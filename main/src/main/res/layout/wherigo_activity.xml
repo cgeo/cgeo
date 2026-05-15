@@ -47,6 +47,12 @@
                 android:tooltipText="@string/wherigo_controls_cartridgelist_hint"
                 app:icon="@drawable/ic_menu_select_play" />
 
+            <Button
+                android:id="@+id/download"
+                style="@style/button_icon"
+                android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
+                app:icon="@drawable/wherigo_download" />
+
             <View
                 style="@style/separator_vertical" />
 

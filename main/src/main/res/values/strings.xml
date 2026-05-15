@@ -1013,7 +1013,8 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_not_logged_in">Not logged in</string>
     <string name="init_login_manual">Manual Login</string>
-    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'ok\' button below.</string>
+    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'Ok\' button below.</string>
+    <string name="init_login_manual_wig_description">Please log into your Geocaching.com account and continue to authorize the Wherigo login. Wait until the Wherigo homepage is visible, then click the \'Ok\' button below.</string>
     <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
@@ -3027,10 +3028,6 @@
     <string name="wherigo_download_progress_started">Download started</string>
     <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Please log in to www.wherigo.com and accept their terms and conditions first</string>
-
-    <string name="wherigo_download_manualguide_title">Cartridge download</string>
-    <string name="wherigo_download_manualguide_text">Follow these steps to download cartridge and make it available for c:geo.\n\n**1. Download cartridge in browser:**\n* Open this [link](%1$s)\n* Follow instructions to log in\n* For option \"Download cartridge file for\", choose \"Pocket PC Device\"\n* Tap \"Download Now\"\n\n**2. Make cartridge available for c:geo**\n* Open your device\'s \"Download\" folder with Files app of your choosing and locate the just downloaded file (ends with .gwc)\n* Rename file so it starts with CGUID \"%2$s\" (use \"Copy CGUID to clipboard\" below) but still ends with \".gwc\"\n* Move file to cgeo/wherigo folder\n\n**3. Reopen c:geo Wherigo Player for cache**</string>
-    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copy CGUID to clipboard</string>
 
     <string name="wherigo_error_title">Wherigo Problem report</string>
     <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
