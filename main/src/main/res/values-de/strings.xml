@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
     <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
     <string name="err_invalid_filename_char">Zeichen \'%c\' nicht erlaubt</string>
+    <string name="err_center_coordinates_invalid">Kann Kartenzentrum nicht setzen, Koordinaten ungültig</string>
     <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
     <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
     <string name="warn_no_coordinates">Keine Koordinaten angegeben.</string>
@@ -891,6 +892,8 @@
     <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
     <string name="init_login_popup_not_logged_in">Nicht angemeldet</string>
     <string name="init_login_manual">Manuelle Anmeldung</string>
+    <string name="init_login_manual_description">Bitte warte, bis die Webseite erscheint, und melde dich bei deinem Konto an. Warte, bis die Anmeldung abgeschlossen ist. Wähle dann \'OK\'.</string>
+    <string name="init_login_manual_wig_description">Bitte melde dich bei deinem geocaching.com-Konto an und erlaube dann den Wherigo-Login. Warte, bis die Wherigo Homepage sichtbar ist, und klicke dann auf \'OK\'.</string>
     <string name="init_login_manual_error_nocookie">Autorisierungs-Token nicht gefunden. Bitte melde dich an oder brich die manuelle Anmeldung ab.</string>
     <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
     <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
