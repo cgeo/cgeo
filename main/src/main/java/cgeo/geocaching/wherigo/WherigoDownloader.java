@@ -3,36 +3,46 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.StatusResult;
-import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
+import static cgeo.geocaching.connector.gc.GCLogin.initializeWebview;
 
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.AlertDialog;
 import android.net.Uri;
 import android.util.Pair;
+import android.view.LayoutInflater;
+import android.webkit.CookieManager;
 
 import androidx.activity.ComponentActivity;
+import androidx.annotation.UiThread;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -40,6 +50,8 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.Cookie;
+import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.Strings;
 import org.oscim.utils.IOUtils;
@@ -48,15 +60,20 @@ public class WherigoDownloader {
 
     private static final String LOG_PRAEFIX = "WherigoDownloader:";
 
-    private static final String LOGIN = "https://www.wherigo.com/login/default.aspx";
-    private static final String DOWNLOAD = "https://www.wherigo.com/cartridge/download.aspx";
+    private static final String WHERIGO_URL = "https://www.wherigo.com";
+    private static final String LOGIN_PAGE = WHERIGO_URL + "/login/";
+    private static final String DOWNLOAD = WHERIGO_URL + "/cartridge/download.aspx";
+    private static final String HOME_PAGE = WHERIGO_URL + "/home.aspx";
+    private static final String AUTH_COOKIE_NAME = ".ASPXAUTH";
 
-    private static final Pattern REQUEST_VERIFICATIOn_TOKEN_PATTERN = Pattern.compile("<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"");
+    private static final Pattern REQUEST_VERIFICATION_TOKEN_PATTERN = Pattern.compile("<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"");
 
     private final WorkerTask<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>> wherigoDownloadTask;
+    private final ComponentActivity activity;
 
 
     public WherigoDownloader(final ComponentActivity activity, final BiConsumer<String, StatusResult> wherigoDownloadConsumer) {
+        this.activity = activity;
 
         wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>>of(
                 "wherigo-download",
@@ -78,18 +95,24 @@ public class WherigoDownloader {
         wherigoDownloadTask.start(new Pair<>(cguid, targetUriSupplier));
     }
 
-    private static Pair<String, StatusResult> downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
+    private Pair<String, StatusResult> downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
         try {
-            final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
-            final String username = cred.getUsernameRaw();
-            final String password = cred.getPasswordRaw();
+            if (!isLoggedIn(progress)) {
+                return new Pair<>(cguid, new StatusResult(StatusCode.NOT_LOGGED_IN, null));
+            }
 
             final Uri[] uriStorage = new Uri[1];
             final Function<String, OutputStream> outputSupplier = name -> {
                 uriStorage[0] = targetUriSupplier.apply(name);
                 return ContentStorage.get().openForWrite(uriStorage[0]);
             };
-            final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
+            progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_started));
+            final StatusResult result = download(cguid, outputSupplier, (c, t) -> {
+                    final int percent = Math.round(((float) c) / t * 100);
+
+                    progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_download_status,
+                            Formatter.formatBytes(c), Formatter.formatBytes(t), String.valueOf(percent)));
+                }, cancelFlag);
             if (!result.isOk() && uriStorage[0] != null) {
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_download_delete_leftover_toast));
                 ContentStorage.get().delete(uriStorage[0]);
@@ -100,48 +123,96 @@ public class WherigoDownloader {
         }
     }
 
-    private static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
-
+    /**
+     * Ensure the user is authenticated against wherigo.com, else start WebView based login.
+     */
+    private boolean isLoggedIn(final Consumer<String> progress) {
+        if (isLoggedIn()) {
+            return true;
+        }
         progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_login));
 
-        final StatusResult loginResult = login(username, password);
-        if (!loginResult.isOk()) {
-            return loginResult;
+        final AtomicBoolean confirmed = new AtomicBoolean(false);
+        final CountDownLatch dialogClosed = new CountDownLatch(1);
+        AndroidRxUtils.runOnUi(() -> performManualLogin(ok -> {
+            confirmed.set(ok);
+            dialogClosed.countDown();
+        }));
+        try {
+            dialogClosed.await();
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            Log.w(LOG_PRAEFIX + " interrupted while waiting for manual login");
+            return false;
         }
-
-        progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_started));
-
-        return download(cguid, outputSupplier, (c, t) -> {
-            final int percent = Math.round(((float) c) / t * 100);
-
-            progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_download_status,
-                    Formatter.formatBytes(c), Formatter.formatBytes(t), String.valueOf(percent)));
-        }, cancelFlag);
+        // Respect explicit cancel/back
+        if (!confirmed.get()) {
+            return false;
+        }
+        return isLoggedIn();
     }
 
-    private static StatusResult login(final String username, final String password) {
+    @UiThread
+    private void performManualLogin(final Consumer<Boolean> onResult) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this.activity, R.style.cgeo_fullScreenDialog);
+        final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(this.activity));
+        binding.info.setText(R.string.init_login_manual_wig_description);
+        final AlertDialog dialog = builder.create();
+        dialog.setView(binding.getRoot());
+        initializeWebview(binding.webview);
 
-        final Parameters params = new Parameters()
-            .put("__EVENTTARGET", "")
-            .put("__EVENTARGUMENT", "")
-            .add("ctl00$ContentPlaceHolder1$Login1$Login1$UserName", username)
-            .add("ctl00$ContentPlaceHolder1$Login1$Login1$Password", password)
-            .add("ctl00$ContentPlaceHolder1$Login1$Login1$LoginButton", "Sign In");
+        WindowCompat.enableEdgeToEdge(this.activity.getWindow());
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
+            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
+            return windowInsets;
+        });
 
-        final HttpRequest loginRequest = new HttpRequest()
-            .uri(LOGIN)
-            .method(HttpRequest.Method.POST)
-            .bodyForm(params);
-        try (HttpResponse loginResponse = loginRequest.request().blockingGet()) {
-            return loginResponse.isSuccessful() ? StatusResult.OK : new StatusResult(StatusCode.NOT_LOGGED_IN, loginResponse.getBodyString());
-        }
+        // Confirmed = OK with a usable cookie. Anything else (cancel, back, outside-tap, activity destroy) is treated as cancelled.
+        final AtomicBoolean confirmed = new AtomicBoolean(false);
+        dialog.setOnDismissListener(d -> onResult.accept(confirmed.get()));
+
+        CookieManager.getInstance().removeAllCookies(b -> {
+            binding.webview.loadUrl(LOGIN_PAGE);
+            binding.okButton.setOnClickListener(bo -> {
+                // Extract the wherigo auth cookie from the WebView.
+                final String webViewCookies = CookieManager.getInstance().getCookie(WHERIGO_URL);
+                final List<Cookie> authCookies = Cookies.extractCookies(WHERIGO_URL, webViewCookies, c -> c.name().equals(AUTH_COOKIE_NAME));
+                if (authCookies.isEmpty()) {
+                    // No cookie yet: keep the dialog open so the user can finish logging in and retry.
+                    SimpleDialog.ofContext(this.activity).setTitle(TextParam.id(R.string.init_login_manual)).setMessage(TextParam.id(R.string.init_login_manual_error_nocookie)).show();
+                    return;
+                }
+
+                // Persist the cookie
+                Cookies.cookieJar.saveFromResponse(HttpUrl.get(WHERIGO_URL), authCookies);
+                Settings.putString(R.string.pref_wherigocomcookie, authCookies.get(0).value());
+                confirmed.set(true);
+                dialog.dismiss();
+            });
+            binding.cancelButton.setOnClickListener(bo -> dialog.dismiss());
+            dialog.show();
+        });
+    }
+
+    private static void injectStoredCookie() {
+        final String value = Settings.getString(R.string.pref_wherigocomcookie, "");
+        Cookies.cookieJar.saveFromResponse(HttpUrl.get(WHERIGO_URL),
+            List.of(new Cookie.Builder().domain("www.wherigo.com").name(AUTH_COOKIE_NAME).value(value).build()));
+    }
+
+    private static boolean isLoggedIn() {
+        injectStoredCookie();
+        final Response response = Network.getRequest(HOME_PAGE).blockingGet();
+        final String data = Network.getResponseData(response);
+        return data != null && data.contains("Signed In:");
     }
 
     private static StatusResult download(final String cguid, final Function<String, OutputStream> outputSupplier, final BiConsumer<Long, Long> progress, final Supplier<Boolean> cancelFlag) {
 
-        //load Download page with GET to retrieve RequestVerificationToken
+        // load Download page with GET to retrieve RequestVerificationToken
         final String page = new HttpRequest().uri(DOWNLOAD + "?CGUID=" + cguid).request().blockingGet().getBodyString();
-        final Matcher m = REQUEST_VERIFICATIOn_TOKEN_PATTERN.matcher(page);
+        final Matcher m = REQUEST_VERIFICATION_TOKEN_PATTERN.matcher(page);
         if (!m.find()) {
             return new StatusResult(StatusCode.COMMUNICATION_ERROR, "Couldn't find RequestVerificationToken on page");
         }
@@ -225,22 +296,6 @@ public class WherigoDownloader {
             errorMsg += " (c=" + completed + ", t=" + total + ")";
             success = success & (completed == total);
             return success ? StatusResult.OK : new StatusResult(StatusCode.COMMUNICATION_ERROR, errorMsg);
-    }
-
-    public static void guideManualDownload(final Context ctx, final String cguid) {
-        final String downloadUrl = DOWNLOAD + "?CGUID=" + cguid;
-        SimpleDialog.ofContext(ctx)
-            .setTitle(TextParam.id(R.string.wherigo_download_manualguide_title))
-            .setMessage(TextParam.id(R.string.wherigo_download_manualguide_text, downloadUrl, cguid).setMarkdown(true))
-            .setNeutralButton(TextParam.id(R.string.wherigo_download_manualguide_copy_cguid_to_clipboard))
-            .setButtonClickAction(which -> {
-               if (which == DialogInterface.BUTTON_NEUTRAL) {
-                   ClipboardUtils.copyToClipboard(cguid);
-                   return true;
-               }
-               return false;
-            })
-            .show();
     }
 
 }
