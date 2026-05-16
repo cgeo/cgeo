@@ -12,6 +12,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOnlineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -186,11 +187,17 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         super.onResume();
         // mMapView.onResume();
         mMapView.getModel().mapViewPosition.addObserver(this);
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mMapView);
+        }
     }
 
     @Override
     public void onPause() {
         // mMapView.onPause();
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mMapView);
+        }
         super.onPause();
 
         mMapView.getModel().mapViewPosition.removeObserver(this);

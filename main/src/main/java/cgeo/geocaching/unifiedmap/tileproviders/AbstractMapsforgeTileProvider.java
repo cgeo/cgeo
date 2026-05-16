@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 import org.mapsforge.map.layer.TileLayer;
+import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.view.MapView;
 
 public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider {
@@ -45,10 +46,20 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
 
     public void prepareForTileSourceChange(final MapView mapView) {
         if (tileLayer != null) {
-            onPause(); // notify tileProvider
+            onPause(); // notify tileProvider (graceful pause before destroy for providers that override it)
+            final TileCache cache = tileLayer.getTileCache();
+            removeTileLayer(mapView);
+            if (cache != null) {
+                cache.purge();
+            }
+        }
+    }
+
+    /** Tear down the tile layer but keep the cached tiles. Used for resume-rebuild (see #17743). */
+    public void removeTileLayer(final MapView mapView) {
+        if (tileLayer != null) {
             mapView.getLayerManager().getLayers().remove(tileLayer);
             tileLayer.onDestroy();
-            tileLayer.getTileCache().purge();
             tileLayer = null;
         }
     }
