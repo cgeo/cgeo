@@ -109,13 +109,15 @@ public class IndividualRoute extends Route implements Parcelable {
             Log.d("[RouteTrackDebug] Individual route: Reset target to null");
             setTarget.setTarget(null, "");
         } else if (Settings.isAutotargetIndividualRoute()) {
-            if (getNumSegments() == 0) {
-                Log.d("[RouteTrackDebug] Individual route: Reset target to null");
-                setTarget.setTarget(null, "");
-            } else {
-                final RouteItem firstItem = segments.get(0).getItem();
-                Log.d("[RouteTrackDebug] Individual route: Reset target to " + firstItem.getIdentifier());
-                setTarget.setTarget(firstItem.getPoint(), firstItem.getGeocode());
+            synchronized (segments) {
+                if (segments.isEmpty()) {
+                    Log.d("[RouteTrackDebug] Individual route: Reset target to null");
+                    setTarget.setTarget(null, "");
+                } else {
+                    final RouteItem firstItem = segments.get(0).getItem();
+                    Log.d("[RouteTrackDebug] Individual route: Reset target to " + firstItem.getIdentifier());
+                    setTarget.setTarget(firstItem.getPoint(), firstItem.getGeocode());
+                }
             }
         }
     }
@@ -133,8 +135,10 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     private synchronized void saveRoute() {
-        if (segments != null) {
-            Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
+        synchronized (segments) {
+            if (!segments.isEmpty()) {
+                Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
+            }
         }
     }
 
@@ -143,7 +147,9 @@ public class IndividualRoute extends Route implements Parcelable {
         if (deleteInDatabase) {
             Schedulers.io().scheduleDirect(DataStore::clearIndividualRoute);
         }
-        segments = null;
+        synchronized (segments) {
+            segments.clear();
+        }
         if (null != routeUpdater) {
             routeUpdater.updateIndividualRoute(this);
         }
@@ -154,61 +160,64 @@ public class IndividualRoute extends Route implements Parcelable {
      * @return ToggleItemState
      */
     private ToggleItemState toggleItemInternal(final RouteItem item, final boolean forceAdd, final boolean addToRouteStart) {
-        if (segments == null) {
-            segments = new ArrayList<>();
-        }
-        final int pos = (forceAdd ? -1 : pos(item));
-        if (pos == -1) {
-            final RouteSegment segment = new RouteSegment(item, null, true);
-            if (segment.hasPoint()) {
-                if (addToRouteStart) {
-                    segments.add(0, segment);
-                    if (segments.size() > 1) {
-                        calculateNavigationRoute(1);
+        synchronized (segments) {
+            final int pos = (forceAdd ? -1 : pos(item));
+            if (pos == -1) {
+                final RouteSegment segment = new RouteSegment(item, null, true);
+                if (segment.hasPoint()) {
+                    if (addToRouteStart) {
+                        segments.add(0, segment);
+                        if (segments.size() > 1) {
+                            calculateNavigationRoute(1);
+                        }
+                    } else {
+                        segments.add(segment);
+                        calculateNavigationRoute(segments.size() - 1);
                     }
+                    return ToggleItemState.ADDED;
                 } else {
-                    segments.add(segment);
-                    calculateNavigationRoute(segments.size() - 1);
+                    return ToggleItemState.ERROR_NO_POINT;
                 }
-                return ToggleItemState.ADDED;
             } else {
-                return ToggleItemState.ERROR_NO_POINT;
+                return removeItem(pos);
             }
-        } else {
-            return removeItem(pos);
         }
     }
 
     private ToggleItemState removeItem(final int pos) {
-        if (pos < 0 || pos >= segments.size()) {
-            return ToggleItemState.ERROR_NO_POINT;
+        synchronized (segments) {
+            if (pos < 0 || pos >= segments.size()) {
+                return ToggleItemState.ERROR_NO_POINT;
+            }
+            distance -= segments.get(pos).getDistance();
+            segments.remove(pos);
+            calculateNavigationRoute(pos);
+            if (pos < segments.size()) {
+                calculateNavigationRoute(pos + 1);
+            }
+            return ToggleItemState.REMOVED;
         }
-        distance -= segments.get(pos).getDistance();
-        segments.remove(pos);
-        calculateNavigationRoute(pos);
-        if (pos < segments.size()) {
-            calculateNavigationRoute(pos + 1);
-        }
-        return ToggleItemState.REMOVED;
     }
 
     private int pos(final RouteItem item) {
-        if (segments == null || segments.isEmpty()) {
+        synchronized (segments) {
+            if (segments.isEmpty()) {
+                return -1;
+            }
+            final String identifier = item.getIdentifier();
+            for (int i = 0; i < segments.size(); i++) {
+                if (segments.get(i).getItem().getIdentifier().equals(identifier)) {
+                    return i;
+                }
+            }
             return -1;
         }
-        final String identifier = item.getIdentifier();
-        for (int i = 0; i < segments.size(); i++) {
-            if (segments.get(i).getItem().getIdentifier().equals(identifier)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     public ArrayList<RouteItem> getRouteItems () {
         final ArrayList<RouteItem> items = new ArrayList<>();
-        if (segments != null) {
-            for (RouteSegment segment : segments) {
+        synchronized (segments) {
+            for (final RouteSegment segment : segments) {
                 items.add(segment.getItem());
             }
         }
