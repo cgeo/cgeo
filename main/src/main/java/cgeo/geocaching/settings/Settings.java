@@ -139,7 +139,12 @@ public class Settings {
         Plain,
         Deg,
         Min,
-        Sec;
+        Sec,
+        UTM,
+        MGRS,
+        OLC,
+        SwissGrid,
+        RD;
 
         public static final int DEFAULT_INT_VALUE = Min.ordinal();
 

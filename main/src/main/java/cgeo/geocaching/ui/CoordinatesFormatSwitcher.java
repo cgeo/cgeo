@@ -22,8 +22,14 @@ public class CoordinatesFormatSwitcher {
             GeopointFormatter.Format.LAT_LON_DECMINUTE,
             GeopointFormatter.Format.LAT_LON_DECSECOND,
             GeopointFormatter.Format.LAT_LON_DECDEGREE,
-            GeopointFormatter.Format.UTM
+            GeopointFormatter.Format.UTM,
+            GeopointFormatter.Format.MGRS,
+            GeopointFormatter.Format.OLC,
+            GeopointFormatter.Format.SWISS_GRID,
+            GeopointFormatter.Format.RD
     };
+
+    private int availableFormatCount = availableFormats.length;
 
     private int position = 0;
     private Geopoint coordinates;
@@ -33,7 +39,7 @@ public class CoordinatesFormatSwitcher {
     public CoordinatesFormatSwitcher setView(final TextView view) {
         this.view = view;
         this.view.setOnClickListener(v -> {
-            position = (position + 1) % availableFormats.length;
+            position = (position + 1) % availableFormatCount;
             renderView();
             if (positionChangedListener != null) {
                 positionChangedListener.onPositionChanged(position);
@@ -54,7 +60,22 @@ public class CoordinatesFormatSwitcher {
             Log.w("CoordinatesFormatSwitcher: Invalid negative position " + position + ", defaulting to 0");
             this.position = 0;
         } else {
-            this.position = position % availableFormats.length;
+            this.position = position % availableFormatCount;
+        }
+        renderView();
+        return this;
+    }
+
+    /**
+     * Limits the number of coordinate formats available for click-cycling.
+     *
+     * @param count number of formats to expose from the start of the list; values <= 0 use all formats
+     * @return this switcher
+     */
+    public CoordinatesFormatSwitcher setAvailableFormatCount(final int count) {
+        availableFormatCount = count <= 0 ? availableFormats.length : Math.min(count, availableFormats.length);
+        if (position >= availableFormatCount) {
+            position = position % availableFormatCount;
         }
         renderView();
         return this;

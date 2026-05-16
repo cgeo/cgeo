@@ -27,7 +27,21 @@ public class GeopointParser {
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("([-+]?\\d{1,3},\\d+), ([-+]?\\d{1,3},\\d+)");
 
-    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
+        private static final List<AbstractParser> parsers = Arrays.asList(
+            new MinDecParser(),
+            new MinParser(),
+            new DegParser(),
+            new DMSParser(),
+            new ShortDMSParser(),
+            new DegDecParser(),
+            new ShortDegDecParser(),
+            new UTMParser(),
+            new MGRSParser(),
+            new OpenLocationCodeParser(),
+            new SwissGridParser(),
+            new RDParser(),
+            new DegDecCommaParser()
+        );
 
     private GeopointParser() {
         // utility class
@@ -479,6 +493,134 @@ public class GeopointParser {
                 try {
                     final UTMPoint utmPoint = new UTMPoint(text);
                     return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
+                } catch (final Exception ignored) {
+                    // Ignore parse errors
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
+         */
+        @Override
+        @Nullable
+        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
+            return null;
+        }
+    }
+
+    /**
+     * Parser for MGRS format: ZZB LL EEEEE NNNNN.
+     */
+    private static final class MGRSParser extends AbstractParser {
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Override
+        @Nullable
+        public GeopointWrapper parse(@NonNull final String text) {
+            final MatcherWrapper matcher = new MatcherWrapper(MGRSPoint.PATTERN_MGRS, text);
+            if (matcher.find()) {
+                try {
+                    final MGRSPoint mgrsPoint = new MGRSPoint(matcher.group());
+                    return new GeopointWrapper(mgrsPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
+                } catch (final Exception ignored) {
+                    // Ignore parse errors
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
+         */
+        @Override
+        @Nullable
+        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
+            return null;
+        }
+    }
+
+    /**
+     * Parser for Open Location Code (Plus Code) format.
+     */
+    private static final class OpenLocationCodeParser extends AbstractParser {
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Override
+        @Nullable
+        public GeopointWrapper parse(@NonNull final String text) {
+            final MatcherWrapper matcher = new MatcherWrapper(OpenLocationCodePoint.PATTERN_OLC, text);
+            if (matcher.find()) {
+                try {
+                    final OpenLocationCodePoint olcPoint = new OpenLocationCodePoint(matcher.group());
+                    return new GeopointWrapper(olcPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
+                } catch (final Exception ignored) {
+                    // Ignore parse errors
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
+         */
+        @Override
+        @Nullable
+        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
+            return null;
+        }
+    }
+
+    /**
+     * Parser for Swiss grid format: LV95/CH1903(+).
+     */
+    private static final class SwissGridParser extends AbstractParser {
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Override
+        @Nullable
+        public GeopointWrapper parse(@NonNull final String text) {
+            final MatcherWrapper matcher = new MatcherWrapper(SwissGridPoint.PATTERN_SWISS, text);
+            if (matcher.find()) {
+                try {
+                    final SwissGridPoint swissGridPoint = new SwissGridPoint(matcher.group());
+                    return new GeopointWrapper(swissGridPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
+                } catch (final Exception ignored) {
+                    // Ignore parse errors
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
+         */
+        @Override
+        @Nullable
+        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
+            return null;
+        }
+    }
+
+    /**
+     * Parser for Dutch Rijksdriehoek (RD) format.
+     */
+    private static final class RDParser extends AbstractParser {
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Override
+        @Nullable
+        public GeopointWrapper parse(@NonNull final String text) {
+            final MatcherWrapper matcher = new MatcherWrapper(RDPoint.PATTERN_RD, text);
+            if (matcher.find()) {
+                try {
+                    final RDPoint rdPoint = new RDPoint(matcher.group());
+                    return new GeopointWrapper(rdPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }
