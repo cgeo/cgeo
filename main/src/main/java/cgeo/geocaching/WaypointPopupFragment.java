@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.WaypointPopupBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
@@ -14,6 +16,7 @@ import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -114,6 +117,12 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 waypoint.setVisited(!waypoint.isVisited());
                 DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
                 ViewUtils.showShortToast(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited);
+                if (waypoint.isVisited() && !cache.isOffline()) {
+                    cache.getLists().add(StoredList.STANDARD_LIST_ID);
+                    AndroidRxUtils.computationScheduler.scheduleDirect(() -> DataStore.saveCache(cache, LoadFlags.SAVE_ALL));
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(getActivity(), cache.getGeocode());
+                    ViewUtils.showShortToast(getActivity(), R.string.info_cache_saved);
+                }
             });
 
             binding.edit.setOnClickListener(arg0 -> EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId()));
