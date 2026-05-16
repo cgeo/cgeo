@@ -11,12 +11,15 @@ import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Route implements IGeoItemSupplier, Parcelable {
     private String name = "";
-    protected ArrayList<RouteSegment> segments = new ArrayList<>();
+    protected final List<RouteSegment> segments = Collections.synchronizedList(new ArrayList<>());
     private boolean routeable;
     protected float distance = 0.0f;
     protected boolean isHidden = false;
@@ -55,20 +58,17 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     public void add(final RouteSegment segment) {
-        if (null == segments) {
-            segments = new ArrayList<>();
-        }
         segments.add(segment);
     }
 
     public int getNumSegments() {
-        return null == segments ? 0 : segments.size();
+        return segments.size();
     }
 
     public int getNumPoints() {
         int numPoints = 0;
-        if (null != segments) {
-            for (RouteSegment segment : segments) {
+        synchronized (segments) {
+            for (final RouteSegment segment : segments) {
                 numPoints += segment.getSize();
             }
         }
@@ -86,8 +86,10 @@ public class Route implements IGeoItemSupplier, Parcelable {
     @Override
     public Viewport getViewport() {
         final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
-        for (RouteSegment rs : getSegments()) {
-            cvb.add(rs.getPoints());
+        synchronized (segments) {
+            for (RouteSegment rs : segments) {
+                cvb.add(rs.getPoints());
+            }
         }
         return cvb.getViewport();
     }
@@ -96,8 +98,8 @@ public class Route implements IGeoItemSupplier, Parcelable {
     public GeoItem getItem() {
         final GeoGroup.Builder result = GeoGroup.builder();
         final List<Geopoint> points = new ArrayList<>();
-        if (getSegments() != null) {
-            for (RouteSegment rs : getSegments()) {
+        synchronized (segments) {
+            for (RouteSegment rs : segments) {
                 if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
                     result.addItems(GeoPrimitive.createPolyline(points, null));
                     points.clear();
@@ -112,11 +114,10 @@ public class Route implements IGeoItemSupplier, Parcelable {
         return result.build();
     }
 
+    @NonNull
     public RouteSegment[] getSegments() {
-        if (null != segments) {
+        synchronized (segments) {
             return segments.toArray(new RouteSegment[0]);
-        } else {
-            return null;
         }
     }
 
@@ -125,37 +126,39 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     public void setCenter(final CenterOnPosition centerOnPosition) {
-        if (null != segments && !segments.isEmpty()) {
-            final ArrayList<Geopoint> points0 = segments.get(0).getPoints();
-            if (!points0.isEmpty()) {
-                final Geopoint first = points0.get(0);
-                double minLat = first.getLatitude();
-                double maxLat = first.getLatitude();
-                double minLon = first.getLongitude();
-                double maxLon = first.getLongitude();
+        synchronized (segments) {
+            if (!segments.isEmpty()) {
+                final ArrayList<Geopoint> points0 = segments.get(0).getPoints();
+                if (!points0.isEmpty()) {
+                    final Geopoint first = points0.get(0);
+                    double minLat = first.getLatitude();
+                    double maxLat = first.getLatitude();
+                    double minLon = first.getLongitude();
+                    double maxLon = first.getLongitude();
 
-                double latitude = 0.0d;
-                double longitude = 0.0d;
-                int numPoints = 0;
-                for (RouteSegment segment : segments) {
-                    final ArrayList<Geopoint> points = segment.getPoints();
-                    if (!points.isEmpty()) {
-                        numPoints += points.size();
-                        for (Geopoint point : points) {
-                            final double lat = point.getLatitude();
-                            final double lon = point.getLongitude();
+                    double latitude = 0.0d;
+                    double longitude = 0.0d;
+                    int numPoints = 0;
+                    for (final RouteSegment segment : segments) {
+                        final ArrayList<Geopoint> points = segment.getPoints();
+                        if (!points.isEmpty()) {
+                            numPoints += points.size();
+                            for (final Geopoint point : points) {
+                                final double lat = point.getLatitude();
+                                final double lon = point.getLongitude();
 
-                            latitude += point.getLatitude();
-                            longitude += point.getLongitude();
+                                latitude += point.getLatitude();
+                                longitude += point.getLongitude();
 
-                            minLat = Math.min(minLat, lat);
-                            maxLat = Math.max(maxLat, lat);
-                            minLon = Math.min(minLon, lon);
-                            maxLon = Math.max(maxLon, lon);
+                                minLat = Math.min(minLat, lat);
+                                maxLat = Math.max(maxLat, lat);
+                                minLon = Math.min(minLon, lon);
+                                maxLon = Math.max(maxLon, lon);
+                            }
                         }
                     }
+                    centerOnPosition.centerOnPosition(latitude / numPoints, longitude / numPoints, new Viewport(new Geopoint(minLat, minLon), new Geopoint(maxLat, maxLon)));
                 }
-                centerOnPosition.centerOnPosition(latitude / numPoints, longitude / numPoints, new Viewport(new Geopoint(minLat, minLon), new Geopoint(maxLat, maxLon)));
             }
         }
     }
@@ -170,23 +173,25 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     protected void calculateNavigationRoute(final int pos) {
-        if (routeable && segments != null && pos < segments.size()) {
-            final RouteSegment segment = segments.get(pos);
-            distance -= segment.getDistance();
-            if (routeable) {
-                // clear info for current segment
-                segment.resetPoints();
-                // calculate route for segment between current point and its predecessor
-                if (pos > 0) {
-                    final ArrayList<Float> elevation = new ArrayList<>();
-                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
-                    for (Geopoint geopoint : temp) {
-                        segment.addPoint(geopoint);
+        synchronized (segments) {
+            if (routeable && pos < segments.size()) {
+                final RouteSegment segment = segments.get(pos);
+                distance -= segment.getDistance();
+                if (routeable) {
+                    // clear info for current segment
+                    segment.resetPoints();
+                    // calculate route for segment between current point and its predecessor
+                    if (pos > 0) {
+                        final ArrayList<Float> elevation = new ArrayList<>();
+                        final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
+                        for (final Geopoint geopoint : temp) {
+                            segment.addPoint(geopoint);
+                        }
+                        segment.setElevation(elevation);
                     }
-                    segment.setElevation(elevation);
                 }
+                distance += segment.calculateDistance();
             }
-            distance += segment.calculateDistance();
         }
     }
 
@@ -208,7 +213,13 @@ public class Route implements IGeoItemSupplier, Parcelable {
 
     protected Route(final Parcel parcel) {
         name = parcel.readString();
-        segments = parcel.readArrayList(RouteSegment.class.getClassLoader());
+        synchronized (segments) {
+            segments.clear();
+            final List<RouteSegment> readSegments = parcel.readArrayList(RouteSegment.class.getClassLoader());
+            if (readSegments != null) {
+                segments.addAll(readSegments);
+            }
+        }
         routeable = parcel.readInt() != 0;
         distance = parcel.readFloat();
         isHidden = parcel.readInt() != 0;
@@ -222,7 +233,9 @@ public class Route implements IGeoItemSupplier, Parcelable {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeString(name);
-        dest.writeList(segments);
+        synchronized (segments) {
+            dest.writeList(segments);
+        }
         dest.writeInt(routeable ? 1 : 0);
         dest.writeFloat(distance);
         dest.writeInt(isHidden ? 1 : 0);
