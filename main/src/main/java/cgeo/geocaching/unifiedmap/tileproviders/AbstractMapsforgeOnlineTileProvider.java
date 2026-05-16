@@ -64,34 +64,8 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
     public void addTileLayer(final MapsforgeFragment fragment, final MapView map) {
         mfTileSource.setUserAgent("cgeo");
         tileLayer = new TileDownloadLayer(fragment.getTileCache(), map.getModel().mapViewPosition, mfTileSource, AndroidGraphicFactory.INSTANCE);
-        map.getLayerManager().getLayers().add(tileLayer);
-        onResume(); // start tile downloader
+        map.getLayerManager().getLayers().add(0, tileLayer); // insert at the bottom of the stack so overlays stay on top
+        ((TileDownloadLayer) tileLayer).onResume();
     }
 
-    // ========================================================================
-    // Lifecycle methods
-
-    @Override
-    public void onPause() {
-        if (tileLayer != null) {
-            ((TileDownloadLayer) tileLayer).onPause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (tileLayer != null) {
-            ((TileDownloadLayer) tileLayer).onResume();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        if (tileLayer != null) {
-            tileLayer.onDestroy();
-        }
-        super.onDestroy();
-    }
 }
