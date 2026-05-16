@@ -9,18 +9,6 @@
     android:orientation="vertical"
     tools:context=".EditWaypointActivity">
 
-    <!-- Coordinates -->
-
-    <Button
-        android:id="@+id/buttonLatLongitude"
-        style="@style/button_full_double"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dip"
-        app:icon="@drawable/ic_menu_variable"
-        android:freezesText="true"
-        android:hint="@string/latlongitude" />
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -33,6 +21,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/buttonLatLongitude"
+                style="@style/button_full_double"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                app:icon="@drawable/ic_menu_variable"
+                android:freezesText="true"
+                android:hint="@string/latlongitude" />
 
             <!-- Projection Settings -->
 
