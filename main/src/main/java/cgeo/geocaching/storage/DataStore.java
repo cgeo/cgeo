@@ -2356,6 +2356,12 @@ public class DataStore {
                     boolean dbUpdateRequired = !isOffline || (cacheCache.getCacheFromCache(geocode) != null);
                     if (isOffline) {
                         dbUpdateRequired |= !cache.gatherMissingFrom(existingCache);
+                    } else if (existingCache != null && existingCache.isDetailed()) {
+                        // For non-offline caches (not saved to any list), still merge user-modified
+                        // data from the existing version: visited waypoints, personal note,
+                        // user-modified coordinates, etc. The return value is irrelevant here
+                        // since dbUpdateRequired is already true for non-offline caches.
+                        cache.gatherMissingFrom(existingCache);
                     }
                     // parse the note AFTER merging the local information in
                     dbUpdateRequired |= cache.addCacheArtefactsFromNotes();
