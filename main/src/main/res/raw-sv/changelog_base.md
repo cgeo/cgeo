@@ -1,6 +1,12 @@
-På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo-mål + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Äldre kartor: Som meddelats med utgåvorna från 2025.07.17 och 2025.12.01, har vi äntligen tagit bort äldre implementationer för våra kartor. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
 - Kartrotation för OpenStreetMap-baserade kartor (online + offline)
 - Klusterpopup för Google Maps
 - Dölj kartkällor som du inte behöver
@@ -25,6 +31,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
