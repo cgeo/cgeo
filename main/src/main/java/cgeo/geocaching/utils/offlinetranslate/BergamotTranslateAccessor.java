@@ -99,7 +99,8 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     public BergamotTranslateAccessor() {
         this.nativeLib = new NativeLib();
         this.langDetect = new LangDetect();
-        nativeLib.initializeService();
+        // NativeLib runs initializeService() from its own constructor; no
+        // explicit call is needed (the method is not public in the AAR).
         // Run on IO thread — loading 30MB models per pair is too heavy for main thread
         Schedulers.io().createWorker().schedule(this::scanAvailableModels);
     }
@@ -212,9 +213,9 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 final DetectionResult result = langDetect.detectLanguage(source, null);
                 // Always return the top-ranked language, even if isReliable=false.
                 // "un" means CLD2 could not determine any language at all (e.g. random chars).
-                final String lang = (result != null && result.language != null
-                        && !result.language.isEmpty() && !"un".equals(result.language))
-                        ? result.language : null;
+                final String lang = (result != null && result.getLanguage() != null
+                        && !result.getLanguage().isEmpty() && !"un".equals(result.getLanguage()))
+                        ? result.getLanguage() : null;
                 runCallback(() -> onSuccess.accept(lang));
             } catch (final Exception e) {
                 Log.e(TAG + ": Language detection failed", e);
