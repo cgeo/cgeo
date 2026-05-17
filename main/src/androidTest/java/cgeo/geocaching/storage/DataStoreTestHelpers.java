@@ -9,8 +9,6 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
-import androidx.test.filters.Suppress;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
@@ -18,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -35,7 +34,7 @@ public class DataStoreTestHelpers {
     /**
      * Method creates dummy caches in the database
      */
-    @Suppress
+    @Ignore
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     public void testCreateDummyCaches() {
@@ -57,7 +56,7 @@ public class DataStoreTestHelpers {
         }
     }
 
-    @Suppress
+    @Ignore
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     public void testRemoveDummyCaches() {
@@ -71,9 +70,7 @@ public class DataStoreTestHelpers {
             dummyCacheCodes.add(getArtificialGeocode(i));
         }
         DataStore.removeCaches(dummyCacheCodes, EnumSet.of(LoadFlags.RemoveFlag.DB));
-
     }
-
 
     private static List<LogEntry> createDummyLogsForCache(final String geocode, final int count) {
         final List<LogEntry> result = new ArrayList<>();

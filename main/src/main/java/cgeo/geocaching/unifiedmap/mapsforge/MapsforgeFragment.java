@@ -12,9 +12,11 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOnlineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -30,6 +32,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
+
+import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.graphics.Canvas;
@@ -151,7 +155,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(LocalizationUtils.getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
@@ -183,11 +187,17 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         super.onResume();
         // mMapView.onResume();
         mMapView.getModel().mapViewPosition.addObserver(this);
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mMapView);
+        }
     }
 
     @Override
     public void onPause() {
         // mMapView.onPause();
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mMapView);
+        }
         super.onPause();
 
         mMapView.getModel().mapViewPosition.removeObserver(this);
@@ -244,7 +254,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setCenter(final Geopoint geopoint) {
-        mMapView.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+        try {
+            mMapView.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+        } catch (IllegalArgumentException e) {
+            Log.e("MapsforgeFragment.setCenter: Invalid geopoint (lat=" + geopoint.getLatitude() + ", lon=" + geopoint.getLongitude() + ")\n" + Arrays.toString(e.getStackTrace()));
+            ViewUtils.showShortToast(getActivity(), R.string.err_center_coordinates_invalid);
+            mMapView.setCenter(new LatLong(41.89018, 12.49237)); // Use Rome, Colosseo as visual indicator for error case
+        }
     }
 
     @Override

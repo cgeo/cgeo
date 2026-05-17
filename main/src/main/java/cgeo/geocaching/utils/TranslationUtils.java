@@ -34,7 +34,8 @@ public final class TranslationUtils {
         NONE(R.string.translate_external_none, null, null),
         EXTERNAL_APP(R.string.translate_external_app, APP_PACKAGE_ANYAPP, null),
         GOOGLE(R.string.translate_external_google, "com.google.android.apps.translate", WEB_GOOGLE_URL),
-        DEEPL(R.string.translate_external_deepl, "com.deepl.mobiletranslator", WEB_DEEPL_URL);
+        DEEPL(R.string.translate_external_deepl, "com.deepl.mobiletranslator", WEB_DEEPL_URL),
+        DAVIDV(R.string.translate_external_davidv, "dev.davidv.translator", null);
 
         private final int nameId;
         public final String appPackageName;
@@ -51,7 +52,8 @@ public final class TranslationUtils {
             if (this.appPackageName != null && !APP_PACKAGE_ANYAPP.equals(this.appPackageName)) {
                 sb
                     .append(" (")
-                    .append(LocalizationUtils.getString(appIsAvailable(this.appPackageName) ? R.string.translate_external_variant_app : R.string.translate_external_variant_web))
+                    .append(LocalizationUtils.getString(appIsAvailable(this.appPackageName) ? R.string.translate_external_variant_app :
+                        (this.urlPattern != null ? R.string.translate_external_variant_web : R.string.translate_external_variant_unavailable)))
                     .append(")");
             }
             return sb.toString();
@@ -114,8 +116,11 @@ public final class TranslationUtils {
         final Translator translator = getTranslator();
         if (APP_PACKAGE_ANYAPP.equals(translator.appPackageName) || appIsAvailable(translator.appPackageName)) {
             startTranslateViaApp(activity, translator.appPackageName, text);
-        } else {
+        } else if (translator.urlPattern != null) {
             startTranslateViaUrl(activity, translator.urlPattern, text);
+        } else {
+            //just open app selector
+            startTranslateViaApp(activity, null, text);
         }
     }
 

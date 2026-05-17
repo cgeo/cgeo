@@ -1,6 +1,9 @@
 package cgeo.geocaching.brouter;
 
 public class BRouterConstants {
+    // BRouter basis for c:geo's implementation
+    public static final String version = "1.7.9";
+
     public static final String BROUTER_LOOKUPS_FILENAME = "lookups.dat";
 
     public static final String BROUTER_PROFILE_FILEEXTENSION = ".brf";
@@ -10,6 +13,7 @@ public class BRouterConstants {
     public static final String BROUTER_PROFILE_ELEVATION_ONLY = "dummy.brf";
 
     public static final String BROUTER_TILE_FILEEXTENSION = ".rd5";
+    public static final String BROUTER_LOOKUPS_FILEEXTENSION = ".dat";
 
     public static final String PROFILE_PARAMTERKEY = "internal_routing_profile";
 

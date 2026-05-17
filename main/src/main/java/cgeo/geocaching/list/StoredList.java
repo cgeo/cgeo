@@ -15,6 +15,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ItemGroup;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -36,6 +37,7 @@ import androidx.appcompat.app.AlertDialog;
 import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -59,7 +61,7 @@ public final class StoredList extends AbstractList {
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title, markerId);
+        super(id, title, 0, markerId);
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
@@ -343,7 +345,7 @@ public final class StoredList extends AbstractList {
                 if (newId >= DataStore.customListIdOffset) {
                     runAfterwards.call(newId);
                 } else {
-                    ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.list_dialog_create_err));
                 }
             });
         }
@@ -364,7 +366,7 @@ public final class StoredList extends AbstractList {
                     Settings.setLastSelectedLists(selectedLists);
                     runAfterwards.call(selectedLists);
                 } else {
-                    ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.list_dialog_create_err));
                 }
             });
         }
@@ -382,10 +384,9 @@ public final class StoredList extends AbstractList {
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
-            final List<String> hierarchies = DataStore.getFullListHierarchy();
-            hierarchies.add(0, activity.getString(R.string.init_custombnitem_none));
-            hierarchies.add(1, activity.getString(R.string.list_create_parent));
-
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+            hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
             listprefix.setVisibility(View.VISIBLE);
             listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
             listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
@@ -396,18 +397,12 @@ public final class StoredList extends AbstractList {
                     .setPositiveButton(buttonTitle, ((d, which) -> {
                             String prefix = "";
                             final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
-                            if (Strings.CS.equals(temp, activity.getString(R.string.list_create_parent))) {
+                            if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
                                 prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
-                                if (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
-                                    prefix = prefix.trim() + GROUP_SEPARATOR;
-                                }
-                            } else if (!Strings.CS.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(temp.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                            } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
+                                prefix = temp + (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
                             }
-                            if (Strings.CS.equals(prefix, GROUP_SEPARATOR)) {
-                                prefix = "";
-                            }
-                            runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
+                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString()));
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                     .setView(menu);
@@ -420,6 +415,19 @@ public final class StoredList extends AbstractList {
 
             ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
             ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
+        }
+
+        public static String handleListNameInputHelper(final String selectedPrefix, final String selectedTitle) {
+            final String prefix = removeSeparatorsAndTrim(selectedPrefix);
+            final String title = removeSeparatorsAndTrim(selectedTitle);
+            return title.isEmpty() ? prefix : prefix.isEmpty() ? title : prefix + GROUP_SEPARATOR + title;
+        }
+
+        private static String removeSeparatorsAndTrim(final String input) {
+            return Arrays.stream(input.split(GROUP_SEPARATOR, -1))
+                    .map(String::trim)
+                    .filter(segment -> !segment.isEmpty())
+                    .collect(Collectors.joining(GROUP_SEPARATOR));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -462,12 +470,12 @@ public final class StoredList extends AbstractList {
                     .setTitle(R.string.list_menu_rename_list_prefix)
                     .setPositiveButton(android.R.string.ok, ((d, which) -> {
                         final String from = listprefixView.getText().toString();
-                        final String to = title.getText().toString();
+                        final String to = removeSeparatorsAndTrim(Objects.requireNonNull(title.getText()).toString());
                         if (!Strings.CS.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
-                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                    LocalizationUtils.getString(R.string.list_confirm_rename, from, to, to.isEmpty() ? LocalizationUtils.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
-                                    DataStore.renameListPrefix(from, to);
+                                    DataStore.renameListPrefix(from + GROUP_SEPARATOR, to + (to.isEmpty() ? "" : GROUP_SEPARATOR));
                                     runAfterRename.run();
                                 });
                             }
@@ -481,6 +489,7 @@ public final class StoredList extends AbstractList {
                 ((EditText) menu.findViewById(R.id.title)).setText(s);
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
             }));
+            ViewUtils.closeKeyboardOnLosingFocus(activity, title);
         }
     }
 

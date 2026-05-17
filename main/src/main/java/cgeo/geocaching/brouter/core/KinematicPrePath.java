@@ -14,9 +14,10 @@ final class KinematicPrePath extends OsmPrePath {
     public int classifiermask;
 
     protected void initPrePath(final OsmPath origin, final RoutingContext rc) {
-        final byte[] description = link.descriptionBitmap;
+        byte[] description = link.descriptionBitmap;
         if (description == null) {
-            throw new IllegalArgumentException("null description for: " + link);
+            //throw new IllegalArgumentException("null description for: " + link);
+            description = (targetNode.descriptionBitmap != null ? targetNode.descriptionBitmap : new byte[] {0, 1, 0});
         }
 
         // extract the 3 positions of the first section

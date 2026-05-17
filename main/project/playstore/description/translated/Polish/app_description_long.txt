@@ -1,4 +1,4 @@
-c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficjalnym klientem dla geocaching.com i oferuje podstawowe wsparcie dla innych platform geocachingowych (takich jak Opencaching). Nie wymaga przeglądarki internetowej ani eksportu - po prostu zainstaluj ją i zacznij od razu.
+c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficjalnym klientem dla geocaching.com i oferuje podstawowe wsparcie dla innych platform geocachingowych (takich jak Opencaching). Nie wymaga przeglądarki internetowej ani eksportowania danych - po prostu zainstaluj ją i zacznij od razu.
 
 Główne funkcje:
 - Przeglądaj skrytki na mapie na żywo

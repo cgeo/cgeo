@@ -253,10 +253,12 @@
     <string name="translate_external_label">Translate with %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Website</string>
+    <string name="translate_external_variant_unavailable">Unavailable</string>
     <string name="translate_external_none">&lt;None&gt;</string>
     <string name="translate_external_app">External App</string>
     <string name="translate_external_google">Google Translate</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Translate</string>
     <string name="translate_length_warning">Translation via Website may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->
@@ -324,6 +326,7 @@
     <string name="err_rendertheme_file_unreadable">Could not load the selected render theme. Reverting to the built-in one.</string>
     <string name="err_rendertheme_invalid">The selected render theme is not valid for this mapsforge version. Reverting to the built-in one.</string>
     <string name="err_invalid_filename_char">Character \'%c\' not allowed</string>
+    <string name="err_center_coordinates_invalid">Cannot set map center, coordinates invalid</string>
     <string name="warn_save_nothing">There is nothing to be saved.</string>
     <string name="warn_no_cache_coord">There are no caches with coordinates.</string>
     <string name="warn_no_coordinates">No Coordinates given.</string>
@@ -552,6 +555,18 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_warning_delete_user_data_others">Delete others</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="zero">No caches have user data. All caches can be removed safely.</item>
+        <item quantity="one">%1$d/%2$d cache has user data. The user data will get lost on deleting the cache.</item>
+        <item quantity="two">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="few">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="many">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="other">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Remove others</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d caches are only on this list. Removing those caches from the list will delete them from your device.</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
@@ -1039,7 +1054,8 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_not_logged_in">Not logged in</string>
     <string name="init_login_manual">Manual Login</string>
-    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'ok\' button below.</string>
+    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'Ok\' button below.</string>
+    <string name="init_login_manual_wig_description">Please log into your Geocaching.com account and continue to authorize the Wherigo login. Wait until the Wherigo homepage is visible, then click the \'Ok\' button below.</string>
     <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
@@ -2645,6 +2661,15 @@
     <string name="do_not_ask_me_again">Do not ask me again</string>
     <string name="geokrety_parsing_failed">Failed to parse GeoKrety response.</string>
 
+    <string name="command_remove_caches_from_list_progress">Removing caches</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="zero">Removed %d caches</item>
+        <item quantity="one">Removed %d cache</item>
+        <item quantity="two">Removed %d caches</item>
+        <item quantity="few">Removed %d caches</item>
+        <item quantity="many">Removed %d caches</item>
+        <item quantity="other">Removed %d caches</item>
+    </plurals>
     <string name="command_move_caches_progress">Moving caches to list %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="zero">Moved %d caches</item>
@@ -2937,7 +2962,7 @@
     <string name="check_hillshading_found">Hillshading data already present</string>
     <string name="check_hillshading_missing">Found missing hillshading data:</string>
     <string name="check_hillshading_unsupported">Warning: Hillshading data is at least partly not available for the selected region</string>
-    <string name="check_hillshading_tiles_menu">Check for missing hillshading data</string>
+    <string name="check_hillshading_tiles_menu">Check for missing elevation data</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>

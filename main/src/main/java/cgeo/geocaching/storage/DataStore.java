@@ -59,6 +59,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
@@ -803,6 +804,30 @@ public class DataStore {
             });
         }
 
+        /**
+         * Atomically replaces all entries for the given key with a single new entry.
+         * Both the removal of existing entries and the insertion of the new entry are
+         * wrapped in a single database transaction, ensuring true atomicity.
+         */
+        protected static DBExtension replaceAll(final DBExtensionType type, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
+            return withAccessLock(() -> {
+                if (!init(false)) {
+                    return null;
+                }
+                database.beginTransaction();
+                try {
+                    removeAll(database, type, key);
+                    final DBExtension result = add(database, type, key, long1, long2, long3, long4, string1, string2, string3, string4);
+                    if (result != null) {
+                        database.setTransactionSuccessful();
+                    }
+                    return result;
+                } finally {
+                    database.endTransaction();
+                }
+            });
+        }
+
         private static void checkState(final DBExtensionType type, @Nullable final String key, final boolean nullable) {
             if (type == DBEXTENSION_INVALID) {
                 throw new IllegalStateException("DBExtension: type must be set to valid type");
@@ -1038,7 +1063,7 @@ public class DataStore {
      * showing a progress window
      */
     public static void moveDatabase(final Activity fromActivity) {
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, LocalizationUtils.getString(R.string.init_dbmove_dbmove), LocalizationUtils.getString(R.string.init_dbmove_running), true, false);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             if (!LocalStorage.isExternalStorageAvailable()) {
                 Log.w("Database was not moved: external memory not available");
@@ -1066,7 +1091,7 @@ public class DataStore {
             });
         }).subscribeOn(Schedulers.io())).subscribe(success -> {
             dialog.dismiss();
-            final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
+            final String message = success ? LocalizationUtils.getString(R.string.init_dbmove_success) : LocalizationUtils.getString(R.string.init_dbmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_dbmove_dbmove).setMessage(TextParam.text(message)).show();
         });
     }
@@ -1095,7 +1120,7 @@ public class DataStore {
                 final int backupDbVersion = backup.getVersion();
                 final int expectedDbVersion = DataStore.getExpectedDBVersion();
                 if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
-                    return String.format(context.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
+                    return LocalizationUtils.getString(R.string.init_restore_version_error, expectedDbVersion, backupDbVersion);
                 }
                 closeDb();
                 result = FileUtils.copy(tmpFile, databasePath()) ? DBRestoreResult.RESTORE_SUCCESSFUL : DBRestoreResult.RESTORE_FAILED_GENERAL;
@@ -1114,7 +1139,7 @@ public class DataStore {
             } finally {
                 tmpFile.delete();
             }
-            return context.getString(result.res);
+            return LocalizationUtils.getString(result.res);
         });
     }
 
@@ -2937,7 +2962,17 @@ public class DataStore {
     public static List<String> getListHierarchy() {
         return withAccessLock(() -> {
             final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists + " ORDER BY title COLLATE NOCASE ASC", new String[]{});
-            return cursorToColl(c, new ArrayList<>(), GET_STRING_0);
+            final Set<String> result = new HashSet<>();
+            while (c.moveToNext()) {
+                final String temp = c.getString(0).trim().replaceAll(":+$", "").trim();
+                if (!temp.isEmpty()) {
+                    result.add(temp);
+                }
+            }
+            c.close();
+            final ArrayList<String> result2 = new ArrayList<>(result);
+            Collections.sort(result2);
+            return result2;
         });
     }
 
@@ -4548,7 +4583,7 @@ public class DataStore {
             final Resources res = CgeoApplication.getInstance().getResources();
             final List<StoredList> lists = new ArrayList<>();
             if (listId == null) {
-                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
             }
 
             try {
@@ -4596,11 +4631,11 @@ public class DataStore {
 
             final Resources res = CgeoApplication.getInstance().getResources();
             if (id == PseudoList.ALL_LIST.id) {
-                return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
+                return new StoredList(PseudoList.ALL_LIST.id, LocalizationUtils.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
             }
 
             // fall back to standard list in case of invalid list id
-            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+            return new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
         });
     }
 
@@ -5499,7 +5534,7 @@ public class DataStore {
                         statement.bindString(3, "waypoint");                         // type
                         statement.bindString(4, "00");                               // prefix
                         statement.bindString(5, "---");                              // lookup
-                        statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
+                        statement.bindString(6, LocalizationUtils.getString(R.string.wp_waypoint) + " " + sequence);      // name
                         statement.bindDouble(7, getDouble(cursor, "latitude"));      // latitude
                         statement.bindDouble(8, getDouble(cursor, "longitude"));     // longitude
                         statement.bindString(9, "");                                 // note

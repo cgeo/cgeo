@@ -1,11 +1,11 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -488,7 +488,7 @@ public class LogEntry implements Parcelable {
             }
         }
         if (titles.isEmpty()) {
-            titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
+            titles.add(LocalizationUtils.getString(R.string.cache_log_image_default_title));
         }
         return "• " + StringUtils.join(titles, "\n• ");
     }
@@ -507,13 +507,23 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Checks, if the logs are representing the same log-entry.
-     * Log-text can be empty (to deal with field-notes)
+     * Checks if the logs represent the same log entry:
+     * Same log type, same author, same day (ignoring time).
+     * Same log-text (or one can be empty). Ignore log-text for found logs
+     * (as there should be only a unique one - at least for that day)
      */
     public boolean isMatchingLog(final LogEntry log) {
-        return this.logType == log.logType &&
-                this.author.compareTo(log.author) == 0 &&
-                DateUtils.isSameDay(new Date(this.date), new Date(log.date)) &&
-                (this.log.isEmpty() || log.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log));
+        final boolean sameType = this.logType == log.logType;
+        final boolean sameAuthor = this.author.compareTo(log.author) == 0;
+
+        if (!sameType || !sameAuthor) {
+            return false;
+        }
+
+        final boolean sameLogText = this.logType.isFoundLog()
+                || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log)
+                || this.log.isEmpty() || log.log.isEmpty();
+        return DateUtils.isSameDay(new Date(this.date), new Date(log.date))
+                && sameLogText;
     }
 }

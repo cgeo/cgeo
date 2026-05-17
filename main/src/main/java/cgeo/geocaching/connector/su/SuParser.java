@@ -15,6 +15,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
@@ -225,27 +226,27 @@ public class SuParser {
 
         if (descriptionJson.has(CACHE_DESC_CACHE)) {
             // Cache description
-            addBoldText(descriptionBuilder, res.getString(R.string.cache_cache_description));
+            addBoldText(descriptionBuilder, LocalizationUtils.getString(R.string.cache_cache_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_CACHE).asText());
         }
         if (descriptionJson.has(CACHE_DESC_TRADITIONAL)) {
             // Traditional part
-            addBoldText(descriptionBuilder, res.getString(R.string.cache_traditional_description));
+            addBoldText(descriptionBuilder, LocalizationUtils.getString(R.string.cache_traditional_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_TRADITIONAL).asText());
         }
         if (descriptionJson.has(CACHE_DESC_VIRTUAL)) {
             // Virtual part
-            addBoldText(descriptionBuilder, res.getString(R.string.cache_virtual_description));
+            addBoldText(descriptionBuilder, LocalizationUtils.getString(R.string.cache_virtual_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_VIRTUAL).asText());
         }
         if (descriptionJson.has(CACHE_DESC_AREA)) {
             // Area description
-            addBoldText(descriptionBuilder, res.getString(R.string.cache_area_description));
+            addBoldText(descriptionBuilder, LocalizationUtils.getString(R.string.cache_area_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_AREA).asText());
         }
         if (descriptionJson.has(CACHE_DESC_CONTAINS)) {
             // What's in the box
-            addBoldText(descriptionBuilder, res.getString(R.string.cache_box_description));
+            addBoldText(descriptionBuilder, LocalizationUtils.getString(R.string.cache_box_description));
             // Box description is the only non-HTML field, so need to add extra line break
             descriptionBuilder.append("<br/>");
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_CONTAINS).asText());

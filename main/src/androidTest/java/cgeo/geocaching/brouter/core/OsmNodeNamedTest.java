@@ -4,6 +4,7 @@ import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OsmNodeNamedTest {
     public static int toOsmLon(final double lon) {
@@ -111,5 +112,22 @@ public class OsmNodeNamedTest {
                 node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
                 0.1 * 5
         );
+    }
+
+    @Test
+    public void testDestination() {
+        // Segment ends
+        // Circle definition
+        final OsmNodeNamed node = new OsmNodeNamed();
+        // Center
+        node.ilon = toOsmLon(0);
+        node.ilat = toOsmLat(0);
+        final double startDist = 1000;
+
+        for (int i = 0; i <= 360; i += 45) {
+            final int[] pos = CheapRulerHelper.destination(node.ilon, node.ilat, startDist, i);
+            final double dist = CheapRulerHelper.distance(node.ilon, node.ilat, pos[0], pos[1]);
+            assertTrue("pos " + pos[0] + " " + pos[1] + " distance (" + dist + ") should be around (" + startDist + ")", dist - 1 < startDist && dist + 1 > startDist);
+        }
     }
 }

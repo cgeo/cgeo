@@ -280,7 +280,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.stopGame.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying());
 
-        this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
+        this.setTitle(game.isPlaying() ? game.getCartridgeName() : LocalizationUtils.getString(R.string.wherigo_player));
 
         binding.cacheContextBox.setVisibility(game.getContextGeocode() != null ? View.VISIBLE : View.GONE);
         binding.cacheContextName.setText(game.getContextGeocacheName());

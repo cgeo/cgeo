@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.ColorPickerUI;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -70,7 +71,7 @@ public class ColorpickerPreference extends Preference {
         }
         if (textView != null && showLineWidthSlider) {
             textView.setVisibility(View.VISIBLE);
-            textView.setText(getContext().getString(R.string.preference_colorpicker_show_width, originalWidth));
+            textView.setText(LocalizationUtils.getString(R.string.preference_colorpicker_show_width, originalWidth));
         }
         final Preference pref = findPreferenceInHierarchy(getKey());
         if (pref != null) {

@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
@@ -31,8 +32,8 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             preference.setEnabled(false);
 
             final ProgressDialog waitDialog = new ProgressDialog(getActivity());
-            waitDialog.setTitle(getString(R.string.init_maintenance_start));
-            waitDialog.setMessage(getString(R.string.init_maintenance_ongoing));
+            waitDialog.setTitle(LocalizationUtils.getString(R.string.init_maintenance_start));
+            waitDialog.setMessage(LocalizationUtils.getString(R.string.init_maintenance_ongoing));
             waitDialog.setCancelable(false);
             waitDialog.show();
 
@@ -63,7 +64,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         } else {
             final AtomicLong usedBytes = new AtomicLong();
             dataDirPreference.setOnPreferenceClickListener(preference -> {
-                final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
+                final ProgressDialog progress = ProgressDialog.show(getActivity(), LocalizationUtils.getString(R.string.calculate_dataDir_title), LocalizationUtils.getString(R.string.calculate_dataDir), true, false);
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
                     // calculate disk usage
                     usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));

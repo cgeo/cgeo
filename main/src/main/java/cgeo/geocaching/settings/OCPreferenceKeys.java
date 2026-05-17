@@ -1,8 +1,8 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OCAuthParams;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.util.SparseArray;
 
@@ -41,7 +41,7 @@ public enum OCPreferenceKeys {
         for (final OCPreferenceKeys key : values()) {
             FIND_BY_ISACTIVE_ID.put(key.isActivePrefId, key);
             FIND_BY_AUTH_PREF_ID.put(key.authPrefId, key);
-            byIsactiveKey.put(CgeoApplication.getInstance().getString(key.isActivePrefId), key);
+            byIsactiveKey.put(LocalizationUtils.getPlainString(key.isActivePrefId), key);
         }
         FIND_BY_ISACTIVE_KEY = Collections.unmodifiableMap(byIsactiveKey);
     }

@@ -3,6 +3,7 @@ package cgeo.geocaching.command;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -29,7 +30,7 @@ public abstract class SetCacheIconCommand extends AbstractCachesCommand {
 
     @Override
     public void execute() {
-        setProgressMessage(getContext().getString(R.string.command_set_cache_icons_progress));
+        setProgressMessage(LocalizationUtils.getString(R.string.command_set_cache_icons_progress));
         SetCacheIconCommand.super.execute();
     }
 
@@ -47,6 +48,6 @@ public abstract class SetCacheIconCommand extends AbstractCachesCommand {
     @Nullable
     protected String getResultMessage() {
         final int size = getCaches().size();
-        return getContext().getResources().getQuantityString(R.plurals.command_set_cache_icons_result, size, size);
+        return LocalizationUtils.getPlural(R.plurals.command_set_cache_icons_result, size);
     }
 }

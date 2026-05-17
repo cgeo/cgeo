@@ -16,7 +16,6 @@ import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
@@ -483,7 +482,7 @@ public class FolderUtils {
     public void copyAllAsynchronousWithGui(final Activity activity, final Folder source, final Folder target, final boolean move, final Consumer<FolderProcessResult> callback) {
         FolderProcessTask.process(
                 activity,
-                activity.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
+                LocalizationUtils.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
                 ci -> copyAll(source, target, move, null, ci),
                 folderProcessResult -> displayCopyAllDoneDialog(activity, folderProcessResult, source, target, move, callback)
         );
@@ -493,7 +492,7 @@ public class FolderUtils {
         final String message = getCopyAllDoneMessage(activity, folderProcessResult, source, target, move);
 
         Dialogs.newBuilder(activity)
-                .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
+                .setTitle(LocalizationUtils.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
                 .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, (dd, pp) -> {
@@ -515,21 +514,21 @@ public class FolderUtils {
     private String getCopyAllDoneMessage(final Activity activity, final FolderProcessResult folderProcessResult, final Folder source, final Folder target, final boolean move) {
 
         final String filesCopied = folderProcessResult.filesModified < 0 ? "-" : "" + folderProcessResult.filesModified;
-        final String filesTotal = folderProcessResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, folderProcessResult.filesInSource);
+        final String filesTotal = folderProcessResult.filesInSource < 0 ? "-" : plurals(R.plurals.file_count, folderProcessResult.filesInSource);
         final String foldersCopied = folderProcessResult.dirsModified < 0 ? "-" : "" + folderProcessResult.dirsModified;
-        final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, folderProcessResult.dirsInSource);
+        final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(R.plurals.folder_count, folderProcessResult.dirsInSource);
 
         String message =
-                activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
+                LocalizationUtils.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
                         source.toUserDisplayableString(), target.toUserDisplayableString(),
                         filesCopied, filesTotal, foldersCopied, foldersTotal);
 
         if (folderProcessResult.result != ProcessResult.OK) {
-            message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
+            message += "\n\n" + LocalizationUtils.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
                     folderProcessResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(folderProcessResult.failedFile.uri));
         }
 
-        message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);
+        message += "\n\n" + LocalizationUtils.getString(R.string.folder_move_finished_dialog_tap);
         return message;
     }
 
@@ -900,12 +899,12 @@ public class FolderUtils {
         protected FolderProcessResult doInBackgroundInternal(final Void[] params) {
             return this.process.call(ci -> {
                 final String filesCopied = ci.filesProcessed < 0 ? "-" : "" + ci.filesProcessed;
-                final String filesTotal = ci.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, ci.filesInSource);
+                final String filesTotal = ci.filesInSource < 0 ? "-" : plurals(R.plurals.file_count, ci.filesInSource);
                 final String foldersCopied = ci.dirsProcessed < 0 ? "-" : "" + ci.dirsProcessed;
-                final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, ci.dirsInSource);
+                final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(R.plurals.folder_count, ci.dirsInSource);
 
-                final String statusString = activity.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
-                final String progressString = activity.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
+                final String statusString = LocalizationUtils.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
+                final String progressString = LocalizationUtils.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
                 publishProgress(statusString + "\n" + progressString);
             });
         }
@@ -917,7 +916,7 @@ public class FolderUtils {
         }
     }
 
-    private static String plurals(final Context context, final int id, final int quantity) {
-        return context.getResources().getQuantityString(id, quantity, quantity);
+    private static String plurals(final int id, final int quantity) {
+        return LocalizationUtils.getPlural(id, quantity);
     }
 }

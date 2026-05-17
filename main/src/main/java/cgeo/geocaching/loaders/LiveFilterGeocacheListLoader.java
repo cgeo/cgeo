@@ -12,6 +12,8 @@ import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
+
 public abstract class LiveFilterGeocacheListLoader extends AbstractSearchLoader {
 
     private final GeocacheSort sort;
@@ -27,13 +29,18 @@ public abstract class LiveFilterGeocacheListLoader extends AbstractSearchLoader 
 
     @Override
     public SearchResult runSearch() {
-        final GeocacheFilter useFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
+        final GeocacheFilter useFilter = getBaseFilter().clone().and(getAdditionalFilterParameter());
         final GeocacheSort sort = this.sort == null ? new GeocacheSort() : this.sort;
 
         final SearchResult result = nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(getFilterType()),
                 connector -> connector.searchByFilter(useFilter, sort));
         AmendmentUtils.amendCachesForFilter(result, useFilter);
         return result;
+    }
+
+    @NonNull
+    protected GeocacheFilter getBaseFilter() {
+        return GeocacheFilterContext.getForType(LIVE);
     }
 
 }

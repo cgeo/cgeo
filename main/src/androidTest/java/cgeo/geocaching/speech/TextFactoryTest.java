@@ -5,9 +5,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
-
 import java.util.Locale;
 
 import org.junit.After;
@@ -26,22 +23,18 @@ public class TextFactoryTest {
     private static final Geopoint EAST_1M = new Geopoint(15, -85.999990);
     private static final Geopoint EAST_1FT = new Geopoint(15, -85.999996);
 
-    private Locale defaultLocale1;
-    private Locale defaultLocale2;
+    private Locale defaultLocale;
     private boolean defaultMetric;
 
     @Before
     public void setUp() throws Exception {
-        final Resources resources = CgeoApplication.getInstance().getResources();
-        final Configuration config = resources.getConfiguration();
-        defaultLocale1 = config.locale;
-        defaultLocale2 = Locale.getDefault();
+        defaultLocale = Settings.getApplicationLocale();
         defaultMetric = !Settings.useImperialUnits();
     }
 
     @After
     public void tearDown() {
-        setLocale(defaultLocale1, defaultLocale2, defaultMetric);
+        setLocale(defaultLocale, defaultMetric);
     }
 
     @Test
@@ -150,16 +143,8 @@ public class TextFactoryTest {
     }
 
     private static void setLocale(final Locale locale, final boolean metric) {
-        setLocale(locale, locale, metric);
-    }
-
-    private static void setLocale(final Locale locale1, final Locale locale2, final boolean metric) {
-        final Configuration config = new Configuration();
-        config.locale = locale1;
-        final Resources resources = CgeoApplication.getInstance().getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-
-        Locale.setDefault(locale2);
+        Settings.putUserLanguage(locale.getLanguage());
         TestSettings.setUseImperialUnits(!metric);
+        CgeoApplication.getInstance().initApplicationLocale();
     }
 }

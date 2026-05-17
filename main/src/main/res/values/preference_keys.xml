@@ -66,13 +66,13 @@
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string translatable="false" name="pref_fakekey_gc_website">fakekey_gc_website</string>
+    <string translatable="false" name="pref_wherigocomcookie">wherigocomcookie</string>
 
     <!-- settings for geocaching.com lab adventures screen -->
     <string translatable="false" name="preference_screen_al">preference_screen_al</string>
     <string translatable="false" name="pref_connectorALActive">connectorLCActive</string><!-- variable stays with "LC" for compatibility reasons -->
     <string translatable="false" name="pref_fakekey_al_website">fakekey_al_website</string>
     <string translatable="false" name="pref_foundstate_al">foundstate_al</string>
-
 
     <!-- settings for opencaching.de screen -->
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>
@@ -196,7 +196,7 @@
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
     <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>
     <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
-    
+
     <string translatable="false" name="pref_saturation_offset_dark">saturation_offset_dark</string>
     <string translatable="false" name="pref_lightness_offset_dark">lightness_offset_dark</string>
     <string translatable="false" name="pref_saturation_offset_light">saturation_offset_light</string>

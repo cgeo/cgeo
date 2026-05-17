@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -79,7 +80,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
 
     @Override
     public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
-        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_openandromaps_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS);
+        return getExtrafile(THEME_FILES, LocalizationUtils.getPlainString(R.string.mapserver_openandromaps_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS);
     }
 
     @Override

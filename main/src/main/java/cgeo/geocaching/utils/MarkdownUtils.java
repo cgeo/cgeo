@@ -29,7 +29,7 @@ public class MarkdownUtils {
                             final Uri uri = Uri.parse(link);
                             if (uri != null) {
                                 // filter links to c:geo-internal settings
-                                if (Strings.CS.equals(uri.getScheme(), context.getString(R.string.settings_scheme))) {
+                                if (Strings.CS.equals(uri.getScheme(), LocalizationUtils.getPlainString(R.string.settings_scheme))) {
                                     SettingsActivity.openForSettingsLink(uri, context);
                                 } else {
                                     new LinkResolverDef().resolve(view, link);

@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-
 public class DebugUtils {
 
     private DebugUtils() {
@@ -42,7 +41,7 @@ public class DebugUtils {
             }
             final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
 
-            ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
+            ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, LocalizationUtils.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
         }, 1000);
     }
 
@@ -53,18 +52,18 @@ public class DebugUtils {
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg, final boolean showErrorTextIfAvailable) {
         final StringBuilder message = new StringBuilder();
         if (showErrorTextIfAvailable && errorMsg != null) {
-            message.append(context.getString(R.string.debug_user_error_errortext)).append("\n[")
+            message.append(LocalizationUtils.getString(R.string.debug_user_error_errortext)).append("\n[")
                     .append(errorMsg).append("]\n\n");
             Log.w("User was asked to report problem: " + errorMsg);
         }
-        message.append(context.getString(R.string.debug_user_error_explain_options));
+        message.append(LocalizationUtils.getString(R.string.debug_user_error_explain_options));
 
         SimpleDialog.of(context)
                 .setTitle(R.string.debug_user_error_report_title)
                 .setMessage(TextParam.text(message.toString()))
                 .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
                 .confirm(
-                        () -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg)
+                        () -> createLogcatHelper(context, true, true, errorMsg == null ? null : LocalizationUtils.getString(R.string.debug_user_error_report_title) + ": " + errorMsg)
                 );
     }
 
@@ -125,7 +124,7 @@ public class DebugUtils {
     private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final Uri logfileUri) {
         final String systemInfo = SystemInformation.getSystemInformation(activity);
         final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
-        ShareUtils.shareAsEmail(activity, String.format(activity.getString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
+        ShareUtils.shareAsEmail(activity, String.format(LocalizationUtils.getPlainString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
     }
 
 

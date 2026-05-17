@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -97,7 +98,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             toolbar.setTitle(wpCode);
             setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
 
-            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
@@ -115,7 +116,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
 
-            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(waypoint.getCoords(), coordinateFormatPosition);
             if (coordinateSwitcher != null) {
                 coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
             }
@@ -181,7 +182,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     @Override
     public void startDefaultNavigation2() {
         if (waypoint == null || waypoint.getCoords() == null) {
-            showToast(res.getString(R.string.cache_coordinates_no));
+            showToast(LocalizationUtils.getString(R.string.cache_coordinates_no));
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), waypoint);
@@ -190,7 +191,8 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
     @Override
     public void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(getActivity(), null, waypoint, null);
+        ViewUtils.setEnabled(requireView().findViewById(R.id.menu_navigate), false);
+        NavigationAppFactory.showNavigationMenu(getActivity(), null, waypoint, null, true, true, R.id.menu_navigate);
     }
 
     @Override

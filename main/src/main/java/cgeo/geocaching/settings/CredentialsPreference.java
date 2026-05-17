@@ -1,6 +1,5 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.IAvatar;
@@ -9,6 +8,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -55,7 +55,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private CredentialActivityMapping getAuthorization() {
         final String prefKey = getKey();
         for (final CredentialActivityMapping auth : CredentialActivityMapping.values()) {
-            if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
+            if (auth.prefKeyId != NO_KEY && prefKey.equals(LocalizationUtils.getPlainString(auth.prefKeyId))) {
                 return auth;
             }
         }

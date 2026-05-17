@@ -41,6 +41,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -144,8 +145,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
                         private void fillView(final View connectorInfo, final ILogin conn) {
 
                             final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
-                            final boolean isLoggingIn = Strings.CS.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working));
-                            final boolean isLoggingOk = Strings.CS.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_ok));
+                            final boolean isLoggingIn = Strings.CS.equals(conn.getLoginStatusString(), LocalizationUtils.getString(R.string.init_login_popup_working));
+                            final boolean isLoggingOk = Strings.CS.equals(conn.getLoginStatusString(), LocalizationUtils.getString(R.string.init_login_popup_ok));
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
                             if (conn instanceof GCConnector && Network.isConnected() && !isLoggingIn && !isLoggingOk) {
                                 final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
@@ -158,7 +159,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             connectorStatus.setOnClickListener(connectorConfig);
 
                             final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
-                            manualLogin.setVisibility(connInfo.toString().contains(activity.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
+                            manualLogin.setVisibility(connInfo.toString().contains(LocalizationUtils.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
                             manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
                                 if (!activity.isDestroyed() && !activity.isFinishing()) {
                                     activity.updateUserInfoHandler.sendEmptyMessage(-1);
@@ -172,12 +173,12 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
                                         final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
                                         if (count >= 0) {
-                                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
+                                            userFoundCount.append(LocalizationUtils.getPlural(R.plurals.user_finds, count));
 
                                             if (Settings.isDisplayOfflineLogsHomescreen()) {
                                                 final int offlinefounds = DataStore.getFoundsOffline(conn);
                                                 if (offlinefounds > 0) {
-                                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                                    userFoundCount.append(" + ").append(LocalizationUtils.getPlural(R.plurals.user_finds_offline, offlinefounds));
                                                 }
                                             }
                                         }
@@ -191,7 +192,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                     },
                                     p -> {
                                         if (conn instanceof GCConnector) {
-                                            connectorStatus.setText(connInfo.append(Formatter.SEPARATOR).append(CgeoApplication.getInstance().getString(Settings.isGCPremiumMember() ? R.string.gc_premium : R.string.gc_basic)));
+                                            connectorStatus.setText(connInfo.append(Formatter.SEPARATOR).append(LocalizationUtils.getString(Settings.isGCPremiumMember() ? R.string.gc_premium : R.string.gc_basic)));
                                         }
                                         final TextView userName = connectorInfo.findViewById(R.id.item_title);
                                         final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
@@ -327,7 +328,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
             final int count = intent.getIntExtra(EXTRA_MESSAGE_CENTER_COUNTER, 0);
             new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
-                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), true, (actionRequested) -> {
+                displayActionItem(R.id.mcupdate, LocalizationUtils.getPlural(R.plurals.mcupdate, count), true, (actionRequested) -> {
                     updateHomeBadge(-1);
                     if (actionRequested) {
                         ShareUtils.openUrl(that, GCConstants.URL_MESSAGECENTER);
@@ -349,7 +350,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (QuickLaunchItem.conditionsFulfilled(item)) {
-                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), LocalizationUtils.getString(item.getTitleResId()), item.viewInitializer);
             }
         }
     }
@@ -429,6 +430,15 @@ public class MainActivity extends AbstractNavigationBarActivity {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onResume")) {
 
             super.onResume();
+
+            // Check if locale has changed and recreate activity if necessary
+            final java.util.Locale currentLocale = getResources().getConfiguration().getLocales().get(0);
+            final java.util.Locale desiredLocale = Settings.getApplicationLocale();
+            if (!currentLocale.equals(desiredLocale)) {
+                Log.d("Locale changed, recreating MainActivity");
+                recreate();
+                return;
+            }
 
             resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
             resumeDisposables.add(LocationDataProvider.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
@@ -540,6 +550,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
         } else if (id == R.id.menu_update_routingdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS, R.string.updates_check, updateCheckAllowed -> { });
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
         } else if (id == R.id.menu_download_language) {
@@ -559,7 +570,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             final TextView counter = findViewById(R.id.offline_counter);
             counter.setVisibility(countOfflineCaches > 0 ? View.VISIBLE : View.GONE);
             if (countOfflineCaches > 0) {
-                counter.setText(getResources().getQuantityString(R.plurals.caches_stored_offline, countOfflineCaches, countOfflineCaches));
+                counter.setText(LocalizationUtils.getPlural(R.plurals.caches_stored_offline, countOfflineCaches));
             }
         }, throwable -> Log.e("Unable to add cache count", throwable));
     }
@@ -578,7 +589,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                 if (query == null) {
                     query = "";
                 }
-                SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
+                SimpleDialog.of(this).setMessage(TextParam.text(LocalizationUtils.getString(R.string.unknown_scan) + "\n\n" + query)).show();
             }
         }
     }
@@ -637,7 +648,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
      * action callback accepts true, if action is to be performed / false if to be postponed
      */
     public void displayActionItem(final int layout, final @StringRes int info, final boolean withBadge, final Action1<Boolean> action) {
-        displayActionItem(layout, getString(info), withBadge, action);
+        displayActionItem(layout, LocalizationUtils.getString(info), withBadge, action);
     }
 
     public void displayActionItem(final int layout, final String info, final boolean withBadge, final Action1<Boolean> action) {

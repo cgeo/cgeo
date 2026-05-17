@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
@@ -8,6 +7,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -76,9 +76,8 @@ public class TileProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && ctp.supportsHillshading());
         parentMenu.findItem(R.id.menu_backgroundmap).setCheckable(true).setChecked(Settings.getMapBackgroundMapLayer()).setVisible(ctp.supportsBackgroundMaps());
-        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getTileProvider().supportsHillshading());
         parentMenu.findItem(R.id.menu_download_backgroundmap).setVisible(ctp.supportsBackgroundMaps);
-        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
+        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
@@ -180,7 +179,7 @@ public class TileProviderFactory {
 
     private static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
+        final String mapsKey = LocalizationUtils.getPlainString(R.string.maps_api2_key);
         if (StringUtils.length(mapsKey) < 30 || Strings.CS.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;

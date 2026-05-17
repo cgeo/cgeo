@@ -419,12 +419,12 @@ public final class GCParser {
         if (galleryImages > 0) {
             galleryImageLink = String.format("<br/><br/><a href=\"%s\"><b>%s</b></a>",
                 "https://www.geocaching.com/seek/gallery.aspx?guid=" + cache.getGuid(),
-                CgeoApplication.getInstance().getString(R.string.link_gallery, galleryImages));
+                LocalizationUtils.getString(R.string.link_gallery, galleryImages));
         }
         Log.d("Gallery image link: " + galleryImageLink);
         String gcChecker = StringUtils.EMPTY;
         if (page.contains(GCConstants.PATTERN_GC_CHECKER)) {
-            gcChecker = "<!--" + CgeoApplication.getInstance().getString(R.string.link_gc_checker) + "-->";
+            gcChecker = "<!--" + LocalizationUtils.getString(R.string.link_gc_checker) + "-->";
         }
         cache.setDescription(longDescription + relatedWebPage + gcChecker);
 
@@ -573,7 +573,7 @@ public final class GCParser {
 
                     // waypoint name
                     // res is null during the unit tests
-                    final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, CgeoApplication.getInstance().getString(R.string.waypoint), true);
+                    final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
 
                     // waypoint type
                     final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
@@ -1372,7 +1372,7 @@ public final class GCParser {
             Log.w("GCParser.parseTrackable: Failed to parse trackable details & image", e);
         }
         if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
-            trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
+            trackable.setDetails(LocalizationUtils.getString(R.string.trackable_not_activated));
         }
 
         // trackable may be locked (see e.g. TB673CE)
@@ -1730,7 +1730,10 @@ public final class GCParser {
 
         // merge time from offline log
         if (offlineLog != null) {
-            mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+            final boolean offlineMerged = mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+            if (offlineMerged) {
+                cache.clearOfflineLog(null);
+            }
         }
 
         // merge time from online-logs already stored in db (overrides possible offline log)
@@ -1878,15 +1881,16 @@ public final class GCParser {
         }
     }
 
-    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
+    private static boolean mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
         for (int i = 0; i < mergedLogTimes.size(); i++) {
             final LogEntry mergedLog = mergedLogTimes.get(i);
             if (logToMerge.isMatchingLog(mergedLog)) {
                 final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
                 mergedLogTimes.set(i, updatedTimeLog);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     @NonNull

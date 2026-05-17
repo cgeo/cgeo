@@ -1,15 +1,13 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-
-import android.app.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +23,6 @@ public class GeokretyParserTest  {
 
     @Test
     public void testParse() throws Exception {
-        final Application app = CgeoApplication.getInstance();
-
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
 
@@ -36,7 +32,7 @@ public class GeokretyParserTest  {
         assertThat(trackable1.getName()).isEqualTo("c:geo One");
         assertThat(trackable1.getGeocode()).isEqualTo("GKB580");
         assertThat(trackable1.getDistance()).isEqualTo(0);
-        assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(trackable1.getType()).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_traditional));
 
         // Check second GK in list
         final Trackable trackable2 = trackables.get(1);
@@ -44,7 +40,7 @@ public class GeokretyParserTest  {
         assertThat(trackable2.getName()).isEqualTo("c:geo Two");
         assertThat(trackable2.getGeocode()).isEqualTo("GKB581");
         assertThat(trackable2.getDistance()).isEqualTo(0);
-        assertThat(trackable2.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_post));
+        assertThat(trackable2.getType()).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_post));
     }
 
     @Test
@@ -75,20 +71,17 @@ public class GeokretyParserTest  {
 
     @Test
     public void testGetType() throws Exception {
-        final Application app = CgeoApplication.getInstance();
-        assertThat(GeokretyParser.getType(0)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
-        assertThat(GeokretyParser.getType(1)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
-        assertThat(GeokretyParser.getType(2)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_human));
-        assertThat(GeokretyParser.getType(3)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_coin));
-        assertThat(GeokretyParser.getType(4)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_post));
+        assertThat(GeokretyParser.getType(0)).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(GeokretyParser.getType(1)).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
+        assertThat(GeokretyParser.getType(2)).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_human));
+        assertThat(GeokretyParser.getType(3)).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_coin));
+        assertThat(GeokretyParser.getType(4)).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_post));
         assertThat(GeokretyParser.getType(5)).isNull();
         assertThat(GeokretyParser.getType(42)).isNull();
     }
 
     @Test
     public void testParseNoValueFields() {
-        final Application app = CgeoApplication.getInstance();
-
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret146_xml)));
         assertThat(trackables).hasSize(1);
 
@@ -101,7 +94,7 @@ public class GeokretyParserTest  {
         assertThat(trackable1.getImage()).isNull();
         assertThat(trackable1.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
         assertThat(trackable1.getSpottedName()).isNull();
-        assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(trackable1.getType()).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_traditional));
     }
 
     @Test
@@ -147,7 +140,6 @@ public class GeokretyParserTest  {
 
     @Test
     public void testFullDetails() throws Exception {
-        final Application app = CgeoApplication.getInstance();
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret47496_details_xml)));
         assertThat(trackables).hasSize(1);
@@ -156,7 +148,7 @@ public class GeokretyParserTest  {
         assertThat(trackable1).isNotNull();
         assertThat(trackable1.getName()).isEqualTo("c:geo tests");
         assertThat(trackable1.getGeocode()).isEqualTo("GKB988");
-        assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(trackable1.getType()).isEqualTo(LocalizationUtils.getString(cgeo.geocaching.R.string.geokret_type_traditional));
         assertThat(trackable1.getOwner()).isEqualTo("kumy");
         assertThat(trackable1.getDistance()).isEqualTo(143);
         assertThat(trackable1.isMissing()).isFalse();
@@ -280,7 +272,7 @@ public class GeokretyParserTest  {
                 .setAuthor("authorDiscovered")
                 .build();
 
-        final String userUnknown = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.user_unknown);
+        final String userUnknown = LocalizationUtils.getString(cgeo.geocaching.R.string.user_unknown);
         assertThat(GeokretyParser.getLastSpottedUsername(new ArrayList<>())).isEqualTo(userUnknown);
 
         final List<LogEntry> logsEntries1 = new ArrayList<>();

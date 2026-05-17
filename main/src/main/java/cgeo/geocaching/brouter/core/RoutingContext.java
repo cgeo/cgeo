@@ -20,16 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("checkstyle:MemberName")
 public final class RoutingContext {
     public int alternativeIdx = 0;
     public String profileFilename;
     public long profileTimestamp;
     public Map<String, String> keyValues;
     public String rawTrackPath;
+    public String rawAreaPath;
     public BExpressionContextWay expctxWay;
     public BExpressionContextNode expctxNode;
-    public GeometryDecoder geometryDecoder = new GeometryDecoder();
-    public int memoryclass = 64;
+    public final GeometryDecoder geometryDecoder = new GeometryDecoder();
+    public final int memoryclass = 64;
     public boolean carMode;
     public boolean bikeMode;
     public boolean footMode;
@@ -51,13 +53,22 @@ public final class RoutingContext {
     public double waypointCatchingRange;
     public boolean correctMisplacedViaPoints;
     public double correctMisplacedViaPointsDistance;
+    public boolean continueStraight;
+    public boolean useDynamicDistance;
+    public boolean buildBeelineOnRange;
+
     public List<OsmNodeNamed> poipoints;
     public List<OsmNodeNamed> nogopoints = null;
-    private List<OsmNodeNamed> nogopointsAll = null; // full list not filtered for wayoints-in-nogos
+    private List<OsmNodeNamed> nogopointsAll = null; // full list not filtered for waypoints-in-nogos
     public Integer startDirection;
     public boolean startDirectionValid;
     public boolean forceUseStartDirection;
-    public CheapAngleMeter anglemeter = new CheapAngleMeter();
+    public Integer roundTripDistance;
+    public Integer roundTripDirectionAdd;
+    public Integer roundTripPoints;
+    public boolean allowSamewayback;
+
+    public final CheapAngleMeter anglemeter = new CheapAngleMeter();
     public double nogoCost = 0.;
     public boolean isEndpoint = false;
     public boolean shortestmatch = false;
@@ -69,8 +80,12 @@ public final class RoutingContext {
     public boolean showSpeedProfile;
     public boolean inverseRouting;
     public boolean showTime;
+    public boolean hasDirectRouting;
+
     public String outputFormat = "gpx";
     public boolean exportWaypoints = false;
+    public boolean exportCorrectedWaypoints = false;
+
     public OsmPrePath firstPrePath;
     public int turnInstructionMode; // 0=none, 1=auto, 2=locus, 3=osmand, 4=comment-style, 5=gpsies-style
     public double turnInstructionCatchingRange;
@@ -81,6 +96,29 @@ public final class RoutingContext {
     public double sCX;
     public double defaultCR;
     public double bikerPower;
+
+    // variables in the profile to activate "crossing costs" at nodes with "estimated_crossing_class" not null
+    public boolean consider_crossing = false; // consider crossing
+
+    public int crossing_Prio_H = 0; // min value to considered a HW as "highprio"
+    public int crossing_Prio_L = 0; // max value to considered a HW as "lowprio"
+
+    // cost when turning left from a Highprio to a lowprio
+    public int cost_ToLeft_from_H_class1 = 0;
+    public int cost_ToLeft_from_H_class2 = 0;
+    public int cost_ToLeft_from_H_class3 = 0;
+    public int cost_ToLeft_from_H_class4 = 0;
+    public int cost_ToLeft_from_H_class5 = 0;
+    public int cost_ToLeft_from_H_class6 = 0;
+
+    // cost when turning Right from a Highprio to a lowprio
+    public int cost_ToRight_from_H_class1 = 0;
+    public int cost_ToRight_from_H_class2 = 0;
+    public int cost_ToRight_from_H_class3 = 0;
+    public int cost_ToRight_from_H_class4 = 0;
+    public int cost_ToRight_from_H_class5 = 0;
+    public int cost_ToRight_from_H_class6 = 0;
+
     public OsmPathModel pm;
     private List<OsmNodeNamed> keepnogopoints = null;
     private OsmNodeNamed pendingEndpoint = null;
@@ -173,9 +211,9 @@ public final class RoutingContext {
                 boolean useAnyway = false;
                 if (prevMwp == null) {
                     useAnyway = true;
-                } else if (mwp.direct) {
+                } else if (mwp.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
                     useAnyway = true;
-                } else if (prevMwp.direct) {
+                } else if (prevMwp.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
                     useAnyway = true;
                 } else if (prevMwpIsInside) {
                     useAnyway = true;
@@ -253,13 +291,35 @@ public final class RoutingContext {
         bikeMode = 0.f != expctxGlobal.getVariableValue("validForBikes", 0.f);
         footMode = 0.f != expctxGlobal.getVariableValue("validForFoot", 0.f);
 
+        consider_crossing = 0.f != expctxGlobal.getVariableValue("consider_crossing", 0.f);
+
+        crossing_Prio_H = (int) expctxGlobal.getVariableValue("crossing_Prio_H", 0.f);
+        crossing_Prio_L = (int) expctxGlobal.getVariableValue("crossing_Prio_L", 0.f);
+
+        cost_ToLeft_from_H_class1 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class1", 0.f);
+        cost_ToLeft_from_H_class2 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class2", 0.f);
+        cost_ToLeft_from_H_class3 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class3", 0.f);
+        cost_ToLeft_from_H_class4 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class4", 0.f);
+        cost_ToLeft_from_H_class5 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class5", 0.f);
+        cost_ToLeft_from_H_class6 = (int) expctxGlobal.getVariableValue("cost_ToLeft_from_H_class6", 0.f);
+
+        // for left-hand traffic
+        cost_ToRight_from_H_class1 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class1", 0.f);
+        cost_ToRight_from_H_class2 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class2", 0.f);
+        cost_ToRight_from_H_class3 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class3", 0.f);
+        cost_ToRight_from_H_class4 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class4", 0.f);
+        cost_ToRight_from_H_class5 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class5", 0.f);
+        cost_ToRight_from_H_class6 = (int) expctxGlobal.getVariableValue("cost_ToRight_from_H_class6", 0.f);
+
         waypointCatchingRange = expctxGlobal.getVariableValue("waypointCatchingRange", 250.f);
 
         // turn-restrictions not used per default for foot profiles
         considerTurnRestrictions = 0.f != expctxGlobal.getVariableValue("considerTurnRestrictions", footMode ? 0.f : 1.f);
 
-        correctMisplacedViaPoints = 0.f != expctxGlobal.getVariableValue("correctMisplacedViaPoints", 1.f);
-        correctMisplacedViaPointsDistance = expctxGlobal.getVariableValue("correctMisplacedViaPointsDistance", 40.f);
+        correctMisplacedViaPoints = 0.f != expctxGlobal.getVariableValue("correctMisplacedViaPoints", 0.f);
+        correctMisplacedViaPointsDistance = expctxGlobal.getVariableValue("correctMisplacedViaPointsDistance", 400.f); // 0 == don't use distance
+
+        continueStraight = 0.f != expctxGlobal.getVariableValue("continueStraight", 0.f);
 
         // process tags not used in the profile (to have them in the data-tab)
         processUnusedTags = 0.f != expctxGlobal.getVariableValue("processUnusedTags", 0.f);
@@ -290,7 +350,7 @@ public final class RoutingContext {
             turnInstructionMode = tiMode;
         }
         turnInstructionCatchingRange = expctxGlobal.getVariableValue("turnInstructionCatchingRange", 40.f);
-        turnInstructionRoundabouts = expctxGlobal.getVariableValue("turnInstructionRoundabouts", 1.f) != 0.f;
+        turnInstructionRoundabouts = expctxGlobal.getVariableValue("turnInstructionRoundabouts", footMode ? 0.f : 1.f) != 0.f;
 
         // Speed computation model (for bikes)
         // Total mass (biker + bike + luggages or hiker), in kg
@@ -307,6 +367,21 @@ public final class RoutingContext {
         defaultCR = expctxGlobal.getVariableValue("C_r", 0.01f);
         // Constant power of the biker (in W)
         bikerPower = expctxGlobal.getVariableValue("bikerPower", 100.f);
+
+        useDynamicDistance = expctxGlobal.getVariableValue("use_dynamic_range", 1f) == 1f;
+        buildBeelineOnRange = expctxGlobal.getVariableValue("add_beeline", 0f) == 1f;
+
+        final boolean test = expctxGlobal.getVariableValue("check_start_way", 1f) == 1f;
+        if (!test) {
+            freeNoWays();
+        }
+    }
+
+    public void freeNoWays() {
+        final BExpressionContext expctxGlobal = expctxWay;
+        if (expctxGlobal != null) {
+            expctxGlobal.freeNoWays();
+        }
     }
 
     public long[] getNogoChecksums() {

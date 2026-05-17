@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 android {
     namespace = 'com.mapwithme.maps.api'
@@ -31,6 +33,6 @@ android {
 
     dependencies {
         // Android annotations
-        implementation 'androidx.annotation:annotation:1.9.1'
+        implementation 'androidx.annotation:annotation:1.10.0'
     }
 }

@@ -77,6 +77,7 @@ public class ImageGalleryView extends LinearLayout {
     private int imageCount = 0;
 
     private Action2<ImageGalleryView, Integer> imageCountChangeCallback = null;
+    private Runnable beforeImageAddAction = null;
 
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
     private final Map<String, EditableCategoryHandler> editableCategoryHandlerMap = new HashMap<>();
@@ -354,9 +355,18 @@ public class ImageGalleryView extends LinearLayout {
 
         final boolean isEditableCat = this.editableCategoryHandlerMap.containsKey(category);
         binding.imgGalleryAddButtons.setVisibility(isEditableCat ? View.VISIBLE : View.GONE);
-        binding.imgGalleryAddMultiImages.setOnClickListener(v -> imageHelper.getMultipleImagesFromStorage(geocode, false, category, null));
-        binding.imgGalleryAddCamera.setOnClickListener(v -> imageHelper.getImageFromCamera(geocode, false, category));
-        binding.imgGalleryAddMultiFiles.setOnClickListener(v -> imageHelper.getMultipleFilesFromStorage(geocode, false, category));
+        binding.imgGalleryAddMultiImages.setOnClickListener(v -> {
+            runBeforeImageAddAction();
+            imageHelper.getMultipleImagesFromStorage(geocode, false, category, null);
+        });
+        binding.imgGalleryAddCamera.setOnClickListener(v -> {
+            runBeforeImageAddAction();
+            imageHelper.getImageFromCamera(geocode, false, category);
+        });
+        binding.imgGalleryAddMultiFiles.setOnClickListener(v -> {
+            runBeforeImageAddAction();
+            imageHelper.getMultipleFilesFromStorage(geocode, false, category);
+        });
 
     }
 
@@ -416,6 +426,22 @@ public class ImageGalleryView extends LinearLayout {
     /** registers a callback which is triggered whenever the count of images displayed in gallery changes */
     public void setImageCountChangeCallback(final Action2<ImageGalleryView, Integer> callback) {
         this.imageCountChangeCallback = callback;
+    }
+
+    /**
+     * Optional callback fired immediately before launching the picker / camera intent on any of
+     * the "+" add buttons. Intended for callers that need to satisfy a pre-condition first
+     * (e.g. {@code CacheDetailActivity#ensureSaved()} so the cache exists in the local DB before
+     * its image folder is mutated). May be set to {@code null} to clear.
+     */
+    public void setBeforeImageAddAction(@Nullable final Runnable action) {
+        this.beforeImageAddAction = action;
+    }
+
+    private void runBeforeImageAddAction() {
+        if (beforeImageAddAction != null) {
+            beforeImageAddAction.run();
+        }
     }
 
     /** scrolls the image gallery to the list index given */

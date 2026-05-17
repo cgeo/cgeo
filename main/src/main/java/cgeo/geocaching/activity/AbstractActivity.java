@@ -1,15 +1,14 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ActionBarUtils;
-import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -20,10 +19,12 @@ import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
+
+import java.util.Locale;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -50,8 +51,6 @@ import io.reactivex.rxjava3.disposables.Disposable;
 
 public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
-    protected CgeoApplication app = null;
-    protected Resources res = null;
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
@@ -83,7 +82,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showToast(final int textId) {
-        showToast(getString(textId));
+        showToast(LocalizationUtils.getString(textId));
     }
 
     @Override
@@ -92,7 +91,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showShortToast(final int textId) {
-        showShortToast(getString(textId));
+        showShortToast(LocalizationUtils.getString(textId));
     }
 
     @Override
@@ -126,9 +125,20 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     @Override
+    protected void attachBaseContext(final Context newBase) {
+        // Apply user-selected locale to activity context
+        final Locale locale = Settings.getApplicationLocale();
+        final Configuration configuration = new Configuration(newBase.getResources().getConfiguration());
+        configuration.setLocale(locale);
+        final Context localeContext = newBase.createConfigurationContext(configuration);
+        super.attachBaseContext(localeContext);
+    }
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
-        ApplicationSettings.setLocale(this);
+
+
         try {
             super.onCreate(savedInstanceState);
         } catch (Exception e) {
@@ -149,9 +159,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e("Error requesting indeterminate progress", ex);
         }
 
-        // initialize commonly used members
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
         initEdgeToEdge();
     }
@@ -166,15 +173,10 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         //apply edge2edge to activity content view
         ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
-            final View activityContent = v.findViewById(R.id.activity_content);
-            if (activityContent == null) {
-                Log.w("edge2edge: activityContent not found in " + this);
-            } else {
-                //calculate and set the activity_content's insets
-                this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
-                //trigger insets recalculation
-                refreshActivityContentInsets();
-            }
+            //calculate and set the activity_content's insets
+            this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
+            //trigger insets recalculation
+            refreshActivityContentInsets();
             return windowInsets;
         });
 
@@ -188,16 +190,22 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             //method was called before insets were set
             return;
         }
-        final View activityContent = getWindow() == null || getWindow().getDecorView() == null ? null :
-            getWindow().getDecorView().findViewById(R.id.activity_content);
-        if (activityContent == null) {
+        final View decorView = getWindow() == null ? null : getWindow().getDecorView();
+        if (decorView == null) {
+            return;
+        }
+        final View activityContent = decorView.findViewById(R.id.activity_content);
+        final View activityWrapper = decorView.findViewById(R.id.activity_content_wrapper);
+        final View root = activityWrapper != null ? activityWrapper : activityContent;
+
+        if (root == null) {
             return;
         }
 
         //let subclasses modify insets according to their needs
         final Insets insets = calculateInsetsForActivityContent(this.currentWindowInsets);
         //apply final insets to activity content
-        activityContent.setPadding(
+        root.setPadding(
                 insets.left < 0 ? this.currentWindowInsets.left : insets.left,
                 insets.top < 0 ? this.currentWindowInsets.top : insets.top,
                 insets.right < 0 ? this.currentWindowInsets.right : insets.right,
@@ -246,14 +254,14 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {
         if (cache != null) {
             final int previousNumberOfWaypoints = cache.getWaypoints().size();
-            final boolean success = cache.addCacheArtefactsFromText(HtmlUtils.extractText(text), true, res.getString(R.string.cache_description), true, null);
+            final boolean success = cache.addCacheArtefactsFromText(HtmlUtils.extractText(text), true, LocalizationUtils.getString(R.string.cache_description), true, null);
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, waypointsAdded));
             if (success) {
                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
             }
         } else {
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, 0));
         }
     }
 
@@ -286,7 +294,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                         });
             }
         } else {
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, 0));
         }
     }
 

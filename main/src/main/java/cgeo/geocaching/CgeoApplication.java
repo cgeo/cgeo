@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.TransactionSizeLogger;
+import cgeo.geocaching.utils.buildconfig.BuildConfigHooks;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.annotation.SuppressLint;
@@ -20,7 +21,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Looper;
 
@@ -30,6 +30,7 @@ import androidx.annotation.Nullable;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,6 +41,8 @@ public class CgeoApplication extends Application {
     private static CgeoApplication instance;
     private final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
     private final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
+
+    private Context localeContext;
 
     private final LifecycleInfo lifecycleInfo;
 
@@ -156,6 +159,9 @@ public class CgeoApplication extends Application {
 
             //initialize TranslationModelManager
             TranslationModelManager.get().initialize();
+
+            //specific hooks
+            BuildConfigHooks.get().initializeApp();
         }
     }
 
@@ -192,10 +198,25 @@ public class CgeoApplication extends Application {
      * Enforce a specific language if the user decided so.
      */
     public void initApplicationLocale() {
-        final Configuration config = getResources().getConfiguration();
-        config.locale = Settings.getApplicationLocale();
-        final Resources resources = getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        final Locale locale = Settings.getApplicationLocale();
+        // Set default locale for Java-side formatting (String.format, toLowerCase, etc.)
+        Locale.setDefault(locale);
+        // Create a locale-aware context for Android resource lookups (getString, etc.)
+        final Configuration config = new Configuration(getResources().getConfiguration());
+        config.setLocale(locale);
+        localeContext = createConfigurationContext(config);
+    }
+
+    /**
+     * Returns a Context configured with the user-selected application locale.
+     * Use this context for string resource lookups instead of getApplicationContext().
+     */
+    @NonNull
+    public Context getLocaleContext() {
+        if (localeContext == null) {
+            initApplicationLocale();
+        }
+        return localeContext;
     }
 
     public AtomicInteger getLowPrioNotificationCounter() {

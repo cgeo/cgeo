@@ -1,11 +1,11 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
@@ -43,7 +43,7 @@ public class GpxExportTask extends AsyncTaskWithProgress<String, Uri> {
     protected Uri doInBackgroundInternal(final String[] geocodes) {
         final List<String> allGeocodes = new ArrayList<>(Arrays.asList(geocodes));
 
-        setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
+        setMessage(LocalizationUtils.getPlural(R.plurals.cache_counts, allGeocodes.size()));
 
         final Uri uri = ContentStorage.get().create(PersistableFolder.GPX, filename);
         if (uri == null) {
@@ -76,9 +76,9 @@ public class GpxExportTask extends AsyncTaskWithProgress<String, Uri> {
         final Activity activityLocal = activity;
         if (activityLocal != null) {
             if (uri != null) {
-                ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, name + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
+                ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, name + ' ' + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
             } else {
-                ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
+                ActivityMixin.showToast(activityLocal, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

@@ -30,7 +30,7 @@ public class CacheUtils {
     }
 
     public static boolean isLabPlayerInstalled(@NonNull final Activity activity) {
-        return null != ProcessUtils.getLaunchIntent(activity.getString(R.string.package_alc));
+        return null != ProcessUtils.getLaunchIntent(LocalizationUtils.getPlainString(R.string.package_alc));
     }
 
     public static void setLabLink(@NonNull final Activity activity, @NonNull final View view, @Nullable final String url) {
@@ -41,7 +41,7 @@ public class CacheUtils {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
             } else {
-                ProcessUtils.openMarket(activity, activity.getString(R.string.package_alc));
+                ProcessUtils.openMarket(activity, LocalizationUtils.getPlainString(R.string.package_alc));
             }
         });
     }

@@ -1,8 +1,8 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
@@ -49,13 +49,13 @@ public class MapDownloaderHylly extends AbstractMapDownloader {
     // hylly uses different servers for update check and download, need to map here
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return CgeoApplication.getInstance().getString(R.string.mapserver_hylly_updatecheckurl);
+        return LocalizationUtils.getPlainString(R.string.mapserver_hylly_updatecheckurl);
     }
 
     @Override
     public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
         // themes are stored in same subfolder as map is, named dynamically, so copy the path prefix from map's uri
-        String base = activity.getString(R.string.mapserver_hylly_themes_downloadurl);
+        String base = LocalizationUtils.getPlainString(R.string.mapserver_hylly_themes_downloadurl);
         if (mapUri != null && mapUri.getLastPathSegment() != null) {
             final String newUri = mapUri.toString();
             base = newUri.substring(0, newUri.length() - mapUri.getLastPathSegment().length());

@@ -304,6 +304,7 @@
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
     <string name="err_invalid_filename_char">Niedozwolony znak \'%c\'</string>
+    <string name="err_center_coordinates_invalid">Nie można ustawić centrum mapy, współrzędne są nieprawidłowe</string>
     <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
     <string name="warn_no_cache_coord">Brak skrytek ze współrzędnymi.</string>
     <string name="warn_no_coordinates">Brak współrzędnych.</string>
@@ -929,7 +930,8 @@
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
     <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
     <string name="init_login_manual">Logowanie ręczne</string>
-    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \'ok\' poniżej.</string>
+    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \"OK\" poniżej.</string>
+    <string name="init_login_manual_wig_description">Zaloguj się na swoje konto Geocaching.com i kontynuuj autoryzację logowania Wherigo. Poczekaj, aż strona główna Wherigo będzie widoczna, a następnie kliknij przycisk \"OK\" poniżej.</string>
     <string name="init_login_manual_error_nocookie">Nie znaleziono tokenu autoryzacyjnego. Proszę wykonać logowanie lub \'anuluj\' manualne logowanie.</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
@@ -1605,6 +1607,7 @@
     <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
+    <string name="cache_log_delete_reason">Powód (maks. %d znaków)</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>

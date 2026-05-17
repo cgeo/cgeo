@@ -28,6 +28,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
@@ -146,7 +147,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         setContentView(binding.getRoot());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
-        setTitle(res.getString(R.string.search));
+        setTitle(LocalizationUtils.getString(R.string.search));
         init();
     }
 
@@ -163,7 +164,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             if (searchPerformed) {
                 // search triggered from search field -> return to main screen
                 searchViewItem.collapseActionView();
-            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo))))) {
+            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(LocalizationUtils.getString(R.string.search_geo))))) {
                 // search triggered from suggestion without any input in search field -> return to main screen
                 searchViewItem.collapseActionView();
             } else if (searchViewItem.isActionViewExpanded()) {
@@ -394,13 +395,13 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
     private void storeMostRecent(@StringRes final Integer recentPostfix, final String value) {
         if (recentPostfix != null) {
-            Settings.putStringDirect("last_" + getString(recentPostfix), value);
+            Settings.putStringDirect("last_" + LocalizationUtils.getPlainString(recentPostfix), value);
         }
     }
 
     private void checkMostRecent(@StringRes final Integer recentPostfix) {
         if (recentPostfix != null) {
-            final String mostRecent = Settings.getStringDirect("last_" + getString(recentPostfix), null);
+            final String mostRecent = Settings.getStringDirect("last_" + LocalizationUtils.getPlainString(recentPostfix), null);
             if (mostRecent != null) {
                 binding.mostRecent.setVisibility(View.VISIBLE);
                 ((TextView) binding.mostRecent.findViewById(R.id.text)).setText(mostRecent);
@@ -478,7 +479,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
-                .addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
+                .addOnClickListener(this::findOwnFn);
 
         addSearchCard(R.string.caches_history, R.drawable.ic_menu_recent_history)
                 .addOnClickListener(() -> startActivity(CacheListActivity.getHistoryIntent(this)));
@@ -509,7 +510,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             CacheListActivity.startActivityCoordinates(this, input, null);
             ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
-            showToast(res.getString(e.resource));
+            showToast(LocalizationUtils.getString(e.resource));
         }
     }
     private void findByKeywordFn(final String keyText) {
@@ -546,6 +547,11 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         ActivityMixin.overrideTransitionToFade(this);
     }
 
+    private void findOwnFn() {
+        CacheListActivity.startActivityOwner(this, Settings.getUserName(), new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT));
+        ActivityMixin.overrideTransitionToFade(this);
+    }
+
     private void findByFinderFn(final String usernameText) {
         if (StringUtils.isBlank(usernameText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
@@ -567,7 +573,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         if (ConnectorFactory.anyConnectorActive()) {
             CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
         } else {
-            showToast(getString(R.string.warn_no_connector));
+            showToast(LocalizationUtils.getString(R.string.warn_no_connector));
         }
     }
 

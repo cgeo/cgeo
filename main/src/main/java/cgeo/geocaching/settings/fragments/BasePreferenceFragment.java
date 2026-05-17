@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings.fragments;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.PreferenceTextAlwaysShow;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
@@ -178,7 +178,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
     private void lazyInitPreferenceKeys() {
         if (basicPreferences[0] == null) {
             for (int i = 0; i < basicPreferencesInt.length; i++) {
-                basicPreferences[i] = CgeoApplication.getInstance().getString(basicPreferencesInt[i]);
+                basicPreferences[i] = LocalizationUtils.getPlainString(basicPreferencesInt[i]);
             }
         }
     }

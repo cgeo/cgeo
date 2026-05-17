@@ -20,7 +20,7 @@ public final class MixCoderDataOutputStream extends DataOutputStream {
     private int b = 0;
 
     public static int[] diffs = new int[100];
-    public static int[] counts = new int[100];
+    public static final int[] counts = new int[100];
 
     public MixCoderDataOutputStream(final OutputStream os) {
         super(os);

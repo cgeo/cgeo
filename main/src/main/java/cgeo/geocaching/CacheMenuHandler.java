@@ -16,9 +16,9 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
@@ -37,7 +37,7 @@ import java.util.Collections;
  * Shared menu handling for all activities having menu items related to a cache. <br>
  * TODO: replace by a fragment
  */
-public final class CacheMenuHandler extends AbstractUIFactory {
+public final class CacheMenuHandler {
 
     private CacheMenuHandler() {
         // utility class
@@ -111,9 +111,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                     shareCoordText = R.string.cache_coordinates_original;
                     shareCoords = cache.getCoords();
                 }
-                shareText.append(activity.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
+                shareText.append(LocalizationUtils.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
                 if (null != cache.getPersonalNote()) {
-                    shareText.append("\n").append(activity.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
+                    shareText.append("\n").append(LocalizationUtils.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
                 }
                 ShareUtils.sharePlainText(activity, shareText.toString());
             }

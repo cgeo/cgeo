@@ -57,7 +57,7 @@ final class ALApi {
     @NonNull
     private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
-    private static final String CONSUMER_KEY = LocalizationUtils.getString(R.string.alc_consumer_key);
+    private static final String CONSUMER_KEY = LocalizationUtils.getPlainString(R.string.alc_consumer_key);
 
     private static final String LOCATION = "/Location";
     private static final String LONGITUDE = "Longitude";

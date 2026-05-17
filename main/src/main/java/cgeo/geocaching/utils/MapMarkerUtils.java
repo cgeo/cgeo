@@ -32,7 +32,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.view.Gravity;

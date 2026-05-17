@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -146,7 +146,7 @@ public enum CacheSize {
 
     @NonNull
     public final String getL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+        return LocalizationUtils.getString(stringId);
     }
 
     @NonNull

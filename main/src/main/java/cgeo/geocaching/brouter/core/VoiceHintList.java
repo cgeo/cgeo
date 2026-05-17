@@ -16,7 +16,7 @@ public class VoiceHintList {
 
     private int transportMode = TRANS_MODE_BIKE;
     public int turnInstructionMode;
-    public List<VoiceHint> list = new ArrayList<>();
+    public final List<VoiceHint> list = new ArrayList<>();
 
     public void setTransportMode(boolean isCar, boolean isBike) {
         transportMode = isCar ? TRANS_MODE_CAR : (isBike ? TRANS_MODE_BIKE : TRANS_MODE_FOOT);

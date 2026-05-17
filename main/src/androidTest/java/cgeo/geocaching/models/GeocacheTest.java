@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheType;
@@ -9,6 +8,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.test.CgeoTestUtils.removeCacheCompletely;
 import static cgeo.geocaching.test.CgeoTestUtils.saveFreshCacheToDB;
 
@@ -490,7 +490,7 @@ public class GeocacheTest {
             final String wpNote = expectedWaypoint.getUserNote();
             String wpName = expectedWaypoint.getName();
             if (wpName == null || wpName.isEmpty()) {
-                wpName = CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " " + (i + 1);
+                wpName = LocalizationUtils.getString(R.string.cache_personal_note) + " " + (i + 1);
             }
             assertThat(waypoint.getName()).isEqualTo(wpName);
             assertThat(waypoint.getUserNote()).isEqualTo(wpNote);

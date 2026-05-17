@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Context;
@@ -50,7 +51,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        navigate(context, coords, context.getString(R.string.osmand_marker_cgeo));
+        navigate(context, coords, LocalizationUtils.getString(R.string.osmand_marker_cgeo));
     }
 
     private static void navigate(@NonNull final Context context, @NonNull final Geopoint coords, @Nullable final String markerName) {

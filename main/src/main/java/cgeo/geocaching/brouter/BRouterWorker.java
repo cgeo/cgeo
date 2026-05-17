@@ -37,6 +37,7 @@ public class BRouterWorker {
 
         final RoutingContext rc = new RoutingContext();
         rc.rawTrackPath = rawTrackPath;
+        //     rc.rawAreaPath = (rawTrackPath != null ? rawTrackPath.substring(0, rawTrackPath.lastIndexOf(File.separator)+1) + "rawAreaInfo.dat" : null);
         rc.profileFilename = profileFilename;
 
         final RoutingParamCollector routingParamCollector = new RoutingParamCollector();
@@ -137,6 +138,7 @@ public class BRouterWorker {
 
             if (track != null) {
                 track.exportWaypoints = rc.exportWaypoints;
+                track.exportCorrectedWaypoints = rc.exportCorrectedWaypoints;
                 switch (writeFromat) {
                     case OUTPUT_FORMAT_KML:
                         return new FormatKml(rc).format(track);

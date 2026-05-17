@@ -129,7 +129,12 @@ abstract class OsmPath implements OsmLinkHolder {
         // evaluate the way tags
         rc.expctxWay.evaluate(rc.inverseDirection ^ isReverse, description);
 
-
+        // and check if is useful
+/*
+        if (rc.ai != null && rc.ai.polygon.isWithin(lon1, lat1)) {
+            rc.ai.checkAreaInfo(rc.expctxWay, ele1/4., description);
+        }
+*/
         // calculate the costfactor inputs
         final float costfactor = rc.expctxWay.getCostfactor();
         final boolean isTrafficBackbone = cost == 0 && rc.expctxWay.getIsTrafficBackbone() > 0.f;

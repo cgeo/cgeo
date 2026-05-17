@@ -77,7 +77,7 @@
 		<!-- Register for global search in Android. https://developer.android.com/guide/topics/search/search-dialog.html -->
         <meta-data
             android:name="android.app.default_searchable"
-            android:value=".SearchActivity" />
+            android:value="cgeo.geocaching.SearchActivity" />
 
         <!-- Android Backup Service, to restore settings on new devices. https://developer.android.com/google/backup/index.html -->
         <meta-data
@@ -241,7 +241,7 @@
         <activity
             android:name=".EditWaypointActivity"
             android:label="@string/waypoint_edit_title"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name=".NavigateAnyPointActivity"
@@ -454,7 +454,8 @@
             />
         <activity
             android:name=".log.LogCacheActivity"
-            android:label="@string/log_new_log" >
+            android:label="@string/log_new_log"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".log.LogTrackableActivity"

@@ -5,6 +5,7 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action2;
@@ -29,7 +30,7 @@ class DownloadSelectorMapListTask extends AsyncTaskWithProgressText<Void, List<D
     private final Action2<String, List<Download>> onPostExecuteInternal;
 
     DownloadSelectorMapListTask(final Activity activity, final Uri uri, final String newSelectionTitle, final AbstractDownloader current, final Download.DownloadType lastCompanionType, final List<Download> lastCompanionList, final Action2<Download.DownloadType, List<Download>> setLastCompanions, final Action2<String, List<Download>> onPostExecuteInternal) {
-        super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_retrieving_directory_data));
+        super(activity, newSelectionTitle, LocalizationUtils.getString(R.string.downloadmap_retrieving_directory_data));
         this.uri = uri;
         this.newSelectionTitle = newSelectionTitle;
         this.current = current;

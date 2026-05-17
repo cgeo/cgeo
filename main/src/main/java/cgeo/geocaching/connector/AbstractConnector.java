@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
@@ -19,6 +18,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -353,7 +353,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     private static String feature(@StringRes final int featureResourceId) {
-        return CgeoApplication.getInstance().getString(featureResourceId);
+        return LocalizationUtils.getString(featureResourceId);
     }
 
     @Override

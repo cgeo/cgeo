@@ -1,10 +1,10 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
@@ -86,7 +86,7 @@ public class MapDownloaderOSMPawsThemes extends AbstractThemeDownloader {
 
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return CgeoApplication.getInstance().getString(R.string.mapserver_osmpaws_downloadurl);
+        return LocalizationUtils.getPlainString(R.string.mapserver_osmpaws_downloadurl);
     }
 
     @NonNull

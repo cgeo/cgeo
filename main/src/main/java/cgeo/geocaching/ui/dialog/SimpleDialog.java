@@ -140,6 +140,7 @@ public class SimpleDialog {
         private Predicate<String> inputChecker = null;
         private String allowedChars = null;
         private String hint = null;
+        private int maxAllowedLength = 0;
 
         /** input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed */
         public InputOptions setInputType(final int inputType) {
@@ -179,6 +180,12 @@ public class SimpleDialog {
         /** if non-null, then only chars passing this regex pattern will be allowed to enter */
         public InputOptions setAllowedChars(final String allowedChars) {
             this.allowedChars = allowedChars;
+            return this;
+        }
+
+        /** set maximum allowed length, 0=no limit */
+        public InputOptions setMaxAllowedLength(final int maxAllowedLength) {
+            this.maxAllowedLength = maxAllowedLength;
             return this;
         }
 
@@ -650,6 +657,9 @@ public class SimpleDialog {
          }
          if (io.suffix != null) {
              textLayout.setSuffixText(io.suffix);
+         }
+         if (io.maxAllowedLength > 0) {
+             ViewUtils.setMaxTextLength(textField, textLayout, io.maxAllowedLength);
          }
 
         if (io.inputChecker != null) {

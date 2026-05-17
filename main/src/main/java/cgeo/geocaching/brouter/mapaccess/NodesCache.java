@@ -25,8 +25,14 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
+@SuppressWarnings("checkstyle:MemberName")
 public final class NodesCache implements Closeable {
-    public OsmNodesMap nodesMap;
+
+    static final int RETRY_RANGE = 250;
+
+    private final int MAX_DYNAMIC_CATCHES = 20; // used with RoutingEngiine MAX_DYNAMIC_RANGE = 60000m
+
+    public final OsmNodesMap nodesMap;
     public WaypointMatcher waypointMatcher;
     public boolean firstFileAccessFailed = false;
     public String firstFileAccessName;
@@ -53,8 +59,8 @@ public final class NodesCache implements Closeable {
     private static final Hashtable<String, FileInformationCacheEntry> folderInfoCache = new Hashtable<>();
 
     private static class FileInformationCacheEntry {
-        public ContentStorage.FileInformation fi;
-        public long fiTimestamp;
+        public final ContentStorage.FileInformation fi;
+        public final long fiTimestamp;
 
         FileInformationCacheEntry(final ContentStorage.FileInformation fi) {
             this.fi = fi;
@@ -181,7 +187,8 @@ public final class NodesCache implements Closeable {
             }
 
             MicroCache segment = osmf.getMicroCache(ilon, ilat);
-            if (segment == null) {
+            // needed for a second chance
+            if (segment == null || (waypointMatcher != null && ((WaypointMatcherImpl) waypointMatcher).useDynamicRange)) {
                 checkEnableCacheCleaning();
                 segment = osmf.createMicroCache(ilon, ilat, dataBuffers, expCtxWay, waypointMatcher, directWeaving ? nodesMap : null);
 
@@ -287,15 +294,15 @@ public final class NodesCache implements Closeable {
         return existing;
     }
 
-    public void matchWaypointsToNodes(final List<MatchedWaypoint> unmatchedWaypoints, final double maxDistance, final OsmNodePairSet islandNodePairs) {
+    public boolean matchWaypointsToNodes(List<MatchedWaypoint> unmatchedWaypoints, double maxDistance, OsmNodePairSet islandNodePairs) {
         waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, maxDistance, islandNodePairs);
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
             int cellsize = 12500;
-            preloadPosition(mwp.waypoint, cellsize);
+            preloadPosition(mwp.waypoint, cellsize, 1, false);
             // get a second chance
-            if (mwp.crosspoint == null) {
+            if (mwp.crosspoint == null || mwp.radius > RETRY_RANGE) {
                 cellsize = 1000000 / 32;
-                preloadPosition(mwp.waypoint, cellsize);
+                preloadPosition(mwp.waypoint, cellsize, maxDistance < 0 ? MAX_DYNAMIC_CATCHES : 2, maxDistance < 0);
             }
         }
 
@@ -306,33 +313,42 @@ public final class NodesCache implements Closeable {
         for (int i = 0; i < len; i++) {
             final MatchedWaypoint mwp = unmatchedWaypoints.get(i);
             if (mwp.crosspoint == null) {
-                if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).direct) {
+                if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
                     mwp.crosspoint = new OsmNode(mwp.waypoint.ilon, mwp.waypoint.ilat);
-                    mwp.direct = true;
+                    mwp.wpttype = MatchedWaypoint.WAYPOINT_TYPE_DIRECT;
                 } else {
-                    throw new IllegalArgumentException(mwp.name + "-position not mapped in existing datafile");
+                    // do not break here throw new IllegalArgumentException(mwp.name + "-position not mapped in existing datafile");
+                    return false;
                 }
             }
-            if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).direct) {
+            if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
                 mwp.crosspoint = new OsmNode(mwp.waypoint.ilon, mwp.waypoint.ilat);
-                mwp.direct = true;
+                mwp.wpttype = MatchedWaypoint.WAYPOINT_TYPE_DIRECT;
             }
         }
+        return true;
     }
 
-    private void preloadPosition(final OsmNode n, final int d) {
+    private void preloadPosition(final OsmNode n, final int d, final int maxscale, final boolean bUseDynamicRange) {
         firstFileAccessFailed = false;
         firstFileAccessName = null;
         loadSegmentFor(n.ilon, n.ilat);
         if (firstFileAccessFailed) {
             throw new IllegalArgumentException("datafile " + firstFileAccessName + " not found");
         }
-        for (int idxLat = -1; idxLat <= 1; idxLat++) {
-            for (int idxLon = -1; idxLon <= 1; idxLon++) {
-                if (idxLon != 0 || idxLat != 0) {
-                    loadSegmentFor(n.ilon + d * idxLon, n.ilat + d * idxLat);
+        int scale = 1;
+        while (scale < maxscale) {
+            for (int idxLat = -scale; idxLat <= scale; idxLat++) {
+                for (int idxLon = -scale; idxLon <= scale; idxLon++) {
+                    if (idxLon != 0 || idxLat != 0) {
+                        loadSegmentFor(n.ilon + d * idxLon, n.ilat + d * idxLat);
+                    }
                 }
             }
+            if (bUseDynamicRange && waypointMatcher.hasMatch(n.ilon, n.ilat)) {
+                break;
+            }
+            scale++;
         }
     }
 

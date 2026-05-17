@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -8,6 +7,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +40,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @NonNull
     @Override
     public String getServiceTitle() {
-        return CgeoApplication.getInstance().getString(R.string.settings_title_gc);
+        return LocalizationUtils.getPlainString(R.string.settings_title_gc);
     }
 
     @Override

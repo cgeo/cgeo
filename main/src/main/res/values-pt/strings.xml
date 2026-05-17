@@ -909,7 +909,6 @@
     <string name="init_login_popup_not_authorized">Não autorizado</string>
     <string name="init_login_popup_not_logged_in">Sem sessão iniciada</string>
     <string name="init_login_manual">Início de Sessão Manual</string>
-    <string name="init_login_manual_description">Por favor, aguarde até que uma página web apareça e entre na sua conta. Aguarde até que o início de sessão seja concluído. Em seguida, clique no botão \'ok\' abaixo.</string>
     <string name="init_login_manual_error_nocookie">Não foi encontrado nenhum token de autorização. Por favor, inicie a sessão ou \'cancele\' a manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
     <string name="init_login_popup_invalid_token">Autorização inválida, volte a autorizar</string>
@@ -1560,6 +1559,7 @@
     <string name="menu_collapse_log">Encurtar registo</string>
     <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
+    <string name="cache_log_delete_reason">Motivo (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>

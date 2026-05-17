@@ -184,13 +184,13 @@ public class ContentStorageActivityHelper {
         final ImmutableTriple<String, String, String> folderInfo = getInternationalizedFolderInfoStrings(folder.getFolder());
 
         //create the message;
-        final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
+        final String folderData = LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
                 folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
-        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
+        final String defaultFolder = LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog
-                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                .setTitle(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
                 .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
                 .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                     d.dismiss();
@@ -459,7 +459,7 @@ public class ContentStorageActivityHelper {
             dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
             dialog
                     .setView(dialogView)
-                    .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                    .setTitle(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
                     .setPositiveButton(android.R.string.ok, (d, p) -> {
                         d.dismiss();
                         continuePersistableFolderSelectionCopyMove(folder, targetUri, cc[0], action);

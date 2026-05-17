@@ -1,9 +1,7 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-
-import android.content.res.Resources;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 
@@ -12,9 +10,8 @@ abstract class AbstractExport implements Export {
     private final String progressTitle;
 
     protected AbstractExport(final int name) {
-        final Resources resources = CgeoApplication.getInstance().getResources();
-        this.name = resources.getString(name);
-        progressTitle = resources.getString(R.string.export_progress, this.name);
+        this.name = LocalizationUtils.getString(name);
+        progressTitle = LocalizationUtils.getString(R.string.export_progress, this.name);
     }
 
     @Override

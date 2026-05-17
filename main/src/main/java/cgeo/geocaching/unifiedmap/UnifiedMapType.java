@@ -122,6 +122,10 @@ public class UnifiedMapType implements Parcelable {
 
     /** launch fresh map with current settings */
     public void launchMap(final Context fromActivity) {
+        // dismiss the originating map's cache popup so it isn't restored when the user navigates back
+        if (fromActivity instanceof UnifiedMapActivity) {
+            ((UnifiedMapActivity) fromActivity).sheetRemoveFragment();
+        }
         fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
 
