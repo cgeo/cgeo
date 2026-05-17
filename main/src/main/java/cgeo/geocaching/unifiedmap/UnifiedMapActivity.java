@@ -1221,9 +1221,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (getIntent().hasExtra("SelectCoordinates")) {
                     selectPointOnMap = getIntent().getBooleanExtra("SelectCoordinates", false);
                 }
-                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget, selectPointOnMap)
-                        .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
-                        .show();
+                if(selectPointOnMap){
+                    MapUtils.showSelectFromMapDialog(this, touchedPoint);
+                } else {
+                    MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget)
+                            .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
+                            .show();
+                }
             } else {
                 if (sheetRemoveFragment()) {
                     return;
