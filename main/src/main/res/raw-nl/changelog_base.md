@@ -1,6 +1,12 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
 - Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
 - Cluster popup voor Google Maps
 - Verberg kaartbronnen die je niet nodig hebt
@@ -25,6 +31,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Display coordinates of waypoints in waypoint popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
