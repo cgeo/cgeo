@@ -1,6 +1,12 @@
-Edge to Edge: Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser Version von c:geo aktualisiert und einige Routinen für das Bildschirmlayout geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir endgültig die Legacy-Implementierungen für unsere Karten entfernt. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
 - Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
 - Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
 - Kartenquellen ausblenden, die nicht benötigt werden
@@ -25,6 +31,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
 - Korrektur: Kartenschnelleinstellungen zeigen nach Wechsel der App-Sprache Buttons "1"/"2" für leere Routing-Profile
 - Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
