@@ -1,6 +1,12 @@
-De ponta a ponta: Devido às políticas da Play Store, actualizámos o nível API do Android nesta versão dos alvos do c:geo e alterámos algumas das rotinas de esquema do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, finalmente removemos as implementações antigas para os nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
 - Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
 - Janela pendente de agrupamento para o Google Maps
 - Ocultar fontes de mapa de que não precisa
@@ -25,6 +31,7 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
