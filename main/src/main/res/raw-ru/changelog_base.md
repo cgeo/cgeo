@@ -1,6 +1,12 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
 - Поворот карты для карт на основе OpenStreetMap (онлайн + офлайн)
 - Всплывающее окно кластера для Google Maps
 - Возможность убрать ненужные вам источники карт
@@ -25,6 +31,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Display coordinates of waypoints in waypoint popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Детали тайника
 - Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
