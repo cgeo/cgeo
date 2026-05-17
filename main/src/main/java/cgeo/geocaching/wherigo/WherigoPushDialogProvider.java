@@ -90,7 +90,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         final String message = this.texts[pageDisplayed];
         final Media media = this.media == null || this.media.length == 0 ? null : (pageDisplayed >= this.media.length ? this.media[0] : this.media[pageDisplayed]);
 
-        binding.description.setText(WherigoGame.get().toDisplayText(message));
+        WherigoViewUtils.setSelectableTextWithClickableLinks(binding.description, WherigoGame.get().toDisplayText(message));
 
         if (media != null) {
             binding.media.setMedia(media);
