@@ -1,6 +1,12 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
 - Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
 - Pop-up de cluster pour Google Maps
 - Cacher les sources de carte dont vous n'avez pas besoin
@@ -25,6 +31,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Display coordinates of waypoints in waypoint popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 
 ### Détails de la cache
 - Nouveau : Détecter les caractères supplémentaires dans les formules : –,  , ×
