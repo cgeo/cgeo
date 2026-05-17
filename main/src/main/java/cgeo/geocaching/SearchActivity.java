@@ -479,7 +479,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
-                .addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
+                .addOnClickListener(this::findOwnFn);
 
         addSearchCard(R.string.caches_history, R.drawable.ic_menu_recent_history)
                 .addOnClickListener(() -> startActivity(CacheListActivity.getHistoryIntent(this)));
@@ -544,6 +544,11 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
         Settings.addToHistoryList(R.string.pref_search_history_owner, userName);
         CacheListActivity.startActivityOwner(this, userName);
+        ActivityMixin.overrideTransitionToFade(this);
+    }
+
+    private void findOwnFn() {
+        CacheListActivity.startActivityOwner(this, Settings.getUserName(), new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT));
         ActivityMixin.overrideTransitionToFade(this);
     }
 

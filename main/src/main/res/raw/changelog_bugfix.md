@@ -3,6 +3,11 @@ Time to update! If you are still using Android 7 or older, this might be the las
 With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back.
 We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
+- Fix: Crash when accessing routes
+- Fix: Crash on waypoint page
+- Change: Search for "own caches" starts with fresh filters
+
+##
 - Fix: Crash in cache infosheet
 - Fix: Wherigo cartridges cannot be downloaded anymore (website change)
 
