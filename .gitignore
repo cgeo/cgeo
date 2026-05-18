@@ -49,4 +49,7 @@ main/gradle.properties
 # ignore AS layout captures
 captures/
 
+# ignore Claude internal files
+.claude/
+
 main/usage.txt
