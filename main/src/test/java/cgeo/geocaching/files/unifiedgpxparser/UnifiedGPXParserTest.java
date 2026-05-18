@@ -1,5 +1,6 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.files.unifiedgpxparser;
 
+import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
@@ -23,13 +24,13 @@ public class UnifiedGPXParserTest {
             + "<gpx version=\"1.1\" creator=\"test\">";
     private static final String GPX_FOOTER = "</gpx>";
 
-    private static UnifiedGPXParser.Result parse(final String xml) throws Exception {
+    private static Result parse(final String xml) throws Exception {
         return UnifiedGPXParser.parse(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
     }
 
     @Test
     public void emptyGpx() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11 + GPX_FOOTER);
+        final Result result = parse(GPX_HEADER_11 + GPX_FOOTER);
         assertThat(result.isEmpty()).isTrue();
         assertThat(result.waypoints).isEmpty();
         assertThat(result.routes).isEmpty();
@@ -38,14 +39,14 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void nonGpxRoot() throws Exception {
-        final UnifiedGPXParser.Result result = parse(
+        final Result result = parse(
                 "<?xml version=\"1.0\"?><foo><bar lat=\"1\" lon=\"2\"/></foo>");
         assertThat(result.isEmpty()).isTrue();
     }
 
     @Test
     public void singleWaypointPopulatesAllSimpleFields() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<wpt lat=\"48.5\" lon=\"9.25\">"
                 + "  <name>WP-Test</name>"
                 + "  <desc>short text</desc>"
@@ -68,7 +69,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void waypointWithoutCoordsIsDropped() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<wpt><name>no coords</name></wpt>"
                 + "<wpt lat=\"1\" lon=\"2\"><name>ok</name></wpt>"
                 + GPX_FOOTER);
@@ -77,7 +78,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void waypointWithUnparseableCoordsIsDropped() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<wpt lat=\"abc\" lon=\"2\"><name>bad</name></wpt>"
                 + GPX_FOOTER);
         assertThat(result.waypoints).isEmpty();
@@ -85,7 +86,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void multipleWaypoints() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<wpt lat=\"1\" lon=\"1\"><name>A</name></wpt>"
                 + "<wpt lat=\"2\" lon=\"2\"><name>B</name></wpt>"
                 + "<wpt lat=\"3\" lon=\"3\"><name>C</name></wpt>"
@@ -97,7 +98,7 @@ public class UnifiedGPXParserTest {
     public void routeIsRoutableWithOneSegmentPerPoint() throws Exception {
         // No <name> on rtept on purpose: RouteItem(String, Geopoint) tries to resolve names
         // that look like geocodes via DataStore, which is not available in plain JVM tests.
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<rte>"
                 + "  <name>My Route</name>"
                 + "  <rtept lat=\"1\" lon=\"1\"/>"
@@ -121,7 +122,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void trackIsNotRoutableAndProducesOneSegmentPerTrkseg() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<trk>"
                 + "  <name>My Track</name>"
                 + "  <trkseg>"
@@ -150,7 +151,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void multipleTracksProduceMultipleRoutes() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<trk><name>A</name><trkseg><trkpt lat=\"1\" lon=\"1\"/></trkseg></trk>"
                 + "<trk><name>B</name><trkseg><trkpt lat=\"2\" lon=\"2\"/></trkseg></trk>"
                 + GPX_FOOTER);
@@ -161,7 +162,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void mixedContentFillsAllThreeLists() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<wpt lat=\"1\" lon=\"1\"><name>A</name></wpt>"
                 + "<wpt lat=\"2\" lon=\"2\"><name>B</name></wpt>"
                 + "<rte><rtept lat=\"3\" lon=\"3\"/></rte>"
@@ -176,7 +177,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void gpx10NamespaceIsAccepted() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_10
+        final Result result = parse(GPX_HEADER_10
                 + "<wpt lat=\"1\" lon=\"1\"><name>A</name></wpt>"
                 + "<trk><trkseg><trkpt lat=\"2\" lon=\"2\"/></trkseg></trk>"
                 + GPX_FOOTER);
@@ -186,7 +187,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void noNamespaceIsAccepted() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_NO_NS
+        final Result result = parse(GPX_HEADER_NO_NS
                 + "<wpt lat=\"1\" lon=\"1\"><name>A</name></wpt>"
                 + GPX_FOOTER);
         assertThat(result.waypoints).hasSize(1);
@@ -195,7 +196,7 @@ public class UnifiedGPXParserTest {
     @Test
     public void unknownElementsAreSkipped() throws Exception {
         // metadata, extensions, and an unknown vendor element should be ignored
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<metadata><name>file</name><time>2024-01-15T10:30:00Z</time></metadata>"
                 + "<wpt lat=\"1\" lon=\"1\">"
                 + "  <name>A</name>"
@@ -217,7 +218,7 @@ public class UnifiedGPXParserTest {
 
     @Test
     public void trkpointsArePreservedInOrder() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX_HEADER_11
+        final Result result = parse(GPX_HEADER_11
                 + "<trk><trkseg>"
                 + "<trkpt lat=\"10\" lon=\"20\"/>"
                 + "<trkpt lat=\"11\" lon=\"21\"/>"

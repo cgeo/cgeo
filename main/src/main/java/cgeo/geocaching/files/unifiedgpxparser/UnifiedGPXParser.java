@@ -1,7 +1,8 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.files.unifiedgpxparser;
 
+import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
+import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -20,7 +21,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,14 +38,14 @@ import org.xmlpull.v1.XmlPullParserException;
  * {@link Route}s, and tracks ({@code <trk>}) as non-routable {@link Route}s. A single
  * file may contribute results to all three lists at the same time.
  * <p>
- * The parser is namespace-agnostic: it matches on the local element name only and
- * therefore accepts GPX 1.0, GPX 1.1 and files that omit the namespace declaration.
- * Extension dialects (Groundspeak, GSAK, c:geo, OpenCaching, TerraCaching) are
- * understood and mapped onto the corresponding {@link Geocache} fields by
- * {@link UnifiedGPXWaypointParser}.
+ * Namespace-agnostic on element local names — accepts GPX 1.0, GPX 1.1 and files that
+ * omit the namespace declaration. Extension dialects (Groundspeak, GSAK, c:geo,
+ * OpenCaching, TerraCaching) are understood and mapped onto the corresponding
+ * {@link Geocache} fields by {@link UnifiedGPXWaypointParser}.
  * <p>
- * The result is a {@link Result} object exposing the three lists as separate named
- * fields ({@link Result#waypoints}, {@link Result#routes}, {@link Result#tracks}).
+ * The result is a {@link Result} object exposing the four output collections as
+ * separate named fields ({@link Result#waypoints}, {@link Result#routes},
+ * {@link Result#tracks}, {@link Result#logsByGeocode}, {@link Result#orphanWaypoints}).
  * <p>
  * Segment mapping:
  * <ul>
@@ -58,45 +58,15 @@ import org.xmlpull.v1.XmlPullParserException;
  *       {@link UnifiedGPXTrackParser}.</li>
  * </ul>
  * <p>
- * Waypoint parsing — including every Groundspeak/GSAK/c:geo/OpenCaching/TerraCaching
- * extension — lives in {@link UnifiedGPXWaypointParser}. Child waypoints (parking,
- * stage, final, ...) found in the same file are attached to their parent cache after
- * the file has been fully read; child waypoints whose parent is not in the file end
- * up in {@link Result#orphanWaypoints}. Groundspeak and TerraCaching logs are returned
- * via {@link Result#logsByGeocode}.
+ * Child waypoints (parking, stage, final, ...) found in the same file are attached to
+ * their parent cache after the file has been fully read; child waypoints whose parent
+ * is not in the file end up in {@link Result#orphanWaypoints}. Groundspeak and
+ * TerraCaching logs are returned via {@link Result#logsByGeocode}.
  */
 public final class UnifiedGPXParser {
 
     private UnifiedGPXParser() {
         // utility class
-    }
-
-    /** Parse result. One list per GPX content type, exposed as separate fields. */
-    public static final class Result {
-        /** Fully-parsed geocaches collected from {@code <wpt>} elements. */
-        public final Collection<Geocache> waypoints = new ArrayList<>();
-        /** Logs collected from Groundspeak / TerraCaching extensions, keyed by geocode. */
-        public final Map<String, List<LogEntry>> logsByGeocode = new HashMap<>();
-        /** Child waypoints whose parent cache was not present in the same file. */
-        public final List<OrphanWaypoint> orphanWaypoints = new ArrayList<>();
-        public final List<Route> routes = new ArrayList<>();
-        public final List<Route> tracks = new ArrayList<>();
-
-        public boolean isEmpty() {
-            return waypoints.isEmpty() && routes.isEmpty() && tracks.isEmpty()
-                    && orphanWaypoints.isEmpty();
-        }
-    }
-
-    /** A child waypoint that could not be attached because its parent cache is not in this file. */
-    public static final class OrphanWaypoint {
-        @NonNull public final Waypoint waypoint;
-        @NonNull public final String parentGeocode;
-
-        OrphanWaypoint(@NonNull final Waypoint waypoint, @NonNull final String parentGeocode) {
-            this.waypoint = waypoint;
-            this.parentGeocode = parentGeocode;
-        }
     }
 
     @NonNull
@@ -131,7 +101,7 @@ public final class UnifiedGPXParser {
 
     private static void parseGpx(final XmlPullParser parser, final Result result)
             throws XmlPullParserException, IOException {
-        final UnifiedGPXWaypointParser.ParseContext ctx = new UnifiedGPXWaypointParser.ParseContext();
+        final ParseContext ctx = new ParseContext();
         // The GPX creator attribute is the standard way to identify the file's origin;
         // some non-standard files put it inside a <creator> element instead — handled below.
         final String creatorAttr = parser.getAttributeValue(null, "creator");
@@ -140,7 +110,7 @@ public final class UnifiedGPXParser {
         }
 
         final Map<String, Geocache> cachesByCode = new HashMap<>();
-        final List<UnifiedGPXWaypointParser.ChildWaypoint> pendingChildWaypoints = new ArrayList<>();
+        final List<ChildWaypoint> pendingChildWaypoints = new ArrayList<>();
 
         final int gpxDepth = parser.getDepth();
         while (true) {
@@ -156,8 +126,7 @@ public final class UnifiedGPXParser {
             }
             switch (parser.getName()) {
                 case "wpt":
-                    final UnifiedGPXWaypointParser.Parsed parsed =
-                            UnifiedGPXWaypointParser.parseWaypoint(parser, ctx);
+                    final Parsed parsed = UnifiedGPXWaypointParser.parseWaypoint(parser, ctx);
                     handleParsedWpt(parsed, result, cachesByCode, pendingChildWaypoints);
                     break;
                 case "rte":
@@ -194,10 +163,10 @@ public final class UnifiedGPXParser {
     }
 
     private static void handleParsedWpt(
-            @NonNull final UnifiedGPXWaypointParser.Parsed parsed,
+            @NonNull final Parsed parsed,
             @NonNull final Result result,
             @NonNull final Map<String, Geocache> cachesByCode,
-            @NonNull final List<UnifiedGPXWaypointParser.ChildWaypoint> pendingChildWaypoints) {
+            @NonNull final List<ChildWaypoint> pendingChildWaypoints) {
         if (parsed.cache != null) {
             result.waypoints.add(parsed.cache);
             final String code = parsed.cache.getGeocode();
@@ -213,7 +182,7 @@ public final class UnifiedGPXParser {
     }
 
     private static void parseMetadataForScriptUrl(final XmlPullParser parser,
-                                                  final UnifiedGPXWaypointParser.ParseContext ctx)
+                                                  final ParseContext ctx)
             throws XmlPullParserException, IOException {
         final int startDepth = parser.getDepth();
         while (true) {
@@ -240,10 +209,10 @@ public final class UnifiedGPXParser {
     }
 
     private static void attachChildWaypoints(
-            @NonNull final List<UnifiedGPXWaypointParser.ChildWaypoint> pendingChildWaypoints,
+            @NonNull final List<ChildWaypoint> pendingChildWaypoints,
             @NonNull final Map<String, Geocache> cachesByCode,
             @NonNull final Result result) {
-        for (final UnifiedGPXWaypointParser.ChildWaypoint cw : pendingChildWaypoints) {
+        for (final ChildWaypoint cw : pendingChildWaypoints) {
             final Geocache parent = cachesByCode.get(cw.parentGeocode);
             if (parent == null) {
                 result.orphanWaypoints.add(new OrphanWaypoint(cw.waypoint, cw.parentGeocode));

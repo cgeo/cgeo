@@ -1,4 +1,4 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.files.unifiedgpxparser;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;

@@ -1,4 +1,4 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.files.unifiedgpxparser;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -55,57 +56,6 @@ final class UnifiedGPXWaypointParser {
             + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*"
             + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
-
-    /** State that lives across multiple wpts in the same file. */
-    static final class ParseContext {
-        @Nullable String scriptUrl;
-        /**
-         * Set once we encounter a TerraCaching parent waypoint (identified by the
-         * "GC_WayPoint1" sentinel in its short description). The next wpt is then
-         * known to be a TerraCaching child.
-         */
-        boolean terraChildWaypoint;
-    }
-
-    /** Parse result for a single wpt. Exactly one of {@code cache} / {@code childWaypoint} is non-null. */
-    static final class Parsed {
-        @Nullable final Geocache cache;
-        @Nullable final ChildWaypoint childWaypoint;
-        @NonNull final List<LogEntry> logs;
-
-        private Parsed(@Nullable final Geocache cache,
-                       @Nullable final ChildWaypoint childWaypoint,
-                       @NonNull final List<LogEntry> logs) {
-            this.cache = cache;
-            this.childWaypoint = childWaypoint;
-            this.logs = logs;
-        }
-
-        static Parsed empty() {
-            return new Parsed(null, null, Collections.emptyList());
-        }
-    }
-
-    /** A child waypoint that needs to be matched to its parent cache. */
-    static final class ChildWaypoint {
-        @NonNull final Waypoint waypoint;
-        @NonNull final String parentGeocode;
-        /** Raw wpt name; used to compute the per-parent prefix later. */
-        @NonNull final String wptName;
-        final boolean userDefined;
-        /** If true the parent's {@code userModifiedCoords} flag should be set on attach. */
-        final boolean markParentUserModifiedCoords;
-
-        ChildWaypoint(@NonNull final Waypoint waypoint, @NonNull final String parentGeocode,
-                      @NonNull final String wptName, final boolean userDefined,
-                      final boolean markParentUserModifiedCoords) {
-            this.waypoint = waypoint;
-            this.parentGeocode = parentGeocode;
-            this.wptName = wptName;
-            this.userDefined = userDefined;
-            this.markParentUserModifiedCoords = markParentUserModifiedCoords;
-        }
-    }
 
     private UnifiedGPXWaypointParser() {
         // utility class

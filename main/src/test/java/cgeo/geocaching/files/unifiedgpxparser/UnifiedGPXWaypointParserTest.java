@@ -1,4 +1,4 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.files.unifiedgpxparser;
 
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -32,11 +32,11 @@ public class UnifiedGPXWaypointParserTest {
             + " xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0/1\">";
     private static final String GPX_FOOT = "</gpx>";
 
-    private static UnifiedGPXParser.Result parse(final String xml) throws Exception {
+    private static Result parse(final String xml) throws Exception {
         return UnifiedGPXParser.parse(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
     }
 
-    private static Geocache firstWaypoint(final UnifiedGPXParser.Result result) {
+    private static Geocache firstWaypoint(final Result result) {
         assertThat(result.waypoints).isNotEmpty();
         return result.waypoints.iterator().next();
     }
@@ -45,7 +45,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void barewptIsAcceptedAsGeocache() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48.5\" lon=\"9.25\"><name>GC1234</name></wpt>"
                 + GPX_FOOT);
         final Geocache cache = firstWaypoint(result);
@@ -57,7 +57,7 @@ public class UnifiedGPXWaypointParserTest {
     @Test
     public void wptWithSentinelZeroCoordsHasNoCoords() throws Exception {
         // GPX export uses (0,0) as a placeholder for "no coordinates"
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"0\" lon=\"0\"><name>GC1234</name></wpt>"
                 + GPX_FOOT);
         // No coords + no internal connector => not imported as cache
@@ -68,7 +68,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void groundspeakCoreFieldsPopulateGeocache() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <sym>Geocache</sym>"
@@ -111,7 +111,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void groundspeakLogsAreReturnedKeyedByGeocode() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -143,7 +143,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void groundspeakTravelbugsAttachToInventory() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -168,7 +168,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void gsakBasicFlagsAndNote() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -191,7 +191,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void gsakGeocodeOverrideTakesPrecedence() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>SomeGarbageName</name>"
                 + "  <extensions>"
@@ -208,7 +208,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void gsakUserDataPopulatesPersonalNoteWhenNoGcNote() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -228,7 +228,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void gsakOriginalCoordsCreateOriginalWaypoint() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48.6\" lon=\"9.4\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -251,7 +251,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void cgeoAssignedEmoji() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <extensions>"
@@ -268,7 +268,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void openCachingRequiresPasswordFlag() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>OC1234</name>"
                 + "  <extensions>"
@@ -286,7 +286,7 @@ public class UnifiedGPXWaypointParserTest {
     @Test
     public void gpx10ExtensionsAsDirectChildren() throws Exception {
         // GPX 1.0: <groundspeak:cache> is a direct child of <wpt>, not under <extensions>.
-        final UnifiedGPXParser.Result result = parse(GPX10_HEAD
+        final Result result = parse(GPX10_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <groundspeak:cache id=\"42\">"
@@ -305,7 +305,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void childWaypointAttachesToInFileParent() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <desc>Main Cache</desc>"
@@ -330,7 +330,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void childWaypointWithoutInFileParentBecomesOrphan() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48.1\" lon=\"9.1\">"
                 + "  <name>P19999</name>"
                 + "  <desc>Parking</desc>"
@@ -347,7 +347,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void childWaypointUsesGsakParentWhenPresent() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48.1\" lon=\"9.1\">"
                 + "  <name>SomeArbitraryName</name>"
                 + "  <desc>Stage</desc>"
@@ -368,7 +368,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void waypointsRoutesAndTracksCoexist() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"1\" lon=\"1\"><name>GC1111</name></wpt>"
                 + "<rte><rtept lat=\"2\" lon=\"2\"/></rte>"
                 + "<trk><trkseg><trkpt lat=\"3\" lon=\"3\"/></trkseg></trk>"
@@ -382,7 +382,7 @@ public class UnifiedGPXWaypointParserTest {
 
     @Test
     public void symGeocacheFoundMarksCacheFound() throws Exception {
-        final UnifiedGPXParser.Result result = parse(GPX11_HEAD
+        final Result result = parse(GPX11_HEAD
                 + "<wpt lat=\"48\" lon=\"9\">"
                 + "  <name>GC9999</name>"
                 + "  <sym>Geocache Found</sym>"

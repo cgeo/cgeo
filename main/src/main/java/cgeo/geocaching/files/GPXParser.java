@@ -182,7 +182,7 @@ abstract class GPXParser extends FileParser {
         version = versionIn;
     }
 
-    static Date parseDate(final String inputUntrimmed) throws ParseException {
+    public static Date parseDate(final String inputUntrimmed) throws ParseException {
         // remove milliseconds to reduce number of needed patterns
         final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, inputUntrimmed.trim());
         final String input = matcher.replaceFirst("");
