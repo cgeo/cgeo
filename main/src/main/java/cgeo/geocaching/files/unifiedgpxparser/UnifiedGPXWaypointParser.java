@@ -18,6 +18,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -222,9 +223,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "href": url = UnifiedGPXParser.readText(parser); break;
                     case "text": urlName = UnifiedGPXParser.readText(parser); break;
@@ -238,9 +245,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "cache":              parseCacheElement(parser); break;
                     case "wptExtension":       parseGsak(parser); break;
@@ -269,16 +282,26 @@ final class UnifiedGPXWaypointParser {
         private void parseGroundspeakCache(final XmlPullParser parser) throws XmlPullParserException, IOException {
             gsCacheId = parser.getAttributeValue(null, "id");
             final String archivedAttr = parser.getAttributeValue(null, "archived");
-            if (archivedAttr != null) gsArchived = archivedAttr.equalsIgnoreCase("true");
+            if (archivedAttr != null) {
+                gsArchived = archivedAttr.equalsIgnoreCase("true");
+            }
             final String availableAttr = parser.getAttributeValue(null, "available");
-            if (availableAttr != null) gsAvailable = availableAttr.equalsIgnoreCase("true");
+            if (availableAttr != null) {
+                gsAvailable = availableAttr.equalsIgnoreCase("true");
+            }
 
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "name":         gsName = validate(UnifiedGPXParser.readText(parser)); break;
                     case "owner":        gsOwnerUserId = validate(UnifiedGPXParser.readText(parser)); break;
@@ -311,9 +334,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("attribute".equals(parser.getName())) {
                     final String idAttr = parser.getAttributeValue(null, "id");
                     final String incAttr = parser.getAttributeValue(null, "inc");
@@ -326,7 +355,7 @@ final class UnifiedGPXWaypointParser {
                             if (attr != null) {
                                 gsAttributes.add(attr.getValue(active));
                             }
-                        } catch (NumberFormatException ignored) {
+                        } catch (final NumberFormatException ignored) {
                             // skip malformed
                         }
                     }
@@ -340,9 +369,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("travelbug".equals(parser.getName())) {
                     parseGroundspeakTravelbug(parser);
                 } else {
@@ -354,14 +389,22 @@ final class UnifiedGPXWaypointParser {
         private void parseGroundspeakTravelbug(final XmlPullParser parser) throws XmlPullParserException, IOException {
             final Trackable tb = new Trackable();
             final String ref = parser.getAttributeValue(null, "ref");
-            if (ref != null) tb.setGeocode(ref);
+            if (ref != null) {
+                tb.setGeocode(ref);
+            }
 
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("name".equals(parser.getName())) {
                     tb.setName(validate(UnifiedGPXParser.readText(parser)));
                 } else {
@@ -377,9 +420,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("log".equals(parser.getName())) {
                     final LogEntry log = parseGroundspeakLog(parser);
                     if (log != null && log.logType != LogType.UNKNOWN) {
@@ -398,21 +447,27 @@ final class UnifiedGPXWaypointParser {
             if (idAttr != null) {
                 try {
                     lb.setId(Integer.parseInt(idAttr));
-                } catch (NumberFormatException ignored) {
+                } catch (final NumberFormatException ignored) {
                     // skip
                 }
             }
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "date":
                         try {
                             lb.setDate(GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime());
-                        } catch (Exception ignored) {
+                        } catch (final Exception ignored) {
                             // skip
                         }
                         break;
@@ -438,9 +493,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 final String n = parser.getName();
                 if ("Watch".equals(n)) {
                     watchlist = parseBoolText(parser);
@@ -456,7 +517,7 @@ final class UnifiedGPXWaypointParser {
                     if (v != null) {
                         try {
                             favPoints = Integer.parseInt(v.trim());
-                        } catch (NumberFormatException ignored) {
+                        } catch (final NumberFormatException ignored) {
                             // skip
                         }
                     }
@@ -478,7 +539,7 @@ final class UnifiedGPXWaypointParser {
                 } else if ("DNFDate".equals(n) || "UserFound".equals(n)) {
                     try {
                         visitedDate = GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime();
-                    } catch (Exception ignored) {
+                    } catch (final Exception ignored) {
                         // skip
                     }
                 } else if ("Child_ByGSAK".equals(n)) {
@@ -494,15 +555,21 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("assignedEmoji".equals(parser.getName())) {
                     final String v = UnifiedGPXParser.readText(parser);
                     if (v != null) {
                         try {
                             assignedEmoji = Integer.parseInt(v.trim());
-                        } catch (NumberFormatException ignored) {
+                        } catch (final NumberFormatException ignored) {
                             // skip
                         }
                     }
@@ -517,9 +584,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "requires_password":
                         logPasswordRequired = parseBoolText(parser);
@@ -549,9 +622,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "name":        terraName = StringUtils.trim(UnifiedGPXParser.readText(parser)); break;
                     case "owner":       terraOwner = validate(UnifiedGPXParser.readText(parser)); break;
@@ -562,7 +641,9 @@ final class UnifiedGPXWaypointParser {
                     case "description": terraDescription = trimHtml(UnifiedGPXParser.readText(parser)); break;
                     case "hint":
                         final String h = UnifiedGPXParser.readText(parser);
-                        if (h != null) terraHint = cgeo.geocaching.utils.html.HtmlUtils.extractText(h);
+                        if (h != null) {
+                            terraHint = HtmlUtils.extractText(h);
+                        }
                         break;
                     case "logs":        parseTerracachingLogs(parser); break;
                     default: UnifiedGPXParser.skipSubtree(parser); break;
@@ -574,9 +655,15 @@ final class UnifiedGPXWaypointParser {
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 if ("log".equals(parser.getName())) {
                     final LogEntry log = parseTerracachingLog(parser);
                     if (log != null && log.logType != LogType.UNKNOWN) {
@@ -595,21 +682,27 @@ final class UnifiedGPXWaypointParser {
             if (idAttr != null) {
                 try {
                     lb.setId(Integer.parseInt(idAttr));
-                } catch (NumberFormatException ignored) {
+                } catch (final NumberFormatException ignored) {
                     // skip
                 }
             }
             final int startDepth = parser.getDepth();
             while (true) {
                 final int event = parser.next();
-                if (event == XmlPullParser.END_DOCUMENT) break;
-                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) break;
-                if (event != XmlPullParser.START_TAG) continue;
+                if (event == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
+                if (event == XmlPullParser.END_TAG && parser.getDepth() == startDepth) {
+                    break;
+                }
+                if (event != XmlPullParser.START_TAG) {
+                    continue;
+                }
                 switch (parser.getName()) {
                     case "date":
                         try {
                             lb.setDate(GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime());
-                        } catch (Exception ignored) {
+                        } catch (final Exception ignored) {
                             // skip
                         }
                         break;
@@ -653,7 +746,7 @@ final class UnifiedGPXWaypointParser {
             if (time != null) {
                 try {
                     cache.setHidden(GPXParser.parseDate(time));
-                } catch (ParseException e) {
+                } catch (final ParseException e) {
                     Log.w("UnifiedGPXWaypointParser: invalid time '" + time + "'");
                 }
             }
@@ -679,20 +772,46 @@ final class UnifiedGPXWaypointParser {
             setUrlName(cache, urlName);
 
             // Apply Groundspeak
-            if (gsCacheId != null) cache.setCacheId(gsCacheId);
-            if (gsArchived != null) cache.setArchived(gsArchived);
-            if (gsAvailable != null) cache.setDisabled(!gsAvailable);
-            if (gsName != null) cache.setName(gsName);
-            if (gsOwnerUserId != null) cache.setOwnerUserId(gsOwnerUserId);
-            if (gsOwnerDisplayName != null) cache.setOwnerDisplayName(gsOwnerDisplayName);
-            if (gsType != null) cache.setType(gsType);
-            if (gsSize != null) cache.setSize(gsSize);
-            if (gsDifficulty != null) cache.setDifficulty(gsDifficulty);
-            if (gsTerrain != null) cache.setTerrain(gsTerrain);
+            if (gsCacheId != null) {
+                cache.setCacheId(gsCacheId);
+            }
+            if (gsArchived != null) {
+                cache.setArchived(gsArchived);
+            }
+            if (gsAvailable != null) {
+                cache.setDisabled(!gsAvailable);
+            }
+            if (gsName != null) {
+                cache.setName(gsName);
+            }
+            if (gsOwnerUserId != null) {
+                cache.setOwnerUserId(gsOwnerUserId);
+            }
+            if (gsOwnerDisplayName != null) {
+                cache.setOwnerDisplayName(gsOwnerDisplayName);
+            }
+            if (gsType != null) {
+                cache.setType(gsType);
+            }
+            if (gsSize != null) {
+                cache.setSize(gsSize);
+            }
+            if (gsDifficulty != null) {
+                cache.setDifficulty(gsDifficulty);
+            }
+            if (gsTerrain != null) {
+                cache.setTerrain(gsTerrain);
+            }
             applyLocation(cache, gsCountry, gsState);
-            if (gsHint != null) cache.setHint(gsHint);
-            if (gsShortDesc != null) cache.setShortDescription(gsShortDesc);
-            if (gsLongDesc != null) cache.setDescription(gsLongDesc);
+            if (gsHint != null) {
+                cache.setHint(gsHint);
+            }
+            if (gsShortDesc != null) {
+                cache.setShortDescription(gsShortDesc);
+            }
+            if (gsLongDesc != null) {
+                cache.setDescription(gsLongDesc);
+            }
             for (final String attr : gsAttributes) {
                 cache.getAttributes().add(attr);
             }
@@ -701,35 +820,65 @@ final class UnifiedGPXWaypointParser {
             }
 
             // Apply GSAK
-            if (watchlist != null) cache.setOnWatchlist(watchlist);
-            if (favPoints != null) cache.setFavoritePoints(favPoints);
-            if (gsakPersonalNote != null) cache.setPersonalNote(gsakPersonalNote, true);
-            if (premium != null) cache.setPremiumMembersOnly(premium);
-            if (gsakGeocodeOverride != null) cache.setGeocode(gsakGeocodeOverride);
-            if (dnf != null && !cache.isFound()) cache.setDNF(dnf);
-            if (visitedDate != null && cache.getVisitedDate() == 0) cache.setVisitedDate(visitedDate);
+            if (watchlist != null) {
+                cache.setOnWatchlist(watchlist);
+            }
+            if (favPoints != null) {
+                cache.setFavoritePoints(favPoints);
+            }
+            if (gsakPersonalNote != null) {
+                cache.setPersonalNote(gsakPersonalNote, true);
+            }
+            if (premium != null) {
+                cache.setPremiumMembersOnly(premium);
+            }
+            if (gsakGeocodeOverride != null) {
+                cache.setGeocode(gsakGeocodeOverride);
+            }
+            if (dnf != null && !cache.isFound()) {
+                cache.setDNF(dnf);
+            }
+            if (visitedDate != null && cache.getVisitedDate() == 0) {
+                cache.setVisitedDate(visitedDate);
+            }
             applyOriginalCoordinates(cache);
 
             // Apply TerraCaching
             if (isTerraCache) {
-                if (terraName != null) cache.setName(terraName);
-                if (terraOwner != null) cache.setOwnerDisplayName(terraOwner);
-                if (terraType != null) cache.setType(terraType);
-                if (terraSize != null) cache.setSize(terraSize);
+                if (terraName != null) {
+                    cache.setName(terraName);
+                }
+                if (terraOwner != null) {
+                    cache.setOwnerDisplayName(terraOwner);
+                }
+                if (terraType != null) {
+                    cache.setType(terraType);
+                }
+                if (terraSize != null) {
+                    cache.setSize(terraSize);
+                }
                 applyLocation(cache, terraCountry, terraState);
-                if (terraDescription != null) cache.setDescription(terraDescription);
-                if (terraHint != null) cache.setHint(terraHint);
+                if (terraDescription != null) {
+                    cache.setDescription(terraDescription);
+                }
+                if (terraHint != null) {
+                    cache.setHint(terraHint);
+                }
             }
 
             // Apply OpenCaching size (only if not already a known size from elsewhere)
-            if (ocSize != null) cache.setSize(ocSize);
+            if (ocSize != null) {
+                cache.setSize(ocSize);
+            }
             cache.setLogPasswordRequired(logPasswordRequired);
             if (StringUtils.isNotBlank(descriptionPrefix)) {
                 cache.setDescription(descriptionPrefix + cache.getDescription());
             }
 
             // Apply c:geo
-            if (assignedEmoji != 0) cache.setAssignedEmoji(assignedEmoji);
+            if (assignedEmoji != 0) {
+                cache.setAssignedEmoji(assignedEmoji);
+            }
 
             // Fall-through geocode resolution from name/desc/cmt if still blank
             if (StringUtils.isBlank(cache.getGeocode())) {
@@ -776,10 +925,18 @@ final class UnifiedGPXWaypointParser {
             if (type == null && subtype == null && sym == null) {
                 return true;
             }
-            if (Strings.CS.contains(type, "geocache")) return true;
-            if (Strings.CS.contains(sym, "geocache")) return true;
-            if (Strings.CI.contains(sym, "waymark")) return true;
-            if (Strings.CI.contains(sym, "terracache") && !ctx.terraChildWaypoint) return true;
+            if (Strings.CS.contains(type, "geocache")) {
+                return true;
+            }
+            if (Strings.CS.contains(sym, "geocache")) {
+                return true;
+            }
+            if (Strings.CI.contains(sym, "waymark")) {
+                return true;
+            }
+            if (Strings.CI.contains(sym, "terracache") && !ctx.terraChildWaypoint) {
+                return true;
+            }
             return false;
         }
 
@@ -864,7 +1021,7 @@ final class UnifiedGPXWaypointParser {
                     wp.setCoords(original);
                     cache.addOrChangeWaypoint(wp, false);
                     cache.setUserModifiedCoords(true);
-                } catch (NumberFormatException e) {
+                } catch (final NumberFormatException e) {
                     Log.w("UnifiedGPXWaypointParser: invalid original coords '" + originalLat + "/" + originalLon + "'");
                 }
             }
@@ -887,19 +1044,25 @@ final class UnifiedGPXWaypointParser {
         }
 
         private void setUrl(final Geocache cache, @Nullable final String urlValue) {
-            if (urlValue == null) return;
+            if (urlValue == null) {
+                return;
+            }
             if (StringUtils.isBlank(cache.getGuid())) {
                 final MatcherWrapper m = new MatcherWrapper(PATTERN_GUID, urlValue);
                 if (m.matches()) {
                     final String guid = m.group(1);
-                    if (StringUtils.isNotBlank(guid)) cache.setGuid(guid);
+                    if (StringUtils.isNotBlank(guid)) {
+                        cache.setGuid(guid);
+                    }
                 }
             }
             if (StringUtils.isBlank(cache.getGeocode())) {
                 final MatcherWrapper m = new MatcherWrapper(PATTERN_URL_GEOCODE, urlValue);
                 if (m.matches()) {
                     final String code = m.group(1);
-                    if (StringUtils.isNotBlank(code)) cache.setGeocode(code);
+                    if (StringUtils.isNotBlank(code)) {
+                        cache.setGeocode(code);
+                    }
                 }
             }
         }
@@ -935,7 +1098,7 @@ final class UnifiedGPXWaypointParser {
                     cache.setGeocode(geocode);
                     return;
                 }
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 // ConnectorFactory may need Android context; fall through to the trimmed
                 // name fallback rather than crash the entire parse.
                 Log.w("UnifiedGPXWaypointParser: ConnectorFactory unavailable: " + t.getMessage());
@@ -960,10 +1123,12 @@ final class UnifiedGPXWaypointParser {
 
     @Nullable
     private static Float parseFloatOrNull(@Nullable final String input) {
-        if (input == null) return null;
+        if (input == null) {
+            return null;
+        }
         try {
             return Float.parseFloat(input.trim());
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return null;
         }
     }

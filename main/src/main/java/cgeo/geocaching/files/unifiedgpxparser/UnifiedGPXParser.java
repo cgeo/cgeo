@@ -82,7 +82,7 @@ public final class UnifiedGPXParser {
             final Result result = new Result();
             findAndParseGpxRoot(parser, result);
             return result;
-        } catch (XmlPullParserException e) {
+        } catch (final XmlPullParserException e) {
             throw new ParserException("Cannot parse .gpx file: invalid XML", e);
         }
     }
@@ -233,7 +233,7 @@ public final class UnifiedGPXParser {
             }
             try {
                 cw.waypoint.setPrefix(parent.getWaypointPrefix(nameForPrefix));
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 // getWaypointPrefix delegates through the connector — fall back to OWN
                 // if no connector is available (e.g. in a JVM test context).
                 Log.w("UnifiedGPXParser: could not derive waypoint prefix: " + t.getMessage());
@@ -329,7 +329,7 @@ public final class UnifiedGPXParser {
         }
         try {
             return new Geopoint(Double.parseDouble(lat), Double.parseDouble(lon));
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             Log.w("UnifiedGPXParser: invalid coordinates lat='" + lat + "' lon='" + lon + "'");
             return null;
         }

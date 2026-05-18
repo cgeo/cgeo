@@ -143,7 +143,7 @@ final class UnifiedGPXTrackParser {
                 if (eleText != null) {
                     try {
                         ele = Float.parseFloat(eleText.trim());
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         Log.w("UnifiedGPXTrackParser: invalid ele value '" + eleText + "'");
                     }
                 }
