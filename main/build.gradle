@@ -391,7 +391,7 @@ dependencies {
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation 'com.github.asamm.locus-api:locus-api-android:0.9.72'
+    implementation 'com.github.asamm.locus-api:locus-api-android:0.9.73'
 
     // -- Mapsforge / Mapsforge --
 
