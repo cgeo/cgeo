@@ -4,6 +4,7 @@ Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta
 - Fix: Crash when accessing routes
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
+- Fix: Unsaved lab adventure stages losing "visited" info on refresh
 
 ##
 - Fix: Crash in cache infosheet
