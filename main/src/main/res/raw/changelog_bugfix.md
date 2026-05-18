@@ -6,6 +6,7 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 - Fix: Crash when accessing routes
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
+- Fix: Unsaved lab adventure stages losing "visited" info on refresh
 
 ##
 - Fix: Crash in cache infosheet
