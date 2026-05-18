@@ -872,7 +872,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == UnifiedMapType.REQUEST_CODE_GET_COORDS && resultCode == RESULT_OK && data != null) {
-            Geopoint gp = new Geopoint(StringUtils.defaultString(data.getStringExtra("coords")));
+            final Geopoint gp = new Geopoint(StringUtils.defaultString(data.getStringExtra("coords")));
             if (listener != null) {
                 listener.showCoordinatesInputDialog(gp, cache);
             }
