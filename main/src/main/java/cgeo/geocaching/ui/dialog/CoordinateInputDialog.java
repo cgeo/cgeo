@@ -268,7 +268,11 @@ public class CoordinateInputDialog {
             // For waypoints only - option to select coordinates from map
             if (waypointOptions == CoordinateDialogDisplayModeEnum.Waypoint) {
                 setFromMap.setVisibility(View.VISIBLE);
-                setFromMap.setOnClickListener(v -> DefaultMap.startActivitySelectCoords((Activity) context, currentCoords()));
+                setFromMap.setOnClickListener(v -> {
+                            DefaultMap.startActivitySelectCoords((Activity) context, currentCoords());
+                            dialog.cancel();
+                        }
+                );
             } else {
                 setFromMap.setVisibility(View.GONE);
             }
