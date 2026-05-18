@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -18,6 +17,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import androidx.annotation.NonNull;
@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -57,6 +58,13 @@ final class UnifiedGPXWaypointParser {
             + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*"
             + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+
+    // definitions for parseDate
+    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
+    private static final SynchronizedDateFormat formatSimple = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US); // 2010-04-20T07:00:00
+    private static final SynchronizedDateFormat formatSimpleNoTime = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US); // 2010-04-20
+    private static final SynchronizedDateFormat formatSimpleZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
+    private static final SynchronizedDateFormat formatTimezone = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US); // 2010-04-20T01:01:03-04:00
 
     private UnifiedGPXWaypointParser() {
         // utility class
@@ -466,7 +474,7 @@ final class UnifiedGPXWaypointParser {
                 switch (parser.getName()) {
                     case "date":
                         try {
-                            lb.setDate(GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime());
+                            lb.setDate(parseDate(UnifiedGPXParser.readText(parser)).getTime());
                         } catch (final Exception ignored) {
                             // skip
                         }
@@ -538,7 +546,7 @@ final class UnifiedGPXWaypointParser {
                     dnf = parseBoolText(parser);
                 } else if ("DNFDate".equals(n) || "UserFound".equals(n)) {
                     try {
-                        visitedDate = GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime();
+                        visitedDate = parseDate(UnifiedGPXParser.readText(parser)).getTime();
                     } catch (final Exception ignored) {
                         // skip
                     }
@@ -701,7 +709,7 @@ final class UnifiedGPXWaypointParser {
                 switch (parser.getName()) {
                     case "date":
                         try {
-                            lb.setDate(GPXParser.parseDate(UnifiedGPXParser.readText(parser)).getTime());
+                            lb.setDate(parseDate(UnifiedGPXParser.readText(parser)).getTime());
                         } catch (final Exception ignored) {
                             // skip
                         }
@@ -745,7 +753,7 @@ final class UnifiedGPXWaypointParser {
             }
             if (time != null) {
                 try {
-                    cache.setHidden(GPXParser.parseDate(time));
+                    cache.setHidden(parseDate(time));
                 } catch (final ParseException e) {
                     Log.w("UnifiedGPXWaypointParser: invalid time '" + time + "'");
                 }
@@ -1136,6 +1144,23 @@ final class UnifiedGPXWaypointParser {
     private static boolean parseBoolText(final XmlPullParser parser) throws XmlPullParserException, IOException {
         final String txt = UnifiedGPXParser.readText(parser);
         return Boolean.parseBoolean(txt == null ? "" : txt.trim());
+    }
+
+    public static Date parseDate(final String inputUntrimmed) throws ParseException {
+        // remove milliseconds to reduce number of needed patterns
+        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, inputUntrimmed.trim());
+        final String input = matcher.replaceFirst("");
+        if (input.contains("Z")) {
+            return formatSimpleZ.parse(input);
+        }
+        if (StringUtils.countMatches(input, ":") == 3) {
+            final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
+            return formatTimezone.parse(removeColon);
+        }
+        if (input.contains("T")) {
+            return formatSimple.parse(input);
+        }
+        return formatSimpleNoTime.parse(input);
     }
 
     private static String trimHtml(@Nullable final String html) {
