@@ -4,6 +4,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Crash when accessing routes
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
+- Fix: Unsaved lab adventure stages losing "visited" info on refresh
 
 ##
 - Fix: Crash in cache infosheet
