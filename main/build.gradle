@@ -336,6 +336,13 @@ dependencies {
     // desugaring of Java 8 APIs
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
+    // Bergamot offline translator: native libraries (.so for all four ABIs)
+    // plus the JNI wrapper classes (dev.davidv.bergamot.*), as a prebuilt AAR
+    // from cgeo/offline-translator's GitHub Release. Resolved via the ivy
+    // repository declared in the root build.gradle. Replaces the formerly
+    // checked-in jniLibs/*.so and dev/davidv/bergamot/*.java.
+    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.1@aar'
+
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.5.0'
     implementation 'org.apache.commons:commons-compress:1.28.0'

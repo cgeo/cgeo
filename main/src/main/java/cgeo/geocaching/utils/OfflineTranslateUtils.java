@@ -96,8 +96,12 @@ public class OfflineTranslateUtils {
     }
 
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
-        // identify listing language
-        TranslateAccessor.get().guessLanguage(text.replaceAll("[\\s\\ufffc]+", " ").trim(),
+        // Use only the first 500 characters for language detection. Cache listings often contain
+        // the same text in multiple languages (e.g. EN + DE + FR + VI); CLD2 would return
+        // isReliable=false for the full text. The primary language is almost always first.
+        final String normalized = text.replaceAll("[\\s\\ufffc]+", " ").trim();
+        final String sample = normalized.length() > 500 ? normalized.substring(0, 500) : normalized;
+        TranslateAccessor.get().guessLanguage(sample,
             lngCode -> successConsumer.accept(new Language(lngCode)),
                 e -> errorConsumer.accept(e.getMessage()));
     }
@@ -172,7 +176,7 @@ public class OfflineTranslateUtils {
         }
 
         TranslateAccessor.get().getTranslatorWithDownload(lng, targetLng, consumer, e -> {
-            Log.e("Failed to initialize MLKit Translator", e);
+            Log.e("Failed to initialize translator", e);
             consumer.accept(null);
         });
     }
@@ -283,13 +287,16 @@ public class OfflineTranslateUtils {
     }
 
     public static SpannableStringBuilder getTextWithTranslatedByLogo(final String text) {
-        final SpannableStringBuilder ssb = new SpannableStringBuilder(text + "\n ");
-        final Drawable d = ContextCompat.getDrawable(CgeoApplication.getInstance(), R.drawable.translated_by_google);
-        if (d != null) {
-            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-            final int start = ssb.length() - 1;
-            ssb.setSpan(new ImageSpan(d, DynamicDrawableSpan.ALIGN_BOTTOM), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ssb.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // center the logo
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(text);
+        if (TranslateAccessor.get().requiresGoogleAttribution()) {
+            ssb.append("\n ");
+            final Drawable d = ContextCompat.getDrawable(CgeoApplication.getInstance(), R.drawable.translated_by_google);
+            if (d != null) {
+                d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+                final int start = ssb.length() - 1;
+                ssb.setSpan(new ImageSpan(d, DynamicDrawableSpan.ALIGN_BOTTOM), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ssb.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
         return ssb;
     }

@@ -119,6 +119,21 @@ subprojects {
         maven {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        // Prebuilt Bergamot offline-translator native libraries, published as
+        // GitHub Release assets by cgeo/offline-translator (build-libs.yml).
+        // Scoped via content {} so it is consulted only for that one artifact.
+        ivy {
+            url = 'https://github.com/cgeo/offline-translator/releases/download'
+            patternLayout {
+                artifact '[revision]/[artifact].[ext]'
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeModule('cgeo', 'bergamot-sys')
+            }
+        }
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
