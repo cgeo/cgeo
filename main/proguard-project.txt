@@ -31,6 +31,11 @@
 
 -keep class androidx.appcompat.widget.ShareActionProvider { <init>(...); }
 
+# androidx.lifecycle 2.10.0+ ProGuard/R8 rules to prevent AbstractMethodError with DefaultLifecycleObserver
+-keep class * implements androidx.lifecycle.DefaultLifecycleObserver {
+    public void * (androidx.lifecycle.LifecycleOwner);
+}
+
 # Apache commons ----------------------------------------------------------------------------------
 
 # apache.commons.collections has some bean related collections, which are undefined in Android
