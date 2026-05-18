@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.OFFLINE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
@@ -41,6 +42,8 @@ public class UnifiedMapType implements Parcelable {
     public boolean followMyLocation = false;
     public Viewport viewport;
     // reminder: add additional fields to parcelable methods below
+
+    public static final int REQUEST_CODE_GET_COORDS = 10004;
 
     /** default UnifiedMapType is PlainMap with no further data */
     public UnifiedMapType() {
@@ -133,7 +136,7 @@ public class UnifiedMapType implements Parcelable {
     public void launchMapWithSelectCoordinates(final Context fromActivity) {
         final Intent intent = getLaunchMapIntent(fromActivity);
         intent.putExtra("SelectCoordinates", true);
-        fromActivity.startActivity(intent);
+        ((Activity) fromActivity).startActivityForResult(intent, REQUEST_CODE_GET_COORDS);
     }
 
 

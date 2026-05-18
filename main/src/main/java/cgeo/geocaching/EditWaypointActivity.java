@@ -31,6 +31,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CommonUtils;
@@ -213,6 +214,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
+    private static CoordDialogListener listener;
+
     private void nonEditable(final TextInputLayout textLayout, final TextView textView) {
         textLayout.setEndIconMode(TextInputLayout.END_ICON_NONE);
         textView.setKeyListener(null);
@@ -247,7 +250,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             setTitle(LocalizationUtils.getString(R.string.waypoint_edit_title));
         }
 
-        binding.buttonLatLongitude.setOnClickListener(new CoordDialogListener());
+        listener = new CoordDialogListener();
+        binding.buttonLatLongitude.setOnClickListener(listener);
 
         final List<String> wayPointTypes = new ArrayList<>();
         for (final WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
@@ -860,5 +864,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         Dialogs.dismiss(waitDialog);
         super.finish();
+    }
+
+    /* process result after selected coords from map */
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UnifiedMapType.REQUEST_CODE_GET_COORDS && resultCode == RESULT_OK && data != null) {
+            Geopoint gp = new Geopoint(StringUtils.defaultString(data.getStringExtra("coords")));
+            if (listener != null) {
+                listener.showCoordinatesInputDialog(gp, cache);
+            }
+        }
     }
 }

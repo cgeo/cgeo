@@ -399,10 +399,12 @@ public class MapUtils {
         final AlertDialog dialog = Dialogs.newBuilder(activity)
                 .setTitle(R.string.selected_position)
                 .setView(R.layout.dialog_selected_position)
-                .setPositiveButton(R.string.cancel, null)
-                .setNegativeButton(R.string.ok, (d, which) -> {
-                    ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
-                    /* finish to do */
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, (d, which) -> {
+                    /* finish activity  */
+                    final Intent result = new Intent();
+                    result.putExtra("coords", GeopointFormatter.reformatForClipboard(textview.get().getText()));
+                    activity.setResult(Activity.RESULT_OK, result);
                     activity.finish();
                 })
                 .show();
