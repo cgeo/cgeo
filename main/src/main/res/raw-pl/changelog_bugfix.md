@@ -4,6 +4,7 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 - Fix: Crash when accessing routes
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
+- Fix: Unsaved lab adventure stages losing "visited" info on refresh
 
 ##
 - Naprawiono: Awaria w informacjach o skrytce
