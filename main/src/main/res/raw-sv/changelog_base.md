@@ -92,3 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Ändra: Använd lokal tidszon (för enheten, inte event) för kalenderposter (istället för UTC)
 - Fix: Vissa texter ignorerar språkväxling
 - Fix: "Använd brittiska inställningar" initieras inte korrekt på nya installationer
+- New: Bergamot open source offline translation module
