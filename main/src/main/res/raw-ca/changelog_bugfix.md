@@ -4,7 +4,7 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 - Correcció: Error en accedir a rutes
 - Correcció: Error a la pàgina de punts de referència
 - Canvi: La cerca de "catxés pròpis" comença amb filtres nous
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
+- Correcció: Les etapes de lab aventure no desades perdien la informació de "visitada" en actualitzar-les
 
 ##
 - Correcció: Error a la fitxa informativa del catxé
