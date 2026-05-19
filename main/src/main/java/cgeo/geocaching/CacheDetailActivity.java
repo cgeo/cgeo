@@ -116,6 +116,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.offlinetranslate.ITranslateAccessor;
 import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
@@ -2112,12 +2113,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         if (translator != null) {
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
-                        binding.descriptionTranslatedByGoogle.setVisibility(translator != null && TranslateAccessor.get().requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
-                        final String translatorName = TranslateAccessor.get().getTranslatorName();
-                        if (translator != null && translatorName != null) {
-                            binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
-                            binding.descriptionTranslatedByBergamot.setVisibility(View.VISIBLE);
+                        if (translator != null) {
+                            final ITranslateAccessor translateAccessor = TranslateAccessor.get();
+                            binding.descriptionTranslatedByGoogle.setVisibility(translateAccessor.requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
+                            final String translatorName = translateAccessor.getTranslatorName();
+                            if (translatorName != null) {
+                                binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
+                                binding.descriptionTranslatedByBergamot.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
+                            }
                         } else {
+                            binding.descriptionTranslatedByGoogle.setVisibility(View.GONE);
                             binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                         }
 
