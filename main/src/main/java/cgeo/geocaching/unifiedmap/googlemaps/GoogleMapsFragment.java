@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
@@ -31,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -219,8 +219,12 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
-            mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
-            mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
+            // mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
+            // mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
+            final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
+                    new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
+                    new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);
+            mMap.animateCamera(cu);
         }
     }
 
