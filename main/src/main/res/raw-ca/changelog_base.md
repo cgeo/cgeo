@@ -92,3 +92,4 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
 - Correcció: Alguns textos ignoren el canvi d'idioma
 - Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
+- Nou: Mòdul de traducció fora de línia de codi obert de Bergamot
