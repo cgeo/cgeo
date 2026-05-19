@@ -92,3 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
 - Naprawiono: Niektóre teksty ignorowały zmianę języka
 - Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
+- New: Bergamot open source offline translation module
