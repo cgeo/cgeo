@@ -92,3 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
 - Fix: Some texts ignore language switching
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
+- New: Bergamot open source offline translation module
