@@ -92,3 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
 - Korrektur: Einige Texte ignorieren den Sprachwechsel
 - Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen
+- New: Bergamot open source offline translation module
