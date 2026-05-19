@@ -386,6 +386,7 @@
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
     <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
+    <string name="translator_attributed_to">Traduït per %s</string>
     <string name="crash_activity_title">Ups! c:geo s\'ha bloquejat!</string>
     <string name="crash_activity_report">Informa d’un problema</string>
     <!-- location service -->
