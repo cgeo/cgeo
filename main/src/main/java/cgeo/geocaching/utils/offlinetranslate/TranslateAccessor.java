@@ -13,13 +13,12 @@ public class TranslateAccessor {
         if (DO_TEST) {
             instance = new DevTranslateAccessor();
         } else {
-            // Bergamot is temporarily disabled due to native-crash issues (see #18112).
-            // Its JNI calls (e.g. language detection) can throw java.lang.Error subtypes
-            // that are not caught by the surrounding catch(Exception) blocks, which lets the
-            // error propagate through RxJava to the uncaught-exception handler and crash the
-            // app. Re-enable (and restore the catch→Throwable fixes in BergamotTranslateAccessor)
-            // once the root cause in the native library is identified and resolved.
-            Log.iForce("TranslateAccessor: Bergamot temporarily disabled (#18112)");
+            try {
+                instance = new BergamotTranslateAccessor();
+                Log.iForce("TranslateAccessor: Bergamot instance created");
+            } catch (final Exception re) {
+                Log.iForce("TranslateAccessor: Could not initialize Bergamot");
+            }
             // Fall back to MLKit if Bergamot failed (e.g. .so not bundled yet)
             if (instance == null) {
                 try {
