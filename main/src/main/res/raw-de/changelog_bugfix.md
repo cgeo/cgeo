@@ -5,6 +5,8 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
 - Fix: Unsaved lab adventure stages losing "visited" info on refresh
+- Fix: Recurring prompt for tile source updates
+- Fix: Random location on mapping a list (Google Maps)
 
 ##
 - Korrektur: Absturz im Cache-Popup
