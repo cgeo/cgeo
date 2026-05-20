@@ -7,6 +7,8 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 - Fix: Crash on waypoint page
 - Change: Search for "own caches" starts with fresh filters
 - Fix: Unsaved lab adventure stages losing "visited" info on refresh
+- Fix: Recurring prompt for tile source updates
+- Fix: Random location on mapping a list (Google Maps)
 
 ##
 - Fix: Crash in cache infosheet

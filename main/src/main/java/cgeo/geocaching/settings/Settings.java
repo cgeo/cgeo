@@ -1571,7 +1571,7 @@ public class Settings {
         return (System.currentTimeMillis() / 1000) - (delay && (intervalInHours > 72) ? (long) (intervalInHours - 72) * HOURS_TO_SECONDS : 0);
     }
 
-    // checks given timestamp against interval; initializes timestampt, if needed
+    // checks given timestamp against interval; initializes timestamp, if needed
     private static boolean needsIntervalAction(final @StringRes int prefTimestamp, final int intervalInHours, final Runnable initAction) {
         // check disabled?
         if (intervalInHours < 1) {
