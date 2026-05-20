@@ -385,6 +385,7 @@
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
     <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
+    <string name="translator_attributed_to">Przetłumaczone przez %s</string>
     <string name="crash_activity_title">Ups! c:geo uległ awarii!</string>
     <string name="crash_activity_report">zgłoś problem</string>
     <!-- location service -->
