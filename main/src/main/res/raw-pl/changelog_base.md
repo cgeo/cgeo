@@ -1,12 +1,12 @@
-### General release notes
+### Ogólne informacje o wydaniu
 
-**Edge to Edge**
+**Od krawędzi do krawędzi**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
 
-**Legacy Maps**
+**Starsze mapy**
 
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
+Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
 - Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
 - Wyskakujące okienko klastra dla Google Maps
 - Ukrywanie źródeł map, których nie potrzebujesz
@@ -31,7 +31,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Nowość: Wyświetlanie współrzędnych punktów nawigacji w wyskakującym okienku punktu nawigacji
 - Naprawiono: Szybkie ustawienia mapy mogły pokazywać przyciski "1"/"2" dla pustych profili routingu po zmianie języka
 - Nowość: Oblicz brakujące dane wysokości na zaimportowanych ścieżkach (jeśli pobierane są dane wysokości)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- Naprawiono: W pewnych sytuacjach pobierania kafelków zatrzymywało się (tylko mapy online OpenStreetMap)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -92,4 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
 - Naprawiono: Niektóre teksty ignorowały zmianę języka
 - Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
-- New: Bergamot open source offline translation module
+- Nowość: Otwarty moduł tłumaczenia offline Bergamot
