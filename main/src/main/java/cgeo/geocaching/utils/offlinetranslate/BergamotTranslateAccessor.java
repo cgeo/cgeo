@@ -177,9 +177,11 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                     availableLanguages.add(PIVOT_LANGUAGE);
                 }
                 runCallback(onSuccess);
-            } catch (final Exception e) {
+            } catch (final Throwable e) {
+                // Catch Throwable (not just Exception) so that native-library Errors
+                // (e.g. UnsatisfiedLinkError) are handled and don't crash the process.
                 Log.e(TAG + ": Error downloading models for " + language, e);
-                runCallback(() -> onError.accept(e));
+                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
             }
         });
     }
@@ -217,9 +219,11 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                         && !result.getLanguage().isEmpty() && !"un".equals(result.getLanguage()))
                         ? result.getLanguage() : null;
                 runCallback(() -> onSuccess.accept(lang));
-            } catch (final Exception e) {
+            } catch (final Throwable e) {
+                // Catch Throwable (not just Exception) so that native-library Errors
+                // (e.g. UnsatisfiedLinkError from langDetect) are handled and don't crash the process.
                 Log.e(TAG + ": Language detection failed", e);
-                runCallback(() -> onError.accept(e));
+                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
             }
         });
     }
@@ -247,8 +251,9 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                     ensureOrDownload(targetLanguage);
                 }
                 runCallback(() -> onSuccess.accept(createTranslatorImpl(sourceLanguage, targetLanguage)));
-            } catch (final Exception e) {
-                runCallback(() -> onError.accept(e));
+            } catch (final Throwable e) {
+                // Catch Throwable (not just Exception) so that native-library Errors are handled.
+                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
             }
         });
     }
@@ -289,9 +294,12 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                         }
                         final String translated = (result != null && result.length > 0) ? result[0] : source;
                         runCallback(() -> onSuccess.accept(translated));
-                    } catch (final Exception e) {
+                    } catch (final Throwable e) {
+                        // Catch Throwable (not just Exception) so that native-library Errors
+                        // (e.g. UnsatisfiedLinkError from translateMultiple/pivotMultiple) don't
+                        // propagate uncaught through RxJava and crash the process.
                         Log.e(TAG + ": Translation failed", e);
-                        runCallback(() -> onError.accept(e));
+                        runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
                     }
                 });
             }
@@ -343,7 +351,9 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                         availableLanguages.add(PIVOT_LANGUAGE);
                     }
                     Log.i(TAG + ": Models loaded for " + lang);
-                } catch (final Exception e) {
+                } catch (final Throwable e) {
+                    // Catch Throwable (not just Exception) so that native-library Errors
+                    // (e.g. from loadModelIntoCache) don't propagate uncaught through RxJava.
                     Log.e(TAG + ": Could not reload cached models for " + lang, e);
                 }
             }

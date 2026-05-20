@@ -13,15 +13,13 @@ public class TranslateAccessor {
         if (DO_TEST) {
             instance = new DevTranslateAccessor();
         } else {
-            // Try Bergamot first (open-source, works in all builds including FOSS)
-            try {
-                instance = new BergamotTranslateAccessor();
-                Log.iForce("TranslateAccessor: Bergamot instance created");
-            } catch (final Throwable e) {
-                // Catch Error (e.g. UnsatisfiedLinkError when .so is missing for this ABI)
-                // as well as Exception, so the app can fall back gracefully.
-                Log.iForce("TranslateAccessor: Could not initialize Bergamot: " + e.getMessage());
-            }
+            // Bergamot is temporarily disabled due to native-crash issues (see #18112).
+            // Its JNI calls (e.g. language detection) can throw java.lang.Error subtypes
+            // that are not caught by the surrounding catch(Exception) blocks, which lets the
+            // error propagate through RxJava to the uncaught-exception handler and crash the
+            // app. Re-enable (and restore the catch→Throwable fixes in BergamotTranslateAccessor)
+            // once the root cause in the native library is identified and resolved.
+            Log.iForce("TranslateAccessor: Bergamot temporarily disabled (#18112)");
             // Fall back to MLKit if Bergamot failed (e.g. .so not bundled yet)
             if (instance == null) {
                 try {
