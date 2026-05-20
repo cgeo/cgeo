@@ -269,9 +269,10 @@ public class CoordinateInputDialog {
             if (waypointOptions == CoordinateDialogDisplayModeEnum.Waypoint) {
                 setFromMap.setVisibility(View.VISIBLE);
                 setFromMap.setOnClickListener(v -> {
-                            DefaultMap.startActivitySelectCoords((Activity) context, currentCoords());
-                            dialog.cancel();
-                        }
+                        final Geopoint gp = inputData.getGeopoint();
+                        DefaultMap.startActivitySelectCoords((Activity) context, gp != null ? gp : currentCoords());
+                        dialog.cancel();
+                    }
                 );
             } else {
                 setFromMap.setVisibility(View.GONE);
