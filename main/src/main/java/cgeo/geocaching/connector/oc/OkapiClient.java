@@ -361,25 +361,21 @@ final class OkapiClient {
             return new SearchResult(); //connector is excluded by origin filter
         }
 
-        final Geopoint searchCoords;
-        final String radius;
-
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
-        } else {
-            // search around current position by default
-            searchCoords = null;
-            radius = DEFAULT_RADIUS;
-        }
-
-        //fill in the defaults
+        // fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("limit", "" + take);
         valueMap.put("offset", "" + skip);
-        fillSearchParameterCenter(valueMap, params, searchCoords, radius);
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            final String radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
+            fillSearchParameterCenter(valueMap, params, df.getEffectiveCoordinate(), radius);
+        } else {
+            // search around current position by default
+            // (but limit only the number of retrieved caches, not the search radius)
+            fillSearchParameterCenter(valueMap, params, null, null);
+        }
 
         String finder = null;
         for (final BaseGeocacheFilter baseFilter : filters) {
@@ -516,11 +512,13 @@ final class OkapiClient {
 
     }
 
-    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, final String radius) {
+    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, @Nullable final String radius) {
         final Geopoint usedCenter = center != null ? center : LocationDataProvider.getInstance().currentGeo().getCoords();
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
         valueMap.put("center", centerString);
-        valueMap.put("radius", radius);
+        if (radius != null) {
+            valueMap.put("radius", radius);
+        }
         params.removeKey("search_method");
         params.put("search_method", METHOD_SEARCH_NEAREST);
     }
