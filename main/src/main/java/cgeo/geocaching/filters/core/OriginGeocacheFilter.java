@@ -4,9 +4,15 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.CollectionStream;
 
 public class OriginGeocacheFilter extends ValueGroupGeocacheFilter<IConnector, IConnector> {
 
+    public static OriginGeocacheFilter create(final IConnector... connectors) {
+        final OriginGeocacheFilter originFilter = GeocacheFilterType.ORIGIN.create();
+        originFilter.setValues(CollectionStream.of(connectors).toSet());
+        return originFilter;
+    }
 
     @Override
     public IConnector getRawCacheValue(final Geocache cache) {

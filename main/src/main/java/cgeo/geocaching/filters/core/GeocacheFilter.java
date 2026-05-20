@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
@@ -13,6 +14,7 @@ import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 import androidx.core.util.Predicate;
 
 import java.text.ParseException;
@@ -311,6 +313,8 @@ public class GeocacheFilter implements Cloneable {
             for (IGeocacheFilter fChild : filterToCheck.getChildren()) {
                 getAndChainIfPossibleInternal(fChild, chain);
             }
+        } else if (filterToCheck instanceof LogicalGeocacheFilter) {
+            return;
         } else if (filterToCheck instanceof BaseGeocacheFilter) {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }
@@ -398,6 +402,163 @@ public class GeocacheFilter implements Cloneable {
 
     private static boolean isAndFilter(final IGeocacheFilter filter) {
         return filter instanceof AndGeocacheFilter && !(filter instanceof NotGeocacheFilter);
+    }
+
+    /**
+     * Returns a new GeocacheFilter with the filter tree simplified for a specific connector.
+     * OriginGeocacheFilter nodes that match the connector are removed (they are always true for this connector).
+     * OR branches that exclude the connector are pruned.
+     * Returns null if the connector is completely excluded by origin filters in this filter.
+     * Returns an empty (non-filtering) GeocacheFilter if the entire tree simplifies to "always true".
+     */
+    @Nullable
+    public GeocacheFilter getConnectorRelevantFilter(@NonNull final IConnector connector) {
+        if (this.tree == null) {
+            return new GeocacheFilter(this.name, this.openInAdvancedMode, this.includeInconclusive, null);
+        }
+        final Pair<IGeocacheFilter, Boolean> simplified = simplifyTreeForConnector(this.tree, connector);
+        if (!simplified.second) {
+            // connector is completely excluded
+            return null;
+        }
+        if (simplified.first == null) {
+            // entire tree simplifies to "always true"
+            return new GeocacheFilter(this.name, this.openInAdvancedMode, this.includeInconclusive, null);
+        }
+        return new GeocacheFilter(this.name, this.openInAdvancedMode, this.includeInconclusive, (IGeocacheFilter) simplified.first);
+    }
+
+    /**
+     * Convenience method: first simplifies this filter for the given connector, then extracts the AND chain.
+     * Returns null if the connector is completely excluded by origin filters.
+     */
+    @Nullable
+    public List<BaseGeocacheFilter> getAndChainIfPossible(@NonNull final IConnector connector) {
+        final GeocacheFilter connectorFilter = getConnectorRelevantFilter(connector);
+        if (connectorFilter == null) {
+            return null;
+        }
+        return connectorFilter.getAndChainIfPossible();
+    }
+
+    /**
+     * Recursively simplifies a filter tree for a specific connector.
+     * Returns:
+     * - null if the connector is excluded (this subtree always evaluates to false for the connector)
+     * - if the subtree always evaluates to true (e.g., matching OriginFilter removed)
+     * - a simplified IGeocacheFilter otherwise
+     */
+    private static Pair<IGeocacheFilter, Boolean> simplifyTreeForConnector(final IGeocacheFilter node, final IConnector connector) {
+        if (node == null) {
+            return Pair.create(null, true);
+        }
+
+        // Handle OriginGeocacheFilter leaf nodes
+        if (node instanceof OriginGeocacheFilter) {
+            final OriginGeocacheFilter origin = (OriginGeocacheFilter) node;
+            if (!origin.isFiltering()) {
+                return Pair.create(null, true);
+            }
+            return Pair.create(null, origin.allowsCachesOf(connector));
+        }
+
+        // Handle NOT filter (extends AndGeocacheFilter)
+        if (node instanceof NotGeocacheFilter) {
+            return simplifyNotForConnector((NotGeocacheFilter) node, connector);
+        }
+
+        // Handle AND filter
+        if (isAndFilter(node)) {
+            return simplifyAndForConnector(node, connector);
+        }
+
+        // Handle OR filter
+        if (node instanceof OrGeocacheFilter) {
+            return simplifyOrForConnector(node, connector);
+        }
+
+        // All other BaseGeocacheFilter nodes: keep as-is
+        return Pair.create(node, true);
+    }
+
+    private static Pair<IGeocacheFilter, Boolean> simplifyAndForConnector(final IGeocacheFilter andNode, final IConnector connector) {
+        final List<IGeocacheFilter> simplifiedChildren = new ArrayList<>();
+        for (final IGeocacheFilter child : andNode.getChildren()) {
+            final Pair<IGeocacheFilter, Boolean> simplified = simplifyTreeForConnector(child, connector);
+            if (!simplified.second) {
+                // one AND child is false → entire AND is false
+                return simplified;
+            }
+            if (simplified.first != null) {
+                simplifiedChildren.add(simplified.first);
+            }
+            // Filter doesn't filter anything -> children are dropped (they don't constrain anything)
+        }
+        if (simplifiedChildren.isEmpty()) {
+            return Pair.create(null, true);
+        }
+        if (simplifiedChildren.size() == 1) {
+            return Pair.create(simplifiedChildren.get(0), true);
+        }
+        final AndGeocacheFilter newAnd = new AndGeocacheFilter();
+        for (final IGeocacheFilter child : simplifiedChildren) {
+            newAnd.addChild(child);
+        }
+        return Pair.create(newAnd, true);
+    }
+
+    private static Pair<IGeocacheFilter, Boolean> simplifyOrForConnector(final IGeocacheFilter orNode, final IConnector connector) {
+        final List<IGeocacheFilter> simplifiedChildren = new ArrayList<>();
+        for (final IGeocacheFilter child : orNode.getChildren()) {
+            final Pair<IGeocacheFilter, Boolean> simplified = simplifyTreeForConnector(child, connector);
+
+            if (simplified.first == null) {
+                if (simplified.second) {
+                    // one OR child is always true → entire OR is always true
+                    return simplified;
+                }
+                // null children are dropped (they are false for this connector)
+            } else {
+                simplifiedChildren.add(simplified.first);
+            }
+        }
+        if (simplifiedChildren.isEmpty()) {
+            // all OR branches excluded this connector
+            return Pair.create(null, false);
+        }
+        if (simplifiedChildren.size() == 1) {
+            return Pair.create(simplifiedChildren.get(0), true);
+        }
+        final OrGeocacheFilter newOr = new OrGeocacheFilter();
+        for (final IGeocacheFilter child : simplifiedChildren) {
+            newOr.addChild(child);
+        }
+        return Pair.create(newOr, true);
+    }
+
+    private static Pair<IGeocacheFilter, Boolean> simplifyNotForConnector(final NotGeocacheFilter notNode, final IConnector connector) {
+        // NOT wraps an AND of its children, then negates the result.
+        // Simplify the inner AND first.
+        final Pair<IGeocacheFilter, Boolean> innerSimplified = simplifyAndForConnector(notNode, connector);
+        if (!innerSimplified.second) {
+            // inner is false → NOT(false) = true
+            return Pair.create(null, true);
+        }
+        final IGeocacheFilter innerFilter = innerSimplified.first;
+        if (innerFilter == null) {
+            // inner is true → NOT(true) = false → connector excluded
+            return Pair.create(null, false);
+        }
+        // Wrap the simplified inner in a new NOT
+        final NotGeocacheFilter newNot = new NotGeocacheFilter();
+        if (innerFilter instanceof AndGeocacheFilter && !(innerFilter instanceof NotGeocacheFilter)) {
+            for (final IGeocacheFilter child : innerFilter.getChildren()) {
+                newNot.addChild(child);
+            }
+        } else {
+            newNot.addChild((IGeocacheFilter) innerFilter);
+        }
+        return Pair.create(newNot, true);
     }
 
 

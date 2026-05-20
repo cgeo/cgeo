@@ -7,6 +7,12 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 public class NotGeocacheFilter extends AndGeocacheFilter {
 
+    public static NotGeocacheFilter create(final IGeocacheFilter child) {
+        final NotGeocacheFilter notFilter = new NotGeocacheFilter();
+        notFilter.addChild(child);
+        return notFilter;
+    }
+
     @Override
     public String getId() {
         return "NOT";

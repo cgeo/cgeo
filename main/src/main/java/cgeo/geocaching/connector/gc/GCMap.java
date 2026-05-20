@@ -14,7 +14,6 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
@@ -118,14 +117,11 @@ public class GCMap {
         search.setPage(take, skip);
 
         final GeocacheFilter filter = pFilter != null ? pFilter : GeocacheFilter.createEmpty();
-
-        //special case: if origin filter is present and excludes GCConnector, then skip search
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
-        if (origin != null && !origin.allowsCachesOf(connector)) {
+        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible(connector);
+        if (filterAndChain == null) {
             return null;
         }
 
-        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
         for (BaseGeocacheFilter baseFilter : filterAndChain) {
             fillForBasicFilter(baseFilter, search);
         }
@@ -133,7 +129,6 @@ public class GCMap {
         search.setSort(GCWebAPI.WebApiSearch.SortType.getByCGeoSortType(sort.getEffectiveType()), sort.isEffectiveAscending());
 
         return search;
-
     }
 
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
