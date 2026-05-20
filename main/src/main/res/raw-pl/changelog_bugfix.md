@@ -1,10 +1,12 @@
 ##
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie związane z konserwacją kodu i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
+- Naprawiono: Awaria podczas dostępu do tras
+- Naprawiono: Awaria na stronie z punktem nawigacji
+- Zmiana: Wyszukiwanie własnych skrytek rozpoczyna się z nowymi filtrami
+- Naprawiono: Niezapisane etapy labów tracą informacje o „odwiedzeniu” po odświeżeniu
+- Fix: Recurring prompt for tile source updates
+- Fix: Random location on mapping a list (Google Maps)
 
 ##
 - Naprawiono: Awaria w informacjach o skrytce
