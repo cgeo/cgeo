@@ -181,7 +181,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 // Catch Throwable (not just Exception) so that native-library Errors
                 // (e.g. UnsatisfiedLinkError) are handled and don't crash the process.
                 Log.e(TAG + ": Error downloading models for " + language, e);
-                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
+                runCallback(() -> onError.accept(asException(e)));
             }
         });
     }
@@ -223,7 +223,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 // Catch Throwable (not just Exception) so that native-library Errors
                 // (e.g. UnsatisfiedLinkError from langDetect) are handled and don't crash the process.
                 Log.e(TAG + ": Language detection failed", e);
-                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
+                runCallback(() -> onError.accept(asException(e)));
             }
         });
     }
@@ -253,7 +253,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 runCallback(() -> onSuccess.accept(createTranslatorImpl(sourceLanguage, targetLanguage)));
             } catch (final Throwable e) {
                 // Catch Throwable (not just Exception) so that native-library Errors are handled.
-                runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
+                runCallback(() -> onError.accept(asException(e)));
             }
         });
     }
@@ -299,7 +299,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                         // (e.g. UnsatisfiedLinkError from translateMultiple/pivotMultiple) don't
                         // propagate uncaught through RxJava and crash the process.
                         Log.e(TAG + ": Translation failed", e);
-                        runCallback(() -> onError.accept(e instanceof Exception ? (Exception) e : new RuntimeException(e)));
+                        runCallback(() -> onError.accept(asException(e)));
                     }
                 });
             }
@@ -661,5 +661,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     private void runCallback(final Runnable r) {
         final Scheduler s = callbackScheduler != null ? callbackScheduler : AndroidSchedulers.mainThread();
         s.createWorker().schedule(r);
+    }
+
+    /** Wraps any Throwable as an Exception suitable for error-consumer callbacks. */
+    private static Exception asException(final Throwable t) {
+        return t instanceof Exception ? (Exception) t : new RuntimeException(t);
     }
 }
