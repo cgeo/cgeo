@@ -16,8 +16,8 @@ public class TranslateAccessor {
             try {
                 instance = new BergamotTranslateAccessor();
                 Log.iForce("TranslateAccessor: Bergamot instance created");
-            } catch (final Exception re) {
-                Log.iForce("TranslateAccessor: Could not initialize Bergamot");
+            } catch (final Exception e) {
+                Log.e("TranslateAccessor: Could not initialize Bergamot", e);
             }
             // Fall back to MLKit if Bergamot failed (e.g. .so not bundled yet)
             if (instance == null) {
