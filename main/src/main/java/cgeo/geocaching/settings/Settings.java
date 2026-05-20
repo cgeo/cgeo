@@ -1216,14 +1216,14 @@ public class Settings {
      * live map) and the map of a single cache (which is often zoomed in more deep).
      */
     public static int getMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType) {
-        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
+        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_SelectCoords) {
             return getCacheZoom();
         }
         return getMapZoom();
     }
 
     public static void setMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType, final int zoomLevel) {
-        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
+        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_SelectCoords) {
             setCacheZoom(zoomLevel);
         } else {
             setMapZoom(zoomLevel);

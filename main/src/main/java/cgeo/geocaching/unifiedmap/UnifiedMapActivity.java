@@ -89,6 +89,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SelectCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport;
@@ -171,9 +172,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private int wherigoListenerId;
     private Menu toolbarMenu;
-
-    // return to Coordinate input dialog after selected point from map
-    private boolean selectPointOnMap = false;
 
     private final CacheListActionBarChooser listChooser = new CacheListActionBarChooser(this, this::getSupportActionBar, newListId -> {
         final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
@@ -462,6 +460,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
                 break;
             case UMTT_TargetCoords:
+            case UMTT_SelectCoords:
                 // set given coords as map center
                 if (setDefaultCenterAndZoom) {
                     mapFragment.setCenter(mapType.coords);
@@ -873,7 +872,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     public int getSelectedBottomItemId() {
         return viewModel == null || viewModel.mapType == null || viewModel.mapType.type == UMTT_PlainMap ||
-                viewModel.mapType.type == UMTT_Viewport || viewModel.mapType.type == UMTT_List || viewModel.mapType.type == UMTT_TargetCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
+                viewModel.mapType.type == UMTT_Viewport || viewModel.mapType.type == UMTT_List || viewModel.mapType.type == UMTT_TargetCoords || viewModel.mapType.type == UMTT_SelectCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
@@ -1218,10 +1217,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (result.isEmpty()) {
             if (isLongTap) {
                 viewModel.longTapCoords.setValue(touchedPoint);
-                if (getIntent().hasExtra("SelectCoordinates")) {
-                    selectPointOnMap = getIntent().getBooleanExtra("SelectCoordinates", false);
-                }
-                if (selectPointOnMap) {
+                if (viewModel.mapType.type == UMTT_SelectCoords) {
                     MapUtils.showSelectFromMapDialog(this, touchedPoint);
                 } else {
                     MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget)

@@ -26,6 +26,7 @@ public class UnifiedMapType implements Parcelable {
         UMTT_Viewport,          // open map, shows and scales to a given Viewport
         UMTT_TargetGeocode,     // set cache or waypoint as target
         UMTT_TargetCoords,      // set coords as target
+        UMTT_SelectCoords,      // select coordinates from map, starting at given position
         UMTT_List,              // display list contents
         UMTT_SearchResult       // show and scale to searchresult
         // to be extended
@@ -134,8 +135,8 @@ public class UnifiedMapType implements Parcelable {
 
     /** launch fresh map to select coordinates from map */
     public void launchMapWithSelectCoordinates(final Context fromActivity) {
+        type = UnifiedMapTypeType.UMTT_SelectCoords;
         final Intent intent = getLaunchMapIntent(fromActivity);
-        intent.putExtra("SelectCoordinates", true);
         ((Activity) fromActivity).startActivityForResult(intent, REQUEST_CODE_GET_COORDS);
     }
 
