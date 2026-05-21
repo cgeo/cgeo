@@ -1,12 +1,12 @@
 ##
 Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Korrektur: Absturz beim Zugriff auf Routen
+- Korrektur: Absturz auf Wegpunkt-Seite
+- Änderung: Suche nach "eigenen Caches" beginnt mit neuen Filtern
+- Korrektur: Nicht gespeicherte Lab-Wegpunkte verlieren "besucht"-Information beim Aktualisieren
+- Korrektur: Wiederkehrende Aufforderung für Update von Routingdaten
+- Korrektur: Zufällige Kartenposition bei Anzeige einer Liste (Google Maps)
 
 ##
 - Korrektur: Absturz im Cache-Popup
