@@ -5,8 +5,8 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 - Correcció: Error a la pàgina de punts de referència
 - Canvi: La cerca de "catxés pròpis" comença amb filtres nous
 - Correcció: Les etapes de lab aventure no desades perdien la informació de "visitada" en actualitzar-les
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Correcció: Sol·licitud recurrent per a actualitzacions de la font de les tessel·les
+- Correcció: Ubicació aleatòria en un mapa d'una llista (Google Maps)
 
 ##
 - Correcció: Error a la fitxa informativa del catxé
