@@ -1,8 +1,16 @@
 ##
 Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Correcció: Error en accedir a rutes
+- Correcció: Error a la pàgina de punts de referència
+- Canvi: La cerca de "catxés pròpis" comença amb filtres nous
+- Correcció: Les etapes de lab aventure no desades perdien la informació de "visitada" en actualitzar-les
+- Correcció: Sol·licitud recurrent per a actualitzacions de la font de les tessel·les
+- Correcció: Ubicació aleatòria en un mapa d'una llista (Google Maps)
+
+##
+- Correcció: Error a la fitxa informativa del catxé
+- Correcció: Ja no es poden descarregar els cartutxos Wherigo (canvi de lloc web)
 
 ##
  - Canvi: Actualment no es poden descarregar els fitxers de Wherigo, mostreu les instruccions de mitigació
