@@ -1,12 +1,12 @@
-### General release notes
+### Allgemeine Versionshinweise
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser Version von c:geo aktualisiert und einige Routinen für das Bildschirmlayout geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
 
-**Legacy Maps**
+**Alte Karten**
 
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
+Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Implementierungen für unsere Karten endgültig entfernt. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
 - Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
 - Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
 - Kartenquellen ausblenden, die nicht benötigt werden
@@ -31,7 +31,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
 - Korrektur: Kartenschnelleinstellungen zeigen nach Wechsel der App-Sprache Buttons "1"/"2" für leere Routing-Profile
 - Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- Korrektur: Anzeige von Kartenkacheln stoppt unter bestimmten Bedingungen (nur OpenStreetMap Onlinekarten)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -92,4 +92,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
 - Korrektur: Einige Texte ignorieren den Sprachwechsel
 - Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen
-- New: Bergamot open source offline translation module
+- Neu: Open Source Offline-Übersetzungsmodul Bergamot
