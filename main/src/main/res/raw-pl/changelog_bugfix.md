@@ -5,8 +5,8 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 - Naprawiono: Awaria na stronie z punktem nawigacji
 - Zmiana: Wyszukiwanie własnych skrytek rozpoczyna się z nowymi filtrami
 - Naprawiono: Niezapisane etapy labów tracą informacje o „odwiedzeniu” po odświeżeniu
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Naprawiono: Okresowy monit o aktualizacje źródła kafelków
+- Naprawiono: Losowa lokalizacja przy mapowaniu listy (Google Maps)
 
 ##
 - Naprawiono: Awaria w informacjach o skrytce
