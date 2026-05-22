@@ -2383,6 +2383,11 @@
     <string name="trackable_log_without_geocode">Du bist gerade dabei, ein Log ohne Geocode zu senden. Es wird empfohlen, immer einen Geocode anzugeben. Möchtest du einen hinzufügen?</string>
     <string name="do_not_ask_me_again">Nicht wieder nachfragen</string>
     <string name="geokrety_parsing_failed">Konnte die Antwort von GeoKrety.org nicht analysieren.</string>
+    <string name="command_remove_caches_from_list_progress">Caches werden entfernt</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">%d Cache entfernt</item>
+        <item quantity="other">%d Caches entfernt</item>
+    </plurals>
     <string name="command_move_caches_progress">Verschiebe Caches zu Liste %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d Cache verschoben</item>
