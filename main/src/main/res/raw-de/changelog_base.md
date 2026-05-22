@@ -6,7 +6,7 @@ Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser V
 
 **Alte Karten**
 
-Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Implementierungen für unsere Karten endgültig entfernt. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
+Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Implementierungen für unsere Karten endgültig entfernt. Du wirst automatisch zu unserer neuen Vereinheitlichten Karte weitergeleitet und solltest keine Unterschiede bemerken, dafür einige neue Funktionen. Einige davon sind
 - Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
 - Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
 - Kartenquellen ausblenden, die nicht benötigt werden
