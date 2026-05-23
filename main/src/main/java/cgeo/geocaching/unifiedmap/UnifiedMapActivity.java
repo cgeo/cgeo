@@ -1004,6 +1004,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (v != null) {
                 final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
                 menu.inflate(R.menu.map_mapview);
+                DownloaderUtils.addManageOfflineDataMenu(this, menu.getMenu().findItem(R.id.menu_manage_offline_data));
                 TileProviderFactory.addMapviewMenuItems(this, menu);
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.setForceShowIcon(true);
