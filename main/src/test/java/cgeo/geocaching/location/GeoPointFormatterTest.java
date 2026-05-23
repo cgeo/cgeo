@@ -61,17 +61,14 @@ public class GeoPointFormatterTest {
         final Geopoint point = new Geopoint("N 52° 22.366 E 004° 53.616");
 
         final String mgrs = GeopointFormatter.format(GeopointFormatter.Format.MGRS, point);
-        final String olc = GeopointFormatter.format(GeopointFormatter.Format.OLC, point);
         final String swiss = GeopointFormatter.format(GeopointFormatter.Format.SWISS_GRID, point);
         final String rd = GeopointFormatter.format(GeopointFormatter.Format.RD, point);
 
         assertThat(mgrs).matches("\\d{1,2}[C-HJ-NP-X] [A-HJ-NP-Z][A-HJ-NP-V] \\d{5} \\d{5}");
-        assertThat(olc).matches("[23456789CFGHJMPQRVWX]{8}\\+[23456789CFGHJMPQRVWX]{2}");
         assertThat(swiss).startsWith("LV95 E ");
         assertThat(rd).startsWith("RD X ");
 
         assertThat(point.distanceTo(GeopointParser.parse(mgrs))).isLessThan(2.0f);
-        assertThat(point.distanceTo(GeopointParser.parse(olc))).isLessThan(20.0f);
         assertThat(point.distanceTo(GeopointParser.parse(swiss))).isLessThan(3.0f);
         assertThat(point.distanceTo(GeopointParser.parse(rd))).isLessThan(3.0f);
     }

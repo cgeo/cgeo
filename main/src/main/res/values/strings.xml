@@ -1924,7 +1924,6 @@
     <string name="coord_input_easting">Easting</string>
     <string name="coord_input_northing">Northing</string>
     <string name="coord_input_show_on_map">Show coordinate on the map</string>
-    <string name="coord_input_olc_area">Area approx. %1$d m x %2$d m</string>
     <string name="coord_input_country_loading">Resolving country…</string>
     <string name="coord_input_country_unknown">Unknown country</string>
     <string name="hash_symbol">#</string>

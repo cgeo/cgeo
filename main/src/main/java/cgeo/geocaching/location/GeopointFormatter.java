@@ -114,11 +114,6 @@ public class GeopointFormatter {
         MGRS,
 
         /**
-         * Example: "9F4MGC2M+H4"
-         */
-        OLC,
-
-        /**
          * Example: "LV95 E 2600072 N 1200147"
          */
         SWISS_GRID,
@@ -228,10 +223,6 @@ public class GeopointFormatter {
 
             case MGRS: {
                 return MGRSPoint.latLong2MGRS(gp).toString();
-            }
-
-            case OLC: {
-                return OpenLocationCodePoint.latLong2OLC(gp).toString();
             }
 
             case SWISS_GRID: {

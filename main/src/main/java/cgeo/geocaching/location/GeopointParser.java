@@ -37,7 +37,6 @@ public class GeopointParser {
             new ShortDegDecParser(),
             new UTMParser(),
             new MGRSParser(),
-            new OpenLocationCodeParser(),
             new SwissGridParser(),
             new RDParser(),
             new DegDecCommaParser()
@@ -525,38 +524,6 @@ public class GeopointParser {
                 try {
                     final MGRSPoint mgrsPoint = new MGRSPoint(matcher.group());
                     return new GeopointWrapper(mgrsPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
-                } catch (final Exception ignored) {
-                    // Ignore parse errors
-                }
-            }
-            return null;
-        }
-
-        /**
-         * @see AbstractParser#parse(String, Geopoint.LatLon)
-         */
-        @Override
-        @Nullable
-        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
-            return null;
-        }
-    }
-
-    /**
-     * Parser for Open Location Code (Plus Code) format.
-     */
-    private static final class OpenLocationCodeParser extends AbstractParser {
-        /**
-         * @see AbstractParser#parse(String)
-         */
-        @Override
-        @Nullable
-        public GeopointWrapper parse(@NonNull final String text) {
-            final MatcherWrapper matcher = new MatcherWrapper(OpenLocationCodePoint.PATTERN_OLC, text);
-            if (matcher.find()) {
-                try {
-                    final OpenLocationCodePoint olcPoint = new OpenLocationCodePoint(matcher.group());
-                    return new GeopointWrapper(olcPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }

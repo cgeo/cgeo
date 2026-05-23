@@ -142,7 +142,6 @@ public class Settings {
         Sec,
         UTM,
         MGRS,
-        OLC,
         SwissGrid,
         RD;
 

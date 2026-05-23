@@ -24,7 +24,6 @@ public class CoordinatesFormatSwitcher {
             GeopointFormatter.Format.LAT_LON_DECDEGREE,
             GeopointFormatter.Format.UTM,
             GeopointFormatter.Format.MGRS,
-            GeopointFormatter.Format.OLC,
             GeopointFormatter.Format.SWISS_GRID,
             GeopointFormatter.Format.RD
     };

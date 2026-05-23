@@ -230,13 +230,6 @@ public class GeoPointParserTest {
     }
 
     @Test
-    public void testOpenLocationCode() {
-        final Geopoint reference = new Geopoint(47.36559, 8.524997);
-        final String olc = reference.format(GeopointFormatter.Format.OLC);
-        assertGeopointEquals(reference, GeopointParser.parse(olc), 20.0f);
-    }
-
-    @Test
     public void testSwissGrid() {
         final Geopoint parsed = GeopointParser.parse("LV95 E 2600000 N 1200000");
         final Geopoint reference = new Geopoint(46.951082877, 7.438632495);

@@ -8,7 +8,6 @@ import cgeo.geocaching.databinding.CoordinateInputDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.location.OpenLocationCodePoint;
 import cgeo.geocaching.location.RDPoint;
 import cgeo.geocaching.location.SwissGridPoint;
 import cgeo.geocaching.location.UTMPoint;
@@ -27,7 +26,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -63,25 +61,17 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 import com.google.android.material.textfield.TextInputLayout;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the original coordinate dialog as an Alert based dialog
 public class CoordinateInputDialog {
 
-    private static final int OLC_SEPARATOR_POSITION = 8;
     private static final String MGRS_LABEL = "Military Grid Reference System (MGRS)";
-    private static final String OLC_LABEL = "Open Location Code (OLC)";
     private static final String RD_COORD_X_LABEL = "X";
     private static final String RD_COORD_Y_LABEL = "Y";
-    private static final Pattern PATTERN_OLC_WITH_SUFFIX = Pattern.compile(
-            "(^|[^23456789CFGHJMPQRVWX])([23456789CFGHJMPQRVWX]{2,8}\\+[23456789CFGHJMPQRVWX]{2,7})(.*)$",
-            Pattern.CASE_INSENSITIVE
-    );
 
     private final Context context;
     private final DialogCallback callback;
@@ -108,9 +98,6 @@ public class CoordinateInputDialog {
     private Geopoint quickMapTarget;
     private Geopoint quickMapCountryTarget;
     private String quickMapAreaText;
-    private Disposable olcReferenceDisposable;
-    private String olcReferenceQuery;
-    private Geopoint olcReferencePoint;
     private Disposable geoDisposable;
     private Disposable reverseGeocodeDisposable;
     private CoordinateDialogDisplayModeEnum waypointOptions = CoordinateDialogDisplayModeEnum.Normal;
@@ -466,16 +453,6 @@ public class CoordinateInputDialog {
     // Close dialog and return selected coordinates to caller
     private boolean saveAndFinishDialog() {
 
-        if (currentFormat == Settings.CoordInputFormatEnum.OLC) {
-            final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(true);
-            if (olcPoint != null) {
-                callback.onDialogClosed(olcPoint.toLatLong());
-                return true;
-            }
-            Toast.makeText(context, R.string.err_parse_lat_lon, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
         final String result = readGui();
 
         try {
@@ -499,152 +476,11 @@ public class CoordinateInputDialog {
             return null;
         }
 
-        if (currentFormat == Settings.CoordInputFormatEnum.OLC) {
-            final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(false);
-            return olcPoint == null ? null : olcPoint.toLatLong();
-        }
-
         try {
             final Geopoint entered = new Geopoint(result);
             return entered.isValid() ? entered : null;
         } catch (final Geopoint.ParseException ignored) {
             return null;
-        }
-    }
-
-    @Nullable
-    private OpenLocationCodePoint parseCurrentInputAsOlcPoint(final boolean allowBlockingLookup) {
-        if (currentFormat != Settings.CoordInputFormatEnum.OLC) {
-            clearOlcReferenceLookupState();
-            return null;
-        }
-
-        final String result = StringUtils.trimToEmpty(readGui());
-        if (StringUtils.isBlank(result)) {
-            clearOlcReferenceLookupState();
-            return null;
-        }
-
-        final OlcInputInfo olcInputInfo = parseOlcInput(result);
-        Geopoint referencePoint = currentCoords();
-
-        if (olcInputInfo != null && olcInputInfo.isShortCode && StringUtils.isNotBlank(olcInputInfo.localityText)) {
-            referencePoint = getReferencePointForShortOlc(olcInputInfo.localityText, allowBlockingLookup);
-            if (referencePoint == null) {
-                return null;
-            }
-        } else {
-            clearOlcReferenceLookupState();
-        }
-
-        try {
-            return new OpenLocationCodePoint(result, referencePoint);
-        } catch (final OpenLocationCodePoint.ParseException ignored) {
-            return null;
-        }
-    }
-
-    @Nullable
-    private Geopoint getReferencePointForShortOlc(@NonNull final String localityText, final boolean allowBlockingLookup) {
-        final String normalizedLocality = StringUtils.trimToEmpty(StringUtils.normalizeSpace(localityText));
-        if (StringUtils.isBlank(normalizedLocality)) {
-            clearOlcReferenceLookupState();
-            return currentCoords();
-        }
-
-        if (StringUtils.equalsIgnoreCase(normalizedLocality, olcReferenceQuery) && olcReferencePoint != null) {
-            return olcReferencePoint;
-        }
-
-        if (!allowBlockingLookup) {
-            triggerOlcReferenceLookup(normalizedLocality);
-            return null;
-        }
-
-        final Geopoint resolvedReference = lookupOlcReferenceBlocking(normalizedLocality);
-        if (resolvedReference == null) {
-            return null;
-        }
-
-        olcReferenceQuery = normalizedLocality;
-        olcReferencePoint = resolvedReference;
-        return resolvedReference;
-    }
-
-    private void triggerOlcReferenceLookup(@NonNull final String localityText) {
-        if (StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)
-                && olcReferenceDisposable != null && !olcReferenceDisposable.isDisposed()) {
-            return;
-        }
-
-        clearOlcReferenceLookupDisposable();
-        olcReferenceQuery = localityText;
-        olcReferencePoint = null;
-
-        olcReferenceDisposable = createOlcReferenceLookup(localityText)
-                .observeOn(AndroidRxUtils.mainThreadScheduler)
-                .subscribe(reference -> {
-                    if (!StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)) {
-                        return;
-                    }
-                    olcReferencePoint = reference;
-                    refreshQuickMapTargetButton();
-                }, throwable -> {
-                    if (StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)) {
-                        olcReferencePoint = null;
-                    }
-                });
-    }
-
-    @Nullable
-    private Geopoint lookupOlcReferenceBlocking(@NonNull final String localityText) {
-        try {
-            return createOlcReferenceLookup(localityText).blockingGet();
-        } catch (final RuntimeException ignored) {
-            return null;
-        }
-    }
-
-    @NonNull
-    private Single<Geopoint> createOlcReferenceLookup(@NonNull final String localityText) {
-        return new AndroidGeocoder(context)
-                .getFromLocationName(localityText)
-                .firstOrError()
-                .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocationName(localityText).firstOrError())
-                .map(address -> new Geopoint(address.getLatitude(), address.getLongitude()));
-    }
-
-    @Nullable
-    private static OlcInputInfo parseOlcInput(@NonNull final String inputText) {
-        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_OLC_WITH_SUFFIX, inputText);
-        if (!matcher.find()) {
-            return null;
-        }
-
-        final String codeText = StringUtils.trimToEmpty(matcher.group(2));
-        final int separatorIndex = codeText.indexOf('+');
-        final boolean isShortCode = separatorIndex >= 0 && separatorIndex < OLC_SEPARATOR_POSITION;
-        final String localityText = sanitizeOlcLocality(matcher.group(3));
-        return new OlcInputInfo(isShortCode, localityText);
-    }
-
-    @Nullable
-    private static String sanitizeOlcLocality(@Nullable final String rawSuffix) {
-        final String cleaned = StringUtils.trimToEmpty(rawSuffix)
-                .replaceFirst("^[\\s,;:()\\-+]+", "");
-        return StringUtils.trimToNull(cleaned);
-    }
-
-    private void clearOlcReferenceLookupState() {
-        clearOlcReferenceLookupDisposable();
-        olcReferenceQuery = null;
-        olcReferencePoint = null;
-    }
-
-    private void clearOlcReferenceLookupDisposable() {
-        if (olcReferenceDisposable != null) {
-            olcReferenceDisposable.dispose();
-            olcReferenceDisposable = null;
         }
     }
 
@@ -658,8 +494,7 @@ public class CoordinateInputDialog {
             return;
         }
 
-        final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(false);
-        final Geopoint parsedInput = olcPoint == null ? parseCurrentInputAsGeopoint() : olcPoint.toLatLong();
+        final Geopoint parsedInput = parseCurrentInputAsGeopoint();
         if (parsedInput == null) {
             hideQuickMapTargetButton();
             return;
@@ -667,9 +502,9 @@ public class CoordinateInputDialog {
 
         quickMapTarget = parsedInput;
         quickMapTargetButton.setVisibility(View.VISIBLE);
-        quickMapCoordinates.setText(olcPoint == null ? parsedInput.format(getQuickMapPreviewFormat(currentFormat)) : olcPoint.toString());
+        quickMapCoordinates.setText(parsedInput.format(getQuickMapPreviewFormat(currentFormat)));
         updateQuickMapDistanceAndDirection(parsedInput, currentCoords());
-        resolveQuickMapCountry(parsedInput, getOlcAreaText(olcPoint));
+        resolveQuickMapCountry(parsedInput, null);
     }
 
     private void hideQuickMapTargetButton() {
@@ -754,23 +589,6 @@ public class CoordinateInputDialog {
                 });
     }
 
-    @Nullable
-    private String getOlcAreaText(@Nullable final OpenLocationCodePoint olcPoint) {
-        if (olcPoint == null) {
-            return null;
-        }
-
-        final Geopoint center = olcPoint.toLatLong();
-        final double latMeters = olcPoint.getLatitudeResolutionDeg() * 111320.0d;
-        final double lonMeters = olcPoint.getLongitudeResolutionDeg() * 111320.0d
-                * Math.cos(Math.toRadians(center.getLatitude()));
-
-        final long widthMeters = Math.max(1L, Math.round(Math.abs(lonMeters)));
-        final long heightMeters = Math.max(1L, Math.round(Math.abs(latMeters)));
-
-        return LocalizationUtils.getString(R.string.coord_input_olc_area, widthMeters, heightMeters);
-    }
-
     @NonNull
     private static String composeCountryAreaText(@NonNull final String countryText, @Nullable final String areaText) {
         if (StringUtils.isBlank(areaText)) {
@@ -801,8 +619,6 @@ public class CoordinateInputDialog {
                 return GeopointFormatter.Format.UTM;
             case MGRS:
                 return GeopointFormatter.Format.MGRS;
-            case OLC:
-                return GeopointFormatter.Format.OLC;
             case SwissGrid:
                 return GeopointFormatter.Format.SWISS_GRID;
             case RD:
@@ -821,17 +637,6 @@ public class CoordinateInputDialog {
         if (reverseGeocodeDisposable != null) {
             reverseGeocodeDisposable.dispose();
             reverseGeocodeDisposable = null;
-        }
-        clearOlcReferenceLookupState();
-    }
-
-    private static class OlcInputInfo {
-        private final boolean isShortCode;
-        private final String localityText;
-
-        OlcInputInfo(final boolean isShortCode, @Nullable final String localityText) {
-            this.isShortCode = isShortCode;
-            this.localityText = localityText;
         }
     }
 
@@ -1176,7 +981,6 @@ public class CoordinateInputDialog {
     private static boolean isSingleInputFormat(final Settings.CoordInputFormatEnum format) {
         switch (format) {
             case MGRS:
-            case OLC:
                 return true;
             default:
                 return false;
@@ -1187,8 +991,6 @@ public class CoordinateInputDialog {
         switch (format) {
             case MGRS:
                 return GeopointFormatter.Format.MGRS;
-            case OLC:
-                return GeopointFormatter.Format.OLC;
             default:
                 return GeopointFormatter.Format.LAT_LON_DECMINUTE;
         }
@@ -1199,8 +1001,6 @@ public class CoordinateInputDialog {
         switch (format) {
             case MGRS:
                 return MGRS_LABEL;
-            case OLC:
-                return OLC_LABEL;
             default:
                 return LocalizationUtils.getString(R.string.latitude);
         }
@@ -1268,7 +1068,6 @@ public class CoordinateInputDialog {
                 break;
             case UTM:
             case MGRS:
-            case OLC:
             case SwissGrid:
             case RD:
                 lat = readGui();
