@@ -109,11 +109,6 @@ public class GeopointFormatter {
         UTM,
 
         /**
-         * Example: "LV95 E 2600072 N 1200147"
-         */
-        SWISS_GRID,
-
-        /**
          * Example: "RD X 155000 Y 463000"
          */
         RD,
@@ -214,10 +209,6 @@ public class GeopointFormatter {
 
             case UTM: {
                 return UTMPoint.latLong2UTM(gp).toString();
-            }
-
-            case SWISS_GRID: {
-                return SwissGridPoint.latLong2SwissGrid(gp).toString();
             }
 
             case RD: {

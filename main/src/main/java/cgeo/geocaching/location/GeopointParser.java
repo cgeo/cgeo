@@ -36,7 +36,6 @@ public class GeopointParser {
             new DegDecParser(),
             new ShortDegDecParser(),
             new UTMParser(),
-            new SwissGridParser(),
             new RDParser(),
             new DegDecCommaParser()
         );
@@ -491,38 +490,6 @@ public class GeopointParser {
                 try {
                     final UTMPoint utmPoint = new UTMPoint(text);
                     return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
-                } catch (final Exception ignored) {
-                    // Ignore parse errors
-                }
-            }
-            return null;
-        }
-
-        /**
-         * @see AbstractParser#parse(String, Geopoint.LatLon)
-         */
-        @Override
-        @Nullable
-        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
-            return null;
-        }
-    }
-
-    /**
-     * Parser for Swiss grid format: LV95/CH1903(+).
-     */
-    private static final class SwissGridParser extends AbstractParser {
-        /**
-         * @see AbstractParser#parse(String)
-         */
-        @Override
-        @Nullable
-        public GeopointWrapper parse(@NonNull final String text) {
-            final MatcherWrapper matcher = new MatcherWrapper(SwissGridPoint.PATTERN_SWISS, text);
-            if (matcher.find()) {
-                try {
-                    final SwissGridPoint swissGridPoint = new SwissGridPoint(matcher.group());
-                    return new GeopointWrapper(swissGridPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }

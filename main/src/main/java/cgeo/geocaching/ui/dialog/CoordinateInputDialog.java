@@ -9,7 +9,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.RDPoint;
-import cgeo.geocaching.location.SwissGridPoint;
 import cgeo.geocaching.location.UTMPoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.CalculatedCoordinate;
@@ -616,8 +615,6 @@ public class CoordinateInputDialog {
                 return GeopointFormatter.Format.LAT_LON_DECSECOND;
             case UTM:
                 return GeopointFormatter.Format.UTM;
-            case SwissGrid:
-                return GeopointFormatter.Format.SWISS_GRID;
             case RD:
                 return GeopointFormatter.Format.RD;
             case Plain:
@@ -659,10 +656,6 @@ public class CoordinateInputDialog {
 
         if (isSingleInputFormat(currentFormat)) {
             return plainLatitude.getText().toString();
-        }
-
-        if (currentFormat.equals(Settings.CoordInputFormatEnum.SwissGrid)) {
-            return "LV95 E " + plainLatitude.getText().toString().trim() + " N " + plainLongitude.getText().toString().trim();
         }
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.RD)) {
@@ -730,17 +723,6 @@ public class CoordinateInputDialog {
         if (isSingleInputFormat(currentFormat)) {
             final GeopointFormatter.Format format = getSingleInputGeopointFormat(currentFormat);
             showSinglePlainInput(geopoint.format(format), getSingleInputHintLabel(currentFormat));
-            return;
-        }
-
-        if (currentFormat.equals(Settings.CoordInputFormatEnum.SwissGrid)) {
-            final SwissGridPoint swissGridPoint = SwissGridPoint.latLong2SwissGrid(geopoint);
-            showDualPlainInput(
-                    Long.toString(Math.round(swissGridPoint.getLv95Easting())),
-                    Long.toString(Math.round(swissGridPoint.getLv95Northing())),
-                    R.string.coord_input_easting,
-                    R.string.coord_input_northing
-            );
             return;
         }
 
@@ -1049,7 +1031,6 @@ public class CoordinateInputDialog {
                 lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
                 break;
             case UTM:
-            case SwissGrid:
             case RD:
                 lat = readGui();
                 lon = "";

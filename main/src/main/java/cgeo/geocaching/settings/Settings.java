@@ -141,7 +141,6 @@ public class Settings {
         Min,
         Sec,
         UTM,
-        SwissGrid,
         RD;
 
         public static final int DEFAULT_INT_VALUE = Min.ordinal();

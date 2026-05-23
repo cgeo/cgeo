@@ -223,13 +223,6 @@ public class GeoPointParserTest {
     }
 
     @Test
-    public void testSwissGrid() {
-        final Geopoint parsed = GeopointParser.parse("LV95 E 2600000 N 1200000");
-        final Geopoint reference = new Geopoint(46.951082877, 7.438632495);
-        assertGeopointEquals(reference, parsed, 3.0f);
-    }
-
-    @Test
     public void testRD() {
         final Geopoint parsed = GeopointParser.parse("RD X 155000 Y 463000");
         final Geopoint reference = new Geopoint(52.15517440, 5.38720621);

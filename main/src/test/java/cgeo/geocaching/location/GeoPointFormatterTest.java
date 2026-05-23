@@ -60,13 +60,10 @@ public class GeoPointFormatterTest {
     public void testExtendedFormatsRoundtrip() {
         final Geopoint point = new Geopoint("N 52° 22.366 E 004° 53.616");
 
-        final String swiss = GeopointFormatter.format(GeopointFormatter.Format.SWISS_GRID, point);
         final String rd = GeopointFormatter.format(GeopointFormatter.Format.RD, point);
 
-        assertThat(swiss).startsWith("LV95 E ");
         assertThat(rd).startsWith("RD X ");
 
-        assertThat(point.distanceTo(GeopointParser.parse(swiss))).isLessThan(3.0f);
         assertThat(point.distanceTo(GeopointParser.parse(rd))).isLessThan(3.0f);
     }
 
