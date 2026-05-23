@@ -160,7 +160,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         final String userName = getUserName();
-        return StringUtils.isNotEmpty(userName) && Strings.CS.equals(cache.getOwnerDisplayName(), userName);
+        return StringUtils.isNotEmpty(userName) && Strings.CI.equals(cache.getOwnerDisplayName(), userName);
     }
 
     @Override
