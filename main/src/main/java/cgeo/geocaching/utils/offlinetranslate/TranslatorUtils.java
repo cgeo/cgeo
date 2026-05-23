@@ -158,12 +158,7 @@ public class TranslatorUtils {
 
         if (StringUtils.isBlank(textOrHtml)) {
             runOnWorker(() -> consumer.accept(textOrHtml));
-        } else if (TextUtils.containsHtml(textOrHtml)) {
-            translateHtml(cleanedTranslator, textOrHtml, cacheAwareConsumer);
-        } else if (textOrHtml.contains("\n")) {
-            translateParagraphedText(cleanedTranslator, textOrHtml, cacheAwareConsumer);
         } else {
-            //simple text, maybe only some words
             cleanedTranslator.accept(textOrHtml, cacheAwareConsumer);
         }
     }
