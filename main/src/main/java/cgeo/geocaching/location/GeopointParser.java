@@ -36,7 +36,6 @@ public class GeopointParser {
             new DegDecParser(),
             new ShortDegDecParser(),
             new UTMParser(),
-            new MGRSParser(),
             new SwissGridParser(),
             new RDParser(),
             new DegDecCommaParser()
@@ -492,38 +491,6 @@ public class GeopointParser {
                 try {
                     final UTMPoint utmPoint = new UTMPoint(text);
                     return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
-                } catch (final Exception ignored) {
-                    // Ignore parse errors
-                }
-            }
-            return null;
-        }
-
-        /**
-         * @see AbstractParser#parse(String, Geopoint.LatLon)
-         */
-        @Override
-        @Nullable
-        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
-            return null;
-        }
-    }
-
-    /**
-     * Parser for MGRS format: ZZB LL EEEEE NNNNN.
-     */
-    private static final class MGRSParser extends AbstractParser {
-        /**
-         * @see AbstractParser#parse(String)
-         */
-        @Override
-        @Nullable
-        public GeopointWrapper parse(@NonNull final String text) {
-            final MatcherWrapper matcher = new MatcherWrapper(MGRSPoint.PATTERN_MGRS, text);
-            if (matcher.find()) {
-                try {
-                    final MGRSPoint mgrsPoint = new MGRSPoint(matcher.group());
-                    return new GeopointWrapper(mgrsPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }

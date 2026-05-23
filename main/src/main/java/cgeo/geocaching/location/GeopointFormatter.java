@@ -109,11 +109,6 @@ public class GeopointFormatter {
         UTM,
 
         /**
-         * Example: "32U NU 49996 00860"
-         */
-        MGRS,
-
-        /**
          * Example: "LV95 E 2600072 N 1200147"
          */
         SWISS_GRID,
@@ -219,10 +214,6 @@ public class GeopointFormatter {
 
             case UTM: {
                 return UTMPoint.latLong2UTM(gp).toString();
-            }
-
-            case MGRS: {
-                return MGRSPoint.latLong2MGRS(gp).toString();
             }
 
             case SWISS_GRID: {

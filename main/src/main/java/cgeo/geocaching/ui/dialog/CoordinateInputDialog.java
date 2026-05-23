@@ -69,7 +69,6 @@ import org.apache.commons.lang3.StringUtils;
 // A recreation of the original coordinate dialog as an Alert based dialog
 public class CoordinateInputDialog {
 
-    private static final String MGRS_LABEL = "Military Grid Reference System (MGRS)";
     private static final String RD_COORD_X_LABEL = "X";
     private static final String RD_COORD_Y_LABEL = "Y";
 
@@ -617,8 +616,6 @@ public class CoordinateInputDialog {
                 return GeopointFormatter.Format.LAT_LON_DECSECOND;
             case UTM:
                 return GeopointFormatter.Format.UTM;
-            case MGRS:
-                return GeopointFormatter.Format.MGRS;
             case SwissGrid:
                 return GeopointFormatter.Format.SWISS_GRID;
             case RD:
@@ -979,31 +976,16 @@ public class CoordinateInputDialog {
     }
 
     private static boolean isSingleInputFormat(final Settings.CoordInputFormatEnum format) {
-        switch (format) {
-            case MGRS:
-                return true;
-            default:
-                return false;
-        }
+        return false;
     }
 
     private static GeopointFormatter.Format getSingleInputGeopointFormat(final Settings.CoordInputFormatEnum format) {
-        switch (format) {
-            case MGRS:
-                return GeopointFormatter.Format.MGRS;
-            default:
-                return GeopointFormatter.Format.LAT_LON_DECMINUTE;
-        }
+        return GeopointFormatter.Format.LAT_LON_DECMINUTE;
     }
 
     @NonNull
     private static String getSingleInputHintLabel(final Settings.CoordInputFormatEnum format) {
-        switch (format) {
-            case MGRS:
-                return MGRS_LABEL;
-            default:
-                return LocalizationUtils.getString(R.string.latitude);
-        }
+        return LocalizationUtils.getString(R.string.latitude);
     }
 
     private CalculatedCoordinateType getCalculatedCoordinateTypeForCurrentFormat() {
@@ -1067,7 +1049,6 @@ public class CoordinateInputDialog {
                 lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
                 break;
             case UTM:
-            case MGRS:
             case SwissGrid:
             case RD:
                 lat = readGui();

@@ -141,7 +141,6 @@ public class Settings {
         Min,
         Sec,
         UTM,
-        MGRS,
         SwissGrid,
         RD;
 

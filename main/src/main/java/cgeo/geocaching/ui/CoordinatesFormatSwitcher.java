@@ -23,7 +23,6 @@ public class CoordinatesFormatSwitcher {
             GeopointFormatter.Format.LAT_LON_DECSECOND,
             GeopointFormatter.Format.LAT_LON_DECDEGREE,
             GeopointFormatter.Format.UTM,
-            GeopointFormatter.Format.MGRS,
             GeopointFormatter.Format.SWISS_GRID,
             GeopointFormatter.Format.RD
     };

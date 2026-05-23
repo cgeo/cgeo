@@ -223,13 +223,6 @@ public class GeoPointParserTest {
     }
 
     @Test
-    public void testMGRS() {
-        final Geopoint reference = new Geopoint(52.520008, 13.404954);
-        final String mgrs = reference.format(GeopointFormatter.Format.MGRS);
-        assertGeopointEquals(reference, GeopointParser.parse(mgrs), 2.0f);
-    }
-
-    @Test
     public void testSwissGrid() {
         final Geopoint parsed = GeopointParser.parse("LV95 E 2600000 N 1200000");
         final Geopoint reference = new Geopoint(46.951082877, 7.438632495);

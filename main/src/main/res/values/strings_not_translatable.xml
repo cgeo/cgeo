@@ -9,7 +9,6 @@
         <item>DDD°MM.MMM\'</item>
         <item>DDD°MM\'SS.SSS\"</item>
         <item>Universal Transverse Mercator (UTM)</item>
-        <item>Military Grid Reference System (MGRS)</item>
         <item>@string/waypoint_coordinate_formats_swiss_grid</item>
         <item>@string/waypoint_coordinate_formats_rd</item>
     </string-array>
