@@ -13,7 +13,10 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
@@ -548,7 +551,11 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     }
 
     private void findOwnFn() {
-        CacheListActivity.startActivityOwner(this, Settings.getUserName(), new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT));
+        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
+        statusFilter.setStatusOwned(true);
+        final GeocacheFilterContext filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+        filterContext.set(GeocacheFilter.create(null, false, false, statusFilter));
+        CacheListActivity.startActivityFilter(this, filterContext);
         ActivityMixin.overrideTransitionToFade(this);
     }
 
@@ -595,7 +602,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            CacheListActivity.startActivityFilter(this);
+            CacheListActivity.startActivityFilter(this, null);
             ActivityMixin.overrideTransitionToFade(this);
         } else {
             super.onActivityResult(requestCode, resultCode, data);

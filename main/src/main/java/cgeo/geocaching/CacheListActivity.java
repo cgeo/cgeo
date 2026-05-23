@@ -1589,9 +1589,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityFilter(final Context context) {
+    public static void startActivityFilter(final Context context, @Nullable final GeocacheFilterContext filterContext) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
+        if (filterContext != null) {
+            cachesIntent.putExtra(Intents.EXTRA_FILTER_CONTEXT, filterContext);
+        }
         context.startActivity(cachesIntent);
     }
 
