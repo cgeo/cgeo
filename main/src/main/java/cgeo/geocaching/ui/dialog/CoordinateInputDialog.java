@@ -15,6 +15,7 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.UtmPatternUtils;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -978,6 +979,10 @@ public class CoordinateInputDialog {
                 return CalculatedCoordinateType.DEGREE_MINUTE;
             case Sec:
                 return CalculatedCoordinateType.DEGREE_MINUTE_SEC;
+            case UTM:
+                return CalculatedCoordinateType.UTM;
+            case RD:
+                return CalculatedCoordinateType.RD;
             default:
                 return CalculatedCoordinateType.PLAIN;
         }
@@ -1031,9 +1036,17 @@ public class CoordinateInputDialog {
                 lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
                 break;
             case UTM:
+                final UtmPatternUtils.UtmPatterns patterns = UtmPatternUtils.createPatternsFromPlainFields(
+                        plainLatitude.getText().toString(),
+                        plainLongitude.getText().toString(),
+                        plainThird.getText().toString(),
+                        false);
+                lat = patterns.latitudePattern;
+                lon = patterns.longitudePattern;
+                break;
             case RD:
-                lat = readGui();
-                lon = "";
+                lat = "X " + plainLatitude.getText().toString().trim();
+                lon = "Y " + plainLongitude.getText().toString().trim();
                 break;
             case Plain:
             default:

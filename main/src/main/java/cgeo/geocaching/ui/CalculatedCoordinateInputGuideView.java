@@ -51,12 +51,16 @@ import org.apache.commons.lang3.StringUtils;
 public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
     private static final Map<CalculatedCoordinateType, String> REFILL_PATTERNS = new HashMap<>();
+    private static final Map<CalculatedCoordinateType, String> REFILL_PATTERNS_LON = new HashMap<>();
     private static final Map<CalculatedCoordinateType, Func1<Geopoint, String>> LAT_CONVERTERS = new HashMap<>();
     private static final Map<CalculatedCoordinateType, Func1<Geopoint, String>> LON_CONVERTERS = new HashMap<>();
 
     private static final Set<Integer> SIGNIFICANT_CHARS = new HashSet<>();
 
     private static final KeyableCharSet CLOSING_PAREN_SET = KeyableCharSet.createFor(")");
+    private static final String UTM_ZONE_PATTERN = "___";
+    private static final String UTM_EASTING_PATTERN = "______";
+    private static final String UTM_NORTHING_PATTERN = "_______";
 
     private GridLayout grid;
     private EditText value;
@@ -64,6 +68,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     private View valueHiddenHint;
 
     private CharButton markedButton;
+    private CalculatedCoordinateType currentType = PLAIN;
 
     static {
         final Locale locale = Locale.US;
@@ -71,6 +76,10 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         REFILL_PATTERNS.put(CalculatedCoordinateType.DEGREE, "1__._____°");
         REFILL_PATTERNS.put(CalculatedCoordinateType.DEGREE_MINUTE, "1__°__.___'");
         REFILL_PATTERNS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, "1__°__'__.___\"");
+        REFILL_PATTERNS.put(CalculatedCoordinateType.UTM, "__ ______");
+        REFILL_PATTERNS.put(CalculatedCoordinateType.RD, "______");
+        REFILL_PATTERNS_LON.putAll(REFILL_PATTERNS);
+        REFILL_PATTERNS_LON.put(CalculatedCoordinateType.UTM, "_ ______");
 
         LAT_CONVERTERS.put(CalculatedCoordinateType.DEGREE, gp ->
                 String.format(locale, "%c %08.5f°", gp.getLatDir(), Math.abs(gp.getLatitude())));
@@ -86,6 +95,24 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                 String.format(Locale.getDefault(), "%c %02d°%02d'%02d%c%03d\"", gp.getLatDir(), gp.getDMSLatDeg(), gp.getDMSLatMin(), gp.getDMSLatSec(), decSep, gp.getDMSLatSecFrac()));
         LON_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, gp ->
                 String.format(Locale.getDefault(), "%c%03d°%02d'%02d%c%03d\"", gp.getLonDir(), gp.getDMSLonDeg(), gp.getDMSLonMin(), gp.getDMSLonSec(), decSep, gp.getDMSLonSecFrac()));
+
+        LAT_CONVERTERS.put(CalculatedCoordinateType.UTM, gp -> {
+            final cgeo.geocaching.location.UTMPoint utm = cgeo.geocaching.location.UTMPoint.latLong2UTM(gp);
+            return String.format(locale, "%c %02d %06d", utm.getZoneLetter(), utm.getZoneNumber(), Math.round(utm.getEasting()));
+        });
+        LON_CONVERTERS.put(CalculatedCoordinateType.UTM, gp -> {
+            final cgeo.geocaching.location.UTMPoint utm = cgeo.geocaching.location.UTMPoint.latLong2UTM(gp);
+            return String.format(locale, "N %01d %06d", Math.round(utm.getNorthing()) / 1_000_000L, Math.round(utm.getNorthing()) % 1_000_000L);
+        });
+
+        LAT_CONVERTERS.put(CalculatedCoordinateType.RD, gp -> {
+            final cgeo.geocaching.location.RDPoint rd = cgeo.geocaching.location.RDPoint.latLong2RD(gp);
+            return String.format(locale, "X %06d", Math.round(rd.getX()));
+        });
+        LON_CONVERTERS.put(CalculatedCoordinateType.RD, gp -> {
+            final cgeo.geocaching.location.RDPoint rd = cgeo.geocaching.location.RDPoint.latLong2RD(gp);
+            return String.format(locale, "Y %06d", Math.round(rd.getY()));
+        });
 
         for (int c = 'A'; c <= 'Z'; c++) {
             SIGNIFICANT_CHARS.add(c);
@@ -133,6 +160,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         this.setVisibility(type == PLAIN ? GONE : VISIBLE);
         boolean result = false;
         if (type != PLAIN) {
+            this.currentType = type;
             result = recreate(type, latPattern, lonPattern, gp);
         }
         markButton(null);
@@ -146,8 +174,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             if (PLAIN == type) {
                 continue;
             }
-            final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, null, -1);
-            final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, null, -1);
+            final boolean b1 = checkAndApply(type, REFILL_PATTERNS.get(type), latPattern, 0, null, -1);
+            final boolean b2 = checkAndApply(type, REFILL_PATTERNS_LON.get(type), lonPattern, 1, null, -1);
             if (b1 && b2) {
                 return type;
             }
@@ -156,7 +184,44 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     }
 
     public Pair<String, String> getPlain() {
+        if (currentType == CalculatedCoordinateType.UTM) {
+            final Pair<String, String> utm = getPlainUtm();
+            if (utm != null) {
+                return utm;
+            }
+        }
         return new Pair<>(scanString(0), scanString(1));
+    }
+
+    @Nullable
+    private Pair<String, String> getPlainUtm() {
+        if (grid.getRowCount() < 3 || grid.getColumnCount() < 2 || grid.getChildCount() < grid.getColumnCount() * 3) {
+            return null;
+        }
+        final String zone = scanUtmRow(0, UTM_ZONE_PATTERN.length());
+        final String easting = scanUtmRow(1, UTM_EASTING_PATTERN.length());
+        final String northing = scanUtmRow(2, UTM_NORTHING_PATTERN.length());
+
+        final String zoneNumber = zone.length() >= 2 ? zone.substring(0, 2) : StringUtils.rightPad(zone, 2, '_');
+        final String zoneLetter = zone.length() >= 3 ? zone.substring(2, 3) : "_";
+        final String northingPadded = StringUtils.rightPad(northing, UTM_NORTHING_PATTERN.length(), '_');
+
+        final String lat = zoneLetter + " " + zoneNumber + " " + easting;
+        final String lon = "N " + northingPadded.substring(0, 1) + " " + northingPadded.substring(1);
+        return new Pair<>(lat, lon);
+    }
+
+    private String scanUtmRow(final int row, final int length) {
+        final StringBuilder sb = new StringBuilder();
+        for (int col = 0; col < length; col++) {
+            final View v = grid.getChildAt(row * grid.getColumnCount() + 1 + col);
+            if (v instanceof CharButton) {
+                sb.append(((CharButton) v).getFormulaText());
+            } else {
+                sb.append("_");
+            }
+        }
+        return sb.toString();
     }
 
     private String scanString(final int row) {
@@ -221,13 +286,13 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings("PMD.NPathComplexity")
-    private static boolean checkAndApply(final String fillPattern, final String coordPattern, final int row, final GridLayout grid, final int viewPos) {
+    private static boolean checkAndApply(final CalculatedCoordinateType type, final String fillPattern, final String coordPattern, final int row, final GridLayout grid, final int viewPos) {
         if (coordPattern == null) {
             return false;
         }
         final TextParser coordParser = new TextParser(coordPattern.trim());
         int vp = viewPos;
-        if (!checkAndApplyHemisphere(row, coordParser, grid, vp)) {
+        if (!checkAndApplyHemisphere(type, row, coordParser, grid, vp)) {
             return false;
         }
         if (vp >= 0) {
@@ -286,20 +351,31 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    private static boolean checkAndApplyHemisphere(final int row, final TextParser coordParser, final GridLayout grid, final int vp) {
+    private static boolean checkAndApplyHemisphere(final CalculatedCoordinateType type, final int row, final TextParser coordParser, final GridLayout grid, final int vp) {
         final char hem = Character.toUpperCase(coordParser.ch());
-        switch (row) {
-            case 0:
-                if (hem != 'N' && hem != 'S') {
-                    return false;
-                }
-                break;
-            case 1:
-            default:
-                if (hem != 'E' && hem != 'W' && hem != 'O') {
-                    return false;
-                }
-                break;
+        if (type == CalculatedCoordinateType.UTM) {
+            final boolean isZoneLetter = hem >= 'C' && hem <= 'X' && hem != 'I' && hem != 'O';
+            if ((row == 0 && !isZoneLetter) || (row == 1 && hem != 'N')) {
+                return false;
+            }
+        } else if (type == CalculatedCoordinateType.RD) {
+            if ((row == 0 && hem != 'X') || (row == 1 && hem != 'Y')) {
+                return false;
+            }
+        } else {
+            switch (row) {
+                case 0:
+                    if (hem != 'N' && hem != 'S') {
+                        return false;
+                    }
+                    break;
+                case 1:
+                default:
+                    if (hem != 'E' && hem != 'W' && hem != 'O') {
+                        return false;
+                    }
+                    break;
+            }
         }
         coordParser.next();
         if (vp >= 0) {
@@ -311,7 +387,11 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     private boolean recreate(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
         changeListenerActive = false;
         this.setVisibility(INVISIBLE);
-        recreateViews(REFILL_PATTERNS.get(type));
+        if (type == CalculatedCoordinateType.UTM) {
+            recreateUtmViews();
+        } else {
+            recreateViews(REFILL_PATTERNS.get(type), REFILL_PATTERNS_LON.get(type));
+        }
 
 
         //set default digits from given geopoint (if any)
@@ -334,18 +414,19 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         return patternSuccess;
     }
 
-    private void recreateViews(final String viewPattern) {
+    private void recreateViews(final String latPattern, final String lonPattern) {
         this.grid.removeAllViews();
-        this.grid.setColumnCount(viewPattern.length() + 1);
+        this.grid.setColumnCount(Math.max(latPattern.length(), lonPattern.length()) + 1);
         this.grid.setRowCount(2);
         for (int row = 0; row < 2; row++) {
+            final String rowPattern = row == 0 ? latPattern : lonPattern;
             final Button hem = ViewUtils.createButton(getContext(), this, TextParam.text("N"));
             hem.setOnClickListener(v -> changeHemisphereButtonValue(hem));
             final GridLayout.LayoutParams hlp = createGridLayoutParams(0);
             hlp.setMargins(0, 0, ViewUtils.dpToPixel(3), 0);
             this.grid.addView(hem, hlp);
 
-            for (char c : viewPattern.toCharArray()) {
+            for (char c : rowPattern.toCharArray()) {
                 if (c == '_' || c == '0' || c == '1') {
                     final View v;
                     if ((c == '0' && row == 1) || (c == '1' && row == 0)) {
@@ -368,6 +449,40 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                     this.grid.addView(tv, lp);
                 }
             }
+            for (int i = rowPattern.length(); i < Math.max(latPattern.length(), lonPattern.length()); i++) {
+                this.grid.addView(new Space(getContext()), createGridLayoutParams(1));
+            }
+        }
+    }
+
+    private void recreateUtmViews() {
+        this.grid.removeAllViews();
+        final int cols = Math.max(UTM_ZONE_PATTERN.length(), Math.max(UTM_EASTING_PATTERN.length(), UTM_NORTHING_PATTERN.length())) + 1;
+        this.grid.setColumnCount(cols);
+        this.grid.setRowCount(3);
+
+        addUtmRow("Z", UTM_ZONE_PATTERN, cols);
+        addUtmRow("E", UTM_EASTING_PATTERN, cols);
+        addUtmRow("N", UTM_NORTHING_PATTERN, cols);
+    }
+
+    private void addUtmRow(final String label, final String pattern, final int cols) {
+        final Button lbl = ViewUtils.createButton(getContext(), this, TextParam.text(label));
+        lbl.setClickable(false);
+        lbl.setLongClickable(false);
+        final GridLayout.LayoutParams hlp = createGridLayoutParams(0);
+        hlp.setMargins(0, 0, ViewUtils.dpToPixel(3), 0);
+        this.grid.addView(lbl, hlp);
+
+        for (int i = 0; i < pattern.length(); i++) {
+            final CharButton v = new CharButton(getContext());
+            v.setText("x");
+            final GridLayout.LayoutParams lp = createGridLayoutParams(1);
+            lp.setMargins(ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2), ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2));
+            this.grid.addView(v, lp);
+        }
+        for (int i = pattern.length(); i < cols - 1; i++) {
+            this.grid.addView(new Space(getContext()), createGridLayoutParams(1));
         }
     }
 
@@ -385,15 +500,46 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         if (latPattern == null || lonPattern == null) {
             return false;
         }
+        if (type == CalculatedCoordinateType.UTM) {
+            return applyUtmPatterns(latPattern, lonPattern);
+        }
 
-        final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, grid, 0);
-        final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, grid, REFILL_PATTERNS.get(type).length() + 1);
+        final boolean b1 = checkAndApply(type, REFILL_PATTERNS.get(type), latPattern, 0, grid, 0);
+        final boolean b2 = checkAndApply(type, REFILL_PATTERNS_LON.get(type), lonPattern, 1, grid, grid.getColumnCount());
 
         return b1 && b2;
     }
 
+    private boolean applyUtmPatterns(final String latPattern, final String lonPattern) {
+        final String[] latParts = StringUtils.trimToEmpty(latPattern).split("\\s+");
+        final String[] lonParts = StringUtils.trimToEmpty(lonPattern).split("\\s+");
+        if (latParts.length < 3 || lonParts.length < 3) {
+            return false;
+        }
+        final String zone = StringUtils.rightPad(latParts[1], 2, '_') + StringUtils.rightPad(latParts[0], 1, '_');
+        final String easting = StringUtils.rightPad(latParts[2], UTM_EASTING_PATTERN.length(), '_');
+        final String northing = StringUtils.rightPad(lonParts[1] + lonParts[2], UTM_NORTHING_PATTERN.length(), '_');
+
+        fillUtmRow(0, zone, UTM_ZONE_PATTERN.length());
+        fillUtmRow(1, easting, UTM_EASTING_PATTERN.length());
+        fillUtmRow(2, northing, UTM_NORTHING_PATTERN.length());
+        return true;
+    }
+
+    private void fillUtmRow(final int row, final String data, final int length) {
+        for (int col = 0; col < length; col++) {
+            final View v = grid.getChildAt(row * grid.getColumnCount() + 1 + col);
+            if (v instanceof CharButton) {
+                ((CharButton) v).setText(col < data.length() ? String.valueOf(data.charAt(col)) : "_");
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private void changeHemisphereButtonValue(final Button hem) {
+        if (currentType == CalculatedCoordinateType.UTM || currentType == CalculatedCoordinateType.RD) {
+            return;
+        }
         final char newChar;
         switch (Character.toUpperCase(hem.getText().charAt(0))) {
             case 'N':
