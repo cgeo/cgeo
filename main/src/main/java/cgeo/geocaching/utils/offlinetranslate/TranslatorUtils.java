@@ -1,37 +1,23 @@
 package cgeo.geocaching.utils.offlinetranslate;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.databinding.TranslationsettingsDialogBinding;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.SimpleDisposable;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -43,13 +29,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.TextNode;
 
 public class TranslatorUtils {
-
-    private static final String LOGPRAEFIX = "[TranslatorUtils]:";
 
     private static final Scheduler WORKER_SINGLE = Schedulers.single();
 
@@ -163,151 +144,6 @@ public class TranslatorUtils {
         }
     }
 
-    /** translates texts in HTML */
-    private static void translateParagraphedText(final BiConsumer<String, Consumer<String>> translator, final String text, final Consumer<String> consumer) {
-        final String[] paragraphs = (text == null ? "" : text).split("\n");
-        final AtomicInteger remaining = new AtomicInteger(paragraphs.length);
-        if (remaining.get() == 0) {
-            //Nothing to translate
-            runOnWorker(() -> consumer.accept(text));
-            return;
-        }
-        final String[] translatedParagraphs = new String[paragraphs.length];
-        for (int i = 0; i < paragraphs.length; i++) {
-            final int pos = i;
-            translator.accept(paragraphs[pos], translation -> {
-                translatedParagraphs[pos] = translation == null ? "?" + paragraphs[pos] : translation;
-                //check if all done
-                if (remaining.decrementAndGet() == 0) {
-                    consumer.accept(TextUtils.join(Arrays.asList(translatedParagraphs), s -> s, "\n").toString());
-                }
-            });
-        }
-    }
-
-    /** translates texts in HTML */
-    private static void translateHtml(final BiConsumer<String, Consumer<String>> translator, final String html, final Consumer<String> consumer) {
-        final Document document = Jsoup.parseBodyFragment(html);
-        final List<TextNode> elements = document.children().select("*").textNodes();
-        final AtomicInteger remaining = new AtomicInteger(elements.size());
-        if (remaining.get() == 0) {
-            //Nothing to translate
-            runOnWorker(() -> consumer.accept(html));
-        } else {
-            for (TextNode textNode : elements) {
-                translator.accept(textNode.text(), translation -> {
-                    textNode.text(translation == null ? "?" + textNode.text() : translation);
-                    //check if all done
-                    if (remaining.decrementAndGet() == 0) {
-                        consumer.accept(document.body().html());
-                    }
-                });
-            }
-        }
-    }
-
-    public static Disposable initializeView(final String id, final Context context, final Translator translator,
-                                            final Button button, final View box, final TextView status) {
-
-        final Consumer<Boolean> circularSetter = ViewUtils.createCircularProgressSetter(button);
-
-        //changes on state
-        final Disposable disposable = translator.addStateListener((s, e) -> {
-            //text
-            if (status == null) {
-                button.setText(getUserDisplayableStatusShort(translator));
-            } else {
-                status.setText(getUserDisplayableStatusLong(translator));
-            }
-            //circular on/off
-            circularSetter.accept(
-                s == TranslatorState.DETECTING_SOURCE || s == TranslatorState.TRANSLATING ||
-                    (s == TranslatorState.DOWNLOADING_MODEL && e));
-            //visibility
-            final View visibilityView = box != null ? box : button;
-            final String srcLng = translator.getSourceLanguage();
-            final String detSrcLng = translator.getSourceLanguageDetected();
-            visibilityView.setVisibility(Translator.isActive() &&
-                (translator.getEffectiveSourceLanguage() == null || translator.isEnabled() ||
-                srcLng != null || (detSrcLng != null && !Settings.getLanguagesToNotTranslate().contains(detSrcLng)))
-                ? View.VISIBLE : View.GONE);
-        });
-
-        //click-listeners
-        button.setOnLongClickListener(v -> {
-            changeSettings(context, translator);
-            return true;
-        });
-        button.setOnClickListener(v -> {
-            if (translator.isEnabled()) {
-                translator.setEnabled(false);
-            } else if (translator.getEffectiveSourceLanguage() != null) {
-                enableTranslation(context, translator, translator.getEffectiveSourceLanguage(), translator.getEffectiveTargetLanguage());
-            } else {
-                changeSettings(context, translator);
-            }
-        });
-        return new SimpleDisposable(() -> {
-            disposable.dispose();
-            circularSetter.accept(false);
-        });
-    }
-
-    public static void changeSettings(final Context context, final Translator translator) {
-
-        final TranslationsettingsDialogBinding binding = TranslationsettingsDialogBinding.inflate(LayoutInflater.from(context));
-        final List<String> sourceLanguageList = new ArrayList<>(TranslationModelManager.get().getSupportedLanguages());
-        Collections.sort(sourceLanguageList, getLanguageSortComparator(true, translator.getSourceLanguage(), translator.getSourceLanguageDetected()));
-        final List<String> targetLanguageList = new ArrayList<>(sourceLanguageList);
-        Collections.sort(targetLanguageList, getLanguageSortComparator(false, translator.getTargetLanguage(), null));
-
-        final TextSpinner<String> sourceLanguage = new TextSpinner<>();
-        sourceLanguage.setTextView(binding.sourceLanguageSelect)
-            .setDisplayMapper(lng -> TextParam.text(getLanguageString(lng, false, translator.getSourceLanguageDetected())))
-            .setTextDisplayMapper(lng -> TextParam.text(getLanguageString(lng, true, translator.getSourceLanguageDetected())))
-            .setValues(sourceLanguageList)
-            .set(translator.getEffectiveSourceLanguage());
-
-        final TextSpinner<String> targetLanguage = new TextSpinner<>();
-        targetLanguage.setTextView(binding.targetLanguageSelect)
-                .setDisplayMapper(lng -> TextParam.text(getLanguageString(lng, false, null)))
-                .setTextDisplayMapper(lng -> TextParam.text(getLanguageString(lng, true, null)))
-                .setValues(targetLanguageList)
-                .set(translator.getEffectiveTargetLanguage());
-
-        final SimpleDialog dialog = SimpleDialog.ofContext(context)
-            .setTitle(TextParam.text("Translation"))
-            .setCustomView(binding)
-            .setPositiveButton(TextParam.text("Translate"));
-
-        if (translator.isEnabled()) {
-            dialog.setNeutralButton(TextParam.text("Turn Off"))
-                .setNeutralAction(() -> translator.setEnabled(false));
-        }
-        dialog.confirm(() -> enableTranslation(context, translator, sourceLanguage.get(), targetLanguage.get()));
-    }
-
-    private static void enableTranslation(final Context context, final Translator translator, final String sourceLanguage, final String targetLanguage) {
-
-        final boolean sourceNeedsDownload = !TranslationModelManager.get().isAvailableOrPending(sourceLanguage);
-        final boolean targetNeedsDownload = !TranslationModelManager.get().isAvailableOrPending(targetLanguage);
-        if (sourceNeedsDownload || targetNeedsDownload) {
-            final String languages =
-                (sourceNeedsDownload ? LocalizationUtils.getLocaleDisplayName(sourceLanguage, true, true) : "") +
-                    (sourceNeedsDownload && targetNeedsDownload ? " + " : "") +
-                    (targetNeedsDownload ? LocalizationUtils.getLocaleDisplayName(targetLanguage, true, true) : "");
-
-            SimpleDialog.ofContext(context).setTitle(R.string.translator_model_download_confirm_title)
-                .setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, languages))
-                .confirm(() -> {
-                    translator.setLanguagesAndEnable(sourceLanguage, targetLanguage);
-                });
-
-        } else {
-            translator.setLanguagesAndEnable(sourceLanguage, targetLanguage);
-        }
-    }
-
     public static void downloadLanguageModels(final Context context) {
         final List<String> nonAvailableModels = TranslationModelManager.get().getSupportedLanguages().stream()
                 .filter(lng -> !TranslationModelManager.get().isAvailable(lng)).collect(Collectors.toCollection(ArrayList::new));
@@ -356,57 +192,6 @@ public class TranslatorUtils {
             //Prio 6: alphabetically by code
             return lng1.compareTo(lng2);
         };
-    }
-
-    private static String getLanguageString(final String language, final boolean doShort, final String detected) {
-        final StringBuilder sb = new StringBuilder(LocalizationUtils.getLocaleDisplayName(language, doShort, true));
-        if (language != null && language.equals(detected)) {
-            sb.append(" ").append(EmojiUtils.getEmojiAsString(EmojiUtils.RED_FLAG));
-        }
-        if (TranslationModelManager.get().isAvailable(language)) {
-            sb.append(" ").append(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED));
-        } else if (TranslationModelManager.get().isPending(language)) {
-            sb.append(" ").append(EmojiUtils.getEmojiAsString(EmojiUtils.GRAY_CHECK_BOXED));
-        }
-        return sb.toString();
-    }
-
-    public static CharSequence getUserDisplayableStatusLong(final Translator t) {
-        final String effSrcLng = t.getEffectiveSourceLanguage();
-        final String languages = (effSrcLng == null ? "??" :
-            getLanguageString(effSrcLng, true, t.getSourceLanguageDetected())) + " -> " +
-            getLanguageString(t.getEffectiveTargetLanguage(), true, null);
-
-        final String status;
-        switch (t.getState()) {
-            case ERROR:
-                status = t.getError().getUserDisplayableString();
-                break;
-            default:
-                status = "";
-        }
-
-        final String fullStatus = languages + "\n" + status;
-        return t.getState() == TranslatorState.TRANSLATED ? TextUtils.setSpan(fullStatus, new StyleSpan(Typeface.BOLD)) : fullStatus;
-    }
-
-    public static CharSequence getUserDisplayableStatusShort(final Translator t) {
-        String srcFlag = LocalizationUtils.getLocaleDisplayFlag(t.getEffectiveSourceLanguage());
-        String trgFlag = LocalizationUtils.getLocaleDisplayFlag(t.getEffectiveTargetLanguage());
-        String middle = t.getState() == TranslatorState.ERROR ? "⇏" : "⇒";
-        if (!t.isEnabled()) {
-            srcFlag = "[" + srcFlag + "]";
-        } else if (t.getState() == TranslatorState.TRANSLATED) {
-            trgFlag = "[" + trgFlag + "]";
-        } else {
-            middle = "[" + middle + "]";
-        }
-        return srcFlag + middle + trgFlag;
-    }
-
-    public CharSequence getUserDisplayableTranslateMenu(final Translator t) {
-        return (t.getState() == TranslatorState.TRANSLATED ? "Revert Translate " : "Translate ") +
-        getUserDisplayableStatusShort(t);
     }
 
 }
