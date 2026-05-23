@@ -565,10 +565,6 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    // Offline translation - language detection and translator
-    // -> this is NON-FOSS code and should only be available in flavor "basic"
-    basicImplementation 'com.google.mlkit:language-id:17.0.6'
-    basicImplementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks
