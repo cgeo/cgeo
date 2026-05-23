@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
@@ -12,7 +12,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -30,20 +29,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
-
-            final ProgressDialog waitDialog = new ProgressDialog(getActivity());
-            waitDialog.setTitle(LocalizationUtils.getString(R.string.init_maintenance_start));
-            waitDialog.setMessage(LocalizationUtils.getString(R.string.init_maintenance_ongoing));
-            waitDialog.setCancelable(false);
-            waitDialog.show();
-
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> {
-                final Activity activity = getActivity();
-                if (activity != null) {
-                    ActivityMixin.showShortToast(activity, R.string.init_maintenance_finished);
-                }
-                waitDialog.dismiss();
-            });
+            DownloaderUtils.deleteOrphanedData(getActivity());
             return true;
         });
 
