@@ -1,5 +1,6 @@
 package cgeo.geocaching.filters;
 
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
@@ -58,6 +59,7 @@ public class StatusGeocacheFilterTest {
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void owned() {
+        GCLogin.getInstance().login();
         singleStandardStatus((c, b) -> {
             c.setOwnerUserId(b ? Settings.getUserName() : "");
             c.setGeocode("GCFAKE");

@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -85,7 +86,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
-import static java.lang.Boolean.FALSE;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -485,11 +485,16 @@ final class OkapiClient {
                     valueMap.put("status", value.substring(1));
                 }
 
-                if (statusFilter.getStatusFound() != null) {
-                    valueMap.put("found_status", statusFilter.getStatusFound() ? "found_only" : "notfound_only");
+                final Boolean statusFound = statusFilter.getStatusFound();
+                if (statusFound != null) {
+                    valueMap.put("found_status", statusFound ? "found_only" : "notfound_only");
                 }
-                if (FALSE.equals(statusFilter.getStatusOwned())) {
+
+                final Boolean statusOwned = statusFilter.getStatusOwned();
+                if (Boolean.FALSE.equals(statusOwned)) {
                     valueMap.put("exclude_my_own", "true");
+                } else if (Boolean.TRUE.equals(statusOwned) && (connector instanceof ILogin)) {
+                    valueMap.put("owner_uuid", getUserUUID(connector, ((ILogin) connector).getUserName()));
                 }
                 break;
             case LOGS_COUNT:
