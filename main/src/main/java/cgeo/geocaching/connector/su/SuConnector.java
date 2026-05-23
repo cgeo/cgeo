@@ -252,7 +252,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
-        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN, GeocacheFilterType.NAME, GeocacheFilterType.OWNER);
+        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN, GeocacheFilterType.NAME, GeocacheFilterType.OWNER, GeocacheFilterType.STATUS);
     }
 
     @Override
