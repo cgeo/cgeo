@@ -2032,7 +2032,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             ? CryptUtils.rot13(binding.hint.getText().toString())
                             : binding.hint.getText().toString();
                     translator.translate(hintPlain,
-                            translated -> binding.hint.setText(OfflineTranslateUtils.getTextWithTranslatedByLogo(translated)),
+                            translated -> binding.hint.setText(translated),
                             e -> binding.hint.setText(hintPlain)); // show plain text on translation error
                 } else {
                     hintRevealed[0] = false;
@@ -2115,7 +2115,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         }
                         if (translator != null) {
                             final ITranslateAccessor translateAccessor = TranslateAccessor.get();
-                            binding.descriptionTranslatedByGoogle.setVisibility(translateAccessor.requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
                             final String translatorName = translateAccessor.getTranslatorName();
                             if (translatorName != null) {
                                 binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
@@ -2124,7 +2123,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                             }
                         } else {
-                            binding.descriptionTranslatedByGoogle.setVisibility(View.GONE);
                             binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                         }
 

@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -25,8 +24,6 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,47 +32,6 @@ public class TranslatorUtils {
     private static final Scheduler WORKER_SINGLE = Schedulers.single();
 
     private static final Map<String, String> TRANSLATION_CACHE = Collections.synchronizedMap(new LeastRecentlyUsedMap.LruCache<>(300));
-
-    public static class ChangeableText implements Disposable {
-        private final Translator translator;
-        private String text;
-        private Disposable disposable;
-
-        public ChangeableText(final Translator translator) {
-            this(translator, null);
-        }
-
-        public ChangeableText(final Translator translator, final CompositeDisposable compositeDisposable) {
-            this.translator = translator;
-            if (compositeDisposable != null) {
-                compositeDisposable.add(this);
-            }
-        }
-
-
-        public void set(final String text, final BiConsumer<String, Boolean> textAction) {
-           if (Objects.equals(this.text, text)) {
-                return;
-            }
-            if (this.disposable != null) {
-                this.disposable.dispose();
-            }
-            this.text = text;
-            this.disposable = translator.addTranslation(this.text, textAction);
-        }
-
-        @Override
-        public void dispose() {
-            if (this.disposable != null) {
-                this.disposable.dispose();
-            }
-        }
-
-        @Override
-        public boolean isDisposed() {
-            return this.disposable != null && this.disposable.isDisposed();
-        }
-    }
 
     private TranslatorUtils() {
         //no instance
