@@ -1,12 +1,12 @@
-### General release notes
+### Obecné poznámky k verzi
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
+V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Android, na kterou se zaměřuje tato verze aplikace c:geo, a změnili jsme některé rutiny rozložení obrazovky. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
 
-**Legacy Maps**
+**Starší mapy**
 
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Budete automaticky převedeni na naši novou službu Sjednocená mapa a kromě několika nových funkcí, z nichž některé jsou
+Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstranili starší implementace našich map. Budete automaticky převedeni na naši novou službu Sjednocená mapa a kromě několika nových funkcí, z nichž některé jsou
 - Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
 - Vyskakovací okno pro Google mapy
 - Skrytí nepotřebných zdrojů map
@@ -29,9 +29,9 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Novinka: Nabídka nastavení ikony kešky i v případě, že keška ještě není uložena
 - Novinka: Infobox pro výškový graf zobrazující zbývající vzdálenost, stoupající, klesající
 - Novinka: Zobrazení souřadnic trasových bodů ve vyskakovacím okně trasového bodu
-- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
-- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- Oprava: V rychlých nastaveních mapy se po přepnutí jazyka mohou u prázdných profilů tras zobrazovat tlačítka „1“/„2“
+- Novinka: Výpočet chybějících údajů o nadmořské výšce při importu tras (pokud jsou data o nadmořské výšce stažena)
+- Oprava: Stahovač map se za určitých podmínek zastaví (pouze online mapy OpenStreetMap)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -52,11 +52,11 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
 - Novinka: Souhrnné funkce s podporou rozsahu: add/součet, min/minimum, max/maximum, cnt/počet, avg/průměr, multiply/součin/pro
 - Oprava: Nesprávné zpracování stavu DNF pro platformy opencaching
-- New: Delete offline log after merge with online log
-- New: Show confirmation when deleting caches with offline logs
-- New: Show confirmation when deleting all caches from "All" list
-- New: Allow Markdown formatting for listing text in user-defined caches
-- Change: Store cache before adding user image
+- Novinka: Po sloučení s online logem odstranit offline log
+- Novinka: Zobrazit potvrzení při mazání kešek pomocí offline logů
+- Novinka: Zobrazit potvrzení při mazání všech kešek ze seznamu "Vše"
+- Novinka: Povolit formátování Markdown pro výpis textu v uživatelsky definovaných keškách
+- Změna: Uložení kešky před přidáním obrázku uživatele
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -90,6 +90,6 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Oprava: Pád aplikace při použití filtru podle procentuální obliby
 - Novinka: Usnadnění používání jednoduchých seznamů jako nadřazených seznamů
 - Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
-- New: Bergamot open source offline translation module
+- Oprava: Některé texty ignorují přepínání jazyků
+- Oprava: Volba „Použít imperiální jednotky“ se při nové instalaci nenastavila správně
+- Novinka: Open source překladový modul Bergamot
