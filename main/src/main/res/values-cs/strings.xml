@@ -234,10 +234,12 @@
     <string name="translate_external_label">Přeložit pomocí %s</string>
     <string name="translate_external_variant_app">Aplikace</string>
     <string name="translate_external_variant_web">Webová stránka</string>
+    <string name="translate_external_variant_unavailable">Není k dispozici</string>
     <string name="translate_external_none">&lt;Žádné&gt;</string>
     <string name="translate_external_app">Externí aplikace</string>
     <string name="translate_external_google">Překladač Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline překlad</string>
     <string name="translate_length_warning">Překlad prostřednictvím webové stránky může selhat v případě velkého množství textu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -304,6 +306,7 @@
     <string name="err_rendertheme_file_unreadable">Vybraný motiv vykreslování nelze načíst. Bude použit výchozí.</string>
     <string name="err_rendertheme_invalid">Vybraný motiv vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí.</string>
     <string name="err_invalid_filename_char">Znak %c není povolený</string>
+    <string name="err_center_coordinates_invalid">Nelze nastavit střed mapy, neplatné souřadnice</string>
     <string name="warn_save_nothing">Není nic k uložení.</string>
     <string name="warn_no_cache_coord">Není k dispozici žádná keška se souřadnicemi.</string>
     <string name="warn_no_coordinates">Souřadnice nezískány</string>
@@ -382,6 +385,7 @@
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
+    <string name="translator_attributed_to">Přeloženo %s</string>
     <string name="crash_activity_title">Jejda! c:geo spadlo!</string>
     <string name="crash_activity_report">nahlásit problém</string>
     <!-- location service -->
@@ -519,6 +523,16 @@
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_overwrite_offline_log">Přepsat offline log</string>
     <string name="caches_overwrite_offline_log_question">Keška má existující offline log typu „%1$s“ s textem logu. Chcete tento log přepsat?</string>
+    <string name="caches_warning_delete_user_data_others">Odstranit ostatní</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d keška má uživatelské údaje. Při odstranění kešky se uživatelské údaje ztratí.</item>
+        <item quantity="few">%1$d/%2$d kešky mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+        <item quantity="many">%1$d/%2$d kešek mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+        <item quantity="other">%1$d/%2$d kešek mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Tato akce odstraní všechny kešky (%d) z vašeho zařízení.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Odstranění ostatních</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d kešky jsou pouze v tomto seznamu. Odstraněním těchto kešek ze seznamu je ze zařízení odstraníte.</string>
     <string name="caches_show_attributes_all">Zobrazit přehled atributů pro všechny kešky</string>
     <string name="caches_show_attributes_selected">Zobrazit přehled atributů pro vybrané kešky</string>
     <string name="caches_set_cache_icon">Natavit ikonu kešky</string>
@@ -929,6 +943,8 @@
     <string name="init_login_popup_not_authorized">Neautorizováno</string>
     <string name="init_login_popup_not_logged_in">Nepřihlášen</string>
     <string name="init_login_manual">Manuální přihlášení</string>
+    <string name="init_login_manual_description">Počkejte prosím, než se webová stránka zobrazí a přihlaste se k vašemu účtu. Počkejte, dokud není přihlášení dokončeno. Poté klikněte na tlačítko \'Ok\' níže.</string>
+    <string name="init_login_manual_wig_description">Přihlaste se prosím do svého účtu na Geocaching.com a pokračujte na autorizaci k přihlášení do Wherigo. Počkejte, dokud nebude zobrazena hlavní stránka Wherigo, pak klikněte na tlačítko \'Ok\' níže.</string>
     <string name="init_login_manual_error_nocookie">Nebyl nalezen žádný autorizační token. Proveďte prosím přihlášení nebo \'zrušte\' manuální přihlášení.</string>
     <string name="init_login_popup_invalid_timestamp">Místní čas je neplatný, nastav systémový čas</string>
     <string name="init_login_popup_invalid_token">Neplatná autorizace, opakuj akci</string>
@@ -1766,6 +1782,7 @@
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
     <string name="waypoint_calculated_coordinates_global">Vypočítat souřadnice</string>
+    <string name="waypoint_select_from_map">Vybrat z mapy</string>
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_my_coordinates_accuracy">Moje souřadnice (±%s)</string>
@@ -2419,6 +2436,13 @@
     <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>
     <string name="do_not_ask_me_again">Již se neptat</string>
     <string name="geokrety_parsing_failed">Odpověď služby GeoKrety se nepodařilo zpracovat.</string>
+    <string name="command_remove_caches_from_list_progress">Odstraňování kešek</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Odstraněná %d keška</item>
+        <item quantity="few">Odstraněné %d kešky</item>
+        <item quantity="many">Odstraněno %d kešek</item>
+        <item quantity="other">Odstraněných %d kešek</item>
+    </plurals>
     <string name="command_move_caches_progress">Přesouvání kešek do seznamu %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Přesunuta %d keška</item>
@@ -2674,6 +2698,7 @@
     <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
     <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
     <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
+    <string name="check_hillshading_tiles_menu">Zkontrolovat chybějící údaje o nadmořské výšce</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
