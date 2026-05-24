@@ -403,6 +403,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             //in case of non-success, reapply previous patterns for a consistent view
             if (gpSuccess) {
                 applyPatternsFor(type, gp);
+            } else if (type == CalculatedCoordinateType.RD) {
+                applyPatterns(type, "X 155000", "Y 463000");
             } else {
                 applyPatternsFor(type, Geopoint.ZERO);
             }
@@ -503,11 +505,16 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         if (type == CalculatedCoordinateType.UTM) {
             return applyUtmPatterns(latPattern, lonPattern);
         }
-
-        final boolean b1 = checkAndApply(type, REFILL_PATTERNS.get(type), latPattern, 0, grid, 0);
-        final boolean b2 = checkAndApply(type, REFILL_PATTERNS_LON.get(type), lonPattern, 1, grid, grid.getColumnCount());
-
-        return b1 && b2;
+        final String latFillPattern = REFILL_PATTERNS.get(type);
+        final String lonFillPattern = REFILL_PATTERNS_LON.get(type);
+        final boolean b1 = checkAndApply(type, latFillPattern, latPattern, 0, null, -1);
+        final boolean b2 = checkAndApply(type, lonFillPattern, lonPattern, 1, null, -1);
+        if (!b1 || !b2) {
+            return false;
+        }
+        checkAndApply(type, latFillPattern, latPattern, 0, grid, 0);
+        checkAndApply(type, lonFillPattern, lonPattern, 1, grid, grid.getColumnCount());
+        return true;
     }
 
     private boolean applyUtmPatterns(final String latPattern, final String lonPattern) {

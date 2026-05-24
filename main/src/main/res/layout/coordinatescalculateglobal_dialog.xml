@@ -133,6 +133,20 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/zoneRes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/edittext_dialog"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+
+                android:gravity="right"
+                android:textAlignment="gravity"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/latRes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -287,7 +287,15 @@ public class CalculatedCoordinate implements Parcelable {
         if (latTokens.length < 3 || northingTokens.length < 3) {
             return null;
         }
-        final String zone = latTokens[1] + latTokens[0].toUpperCase(Locale.US);
+        final String zoneLetter = latTokens[0].toUpperCase(Locale.US);
+        if (!zoneLetter.matches("[C-HJ-NP-X]")) {
+            return null;
+        }
+        final EvalPart zoneNumberPart = evaluateNumericToken(latTokens[1], varMap);
+        if (zoneNumberPart == null || zoneNumberPart.value == null || zoneNumberPart.value < 1 || zoneNumberPart.value > 60) {
+            return null;
+        }
+        final String zone = String.format(Locale.US, "%02d%s", zoneNumberPart.value, zoneLetter);
         final EvalPart eastingPart = evaluateNumericToken(latTokens[2], varMap);
         final EvalPart northingLeadPart = evaluateNumericToken(northingTokens[1], varMap);
         final EvalPart northingTailPart = evaluateNumericToken(northingTokens[2], varMap);
@@ -298,7 +306,7 @@ public class CalculatedCoordinate implements Parcelable {
         if (eastingPart == null || eastingPart.value == null) {
             return null;
         }
-        return new UtmParts(zone, eastingPart.display.toString(), northingText, eastingPart.warning || northingLeadPart.warning || northingTailPart.warning);
+        return new UtmParts(zone, eastingPart.display.toString(), northingText, zoneNumberPart.warning || eastingPart.warning || northingLeadPart.warning || northingTailPart.warning);
     }
 
     private static String[] splitOnWhitespace(final String text) {
