@@ -1,27 +1,27 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Čas na aktualizaci! Pokud stále používáte Android 7 nebo starší, tato aktualizace c:geo je pro vás možná poslední! S naší další verzí aplikace c:geo ukončíme podporu pro Android 5-7, abychom snížili zátěž spojenou s údržbou a mohli aktualizovat některé externí komponenty používané aplikací c:geo, které v současné době stále udržujeme. Budeme stále podporovat Android 8 až do Android 16 (a novější verze, až budou publikovány), tedy rozpětí více než osmi let historie Androidu.
 
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
-
-##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Oprava: Chyba při přístupu k trasám
+- Oprava: Pád na stránce trasového bodu
+- Změna: Hledání "vlastních kešek" začíná s novými filtry
+- Oprava: Neuložené fáze lab dobrodružství obnovovení stránky ztrácejí informaci o tom, že byly navštíveny
+- Oprava: Opakující se výzva k aktualizaci dlaždic
+- Oprava: Náhodné umístění při mapování seznamu (Google Maps)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+- Oprava: Pád aplikace v informačním okně o kešce
+- Oprava: Cartridge Wherigo již nelze stahovat (změna na webu)
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+##
+ - Změna: Soubory Wherigo nelze v současné době stáhnout, zobrazit pokyny k řešení problému
+ - Oprava: Důvod smazání logu nepřekračuje limit délky
+ - Novinka: Rozšířené protokolování pro pády ve správci stahování
+ - Oprava: Informační list o trasovém bodu může být příliš dlouhý, tlačítka jsou nedostupná
+ - Oprava: Některé informace o poloze jsou zkráceny
+ - Oprava: Interní směrování již nefunguje, pouze zobrazená přímka
+ - Oprava: Některé problémy s vytvořením složky
+
+Poznámka: Pokud používáte interní navigaci, budete po instalaci této verze muset jednou provést následující krok: Přejděte na úvodní obrazovku aplikace c:geo, otevřete položku „Spravovat offline data“ – „Aktualizovat navigační data“ a nechte aplikaci c:geo nainstalovat aktualizované soubory. (Důvod: Struktura souborů s daty pro směrování v BRouteru se změnila a všechny soubory s daty pro směrování musí odpovídat stejné verzi.)
 
 ##
 - Oprava: U některých jazyků webových stránek selhává analýza řetězce s umístěním kešky
