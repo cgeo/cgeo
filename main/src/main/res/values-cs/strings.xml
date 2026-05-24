@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">Vybraný motiv vykreslování nelze načíst. Bude použit výchozí.</string>
     <string name="err_rendertheme_invalid">Vybraný motiv vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí.</string>
     <string name="err_invalid_filename_char">Znak %c není povolený</string>
+    <string name="err_center_coordinates_invalid">Nelze nastavit střed mapy, neplatné souřadnice</string>
     <string name="warn_save_nothing">Není nic k uložení.</string>
     <string name="warn_no_cache_coord">Není k dispozici žádná keška se souřadnicemi.</string>
     <string name="warn_no_coordinates">Souřadnice nezískány</string>
@@ -903,6 +904,8 @@
     <string name="init_login_popup_not_authorized">Neautorizováno</string>
     <string name="init_login_popup_not_logged_in">Nepřihlášen</string>
     <string name="init_login_manual">Manuální přihlášení</string>
+    <string name="init_login_manual_description">Počkejte prosím, než se webová stránka zobrazí a přihlaste se k vašemu účtu. Počkejte, dokud není přihlášení dokončeno. Poté klikněte na tlačítko \'Ok\' níže.</string>
+    <string name="init_login_manual_wig_description">Přihlaste se prosím do svého účtu na Geocaching.com a pokračujte na autorizaci k přihlášení do Wherigo. Počkejte, dokud nebude zobrazena hlavní stránka Wherigo, pak klikněte na tlačítko \'Ok\' níže.</string>
     <string name="init_login_manual_error_nocookie">Nebyl nalezen žádný autorizační token. Proveďte prosím přihlášení nebo \'zrušte\' manuální přihlášení.</string>
     <string name="init_login_popup_invalid_timestamp">Místní čas je neplatný, nastav systémový čas</string>
     <string name="init_login_popup_invalid_token">Neplatná autorizace, opakuj akci</string>
@@ -1564,6 +1567,7 @@
     <string name="menu_collapse_log">Sbalit log</string>
     <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
+    <string name="cache_log_delete_reason">Důvod (max. %d znaků)</string>
     <string name="cache_log_delete_reason_default">Log byl odstraněn pomocí c:geo</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
