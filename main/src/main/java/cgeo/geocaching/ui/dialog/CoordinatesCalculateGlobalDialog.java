@@ -538,9 +538,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         final String[] utmLonTokens = Objects.toString(lonData.middle, "").trim().split("\\s+");
         final String[] rawLatTokens = StringUtils.defaultString(calcCoord.getLatitudePattern()).trim().split("\\s+");
         final String[] rawLonTokens = StringUtils.defaultString(calcCoord.getLongitudePattern()).trim().split("\\s+");
-        String zoneText = extractZoneFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
-        String eastingText = extractEastingFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
-        String northingText = extractNorthingFromEvaluatedOrRaw(utmLonTokens, rawLonTokens);
+        final String zoneText = extractZoneFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        final String eastingText = extractEastingFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        final String northingText = extractNorthingFromEvaluatedOrRaw(utmLonTokens, rawLonTokens);
         return new UtmDisplayData(zoneText, eastingText, northingText);
     }
 
