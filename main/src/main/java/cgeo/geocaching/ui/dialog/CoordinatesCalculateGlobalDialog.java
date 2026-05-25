@@ -504,84 +504,113 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         final boolean projectedType = calcCoord.getType() == CalculatedCoordinateType.UTM || calcCoord.getType() == CalculatedCoordinateType.RD;
         final boolean geopointInvalid = projectedType && calcCoord.calculateGeopoint(varList::getValue) == null;
         if (calcCoord.getType() == CalculatedCoordinateType.UTM) {
-            final boolean isGuidedMode = binding.ccSwitchGuided.isChecked();
-            final String[] utmLatTokens = Objects.toString(latData.middle, "").trim().split("\\s+");
-            final String[] utmLonTokens = Objects.toString(lonData.middle, "").trim().split("\\s+");
-            final String[] rawLatTokens = StringUtils.defaultString(calcCoord.getLatitudePattern()).trim().split("\\s+");
-            final String[] rawLonTokens = StringUtils.defaultString(calcCoord.getLongitudePattern()).trim().split("\\s+");
-            String zoneText = StringUtils.EMPTY;
-            String eastingText = StringUtils.EMPTY;
-            String northingText = StringUtils.EMPTY;
-
-            if (!isGuidedMode) {
-                zoneText = ViewUtils.getEditableText(binding.PlainLat.getText()).trim().toUpperCase(Locale.US);
-                eastingText = ViewUtils.getEditableText(binding.PlainLon.getText()).trim();
-                northingText = ViewUtils.getEditableText(binding.PlainThird.getText()).trim();
-            } else {
-                if (utmLatTokens.length >= 2) {
-                    final String tokenA = utmLatTokens[0].toUpperCase(Locale.US);
-                    final String tokenB = utmLatTokens[1].toUpperCase(Locale.US);
-                    if (tokenA.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
-                        zoneText = tokenA;
-                        eastingText = utmLatTokens[1];
-                    } else if (tokenB.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
-                        zoneText = tokenB;
-                        eastingText = utmLatTokens[0];
-                    }
-                }
-
-                if (StringUtils.isBlank(zoneText) && rawLatTokens.length >= 3) {
-                    zoneText = rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
-                    eastingText = rawLatTokens[2];
-                } else if (StringUtils.isBlank(zoneText) && rawLatTokens.length == 2) {
-                    if (rawLatTokens[0].matches("^[0-9]{1,2}$")) {
-                        zoneText = rawLatTokens[0];
-                        eastingText = rawLatTokens[1];
-                    } else {
-                        zoneText = rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
-                    }
-                } else if (StringUtils.isBlank(zoneText) && rawLatTokens.length == 1) {
-                    zoneText = rawLatTokens[0];
-                }
-                if (StringUtils.isBlank(eastingText) && rawLatTokens.length >= 3) {
-                    eastingText = rawLatTokens[2];
-                }
-                if (utmLonTokens.length >= 3 && "N".equalsIgnoreCase(utmLonTokens[0])) {
-                    northingText = utmLonTokens[1] + utmLonTokens[2];
-                } else if (utmLonTokens.length >= 2 && "N".equalsIgnoreCase(utmLonTokens[0])) {
-                    northingText = utmLonTokens[1];
-                } else if (utmLonTokens.length >= 1) {
-                    northingText = utmLonTokens[utmLonTokens.length - 1];
-                }
-                if (StringUtils.isBlank(northingText) && rawLonTokens.length >= 3 && "N".equalsIgnoreCase(rawLonTokens[0])) {
-                    northingText = rawLonTokens[1] + rawLonTokens[2];
-                }
-            }
-
-            final boolean zoneError = !zoneText.toUpperCase(Locale.US).matches("^[0-9]{1,2}[C-HJ-NP-X]$");
-            final boolean eastingError = !eastingText.matches("^[0-9]{5,7}$");
-            final boolean northingError = !northingText.matches("^[0-9]{6,8}$");
-            binding.zoneRes.setVisibility(View.VISIBLE);
-            binding.zoneRes.setText(TextUtils.concat("Z ", zoneText, " ", getStatusText(zoneError, latData.right)));
-            binding.latRes.setText(TextUtils.concat("E ", eastingText, " ", getStatusText(eastingError, latData.right)));
-            binding.lonRes.setText(TextUtils.concat("N ", northingText, " ", getStatusText(northingError, lonData.right)));
+            updateUtmView(latData, lonData);
         } else if (calcCoord.getType() == CalculatedCoordinateType.RD) {
-            binding.zoneRes.setVisibility(View.GONE);
-            // Official EPSG:28992 projected bounds (Area of use Netherlands onshore incl. coastal zone).
-            // X: 482.06 .. 284182.97, Y: 306602.42 .. 637049.52
-            final Long xValue = parseLongValue(latData.middle);
-            final Long yValue = parseLongValue(lonData.middle);
-            final boolean xRangeInvalid = xValue == null || xValue < 482 || xValue > 284183;
-            final boolean yRangeInvalid = yValue == null || yValue < 306602 || yValue > 637050;
-            final CharSequence xDisplay = TextUtils.concat("X ", latData.middle);
-            final CharSequence yDisplay = TextUtils.concat("Y ", lonData.middle);
-            binding.latRes.setText(TextUtils.concat(xDisplay, " ", getStatusText(latData.left == null || xRangeInvalid, latData.right)));
-            binding.lonRes.setText(TextUtils.concat(yDisplay, " ", getStatusText(lonData.left == null || yRangeInvalid, lonData.right)));
+            updateRdView(latData, lonData);
         } else {
             binding.zoneRes.setVisibility(View.GONE);
             binding.latRes.setText(TextUtils.concat(latData.middle, " ", getStatusText(latData.left == null || geopointInvalid, latData.right)));
             binding.lonRes.setText(TextUtils.concat(lonData.middle, " ", getStatusText(lonData.left == null || geopointInvalid, lonData.right)));
         }
+    }
+
+    private void updateUtmView(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                               final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        final UtmDisplayData utmData = buildUtmDisplayData(latData, lonData);
+        final boolean zoneError = !utmData.zoneText.toUpperCase(Locale.US).matches("^[0-9]{1,2}[C-HJ-NP-X]$");
+        final boolean eastingError = !utmData.eastingText.matches("^[0-9]{5,7}$");
+        final boolean northingError = !utmData.northingText.matches("^[0-9]{6,8}$");
+        binding.zoneRes.setVisibility(View.VISIBLE);
+        binding.zoneRes.setText(TextUtils.concat("Z ", utmData.zoneText, " ", getStatusText(zoneError, latData.right)));
+        binding.latRes.setText(TextUtils.concat("E ", utmData.eastingText, " ", getStatusText(eastingError, latData.right)));
+        binding.lonRes.setText(TextUtils.concat("N ", utmData.northingText, " ", getStatusText(northingError, lonData.right)));
+    }
+
+    private UtmDisplayData buildUtmDisplayData(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                                               final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        if (!binding.ccSwitchGuided.isChecked()) {
+            return new UtmDisplayData(
+                    ViewUtils.getEditableText(binding.PlainLat.getText()).trim().toUpperCase(Locale.US),
+                    ViewUtils.getEditableText(binding.PlainLon.getText()).trim(),
+                    ViewUtils.getEditableText(binding.PlainThird.getText()).trim());
+        }
+        final String[] utmLatTokens = Objects.toString(latData.middle, "").trim().split("\\s+");
+        final String[] utmLonTokens = Objects.toString(lonData.middle, "").trim().split("\\s+");
+        final String[] rawLatTokens = StringUtils.defaultString(calcCoord.getLatitudePattern()).trim().split("\\s+");
+        final String[] rawLonTokens = StringUtils.defaultString(calcCoord.getLongitudePattern()).trim().split("\\s+");
+        String zoneText = extractZoneFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        String eastingText = extractEastingFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        String northingText = extractNorthingFromEvaluatedOrRaw(utmLonTokens, rawLonTokens);
+        return new UtmDisplayData(zoneText, eastingText, northingText);
+    }
+
+    private static String extractZoneFromEvaluatedOrRaw(final String[] utmLatTokens, final String[] rawLatTokens) {
+        if (utmLatTokens.length >= 2) {
+            final String tokenA = utmLatTokens[0].toUpperCase(Locale.US);
+            final String tokenB = utmLatTokens[1].toUpperCase(Locale.US);
+            if (tokenA.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return tokenA;
+            }
+            if (tokenB.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return tokenB;
+            }
+        }
+        if (rawLatTokens.length >= 3) {
+            return rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
+        }
+        if (rawLatTokens.length == 2 && !rawLatTokens[0].matches("^[0-9]{1,2}$")) {
+            return rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
+        }
+        return rawLatTokens.length > 0 ? rawLatTokens[0] : StringUtils.EMPTY;
+    }
+
+    private static String extractEastingFromEvaluatedOrRaw(final String[] utmLatTokens, final String[] rawLatTokens) {
+        if (utmLatTokens.length >= 2) {
+            final String tokenA = utmLatTokens[0].toUpperCase(Locale.US);
+            final String tokenB = utmLatTokens[1].toUpperCase(Locale.US);
+            if (tokenA.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return utmLatTokens[1];
+            }
+            if (tokenB.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return utmLatTokens[0];
+            }
+        }
+        if (rawLatTokens.length >= 3) {
+            return rawLatTokens[2];
+        }
+        if (rawLatTokens.length == 2 && rawLatTokens[0].matches("^[0-9]{1,2}$")) {
+            return rawLatTokens[1];
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractNorthingFromEvaluatedOrRaw(final String[] utmLonTokens, final String[] rawLonTokens) {
+        if (utmLonTokens.length >= 3 && "N".equalsIgnoreCase(utmLonTokens[0])) {
+            return utmLonTokens[1] + utmLonTokens[2];
+        }
+        if (utmLonTokens.length >= 2 && "N".equalsIgnoreCase(utmLonTokens[0])) {
+            return utmLonTokens[1];
+        }
+        if (utmLonTokens.length >= 1) {
+            return utmLonTokens[utmLonTokens.length - 1];
+        }
+        if (rawLonTokens.length >= 3 && "N".equalsIgnoreCase(rawLonTokens[0])) {
+            return rawLonTokens[1] + rawLonTokens[2];
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private void updateRdView(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                              final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        binding.zoneRes.setVisibility(View.GONE);
+        final Long xValue = parseLongValue(latData.middle);
+        final Long yValue = parseLongValue(lonData.middle);
+        final boolean xRangeInvalid = xValue == null || xValue < 482 || xValue > 284183;
+        final boolean yRangeInvalid = yValue == null || yValue < 306602 || yValue > 637050;
+        final CharSequence xDisplay = TextUtils.concat("X ", latData.middle);
+        final CharSequence yDisplay = TextUtils.concat("Y ", lonData.middle);
+        binding.latRes.setText(TextUtils.concat(xDisplay, " ", getStatusText(latData.left == null || xRangeInvalid, latData.right)));
+        binding.lonRes.setText(TextUtils.concat(yDisplay, " ", getStatusText(lonData.left == null || yRangeInvalid, lonData.right)));
     }
 
     private static String normalizeRdPattern(final char axis, final String value) {
@@ -605,6 +634,18 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             return Long.parseLong(StringUtils.defaultString(Objects.toString(text, "")).trim());
         } catch (final NumberFormatException ignored) {
             return null;
+        }
+    }
+
+    private static class UtmDisplayData {
+        private final String zoneText;
+        private final String eastingText;
+        private final String northingText;
+
+        UtmDisplayData(final String zoneText, final String eastingText, final String northingText) {
+            this.zoneText = StringUtils.defaultString(zoneText);
+            this.eastingText = StringUtils.defaultString(eastingText);
+            this.northingText = StringUtils.defaultString(northingText);
         }
     }
 
