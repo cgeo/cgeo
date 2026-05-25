@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.core.Single;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
+import mockwebserver3.MockResponse;
+import mockwebserver3.MockWebServer;
+import mockwebserver3.RecordedRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,13 +36,12 @@ public class HttpRequestTest {
 
     @After
     public void after() throws IOException {
-        mockServer.shutdown();
+        mockServer.close();
     }
-
 
     @Test
     public void simple() {
-        mockServerEnqueue(new MockResponse().setResponseCode(200).setBody("test"));
+        mockServerEnqueue(new MockResponse.Builder().code(200).body("test").build());
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").request().blockingGet();
         assertThat(resp.getBodyString()).isEqualTo("test");
     }
@@ -50,23 +49,23 @@ public class HttpRequestTest {
     @Test
     public void simpleRequestResponse() {
 
-        mockServerEnqueue(new MockResponse().setResponseCode(200).setBody("testResp"));
+        mockServerEnqueue(new MockResponse.Builder().code(200).body("testResp").build());
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").body("testReq").request().blockingGet();
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getMethod()).isEqualTo("POST");
 
-        assertThat(req.getBody().readUtf8()).isEqualTo("testReq");
+        assertThat(req.getBody().utf8()).isEqualTo("testReq");
         assertThat(resp.getBodyString()).isEqualTo("testResp");
     }
 
     @Test
     public void getRequest() {
-        mockServerEnqueue(new MockResponse().setResponseCode(200).setBody("testResp"));
+        mockServerEnqueue(new MockResponse.Builder().code(200).body("testResp").build());
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").request().blockingGet();
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getMethod()).isEqualTo("GET");
 
-        assertThat(req.getBody().readUtf8()).isEqualTo("");
+        assertThat(req.getBody().utf8()).isEqualTo("");
         assertThat(resp.getBodyString()).isEqualTo("testResp");
     }
 
@@ -77,13 +76,13 @@ public class HttpRequestTest {
         jsonReq.name = "Huber";
         final String jsonResp = "{ \"id\": 13, \"name\": \"Schmidt\" }";
 
-        mockServerEnqueue(new MockResponse().setResponseCode(200).setBody(jsonResp));
+        mockServerEnqueue(new MockResponse.Builder().code(200).body(jsonResp).build());
         final JsonHolder resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").bodyJson(jsonReq).requestJson(JsonHolder.class).blockingGet();
         final RecordedRequest req = mockServerTakeRequest();
 
         assertThat(req.getMethod()).isEqualTo("POST");
 
-        final String respJson = TextUtils.replaceWhitespace(req.getBody().readUtf8());
+        final String respJson = TextUtils.replaceWhitespace(req.getBody().utf8());
         assertThat(respJson).contains("\"id\":5");
         assertThat(respJson).contains("\"name\":\"Huber\"");
         assertThat(resp.id).isEqualTo(13);
@@ -93,18 +92,18 @@ public class HttpRequestTest {
 
     @Test
     public void headers() {
-        mockServerEnqueue(new MockResponse().setResponseCode(200).setBody("testResp").addHeader("h1", "v1"));
+        mockServerEnqueue(new MockResponse.Builder().code(200).body("testResp").addHeader("h1", "v1").build());
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").headers("reqh1", "reqv1").request().blockingGet();
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getMethod()).isEqualTo("GET");
 
-        assertThat(req.getHeader("reqh1")).isEqualTo("reqv1");
+        assertThat(req.getHeaders().get("reqh1")).isEqualTo("reqv1");
         assertThat(resp.getResponse().headers("h1").get(0)).isEqualTo("v1");
     }
 
     @Test
     public void requestPrepare() {
-        mockServerEnqueue(new MockResponse().setResponseCode(200));
+        mockServerEnqueue(new MockResponse.Builder().code(200).build());
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo")
                 .headers("h1", "v1")
                 .requestPreparer(r -> {
@@ -113,8 +112,8 @@ public class HttpRequestTest {
                 }).request().blockingGet();
         assertThat(resp).isNotNull();
         final RecordedRequest req = mockServerTakeRequest();
-        assertThat(req.getHeader("h1")).isEqualTo("v1");
-        assertThat(req.getHeader("h2")).isEqualTo("v2");
+        assertThat(req.getHeaders().get("h1")).isEqualTo("v1");
+        assertThat(req.getHeaders().get("h2")).isEqualTo("v2");
     }
 
     private void mockServerEnqueue(final MockResponse response) {
@@ -132,5 +131,4 @@ public class HttpRequestTest {
             throw new IllegalArgumentException("This exception throw will never be reached");
         }
     }
-
 }
