@@ -49,6 +49,7 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
@@ -2519,7 +2520,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
-            calculatedCoordinatesView.setText("(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern());
+            calculatedCoordinatesView.setText(formatCalculatedCoordinatePreview(cc));
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
             if (cc.hasWarning(varList::getValue)) {
                 holder.binding.calculatedCoordinatesIcon.setImageTintList(ColorStateList.valueOf(Color.YELLOW));
@@ -2600,6 +2601,55 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.openContextMenu(v);
                 return true;
             });
+        }
+
+        private static String formatCalculatedCoordinatePreview(final CalculatedCoordinate cc) {
+            if (cc == null) {
+                return "(x):";
+            }
+            if (cc.getType() == CalculatedCoordinateType.UTM) {
+                return "(x): " + formatUtmPreview(cc);
+            }
+            if (cc.getType() == CalculatedCoordinateType.RD) {
+                return "(x): X " + stripAxisPrefix(cc.getLatitudePattern(), 'X') + " / Y " + stripAxisPrefix(cc.getLongitudePattern(), 'Y');
+            }
+            return "(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern();
+        }
+
+        private static String formatUtmPreview(final CalculatedCoordinate cc) {
+            final String[] lat = StringUtils.defaultString(cc.getLatitudePattern()).trim().split("\\s+");
+            final String[] lon = StringUtils.defaultString(cc.getLongitudePattern()).trim().split("\\s+");
+
+            String zone = StringUtils.EMPTY;
+            String easting = StringUtils.EMPTY;
+            String northing = StringUtils.EMPTY;
+
+            if (lat.length >= 3) {
+                zone = lat[1] + lat[0].toUpperCase(Locale.US);
+                easting = lat[2];
+            } else if (lat.length == 2) {
+                zone = lat[1] + lat[0].toUpperCase(Locale.US);
+            } else if (lat.length == 1) {
+                zone = lat[0];
+            }
+
+            if (lon.length >= 3 && "N".equalsIgnoreCase(lon[0])) {
+                northing = lon[1] + lon[2];
+            } else if (lon.length >= 2 && "N".equalsIgnoreCase(lon[0])) {
+                northing = lon[1];
+            } else if (lon.length >= 1) {
+                northing = lon[lon.length - 1];
+            }
+
+            return "Z " + zone + " / E " + easting + " / N " + northing;
+        }
+
+        private static String stripAxisPrefix(final String text, final char axis) {
+            final String trimmed = StringUtils.defaultString(text).trim();
+            if (trimmed.length() > 0 && Character.toUpperCase(trimmed.charAt(0)) == Character.toUpperCase(axis)) {
+                return trimmed.substring(1).trim();
+            }
+            return trimmed;
         }
     }
 
