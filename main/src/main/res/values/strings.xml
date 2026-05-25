@@ -485,6 +485,7 @@
         <item quantity="many">%d caches downloaded</item>
         <item quantity="other">%d caches downloaded</item>
     </plurals>
+    <string name="caches_store_background_skipped">Skipped offline caches: %d</string>
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
