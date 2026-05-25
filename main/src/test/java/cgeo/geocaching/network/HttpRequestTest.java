@@ -54,7 +54,7 @@ public class HttpRequestTest {
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getMethod()).isEqualTo("POST");
 
-        assertThat(req.getBody().utf8()).isEqualTo("testReq");
+        assertThat(req.getBody() != null ? req.getBody().utf8() : "").isEqualTo("testReq");
         assertThat(resp.getBodyString()).isEqualTo("testResp");
     }
 
@@ -65,7 +65,7 @@ public class HttpRequestTest {
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getMethod()).isEqualTo("GET");
 
-        assertThat(req.getBody().utf8()).isEqualTo("");
+        assertThat(req.getBody() != null ? req.getBody().utf8() : "").isEqualTo("");
         assertThat(resp.getBodyString()).isEqualTo("testResp");
     }
 
@@ -82,7 +82,7 @@ public class HttpRequestTest {
 
         assertThat(req.getMethod()).isEqualTo("POST");
 
-        final String respJson = TextUtils.replaceWhitespace(req.getBody().utf8());
+        final String respJson = TextUtils.replaceWhitespace(req.getBody() != null ? req.getBody().utf8() : "");
         assertThat(respJson).contains("\"id\":5");
         assertThat(respJson).contains("\"name\":\"Huber\"");
         assertThat(resp.id).isEqualTo(13);
