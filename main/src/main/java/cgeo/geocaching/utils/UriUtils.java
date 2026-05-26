@@ -42,6 +42,8 @@ public final class UriUtils {
 
     public static final String SCHEME_ANDROID_RESOURCE = ContentResolver.SCHEME_ANDROID_RESOURCE;
 
+    public static final String SCHEME_DATA = "data";
+
     private static final Map<String, String> VOLUME_MAP = getVolumeMap();
 
     private UriUtils() {
@@ -268,6 +270,14 @@ public final class UriUtils {
             return false;
         }
         return SCHEME_CONTENT.equals(uri.getScheme());
+    }
+
+    /** Returns whether this inline data-uri */
+    public static boolean isDataUri(final Uri uri) {
+        if (uri == null) {
+            return false;
+        }
+        return SCHEME_DATA.equals(uri.getScheme());
     }
 
     /** Returns whether this Uri is a resource Uri */
