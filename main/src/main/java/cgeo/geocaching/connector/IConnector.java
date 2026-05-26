@@ -258,6 +258,16 @@ public interface IConnector {
     List<LogType> getPossibleLogTypes(@NonNull Geocache geocache);
 
     /**
+     * Get the list of log types available for offline logging for a cache.
+     * Implementations should usually return the same set as {@link #getPossibleLogTypes(Geocache)},
+     * unless the connector supports different log types for offline logging.
+     * Unsupported offline logs will be changed into a NOTE-log during the offline logging process.
+     * All connectors should support at least the NOTE log type.
+     */
+    @NonNull
+    List<LogType> getPossibleOfflineLogTypes(@NonNull Geocache geocache);
+
+    /**
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'.
      */

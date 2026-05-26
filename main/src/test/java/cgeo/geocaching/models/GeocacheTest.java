@@ -28,12 +28,12 @@ public class GeocacheTest {
         ocCache.setType(CacheType.TRADITIONAL);
         assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.DIDNT_FIND_IT);
         assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.NOTE);
-        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.NEEDS_MAINTENANCE);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").doesNotContain(LogType.NEEDS_MAINTENANCE);
         assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
 
         ocCache.setType(CacheType.WEBCAM);
         assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible webcam log-types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
-        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible webcam log-types").contains(LogType.NEEDS_MAINTENANCE);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible webcam log-types").doesNotContain(LogType.NEEDS_MAINTENANCE);
     }
 
     @Test
