@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:gravity="center_vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/marker_button"
+        style="@style/button_icon"
+        app:icon="@drawable/ic_menu_emoticons"
+        tools:ignore="ContentDescription" />
+
+    <Button
+        android:id="@+id/filter_button"
+        style="@style/button_icon"
+        app:icon="@drawable/ic_menu_filter"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/filter_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="@dimen/textSize_detailsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="Type: Traditional" />
+
+
+    <Button
+        android:id="@+id/delete_button"
+        style="@style/button_icon"
+        app:icon="@drawable/ic_menu_delete"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/drag_handle"
+        android:layout_width="@dimen/buttonSize_iconButton"
+        android:layout_height="@dimen/buttonSize_iconButton"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_menu_reorder"
+        tools:src="@drawable/ic_menu_reorder"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
+
+

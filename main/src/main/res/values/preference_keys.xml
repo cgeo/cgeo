@@ -250,6 +250,8 @@
     <string translatable="false" name="pref_maptrail_maxdistance">maptrail_maxdistance</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
+    <string translatable="false" name="pref_fakekey_conditional_markers">fakekey_conditional_markers</string>
+    <string translatable="false" name="pref_conditionalCacheMarkers">conditionalCacheMarkers</string>
     <string translatable="false" name="pref_showElevation">showElevation</string>
 
     <!-- category waypoints -->

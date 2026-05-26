@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/menu_item_add"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/conditional_marker_add_rule"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+    <item
+        android:id="@+id/menu_item_cancel"
+        android:icon="@drawable/ic_menu_cancel"
+        android:title="@string/cancel"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+    <item
+        android:id="@+id/menu_item_save"
+        android:icon="@drawable/ic_menu_done"
+        android:title="@string/waypoint_save"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+
+</menu>
+

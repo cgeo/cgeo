@@ -56,7 +56,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             R.string.pref_tileprovider, R.string.pref_tileprovider_hidden,
             // map content & behavior
             R.string.pref_maptrail,
-            R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,
+            R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon, R.string.pref_fakekey_conditional_markers,
             R.string.pref_excludeWpOriginal, R.string.pref_excludeWpParking, R.string.pref_excludeWpVisited,
             R.string.pref_longTapOnMap,
             R.string.pref_mapRotation,
