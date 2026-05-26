@@ -681,6 +681,10 @@ public final class MapMarkerUtils {
         readLists();
 
         final ArrayList<Integer> result = new ArrayList<>();
+
+        // Conditional cache markers are prepended so they appear first
+        result.addAll(cgeo.geocaching.models.ConditionalCacheMarker.getMarkersForCache(cache));
+
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {
             final Integer markerId = list2marker.get(list);

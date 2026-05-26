@@ -859,6 +859,11 @@
         </activity>
 
         <activity
+            android:name=".settings.ConditionalCacheMarkersActivity"
+            android:label="@string/conditional_marker_activity_title" >
+        </activity>
+
+        <activity
             android:name=".connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"

@@ -21,6 +21,11 @@
             android:summary="@string/init_summary_dtMarkerOnCacheIcon"
             android:title="@string/init_dtMarkerOnCacheIcon"
             app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_conditional_markers"
+            android:title="@string/init_conditionalCacheMarkers"
+            android:summary="@string/init_summary_conditionalCacheMarkers"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_showElevation"
