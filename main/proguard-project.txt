@@ -168,9 +168,9 @@
 # keep classes of metadata libaray (this lib heavily uses reflection)
 -keep class com.drew.** { *; }
 
-# Whitelist MPAndroidChart
+# Whitelist AndroidChart (fork of MPAndroidChart)
 # Preserve all public classes and methods
--keep class com.github.mikephil.charting.** { *; }
--keep public class com.github.mikephil.charting.animation.* {
+-keep class info.appdev.charting.** { *; }
+-keep public class info.appdev.charting.animation.* {
     public protected *;
 }
