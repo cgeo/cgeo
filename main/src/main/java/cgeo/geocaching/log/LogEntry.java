@@ -74,6 +74,8 @@ public class LogEntry implements Parcelable {
     @NonNull public final String cacheGuid; // used for trackables
     /** Spotted cache geocode */
     @NonNull public final String cacheGeocode; // used for trackables
+    /** Is markes as favorite */
+    public final boolean favorite;
 
     @NonNull
     public Date getDate() {
@@ -111,6 +113,7 @@ public class LogEntry implements Parcelable {
         cacheName = StringUtils.defaultString(in.readString());
         cacheGuid = StringUtils.defaultString(in.readString());
         cacheGeocode = StringUtils.defaultString(in.readString());
+        favorite = in.readInt() == 1;
     }
 
     @Override
@@ -129,6 +132,7 @@ public class LogEntry implements Parcelable {
         dest.writeString(cacheName);
         dest.writeString(cacheGuid);
         dest.writeString(cacheGeocode);
+        dest.writeInt(favorite ? 1 : 0);
     }
 
     public static final Parcelable.Creator<LogEntry> CREATOR = new Parcelable.Creator<LogEntry>() {
@@ -186,6 +190,7 @@ public class LogEntry implements Parcelable {
         String cacheName = ""; // used for trackables
         String cacheGuid = ""; // used for trackables
         String cacheGeocode = ""; // used for trackables
+        boolean favorite = false;
 
 
         /** Build an immutable {@link LogEntry} Object. */
@@ -363,6 +368,15 @@ public class LogEntry implements Parcelable {
             this.reportProblem = reportProblem;
             return self();
         }
+
+        public boolean isFavorite() {
+            return favorite;
+        }
+
+        public T setFavorite(final boolean favorite) {
+            this.favorite = favorite;
+            return self();
+        }
     }
 
     /**
@@ -385,6 +399,7 @@ public class LogEntry implements Parcelable {
         this.cacheGuid = builder.cacheGuid;
         this.cacheGeocode = builder.cacheGeocode;
         this.reportProblem = builder.reportProblem == null ? ReportProblemType.NO_PROBLEM : builder.reportProblem;
+        this.favorite = builder.favorite;
     }
 
     /**
@@ -412,7 +427,8 @@ public class LogEntry implements Parcelable {
             .setLogImages(logImages)
             .setCacheName(cacheName)
             .setCacheGuid(cacheGuid)
-            .setCacheGeocode(cacheGeocode);
+            .setCacheGeocode(cacheGeocode)
+            .setFavorite(favorite);
     }
 
 
@@ -427,7 +443,7 @@ public class LogEntry implements Parcelable {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(id).append(logType).append(author).append(log).append(date).append(found)
-                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode)
+                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode).append(favorite)
                 .build();
     }
 
