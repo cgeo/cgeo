@@ -547,6 +547,7 @@
         <item>3μ</item>
         <item>&lt;3μ</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
