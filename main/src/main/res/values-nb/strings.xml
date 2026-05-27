@@ -528,6 +528,7 @@
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inkluder cacher uten V/T</string>
     <string name="cache_filter_log_entry_foundby">Funnet av</string>
     <string name="cache_filter_log_entry_logtext">Loggtekst</string>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
