@@ -1082,7 +1082,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
             ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
         } else if (requestCode == REQUEST_CODE_CONDITIONAL_MARKERS) {
-            MapMarkerUtils.clearCachedItems();
             reloadCachesAndWaypoints();
         }
     }
