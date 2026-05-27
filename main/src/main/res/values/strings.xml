@@ -884,6 +884,8 @@
     <string name="conditional_marker_add_rule">Add rule</string>
     <string name="conditional_marker_empty_hint">No rules configured. Tap + to add one.</string>
     <string name="conditional_marker_nofilter_label">(no filter — marks all caches)</string>
+    <string name="conditional_marker_enabled">Conditional markers enabled</string>
+    <string name="conditional_marker_disabled">Conditional markers disabled</string>
 
 
     <!-- about -->

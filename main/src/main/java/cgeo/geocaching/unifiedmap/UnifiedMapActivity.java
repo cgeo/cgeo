@@ -1513,6 +1513,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     return true;
                 });
             }
+
+            final View conditionalMarkersButton = findViewById(R.id.menu_conditional_markers);
+            if (conditionalMarkersButton != null) {
+                conditionalMarkersButton.setOnLongClickListener(v -> {
+                    final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
+                    Settings.setConditionalCacheMarkersEnabled(newState);
+                    ViewUtils.showShortToast(this, newState ? R.string.conditional_marker_enabled : R.string.conditional_marker_disabled);
+                    reloadCachesAndWaypoints();
+                    return true;
+                });
+            }
         });
     }
 }

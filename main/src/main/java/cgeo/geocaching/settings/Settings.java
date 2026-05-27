@@ -2563,6 +2563,14 @@ public class Settings {
         }
     }
 
+    public static boolean isConditionalCacheMarkersEnabled() {
+        return getBoolean(R.string.pref_conditionalCacheMarkersEnabled, true);
+    }
+
+    public static void setConditionalCacheMarkersEnabled(final boolean enabled) {
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, enabled);
+    }
+
     /**
      * Persists the list of ConditionalCacheMarker rules and updates the in-memory cache.
      */

@@ -69,6 +69,9 @@ public class ConditionalCacheMarker {
      */
     @NonNull
     public static List<Integer> getMarkersForCache(@Nullable final Geocache cache) {
+        if (!Settings.isConditionalCacheMarkersEnabled()) {
+            return Collections.emptyList();
+        }
         return getMarkersForRules(cache, Settings.getConditionalCacheMarkers());
     }
 
