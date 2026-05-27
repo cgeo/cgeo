@@ -1555,7 +1555,8 @@ public final class GCParser {
                             .setLogType(LogType.getByType(logType))
                             .setLog(logText)
                             .setFound(entry.path("GeocacheFindCount").asInt())
-                            .setFriend(markAsFriendsLog);
+                            .setFriend(markAsFriendsLog)
+                            .setFavorite(entry.path("FavoritePointUsed").asBoolean());
 
                     final ArrayNode images = (ArrayNode) entry.get("Images");
                     for (final JsonNode image : images) {
