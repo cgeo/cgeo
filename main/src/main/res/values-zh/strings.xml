@@ -667,6 +667,7 @@
         <item>1月</item>
         <item>&gt;1月</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>
