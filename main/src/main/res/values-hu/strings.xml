@@ -414,6 +414,7 @@
     <string name="cache_filter_stringfilter_type_does_not_contain">Nem tartalmaz</string>
     <string name="cache_filter_stringfilter_type_starts_with">Ezzel kezdődik</string>
     <string name="cache_filter_checkboxlist_add_all_items">Az összes elem hozzáadása</string>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>
