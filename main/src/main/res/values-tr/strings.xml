@@ -589,6 +589,7 @@
         <item>1ay</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
