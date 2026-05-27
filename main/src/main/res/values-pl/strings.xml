@@ -779,6 +779,11 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- conditional cache markers -->
+    <string name="conditional_marker_activity_title">Znaczniki warunkowe</string>
+    <string name="conditional_marker_add_rule">Dodaj regułę</string>
+    <string name="conditional_marker_empty_hint">Brak skonfigurowanych reguł. Dotknij +, aby jakąś dodać.</string>
+    <string name="conditional_marker_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -1025,6 +1030,8 @@
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
+    <string name="init_conditionalCacheMarkers">Warunkowe znaczniki skrytki</string>
+    <string name="init_summary_conditionalCacheMarkers">Zdefiniuj symbole znacznika do rysowania na ikonach skrytek w oparciu o warunki filtrowania</string>
     <string name="init_showElevation">Pokaż wysokość</string>
     <string name="init_summary_showElevation">Pokaż informacje o wysokości dla bieżącej pozycji, pobrane z danych trasy lub GNSS (jeśli są dostępne)</string>
     <string name="init_elevation_notAvailable">"Brak dostępnych danych o wysokości"</string>
