@@ -584,6 +584,7 @@
         <item>3d</item>
         <item>&lt;3d</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
