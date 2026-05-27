@@ -36,6 +36,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.ConditionalCacheMarkersActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.storage.DataStore;
@@ -148,6 +149,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
     private static final int REQUEST_CODE_LOG = 1001;
+    private static final int REQUEST_CODE_CONDITIONAL_MARKERS = 1002;
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
@@ -987,6 +989,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return true;
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
+        } else if (id == R.id.menu_conditional_markers) {
+            startActivityForResult(new Intent(this, ConditionalCacheMarkersActivity.class), REQUEST_CODE_CONDITIONAL_MARKERS);
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1077,6 +1081,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             refreshMapData(true);
         } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
             ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
+        } else if (requestCode == REQUEST_CODE_CONDITIONAL_MARKERS) {
+            reloadCachesAndWaypoints();
         }
     }
 
