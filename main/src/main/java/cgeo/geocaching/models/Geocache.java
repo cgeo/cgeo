@@ -216,6 +216,10 @@ public class Geocache implements INamedGeoCoordinate {
     //transient field, used for online searches only
     private SearchCacheData searchCacheData = null;
 
+    //transient field: logtypes the connector's server reports as submittable for this cache+user
+    //null means "not yet fetched"; callers fall back to the static list in that case
+    private Set<LogType> submittableLogTypes = null;
+
     public void setChangeNotificationHandler(@Nullable final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
     }
@@ -679,6 +683,15 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public List<LogType> getPossibleLogTypes() {
         return getConnector().getPossibleLogTypes(this);
+    }
+
+    @Nullable
+    public Set<LogType> getSubmittableLogTypes() {
+        return submittableLogTypes;
+    }
+
+    public void setSubmittableLogTypes(@Nullable final Set<LogType> submittableLogTypes) {
+        this.submittableLogTypes = submittableLogTypes;
     }
 
     @NonNull

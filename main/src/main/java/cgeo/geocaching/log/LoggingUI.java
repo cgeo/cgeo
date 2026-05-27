@@ -1,12 +1,16 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -85,6 +89,24 @@ public final class LoggingUI {
     }
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
+        // For OC caches, the static log-type list is a superset — the OKAPI server is the source of
+        // truth. If we haven't fetched submittable logtypes yet, do so before opening the menu so
+        // that entries the server won't accept (e.g. OWNER_MAINTENANCE on OC.de) don't show up.
+        if (cache.getSubmittableLogTypes() == null && ConnectorFactory.getConnector(cache) instanceof OCApiConnector) {
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+                try {
+                    cache.getLoggingManager().getLogContextInfo(null);
+                } catch (final Exception e) {
+                    Log.d("LoggingUI.showOfflineMenu: prefetch of submittable logtypes failed: " + e);
+                }
+                AndroidRxUtils.runOnUi(() -> doShowOfflineMenu(cache, activity, listener));
+            });
+            return;
+        }
+        doShowOfflineMenu(cache, activity, listener);
+    }
+
+    private static void doShowOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
         final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
         final LogType currentLogType = currentLog == null ? null : currentLog.logType;
 

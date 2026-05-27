@@ -632,6 +632,33 @@ final class OkapiClient {
         return data != null;
     }
 
+    /**
+     * Query the OKAPI /logs/capabilities endpoint for the set of logtypes this user may submit
+     * for the given cache in its current state. Returns null when the call fails so callers can
+     * fall back to a static list (e.g. when offline).
+     */
+    @Nullable
+    @WorkerThread
+    public static EnumSet<LogType> getSubmittableLogTypes(@NonNull final OCApiConnector connector, @NonNull final Geocache cache) {
+        final Parameters params = new Parameters("cache_code", cache.getGeocode());
+        params.add("fields", "submittable_logtypes");
+
+        final ObjectNode data = getRequest(connector, OkapiService.SERVICE_LOG_CAPABILITIES, params).data;
+        Log.d("OkapiClient.getSubmittableLogTypes: response=" + (data == null ? "null" : data.toString()));
+        if (data == null) {
+            return null;
+        }
+        final JsonNode listNode = data.get("submittable_logtypes");
+        if (listNode == null || !listNode.isArray()) {
+            return null;
+        }
+        final EnumSet<LogType> result = EnumSet.noneOf(LogType.class);
+        for (final JsonNode item : listNode) {
+            result.add(parseLogType(item.asText()));
+        }
+        return result;
+    }
+
     @NonNull
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity")
@@ -660,6 +687,8 @@ final class OkapiClient {
         }
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
+
+        Log.d("OkapiClient.postLog: logtype='" + logType.ocType + "' response=" + (data == null ? "null" : data.toString()));
 
         if (data == null) {
             return LogResult.error(StatusCode.LOG_POST_ERROR);

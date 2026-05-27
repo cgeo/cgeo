@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -64,7 +65,7 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
 
     @Override
     @NonNull
-    public final List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
+    public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();
         if (geocache.isEventCache()) {
             logTypes.addAll(EVENT_LOG_TYPES);
@@ -80,6 +81,15 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
                 logTypes.add(LogType.TEMP_DISABLE_LISTING);
             }
             logTypes.add(LogType.ARCHIVE);
+        }
+
+        // If the connector's OKAPI server has reported which logtypes are actually submittable for
+        // this cache+user (fetched via OkapiClient.getSubmittableLogTypes), restrict the list. The
+        // static list above is a superset of what every OC platform might accept — the server is
+        // the source of truth. When not yet fetched, the static list is used as-is.
+        final Set<LogType> serverTypes = geocache.getSubmittableLogTypes();
+        if (serverTypes != null) {
+            logTypes.retainAll(serverTypes);
         }
         return logTypes;
     }
