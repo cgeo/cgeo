@@ -281,9 +281,22 @@ public final class HtmlUtils {
             if (sa != sb) {
                 return sa - sb;
             }
-            return ssb.getSpanEnd(a) - ssb.getSpanEnd(b);
+            final int ea = ssb.getSpanEnd(a);
+            final int eb = ssb.getSpanEnd(b);
+            return eb - ea;
         });
 
+        // rearange after sorting
+        for (ForegroundColorSpan span : colorSpans) {
+            final int start = ssb.getSpanStart(span);
+            final int end = ssb.getSpanEnd(span);
+            final int flags = ssb.getSpanFlags(span);
+
+            ssb.removeSpan(span);
+            ssb.setSpan(span, start, end, flags);
+        }
+
+        // rearange spans with same size
         for (int i = 0; i < colorSpans.length - 1; i++) {
             final ForegroundColorSpan currentSpan = colorSpans[i];
             final ForegroundColorSpan next = colorSpans[i + 1];
