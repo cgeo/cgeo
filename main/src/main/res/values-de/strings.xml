@@ -765,6 +765,7 @@
         <item>1M</item>
         <item>&gt;1M</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
