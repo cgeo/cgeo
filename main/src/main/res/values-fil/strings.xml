@@ -275,6 +275,7 @@
     <string name="list_dialog_rename">Ang pangalan ay palitan</string>
     <string name="list_not_available">Ang listahan ay hindi pwede, lumipat sa karaniwang listahan</string>
     <!-- caches lists filter -->
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Ang Bersyon</string>
     <string name="about_changelog">Baguhin ang log</string>
