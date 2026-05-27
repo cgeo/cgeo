@@ -644,6 +644,7 @@
         <item>1 mėn</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
