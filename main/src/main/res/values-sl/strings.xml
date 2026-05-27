@@ -299,6 +299,7 @@
     <string name="list_dialog_rename">Preimenuj</string>
     <string name="list_not_available">Seznam ni več na voljo, preklapljam na standardni seznam</string>
     <!-- caches lists filter -->
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Različica</string>
     <string name="about_changelog">Zadnje spremembe</string>
