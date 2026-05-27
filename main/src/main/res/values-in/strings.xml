@@ -278,6 +278,7 @@
     <string name="list_dialog_rename">Ubah nama</string>
     <string name="list_not_available">Daftar tidak lagi tersedia, beralih ke daftar standar</string>
     <!-- caches lists filter -->
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versi</string>
     <string name="about_changelog">Perubahan</string>
