@@ -330,6 +330,7 @@
     <string name="cache_filter_storage_select_title">Selectare filtru</string>
     <string name="cache_filter_storage_select_clear_title">Selectaţi filtrul sau ştergeţi filtrul curent</string>
     <string name="cache_filter_checkboxlist_add_all_items">Adaugă toate elementele</string>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
