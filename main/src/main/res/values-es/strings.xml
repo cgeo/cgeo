@@ -736,6 +736,7 @@
         <item>1 mes</item>
         <item>&gt;1 mes</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
