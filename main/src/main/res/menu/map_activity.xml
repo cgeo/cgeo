@@ -53,6 +53,10 @@
         android:visible="false"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/menu_conditional_markers"
+        android:icon="@drawable/ic_menu_emoticons"
+        android:title="@string/conditional_marker_activity_title"/>
+    <item
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
         android:title="@string/cache_hint"
