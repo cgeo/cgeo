@@ -763,6 +763,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
