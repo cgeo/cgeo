@@ -717,6 +717,7 @@
         <item>1kk</item>
         <item>&gt;1kk</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
