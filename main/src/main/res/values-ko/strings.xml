@@ -653,6 +653,7 @@
         <item>1달</item>
         <item>&gt;1달</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
