@@ -488,6 +488,7 @@
     <string name="cache_filter_status_exclude_archived">Udelad arkiverede</string>
     <string name="cache_filter_log_entry_foundby">Fundet af</string>
     <string name="cache_filter_log_entry_logtext">Logtekst</string>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
