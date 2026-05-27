@@ -513,6 +513,7 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">サブフィルタが未定義です</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
