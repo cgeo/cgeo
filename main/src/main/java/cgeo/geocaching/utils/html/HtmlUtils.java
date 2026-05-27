@@ -263,8 +263,44 @@ public final class HtmlUtils {
         final String preparedHtml = prepareParseBody(html);
         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
         final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(preparedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
+        fixSpanOrder(description);
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());
 
+    }
+
+    /**
+     * Fix span order by reorganise them to have correct color
+     */
+    private static void fixSpanOrder(final SpannableStringBuilder ssb) {
+        final ForegroundColorSpan[] colorSpans = ssb.getSpans(0, ssb.length(), ForegroundColorSpan.class);
+
+        // sorting by postition
+        Arrays.sort(colorSpans, (a, b) -> {
+            final int sa = ssb.getSpanStart(a);
+            final int sb = ssb.getSpanStart(b);
+            if (sa != sb) {
+                return sa - sb;
+            }
+            return ssb.getSpanEnd(a) - ssb.getSpanEnd(b);
+        });
+
+        for (int i = 0; i < colorSpans.length - 1; i++) {
+            final ForegroundColorSpan currentSpan = colorSpans[i];
+            final ForegroundColorSpan next = colorSpans[i + 1];
+
+            final int startCurrent = ssb.getSpanStart(currentSpan);
+            final int endCurrent = ssb.getSpanEnd(currentSpan);
+            final int startNext = ssb.getSpanStart(next);
+            final int endNext = ssb.getSpanEnd(next);
+
+            // if span are same, need too reorganise them
+            if (startCurrent == startNext && endCurrent == endNext) {
+                final int flags = ssb.getSpanFlags(currentSpan);
+                // current span moves to the end of the list and gets the highest priority
+                ssb.removeSpan(currentSpan);
+                ssb.setSpan(currentSpan, startCurrent, endCurrent, flags);
+            }
+        }
     }
 
     /** returns formatted HTML data (syntax-corrected as well as pretty-printed and colorized according to input parameters) */
