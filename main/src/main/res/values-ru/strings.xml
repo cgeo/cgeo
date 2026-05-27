@@ -762,6 +762,7 @@
         <item>1м</item>
         <item>&gt;1м</item>
     </string-array>
+    <!-- conditional cache markers -->
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
