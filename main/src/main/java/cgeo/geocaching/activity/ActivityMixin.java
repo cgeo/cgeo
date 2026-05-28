@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -24,6 +25,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
+
+import java.lang.ref.WeakReference;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 public final class ActivityMixin {
 
@@ -195,6 +200,89 @@ public final class ActivityMixin {
     public static void requireActivity(final @Nullable Activity activity, final Action1<Activity> action) {
         if (activity != null) {
             action.call(activity);
+        }
+    }
+
+    /**
+     * Registers an interceptor for back press and/or navigate up on the given activity.
+     *
+     * @param activity       The activity to register on. Held via WeakReference to avoid memory leaks.
+     * @param interceptBack  Whether to intercept the system back press.
+     * @param interceptNavUp Whether to intercept navigate up (Toolbar ← arrow). Use the returned
+     *                       BooleanSupplier in {@code onSupportNavigateUp()}.
+     * @param interceptor    Called when back/navUp is triggered.
+     *                       Parameter: {@code true} = navigate up, {@code false} = back press.
+     *                       Return {@code true} to STOP navigation, {@code false} to CONTINUE.
+     * @return A BooleanSupplier to be called from {@code onSupportNavigateUp()}. Returns {@code true}
+     *         when navigation was intercepted (stopped), {@code false} to continue (call
+     *         {@code super.onSupportNavigateUp()}). Returns {@code false} immediately if
+     *         interceptNavUp is false or the activity is gone.
+     *         Note: the caller is responsible for invoking {@code super.onSupportNavigateUp()} when
+     *         the supplier returns {@code false}, as super calls cannot be made from outside the class.
+     */
+    public static BooleanSupplier registerNavigationInterceptor(
+            @NonNull final AppCompatActivity activity,
+            final boolean interceptBack,
+            final boolean interceptNavUp,
+            @NonNull final Predicate<Boolean> interceptor) {
+
+        final WeakReference<AppCompatActivity> weakActivity = new WeakReference<>(activity);
+
+        if (interceptBack) {
+            final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    final AppCompatActivity a = weakActivity.get();
+                    if (a == null || a.isFinishing() || a.isDestroyed()) {
+                        setEnabled(false);
+                        return;
+                    }
+                    final boolean stop = interceptor.test(false);
+                    if (!stop) {
+                        // Disable before re-triggering to avoid infinite interception loop
+                        setEnabled(false);
+                        a.getOnBackPressedDispatcher().onBackPressed();
+                        if (!a.isFinishing() && !a.isDestroyed()) {
+                            setEnabled(true);
+                        }
+                    }
+                }
+            };
+            // Passing activity as LifecycleOwner: callback is automatically removed on destroy
+            activity.getOnBackPressedDispatcher().addCallback(activity, callback);
+        }
+
+        if (interceptNavUp) {
+            return () -> {
+                final AppCompatActivity a = weakActivity.get();
+                if (a == null || a.isFinishing() || a.isDestroyed()) {
+                    return false;
+                }
+                return interceptor.test(true);
+            };
+        }
+
+        return () -> false;
+    }
+
+    /**
+     * Programmatically simulates the user pressing back or navigate up.
+     * Useful inside confirmation dialogs registered via {@link #registerNavigationInterceptor}.
+     *
+     * @param activity     The activity to trigger navigation on.
+     * @param isNavigateUp {@code true} to simulate navigate up, {@code false} to simulate back press.
+     */
+    public static void triggerNavigation(
+            @NonNull final AppCompatActivity activity,
+            final boolean isNavigateUp) {
+
+        if (activity.isFinishing() || activity.isDestroyed()) {
+            return;
+        }
+        if (isNavigateUp) {
+            activity.onSupportNavigateUp();
+        } else {
+            activity.getOnBackPressedDispatcher().onBackPressed();
         }
     }
 }
