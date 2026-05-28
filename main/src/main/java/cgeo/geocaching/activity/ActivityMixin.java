@@ -290,7 +290,9 @@ public final class ActivityMixin {
     }
 
     /**
-     * Programmatically simulates the user pressing back or navigate up.
+     * Immediately triggers back or navigate up programmatically.
+     * Use the Runnable passed to {@link #registerNavigationInterceptor(Activity, boolean, boolean, Predicate)}
+     * when navigation should resume later, for example after a confirmation dialog.
      *
      * @param activity     The activity to trigger navigation on.
      * @param isNavigateUp {@code true} to simulate navigate up, {@code false} to simulate back press.
