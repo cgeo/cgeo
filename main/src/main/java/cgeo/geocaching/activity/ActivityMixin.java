@@ -28,10 +28,16 @@ import androidx.core.app.TaskStackBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
 public final class ActivityMixin {
+
+    private static final Map<Activity, AtomicBoolean> NAVIGATION_BYPASS = Collections.synchronizedMap(new WeakHashMap<>());
 
     private ActivityMixin() {
         // utility class
@@ -211,6 +217,10 @@ public final class ActivityMixin {
         }
     }
 
+    public static boolean isActivityValid(final @Nullable Activity activity) {
+        return activity != null && !activity.isFinishing() && !activity.isDestroyed();
+    }
+
     /**
      * Registers an interceptor for back press and/or navigate up on the given activity.
      *
@@ -229,41 +239,53 @@ public final class ActivityMixin {
      *         the supplier returns {@code false}, as super calls cannot be made from outside the class.
      */
     public static BooleanSupplier registerNavigationInterceptor(
-            @NonNull final AppCompatActivity activity,
+            @NonNull final Activity activity,
             final boolean interceptBack,
             final boolean interceptNavUp,
             @NonNull final Predicate<Boolean> interceptor) {
 
-        final WeakReference<AppCompatActivity> weakActivity = new WeakReference<>(activity);
+        final WeakReference<Activity> weakActivity = new WeakReference<>(activity);
 
-        if (interceptBack) {
+        if (interceptBack && activity instanceof AppCompatActivity) {
+            final AppCompatActivity appCompatActivity = (AppCompatActivity) activity;
             final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    final AppCompatActivity a = weakActivity.get();
-                    if (a == null || a.isFinishing() || a.isDestroyed()) {
+                    final Activity a = weakActivity.get();
+                    if (!isActivityValid(a)) {
                         setEnabled(false);
+                        return;
+                    }
+                    if (consumeNavigationBypass(a)) {
+                        setEnabled(false);
+                        triggerBack(a);
+                        if (isActivityValid(a)) {
+                            setEnabled(true);
+                        }
                         return;
                     }
                     final boolean stop = interceptor.test(false);
                     if (!stop) {
                         // Disable before re-triggering to avoid infinite interception loop
                         setEnabled(false);
-                        a.getOnBackPressedDispatcher().onBackPressed();
-                        if (!a.isFinishing() && !a.isDestroyed()) {
+                        triggerBack(a);
+                        if (isActivityValid(a)) {
                             setEnabled(true);
                         }
                     }
                 }
             };
             // Passing activity as LifecycleOwner: callback is automatically removed on destroy
-            activity.getOnBackPressedDispatcher().addCallback(activity, callback);
+            appCompatActivity.getOnBackPressedDispatcher().addCallback(appCompatActivity, callback);
         }
 
         if (interceptNavUp) {
             return () -> {
-                final AppCompatActivity a = weakActivity.get();
-                if (a == null || a.isFinishing() || a.isDestroyed()) {
+                final Activity a = weakActivity.get();
+                if (!isActivityValid(a)) {
+                    return false;
+                }
+                if (consumeNavigationBypass(a)) {
                     return false;
                 }
                 return interceptor.test(true);
@@ -281,16 +303,51 @@ public final class ActivityMixin {
      * @param isNavigateUp {@code true} to simulate navigate up, {@code false} to simulate back press.
      */
     public static void triggerNavigation(
-            @NonNull final AppCompatActivity activity,
+            @NonNull final Activity activity,
             final boolean isNavigateUp) {
+        triggerNavigation(activity, isNavigateUp, false);
+    }
 
-        if (activity.isFinishing() || activity.isDestroyed()) {
+    /**
+     * Programmatically simulates the user pressing back or navigate up.
+     *
+     * @param activity           The activity to trigger navigation on.
+     * @param isNavigateUp       {@code true} to simulate navigate up, {@code false} to simulate back press.
+     * @param bypassInterceptor  {@code true} to continue navigation without invoking the registered interceptor again.
+     */
+    public static void triggerNavigation(
+            @NonNull final Activity activity,
+            final boolean isNavigateUp,
+            final boolean bypassInterceptor) {
+
+        if (!isActivityValid(activity)) {
             return;
         }
+        if (bypassInterceptor) {
+            NAVIGATION_BYPASS.computeIfAbsent(activity, key -> new AtomicBoolean()).set(true);
+        }
         if (isNavigateUp) {
-            activity.onSupportNavigateUp();
+            if (bypassInterceptor || !(activity instanceof AppCompatActivity)) {
+                navigateUp(activity);
+            } else {
+                ((AppCompatActivity) activity).onSupportNavigateUp();
+            }
         } else {
-            activity.getOnBackPressedDispatcher().onBackPressed();
+            triggerBack(activity);
+        }
+    }
+
+    private static boolean consumeNavigationBypass(@NonNull final Activity activity) {
+        final AtomicBoolean bypass = NAVIGATION_BYPASS.get(activity);
+        return bypass != null && bypass.getAndSet(false);
+    }
+
+    @SuppressWarnings("deprecation")
+    private static void triggerBack(@NonNull final Activity activity) {
+        if (activity instanceof AppCompatActivity) {
+            ((AppCompatActivity) activity).getOnBackPressedDispatcher().onBackPressed();
+        } else {
+            activity.onBackPressed();
         }
     }
 }
