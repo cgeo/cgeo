@@ -379,7 +379,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         final GeocacheFilter newFilter = getFilterFromView();
         final boolean filterWasChanged = originalFilterConfig != null && !originalFilterConfig.equals(newFilter.toConfig());
         if (filterWasChanged) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
+                    .confirm(() -> ActivityMixin.triggerNavigation(this, isNavigateUp, true));
             return true;
         }
         return false;
