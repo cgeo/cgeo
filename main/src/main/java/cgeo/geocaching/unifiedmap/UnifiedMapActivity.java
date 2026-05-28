@@ -895,6 +895,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
+        final MenuItem itemConditionalMarkers = toolbarMenu.findItem(R.id.menu_conditional_markers);
+        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(itemConditionalMarkers, Settings.isConditionalCacheMarkersEnabled());
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -1525,7 +1527,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 conditionalMarkersButton.setOnLongClickListener(v -> {
                     final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
                     Settings.setConditionalCacheMarkersEnabled(newState);
-                    ViewUtils.showShortToast(this, newState ? R.string.conditional_marker_enabled : R.string.conditional_marker_disabled);
+                    if (null != toolbarMenu && null != toolbarMenu.findItem(R.id.menu_conditional_markers)) {
+                        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(toolbarMenu.findItem(R.id.menu_conditional_markers), newState);
+                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
+                    }
                     reloadCachesAndWaypoints();
                     return true;
                 });

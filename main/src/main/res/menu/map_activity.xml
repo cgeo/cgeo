@@ -54,7 +54,7 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_conditional_markers"
-        android:icon="@drawable/ic_menu_emoticons"
+        android:icon="@drawable/ic_menu_marker"
         android:title="@string/conditional_marker_activity_title"
         app:showAsAction="ifRoom|withText"/>
     <item

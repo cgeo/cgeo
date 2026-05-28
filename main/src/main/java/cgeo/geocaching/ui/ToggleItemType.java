@@ -25,7 +25,9 @@ public enum ToggleItemType {
     TOGGLE_SPEECH(R.drawable.ic_menu_text_to_speech_on, R.drawable.ic_menu_text_to_speech_off,
             R.string.cache_menu_speechDeactivate, R.string.cache_menu_speechActivate, R.string.talking_enabled, R.string.talking_disabled),
     WAYPOINTS_FROM_NOTE(-1, -1, R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote,
-            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote);
+            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote),
+    CONDITIONAL_MARKERS(R.drawable.ic_menu_marker, R.drawable.ic_menu_marker_off,
+            R.string.conditional_marker_activity_title, R.string.conditional_marker_activity_title, R.string.conditional_marker_enabled, R.string.conditional_marker_disabled);
 
     @DrawableRes
     private final int drawableActiveId;
