@@ -767,6 +767,12 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- conditional cache markers -->
+    <string name="conditional_marker_activity_title">Marcadors condicionals</string>
+    <string name="conditional_marker_add_rule">Afegeix una regla</string>
+    <string name="conditional_marker_empty_hint">No hi ha cap regla configurada. Toca + per afegir-ne una.</string>
+    <string name="conditional_marker_nofilter_label">(sense filtre — marca tots els catxés)</string>
+    <string name="conditional_marker_enabled">Marcadors condicionals activats</string>
+    <string name="conditional_marker_disabled">Marcadors condicionals desactivats</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1013,6 +1019,8 @@
     <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols de \'\" trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé.</string>
     <string name="init_dtMarkerOnCacheIcon">Classificació D/T a les icones del catxé</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Mostra un marcador per a les classificacions de Dificultat (esquerra) i Terreny (dreta) als marcadors de catxé a la cantonada superior dreta (el marcador \"emmagatzemat\" es mou al centre).</string>
+    <string name="init_conditionalCacheMarkers">Marcadors de catxé condicional</string>
+    <string name="init_summary_conditionalCacheMarkers">Defineix els símbols de marcador que es dibuixaran a les icones del catxé segons les condicions del filtre</string>
     <string name="init_showElevation">Mostra l\'elevació</string>
     <string name="init_summary_showElevation">Mostra informació d\'elevació per a la posició actual, extreta de les dades d\'encaminament o GNSS (si està disponible)</string>
     <string name="init_elevation_notAvailable">"No hi ha dades d'elevació disponibles"</string>
