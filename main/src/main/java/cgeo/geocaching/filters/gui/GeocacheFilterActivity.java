@@ -261,8 +261,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
             return onSupportNavigateUp();
+        } else if (itemId == android.R.id.home) {
+            return onSupportNavigateUp();
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -387,7 +389,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return navUpHandler.getAsBoolean();
+        if (navUpHandler.getAsBoolean()) {
+            return true;
+        }
+        return ActivityMixin.navigateUp(this) || super.onSupportNavigateUp();
     }
 
 

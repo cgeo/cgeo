@@ -228,7 +228,8 @@ public final class ActivityMixin {
      *                    (e.g. from a dialog confirmation).
      *                    Return {@code true} to STOP navigation, {@code false} to CONTINUE.
      * @return A BooleanSupplier to be called from {@code onSupportNavigateUp()}. Returns {@code true}
-     *         when navigation was handled or intercepted, {@code false} if the activity is gone.
+     *         when navigation was handled or intercepted, {@code false} if the activity is gone or
+     *         navigate up could not be concluded.
      */
     public static BooleanSupplier registerBackNavigationInterceptor(
             @NonNull final AppCompatActivity activity,
@@ -267,16 +268,18 @@ public final class ActivityMixin {
             if (!isActivityValid(weakActivity)) {
                 return false;
             }
+            final boolean[] navigationHandled = new boolean[] {false};
             final Runnable continueNavigateUp = () -> {
                 final AppCompatActivity currentActivity = weakActivity.get();
                 if (isActivityValid(currentActivity)) {
-                    navigateUp(currentActivity);
+                    navigationHandled[0] = navigateUp(currentActivity);
                 }
             };
-            if (!interceptor.test(continueNavigateUp)) {
+            final boolean stop = interceptor.test(continueNavigateUp);
+            if (!stop) {
                 continueNavigateUp.run();
             }
-            return true;
+            return stop || navigationHandled[0];
         };
     }
 }
