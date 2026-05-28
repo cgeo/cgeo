@@ -10,6 +10,12 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
     <item
+        android:id="@+id/menu_item_disable"
+        android:icon="@drawable/ic_menu_pause"
+        android:title="@string/conditional_marker_disable"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+    <item
         android:id="@+id/menu_item_cancel"
         android:icon="@drawable/ic_menu_cancel"
         android:title="@string/cancel"

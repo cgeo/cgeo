@@ -15,7 +15,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/marker_button"
         style="@style/button_icon"
-        app:icon="@drawable/ic_menu_emoticons"
+        app:icon="@drawable/ic_menu_marker"
         tools:ignore="ContentDescription" />
 
     <Button

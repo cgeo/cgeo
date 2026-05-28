@@ -76,7 +76,7 @@ public class ConditionalCacheMarkersActivity extends AbstractActionBarActivity {
                 markerBtn.setIcon(null);
             } else {
                 markerBtn.setText(null);
-                markerBtn.setIconResource(R.drawable.ic_menu_emoticons);
+                markerBtn.setIconResource(R.drawable.ic_menu_marker);
             }
 
             // Filter label: null or non-filtering (empty) filter = marks all caches
@@ -191,12 +191,17 @@ public class ConditionalCacheMarkersActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_item_save) {
+            Settings.setConditionalCacheMarkersEnabled(true);
             saveAndFinish();
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
             finish();
             return true;
         } else if (itemId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (itemId == R.id.menu_item_disable) {
+            Settings.setConditionalCacheMarkersEnabled(false);
             finish();
             return true;
         } else if (itemId == R.id.menu_item_add) {
