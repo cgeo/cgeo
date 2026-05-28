@@ -372,15 +372,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     /**
      * Called when the user attempts to leave via back press or navigate up.
      *
-     * @param isNavigateUp true if triggered by the Up arrow, false if by back press or Cancel menu item
+     * @param navigationAction concludes the intercepted back/up navigation when executed
      * @return true to STOP navigation (a confirmation dialog was shown), false to CONTINUE
      */
-    private boolean onNavigationIntercepted(final boolean isNavigateUp) {
+    private boolean onNavigationIntercepted(final Runnable navigationAction) {
         final GeocacheFilter newFilter = getFilterFromView();
         final boolean filterWasChanged = originalFilterConfig != null && !originalFilterConfig.equals(newFilter.toConfig());
         if (filterWasChanged) {
             SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
-                    .confirm(() -> ActivityMixin.triggerNavigation(this, isNavigateUp, true));
+                    .confirm(navigationAction);
             return true;
         }
         return false;
@@ -388,7 +388,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return navUpHandler.getAsBoolean() || super.onSupportNavigateUp();
+        return navUpHandler.getAsBoolean();
     }
 
 
