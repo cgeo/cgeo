@@ -31,13 +31,12 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
 public final class ActivityMixin {
 
-    private static final Map<Activity, AtomicBoolean> NAVIGATION_BYPASS = Collections.synchronizedMap(new WeakHashMap<>());
+    private static final Map<Activity, Boolean> NAVIGATION_BYPASS = Collections.synchronizedMap(new WeakHashMap<>());
 
     private ActivityMixin() {
         // utility class
@@ -324,7 +323,7 @@ public final class ActivityMixin {
             return;
         }
         if (bypassInterceptor) {
-            NAVIGATION_BYPASS.computeIfAbsent(activity, key -> new AtomicBoolean()).set(true);
+            setNavigationBypass(activity);
         }
         if (isNavigateUp) {
             if (bypassInterceptor || !(activity instanceof AppCompatActivity)) {
@@ -338,8 +337,15 @@ public final class ActivityMixin {
     }
 
     private static boolean consumeNavigationBypass(@NonNull final Activity activity) {
-        final AtomicBoolean bypass = NAVIGATION_BYPASS.get(activity);
-        return bypass != null && bypass.getAndSet(false);
+        synchronized (NAVIGATION_BYPASS) {
+            return Boolean.TRUE.equals(NAVIGATION_BYPASS.remove(activity));
+        }
+    }
+
+    private static void setNavigationBypass(@NonNull final Activity activity) {
+        synchronized (NAVIGATION_BYPASS) {
+            NAVIGATION_BYPASS.put(activity, true);
+        }
     }
 
     @SuppressWarnings("deprecation")
