@@ -260,7 +260,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             finishWithResult();
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
-            ActivityMixin.triggerNavigation(this, false);
+            getOnBackPressedDispatcher().onBackPressed();
             return true;
         }
         return false;

@@ -25,11 +25,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.ref.WeakReference;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
+
+import org.apache.commons.lang3.StringUtils;
 
 public final class ActivityMixin {
 
@@ -215,6 +215,10 @@ public final class ActivityMixin {
         return activity != null && !activity.isFinishing() && !activity.isDestroyed();
     }
 
+    public static boolean isActivityValid(final @Nullable WeakReference<? extends Activity> activityRef) {
+        return activityRef != null && isActivityValid(activityRef.get());
+    }
+
     /**
      * Registers an interceptor for back press and/or navigate up on the given activity.
      *
@@ -231,30 +235,29 @@ public final class ActivityMixin {
      *         or the activity is gone.
      */
     public static BooleanSupplier registerNavigationInterceptor(
-            @NonNull final Activity activity,
+            @NonNull final AppCompatActivity activity,
             final boolean interceptBack,
             final boolean interceptNavUp,
             @NonNull final Predicate<Runnable> interceptor) {
 
-        final WeakReference<Activity> weakActivity = new WeakReference<>(activity);
+        final WeakReference<AppCompatActivity> weakActivity = new WeakReference<>(activity);
 
-        if (interceptBack && activity instanceof AppCompatActivity) {
-            final AppCompatActivity appCompatActivity = (AppCompatActivity) activity;
+        if (interceptBack) {
             final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    final Activity a = weakActivity.get();
-                    if (!isActivityValid(a)) {
+                    if (!isActivityValid(weakActivity)) {
                         setEnabled(false);
                         return;
                     }
                     final Runnable continueBackNavigation = () -> {
-                        if (!isActivityValid(a)) {
+                        final AppCompatActivity currentActivity = weakActivity.get();
+                        if (!isActivityValid(currentActivity)) {
                             return;
                         }
                         setEnabled(false);
-                        triggerBack(a);
-                        if (isActivityValid(a)) {
+                        currentActivity.getOnBackPressedDispatcher().onBackPressed();
+                        if (isActivityValid(weakActivity)) {
                             setEnabled(true);
                         }
                     };
@@ -265,18 +268,18 @@ public final class ActivityMixin {
                 }
             };
             // Passing activity as LifecycleOwner: callback is automatically removed on destroy
-            appCompatActivity.getOnBackPressedDispatcher().addCallback(appCompatActivity, callback);
+            activity.getOnBackPressedDispatcher().addCallback(activity, callback);
         }
 
         if (interceptNavUp) {
             return () -> {
-                final Activity a = weakActivity.get();
-                if (!isActivityValid(a)) {
+                if (!isActivityValid(weakActivity)) {
                     return false;
                 }
                 final Runnable continueNavigateUp = () -> {
-                    if (isActivityValid(a)) {
-                        navigateUp(a);
+                    final AppCompatActivity currentActivity = weakActivity.get();
+                    if (isActivityValid(currentActivity)) {
+                        navigateUp(currentActivity);
                     }
                 };
                 if (!interceptor.test(continueNavigateUp)) {
@@ -287,36 +290,5 @@ public final class ActivityMixin {
         }
 
         return () -> false;
-    }
-
-    /**
-     * Immediately triggers back or navigate up programmatically.
-     * Use the Runnable passed to {@link #registerNavigationInterceptor(Activity, boolean, boolean, Predicate)}
-     * when navigation should resume later, for example after a confirmation dialog.
-     *
-     * @param activity     The activity to trigger navigation on.
-     * @param isNavigateUp {@code true} to simulate navigate up, {@code false} to simulate back press.
-     */
-    public static void triggerNavigation(
-            @NonNull final Activity activity,
-            final boolean isNavigateUp) {
-
-        if (!isActivityValid(activity)) {
-            return;
-        }
-        if (isNavigateUp) {
-            navigateUp(activity);
-        } else {
-            triggerBack(activity);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private static void triggerBack(@NonNull final Activity activity) {
-        if (activity instanceof AppCompatActivity) {
-            ((AppCompatActivity) activity).getOnBackPressedDispatcher().onBackPressed();
-        } else {
-            activity.onBackPressed();
-        }
     }
 }
