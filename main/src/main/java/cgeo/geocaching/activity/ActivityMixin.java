@@ -28,15 +28,10 @@ import androidx.core.app.TaskStackBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
-import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
 public final class ActivityMixin {
-
-    private static final Map<Activity, Boolean> NAVIGATION_BYPASS = Collections.synchronizedMap(new WeakHashMap<>());
 
     private ActivityMixin() {
         // utility class
@@ -228,20 +223,18 @@ public final class ActivityMixin {
      * @param interceptNavUp Whether to intercept navigate up (Toolbar ← arrow). Use the returned
      *                       BooleanSupplier in {@code onSupportNavigateUp()}.
      * @param interceptor    Called when back/navUp is triggered.
-     *                       Parameter: {@code true} = navigate up, {@code false} = back press.
+     *                       Parameter: a Runnable to conclude the intercepted navigation later
+     *                       (e.g. from a dialog confirmation).
      *                       Return {@code true} to STOP navigation, {@code false} to CONTINUE.
      * @return A BooleanSupplier to be called from {@code onSupportNavigateUp()}. Returns {@code true}
-     *         when navigation was intercepted (stopped), {@code false} to continue (call
-     *         {@code super.onSupportNavigateUp()}). Returns {@code false} immediately if
-     *         interceptNavUp is false or the activity is gone.
-     *         Note: the caller is responsible for invoking {@code super.onSupportNavigateUp()} when
-     *         the supplier returns {@code false}, as super calls cannot be made from outside the class.
+     *         when navigation was handled or intercepted, {@code false} if interceptNavUp is false
+     *         or the activity is gone.
      */
     public static BooleanSupplier registerNavigationInterceptor(
             @NonNull final Activity activity,
             final boolean interceptBack,
             final boolean interceptNavUp,
-            @NonNull final Predicate<Boolean> interceptor) {
+            @NonNull final Predicate<Runnable> interceptor) {
 
         final WeakReference<Activity> weakActivity = new WeakReference<>(activity);
 
@@ -255,22 +248,19 @@ public final class ActivityMixin {
                         setEnabled(false);
                         return;
                     }
-                    if (consumeNavigationBypass(a)) {
+                    final Runnable continueBackNavigation = () -> {
+                        if (!isActivityValid(a)) {
+                            return;
+                        }
                         setEnabled(false);
                         triggerBack(a);
                         if (isActivityValid(a)) {
                             setEnabled(true);
                         }
-                        return;
-                    }
-                    final boolean stop = interceptor.test(false);
+                    };
+                    final boolean stop = interceptor.test(continueBackNavigation);
                     if (!stop) {
-                        // Disable before re-triggering to avoid infinite interception loop
-                        setEnabled(false);
-                        triggerBack(a);
-                        if (isActivityValid(a)) {
-                            setEnabled(true);
-                        }
+                        continueBackNavigation.run();
                     }
                 }
             };
@@ -284,10 +274,15 @@ public final class ActivityMixin {
                 if (!isActivityValid(a)) {
                     return false;
                 }
-                if (consumeNavigationBypass(a)) {
-                    return false;
+                final Runnable continueNavigateUp = () -> {
+                    if (isActivityValid(a)) {
+                        navigateUp(a);
+                    }
+                };
+                if (!interceptor.test(continueNavigateUp)) {
+                    continueNavigateUp.run();
                 }
-                return interceptor.test(true);
+                return true;
             };
         }
 
@@ -296,7 +291,6 @@ public final class ActivityMixin {
 
     /**
      * Programmatically simulates the user pressing back or navigate up.
-     * Useful inside confirmation dialogs registered via {@link #registerNavigationInterceptor}.
      *
      * @param activity     The activity to trigger navigation on.
      * @param isNavigateUp {@code true} to simulate navigate up, {@code false} to simulate back press.
@@ -304,47 +298,14 @@ public final class ActivityMixin {
     public static void triggerNavigation(
             @NonNull final Activity activity,
             final boolean isNavigateUp) {
-        triggerNavigation(activity, isNavigateUp, false);
-    }
-
-    /**
-     * Programmatically simulates the user pressing back or navigate up.
-     *
-     * @param activity           The activity to trigger navigation on.
-     * @param isNavigateUp       {@code true} to simulate navigate up, {@code false} to simulate back press.
-     * @param bypassInterceptor  {@code true} to continue navigation without invoking the registered interceptor again.
-     */
-    public static void triggerNavigation(
-            @NonNull final Activity activity,
-            final boolean isNavigateUp,
-            final boolean bypassInterceptor) {
 
         if (!isActivityValid(activity)) {
             return;
         }
-        if (bypassInterceptor) {
-            setNavigationBypass(activity);
-        }
         if (isNavigateUp) {
-            if (bypassInterceptor || !(activity instanceof AppCompatActivity)) {
-                navigateUp(activity);
-            } else {
-                ((AppCompatActivity) activity).onSupportNavigateUp();
-            }
+            navigateUp(activity);
         } else {
             triggerBack(activity);
-        }
-    }
-
-    private static boolean consumeNavigationBypass(@NonNull final Activity activity) {
-        synchronized (NAVIGATION_BYPASS) {
-            return Boolean.TRUE.equals(NAVIGATION_BYPASS.remove(activity));
-        }
-    }
-
-    private static void setNavigationBypass(@NonNull final Activity activity) {
-        synchronized (NAVIGATION_BYPASS) {
-            NAVIGATION_BYPASS.put(activity, true);
         }
     }
 
