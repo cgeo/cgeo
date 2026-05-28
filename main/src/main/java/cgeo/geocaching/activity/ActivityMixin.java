@@ -26,6 +26,7 @@ import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
@@ -268,18 +269,18 @@ public final class ActivityMixin {
             if (!isActivityValid(weakActivity)) {
                 return false;
             }
-            final boolean[] navigationHandled = new boolean[] {false};
+            final AtomicBoolean navigationHandled = new AtomicBoolean(false);
             final Runnable continueNavigateUp = () -> {
                 final AppCompatActivity currentActivity = weakActivity.get();
                 if (isActivityValid(currentActivity)) {
-                    navigationHandled[0] = navigateUp(currentActivity);
+                    navigationHandled.set(navigateUp(currentActivity));
                 }
             };
-            final boolean stop = interceptor.test(continueNavigateUp);
-            if (!stop) {
+            final boolean interceptorStoppedNavigation = interceptor.test(continueNavigateUp);
+            if (!interceptorStoppedNavigation) {
                 continueNavigateUp.run();
             }
-            return stop || navigationHandled[0];
+            return interceptorStoppedNavigation || navigationHandled.get();
         };
     }
 }
