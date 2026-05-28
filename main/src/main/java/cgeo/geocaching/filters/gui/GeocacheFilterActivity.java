@@ -128,7 +128,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         fillViewFromFilter(filterContext.get().toConfig(), false);
         originalFilterConfig = getFilterFromView().toConfig();
 
-        navUpHandler = ActivityMixin.registerNavigationInterceptor(this, true, true, this::onNavigationIntercepted);
+        navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
         // Some features do not work / make no sense for nested filters
         if (isNested) {
@@ -260,8 +260,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             finishWithResult();
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
-            getOnBackPressedDispatcher().onBackPressed();
-            return true;
+            return onSupportNavigateUp();
         }
         return false;
     }

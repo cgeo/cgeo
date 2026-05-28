@@ -220,75 +220,63 @@ public final class ActivityMixin {
     }
 
     /**
-     * Registers an interceptor for back press and/or navigate up on the given activity.
+     * Registers an interceptor for back press and navigate up on the given activity.
      *
-     * @param activity       The activity to register on. Held via WeakReference to avoid memory leaks.
-     * @param interceptBack  Whether to intercept the system back press.
-     * @param interceptNavUp Whether to intercept navigate up (Toolbar ← arrow). Use the returned
-     *                       BooleanSupplier in {@code onSupportNavigateUp()}.
-     * @param interceptor    Called when back/navUp is triggered.
-     *                       Parameter: a Runnable to conclude the intercepted navigation later
-     *                       (e.g. from a dialog confirmation).
-     *                       Return {@code true} to STOP navigation, {@code false} to CONTINUE.
+     * @param activity    The activity to register on. Held via WeakReference to avoid memory leaks.
+     * @param interceptor Called when back/navUp is triggered.
+     *                    Parameter: a Runnable to conclude the intercepted navigation later
+     *                    (e.g. from a dialog confirmation).
+     *                    Return {@code true} to STOP navigation, {@code false} to CONTINUE.
      * @return A BooleanSupplier to be called from {@code onSupportNavigateUp()}. Returns {@code true}
-     *         when navigation was handled or intercepted, {@code false} if interceptNavUp is false
-     *         or the activity is gone.
+     *         when navigation was handled or intercepted, {@code false} if the activity is gone.
      */
-    public static BooleanSupplier registerNavigationInterceptor(
+    public static BooleanSupplier registerBackNavigationInterceptor(
             @NonNull final AppCompatActivity activity,
-            final boolean interceptBack,
-            final boolean interceptNavUp,
             @NonNull final Predicate<Runnable> interceptor) {
 
         final WeakReference<AppCompatActivity> weakActivity = new WeakReference<>(activity);
 
-        if (interceptBack) {
-            final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-                @Override
-                public void handleOnBackPressed() {
-                    if (!isActivityValid(weakActivity)) {
-                        setEnabled(false);
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!isActivityValid(weakActivity)) {
+                    setEnabled(false);
+                    return;
+                }
+                final Runnable continueBackNavigation = () -> {
+                    final AppCompatActivity currentActivity = weakActivity.get();
+                    if (!isActivityValid(currentActivity)) {
                         return;
                     }
-                    final Runnable continueBackNavigation = () -> {
-                        final AppCompatActivity currentActivity = weakActivity.get();
-                        if (!isActivityValid(currentActivity)) {
-                            return;
-                        }
-                        setEnabled(false);
-                        currentActivity.getOnBackPressedDispatcher().onBackPressed();
-                        if (isActivityValid(weakActivity)) {
-                            setEnabled(true);
-                        }
-                    };
-                    final boolean stop = interceptor.test(continueBackNavigation);
-                    if (!stop) {
-                        continueBackNavigation.run();
-                    }
-                }
-            };
-            // Passing activity as LifecycleOwner: callback is automatically removed on destroy
-            activity.getOnBackPressedDispatcher().addCallback(activity, callback);
-        }
-
-        if (interceptNavUp) {
-            return () -> {
-                if (!isActivityValid(weakActivity)) {
-                    return false;
-                }
-                final Runnable continueNavigateUp = () -> {
-                    final AppCompatActivity currentActivity = weakActivity.get();
-                    if (isActivityValid(currentActivity)) {
-                        navigateUp(currentActivity);
+                    setEnabled(false);
+                    currentActivity.getOnBackPressedDispatcher().onBackPressed();
+                    if (isActivityValid(weakActivity)) {
+                        setEnabled(true);
                     }
                 };
-                if (!interceptor.test(continueNavigateUp)) {
-                    continueNavigateUp.run();
+                final boolean stop = interceptor.test(continueBackNavigation);
+                if (!stop) {
+                    continueBackNavigation.run();
                 }
-                return true;
-            };
-        }
+            }
+        };
+        // Passing activity as LifecycleOwner: callback is automatically removed on destroy
+        activity.getOnBackPressedDispatcher().addCallback(activity, callback);
 
-        return () -> false;
+        return () -> {
+            if (!isActivityValid(weakActivity)) {
+                return false;
+            }
+            final Runnable continueNavigateUp = () -> {
+                final AppCompatActivity currentActivity = weakActivity.get();
+                if (isActivityValid(currentActivity)) {
+                    navigateUp(currentActivity);
+                }
+            };
+            if (!interceptor.test(continueNavigateUp)) {
+                continueNavigateUp.run();
+            }
+            return true;
+        };
     }
 }
