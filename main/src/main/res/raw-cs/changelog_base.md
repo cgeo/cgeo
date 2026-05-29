@@ -32,6 +32,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Oprava: V rychlých nastaveních mapy se po přepnutí jazyka mohou u prázdných profilů tras zobrazovat tlačítka „1“/„2“
 - Novinka: Výpočet chybějících údajů o nadmořské výšce při importu tras (pokud jsou data o nadmořské výšce stažena)
 - Oprava: Stahovač map se za určitých podmínek zastaví (pouze online mapy OpenStreetMap)
+- New: Conditional cache markers
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -92,4 +93,4 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
 - Oprava: Některé texty ignorují přepínání jazyků
 - Oprava: Volba „Použít imperiální jednotky“ se při nové instalaci nenastavila správně
-- Novinka: Open source překladový modul Bergamot
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
