@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.CacheFilterActivityBinding;
 import cgeo.geocaching.databinding.CacheFilterListItemBinding;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
@@ -49,6 +50,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -90,6 +92,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private boolean processBasicAdvancedListener = true;
     private boolean isNested = false;
 
+    private BooleanSupplier navUpHandler;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +126,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         setTitle(LocalizationUtils.getString(filterContext.getType().titleId));
         fillViewFromFilter(filterContext.get().toConfig(), false);
         originalFilterConfig = getFilterFromView().toConfig();
+
+        navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
         // Some features do not work / make no sense for nested filters
         if (isNested) {
@@ -252,13 +258,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             finishWithResult();
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
-            finish();
-            return true;
+            return onSupportNavigateUp();
         } else if (itemId == android.R.id.home) {
-            onBackPressed();
-            return true;
+            return onSupportNavigateUp();
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -362,17 +366,29 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        // @todo should be replaced by setting a OnBackPressedDispatcher
+    /**
+     * Called when the user attempts to leave via back press or navigate up.
+     *
+     * @param navigationAction concludes the intercepted back/up navigation when executed
+     * @return true to STOP navigation (a confirmation dialog was shown), false to CONTINUE
+     */
+    private boolean onNavigationIntercepted(final Runnable navigationAction) {
         final GeocacheFilter newFilter = getFilterFromView();
-        final boolean filterWasChanged = !originalFilterConfig.equals(newFilter.toConfig());
+        final boolean filterWasChanged = originalFilterConfig != null && !originalFilterConfig.equals(newFilter.toConfig());
         if (filterWasChanged) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
-        } else {
-            finish();
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
+                    .confirm(navigationAction);
+            return true;
         }
-        super.onBackPressed();
+        return false;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        if (navUpHandler.getAsBoolean()) {
+            return true;
+        }
+        return ActivityMixin.navigateUp(this) || super.onSupportNavigateUp();
     }
 
     @NonNull

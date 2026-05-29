@@ -1,6 +1,14 @@
 ##
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie związane z konserwacją kodu i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
+- Naprawiono: Awaria podczas dostępu do tras
+- Naprawiono: Awaria na stronie z punktem nawigacji
+- Zmiana: Wyszukiwanie własnych skrytek rozpoczyna się z nowymi filtrami
+- Naprawiono: Niezapisane etapy labów tracą informacje o „odwiedzeniu” po odświeżeniu
+- Naprawiono: Okresowy monit o aktualizacje źródła kafelków
+- Naprawiono: Losowa lokalizacja przy mapowaniu listy (Google Maps)
+
+##
 - Naprawiono: Awaria w informacjach o skrytce
 - Naprawiono: Wkłady Wherigo nie mogą być już pobierane (zmiana struktury strony internetowej)
 
