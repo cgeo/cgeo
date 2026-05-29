@@ -32,6 +32,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Correcció: La configuració ràpida del mapa pot mostrar els botons "1"/"2" per als perfils d'enrutament buits després de canviar d'idioma
 - Nou: Calcula les dades d'elevació que falten en importar rutes (si es descarreguen les dades d'elevació)
 - Correcció: El descarregador de tessel·les s'atura sota certes condicions (només mapes en línia d'OpenStreetMap)
+- Nou: Marcadors de catxé condicionals
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -92,4 +93,4 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
 - Correcció: Alguns textos ignoren el canvi d'idioma
 - Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
-- Nou: Mòdul de traducció fora de línia de codi obert de Bergamot
+- Canvi: El mòdul de traducció fora de línia de codi obert de Bergamot substitueix el traductor de codi tancat de Google ML Kit
