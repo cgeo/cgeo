@@ -32,6 +32,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Naprawiono: Szybkie ustawienia mapy mogły pokazywać przyciski "1"/"2" dla pustych profili routingu po zmianie języka
 - Nowość: Oblicz brakujące dane wysokości na zaimportowanych ścieżkach (jeśli pobierane są dane wysokości)
 - Naprawiono: W pewnych sytuacjach pobierania kafelków zatrzymywało się (tylko mapy online OpenStreetMap)
+- New: Conditional cache markers
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -92,4 +93,4 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
 - Naprawiono: Niektóre teksty ignorowały zmianę języka
 - Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
-- Nowość: Otwarty moduł tłumaczenia offline Bergamot
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
