@@ -32,6 +32,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- New: Conditional cache markers
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -92,4 +93,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
 - Fix: Some texts ignore language switching
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
-- New: Bergamot open source offline translation module
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
