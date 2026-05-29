@@ -453,6 +453,7 @@
         <item quantity="many">%d skrytek pobranych</item>
         <item quantity="other">%d skrytek pobranych</item>
     </plurals>
+    <string name="caches_store_background_skipped">Pominięte skrytki offline: %d</string>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -784,6 +785,8 @@
     <string name="conditional_marker_add_rule">Dodaj regułę</string>
     <string name="conditional_marker_empty_hint">Brak skonfigurowanych reguł. Dotknij +, aby jakąś dodać.</string>
     <string name="conditional_marker_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
+    <string name="conditional_marker_enabled">Znaczniki warunkowe włączone</string>
+    <string name="conditional_marker_disabled">Znaczniki warunkowe wyłączone</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
