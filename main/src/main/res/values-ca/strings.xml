@@ -450,6 +450,7 @@
         <item quantity="one">S\'ha descarregat %d catxécatxé</item>
         <item quantity="other">S\'ha descarregat %d catxés</item>
     </plurals>
+    <string name="caches_store_background_skipped">Catxés fora de línia omesos: %d</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
