@@ -774,6 +774,7 @@
     <string name="conditional_marker_nofilter_label">(sense filtre — marca tots els catxés)</string>
     <string name="conditional_marker_enabled">Marcadors condicionals activats</string>
     <string name="conditional_marker_disabled">Marcadors condicionals desactivats</string>
+    <string name="conditional_marker_disable">Desactiva els marcadors condicionals</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
