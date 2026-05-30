@@ -36,7 +36,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
-import cgeo.geocaching.settings.ConditionalCacheMarkersActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.storage.DataStore;
@@ -75,6 +74,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.NamedFilterUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -289,6 +289,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    reloadCachesAndWaypoints();
+                    return;
+                }
                 handleGeocodeChangedBroadcastReceived(geocode);
             }
         });
@@ -896,7 +900,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         itemMapLive.setVisible(true);
 
         final MenuItem itemConditionalMarkers = toolbarMenu.findItem(R.id.menu_conditional_markers);
-        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(itemConditionalMarkers, Settings.isConditionalCacheMarkersEnabled());
+        final boolean anyActive = cgeo.geocaching.models.NamedFilter.getAll().stream().anyMatch(cgeo.geocaching.models.NamedFilter::isConditionalMarkerActive);
+        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(itemConditionalMarkers, anyActive);
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -992,7 +997,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
         } else if (id == R.id.menu_conditional_markers) {
-            startActivityForResult(new Intent(this, ConditionalCacheMarkersActivity.class), REQUEST_CODE_CONDITIONAL_MARKERS);
+            NamedFilterUtils.openActivateDeactivateDialog(this);
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1084,7 +1089,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
             ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
         } else if (requestCode == REQUEST_CODE_CONDITIONAL_MARKERS) {
-            reloadCachesAndWaypoints();
+            // no longer used, kept for compatibility
         }
     }
 
@@ -1107,7 +1112,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, viewModel.mapType.filterContext);
+        NamedFilterUtils.openSingleSelectDialog(this,
+            getString(R.string.cache_filter_storage_select_title),
+            selectedFilter -> {
+                viewModel.mapType.filterContext.set(NamedFilterUtils.getAsFilter(selectedFilter));
+                refreshWithFilter(viewModel.mapType.filterContext.get());
+            });
+        return true;
     }
 
     @Override
@@ -1525,13 +1536,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final View conditionalMarkersButton = findViewById(R.id.menu_conditional_markers);
             if (conditionalMarkersButton != null) {
                 conditionalMarkersButton.setOnLongClickListener(v -> {
-                    final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
-                    Settings.setConditionalCacheMarkersEnabled(newState);
-                    if (null != toolbarMenu && null != toolbarMenu.findItem(R.id.menu_conditional_markers)) {
-                        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(toolbarMenu.findItem(R.id.menu_conditional_markers), newState);
-                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
-                    }
-                    reloadCachesAndWaypoints();
+                    startActivity(new Intent(UnifiedMapActivity.this, cgeo.geocaching.NamedFilterActivity.class));
                     return true;
                 });
             }

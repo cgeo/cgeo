@@ -554,7 +554,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
         statusFilter.setStatusOwned(true);
         final GeocacheFilterContext filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
-        filterContext.set(GeocacheFilter.create(null, false, false, statusFilter));
+        filterContext.set(GeocacheFilter.create(false, false, statusFilter));
         CacheListActivity.startActivityFilter(this, filterContext);
         ActivityMixin.overrideTransitionToFade(this);
     }

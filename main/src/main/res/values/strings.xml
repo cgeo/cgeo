@@ -889,6 +889,23 @@
     <string name="conditional_marker_disabled">Conditional markers disabled</string>
     <string name="conditional_marker_disable">Disable conditional markers</string>
 
+    <!-- named filter activity -->
+    <string name="named_filter_activity_title">Named Filters</string>
+    <string name="cache_namedfilter_matching">Matching named filters</string>
+    <string name="named_filter_add">Add filter</string>
+    <string name="named_filter_toggle_markers">Toggle all markers</string>
+    <string name="named_filter_empty_hint">No named filters configured. Tap + to add one.</string>
+    <string name="named_filter_activate_marker">Activate marker</string>
+    <string name="named_filter_select_title">Select filter</string>
+    <string name="named_filter_activate_deactivate_title">Activate / deactivate markers</string>
+    <string name="named_filter_nofilter_label">(no filter — matches all caches)</string>
+    <string name="named_filter_save_as_title">Save as named filter</string>
+    <string name="named_filter_name_exists_title">Name already exists</string>
+    <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
+    <string name="named_filter_config_exists_title">Filter already saved</string>
+    <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
+    <string name="named_filter_add_named_criterion">Add named filter criterion</string>
+
 
     <!-- about -->
     <string name="about_version">Version</string>

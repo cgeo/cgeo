@@ -69,7 +69,7 @@ public class GeocacheFilterTestUtils {
         geocodeFilter.getStringFilter().setTextValue(geocode);
         filterConfig.addChild(geocodeFilter);
 
-        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
+        final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
         final SearchResult sr;
         try {
             DataStore.storeIntoDatabase(cache);

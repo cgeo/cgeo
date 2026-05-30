@@ -94,6 +94,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.NamedFilterUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -433,6 +434,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    refreshCurrentList();
+                    return;
+                }
                 if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
                     final Geocache geocache = DataStore.loadCache(geocode, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));
                     if (geocache != null) {
@@ -934,7 +939,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, currentCacheFilterContext);
+        NamedFilterUtils.openSingleSelectDialog(this,
+                getString(R.string.cache_filter_storage_select_title),
+                selectedFilter -> {
+                    if (selectedFilter.getFilter() != null) {
+                        currentCacheFilterContext.set(NamedFilterUtils.getAsFilter(selectedFilter));
+                        refreshWithFilter(currentCacheFilterContext.get());
+                    }
+                });
+        return true;
     }
 
     @Override
@@ -1624,21 +1637,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getActiveFilterName(), getActiveFilterSavedDifferently());
+        FilterUtils.updateFilterBar(this, getActiveFilterName());
     }
 
     @Nullable
     private String getActiveFilterName() {
         if (currentCacheFilterContext.get().isFiltering()) {
             return currentCacheFilterContext.get().toUserDisplayableString();
-        }
-        return null;
-    }
-
-    @Nullable
-    private Boolean getActiveFilterSavedDifferently() {
-        if (currentCacheFilterContext.get().isFiltering()) {
-            return currentCacheFilterContext.get().isSavedDifferently();
         }
         return null;
     }

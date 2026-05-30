@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp">
+
+    <!-- Row 1: marker button, name, drag handle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/marker_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_marker"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/filter_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="@dimen/textSize_detailsPrimary"
+            android:textColor="@color/colorText_listsPrimary"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="My Filter" />
+
+        <ImageView
+            android:id="@+id/drag_handle"
+            android:layout_width="@dimen/buttonSize_iconButton"
+            android:layout_height="@dimen/buttonSize_iconButton"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_menu_reorder"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <!-- Row 2: filter description -->
+    <TextView
+        android:id="@+id/filter_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="@dimen/textSize_detailsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="Type: Traditional" />
+
+    <!-- Row 3: activate checkbox, edit name, edit filter, delete -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/activate_marker_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/named_filter_activate_marker"
+            android:layout_marginEnd="4dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/edit_name_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_edit"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/edit_filter_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_filter"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/delete_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_delete"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/select_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_selectall"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
+
+</LinearLayout>

@@ -200,9 +200,9 @@ public final class SystemInformation {
             final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
-        final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
-        if (!storedFilters.isEmpty()) {
-            body.append("\n- ").append("Additional stored filters: ").append(storedFilters.size());
+        final int storedFilterCount = cgeo.geocaching.models.NamedFilter.getAll().size();
+        if (storedFilterCount > 0) {
+            body.append("\n- ").append("Named filters: ").append(storedFilterCount);
         }
     }
 

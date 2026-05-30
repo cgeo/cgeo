@@ -34,63 +34,50 @@
             android:layout_centerVertical="true"
             android:text="@string/cache_filter_mode_advanced" />
 
-        <Button
-            android:id="@+id/filter_additem"
-            style="@style/button"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/filter_basic_advanced"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:layout_margin="6dp"
-            android:text="@string/cache_filter_add_button"
-            app:icon="@drawable/ic_menu_add" />
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/filter_additem"
+                style="@style/button_icon"
+                android:layout_centerVertical="true"
+                app:icon="@drawable/ic_menu_add" />
 
-   <View
-        style="@style/separator_horizontal"
-        android:layout_marginTop="1dp" />
+            <LinearLayout
+                android:id="@+id/filter_named_filter_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-     <RelativeLayout
-         android:id="@+id/filter_storage_options"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/filter_add_named_criterion"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_file_add" />
 
-        <Button
-            android:id="@+id/filter_storage_manage"
-            style="@style/button_icon"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:tooltipText="@string/cache_filter_storage_load_delete_title"
-            app:icon="@drawable/ic_menu_manage_list" />
+                <Button
+                    android:id="@+id/filter_save_as_named"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_save" />
 
-        <Button
-            android:id="@+id/filter_storage_save"
-            style="@style/button_icon"
-            android:layout_toRightOf="@+id/filter_storage_manage"
-            android:layout_centerVertical="true"
-            android:tooltipText="@string/cache_filter_storage_save_title"
-            app:icon="@drawable/ic_menu_save" />
+                <Button
+                    android:id="@+id/filter_open_named_filter_activity"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_marker" />
 
-         <TextView
-             android:id="@+id/filter_storage_name"
-             android:hint="@string/cache_name"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_centerVertical="true"
-             android:layout_marginLeft="5dp"
-             android:layout_toRightOf="@+id/filter_storage_save"
-             android:ellipsize="end"
-             android:maxLines="1"
-             android:textSize="@dimen/textSize_detailsPrimary" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
     <View
-        android:id="@+id/filter_storage_options_line"
         style="@style/separator_horizontal"
         android:layout_marginTop="1dp" />
 

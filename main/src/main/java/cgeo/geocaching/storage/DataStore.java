@@ -32,6 +32,7 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.NamedFilter;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
@@ -261,7 +262,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 106;
+    private static final int dbVersion = 107;
     public static final int customListIdOffset = 10;
 
     /**
@@ -303,7 +304,8 @@ public class DataStore {
             103, // add more projection attributes to waypoints
             104,  // add geofence radius for lab stages
             105,  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
-            106  // Update lab caches DT rating to zero from minus one
+            106,  // Update lab caches DT rating to zero from minus one
+            107   // Unify named filters and conditional markers; new cg_filters schema
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -606,8 +608,9 @@ public class DataStore {
     private static final String dbCreateFilters
             = "CREATE TABLE IF NOT EXISTS " + dbTableFilters + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "name TEXT NOT NULL UNIQUE, "
-            + "treeconfig TEXT"
+            + "name TEXT, "
+            + "treeconfig TEXT, "
+            + "priority INTEGER NOT NULL DEFAULT 0"
             + "); ";
 
     // reminder to myself: when adding a new CREATE TABLE statement:
@@ -880,31 +883,56 @@ public class DataStore {
 
     public static class DBFilters {
 
-        public static List<GeocacheFilter> getAllStoredFilters() {
-            return withAccessLock(() -> queryToColl(dbTableFilters, new String[]{"name", "treeconfig"},
-                    null, null, null, null, new ArrayList<>(),
-                    c -> GeocacheFilter.createFromConfig(c.getString(0), c.getString(1))));
+        /** Loads all stored NamedFilters ordered by priority ascending (index 0 = highest priority). */
+        public static List<NamedFilter> loadAll() {
+            return withAccessLock(() -> queryToColl(dbTableFilters,
+                    new String[]{"treeconfig", "priority"},
+                    null, null, "priority ASC", null, new ArrayList<>(),
+                    c -> {
+                        final String json = c.getString(0);
+                        if (json == null) {
+                            return null;
+                        }
+                        final com.fasterxml.jackson.databind.JsonNode node = cgeo.geocaching.utils.JsonUtils.stringToNode(json);
+                        if (node == null) {
+                            return null;
+                        }
+                        return NamedFilter.fromJson(node);
+                    }));
         }
 
         /**
-         * Saves using UPSERT on NAME (if filter with same name exists, it deleted before.  otherwise new one is created)
+         * Replaces all rows in cg_filters with the given list. Priority is set to the list index.
          */
-        public static int save(final GeocacheFilter filter) {
-            return withAccessLock(() -> {
-                delete(filter.getName());
-                final ContentValues values = new ContentValues();
-                values.put("name", filter.getName());
-                values.put("treeconfig", filter.toConfig());
-                return (int) database.insert(dbTableFilters, null, values);
+        public static void storeAll(final List<NamedFilter> filters) {
+            withAccessLock(() -> {
+                database.delete(dbTableFilters, null, null);
+                for (int i = 0; i < filters.size(); i++) {
+                    final NamedFilter nf = filters.get(i);
+                    final ContentValues values = new ContentValues();
+                    values.put("name", nf.getName());
+                    values.put("treeconfig", cgeo.geocaching.utils.JsonUtils.nodeToString(nf.toJson()));
+                    values.put("priority", i);
+                    database.insert(dbTableFilters, null, values);
+                }
+                return null;
             });
         }
 
-        /**
-         * deletes any entry in DB with same filterName as in supplied filter object, if exists
-         */
-        public static boolean delete(final String filterName) {
-            return withAccessLock(() -> database.delete(dbTableFilters, "name = ?", new String[]{filterName}) > 0);
-        }
+//        /**
+//         * @deprecated Use {@link #loadAll()} instead.
+//         */
+//        @Deprecated
+//        public static List<GeocacheFilter> getAllStoredFilters() {
+//            final List<NamedFilter> named = loadAll();
+//            final List<GeocacheFilter> result = new ArrayList<>();
+//            for (final NamedFilter nf : named) {
+//                if (nf.getFilter() != null) {
+//                    result.add(nf.getFilter());
+//                }
+//            }
+//            return result;
+//        }
     }
 
     private DataStore() {
@@ -1919,6 +1947,80 @@ public class DataStore {
                             db.execSQL("UPDATE " + dbTableCaches + " SET terrain = 0 WHERE terrain < 0");
                         } catch (final SQLException e) {
                             onUpgradeError(e, 106);
+                        }
+                    }
+
+                    // Unify named filters and conditional markers: recreate cg_filters with new schema
+                    if (oldVersion < 107) {
+                        try {
+                            // Step 1: rename old table
+                            db.execSQL("ALTER TABLE " + dbTableFilters + " RENAME TO cg_filters_old");
+                            // Step 2: create new table with updated schema
+                            db.execSQL("CREATE TABLE IF NOT EXISTS " + dbTableFilters + " ("
+                                    + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                    + "name TEXT, "
+                                    + "treeconfig TEXT, "
+                                    + "priority INTEGER NOT NULL DEFAULT 0"
+                                    + ")");
+                            // Step 3: migrate existing named filters from the old table
+                            final List<NamedFilter> migratedFilters = new ArrayList<>();
+                            try (android.database.Cursor cursor = db.query("cg_filters_old",
+                                    new String[]{"name", "treeconfig"}, null, null, null, null, "name ASC")) {
+                                int idx = 0;
+                                while (cursor.moveToNext()) {
+                                    final String oldName = cursor.getString(0);
+                                    final String oldConfig = cursor.getString(1);
+                                    final GeocacheFilter gcFilter = GeocacheFilter.createFromConfig(oldConfig);
+                                    migratedFilters.add(new NamedFilter(idx + 1,
+                                            oldName != null ? oldName : "",
+                                            gcFilter,
+                                            EmojiUtils.NO_EMOJI, false));
+                                    idx++;
+                                }
+                            }
+                            // Step 4: migrate ConditionalCacheMarkers from SharedPreferences (read JSON directly)
+                            final String markersJson = cgeo.geocaching.settings.Settings.getString(
+                                    cgeo.geocaching.R.string.pref_conditionalCacheMarkers, "[]");
+                            final com.fasterxml.jackson.databind.JsonNode markersRoot =
+                                    cgeo.geocaching.utils.JsonUtils.stringToNode(markersJson);
+                            final int numMigratedFilters = migratedFilters.size();
+                            if (markersRoot != null && markersRoot.isArray()) {
+                                int j = 0;
+                                for (final com.fasterxml.jackson.databind.JsonNode child : markersRoot) {
+                                    final int markerId = cgeo.geocaching.utils.JsonUtils.getInt(child, "markerId",
+                                            cgeo.geocaching.utils.EmojiUtils.NO_EMOJI);
+                                    final com.fasterxml.jackson.databind.JsonNode filterNode = child.get("filter");
+                                    cgeo.geocaching.filters.core.GeocacheFilter markerGf = null;
+                                    if (filterNode != null) {
+                                        try {
+                                            markerGf = cgeo.geocaching.filters.core.GeocacheFilter.createFromConfig(
+                                                    cgeo.geocaching.utils.JsonUtils.nodeToString(filterNode));
+                                        } catch (final Exception ex) {
+                                            // ignore parse errors, use null filter
+                                        }
+                                    }
+                                    migratedFilters.add(new NamedFilter(numMigratedFilters + j + 1,
+                                            "Marker Filter " + (j + 1),
+                                            markerGf,
+                                            markerId,
+                                            true));
+                                    j++;
+                                }
+                            }
+                            // Step 5: write migrated filters into new table
+                            for (int i = 0; i < migratedFilters.size(); i++) {
+                                final NamedFilter nf = migratedFilters.get(i);
+                                final ContentValues cv = new ContentValues();
+                                cv.put("name", nf.getName());
+                                cv.put("treeconfig", cgeo.geocaching.utils.JsonUtils.nodeToString(nf.toJson()));
+                                cv.put("priority", i);
+                                db.insert(dbTableFilters, null, cv);
+                            }
+                            // Step 6: drop old table and clear SharedPreferences marker keys
+                            db.execSQL("DROP TABLE IF EXISTS cg_filters_old");
+                            cgeo.geocaching.settings.Settings.clearConditionalCacheMarkersPrefs();
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 107);
                         }
                     }
 
