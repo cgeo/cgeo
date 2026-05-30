@@ -27,8 +27,10 @@ import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
@@ -39,12 +41,14 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
@@ -263,9 +267,16 @@ public class MainActivity extends AbstractNavigationBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
-            // don't call the super implementation with the layout argument, as that would set the wrong theme
+            // don't call the super implementation with the layout argument, as that would set the wrong theme;
+            // overrides SplashScreenTheme set in AndroidManifest.xml
             setTheme(Settings.isWallpaper() ? R.style.cgeo_withWallpaper : R.style.cgeo);
             super.onCreate(savedInstanceState);
+
+            // Splash-time routing: on a fresh launch, decide whether the installation wizard or a non-home start screen
+            // should run instead of MainActivity. Skip on activity recreation (savedInstanceState != null).
+            if (savedInstanceState == null && handleLauncherRouting()) {
+                return;
+            }
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
 
@@ -307,9 +318,66 @@ public class MainActivity extends AbstractNavigationBarActivity {
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
-            binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreate"));
+            binding.getRoot().post(() -> Log.d(CgeoApplication.elapsedMsSinceStartup() + "[Ctxlog]" + "Post after MainActivity.onCreate"));
         }
 
+    }
+    /**
+     * Routes the launcher intent to the installation wizard or to the user-configured start screen.
+     * Returns whether another activity was started and this MainActivity instance should not continue to inflate its UI.
+     */
+    private boolean handleLauncherRouting() {
+        final boolean firstInstall = Settings.getLastChangelogChecksum() == 0;
+        final boolean folderMigrationNeeded = InstallWizardActivity.needsFolderMigration();
+
+        // new install, base folder missing or folder migration needed => run installation wizard
+        if (firstInstall || !ContentStorageActivityHelper.baseFolderIsSet() || folderMigrationNeeded) {
+            final Intent intent = new Intent(this, InstallWizardActivity.class);
+            intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? InstallWizardActivity.WizardMode.WIZARDMODE_DEFAULT.id : InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id);
+            return handleLauncherRoutingHelper(intent);
+        }
+
+        // otherwise regular startup
+        final Intent intent = Settings.getStartscreenIntent(this);
+        final boolean stayInMainActivity = intent.getComponent() != null && MainActivity.class.getName().equals(intent.getComponent().getClassName());
+        if (!stayInMainActivity) {
+            intent.putExtras(getIntent());
+            return handleLauncherRoutingHelper(intent);
+        }
+        return handleLauncherRoutingHelper(null);
+    }
+
+    private boolean handleLauncherRoutingHelper(final Intent intent) {
+        if (intent != null) {
+            startActivity(intent);
+        }
+        OneTimeDialogs.nextStatus();
+        checkChangedInstall();
+        if (intent != null) {
+            finish();
+            return true;
+        }
+        return false;
+    }
+
+    private void checkChangedInstall() {
+        try {
+            final long lastChecksum = Settings.getLastChangelogChecksum();
+            final long checksum = TextUtils.checksum(FileUtils.getChangelogMaster(this) + FileUtils.getChangelogRelease(this));
+            Settings.setLastChangelogChecksum(checksum);
+
+            if (lastChecksum == 0) {
+                // initialize oneTimeMessages after fresh install
+                OneTimeDialogs.initializeOnFreshInstall();
+                // initialize useInternalRouting setting depending on whether BRouter app is installed or not
+                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
+            } else if (lastChecksum != checksum) {
+                // show change log page after update
+                AboutActivity.showChangeLog(this);
+            }
+        } catch (final Exception ex) {
+            Log.e("Error checking/showing changelog!", ex);
+        }
     }
 
     @Override

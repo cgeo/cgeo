@@ -129,7 +129,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
 
     /**
      * switches to the next show state
-     * this is called ones after app start, as basicOneTimeMessages are snoozing if "don't show again" was not checked
+     * this is called once after app start, as basicOneTimeMessages are snoozing if "don't show again" was not checked
      */
     public static void nextStatus() {
 
