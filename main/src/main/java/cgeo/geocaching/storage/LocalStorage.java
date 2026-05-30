@@ -517,4 +517,25 @@ public final class LocalStorage {
 
     }
 
+    /**
+     cleans remainders of ML Kit offline translation:
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.translate.models/ had subfolders with the actual models
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.InstallationId
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.RemoteConfig
+     /data/data/cgeo.geocaching/shared_prefs/com.google.mlkit.internal.xml
+     */
+    public static void cleanupMLKitfiles() {
+        final File baseFolder = CgeoApplication.getInstance().getNoBackupFilesDir();
+        if (baseFolder != null) {
+            final File folder = new File(baseFolder, "com.google.mlkit.translate.models");
+            if (folder.exists()) {
+                FileUtils.deleteDirectory(folder);
+                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.InstallationId"));
+                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.RemoteConfig"));
+                FileUtils.deleteIgnoringFailure(new File(new File(CgeoApplication.getInstance().getDataDir(), "shared_prefs"), "com.google.mlkit.internal.xml"));
+                Log.e("ML Kit cleanup finished");
+            }
+        }
+    }
+
 }
