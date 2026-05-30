@@ -5,6 +5,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 
 import java.io.InputStream;
@@ -22,6 +23,7 @@ import static java.lang.Boolean.TRUE;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+@SuppressLint("LogNotTimber")
 public final class Log {
 
     private static final String TAG = "cgeo";
