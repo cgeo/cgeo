@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
@@ -57,9 +58,9 @@ public class ContextLogger implements Closeable {
         this.doLog = Log.isEnabled(logLevel) || forceLog;
         if (this.doLog) {
             if (this.forceLog) {
-                Log.iForce(contextString + "START");
+                Log.iForce(CgeoApplication.elapsedMsSinceStartup() + contextString + "START");
             } else {
-                Log.log(logLevel, contextString + "START");
+                Log.log(logLevel, CgeoApplication.elapsedMsSinceStartup() + contextString + "START");
             }
         }
     }
@@ -109,8 +110,9 @@ public class ContextLogger implements Closeable {
     public void endLog() {
         if (doLog || forceLog) {
             hasLogged = true;
-            final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message +
-                    (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");
+            final String logMsg = CgeoApplication.elapsedMsSinceStartup() + this.contextString + "END" +
+                    " (" + (System.currentTimeMillis() - startTime) + "ms)" + message +
+                    (this.exception == null ? "" : ", EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");
             if (this.exception == null) {
                 if (this.forceLog) {
                     Log.iForce(logMsg);

@@ -46,6 +46,17 @@ public class CgeoApplication extends Application {
 
     private final LifecycleInfo lifecycleInfo;
 
+    // STARTUP instrumentation: captured when the Application class is loaded by the
+    // Android process — i.e. the earliest moment we can observe in user code.
+    public static final long startupNanos = System.nanoTime();
+
+    public static long elapsedStartupMs() {
+        return (System.nanoTime() - startupNanos) / 1_000_000L;
+    }
+
+    public static String elapsedMsSinceStartup() {
+        return "[▷" + elapsedStartupMs() + "ms]";
+    }
     private static class LifecycleInfo implements ActivityLifecycleCallbacks {
 
         private Activity currentForegroundActivity = null;
