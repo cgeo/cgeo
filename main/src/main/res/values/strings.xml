@@ -399,7 +399,6 @@
     <string name="translator_model">Translation model</string>
     <string name="translator_tooltip">Offline translate</string>
     <string name="translator_language_select">Select source language</string>
-    <string name="translator_language_target_select">Select target language</string>
     <string name="translator_language_unsupported">Language (%s) not supported for translation. Tap to select source language.</string>
     <string name="translator_language_unknown">Unable to identify language. Tap to select source language.</string>
     <string name="translator_language_detected">Translate from "%s". Tap to select source language.</string>
@@ -640,7 +639,6 @@
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Switch to Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Changing to \'Basic\' mode will result in loss of filter settings. Do you want to continue?</string>
 
-    <string name="cache_filter_add_button">Add filter criteria</string>
     <string name="cache_filter_option_and_or">Use OR instead of AND</string>
     <string name="cache_filter_option_inverse">Inverse Filter</string>
     <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
@@ -708,17 +706,7 @@
 
     <string name="cache_filter_storage_delete_button">Delete</string>
     <string name="cache_filter_storage_clear_button">Clear</string>
-    <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
     <string name="cache_filter_storage_select_title">Select filter</string>
-    <string name="cache_filter_storage_delete_title">Delete filter</string>
-    <string name="cache_filter_storage_delete_message">Do you really want to delete this filter config?</string>
-    <string name="cache_filter_storage_select_clear_title">Select filter or clear current filter</string>
-    <string name="cache_filter_storage_clear_title">Clear current filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">No filter are stored yet.</string>
-    <string name="cache_filter_storage_save_title">Save filter with name</string>
-    <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
-    <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
-    <string name="cache_filter_storage_clear_message">Do you want to clear the current filter?</string>
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Search Text</string>
@@ -882,20 +870,16 @@
 
     <!-- conditional cache markers -->
     <string name="conditional_marker_activity_title">Conditional markers</string>
-    <string name="conditional_marker_add_rule">Add rule</string>
-    <string name="conditional_marker_empty_hint">No rules configured. Tap + to add one.</string>
-    <string name="conditional_marker_nofilter_label">(no filter — marks all caches)</string>
     <string name="conditional_marker_enabled">Conditional markers enabled</string>
     <string name="conditional_marker_disabled">Conditional markers disabled</string>
-    <string name="conditional_marker_disable">Disable conditional markers</string>
 
     <!-- named filter activity -->
     <string name="named_filter_activity_title">Named Filters</string>
     <string name="cache_namedfilter_matching">Matching named filters</string>
     <string name="named_filter_add">Add filter</string>
-    <string name="named_filter_toggle_markers">Toggle all markers</string>
     <string name="named_filter_empty_hint">No named filters configured. Tap + to add one.</string>
     <string name="named_filter_activate_marker">Activate marker</string>
+    <string name="named_filter_enable_all_markers">Enable all Markers</string>
     <string name="named_filter_select_title">Select filter</string>
     <string name="named_filter_activate_deactivate_title">Activate / deactivate markers</string>
     <string name="named_filter_nofilter_label">(no filter — matches all caches)</string>

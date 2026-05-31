@@ -10,7 +10,6 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -67,11 +66,9 @@ public class FilterUtils {
         ViewUtils.registerLongClickHandlerForMenuItem(activity, namedFilterMenuId, v -> filteredActivity.showNamedFilterActivateDeactivate());
     }
 
-
     public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
         activity.startActivity(new Intent(activity, NamedFilterActivity.class));
     }
-
 
     /** opens a dialog to activate/deactivate named filter markers */
     public static void openDialogActivateDeactivateNamedFilters(final Context context) {

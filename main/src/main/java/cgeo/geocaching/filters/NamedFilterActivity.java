@@ -46,6 +46,8 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     private int pendingFilterEditPosition = -1;
     private BooleanSupplier navUpHandler;
     private boolean selectMode;
+    /** Guard flag to prevent the header checkbox listener from firing during programmatic updates. */
+    private boolean updatingEnableAllCheckbox = false;
 
     // -------------------------------------------------------------------------
     // Static helpers
@@ -122,6 +124,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                 final int pos = holder.getBindingAdapterPosition();
                 if (pos != androidx.recyclerview.widget.RecyclerView.NO_ID) {
                     getItem(pos).setConditionalMarkerActive(checked);
+                    updateEnableAllMarkersCheckbox();
                 }
             });
 
@@ -238,6 +241,17 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
 
         navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
+        binding.enableAllMarkersCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (updatingEnableAllCheckbox) {
+                return;
+            }
+            final List<NamedFilter> items = filterAdapter.getItems();
+            for (final NamedFilter nf : items) {
+                nf.setConditionalMarkerActive(isChecked);
+            }
+            filterAdapter.notifyDataSetChanged();
+        });
+
         updateEmptyHint();
     }
 
@@ -260,9 +274,6 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
             return onSupportNavigateUp();
         } else if (itemId == R.id.menu_item_add) {
             addNewFilter();
-            return true;
-        } else if (itemId == R.id.menu_item_toggle_markers) {
-            toggleAllMarkers();
             return true;
         }
         return false;
@@ -313,6 +324,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     final NamedFilter nf = new NamedFilter(generateLocalId(), newName == null ? "" : newName, null, EmojiUtils.NO_EMOJI, false);
                     filterAdapter.addItem(0, nf);
                     updateEmptyHint();
+                    updateEnableAllMarkersCheckbox();
                 });
     }
 
@@ -334,19 +346,20 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         originalJson = filtersToJson(NamedFilter.getAll());
     }
 
-    private void toggleAllMarkers() {
-        final List<NamedFilter> items = filterAdapter.getItems();
-        final boolean allActive = items.stream().allMatch(NamedFilter::isConditionalMarkerActive);
-        for (final NamedFilter nf : items) {
-            nf.setConditionalMarkerActive(!allActive);
-        }
-        filterAdapter.notifyDataSetChanged();
-    }
-
     private void updateEmptyHint() {
         final boolean isEmpty = filterAdapter.getItemCount() == 0;
         binding.emptyHint.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        binding.enableAllMarkersCheckbox.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
         binding.namedFilterList.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        updateEnableAllMarkersCheckbox();
+    }
+
+    private void updateEnableAllMarkersCheckbox() {
+        final List<NamedFilter> items = filterAdapter.getItems();
+        final boolean allActive = !items.isEmpty() && items.stream().allMatch(NamedFilter::isConditionalMarkerActive);
+        updatingEnableAllCheckbox = true;
+        binding.enableAllMarkersCheckbox.setChecked(allActive);
+        updatingEnableAllCheckbox = false;
     }
 
     @NonNull

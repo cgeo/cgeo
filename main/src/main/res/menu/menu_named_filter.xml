@@ -10,12 +10,6 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
     <item
-        android:id="@+id/menu_item_toggle_markers"
-        android:icon="@drawable/ic_menu_marker"
-        android:title="@string/named_filter_toggle_markers"
-        app:showAsAction="always"
-        tools:ignore="AlwaysShowAction" />
-    <item
         android:id="@+id/menu_item_cancel"
         android:icon="@drawable/ic_menu_cancel"
         android:title="@string/cancel"

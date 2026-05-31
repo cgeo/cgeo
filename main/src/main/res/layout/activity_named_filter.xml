@@ -15,6 +15,17 @@
         android:textSize="@dimen/textSize_listsPrimary"
         android:textColor="@color/colorText_listsPrimary" />
 
+    <CheckBox
+        android:id="@+id/enable_all_markers_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:visibility="gone"
+        android:text="@string/named_filter_enable_all_markers" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/named_filter_list"
         android:layout_width="match_parent"
