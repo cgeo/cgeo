@@ -58,6 +58,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Pokaż potwierdzenie podczas usuwania wszystkich skrytek z listy „Wszystkie”
 - Nowość: Zezwalaj na formatowanie Markdown dla tekstu opisu w skrytkach zdefiniowanych przez użytkownika
 - Zmiana: Zapisz skrytkę przed dodaniem obrazu użytkownika
+- Fix: Crash on loading images embedded directly in listing text
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
