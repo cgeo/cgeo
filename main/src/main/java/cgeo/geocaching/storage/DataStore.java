@@ -5378,6 +5378,7 @@ public class DataStore {
     @NonNull
     public static Geocache loadCacheTexts(final String geocode) {
         final Geocache partial = new Geocache();
+        partial.setGeocode(geocode);
 
         // in case of database issues, we still need to return a result to avoid endless loops
         partial.setDescription(StringUtils.EMPTY);

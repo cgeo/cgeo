@@ -67,6 +67,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -107,6 +108,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -892,15 +894,44 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
-        final Geocache targetCache = getCurrentTargetCache();
-        if (targetCache != null) {
-            menu.findItem(R.id.menu_hint).setVisible(StringUtils.isNotEmpty(targetCache.getHint()));
-            menu.findItem(R.id.menu_log_visit).setVisible(targetCache.supportsLogging() && !Settings.getLogOffline());
-            menu.findItem(R.id.menu_log_visit_offline).setVisible(targetCache.supportsLogging() && Settings.getLogOffline());
-        } else {
-            menu.findItem(R.id.menu_hint).setVisible(false);
-            menu.findItem(R.id.menu_log_visit).setVisible(false);
-            menu.findItem(R.id.menu_log_visit_offline).setVisible(false);
+        // Avoid blocking UI thread by not calling DataStore.loadCache() directly here.
+        // Instead load cache data asynchronously if a target geocode is set and
+        // update menu items on the UI thread when the load completes.
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
+        final MenuItem hintItem = menu.findItem(R.id.menu_hint);
+        final MenuItem logVisitItem = menu.findItem(R.id.menu_log_visit);
+        final MenuItem logVisitOfflineItem = menu.findItem(R.id.menu_log_visit_offline);
+        hintItem.setVisible(false);
+        logVisitItem.setVisible(false);
+        logVisitOfflineItem.setVisible(false);
+
+        if (target != null && StringUtils.isNotBlank(target.geocode)) {
+            // hide until we know the cache details
+            final String geocode = target.geocode;
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                        Geocache dbCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                        if (dbCache == null) {
+                            dbCache = DataStore.loadCacheTexts(geocode);
+                        }
+                        return dbCache;
+                    },
+                    cache -> {
+                        // ensure target did not change while we were loading
+                        final UnifiedMapViewModel.Target currentTarget = viewModel.target.getValue();
+                        if (currentTarget == null || !Strings.CS.equals(currentTarget.geocode, geocode)) {
+                            return;
+                        }
+
+                        // show hint if cache is detailed
+                        final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
+                        final boolean showHintButton = StringUtils.isNotEmpty(title);
+                        hintItem.setEnabled(showHintButton);
+                        hintItem.setVisible(showHintButton);
+                        hintItem.setTitle(title);
+
+                        LoggingUI.onPrepareOptionsMenu(menu, cache);
+                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
+                    });
         }
 
         // init followMyLocation
@@ -1018,9 +1049,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
         } else if (id == R.id.menu_hint) {
+            boolean hintIsAvailable = false;
             final Geocache targetCache = getCurrentTargetCache();
-            final String targetHint = targetCache != null ? targetCache.getHint() : LocalizationUtils.getString(R.string.cache_hint_not_available);
-            this.showToast(targetHint);
+            if (targetCache != null) {
+                final Pair<CharSequence, CharSequence> hintTitleAndMessage = CacheUtils.getHintTitleAndMessage(targetCache);
+                if (StringUtils.isNotEmpty(hintTitleAndMessage.second)) {
+                    hintIsAvailable = true;
+                    SimpleDialog.ofContext(this).setTitle(TextParam.text(hintTitleAndMessage.first)).setMessage(TextParam.text(hintTitleAndMessage.second)).show();
+                }
+            }
+
+            if (!hintIsAvailable) {
+                SimpleDialog.ofContext(this).setTitle(R.string.cache_hint).setMessage(TextParam.id(R.string.cache_hint_not_available)).show();
+            }
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
