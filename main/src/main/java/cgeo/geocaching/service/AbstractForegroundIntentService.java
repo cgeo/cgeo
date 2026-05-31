@@ -42,7 +42,13 @@ public abstract class AbstractForegroundIntentService extends IntentService {
                 .setOnlyAlertOnce(true)
                 .setSilent(true);
 
-        startForeground(getForegroundNotificationId(), notification.build());
+        try {
+            startForeground(getForegroundNotificationId(), notification.build());
+        } catch (IllegalStateException e) {
+            // actually a ForegroundServiceStartNotAllowedException, which is API 31+,
+            // therefore resolving to first ancestor, which is available for API 26
+            Log.e("cannot start foreground service " + e.getMessage());
+        }
     }
 
 
