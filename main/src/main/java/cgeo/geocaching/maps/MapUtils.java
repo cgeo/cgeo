@@ -11,6 +11,7 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
@@ -39,7 +40,6 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
@@ -148,7 +148,7 @@ public class MapUtils {
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext), getActiveMapFilterSavedDifferently(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext));
     }
 
     @Nullable
@@ -156,15 +156,6 @@ public class MapUtils {
         final GeocacheFilter filter = filterContext.get();
         if (filter.isFiltering()) {
             return filter.toUserDisplayableString();
-        }
-        return null;
-    }
-
-    @Nullable
-    private static Boolean getActiveMapFilterSavedDifferently(final GeocacheFilterContext filterContext) {
-        final GeocacheFilter filter = filterContext.get();
-        if (filter.isFiltering()) {
-            return filter.isSavedDifferently();
         }
         return null;
     }

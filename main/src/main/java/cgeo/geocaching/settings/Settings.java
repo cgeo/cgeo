@@ -24,7 +24,6 @@ import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableComparator;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
-import cgeo.geocaching.models.ConditionalCacheMarker;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.network.HtmlImage;
@@ -43,7 +42,6 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
@@ -81,9 +79,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -2535,56 +2531,12 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
-    // In-memory cache for conditional cache markers — volatile for thread visibility
-    private static final List<ConditionalCacheMarker> conditionalCacheMarkersCache = new ArrayList<>();
-    private static boolean conditionalCacheMarkersCacheInitialized = false;
-
     /**
-     * Returns the current list of ConditionalCacheMarker rules.
-     * Uses an in-memory cache to avoid repeated JSON parsing.
-     * Returns an empty mutable list if nothing is configured.
+     * Clears the conditional cache markers SharedPreferences keys (called during DB migration).
      */
-    @NonNull
-    public static List<ConditionalCacheMarker> getConditionalCacheMarkers() {
-        synchronized (conditionalCacheMarkersCache) {
-            if (conditionalCacheMarkersCacheInitialized) {
-                return conditionalCacheMarkersCache;
-            }
-            final String json = getString(R.string.pref_conditionalCacheMarkers, "[]");
-            final JsonNode root = JsonUtils.stringToNode(json);
-            conditionalCacheMarkersCache.clear();
-            if (root != null && root.isArray()) {
-                for (final JsonNode child : root) {
-                    conditionalCacheMarkersCache.add(cgeo.geocaching.models.ConditionalCacheMarker.fromJson(child));
-                }
-            }
-            conditionalCacheMarkersCacheInitialized = true;
-            return conditionalCacheMarkersCache;
-        }
-    }
-
-    public static boolean isConditionalCacheMarkersEnabled() {
-        return getBoolean(R.string.pref_conditionalCacheMarkersEnabled, true);
-    }
-
-    public static void setConditionalCacheMarkersEnabled(final boolean enabled) {
-        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, enabled);
-    }
-
-    /**
-     * Persists the list of ConditionalCacheMarker rules and updates the in-memory cache.
-     */
-    public static void setConditionalCacheMarkers(@NonNull final List<ConditionalCacheMarker> markers) {
-        synchronized (conditionalCacheMarkersCache) {
-            conditionalCacheMarkersCache.clear();
-            conditionalCacheMarkersCache.addAll(markers);
-            conditionalCacheMarkersCacheInitialized = true;
-            final ArrayNode array = JsonUtils.createArrayNode();
-            for (final ConditionalCacheMarker marker : markers) {
-                array.add(marker.toJson());
-            }
-            putString(R.string.pref_conditionalCacheMarkers, JsonUtils.nodeToString(array));
-        }
+    public static void clearConditionalCacheMarkersPrefs() {
+        putString(R.string.pref_conditionalCacheMarkers, "[]");
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, false);
     }
 
     public static int getAttributeFilterSources() {
