@@ -58,6 +58,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Novinka: Zobrazit potvrzení při mazání všech kešek ze seznamu "Vše"
 - Novinka: Povolit formátování Markdown pro výpis textu v uživatelsky definovaných keškách
 - Změna: Uložení kešky před přidáním obrázku uživatele
+- Fix: Crash on loading images embedded directly in listing text
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
