@@ -372,7 +372,6 @@
     <string name="translator_model_download_success">Modello di traduzione per %s scaricato</string>
     <string name="translator_model_download_error">Download del modello di traduzione non riuscito: %1$s: %2$s</string>
     <string name="translator_model">Modello di traduzione</string>
-    <string name="translator_tooltip">Traduttore offline con Google</string>
     <string name="translator_language_select">Seleziona la lingua di origine</string>
     <string name="translator_language_target_select">Seleziona la lingua di destinazione</string>
     <string name="translator_language_unsupported">Lingua (%s) non supportata per la traduzione. Tocca per selezionare la lingua sorgente.</string>
