@@ -58,6 +58,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Nyhet: Visa bekräftelse när du tar bort alla cacher från listan "Alla"
 - New: Allow Markdown formatting for listing text in user-defined caches
 - Change: Store cache before adding user image
+- Fix: Crash on loading images embedded directly in listing text
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
