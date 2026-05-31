@@ -370,7 +370,6 @@
     <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
     <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
     <string name="translator_model">Översättningsmodell</string>
-    <string name="translator_tooltip">Översätta offline med Google</string>
     <string name="translator_language_select">Välj källspråk</string>
     <string name="translator_language_target_select">Välj målspråk</string>
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning. Tryck för att välja källspråk.</string>
