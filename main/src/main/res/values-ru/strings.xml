@@ -370,7 +370,6 @@
     <string name="translator_model_download_success">Модель перевода для %s загружена</string>
     <string name="translator_model_download_error">Не удалось загрузить модель перевода %1$s: %2$s</string>
     <string name="translator_model">Модель перевода</string>
-    <string name="translator_tooltip">Оффлайн перевод с Google</string>
     <string name="translator_language_select">Выберите исходный язык</string>
     <string name="translator_language_target_select">Выбрать целевой язык</string>
     <string name="translator_language_unsupported">Язык (%s) не поддерживается для перевода. Нажмите, чтобы выбрать исходный язык.</string>
