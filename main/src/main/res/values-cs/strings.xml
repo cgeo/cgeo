@@ -375,7 +375,6 @@
     <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
     <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
     <string name="translator_model">Překladový model</string>
-    <string name="translator_tooltip">Offline překlad pomocí Google</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
     <string name="translator_language_target_select">Vyberte cílový jazyk</string>
     <string name="translator_language_unsupported">Jazyk (%s) není pro překlad podporován. Klepnutím vyberte zdrojový jazyk.</string>
