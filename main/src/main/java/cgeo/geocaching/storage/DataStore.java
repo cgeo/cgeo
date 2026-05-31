@@ -5421,7 +5421,7 @@ public class DataStore {
     /**
      * checks if this is a newly created database
      */
-    public static boolean isNewlyCreatedDatebase() {
+    public static boolean isNewlyCreatedDatabase() {
         return newlyCreatedDatabase;
     }
 
