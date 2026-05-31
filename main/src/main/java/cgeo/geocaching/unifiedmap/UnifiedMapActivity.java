@@ -10,6 +10,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -36,7 +38,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
-import cgeo.geocaching.settings.ConditionalCacheMarkersActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.storage.DataStore;
@@ -67,7 +68,6 @@ import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -149,7 +149,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
     private static final int REQUEST_CODE_LOG = 1001;
-    private static final int REQUEST_CODE_CONDITIONAL_MARKERS = 1002;
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
@@ -264,7 +263,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         changeMapSource(Settings.getTileProvider());
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.reloadIndividualRoute(), this);
@@ -289,6 +288,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    reloadCachesAndWaypoints();
+                    invalidateOptionsMenu();
+                    return;
+                }
                 handleGeocodeChangedBroadcastReceived(geocode);
             }
         });
@@ -895,8 +899,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
-        final MenuItem itemConditionalMarkers = toolbarMenu.findItem(R.id.menu_conditional_markers);
-        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(itemConditionalMarkers, Settings.isConditionalCacheMarkersEnabled());
+        final MenuItem itemNamedFilters = toolbarMenu.findItem(R.id.menu_named_filters);
+        final boolean anyActive = NamedFilter.getAll().stream().anyMatch(NamedFilter::isConditionalMarkerActive);
+        ToggleItemType.NAMED_FILTERS.toggleMenuItem(itemNamedFilters, anyActive);
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -933,7 +938,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
+        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
+
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
         initializeLongClicks();
@@ -990,9 +997,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_filter) {
-            showFilterMenu();
-        } else if (id == R.id.menu_conditional_markers) {
-            startActivityForResult(new Intent(this, ConditionalCacheMarkersActivity.class), REQUEST_CODE_CONDITIONAL_MARKERS);
+            FilterUtils.onClickFilterMenu(this);
+        } else if (id == R.id.menu_named_filters) {
+            FilterUtils.onClickNamedFilterMenu(this);
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1083,8 +1090,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             refreshMapData(true);
         } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
             ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
-        } else if (requestCode == REQUEST_CODE_CONDITIONAL_MARKERS) {
-            reloadCachesAndWaypoints();
         }
     }
 
@@ -1102,12 +1107,29 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void showFilterMenu() {
-        FilterUtils.openFilterActivity(this, viewModel.mapType.filterContext, viewModel.caches.getListCopy());
+        final Collection<Geocache> filteredList = viewModel.caches.getListCopy();
+
+        GeocacheFilterActivity.selectFilter(
+                this,
+                viewModel.mapType.filterContext,
+                filteredList, true);
     }
 
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, viewModel.mapType.filterContext);
+        FilterUtils.openDialogSelectNamedFilter(this,
+                TextParam.id(R.string.cache_filter_storage_select_title),
+                viewModel.mapType.filterContext,
+                selectedFilter -> {
+                    refreshWithFilter(viewModel.mapType.filterContext.get());
+                });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        return true;
     }
 
     @Override
@@ -1517,20 +1539,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
                     viewModel.transientIsLiveEnabled.setValue(false);
                     Settings.setLiveMap(false);
-                    reloadCachesAndWaypoints();
-                    return true;
-                });
-            }
-
-            final View conditionalMarkersButton = findViewById(R.id.menu_conditional_markers);
-            if (conditionalMarkersButton != null) {
-                conditionalMarkersButton.setOnLongClickListener(v -> {
-                    final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
-                    Settings.setConditionalCacheMarkersEnabled(newState);
-                    if (null != toolbarMenu && null != toolbarMenu.findItem(R.id.menu_conditional_markers)) {
-                        ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(toolbarMenu.findItem(R.id.menu_conditional_markers), newState);
-                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
-                    }
                     reloadCachesAndWaypoints();
                     return true;
                 });

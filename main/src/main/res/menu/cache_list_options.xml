@@ -18,6 +18,11 @@
         android:title="@string/caches_sort"
         app:showAsAction="ifRoom|withText"/>
     <item
+        android:id="@+id/menu_named_filters"
+        android:icon="@drawable/ic_menu_marker"
+        android:title="@string/named_filter_activity_title"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:id="@+id/menu_switch_select_mode"
         android:icon="@drawable/ic_menu_select_start"
         android:title="@string/caches_select_mode"

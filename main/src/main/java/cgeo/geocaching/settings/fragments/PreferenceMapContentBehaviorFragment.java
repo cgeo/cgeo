@@ -2,15 +2,12 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.ButtonPreference;
-import cgeo.geocaching.settings.ConditionalCacheMarkersActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
-import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -33,8 +30,6 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         assert activity != null;
         activity.setTitle(R.string.settings_title_map_content_behavior);
 
-        setPrefClick(this, R.string.pref_fakekey_conditional_markers,
-                () -> activity.startActivity(new Intent(activity, ConditionalCacheMarkersActivity.class)));
 
         updateNotificationAudioInfo();
 

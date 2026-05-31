@@ -196,6 +196,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
                 @Override
                 protected void onReceive(final Context context, final String geocode) {
+                    if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                        init();
+                        return;
+                    }
                     if (Strings.CS.equals(geocode, CachePopupFragment.this.geocode)) {
                         init();
                     }

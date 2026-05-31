@@ -6,13 +6,7 @@
     <item
         android:id="@+id/menu_item_add"
         android:icon="@drawable/ic_menu_add"
-        android:title="@string/conditional_marker_add_rule"
-        app:showAsAction="always"
-        tools:ignore="AlwaysShowAction" />
-    <item
-        android:id="@+id/menu_item_disable"
-        android:icon="@drawable/ic_menu_pause"
-        android:title="@string/conditional_marker_disable"
+        android:title="@string/named_filter_add"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
     <item
@@ -29,4 +23,3 @@
         tools:ignore="AlwaysShowAction" />
 
 </menu>
-
