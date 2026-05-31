@@ -81,9 +81,9 @@
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/menu_edit_fieldnote"
+        android:id="@+id/menu_edit_personalnote"
         android:icon="@drawable/ic_menu_note"
-        android:title="@string/cache_personal_note"
+        android:title="@string/cache_personal_note_edit_pn"
         android:visible="false"/>
     <item
         android:id="@+id/menu_translate"
