@@ -295,9 +295,10 @@ public class RouteTrackUtils {
         }
         final boolean hasIndividualRoute = isRouteNonEmpty(individualRoute);
         dialog.findViewById(R.id.indivroute).setVisibility(hasIndividualRoute ? View.VISIBLE : View.GONE);
-        final View v = dialog.findViewById(R.id.indivroute_load);
-        v.setVisibility(hasIndividualRoute ? View.GONE : View.VISIBLE);
-        v.setOnClickListener(hasIndividualRoute ? null : (view) -> {
+        final View v1 = dialog.findViewById(R.id.indivroute_block);
+        v1.setVisibility(hasIndividualRoute ? View.GONE : View.VISIBLE);
+        final View v2 = dialog.findViewById(R.id.indivroute_load);
+        v2.setOnClickListener(hasIndividualRoute ? null : (view) -> {
             startFileSelectorIndividualRoute();
             this.dialog.dismiss();
         });
@@ -313,7 +314,7 @@ public class RouteTrackUtils {
 
             final CheckBox vAutoTarget = dialog.findViewById(R.id.auto_target);
             vAutoTarget.setChecked(Settings.isAutotargetIndividualRoute());
-            vAutoTarget.setOnClickListener(v1 -> {
+            vAutoTarget.setOnClickListener(v3 -> {
                 setAutotargetIndividualRoute(activity, individualRoute, !Settings.isAutotargetIndividualRoute());
                 updateDialogClearTargets(popup, individualRoute, setTarget, showElevationChart);
             });
