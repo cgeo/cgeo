@@ -370,7 +370,6 @@
     <string name="translator_model_download_success">Vertaalmodel voor %s gedownload</string>
     <string name="translator_model_download_error">Downloaden van vertaalmodel %1$s: %2$s is mislukt</string>
     <string name="translator_model">Vertaal model</string>
-    <string name="translator_tooltip">Offline vertalen met Google</string>
     <string name="translator_language_select">Selecteer brontaal</string>
     <string name="translator_language_target_select">Selecteer doeltaal</string>
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling. Tik om de brontaal te selecteren.</string>
