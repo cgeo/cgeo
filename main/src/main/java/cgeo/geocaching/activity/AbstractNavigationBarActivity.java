@@ -241,7 +241,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
-        Log.e("insets.top=" + insets.top + ", left=" + insets.left + ", right=" + insets.right + ", bottom=" + insets.bottom + ", ab=" + getResources().getDimension(R.dimen.actionbar_height));
         if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
             //-> navbar is NOT shown, we have to handle all insets (including bottom)
             return insets;

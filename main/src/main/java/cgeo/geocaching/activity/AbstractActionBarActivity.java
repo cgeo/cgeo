@@ -7,7 +7,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -45,7 +44,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     @Override
     public void setContentView(@LayoutRes final int layoutResID) {
-        Log.e("AbstractActionBarActivity.setContentView: inflating view #" + layoutResID);
         setContentView(LayoutInflater.from(this).inflate(layoutResID, null));
     }
 
@@ -55,11 +53,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
         toolbar = view.findViewById(R.id.appToolbar);
         if (toolbar != null) {
             // use existing toolbar
-            Log.e("AbstractActionBarActivity.setContentView: using given view");
             super.setContentView(view);
         } else {
             // add toolbar above given view
-            Log.e("AbstractActionBarActivity.setContentView: creating new frame view");
             super.setContentView(R.layout.activity_base_with_toolbar);
             final ViewGroup contentContainer = findViewById(R.id.activity_content_wrapper);
             if (contentContainer != null) {
