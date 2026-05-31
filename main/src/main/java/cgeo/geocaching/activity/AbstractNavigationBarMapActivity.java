@@ -90,13 +90,17 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             // limit content height
             final DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            ((BottomSheetBehavior<?>) behavior).setMaxHeight((int) (displayMetrics.heightPixels * 0.7f));
+            final int maxHeight = (int) (displayMetrics.heightPixels * 0.7f);
+            ((BottomSheetBehavior<?>) behavior).setMaxHeight(maxHeight);
 
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
             b.setHideable(true);
             b.setSkipCollapsed(false);
-            b.setPeekHeight(0); // temporary set to 0 to avoid bumping. Gets updated once view is loaded.
-            b.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            // default initialization to avoid bumping & delayed opening (see #17450)
+            final boolean[] sheetOpenedAtLeastOnce = { false };
+            b.setPeekHeight(0);
+            b.setState(BottomSheetBehavior.STATE_HIDDEN);
 
             ft.runOnCommit(() -> {
                 final View view = fragment.requireView();
@@ -109,9 +113,29 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     if (layoutListeners[0] != null) {
                         view.getViewTreeObserver().removeOnGlobalLayoutListener(layoutListeners[0]);
                     }
-                    layoutListeners[0] = () -> b.setPeekHeight(view.getHeight());
+                    final int[] lastHeight = { -1 };
+                    layoutListeners[0] = () -> {
+                        final int height = Math.min(view.getHeight(), maxHeight);
+                        if (height <= 0) {
+                            return;
+                        }
+                        b.setPeekHeight(height); // no-op when unchanged, snaps without animation otherwise
+                        // open only after the height settled (same value on two consecutive layout passes)
+                        if (b.getState() == BottomSheetBehavior.STATE_HIDDEN && height == lastHeight[0]) {
+                            sheetOpenedAtLeastOnce[0] = true;
+                            b.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        }
+                        lastHeight[0] = height;
+                    };
                     view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListeners[0]);
                 }
+                // safety net: make sure the sheet opens even if its height never reports as stable
+                ActivityMixin.postDelayed(() -> {
+                    if (!isFinishing() && !isDestroyed() && b.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                        sheetOpenedAtLeastOnce[0] = true;
+                        b.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                }, 300);
             });
 
             if (swipeToOpenFragment != null) {
@@ -119,7 +143,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
                     @Override
                     public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
-                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        if (newState == BottomSheetBehavior.STATE_HIDDEN && sheetOpenedAtLeastOnce[0]) {
                             sheetRemoveFragment();
                         }
                         if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
