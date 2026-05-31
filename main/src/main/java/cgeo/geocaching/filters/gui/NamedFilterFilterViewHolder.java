@@ -29,9 +29,9 @@ public class NamedFilterFilterViewHolder extends BaseFilterViewHolder<NamedFilte
         updateButtonLabel();
 
         selectButton.setOnClickListener(v ->
-            FilterUtils.openSingleSelectDialog(
+            FilterUtils.openDialogSelectNamedFilter(
                 getActivity(),
-                LocalizationUtils.getString(R.string.named_filter_select_title),
+                TextParam.id(R.string.named_filter_select_title),
                 filter -> {
                     selectedFilter = filter;
                     updateButtonLabel();

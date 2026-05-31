@@ -40,8 +40,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
+import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
-import cgeo.geocaching.filters.NamedFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -1513,10 +1513,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             namedfilterText.setText(sb);
 
             final Button namedfilterOpen = view.findViewById(R.id.namedfilter_open);
-            namedfilterOpen.setOnClickListener(v -> {
-                if (activity != null) {
-                    activity.startActivity(new Intent(activity, NamedFilterActivity.class));
-                }
+            namedfilterOpen.setOnClickListener(v -> FilterUtils.onClickNamedFilterMenu(activity));
+            namedfilterOpen.setOnLongClickListener(v -> {
+                FilterUtils.openDialogActivateDeactivateNamedFilters(activity);
+                return true;
             });
         }
 

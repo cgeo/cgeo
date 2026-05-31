@@ -53,9 +53,11 @@
         android:visible="false"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/menu_conditional_markers"
+        android:id="@+id/menu_named_filters"
         android:icon="@drawable/ic_menu_marker"
-        android:title="@string/conditional_marker_activity_title"
+        android:showAsAction="ifRoom"
+        android:title="@string/named_filter_activity_title"
+        android:visible="true"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_hint"

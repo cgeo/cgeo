@@ -168,11 +168,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
         binding.filterAddNamedCriterion.setOnClickListener(v -> {
-            FilterUtils.openSingleSelectDialog(this,
-                    LocalizationUtils.getString(R.string.named_filter_add_named_criterion),
+            FilterUtils.openDialogSelectNamedFilter(this,
+                    TextParam.id(R.string.named_filter_add_named_criterion),
                     selectedNamedFilter -> {
-                        final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();
-                        nff.setNamedFilterId(selectedNamedFilter.getId());
+                        final NamedFilterGeocacheFilter nff = NamedFilterGeocacheFilter.createFor(selectedNamedFilter);
                         filterListAdapter.setItems(Collections.singletonList(FilterViewHolderCreator.createFor(nff, this)));
                         binding.filterList.smoothScrollToPosition(0);
                         adjustFilterEmptyView();

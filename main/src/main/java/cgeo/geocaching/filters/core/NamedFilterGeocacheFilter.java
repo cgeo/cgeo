@@ -30,7 +30,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Nullable
-    private NamedFilter resolveNamedFilter() {
+    public NamedFilter getNamedFilter() {
         if (namedFilterId == 0) {
             return null;
         }
@@ -39,7 +39,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public Boolean filter(final Geocache cache) {
-        final NamedFilter nf = resolveNamedFilter();
+        final NamedFilter nf = getNamedFilter();
         if (nf == null || nf.getFilter() == null) {
             return true;
         }
@@ -55,7 +55,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public boolean isFiltering() {
-        final NamedFilter nf = resolveNamedFilter();
+        final NamedFilter nf = getNamedFilter();
         if (nf == null || nf.getFilter() == null) {
             return false;
         }
@@ -71,7 +71,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        final NamedFilter nf = resolveNamedFilter();
+        final NamedFilter nf = getNamedFilter();
         if (nf == null || nf.getFilter() == null || nf.getFilter().getTree() == null) {
             sqlBuilder.addWhereTrue();
         } else {
@@ -100,9 +100,17 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
         this.namedFilterId = JsonUtils.getInt(node, "id", 0);
     }
 
+    public static NamedFilterGeocacheFilter createFor(final NamedFilter nf) {
+        final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();
+        if (nf != null) {
+            nff.setNamedFilterId(nf.getId());
+        }
+        return nff;
+    }
+
     @Override
     protected String getUserDisplayableConfig() {
-        final NamedFilter nf = resolveNamedFilter();
+        final NamedFilter nf = getNamedFilter();
         return nf == null ?
             LocalizationUtils.getString(R.string.cache_filter_userdisplay_none) :
             nf.getNameAndMarker();

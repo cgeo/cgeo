@@ -4,17 +4,18 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
-import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,26 +31,10 @@ import java.util.function.Consumer;
 public class FilterUtils {
 
     /** Separator used in filter names to define display groups, e.g. "Parent::Child". */
-    private static final String GROUP_SEPARATOR = "::";
+    private static final String NAMED_FILTER_GROUP_SEPARATOR = "::";
 
     private FilterUtils() {
         // should not be instantiated
-    }
-
-    public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
-
-        GeocacheFilterActivity.selectFilter(
-                activity,
-                filterContext,
-                filteredList, true);
-    }
-
-    public static void setFilterText(@NonNull final TextView viewField, @Nullable final String filterName) {
-        if (filterName != null) {
-            viewField.setText(filterName);
-        } else {
-            viewField.setText("");
-        }
     }
 
     public static void updateFilterBar(final Activity activity, @Nullable final String filterName) {
@@ -59,56 +43,38 @@ public class FilterUtils {
             filterView.setVisibility(View.GONE);
         } else {
             final TextView filterTextView = activity.findViewById(R.id.filter_text);
-            setFilterText(filterTextView, filterName);
+            filterTextView.setText(filterName);
             filterView.setVisibility(View.VISIBLE);
         }
     }
 
-    /**
-     * filterView must exist
-     */
-    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
-        ViewUtils.setForParentAndChildren(activity.findViewById(R.id.filter_bar),
-                v -> filteredActivity.showFilterMenu(),
-                v -> filteredActivity.showSavedFilterList());
+    /** filterView must exist */
+    public static void initializeFilterBar(@Nullable final View filterBarView, @NonNull final FilteredActivity filteredActivity) {
+        ViewUtils.setForParentAndChildren(filterBarView,
+            v -> filteredActivity.showFilterMenu(),
+            v -> filteredActivity.showSavedFilterList());
     }
 
-    public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
-
-        new android.os.Handler().post(() -> {
-            final View filterView = activity.findViewById(R.id.menu_filter);
-            if (filterView != null) {
-                filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
-            }
-        });
+    public static void initializeFilterMenu(final Activity activity, final int filterMenuId, @NonNull final FilteredActivity filteredActivity) {
+        ViewUtils.registerLongClickHandlerForMenuItem(activity, filterMenuId, v -> filteredActivity.showSavedFilterList());
     }
 
-    public static void openSingleSelectDialog(final Activity activity, final String title, final Consumer<NamedFilter> onSelected) {
-        final List<NamedFilter> filters = NamedFilter.getAll();
-
-        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
-
-        SimpleDialog.of(activity)
-            .setTitle(TextParam.text(title))
-            .setPositiveButton(null)
-            .selectSingle(model, onSelected);
+    public static void onClickFilterMenu(@NonNull final FilteredActivity filteredActivity) {
+        filteredActivity.showFilterMenu();
     }
 
-    public static void openMultiSelectDialog(final Activity activity, final Consumer<List<NamedFilter>> onConfirm) {
-        final List<NamedFilter> filters = NamedFilter.getAll();
-
-        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
-        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
-
-        SimpleDialog.of(activity)
-                .setTitle(TextParam.id(R.string.named_filter_select_title))
-                .selectMultiple(model, selected -> {
-                    final List<NamedFilter> selectedList = new ArrayList<>(selected);
-                    onConfirm.accept(selectedList);
-                });
+    public static void initializeNamedFilterMenu(final Activity activity, final int namedFilterMenuId, @NonNull final FilteredActivity filteredActivity) {
+        ViewUtils.registerLongClickHandlerForMenuItem(activity, namedFilterMenuId, v -> filteredActivity.showNamedFilterActivateDeactivate());
     }
 
-    public static void openActivateDeactivateDialog(final Activity activity) {
+
+    public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
+        activity.startActivity(new Intent(activity, NamedFilterActivity.class));
+    }
+
+
+    /** opens a dialog to activate/deactivate named filter markers */
+    public static void openDialogActivateDeactivateNamedFilters(final Context context) {
         final List<NamedFilter> filters = NamedFilter.getAll();
 
         final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
@@ -122,7 +88,7 @@ public class FilterUtils {
         }
         model.setSelectedItems(preSelected);
 
-        SimpleDialog.of(activity)
+        SimpleDialog.ofContext(context)
             .setTitle(TextParam.id(R.string.named_filter_activate_deactivate_title))
             .selectMultiple(model, selected -> {
                 final List<NamedFilter> updated = new ArrayList<>(filters);
@@ -133,42 +99,69 @@ public class FilterUtils {
             });
     }
 
-    /**
-     * Opens a single-select dialog for named filters and, upon selection, replaces the given
-     * filter context with a {@link NamedFilterGeocacheFilter} referencing the selected named filter.
-     * After setting the filter the {@code onFilterApplied} runnable is invoked.
-     */
-    public static void applySelectedNamedFilter(final Activity activity, final String title,
-                                                final GeocacheFilterContext filterContext,
-                                                final Runnable onFilterApplied) {
-        openSingleSelectDialog(activity, title, selectedFilter -> {
-            final NamedFilterGeocacheFilter namedRef = GeocacheFilterType.NAMED_FILTER.create();
-            namedRef.setNamedFilterId(selectedFilter.getId());
-            final GeocacheFilter newFilter = GeocacheFilter.create(false, false, namedRef);
-            filterContext.set(newFilter);
-            onFilterApplied.run();
+
+    /** opens a dialog to select one named filter */
+    public static void openDialogSelectNamedFilter(@NonNull final Context activity, @Nullable final TextParam title, final Consumer<NamedFilter> onSelected) {
+        openDialogSelectNamedFilter(activity, title, null, f -> {
+            if (onSelected == null || f == null || !(f.getTree() instanceof NamedFilterGeocacheFilter)) {
+                return;
+            }
+            final NamedFilter nf = ((NamedFilterGeocacheFilter) f.getTree()).getNamedFilter();
+            if (nf != null) {
+                onSelected.accept(nf);
+            }
         });
     }
 
-    /**
-     * Creates a {@link GeocacheFilter} that wraps the given named filter by reference
-     * (i.e. a single {@link NamedFilterGeocacheFilter} pointing to the named filter's ID).
-     */
-    public static GeocacheFilter createNamedFilterReference(final NamedFilter namedFilter) {
-        final NamedFilterGeocacheFilter namedRef = GeocacheFilterType.NAMED_FILTER.create();
-        namedRef.setNamedFilterId(namedFilter.getId());
-        return GeocacheFilter.create(false, false, namedRef);
+    /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
+    public static void openDialogSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
+        final GeocacheFilter currentFilter = filterContext == null ? null : filterContext.get();
+        final boolean isFilterActive = currentFilter != null && currentFilter.isFiltering();
+        final GeocacheFilter previousFilter = filterContext == null ? null : filterContext.getPreviousFilter();
+        final boolean hasPreviousFilter = previousFilter != null && previousFilter.isFiltering();
+
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(NamedFilter.getAll());
+
+        SimpleDialog.ofContext(context)
+            .setTitle(title != null ? title : TextParam.id(R.string.named_filter_select_title))
+            .setPositiveButton(null)
+            .setNeutralButton(isFilterActive ? TextParam.id(R.string.cache_filter_storage_clear_button) : null)
+            .setNegativeButton(hasPreviousFilter ? TextParam.id(R.string.caches_filter_select_last) : null)
+            .setButtonClickAction(which -> {
+                if (which == DialogInterface.BUTTON_NEUTRAL && isFilterActive) {
+                    final GeocacheFilter empty = GeocacheFilter.createEmpty();
+                    filterContext.set(empty);
+                    if (onFilterSelected != null) {
+                        onFilterSelected.accept(empty);
+                    }
+                } else if (which == DialogInterface.BUTTON_NEGATIVE && hasPreviousFilter) {
+                    filterContext.set(previousFilter);
+                    if (onFilterSelected != null) {
+                        onFilterSelected.accept(previousFilter);
+                    }
+                }
+                return false;
+            })
+            .selectSingle(model, selectedNamedFilter -> {
+                final GeocacheFilter newFilter = createFilterForNamedFilter(selectedNamedFilter);
+                if (filterContext != null) {
+                    filterContext.set(newFilter);
+                }
+                if (onFilterSelected != null) {
+                    onFilterSelected.accept(newFilter);
+                }
+            });
     }
 
-    public static GeocacheFilter getAsFilter(final NamedFilter nf) {
+    public static GeocacheFilter createFilterForNamedFilter(final NamedFilter nf) {
         if (nf == null) {
             return GeocacheFilter.createEmpty();
         }
-        final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();
-        nff.setNamedFilterId(nf.getId());
+        final NamedFilterGeocacheFilter nff = NamedFilterGeocacheFilter.createFor(nf);
         return GeocacheFilter.createEmpty(true).and(nff);
     }
 
+    /** builds basic display model for named filters, initialized to "single-plain". Handles grouping */
     private static SimpleDialog.ItemSelectModel<NamedFilter> buildGroupedModel(final List<NamedFilter> filters) {
         final SimpleDialog.ItemSelectModel<NamedFilter> model = new SimpleDialog.ItemSelectModel<>();
         model
@@ -177,8 +170,8 @@ public class FilterUtils {
             .setDisplayMapper((f, gi) -> {
                 String name = f.getName();
                 final String parentGroup = gi == null || gi.getGroup() == null ? "" : gi.getGroup().toString();
-                if (name.startsWith(parentGroup + GROUP_SEPARATOR)) {
-                    name = name.substring(parentGroup.length() + GROUP_SEPARATOR.length());
+                if (name.startsWith(parentGroup + NAMED_FILTER_GROUP_SEPARATOR)) {
+                    name = name.substring(parentGroup.length() + NAMED_FILTER_GROUP_SEPARATOR.length());
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
@@ -189,8 +182,8 @@ public class FilterUtils {
             .setGroupDisplayMapper(gi -> {
                 final String parentGroup = gi.getParent() == null || gi.getParent().getGroup() == null ? "" : gi.getParent().getGroup();
                 String name = gi.getGroup();
-                if (name.startsWith(parentGroup + GROUP_SEPARATOR)) {
-                    name = name.substring(parentGroup.length() + GROUP_SEPARATOR.length());
+                if (name.startsWith(parentGroup + NAMED_FILTER_GROUP_SEPARATOR)) {
+                    name = name.substring(parentGroup.length() + NAMED_FILTER_GROUP_SEPARATOR.length());
                 }
                 return TextParam.text("**" + name + "**").setMarkdown(true);
             })
@@ -202,7 +195,7 @@ public class FilterUtils {
         if (name == null) {
             return null;
         }
-        final int idx = name.lastIndexOf(GROUP_SEPARATOR);
+        final int idx = name.lastIndexOf(NAMED_FILTER_GROUP_SEPARATOR);
         return idx <= 0 ? null : name.substring(0, idx);
     }
 }

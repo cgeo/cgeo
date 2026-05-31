@@ -414,7 +414,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         updateFilterBar();
 
         restartCacheLoader(false, null);
@@ -548,7 +548,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
+        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
@@ -804,9 +805,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_select_next100) {
             adapter.selectNextCaches(100);
         } else if (menuItem == R.id.menu_filter) {
-            showFilterMenu();
+            FilterUtils.onClickFilterMenu(this);
         } else if (menuItem == R.id.menu_sort) {
             openSortDialog();
+        } else if (menuItem == R.id.menu_named_filters) {
+            FilterUtils.onClickNamedFilterMenu(this);
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -938,14 +941,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        FilterUtils.openSingleSelectDialog(this,
-                getString(R.string.cache_filter_storage_select_title),
-                selectedFilter -> {
-                    if (selectedFilter.getFilter() != null) {
-                        currentCacheFilterContext.set(FilterUtils.getAsFilter(selectedFilter));
-                        refreshWithFilter(currentCacheFilterContext.get());
-                    }
-                });
+        FilterUtils.openDialogSelectNamedFilter(this,
+            TextParam.id(R.string.cache_filter_storage_select_title),
+            currentCacheFilterContext,
+            selectedFilter -> {
+                refreshWithFilter(currentCacheFilterContext.get());
+            });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
         return true;
     }
 
