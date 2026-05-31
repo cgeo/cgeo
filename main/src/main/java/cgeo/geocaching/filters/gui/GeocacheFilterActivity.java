@@ -1,11 +1,13 @@
 package cgeo.geocaching.filters.gui;
 
-import cgeo.geocaching.NamedFilterActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.CacheFilterActivityBinding;
 import cgeo.geocaching.databinding.CacheFilterListItemBinding;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
+import cgeo.geocaching.filters.NamedFilterActivity;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -17,7 +19,6 @@ import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.NamedFilter;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
@@ -27,7 +28,6 @@ import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.NamedFilterUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
 
@@ -168,7 +168,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
         binding.filterAddNamedCriterion.setOnClickListener(v -> {
-            NamedFilterUtils.openSingleSelectDialog(this,
+            FilterUtils.openSingleSelectDialog(this,
                     LocalizationUtils.getString(R.string.named_filter_add_named_criterion),
                     selectedNamedFilter -> {
                         final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();

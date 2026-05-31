@@ -6,7 +6,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.NamedFilter;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 

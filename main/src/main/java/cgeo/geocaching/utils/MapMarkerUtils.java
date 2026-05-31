@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -683,7 +684,7 @@ public final class MapMarkerUtils {
         final ArrayList<Integer> result = new ArrayList<>();
 
         // Named filter markers are prepended so they appear first
-        result.addAll(cgeo.geocaching.models.NamedFilter.getMarkersForCache(cache));
+        result.addAll(NamedFilter.getMarkersForCache(cache));
 
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {

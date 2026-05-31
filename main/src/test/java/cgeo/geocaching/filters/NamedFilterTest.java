@@ -1,9 +1,10 @@
-package cgeo.geocaching.models;
+package cgeo.geocaching.filters;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.EmojiUtils;
 
 import java.util.ArrayList;

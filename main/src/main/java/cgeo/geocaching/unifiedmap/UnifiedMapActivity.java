@@ -10,6 +10,9 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
+import cgeo.geocaching.filters.NamedFilterActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -66,7 +69,6 @@ import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -74,7 +76,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.NamedFilterUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -900,7 +901,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         itemMapLive.setVisible(true);
 
         final MenuItem itemConditionalMarkers = toolbarMenu.findItem(R.id.menu_conditional_markers);
-        final boolean anyActive = cgeo.geocaching.models.NamedFilter.getAll().stream().anyMatch(cgeo.geocaching.models.NamedFilter::isConditionalMarkerActive);
+        final boolean anyActive = NamedFilter.getAll().stream().anyMatch(NamedFilter::isConditionalMarkerActive);
         ToggleItemType.CONDITIONAL_MARKERS.toggleMenuItem(itemConditionalMarkers, anyActive);
 
         // map rotation state
@@ -997,7 +998,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
         } else if (id == R.id.menu_conditional_markers) {
-            NamedFilterUtils.openActivateDeactivateDialog(this);
+            FilterUtils.openActivateDeactivateDialog(this);
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1112,10 +1113,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public boolean showSavedFilterList() {
-        NamedFilterUtils.openSingleSelectDialog(this,
+        FilterUtils.openSingleSelectDialog(this,
             getString(R.string.cache_filter_storage_select_title),
             selectedFilter -> {
-                viewModel.mapType.filterContext.set(NamedFilterUtils.getAsFilter(selectedFilter));
+                viewModel.mapType.filterContext.set(FilterUtils.getAsFilter(selectedFilter));
                 refreshWithFilter(viewModel.mapType.filterContext.get());
             });
         return true;
@@ -1536,7 +1537,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final View conditionalMarkersButton = findViewById(R.id.menu_conditional_markers);
             if (conditionalMarkersButton != null) {
                 conditionalMarkersButton.setOnLongClickListener(v -> {
-                    startActivity(new Intent(UnifiedMapActivity.this, cgeo.geocaching.NamedFilterActivity.class));
+                    startActivity(new Intent(UnifiedMapActivity.this, NamedFilterActivity.class));
                     return true;
                 });
             }

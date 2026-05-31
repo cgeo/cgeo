@@ -1,8 +1,8 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.NamedFilter;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;

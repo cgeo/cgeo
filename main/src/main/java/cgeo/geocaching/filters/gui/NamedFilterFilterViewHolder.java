@@ -1,12 +1,12 @@
 package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
-import cgeo.geocaching.models.NamedFilter;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.NamedFilterUtils;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +29,7 @@ public class NamedFilterFilterViewHolder extends BaseFilterViewHolder<NamedFilte
         updateButtonLabel();
 
         selectButton.setOnClickListener(v ->
-            NamedFilterUtils.openSingleSelectDialog(
+            FilterUtils.openSingleSelectDialog(
                 getActivity(),
                 LocalizationUtils.getString(R.string.named_filter_select_title),
                 filter -> {

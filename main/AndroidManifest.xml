@@ -859,7 +859,7 @@
         </activity>
 
         <activity
-            android:name=".NamedFilterActivity"
+            android:name=".filters.NamedFilterActivity"
             android:label="@string/named_filter_activity_title" >
         </activity>
 

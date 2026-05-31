@@ -1,31 +1,86 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.filters;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
-import cgeo.geocaching.models.NamedFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class NamedFilterUtils {
+public class FilterUtils {
 
     /** Separator used in filter names to define display groups, e.g. "Parent::Child". */
     private static final String GROUP_SEPARATOR = "::";
 
-    private NamedFilterUtils() {
-        // utility class
+    private FilterUtils() {
+        // should not be instantiated
+    }
+
+    public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
+
+        GeocacheFilterActivity.selectFilter(
+                activity,
+                filterContext,
+                filteredList, true);
+    }
+
+    public static void setFilterText(@NonNull final TextView viewField, @Nullable final String filterName) {
+        if (filterName != null) {
+            viewField.setText(filterName);
+        } else {
+            viewField.setText("");
+        }
+    }
+
+    public static void updateFilterBar(final Activity activity, @Nullable final String filterName) {
+        final View filterView = activity.findViewById(R.id.filter_bar);
+        if (filterName == null) {
+            filterView.setVisibility(View.GONE);
+        } else {
+            final TextView filterTextView = activity.findViewById(R.id.filter_text);
+            setFilterText(filterTextView, filterName);
+            filterView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * filterView must exist
+     */
+    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
+        ViewUtils.setForParentAndChildren(activity.findViewById(R.id.filter_bar),
+                v -> filteredActivity.showFilterMenu(),
+                v -> filteredActivity.showSavedFilterList());
+    }
+
+    public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
+
+        new android.os.Handler().post(() -> {
+            final View filterView = activity.findViewById(R.id.menu_filter);
+            if (filterView != null) {
+                filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
+            }
+        });
     }
 
     public static void openSingleSelectDialog(final Activity activity, final String title, final Consumer<NamedFilter> onSelected) {
@@ -130,7 +185,7 @@ public class NamedFilterUtils {
             .setDisplayIconMapper(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_filter))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
-            .setGroupGroupMapper(NamedFilterUtils::getGroupFromFilterName)
+            .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)
             .setGroupDisplayMapper(gi -> {
                 final String parentGroup = gi.getParent() == null || gi.getParent().getGroup() == null ? "" : gi.getParent().getGroup();
                 String name = gi.getGroup();

@@ -31,6 +31,7 @@ import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -89,12 +90,10 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.NamedFilterUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -939,11 +938,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        NamedFilterUtils.openSingleSelectDialog(this,
+        FilterUtils.openSingleSelectDialog(this,
                 getString(R.string.cache_filter_storage_select_title),
                 selectedFilter -> {
                     if (selectedFilter.getFilter() != null) {
-                        currentCacheFilterContext.set(NamedFilterUtils.getAsFilter(selectedFilter));
+                        currentCacheFilterContext.set(FilterUtils.getAsFilter(selectedFilter));
                         refreshWithFilter(currentCacheFilterContext.get());
                     }
                 });

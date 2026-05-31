@@ -1,6 +1,7 @@
-package cgeo.geocaching.models;
+package cgeo.geocaching.filters;
 
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.EmojiUtils;

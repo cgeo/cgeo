@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
-import cgeo.geocaching.NamedFilterActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.filters.NamedFilterActivity;
 import cgeo.geocaching.settings.ButtonPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;

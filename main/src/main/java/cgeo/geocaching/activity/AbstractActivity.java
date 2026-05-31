@@ -23,8 +23,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
-
-import java.util.Locale;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -45,6 +43,7 @@ import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;

@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -46,7 +47,6 @@ import androidx.core.util.Pair;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -200,7 +200,7 @@ public final class SystemInformation {
             final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
-        final int storedFilterCount = cgeo.geocaching.models.NamedFilter.getAll().size();
+        final int storedFilterCount = NamedFilter.getAll().size();
         if (storedFilterCount > 0) {
             body.append("\n- ").append("Named filters: ").append(storedFilterCount);
         }
