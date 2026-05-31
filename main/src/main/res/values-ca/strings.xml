@@ -376,7 +376,6 @@
     <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
     <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
     <string name="translator_model">Model de traducció</string>
-    <string name="translator_tooltip">Traducció fora de línia amb Google</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
     <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
