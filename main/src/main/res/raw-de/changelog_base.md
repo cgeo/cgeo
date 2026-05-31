@@ -58,6 +58,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Bestätigung beim Löschen aller Caches aus der "Alle" Liste
 - Neu: Erlaube Markdown-Formatierung für Listingtext in benutzerdefinierten Caches
 - Änderung: Cache wird beim Hinzufügen von benutzerdefinierten Bildern gespeichert
+- Fix: Crash on loading images embedded directly in listing text
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
