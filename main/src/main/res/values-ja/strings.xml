@@ -413,7 +413,6 @@
     <string name="cache_filter_mode_advanced">詳細</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">基本フィルタへ切り替え</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">基本フィルタにすると、フィルタ設定の一部またはすべてが失われます。変更しますか?</string>
-    <string name="cache_filter_add_button">フィルタ条件を追加</string>
     <string name="cache_filter_option_and_or">ANDの代わりにORを使用</string>
     <string name="cache_filter_option_inverse">除外フィルタ</string>
     <string name="cache_filter_option_include_inconclusive">不確定な一致を含める</string>
@@ -459,13 +458,6 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">削除</string>
     <string name="cache_filter_storage_clear_button">削除</string>
-    <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
-    <string name="cache_filter_storage_delete_title">フィルタの削除</string>
-    <string name="cache_filter_storage_delete_message">このフィルタを削除しますか?</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
-    <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
-    <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
-    <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定がすでに存在します。上書きしますか?</string>
     <string name="cache_filter_stringfilter_matchcase">大小文字を区別</string>
     <string name="cache_filter_stringfilter_searchtext_hint">検索テキスト</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
@@ -513,7 +505,7 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">サブフィルタが未定義です</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
