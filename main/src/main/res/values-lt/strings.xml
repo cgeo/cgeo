@@ -472,7 +472,6 @@
     <string name="cache_filter_mode_advanced">Išplėstiniai</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Perjunkite į Pagrindinis</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Pakeitus režimą į Pagrindinis, prarasite filtro nustatymus. Ar norite tęsti?</string>
-    <string name="cache_filter_add_button">Pridėti filtro kriterijus</string>
     <string name="cache_filter_option_and_or">Vietoj IR naudokite ARBA</string>
     <string name="cache_filter_option_inverse">Atvirkštinis filtras</string>
     <string name="cache_filter_option_include_inconclusive">Įtraukiti dviprasmiškus atitikmenis</string>
@@ -525,15 +524,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
     <string name="cache_filter_storage_clear_button">Išvalyti</string>
-    <string name="cache_filter_storage_load_delete_title">Įkelkite arba ištrinkite esamą filtrą</string>
     <string name="cache_filter_storage_select_title">Pasirinkite filtrą</string>
-    <string name="cache_filter_storage_delete_title">Ištrinti failą</string>
-    <string name="cache_filter_storage_delete_message">Ar tikrai norite ištrinti šią filtro konfigūraciją?</string>
-    <string name="cache_filter_storage_select_clear_title">Pasirinkite filtrą arba išvalykite esamą filtrą</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Filtras dar nėra išsaugotas.</string>
-    <string name="cache_filter_storage_save_title">Išsaugoti filtrą su pavadinimu</string>
-    <string name="cache_filter_storage_save_confirm_title">Išsaugoti filtro perrašymą</string>
-    <string name="cache_filter_storage_save_confirm_message">Filtras su pavadinimu \'%s\' ir kitokia konfigūracija jau yra. Perrašyti?</string>
     <string name="cache_filter_stringfilter_matchcase">Skirti raidžių lygį</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Paieškos tekstas</string>
     <string name="cache_filter_stringfilter_info">Naudodami parinktį \'Ruošinys\', naudokite pakaitos simbolius * ir ?. * reiškia nulį, vieną ar kelis simbolius, ? reiškia vieną simbolį. Pavyzdžiui, ruošinys \'H?mburg*\' atitiks pvz. \'Homburg\' arba \'Hamburg naktį\', bet ne \'Diena Hamburge\' ar \'Hahmburg\'</string>
@@ -644,7 +635,7 @@
         <item>1 mėn</item>
         <item>&gt;1m</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
