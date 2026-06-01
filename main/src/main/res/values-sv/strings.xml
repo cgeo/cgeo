@@ -304,6 +304,7 @@
     <string name="err_rendertheme_file_unreadable">Kunde ej ladda det valda renderingstemat. Återgår till det inbyggda.</string>
     <string name="err_rendertheme_invalid">Det valda renderingstemat är ej giltigt för denna version av mapforge. Återgår till det inbyggda.</string>
     <string name="err_invalid_filename_char">Tecken \'%c\' inte tillåtet</string>
+    <string name="err_center_coordinates_invalid">Kan inte sätta kartcentrum, koordinater ogiltiga</string>
     <string name="warn_save_nothing">Det finns inget att spara.</string>
     <string name="warn_no_cache_coord">Det finns inga koordinater för cachen.</string>
     <string name="warn_no_coordinates">Inga koordinater angivna.</string>
@@ -370,6 +371,7 @@
     <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
     <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
     <string name="translator_model">Översättningsmodell</string>
+    <string name="translator_tooltip">Översätt offline</string>
     <string name="translator_language_select">Välj källspråk</string>
     <string name="translator_language_target_select">Välj målspråk</string>
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning. Tryck för att välja källspråk.</string>
@@ -379,6 +381,7 @@
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
     <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
+    <string name="translator_attributed_to">Översatt av %s</string>
     <string name="crash_activity_title">Hoppsan! c:geo kraschade!</string>
     <string name="crash_activity_report">rapportera problem</string>
     <!-- location service -->
@@ -442,6 +445,7 @@
         <item quantity="one">%d cache hämtad</item>
         <item quantity="other">%d cacher hämtade</item>
     </plurals>
+    <string name="caches_store_background_skipped">Skippade offlinecacher: %d</string>
     <string name="caches_history">Senast hittade cacher</string>
     <string name="caches_on_map">Visa på karta</string>
     <string name="caches_sort">Sortering</string>
@@ -572,7 +576,6 @@
     <string name="cache_filter_mode_advanced">Avancerat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Ändra till Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Att ändra till \"Basic\" läge kommer att göra att filterinställningar försvinner. Vill du fortsätta?</string>
-    <string name="cache_filter_add_button">Lägg till filterkriterie</string>
     <string name="cache_filter_option_and_or">Använd OR istället för AND</string>
     <string name="cache_filter_option_inverse">Omvänd filter</string>
     <string name="cache_filter_option_include_inconclusive">Inkludera slutgiltiga träffar</string>
@@ -628,17 +631,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Ta bort</string>
     <string name="cache_filter_storage_clear_button">Rensa</string>
-    <string name="cache_filter_storage_load_delete_title">Ladda eller ta bort ett befintligt filter</string>
     <string name="cache_filter_storage_select_title">Välj filter</string>
-    <string name="cache_filter_storage_delete_title">Ta bort filter</string>
-    <string name="cache_filter_storage_delete_message">Vill du verkligen ta bort den här filterkonfigurationen?</string>
-    <string name="cache_filter_storage_select_clear_title">Välj filter eller rensa nuvarande filter</string>
-    <string name="cache_filter_storage_clear_title">Rensa aktuella filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Inga filter har sparats än.</string>
-    <string name="cache_filter_storage_save_title">Spara filter med namn</string>
-    <string name="cache_filter_storage_save_confirm_title">Överskrivning av filter</string>
-    <string name="cache_filter_storage_save_confirm_message">Ett filter med namnet \'%s\' och annan konfiguration finns redan. Skriv över det?</string>
-    <string name="cache_filter_storage_clear_message">Vill du rensa det aktuella filtret?</string>
     <string name="cache_filter_stringfilter_matchcase">Matcha skiftläge</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Söktext</string>
     <string name="cache_filter_stringfilter_info">Med alternativet \"Pattern\", använd jokertecken * och ?. * representerar noll, ett eller flera tecken, ? representerar ett enda tecken. Till exempel matchar mönstret \"H?mburg*\" t.ex. \"Homburg\" eller \"Hamburg på natten\" men inte \"En dag i Hamburg\" eller \"Hahmburg\"</string>
@@ -753,7 +746,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
@@ -913,6 +906,8 @@
     <string name="init_login_popup_not_authorized">Ej godkänd</string>
     <string name="init_login_popup_not_logged_in">Inte inloggad</string>
     <string name="init_login_manual">Manuell inloggning</string>
+    <string name="init_login_manual_description">Vänta på att en webbplats ska visas och logga in på ditt konto. Vänta tills inloggningen har slutförts. Klicka sedan på \"ok\"-knappen nedan.</string>
+    <string name="init_login_manual_wig_description">Logga in på ditt Geocaching.com-konto och fortsätt att godkänna Wherigo-inloggningen. Vänta tills Wherigo hemsida är synlig, klicka sedan på \"OK\" knappen nedan.</string>
     <string name="init_login_manual_error_nocookie">Ingen auktoriseringstoken hittades. Vänligen utför inloggning eller \'avbryt\' manuell inloggning.</string>
     <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
     <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
@@ -1726,6 +1721,7 @@
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cache koordinater</string>
     <string name="waypoint_calculated_coordinates_global">Beräkna koordinat</string>
+    <string name="waypoint_select_from_map">Välj från kartan</string>
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_my_coordinates_accuracy">Mina koordinater (±%s)</string>
@@ -2605,6 +2601,7 @@
     <string name="check_hillshading_found">Terrängskuggningsdata finns redan</string>
     <string name="check_hillshading_missing">Saknar terrängskuggningsdata:</string>
     <string name="check_hillshading_unsupported">Varning: Terrängskuggningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
+    <string name="check_hillshading_tiles_menu">Sök efter saknad höjddata</string>
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
