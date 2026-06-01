@@ -583,7 +583,6 @@
     <string name="cache_filter_mode_advanced">Erweitert</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Wechsel zu einfacher Ansicht</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Der Wechsel zur einfachen Ansicht führt zum Verwerfen einiger Filtereinstellungen. Fortfahren?</string>
-    <string name="cache_filter_add_button">Filterkriterium hinzufügen</string>
     <string name="cache_filter_option_and_or">Benutze ODER statt UND</string>
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
@@ -639,17 +638,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_clear_button">Leeren</string>
-    <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_select_title">Filter auswählen</string>
-    <string name="cache_filter_storage_delete_title">Filter löschen</string>
-    <string name="cache_filter_storage_delete_message">Möchtest du diese Filterkonfiguration wirklich löschen?</string>
-    <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
-    <string name="cache_filter_storage_clear_title">Aktuellen Filter löschen</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
-    <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
-    <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>
-    <string name="cache_filter_storage_save_confirm_message">Ein Filter mit dem Namen \'%s\' und einer anderen Konfiguration existiert bereits. Überschreiben?</string>
-    <string name="cache_filter_storage_clear_message">Möchtest du den aktuellen Filter löschen?</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Suchtext</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
@@ -764,7 +753,7 @@
         <item>1M</item>
         <item>&gt;1M</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
