@@ -42,6 +42,7 @@ public enum GeocacheFilterType {
     STORED_SINCE("stored_since", R.string.cache_filter_stored_since, R.string.cache_filtergroup_userspecific, StoredSinceGeocacheFilter::new),
     CATEGORY("category", R.string.cache_filter_category, R.string.cache_filtergroup_details, CategoryGeocacheFilter::new),
     TIER("tier", R.string.cache_filter_tier, R.string.cache_filtergroup_details, TierGeocacheFilter::new),
+    HEALTH_SCORE("health_score", R.string.cache_filter_health_score, R.string.cache_filtergroup_details, HealthScoreGeocacheFilter::new),
     NAMED_FILTER("named_filter", R.string.cache_filter_named_filter, R.string.cache_filtergroup_special, NamedFilterGeocacheFilter::new),
     LOGICAL_FILTER_GROUP(null, R.string.cache_filter_logical_filter_group, R.string.cache_filtergroup_special, AndGeocacheFilter::new);
 

@@ -267,6 +267,7 @@ public class GeocacheFilterTest {
             case LOGICAL_FILTER_GROUP:
             case LIST_ID:
             case VIEWPORT:
+            case HEALTH_SCORE:
                 // nothing to do
                 break;
             default:

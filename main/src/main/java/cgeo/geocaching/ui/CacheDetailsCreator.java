@@ -412,6 +412,12 @@ public final class CacheDetailsCreator {
             logIcon.setBackgroundResource(marker);
             markers.addView(logIcon);
         }
+
+        final Integer healthScore = cache.getHealthScore();
+        if (healthScore != null) {
+            final String scoreText = healthScore == Geocache.HEALTH_SCORE_UNKNOWN ? "-" : healthScore + " %";
+            add(R.string.cache_health_score, scoreText);
+        }
     }
 
     public void addShareAction(final TextView view) {

@@ -15,6 +15,7 @@ import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.RecalculateHealthScoreCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -652,6 +653,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_set_askfordeletion, isNonDefaultList, preventAskForDeletion);
 
@@ -860,6 +862,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             }.execute();
             invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_recalculate_health_score) {
+            new RecalculateHealthScoreCommand(this, adapter.getCheckedOrAllCaches()).execute();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_watch_all) {

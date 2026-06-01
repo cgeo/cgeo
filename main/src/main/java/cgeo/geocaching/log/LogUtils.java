@@ -34,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,6 +43,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -54,6 +56,22 @@ public final class LogUtils {
         //no instance
     }
 
+    public static final Comparator<LogEntry> LOG_ENTRY_DATE_COMPARATOR = (a, b) -> {
+        return Long.compare(getDaysSinceEpochZoneCorrected(b.date), getDaysSinceEpochZoneCorrected(a.date));
+    };
+
+    /**
+     * Gets timezone-corrected days passed since Unix epoch for given time
+     */
+    public static long getDaysSinceEpochZoneCorrected(final long date) {
+        final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+
+        // move time
+        final long localMillis = date + offsetMillis;
+
+        // get days since epoch
+        return localMillis / 86_400_000L;
+    }
 
     /** get title for a log image in the list */
     public static String getLogImageTitle(final Image image, final int imagePos, final int imageCount) {
