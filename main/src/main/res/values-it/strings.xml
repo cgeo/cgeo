@@ -571,7 +571,6 @@
     <string name="cache_filter_mode_advanced">Avanzate</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Passa a Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Il passaggio alla modalità \'Basic\' comporterà la perdita delle impostazioni del filtro. Vuoi continuare?</string>
-    <string name="cache_filter_add_button">Aggiungi criteri di filtro</string>
     <string name="cache_filter_option_and_or">Usa OR invece di AND</string>
     <string name="cache_filter_option_inverse">Filtro Inverso</string>
     <string name="cache_filter_option_include_inconclusive">Includi confronti non conclusivi</string>
@@ -627,17 +626,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Elimina</string>
     <string name="cache_filter_storage_clear_button">Azzera</string>
-    <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
     <string name="cache_filter_storage_select_title">Seleziona filtro</string>
-    <string name="cache_filter_storage_delete_title">Elimina filtro</string>
-    <string name="cache_filter_storage_delete_message">Vuoi davvero eliminare questa configurazione del filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleziona filtro o azzera filtro corrente</string>
-    <string name="cache_filter_storage_clear_title">Cancella filtro corrente</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
-    <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
-    <string name="cache_filter_storage_save_confirm_title">Salva filtro con sovrascrittura</string>
-    <string name="cache_filter_storage_save_confirm_message">Un filtro con il nome \'%s\' e una configurazione differente esiste già. Sovrascriverlo?</string>
-    <string name="cache_filter_storage_clear_message">Vuoi cancellare il filtro corrente?</string>
     <string name="cache_filter_stringfilter_matchcase">Maiuscole/Minuscole</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Cerca Testo</string>
     <string name="cache_filter_stringfilter_info">Con l\'opzione \'Pattern\', usa caratteri jolly * e ?. * rappresenta nessuno, uno o più caratteri, ? rappresenta un singolo carattere. Per esempio, il pattern \'H?mburg*\' coinciderà ad esempio con \'Homburg\' o \'Hamburg di notte\' ma non \'Un giorno ad Hamburg\' o \'Hahmburg\'</string>
@@ -752,7 +741,7 @@
         <item>1 mese</item>
         <item>&gt;1 mese</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
