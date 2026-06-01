@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Этот пользователь сообщил, что есть проблема с тайником.</string>
     <string name="log_problem_log_full_label">Блокнот заполнен</string>
     <string name="log_problem_log_full_text">Этот пользователь сообщил, что блокнот заполнен.</string>
+    <string name="log_problem_log_wet_label">Блокнот мокрый</string>
+    <string name="log_problem_log_wet_text">Этот геокэшер сообщил, что блокнот мокрый.</string>
     <string name="log_problem_damaged_label">Контейнер повреждён</string>
     <string name="log_problem_damaged_text">Этот пользователь сообщил, что контейнер повреждён.</string>
     <string name="log_problem_missing_label">Тайник может отсутствовать</string>
@@ -232,10 +234,12 @@
     <string name="translate_external_label">Перевод с %s</string>
     <string name="translate_external_variant_app">Приложение</string>
     <string name="translate_external_variant_web">Веб-сайт</string>
+    <string name="translate_external_variant_unavailable">Недоступно</string>
     <string name="translate_external_none">&lt;Нет&gt;</string>
     <string name="translate_external_app">Внешнее Приложение</string>
     <string name="translate_external_google">Google Переводчик</string>
     <string name="translate_external_deepl">DeepL Переводчик</string>
+    <string name="translate_external_davidv">Офлайн перевод от DavidV</string>
     <string name="translate_length_warning">Перевод через веб-сайт может привести к сбою из-за большого объема текста.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -302,6 +306,7 @@
     <string name="err_rendertheme_file_unreadable">Не удалось загрузить выбранную тему. Возвращаюсь к встроенной.</string>
     <string name="err_rendertheme_invalid">Выбранная тема не подходит к этой версии mapsforge. Возвращаюсь к встроенной.</string>
     <string name="err_invalid_filename_char">Символ \'%c\' не допускается</string>
+    <string name="err_center_coordinates_invalid">Не удается определить центр карты, неверные координаты</string>
     <string name="warn_save_nothing">Нет данных для сохранения.</string>
     <string name="warn_no_cache_coord">Отсутствуют тайники с такими координатами.</string>
     <string name="warn_no_coordinates">Не введены координаты.</string>
@@ -370,6 +375,7 @@
     <string name="translator_model_download_success">Модель перевода для %s загружена</string>
     <string name="translator_model_download_error">Не удалось загрузить модель перевода %1$s: %2$s</string>
     <string name="translator_model">Модель перевода</string>
+    <string name="translator_tooltip">Офлайн перевод</string>
     <string name="translator_language_select">Выберите исходный язык</string>
     <string name="translator_language_target_select">Выбрать целевой язык</string>
     <string name="translator_language_unsupported">Язык (%s) не поддерживается для перевода. Нажмите, чтобы выбрать исходный язык.</string>
@@ -379,6 +385,7 @@
     <string name="translator_translation_error">Не удалось перевести текст: %s</string>
     <string name="translator_translation_initerror">Не удалось инициализировать переводчик</string>
     <string name="translator_translation_success">Переведено с \"%s\", нажмите кнопку, чтобы восстановить оригинал</string>
+    <string name="translator_attributed_to">Переведено в %s</string>
     <string name="crash_activity_title">Упс! c:geo сломался!</string>
     <string name="crash_activity_report">сообщить о проблеме</string>
     <!-- location service -->
@@ -446,6 +453,7 @@
         <item quantity="many">%d тайников загружено</item>
         <item quantity="other">%d тайников загружено</item>
     </plurals>
+    <string name="caches_store_background_skipped">Пропущено офлайн тайников: %d</string>
     <string name="caches_history">История</string>
     <string name="caches_on_map">Показать на карте</string>
     <string name="caches_sort">Сортировка</string>
@@ -516,6 +524,16 @@
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
     <string name="caches_overwrite_offline_log">Перезаписать офлайновую запись</string>
     <string name="caches_overwrite_offline_log_question">В тайнике есть офлайн запись типа \"%1$s\" с текстом. Вы хотите перезаписать эту запись?</string>
+    <string name="caches_warning_delete_user_data_others">Удалить другие</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">Тайник %1$d/%2$d содержит пользовательские данные, которые будут потеряны при удалении тайника.</item>
+        <item quantity="few">Тайники %1$d/%2$d содержит пользовательские данные, которые будут потеряны при удалении тайников.</item>
+        <item quantity="many">Тайники %1$d/%2$d содержит пользовательские данные, которые будут потеряны при удалении тайника.</item>
+        <item quantity="other">Тайники %1$d/%2$d содержит пользовательские данные, которые будут потеряны при удалении тайника.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Это действие приведет к удалению всех тайников (%d) с вашего устройства.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Убрать другие</string>
+    <string name="caches_warning_remove_caches_from_single_list">Тайники %1$d/%2$d доступны только в этом списке. Удаление этих тайников из списка приведет к их удалению с вашего устройства.</string>
     <string name="caches_show_attributes_all">Показать обзор атрибутов для всех тайников</string>
     <string name="caches_show_attributes_selected">Показать обзор атрибутов для выбранных тайников</string>
     <string name="caches_set_cache_icon">Установить иконку тайника</string>
@@ -579,7 +597,6 @@
     <string name="cache_filter_mode_advanced">Продвинутые</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Перейти в простой режим</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Переход к базовому режиму приведет к сбросу настроек фильтра. Точно продолжить?</string>
-    <string name="cache_filter_add_button">Добавить критерий фильтра</string>
     <string name="cache_filter_option_and_or">Использовать ИЛИ вместо И</string>
     <string name="cache_filter_option_inverse">Инвертировать фильтр</string>
     <string name="cache_filter_option_include_inconclusive">Включать неточные совпадения</string>
@@ -637,17 +654,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Удалить</string>
     <string name="cache_filter_storage_clear_button">Очистить</string>
-    <string name="cache_filter_storage_load_delete_title">Загрузить или удалить существующий фильтр</string>
     <string name="cache_filter_storage_select_title">Выберите фильтр</string>
-    <string name="cache_filter_storage_delete_title">Удаление фильтра</string>
-    <string name="cache_filter_storage_delete_message">Удалить этот фильтр?</string>
-    <string name="cache_filter_storage_select_clear_title">Выбрать или очистить текущий фильтр</string>
-    <string name="cache_filter_storage_clear_title">Очистить текущий фильтр</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Не сохранено ни одного фильтра.</string>
-    <string name="cache_filter_storage_save_title">Сохранение фильтра</string>
-    <string name="cache_filter_storage_save_confirm_title">Перезапись фильтра</string>
-    <string name="cache_filter_storage_save_confirm_message">Уже существует фильтр с названием \'%s\'. Заменить его?</string>
-    <string name="cache_filter_storage_clear_message">Вы хотите очистить текущий фильтр?</string>
     <string name="cache_filter_stringfilter_matchcase">С учётом регистра</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Искомый текст</string>
     <string name="cache_filter_stringfilter_info">В шаблоне можно использовать подстановочные знаки * и ?. Знак * означает, что в этом месте может быть любое количество любых символов или не быть ничего. Знак ? означает, что здесь должен быть один любой символ. Например, шаблону «Красно??р*» соответствуют «Краснодар» и «Краснотуранск», но не подходит «Красноярск»</string>
@@ -660,6 +667,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Шаблон</string>
     <string name="cache_filter_datefilter_absolute">Абсолютная</string>
     <string name="cache_filter_datefilter_relative">Относительно сегодня</string>
+    <string name="cache_filter_datefilter_ignoreyear">Игнорировать год</string>
     <string name="cache_filter_datefilter_label_from">От:</string>
     <string name="cache_filter_datefilter_label_to">До:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Выбрать всё</string>
@@ -761,7 +769,7 @@
         <item>1м</item>
         <item>&gt;1м</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -814,6 +822,10 @@
     <string name="downloader_pending_info">Существует хотя бы одна остановленная или неудачная загрузка. Открыть список ожидающих загрузок?</string>
     <string name="downloader_retry_download">Повторить загрузку</string>
     <string name="downloader_retry_download_details">Вы хотите повторить загрузку файла?</string>
+    <string name="downloader_delete_all_pending">Удалить все</string>
+    <string name="downloader_delete_all_confirmation">Удалить все незавершенные загрузки?</string>
+    <string name="downloader_delete_all_message">Это отменит все %d незавершенные загрузки и удалит загруженные части. Это действие невозможно отменить.</string>
+    <string name="downloader_deleted_all">Удалить все незавершенные загрузки</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Ошибка загрузки (попыток больше не будет)</string>
     <string name="asdm_status_paused">Загрузка в ожидании повтора</string>
@@ -857,6 +869,7 @@
     <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и\u00a0настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
     <string name="settings_title_waypoints">Точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
+    <string name="settings_title_maptrail">История трека</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
     <string name="settings_title_map_style">Стиль карты</string>
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
@@ -921,6 +934,8 @@
     <string name="init_login_popup_not_authorized">Не авторизован</string>
     <string name="init_login_popup_not_logged_in">Вход не выполнен</string>
     <string name="init_login_manual">Вход вручную</string>
+    <string name="init_login_manual_description">Пожалуйста, дождитесь появления веб-сайта и войдите в свою учетную запись. Дождитесь завершения входа в систему. Затем нажмите кнопку \"Ок\" ниже.</string>
+    <string name="init_login_manual_wig_description">Пожалуйста, войдите в свою учетную запись Geocaching.com и авторизуйтесь под логином Wherigo. Подождите, пока не откроется домашняя страница Wherigo, затем нажмите кнопку \"Ок\" ниже.</string>
     <string name="init_login_manual_error_nocookie">Не найден токен авторизации. Пожалуйста, выполните вход в систему или \"отмените\" вход вручную.</string>
     <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
     <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
@@ -1066,6 +1081,10 @@
         <item>Светлая</item>
         <item>Темная</item>
     </string-array>
+    <string name="init_colored_theme_dark">Цветная тёмная тема</string>
+    <string name="init_colored_theme_light">Цветная светлая тема</string>
+    <string name="init_summary_colored_theme_dark">Использовать цветную панель в тёмной теме</string>
+    <string name="init_summary_colored_theme_light">Использовать цветную панель в светлой теме</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Экран по умолчанию</string>
     <string name="init_wallpaper">Обои</string>
@@ -1150,7 +1169,10 @@
     <string name="init_dataDir">Выберите папку данных</string>
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать историю трека</string>
+    <string name="init_maptrail_length">Максимальная длина</string>
     <string name="init_maptrail_length_summary">Установите максимальную длину трека (требуется при каждом запуске c:geo). По умолчанию значение 700 точек - вы можете это изменить в зависимости от доступной памяти.</string>
+    <string name="init_maptrail_maxdistance">Максимальное расстояние</string>
+    <string name="init_maptrail_maxdistance_summary">Максимальное расстояние, до которого две последовательные точки исторического трека соединяются на карте</string>
     <string name="init_summary_maptrail">Когда активирован (и GPS включен) c:geo сохраняет историю Ваших движений в виде трека и отображает его на карте.</string>
     <string name="init_trailappearance">Внешний вид истории трека</string>
     <string name="init_trailappearance_summary">Выберите цвет, непрозрачность и ширину линии для истории трека</string>
@@ -1283,6 +1305,7 @@
     <string name="map_source_google_satellite">Google: спутник</string>
     <string name="map_source_google_terrain">Google: ландшафт</string>
     <string name="map_source_osm_offline_combined">Совмещённые (офлайн)</string>
+    <string name="map_source_nomap">Без карты</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
     <string name="init_sendToCgeo">Отправить в c:geo</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
@@ -1751,6 +1774,7 @@
     <string name="waypoint_coordinates">Координаты</string>
     <string name="waypoint_cache_coordinates">Координаты тайника</string>
     <string name="waypoint_calculated_coordinates_global">Вычислить координаты</string>
+    <string name="waypoint_select_from_map">Выбрать на карте</string>
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
     <string name="waypoint_my_coordinates_accuracy">Мои координаты (±%s)</string>
@@ -1821,7 +1845,10 @@
     <string name="calccoord_guided_mode">Помощник</string>
     <string name="calccoord_guided_edit">Нажмите на цифру, чтобы изменить</string>
     <string name="calccoord_guided_value">Значение</string>
+    <string name="calccoord_select_variable">Выберите Переменную</string>
+    <string name="calccoord_new_variable">**%s** *(Новое)*</string>
     <string name="calccoord_convert_to_plain">Преобразовать в простые координаты</string>
+    <string name="calccoord_convert_to_plain_error">Формула не выдала допустимые координаты.\nПреобразование в простые координаты приведет к сбросу путевой точки в пустые координаты.</string>
     <string name="calccoord_plain_tools_title">Инструменты по работе с координатами в виде строки текста</string>
     <string name="calccoord_remove_spaces">Удалить пробелы</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Заменить \'x\' на \'*\'</string>
@@ -1860,8 +1887,15 @@
     <string name="formula_function_lettervalue">Значение слова</string>
     <string name="formula_function_roman">из Римских в Десятичные</string>
     <string name="formula_function_vanity">Vanity Код (телефонный)</string>
+    <string name="formula_function_add">Сложение</string>
+    <string name="formula_function_multiply">Умножение</string>
+    <string name="formula_function_min">Мин</string>
+    <string name="formula_function_max">Макс</string>
+    <string name="formula_function_count">Кол-во</string>
+    <string name="formula_function_average">Cреднее</string>
     <string name="formula_function_group_simplenumeric">Простая числовая</string>
     <string name="formula_function_group_complexnumeric">Сложная числовая</string>
+    <string name="formula_function_group_aggregatenumeric">Суммарное количество</string>
     <string name="formula_function_group_simplestring">Простая строка</string>
     <string name="formula_function_group_complexstring">Сложная строка</string>
     <string name="formula_error_unexpectedtoken">Ожидался \'%1$s\'</string>
@@ -1871,6 +1905,7 @@
     <string name="formula_error_cyclicdependency">Цикл: %1$s</string>
     <string name="formula_error_empty">Пустая Формула</string>
     <string name="formula_error_numeric_overflow">Числовое переполнение</string>
+    <string name="formula_error_invalid_range">Неверный диапазон: %1$s</string>
     <string name="formula_error_other">Ошибка: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Без названия</string>
@@ -2393,6 +2428,13 @@
     <string name="trackable_log_without_geocode">Вы собираетесь отправить запись без геокода. Необходимо указать геокод. Добавить его сейчас?</string>
     <string name="do_not_ask_me_again">Больше не спрашивать</string>
     <string name="geokrety_parsing_failed">Не удалось разобрать ответ от GeoKrety.org.</string>
+    <string name="command_remove_caches_from_list_progress">Удаление тайников</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Удален %d тайник</item>
+        <item quantity="few">Удалены %d тайника</item>
+        <item quantity="many">Удалено %d тайников</item>
+        <item quantity="other">Удалено %d тайников</item>
+    </plurals>
     <string name="command_move_caches_progress">Перемещение тайников в список %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Перемещен %d тайник</item>
@@ -2478,6 +2520,8 @@
     <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
+    <string name="number_input_title">Установите значение</string>
+    <string name="number_input_range">Установите значение между %1$s и %2$s</string>
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
     <string name="number_input_err_format">Неверный формат числа</string>
@@ -2646,6 +2690,7 @@
     <string name="check_hillshading_found">Данные о затенении высот уже есть</string>
     <string name="check_hillshading_missing">Найдены недостающие данные затенения высот:</string>
     <string name="check_hillshading_unsupported">Предупреждение: Данные о затенении высот недоступны для выбранного региона (по крайней мере частично)</string>
+    <string name="check_hillshading_tiles_menu">Проверка отсутствующих данных о высотах</string>
     <string name="mapupdate_info">Проверить наличие обновлений для карт и тем. Долгое нажатие — напомнить позже.</string>
     <string name="no_updates_found">Обновления не найдены</string>
     <string name="updates_check">Проверка обновлений</string>
