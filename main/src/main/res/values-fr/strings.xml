@@ -556,7 +556,6 @@
     <string name="cache_filter_mode_advanced">Avancé</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Basculer vers Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Passer en mode \'Basique\' entraînera la perte des paramètres de filtre. Voulez-vous continuer ?</string>
-    <string name="cache_filter_add_button">Ajouter des critères</string>
     <string name="cache_filter_option_and_or">Utilisez OU à la place de ET</string>
     <string name="cache_filter_option_inverse">Inverser filtre</string>
     <string name="cache_filter_option_include_inconclusive">Inclure les résultats non concluants</string>
@@ -612,17 +611,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Supprimer</string>
     <string name="cache_filter_storage_clear_button">Effacer</string>
-    <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
     <string name="cache_filter_storage_select_title">Sélectionner un filtre</string>
-    <string name="cache_filter_storage_delete_title">Supprimer le filtre</string>
-    <string name="cache_filter_storage_delete_message">Voulez-vous vraiment supprimer ce filtre ?</string>
-    <string name="cache_filter_storage_select_clear_title">Sélectionner un filtre ou effacer le filtre courant</string>
-    <string name="cache_filter_storage_clear_title">Effacer le filtre actuel</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Aucun filtre n\'a encore été enregistré.</string>
-    <string name="cache_filter_storage_save_title">Enregistrer et nommer le filtre</string>
-    <string name="cache_filter_storage_save_confirm_title">Écraser le filtre</string>
-    <string name="cache_filter_storage_save_confirm_message">Un filtre portant le nom \'%s\' et avec un paramétrage différent existe déjà. Souhaitez-vous l\'écraser ?</string>
-    <string name="cache_filter_storage_clear_message">Voulez-vous effacer le filtre actuel ?</string>
     <string name="cache_filter_stringfilter_matchcase">Sensible à la casse</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Texte à rechercher</string>
     <string name="cache_filter_stringfilter_info">Avec l\'option “Motif”, utilisez les jokers * et ?. * représente zéro, un ou plusieurs caractères, ? en représente qu\'un seul. Par exemple le motif “P?ris*” correspondra à \"Piris\" ou \"Paris la nuit”, mais pas à “Une journée à Paris” ou “Parsec”</string>
@@ -736,7 +725,7 @@
         <item>1m</item>
         <item>&gt;1mois</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
