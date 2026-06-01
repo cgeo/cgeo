@@ -57,8 +57,21 @@ public abstract class AbstractCommand implements Command {
      * <p>
      * This runs in a <b>non</b> UI thread.
      * </p>
+     * <p>
+     * The default implementation is a no-op.  Override only when {@link #supportsUndo()} returns
+     * {@code true} (the default).
+     * </p>
      */
-    protected abstract void undoCommand();
+    protected void undoCommand() {
+    }
+
+    /**
+     * Returns whether this command supports undo.  When {@code false}, the Snackbar shown after
+     * execution will not include an UNDO action button.  Defaults to {@code true}.
+     */
+    protected boolean supportsUndo() {
+        return true;
+    }
 
     /**
      * Called after the execution of {@link #doCommand()} or {@link #undoCommand()} finished.
@@ -128,10 +141,12 @@ public abstract class AbstractCommand implements Command {
                 final View navBar = context.findViewById(R.id.activity_navigationBar);
                 final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
 
-                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
-                        .setAction(LocalizationUtils.getString(R.string.undo), this)
-                        .setAnchorView(isNavBarVisible ? navBar : context.findViewById(android.R.id.navigationBarBackground))
-                        .show();
+                final Snackbar snackbar = Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
+                        .setAnchorView(isNavBarVisible ? navBar : context.findViewById(android.R.id.navigationBarBackground));
+                if (supportsUndo()) {
+                    snackbar.setAction(LocalizationUtils.getString(R.string.undo), this);
+                }
+                snackbar.show();
             }
         }
 

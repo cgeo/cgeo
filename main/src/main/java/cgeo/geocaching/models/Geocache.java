@@ -46,6 +46,7 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
@@ -130,6 +131,10 @@ public class Geocache implements INamedGeoCoordinate {
     private int assignedEmoji = 0;
     private int alcMode = 0;
     private Tier tier;
+    /** Sentinel: health score was attempted but could not be computed (no scoreable logs found). */
+    public static final int HEALTH_SCORE_UNKNOWN = -1;
+    @Nullable
+    private Integer healthScore; // null = not calculated; HEALTH_SCORE_UNKNOWN(-1) = calculated but n/a; 0-100 = score
 
     @Nullable
     private Date hidden = null;
@@ -367,6 +372,9 @@ public class Geocache implements INamedGeoCoordinate {
         }
         if (tier == null || Tier.NONE == tier) {
             tier = other.tier;
+        }
+        if (healthScore == null) {
+            healthScore = other.healthScore;
         }
         if (categories.isEmpty()) {
             setCategories(other.getCategories());
@@ -1354,6 +1362,23 @@ public class Geocache implements INamedGeoCoordinate {
 
     public Tier getTier() {
         return this.tier;
+    }
+
+    @Nullable
+    public Integer getHealthScore() {
+        return healthScore;
+    }
+
+    public void setHealthScore(@Nullable final Integer healthScore) {
+        this.healthScore = healthScore;
+    }
+
+    /**
+     * Recalculates and stores the health score from the cache's current log list and
+     * detailedUpdate timestamp. Does NOT trigger a database save.
+     */
+    public void updateHealthScore() {
+        healthScore = CacheUtils.calculateHealthScore(getLogs(), detailedUpdate);
     }
 
     /**

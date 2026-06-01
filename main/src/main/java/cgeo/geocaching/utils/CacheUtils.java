@@ -2,6 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Geocache;
 
 import android.app.Activity;
@@ -12,7 +15,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,8 +27,108 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CacheUtils {
 
+    /** Log types that contribute positively to the health score. */
+    private static final Set<LogType> HEALTH_SCORE_GOOD_LOG_TYPES = EnumSet.of(
+            LogType.FOUND_IT, LogType.ATTENDED, LogType.WEBCAM_PHOTO_TAKEN);
+
+    /** Log types that contribute negatively to the health score. */
+    private static final Set<LogType> HEALTH_SCORE_BAD_LOG_TYPES = EnumSet.of(
+            LogType.DIDNT_FIND_IT, LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE);
+
+    /**
+     * Log types that act as a "fresh start": the algorithm stops consuming older logs when it
+     * encounters one of these types.
+     */
+    private static final Set<LogType> HEALTH_SCORE_RESET_LOG_TYPES = EnumSet.of(
+            LogType.OWNER_MAINTENANCE, LogType.ENABLE_LISTING, LogType.UNARCHIVE, LogType.ARCHIVE,
+            LogType.TEMP_DISABLE_LISTING);
+
+    /**
+     * Log types that act as a reset "nullifier": if found before any other RESET type, health is 0%.
+     */
+    private static final Set<LogType> HEALTH_SCORE_RESET_NULLIFY_LOG_TYPES = EnumSet.of(
+            LogType.ARCHIVE, LogType.TEMP_DISABLE_LISTING);
+
     private CacheUtils() {
         // utility class
+    }
+
+    /**
+     * Calculates the log health score for a cache.
+     *
+     * @param logs           Log entries for the cache (may be in any order; at most 20 are used).
+     * @param detailedUpdate Timestamp (ms since epoch) when log data was last fetched from server.
+     *                       Not used for computation — kept for future use / API consistency.
+     * @return Integer in [0, 100] representing the health score in percent, or
+     *         {@link Geocache#HEALTH_SCORE_UNKNOWN} (−1) when the candidate set is empty or
+     *         contains no good/bad logs.  Never returns {@code null}.
+     */
+    @NonNull
+    public static Integer calculateHealthScore(@NonNull final List<LogEntry> logs, final long detailedUpdate) {
+        // Step 1: sort descending by date, keep at most 20
+        final List<LogEntry> sorted = new ArrayList<>(logs);
+        sorted.sort(LogUtils.LOG_ENTRY_DATE_COMPARATOR);
+
+        // Walk from newest to oldest, stop before the first reset trigger
+        int candidateEnd = Math.min(sorted.size(), 20);
+        for (int i = 0; i < candidateEnd; i++) {
+            if (HEALTH_SCORE_RESET_LOG_TYPES.contains(sorted.get(i).logType)) {
+
+                if (HEALTH_SCORE_RESET_NULLIFY_LOG_TYPES.contains(sorted.get(i).logType)) {
+                    return 0; // nullifying reset trigger found, no need to look further
+                }
+
+                candidateEnd = i; // exclusive: stop before the reset trigger
+                break;
+            }
+        }
+
+        if (candidateEnd == 0) {
+            return Geocache.HEALTH_SCORE_UNKNOWN;
+        }
+
+
+        // Step 2: find oldest relevant date
+        long oldestDay = Long.MAX_VALUE;
+        for (int i = candidateEnd - 1; i >= 0; i--) {
+            final LogEntry log = sorted.get(i);
+            if (HEALTH_SCORE_GOOD_LOG_TYPES.contains(log.logType) || HEALTH_SCORE_BAD_LOG_TYPES.contains(log.logType)) {
+                oldestDay = log.getLogAgeInDaysSinceEpochZoneCorrected();
+                break;
+            }
+        }
+
+        if (oldestDay == Long.MAX_VALUE) {
+            return Geocache.HEALTH_SCORE_UNKNOWN; // no good/bad logs
+        }
+
+        // Step 3: compute weighted sums
+        double wGood = 0;
+        double wBad = 0;
+        for (int i = 0; i < candidateEnd; i++) {
+            final LogEntry log = sorted.get(i);
+            final boolean isGood = HEALTH_SCORE_GOOD_LOG_TYPES.contains(log.logType);
+            final boolean isBad = HEALTH_SCORE_BAD_LOG_TYPES.contains(log.logType);
+            if (!isGood && !isBad) {
+                continue;
+            }
+            final long day = log.getLogAgeInDaysSinceEpochZoneCorrected();
+            final double age = day - oldestDay; // >= 0
+            final double weight = Math.sqrt(age + 1); // >= 1
+            if (isGood) {
+                wGood += weight;
+            } else {
+                wBad += weight;
+            }
+        }
+
+        //Step 4: calculate score as percentage of good weight over total weight
+        final double wTotal = wGood + wBad;
+        if (wTotal == 0) {
+            return Geocache.HEALTH_SCORE_UNKNOWN;
+        }
+
+        return (int) Math.round(wGood / wTotal * 100);
     }
 
     public static boolean isLabAdventure(@NonNull final Geocache cache) {

@@ -176,6 +176,9 @@ public class FilterViewHolderCreator {
                                 .setValueDrawableGetter(t -> ImageParam.id(t.getIconId())),
                         2, null);
                 break;
+            case HEALTH_SCORE:
+                result = new HealthScoreFilterViewHolder();
+                break;
             case LOGICAL_FILTER_GROUP:
                 result = new LogicalFilterViewHolder();
                 break;

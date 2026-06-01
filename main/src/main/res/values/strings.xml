@@ -576,6 +576,7 @@
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_recalculate_health_score">Recalculate log health scores</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
@@ -675,6 +676,8 @@
     <string name="cache_filter_stored_since">Last details update</string>
     <string name="cache_filter_category">BC Category</string>
     <string name="cache_filter_tier">BC Tier</string>
+    <string name="cache_filter_health_score">Log health score</string>
+    <string name="cache_filter_health_score_include_unscored">Include caches with no scoreable logs</string>
     <string name="cache_filter_named_filter">Named Filter</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
@@ -1719,6 +1722,7 @@
     <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>
     <string name="cache_latest_logs">Recent logs</string>
+    <string name="cache_health_score">Log health score</string>
     <string name="cache_logs_friends_and_own">Friends/Own Logs</string>
     <string name="cache_logs_friends">Friends</string>
     <string name="cache_dialog_loading_details">Loading cache details…</string>
@@ -2736,6 +2740,8 @@
         <item quantity="many">Set %d cache icons</item>
         <item quantity="other">Set %d cache icons</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Recalculating log health scores…</string>
+    <string name="command_recalculate_health_score_result">Log health scores recalculated: %d</string>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
     <string name="live_map_status_http429">Please slow down, too many requests to %s</string>

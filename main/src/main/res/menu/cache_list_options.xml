@@ -161,6 +161,11 @@
                 android:enabled="false"
                 app:showAsAction="never|withText"/>
             <item
+                android:id="@+id/menu_recalculate_health_score"
+                android:title="@string/caches_recalculate_health_score"
+                android:enabled="false"
+                app:showAsAction="never|withText"/>
+            <item
                 android:id="@+id/menu_set_listmarker"
                 android:title="@string/caches_set_listmarker"
                 app:showAsAction="never|withText"/>

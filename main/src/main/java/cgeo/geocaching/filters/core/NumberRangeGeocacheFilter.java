@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -125,7 +126,11 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
 
     @Override
     protected String getUserDisplayableConfig() {
-        return numberRangeFilter.getUserDisplayableConfig();
+        return getUserDisplayableConfig(null);
+    }
+
+    String getUserDisplayableConfig(@Nullable final Function<T, String> converter) {
+        return numberRangeFilter.getUserDisplayableConfig(converter);
     }
 
     @Nullable

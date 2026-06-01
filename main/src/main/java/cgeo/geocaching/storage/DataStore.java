@@ -244,7 +244,8 @@ public class DataStore {
                     "cg_caches.owner_guid," +  // 44
                     "cg_caches.emoji," +       // 45
                     "cg_caches.alcMode," +       // 46
-                    "cg_caches.tier"; // 47
+                    "cg_caches.tier," + // 47
+                    "cg_caches.health_score"; // 48
 
     /**
      * The list of fields needed for mapping.
@@ -262,7 +263,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 107;
+    private static final int dbVersion = 108;
     public static final int customListIdOffset = 10;
 
     /**
@@ -305,8 +306,9 @@ public class DataStore {
             104,  // add geofence radius for lab stages
             105,  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
             106,  // Update lab caches DT rating to zero from minus one
-            107   // Unify named filters and conditional markers; new cg_filters schema
-    ));
+            107,   // Unify named filters and conditional markers; new cg_filters schema
+            108   // add health_score column to cg_caches
+            ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
     @NonNull public static final String dbFieldCaches_type = "type";
@@ -418,7 +420,8 @@ public class DataStore {
             + "owner_guid TEXT NOT NULL DEFAULT '',"
             + "emoji INTEGER DEFAULT 0,"
             + "alcMode INTEGER DEFAULT 0,"
-            + "tier TEXT"
+            + "tier TEXT,"
+            + "health_score INTEGER"
             + "); ";
     private static final String dbCreateLists = "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -2024,6 +2027,14 @@ public class DataStore {
                         }
                     }
 
+                    // Add health_score column
+                    if (oldVersion < 108) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "health_score INTEGER");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 108);
+                        }
+                    }
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2486,6 +2497,7 @@ public class DataStore {
                 }
 
                 for (final Geocache geocache : toBeStored) {
+                    geocache.updateHealthScore();
                     storeIntoDatabase(geocache);
                 }
 
@@ -2592,6 +2604,7 @@ public class DataStore {
             values.put("emoji", cache.getAssignedEmoji());
             values.put("alcMode", cache.getAlcMode());
             values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
+            values.put("health_score", cache.getHealthScore());
 
             init();
 
@@ -3420,6 +3433,7 @@ public class DataStore {
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
         cache.setTier(Tier.getByName(cursor.getString(47)));
+        cache.setHealthScore(cursor.isNull(48) ? null : cursor.getInt(48));
 
         return cache;
     }
@@ -3897,6 +3911,53 @@ public class DataStore {
         return loadLogs(geocode, null, null);
     }
 
+    /**
+     * Loads minimal log data (type + date) needed for health score calculation.
+     * Returns at most 20 logs ordered newest-first. Much lighter than {@link #loadLogs(String)}.
+     */
+    @NonNull
+    public static List<LogEntry> loadLogsForHealthScore(final String geocode) {
+        return withAccessLock(() -> {
+            final List<LogEntry> logs = new ArrayList<>();
+            if (StringUtils.isBlank(geocode)) {
+                return logs;
+            }
+            init();
+
+            try (Cursor cursor = database.rawQuery(
+                "SELECT type, date FROM " + dbTableLogs + " WHERE geocode = ? ORDER BY " + getGeocacheLogOrderByClause() + " LIMIT 20",
+                    new String[]{geocode})) {
+                while (cursor.moveToNext()) {
+                    logs.add(new LogEntry.Builder()
+                        .setLogType(LogType.getById(cursor.getInt(0)))
+                        .setDate(cursor.getLong(1))
+                        .build());
+                }
+            }
+            return Collections.unmodifiableList(logs);
+        });
+    }
+
+    private static String getGeocacheLogOrderByClause() {
+        final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+        return "Date((date+" + offsetMillis + ")/1000, 'unixepoch') DESC";
+    }
+
+    /**
+     * Saves the health score for a single cache to the database (lightweight single-column update).
+     */
+    public static void saveHealthScore(final String geocode, @Nullable final Integer healthScore) {
+        withAccessLock(() -> {
+            if (StringUtils.isBlank(geocode)) {
+                return;
+            }
+            init();
+            final ContentValues values = new ContentValues();
+            values.put("health_score", healthScore);
+            database.update(dbTableCaches, values, "geocode = ?", new String[]{geocode});
+        });
+    }
+
     @NonNull
     public static List<LogEntry> loadLogsOfAuthor(final String geocode, final @Nullable String authorName, final @Nullable Boolean whereFriend) {
         return loadLogs(geocode, authorName, whereFriend);
@@ -3926,8 +3987,7 @@ public class DataStore {
                     whereFriendSql += whereFriend ? "1" : "0";
                 }
 
-                final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
-                final String dateOrderSql = " ORDER BY Date((date+" + offsetMillis + ")/1000, 'unixepoch') DESC, service_log_id DESC, cg_logs._id ASC";
+                final String dateOrderSql = " ORDER BY " + getGeocacheLogOrderByClause() + ", service_log_id DESC, cg_logs._id ASC";
                 final Cursor cursor = database.rawQuery(
                         //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
                         "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"

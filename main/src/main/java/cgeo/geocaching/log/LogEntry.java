@@ -526,4 +526,8 @@ public class LogEntry implements Parcelable {
         return DateUtils.isSameDay(new Date(this.date), new Date(log.date))
                 && sameLogText;
     }
+
+    public long getLogAgeInDaysSinceEpochZoneCorrected() {
+        return LogUtils.getDaysSinceEpochZoneCorrected(date);
+    }
 }
