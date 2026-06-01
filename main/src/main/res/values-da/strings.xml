@@ -405,7 +405,6 @@
     <string name="cache_filter_mode_advanced">Avanceret</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Skift til basisindstillenger</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Ændringer til basis-tilstans vil resultere i tab af filterindstillinger. Vil du fortsætte?</string>
-    <string name="cache_filter_add_button">Tilføj filterkriterier</string>
     <string name="cache_filter_option_and_or">Brug ELLER i stedet for OG</string>
     <string name="cache_filter_option_inverse">Omvendt Filter</string>
     <string name="cache_filter_option_include_inconclusive">Inkludér inkonklusive matches</string>
@@ -451,13 +450,6 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Slet</string>
     <string name="cache_filter_storage_clear_button">Ryd</string>
-    <string name="cache_filter_storage_load_delete_title">Indlæs eller slet et eksisterende filter</string>
-    <string name="cache_filter_storage_delete_title">Slet filter</string>
-    <string name="cache_filter_storage_delete_message">Er du sikker på, at du vil slette denne filterdefinition?</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filtre er gemt endnu.</string>
-    <string name="cache_filter_storage_save_title">Gem filter med navn</string>
-    <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
-    <string name="cache_filter_storage_save_confirm_message">Et filter med navnet \'%s\' og forskellige konfigurationer findes allerede. Overskriv det?</string>
     <string name="cache_filter_stringfilter_matchcase">Respektér store/små bogstaver</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Søg Tekst</string>
     <string name="cache_filter_stringfilter_info">Med indstillingen \'Mønster\' kan du bruge jokertegn * og ?. * repræsenterer nul eller flere tegn, ? repræsenterer et enkelt tegn. Eksempelvis vil mønsteret \'H?mburg*\' matche f.eks. \'Homburg\' eller \'Hamburg om natten\', men ikke \'A day in Hamburg\' eller \'Hahmburg\'</string>
@@ -488,7 +480,7 @@
     <string name="cache_filter_status_exclude_archived">Udelad arkiverede</string>
     <string name="cache_filter_log_entry_foundby">Fundet af</string>
     <string name="cache_filter_log_entry_logtext">Logtekst</string>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
