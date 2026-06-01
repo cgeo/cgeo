@@ -596,7 +596,6 @@
     <string name="cache_filter_mode_advanced">Zaawansowany</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Przełącz na tryb podstawowy</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Zmiana na tryb podstawowy spowoduje utratę ustawień filtrów. Czy chcesz kontynuować?</string>
-    <string name="cache_filter_add_button">Dodaj kryteria filtru</string>
     <string name="cache_filter_option_and_or">Użyj LUB zamiast ORAZ</string>
     <string name="cache_filter_option_inverse">Odwróć filtr</string>
     <string name="cache_filter_option_include_inconclusive">Dołącz niejednoznaczne dopasowania</string>
@@ -654,17 +653,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Usuń</string>
     <string name="cache_filter_storage_clear_button">Wyczyść</string>
-    <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
     <string name="cache_filter_storage_select_title">Wybierz filtr</string>
-    <string name="cache_filter_storage_delete_title">Usuń filtr</string>
-    <string name="cache_filter_storage_delete_message">Czy na pewno chcesz usunąć tę konfigurację filtra?</string>
-    <string name="cache_filter_storage_select_clear_title">Wybierz filtr lub wyczyść bieżący filtr</string>
-    <string name="cache_filter_storage_clear_title">Wyczyść bieżący filtr</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
-    <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
-    <string name="cache_filter_storage_save_confirm_title">Nadpisz zapisany filtr</string>
-    <string name="cache_filter_storage_save_confirm_message">Filtr o nazwie \'%s\' i innej konfiguracji już istnieje. Nadpisać go?</string>
-    <string name="cache_filter_storage_clear_message">Czy chcesz wyczyścić bieżący filtr?</string>
     <string name="cache_filter_stringfilter_matchcase">Dopasuj wielkość liter</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Wyszukaj tekst</string>
     <string name="cache_filter_stringfilter_info">Z opcją \'Wzorzec\', użyj wieloznacznika * i ?. * reprezentuje brak, jeden lub wiele znaków, ? reprezentuje pojedynczy znak. Przykładowo: wzorzec \'H?mburg*\' będzie pasował do np. \'Homburg\' lub \'Hamburg w nocy\', ale nie \'Dzień w Hamburg\' lub \'Hahmburg\'</string>
@@ -779,13 +768,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
-    <!-- conditional cache markers -->
-    <string name="conditional_marker_activity_title">Znaczniki warunkowe</string>
-    <string name="conditional_marker_add_rule">Dodaj regułę</string>
-    <string name="conditional_marker_empty_hint">Brak skonfigurowanych reguł. Dotknij +, aby jakąś dodać.</string>
-    <string name="conditional_marker_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
-    <string name="conditional_marker_enabled">Znaczniki warunkowe włączone</string>
-    <string name="conditional_marker_disabled">Znaczniki warunkowe wyłączone</string>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -1032,8 +1015,6 @@
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
-    <string name="init_conditionalCacheMarkers">Warunkowe znaczniki skrytki</string>
-    <string name="init_summary_conditionalCacheMarkers">Zdefiniuj symbole znacznika do rysowania na ikonach skrytek w oparciu o warunki filtrowania</string>
     <string name="init_showElevation">Pokaż wysokość</string>
     <string name="init_summary_showElevation">Pokaż informacje o wysokości dla bieżącej pozycji, pobrane z danych trasy lub GNSS (jeśli są dostępne)</string>
     <string name="init_elevation_notAvailable">"Brak dostępnych danych o wysokości"</string>
