@@ -581,7 +581,6 @@
     <string name="cache_filter_mode_advanced">Avançado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Mudar para básico</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Mudar para o modo \'Básico\' resultará na perda das configurações de filtro. Deseja continuar?</string>
-    <string name="cache_filter_add_button">Adic. critérios de filtro</string>
     <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
@@ -637,17 +636,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Eliminar</string>
     <string name="cache_filter_storage_clear_button">Limpar</string>
-    <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
-    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
-    <string name="cache_filter_storage_delete_message">Tem a certeza que quer eliminar esta configuração de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>
-    <string name="cache_filter_storage_clear_title">Limpar filtro actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
-    <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
-    <string name="cache_filter_storage_save_confirm_title">Guardar e substituir filtro</string>
-    <string name="cache_filter_storage_save_confirm_message">Já existe um filtro com o nome \'%s\' e uma configuração diferente. Substituir?</string>
-    <string name="cache_filter_storage_clear_message">Deseja remover o filtro actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Diferenciar maiúsc. e minúsc.</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Texto a pesquisar</string>
     <string name="cache_filter_stringfilter_info">Com a opção \'Modelo\', utilizar caracteres * e ?. * representa zero, um ou vários caracteres, ? representa um único carácter. Por exemplo, o modelo \'Barr?iro*\' corresponderá a \'Barroiro\' ou \'Barreiro à noite\' mas não a \'Um dia no Barreiro\' ou \'Barrasco\'</string>
@@ -762,7 +751,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
