@@ -2531,6 +2531,14 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
+    /**
+     * Clears the conditional cache markers SharedPreferences keys (called during DB migration).
+     */
+    public static void clearConditionalCacheMarkersPrefs() {
+        putString(R.string.pref_conditionalCacheMarkers, "[]");
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, false);
+    }
+
     public static int getAttributeFilterSources() {
         int setting = getInt(R.string.pref_attributeFilterSources, 0);
         if (setting == 0) {

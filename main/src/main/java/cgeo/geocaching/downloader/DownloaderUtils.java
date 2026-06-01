@@ -12,6 +12,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.ImageParam;
@@ -20,6 +21,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -27,9 +29,11 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES;
@@ -41,12 +45,15 @@ import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_THE
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import static android.content.Context.DOWNLOAD_SERVICE;
@@ -67,6 +74,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -85,17 +93,36 @@ public class DownloaderUtils {
     public static boolean onOptionsItemSelected(final Activity activity, final int id) {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
-            return true;
         } else if (id == R.id.menu_download_backgroundmap) {
             final Intent intent = new Intent(activity, DownloadSelectorActivity.class);
             intent.putExtra(DownloadSelectorActivity.INTENT_FIXED_DOWNLOADTYPE, Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id);
             activity.startActivity(intent);
-            return true;
+        } else if (id == R.id.menu_update_routingdata) {
+            checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
+            checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS, R.string.updates_check, updateCheckAllowed -> { });
+        } else if (id == R.id.menu_update_mapdata) {
+            checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_download_language) {
+            TranslatorUtils.downloadLanguageModels(activity);
         } else if (id == R.id.menu_delete_offline_data) {
             deleteOfflineData(activity);
-            return true;
+        } else if (id == R.id.menu_delete_orphaned_data) {
+            deleteOrphanedData(activity);
+        } else {
+            return false;
         }
-        return false;
+        return true;
+    }
+
+    /** injects offline data submenu at given position and enables/disables certain menu items depending on whether we are in map or not */
+    public static void addManageOfflineDataMenu(@NonNull final Activity activity, @NonNull final MenuItem subMenuAnchor) {
+        final Menu subMenu = subMenuAnchor.getSubMenu();
+        assert subMenu != null;
+        activity.getMenuInflater().inflate(R.menu.manage_offline_data, subMenu);
+        final boolean inMap = (activity instanceof UnifiedMapActivity);
+        MenuUtils.setVisible(subMenu.findItem(R.id.menu_download_language), !inMap);
+        MenuUtils.setVisible(subMenu.findItem(R.id.menu_check_routingdata), inMap);
+        MenuUtils.setVisible(subMenu.findItem(R.id.menu_check_hillshadingdata), inMap);
     }
 
     public static void checkForRoutingTileUpdates(final MainActivity activity) {
@@ -117,6 +144,19 @@ public class DownloaderUtils {
 
     public static void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
         Settings.setMapAutoDownloadsLastCheck(!updateCheckAllowed);
+    }
+
+    public static void deleteOrphanedData(final Activity activity) {
+        final ProgressDialog waitDialog = new ProgressDialog(activity);
+        waitDialog.setTitle(LocalizationUtils.getString(R.string.init_maintenance_start));
+        waitDialog.setMessage(LocalizationUtils.getString(R.string.init_maintenance_ongoing));
+        waitDialog.setCancelable(false);
+        waitDialog.show();
+
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> {
+            ViewUtils.showShortToast(activity, R.string.init_maintenance_finished);
+            waitDialog.dismiss();
+        });
     }
 
     private static String getFilenameFromUri(final Uri uri) {

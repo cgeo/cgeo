@@ -157,7 +157,7 @@ public class OfflineTranslateUtils {
                             textNode.text(translation);
                             // check if all done
                             if (remaining.decrementAndGet() == 0) {
-                                consumer.accept(OfflineTranslateUtils.getTextWithTranslatedByLogo(document.body().html()));
+                                consumer.accept(new SpannableStringBuilder(document.body().html()));
                                 status.updateProgress();
                             }
                         }, e -> {
@@ -284,21 +284,6 @@ public class OfflineTranslateUtils {
         public TranslationProgressHandler(final AbstractActivity activity) {
             super(activity);
         }
-    }
-
-    public static SpannableStringBuilder getTextWithTranslatedByLogo(final String text) {
-        final SpannableStringBuilder ssb = new SpannableStringBuilder(text);
-        if (TranslateAccessor.get().requiresGoogleAttribution()) {
-            ssb.append("\n ");
-            final Drawable d = ContextCompat.getDrawable(CgeoApplication.getInstance(), R.drawable.translated_by_google);
-            if (d != null) {
-                d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-                final int start = ssb.length() - 1;
-                ssb.setSpan(new ImageSpan(d, DynamicDrawableSpan.ALIGN_BOTTOM), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                ssb.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        return ssb;
     }
 
     public static class Language implements Comparable<Language> {

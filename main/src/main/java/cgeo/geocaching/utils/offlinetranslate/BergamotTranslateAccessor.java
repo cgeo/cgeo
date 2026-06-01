@@ -278,7 +278,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 Schedulers.computation().createWorker().schedule(() -> {
                     try {
                         final String[] result;
-                        if (PIVOT_LANGUAGE.equals(sourceLang)) {
+                        // skip translation if src == target
+                        if (sourceLang.equals(targetLang)) {
+                            result = null;
+                        } else if (PIVOT_LANGUAGE.equals(sourceLang)) {
                             // en → target: direct
                             result = nativeLib.translateMultiple(new String[]{source}, pairKey(PIVOT_LANGUAGE, targetLang));
                         } else if (PIVOT_LANGUAGE.equals(targetLang)) {

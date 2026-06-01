@@ -15,7 +15,6 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.PendingDownloadsActivity;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
-import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
@@ -49,7 +48,6 @@ import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
@@ -489,6 +487,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             SearchUtils.setSearchViewColor(searchView);
 
             // initialize menu items
+            DownloaderUtils.addManageOfflineDataMenu(this, menu.findItem(R.id.menu_manage_offline_data));
             menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk());
             menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
             menu.findItem(R.id.menu_download_language).setEnabled(!TranslateAccessor.get().getSupportedLanguages().isEmpty());
@@ -548,18 +547,9 @@ public class MainActivity extends AbstractNavigationBarActivity {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, BookmarkListActivity.class));
             }
-        } else if (id == R.id.menu_update_routingdata) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS, R.string.updates_check, updateCheckAllowed -> { });
-        } else if (id == R.id.menu_update_mapdata) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
-        } else if (id == R.id.menu_download_language) {
-            TranslatorUtils.downloadLanguageModels(this);
-        } else if (id == R.id.menu_delete_offline_data) {
-            DownloaderUtils.deleteOfflineData(this);
         } else if (id == R.id.menu_pending_downloads) {
             startActivity(new Intent(this, PendingDownloadsActivity.class));
-        } else {
+        } else if (!DownloaderUtils.onOptionsItemSelected(this, id)) {
             return super.onOptionsItemSelected(item);
         }
         return true;

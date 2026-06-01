@@ -640,4 +640,20 @@ public class CacheArtefactParserTest {
         assertThat(nonCalc).isNotNull();
         assertThat(nonCalc.getCoords()).isEqualTo(new Geopoint(13.5, 8.3));
     }
+
+    @Test
+    public void testParseFormulaContainingProjectedCoords() {
+        final CacheArtefactParser parser = createParser("ProjectedPrefix");
+
+        final Collection<Waypoint> wps =
+                parser.parse("@Finale1 (F) N47° 37.000 E012° 16.000{P|BEARING|55.55|11.11|METER}\n" +
+                        "@Finale2 (F) N47° 37.000 E012° 16.000{P|BEARING|55,55|22,22|METER}\n" +
+                        "@Finale3 (F) N47° 37,000 E012° 16,000{P|BEARING|55,55|33,33|METER}").getWaypoints();
+        assertThat(wps).hasSize(3);
+        final Iterator<Waypoint> it = wps.iterator();
+        assertThat(it.next().getProjectionConfig()).isEqualTo("{P|BEARING|55.55|11.11|METER}");
+        assertThat(it.next().getProjectionConfig()).isEqualTo("{P|BEARING|55,55|22,22|METER}");
+        // Finale3 uses European comma notation; GeopointParser swaps dots/commas, so stored config uses dots
+        assertThat(it.next().getProjectionConfig()).isEqualTo("{P|BEARING|55.55|33.33|METER}");
+    }
 }

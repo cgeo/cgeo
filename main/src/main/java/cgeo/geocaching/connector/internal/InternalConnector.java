@@ -93,6 +93,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
+    public boolean hasOnlineSource() {
+        return false;
+    }
+
+    @Override
     public boolean isActive() {
         return true;
     }

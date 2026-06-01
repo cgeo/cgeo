@@ -30,6 +30,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         assert activity != null;
         activity.setTitle(R.string.settings_title_map_content_behavior);
 
+
         updateNotificationAudioInfo();
 
         // Clear icon cache when modifying settings that influence icon appearance

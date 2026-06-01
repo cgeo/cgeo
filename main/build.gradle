@@ -460,10 +460,10 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.20.0'
 
-    String okhttpVersion = '4.12.0'
+    String okhttpVersion = '5.3.2'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver3:$okhttpVersion"
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
@@ -528,7 +528,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
 
     // Altitude above MSL
-    implementation 'androidx.core:core-location-altitude:1.0.0-beta01'
+    implementation 'androidx.core:core-location-altitude:1.0.0-rc01'
 
     // Support Annotations. use same version for the main app and the test app
     String annotationVersion = '1.10.0'
@@ -556,7 +556,7 @@ dependencies {
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.31'
+    implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.1'
 
     // For Wherigos: GIF support
     // ani gif support
@@ -565,10 +565,6 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    // Offline translation - language detection and translator
-    // -> this is NON-FOSS code and should only be available in flavor "basic"
-    basicImplementation 'com.google.mlkit:language-id:17.0.6'
-    basicImplementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks

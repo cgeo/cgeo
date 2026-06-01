@@ -13,6 +13,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
@@ -180,6 +181,10 @@ public class SuApi {
         final OwnerGeocacheFilter ownf = GeocacheFilter.findInChain(filters, OwnerGeocacheFilter.class);
         if (ownf != null && !StringUtils.isEmpty(ownf.getStringFilter().getTextValue())) {
             return searchByOwner(ownf.getStringFilter().getTextValue(), connector);
+        }
+        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filters, StatusGeocacheFilter.class);
+        if (statusFilter != null && Boolean.TRUE.equals(statusFilter.getStatusOwned())) {
+            return searchByOwner(connector.getUserName(), connector);
         }
 
         //by default, search around current position

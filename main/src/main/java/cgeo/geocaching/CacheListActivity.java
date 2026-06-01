@@ -31,6 +31,7 @@ import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -89,7 +90,6 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -414,7 +414,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         updateFilterBar();
 
         restartCacheLoader(false, null);
@@ -433,6 +433,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    refreshCurrentList();
+                    return;
+                }
                 if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
                     final Geocache geocache = DataStore.loadCache(geocode, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));
                     if (geocache != null) {
@@ -544,7 +548,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
+        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
@@ -800,9 +805,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_select_next100) {
             adapter.selectNextCaches(100);
         } else if (menuItem == R.id.menu_filter) {
-            showFilterMenu();
+            FilterUtils.onClickFilterMenu(this);
         } else if (menuItem == R.id.menu_sort) {
             openSortDialog();
+        } else if (menuItem == R.id.menu_named_filters) {
+            FilterUtils.onClickNamedFilterMenu(this);
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -934,7 +941,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, currentCacheFilterContext);
+        FilterUtils.openDialogSelectNamedFilter(this,
+            TextParam.id(R.string.cache_filter_storage_select_title),
+            currentCacheFilterContext,
+            selectedFilter -> {
+                refreshWithFilter(currentCacheFilterContext.get());
+            });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        return true;
     }
 
     @Override
@@ -1589,9 +1608,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityFilter(final Context context) {
+    public static void startActivityFilter(final Context context, @Nullable final GeocacheFilterContext filterContext) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
+        if (filterContext != null) {
+            cachesIntent.putExtra(Intents.EXTRA_FILTER_CONTEXT, filterContext);
+        }
         context.startActivity(cachesIntent);
     }
 
@@ -1621,21 +1643,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getActiveFilterName(), getActiveFilterSavedDifferently());
+        FilterUtils.updateFilterBar(this, getActiveFilterName());
     }
 
     @Nullable
     private String getActiveFilterName() {
         if (currentCacheFilterContext.get().isFiltering()) {
             return currentCacheFilterContext.get().toUserDisplayableString();
-        }
-        return null;
-    }
-
-    @Nullable
-    private Boolean getActiveFilterSavedDifferently() {
-        if (currentCacheFilterContext.get().isFiltering()) {
-            return currentCacheFilterContext.get().isSavedDifferently();
         }
         return null;
     }

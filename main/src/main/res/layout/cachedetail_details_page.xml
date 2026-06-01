@@ -71,6 +71,10 @@
 
         <include layout="@layout/cache_offlinebox" />
 
+        <!-- Named filter box -->
+
+        <include layout="@layout/cache_namedfilterbox" />
+
         <!-- Watchlist box -->
 
         <LinearLayout

@@ -40,6 +40,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -142,6 +144,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.util.Linkify;
 import android.util.Pair;
@@ -166,6 +169,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -193,6 +197,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -426,6 +431,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    notifyDataSetChanged();
+                    return;
+                }
                 if (cache != null && cache.getGeocode().equals(geocode)) {
                     notifyDataSetChanged();
                 }
@@ -1439,6 +1448,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // list
             updateCacheLists(binding.getRoot(), cache, activity);
 
+            // named filter box
+            updateNamedFilterBox(binding.getRoot(), activity);
+
             // watchlist
 
             binding.addToWatchlist.setOnClickListener(new AddToWatchlistClickListener());
@@ -1466,6 +1478,46 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             } else {
                 binding.licenseBox.findViewById(R.id.license_box).setVisibility(View.GONE);
             }
+        }
+
+        /**
+         * Show/hide and populate the named filter matching box
+         */
+        private void updateNamedFilterBox(final View view, final CacheDetailActivity activity) {
+            final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matching = NamedFilter.getFiltersMatchingCache(cache);
+            final List<NamedFilter> activeFilters = matching.left;
+            final List<NamedFilter> inactiveFilters = matching.right;
+
+            final View box = view.findViewById(R.id.namedfilter_box);
+            if (activeFilters.isEmpty() && inactiveFilters.isEmpty()) {
+                box.setVisibility(View.GONE);
+                return;
+            }
+
+            box.setVisibility(View.VISIBLE);
+
+            final SpannableStringBuilder sb = new SpannableStringBuilder();
+            sb.append(LocalizationUtils.getString(R.string.cache_namedfilter_matching)).append(": ");
+            sb.append(TextUtils.join(activeFilters, NamedFilter::getNameAndMarker, ", "));
+            if (!activeFilters.isEmpty() && !inactiveFilters.isEmpty()) {
+                sb.append(", ");
+            }
+            final int inactiveStart = sb.length();
+            sb.append(TextUtils.join(inactiveFilters, NamedFilter::getNameAndMarker, ", "));
+            if (inactiveStart < sb.length() && activity != null) {
+                final int secondaryColor = ContextCompat.getColor(activity, R.color.colorText_listsSecondary);
+                sb.setSpan(new ForegroundColorSpan(secondaryColor), inactiveStart, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            final TextView namedfilterText = view.findViewById(R.id.namedfilter_text);
+            namedfilterText.setText(sb);
+
+            final Button namedfilterOpen = view.findViewById(R.id.namedfilter_open);
+            namedfilterOpen.setOnClickListener(v -> FilterUtils.onClickNamedFilterMenu(activity));
+            namedfilterOpen.setOnLongClickListener(v -> {
+                FilterUtils.openDialogActivateDeactivateNamedFilters(activity);
+                return true;
+            });
         }
 
         private void updateAttributes(final Activity activity) {
@@ -2032,7 +2084,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             ? CryptUtils.rot13(binding.hint.getText().toString())
                             : binding.hint.getText().toString();
                     translator.translate(hintPlain,
-                            translated -> binding.hint.setText(OfflineTranslateUtils.getTextWithTranslatedByLogo(translated)),
+                            translated -> binding.hint.setText(translated),
                             e -> binding.hint.setText(hintPlain)); // show plain text on translation error
                 } else {
                     hintRevealed[0] = false;
@@ -2115,7 +2167,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         }
                         if (translator != null) {
                             final ITranslateAccessor translateAccessor = TranslateAccessor.get();
-                            binding.descriptionTranslatedByGoogle.setVisibility(translateAccessor.requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
                             final String translatorName = translateAccessor.getTranslatorName();
                             if (translatorName != null) {
                                 binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
@@ -2124,7 +2175,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                             }
                         } else {
-                            binding.descriptionTranslatedByGoogle.setVisibility(View.GONE);
                             binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                         }
 
@@ -2986,8 +3036,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId, @Nullable final CacheDetailActivity cacheDetailActivity) {
+        final StoredList list = DataStore.getList(listId);
+        if (list.markerId != EmojiUtils.NO_EMOJI) {
+            builder.append(EmojiUtils.getEmojiAsString(list.markerId)).append(" ");
+        }
         final int start = builder.length();
-        builder.append(DataStore.getList(listId).getTitle());
+        builder.append(list.getTitle());
         builder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull final View widget) {

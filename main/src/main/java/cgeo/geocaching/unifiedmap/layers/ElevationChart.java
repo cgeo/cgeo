@@ -37,16 +37,16 @@ import java.util.ListIterator;
 
 import javax.annotation.Nullable;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import info.appdev.charting.charts.LineChart;
+import info.appdev.charting.components.Legend;
+import info.appdev.charting.components.MarkerView;
+import info.appdev.charting.components.XAxis;
+import info.appdev.charting.components.YAxis;
+import info.appdev.charting.data.EntryFloat;
+import info.appdev.charting.data.LineData;
+import info.appdev.charting.data.LineDataSet;
+import info.appdev.charting.highlight.Highlight;
+import info.appdev.charting.listener.OnChartValueSelectedListener;
 
 public class ElevationChart {
 
@@ -56,7 +56,7 @@ public class ElevationChart {
     private final Resources res;
     private final GeoItemLayer<String> geoItemLayer;
     final Toolbar toolbar;
-    private final List<Entry> entries = new ArrayList<>();
+    private final List<EntryFloat> entries = new ArrayList<>();
     private float offset = 0f;
     private Geopoint lastShownPosition = null;
     private boolean expanded = Settings.getBoolean(R.string.pref_elevationChartExpanded, false);
@@ -108,7 +108,7 @@ public class ElevationChart {
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
-                public void onValueSelected(final Entry e, final Highlight h) {
+                public void onValueSelected(final EntryFloat e, final Highlight h) {
                     final Data data = (Data) e.getData();
                     if (data != null) {
                         final Geopoint center = data.point;
@@ -173,7 +173,7 @@ public class ElevationChart {
                 lastPoint = point;
                 final float elev = it.hasNext() ? it.next() : Float.NaN;
                 if (!Float.isNaN(elev)) {
-                    entries.add(new Entry(distance, elev, new Data(
+                    entries.add(new EntryFloat(distance, elev, new Data(
                             point,
                             lastElevation < elev ? (int) (100f * (elev - lastElevation)) : 0, // relative up from last point
                             lastElevation > elev ? (int) (100F * (lastElevation - elev)) : 0, // relative down from last point
@@ -185,13 +185,13 @@ public class ElevationChart {
         }
 
         // prepare data for infobox
-        final ListIterator<Entry> listIterator = entries.listIterator(entries.size());
+        final ListIterator<EntryFloat> listIterator = entries.listIterator(entries.size());
         if (listIterator.hasPrevious()) {
             Data nextData = (Data) listIterator.previous().getData();
             if (nextData != null) {
                 final int totalDistance = (int) (100000f * distance);
                 while (listIterator.hasPrevious()) {
-                    final Entry current = listIterator.previous();
+                    final EntryFloat current = listIterator.previous();
                     final Data currentData = (Data) current.getData();
                     assert currentData != null;
                     currentData.upRemaining += nextData.upRemaining;
@@ -208,8 +208,8 @@ public class ElevationChart {
     private void formatChart(final Resources res) {
         chart.setData(null);
         if (!entries.isEmpty()) {
-            final LineDataSet dataSet = new LineDataSet(entries, "");
-            dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+            final LineDataSet<EntryFloat> dataSet = new LineDataSet(entries, "");
+            dataSet.setLineMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);
             dataSet.setColor(color);
@@ -226,8 +226,8 @@ public class ElevationChart {
 
             // initialize infobox
             chart.setMarker(mv);
-            chart.highlightValue(0, 0);
-            chart.setHighlightPerTapEnabled(false);
+            chart.highlightValue(null, false);
+            chart.setHighlightPerTap(false);
         }
 
         chart.setExtraOffsets(0, -30, 0, 10);
@@ -254,7 +254,7 @@ public class ElevationChart {
         yAxis2.setEnabled(false);
     }
 
-    private void updateInfoBox(@Nullable final Entry entry) {
+    private void updateInfoBox(@Nullable final EntryFloat entry) {
         final RelativeLayout info = mv.findViewById(R.id.elevation_infobox);
         if (info == null || entry == null) {
             return;
@@ -277,7 +277,7 @@ public class ElevationChart {
         float minDistance = 0.1f;
         int x = -1;
         int index = 0;
-        for (Entry entry : entries) {
+        for (EntryFloat entry : entries) {
             final float distance = ((Data) entry.getData()).point.distanceTo(coords);
             if (distance < minDistance) {
                 x = index;
@@ -287,7 +287,7 @@ public class ElevationChart {
         }
         // display hairpin line for found position + adapt x axis labelling
         offset = x < 0 ? 0f : entries.get(x).getX();
-        chart.highlightValue(offset, x < 0 ? -1 : 0);
+        chart.highlightValue(offset, Float.NaN, x < 0 ? -1 : 0, true);
         chart.invalidate();
     }
 

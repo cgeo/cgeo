@@ -27,6 +27,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -909,4 +910,13 @@ public class ViewUtils {
         return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
     }
 
+    /** to be used in Activity.onCreateOptionsMenu to set a long click handler for menu items */
+    public static void registerLongClickHandlerForMenuItem(final Activity ctx, final int viewId, final Predicate<View> longClickHandler) {
+        new Handler().post(() -> {
+            final View view = ctx.findViewById(viewId);
+            if (view != null) {
+                view.setOnLongClickListener(v -> longClickHandler.test(v));
+            }
+        });
+    }
 }

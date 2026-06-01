@@ -46,11 +46,6 @@ public class LegacyFilterConfig extends HashMap<String, List<String>> {
             return;
         }
 
-        //Migrate all stored filters
-        for (GeocacheFilter filter : GeocacheFilter.Storage.getStoredFilters()) {
-            GeocacheFilter.Storage.save(filter);
-        }
-
         //Migrate context filters
         migrateFilterContext(new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE));
         migrateFilterContext(new GeocacheFilterContext(GeocacheFilterContext.FilterType.OFFLINE));
@@ -92,7 +87,7 @@ public class LegacyFilterConfig extends HashMap<String, List<String>> {
                 Log.w("Couldn't parse expression '" + filterConfig + "' (idx: " + idx + ")", pe);
             }
         }
-        return GeocacheFilter.create(name, openInAdvancedMode, includeInconclusive, tree);
+        return GeocacheFilter.create(openInAdvancedMode, includeInconclusive, tree);
     }
 
     @Deprecated
@@ -101,7 +96,7 @@ public class LegacyFilterConfig extends HashMap<String, List<String>> {
             return null;
         }
         final LegacyFilterConfig config = new LegacyFilterConfig();
-        config.addToDefaultList(filter.getName());
+        config.addToDefaultList("");
         config.putList(CONFIG_KEY_ADV_MODE, BooleanUtils.toStringTrueFalse(filter.isOpenInAdvancedMode()));
         config.putList(CONFIG_KEY_INCLUDE_INCLUSIVE, BooleanUtils.toStringTrueFalse(filter.isIncludeInconclusive()));
         return "[" + LegacyFilterConfigParser.toConfig(config) + "]" + (filter.getTree() == null ? "" : FILTER_PARSER.getConfig(filter.getTree()));

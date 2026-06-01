@@ -10,6 +10,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -66,7 +68,6 @@ import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -262,7 +263,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         changeMapSource(Settings.getTileProvider());
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.reloadIndividualRoute(), this);
@@ -287,6 +288,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    reloadCachesAndWaypoints();
+                    invalidateOptionsMenu();
+                    return;
+                }
                 handleGeocodeChangedBroadcastReceived(geocode);
             }
         });
@@ -893,6 +899,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
+        final MenuItem itemNamedFilters = toolbarMenu.findItem(R.id.menu_named_filters);
+        final boolean anyActive = NamedFilter.getAll().stream().anyMatch(NamedFilter::isConditionalMarkerActive);
+        ToggleItemType.NAMED_FILTERS.toggleMenuItem(itemNamedFilters, anyActive);
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -929,7 +938,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
+        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
+
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
         initializeLongClicks();
@@ -986,7 +997,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_filter) {
-            showFilterMenu();
+            FilterUtils.onClickFilterMenu(this);
+        } else if (id == R.id.menu_named_filters) {
+            FilterUtils.onClickNamedFilterMenu(this);
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1004,6 +1017,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (v != null) {
                 final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
                 menu.inflate(R.menu.map_mapview);
+                DownloaderUtils.addManageOfflineDataMenu(this, menu.getMenu().findItem(R.id.menu_manage_offline_data));
                 TileProviderFactory.addMapviewMenuItems(this, menu);
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.setForceShowIcon(true);
@@ -1093,12 +1107,29 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void showFilterMenu() {
-        FilterUtils.openFilterActivity(this, viewModel.mapType.filterContext, viewModel.caches.getListCopy());
+        final Collection<Geocache> filteredList = viewModel.caches.getListCopy();
+
+        GeocacheFilterActivity.selectFilter(
+                this,
+                viewModel.mapType.filterContext,
+                filteredList, true);
     }
 
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, viewModel.mapType.filterContext);
+        FilterUtils.openDialogSelectNamedFilter(this,
+                TextParam.id(R.string.cache_filter_storage_select_title),
+                viewModel.mapType.filterContext,
+                selectedFilter -> {
+                    refreshWithFilter(viewModel.mapType.filterContext.get());
+                });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        return true;
     }
 
     @Override

@@ -859,6 +859,11 @@
         </activity>
 
         <activity
+            android:name=".filters.NamedFilterActivity"
+            android:label="@string/named_filter_activity_title" >
+        </activity>
+
+        <activity
             android:name=".connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"

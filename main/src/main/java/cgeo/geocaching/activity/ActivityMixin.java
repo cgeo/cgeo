@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -24,6 +25,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 public final class ActivityMixin {
 
@@ -196,5 +202,77 @@ public final class ActivityMixin {
         if (activity != null) {
             action.call(activity);
         }
+    }
+
+    public static boolean isActivityValid(final @Nullable Activity activity) {
+        return activity != null && !activity.isFinishing() && !activity.isDestroyed();
+    }
+
+    public static boolean isActivityValid(final @Nullable WeakReference<? extends Activity> activityRef) {
+        return activityRef != null && isActivityValid(activityRef.get());
+    }
+
+    /**
+     * Registers an interceptor for back press and navigate up on the given activity.
+     *
+     * @param activity    The activity to register on. Held via WeakReference to avoid memory leaks.
+     * @param interceptor Called when back/navUp is triggered.
+     *                    Parameter: a Runnable to conclude the intercepted navigation later
+     *                    (e.g. from a dialog confirmation).
+     *                    Return {@code true} to STOP navigation, {@code false} to CONTINUE.
+     * @return A BooleanSupplier to be called from {@code onSupportNavigateUp()}. Returns {@code true}
+     *         when navigation was handled or intercepted, {@code false} if the activity is gone or
+     *         navigate up could not be concluded.
+     */
+    public static BooleanSupplier registerBackNavigationInterceptor(
+            @NonNull final AppCompatActivity activity,
+            @NonNull final Predicate<Runnable> interceptor) {
+
+        final WeakReference<AppCompatActivity> weakActivity = new WeakReference<>(activity);
+
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!isActivityValid(weakActivity)) {
+                    setEnabled(false);
+                    return;
+                }
+                final Runnable continueBackNavigation = () -> {
+                    final AppCompatActivity currentActivity = weakActivity.get();
+                    if (!isActivityValid(currentActivity)) {
+                        return;
+                    }
+                    setEnabled(false);
+                    currentActivity.getOnBackPressedDispatcher().onBackPressed();
+                    if (isActivityValid(weakActivity)) {
+                        setEnabled(true);
+                    }
+                };
+                final boolean stop = interceptor.test(continueBackNavigation);
+                if (!stop) {
+                    continueBackNavigation.run();
+                }
+            }
+        };
+        // Passing activity as LifecycleOwner: callback is automatically removed on destroy
+        activity.getOnBackPressedDispatcher().addCallback(activity, callback);
+
+        return () -> {
+            if (!isActivityValid(weakActivity)) {
+                return false;
+            }
+            final AtomicBoolean navigationHandled = new AtomicBoolean(false);
+            final Runnable continueNavigateUp = () -> {
+                final AppCompatActivity currentActivity = weakActivity.get();
+                if (isActivityValid(currentActivity)) {
+                    navigationHandled.set(navigateUp(currentActivity));
+                }
+            };
+            final boolean interceptorStoppedNavigation = interceptor.test(continueNavigateUp);
+            if (!interceptorStoppedNavigation) {
+                continueNavigateUp.run();
+            }
+            return interceptorStoppedNavigation || navigationHandled.get();
+        };
     }
 }
