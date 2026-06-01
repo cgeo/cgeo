@@ -58,7 +58,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Mostra la confirmació en suprimir tots els catxés de la llista "Tot"
 - Nou: Permet el format Markdown per al text de llistat als catxés definides per l'usuari
 - Canvi: Emmagatzema el catxé abans d'afegir la imatge de l'usuari
-- Fix: Crash on loading images embedded directly in listing text
+- Correcció: Error en carregar imatges incrustades directament al text de la fitxa
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
