@@ -376,6 +376,7 @@
     <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
     <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
     <string name="translator_model">Model de traducció</string>
+    <string name="translator_tooltip">Traducció fora de línia</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
     <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
@@ -585,7 +586,6 @@
     <string name="cache_filter_mode_advanced">Avançat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Canvieu a Bàsic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Canviar al mode \"Bàsic\" provocarà la pèrdua de la configuració del filtre. Vols continuar?</string>
-    <string name="cache_filter_add_button">Afegiu criteris de filtre</string>
     <string name="cache_filter_option_and_or">Utilitzeu OR en lloc de AND</string>
     <string name="cache_filter_option_inverse">Filtre invers</string>
     <string name="cache_filter_option_include_inconclusive">Incloure coincidències poc concloents</string>
@@ -641,17 +641,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Esborra</string>
     <string name="cache_filter_storage_clear_button">Esborra</string>
-    <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
     <string name="cache_filter_storage_select_title">Seleccioneu Filtre</string>
-    <string name="cache_filter_storage_delete_title">Esborrar el filtre</string>
-    <string name="cache_filter_storage_delete_message">Confirmes que vols suprimir aquesta configuració del filtre?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccioneu el filtre o esborreu el filtre actual</string>
-    <string name="cache_filter_storage_clear_title">Esborra el filtre actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
-    <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
-    <string name="cache_filter_storage_save_confirm_title">Desa la sobreescriptura del filtre</string>
-    <string name="cache_filter_storage_save_confirm_message">Ja existeix un filtre amb el nom \'%s\' i una configuració diferent. Voleu sobreescriure\'l?</string>
-    <string name="cache_filter_storage_clear_message">Voleu esborrar el filtre actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Cerca de Text</string>
     <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
@@ -766,14 +756,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
-    <!-- conditional cache markers -->
-    <string name="conditional_marker_activity_title">Marcadors condicionals</string>
-    <string name="conditional_marker_add_rule">Afegeix una regla</string>
-    <string name="conditional_marker_empty_hint">No hi ha cap regla configurada. Toca + per afegir-ne una.</string>
-    <string name="conditional_marker_nofilter_label">(sense filtre — marca tots els catxés)</string>
-    <string name="conditional_marker_enabled">Marcadors condicionals activats</string>
-    <string name="conditional_marker_disabled">Marcadors condicionals desactivats</string>
-    <string name="conditional_marker_disable">Desactiva els marcadors condicionals</string>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1020,8 +1003,6 @@
     <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols de \'\" trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé.</string>
     <string name="init_dtMarkerOnCacheIcon">Classificació D/T a les icones del catxé</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Mostra un marcador per a les classificacions de Dificultat (esquerra) i Terreny (dreta) als marcadors de catxé a la cantonada superior dreta (el marcador \"emmagatzemat\" es mou al centre).</string>
-    <string name="init_conditionalCacheMarkers">Marcadors de catxé condicional</string>
-    <string name="init_summary_conditionalCacheMarkers">Defineix els símbols de marcador que es dibuixaran a les icones del catxé segons les condicions del filtre</string>
     <string name="init_showElevation">Mostra l\'elevació</string>
     <string name="init_summary_showElevation">Mostra informació d\'elevació per a la posició actual, extreta de les dades d\'encaminament o GNSS (si està disponible)</string>
     <string name="init_elevation_notAvailable">"No hi ha dades d'elevació disponibles"</string>
