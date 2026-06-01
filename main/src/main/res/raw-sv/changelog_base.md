@@ -1,12 +1,12 @@
-### General release notes
+### Allmän versionsinformation
 
-**Edge to Edge**
+**Kant till kant**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo riktar sig mot + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
 
-**Legacy Maps**
+**Äldre kartor**
 
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
+Äldre kartor: Som meddelats med utgåvorna från 2025.07.17 och 2025.12.01, har vi äntligen tagit bort äldre implementationer för våra kartor. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
 - Kartrotation för OpenStreetMap-baserade kartor (online + offline)
 - Klusterpopup för Google Maps
 - Dölj kartkällor som du inte behöver
@@ -29,10 +29,10 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Nytt: Erbjud att ställa in cache-ikonen även om cachen ännu inte är lagrad
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
-- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
-- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Snabbinställningar på kartan kan visa knapparna "1"/"2" för tomma routing-profiler efter att ha bytt språk
+- Nytt: Beräkna saknade höjddata vid import av spår (om höjddata laddas ner)
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
-- New: Conditional cache markers
+- Nytt: Villkorade cachemarkörer
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -56,9 +56,9 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Nytt: Ta bort offline-logg efter sammanslagning med online-logg
 - Nyhet: Visa bekräftelse vid borttagning av cacher med offlineloggar
 - Nyhet: Visa bekräftelse när du tar bort alla cacher från listan "Alla"
-- New: Allow Markdown formatting for listing text in user-defined caches
-- Change: Store cache before adding user image
-- Fix: Crash on loading images embedded directly in listing text
+- Nytt: Tillåt markdown-formatering för att lista text i användardefinierade cacher
+- Ändra: Lagra cache innan du lägger till användarbild
+- Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -94,4 +94,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Ändra: Använd lokal tidszon (för enheten, inte event) för kalenderposter (istället för UTC)
 - Fix: Vissa texter ignorerar språkväxling
 - Fix: "Använd brittiska inställningar" initieras inte korrekt på nya installationer
-- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Förändring: Bergamot översättningsmodul med öppen källkod som ersätter Google ML Kit översättare
