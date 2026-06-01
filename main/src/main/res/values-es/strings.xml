@@ -556,7 +556,6 @@
     <string name="cache_filter_mode_advanced">Avanzado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Cambiar a Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Cambiar a modo \'Basic\' provocará la pérdida de la configuración del filtro. ¿Desea continuar?</string>
-    <string name="cache_filter_add_button">Añadir criterios de filtro</string>
     <string name="cache_filter_option_and_or">Usar OR en lugar de AND</string>
     <string name="cache_filter_option_inverse">Filtro Inverso</string>
     <string name="cache_filter_option_include_inconclusive">Incluye coincidencias no concluyentes</string>
@@ -612,17 +611,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Borrar</string>
     <string name="cache_filter_storage_clear_button">Limpiar</string>
-    <string name="cache_filter_storage_load_delete_title">Cargar o eliminar un filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
-    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
-    <string name="cache_filter_storage_delete_message">¿Está seguro de que quiere borrar esta configuración de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro o borrar el filtro actual</string>
-    <string name="cache_filter_storage_clear_title">Limpiar el filtro actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ningún filtro ha sido almacenado todavía.</string>
-    <string name="cache_filter_storage_save_title">Guardar filtro con nombre</string>
-    <string name="cache_filter_storage_save_confirm_title">Guardar filtro y sobrescribir</string>
-    <string name="cache_filter_storage_save_confirm_message">Ya existe un filtro con el nombre \'%s\' y una configuración diferente. ¿Sobrescribirlo?</string>
-    <string name="cache_filter_storage_clear_message">¿Deseas limpiar el filtro actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidir Mayus/minus</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Buscar texto</string>
     <string name="cache_filter_stringfilter_info">Con la opción \'Patrón\', usa comodines * y ?. * representa cero, uno o varios caracteres, ? representa un solo carácter. Por ejemplo, el patrón \"H?mburg*\" coincidirá, por ejemplo, \"Homburg\" o \"Hamburgo por la noche\", pero no \"Un día en Hamburg\" o \"Hahmburg\"</string>
@@ -736,7 +725,7 @@
         <item>1 mes</item>
         <item>&gt;1 mes</item>
     </string-array>
-    <!-- conditional cache markers -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
