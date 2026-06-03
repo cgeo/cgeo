@@ -191,7 +191,7 @@ public final class GCConstants {
      * Live Map since 14.02.2012
      */
     static final Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
-    static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
+    static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("\"?sessionToken\"?:['\"]([^'\"]+)");
 
     static final String STRING_PREMIUMONLY = "class=\"illustration lock-icon\"";
     static final Pattern PATTERN_PREMIUMONLY_CACHETYPE = Pattern.compile("/app/ui-icons/sprites/cache-types\\.svg#icon-([^\"\\-]+)-?([^\"]+)?");
