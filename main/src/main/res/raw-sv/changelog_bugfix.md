@@ -5,7 +5,7 @@ Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta
 - Fix: Krasch på waypoint-sidan
 - Ändra: Sök efter "egna cacher" börjar med färska filter
 - Fix: Osparade labbäventyr-steg förlorar "besökt"-information vid uppdatering
-- Fix: Recurring prompt for tile source updates
+- Fix: Återkommande fråga för källuppdateringar av rutor
 - Fix: Slumpmässig plats när en lista visas på karta (Google Maps)
 
 ##
