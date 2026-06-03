@@ -537,6 +537,7 @@
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
+    <string name="caches_recalculate_health_score">Recalcula les puntuacions d\'estat del registre</string>
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
@@ -620,6 +621,8 @@
     <string name="cache_filter_stored_since">Última actualització de detalls</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">Nivell BC</string>
+    <string name="cache_filter_health_score">Puntuació d\'estat del registre</string>
+    <string name="cache_filter_health_score_include_unscored">Inclou els catxés sense registres puntuables</string>
     <string name="cache_filter_named_filter">Filtre amb nom</string>
     <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
@@ -757,6 +760,23 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filtres amb nom</string>
+    <string name="cache_namedfilter_matching">Filtres amb nom coincidents</string>
+    <string name="named_filter_add">Afegeix un filtre</string>
+    <string name="named_filter_empty_hint">No hi ha filtres amb nom configurats. Toca + per afegir-ne un.</string>
+    <string name="named_filter_activate_marker">Activa el marcador</string>
+    <string name="named_filter_enable_all_markers">Activa tots els marcadors</string>
+    <string name="named_filter_markers_enabled">Marcadors activats</string>
+    <string name="named_filter_markers_disabled">Marcadors desactivats</string>
+    <string name="named_filter_select_title">Selecciona el filtre</string>
+    <string name="named_filter_activate_deactivate_title">Activar/desactivar marcadors</string>
+    <string name="named_filter_nofilter_label">(sense filtre — coincideix amb tots els catxés)</string>
+    <string name="named_filter_save_as_title">Desa com a filtre amb nom</string>
+    <string name="named_filter_name_exists_title">El nom ja existeix</string>
+    <string name="named_filter_name_exists_message">Ja existeix un filtre anomenat \'%s\'. Voleu sobreescriure-ho?</string>
+    <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
+    <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
+    <string name="named_filter_add_named_criterion">Afegeix un criteri de filtre amb nom</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1508,6 +1528,7 @@
     <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
     <string name="cache_logs">Llibre de registre</string>
     <string name="cache_latest_logs">Registres recents</string>
+    <string name="cache_health_score">Puntuació d\'estat del registre</string>
     <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
     <string name="cache_logs_friends">Amics</string>
     <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
@@ -2419,6 +2440,8 @@
         <item quantity="one">Definiu %d icona del catxé</item>
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Recalculant les puntuacions d\'estat del registre…</string>
+    <string name="command_recalculate_health_score_result">Puntuacions d\'estat del registre recalculades: %d</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
     <string name="live_map_status_http429">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
     <string name="live_map_status_error">Error en carregar les dades del mapa: %s</string>
