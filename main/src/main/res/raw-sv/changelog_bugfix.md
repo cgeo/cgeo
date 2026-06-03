@@ -1,16 +1,19 @@
 ##
 Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Fix: Pocket query import broken (website change)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Fix: Krasch vid åtkomst till rutter
+- Fix: Krasch på waypoint-sidan
+- Ändra: Sök efter "egna cacher" börjar med färska filter
+- Fix: Osparade labbäventyr-steg förlorar "besökt"-information vid uppdatering
+- Fix: Återkommande fråga för källuppdateringar av rutor
+- Fix: Slumpmässig plats när en lista visas på karta (Google Maps)
+
+##
+- Fix: Krasch i cache infoblad
+- Fix: Wherigo-cartridges kan inte laddas ner längre (webbplatsändring)
 
 ##
  - Ändra: Wherigo-filer kan inte laddas ner för närvarande, visa instruktioner för åtgärder
