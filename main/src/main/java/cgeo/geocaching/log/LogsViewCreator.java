@@ -38,13 +38,20 @@ import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
-    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
+    /** per-log (temporary) translation status, keyed by log instance so each log toggles independently */
+    private final Map<LogEntry, OfflineTranslateUtils.Status> translationStatusByLog = new IdentityHashMap<>();
+
+    private OfflineTranslateUtils.Status getTranslationStatus(final LogEntry log) {
+        return translationStatusByLog.computeIfAbsent(log, l -> new OfflineTranslateUtils.Status());
+    }
 
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -187,6 +194,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             }
             if (OfflineTranslateUtils.isTargetLanguageValid() && !TranslateAccessor.get().getSupportedLanguages().isEmpty()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
+                    final OfflineTranslateUtils.Status translationStatus = getTranslationStatus(log);
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();
                         fillViewHolder(null, holder, log);
