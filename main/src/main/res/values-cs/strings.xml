@@ -384,7 +384,6 @@
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
-    <string name="translator_attributed_to">Přeloženo %s</string>
     <string name="crash_activity_title">Jejda! c:geo spadlo!</string>
     <string name="crash_activity_report">nahlásit problém</string>
     <!-- location service -->
