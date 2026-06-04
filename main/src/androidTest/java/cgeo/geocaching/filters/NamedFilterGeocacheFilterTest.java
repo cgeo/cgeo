@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,18 +21,17 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class NamedFilterGeocacheFilterTest {
 
+    private final List<NamedFilter> storage = new ArrayList<>();
+
     @Before
     public void setUp() {
-        NamedFilter.setLoadFunctionForTesting(ArrayList::new);
-        NamedFilter.setStoreFunctionForTesting(list -> { });
-        NamedFilter.storeAll(new ArrayList<>());
+        storage.clear();
+        NamedFilter.resetStorageForTesting(storage);
     }
 
     @After
     public void tearDown() {
-        NamedFilter.setLoadFunctionForTesting(null);
-        NamedFilter.setStoreFunctionForTesting(null);
-        NamedFilter.storeAll(new ArrayList<>());
+        NamedFilter.resetStorageForTesting(null);
     }
 
     @Test
@@ -39,24 +39,24 @@ public class NamedFilterGeocacheFilterTest {
     public void simple() {
         final NamedFilter tf = createSimpleNamedTypeFilter(1, CacheType.TRADITIONAL);
         NamedFilter.storeAll(Collections.singletonList(tf));
-        singleNamedFilter(c -> c.setType(CacheType.TRADITIONAL), f -> f.setNamedFilterId(1), true);
-        singleNamedFilter(c -> c.setType(CacheType.MYSTERY), f -> f.setNamedFilterId(1), false);
+        singleNamedFilter(c -> c.setType(CacheType.TRADITIONAL), f -> f.setNamedFilters(Collections.singletonList(tf)), true);
+        singleNamedFilter(c -> c.setType(CacheType.MYSTERY), f -> f.setNamedFilters(Collections.singletonList(tf)), false);
     }
 
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void nonNamedFilter() {
         //when no named filter is configured (id=0), then everything is passed through
-        singleNamedFilter(c -> c.setType(CacheType.MYSTERY), f -> f.setNamedFilterId(0), true);
+        singleNamedFilter(c -> c.setType(CacheType.MYSTERY), f -> f.setNamedFilters(Collections.emptyList()), true);
     }
 
     @Test
     public void preventEndlessLoopOnNesting() {
         //create a named filter which references itself via id
         final NamedFilterGeocacheFilter filterInside = new NamedFilterGeocacheFilter();
-        filterInside.setNamedFilterId(99);
         final GeocacheFilter named = GeocacheFilter.create(true, false, filterInside);
         final NamedFilter selfRef = new NamedFilter(99, "self", named, EmojiUtils.NO_EMOJI, false);
+        filterInside.setNamedFilters(Collections.singletonList(selfRef));
         NamedFilter.storeAll(Collections.singletonList(selfRef));
 
         //assert that filter executes w/o producing infinite loop and that it doesn't filter any cache

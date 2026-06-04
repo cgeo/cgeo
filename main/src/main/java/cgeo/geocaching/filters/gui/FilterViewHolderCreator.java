@@ -5,11 +5,13 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.CategoryGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
+import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -66,7 +68,7 @@ public class FilterViewHolderCreator {
                 result = new StringFilterViewHolder<>();
                 break;
             case INVENTORY_COUNT:
-                result = new NumberCountFilterViewHolder(0, 100);
+                result = new NumberCountFilterViewHolder<>(0, 100);
                 break;
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
@@ -141,7 +143,7 @@ public class FilterViewHolderCreator {
                 result = createStoredListFilterViewHolder();
                 break;
             case NAMED_FILTER:
-                result = new NamedFilterFilterViewHolder();
+                result = createNamedFilterFilterViewHolder();
                 break;
             case ORIGIN:
                 result = new CheckboxFilterViewHolder<>(
@@ -266,6 +268,20 @@ public class FilterViewHolderCreator {
                         .setValueDisplayTextGetter(f -> f.title)
                         .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
-        return new StoredListsFilterViewHolder<>(vgfa, 1, Collections.emptySet());
+        return new StoredListsFilterViewHolder<>(vgfa);
+    }
+
+    private static IFilterViewHolder<?> createNamedFilterFilterViewHolder() {
+
+        final List<NamedFilter> allNamedFilters = NamedFilter.getAll();
+        final ValueGroupFilterAccessor<NamedFilter, NamedFilterGeocacheFilter> vgfa =
+                new ValueGroupFilterAccessor<NamedFilter, NamedFilterGeocacheFilter>()
+                    .setSelectableValues(allNamedFilters)
+                    .setFilterValueGetter(NamedFilterGeocacheFilter::getNamedFilters)
+                    .setFilterValueSetter(NamedFilterGeocacheFilter::setNamedFilters)
+                    .setValueDrawableGetter(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
+                    .setValueDisplayTextGetter(NamedFilter::getName);
+
+        return new NamedFilterFilterViewHolder<>(vgfa);
     }
 }

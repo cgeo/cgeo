@@ -29,8 +29,8 @@ import java.util.function.Consumer;
 
 public class FilterUtils {
 
-    /** Separator used in filter names to define display groups, e.g. "Parent::Child". */
-    private static final String NAMED_FILTER_GROUP_SEPARATOR = "::";
+    /** Separator used in filter names to define display groups, e.g. "Parent:Child". */
+    private static final String NAMED_FILTER_GROUP_SEPARATOR = ":";
 
     private FilterUtils() {
         // should not be instantiated
@@ -73,27 +73,33 @@ public class FilterUtils {
     /** opens a dialog to activate/deactivate named filter markers */
     public static void openDialogActivateDeactivateNamedFilters(final Context context) {
         final List<NamedFilter> filters = NamedFilter.getAll();
-
-        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
-        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
-
         final Set<NamedFilter> preSelected = new HashSet<>();
         for (final NamedFilter nf : filters) {
             if (nf.isConditionalMarkerActive()) {
                 preSelected.add(nf);
             }
         }
-        model.setSelectedItems(preSelected);
+
+        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected, selected -> {
+            final List<NamedFilter> updated = new ArrayList<>(filters);
+            for (final NamedFilter nf : updated) {
+                nf.setConditionalMarkerActive(selected.contains(nf));
+            }
+            NamedFilter.storeAll(updated);
+        });
+    }
+
+    public static void openDialogMultiselectNamedFilters(final Context context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {
+        final List<NamedFilter> filters = NamedFilter.getAll();
+
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
+        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
+
+        model.setSelectedItems(preselected);
 
         SimpleDialog.ofContext(context)
-            .setTitle(TextParam.id(R.string.named_filter_activate_deactivate_title))
-            .selectMultiple(model, selected -> {
-                final List<NamedFilter> updated = new ArrayList<>(filters);
-                for (final NamedFilter nf : updated) {
-                    nf.setConditionalMarkerActive(selected.contains(nf));
-                }
-                NamedFilter.storeAll(updated);
-            });
+            .setTitle(title)
+            .selectMultiple(model, selectionListener);
     }
 
 
@@ -103,9 +109,9 @@ public class FilterUtils {
             if (onSelected == null || f == null || !(f.getTree() instanceof NamedFilterGeocacheFilter)) {
                 return;
             }
-            final NamedFilter nf = ((NamedFilterGeocacheFilter) f.getTree()).getNamedFilter();
-            if (nf != null) {
-                onSelected.accept(nf);
+            final Set<NamedFilter> nf = ((NamedFilterGeocacheFilter) f.getTree()).getNamedFilters();
+            if (nf != null && nf.size() == 1) {
+                onSelected.accept(nf.iterator().next());
             }
         });
     }
@@ -172,7 +178,7 @@ public class FilterUtils {
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
-            .setDisplayIconMapper(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_filter))
+            .setDisplayIconMapper(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
             .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)

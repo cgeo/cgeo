@@ -59,6 +59,7 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -119,6 +120,7 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleOnSubscribe;
@@ -898,7 +900,7 @@ public class DataStore {
                         if (json == null) {
                             return null;
                         }
-                        final com.fasterxml.jackson.databind.JsonNode node = cgeo.geocaching.utils.JsonUtils.stringToNode(json);
+                        final JsonNode node = JsonUtils.stringToNode(json);
                         if (node == null) {
                             return null;
                         }
@@ -916,7 +918,7 @@ public class DataStore {
                     final NamedFilter nf = filters.get(i);
                     final ContentValues values = new ContentValues();
                     values.put("name", nf.getName());
-                    values.put("treeconfig", cgeo.geocaching.utils.JsonUtils.nodeToString(nf.toJson()));
+                    values.put("treeconfig", JsonUtils.nodeToString(nf.toJson()));
                     values.put("priority", i);
                     database.insert(dbTableFilters, null, values);
                 }
@@ -924,20 +926,6 @@ public class DataStore {
             });
         }
 
-//        /**
-//         * @deprecated Use {@link #loadAll()} instead.
-//         */
-//        @Deprecated
-//        public static List<GeocacheFilter> getAllStoredFilters() {
-//            final List<NamedFilter> named = loadAll();
-//            final List<GeocacheFilter> result = new ArrayList<>();
-//            for (final NamedFilter nf : named) {
-//                if (nf.getFilter() != null) {
-//                    result.add(nf.getFilter());
-//                }
-//            }
-//            return result;
-//        }
     }
 
     private DataStore() {
@@ -4761,7 +4749,6 @@ public class DataStore {
                 return Collections.emptyList();
             }
 
-            final Resources res = CgeoApplication.getInstance().getResources();
             final List<StoredList> lists = new ArrayList<>();
             if (listId == null) {
                 lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));

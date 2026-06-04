@@ -10,127 +10,173 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
-    private int namedFilterId = 0;
+    private final Set<Integer> namedFilterIds = new HashSet<>();
+    private String namedFilter; //for legacy support
 
     private static final ThreadLocal<Set<Integer>> nestingTracker = new ThreadLocal<>();
 
-    public int getNamedFilterId() {
-        return namedFilterId;
-    }
-
-    public void setNamedFilterId(final int id) {
-        this.namedFilterId = id;
-    }
-
-    @Nullable
-    public NamedFilter getNamedFilter() {
-        if (namedFilterId == 0) {
+    public Set<NamedFilter> getNamedFilters() {
+        final Set<NamedFilter> filterLists = new HashSet<>();
+        forEachSelectedNamedFilter(nf -> {
+            filterLists.add(nf);
             return null;
+        });
+        return filterLists;
+    }
+
+    public void setNamedFilters(final Collection<NamedFilter> filters) {
+        namedFilterIds.clear();
+        for (NamedFilter filter : filters) {
+            namedFilterIds.add(filter.getId());
         }
-        return NamedFilter.getById(namedFilterId);
     }
 
     @Override
     public Boolean filter(final Geocache cache) {
-        final NamedFilter nf = getNamedFilter();
-        if (nf == null || nf.getFilter() == null) {
-            return true;
+        if (cache == null) {
+            return null;
         }
-        try {
-            if (startNested()) {
+
+        final boolean[] oneFilter = new boolean[] { false };
+        final Boolean filterResult = forEachSelectedNamedFilter(nf -> {
+            oneFilter[0] = true;
+            if (nf.getFilter() == null || nf.getFilter().filter(cache)) {
                 return true;
             }
-            return nf.getFilter().filter(cache);
-        } finally {
-            stopNested();
-        }
+            return null;
+        });
+        return filterResult == Boolean.TRUE || !oneFilter[0];
     }
 
     @Override
     public boolean isFiltering() {
-        final NamedFilter nf = getNamedFilter();
-        if (nf == null || nf.getFilter() == null) {
-            return false;
-        }
-        try {
-            if (startNested()) {
-                return false;
+        final Boolean filterResult = forEachSelectedNamedFilter(nf -> {
+            if (nf.getFilter() != null && nf.getFilter().isFiltering()) {
+                return true;
             }
-            return nf.getFilter().isFiltering();
-        } finally {
-            stopNested();
-        }
+            return null;
+        });
+        return filterResult == Boolean.TRUE;
     }
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        final NamedFilter nf = getNamedFilter();
-        if (nf == null || nf.getFilter() == null || nf.getFilter().getTree() == null) {
+        if (namedFilterIds.isEmpty()) {
             sqlBuilder.addWhereTrue();
-        } else {
-            try {
-                if (startNested()) {
-                    sqlBuilder.addWhereTrue();
-                } else {
-                    nf.getFilter().getTree().addToSql(sqlBuilder);
-                }
-            } finally {
-                stopNested();
-            }
+            return;
         }
+        sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
+        forEachSelectedNamedFilter(nf -> {
+             if (nf.getFilter() == null || nf.getFilter().getTree() == null) {
+                 sqlBuilder.addWhereTrue();
+             } else {
+                 nf.getFilter().getTree().addToSql(sqlBuilder);
+             }
+             return null;
+        });
+        sqlBuilder.closeWhere();
     }
 
     @Nullable
     @Override
     public ObjectNode getJsonConfig() {
         final ObjectNode node = JsonUtils.createObjectNode();
-        JsonUtils.setInt(node, "id", namedFilterId);
+        JsonUtils.setCollection(node, "ids", namedFilterIds, JsonUtils::fromInt);
+        JsonUtils.setText(node, "name", namedFilter);
         return node;
     }
 
     @Override
     public void setJsonConfig(@NonNull final ObjectNode node) {
-        this.namedFilterId = JsonUtils.getInt(node, "id", 0);
+        this.namedFilterIds.clear();
+        this.namedFilterIds.addAll(JsonUtils.getList(node, "ids", n -> JsonUtils.toInt(n, -1))
+            .stream().filter(i -> i != -1).collect(Collectors.toList()));
+        final int idList = JsonUtils.getInt(node, "id", -1);
+        if (idList >= 0) {
+            this.namedFilterIds.add(idList);
+        }
+        this.namedFilter = JsonUtils.getText(node, "name", null);
     }
 
     public static NamedFilterGeocacheFilter createFor(final NamedFilter nf) {
         final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();
         if (nf != null) {
-            nff.setNamedFilterId(nf.getId());
+            nff.setNamedFilters(Collections.singleton(nf));
         }
         return nff;
     }
 
     @Override
     protected String getUserDisplayableConfig() {
-        final NamedFilter nf = getNamedFilter();
-        return nf == null ?
-            LocalizationUtils.getString(R.string.cache_filter_userdisplay_none) :
-            nf.getNameAndMarker();
+        final Set<NamedFilter> selectedFilters = getNamedFilters();
+
+        if (selectedFilters.isEmpty()) {
+            return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
+        }
+        if (selectedFilters.size() > 1) {
+            return LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, selectedFilters.size());
+        }
+        return selectedFilters.iterator().next().getNameAndMarker();
     }
 
-    private boolean startNested() {
-        if (namedFilterId == 0) {
-            return false;
+    private <T> T forEachSelectedNamedFilter(final Function<NamedFilter, T> function) {
+        for (Integer listId : namedFilterIds) {
+            final NamedFilter nf = NamedFilter.getById(listId);
+            if (nf == null) {
+                continue;
+            }
+            try {
+                if (startNested(nf.getId())) {
+                    continue;
+                }
+                final T result = function.apply(nf);
+                if (result != null) {
+                    return result;
+                }
+            } finally {
+                stopNested(nf.getId());
+            }
         }
-        if (getNestedSet().contains(namedFilterId)) {
+        final NamedFilter nf = NamedFilter.getFirstByName(namedFilter);
+        if (nf != null && !startNested(nf.getId())) {
+            try {
+                final T result = function.apply(nf);
+                if (result != null) {
+                    return result;
+                }
+            } finally {
+                stopNested(nf.getId());
+            }
+        }
+        return null;
+    }
+
+    // --- Nesting detection to avoid infinite loops in case of circular references ---
+
+    /** returns true if nesting was detected */
+    private boolean startNested(final int filterId) {
+        final Set<Integer> nestedSet = getNestedSet();
+        if (nestedSet.contains(filterId)) {
+            //nested filter detected, stop nesting and return true to avoid infinite loop
             return true;
         }
-        getNestedSet().add(namedFilterId);
+        nestedSet.add(filterId);
         return false;
     }
 
-    private void stopNested() {
-        if (namedFilterId != 0) {
-            getNestedSet().remove(namedFilterId);
-        }
+    private void stopNested(final int filterId) {
+        getNestedSet().remove(filterId);
     }
 
     private Set<Integer> getNestedSet() {

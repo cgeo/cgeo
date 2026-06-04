@@ -42,7 +42,7 @@ public class GeocacheFilterTestUtils {
     }
 
     public static boolean testSingleLogic(final Geocache cache, final IGeocacheFilter filter, final Boolean expectedResult) {
-        assertThat(filter.filter(cache)).as("LOGIC: Wrong test result for filter: " + filter.getConfig() + "/cache: " + cache).isEqualTo(expectedResult);
+        assertThat(filter.filter(cache)).as("LOGIC: Wrong test result for filter: " + filter.getJsonConfig() + "/cache: " + cache).isEqualTo(expectedResult);
         return true;
     }
 
