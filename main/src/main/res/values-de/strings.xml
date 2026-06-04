@@ -384,7 +384,6 @@
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
     <string name="translator_translation_success">Übersetzt von \"%s\", tippe auf Schaltfläche, um das Original wiederherzustellen</string>
-    <string name="translator_attributed_to">Übersetzt mit %s</string>
     <string name="crash_activity_title">Ups! c:geo ist abgestürzt!</string>
     <string name="crash_activity_report">Problem melden</string>
     <!-- location service -->
