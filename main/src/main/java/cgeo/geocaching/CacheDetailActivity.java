@@ -118,9 +118,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
-import cgeo.geocaching.utils.offlinetranslate.ITranslateAccessor;
 import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
-import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -2164,18 +2162,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         displayDescription(activity, cache, p.first, binding.description);
                         if (translator != null) {
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
-                        }
-                        if (translator != null) {
-                            final ITranslateAccessor translateAccessor = TranslateAccessor.get();
-                            final String translatorName = translateAccessor.getTranslatorName();
-                            if (translatorName != null) {
-                                binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
-                                binding.descriptionTranslatedByBergamot.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
-                            }
-                        } else {
-                            binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
                         }
 
                         if (status == null || Strings.CS.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
