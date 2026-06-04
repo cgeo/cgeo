@@ -59,6 +59,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Tillåt markdown-formatering för att lista text i användardefinierade cacher
 - Ändra: Lagra cache innan du lägger till användarbild
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
+- New: Show own favorites in log view (Geocaching.com + offline logs)
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
