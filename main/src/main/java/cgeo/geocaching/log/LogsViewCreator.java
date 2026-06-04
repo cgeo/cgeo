@@ -27,7 +27,6 @@ import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -206,7 +205,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                     final OfflineTranslateUtils.Status translationStatus = getTranslationStatus(log);
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();
-                        holder.binding.logTranslateHint.setVisibility(View.GONE);
+                        holder.binding.logTranslateNote.setVisibility(View.GONE);
                         fillViewHolder(null, holder, log);
                     } else {
                         final String logText = HtmlUtils.extractText(log.log);
@@ -216,13 +215,15 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                                 downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
                                 translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, translated -> {
                                     holder.binding.log.setText(translated);
-                                    holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))).append("\n").append(LocalizationUtils.getString(R.string.translator_attributed_to, TranslateAccessor.get().getTranslatorName())));
-                                    holder.binding.logTranslateButton.setOnClickListener(v1 -> {
+                                    holder.binding.logTranslateNote.setText(
+                                            LocalizationUtils.getLocaleDisplayFlag(translator.getSourceLanguage()) + " " +
+                                            LocalizationUtils.getString(R.string.translator_restore_original));
+                                    holder.binding.logTranslateNote.setOnClickListener(v1 -> {
                                         translationStatus.setNotTranslated();
-                                        holder.binding.logTranslateHint.setVisibility(View.GONE);
+                                        holder.binding.logTranslateNote.setVisibility(View.GONE);
                                         fillViewHolder(null, holder, log);
                                     });
-                                    holder.binding.logTranslateHint.setVisibility(View.VISIBLE);
+                                    holder.binding.logTranslateNote.setVisibility(View.VISIBLE);
                                 }, e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
                         }
                 });
