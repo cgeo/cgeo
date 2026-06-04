@@ -381,7 +381,6 @@
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
     <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
-    <string name="translator_attributed_to">Översatt av %s</string>
     <string name="crash_activity_title">Hoppsan! c:geo kraschade!</string>
     <string name="crash_activity_report">rapportera problem</string>
     <!-- location service -->
