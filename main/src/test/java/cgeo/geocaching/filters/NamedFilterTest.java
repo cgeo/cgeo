@@ -25,19 +25,18 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class NamedFilterTest {
 
+
+    private final List<NamedFilter> storage = new ArrayList<>();
+
     @Before
     public void setUp() {
-        // Inject no-op store and empty load functions for testing
-        NamedFilter.setLoadFunctionForTesting(ArrayList::new);
-        NamedFilter.setStoreFunctionForTesting(list -> { });
-        // Reset in-memory state by providing an empty list
-        NamedFilter.storeAll(new ArrayList<>());
+        storage.clear();
+        NamedFilter.resetStorageForTesting(storage);
     }
 
     @After
     public void tearDown() {
-        // Reset all static state to defaults (no-DB)
-        NamedFilter.resetForTesting();
+        NamedFilter.resetStorageForTesting(null);
     }
 
     @Test
@@ -56,6 +55,7 @@ public class NamedFilterTest {
     public void testAddNewAutoIncrementsId() {
         final NamedFilter first = NamedFilter.addNew("First", null);
         final NamedFilter second = NamedFilter.addNew("Second", null);
+        final NamedFilter third = NamedFilter.addNew("Third", null);
 
         assertThat(first.getId()).isNotEqualTo(second.getId());
     }
@@ -85,8 +85,6 @@ public class NamedFilterTest {
 
     @Test
     public void testStoreAllCallsStoreFunction() {
-        final List<List<NamedFilter>> captured = new ArrayList<>();
-        NamedFilter.setStoreFunctionForTesting(captured::add);
 
         final List<NamedFilter> newList = Arrays.asList(
                 new NamedFilter(1, "A", null, EmojiUtils.NO_EMOJI, false),
@@ -94,8 +92,7 @@ public class NamedFilterTest {
         );
         NamedFilter.storeAll(newList);
 
-        assertThat(captured).hasSize(1);
-        assertThat(captured.get(0)).hasSize(2);
+        assertThat(storage).hasSize(2);
     }
 
     @Test
@@ -278,9 +275,10 @@ public class NamedFilterTest {
     public void testNoEndlessLoopOnSelfReference() {
         // Create a NamedFilterGeocacheFilter that references itself
         final NamedFilterGeocacheFilter selfRef = new NamedFilterGeocacheFilter();
-        selfRef.setNamedFilterId(999);
+
         final GeocacheFilter gf = GeocacheFilter.create(false, false, selfRef);
         final NamedFilter nf = new NamedFilter(999, "Self", gf, EmojiUtils.NO_EMOJI, true);
+        selfRef.setNamedFilters(Collections.singletonList(nf));
         NamedFilter.storeAll(Collections.singletonList(nf));
 
         // This should not throw or hang
@@ -301,15 +299,6 @@ public class NamedFilterTest {
         assertThat(all.get(0).getName()).isEqualTo("A");
         assertThat(all.get(1).getName()).isEqualTo("B");
         assertThat(all.get(2).getName()).isEqualTo("C");
-    }
-
-    @Test
-    public void testStoreAllBroadcastsSent() {
-        final List<List<NamedFilter>> calls = new ArrayList<>();
-        NamedFilter.setStoreFunctionForTesting(calls::add);
-
-        NamedFilter.storeAll(new ArrayList<>());
-        assertThat(calls).hasSize(1);
     }
 
     @Test

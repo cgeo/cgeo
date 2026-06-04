@@ -77,7 +77,7 @@ public abstract class GeocacheChangedBroadcastReceiver extends BroadcastReceiver
             ctx = CgeoApplication.getInstance().getApplicationContext();
         }
         if (ctx != null) {
-            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_GEOCACHE_CHANGED).putExtra(EXTRA_GEOCODE, geocode));
+            LocalBroadcastManager.getInstance(ctx).sendBroadcast(new Intent(ACTION_GEOCACHE_CHANGED).putExtra(EXTRA_GEOCODE, geocode));
         }
     }
 }

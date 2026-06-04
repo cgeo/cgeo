@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
@@ -221,6 +221,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     // Activity lifecycle
     // -------------------------------------------------------------------------
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,7 +236,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
 
         filterAdapter = new NamedFilterListAdapter(binding.namedFilterList);
 
-        final List<NamedFilter> filters = new ArrayList<>(NamedFilter.getAll());
+        final List<NamedFilter> filters = NamedFilter.getAllDeepCopy();
         filterAdapter.setItems(filters);
         originalJson = filtersToJson(filters);
 

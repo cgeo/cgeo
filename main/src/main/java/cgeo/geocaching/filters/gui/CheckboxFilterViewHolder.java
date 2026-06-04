@@ -48,11 +48,13 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     private Map<T, Integer> statistics;
     private boolean statsAreComplete = false;
 
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
-        this(filterAccessor, 1, null);
-    }
-
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, final Set<T> alwaysVisibleItems) {
+    /**
+     *
+     * @param filterAccessor how to access and display the filter-specific configuration items
+     * @param colCount number of display columns
+     * @param alwaysVisibleItems if null then ALL values are visible. If emptySet() then only selected values are visible.
+     */
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, @Nullable final Set<T> alwaysVisibleItems) {
         this.filterAccessor = filterAccessor;
         this.columnCount = colCount;
         if (alwaysVisibleItems != null) {
@@ -202,12 +204,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             for (Geocache cache : FilterViewHolderCreator.getListInfoFilteredList()) {
                 final Set<T> cValues = filterAccessor.getCacheValues(filter, cache);
                 for (T cValue : cValues) {
-                    if (stats.containsKey(cValue)) {
-                        final Integer cnt = stats.get(cValue);
-                        stats.put(cValue, cnt == null ? 1 : cnt + 1);
-                    } else {
-                        stats.put(cValue, 1);
-                    }
+                    stats.compute(cValue, (k, cnt) -> cnt == null ? 1 : cnt + 1);
                 }
             }
         }

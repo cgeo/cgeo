@@ -3,66 +3,32 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
-import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
-public class NamedFilterFilterViewHolder extends BaseFilterViewHolder<NamedFilterGeocacheFilter> {
+public class NamedFilterFilterViewHolder<T, F extends IGeocacheFilter> extends CheckboxFilterViewHolder<T, F> {
 
-    private NamedFilter selectedFilter = null;
-    private Button selectButton;
-
-    @Override
-    public View createView() {
-        final LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
-
-        selectButton = ViewUtils.createButton(getActivity(), ll, TextParam.text(""));
-        selectButton.setMinimumWidth(ViewUtils.dpToPixel(200));
-        updateButtonLabel();
-
-        selectButton.setOnClickListener(v ->
-            FilterUtils.openDialogSelectNamedFilter(
-                getActivity(),
-                TextParam.id(R.string.named_filter_select_title),
-                filter -> {
-                    selectedFilter = filter;
-                    updateButtonLabel();
-                }));
-
-        final LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llParams.bottomMargin = ViewUtils.dpToPixel(10);
-        ll.addView(selectButton, llParams);
-
-        return ll;
-    }
-
-    private void updateButtonLabel() {
-        if (selectButton != null) {
-            selectButton.setText(selectedFilter == null
-                    ? LocalizationUtils.getString(R.string.cache_filter_userdisplay_none)
-                    : selectedFilter.getNameAndMarker());
+        public NamedFilterFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
+            super(filterAccessor, 1, Collections.emptySet());
         }
-    }
 
-    @Override
-    public void setViewFromFilter(final NamedFilterGeocacheFilter filter) {
-        selectedFilter = NamedFilter.getById(filter.getNamedFilterId());
-        updateButtonLabel();
+        @Override
+        protected View.OnClickListener getAddItemButtonCallback() {
+            return v -> FilterUtils.openDialogMultiselectNamedFilters(getActivity(), TextParam.id(R.string.named_filter_select_title), null, nfs -> {
+                final Set<Integer> nfIds = nfs.stream().map(NamedFilter::getId).collect(Collectors.toSet());
+                final Set<T> selectedListsSet = filterAccessor.getSelectableValues().stream().filter(nf -> nfIds.contains(((NamedFilter) nf).getId())).collect(Collectors.toSet());
+                visibleValues.addAll(selectedListsSet);
+                for (T value : selectedListsSet) {
+                    getValueCheckbox(value).right.setChecked(true);
+                }
+                relayout();
+            });
     }
-
-    @Override
-    public NamedFilterGeocacheFilter createFilterFromView() {
-        final NamedFilterGeocacheFilter filter = createFilter();
-        filter.setNamedFilterId(selectedFilter == null ? 0 : selectedFilter.getId());
-        return filter;
-    }
-
 }
