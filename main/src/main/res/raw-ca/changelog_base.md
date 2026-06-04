@@ -59,6 +59,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Permet el format Markdown per al text de llistat als catxés definides per l'usuari
 - Canvi: Emmagatzema el catxé abans d'afegir la imatge de l'usuari
 - Correcció: Error en carregar imatges incrustades directament al text de la fitxa
+- Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
