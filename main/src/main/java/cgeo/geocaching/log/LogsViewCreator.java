@@ -216,7 +216,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                                 downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
                                 translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, translated -> {
                                     holder.binding.log.setText(translated);
-                                    holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))).append("\n").append(LocalizationUtils.getString(R.string.translator_attributed_to, TranslateAccessor.get().getTranslatorName())));
+                                    holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))));
                                     holder.binding.logTranslateButton.setOnClickListener(v1 -> {
                                         translationStatus.setNotTranslated();
                                         holder.binding.logTranslateHint.setVisibility(View.GONE);

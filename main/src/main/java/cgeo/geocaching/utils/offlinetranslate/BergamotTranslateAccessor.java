@@ -106,11 +106,6 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     }
 
     @Override
-    public String getTranslatorName() {
-        return "Bergamot";
-    }
-
-    @Override
     public void setCallbackScheduler(final Scheduler scheduler) {
         this.callbackScheduler = scheduler;
     }
