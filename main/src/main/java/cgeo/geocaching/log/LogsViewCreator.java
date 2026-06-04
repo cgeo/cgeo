@@ -133,6 +133,8 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             holder.binding.logImages.setVisibility(View.GONE);
         }
 
+        holder.binding.logTranslateHint.setVisibility(View.GONE);
+
         // colored marker
         final int marker = log.logType.markerId;
         if (marker != 0) {
