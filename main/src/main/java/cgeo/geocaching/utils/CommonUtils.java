@@ -131,7 +131,7 @@ public class CommonUtils {
         };
     }
 
-    /** executes a given action on each 'partitionSize' numer of elements of the given collection. If false is returned, action is abandoned */
+    /** executes a given action on each 'partitionSize' number of elements of the given collection. If false is returned, action is abandoned */
     public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Func1<List<T>, Boolean> action) {
         final List<T> sublist = new ArrayList<>(partitionSize);
         int cnt = 0;
@@ -144,6 +144,7 @@ public class CommonUtils {
                     return;
                 }
                 sublist.clear();
+                cnt = 0;
             }
         }
         if (!sublist.isEmpty()) {
