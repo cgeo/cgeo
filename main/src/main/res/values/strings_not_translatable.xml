@@ -184,6 +184,7 @@
     - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/), © [cyclosm.org](https://www.cyclosm.org/) and  © [opentopomap.org](https://www.opentopomap.org/).\n
     - Map Downloader supports maps from [Mapsforge](https://github.com/mapsforge), [OpenAndroMaps](https://www.openandromaps.org), [Freizeitkarte](https://www.freizeitkarte-osm.de/), [Hylly](https://kartat.hylly.org/) and [OSM Paws](https://osm.paws.cz/).\n
     - Routing © 2024 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE)), based on BRouter version %2\n
+    - Offline translation using results from [Bergamot project](https://browser.mt/) via David Ventura\'s [offline-translator](https://github.com/DavidVentura/offline-translator) ([GPL-3.0 license](https://github.com/DavidVentura/offline-translator/?tab=GPL-3.0-1-ov-file#readme))\n
     </string>
 
     <!-- see comment for "components" -->
