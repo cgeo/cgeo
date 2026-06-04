@@ -59,6 +59,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Allow Markdown formatting for listing text in user-defined caches
 - Change: Store cache before adding user image
 - Fix: Crash on loading images embedded directly in listing text
+- New: Show own favorites in log view (Geocaching.com + offline logs)
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
