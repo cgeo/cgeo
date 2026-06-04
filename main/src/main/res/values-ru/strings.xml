@@ -302,6 +302,7 @@
     <string name="err_rendertheme_file_unreadable">Не удалось загрузить выбранную тему. Возвращаюсь к встроенной.</string>
     <string name="err_rendertheme_invalid">Выбранная тема не подходит к этой версии mapsforge. Возвращаюсь к встроенной.</string>
     <string name="err_invalid_filename_char">Символ \'%c\' не допускается</string>
+    <string name="err_center_coordinates_invalid">Не удается определить центр карты, неверные координаты</string>
     <string name="warn_save_nothing">Нет данных для сохранения.</string>
     <string name="warn_no_cache_coord">Отсутствуют тайники с такими координатами.</string>
     <string name="warn_no_coordinates">Не введены координаты.</string>
@@ -921,6 +922,8 @@
     <string name="init_login_popup_not_authorized">Не авторизован</string>
     <string name="init_login_popup_not_logged_in">Вход не выполнен</string>
     <string name="init_login_manual">Вход вручную</string>
+    <string name="init_login_manual_description">Пожалуйста, дождитесь появления веб-сайта и войдите в свою учетную запись. Дождитесь завершения входа в систему. Затем нажмите кнопку \"Ок\" ниже.</string>
+    <string name="init_login_manual_wig_description">Пожалуйста, войдите в свою учетную запись Geocaching.com и авторизуйтесь под логином Wherigo. Подождите, пока не откроется домашняя страница Wherigo, затем нажмите кнопку \"Ок\" ниже.</string>
     <string name="init_login_manual_error_nocookie">Не найден токен авторизации. Пожалуйста, выполните вход в систему или \"отмените\" вход вручную.</string>
     <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
     <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
@@ -1590,6 +1593,7 @@
     <string name="menu_collapse_log">Свернуть запись</string>
     <string name="cache_log_menu_delete">Удалить запись</string>
     <string name="cache_log_menu_popup_title">Запись %s</string>
+    <string name="cache_log_delete_reason">Причина (макс. %d символов)</string>
     <string name="cache_log_delete_reason_default">Запись была удалена с помощью c:geo</string>
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
@@ -2479,6 +2483,7 @@
     <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
+    <string name="number_input_title">Установите значение между %1$s и %2$s</string>
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
     <string name="number_input_err_format">Неверный формат числа</string>

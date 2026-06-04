@@ -27,13 +27,17 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.reactivex.rxjava3.exceptions.UndeliverableException;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import org.oscim.backend.CanvasAdapter;
 
 public class CgeoApplication extends Application {
@@ -145,6 +149,7 @@ public class CgeoApplication extends Application {
 
             // error handlers
             CgeoUncaughtExceptionHandler.installUncaughtExceptionHandler(this);
+            setupRxJavaErrorHandler();
 
             Settings.setAppThemeAutomatically(this);
 
@@ -174,6 +179,28 @@ public class CgeoApplication extends Application {
             //specific hooks
             BuildConfigHooks.get().initializeApp();
         }
+    }
+
+    private void setupRxJavaErrorHandler() {
+        RxJavaPlugins.setErrorHandler(throwable -> {
+            Throwable cause = throwable;
+
+            // Unwraps the exception if it is wrapped in an UndeliverableException
+            if (throwable instanceof UndeliverableException) {
+                cause = throwable.getCause();
+            }
+
+            // Handle specific known cases
+            if (cause instanceof IOException || cause instanceof InterruptedException || cause instanceof java.util.concurrent.RejectedExecutionException) {
+                // Fine: network/file disruption, some blocking code was cancelled, or Scheduler/ThreadPool was shut down before the stream finished
+            } else if (cause instanceof NullPointerException || cause instanceof IllegalArgumentException || cause instanceof IllegalStateException) {
+                // That's likely a bug in the application or in RxJava
+                Objects.requireNonNull(Thread.currentThread().getUncaughtExceptionHandler()).uncaughtException(Thread.currentThread(), cause);
+            } else {
+                // Log remaining unknown errors
+                Log.e("RxJava Global Error: " + (cause == null ? "(unknown cause)" : cause.getMessage()));
+            }
+        });
     }
 
     private void applyVTMScales() {

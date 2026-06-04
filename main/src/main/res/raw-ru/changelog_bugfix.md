@@ -1,57 +1,60 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Время обновиться! Если вы всё ещё используете Android 7 или более ранние версии, возможно, это последнее обновление c:geo для вас! В нашем следующем релизе c:geo мы откажемся от поддержки Android 5-7, чтобы снизить нашу нагрузку на обслуживание и иметь возможность обновить некоторые внешние компоненты, используемые c:geo, которые мы в настоящее время не успеваем реализовать. Мы по-прежнему будем поддерживать Android 8 вплоть до Android 16 (и более новые версии, когда они будут опубликованы), что соответствует более чем восьмилетней истории Android.
 
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Fix: Pocket query import broken (website change)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Исправлено: Сбой при доступе к маршрутам
+- Исправлено: Сбой на странице путевой точки
+- Изменение: Поиск "собственных тайников" начинается с новых фильтров
+- Исправлено: Несохраненные этапы lab adventure теряли информацию о "посещенных" при обновлении
+- Исправлено: Повторяющийся запрос на обновление плитки карты
+- Исправлено: Случайное местоположение при отображении списка (Google Maps)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
-
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+- Исправлено: Cбой приложения при открытии описания тайника
+- Исправлено: Картриджи Whirigo не загружались (изменение веб-сайта)
 
 ##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+ - Изменение: Файлы Wherigo нельзя сейчас загрузить, отображаются инструкции по устранению неполадок
+ - Исправлено: Причина удаления записи не была ограничена по длине
+ - Новое: Расширенное журналирование причин сбоев в диспетчере загрузок
+ - Исправлено: Описание путевых точек могло быть слишком длинным, кнопки были недоступны
+ - Исправлено: Некоторые данные о местоположении были обрезаны
+ - Исправлено: Встроенная маршрутизация не работала, отображалась только прямая
+ - Исправлено: Некоторые проблемы с созданием папки
+
+Примечание: Если вы используете встроенную в c:geo маршрутизацию, после установки этой версии, вам нужно будет выполнить следующее: перейдите на домашний экран c:geo, откройте "Упр. офлайн данными" - "Обновить данные маршрутизации" и позвольте c:geo установить обновленные файлы. (Причина: изменилась структура файлов маршрутизации BRouter и все файлы данных маршрутизации должны соответствовать той же версии.)
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Исправлено: Не удавалось выполнить синтаксический анализ строки расположения тайника для определенных языков веб-сайта
+- Исправлено: Не удавалось открыть трекабл из списка наблюдения
+- Исправлено: Клавиатура могла блокировать выбор списка
+- Исправлено: Вариант пользовательского провайдера карт не поддерживал дополнительные параметры URL
+- Исправлено: Инвентарь/трекаблы тайников не загружались
+- Изменение: Обновлен внутренний пользовательский агент для устранения некоторых проблем с загрузкой
+- Исправлено: Просмотр деталей трекаблов удалял их из инвентаря тайника
+
+##
+- Исправлено: Диалог загрузки автономного перевода отображался при установке без поддержки автономного перевода
+- Исправлено: Изменение формата координат в информационном листе тайника/путевой точки
+- Исправлено: дата записи с отзывом в списке журналов была обрезана (в зависимости от формата даты и размера шрифта)
+- Исправлено: Время события не определялось при определенных условиях
+- Исправлено: При определенных условиях ссылка в списке была недоступна для перехода
+- Исправлено: Иногда происходила путаница в протоколировании действий для трекаблов
 
 ##
 - Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
 - Исправлено: Были возможны некоторые исключения из правил безопасности, когда пользователь не предоставлял определенные права (например, уведомления)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Исправлено: Не дорисованные круги тайников на низких уровнях масштаба (только VTM)
+- Исправлено: Сбой при перезагрузке путевых точек при определенных условиях загрузки
+- Исправлено: Фильтр даты события не работал при определенных условиях
+- Исправлено: Ограничение на максимальное число строк записи не всегда корректно работало при настройке "неограниченно"
+- Исправлено: Сбой при открытии карты при определённых условиях
+- Исправлено: Карта не отображалась, если в wherigo не было видимых зон
+- Исправлено: Сбой на вкладке сведений о тайнике при определенных условиях
+- Исправлено: Поиск по карте с неверными координатами
+- Исправлено: Некоторые переводы не учитывали настройки языка c:geo
 
 ##
 - Изменение: ЕдинаяКарта установлена в качестве карты по умолчанию для всех (как часть нашего плана по её развитию). На данный момент вы можете вернуть всё как было в меню "Настройки" - "Источники карт". Удаление устаревших карт запланировано на весну 2026 года в наших регулярных релизах.
