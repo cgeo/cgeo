@@ -19,12 +19,16 @@
         android:id="@+id/enable_all_markers_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
+        android:paddingStart="4dp"
         android:paddingEnd="8dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         android:visibility="gone"
         android:text="@string/named_filter_enable_all_markers" />
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/named_filter_list"

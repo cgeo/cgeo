@@ -15,7 +15,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
-import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
@@ -167,17 +166,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
-        binding.filterAddNamedCriterion.setOnClickListener(v -> {
-            FilterUtils.openDialogSelectNamedFilter(this,
-                    TextParam.id(R.string.named_filter_add_named_criterion),
-                    selectedNamedFilter -> {
-                        final NamedFilterGeocacheFilter nff = NamedFilterGeocacheFilter.createFor(selectedNamedFilter);
-                        filterListAdapter.setItems(Collections.singletonList(FilterViewHolderCreator.createFor(nff, this)));
-                        binding.filterList.smoothScrollToPosition(0);
-                        adjustFilterEmptyView();
-                    });
+        binding.filterFillWithNamed.setOnClickListener(v -> {
+            FilterUtils.openDialogSelectNamedFilter(this, TextParam.id(R.string.named_filter_fill_with_named), selected ->
+                fillViewFromFilter(selected == null || selected.getFilter() == null ? null : selected.getFilter().toConfig(), true));
         });
-        ViewUtils.setTooltip(binding.filterAddNamedCriterion, TextParam.id(R.string.named_filter_add_named_criterion));
+        ViewUtils.setTooltip(binding.filterFillWithNamed, TextParam.id(R.string.named_filter_fill_with_named));
 
         // Save as Named Filter button
         binding.filterSaveAsNamed.setOnClickListener(v -> {

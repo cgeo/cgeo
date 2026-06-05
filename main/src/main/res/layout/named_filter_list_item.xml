@@ -20,7 +20,9 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/marker_button"
             style="@style/button_icon"
-            app:icon="@drawable/ic_menu_marker"
+            app:icon="@drawable/ic_menu_marker_off"
+            app:iconTint="@color/colorText_listsSecondary"
+            android:textSize="@dimen/textSize_listsPrimary"
             tools:ignore="ContentDescription" />
 
         <TextView
