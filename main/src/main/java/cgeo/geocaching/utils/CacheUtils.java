@@ -27,6 +27,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CacheUtils {
 
+    private static final int HEALTH_SCORE_MAX_LOGS_TO_CONSIDER = 20;
+
     /** Log types that contribute positively to the health score. */
     private static final Set<LogType> HEALTH_SCORE_GOOD_LOG_TYPES = EnumSet.of(
             LogType.FOUND_IT, LogType.ATTENDED, LogType.WEBCAM_PHOTO_TAKEN);
@@ -70,7 +72,7 @@ public class CacheUtils {
         sorted.sort(LogUtils.LOG_ENTRY_DATE_COMPARATOR);
 
         // Walk from newest to oldest, stop before the first reset trigger
-        int candidateEnd = Math.min(sorted.size(), 20);
+        int candidateEnd = Math.min(sorted.size(), HEALTH_SCORE_MAX_LOGS_TO_CONSIDER);
         for (int i = 0; i < candidateEnd; i++) {
             if (HEALTH_SCORE_RESET_LOG_TYPES.contains(sorted.get(i).logType)) {
 
@@ -129,6 +131,14 @@ public class CacheUtils {
         }
 
         return (int) Math.round(wGood / wTotal * 100);
+    }
+
+    public static String getLogHealthScoreExplanationAsMarkDown() {
+        return LocalizationUtils.getString(R.string.log_health_score_explanation,
+            HEALTH_SCORE_MAX_LOGS_TO_CONSIDER,
+            TextUtils.join(HEALTH_SCORE_RESET_LOG_TYPES, LogType::getL10n, ", "),
+            TextUtils.join(HEALTH_SCORE_GOOD_LOG_TYPES, LogType::getL10n, ", "),
+            TextUtils.join(HEALTH_SCORE_BAD_LOG_TYPES, LogType::getL10n, ", "));
     }
 
     public static boolean isLabAdventure(@NonNull final Geocache cache) {
