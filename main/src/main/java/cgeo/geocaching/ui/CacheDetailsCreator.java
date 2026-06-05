@@ -18,6 +18,8 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -414,9 +416,16 @@ public final class CacheDetailsCreator {
         }
 
         final Integer healthScore = cache.getHealthScore();
-        if (healthScore != null) {
-            final String scoreText = healthScore == Geocache.HEALTH_SCORE_UNKNOWN ? "-" : healthScore + " %";
-            add(R.string.cache_health_score, scoreText);
+        if (healthScore != null && healthScore != Geocache.HEALTH_SCORE_UNKNOWN) {
+            final LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, smileySize);
+            lpp.setMargins(ViewUtils.dpToPixel(10), 0, 5, 0);
+            final TextView tv = ViewUtils.createTextItem(context, R.style.text_label, TextParam.text("(" + healthScore + " %)"));
+            tv.setLayoutParams(lpp);
+            tv.setOnClickListener(v -> SimpleDialog.ofContext(context)
+                .setTitle(TextParam.id(R.string.log_health_score_explanation_title))
+                .setMessage(TextParam.text(CacheUtils.getLogHealthScoreExplanationAsMarkDown()).setMarkdown(true))
+                .show());
+            markers.addView(tv);
         }
     }
 
