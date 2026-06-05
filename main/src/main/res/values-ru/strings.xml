@@ -910,7 +910,6 @@
     <string name="settings_lc_description">Включить тайники Лаборатории Приключений на карте.\n\n(Доступно только для премиум-пользователей \"Geocaching.com\". Требуется активный сервис \"Geocaching.com\".)\n\nИзменение этой настройки требует перезапуска c:geo.</string>
     <string name="settings_lc_found_state_title">Ручной выбор состояния нахождения тайника</string>
     <string name="settings_lc_found_state_handling">При отмеченной опции, вы автоматически не получаете истинное состояние нахождения тайника в Adventure Lab, вместо этого, предоставлена возможность пользователю вручную задать это состояние</string>
-    <string name="lc_default_description">Это тайник geocaching.com Adventure Lab. Поучаствовать в приключении можно только с помощью приложения Groundspeak Adventure Lab. Нажмите на иконку \"Details\", чтобы открыть/установить \"Adventure Lab\".\nЕсли вы не хотите видеть тайники Adenture Lab на вашей карте и при поиске, вы можете их отключить с помощью меню Services - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Загрузить тайники с opencaching.de</string>
     <string name="init_oc_de_description">Авторизовать c:geo для opencaching.de, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
     <string name="init_summary_oc_pl">Загрузить тайники с opencaching.pl</string>
