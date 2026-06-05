@@ -103,7 +103,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                 markerBtn.setIcon(null);
             } else {
                 markerBtn.setText(null);
-                markerBtn.setIconResource(R.drawable.ic_menu_cancel);
+                markerBtn.setIconResource(R.drawable.ic_menu_marker_off);
             }
 
             // Row 1: filter name

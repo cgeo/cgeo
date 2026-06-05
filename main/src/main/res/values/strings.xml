@@ -888,7 +888,7 @@
     <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
     <string name="named_filter_config_exists_title">Filter already saved</string>
     <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
-    <string name="named_filter_add_named_criterion">Add named filter criterion</string>
+    <string name="named_filter_fill_with_named">Fill with named filter</string>
 
 
     <!-- about -->

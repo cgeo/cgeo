@@ -53,11 +53,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent" />
+
                 <Button
-                    android:id="@+id/filter_add_named_criterion"
+                    android:id="@+id/filter_fill_with_named"
                     style="@style/button_icon"
                     android:layout_centerVertical="true"
-                    app:icon="@drawable/ic_menu_file_add" />
+                    app:icon="@drawable/ic_menu_manage_list" />
 
                 <Button
                     android:id="@+id/filter_save_as_named"
