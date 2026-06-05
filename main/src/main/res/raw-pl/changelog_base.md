@@ -58,8 +58,8 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Pokaż potwierdzenie podczas usuwania wszystkich skrytek z listy „Wszystkie”
 - Nowość: Zezwalaj na formatowanie Markdown dla tekstu opisu w skrytkach zdefiniowanych przez użytkownika
 - Zmiana: Zapisz skrytkę przed dodaniem obrazu użytkownika
-- Fix: Crash on loading images embedded directly in listing text
-- New: Show own favorites in log view (Geocaching.com + offline logs)
+- Naprawiono: Awaria przy wczytywaniu obrazów osadzonych bezpośrednio w opisie skrytki
+- Nowość: Pokaż własne ulubione w widoku dziennika (Geocaching.com + dzienniki offline)
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
