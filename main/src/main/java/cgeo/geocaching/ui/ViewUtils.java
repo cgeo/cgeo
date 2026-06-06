@@ -245,6 +245,7 @@ public class ViewUtils {
                 if (DEBUG_LAYOUT) {
                     tv.setBackgroundResource(R.drawable.mark_orange);
                 }
+                tv.setVisibility(View.INVISIBLE);   // hide until layout pass
                 return tv;
             }
             return null;
@@ -263,7 +264,7 @@ public class ViewUtils {
         int idx = 0;
         for (T item : items) {
             final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.weight = weightCreator == null ? 1 : weightCreator.apply(idx, item);
+            lp.weight = weightCreator == null ? 1f : weightCreator.apply(idx, item);
 
             View itemView = viewCreator.apply(idx, item);
             if (itemView == null) {
@@ -271,11 +272,44 @@ public class ViewUtils {
             }
             if (itemView instanceof TextView) {
                 ((TextView) itemView).setGravity(Gravity.CENTER_HORIZONTAL);
+                ((TextView) itemView).setEllipsize(android.text.TextUtils.TruncateAt.END);
             }
             viewGroup.addView(itemView, lp);
 
             idx++;
         }
+
+        // hide text that don't fit, but keep their space (INVISIBLE)
+        ViewUtils.runOnViewMeasured(viewGroup, v -> {
+            if (!(v instanceof ViewGroup)) {
+                return false;
+            }
+
+            final ViewGroup vg = (ViewGroup) v;
+            final int availableWidth = vg.getWidth() / Math.max(1, items.size());
+
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                final View child = vg.getChildAt(i);
+                if (child instanceof TextView) {
+                    final TextView tv = (TextView) child;
+
+                    tv.measure(
+                            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    );
+
+                    final int textWidth = tv.getMeasuredWidth();
+
+                    if (textWidth <= availableWidth * 0.9f) {
+                        tv.setVisibility(View.VISIBLE);
+                    } else {
+                        tv.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+
+            return false;
+        });
         return viewGroup;
     }
 
