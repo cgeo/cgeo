@@ -17,6 +17,7 @@ import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.CacheCache;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.FolderUtils;
@@ -46,6 +47,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -175,6 +177,8 @@ public final class SystemInformation {
                 .append(", Threshold: ").append(Formatter.formatBytes(memoryInfo.threshold))
                 .append(", low:").append(memoryInfo.lowMemory);
         }
+        final NumberFormat intFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+        body.append(", CacheCache: ").append(intFormat.format(DataStore.getCacheCacheSize())).append("/").append(intFormat.format(CacheCache.MAX_CACHED_CACHES));
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
