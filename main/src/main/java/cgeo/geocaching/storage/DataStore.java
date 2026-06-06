@@ -3295,13 +3295,6 @@ public class DataStore {
                         cache.setAttributes(loadAttributes(cache.getGeocode()));
                     }
 
-                    if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
-                        final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
-                        if (CollectionUtils.isNotEmpty(waypoints)) {
-                            cache.setWaypoints(waypoints);
-                        }
-                    }
-
                     if (loadFlags.contains(LoadFlag.SPOILERS)) {
                         final List<Image> spoilers = loadSpoilers(cache.getGeocode());
                         cache.setSpoilers(spoilers);
@@ -3341,6 +3334,17 @@ public class DataStore {
                     cacheCache.putCacheInCache(cache);
 
                     caches.add(cache);
+                }
+
+                // waypoints are loaded in a single batch query (instead of one query per cache) and assigned here
+                if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
+                    final Map<String, List<Waypoint>> waypointsByGeocode = loadWaypointsByGeocodes(geocodes);
+                    for (final Geocache geocache : caches) {
+                        final List<Waypoint> waypoints = waypointsByGeocode.get(geocache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(waypoints)) {
+                            geocache.setWaypoints(waypoints);
+                        }
+                    }
                 }
 
                 final Map<String, Set<Integer>> cacheLists = loadLists(geocodes);
@@ -3563,6 +3567,32 @@ public class DataStore {
                 null,
                 new LinkedList<>(),
                 DataStore::createWaypointFromDatabaseContent));
+    }
+
+    /**
+     * Loads the waypoints for many caches in a single query, grouped by geocode. Avoids
+     * the per-cache query when loading a batch of caches with {@link LoadFlag#WAYPOINTS}.
+     */
+    @NonNull
+    private static Map<String, List<Waypoint>> loadWaypointsByGeocodes(final Set<String> geocodes) {
+        if (CollectionUtils.isEmpty(geocodes)) {
+            return Collections.emptyMap();
+        }
+        return withAccessLock(() -> {
+            final List<Waypoint> allWaypoints = queryToColl(dbTableWaypoints,
+                    WAYPOINT_COLUMNS,
+                    whereGeocodeIn(geocodes).toString(),
+                    null,
+                    "_id",
+                    null,
+                    new LinkedList<>(),
+                    DataStore::createWaypointFromDatabaseContent);
+            final Map<String, List<Waypoint>> result = new HashMap<>();
+            for (final Waypoint waypoint : allWaypoints) {
+                result.computeIfAbsent(waypoint.getGeocode(), k -> new ArrayList<>()).add(waypoint);
+            }
+            return result;
+        });
     }
 
     @NonNull
