@@ -167,6 +167,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private enum CacheReloadState { REFRESH, INITIALIZE, RESUME }
     private CacheReloadState cacheReloadState = CacheReloadState.REFRESH;
 
+    // skip loading caches twice initially (by onMapReadyTasks and onResume)
+    private boolean skipResumeReloadOnce = false;
+
     private int wherigoListenerId;
     private Menu toolbarMenu;
 
@@ -314,6 +317,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }));
 
         refreshListChooser();
+        skipResumeReloadOnce = true; // let do onMapReadyTask() do the job
     }
 
     public AbstractMapFragment getMapFragment() {
@@ -1429,7 +1433,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.reloadIndividualRoute();
         }
         super.onResume();
-        reloadCachesAndWaypoints();
+        if (skipResumeReloadOnce) {
+            skipResumeReloadOnce = false;
+        } else {
+            reloadCachesAndWaypoints();
+        }
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
         if (tileProvider != null) {
             tileProvider.onResume();
