@@ -4,10 +4,12 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
@@ -145,6 +147,9 @@ public class CgeoApplication extends Application {
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
             super.onCreate();
 
+            // distinguish between c:geo main process and subprocesses (eg: brouter_service), that don't need full initialization
+            final boolean isMainProcess = ProcessUtils.isMainProcess(this);
+
             TransactionSizeLogger.get().setRequested();
 
             OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
@@ -156,28 +161,36 @@ public class CgeoApplication extends Application {
                 fixUserManagerMemoryLeak();
             }
 
-            initApplicationLocale();
+            if (isMainProcess) {
+                initApplicationLocale();
 
-            // initialize cgeo notification channels
-            NotificationChannels.createNotificationChannels(this);
+                // initialize cgeo notification channels
+                NotificationChannels.createNotificationChannels(this);
 
-            // ensure initialization of lists
-            DataStore.getLists();
+                // ensure initialization of lists
+                DataStore.getLists();
 
-            // Restore cookies
-            Cookies.restoreCookies();
+                // Restore cookies
+                Cookies.restoreCookies();
 
-            // dump hash key to log, if requested
-            // Log.e("app hashkey: " + getApplicationHashkey(this));
+                // dump hash key to log, if requested
+                // Log.e("app hashkey: " + getApplicationHashkey(this));
 
-            MessageCenterUtils.configureMessageCenterPolling();
+                MessageCenterUtils.configureMessageCenterPolling();
+            }
 
             LooperLogger.startLogging(Looper.getMainLooper());
 
-            applyVTMScales();
+            if (isMainProcess) {
+                applyVTMScales();
 
-            //initialize TranslationModelManager
-            TranslationModelManager.get().initialize();
+                //initialize TranslationModelManager
+                TranslationModelManager.get().initialize();
+
+                // building list of tileproviders is costly, it includes file system reads
+                // + validity check for offline map files, thus preload list in background
+                AndroidRxUtils.computationScheduler.scheduleDirect(Settings::getTileProvider);
+            }
         }
     }
 
