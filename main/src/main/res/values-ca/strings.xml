@@ -775,7 +775,6 @@
     <string name="named_filter_name_exists_message">Ja existeix un filtre anomenat \'%s\'. Voleu sobreescriure-ho?</string>
     <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
     <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
-    <string name="named_filter_add_named_criterion">Afegeix un criteri de filtre amb nom</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -917,6 +916,7 @@
     <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
     <string name="settings_lc_found_state_title">Estat trobat manualment</string>
     <string name="settings_lc_found_state_handling">Si està marcat, no obteniu automàticament l\'estat trobat veritable per a les catxés d\'Adventure Lab, sinó que proporcioneu controls perquè l\'usuari estableixi manualment l\'estat trobat</string>
+    <string name="lc_default_description">Aquest és un catxé de l\'Adventure Lab de geocaching.com. Les aventures només es poden jugar amb l\'aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab a la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure els catxés d\'Adventure Lab al vostre mapa i cerca, podeu desactivar-les mitjançant el menú \"configuració\" - Serveis - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="init_summary_oc_pl">Carregar catxés des de opencaching.pl</string>
@@ -1526,7 +1526,6 @@
     <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
     <string name="cache_logs">Llibre de registre</string>
     <string name="cache_latest_logs">Registres recents</string>
-    <string name="cache_health_score">Puntuació d\'estat del registre</string>
     <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
     <string name="cache_logs_friends">Amics</string>
     <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
