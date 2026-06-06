@@ -100,6 +100,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private HashMap<String, Integer> mapSection;
     private String[] sections;
 
+    /** the fast-scroll index iterates the whole list, so it is (re)built lazily on demand only */
+    private boolean fastScrollIndexDirty = true;
+
     /**
      * view holder for the cache list adapter
      */
@@ -123,7 +126,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         this.cacheListType = cacheListType;
         this.list = list;
         checkSpecialSortOrder();
-        buildFastScrollIndex();
         GlobalGPSDistanceComparator.updateGlobalGps(coords);
     }
 
@@ -521,7 +523,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         super.notifyDataSetChanged();
         distances.clear();
         compasses.clear();
-        buildFastScrollIndex();
+
+        // set dirty flag for fast-scroll, but rebuild on demand only
+        fastScrollIndexDirty = true;
     }
 
     private static class SelectionCheckBoxListener implements View.OnClickListener {
@@ -704,6 +708,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     // methods for section indexer
 
+    private void ensureFastScrollIndex() {
+        if (fastScrollIndexDirty) {
+            buildFastScrollIndex();
+            fastScrollIndexDirty = false;
+        }
+    }
+
     private void buildFastScrollIndex() {
         mapFirstPosition = new LinkedHashMap<>();
         final ArrayList<String> sectionList = new ArrayList<>();
@@ -725,6 +736,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public int getPositionForSection(final int section) {
+        ensureFastScrollIndex();
         if (sections == null || sections.length == 0) {
             return 0;
         }
@@ -733,11 +745,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public int getSectionForPosition(final int position) {
+        ensureFastScrollIndex();
         final Integer section = mapSection.get(getComparable(position));
         return null == section ? 0 : section;
     }
 
     public Object[] getSections() {
+        ensureFastScrollIndex();
         return sections;
     }
 
