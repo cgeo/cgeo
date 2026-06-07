@@ -7,7 +7,6 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,16 +72,6 @@ public class LogicalGeocacheFilterTest {
             @Override
             public String getId() {
                 return "constant";
-            }
-
-            @Override
-            public void setConfig(final LegacyFilterConfig config) {
-                //no implementation needed
-            }
-
-            @Override
-            public LegacyFilterConfig getConfig() {
-                return null;
             }
 
             @Nullable

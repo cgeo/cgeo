@@ -6,7 +6,6 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -115,11 +114,6 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
         return rawValues;
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        setConfigInternal(config.getDefaultList());
-    }
-
     private void setConfigInternal(final List<String> configValues) {
         values.clear();
         if (configValues != null) {
@@ -130,13 +124,6 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
                 }
             }
         }
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig result = new LegacyFilterConfig();
-        result.putDefaultList(getConfigInternal());
-        return result;
     }
 
     private List<String> getConfigInternal() {

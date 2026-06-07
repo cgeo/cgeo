@@ -9,7 +9,6 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,10 +84,6 @@ public class StoredListGeocacheFilter extends BaseGeocacheFilter {
     }
 
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        setConfigInternal(config.getDefaultList());
-    }
 
     private void setConfigInternal(final List<String> configValues) {
         filterListIds.clear();
@@ -99,12 +94,6 @@ public class StoredListGeocacheFilter extends BaseGeocacheFilter {
         }
     }
 
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig config = new LegacyFilterConfig();
-        config.putDefaultList(getConfigInternal());
-        return config;
-    }
 
     private List<String> getConfigInternal() {
         final List<String> result = new ArrayList<>();

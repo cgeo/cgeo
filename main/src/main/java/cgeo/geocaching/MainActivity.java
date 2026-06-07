@@ -49,7 +49,6 @@ import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
@@ -313,8 +312,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
             binding.locationStatus.setPermissionRequestCallback(() -> this.askLocationPermissionAction.launch(null));
 
             configureMessageCenterPolling();
-
-            LegacyFilterConfig.checkAndMigrate();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
