@@ -427,25 +427,29 @@ public final class GCParser {
         // cache attributes
         try {
             final List<String> attributes = new ArrayList<>();
-            final String attributesPre = TextUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
-            if (attributesPre != null) {
-                final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
+            final MatcherWrapper attributesList = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTES, page);
+            while (attributesList.find()) {
+                final String attributesPre = attributesList.group(1);
+                if (attributesPre != null) {
+                    attributes.clear(); // discard user-supplied attributes; last block is "the official one"
+                    final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
-                while (matcherAttributesInside.find()) {
-                    if (!matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-                        // by default, use the tooltip of the attribute
-                        String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
+                    while (matcherAttributesInside.find()) {
+                        if (!matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
+                            // by default, use the tooltip of the attribute
+                            String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
-                        // if the image name can be recognized, use the image name as attribute
-                        final String imageName = matcherAttributesInside.group(1).trim();
-                        if (StringUtils.isNotEmpty(imageName)) {
-                            final int start = imageName.lastIndexOf('/');
-                            final int end = imageName.lastIndexOf('.');
-                            if (start >= 0 && end >= 0) {
-                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
+                            // if the image name can be recognized, use the image name as attribute
+                            final String imageName = matcherAttributesInside.group(1).trim();
+                            if (StringUtils.isNotEmpty(imageName)) {
+                                final int start = imageName.lastIndexOf('/');
+                                final int end = imageName.lastIndexOf('.');
+                                if (start >= 0 && end >= 0) {
+                                    attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
+                                }
                             }
+                            attributes.add(attribute);
                         }
-                        attributes.add(attribute);
                     }
                 }
             }
