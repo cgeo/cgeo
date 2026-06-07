@@ -1856,7 +1856,8 @@ public final class GCParser {
             } else {
                 final int logIndex = mergedLogs.indexOf(modifiedLog);
                 if (logIndex >= 0) {
-                    mergedLogs.set(logIndex, logToMerge);
+                    // manually merge the favorite flag as that's only in the listing logs
+                    mergedLogs.set(logIndex, logToMerge.buildUpon().setFavorite(modifiedLog.favorite).build());
                 }
             }
         }
