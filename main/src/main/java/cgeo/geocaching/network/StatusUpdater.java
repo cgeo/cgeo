@@ -5,7 +5,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
@@ -57,14 +56,7 @@ public class StatusUpdater {
             message = response.path("message").asText(null);
             messageId = response.path("message_id").asText(null);
             icon = response.path("icon").asText(null);
-
-            // See #https://github.com/cgeo/cgeo/pull/17671):
-            // TODO: Remove this hack once status server supports flavor parameter
-            String responseUrl = response.path("url").asText(null);
-            if (BranchDetectionHelper.isFossBuild() && responseUrl != null && responseUrl.endsWith(".apk") && !responseUrl.endsWith("-foss.apk")) {
-                responseUrl = responseUrl.replaceFirst("\\.apk$", "-foss.apk");
-            }
-            url = responseUrl;
+            url = response.path("url").asText(null);
         }
 
         @NonNull
@@ -111,12 +103,11 @@ public class StatusUpdater {
             } else {
                 gcMembershipParameters = null;
             }
-            final Parameters flavorParameters = BranchDetectionHelper.isFossBuild() ? new Parameters("flavor", "foss") : null;
             Network.requestJSON("https://status.cgeo.org/api/status.json",
                     Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
                                     "version_name", Version.getVersionName(app),
                                     "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
-                            new Parameters("active_connectors", getActiveConnectorsString()), flavorParameters))
+                            new Parameters("active_connectors", getActiveConnectorsString())))
                     .subscribe(json -> LATEST_STATUS.onNext(Status.defaultStatus(new Status(json))), throwable -> {
                         // Error has already been signaled during the request
                     });
