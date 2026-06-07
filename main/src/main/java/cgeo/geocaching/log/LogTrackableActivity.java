@@ -35,8 +35,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View.OnFocusChangeListener;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;

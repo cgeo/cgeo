@@ -5,7 +5,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +16,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DifficultyTerrainMatrixGeocacheFilter extends BaseGeocacheFilter {
@@ -125,22 +123,6 @@ public class DifficultyTerrainMatrixGeocacheFilter extends BaseGeocacheFilter {
         }
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        this.includeCachesWoDt = config.getFirstValue(CONFIG_KEY_INCLUDE_CACHES_WO_DT, false, BooleanUtils::toBoolean);
-        this.difficultyTerrainCombis.clear();
-        this.difficultyTerrainCombis.addAll(config.getDefaultList());
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig config = new LegacyFilterConfig();
-        config.putList(CONFIG_KEY_INCLUDE_CACHES_WO_DT, Boolean.toString(includeCachesWoDt));
-        if (isFilteringMatrix()) {
-            config.putDefaultList(new ArrayList<>(this.difficultyTerrainCombis));
-        }
-        return config;
-    }
 
     @Override
     protected String getUserDisplayableConfig() {

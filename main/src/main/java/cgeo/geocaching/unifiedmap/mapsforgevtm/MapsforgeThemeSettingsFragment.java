@@ -1,8 +1,8 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Bundle;

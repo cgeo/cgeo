@@ -5,7 +5,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.config.JsonConfigurationUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -23,7 +22,6 @@ import static java.lang.Boolean.TRUE;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter implements Cloneable {
 
@@ -198,11 +196,6 @@ public class GeocacheFilter implements Cloneable {
 
 
     private static GeocacheFilter createInternal(final String pJsonConfig, final boolean throwOnParseError) throws ParseException {
-
-        if (pJsonConfig != null && !pJsonConfig.trim().startsWith("{")) {
-            //legacy
-            return LegacyFilterConfig.parseLegacy(null, pJsonConfig, throwOnParseError);
-        }
 
         final JsonNode node = JsonUtils.stringToNode(pJsonConfig);
         if (node == null) {

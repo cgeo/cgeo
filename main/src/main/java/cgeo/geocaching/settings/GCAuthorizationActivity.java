@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 

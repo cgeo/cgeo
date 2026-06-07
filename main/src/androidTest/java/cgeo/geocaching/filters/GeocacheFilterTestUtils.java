@@ -82,7 +82,7 @@ public class GeocacheFilterTestUtils {
 
         final SqlBuilder sqlBuilder = new SqlBuilder("cache-table", new String[]{"*"});
         filter.addToSql(sqlBuilder);
-        final String descr = "DB: Wrong test result for filter: " + filter.getConfig() + "/cache: " + cache + "/SQL: " + sqlBuilder.toString();
+        final String descr = "DB: Wrong test result for filter: " + filter.getJsonConfig() + "/cache: " + cache + "/SQL: " + sqlBuilder.toString();
 
         if (sr.getCount() > 1) {
             fail("DB: very wrong result, cnt=" + sr.getCount() + " for '" + descr + "'");

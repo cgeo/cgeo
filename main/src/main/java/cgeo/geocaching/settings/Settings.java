@@ -2623,12 +2623,6 @@ public class Settings {
         return getBoolean(R.string.pref_removeFromRouteOnLog, false);
     }
 
-    public static boolean checkAndSetLegacyFilterConfigMigrated() {
-        final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
-        putBoolean(R.string.pref_legacy_filter_config_migrated, true);
-        return isMigrated;
-    }
-
     public static void setLastUsedDate(final Calendar date) {
         putLong(R.string.pref_last_used_date, date.getTimeInMillis());
     }
