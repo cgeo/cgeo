@@ -65,6 +65,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
@@ -154,6 +155,13 @@ public class ViewUtils {
         if (view != null) {
             view.setText(text);
         }
+    }
+
+    /**
+     * Sets text for given TextView (without crashing on null view)
+     */
+    public static void setText(final TextView view, final @StringRes int textId) {
+        TextParam.id(textId).applyTo(view);
     }
 
     public static void setMaxTextLength(@NonNull final EditText textField, @Nullable final TextInputLayout textLayout, final int maxLength) {

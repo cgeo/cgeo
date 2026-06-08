@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.PopupBinding;
-import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
@@ -19,22 +18,17 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CacheUtils;
+import cgeo.geocaching.utils.CacheInfoBoxes;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.wherigo.WherigoActivity;
-import cgeo.geocaching.wherigo.WherigoUtils;
-import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Message;
@@ -51,7 +45,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -172,53 +165,13 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
             });
 
-            // Wherigo
-            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
-            if (!wherigoGuis.isEmpty()) {
-                binding.playInCgeo.setVisibility(View.VISIBLE);
-                binding.playInCgeo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(requireActivity(), wherigoGuis, guid ->
-                        WherigoActivity.startForGuid(requireActivity(), guid, cache.getGeocode(), true)));
-            } else {
-                binding.playInCgeo.setVisibility(View.GONE);
-            }
-
-            // ChirpWolf
-            final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
-            boolean isEnabled = false;
-            for (String current : cache.getAttributes()) {
-                if (Strings.CS.equals(current, compare)) {
-                    isEnabled = true;
-                    break;
-                }
-            }
-            binding.sendToChirp.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-            if (isEnabled) {
-                final Intent chirpWolf = ProcessUtils.getLaunchIntent(LocalizationUtils.getPlainString(R.string.package_chirpwolf));
-                binding.sendToChirp.setHint(chirpWolf != null ? R.string.cache_chirpwolf_start : R.string.cache_chirpwolf_install);
-                binding.sendToChirp.setOnClickListener(v -> {
-                    // re-check installation state, might have changed since creating the view
-                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(LocalizationUtils.getPlainString(R.string.package_chirpwolf));
-                    if (chirpWolf2 != null) {
-                        chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        requireActivity().startActivity(chirpWolf2);
-                    } else {
-                        ProcessUtils.openMarket(requireActivity(), LocalizationUtils.getPlainString(R.string.package_chirpwolf));
-                    }
-                });
-            }
-
-            // ALC
-            if (CacheUtils.isLabAdventure(cache)) {
-                binding.sendToAlc.setVisibility(View.VISIBLE);
-                CacheUtils.setLabLink(requireActivity(), binding.sendToAlc, cache.getUrl());
-            } else {
-                binding.sendToAlc.setVisibility(View.GONE);
-            }
+            // internal WIG player, WhereYouGo, ChirpWolf, Adventure Lab
+            CacheInfoBoxes.updateWherigoBox(cache, requireActivity(), binding.playInCgeo, null, null);
+            CacheInfoBoxes.updateChirpWolfBox(cache, requireActivity(), binding.sendToChirp, null, null);
+            CacheInfoBoxes.updateALCBox(cache, requireActivity(), binding.sendToAlc, null, null);
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-
-            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, null);
+            updateViewInfoBox();
 
             updateStoreRefreshButtons(true);
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
@@ -270,25 +223,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), listIds);
-            updateViewInfoAfterStore();
+            updateViewInfoBox();
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
             progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_offline_save_title), LocalizationUtils.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
                 activity.invalidateOptionsMenu();
-                updateViewInfoAfterStore();
+                updateViewInfoBox();
             });
         }
     }
 
-    private void updateViewInfoAfterStore() {
+    private void updateViewInfoBox() {
         final View view = getView();
         if (view != null) {
-            CacheDetailActivity.updateOfflineBox(view, cache,
+            CacheInfoBoxes.updateOfflineBox(view, cache,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(view, cache, null);
+            CacheInfoBoxes.updateCacheLists(view, cache, null);
         }
     }
 
