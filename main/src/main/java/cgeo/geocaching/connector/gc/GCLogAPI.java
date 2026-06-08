@@ -368,8 +368,9 @@ public class GCLogAPI {
         }
 
         //2,) Send a DELETE Request (which is a POST)
-        try (HttpResponse response = websiteReq().uri("/api/live/v1/images/delete/" + logId + "/" + getGuidFrom(logImageId))
+        try (HttpResponse response = websiteReq().uri("/api/live/v1/trpc/web.images.delete?batch=1")
             .method(HttpRequest.Method.POST)
+            .body("{\"0\":{\"refCode\":\"" + logId + "\",\"guid\":\"" + getGuidFrom(logImageId) + "\"}}")
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
             .request().blockingGet()) {
 
