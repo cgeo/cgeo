@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.JsonUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,6 +19,12 @@ public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
     private static final String CONFIG_KEY_DIFFICULTY = "d";
     private static final String CONFIG_KEY_TERRAIN = "t";
 
+    public static DifficultyAndTerrainGeocacheFilter create(final Pair<Float, Float> difficultyMinMax, final Pair<Float, Float> terrainMinMax) {
+        final DifficultyAndTerrainGeocacheFilter filter = GeocacheFilterType.DIFFICULTY_TERRAIN.create();
+        filter.difficultyGeocacheFilter.setMinMaxRange(difficultyMinMax.first, difficultyMinMax.second);
+        filter.terrainGeocacheFilter.setMinMaxRange(terrainMinMax.first, terrainMinMax.second);
+        return filter;
+    }
 
     public DifficultyAndTerrainGeocacheFilter() {
         difficultyGeocacheFilter = GeocacheFilterType.DIFFICULTY.create();

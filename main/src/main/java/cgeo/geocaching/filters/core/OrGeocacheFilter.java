@@ -7,6 +7,16 @@ import java.util.List;
 
 public class OrGeocacheFilter extends LogicalGeocacheFilter {
 
+    public static OrGeocacheFilter create(final List<? extends IGeocacheFilter> children) {
+        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
+        orFilter.setChildren(children);
+        return orFilter;
+    }
+
+    public static OrGeocacheFilter create(final IGeocacheFilter... children) {
+        return OrGeocacheFilter.create(List.of(children));
+    }
+
     @Override
     public String getId() {
         return "OR";

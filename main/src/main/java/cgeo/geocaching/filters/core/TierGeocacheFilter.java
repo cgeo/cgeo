@@ -3,8 +3,18 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.bettercacher.Tier;
 
+import java.util.Collection;
+import java.util.List;
+
 public class TierGeocacheFilter extends ValueGroupGeocacheFilter<Tier, Tier> {
 
+    public static TierGeocacheFilter create(final Collection<Tier> tiers) {
+        return ValueGroupGeocacheFilter.create(GeocacheFilterType.TIER, tiers);
+    }
+
+    public static TierGeocacheFilter create(final Tier... tiers) {
+        return create(List.of(tiers));
+    }
 
     @Override
     public Tier getRawCacheValue(final Geocache cache) {

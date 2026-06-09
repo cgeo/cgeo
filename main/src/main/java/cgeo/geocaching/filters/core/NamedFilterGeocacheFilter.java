@@ -21,6 +21,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
+    public static NamedFilterGeocacheFilter create(final Collection<NamedFilter> namedFilters) {
+        final NamedFilterGeocacheFilter filter = GeocacheFilterType.NAMED_FILTER.create();
+        filter.setNamedFilters(namedFilters);
+        return filter;
+    }
+
+    public static NamedFilterGeocacheFilter create(final NamedFilter... namedFilters) {
+        return create(List.of(namedFilters));
+    }
+
     private final Set<Integer> namedFilterIds = new HashSet<>();
     private String namedFilter; //for legacy support
 

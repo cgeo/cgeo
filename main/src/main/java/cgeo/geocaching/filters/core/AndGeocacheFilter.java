@@ -3,9 +3,20 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
+import java.util.Collection;
 import java.util.List;
 
 public class AndGeocacheFilter extends LogicalGeocacheFilter {
+
+    public static AndGeocacheFilter create(final Collection<? extends IGeocacheFilter> children) {
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        andFilter.setChildren(children);
+        return andFilter;
+    }
+
+    public static AndGeocacheFilter create(final IGeocacheFilter... children) {
+        return AndGeocacheFilter.create(List.of(children));
+    }
 
     @Override
     public String getId() {

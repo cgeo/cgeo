@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class IndividualRouteGeocacheFilter extends BooleanGeocacheFilter {
 
+    public static IndividualRouteGeocacheFilter create(final Boolean value) {
+        return BooleanGeocacheFilter.create(GeocacheFilterType.INDIVIDUAL_ROUTE, value);
+    }
+    
     @Override
     public Boolean filter(final Geocache cache, final boolean value) {
         final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();

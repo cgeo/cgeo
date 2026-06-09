@@ -35,6 +35,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter {
 
+    protected static <G, F extends ValueGroupGeocacheFilter> F create(final GeocacheFilterType type, final Collection<G> types) {
+        final F groupFilter = type.create();
+        groupFilter.setValues(types);
+        return groupFilter;
+    }
+
     private final Set<G> values = new HashSet<>();
     private final Map<G, Set<T>> displayToValueMap = new HashMap<>();
     private final Map<T, G> valueToDisplayMap = new HashMap<>();

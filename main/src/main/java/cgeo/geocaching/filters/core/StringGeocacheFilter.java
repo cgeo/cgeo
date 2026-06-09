@@ -11,6 +11,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
 
+    protected static <F extends StringGeocacheFilter> F create(final GeocacheFilterType type, final String text, final boolean matchCase, final StringFilter.StringFilterType stringFilterType) {
+        final F geocacheFilter = type.create();
+        final StringFilter sf = geocacheFilter.getStringFilter();
+        sf.setTextValue(text);
+        sf.setMatchCase(matchCase);
+        sf.setFilterType(stringFilterType);
+        return geocacheFilter;
+    }
+
     private final StringFilter stringFilter = new StringFilter();
 
     protected abstract String getValue(Geocache cache);

@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +31,15 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     private final Set<String> attributesRaw = new HashSet<>();
     private boolean inverse = false;
     private int sources = 3;
+
+    public static AttributesGeocacheFilter create(final Collection<CacheAttribute> yesAttributes, final Collection<CacheAttribute> noAttributes) {
+        final AttributesGeocacheFilter filter = GeocacheFilterType.ATTRIBUTES.create();
+        final Map<CacheAttribute, Boolean> atts = new HashMap<>();
+        yesAttributes.forEach(att -> atts.put(att, true));
+        noAttributes.forEach(att -> atts.put(att, false));
+        filter.setAttributes(atts);
+        return filter;
+    }
 
     public void setAttributes(final Map<CacheAttribute, Boolean> atts) {
         this.attributes.clear();
