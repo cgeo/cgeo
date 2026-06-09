@@ -21,6 +21,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class CategoryGeocacheFilter extends BaseGeocacheFilter {
 
+    public static CategoryGeocacheFilter create(final Collection<Category> categories) {
+        final CategoryGeocacheFilter categoryFilter = GeocacheFilterType.CATEGORY.create();
+        categoryFilter.setCategories(categories);
+        return categoryFilter;
+    }
+
+    public static CategoryGeocacheFilter create(final Category... categories) {
+        return create(List.of(categories));
+    }
+
     private final Set<Category> categories = new HashSet<>();
 
     public void setCategories(final Collection<Category> cats) {

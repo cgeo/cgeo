@@ -7,6 +7,13 @@ import cgeo.geocaching.storage.SqlBuilder;
 
 public class OfflineLogGeocacheFilter extends StringGeocacheFilter {
 
+    public static OfflineLogGeocacheFilter create(final String text) {
+        return OfflineLogGeocacheFilter.create(text, false, StringFilter.StringFilterType.CONTAINS);
+    }
+
+    public static OfflineLogGeocacheFilter create(final String text, final boolean matchCase, final StringFilter.StringFilterType filterType) {
+        return StringGeocacheFilter.create(GeocacheFilterType.OFFLINE_LOG, text, matchCase, filterType);
+    }
 
     @Override
     protected String getValue(final Geocache cache) {

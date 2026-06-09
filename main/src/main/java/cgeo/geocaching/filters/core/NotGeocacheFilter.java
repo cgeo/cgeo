@@ -9,6 +9,16 @@ import java.util.List;
 
 public class NotGeocacheFilter extends AndGeocacheFilter {
 
+    public static NotGeocacheFilter create(final List<? extends IGeocacheFilter> children) {
+        final NotGeocacheFilter notFilter = new NotGeocacheFilter();
+        notFilter.setChildren(children);
+        return notFilter;
+    }
+
+    public static NotGeocacheFilter create(final IGeocacheFilter... children) {
+        return NotGeocacheFilter.create(List.of(children));
+    }
+
     @Override
     public String getId() {
         return "NOT";

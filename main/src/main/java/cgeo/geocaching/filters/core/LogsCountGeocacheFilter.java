@@ -25,6 +25,12 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
 
     private LogType logType = null;
 
+    public static LogsCountGeocacheFilter create(final LogType logType, final Integer min, final Integer max) {
+        final LogsCountGeocacheFilter filter = NumberRangeGeocacheFilter.create(GeocacheFilterType.LOGS_COUNT, min, max);
+        filter.setLogType(logType);
+        return filter;
+    }
+
     public LogsCountGeocacheFilter() {
         super(Integer::valueOf, Math::round);
     }
