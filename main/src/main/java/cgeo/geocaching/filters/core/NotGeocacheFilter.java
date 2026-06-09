@@ -49,14 +49,12 @@ public class NotGeocacheFilter extends AndGeocacheFilter {
             if (simplifiedChildren.get(0).getChildren().size() == 1) {
                 return simplifiedChildren.get(0).getChildren().get(0);
             } else {
-                final AndGeocacheFilter innerAnd = new AndGeocacheFilter();
-                innerAnd.getChildren().addAll(simplifiedChildren.get(0).getChildren());
-                return innerAnd;
+                return AndGeocacheFilter.create(simplifiedChildren.get(0).getChildren());
             }
         }
 
         //else: optimize inner-and
-        final NotGeocacheFilter result = new NotGeocacheFilter();
+        final NotGeocacheFilter result = NotGeocacheFilter.create();
         for (IGeocacheFilter child : simplifiedChildren) {
             if (child == ConstantGeocacheFilter.ALWAYS_FALSE) {
                 return ConstantGeocacheFilter.ALWAYS_TRUE;

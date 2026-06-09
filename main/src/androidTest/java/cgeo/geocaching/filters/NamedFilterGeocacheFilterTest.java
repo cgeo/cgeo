@@ -9,7 +9,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.functions.Action1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class NamedFilterGeocacheFilterTest {
     @Test
     public void preventEndlessLoopOnNesting() {
         //create a named filter which references itself via id
-        final NamedFilterGeocacheFilter filterInside = new NamedFilterGeocacheFilter();
+        final NamedFilterGeocacheFilter filterInside = GeocacheFilterType.NAMED_FILTER.create();
         final GeocacheFilter named = GeocacheFilter.create(true, false, filterInside);
         final NamedFilter selfRef = new NamedFilter("self", named).setId(99);
         filterInside.setNamedFilters(Collections.singletonList(selfRef));
@@ -70,8 +69,7 @@ public class NamedFilterGeocacheFilterTest {
     }
 
     private NamedFilter createSimpleNamedTypeFilter(final int id, final CacheType ... types) {
-        final TypeGeocacheFilter tree = new TypeGeocacheFilter();
-        tree.setValues(Arrays.asList(types));
+        final TypeGeocacheFilter tree = TypeGeocacheFilter.create(types);
         final GeocacheFilter gf = GeocacheFilter.create(true, false, tree);
         return new NamedFilter("namedFilter_" + id, gf).setId(id);
     }

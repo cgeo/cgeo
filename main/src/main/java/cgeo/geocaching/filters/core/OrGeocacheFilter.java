@@ -57,7 +57,7 @@ public class OrGeocacheFilter extends LogicalGeocacheFilter {
 
     @Override
     protected IGeocacheFilter simplifyFor(final List<IGeocacheFilter> simplifiedChildren) {
-        final OrGeocacheFilter result = new OrGeocacheFilter();
+        final OrGeocacheFilter result = OrGeocacheFilter.create();
         for (IGeocacheFilter child : simplifiedChildren) {
             if (child == ConstantGeocacheFilter.ALWAYS_TRUE) {
                 return ConstantGeocacheFilter.ALWAYS_TRUE;
