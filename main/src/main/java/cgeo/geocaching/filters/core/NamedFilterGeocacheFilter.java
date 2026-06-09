@@ -206,8 +206,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
         if (namedFilterList.size() == 1) {
             return namedFilterList.get(0).simplify(criterion);
         }
-        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
-        orFilter.getChildren().addAll(namedFilterList);
+        final OrGeocacheFilter orFilter = OrGeocacheFilter.create(namedFilterList);
         return orFilter.simplify(criterion);
     }
 }

@@ -17,9 +17,10 @@ import cgeo.geocaching.filters.core.UserDisplayableStringUtils;
 import cgeo.geocaching.utils.functions.Action2;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
-import java.util.Stack;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -79,18 +80,9 @@ public class UserDisplayableStringTest {
 
     @Test
     public void testAndFilter() {
-        final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
-
-        final Stack<CacheType> testTypes = new Stack<>();
-        testTypes.add(CacheType.TRADITIONAL);
-        typeFilter.setValues(testTypes);
-
-        final AndGeocacheFilter filterConfig = new AndGeocacheFilter();
-        filterConfig.addChild(typeFilter);
-        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
-        statusFilter.setStatusFound(true);
-        statusFilter.setStatusOwned(true);
-        filterConfig.addChild(statusFilter);
+        final TypeGeocacheFilter typeFilter = TypeGeocacheFilter.create(CacheType.TRADITIONAL);
+        final StatusGeocacheFilter statusFilter = StatusGeocacheFilter.create(List.of(StatusGeocacheFilter.StatusType.FOUND, StatusGeocacheFilter.StatusType.OWNED), Collections.emptyList());
+        final AndGeocacheFilter filterConfig = AndGeocacheFilter.create(typeFilter, statusFilter);
 
         final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
 
@@ -101,18 +93,12 @@ public class UserDisplayableStringTest {
 
     @Test
     public void testOrFilter() {
-        final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
+        final TypeGeocacheFilter typeFilter = TypeGeocacheFilter.create(CacheType.TRADITIONAL);
+        final StatusGeocacheFilter statusFilter = StatusGeocacheFilter.create(List.of(StatusGeocacheFilter.StatusType.FOUND,
+                        StatusGeocacheFilter.StatusType.OWNED),
+                Collections.emptyList());
 
-        final Stack<CacheType> testTypes = new Stack<>();
-        testTypes.add(CacheType.TRADITIONAL);
-        typeFilter.setValues(testTypes);
-
-        final OrGeocacheFilter filterConfig = new OrGeocacheFilter();
-        filterConfig.addChild(typeFilter);
-        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
-        statusFilter.setStatusFound(true);
-        statusFilter.setStatusOwned(true);
-        filterConfig.addChild(statusFilter);
+        final OrGeocacheFilter filterConfig = OrGeocacheFilter.create(typeFilter, statusFilter);
 
         final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
 
@@ -123,17 +109,12 @@ public class UserDisplayableStringTest {
 
     @Test
     public void testNotFilter() {
-        final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
+        final TypeGeocacheFilter typeFilter = TypeGeocacheFilter.create(CacheType.TRADITIONAL);
 
-        final Stack<CacheType> testTypes = new Stack<>();
-        testTypes.add(CacheType.TRADITIONAL);
-        typeFilter.setValues(testTypes);
-
-        final NotGeocacheFilter filterConfig = new NotGeocacheFilter();
-        filterConfig.addChild(typeFilter);
-        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
-        statusFilter.setStatusFound(true);
-        statusFilter.setStatusOwned(true);
+        final NotGeocacheFilter filterConfig = NotGeocacheFilter.create(typeFilter);
+        final StatusGeocacheFilter statusFilter = StatusGeocacheFilter.create(List.of(StatusGeocacheFilter.StatusType.FOUND,
+                        StatusGeocacheFilter.StatusType.OWNED),
+                Collections.emptyList());
         filterConfig.addChild(statusFilter);
 
         final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);

@@ -35,7 +35,6 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -1815,8 +1814,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         offlineFilter = currentCacheFilterContext.get();
                     } else {
                         final IConnector connector = ConnectorFactory.getConnectorByName(connectorName);
-                        final OriginGeocacheFilter connectorAddFilter = GeocacheFilterType.ORIGIN.create();
-                        connectorAddFilter.setValues(Collections.singletonList(connector));
+                        final OriginGeocacheFilter connectorAddFilter = OriginGeocacheFilter.create(connector);
                         offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
                     }
                     loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);

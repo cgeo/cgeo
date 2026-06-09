@@ -56,7 +56,7 @@ public class AndGeocacheFilter extends LogicalGeocacheFilter {
 
     @Override
     protected IGeocacheFilter simplifyFor(final List<IGeocacheFilter> simplifiedChildren) {
-        final AndGeocacheFilter result = new AndGeocacheFilter();
+        final AndGeocacheFilter result = AndGeocacheFilter.create();
         for (IGeocacheFilter child : simplifiedChildren) {
             if (child == ConstantGeocacheFilter.ALWAYS_FALSE) {
                 return ConstantGeocacheFilter.ALWAYS_FALSE;
