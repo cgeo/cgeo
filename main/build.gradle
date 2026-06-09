@@ -460,7 +460,7 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.20.0'
 
-    String okhttpVersion = '5.3.2'
+    String okhttpVersion = '5.4.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver3:$okhttpVersion"
