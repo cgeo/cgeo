@@ -866,7 +866,6 @@
     <string name="settings_lc_description">Includi i cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
     <string name="settings_lc_found_state_title">Stato \'trovato\' manuale</string>
     <string name="settings_lc_found_state_handling">Se selezionato, non ottenere automaticamente il reale stato \'trovato\' per le cache di Adventure Lab, invece, fornisce controlli per l\'utente per impostare manualmente lo stato \'trovato\'</string>
-    <string name="lc_default_description">Questo è un cache Adventure Lab di geocaching.com. Le Adventure possono essere giocate solo con l\'app Adventure Lab di Groundspeak. Tocca l\'icona di Adventure Lab sulla pagina \"Dettagli\" per aprire/installare l\'app Adventure Lab per questa Adventure.\nSe non vuoi visualizzare e cercare i cache Adenture Lab sulla tua mappa, è possibile disattivarli utilizzando il menu \"impostazioni\" - Servizi - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
     <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
