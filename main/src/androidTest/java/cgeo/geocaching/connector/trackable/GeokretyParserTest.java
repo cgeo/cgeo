@@ -17,7 +17,7 @@ import java.util.TimeZone;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.Test;
 import org.xml.sax.InputSource;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeokretyParserTest  {
 

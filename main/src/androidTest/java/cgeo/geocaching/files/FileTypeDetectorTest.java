@@ -12,7 +12,7 @@ import androidx.annotation.RawRes;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileTypeDetectorTest {
 

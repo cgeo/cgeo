@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.xmlpull.v1.XmlPullParser.START_TAG;
 
 public class XmlNodeTest {

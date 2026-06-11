@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValueTest {
 
@@ -130,7 +130,7 @@ public class ValueTest {
         final Value v1 = Value.of(10);
         final Value v2 = Value.of(20);
         final Value v3 = Value.of(10);
-        
+
         assertThat(v1.compareTo(v2)).isLessThan(0);
         assertThat(v2.compareTo(v1)).isGreaterThan(0);
         assertThat(v1.compareTo(v3)).isEqualTo(0);
@@ -141,7 +141,7 @@ public class ValueTest {
         final Value v1 = Value.of("apple");
         final Value v2 = Value.of("banana");
         final Value v3 = Value.of("apple");
-        
+
         assertThat(v1.compareTo(v2)).isLessThan(0);
         assertThat(v2.compareTo(v1)).isGreaterThan(0);
         assertThat(v1.compareTo(v3)).isEqualTo(0);
@@ -151,7 +151,7 @@ public class ValueTest {
     public void testCompareToMixed() {
         final Value numeric = Value.of(10);
         final Value text = Value.of("hello");
-        
+
         // Numeric values are considered less than text values
         assertThat(numeric.compareTo(text)).isLessThan(0);
         assertThat(text.compareTo(numeric)).isGreaterThan(0);
@@ -162,7 +162,7 @@ public class ValueTest {
         final Value v1 = Value.of(42);
         final Value v2 = Value.of(42.0);
         final Value v3 = Value.of(new BigDecimal("42"));
-        
+
         assertThat(v1.equals(v2)).isTrue();
         assertThat(v1.equals(v3)).isTrue();
     }
@@ -172,7 +172,7 @@ public class ValueTest {
         final Value v1 = Value.of("hello");
         final Value v2 = Value.of("hello");
         final Value v3 = Value.of("world");
-        
+
         assertThat(v1.equals(v2)).isTrue();
         assertThat(v1.equals(v3)).isFalse();
     }
@@ -221,7 +221,7 @@ public class ValueTest {
         final Value v1 = Value.of(42);
         final Value v2 = Value.of(42);
         final Value v3 = Value.of(43);
-        
+
         assertThat(v1.hashCode()).isEqualTo(v2.hashCode());
         assertThat(v1.hashCode()).isNotEqualTo(v3.hashCode());
     }
@@ -237,7 +237,7 @@ public class ValueTest {
     public void testCompareStatic() {
         final Value v1 = Value.of(10);
         final Value v2 = Value.of(20);
-        
+
         assertThat(Value.compare(v1, v2)).isLessThan(0);
         assertThat(Value.compare(v2, v1)).isGreaterThan(0);
         assertThat(Value.compare(v1, v1)).isEqualTo(0);

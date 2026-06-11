@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UnifiedGPXParserTest {
 

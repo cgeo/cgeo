@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.xmlpull.v1.XmlPullParser;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Focused tests for {@link UnifiedGPXTrackParser#parseTrack(XmlPullParser)}.

@@ -19,8 +19,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.assertj.core.api.Java6Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class GeoItemLayerTest {
 
