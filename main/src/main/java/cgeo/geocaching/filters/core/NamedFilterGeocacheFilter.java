@@ -109,14 +109,6 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
         this.namedFilter = JsonUtils.getText(node, "name", null);
     }
 
-    public static NamedFilterGeocacheFilter createFor(final NamedFilter nf) {
-        final NamedFilterGeocacheFilter nff = GeocacheFilterType.NAMED_FILTER.create();
-        if (nf != null) {
-            nff.setNamedFilters(Collections.singleton(nf));
-        }
-        return nff;
-    }
-
     @Override
     protected String getUserDisplayableConfig() {
         final Set<NamedFilter> selectedFilters = getNamedFilters();

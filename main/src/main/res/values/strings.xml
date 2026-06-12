@@ -889,6 +889,7 @@
     <string name="named_filter_config_exists_title">Filter already saved</string>
     <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
     <string name="named_filter_fill_with_named">Fill with named filter</string>
+    <string name="cache_filter_reference_based_on">Based on: %1$s</string>
 
 
     <!-- about -->
