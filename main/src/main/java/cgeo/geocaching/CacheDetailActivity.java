@@ -1731,9 +1731,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             } else {
                 favoriteLine.layout.setVisibility(View.GONE);
             }
+
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             binding.favpointBox.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
             if (!supportsFavoritePoints) {
+                return;
+            }
+            
+            // Add/remove to Favorites is only possible if the cache has been found
+            if (!cache.isFound()) {
                 return;
             }
 
@@ -1745,12 +1751,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.addToFavpoint.setVisibility(View.VISIBLE);
                 binding.removeFromFavpoint.setVisibility(View.GONE);
                 binding.favpointText.setText(R.string.cache_favpoint_not_on);
-            }
-
-            // Add/remove to Favorites is only possible if the cache has been found
-            if (!cache.isFound()) {
-                binding.addToFavpoint.setVisibility(View.GONE);
-                binding.removeFromFavpoint.setVisibility(View.GONE);
             }
         }
     }
