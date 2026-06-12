@@ -134,6 +134,7 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
                 result.add(c);
             }
         }
+        Collections.sort(result); // -> two configs with same values should always be recognized as equal when comparing the json
         return result;
     }
 

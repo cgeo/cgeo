@@ -85,6 +85,52 @@
         style="@style/separator_horizontal"
         android:layout_marginTop="1dp" />
 
+        <LinearLayout
+            android:id="@+id/filter_reference_named_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp" >
+
+            <ImageView
+                android:layout_width="@dimen/buttonSize_iconButton"
+                android:layout_height="@dimen/buttonSize_iconButton"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_menu_marker"
+                tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/filter_reference_named_filter_id"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/filter_reference_named_filter_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    style="@style/text_note"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Based on: abc" />
+
+            <Button
+                android:id="@+id/filter_reference_named_filter_delete"
+                style="@style/button_icon"
+                app:icon="@drawable/ic_menu_delete" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/filter_reference_named_filter_line"
+            style="@style/separator_horizontal"
+            android:layout_marginTop="1dp" />
+
     <LinearLayout
         android:id="@+id/filter_props_checkboxes"
         android:layout_width="match_parent"
