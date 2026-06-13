@@ -394,14 +394,15 @@ public final class StoredList extends AbstractList {
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
                     .setTitle(dialogTitle)
                     .setPositiveButton(buttonTitle, ((d, which) -> {
+                            // same logic as in updateButtonState()
                             String prefix = "";
-                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString().trim();
                             if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
-                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
+                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString().trim();
                             } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                                prefix = temp + (!Strings.CS.endsWith(temp, GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
                             }
-                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString()));
+                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString().trim()));
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                     .setView(menu);
@@ -410,10 +411,33 @@ public final class StoredList extends AbstractList {
             ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
 
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0)));
+            final String oldPrefix = listprefixView.getText().toString();
+            final String oldListname = Objects.requireNonNull(listname.getText()).toString();
+            listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, s.toString(), oldListname, listname.getText().toString())));
+            ((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, listprefixView.getText().toString(), oldListname, listname.getText().toString())));
+            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, listprefixView.getText().toString(), oldListname, s.toString())));
 
             ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
             ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
+        }
+
+        private static void updateButtonState(final AlertDialog dialog, final String oldPrefix, final String newPrefix, final String oldListname, final String newListname) {
+            final String tempListname = newListname.trim();
+            boolean unchanged = Strings.CS.equals(oldListname, tempListname);
+            boolean blocked = tempListname.isEmpty();
+            if (!blocked) {
+                // same logic as in handleListNameInput:builder.setPositiveButton() above
+                String prefix = "";
+                final String temp = newPrefix.trim();
+                if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
+                    prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).getText()).toString().trim();
+                    blocked = prefix.isEmpty();
+                } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
+                    prefix = temp + (!Strings.CS.endsWith(temp, GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                }
+                unchanged = unchanged && Strings.CS.equals(oldPrefix, prefix);
+            }
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!unchanged && !blocked);
         }
 
         public static String handleListNameInputHelper(final String selectedPrefix, final String selectedTitle) {
