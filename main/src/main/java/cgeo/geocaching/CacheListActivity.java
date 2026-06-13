@@ -644,6 +644,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_set_cache_icon, R.string.caches_set_cache_icon_selected, R.string.caches_set_cache_icon_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_other_lists, isOffline && listId != PseudoList.ALL_LIST.id, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_other_lists, R.string.caches_remove_from_other_lists_selected, R.string.caches_remove_from_other_lists_all, checkedCount);
 
@@ -653,7 +654,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_set_askfordeletion, isNonDefaultList, preventAskForDeletion);
 
