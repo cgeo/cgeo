@@ -32,7 +32,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Korrektur: Kartenschnelleinstellungen zeigen nach Wechsel der App-Sprache Buttons "1"/"2" für leere Routing-Profile
 - Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
 - Korrektur: Anzeige von Kartenkacheln stoppt unter bestimmten Bedingungen (nur OpenStreetMap Onlinekarten)
-- New: Conditional cache markers
+- Neu: Bedingte Cache-Marker
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -59,7 +59,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Erlaube Markdown-Formatierung für Listingtext in benutzerdefinierten Caches
 - Änderung: Cache wird beim Hinzufügen von benutzerdefinierten Bildern gespeichert
 - Korrektur: Absturz beim Laden von Bildern, die direkt in den Text eingebettet sind
-- New: Show own favorites in log view (Geocaching.com + offline logs)
+- Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -95,4 +95,4 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
 - Korrektur: Einige Texte ignorieren den Sprachwechsel
 - Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen
-- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Änderung: Bergamot Open Source Offline-Übersetzer ersetzt Closed-Source Google ML Kit Übersetzer
