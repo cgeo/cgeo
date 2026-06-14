@@ -1809,6 +1809,7 @@
     <string name="calccoord_select_variable">Variable wählen</string>
     <string name="calccoord_new_variable">**%s** *(neu)*</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
+    <string name="calccoord_convert_to_plain_error">Die Formel wird nicht zu gültigen Koordinaten ausgewertet.\nUmwandeln in einfache Koordinaten wird den Wegpunkt auf leere Koordinaten zurücksetzen.</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">\'x\' durch \'*\' ersetzen</string>
@@ -1847,6 +1848,12 @@
     <string name="formula_function_lettervalue">Buchstabenwortwert</string>
     <string name="formula_function_roman">Römisch nach Dezimal</string>
     <string name="formula_function_vanity">Vanity-Code</string>
+    <string name="formula_function_add">Hinzufügen</string>
+    <string name="formula_function_multiply">Multiplizieren</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Anzahl</string>
+    <string name="formula_function_average">Durchschnitt</string>
     <string name="formula_function_group_simplenumeric">Einfache numerische Funktionen</string>
     <string name="formula_function_group_complexnumeric">Komplexe numerische Funktionen</string>
     <string name="formula_function_group_aggregatenumeric">Numerisch zusammenfassen</string>
