@@ -3,6 +3,8 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
+import java.util.List;
+
 public class AndGeocacheFilter extends LogicalGeocacheFilter {
 
     @Override
@@ -39,6 +41,28 @@ public class AndGeocacheFilter extends LogicalGeocacheFilter {
     @Override
     public String getUserDisplayableType() {
         return ", ";
+    }
+
+    @Override
+    protected IGeocacheFilter simplifyFor(final List<IGeocacheFilter> simplifiedChildren) {
+        final AndGeocacheFilter result = new AndGeocacheFilter();
+        for (IGeocacheFilter child : simplifiedChildren) {
+            if (child == ConstantGeocacheFilter.ALWAYS_FALSE) {
+                return ConstantGeocacheFilter.ALWAYS_FALSE;
+            }
+            if (child instanceof AndGeocacheFilter && !(child instanceof NotGeocacheFilter)) {
+                result.getChildren().addAll(child.getChildren());
+            } else if (child != ConstantGeocacheFilter.ALWAYS_TRUE) {
+                result.getChildren().add(child);
+            }
+        }
+        if (result.getChildren().isEmpty()) {
+            return ConstantGeocacheFilter.ALWAYS_TRUE;
+        }
+        if (result.getChildren().size() == 1) {
+            return result.getChildren().get(0);
+        }
+        return result;
     }
 
 

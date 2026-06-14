@@ -1,9 +1,11 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Action1;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Base implementation for common (non-logical) geocache filters
@@ -64,15 +66,13 @@ public abstract class BaseGeocacheFilter implements IGeocacheFilter {
         return TextUtils.isEqualIgnoreCaseAndSpecialChars(value, expectedFlag);
     }
 
-    /**
-     * Helper method to read enum config values
-     */
-    protected static <E extends Enum<E>> void checkEnumValue(final Class<E> enumClass, final String value, final Action1<E> executeIfFound) {
-        final E enumValue = TextUtils.getEnumIgnoreCaseAndSpecialChars(enumClass, value, null);
-        if (enumValue != null) {
-            executeIfFound.call(enumValue);
+    @NonNull
+    @Override
+    public IGeocacheFilter simplify(@NonNull final Function<IGeocacheFilter, Boolean> criterion) {
+        final Boolean crit = criterion.apply(this);
+        if (crit == null) {
+            return isFiltering() ? this : ConstantGeocacheFilter.ALWAYS_TRUE;
         }
+        return crit ? ConstantGeocacheFilter.ALWAYS_TRUE : ConstantGeocacheFilter.ALWAYS_FALSE;
     }
-
-
 }

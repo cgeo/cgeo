@@ -253,7 +253,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         GeocacheFilter filter = null;
         if (filterConfig != null) {
             filter = GeocacheFilter.createFromConfig(filterConfig);
-            final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+            final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(this), OriginGeocacheFilter.class);
             if (origin != null && !origin.allowsCachesOf(this)) {
                 return new SearchResult();
             }

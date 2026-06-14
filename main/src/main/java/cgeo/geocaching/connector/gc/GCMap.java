@@ -120,12 +120,12 @@ public class GCMap {
         final GeocacheFilter filter = pFilter != null ? pFilter : GeocacheFilter.createEmpty();
 
         //special case: if origin filter is present and excludes GCConnector, then skip search
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(connector), OriginGeocacheFilter.class);
         if (origin != null && !origin.allowsCachesOf(connector)) {
             return null;
         }
 
-        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
+        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible(connector);
         for (BaseGeocacheFilter baseFilter : filterAndChain) {
             fillForBasicFilter(baseFilter, search);
         }

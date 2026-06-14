@@ -1,17 +1,12 @@
 package cgeo.geocaching.filters;
 
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.ConstantGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
-import cgeo.geocaching.models.Geocache;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -52,39 +47,8 @@ public class LogicalGeocacheFilterTest {
 
 
     private static IGeocacheFilter getConstantFilter(final Boolean returnValue) {
-        return new IGeocacheFilter() {
-            @Nullable
-            @Override
-            public Boolean filter(final Geocache cache) {
-                return returnValue;
-            }
-
-            @Override
-            public GeocacheFilterType getType() {
-                return null;
-            }
-
-            @Override
-            public boolean isFiltering() {
-                return false;
-            }
-
-            @Override
-            public String getId() {
-                return "constant";
-            }
-
-            @Nullable
-            @Override
-            public ObjectNode getJsonConfig() {
-                return null;
-            }
-
-            @Override
-            public void setJsonConfig(@NonNull final ObjectNode node) {
-                //no implementation needed
-            }
-        };
+        return returnValue == null ? ConstantGeocacheFilter.ALWAYS_NULL :
+            (returnValue ? ConstantGeocacheFilter.ALWAYS_TRUE : ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
 }
