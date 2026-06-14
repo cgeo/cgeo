@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -116,14 +117,14 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             return null;
         }
         // Map Traditional Chinese variants (zh-Hant, zh-TW, zh-HK, zh-MO) to our "zh-hant" code
-        final String lower = tag.toLowerCase();
+        final String lower = tag.toLowerCase(Locale.ROOT);
         if (lower.startsWith("zh-")) {
             final String sub = lower.substring(3);
             if ("hant".equals(sub) || "tw".equals(sub) || "hk".equals(sub) || "mo".equals(sub)) {
                 return "zh-hant";
             }
         }
-        return tag.contains("-") ? tag.split("-")[0].toLowerCase() : lower;
+        return tag.contains("-") ? tag.split("-")[0].toLowerCase(Locale.ROOT) : lower;
     }
 
     /**

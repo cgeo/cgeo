@@ -253,7 +253,7 @@ public class UnifiedGPXParserTest {
         }
     }
 
-    @Ignore
+    @Ignore("Ignore for the time being / UnifiedGPXParser being experimental")
     @Test(expected = ParserException.class)
     public void invalidXmlThrowsParserException() throws ParserException, IOException {
         parse(GPX_HEADER_11 + "<wpt lat=\"1\" lon=\"1\"><name>not closed");
