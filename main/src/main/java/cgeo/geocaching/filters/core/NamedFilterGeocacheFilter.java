@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -76,7 +76,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.addWhereTrue();
             return;
         }
-        sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
+        sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
         forEachSelectedNamedFilter(nf -> {
              if (nf.getFilter() == null || nf.getFilter().getTree() == null) {
                  sqlBuilder.addWhereTrue();
@@ -178,5 +178,26 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
             nestingTracker.set(nestSet);
         }
         return nestSet;
+    }
+
+    @NonNull
+    @Override
+    public IGeocacheFilter simplify(@NonNull final Function<IGeocacheFilter, Boolean> criterion) {
+        final Boolean crit = criterion.apply(this);
+        if (crit != null) {
+            return crit ? ConstantGeocacheFilter.ALWAYS_TRUE : ConstantGeocacheFilter.ALWAYS_FALSE;
+        }
+        final List<IGeocacheFilter> namedFilterList =
+            getNamedFilters().stream().filter(nf -> nf.getFilter() != null && nf.getFilter().getTree() != null)
+                    .map(nf -> nf.getFilter().getTree()).collect(Collectors.toList());
+        if (namedFilterList.isEmpty()) {
+            return ConstantGeocacheFilter.ALWAYS_TRUE;
+        }
+        if (namedFilterList.size() == 1) {
+            return namedFilterList.get(0).simplify(criterion);
+        }
+        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
+        orFilter.getChildren().addAll(namedFilterList);
+        return orFilter.simplify(criterion);
     }
 }
