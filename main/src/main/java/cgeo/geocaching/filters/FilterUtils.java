@@ -66,7 +66,7 @@ public class FilterUtils {
     }
 
     public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
-        activity.startActivity(new Intent(activity, NamedFilterActivity.class));
+        NamedFilterActivity.startActivity(activity);
     }
 
     /** opens a dialog to activate/deactivate named filter markers */
@@ -79,13 +79,8 @@ public class FilterUtils {
             }
         }
 
-        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected, selected -> {
-            final List<NamedFilter> updated = new ArrayList<>(filters);
-            for (final NamedFilter nf : updated) {
-                nf.setConditionalMarkerActive(selected.contains(nf));
-            }
-            NamedFilter.storeAll(updated);
-        });
+        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected,
+                NamedFilter::activateMarker);
     }
 
     public static void openDialogMultiselectNamedFilters(final Context context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {

@@ -1,23 +1,33 @@
 package cgeo.geocaching.filters;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -32,25 +42,61 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class NamedFilter {
 
+
+    public enum MarkerPriority {
+        HIGHEST(100, R.string.named_filter_priority_highest),
+        HIGH(200, R.string.named_filter_priority_high),
+        NORMAL(300, R.string.named_filter_priority_normal),
+        LOW(400, R.string.named_filter_priority_low),
+        LOWEST(500, R.string.named_filter_priority_lowest);
+
+        private final int value;
+        @StringRes private final int resId;
+
+        MarkerPriority(final int value, final int resId) {
+            this.resId = resId;
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String getL10n() {
+            return LocalizationUtils.getString(this.resId);
+        }
+
+        public static MarkerPriority fromValue(final int value) {
+            for (final MarkerPriority mp : values()) {
+                if (mp.value == value) {
+                    return mp;
+                }
+            }
+            return NORMAL; // default
+        }
+    }
+
     // JSON keys
     private static final String JSON_KEY_ID = "id";
     private static final String JSON_KEY_NAME = "name";
     private static final String JSON_KEY_FILTER = "filter";
     private static final String JSON_KEY_MARKER_ID = "markerId";
     private static final String JSON_KEY_CONDITIONAL_MARKER_ACTIVE = "conditionalMarkerActive";
+    private static final String JSON_KEY_CONDITIONAL_MARKER_PRIORITY = "conditionalMarkerPriority";
 
     // --- instance fields ---
-    private final int id;
+    private int id = -1;
     private String name;
     private GeocacheFilter filter;
     private int markerId;
     private boolean conditionalMarkerActive;
+    private MarkerPriority conditionalMarkerPriority = MarkerPriority.NORMAL;
 
     // --- static in-memory list and ID generator ---
-    private static boolean namedFiltersLoaded = false; // tracks whether we've loaded from DB yet
-    private static final List<NamedFilter> namedFilters = new ArrayList<>(); // lazy init
-    private static final List<NamedFilter> namedFiltersUnmodifiable = Collections.unmodifiableList(namedFilters);
-    private static final AtomicInteger nextId = new AtomicInteger(1);
+    private static boolean cacheLoaded = false; // tracks whether we've loaded from DB yet
+    private static final Map<Integer, NamedFilter> namedFilters = new HashMap<>(); // lazy init
+    private static final List<NamedFilter> namedFiltersSortedByName = new ArrayList<>();
+    private static final List<NamedFilter> namedFiltersSortedByPrioAndName = new ArrayList<>();
 
     // injectable functions for testability
     private static Supplier<List<NamedFilter>> loadFunction = DataStore.DBFilters::loadAll;
@@ -60,17 +106,18 @@ public class NamedFilter {
     // Constructor
     // -------------------------------------------------------------------------
 
-    /**
-     * Public constructor for direct construction (deserialization, testing).
-     * For user-facing creation of new filters use {@link #addNew(String, GeocacheFilter)}.
-     */
-    public NamedFilter(final int id, @NonNull final String name, @Nullable final GeocacheFilter filter,
-                       final int markerId, final boolean conditionalMarkerActive) {
-        this.id = id;
+    public NamedFilter(@NonNull final String name, @Nullable final GeocacheFilter filter) {
+        this(name, filter, EmojiUtils.NO_EMOJI, false, MarkerPriority.NORMAL);
+    }
+
+    public NamedFilter(@NonNull final String name, @Nullable final GeocacheFilter filter,
+                       final int markerId, final boolean conditionalMarkerActive, final MarkerPriority conditionalMarkerPriority) {
+
         this.name = name;
         this.filter = filter;
         this.markerId = markerId;
         this.conditionalMarkerActive = conditionalMarkerActive;
+        this.conditionalMarkerPriority = conditionalMarkerPriority == null ? MarkerPriority.NORMAL : conditionalMarkerPriority;
     }
 
     // -------------------------------------------------------------------------
@@ -81,13 +128,19 @@ public class NamedFilter {
         return id;
     }
 
+    public NamedFilter setId(final int id) {
+        this.id = id;
+        return this;
+    }
+
     @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull final String name) {
+    public NamedFilter setName(@NonNull final String name) {
         this.name = name;
+        return this;
     }
 
     @Nullable
@@ -95,24 +148,36 @@ public class NamedFilter {
         return filter;
     }
 
-    public void setFilter(@Nullable final GeocacheFilter filter) {
+    public NamedFilter setFilter(@Nullable final GeocacheFilter filter) {
         this.filter = filter;
+        return this;
     }
 
     public int getMarkerId() {
         return markerId;
     }
 
-    public void setMarkerId(final int markerId) {
+    public NamedFilter setMarkerId(final int markerId) {
         this.markerId = markerId;
+        return this;
     }
 
     public boolean isConditionalMarkerActive() {
         return conditionalMarkerActive;
     }
 
-    public void setConditionalMarkerActive(final boolean conditionalMarkerActive) {
+    public NamedFilter setConditionalMarkerActive(final boolean conditionalMarkerActive) {
         this.conditionalMarkerActive = conditionalMarkerActive;
+        return this;
+    }
+
+    public MarkerPriority getConditionalMarkerPriority() {
+        return conditionalMarkerPriority;
+    }
+
+    public NamedFilter setConditionalMarkerPriority(final MarkerPriority conditionalMarkerPriority) {
+        this.conditionalMarkerPriority = conditionalMarkerPriority == null ? MarkerPriority.NORMAL : conditionalMarkerPriority;
+        return this;
     }
 
     // -------------------------------------------------------------------------
@@ -137,82 +202,111 @@ public class NamedFilter {
     // -------------------------------------------------------------------------
 
     @NonNull
-    public ObjectNode toJson() {
+    public String toConfig() {
+        return JsonUtils.nodeToString(toJsonNode());
+    }
+
+    private ObjectNode toJsonNode() {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setInt(node, JSON_KEY_ID, id);
         JsonUtils.setText(node, JSON_KEY_NAME, name);
         JsonUtils.setText(node, JSON_KEY_FILTER, filter != null ? filter.toConfig() : null);
         JsonUtils.setInt(node, JSON_KEY_MARKER_ID, markerId);
         JsonUtils.setBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, conditionalMarkerActive);
+        JsonUtils.setInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, conditionalMarkerPriority.getValue());
         return node;
     }
 
     @NonNull
-    public static NamedFilter fromJson(@NonNull final JsonNode node) {
+    public static NamedFilter createFromConfig(@NonNull final String config) {
+        final JsonNode node = JsonUtils.stringToNode(config);
+        return createFromJsonNode(node);
+    }
+
+    private static NamedFilter createFromJsonNode(@NonNull final JsonNode node) {
         final int id = JsonUtils.getInt(node, JSON_KEY_ID, 0);
         final String name = JsonUtils.getText(node, JSON_KEY_NAME, "");
         final String filterConfig = JsonUtils.getText(node, JSON_KEY_FILTER, null);
         final GeocacheFilter filter = filterConfig != null ? GeocacheFilter.createFromConfig(filterConfig) : null;
         final int markerId = JsonUtils.getInt(node, JSON_KEY_MARKER_ID, EmojiUtils.NO_EMOJI);
         final boolean conditionalMarkerActive = JsonUtils.getBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, false);
-        return new NamedFilter(id, name != null ? name : "", filter, markerId, conditionalMarkerActive);
+        final MarkerPriority conditionalMarkerPriority = MarkerPriority.fromValue(JsonUtils.getInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, -1));
+        return new NamedFilter(name != null ? name : "", filter, markerId, conditionalMarkerActive, conditionalMarkerPriority).setId(id);
+    }
+
+    public static List<NamedFilter> createFromListConfig(final String config) {
+        final List<NamedFilter> result = new ArrayList<>();
+        final JsonNode array = JsonUtils.stringToNode(config);
+        for (final JsonNode node : array) {
+            result.add(createFromJsonNode(node));
+        }
+        return result;
+    }
+
+    public static String toListConfig(final Collection<NamedFilter> filters) {
+        final ArrayNode array = JsonUtils.createArrayNode();
+        for (final NamedFilter nf : filters) {
+            array.add(nf.toJsonNode());
+        }
+        return JsonUtils.nodeToString(array);
     }
 
     // -------------------------------------------------------------------------
     // Static management
     // -------------------------------------------------------------------------
 
-    /** Lazily loads and returns the in-memory list. Must be called within synchronized block. */
-    private static List<NamedFilter> ensureList() {
-        if (!namedFiltersLoaded) {
-            namedFilters.clear();
-            namedFilters.addAll(loadFunction.get());
-            namedFiltersLoaded = true;
-            // Initialize nextId from max existing id
-            int maxId = 0;
-            for (final NamedFilter nf : namedFilters) {
-                if (nf.id > maxId) {
-                    maxId = nf.id;
-                }
-            }
-            nextId.set(maxId + 1);
+    /** Lazily loads cache. */
+    private static void ensureCache() {
+        if (!cacheLoaded) {
+            initializeCacheFrom(loadFunction.get());
+            cacheLoaded = true;
         }
-        return namedFilters;
+    }
+
+    private static void initializeCacheFrom(final Collection<NamedFilter> filters) {
+        namedFilters.clear();
+        namedFiltersSortedByName.clear();
+        namedFiltersSortedByPrioAndName.clear();
+        for (final NamedFilter nf : filters) {
+            namedFilters.put(nf.id, nf);
+            namedFiltersSortedByName.add(nf);
+            namedFiltersSortedByPrioAndName.add(nf);
+        }
+        namedFiltersSortedByName.sort(CommonUtils.getTextSortingComparator(f -> f.name)); // sort by name for display
+        namedFiltersSortedByPrioAndName.sort(CommonUtils.getTextSortingComparator(f -> String.format(Locale.US, "%03d", f.conditionalMarkerPriority.value) + ":" + f.name)); // sort by name for display
     }
 
     /** Returns an unmodifiable view of all named filters in priority order. */
     @NonNull
     public static synchronized List<NamedFilter> getAll() {
-        ensureList();
-        return namedFiltersUnmodifiable;
+        ensureCache();
+        return Collections.unmodifiableList(namedFiltersSortedByName);
     }
 
-    /** Returns a modifable deep copy of all named filters in priority order. */
+    /** Returns an unmodifiable view of all named filters in priority order. */
     @NonNull
     public static synchronized List<NamedFilter> getAllDeepCopy() {
-        final List<NamedFilter> result = new ArrayList<>();
-        ensureList();
-        for (final NamedFilter nf : namedFilters) {
-            result.add(fromJson(nf.toJson()));
+        ensureCache();
+        final List<NamedFilter> copy = new ArrayList<>();
+        for (final NamedFilter nf : namedFiltersSortedByName) {
+            copy.add(NamedFilter.createFromConfig(nf.toConfig()));
         }
-        return result;
+        return copy;
     }
+
 
     /** Find a filter by its integer id; returns null if not found. */
     @Nullable
     public static synchronized NamedFilter getById(final int id) {
-        for (final NamedFilter nf : ensureList()) {
-            if (nf.id == id) {
-                return nf;
-            }
-        }
-        return null;
+        ensureCache();
+        return namedFilters.get(id);
     }
 
     /** Find any filter by its name; returns null if not found; returns any filter if multiple exists with that name */
     @Nullable
     public static synchronized NamedFilter getFirstByName(final String name) {
-        for (final NamedFilter nf : ensureList()) {
+        ensureCache();
+        for (final NamedFilter nf : namedFiltersSortedByName) {
             if (Strings.CI.equals(name, nf.name)) {
                 return nf;
             }
@@ -222,7 +316,8 @@ public class NamedFilter {
 
     /** Case-insensitive check whether a filter with the given name exists. */
     public static synchronized boolean nameExists(@NonNull final String name) {
-        for (final NamedFilter nf : ensureList()) {
+        ensureCache();
+        for (final NamedFilter nf : namedFiltersSortedByName) {
             if (nf.name.equalsIgnoreCase(name)) {
                 return true;
             }
@@ -236,7 +331,8 @@ public class NamedFilter {
      */
     @Nullable
     public static synchronized NamedFilter filterConfigExists(@Nullable final GeocacheFilter filter) {
-        for (final NamedFilter nf : ensureList()) {
+        ensureCache();
+        for (final NamedFilter nf : namedFiltersSortedByName) {
             if (GeocacheFilter.filtersSame(nf.filter, filter)) {
                 return nf;
             }
@@ -248,27 +344,33 @@ public class NamedFilter {
      * Replaces the in-memory list with {@code newList}, persists via the store function, and broadcasts
      * {@link GeocacheChangedBroadcastReceiver#NAMED_FILTER_CHANGED}.
      */
-    public static synchronized void storeAll(@NonNull final List<NamedFilter> newList) {
-        if (namedFilters != newList) {
-            namedFilters.clear();
-            namedFilters.addAll(newList);
+    public static synchronized void storeAll(@NonNull final Collection<NamedFilter> newList) {
+        //safe guard!
+        if (newList == namedFiltersSortedByName || newList == namedFiltersSortedByPrioAndName) {
+            throw new IllegalArgumentException("Cannot pass internal list directly; make a copy first");
         }
-        storeFunction.accept(namedFilters);
+
+        initializeCacheFrom(newList);
+        storeFunction.accept(namedFiltersSortedByName);
         GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
     }
 
-    /**
-     * Creates a new filter with an auto-generated id, inserts it at position 0 (highest priority),
-     * persists, and broadcasts.
-     */
-    @NonNull
-    public static synchronized NamedFilter addNew(@NonNull final String name, @Nullable final GeocacheFilter filter) {
-        final List<NamedFilter> newList = ensureList();
-        final int id = nextId.getAndIncrement();
-        final NamedFilter nf = new NamedFilter(id, name, filter, EmojiUtils.NO_EMOJI, false);
-        newList.add(0, nf);
+
+    public static synchronized NamedFilter addNew(final String name, final GeocacheFilter filter) {
+        final NamedFilter newFilter = new NamedFilter(name, filter);
+        final List<NamedFilter> newList = getAllDeepCopy();
+        newList.add(newFilter);
         storeAll(newList);
-        return nf;
+        return namedFilters.get(newFilter.getId());
+    }
+
+    public static synchronized void activateMarker(final Collection<NamedFilter> filters) {
+        final Set<Integer> filterIds = filters.stream().map(NamedFilter::getId).collect(Collectors.toSet());
+        final List<NamedFilter> newList = getAllDeepCopy();
+        for (final NamedFilter nf : newList) {
+            nf.setConditionalMarkerActive(filterIds.contains(nf.getId()));
+        }
+        storeAll(newList);
     }
 
     /**
@@ -284,9 +386,10 @@ public class NamedFilter {
         if (cache == null) {
             return new ImmutablePair<>(Collections.emptyList(), Collections.emptyList());
         }
+        ensureCache();
         final List<NamedFilter> active = new ArrayList<>();
         final List<NamedFilter> passive = new ArrayList<>();
-        for (final NamedFilter nf : ensureList()) {
+        for (final NamedFilter nf : namedFiltersSortedByPrioAndName) {
             final boolean matches = filterMatches(nf, cache);
             if (matches) {
                 if (nf.conditionalMarkerActive) {
@@ -326,27 +429,7 @@ public class NamedFilter {
             filterStorage.clear();
             filterStorage.addAll(list);
         };
-        namedFiltersLoaded = false; // reset lazy cache
-        nextId.set(1); // reset ids
-    }
-
-    /** FOR UNIT/INSTR-TEST ONLY: inject a load function for unit testing (bypasses DataStore). Pass null to reset to default. */
-    private static void setLoadFunctionForTesting(@Nullable final Supplier<List<NamedFilter>> fn) {
-        loadFunction = fn != null ? fn : DataStore.DBFilters::loadAll;
-        namedFiltersLoaded = false; // reset lazy cache
-    }
-
-    /** FOR UNIT/INSTR-TEST ONLY: inject a store function for unit testing (bypasses DataStore). Pass null to reset to default. */
-    private static void setStoreFunctionForTesting(@Nullable final Consumer<List<NamedFilter>> fn) {
-        storeFunction = fn != null ? fn : DataStore.DBFilters::storeAll;
-    }
-
-    /** FOR UNIT/INSTR-TEST ONLY: reset the static state (for testing only). */
-    private static void resetForTesting() {
-        namedFiltersLoaded = false;
-        nextId.set(1);
-        loadFunction = DataStore.DBFilters::loadAll;
-        storeFunction = DataStore.DBFilters::storeAll;
+        cacheLoaded = false; // reset lazy cache
     }
 
     // -------------------------------------------------------------------------

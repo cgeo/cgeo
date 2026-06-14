@@ -11,12 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.After;
 import org.junit.Before;
@@ -42,7 +37,7 @@ public class NamedFilterTest {
     @Test
     public void testPublicConstructorStoresAllFields() {
         final GeocacheFilter filter = GeocacheFilter.create(false, false, null);
-        final NamedFilter nf = new NamedFilter(42, "TestName", filter, 0x1f600, true);
+        final NamedFilter nf = new NamedFilter("TestName", filter, 0x1f600, true, NamedFilter.MarkerPriority.NORMAL).setId(42);
 
         assertThat(nf.getId()).isEqualTo(42);
         assertThat(nf.getName()).isEqualTo("TestName");
@@ -52,22 +47,15 @@ public class NamedFilterTest {
     }
 
     @Test
-    public void testAddNewAutoIncrementsId() {
-        final NamedFilter first = NamedFilter.addNew("First", null);
-        final NamedFilter second = NamedFilter.addNew("Second", null);
-        final NamedFilter third = NamedFilter.addNew("Third", null);
-
-        assertThat(first.getId()).isNotEqualTo(second.getId());
-    }
-
-    @Test
-    public void testAddNewInsertsAtPositionZero() {
-        final NamedFilter first = NamedFilter.addNew("First", null);
-        final NamedFilter second = NamedFilter.addNew("Second", null);
+    public void testAddNewSortsAlphabetically() {
+        final NamedFilter n1 = NamedFilter.addNew("B - Second", null);
+        final NamedFilter n2 = NamedFilter.addNew("A - First", null);
+        final NamedFilter n3 = NamedFilter.addNew("C - Third", null);
 
         // Second added should be at position 0 (highest priority)
-        assertThat(NamedFilter.getAll().get(0)).isEqualTo(second);
-        assertThat(NamedFilter.getAll().get(1)).isEqualTo(first);
+        assertThat(NamedFilter.getAll().get(0).toConfig()).isEqualTo(n2.toConfig());
+        assertThat(NamedFilter.getAll().get(1).toConfig()).isEqualTo(n1.toConfig());
+        assertThat(NamedFilter.getAll().get(2).toConfig()).isEqualTo(n3.toConfig());
     }
 
     @Test
@@ -75,7 +63,7 @@ public class NamedFilterTest {
         NamedFilter.addNew("Test", null);
         final List<NamedFilter> all = NamedFilter.getAll();
         try {
-            all.add(new NamedFilter(99, "Extra", null, EmojiUtils.NO_EMOJI, false));
+            all.add(new NamedFilter("Extra", null).setId(99));
             // If we get here, the list was mutable - fail
             assertThat(false).as("List should be unmodifiable").isTrue();
         } catch (final UnsupportedOperationException e) {
@@ -87,8 +75,8 @@ public class NamedFilterTest {
     public void testStoreAllCallsStoreFunction() {
 
         final List<NamedFilter> newList = Arrays.asList(
-                new NamedFilter(1, "A", null, EmojiUtils.NO_EMOJI, false),
-                new NamedFilter(2, "B", null, EmojiUtils.NO_EMOJI, false)
+                new NamedFilter("A", null).setId(1),
+                new NamedFilter("B", null).setId(2)
         );
         NamedFilter.storeAll(newList);
 
@@ -99,8 +87,8 @@ public class NamedFilterTest {
     public void testStoreAllReplacesInMemoryList() {
         NamedFilter.addNew("Old", null);
         final List<NamedFilter> newList = Arrays.asList(
-                new NamedFilter(10, "NewA", null, EmojiUtils.NO_EMOJI, false),
-                new NamedFilter(11, "NewB", null, EmojiUtils.NO_EMOJI, false)
+                new NamedFilter("NewA", null).setId(10),
+                new NamedFilter("NewB", null).setId(11)
         );
         NamedFilter.storeAll(newList);
 
@@ -112,7 +100,7 @@ public class NamedFilterTest {
 
     @Test
     public void testGetByIdReturnsCorrectFilter() {
-        final NamedFilter nf = new NamedFilter(55, "ByIdTest", null, EmojiUtils.NO_EMOJI, false);
+        final NamedFilter nf = new NamedFilter("ByIdTest", null).setId(55);
         NamedFilter.storeAll(Collections.singletonList(nf));
 
         assertThat(NamedFilter.getById(55)).isEqualTo(nf);
@@ -126,7 +114,7 @@ public class NamedFilterTest {
     @Test
     public void testNameExistsCaseInsensitive() {
         NamedFilter.storeAll(Collections.singletonList(
-                new NamedFilter(1, "Test", null, EmojiUtils.NO_EMOJI, false)));
+                new NamedFilter("Test", null).setId(1)));
 
         assertThat(NamedFilter.nameExists("test")).isTrue();
         assertThat(NamedFilter.nameExists("TEST")).isTrue();
@@ -140,7 +128,7 @@ public class NamedFilterTest {
         typeFilter.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, typeFilter);
 
-        final NamedFilter nf = new NamedFilter(1, "Tradi", gf, EmojiUtils.NO_EMOJI, false);
+        final NamedFilter nf = new NamedFilter("Tradi", gf).setId(1);
         NamedFilter.storeAll(Collections.singletonList(nf));
 
         // Create an equivalent filter
@@ -157,7 +145,7 @@ public class NamedFilterTest {
         typeFilter.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, typeFilter);
         NamedFilter.storeAll(Collections.singletonList(
-                new NamedFilter(1, "Tradi", gf, EmojiUtils.NO_EMOJI, false)));
+                new NamedFilter("Tradi", gf).setId(1)));
 
         final TypeGeocacheFilter typeFilter2 = new TypeGeocacheFilter();
         typeFilter2.setValues(Collections.singletonList(CacheType.MYSTERY));
@@ -175,13 +163,13 @@ public class NamedFilterTest {
         final TypeGeocacheFilter typeFilter = new TypeGeocacheFilter();
         typeFilter.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter activeGf = GeocacheFilter.create(false, false, typeFilter);
-        final NamedFilter activeNf = new NamedFilter(1, "Active", activeGf, 0x1f600, true);
+        final NamedFilter activeNf = new NamedFilter("Active", activeGf, 0x1f600, true, NamedFilter.MarkerPriority.NORMAL).setId(1);
 
         // Passive filter that matches
         final TypeGeocacheFilter typeFilter2 = new TypeGeocacheFilter();
         typeFilter2.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter passiveGf = GeocacheFilter.create(false, false, typeFilter2);
-        final NamedFilter passiveNf = new NamedFilter(2, "Passive", passiveGf, 0x2764, false);
+        final NamedFilter passiveNf = new NamedFilter("Passive", passiveGf, 0x2764, false, NamedFilter.MarkerPriority.NORMAL).setId(2);
 
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
@@ -199,7 +187,7 @@ public class NamedFilterTest {
         typeFilter.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, typeFilter);
         NamedFilter.storeAll(Collections.singletonList(
-                new NamedFilter(1, "NoMatch", gf, 0x1f600, true)));
+                new NamedFilter("NoMatch", gf, 0x1f600, true, null).setId(1)));
 
         final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
         assertThat(result.getLeft()).isEmpty();
@@ -211,8 +199,8 @@ public class NamedFilterTest {
         final Geocache cache = new Geocache();
         cache.setType(CacheType.MYSTERY);
 
-        final NamedFilter activeNf = new NamedFilter(1, "AllActive", null, 0x1f600, true);
-        final NamedFilter passiveNf = new NamedFilter(2, "AllPassive", null, 0x2764, false);
+        final NamedFilter activeNf = new NamedFilter("AllActive", null, 0x1f600, true, null).setId(1);
+        final NamedFilter passiveNf = new NamedFilter("AllPassive", null, 0x2764, false, null).setId(2);
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
         final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
@@ -237,8 +225,8 @@ public class NamedFilterTest {
         tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
 
-        final NamedFilter activeNf = new NamedFilter(1, "A", gf, 0x1f600, true);
-        final NamedFilter passiveNf = new NamedFilter(2, "P", gf, 0x2764, false);
+        final NamedFilter activeNf = new NamedFilter("A", gf, 0x1f600, true, null).setId(1);
+        final NamedFilter passiveNf = new NamedFilter("P", gf, 0x2764, false, null).setId(2);
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
         final List<Integer> markers = NamedFilter.getMarkersForCache(cache);
@@ -251,9 +239,8 @@ public class NamedFilterTest {
         tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
 
-        final NamedFilter original = new NamedFilter(77, "RoundTrip", gf, 0x1f600, true);
-        final JsonNode json = original.toJson();
-        final NamedFilter restored = NamedFilter.fromJson(json);
+        final NamedFilter original = new NamedFilter("RoundTrip", gf, 0x1f600, true, null).setId(77);
+        final NamedFilter restored = NamedFilter.createFromConfig(original.toConfig());
 
         assertThat(restored.getId()).isEqualTo(77);
         assertThat(restored.getName()).isEqualTo("RoundTrip");
@@ -264,9 +251,8 @@ public class NamedFilterTest {
 
     @Test
     public void testFromJsonUsesStoredId() {
-        final NamedFilter original = new NamedFilter(123, "StoredId", null, EmojiUtils.NO_EMOJI, false);
-        final JsonNode json = original.toJson();
-        final NamedFilter restored = NamedFilter.fromJson(json);
+        final NamedFilter original = new NamedFilter("StoredId", null, EmojiUtils.NO_EMOJI, false, null).setId(123);
+        final NamedFilter restored = NamedFilter.createFromConfig(original.toConfig());
 
         assertThat(restored.getId()).isEqualTo(123);
     }
@@ -277,7 +263,7 @@ public class NamedFilterTest {
         final NamedFilterGeocacheFilter selfRef = new NamedFilterGeocacheFilter();
 
         final GeocacheFilter gf = GeocacheFilter.create(false, false, selfRef);
-        final NamedFilter nf = new NamedFilter(999, "Self", gf, EmojiUtils.NO_EMOJI, true);
+        final NamedFilter nf = new NamedFilter("Self", gf, EmojiUtils.NO_EMOJI, true, null).setId(999);
         selfRef.setNamedFilters(Collections.singletonList(nf));
         NamedFilter.storeAll(Collections.singletonList(nf));
 
@@ -290,9 +276,9 @@ public class NamedFilterTest {
 
     @Test
     public void testPriorityOrderPreservedAfterStoreAll() {
-        final NamedFilter a = new NamedFilter(1, "A", null, EmojiUtils.NO_EMOJI, false);
-        final NamedFilter b = new NamedFilter(2, "B", null, EmojiUtils.NO_EMOJI, false);
-        final NamedFilter c = new NamedFilter(3, "C", null, EmojiUtils.NO_EMOJI, false);
+        final NamedFilter a = new NamedFilter("A", null).setId(1);
+        final NamedFilter b = new NamedFilter("B", null).setId(2);
+        final NamedFilter c = new NamedFilter("C", null).setId(3);
         NamedFilter.storeAll(Arrays.asList(a, b, c));
 
         final List<NamedFilter> all = NamedFilter.getAll();
@@ -301,24 +287,5 @@ public class NamedFilterTest {
         assertThat(all.get(2).getName()).isEqualTo("C");
     }
 
-    @Test
-    public void testAtomicIdGenerationThreadsafe() throws InterruptedException {
-        final int threadCount = 20;
-        final CountDownLatch latch = new CountDownLatch(threadCount);
-        final ExecutorService executor = Executors.newFixedThreadPool(threadCount);
-        final List<Integer> ids = Collections.synchronizedList(new ArrayList<>());
 
-        for (int i = 0; i < threadCount; i++) {
-            executor.submit(() -> {
-                final NamedFilter nf = NamedFilter.addNew("Thread", null);
-                ids.add(nf.getId());
-                latch.countDown();
-            });
-        }
-        latch.await();
-        executor.shutdown();
-
-        // All IDs must be unique
-        assertThat(ids.stream().distinct().collect(Collectors.toList())).hasSize(threadCount);
-    }
 }
