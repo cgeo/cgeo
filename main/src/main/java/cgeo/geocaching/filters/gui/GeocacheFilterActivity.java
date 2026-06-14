@@ -202,7 +202,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         // Open NamedFilterActivity button
         binding.filterOpenNamedFilterActivity.setOnClickListener(v ->
-                startActivity(new Intent(this, NamedFilterActivity.class)));
+                NamedFilterActivity.startActivity(this));
         ViewUtils.setTooltip(binding.filterOpenNamedFilterActivity, TextParam.id(R.string.named_filter_activity_title));
     }
 

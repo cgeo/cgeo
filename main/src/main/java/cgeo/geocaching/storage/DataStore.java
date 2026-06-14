@@ -59,7 +59,6 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -120,7 +119,6 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleOnSubscribe;
@@ -893,36 +891,37 @@ public class DataStore {
         /** Loads all stored NamedFilters ordered by priority ascending (index 0 = highest priority). */
         public static List<NamedFilter> loadAll() {
             return withAccessLock(() -> queryToColl(dbTableFilters,
-                    new String[]{"treeconfig", "priority"},
-                    null, null, "priority ASC", null, new ArrayList<>(),
+                    new String[]{"_id", "treeconfig"},
+                    null, null, null, null, new ArrayList<>(),
                     c -> {
-                        final String json = c.getString(0);
+                        final String json = c.getString(1);
                         if (json == null) {
                             return null;
                         }
-                        final JsonNode node = JsonUtils.stringToNode(json);
-                        if (node == null) {
-                            return null;
-                        }
-                        return NamedFilter.fromJson(node);
+                        final NamedFilter nf = NamedFilter.createFromConfig(json);
+                        nf.setId(c.getInt(0));
+                        return nf;
                     }));
         }
 
         /**
-         * Replaces all rows in cg_filters with the given list. Priority is set to the list index.
+         * Replaces all rows in cg_filters with the given list.
          */
         public static void storeAll(final List<NamedFilter> filters) {
             withAccessLock(() -> {
+                //delete all entries
                 database.delete(dbTableFilters, null, null);
-                for (int i = 0; i < filters.size(); i++) {
-                    final NamedFilter nf = filters.get(i);
+                //insert all. Some have an id, some may not yet have an id
+                for(NamedFilter nf : filters) {
                     final ContentValues values = new ContentValues();
+                    if (nf.getId() > 0) {
+                        values.put("_id", nf.getId());
+                    }
                     values.put("name", nf.getName());
-                    values.put("treeconfig", JsonUtils.nodeToString(nf.toJson()));
-                    values.put("priority", i);
-                    database.insert(dbTableFilters, null, values);
+                    values.put("treeconfig", nf.toConfig());
+                    final int id = (int) database.insert(dbTableFilters, null, values);
+                    nf.setId(id);
                 }
-                return null;
             });
         }
 
@@ -1964,10 +1963,10 @@ public class DataStore {
                                     final String oldName = cursor.getString(0);
                                     final String oldConfig = cursor.getString(1);
                                     final GeocacheFilter gcFilter = GeocacheFilter.createFromConfig(oldConfig);
-                                    migratedFilters.add(new NamedFilter(idx + 1,
-                                            oldName != null ? oldName : "",
-                                            gcFilter,
-                                            EmojiUtils.NO_EMOJI, false));
+                                    migratedFilters.add(new NamedFilter(
+                                        oldName != null ? oldName : "",
+                                        gcFilter,
+                                        EmojiUtils.NO_EMOJI, false, NamedFilter.MarkerPriority.NORMAL).setId(idx + 1));
                                     idx++;
                                 }
                             }
@@ -1992,11 +1991,12 @@ public class DataStore {
                                             // ignore parse errors, use null filter
                                         }
                                     }
-                                    migratedFilters.add(new NamedFilter(numMigratedFilters + j + 1,
+                                    migratedFilters.add(new NamedFilter(
                                             "Marker Filter " + (j + 1),
                                             markerGf,
                                             markerId,
-                                            true));
+                                            true, NamedFilter.MarkerPriority.NORMAL)
+                                            .setId(numMigratedFilters + j + 1));
                                     j++;
                                 }
                             }
@@ -2004,9 +2004,9 @@ public class DataStore {
                             for (int i = 0; i < migratedFilters.size(); i++) {
                                 final NamedFilter nf = migratedFilters.get(i);
                                 final ContentValues cv = new ContentValues();
-                                cv.put("name", nf.getName());
-                                cv.put("treeconfig", cgeo.geocaching.utils.JsonUtils.nodeToString(nf.toJson()));
-                                cv.put("priority", i);
+                                cv.put("_id", nf.getId());
+                                cv.put("name", nf.getName()); //for legacy
+                                cv.put("treeconfig", nf.toConfig());
                                 db.insert(dbTableFilters, null, cv);
                             }
                             // Step 6: drop old table and clear SharedPreferences marker keys
