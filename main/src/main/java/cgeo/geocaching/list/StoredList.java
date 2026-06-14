@@ -383,12 +383,13 @@ public final class StoredList extends AbstractList {
             final TextInputEditText listname = menu.findViewById(R.id.title);
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
+            final String oldPrefix = defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "";
 
             final List<String> hierarchies = DataStore.getListHierarchy();
             hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
             hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
             listprefix.setVisibility(View.VISIBLE);
-            listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+            listprefixView.setText(Strings.CS.endsWith(oldPrefix, GROUP_SEPARATOR) ? oldPrefix.substring(0, oldPrefix.length() - 1) : oldPrefix);
             listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
 
             ((EditText) menu.findViewById(R.id.title)).setText(current);
@@ -401,8 +402,9 @@ public final class StoredList extends AbstractList {
                             if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
                                 prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString().trim();
                             } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(temp, GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                                prefix = temp;
                             }
+                            prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
                             runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString().trim()));
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
@@ -412,7 +414,6 @@ public final class StoredList extends AbstractList {
             ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
 
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            final String oldPrefix = listprefixView.getText().toString();
             final String oldListname = Objects.requireNonNull(listname.getText()).toString();
             listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, s.toString(), oldListname, listname.getText().toString())));
             ((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, listprefixView.getText().toString(), oldListname, listname.getText().toString())));
@@ -434,8 +435,9 @@ public final class StoredList extends AbstractList {
                     prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).getText()).toString().trim();
                     blocked = prefix.isEmpty();
                 } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
-                    prefix = temp + (!Strings.CS.endsWith(temp, GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                    prefix = temp;
                 }
+                prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
                 unchanged = unchanged && Strings.CS.equals(oldPrefix, prefix);
             }
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!unchanged && !blocked);
