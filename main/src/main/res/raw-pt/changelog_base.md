@@ -96,3 +96,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Some texts ignore language switching
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector
