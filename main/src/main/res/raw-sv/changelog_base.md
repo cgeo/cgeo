@@ -96,3 +96,4 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Vissa texter ignorerar språkväxling
 - Fix: "Använd brittiska inställningar" initieras inte korrekt på nya installationer
 - Förändring: Bergamot översättningsmodul med öppen källkod som ersätter Google ML Kit översättare
+- Change: New emoji selector
