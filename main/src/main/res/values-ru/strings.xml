@@ -377,7 +377,6 @@
     <string name="translator_model">Модель перевода</string>
     <string name="translator_tooltip">Офлайн перевод</string>
     <string name="translator_language_select">Выберите исходный язык</string>
-    <string name="translator_language_target_select">Выбрать целевой язык</string>
     <string name="translator_language_unsupported">Язык (%s) не поддерживается для перевода. Нажмите, чтобы выбрать исходный язык.</string>
     <string name="translator_language_unknown">Невозможно определить язык. Нажмите, чтобы выбрать исходный язык.</string>
     <string name="translator_language_detected">Перевести с \"%s\". Нажмите, чтобы выбрать исходный язык.</string>
@@ -2518,7 +2517,6 @@
     <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
-    <string name="number_input_title">Установите значение</string>
     <string name="number_input_range">Установите значение между %1$s и %2$s</string>
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
@@ -2909,13 +2907,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" является частью первичного ключа, не подлежит редактированию"</string>
     <string name="dbi_search_title">Искать</string>
     <string name="dbi_search_columnSelection">Ограничить</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Недавние</string>
-    <string name="emoji_category_symbols">Символы</string>
-    <string name="emoji_category_dots">Точки</string>
-    <string name="emoji_category_places">Места</string>
-    <string name="emoji_category_food">Еда и напитки</string>
-    <string name="emoji_category_activity">Активность</string>
-    <string name="emoji_category_people">Люди</string>
-    <string name="emoji_category_numbers">Числа</string>
 </resources>
