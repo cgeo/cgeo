@@ -8,11 +8,12 @@ import cgeo.geocaching.databinding.NamedFilterListItemBinding;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
+import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
@@ -28,24 +29,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.android.material.button.MaterialButton;
+import org.apache.commons.lang3.StringUtils;
 
 public class NamedFilterActivity extends AbstractActionBarActivity {
 
-    public static final int REQUEST_SELECT_NAMED_FILTER = 457;
-    public static final String EXTRA_SELECT_MODE = "select_mode";
-    public static final String EXTRA_RESULT_NAMED_FILTER_ID = "named_filter_id";
+    private static final String STATE_CURRENT_NAMED_FILTER_EDIT = "state_current_named_filter:edit";
 
     private ActivityNamedFilterBinding binding;
     private NamedFilterListAdapter filterAdapter;
-    private String originalJson;
     private int pendingFilterEditPosition = -1;
     private BooleanSupplier navUpHandler;
-    private boolean selectMode;
+
     /** Guard flag to prevent the header checkbox listener from firing during programmatic updates. */
     private boolean updatingEnableAllCheckbox = false;
 
@@ -53,16 +52,9 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     // Static helpers
     // -------------------------------------------------------------------------
 
-    /**
-     * Starts {@link NamedFilterActivity} in "select" mode so the user can both
-     * manage named filters and pick one to replace the current filter.
-     * The caller must handle {@link Activity#onActivityResult} with request code
-     * {@link #REQUEST_SELECT_NAMED_FILTER} and read {@link #EXTRA_RESULT_NAMED_FILTER_ID}.
-     */
-    public static void startForSelect(@NonNull final Activity activity) {
+    public static void startActivity(@NonNull final Activity activity) {
         final Intent intent = new Intent(activity, NamedFilterActivity.class);
-        intent.putExtra(EXTRA_SELECT_MODE, true);
-        activity.startActivityForResult(intent, REQUEST_SELECT_NAMED_FILTER);
+        activity.startActivity(intent);
     }
 
     // -------------------------------------------------------------------------
@@ -71,10 +63,15 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
 
     protected static final class NamedFilterViewHolder extends AbstractRecyclerViewHolder {
         final NamedFilterListItemBinding itemBinding;
+        final TextSpinner<NamedFilter.MarkerPriority> markerPrioSpinner = new TextSpinner<>();
 
         NamedFilterViewHolder(final View rowView) {
             super(rowView);
             itemBinding = NamedFilterListItemBinding.bind(rowView);
+            markerPrioSpinner.setValues(Arrays.asList(NamedFilter.MarkerPriority.values()))
+                .setTextView(itemBinding.markerPriority)
+                .setTextDisplayMapperPure(rp -> rp.getL10n() + " ▼")
+                .setDisplayMapperPure(NamedFilter.MarkerPriority::getL10n);
         }
     }
 
@@ -96,10 +93,10 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
             }
 
             // Row 1: marker button
-            final int markerId = item.getMarkerId();
+            final String markerId = item.getMarkerId();
             final MaterialButton markerBtn = holder.itemBinding.markerButton;
-            if (markerId != EmojiUtils.NO_EMOJI) {
-                markerBtn.setText(EmojiUtils.getEmojiAsString(markerId));
+            if (StringUtils.isNotBlank(markerId)) {
+                markerBtn.setText(markerId);
                 markerBtn.setIcon(null);
             } else {
                 markerBtn.setText(null);
@@ -127,9 +124,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     updateEnableAllMarkersCheckbox();
                 }
             });
-
-            // Select button: only visible in select mode
-            holder.itemBinding.selectButton.setVisibility(selectMode ? View.VISIBLE : View.GONE);
+            holder.markerPrioSpinner.set(item.getConditionalMarkerPriority());
         }
 
         @NonNull
@@ -146,26 +141,11 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     return;
                 }
                 final NamedFilter nf = getItem(pos);
-                EmojiUtils.selectEmojiPopup(NamedFilterActivity.this, nf.getMarkerId(), null, newMarkerId -> {
+                EmojiUtils.selectEmojiPopup(NamedFilterActivity.this, nf.getMarkerId(), false, null, newMarkerId -> {
                     nf.setMarkerId(newMarkerId);
                     notifyItemChanged(pos);
                     updateEmptyHint();
                 });
-            });
-
-            // Edit name button
-            holder.itemBinding.editNameButton.setOnClickListener(v -> {
-                final int pos = holder.getBindingAdapterPosition();
-                if (pos == androidx.recyclerview.widget.RecyclerView.NO_ID) {
-                    return;
-                }
-                final NamedFilter nf = getItem(pos);
-                SimpleDialog.of(NamedFilterActivity.this)
-                        .setTitle(R.string.named_filter_add)
-                        .input(new SimpleDialog.InputOptions().setInitialValue(nf.getName()), newName -> {
-                            nf.setName(newName);
-                            notifyItemChanged(pos);
-                        });
             });
 
             // Edit filter button
@@ -192,21 +172,25 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                 }
             });
 
-            // Select button (select mode only)
-            holder.itemBinding.selectButton.setOnClickListener(v -> {
+            //Name field
+            holder.itemBinding.filterName.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
                 final int pos = holder.getBindingAdapterPosition();
                 if (pos == androidx.recyclerview.widget.RecyclerView.NO_ID) {
                     return;
                 }
                 final NamedFilter nf = getItem(pos);
-                final Intent resultIntent = new Intent();
-                resultIntent.putExtra(EXTRA_RESULT_NAMED_FILTER_ID, nf.getId());
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            });
+                nf.setName(s.toString());
+            }));
 
-            // Drag handle
-            registerStartDrag(holder, holder.itemBinding.dragHandle);
+            // Marker priority spinner
+            holder.markerPrioSpinner.setChangeListener(mp -> {
+                final int pos = holder.getBindingAdapterPosition();
+                if (pos == androidx.recyclerview.widget.RecyclerView.NO_ID) {
+                    return;
+                }
+                final NamedFilter nf = getItem(pos);
+                nf.setConditionalMarkerPriority(mp);
+            });
 
             return holder;
         }
@@ -228,17 +212,18 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         setTheme();
         setTitle(LocalizationUtils.getString(R.string.named_filter_activity_title));
 
-        final Bundle extras = getIntent().getExtras();
-        selectMode = extras != null && extras.getBoolean(EXTRA_SELECT_MODE, false);
-
         binding = ActivityNamedFilterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         filterAdapter = new NamedFilterListAdapter(binding.namedFilterList);
 
-        final List<NamedFilter> filters = NamedFilter.getAllDeepCopy();
+        final List<NamedFilter> filters;
+        if (savedInstanceState != null && savedInstanceState.getString(STATE_CURRENT_NAMED_FILTER_EDIT) != null) {
+            filters = NamedFilter.createFromListConfig(savedInstanceState.getString(STATE_CURRENT_NAMED_FILTER_EDIT));
+        } else {
+            filters = NamedFilter.getAllDeepCopy();
+        }
         filterAdapter.setItems(filters);
-        originalJson = filtersToJson(filters);
 
         navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
@@ -266,8 +251,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_item_save) {
-            saveFilters();
-            finish();
+            saveFiltersAndFinish();
             return true;
         } else if (itemId == R.id.menu_item_cancel) {
             return onSupportNavigateUp();
@@ -289,8 +273,9 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     }
 
     private boolean onNavigationIntercepted(final Runnable navigationAction) {
-        final String currentJson = filtersToJson(filterAdapter.getItems());
-        if (originalJson != null && !originalJson.equals(currentJson)) {
+        final String currentJson = NamedFilter.toListConfig(filterAdapter.getItems());
+        final String storedJson = NamedFilter.toListConfig(NamedFilter.getAll());
+        if (storedJson != null && !storedJson.equals(currentJson)) {
             SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
                     .confirm(navigationAction);
             return true;
@@ -314,6 +299,12 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_CURRENT_NAMED_FILTER_EDIT, NamedFilter.toListConfig(filterAdapter.getItems()));
+    }
+
     // -------------------------------------------------------------------------
     // Helpers
     // -------------------------------------------------------------------------
@@ -322,29 +313,17 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         SimpleDialog.of(this)
                 .setTitle(R.string.named_filter_add)
                 .input(new SimpleDialog.InputOptions(), newName -> {
-                    final NamedFilter nf = new NamedFilter(generateLocalId(), newName == null ? "" : newName, null, EmojiUtils.NO_EMOJI, false);
+                    final NamedFilter nf = new NamedFilter(newName == null ? "" : newName, null);
                     filterAdapter.addItem(0, nf);
                     updateEmptyHint();
                     updateEnableAllMarkersCheckbox();
                 });
     }
 
-    private int generateLocalId() {
-        // Generate a unique negative id for items not yet persisted; real IDs are assigned on storeAll
-        int minId = -1;
-        for (final NamedFilter nf : filterAdapter.getItems()) {
-            if (nf.getId() <= minId) {
-                minId = nf.getId() - 1;
-            }
-        }
-        return minId;
-    }
-
-    private void saveFilters() {
+    private void saveFiltersAndFinish() {
         final List<NamedFilter> items = filterAdapter.getItems();
-        // Reassign IDs if needed before saving
         NamedFilter.storeAll(items);
-        originalJson = filtersToJson(NamedFilter.getAll());
+        finish();
     }
 
     private void updateEmptyHint() {
@@ -363,13 +342,5 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         updatingEnableAllCheckbox = false;
     }
 
-    @NonNull
-    private static String filtersToJson(final List<NamedFilter> filters) {
-        final ArrayNode array = JsonUtils.createArrayNode();
-        for (final NamedFilter nf : filters) {
-            array.add(nf.toJson());
-        }
-        return JsonUtils.nodeToString(array);
-    }
 }
 

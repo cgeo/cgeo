@@ -265,15 +265,7 @@
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
 
-    <!-- link data to WhereYouGo - must be according to WhereYouGo configuration in their AndroidManifest.xml -->
-    <string translatable="false" name="whereyougo_action_Mapsforge">"menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"</string>
-
-    <!-- WhereYouGo helper - must be the same values as in WhereYouGo -->
-    <string translatable="false" name="cgeo_queryMapFile_resultParam">mapfile</string>
-    <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
-
     <!-- play store ids -->
-    <string translatable="false" name="package_whereyougo">menion.android.whereyougo</string>
     <string translatable="false" name="package_chirpwolf">de.wolffire.chirpwolf</string>
     <string translatable="false" name="package_brouter">btools.routingapp</string>
     <string translatable="false" name="package_google_translate">com.google.android.apps.translate</string>

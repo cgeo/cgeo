@@ -15,10 +15,10 @@ import java.util.HashMap;
 
 public abstract class SetCacheIconCommand extends AbstractCachesCommand {
 
-    private final int newCacheIcon;
-    private final HashMap<String, Integer> undo;
+    @Nullable private final String newCacheIcon;
+    private final HashMap<String, String> undo;
 
-    protected SetCacheIconCommand(@NonNull final Activity context, @NonNull final Collection<Geocache> caches, final int newCacheIcon) {
+    protected SetCacheIconCommand(@NonNull final Activity context, @NonNull final Collection<Geocache> caches, @Nullable final String newCacheIcon) {
         super(context, caches, R.string.command_set_cache_icons_progress);
         this.newCacheIcon = newCacheIcon;
         final int size = caches.size();

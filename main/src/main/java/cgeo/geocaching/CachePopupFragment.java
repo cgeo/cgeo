@@ -139,7 +139,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             toolbar.setLongClickable(true);
             toolbar.setOnClickListener(v -> {
                 if (cache.isOffline()) {
-                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
+                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), false, cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
                         toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);

@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -97,7 +98,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                     final String geocode;
                     if (which == 0) {
                         // create new UDC
-                        geocode = InternalConnector.createCache(context, name, null, 0, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
+                        geocode = InternalConnector.createCache(context, name, null, EmojiUtils.NO_EMOJI, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
                     } else {
                         // add to an existing UDC
                         geocode = items.get(which).getGeocode();

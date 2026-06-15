@@ -124,9 +124,19 @@ public class MapUtils {
         final boolean excludeWpParking = Settings.isExcludeWpParking();
         final boolean excludeWpVisited = Settings.isExcludeWpVisited();
 
+        final Set<String> geocodes = new HashSet<>();
+        for (final Waypoint wp : waypoints) {
+            geocodes.add(wp.getGeocode());
+        }
+        final HashMap<String, Geocache> cacheByGeocode = new HashMap<>();
+        for (final Geocache cache : DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB)) {
+            cacheByGeocode.put(cache.getGeocode(), cache);
+        }
+
         final List<Waypoint> removeList = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
-            final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            final Geocache cache = cacheByGeocode.get(wp.getGeocode());
+            wp.setParentGeocache(cache);
             final WaypointType wpt = wp.getWaypointType();
             if (cache == null ||
                     (filter != null && !filter.filter(cache)) ||

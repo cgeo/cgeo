@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -14,18 +13,18 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class FilterUtils {
 
@@ -67,7 +66,7 @@ public class FilterUtils {
     }
 
     public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
-        activity.startActivity(new Intent(activity, NamedFilterActivity.class));
+        NamedFilterActivity.startActivity(activity);
     }
 
     /** opens a dialog to activate/deactivate named filter markers */
@@ -80,13 +79,8 @@ public class FilterUtils {
             }
         }
 
-        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected, selected -> {
-            final List<NamedFilter> updated = new ArrayList<>(filters);
-            for (final NamedFilter nf : updated) {
-                nf.setConditionalMarkerActive(selected.contains(nf));
-            }
-            NamedFilter.storeAll(updated);
-        });
+        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected,
+                NamedFilter::activateMarker);
     }
 
     public static void openDialogMultiselectNamedFilters(final Context context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {
@@ -100,20 +94,6 @@ public class FilterUtils {
         SimpleDialog.ofContext(context)
             .setTitle(title)
             .selectMultiple(model, selectionListener);
-    }
-
-
-    /** opens a dialog to select one named filter */
-    public static void openDialogSelectNamedFilter(@NonNull final Context activity, @Nullable final TextParam title, final Consumer<NamedFilter> onSelected) {
-        openDialogSelectNamedFilter(activity, title, null, f -> {
-            if (onSelected == null || f == null || !(f.getTree() instanceof NamedFilterGeocacheFilter)) {
-                return;
-            }
-            final Set<NamedFilter> nf = ((NamedFilterGeocacheFilter) f.getTree()).getNamedFilters();
-            if (nf != null && nf.size() == 1) {
-                onSelected.accept(nf.iterator().next());
-            }
-        });
     }
 
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
@@ -146,7 +126,9 @@ public class FilterUtils {
                 return false;
             })
             .selectSingle(model, selectedNamedFilter -> {
-                final GeocacheFilter newFilter = createFilterForNamedFilter(selectedNamedFilter);
+                final GeocacheFilter sourceFilter = selectedNamedFilter.getFilter();
+                final GeocacheFilter newFilter = sourceFilter == null ? GeocacheFilter.createEmpty() :
+                    GeocacheFilter.create(sourceFilter.isOpenInAdvancedMode(), sourceFilter.isIncludeInconclusive(), selectedNamedFilter, sourceFilter.getTree());
                 if (filterContext != null) {
                     filterContext.set(newFilter);
                 }
@@ -154,14 +136,6 @@ public class FilterUtils {
                     onFilterSelected.accept(newFilter);
                 }
             });
-    }
-
-    public static GeocacheFilter createFilterForNamedFilter(final NamedFilter nf) {
-        if (nf == null) {
-            return GeocacheFilter.createEmpty();
-        }
-        final NamedFilterGeocacheFilter nff = NamedFilterGeocacheFilter.createFor(nf);
-        return GeocacheFilter.createEmpty(true).and(nff);
     }
 
     /** builds basic display model for named filters, initialized to "single-plain". Handles grouping */
@@ -178,7 +152,7 @@ public class FilterUtils {
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
-            .setDisplayIconMapper(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
+            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
             .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)

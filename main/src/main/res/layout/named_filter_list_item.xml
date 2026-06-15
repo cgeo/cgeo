@@ -23,28 +23,17 @@
             app:icon="@drawable/ic_menu_marker_off"
             app:iconTint="@color/colorText_listsSecondary"
             android:textSize="@dimen/textSize_listsPrimary"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/filter_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textSize="@dimen/textSize_detailsPrimary"
-            android:textColor="@color/colorText_listsPrimary"
-            android:ellipsize="end"
-            android:maxLines="1"
-            tools:text="My Filter" />
-
-        <ImageView
-            android:id="@+id/drag_handle"
-            android:layout_width="@dimen/buttonSize_iconButton"
-            android:layout_height="@dimen/buttonSize_iconButton"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_menu_reorder"
-            tools:ignore="ContentDescription" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/waypoint_name" android:labelFor="@id/filter_name" android:layout_weight="1" android:id="@+id/filter_name_layout"
+            android:layout_width="0dp" android:gravity="center_vertical">
+            <AutoCompleteTextView
+                android:id="@+id/filter_name"
+                style="@style/textinput_embedded_singleline" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -72,8 +61,17 @@
             android:id="@+id/activate_marker_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:text="@string/named_filter_activate_marker"
             android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/marker_priority"
+            style="@style/button_full"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            tools:text="Normal"/>
 
         <View
             android:layout_width="0dp"
@@ -81,28 +79,17 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/edit_name_button"
-            style="@style/button_icon"
-            app:icon="@drawable/ic_menu_edit"
-            tools:ignore="ContentDescription" />
-
-        <Button
             android:id="@+id/edit_filter_button"
             style="@style/button_icon"
             app:icon="@drawable/ic_menu_filter"
+            android:gravity="center_vertical"
             tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/delete_button"
             style="@style/button_icon"
             app:icon="@drawable/ic_menu_delete"
-            tools:ignore="ContentDescription" />
-
-        <Button
-            android:id="@+id/select_button"
-            style="@style/button_icon"
-            app:icon="@drawable/ic_menu_selectall"
-            android:visibility="gone"
+            android:gravity="center_vertical"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>

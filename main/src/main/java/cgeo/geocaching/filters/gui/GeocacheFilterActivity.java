@@ -42,6 +42,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
@@ -54,6 +55,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
@@ -101,8 +103,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.cache_filter_activity);
         binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_content));
-
         binding.filterPropsCheckboxes.removeAllViews();
+
         this.andOrFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_and_or), R.drawable.ic_menu_logic);
         this.inverseFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_inverse), R.drawable.ic_menu_invert);
 
@@ -157,6 +159,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         });
             }
         });
+        this.binding.filterReferenceNamedFilterDelete.setOnClickListener(v -> adjustNamedFilterReferenceViewFor(null));
     }
 
     @Override
@@ -167,8 +170,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
         binding.filterFillWithNamed.setOnClickListener(v -> {
-            FilterUtils.openDialogSelectNamedFilter(this, TextParam.id(R.string.named_filter_fill_with_named), selected ->
-                fillViewFromFilter(selected == null || selected.getFilter() == null ? null : selected.getFilter().toConfig(), true));
+            FilterUtils.openDialogSelectNamedFilter(this, TextParam.id(R.string.named_filter_fill_with_named), null, selected ->
+                fillViewFromFilter(selected == null ? null : selected.toConfig(), true));
         });
         ViewUtils.setTooltip(binding.filterFillWithNamed, TextParam.id(R.string.named_filter_fill_with_named));
 
@@ -179,19 +182,18 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         if (name == null || name.trim().isEmpty()) {
                             return;
                         }
-                        final GeocacheFilter currentFilter = getFilterFromView();
                         if (NamedFilter.nameExists(name)) {
                             SimpleDialog.of(this).setTitle(R.string.named_filter_name_exists_title)
                                     .setMessage(R.string.named_filter_name_exists_message, name)
-                                    .confirm(() -> NamedFilter.addNew(name, currentFilter));
+                                    .confirm(() -> saveViewAsNewNamedFilter(name));
                         } else {
-                            final NamedFilter existing = NamedFilter.filterConfigExists(currentFilter);
+                            final NamedFilter existing = NamedFilter.filterConfigExists(getFilterFromView());
                             if (existing != null) {
                                 SimpleDialog.of(this).setTitle(R.string.named_filter_config_exists_title)
                                         .setMessage(R.string.named_filter_config_exists_message, existing.getName())
-                                        .confirm(() -> NamedFilter.addNew(name, currentFilter));
+                                        .confirm(() -> saveViewAsNewNamedFilter(name));
                             } else {
-                                NamedFilter.addNew(name, currentFilter);
+                                saveViewAsNewNamedFilter(name);
                             }
                         }
                     });
@@ -200,8 +202,14 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         // Open NamedFilterActivity button
         binding.filterOpenNamedFilterActivity.setOnClickListener(v ->
-                startActivity(new Intent(this, NamedFilterActivity.class)));
+                NamedFilterActivity.startActivity(this));
         ViewUtils.setTooltip(binding.filterOpenNamedFilterActivity, TextParam.id(R.string.named_filter_activity_title));
+    }
+
+    private void saveViewAsNewNamedFilter(final String newName) {
+        adjustNamedFilterReferenceViewFor(null);
+        final NamedFilter newNamedFilter = NamedFilter.addNew(newName, getFilterFromView());
+        adjustNamedFilterReferenceViewFor(newNamedFilter);
     }
 
     @Override
@@ -275,6 +283,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 final GeocacheFilter filter = GeocacheFilter.checkConfig(inputFilter);
                 includeInconclusiveFilterCheckbox.setChecked(filter.isIncludeInconclusive());
                 setAdvanced = filter.isOpenInAdvancedMode();
+                adjustNamedFilterReferenceViewFor(filter.getReferencedNamedFilter());
                 IGeocacheFilter filterTree = filter.getTree();
                 if (filterTree instanceof NotGeocacheFilter) {
                     inverseFilterCheckbox.setChecked(true);
@@ -333,10 +342,18 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         andOrFilterCheckbox.setChecked(false);
         inverseFilterCheckbox.setChecked(false);
         includeInconclusiveFilterCheckbox.setChecked(false);
+        adjustNamedFilterReferenceViewFor(null);
         if (!isAdvancedView()) {
             switchToBasic();
         }
         adjustFilterEmptyView();
+    }
+
+    private void adjustNamedFilterReferenceViewFor(@Nullable final NamedFilter filter) {
+        binding.filterReferenceNamedFilter.setVisibility(filter == null ? View.GONE : View.VISIBLE);
+        binding.filterReferenceNamedFilterLine.setVisibility(filter == null ? View.GONE : View.VISIBLE);
+        binding.filterReferenceNamedFilterName.setText(filter == null ? "" : LocalizationUtils.getString(R.string.cache_filter_reference_based_on, filter.getNameAndMarker()));
+        binding.filterReferenceNamedFilterId.setText(filter == null ? "-1" : "" + filter.getId());
     }
 
     private void finishWithResult() {
@@ -394,6 +411,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         return GeocacheFilter.create(
                 binding.filterBasicAdvanced.isChecked(),
                 this.includeInconclusiveFilterCheckbox.isChecked(),
+                NamedFilter.getById(NumberUtils.toInt(binding.filterReferenceNamedFilterId.getText().toString(), -1)),
                 filter);
     }
 

@@ -1,6 +1,5 @@
 package cgeo.geocaching.list;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
@@ -22,7 +21,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +56,13 @@ public final class StoredList extends AbstractList {
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, true, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
     public final boolean preventAskForDeletion;
+    /** emoji assigned to this list as its marker, or null/empty for "none" */
+    @Nullable public final String emojiMarker;
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
-    public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title, 0, markerId);
+    public StoredList(final int id, final String title, @Nullable final String emojiMarker, final boolean preventAskForDeletion, final int count) {
+        super(id, title, 0);
+        this.emojiMarker = emojiMarker;
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
@@ -92,13 +93,11 @@ public final class StoredList extends AbstractList {
 
     public static class UserInterface {
         private final WeakReference<Activity> activityRef;
-        private final Resources res;
 
         public static final String GROUP_SEPARATOR = ":";
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
-            res = CgeoApplication.getInstance().getResources();
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
@@ -269,11 +268,11 @@ public final class StoredList extends AbstractList {
             if (item instanceof StoredList) {
                 if (item.id == STANDARD_LIST_ID) {
                     return ImageParam.id(R.drawable.ic_menu_save);
-                } else if (item.markerId > 0) {
-                    return ImageParam.emoji(item.markerId, 30);
+                } else if (StringUtils.isNotBlank(((StoredList) item).emojiMarker)) {
+                    return ImageParam.emoji(((StoredList) item).emojiMarker, 30);
                 }
             } else if (item instanceof PseudoList) {
-                return ImageParam.id(item.markerId);
+                return ImageParam.id(((PseudoList) item).drawableId);
             }
             if (isGroup) {
                 return ImageParam.id(R.drawable.downloader_folder);
@@ -383,26 +382,29 @@ public final class StoredList extends AbstractList {
             final TextInputEditText listname = menu.findViewById(R.id.title);
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
+            final String oldPrefix = defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "";
 
             final List<String> hierarchies = DataStore.getListHierarchy();
             hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
             hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
             listprefix.setVisibility(View.VISIBLE);
-            listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+            listprefixView.setText(Strings.CS.endsWith(oldPrefix, GROUP_SEPARATOR) ? oldPrefix.substring(0, oldPrefix.length() - 1) : oldPrefix);
             listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
 
             ((EditText) menu.findViewById(R.id.title)).setText(current);
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
                     .setTitle(dialogTitle)
                     .setPositiveButton(buttonTitle, ((d, which) -> {
+                            // same logic as in updateButtonState()
                             String prefix = "";
-                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString().trim();
                             if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
-                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
+                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString().trim();
                             } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                                prefix = temp;
                             }
-                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString()));
+                            prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
+                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString().trim()));
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                     .setView(menu);
@@ -411,10 +413,33 @@ public final class StoredList extends AbstractList {
             ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
 
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0)));
+            final String oldListname = Objects.requireNonNull(listname.getText()).toString();
+            listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, s.toString(), oldListname, listname.getText().toString())));
+            ((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, listprefixView.getText().toString(), oldListname, listname.getText().toString())));
+            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, listprefixView.getText().toString(), oldListname, s.toString())));
 
             ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
             ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
+        }
+
+        private static void updateButtonState(final AlertDialog dialog, final String oldPrefix, final String newPrefix, final String oldListname, final String newListname) {
+            final String tempListname = newListname.trim();
+            boolean unchanged = Strings.CS.equals(oldListname, tempListname);
+            boolean blocked = tempListname.isEmpty();
+            if (!blocked) {
+                // same logic as in handleListNameInput:builder.setPositiveButton() above
+                String prefix = "";
+                final String temp = newPrefix.trim();
+                if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
+                    prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).getText()).toString().trim();
+                    blocked = prefix.isEmpty();
+                } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
+                    prefix = temp;
+                }
+                prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
+                unchanged = unchanged && Strings.CS.equals(oldPrefix, prefix);
+            }
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!unchanged && !blocked);
         }
 
         public static String handleListNameInputHelper(final String selectedPrefix, final String selectedTitle) {

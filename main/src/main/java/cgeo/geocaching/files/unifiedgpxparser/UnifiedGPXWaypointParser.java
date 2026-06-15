@@ -15,6 +15,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
+import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -139,7 +140,7 @@ final class UnifiedGPXWaypointParser {
         boolean wptVisited;
         boolean wptUserDefined;
         boolean wptEmptyCoordinates;
-        int assignedEmoji;
+        String assignedEmoji;
 
         // OpenCaching
         boolean logPasswordRequired;
@@ -575,11 +576,7 @@ final class UnifiedGPXWaypointParser {
                 if ("assignedEmoji".equals(parser.getName())) {
                     final String v = UnifiedGPXParser.readText(parser);
                     if (v != null) {
-                        try {
-                            assignedEmoji = Integer.parseInt(v.trim());
-                        } catch (final NumberFormatException ignored) {
-                            // skip
-                        }
+                        assignedEmoji = EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(v);
                     }
                 } else {
                     UnifiedGPXParser.skipSubtree(parser);
@@ -884,7 +881,7 @@ final class UnifiedGPXWaypointParser {
             }
 
             // Apply c:geo
-            if (assignedEmoji != 0) {
+            if (StringUtils.isNotBlank(assignedEmoji)) {
                 cache.setAssignedEmoji(assignedEmoji);
             }
 

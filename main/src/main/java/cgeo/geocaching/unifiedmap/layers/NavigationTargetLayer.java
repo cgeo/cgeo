@@ -18,12 +18,14 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 public class NavigationTargetLayer {
 
     public static final String KEY_TARGET_PATH = "TARGETPATH";
+    private static final Scheduler ROUTE_UPDATE_SCHEDULER = AndroidRxUtils.singleThreadPool(); // serialize requests
 
     private final GeoStyle lineStyle = GeoStyle.builder()
             .setStrokeColor(MapLineUtils.getDirectionColor())
@@ -35,6 +37,7 @@ public class NavigationTargetLayer {
     final GeoItemLayer<String> layer;
 
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
+    private Disposable pendingUpdate = null;
 
     public NavigationTargetLayer(final UnifiedMapActivity activity, final GeoItemLayer<String> layer) {
         mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo));
@@ -70,6 +73,12 @@ public class NavigationTargetLayer {
     }
 
     public void triggerRepaint() {
+        // drop scheduled but not yet started updates, their result would be superseded by this newer position
+        if (pendingUpdate != null) {
+            pendingUpdate.dispose();
+            pendingUpdate = null;
+        }
+
         final UnifiedMapViewModel.Target target = viewModel.target.getValue();
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
 
@@ -79,7 +88,7 @@ public class NavigationTargetLayer {
         }
 
         final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> viewModel.navigationTargetRoute.getValue().update(currentGp, target.geopoint), this::repaint);
+        pendingUpdate = AndroidRxUtils.andThenOnUi(ROUTE_UPDATE_SCHEDULER, () -> viewModel.navigationTargetRoute.getValue().update(currentGp, target.geopoint), this::repaint);
     }
 
     private void repaint() {

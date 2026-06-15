@@ -227,7 +227,9 @@ public final class GpxSerializer {
 
     private void writeCGeoExtensions(@NonNull final Geocache cache) throws IOException {
         gpx.startTag(NS_CGEO, "cacheExtension");
-        XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmoji", String.valueOf(cache.getAssignedEmoji()));
+        if (StringUtils.isNotBlank(cache.getAssignedEmoji())) {
+            XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmoji", cache.getAssignedEmoji());
+        }
         gpx.endTag(NS_CGEO, "cacheExtension");
     }
 

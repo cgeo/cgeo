@@ -230,7 +230,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id, may be NEW_LIST
      */
-    private static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
+    private static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, @Nullable final String assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
             int newListId = listId;
@@ -265,7 +265,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, GEOCODE_HISTORY_CACHE, LocalizationUtils.getString(R.string.internal_goto_targets_title), LocalizationUtils.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
+        assertCacheExists(context, GEOCODE_HISTORY_CACHE, LocalizationUtils.getString(R.string.internal_goto_targets_title), LocalizationUtils.getString(R.string.internal_goto_targets_description), EmojiUtils.NO_EMOJI, null, UDC_LIST);
     }
 
     /**
@@ -279,7 +279,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param listId        cache list's id
      * @return geocode      geocode of the newly created cache
      */
-    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
+    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, @Nullable final String assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         String geocode;
         do {
             geocode = PREFIX + generateRandomId();
@@ -324,7 +324,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable())));
         dialogButton.setIconTint(null);
         dialogButton.setHint(R.string.caches_set_cache_icon);
-        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache, assignedEmoji -> {
+        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), false, temporaryCache, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
             dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
         }));

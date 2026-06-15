@@ -6,7 +6,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class NamedFilterGeocacheFilterTest {
         //create a named filter which references itself via id
         final NamedFilterGeocacheFilter filterInside = new NamedFilterGeocacheFilter();
         final GeocacheFilter named = GeocacheFilter.create(true, false, filterInside);
-        final NamedFilter selfRef = new NamedFilter(99, "self", named, EmojiUtils.NO_EMOJI, false);
+        final NamedFilter selfRef = new NamedFilter("self", named).setId(99);
         filterInside.setNamedFilters(Collections.singletonList(selfRef));
         NamedFilter.storeAll(Collections.singletonList(selfRef));
 
@@ -74,7 +73,7 @@ public class NamedFilterGeocacheFilterTest {
         final TypeGeocacheFilter tree = new TypeGeocacheFilter();
         tree.setValues(Arrays.asList(types));
         final GeocacheFilter gf = GeocacheFilter.create(true, false, tree);
-        return new NamedFilter(id, "namedFilter_" + id, gf, EmojiUtils.NO_EMOJI, false);
+        return new NamedFilter("namedFilter_" + id, gf).setId(id);
     }
 
 }

@@ -399,7 +399,6 @@
     <string name="translator_model">Translation model</string>
     <string name="translator_tooltip">Offline translate</string>
     <string name="translator_language_select">Select source language</string>
-    <string name="translator_language_target_select">Select target language</string>
     <string name="translator_language_unsupported">Language (%s) not supported for translation. Tap to select source language.</string>
     <string name="translator_language_unknown">Unable to identify language. Tap to select source language.</string>
     <string name="translator_language_detected">Translate from "%s". Tap to select source language.</string>
@@ -876,7 +875,7 @@
     <string name="cache_namedfilter_matching">Matching named filters</string>
     <string name="named_filter_add">Add filter</string>
     <string name="named_filter_empty_hint">No named filters configured. Tap + to add one.</string>
-    <string name="named_filter_activate_marker">Activate marker</string>
+    <string name="named_filter_activate_marker">Activate marker with priority:</string>
     <string name="named_filter_enable_all_markers">Enable all Markers</string>
     <string name="named_filter_markers_enabled">Markers enabled</string>
     <string name="named_filter_markers_disabled">Markers disabled</string>
@@ -889,6 +888,13 @@
     <string name="named_filter_config_exists_title">Filter already saved</string>
     <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
     <string name="named_filter_fill_with_named">Fill with named filter</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">High</string>
+    <string name="named_filter_priority_highest">Highest</string>
+    <string name="named_filter_priority_low">Low</string>
+    <string name="named_filter_priority_lowest">Lowest</string>
+
+    <string name="cache_filter_reference_based_on">Based on: %1$s</string>
 
 
     <!-- about -->
@@ -2794,7 +2800,7 @@
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->
-    <string name="number_input_title">Set value</string>
+    <string name="number_input_title_short">Set value</string>
     <string name="number_input_range">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
@@ -3231,15 +3237,5 @@
     <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
     <string name="dbi_search_title">Search for</string>
     <string name="dbi_search_columnSelection">Restrict to</string>
-
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Recently used</string>
-    <string name="emoji_category_symbols">Symbols</string>
-    <string name="emoji_category_dots">Dots</string>
-    <string name="emoji_category_places">Places</string>
-    <string name="emoji_category_food">Food &amp; Beverage</string>
-    <string name="emoji_category_activity">Activity</string>
-    <string name="emoji_category_people">People</string>
-    <string name="emoji_category_numbers">Numbers</string>
 
 </resources>

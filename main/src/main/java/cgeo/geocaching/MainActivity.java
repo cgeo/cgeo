@@ -325,6 +325,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
      */
     private boolean handleLauncherRouting() {
         final boolean firstInstall = Settings.getLastChangelogChecksum() == 0;
+        final boolean firstCall = (getIntent() != null) && (getIntent().getAction() != null); // app start (true) or "back to home screen" (false)
         final boolean folderMigrationNeeded = InstallWizardActivity.needsFolderMigration();
 
         // new install, base folder missing or folder migration needed => run installation wizard
@@ -336,7 +337,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
         // otherwise regular startup
         final Intent intent = Settings.getStartscreenIntent(this);
-        final boolean stayInMainActivity = intent.getComponent() != null && MainActivity.class.getName().equals(intent.getComponent().getClassName());
+        final boolean stayInMainActivity = !firstCall || (intent.getComponent() != null && MainActivity.class.getName().equals(intent.getComponent().getClassName()));
         if (!stayInMainActivity) {
             intent.putExtras(getIntent());
             return handleLauncherRoutingHelper(intent);
