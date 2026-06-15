@@ -373,7 +373,6 @@
     <string name="translator_model">Översättningsmodell</string>
     <string name="translator_tooltip">Översätt offline</string>
     <string name="translator_language_select">Välj källspråk</string>
-    <string name="translator_language_target_select">Välj målspråk</string>
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning. Tryck för att välja källspråk.</string>
     <string name="translator_language_unknown">Det går inte att identifiera språk. Tryck för att välja källspråk.</string>
     <string name="translator_language_detected">Översätt från \"%s\". Tryck för att välja källspråk.</string>
@@ -753,7 +752,6 @@
     <string name="cache_namedfilter_matching">Matchande namngivna filter</string>
     <string name="named_filter_add">Lägg till filter</string>
     <string name="named_filter_empty_hint">Inga namngivna filter har konfigurerats. Tryck på + för att lägga till ett.</string>
-    <string name="named_filter_activate_marker">Aktivera markör</string>
     <string name="named_filter_enable_all_markers">Aktivera alla markörer</string>
     <string name="named_filter_markers_enabled">Markörer aktiverade</string>
     <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
@@ -2455,7 +2453,6 @@
     <string name="preference_colorpicker_show_width">bredd: %d</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Ställ in värde</string>
     <string name="number_input_range">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
     <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
@@ -2789,13 +2786,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
     <string name="dbi_search_title">Sök efter</string>
     <string name="dbi_search_columnSelection">Begränsa till</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Senast använda</string>
-    <string name="emoji_category_symbols">Symboler</string>
-    <string name="emoji_category_dots">Prickar</string>
-    <string name="emoji_category_places">Platser</string>
-    <string name="emoji_category_food">Mat &amp; dryck</string>
-    <string name="emoji_category_activity">Aktivitet</string>
-    <string name="emoji_category_people">Människor</string>
-    <string name="emoji_category_numbers">Siffror</string>
 </resources>
