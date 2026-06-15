@@ -2685,7 +2685,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" on osa ensisijaista avainta, ei voida muokata"</string>
     <string name="dbi_search_title">Hae</string>
     <string name="dbi_search_columnSelection">Rajoita</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Äskettäin käytetty</string>
-    <string name="emoji_category_symbols">Symbolit</string>
 </resources>
