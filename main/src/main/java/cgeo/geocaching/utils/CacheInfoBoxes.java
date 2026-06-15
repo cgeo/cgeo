@@ -276,7 +276,7 @@ public class CacheInfoBoxes {
         if (needsLoad) {
             if (Network.isConnected()) {
                 final Progress progress = new Progress();
-                progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_loading_details_status_cache), "", true, null);
+                progress.show(activity, LocalizationUtils.getString(R.string.cache_wherigo_no_cartridge_fetch), "", true, null);
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
                     Geocache loaded = cache;
                     final SearchResult result = Geocache.searchByGeocode(cache.getGeocode(), null, false, null);
