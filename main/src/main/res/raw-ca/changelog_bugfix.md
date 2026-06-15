@@ -3,7 +3,7 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 
 - Correcció: L'eliminació d'imatges de registre està trencada (canvi de lloc web)
 - Canvi: Unifica els botons de càrrega de pistes i rutes individuals
-- Fix: Cache attributes not detected correctly under certain conditions
+- Correcció: Els atributs del catxé no es detecten correctament en determinades condicions
 
 ##
 - Correcció: La importació de consultes de Pocket no funciona correctament (canvi de lloc web)
