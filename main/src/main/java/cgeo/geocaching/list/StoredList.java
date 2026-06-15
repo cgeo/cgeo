@@ -1,6 +1,5 @@
 package cgeo.geocaching.list;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
@@ -22,7 +21,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +56,13 @@ public final class StoredList extends AbstractList {
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, true, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
     public final boolean preventAskForDeletion;
+    /** emoji assigned to this list as its marker, or null/empty for "none" */
+    @Nullable public final String emojiMarker;
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
-    public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title, 0, markerId);
+    public StoredList(final int id, final String title, @Nullable final String emojiMarker, final boolean preventAskForDeletion, final int count) {
+        super(id, title, 0);
+        this.emojiMarker = emojiMarker;
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
@@ -92,13 +93,11 @@ public final class StoredList extends AbstractList {
 
     public static class UserInterface {
         private final WeakReference<Activity> activityRef;
-        private final Resources res;
 
         public static final String GROUP_SEPARATOR = ":";
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
-            res = CgeoApplication.getInstance().getResources();
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
@@ -269,11 +268,11 @@ public final class StoredList extends AbstractList {
             if (item instanceof StoredList) {
                 if (item.id == STANDARD_LIST_ID) {
                     return ImageParam.id(R.drawable.ic_menu_save);
-                } else if (item.markerId > 0) {
-                    return ImageParam.emoji(item.markerId, 30);
+                } else if (StringUtils.isNotBlank(((StoredList) item).emojiMarker)) {
+                    return ImageParam.emoji(((StoredList) item).emojiMarker, 30);
                 }
             } else if (item instanceof PseudoList) {
-                return ImageParam.id(item.markerId);
+                return ImageParam.id(((PseudoList) item).drawableId);
             }
             if (isGroup) {
                 return ImageParam.id(R.drawable.downloader_folder);

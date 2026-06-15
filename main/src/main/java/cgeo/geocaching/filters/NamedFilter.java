@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -88,7 +89,7 @@ public class NamedFilter {
     private int id = -1;
     private String name;
     private GeocacheFilter filter;
-    private int markerId;
+    @Nullable private String markerId;
     private boolean conditionalMarkerActive;
     private MarkerPriority conditionalMarkerPriority = MarkerPriority.NORMAL;
 
@@ -111,7 +112,7 @@ public class NamedFilter {
     }
 
     public NamedFilter(@NonNull final String name, @Nullable final GeocacheFilter filter,
-                       final int markerId, final boolean conditionalMarkerActive, final MarkerPriority conditionalMarkerPriority) {
+                       @Nullable final String markerId, final boolean conditionalMarkerActive, final MarkerPriority conditionalMarkerPriority) {
 
         this.name = name;
         this.filter = filter;
@@ -153,11 +154,12 @@ public class NamedFilter {
         return this;
     }
 
-    public int getMarkerId() {
+    @Nullable
+    public String getMarkerId() {
         return markerId;
     }
 
-    public NamedFilter setMarkerId(final int markerId) {
+    public NamedFilter setMarkerId(@Nullable final String markerId) {
         this.markerId = markerId;
         return this;
     }
@@ -190,8 +192,8 @@ public class NamedFilter {
     @NonNull
     public String getNameAndMarker() {
         final StringBuilder sb = new StringBuilder();
-        if (markerId != EmojiUtils.NO_EMOJI) {
-            sb.append(EmojiUtils.getEmojiAsString(markerId)).append(" ");
+        if (StringUtils.isNotBlank(markerId)) {
+            sb.append(markerId).append(" ");
         }
         sb.append(name);
         return sb.toString();
@@ -211,7 +213,7 @@ public class NamedFilter {
         JsonUtils.setInt(node, JSON_KEY_ID, id);
         JsonUtils.setText(node, JSON_KEY_NAME, name);
         JsonUtils.setText(node, JSON_KEY_FILTER, filter != null ? filter.toConfig() : null);
-        JsonUtils.setInt(node, JSON_KEY_MARKER_ID, markerId);
+        JsonUtils.setText(node, JSON_KEY_MARKER_ID, markerId);
         JsonUtils.setBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, conditionalMarkerActive);
         JsonUtils.setInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, conditionalMarkerPriority.getValue());
         return node;
@@ -228,7 +230,8 @@ public class NamedFilter {
         final String name = JsonUtils.getText(node, JSON_KEY_NAME, "");
         final String filterConfig = JsonUtils.getText(node, JSON_KEY_FILTER, null);
         final GeocacheFilter filter = filterConfig != null ? GeocacheFilter.createFromConfig(filterConfig) : null;
-        final int markerId = JsonUtils.getInt(node, JSON_KEY_MARKER_ID, EmojiUtils.NO_EMOJI);
+        // legacy int-codepoint markers are migrated to emoji Strings in the DataStore upgrade routine
+        final String markerId = JsonUtils.getText(node, JSON_KEY_MARKER_ID, EmojiUtils.NO_EMOJI);
         final boolean conditionalMarkerActive = JsonUtils.getBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, false);
         final MarkerPriority conditionalMarkerPriority = MarkerPriority.fromValue(JsonUtils.getInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, -1));
         return new NamedFilter(name != null ? name : "", filter, markerId, conditionalMarkerActive, conditionalMarkerPriority).setId(id);
@@ -407,11 +410,11 @@ public class NamedFilter {
      * Uses the first list from {@link #getFiltersMatchingCache(Geocache)}.
      */
     @NonNull
-    public static List<Integer> getMarkersForCache(@Nullable final Geocache cache) {
+    public static List<String> getMarkersForCache(@Nullable final Geocache cache) {
         final ImmutablePair<List<NamedFilter>, List<NamedFilter>> pair = getFiltersMatchingCache(cache);
-        final List<Integer> result = new ArrayList<>();
+        final List<String> result = new ArrayList<>();
         for (final NamedFilter nf : pair.left) {
-            if (nf.markerId != EmojiUtils.NO_EMOJI) {
+            if (StringUtils.isNotBlank(nf.markerId)) {
                 result.add(nf.markerId);
             }
         }

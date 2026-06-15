@@ -185,7 +185,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private String title = "";
     private final AtomicInteger detailProgress = new AtomicInteger(0);
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
-    private int markerId = EmojiUtils.NO_EMOJI;
+    @Nullable private String markerId = EmojiUtils.NO_EMOJI;
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
 
@@ -398,7 +398,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             typeParameters.clear();
             typeParameters.putAll(savedInstanceState.getBundle(STATE_TYPE_PARAMETERS));
             listId = savedInstanceState.getInt(STATE_LIST_ID);
-            markerId = savedInstanceState.getInt(STATE_MARKER_ID);
+            markerId = savedInstanceState.getString(STATE_MARKER_ID);
             preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
             checkForEmtpyList = savedInstanceState.getBoolean(STATE_CHECKFOREMPTYLIST);
@@ -465,7 +465,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putBundle(STATE_TYPE_PARAMETERS, typeParameters);
         savedInstanceState.putInt(STATE_LIST_ID, listId);
-        savedInstanceState.putInt(STATE_MARKER_ID, markerId);
+        savedInstanceState.putString(STATE_MARKER_ID, markerId);
         savedInstanceState.putBoolean(STATE_PREVENTASKFORDELETION, preventAskForDeletion);
         savedInstanceState.putInt(STATE_OFFLINELISTLOADLIMIT_ID, offlineListLoadLimit);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
@@ -720,7 +720,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private void setListMarker(final int newListMarker) {
+    private void setListMarker(final String newListMarker) {
         DataStore.setListEmoji(listId, newListMarker);
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
@@ -735,15 +735,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         invalidateOptionsMenuCompatible();
     }
 
-    private void setCacheIcons(final int newCacheIcon) {
-        if (newCacheIcon == 0) {
-            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm(() -> setCacheIconsHelper(0));
+    private void setCacheIcons(final String newCacheIcon) {
+        if (!StringUtils.isNotBlank(newCacheIcon)) {
+            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm(() -> setCacheIconsHelper(EmojiUtils.NO_EMOJI));
         } else {
             setCacheIconsHelper(newCacheIcon);
         }
     }
 
-    private void setCacheIconsHelper(final int newCacheIcon) {
+    private void setCacheIconsHelper(final String newCacheIcon) {
         new SetCacheIconCommand(this, adapter.getCheckedOrAllCaches(), newCacheIcon) {
             @Override
             protected void onFinished() {
@@ -871,9 +871,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_unwatch_all) {
             WatchListUtils.unwatchAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
-            EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
+            EmojiUtils.selectEmojiPopup(this, markerId, false, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, -1, null, this::setCacheIcons);
+            EmojiUtils.selectEmojiPopup(this, null, true, null, this::setCacheIcons);
         } else if (menuItem == R.id.menu_set_askfordeletion) {
             setPreventAskForDeletion(false);
         } else {
@@ -1475,7 +1475,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final StoredList list = DataStore.getList(id);
                 listId = list.id;
                 title = list.title;
-                markerId = list.markerId;
+                markerId = list.emojiMarker;
                 preventAskForDeletion = list.preventAskForDeletion;
             }
             type = CacheListType.OFFLINE;
@@ -1797,7 +1797,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                         listId = list.id;
                         title = list.title;
-                        markerId = list.markerId;
+                        markerId = list.emojiMarker;
                         preventAskForDeletion = list.preventAskForDeletion;
                     }
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/emoji_picker_title"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/primary_material_dark"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <ImageButton
+        android:id="@+id/emoji_picker_close"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/close"
+        android:src="@drawable/expand_more" />
+
+    <TextView
+        android:id="@+id/dialog_title_title"
+        style="@style/alertDialogTitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/emoji_picker_close"
+        android:layout_toStartOf="@+id/dialog_button_wrapper"
+        android:text="@string/select_icon"
+        android:ellipsize="marquee"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:id="@+id/dialog_button_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp">
+
+        <Button
+            android:id="@+id/dialog_buttonLeft"
+            style="@style/button_icon"
+            android:tooltipText="@string/caches_reset_cache_icons_title"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/dialog_buttonRight"
+            style="@style/button_icon"
+            android:tooltipText="@string/close"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>

@@ -54,11 +54,13 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
 import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -119,6 +121,8 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleOnSubscribe;
@@ -169,7 +173,8 @@ public class DataStore {
         DBEXTENSION_EMOJILRU(5),
         DBEXTENSION_POCKETQUERY_HISTORY(6),
         DBEXTENSION_TRACKFILES(7),
-        DBEXTENSION_LAST_TRACKABLE_ACTION(8);
+        DBEXTENSION_LAST_TRACKABLE_ACTION(8),
+        DBEXTENSION_EMOJISTRINGLRU(9);
 
         public final int id;
         private static final EnumValueMapper<Integer, DBExtensionType> mapper = new EnumValueMapper<>();
@@ -242,7 +247,7 @@ public class DataStore {
                     "cg_caches.watchlistCount," +  // 42
                     "cg_caches.preventWaypointsFromNote," +  // 43
                     "cg_caches.owner_guid," +  // 44
-                    "cg_caches.emoji," +       // 45
+                    "cg_caches.emojiString," +       // 45
                     "cg_caches.alcMode," +       // 46
                     "cg_caches.tier," + // 47
                     "cg_caches.health_score"; // 48
@@ -263,7 +268,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 109;
+    private static final int dbVersion = 110;
     public static final int customListIdOffset = 10;
 
     /**
@@ -308,7 +313,8 @@ public class DataStore {
             106, // Update lab caches DT rating to zero from minus one
             107, // Unify named filters and conditional markers; new cg_filters schema
             108, // add health_score column to cg_caches
-            109  // add favorite column to cg_logs
+            109,  // add favorite column to cg_logs
+            110  // migrate markers/emojis datatype from int to string
             ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -419,7 +425,8 @@ public class DataStore {
             + "watchlistCount INTEGER DEFAULT -1,"
             + "preventWaypointsFromNote INTEGER DEFAULT 0,"
             + "owner_guid TEXT NOT NULL DEFAULT '',"
-            + "emoji INTEGER DEFAULT 0,"
+            + "emoji INTEGER DEFAULT 0,"             // legacy int codepoint, unused from v110 on - superseded by emojiString
+            + "emojiString TEXT,"
             + "alcMode INTEGER DEFAULT 0,"
             + "tier TEXT,"
             + "health_score INTEGER"
@@ -429,7 +436,8 @@ public class DataStore {
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
             + "marker INTEGER NOT NULL,"            // unused from v93 on - TODO should we remove the column?
-            + "emoji INTEGER DEFAULT 0,"
+            + "emoji INTEGER DEFAULT 0,"            // legacy int codepoint, unused from v110 on - superseded by emojiString
+            + "emojiString TEXT,"
             + FIELD_LISTS_PREVENTASKFORDELETION + " INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateCachesLists = "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
@@ -807,8 +815,12 @@ public class DataStore {
 
         public static void removeAll(final SQLiteDatabase db, final DBExtensionType type, final String key) {
             withAccessLock(() -> {
-                checkState(type, key, false);
-                db.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{String.valueOf(type.id), key});
+                checkState(type, key, true);
+                if (key == null) {
+                    db.delete(dbTableExtension, "_type = ? AND _key IS NULL", new String[]{String.valueOf(type.id)});
+                } else {
+                    db.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{String.valueOf(type.id), key});
+                }
             });
         }
 
@@ -912,7 +924,7 @@ public class DataStore {
                 //delete all entries
                 database.delete(dbTableFilters, null, null);
                 //insert all. Some have an id, some may not yet have an id
-                for(NamedFilter nf : filters) {
+                for (NamedFilter nf : filters) {
                     final ContentValues values = new ContentValues();
                     if (nf.getId() > 0) {
                         values.put("_id", nf.getId());
@@ -1979,14 +1991,13 @@ public class DataStore {
                             if (markersRoot != null && markersRoot.isArray()) {
                                 int j = 0;
                                 for (final com.fasterxml.jackson.databind.JsonNode child : markersRoot) {
-                                    final int markerId = cgeo.geocaching.utils.JsonUtils.getInt(child, "markerId",
-                                            cgeo.geocaching.utils.EmojiUtils.NO_EMOJI);
+                                    final String markerId = EmojiUtilsLegacyMigration.legacyIntToEmojiString(
+                                            cgeo.geocaching.utils.JsonUtils.getInt(child, "markerId", EmojiUtilsLegacyMigration.NO_EMOJI_LEGACY));
                                     final com.fasterxml.jackson.databind.JsonNode filterNode = child.get("filter");
                                     cgeo.geocaching.filters.core.GeocacheFilter markerGf = null;
                                     if (filterNode != null) {
                                         try {
-                                            markerGf = cgeo.geocaching.filters.core.GeocacheFilter.createFromConfig(
-                                                    cgeo.geocaching.utils.JsonUtils.nodeToString(filterNode));
+                                            markerGf = GeocacheFilter.createFromConfig(JsonUtils.nodeToString(filterNode));
                                         } catch (final Exception ex) {
                                             // ignore parse errors, use null filter
                                         }
@@ -2034,6 +2045,20 @@ public class DataStore {
                         }
                     }
 
+                    // migrate assigned emoji from int codepoint ("emoji" column) to String representation ("emojiString" column)
+                    if (oldVersion < 110) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "emojiString TEXT");
+                            createColumnIfNotExists(db, dbTableLists, "emojiString TEXT");
+                            migrateEmojiIntToString(db, dbTableCaches, "geocode");
+                            migrateEmojiIntToString(db, dbTableLists, "_id");
+                            migrateFilterMarkerIntToString(db);
+                            migrateEmojiLruIntToString(db);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 110);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2054,6 +2079,62 @@ public class DataStore {
         private void onUpgradeError(final SQLException e, final int version) throws SQLException {
             Log.e("Failed to upgrade to version " + version, e);
             throw e;
+        }
+
+        /** converts the legacy int "emoji" codepoint column into the new String "emojiString" column */
+        private void migrateEmojiIntToString(final SQLiteDatabase db, final String table, final String idColumn) {
+            try (Cursor c = db.query(table, new String[]{idColumn, "emoji"}, "emoji <> 0", null, null, null, null)) {
+                while (c.moveToNext()) {
+                    final String emojiString = EmojiUtilsLegacyMigration.legacyIntToEmojiString(c.getInt(1));
+                    final ContentValues cv = new ContentValues();
+                    if (emojiString == null) {
+                        cv.putNull("emojiString");
+                    } else {
+                        cv.put("emojiString", emojiString);
+                    }
+                    db.update(table, cv, idColumn + " = ?", new String[]{c.getString(0)});
+                }
+            }
+        }
+
+        /** converts the legacy int "markerId" codepoint stored in the cg_filters treeconfig JSON into its String representation */
+        private void migrateFilterMarkerIntToString(final SQLiteDatabase db) {
+            try (Cursor c = db.query(dbTableFilters, new String[]{"_id", "treeconfig"}, null, null, null, null, null)) {
+                while (c.moveToNext()) {
+                    final String json = c.getString(1);
+                    if (json == null) {
+                        continue;
+                    }
+                    final JsonNode node = JsonUtils.stringToNode(json);
+                    if (!(node instanceof ObjectNode)) {
+                        continue;
+                    }
+                    final JsonNode markerNode = node.get("markerId");
+                    if (markerNode == null || !markerNode.isNumber()) {
+                        continue; // already migrated to String (or no marker stored)
+                    }
+                    JsonUtils.setText((ObjectNode) node, "markerId", EmojiUtilsLegacyMigration.legacyIntToEmojiString(markerNode.asInt()));
+                    final ContentValues cv = new ContentValues();
+                    cv.put("treeconfig", JsonUtils.nodeToString(node));
+                    db.update(dbTableFilters, cv, "_id = ?", new String[]{c.getString(0)});
+                }
+            }
+        }
+
+        /** EmojiLRU: converts the legacy int "emoji" codepoint column into the new String  */
+        private void migrateEmojiLruIntToString(final SQLiteDatabase db) {
+            try (Cursor c = db.query(dbTableExtension, new String[]{"_id", "_key"}, "_type = " + DBExtensionType.DBEXTENSION_EMOJILRU.id, null, null, null, null)) {
+                while (c.moveToNext()) {
+                    final String emojiString = EmojiUtilsLegacyMigration.legacyIntToEmojiString(c.getInt(1));
+                    final ContentValues cv = new ContentValues();
+                    if (emojiString == null) {
+                        cv.putNull("_key");
+                    } else {
+                        cv.put("_key", emojiString);
+                    }
+                    db.update(dbTableExtension, cv, "_id" + " = ?", new String[]{c.getString(0)});
+                }
+            }
         }
 
         @Override
@@ -2600,7 +2681,7 @@ public class DataStore {
             values.put("watchlistCount", cache.getWatchlistCount());
             values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
             values.put("owner_guid", cache.getOwnerGuid());
-            values.put("emoji", cache.getAssignedEmoji());
+            values.put("emojiString", cache.getAssignedEmoji());
             values.put("alcMode", cache.getAlcMode());
             values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
             values.put("health_score", cache.getHealthScore());
@@ -3434,7 +3515,7 @@ public class DataStore {
         cache.setWatchlistCount(cursor.getInt(42));
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
         cache.setOwnerGuid(cursor.getString(44));
-        cache.setAssignedEmoji(cursor.getInt(45));
+        cache.setAssignedEmoji(cursor.getString(45));
         cache.setAlcMode(cursor.getInt(46));
         cache.setTier(Tier.getByName(cursor.getString(47)));
         cache.setHealthScore(cursor.isNull(48) ? null : cursor.getInt(48));
@@ -4781,11 +4862,11 @@ public class DataStore {
 
             final List<StoredList> lists = new ArrayList<>();
             if (listId == null) {
-                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), null, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
             }
 
             try {
-                final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji," +
+                final String query = "SELECT l._id AS _id, l.title AS title, l.emojiString AS emojiString," +
                         " l." + FIELD_LISTS_PREVENTASKFORDELETION + " AS " + FIELD_LISTS_PREVENTASKFORDELETION + "," +
                         " COUNT(c.geocode) AS count" +
                         " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
@@ -4806,12 +4887,12 @@ public class DataStore {
     private static List<StoredList> getListsFromCursor(final Cursor cursor) {
         final int indexId = cursor.getColumnIndex("_id");
         final int indexTitle = cursor.getColumnIndex("title");
-        final int indexEmoji = cursor.getColumnIndex("emoji");
+        final int indexEmojiString = cursor.getColumnIndex("emojiString");
         final int indexCount = cursor.getColumnIndex("count");
         final int indexPreventAskForDeletion = cursor.getColumnIndex(FIELD_LISTS_PREVENTASKFORDELETION);
         return cursorToColl(cursor, new ArrayList<>(), cursor1 -> {
             final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
-            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexEmoji), indexPreventAskForDeletion >= 0 && cursor1.getInt(indexPreventAskForDeletion) != 0, count);
+            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getString(indexEmojiString), indexPreventAskForDeletion >= 0 && cursor1.getInt(indexPreventAskForDeletion) != 0, count);
         });
     }
 
@@ -4829,11 +4910,11 @@ public class DataStore {
 
             final Resources res = CgeoApplication.getInstance().getResources();
             if (id == PseudoList.ALL_LIST.id) {
-                return new StoredList(PseudoList.ALL_LIST.id, LocalizationUtils.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
+                return new StoredList(PseudoList.ALL_LIST.id, LocalizationUtils.getString(R.string.list_all_lists), null, true, getAllCachesCount());
             }
 
             // fall back to standard list in case of invalid list id
-            return new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+            return new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), null, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
         });
     }
 
@@ -4872,7 +4953,7 @@ public class DataStore {
                 values.put("updated", System.currentTimeMillis());
                 values.put("marker", 0); // ToDo - delete column?
                 values.put(FIELD_LISTS_PREVENTASKFORDELETION, 0);
-                values.put("emoji", 0);
+                values.putNull("emojiString");
 
                 id = (int) database.insert(dbTableLists, null, values);
                 database.setTransactionSuccessful();
@@ -4958,10 +5039,10 @@ public class DataStore {
 
     /**
      * @param listId   List to change
-     * @param useEmoji Id of new emoji
+     * @param useEmoji new emoji (or null/empty for none)
      * @return Number of lists changed
      */
-    public static int setListEmoji(final int listId, final int useEmoji) {
+    public static int setListEmoji(final int listId, @Nullable final String useEmoji) {
         if (listId == StoredList.STANDARD_LIST_ID) {
             return 0;
         }
@@ -4974,7 +5055,7 @@ public class DataStore {
             int count = 0;
             try {
                 final ContentValues values = new ContentValues();
-                values.put("emoji", useEmoji);
+                values.put("emojiString", useEmoji);
                 values.put("updated", System.currentTimeMillis());
 
                 count = database.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);
@@ -5185,7 +5266,7 @@ public class DataStore {
         });
     }
 
-    public static void setCacheIcons(final Collection<Geocache> caches, final int newCacheIcon) {
+    public static void setCacheIcons(final Collection<Geocache> caches, @Nullable final String newCacheIcon) {
         if (caches.isEmpty()) {
             return;
         }
@@ -5196,7 +5277,7 @@ public class DataStore {
             database.beginTransaction();
             try {
                 for (final Geocache cache : caches) {
-                    add.bindLong(1, newCacheIcon);
+                    bindStringOrNull(add, 1, newCacheIcon);
                     add.bindString(2, cache.getGeocode());
                     add.execute();
 
@@ -5211,9 +5292,9 @@ public class DataStore {
 
     /**
      * Sets individual cache icons given by HashMap<Geocode, newCacheIcon>.
-     * Missing entries are reset to default value (0).
+     * Missing entries are reset to default value (none).
      */
-    public static void setCacheIcons(final Collection<Geocache> caches, final HashMap<String, Integer> undo) {
+    public static void setCacheIcons(final Collection<Geocache> caches, final HashMap<String, String> undo) {
         if (caches.isEmpty()) {
             return;
         }
@@ -5225,18 +5306,26 @@ public class DataStore {
             try {
                 for (final Geocache cache : caches) {
                     final String geocode = cache.getGeocode();
-                    final Integer newCacheIcon = undo.get(geocode);
-                    add.bindLong(1, newCacheIcon == null ? 0 : newCacheIcon);
+                    final String newCacheIcon = undo.get(geocode);
+                    bindStringOrNull(add, 1, newCacheIcon);
                     add.bindString(2, geocode);
                     add.execute();
 
-                    cache.setAssignedEmoji(newCacheIcon == null ? 0 : newCacheIcon);
+                    cache.setAssignedEmoji(newCacheIcon);
                 }
                 database.setTransactionSuccessful();
             } finally {
                 database.endTransaction();
             }
         });
+    }
+
+    private static void bindStringOrNull(final SQLiteStatement statement, final int index, @Nullable final String value) {
+        if (value == null) {
+            statement.bindNull(index);
+        } else {
+            statement.bindString(index, value);
+        }
     }
 
     private static @NonNull
@@ -5423,7 +5512,7 @@ public class DataStore {
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
         GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
-        SET_CACHE_ICON("UPDATE " + dbTableCaches + " SET emoji = ? WHERE geocode = ?");
+        SET_CACHE_ICON("UPDATE " + dbTableCaches + " SET emojiString = ? WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 

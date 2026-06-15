@@ -26,6 +26,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -132,7 +133,7 @@ abstract class GPXParser extends FileParser {
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
     private boolean wptEmptyCoordinates = false;
-    private int cacheAssignedEmoji = 0;
+    @Nullable private String cacheAssignedEmoji = null;
     private List<LogEntry> logs = new ArrayList<>();
 
     /**
@@ -869,7 +870,7 @@ abstract class GPXParser extends FileParser {
 
             final Element cgeo = cacheParent.getChild(cgeoNamespace, "cacheExtension");
             final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmoji");
-            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = Integer.parseInt(assignedEmoji.trim()));
+            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmoji));
         }
     }
 
@@ -961,7 +962,7 @@ abstract class GPXParser extends FileParser {
         wptVisited = false;
         wptUserDefined = false;
         wptEmptyCoordinates = false;
-        cacheAssignedEmoji = 0;
+        cacheAssignedEmoji = null;
         logs = new ArrayList<>();
 
         cache = createCache();

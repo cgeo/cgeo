@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 
 import com.google.android.material.button.MaterialButton;
+import org.apache.commons.lang3.StringUtils;
 
 public class NamedFilterActivity extends AbstractActionBarActivity {
 
@@ -92,10 +93,10 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
             }
 
             // Row 1: marker button
-            final int markerId = item.getMarkerId();
+            final String markerId = item.getMarkerId();
             final MaterialButton markerBtn = holder.itemBinding.markerButton;
-            if (markerId != EmojiUtils.NO_EMOJI) {
-                markerBtn.setText(EmojiUtils.getEmojiAsString(markerId));
+            if (StringUtils.isNotBlank(markerId)) {
+                markerBtn.setText(markerId);
                 markerBtn.setIcon(null);
             } else {
                 markerBtn.setText(null);
@@ -140,7 +141,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     return;
                 }
                 final NamedFilter nf = getItem(pos);
-                EmojiUtils.selectEmojiPopup(NamedFilterActivity.this, nf.getMarkerId(), null, newMarkerId -> {
+                EmojiUtils.selectEmojiPopup(NamedFilterActivity.this, nf.getMarkerId(), false, null, newMarkerId -> {
                     nf.setMarkerId(newMarkerId);
                     notifyItemChanged(pos);
                     updateEmptyHint();

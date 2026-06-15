@@ -524,6 +524,10 @@ dependencies {
     // Support Library RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
 
+    // androidx Emoji Picker (full standard emoji set, used by the icon/marker selection dialog)
+    implementation 'androidx.emoji2:emoji2-emojipicker:1.6.0'
+    implementation 'com.google.guava:guava:33.6.0-android' //needed by emojipicker
+
     // Settings Library
     implementation 'androidx.preference:preference:1.2.1'
 
