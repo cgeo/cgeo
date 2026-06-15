@@ -377,7 +377,6 @@
     <string name="translator_model">Model tłumaczenia</string>
     <string name="translator_tooltip">Tłumaczenie offline</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
-    <string name="translator_language_target_select">Wybierz język docelowy</string>
     <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia. Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_language_unknown">Nie można zidentyfikować języka. Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_language_detected">Tłumacz z \"%s\". Dotknij, aby wybrać język źródłowy.</string>
@@ -776,7 +775,6 @@
     <string name="cache_namedfilter_matching">Dopasowanie nazwanych filtrów</string>
     <string name="named_filter_add">Dodaj filtr</string>
     <string name="named_filter_empty_hint">Brak skonfigurowanych nazwanych filtrów. Dotknij +, aby go dodać.</string>
-    <string name="named_filter_activate_marker">Aktywuj znacznik</string>
     <string name="named_filter_enable_all_markers">Włącz wszystkie znaczniki</string>
     <string name="named_filter_markers_enabled">Znaczniki włączone</string>
     <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
@@ -2542,7 +2540,6 @@
     <string name="preference_colorpicker_show_width">szerokość: %d</string>
     <string name="reset_to_default">Domyślny</string>
     <!-- number input -->
-    <string name="number_input_title">Ustaw wartość</string>
     <string name="number_input_range">Wprowadź wartość między %1$s a %2$s</string>
     <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
     <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
@@ -2933,13 +2930,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
     <string name="dbi_search_title">Szukaj</string>
     <string name="dbi_search_columnSelection">Ogranicz do</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Ostatnio używane</string>
-    <string name="emoji_category_symbols">Symbole</string>
-    <string name="emoji_category_dots">Kropki</string>
-    <string name="emoji_category_places">Miejsca</string>
-    <string name="emoji_category_food">Jedzenie i napoje</string>
-    <string name="emoji_category_activity">Aktywność</string>
-    <string name="emoji_category_people">Ludzie</string>
-    <string name="emoji_category_numbers">Liczby</string>
 </resources>
