@@ -96,3 +96,4 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Naprawiono: Niektóre teksty ignorowały zmianę języka
 - Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
 - Zmiana: Moduł tłumaczenia offline Bergamot (open source) zastępuje Google ML Kit (closed-source)
+- Change: New emoji selector
