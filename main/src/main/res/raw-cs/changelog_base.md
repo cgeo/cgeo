@@ -96,3 +96,4 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Oprava: Některé texty ignorují přepínání jazyků
 - Oprava: Volba „Použít imperiální jednotky“ se při nové instalaci nenastavila správně
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector
