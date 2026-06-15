@@ -375,8 +375,8 @@
     <string name="translator_model_download_success">Übersetzungsmodell für %s heruntergeladen</string>
     <string name="translator_model_download_error">Fehler beim Herunterladen des Übersetzungsmodells %1$s: %2$s</string>
     <string name="translator_model">Übersetzungsmodell</string>
+    <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
-    <string name="translator_language_target_select">Zielsprache wählen</string>
     <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt. Tippen, um die Ausgangssprache auszuwählen.</string>
     <string name="translator_language_unknown">Die Sprache kann nicht erkannt werden. Tippen, um die Ausgangssprache auszuwählen.</string>
     <string name="translator_language_detected">Übersetze von \"%s\". Tippe um die Ausgangssprache auszuwählen.</string>
@@ -447,6 +447,7 @@
         <item quantity="one">%d Cache heruntergeladen</item>
         <item quantity="other">%d Caches heruntergeladen</item>
     </plurals>
+    <string name="caches_store_background_skipped">Offline-Caches übersprungen: %d</string>
     <string name="caches_history">Verlauf</string>
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
@@ -753,6 +754,9 @@
         <item>&gt;1M</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_activity_title">Benannte Filter</string>
+    <string name="cache_namedfilter_matching">Passende benannte Filter</string>
+    <string name="named_filter_add">Filter hinzufügen</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -894,6 +898,7 @@
     <string name="settings_lc_description">Zeige Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)\n\nDas Ändern dieser Einstellung erfordert einen Neustart.</string>
     <string name="settings_lc_found_state_title">Manueller Gefunden-Status</string>
     <string name="settings_lc_found_state_handling">Erlaube Benutzern, den Gefunden-Status manuell zu setzen (statt ihn automatisch zu ermitteln)</string>
+    <string name="lc_default_description">Dies ist ein Geocaching.com Adventure Lab Cache. Lab Caches können nur mit der Groundspeak Adventure Lab App gespielt werden. Tippe auf das Adventure Lab-Symbol auf der \"Details\"-Seite, um die Adventure Lab App für diesen Cache von dort aus zu öffnen/zu installieren.\nWenn du keine Adventure Lab-Caches auf deiner Karte und Suche sehen möchtest, kannst du sie im Menü \"Einstellungen\" - Dienste - Geocaching.com Adventure Lab deaktivieren</string>
     <string name="init_summary_oc_de">Caches von Opencaching.de laden</string>
     <string name="init_oc_de_description">Autorisiere c:geo auf Opencaching.de zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="init_summary_oc_pl">Caches von opencaching.pl laden</string>
@@ -2453,7 +2458,6 @@
     <string name="preference_colorpicker_show_width">Breite: %d</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
-    <string name="number_input_title">Wert festlegen</string>
     <string name="number_input_range">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
@@ -2838,13 +2842,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
     <string name="dbi_search_title">Suche nach</string>
     <string name="dbi_search_columnSelection">Beschränken auf</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Zuletzt verwendet</string>
-    <string name="emoji_category_symbols">Symbole</string>
-    <string name="emoji_category_dots">Punkte</string>
-    <string name="emoji_category_places">Orte</string>
-    <string name="emoji_category_food">Essen &amp; Trinken</string>
-    <string name="emoji_category_activity">Aktivität</string>
-    <string name="emoji_category_people">Personen</string>
-    <string name="emoji_category_numbers">Zahlen</string>
 </resources>
