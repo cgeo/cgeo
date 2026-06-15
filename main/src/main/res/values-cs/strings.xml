@@ -376,7 +376,6 @@
     <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
     <string name="translator_model">Překladový model</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
-    <string name="translator_language_target_select">Vyberte cílový jazyk</string>
     <string name="translator_language_unsupported">Jazyk (%s) není pro překlad podporován. Klepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_language_unknown">Nelze určit jazyk. Klepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_language_detected">Přeložit z \"%s\". Klepnutím vyberte zdrojový jazyk.</string>
@@ -2515,7 +2514,6 @@
     <string name="preference_colorpicker_show_width">šířka: %d</string>
     <string name="reset_to_default">Výchozí</string>
     <!-- number input -->
-    <string name="number_input_title">Nastavit hodnotu</string>
     <string name="number_input_range">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
@@ -2906,13 +2904,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Naposledy použito</string>
-    <string name="emoji_category_symbols">Symboly</string>
-    <string name="emoji_category_dots">Body</string>
-    <string name="emoji_category_places">Místa</string>
-    <string name="emoji_category_food">Jídlo &amp; Nápoje</string>
-    <string name="emoji_category_activity">Aktivita</string>
-    <string name="emoji_category_people">Lidé</string>
-    <string name="emoji_category_numbers">Čísla</string>
 </resources>
