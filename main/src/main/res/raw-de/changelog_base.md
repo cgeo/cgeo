@@ -96,3 +96,4 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Korrektur: Einige Texte ignorieren den Sprachwechsel
 - Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen
 - Änderung: Bergamot Open Source Offline-Übersetzer ersetzt Closed-Source Google ML Kit Übersetzer
+- Change: New emoji selector
