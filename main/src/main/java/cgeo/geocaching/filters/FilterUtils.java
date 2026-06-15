@@ -13,18 +13,18 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class FilterUtils {
 
@@ -152,7 +152,7 @@ public class FilterUtils {
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
-            .setDisplayIconMapper(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
+            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
             .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)

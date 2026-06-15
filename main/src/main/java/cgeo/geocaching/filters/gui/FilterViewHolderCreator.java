@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class FilterViewHolderCreator {
 
     private static boolean listInfoFilled = false;
@@ -264,7 +266,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(allLists)
                         .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
                         .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
-                        .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_list))
+                        .setValueDrawableGetter(f -> StringUtils.isNotBlank(f.emojiMarker) ? ImageParam.emoji(f.emojiMarker) : ImageParam.id(R.drawable.ic_menu_list))
                         .setValueDisplayTextGetter(f -> f.title)
                         .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
@@ -279,7 +281,7 @@ public class FilterViewHolderCreator {
                     .setSelectableValues(allNamedFilters)
                     .setFilterValueGetter(NamedFilterGeocacheFilter::getNamedFilters)
                     .setFilterValueSetter(NamedFilterGeocacheFilter::setNamedFilters)
-                    .setValueDrawableGetter(f -> f.getMarkerId() > 0 ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
+                    .setValueDrawableGetter(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
                     .setValueDisplayTextGetter(NamedFilter::getName);
 
         return new NamedFilterFilterViewHolder<>(vgfa);

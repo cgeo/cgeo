@@ -530,10 +530,10 @@ public final class WherigoUtils {
         if (et instanceof Task) {
             switch (((Task) et).state()) {
                 case Task.DONE:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
+                    name = TextUtils.concat(EmojiUtils.GREEN_CHECK_BOXED + " ", name);
                     break;
                 case Task.FAILED:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
+                    name = TextUtils.concat(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK + " ", name);
                     break;
                 default:
                     break;

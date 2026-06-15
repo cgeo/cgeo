@@ -825,7 +825,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             SpeechService.toggleService(this, cache.getCoords());
             ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(item, SpeechService.isRunning());
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache, this::setCacheIcon);
+            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), false, cache, this::setCacheIcon);
         } else if (menuItem == R.id.menu_change_description_style) {
             changeDescriptionStyle();
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
@@ -853,7 +853,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         ShareUtils.openUrl(activity, CheckerUtils.getCheckerUrl(cache), true);
     }
 
-    private void setCacheIcon(final int newCacheIcon) {
+    private void setCacheIcon(final String newCacheIcon) {
         ensureSaved();
         cache.setAssignedEmoji(newCacheIcon);
         saveAndNotify(LoadFlags.SAVE_ALL);

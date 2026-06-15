@@ -235,8 +235,8 @@ public class CacheInfoBoxes {
 
     private static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final StoredList list = DataStore.getList(listId);
-        if (list.markerId != EmojiUtils.NO_EMOJI) {
-            builder.append(EmojiUtils.getEmojiAsString(list.markerId)).append(" ");
+        if (StringUtils.isNotBlank(list.emojiMarker)) {
+            builder.append(list.emojiMarker).append(" ");
         }
         final int start = builder.length();
         builder.append(list.getTitle());

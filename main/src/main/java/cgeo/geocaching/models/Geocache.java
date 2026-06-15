@@ -51,6 +51,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
@@ -128,7 +129,7 @@ public class Geocache implements INamedGeoCoordinate {
     private String ownerDisplayName = "";
     private String ownerGuid = "";
     private String ownerUserId = "";
-    private int assignedEmoji = 0;
+    @Nullable private String assignedEmoji = EmojiUtils.NO_EMOJI;
     private int alcMode = 0;
     private Tier tier;
     /** Sentinel: health score was attempted but could not be computed (no scoreable logs found). */
@@ -422,7 +423,7 @@ public class Geocache implements INamedGeoCoordinate {
             preventWaypointsFromNote = other.preventWaypointsFromNote;
         }
 
-        if (assignedEmoji == 0) {
+        if (!StringUtils.isNotBlank(assignedEmoji)) {
             assignedEmoji = other.assignedEmoji;
         }
 
@@ -1503,7 +1504,7 @@ public class Geocache implements INamedGeoCoordinate {
         this.ownerGuid = ownerGuid;
     }
 
-    public void setAssignedEmoji(final int assignedEmoji) {
+    public void setAssignedEmoji(@Nullable final String assignedEmoji) {
         this.assignedEmoji = assignedEmoji;
     }
 
@@ -2540,7 +2541,8 @@ public class Geocache implements INamedGeoCoordinate {
         return isGotoHistoryUDC() ? Waypoint.WAYPOINT_ID_COMPARATOR : Waypoint.WAYPOINT_COMPARATOR;
     }
 
-    public int getAssignedEmoji() {
+    @Nullable
+    public String getAssignedEmoji() {
         return assignedEmoji;
     }
 
