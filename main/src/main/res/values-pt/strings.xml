@@ -375,7 +375,6 @@
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
-    <string name="translator_language_target_select">Seleccione idioma de destino</string>
     <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução. Toque para selecionar o idioma de origem.</string>
     <string name="translator_language_unknown">Não é possível identificar o idioma. Toque para selecionar o idioma de origem.</string>
     <string name="translator_language_detected">Traduzir de \"%s\". Toque para selecionar o idioma de origem.</string>
@@ -2449,7 +2448,6 @@
     <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Definir valor</string>
     <string name="number_input_range">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
@@ -2833,13 +2831,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
     <string name="dbi_search_title">Pesquisar por</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usado recentemente</string>
-    <string name="emoji_category_symbols">Símbolos</string>
-    <string name="emoji_category_dots">Pontos</string>
-    <string name="emoji_category_places">Locais</string>
-    <string name="emoji_category_food">Alimentação e Bebidas</string>
-    <string name="emoji_category_activity">Actividade</string>
-    <string name="emoji_category_people">Pessoas</string>
-    <string name="emoji_category_numbers">Números</string>
 </resources>
