@@ -378,7 +378,6 @@
     <string name="translator_model">Model de traducció</string>
     <string name="translator_tooltip">Traducció fora de línia</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
-    <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_language_unknown">No s\'ha pogut identificar l\'idioma. Toca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_language_detected">Tradueix de \"%s\". Toca per seleccionar l\'idioma d\'origen.</string>
@@ -763,7 +762,7 @@
     <string name="cache_namedfilter_matching">Filtres amb nom coincidents</string>
     <string name="named_filter_add">Afegeix un filtre</string>
     <string name="named_filter_empty_hint">No hi ha filtres amb nom configurats. Toca + per afegir-ne un.</string>
-    <string name="named_filter_activate_marker">Activa el marcador</string>
+    <string name="named_filter_activate_marker">Activa el marcador amb prioritat:</string>
     <string name="named_filter_enable_all_markers">Activa tots els marcadors</string>
     <string name="named_filter_markers_enabled">Marcadors activats</string>
     <string name="named_filter_markers_disabled">Marcadors desactivats</string>
@@ -776,6 +775,12 @@
     <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
     <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
     <string name="named_filter_fill_with_named">Ompliu amb un filtre amb nom</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Alt</string>
+    <string name="named_filter_priority_highest">El més alt</string>
+    <string name="named_filter_priority_low">Baix</string>
+    <string name="named_filter_priority_lowest">El més baix</string>
+    <string name="cache_filter_reference_based_on">Basat en: %1$s</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -2482,7 +2487,6 @@
     <string name="preference_colorpicker_show_width">amplada: %d</string>
     <string name="reset_to_default">Per defecte</string>
     <!-- number input -->
-    <string name="number_input_title">Estableix el valor</string>
     <string name="number_input_range">Introduïu un valor entre %1$s i %2$s</string>
     <string name="number_input_err_boundarymin">El valor introduït és massa petit: restableix el valor mínim</string>
     <string name="number_input_err_boundarymax">El valor introduït és massa gran: restableix el valor màxim</string>
@@ -2867,13 +2871,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
     <string name="dbi_search_title">Buscar per</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usat recentment</string>
-    <string name="emoji_category_symbols">Símbols</string>
-    <string name="emoji_category_dots">Punts</string>
-    <string name="emoji_category_places">Llocs</string>
-    <string name="emoji_category_food">Menjar &amp; Beguda</string>
-    <string name="emoji_category_activity">Activitat</string>
-    <string name="emoji_category_people">Gent</string>
-    <string name="emoji_category_numbers">Nombres</string>
 </resources>
