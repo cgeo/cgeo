@@ -18,7 +18,9 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -321,6 +323,13 @@ public class CacheInfoBoxes {
                                 cache,
                                 currentCache -> {
                                     final List<String> guids = wherigoGuidsAvailable ? wherigoGuids : WherigoUtils.getWherigoGuids(currentCache);
+                                    if (guids.isEmpty()) {
+                                        SimpleDialog.of(activity)
+                                                .setTitle(TextParam.id(R.string.cache_wherigo_no_cartridge_title))
+                                                .setMessage(TextParam.id(R.string.cache_wherigo_no_cartridge_message))
+                                                .show();
+                                        return;
+                                    }
                                     WherigoViewUtils.executeForOneCartridge(activity, guids, guid ->
                                             WherigoActivity.startForGuid(activity, guid, currentCache.getGeocode(), true));
                                 });
