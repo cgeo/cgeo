@@ -359,7 +359,6 @@
     <string name="translator_model_download_error">Fallo al descargar el modelo de traducción %1$s: %2$s</string>
     <string name="translator_model">Modelo de traducción</string>
     <string name="translator_language_select">Seleccione el idioma de origen</string>
-    <string name="translator_language_target_select">Seleccionar idiomas a traducir</string>
     <string name="translator_language_unsupported">Idioma (%s) no disponible para traducción. Pulse para seleccionar el idioma de origen.</string>
     <string name="translator_language_unknown">No se puede identificar el idioma. Pulse para seleccionar el idioma de origen.</string>
     <string name="translator_language_detected">Traducir desde \"%s\". Pulse para seleccionar el idioma de origen.</string>
@@ -2764,13 +2763,4 @@ Nombre de archivo:%2$s</string>
     <string name="dbi_edit_error_pkfield">"%s\" es parte de la clave primaria, no se puede editar"</string>
     <string name="dbi_search_title">Buscar por</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usado recientemente</string>
-    <string name="emoji_category_symbols">Símbolos</string>
-    <string name="emoji_category_dots">Puntos</string>
-    <string name="emoji_category_places">Lugares</string>
-    <string name="emoji_category_food">Comida &amp; Bebida</string>
-    <string name="emoji_category_activity">Actividad</string>
-    <string name="emoji_category_people">Personas</string>
-    <string name="emoji_category_numbers">Números</string>
 </resources>
