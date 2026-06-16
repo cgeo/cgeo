@@ -96,4 +96,4 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Correcció: Alguns textos ignoren el canvi d'idioma
 - Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
 - Canvi: El mòdul de traducció fora de línia de codi obert de Bergamot substitueix el traductor de codi tancat de Google ML Kit
-- Change: New emoji selector
+- Canvi: Nou selector d'emojis
