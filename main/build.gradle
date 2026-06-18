@@ -491,7 +491,7 @@ dependencies {
     }
 
     // Support Library Lifecycle Helpers
-    String lifecycleVersion = '2.10.0'
+    String lifecycleVersion = '2.11.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common:$lifecycleVersion"
