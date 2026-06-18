@@ -5,6 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,28 @@ public final class ProcessUtils {
     private ProcessUtils() {
         // utility class
     }
+
+    /** the main process name equals the package name; other processes (e.g. ":brouter_service") have a suffix */
+    public static boolean isMainProcess(final Application application) {
+        final String processName = getCurrentProcessName();
+        return processName == null || processName.equals(application.getPackageName());
+    }
+
+    @Nullable
+    public static String getCurrentProcessName() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            return Application.getProcessName();
+        }
+        // fallback for API 26-27: /proc/self/cmdline holds the (null-terminated) process name
+        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("/proc/self/cmdline"))) {
+            final String line = reader.readLine();
+            return line == null ? null : line.replace("\0", "").trim();
+        } catch (final java.io.IOException ignored) {
+            return null;
+        }
+    }
+
+
 
     /**
      * Preferred method to detect the availability of an external app
