@@ -4,6 +4,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Deleting of log images broken (website change)
 - Change: Unify track and individual route loading buttons
 - Fix: Cache attributes not detected correctly under certain conditions
+- Fix: Logging caches (website change)
+- Fix: Logging trackables (website change)
 
 ##
 - Fix: Pocket query import broken (website change)
