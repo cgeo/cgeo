@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.JsonUtils;
@@ -19,6 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import static java.lang.Boolean.TRUE;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -261,14 +263,22 @@ public class GeocacheFilter implements Cloneable {
      * * If this is an AND filter, extract the "AND" chain of Base filters.
      * * Otherwise return an empty list
      */
-    public List<BaseGeocacheFilter> getAndChainIfPossible() {
+    public List<BaseGeocacheFilter> getAndChainIfPossible(final IConnector connector) {
         final List<BaseGeocacheFilter> result = new ArrayList<>();
-        getAndChainIfPossibleInternal(this.getTree(), result);
+        final Function<IGeocacheFilter, Boolean> function = f -> {
+            if (connector != null && f instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) f).allowsCachesOf(connector)) {
+                return false;
+            }
+            return null;
+        };
+        if (this.getTree() != null) {
+            getAndChainIfPossibleInternal(this.getTree().simplify(function), result);
+        }
         return result;
     }
 
     /**
-     * Helper method to be used in conjunction with {@link #getAndChainIfPossible()} by search providers
+     * Helper method to be used in conjunction with {@link #getAndChainIfPossible(IConnector)} ()} by search providers
      * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
      */
     @SuppressWarnings("unchecked")
@@ -326,7 +336,7 @@ public class GeocacheFilter implements Cloneable {
      */
     public Map<QuickFilter, Boolean> getQuickFilter() {
         final Map<QuickFilter, Boolean> result = new HashMap<>();
-        final StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(), StatusGeocacheFilter.class);
+        final StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(null), StatusGeocacheFilter.class);
         result.put(QuickFilter.FOUND, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusFound()));
         result.put(QuickFilter.OWNED, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusOwned()));
         result.put(QuickFilter.HAS_OFFLINE_FOUND_LOG, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusHasOfflineFoundLog()));
@@ -349,7 +359,7 @@ public class GeocacheFilter implements Cloneable {
             return;
         }
 
-        StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(), StatusGeocacheFilter.class);
+        StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(null), StatusGeocacheFilter.class);
         if (statusFilter == null) {
             statusFilter = GeocacheFilterType.STATUS.create();
             and(statusFilter);

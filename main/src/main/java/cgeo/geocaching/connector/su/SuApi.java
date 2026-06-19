@@ -165,7 +165,7 @@ public class SuApi {
 
         //for now we have to assume that SUConnector supports only SINGLE criteria search
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
         final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
