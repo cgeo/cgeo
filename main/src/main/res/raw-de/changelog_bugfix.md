@@ -4,8 +4,8 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 - Korrektur: Löschen von Logbildern defekt (Webseitenänderung)
 - Änderung: Vereinheitlichung der Buttons zum Laden von Tracks und Individueller Route
 - Fix: Cache-Attribute unter bestimmten Bedingungen nicht korrekt erkannt
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Korrektur: Loggen von Caches (Webseitenänderung)
+- Korrektur: Loggen von Trackables (Webseitenänderung)
 
 ##
 - Korrektur: Import von Pocket Queries schlägt fehl (Webseitenänderung)
