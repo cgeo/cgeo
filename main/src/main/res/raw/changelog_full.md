@@ -3,6 +3,20 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2026.06.19 Bugfix Release
+
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you!
+With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back.
+We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Logging caches (website change)
+- Fix: Logging trackables (website change)
+- Fix: Deleting of log images broken (website change)
+- Fix: Cache attributes not detected correctly under certain conditions
+- Change: Unify track and individual route loading buttons
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2026.06.04 Bugfix Release
 
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you!
