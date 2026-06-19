@@ -54,6 +54,7 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.SearchFilterGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
@@ -216,6 +217,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
     private final DisposableHandler clearOfflineLogsHandler = new ClearOfflineLogsHandler(this);
+    private final DisposableHandler postOfflineLogsHandler = new PostOfflineLogsHandler(this);
     private final Handler importGpxAttachementFinishedHandler = new ImportGpxAttachementFinishedHandler(this);
 
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
@@ -337,6 +339,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 activity.replaceCacheListFromSearch();
 
+                activity.progress.dismiss();
+            }
+        }
+    }
+
+    private static final class PostOfflineLogsHandler extends DisposableHandler {
+        private final WeakReference<CacheListActivity> activityRef;
+
+        PostOfflineLogsHandler(final CacheListActivity activity) {
+            activityRef = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleRegularMessage(final Message msg) {
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                activity.adapter.setSelectMode(false);
+                activity.refreshCurrentList();
+                activity.replaceCacheListFromSearch();
                 activity.progress.dismiss();
             }
         }
@@ -624,6 +645,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history, checkedCount);
 
+            MenuUtils.setVisible(menu, R.id.menu_post_offline_logs, containsOfflineLogs);
+
             final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, (isHistory || containsStoredCaches) && !removeFromDevice, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all, checkedCount);
@@ -845,6 +868,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_clear_offline_logs) {
             clearOfflineLogs(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_post_offline_logs) {
+            postOfflineLogs(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_show_attributes) {
             adapter.showAttributes(adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_make_list_unique || menuItem == R.id.menu_remove_from_other_lists) {
@@ -929,6 +955,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         SimpleDialog.of(this).setTitle(R.string.caches_clear_offlinelogs).setMessage(R.string.caches_clear_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
             progress.show(CacheListActivity.this, null, LocalizationUtils.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
             clearOfflineLogs(clearOfflineLogsHandler, caches);
+        });
+    }
+
+    private void postOfflineLogs(final Collection<Geocache> caches) {
+        SimpleDialog.of(this).setTitle(R.string.caches_post_offlinelogs).setMessage(R.string.caches_post_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
+            progress.show(CacheListActivity.this, null, LocalizationUtils.getString(R.string.caches_post_offlinelogs_progress), true, postOfflineLogsHandler.disposeMessage());
+            postOfflineLogs(postOfflineLogsHandler, caches);
         });
     }
 
@@ -1424,6 +1457,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static void clearOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
         Schedulers.io().scheduleDirect(() -> {
             DataStore.clearLogsOffline(selectedCaches);
+            handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+        });
+    }
+
+    private static void postOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
+        Schedulers.io().scheduleDirect(() -> {
+            for (final Geocache cache : selectedCaches) {
+                if (!cache.hasLogOffline()) {
+                    continue;
+                }
+
+                LogUtils.postOfflineLog(cache, progressText -> { });
+                try {
+                    Thread.sleep(1000);
+                } catch (final InterruptedException ignored) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
             handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
         });
     }

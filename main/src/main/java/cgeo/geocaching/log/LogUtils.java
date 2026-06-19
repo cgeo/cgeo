@@ -229,6 +229,22 @@ public final class LogUtils {
         }
     }
 
+    @WorkerThread
+    public static LogResult postOfflineLog(final Geocache cache, final Consumer<String> progress) {
+        final OfflineLogEntry logEntry = DataStore.loadLogOffline(cache.getGeocode());
+
+        if (logEntry == null) {
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "No offline log for " + cache.getGeocode(), null);
+        }
+
+        final Map<String, Trackable> inventory = new HashMap<>();
+        for (final Trackable trackable : cache.getInventory()) {
+            inventory.put(trackable.getGeocode(), trackable);
+        }
+
+        return createLogTaskLogic(cache, logEntry, inventory, progress);
+    }
+
     private static LogEntry.Builder applyCommonsToOwnLog(final LogEntry.Builder logBuilder, final IConnector cacheConnector) {
         logBuilder.setFriend(true);
         // login credentials may vary from actual username
