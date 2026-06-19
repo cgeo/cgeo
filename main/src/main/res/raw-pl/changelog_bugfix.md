@@ -4,6 +4,8 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 - Naprawiono: Usuwanie uszkodzonych obrazów z wpisu (zmiana strony internetowej)
 - Zmiana: Ujednolicenie przycisków wczytywania ścieżek i indywidualnych tras
 - Naprawiono: Atrybuty skrytki nie były poprawnie wykrywane w pewnych okolicznościach
+- Fix: Logging caches (website change)
+- Fix: Logging trackables (website change)
 
 ##
 - Naprawiono: Uszkodzony import Pocket query (zmiany na stronie internetowej)
