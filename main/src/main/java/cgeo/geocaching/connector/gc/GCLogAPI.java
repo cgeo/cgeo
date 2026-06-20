@@ -633,7 +633,7 @@ public class GCLogAPI {
         @JsonProperty("0")
         TrpcRequestBodyEntry entry;
 
-        public TrpcRequestBody(final String referenceCode) {
+        TrpcRequestBody(final String referenceCode) {
             this.entry = new TrpcRequestBodyEntry(referenceCode);
         }
 
@@ -653,7 +653,7 @@ public class GCLogAPI {
 
             private final Map<String, Object> extra = new LinkedHashMap<>();
 
-            public TrpcRequestBodyEntry(final String referenceCode) {
+            TrpcRequestBodyEntry(final String referenceCode) {
                 this.referenceCode = referenceCode;
             }
 
