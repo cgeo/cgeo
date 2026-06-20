@@ -29,10 +29,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -239,7 +237,7 @@ public class GCLogAPI {
                 .uriParams("batch", "1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(requestBody)
+                .bodyJson(requestBody.build())
                 .requestJsonNode().blockingGet());
 
         //Response: [{"result":{"data":{"logReferenceCode":"GLxxx",...}}}]
@@ -275,7 +273,7 @@ public class GCLogAPI {
                 .uriParams("batch", "1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(requestBody)
+                .bodyJson(requestBody.build())
                 .requestJsonNode().blockingGet());
 
         final String logReferenceCode = response.getText("logReferenceCode");
@@ -310,7 +308,7 @@ public class GCLogAPI {
             .uriParams("batch", "1")
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-            .bodyJson(requestBody)
+            .bodyJson(requestBody.build())
             .request().blockingGet()) {
 
             // Use status code for checking success
@@ -433,14 +431,14 @@ public class GCLogAPI {
             }
         }
 
-        final TrpcRequestBody requestBody = new TrpcRequestBody(trackableLog.geocode).with("body", logEntry);
+        final TrpcRequestBody requestBody = new TrpcRequestBody(trackableLog.geocode).with("body", JsonUtils.mapper.valueToTree(logEntry));
 
         //URL: https://www.geocaching.com/api/live/v1/trpc/web.logs.createTrackableLog?batch=1
         final TrpcResponseBody response = TrpcResponseBody.of(websiteReq().uri("/api/live/v1/trpc/web.logs.createTrackableLog")
                 .uriParams("batch", "1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(requestBody)
+                .bodyJson(requestBody.build())
                 .requestJsonNode().blockingGet());
 
         //Response: [{"result":{"data":{"logReferenceCode":"TLxxx",...}}}]
@@ -466,7 +464,7 @@ public class GCLogAPI {
         //2,) Send a DELETE Request (which is actually a POST)
         try (HttpResponse response = websiteReq().uri("/api/live/v1/trpc/web.logs.deleteTrackableLog")
             .uriParams("batch", "1")
-            .bodyJson(new TrpcRequestBody(logId).with("reasonText", ""))
+            .bodyJson(new TrpcRequestBody(logId).with("reasonText", "").build())
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
             .request().blockingGet()) {
@@ -630,37 +628,31 @@ public class GCLogAPI {
     }
 
     static class TrpcRequestBody {
-        @JsonProperty("0")
-        TrpcRequestBodyEntry entry;
+        private final ObjectNode root;
+        private final ObjectNode entry;
 
         TrpcRequestBody(final String referenceCode) {
-            this.entry = new TrpcRequestBodyEntry(referenceCode);
+            entry = JsonUtils.createObjectNode().put("referenceCode", referenceCode);
+            root = JsonUtils.createObjectNode().set("0", entry);
         }
 
-        public TrpcRequestBody with(final String key, final Object value) {
-            entry.extra.put(key, value);
+        TrpcRequestBody with(final String key, final String value) {
+            entry.put(key, value);
             return this;
+        }
+
+        TrpcRequestBody with(final String key, final JsonNode value) {
+            entry.set(key, value);
+            return this;
+        }
+
+        ObjectNode build() {
+            return root;
         }
 
         @Override
         public String toString() {
-            return JsonUtils.nodeToString(JsonUtils.mapper.valueToTree(this));
-        }
-
-        static class TrpcRequestBodyEntry {
-            @JsonProperty("referenceCode")
-            String referenceCode;
-
-            private final Map<String, Object> extra = new LinkedHashMap<>();
-
-            TrpcRequestBodyEntry(final String referenceCode) {
-                this.referenceCode = referenceCode;
-            }
-
-            @JsonAnyGetter
-            public Map<String, Object> extra() {
-                return extra;
-            }
+            return JsonUtils.nodeToString(root);
         }
     }
 }
