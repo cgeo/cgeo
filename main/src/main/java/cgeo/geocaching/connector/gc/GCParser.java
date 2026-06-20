@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -1759,6 +1760,8 @@ public final class GCParser {
         specialLogEntries.addAll(friendLogsBlocked);
         specialLogEntries.addAll(ownLogEntriesBlocked);
         specialLogEntries.addAll(ownerLogsBlocked);
+        final Set<String> seenServiceLogIds = new HashSet<>();
+        specialLogEntries.removeIf(e -> e.serviceLogId != null && !seenServiceLogIds.add(e.serviceLogId));
         if (!specialLogEntries.isEmpty()) {
             setFriendsLogs(specialLogEntries);
             mergeModifiedLogs(logsBlocked, specialLogEntries);
