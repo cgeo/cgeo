@@ -350,9 +350,12 @@
     <string name="err_read_bookmark_list">Error reading bookmark lists.</string>
     <string name="err_bookmark_list_overfull">Too many caches</string>
     <string name="err_bookmark_list_overfull_description">Bookmark lists can only store up to 1000 caches, you\'re attempting to add more than that to the list.\n\nDo you want to proceed and add only as many caches as the list can hold?</string>
+    <string name="info_log_posting_background">Log is being posted…</string>
+    <string name="info_log_post_success">Log for %s successfully sent</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
+    <string name="info_log_post_failed_geocode">Posting log for %s failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
     <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
     <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
@@ -2816,6 +2819,8 @@
     <string name="notification_channel_downloader_description">result notifications for downloads (e.g. offline maps)</string>
     <string name="notification_channel_cache_download_name">cache downloader</string>
     <string name="notification_channel_cache_download_description">result notifications for caches background downloads</string>
+    <string name="notification_channel_log_name">log posting</string>
+    <string name="notification_channel_log_description">progress and error notifications for posting cache logs</string>
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->

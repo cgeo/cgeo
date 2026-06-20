@@ -974,6 +974,11 @@
             android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
 
+        <!-- Background log poster -->
+        <service
+            android:name=".service.LogPostingService"
+            android:foregroundServiceType="dataSync"/>
+
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
     </application>
