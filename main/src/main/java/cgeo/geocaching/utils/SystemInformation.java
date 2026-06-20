@@ -164,12 +164,13 @@ public final class SystemInformation {
     }
 
     private static void appendMemoryInfo(@NonNull final Context context, @NonNull final StringBuilder body) {
-        body.append("\n- Memory: ");
+        final Integer own = EnvironmentUtils.getOwnMemoryFootprint(context);
+        body.append("\n- Memory: ").append("c:geo:").append(own == null ? "?" : Formatter.formatBytes(1024L * own));
         final ActivityManager.MemoryInfo memoryInfo = EnvironmentUtils.getMemoryInfo(context);
         if (memoryInfo == null) {
             body.append("null");
         } else {
-            body.append(" Available:").append(Formatter.formatBytes(memoryInfo.availMem))
+            body.append(", Available:").append(Formatter.formatBytes(memoryInfo.availMem))
                 .append(", Total:").append(Formatter.formatBytes(memoryInfo.totalMem))
                 .append(", Threshold: ").append(Formatter.formatBytes(memoryInfo.threshold))
                 .append(", low:").append(memoryInfo.lowMemory);
