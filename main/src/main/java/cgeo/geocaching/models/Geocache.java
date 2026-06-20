@@ -635,7 +635,6 @@ public class Geocache implements INamedGeoCoordinate {
 
         final Resources res = fromActivity.getResources();
         if (status) {
-            ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.info_log_saved));
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
             if (Settings.removeFromRouteOnLog()) {
@@ -643,6 +642,9 @@ public class Geocache implements INamedGeoCoordinate {
             }
             offlineLog = logEntry;
             notifyChange(fromActivity);
+            if (!fromActivity.isFinishing()) {
+                ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.info_log_saved));
+            }
         } else {
             ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.err_log_post_failed));
         }

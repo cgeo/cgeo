@@ -133,7 +133,7 @@ public final class LogUtils {
 
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
-    static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
+    public static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
 
 
         try (ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), logEntry)) {
@@ -217,6 +217,7 @@ public final class LogUtils {
                 postGenericInventoryLogs(cache, logEntry, inventory.values(), progress);
 
                 cache.notifyChange();
+
                 return logResult;
 
             } catch (final RuntimeException e) {
@@ -290,7 +291,7 @@ public final class LogUtils {
 
 
     @WorkerThread
-    static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
+    public static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
         final IConnector cacheConnector = loggingManager.getConnector();
 

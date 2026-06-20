@@ -88,7 +88,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         EDIT_EXISTING //edit an existing online log entry (as of now not storable offline)
     }
 
-    private enum SaveMode { NORMAL, FORCE, SKIP }
+    private enum SaveMode { NORMAL, FORCE, SKIP, SENDING }
 
     protected LogcacheActivityBinding binding;
 
@@ -115,6 +115,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private LogEntry originalLogEntry = null;
 
     private boolean readyToPost = false;
+    private Runnable pendingPost = null; // set by sendLogInternal(), consumed by onStop()
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -418,6 +419,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     public void onStop() {
         saveLog();
+        if (pendingPost != null) {
+            final Runnable post = pendingPost;
+            pendingPost = null;
+            post.run();
+        }
         super.onStop();
     }
 
@@ -463,7 +469,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW) {
+        if (logEditMode != LogEditMode.CREATE_NEW || saveMode == SaveMode.SENDING) {
             return;
         }
 
@@ -558,15 +564,29 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
             return;
         }
+        // Capture view data now (before the activity tears down), but delay starting the
+        // service until onStop() so that saveLog()'s async storeLogOffline is always
+        // scheduled before the background post begins.
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
-            logActivityHelper.editLog(cache, this.originalLogEntry,
-                getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
+            final LogEntry newEntry = getEntryFromView()
+                .buildUponOfflineLogEntry()
+                .setServiceLogId(this.originalLogEntry.serviceLogId)
+                .build();
+            pendingPost = () -> logActivityHelper.editLog(cache, this.originalLogEntry, newEntry);
         } else {
-            logActivityHelper.createLog(cache, getEntryFromView(), inventoryAdapter.getInventory());
+            final OfflineLogEntry entry = getEntryFromView();
+            final Map<String, Trackable> inv = inventoryAdapter.getInventory();
+            pendingPost = () -> logActivityHelper.createLog(cache, entry, inv);
         }
+        showShortToast(LocalizationUtils.getString(R.string.info_log_posting_background));
+        finish(SaveMode.SENDING);
     }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
+        if (!statusResult.isOk()) {
+            // Activity already exiting (immediate-send path) or error (notification handles it).
+            return;
+        }
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.isOk()) {
 
@@ -615,14 +635,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (!LogCacheActivity.this.isFinishing()) {
-            SimpleDialog.of(LogCacheActivity.this)
-                    .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.id(R.string.info_log_post_failed_simple_reason))
-                    .setButtons(R.string.info_log_post_retry, R.string.cancel, logEditMode == LogEditMode.CREATE_NEW ? R.string.info_log_post_save : 0)
-                    .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
-                    .confirm(this::sendLogInternal);
         }
+        // On error the LogPostingService shows a tappable system notification.
     }
 
     @Override
