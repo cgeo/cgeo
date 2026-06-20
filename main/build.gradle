@@ -30,6 +30,21 @@ plugins {
 Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class) {}
 String commitIdShort = gitCommitIdProvider.get()
 
+// Build-date as a ValueSource so the configuration cache is invalidated when
+// the calendar date changes (day roll-over). Without this, 'new Date()' called
+// in versionCodeFromDate() would be frozen by the configuration cache and old
+// version codes would be reused on subsequent days, causing
+// INSTALL_FAILED_VERSION_DOWNGRADE when a newer debug build was already installed.
+abstract class BuildDateValueSource implements ValueSource<String, None> {
+    String obtain() {
+        return new Date().format('yyyyMMdd')
+    }
+}
+Provider<String> buildDateProvider = providers.of(BuildDateValueSource.class) {}
+String buildDate = buildDateProvider.get()
+// expose as ext so versionCodeFromDate/versionNameFromDate can access it from anywhere in this script
+ext.cgeo_buildDate = buildDate
+
 android {
     namespace = 'cgeo.geocaching'
     compileSdk = 36
@@ -632,17 +647,17 @@ tasks.register('verifyCgeoKeys') {
 }
 
 // version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
-static int versionCodeFromDate(offset) {
-    Date date = new Date()
-    String formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate) + offset
+// NOTE: uses the 'cgeo_buildDate' ext property captured via BuildDateValueSource (not new Date() directly)
+// to ensure the Gradle configuration cache is properly invalidated on day roll-over.
+int versionCodeFromDate(int offset) {
+    return Integer.valueOf(project.ext.cgeo_buildDate) + offset
 }
 
 // version name based on current date
-static String versionNameFromDate() {
-    Date date = new Date()
-    String formattedDate = date.format('yyyy.MM.dd')
-    return formattedDate
+// NOTE: uses the 'cgeo_buildDate' ext property captured via BuildDateValueSource (not new Date() directly).
+String versionNameFromDate() {
+    final String d = project.ext.cgeo_buildDate
+    return d.substring(0, 4) + '.' + d.substring(4, 6) + '.' + d.substring(6, 8)
 }
 
 // get the most recent git commit ID in short form
