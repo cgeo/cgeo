@@ -488,7 +488,8 @@ public class DownloaderUtils {
                 .setDisplayMapper((item, itemGroup) -> TextParam.text(item.right), (item, itemGroup) -> String.valueOf(item.left), null)
                 .activateGrouping(item -> LocalizationUtils.getString(Download.DownloadType.getFromId(item.left).getTypeNameResId()))
                 .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
-                .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()));
+                .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()))
+                .setCollapseMode(SimpleItemListModel.GroupCollapseMode.FORCED_COLLAPSED);
 
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_items))
                 .setPositiveButton(TextParam.id(R.string.delete))

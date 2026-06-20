@@ -461,6 +461,9 @@ public class SimpleItemListView extends LinearLayout {
     }
 
     private boolean isGroupExpanded(final Object group) {
+        if (group == null) {
+            return true;
+        }
         return !model.getGroupingOptions().getReducedGroups().contains(group);
     }
 

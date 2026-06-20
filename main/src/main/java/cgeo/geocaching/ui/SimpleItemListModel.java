@@ -73,6 +73,12 @@ public class SimpleItemListModel<T> {
     /** Types of model changes for which events are fired */
     public enum ChangeType { COMPLETE, SELECTION, FILTER, GROUP_HEADER }
 
+    public enum GroupCollapseMode {
+        DEFAULT_EXPANDED,
+        DEFAULT_COLLAPSED,
+        FORCED_COLLAPSED
+    }
+
     /** Specifies options for grouping items */
     public class GroupingOptions<G> {
 
@@ -88,6 +94,9 @@ public class SimpleItemListModel<T> {
         private Predicate<ItemGroup<T, G>> groupPruner = null;
 
         private final Set<G> reducedGroups = new HashSet<>();
+        private GroupCollapseMode collapseMode = GroupCollapseMode.DEFAULT_EXPANDED;
+        private boolean hasSavedState = false;
+        private boolean defaultCollapsedInitialized = false;
 
         private String reducedGroupSaveId = null;
         private Function<G, String> reducedGroupIdMapper = null;
@@ -210,6 +219,13 @@ public class SimpleItemListModel<T> {
             return reducedGroups;
         }
 
+        public GroupingOptions<G> setCollapseMode(final GroupCollapseMode collapseMode) {
+            this.collapseMode = collapseMode == null ? GroupCollapseMode.DEFAULT_EXPANDED : collapseMode;
+            initializeCollapsedGroups();
+            triggerChange(ChangeType.GROUP_HEADER);
+            return this;
+        }
+
         public GroupingOptions<G> toggleGroup(final G group) {
             if (reducedGroups.contains(group)) {
                 reducedGroups.remove(group);
@@ -219,6 +235,20 @@ public class SimpleItemListModel<T> {
             saveReducedGroups();
             triggerChange(ChangeType.GROUP_HEADER);
             return this;
+        }
+
+        void initializeCollapsedGroups() {
+            if (groupMapper == null || defaultCollapsedInitialized || collapseMode == GroupCollapseMode.DEFAULT_EXPANDED || (collapseMode == GroupCollapseMode.DEFAULT_COLLAPSED && hasSavedState)) {
+                return;
+            }
+            if (collapseMode == GroupCollapseMode.FORCED_COLLAPSED) {
+                reducedGroups.clear();
+            }
+            final List<T> currentItems = SimpleItemListModel.this.items;
+            currentItems.stream().map(groupMapper).filter(Objects::nonNull).forEach(reducedGroups::add);
+            if (collapseMode == GroupCollapseMode.DEFAULT_COLLAPSED) {
+                defaultCollapsedInitialized = true;
+            }
         }
 
         public GroupingOptions<G> setReducedGroups(final Iterable<G> reducedGroups) {
@@ -245,6 +275,7 @@ public class SimpleItemListModel<T> {
             if (this.reducedGroupSaveId != null && this.reducedGroupIdBackMapper != null) {
                 final JsonNode node = JsonUtils.stringToNode(Settings.getSimpleListModelConfig(this.reducedGroupSaveId));
                 if (node != null) {
+                    hasSavedState = true;
                     final List<String> groupStrings = JsonUtils.getTextList(node, "groups");
                     setReducedGroups(groupStrings.stream().map(this.reducedGroupIdBackMapper::apply).collect(Collectors.toList()));
                 }
@@ -272,6 +303,7 @@ public class SimpleItemListModel<T> {
             for (T item : items) {
                 this.items.add(item);
             }
+            groupingOptions.initializeCollapsedGroups();
             triggerChange(ChangeType.COMPLETE);
         }
         return this;
