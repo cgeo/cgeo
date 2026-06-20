@@ -131,6 +131,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -1463,11 +1464,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static void postOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
         Schedulers.io().scheduleDirect(() -> {
-            for (final Geocache cache : selectedCaches) {
-                if (!cache.hasLogOffline()) {
-                    continue;
-                }
 
+            final List<Geocache> sortedCaches = new ArrayList<>();
+            for (Geocache cache : selectedCaches) {
+                if (cache.hasLogOffline()) {
+                    sortedCaches.add(cache);
+                }
+            }
+
+            sortedCaches.sort(Comparator.comparing(cache -> cache.getOfflineLog().getDate()));
+
+            for (final Geocache cache : sortedCaches) {
                 LogUtils.postOfflineLog(cache, progressText -> { });
                 try {
                     Thread.sleep(1000);
