@@ -97,6 +97,11 @@ public class GeocacheFilter implements Cloneable {
         }
     }
 
+    @NonNull
+    public static GeocacheFilter createFromJson(final JsonNode node) {
+        return createInternalJson(node);
+    }
+
     public static GeocacheFilter checkConfig(final String filterConfig) throws ParseException {
         return createInternal(filterConfig, true);
     }
@@ -211,6 +216,10 @@ public class GeocacheFilter implements Cloneable {
     }
 
     public String toConfig() {
+        return JsonUtils.nodeToString(toJson());
+    }
+
+    public JsonNode toJson() {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setBoolean(node, CONFIG_KEY_ADV_MODE, isOpenInAdvancedMode());
         JsonUtils.setBoolean(node, CONFIG_KEY_INCLUDE_INCLUSIVE, isIncludeInconclusive());
@@ -218,7 +227,7 @@ public class GeocacheFilter implements Cloneable {
         if (referencedNamedFilterId >= 0) {
             JsonUtils.setInt(node, CONFIG_KEY_REFERENCES, referencedNamedFilterId);
         }
-        return JsonUtils.nodeToString(node);
+        return node;
     }
 
 
@@ -229,6 +238,13 @@ public class GeocacheFilter implements Cloneable {
             if (throwOnParseError) {
                 throw new ParseException("Couldn't parse Json:" + pJsonConfig, -1);
             }
+            return createEmpty();
+        }
+        return createInternalJson(node);
+    }
+
+    private static GeocacheFilter createInternalJson(final JsonNode node) {
+        if (node == null) {
             return createEmpty();
         }
 

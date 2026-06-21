@@ -122,6 +122,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
@@ -268,7 +269,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 110;
+    private static final int dbVersion = 111;
     public static final int customListIdOffset = 10;
 
     /**
@@ -314,7 +315,8 @@ public class DataStore {
             107, // Unify named filters and conditional markers; new cg_filters schema
             108, // add health_score column to cg_caches
             109,  // add favorite column to cg_logs
-            110  // migrate markers/emojis datatype from int to string
+            110,  // migrate markers/emojis datatype from int to string
+            111  // correct a problem in name filter migration: reference by id instead of name
             ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -1985,14 +1987,13 @@ public class DataStore {
                             // Step 4: migrate ConditionalCacheMarkers from SharedPreferences (read JSON directly)
                             final String markersJson = cgeo.geocaching.settings.Settings.getString(
                                     cgeo.geocaching.R.string.pref_conditionalCacheMarkers, "[]");
-                            final com.fasterxml.jackson.databind.JsonNode markersRoot =
-                                    cgeo.geocaching.utils.JsonUtils.stringToNode(markersJson);
+                            final JsonNode markersRoot = JsonUtils.stringToNode(markersJson);
                             final int numMigratedFilters = migratedFilters.size();
                             if (markersRoot != null && markersRoot.isArray()) {
                                 int j = 0;
-                                for (final com.fasterxml.jackson.databind.JsonNode child : markersRoot) {
+                                for (final JsonNode child : markersRoot) {
                                     final String markerId = EmojiUtilsLegacyMigration.legacyIntToEmojiString(
-                                            cgeo.geocaching.utils.JsonUtils.getInt(child, "markerId", EmojiUtilsLegacyMigration.NO_EMOJI_LEGACY));
+                                            JsonUtils.getInt(child, "markerId", EmojiUtilsLegacyMigration.NO_EMOJI_LEGACY));
                                     final com.fasterxml.jackson.databind.JsonNode filterNode = child.get("filter");
                                     cgeo.geocaching.filters.core.GeocacheFilter markerGf = null;
                                     if (filterNode != null) {
@@ -2059,6 +2060,15 @@ public class DataStore {
                         }
                     }
 
+                    //fix migration problem for named filters created with version 107
+                    if (oldVersion < 111) {
+                        try {
+                            migrateNamedFilterNameToId(db);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 111);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2076,9 +2086,9 @@ public class DataStore {
             Log.iForce("[DB] Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
         }
 
-        private void onUpgradeError(final SQLException e, final int version) throws SQLException {
+        private void onUpgradeError(final Exception e, final int version) throws SQLException {
             Log.e("Failed to upgrade to version " + version, e);
-            throw e;
+            throw e instanceof SQLException ? (SQLException) e : new SQLException("Upgrade to version " + version + " failed", e);
         }
 
         /** converts the legacy int "emoji" codepoint column into the new String "emojiString" column */
@@ -2133,6 +2143,65 @@ public class DataStore {
                         cv.put("_key", emojiString);
                     }
                     db.update(dbTableExtension, cv, "_id" + " = ?", new String[]{c.getString(0)});
+                }
+            }
+        }
+
+        private void migrateNamedFilterNameToId(final SQLiteDatabase db) {
+            //find all existing filters name and id
+            final Map<String, Integer> nameToId = new HashMap<>();
+            try (Cursor c1 = db.query(dbTableFilters, new String[]{"_id", "name"}, null, null, null, null, null)) {
+                while (c1.moveToNext()) {
+                    if (!c1.isNull(0) && !c1.isNull(1)) {
+                        nameToId.put(c1.getString(1), c1.getInt(0));
+                    }
+                }
+
+                //for each filter replace named_filter references to "name" with "id"
+                try (Cursor c = db.query(dbTableFilters, new String[]{"_id", "treeconfig"}, null, null, null, null, null)) {
+                    while (c.moveToNext()) {
+                        if (c.isNull(0) || c.isNull(1)) {
+                            continue;
+                        }
+                        final String treeconfig = c.getString(1);
+                        final int id = c.getInt(0);
+                        final JsonNode tcNode = JsonUtils.stringToNode(treeconfig);
+                        final String filterText = JsonUtils.getText(tcNode, "filter", null);
+                        if (filterText == null) {
+                            return;
+                        }
+                        final JsonNode node = JsonUtils.stringToNode(filterText);
+                        JsonUtils.forEach(node, n -> {
+                            // Check if the current node matches your criteria
+                            if (!n.isObject() || !n.has("type") || !"named_filter".equals(n.get("type").asText())) {
+                                return true;
+                            }
+                            final JsonNode configNode = n.get("config");
+                            if (configNode == null || !configNode.isObject()) {
+                                return false;
+                            }
+                            final ObjectNode configObj = (ObjectNode) configNode;
+                            final String name = configObj.has("name") ? configObj.get("name").asText() : null;
+                            final Integer filterId = nameToId.get(name);
+                            if (name == null || filterId == null) {
+                                return false;
+                            }
+                            // Check if the array "ids" is present
+                            if (configObj.has("ids") && configObj.get("ids").isArray()) {
+                                final ArrayNode idsArray = (ArrayNode) configObj.get("ids");
+                                idsArray.add(filterId);
+                            } else {
+                                final ArrayNode newIdsArray = JsonUtils.createArrayNode();
+                                newIdsArray.add(filterId);
+                                configObj.set("ids", newIdsArray);
+                            }
+                            return false;
+                        });
+                        final ContentValues cv = new ContentValues();
+                        ((ObjectNode) tcNode).set("filter", node);
+                        cv.put("treeconfig", JsonUtils.nodeToString(tcNode));
+                        db.update(dbTableFilters, cv, "_id = ?", new String[]{String.valueOf(id)});
+                    }
                 }
             }
         }

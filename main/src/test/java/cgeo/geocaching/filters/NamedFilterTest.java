@@ -2,6 +2,7 @@ package cgeo.geocaching.filters;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
@@ -50,9 +51,9 @@ public class NamedFilterTest {
 
     @Test
     public void testAddNewSortsAlphabetically() {
-        final NamedFilter n1 = NamedFilter.addNew("B - Second", null);
-        final NamedFilter n2 = NamedFilter.addNew("A - First", null);
-        final NamedFilter n3 = NamedFilter.addNew("C - Third", null);
+        final NamedFilter n1 = NamedFilter.addNew("B - Second", GeocacheFilter.createEmpty());
+        final NamedFilter n2 = NamedFilter.addNew("A - First", GeocacheFilter.createEmpty());
+        final NamedFilter n3 = NamedFilter.addNew("C - Third", GeocacheFilter.createEmpty());
 
         // Second added should be at position 0 (highest priority)
         assertThat(NamedFilter.getAll().get(0).toConfig()).isEqualTo(n2.toConfig());
@@ -237,18 +238,22 @@ public class NamedFilterTest {
 
     @Test
     public void testToJsonFromJsonRoundTrip() {
-        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        final TypeGeocacheFilter tf = GeocacheFilterType.TYPE.create();
         tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
         final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
 
         final NamedFilter original = new NamedFilter("RoundTrip", gf, EMOJI_SMILEY, true, null).setId(77);
-        final NamedFilter restored = NamedFilter.createFromConfig(original.toConfig());
+        final String config = original.toConfig();
+        final NamedFilter restored = NamedFilter.createFromConfig(config);
 
         assertThat(restored.getId()).isEqualTo(77);
         assertThat(restored.getName()).isEqualTo("RoundTrip");
         assertThat(restored.getMarkerId()).isEqualTo(EMOJI_SMILEY);
         assertThat(restored.isConditionalMarkerActive()).isTrue();
         assertThat(restored.getFilter()).isNotNull();
+        assertThat(restored.getFilter().getTree()).isInstanceOf(TypeGeocacheFilter.class);
+        assertThat(((TypeGeocacheFilter) restored.getFilter().getTree()).getType()).isEqualTo(GeocacheFilterType.TYPE);
+        assertThat(((TypeGeocacheFilter) restored.getFilter().getTree()).getValues()).containsExactly(CacheType.TRADITIONAL);
     }
 
     @Test
