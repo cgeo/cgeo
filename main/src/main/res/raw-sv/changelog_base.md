@@ -33,6 +33,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Beräkna saknade höjddata vid import av spår (om höjddata laddas ner)
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 - Nytt: Villkorade cachemarkörer
+- New: Show navigation hint (arrow + distance)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
