@@ -33,6 +33,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Novinka: Výpočet chybějících údajů o nadmořské výšce při importu tras (pokud jsou data o nadmořské výšce stažena)
 - Oprava: Stahovač map se za určitých podmínek zastaví (pouze online mapy OpenStreetMap)
 - New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
