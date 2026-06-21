@@ -98,6 +98,23 @@ public class JsonUtilsTest {
         final String jsonDateString = JsonUtils.stringToNode(json).get("logDate").textValue();
 
         assertThat(jsonDateString).isEqualTo(sdfDateString);
+    }
 
+    @Test
+    public void forEach() {
+        final JsonNode node = JsonUtils.stringToNode(TEST_JSON, false);
+
+        final StringBuilder sb = new StringBuilder();
+        JsonUtils.forEach(node, (key) -> {
+            if (key.isArray()) {
+                //don't scan arrays
+                return false;
+            }
+            if (key.isTextual()) {
+                sb.append(key.asText());
+            }
+            return true;
+        });
+        assertThat(sb.toString()).isEqualTo("green");
     }
 }

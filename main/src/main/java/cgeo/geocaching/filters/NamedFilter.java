@@ -212,7 +212,7 @@ public class NamedFilter {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setInt(node, JSON_KEY_ID, id);
         JsonUtils.setText(node, JSON_KEY_NAME, name);
-        JsonUtils.setText(node, JSON_KEY_FILTER, filter != null ? filter.toConfig() : null);
+        JsonUtils.set(node, JSON_KEY_FILTER, filter != null ? filter.toJson() : null);
         JsonUtils.setText(node, JSON_KEY_MARKER_ID, markerId);
         JsonUtils.setBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, conditionalMarkerActive);
         JsonUtils.setInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, conditionalMarkerPriority.getValue());
@@ -228,9 +228,7 @@ public class NamedFilter {
     private static NamedFilter createFromJsonNode(@NonNull final JsonNode node) {
         final int id = JsonUtils.getInt(node, JSON_KEY_ID, 0);
         final String name = JsonUtils.getText(node, JSON_KEY_NAME, "");
-        final String filterConfig = JsonUtils.getText(node, JSON_KEY_FILTER, null);
-        final GeocacheFilter filter = filterConfig != null ? GeocacheFilter.createFromConfig(filterConfig) : null;
-        // legacy int-codepoint markers are migrated to emoji Strings in the DataStore upgrade routine
+        final GeocacheFilter filter = GeocacheFilter.createFromJson(JsonUtils.get(node, JSON_KEY_FILTER));
         final String markerId = JsonUtils.getText(node, JSON_KEY_MARKER_ID, EmojiUtils.NO_EMOJI);
         final boolean conditionalMarkerActive = JsonUtils.getBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, false);
         final MarkerPriority conditionalMarkerPriority = MarkerPriority.fromValue(JsonUtils.getInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, -1));

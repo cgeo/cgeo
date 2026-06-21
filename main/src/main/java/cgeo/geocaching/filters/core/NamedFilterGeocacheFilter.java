@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
     private final Set<Integer> namedFilterIds = new HashSet<>();
-    private String namedFilter; //for legacy support
 
     private static final ThreadLocal<Set<Integer>> nestingTracker = new ThreadLocal<>();
 
@@ -93,7 +92,6 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
     public ObjectNode getJsonConfig() {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setCollection(node, "ids", namedFilterIds, JsonUtils::fromInt);
-        JsonUtils.setText(node, "name", namedFilter);
         return node;
     }
 
@@ -106,7 +104,6 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
         if (idList >= 0) {
             this.namedFilterIds.add(idList);
         }
-        this.namedFilter = JsonUtils.getText(node, "name", null);
     }
 
     @Override
@@ -132,17 +129,6 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
                 if (startNested(nf.getId())) {
                     continue;
                 }
-                final T result = function.apply(nf);
-                if (result != null) {
-                    return result;
-                }
-            } finally {
-                stopNested(nf.getId());
-            }
-        }
-        final NamedFilter nf = NamedFilter.getFirstByName(namedFilter);
-        if (nf != null && !startNested(nf.getId())) {
-            try {
                 final T result = function.apply(nf);
                 if (result != null) {
                     return result;
