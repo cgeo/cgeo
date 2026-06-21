@@ -51,7 +51,7 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Fix: Åtgärder vid loggning av spårbara objekt blandas ibland
 
 ##
-- Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
+- Ändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
 - Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
 - Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
 - Fix: Crash on reloading waypoints in certain load conditions
@@ -68,7 +68,7 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
 - Fix: Geofence-radie-inmatningsrutan visar decimaltal
 - Fix: Synkronisering av personliga anteckningar fungerar inte
-- Ändra: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
+- Ändring: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
 
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
