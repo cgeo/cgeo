@@ -33,6 +33,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 - New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
