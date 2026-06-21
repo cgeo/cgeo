@@ -20,6 +20,7 @@ import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -122,6 +123,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
 import androidx.loader.app.LoaderManager;
@@ -137,6 +139,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -962,7 +965,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void postOfflineLogs(final Collection<Geocache> caches) {
         SimpleDialog.of(this).setTitle(R.string.caches_post_offlinelogs).setMessage(R.string.caches_post_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
             progress.show(CacheListActivity.this, null, LocalizationUtils.getString(R.string.caches_post_offlinelogs_progress), true, postOfflineLogsHandler.disposeMessage());
-            postOfflineLogs(postOfflineLogsHandler, caches);
+            postOfflineLogs(this, postOfflineLogsHandler, caches);
         });
     }
 
@@ -1462,7 +1465,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
     }
 
-    private static void postOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
+    private static void postOfflineLogs(final Context context, final Handler handler, final Collection<Geocache> selectedCaches) {
         Schedulers.io().scheduleDirect(() -> {
 
             final List<Geocache> sortedCaches = new ArrayList<>();
@@ -1471,11 +1474,61 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     sortedCaches.add(cache);
                 }
             }
-
             sortedCaches.sort(Comparator.comparing(cache -> cache.getOfflineLog().getDate()));
 
+            boolean shouldStop = false;
             for (final Geocache cache : sortedCaches) {
-                LogUtils.postOfflineLog(cache, progressText -> { });
+                while (true) {
+                    final LogResult logResult = LogUtils.postOfflineLog(cache, progressText -> { });
+                    if (logResult.isOk()) {
+                        break;
+                    }
+
+                    final CountDownLatch waitForAnswer = new CountDownLatch(1);
+                    final String[] answer = new String[1];
+                    handler.post(() -> {
+                        final AlertDialog.Builder builder = Dialogs.newBuilder(context);
+                        builder.setTitle(LocalizationUtils.getString(R.string.caches_post_offline_logs_error));
+                        builder.setMessage(LocalizationUtils.getString(R.string.caches_post_offline_logs_error_message) + " " + cache.getName());
+                        builder.setCancelable(false);
+                        builder.setPositiveButton(R.string.caches_post_offline_logs_error_retry, (dialog, which) -> {
+                            answer[0] = LocalizationUtils.getString(R.string.caches_post_offline_logs_error_retry);
+                            waitForAnswer.countDown();
+                        });
+                        builder.setNeutralButton(R.string.caches_post_offline_logs_error_skip, (dialog, which) -> {
+                            answer[0] = LocalizationUtils.getString(R.string.caches_post_offline_logs_error_skip);
+                            waitForAnswer.countDown();
+                        });
+                        builder.setNegativeButton(R.string.caches_post_offline_logs_error_stop, (dialog, which) -> {
+                            answer[0] = LocalizationUtils.getString(R.string.caches_post_offline_logs_error_stop);
+                            waitForAnswer.countDown();
+                        });
+                        builder.create().show();
+                    });
+
+                    try {
+                        waitForAnswer.await();
+                    } catch (final InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+
+                    final String selectedOption = answer[0];
+
+                    if (LocalizationUtils.getString(R.string.caches_post_offline_logs_error_retry).equals(selectedOption)) {
+                        continue;
+                    } else if (LocalizationUtils.getString(R.string.caches_post_offline_logs_error_skip).equals(selectedOption)) {
+                        break;
+                    } else {
+                        shouldStop = true;
+                        break;
+                    }
+                }
+
+                if (shouldStop) {
+                    break;
+                }
+
                 try {
                     Thread.sleep(1000);
                 } catch (final InterruptedException ignored) {
