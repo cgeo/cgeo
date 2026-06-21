@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_alignParentRight="true">
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/filterbar">
 
     <include layout="@layout/map_detailsfragment_sidesheet" />
 </LinearLayout>
