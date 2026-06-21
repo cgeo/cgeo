@@ -99,7 +99,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="left"
-                    android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
