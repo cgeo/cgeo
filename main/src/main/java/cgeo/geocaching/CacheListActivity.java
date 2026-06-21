@@ -508,6 +508,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onResume() {
         super.onResume();
+        setAppIconAsUpIndicator(true);
 
         // save current position
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
@@ -756,7 +757,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
-        if (menuItem == R.id.menu_show_on_map) {
+        if (menuItem == android.R.id.home) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (menuItem == R.id.menu_show_on_map) {
             goMap();
         } else if (menuItem == R.id.menu_switch_select_mode) {
             adapter.switchSelectMode();

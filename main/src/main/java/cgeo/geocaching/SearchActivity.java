@@ -163,6 +163,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setAppIconAsUpIndicator(true);
         if (null != searchView) {
             if (searchPerformed) {
                 // search triggered from search field -> return to main screen
@@ -179,6 +180,15 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             }
         }
         searchPerformed = false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+        if (item.getItemId() != android.R.id.home) {
+            return super.onOptionsItemSelected(item);
+        }
+        startActivity(new Intent(this, AboutActivity.class));
+        return true;
     }
 
     @Override
