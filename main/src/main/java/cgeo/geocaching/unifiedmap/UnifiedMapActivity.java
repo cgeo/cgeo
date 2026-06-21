@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.AboutActivity;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
@@ -950,7 +951,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        if (id == R.id.menu_map_live) {
+        if (id == android.R.id.home) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (id == R.id.menu_map_live) {
             if (viewModel.mapType.enableLiveMap()) {
                 Settings.setLiveMap(!Settings.isLiveMap());
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
@@ -1484,6 +1487,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     protected void onResume() {
         super.onResume();
+        setAppIconAsUpIndicator(true);
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
             return; // prevent further execution on the old activity instance

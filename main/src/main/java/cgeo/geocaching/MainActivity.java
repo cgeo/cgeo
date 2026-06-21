@@ -689,14 +689,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     @Override
     public void updateSelectedBottomNavItemId() {
         super.updateSelectedBottomNavItemId();
-
-        // Always show c:geo logo for this activity
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher_rounded_noborder);
-            actionBar.setHomeActionContentDescription(R.string.about);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setAppIconAsUpIndicator(false);
     }
 
     /**
