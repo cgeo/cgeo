@@ -14,7 +14,6 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LegacyCalculatedCoordinateMigrator;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
@@ -826,13 +825,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
-
-        final Waypoint wp = cache.getWaypointById(waypointId);
-        if (LegacyCalculatedCoordinateMigrator.needsMigration(wp)) {
-            LegacyCalculatedCoordinateMigrator.performMigration(context, cache, wp, () -> startActivityEditWaypointInternal(context, cache, waypointId));
-        } else {
-            startActivityEditWaypointInternal(context, cache, waypointId);
-        }
+        startActivityEditWaypointInternal(context, cache, waypointId);
     }
 
     private static void startActivityEditWaypointInternal(final Context context, final Geocache cache, final int waypointId) {
