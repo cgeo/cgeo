@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class NamedFilterFilterViewHolder<T, F extends IGeocacheFilter> extends CheckboxFilterViewHolder<T, F> {
 
         public NamedFilterFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
-            super(filterAccessor, 1, Collections.emptySet());
+            super(filterAccessor, 1, Collections.emptySet(), false);
         }
 
         @Override

@@ -79,7 +79,7 @@ public class FilterViewHolderCreator {
                                         CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
                                 .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
                                 .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
-                        2, null);
+                        2, null, true);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -153,7 +153,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(ConnectorFactory.getConnectors())
                                 .setValueDisplayTextGetter(IConnector::getDisplayName)
                                 .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)), 1,
-                        new HashSet<>(ConnectorFactory.getActiveConnectors()));
+                        new HashSet<>(ConnectorFactory.getActiveConnectors()), false);
                 break;
             case STORED_SINCE:
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
@@ -170,7 +170,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(Category.getAllCategoriesExceptUnknown())
                                 .setValueDisplayTextGetter(Category::getI18nText)
                                 .setValueDrawableGetter(c -> ImageParam.id(c.getIconId())),
-                        2, null);
+                        2, null, false);
                 break;
             case TIER:
                 result = new CheckboxFilterViewHolder<>(
@@ -178,7 +178,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(Tier.values())
                                 .setValueDisplayTextGetter(Tier::getI18nText)
                                 .setValueDrawableGetter(t -> ImageParam.id(t.getIconId())),
-                        2, null);
+                        2, null, false);
                 break;
             case HEALTH_SCORE:
                 result = new HealthScoreFilterViewHolder();
