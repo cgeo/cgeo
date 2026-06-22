@@ -440,8 +440,9 @@ public final class StoredList extends AbstractList {
                 } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
                     prefix = temp;
                 }
-                prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
-                unchanged = unchanged && Strings.CS.equals(oldPrefix, prefix);
+
+                final String prefixWithSeparator = prefix + (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
+                unchanged = unchanged && (Strings.CS.equals(oldPrefix, prefix) || Strings.CS.equals(oldPrefix, prefixWithSeparator));
             }
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!unchanged && !blocked);
         }
