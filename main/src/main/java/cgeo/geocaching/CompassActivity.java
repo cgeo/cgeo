@@ -225,7 +225,6 @@ public class CompassActivity extends AbstractActionBarActivity {
         final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
         final boolean showHintButton = StringUtils.isNotEmpty(title);
         hintItem.setVisible(showHintButton);
-        hintItem.setTitle(title);
 
         final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
         ttsMenuItem.setVisible(cache != null);

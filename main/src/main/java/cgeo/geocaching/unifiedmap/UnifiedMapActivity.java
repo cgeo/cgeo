@@ -927,7 +927,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         final boolean showHintButton = StringUtils.isNotEmpty(title);
                         hintItem.setEnabled(showHintButton);
                         hintItem.setVisible(showHintButton);
-                        hintItem.setTitle(title);
 
                         LoggingUI.onPrepareOptionsMenu(menu, cache);
                         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
