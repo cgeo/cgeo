@@ -152,7 +152,7 @@ public class FilterUtils {
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
-            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
+            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
             .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)
@@ -163,6 +163,13 @@ public class FilterUtils {
                     name = name.substring(parentGroup.length() + NAMED_FILTER_GROUP_SEPARATOR.length());
                 }
                 return TextParam.text("**" + name + "**").setMarkdown(true);
+            })
+            .setGroupDisplayIconMapper(gi -> {
+                if (gi.getItems().isEmpty()) {
+                    return ImageParam.id(R.drawable.downloader_folder);
+                }
+                final NamedFilter first = gi.getItems().get(0);
+                return StringUtils.isNotBlank(first.getMarkerId()) ? ImageParam.emoji(first.getMarkerId()) : ImageParam.id(R.drawable.downloader_folder);
             })
             .setReducedGroupSaver("named_filters", g -> g, g -> g);
         return model;
