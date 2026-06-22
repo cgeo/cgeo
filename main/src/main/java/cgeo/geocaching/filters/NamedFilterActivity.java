@@ -160,6 +160,8 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     ctx.set(nf.getFilter());
                 }
                 pendingFilterEditPosition = pos;
+                //we have to save before opening filter editor, otherwise edited filters may not show up there correctly
+                saveFilters();
                 GeocacheFilterActivity.selectFilter(NamedFilterActivity.this, ctx, null, false);
             });
 
@@ -321,9 +323,13 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     }
 
     private void saveFiltersAndFinish() {
+        saveFilters();
+        finish();
+    }
+
+    private void saveFilters() {
         final List<NamedFilter> items = filterAdapter.getItems();
         NamedFilter.storeAll(items);
-        finish();
     }
 
     private void updateEmptyHint() {

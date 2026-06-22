@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class StoredListsFilterViewHolder<T, F extends IGeocacheFilter> extends CheckboxFilterViewHolder<T, F> {
     public StoredListsFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
-        super(filterAccessor, 1, Collections.emptySet());
+        super(filterAccessor, 1, Collections.emptySet(), false);
     }
 
     @Override

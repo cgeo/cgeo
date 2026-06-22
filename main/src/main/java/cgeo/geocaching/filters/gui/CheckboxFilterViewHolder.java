@@ -43,6 +43,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
     private final int columnCount;
     private Set<T> alwaysVisibleItems = null;
+    private final boolean allIsNone;
 
     private List<LinearLayout> columns;
     private Map<T, Integer> statistics;
@@ -54,9 +55,10 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
      * @param colCount number of display columns
      * @param alwaysVisibleItems if null then ALL values are visible. If emptySet() then only selected values are visible.
      */
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, @Nullable final Set<T> alwaysVisibleItems) {
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, @Nullable final Set<T> alwaysVisibleItems, final boolean allIsNone) {
         this.filterAccessor = filterAccessor;
         this.columnCount = colCount;
+        this.allIsNone = allIsNone;
         if (alwaysVisibleItems != null) {
             this.alwaysVisibleItems = new HashSet<>();
             this.alwaysVisibleItems.addAll(alwaysVisibleItems);
@@ -250,7 +252,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        if (getAllNoneSelected() == null) {
+        if (!allIsNone || !areAllSelected()) {
             for (T value : filterAccessor.getSelectableValuesAsArray()) {
                 if (this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked()) {
                     set.add(value);
@@ -261,20 +263,13 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return filter;
     }
 
-    private Boolean getAllNoneSelected() {
-        boolean foundNonSelected = false;
-        boolean foundSelected = false;
+    private boolean areAllSelected() {
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
             final boolean selected = this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked();
-            foundNonSelected |= !selected;
-            foundSelected |= selected;
+            if (!selected) {
+                return false;
+            }
         }
-        if (foundNonSelected && !foundSelected) {
-            return false;
-        }
-        if (!foundNonSelected && foundSelected) {
-            return true;
-        }
-        return null;
+        return true;
     }
 }

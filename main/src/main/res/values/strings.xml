@@ -875,7 +875,7 @@
     <string name="cache_namedfilter_matching">Matching named filters</string>
     <string name="named_filter_add">Add filter</string>
     <string name="named_filter_empty_hint">No named filters configured. Tap + to add one.</string>
-    <string name="named_filter_activate_marker">Activate marker with priority:</string>
+    <string name="named_filter_activate_marker">Show marker - priority:</string>
     <string name="named_filter_enable_all_markers">Enable all Markers</string>
     <string name="named_filter_markers_enabled">Markers enabled</string>
     <string name="named_filter_markers_disabled">Markers disabled</string>
