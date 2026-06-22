@@ -1107,12 +1107,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
-            } else if (viewModel.mapType.type == UMTT_TargetGeocode) {
-                if (LoggingUI.isMenuItemSelected(item)) {
-                    final Geocache targetCache = getCurrentTargetCache();
-                    if (targetCache != null) {
-                        return LoggingUI.onMenuItemSelected(item, this, targetCache, null);
-                    }
+            } else if (LoggingUI.isMenuItemSelected(item)) {
+                final Geocache targetCache = getCurrentTargetCache();
+                if (targetCache != null) {
+                    return LoggingUI.onMenuItemSelected(item, this, targetCache, null);
                 }
             }
             return super.onOptionsItemSelected(item);
