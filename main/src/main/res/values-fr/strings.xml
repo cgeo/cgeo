@@ -872,7 +872,6 @@
     <string name="settings_lc_description">Ce paramètre ajoute les Adventure Lab sur la carte.\n\n(Disponible pour les membres premium uniquement sur geocaching.com. Nécessite d\'activer le service “Géocaching”.)\n\nModifier ce paramètre nécessite de redémarrer l\'application.</string>
     <string name="settings_lc_found_state_title">État trouvé manuel</string>
     <string name="settings_lc_found_state_handling">Si coché, ne pas récupérer automatiquement l\'état trouvé des Labcaches, à la place, fournir des contrôles pour que l\'utilisateur définisse manuellement l\'état trouvé</string>
-    <string name="lc_default_description">C\'est une Adventure Lab de geocaching.com. Les Adventures peuvent seulement être jouées avec l\'application Adventure Lab de Groundspeak. Appuyez sur l\'icône Adventure Lab sur l\'onglet “Détails” pour ouvrir/installer l\'application.\nSi vous ne voulez pas voir les Adventure Lab sur votre carte et la recherche, vous pouvez les désactiver dans le menu “Paramètres”, “Services”, puis “Geocaching.com Adventure Lab”</string>
     <string name="init_summary_oc_de">Charger les caches depuis opencaching.de</string>
     <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
     <string name="init_summary_oc_pl">Charger les caches depuis opencaching.pl</string>

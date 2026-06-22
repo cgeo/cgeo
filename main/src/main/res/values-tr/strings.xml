@@ -687,7 +687,6 @@
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
     <string name="settings_lc_description">Adventure Lab cache\'leri de haritaya dahil et.\n\n(\"Geocaching.com\" ücretli üyeliği sahiplerine özeldir. \"Geocaching.com\" hizmeti c:geo\'da yetkilendirilmelidir.)\n\nBu ayarın değiştirilmesi yeniden başlatma gerektirir.</string>
-    <string name="lc_default_description">Bu bir geocaching.com Adventure Lab Cache\'dir. Adventure\'lar sadece Groundspeak Adventure Lab uygulamasıyla oynanabilir. Adventure Lab uygulamasını açmak/kurmak için \'\'Detaylar\'\' sayfasındaki Adventure Lab ikonuna tıklayın.\nEğer haritanızda ve aramalarınızda Adventure Lab cache\'leri görmek istemiyorsanız \'\'Ayarlar\'\' üzerinden bu özelliği kapatabilirsiniz. Ayarlar-Servisler-Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">opencaching.de üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_de_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencachin.de ile c:geo\'yu yetkilendirin.</string>
     <string name="init_summary_oc_pl">opencaching.pl üzerinden Geocache\'leri yükle</string>

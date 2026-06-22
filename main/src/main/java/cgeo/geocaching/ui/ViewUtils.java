@@ -34,7 +34,7 @@ import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
+import android.text.method.ArrowKeyMovementMethod;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Pair;
@@ -348,7 +348,7 @@ public class ViewUtils {
             binding.input.setMaxLines(maxLines);
             binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
             binding.input.setVerticalScrollBarEnabled(true);
-            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance());
+            binding.input.setMovementMethod(ArrowKeyMovementMethod.getInstance());
             binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
             binding.input.invalidate();
             Dialogs.moveCursorToEnd(binding.input);

@@ -443,18 +443,30 @@ public class GCLogAPI {
             }
         }
 
-        //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
-        try (GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
+        final ObjectNode inner = JsonUtils.createObjectNode();
+        inner.put("referenceCode", trackableLog.geocode);
+        inner.set("body", JsonUtils.mapper.valueToTree(logEntry));
+        final ObjectNode requestBody = JsonUtils.createObjectNode();
+        requestBody.set("0", inner);
+
+        //URL: https://www.geocaching.com/api/live/v1/trpc/web.logs.createTrackableLog?batch=1
+        //Response: [{"result":{"data":{"logReferenceCode":"TLxxx",...}}}]
+        final JsonNode response = websiteReq().uri("/api/live/v1/trpc/web.logs.createTrackableLog?batch=1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(logEntry)
-                .requestJson(GCWebTrackableLogResponse.class).blockingGet()) {
-            if (response.logReferenceCode == null) {
-                return generateLogError("Problem pasting trackable log, response is: " + response + ", request was:" + HttpRequest.safeGetJsonBody(logEntry));
-            }
+                .bodyJson(requestBody)
+                .requestJsonNode().blockingGet();
 
-            return LogResult.ok(response.logReferenceCode);
+        final JsonNode firstResult = response != null && response.isArray() && !response.isEmpty() ? response.get(0) : null;
+        final JsonNode data = JsonUtils.get(JsonUtils.get(firstResult, "result"), "data");
+        final String logReferenceCode = JsonUtils.getText(data, "logReferenceCode", null);
+
+        if (logReferenceCode == null) {
+            return generateLogError("Problem pasting trackable log, request JSON=[" + JsonUtils.nodeToString(requestBody) +
+                    "], response=[" + JsonUtils.nodeToString(response) + "]");
         }
+
+        return LogResult.ok(logReferenceCode);
 
 
     }

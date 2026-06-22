@@ -787,7 +787,6 @@
     <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)\n\n이 설정을 변경하려면 다시 시작해야합니다.</string>
     <string name="settings_lc_found_state_title">수동 찾음 상태</string>
     <string name="settings_lc_found_state_handling">이 옵션을 선택하면 어드벤처 랩 캐시의 실제 검색 상태를 자동으로 가져오지 않습니다. 대신 사용자가 검색 상태를 수동으로 설정할 수 있는 컨트롤을 제공합니다</string>
-    <string name="lc_default_description">이것은 geocaching.com 어드벤처 랩 캐시입니다. 어드벤처는 그라운드스픽 어드벤처 랩 앱에서만 플레이 할 수 있습니다. \"상세 정보\"페이지에서 어드벤처 랩 아이콘을 눌러 이 어드벤처를 위한 어드벤처 랩 앱을 열거나 설치합니다.\n지도 및 검색에서 어드벤처 랩 캐시를 보고 싶지 않은 경우 \"설정\"메뉴-서비스-Geocaching.com 어드벤처 랩을 사용하여 비활성화 할 수 있습니다.</string>
     <string name="init_summary_oc_de">Opencaching.de 에서 캐시 불러오기</string>
     <string name="init_oc_de_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.de에 c:geo를 인증하기</string>
     <string name="init_summary_oc_pl">Opencaching.pl 에서 캐시 불러오기</string>
