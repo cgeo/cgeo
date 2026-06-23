@@ -7,10 +7,6 @@ updates:
     # no limit :)
     open-pull-requests-limit: 30
     ignore:
-      # Ignore some updates to the 'assertj' package
-      # Ignore only new versions for >= 3.x
-      - dependency-name: "org.assertj:assertj-core"
-        versions: ">= 3.0.0"
       # Ignore updates to the 'jts-core' package
       # jts-core 1.17.0 includes a API breaking change not supported by VTM
       - dependency-name: "org.locationtech.jts:jts-core"

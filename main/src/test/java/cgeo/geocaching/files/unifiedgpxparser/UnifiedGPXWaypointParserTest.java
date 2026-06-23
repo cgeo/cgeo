@@ -9,8 +9,8 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Assume;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 /**
  * Tests for {@link UnifiedGPXWaypointParser} driven through the public
@@ -53,7 +53,7 @@ public class UnifiedGPXWaypointParserTest {
             final Geocache cache = firstWaypoint(result);
             assertThat(cache.getName()).isEqualTo("GC1234");
             assertThat(cache.getGeocode()).isEqualTo("GC1234");
-            assertThat(cache.getCoords().getLatitude()).isEqualTo(48.5, offset(1e-9));
+            assertThat(cache.getCoords().getLatitude()).isCloseTo(48.5, within(1e-9));
         } catch (Throwable t) {
             Assume.assumeNoException("Gracefully skip error - Don't break CI while UnifiedGPXParser is still in exploration phase", t);
         }
@@ -106,8 +106,8 @@ public class UnifiedGPXWaypointParserTest {
             assertThat(cache.getOwnerUserId()).isEqualTo("OwnerId");
             assertThat(cache.getType()).isEqualTo(CacheType.TRADITIONAL);
             assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
-            assertThat(cache.getDifficulty()).isEqualTo(2.5f, offset(1e-6f));
-            assertThat(cache.getTerrain()).isEqualTo(3.0f, offset(1e-6f));
+            assertThat(cache.getDifficulty()).isCloseTo(2.5f, within(1e-6f));
+            assertThat(cache.getTerrain()).isCloseTo(3.0f, within(1e-6f));
             assertThat(cache.getLocation()).contains("Baden-Württemberg").contains("Germany");
             assertThat(cache.getHint()).isEqualTo("Pgvyu cnegva");
             assertThat(cache.getShortDescription()).isEqualTo("Short text");
@@ -268,7 +268,7 @@ public class UnifiedGPXWaypointParserTest {
             assertThat(cache.hasUserModifiedCoords()).isTrue();
             assertThat(cache.getWaypoints()).hasSize(1);
             assertThat(cache.getWaypoints().get(0).getCoords().getLatitude())
-                    .isEqualTo(48.5, offset(1e-9));
+                    .isCloseTo(48.5, within(1e-9));
         } catch (Throwable t) {
             Assume.assumeNoException("Gracefully skip error - Don't break CI while UnifiedGPXParser is still in exploration phase", t);
         }
@@ -334,7 +334,7 @@ public class UnifiedGPXWaypointParserTest {
         try {
             final Geocache cache = firstWaypoint(result);
             assertThat(cache.getName()).isEqualTo("From 1.0");
-            assertThat(cache.getDifficulty()).isEqualTo(4f, offset(1e-6f));
+            assertThat(cache.getDifficulty()).isCloseTo(4f, within(1e-6f));
         } catch (Throwable t) {
             Assume.assumeNoException("Gracefully skip error - Don't break CI while UnifiedGPXParser is still in exploration phase", t);
         }

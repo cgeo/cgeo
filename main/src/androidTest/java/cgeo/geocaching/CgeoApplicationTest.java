@@ -41,7 +41,7 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The c:geo application test. It can be used for tests that require an

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.xmlpull.v1.XmlPullParser;
-import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 /**
  * Focused tests for {@link UnifiedGPXTrackParser#parseTrack(XmlPullParser)}.
@@ -102,9 +102,9 @@ public class UnifiedGPXTrackParserTest {
         final ArrayList<Float> elevations = route.getSegments()[0].getElevation();
         assertThat(elevations).isNotNull();
         assertThat(elevations).hasSize(3);
-        assertThat(elevations.get(0)).isEqualTo(100.0f, offset(1e-6f));
-        assertThat(elevations.get(1)).isEqualTo(200.5f, offset(1e-6f));
-        assertThat(elevations.get(2)).isEqualTo(300.0f, offset(1e-6f));
+        assertThat(elevations.get(0)).isCloseTo(100.0f, within(1e-6f));
+        assertThat(elevations.get(1)).isCloseTo(200.5f, within(1e-6f));
+        assertThat(elevations.get(2)).isCloseTo(300.0f, within(1e-6f));
     }
 
     @Test
@@ -183,7 +183,7 @@ public class UnifiedGPXTrackParserTest {
                 + "<trkpt lat=\"48.123456\" lon=\"9.654321\"/>"
                 + "</trkseg></trk>"));
         final Geopoint p = route.getSegments()[0].getPoints().get(0);
-        assertThat(p.getLatitude()).isEqualTo(48.123456, offset(1e-9));
-        assertThat(p.getLongitude()).isEqualTo(9.654321, offset(1e-9));
+        assertThat(p.getLatitude()).isCloseTo(48.123456, within(1e-9));
+        assertThat(p.getLongitude()).isCloseTo(9.654321, within(1e-9));
     }
 }

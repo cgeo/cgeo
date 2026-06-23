@@ -13,7 +13,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This class tests the Date filters, using HIDDEN filter as an example

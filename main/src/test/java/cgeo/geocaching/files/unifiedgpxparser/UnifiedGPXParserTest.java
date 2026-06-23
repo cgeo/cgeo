@@ -2,7 +2,6 @@ package cgeo.geocaching.files.unifiedgpxparser;
 
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteSegment;
 
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 public class UnifiedGPXParserTest {
 
@@ -59,16 +58,16 @@ public class UnifiedGPXParserTest {
                 + GPX_FOOTER);
 
         try {
-            assertThat(result.waypoints).hasSize(1);
-            final Geocache cache = result.waypoints.iterator().next();
-            assertThat(cache.getCoords().getLatitude()).isEqualTo(48.5, offset(1e-9));
-            assertThat(cache.getCoords().getLongitude()).isEqualTo(9.25, offset(1e-9));
-            assertThat(cache.getName()).isEqualTo("WP-Test");
-            // setGeocode uppercases the input
-            assertThat(cache.getGeocode()).isEqualTo("WP-TEST");
-            assertThat(cache.getShortDescription()).isEqualTo("short text");
-            assertThat(cache.getDescription()).isEqualTo("long text");
-            assertThat(cache.getHiddenDate()).isNotNull();
+            assertThat(result.waypoints).singleElement().satisfies(cache -> {
+                assertThat(cache.getCoords().getLatitude()).isCloseTo(48.5, within(1e-9));
+                assertThat(cache.getCoords().getLongitude()).isCloseTo(9.25, within(1e-9));
+                assertThat(cache.getName()).isEqualTo("WP-Test");
+                // setGeocode uppercases the input
+                assertThat(cache.getGeocode()).isEqualTo("WP-TEST");
+                assertThat(cache.getShortDescription()).isEqualTo("short text");
+                assertThat(cache.getDescription()).isEqualTo("long text");
+                assertThat(cache.getHiddenDate()).isNotNull();
+            });
         } catch (Throwable t) {
             Assume.assumeNoException("Gracefully skip error - Don't break CI while UnifiedGPXParser is still in exploration phase", t);
         }
@@ -272,10 +271,10 @@ public class UnifiedGPXParserTest {
         try {
             final ArrayList<Geopoint> points = result.tracks.get(0).getSegments()[0].getPoints();
             assertThat(points).hasSize(3);
-            assertThat(points.get(0).getLatitude()).isEqualTo(10.0, offset(1e-9));
-            assertThat(points.get(0).getLongitude()).isEqualTo(20.0, offset(1e-9));
-            assertThat(points.get(2).getLatitude()).isEqualTo(12.0, offset(1e-9));
-            assertThat(points.get(2).getLongitude()).isEqualTo(22.0, offset(1e-9));
+            assertThat(points.get(0).getLatitude()).isCloseTo(10.0, within(1e-9));
+            assertThat(points.get(0).getLongitude()).isCloseTo(20.0, within(1e-9));
+            assertThat(points.get(2).getLatitude()).isCloseTo(12.0, within(1e-9));
+            assertThat(points.get(2).getLongitude()).isCloseTo(22.0, within(1e-9));
         } catch (Throwable t) {
             Assume.assumeNoException("Gracefully skip error - Don't break CI while UnifiedGPXParser is still in exploration phase", t);
         }

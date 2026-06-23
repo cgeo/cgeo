@@ -9,8 +9,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.junit.Before;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class RxOkHttpUtilsTest {
 

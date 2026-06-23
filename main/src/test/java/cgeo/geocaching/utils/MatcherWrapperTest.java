@@ -3,7 +3,7 @@ package cgeo.geocaching.utils;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatcherWrapperTest {
 
@@ -11,7 +11,7 @@ public class MatcherWrapperTest {
     public void testFind() {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "abc123def456");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.group()).isEqualTo("123");
         assertThat(matcher.find()).isTrue();
@@ -23,7 +23,7 @@ public class MatcherWrapperTest {
     public void testFindWithStart() {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "abc123def456ghi789");
-        
+
         // Start at position 9 (just before "456")
         assertThat(matcher.find(9)).isTrue();
         assertThat(matcher.group()).isEqualTo("456");
@@ -33,7 +33,7 @@ public class MatcherWrapperTest {
     public void testGroupCount() {
         final Pattern pattern = Pattern.compile("(\\w+)=(\\d+)");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "key=123");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.groupCount()).isEqualTo(2);
     }
@@ -42,7 +42,7 @@ public class MatcherWrapperTest {
     public void testGroupWithIndex() {
         final Pattern pattern = Pattern.compile("(\\w+)=(\\d+)");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "key=123");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.group(1)).isEqualTo("key");
         assertThat(matcher.group(2)).isEqualTo("123");
@@ -52,7 +52,7 @@ public class MatcherWrapperTest {
     public void testStart() {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "abc123def");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.start()).isEqualTo(3);
     }
@@ -61,7 +61,7 @@ public class MatcherWrapperTest {
     public void testStartWithGroup() {
         final Pattern pattern = Pattern.compile("(\\w+)=(\\d+)");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "key=123");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.start(1)).isEqualTo(0);
         assertThat(matcher.start(2)).isEqualTo(4);
@@ -71,7 +71,7 @@ public class MatcherWrapperTest {
     public void testReplaceAll() {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "abc123def456");
-        
+
         final String result = matcher.replaceAll("X");
         assertThat(result).isEqualTo("abcXdefX");
     }
@@ -80,7 +80,7 @@ public class MatcherWrapperTest {
     public void testReplaceFirst() {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "abc123def456");
-        
+
         final String result = matcher.replaceFirst("X");
         assertThat(result).isEqualTo("abcXdef456");
     }
@@ -90,7 +90,7 @@ public class MatcherWrapperTest {
         final Pattern pattern = Pattern.compile("\\d+");
         final MatcherWrapper matcher1 = new MatcherWrapper(pattern, "123");
         final MatcherWrapper matcher2 = new MatcherWrapper(pattern, "abc123");
-        
+
         assertThat(matcher1.matches()).isTrue();
         assertThat(matcher2.matches()).isFalse();
     }
@@ -99,7 +99,7 @@ public class MatcherWrapperTest {
     public void testNullGroup() {
         final Pattern pattern = Pattern.compile("(\\w+)=(\\d*)");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "key=");
-        
+
         assertThat(matcher.find()).isTrue();
         // Group 2 matches empty string, not null
         assertThat(matcher.group(2)).isEqualTo("");
@@ -109,7 +109,7 @@ public class MatcherWrapperTest {
     public void testMultipleMatches() {
         final Pattern pattern = Pattern.compile("\\w+");
         final MatcherWrapper matcher = new MatcherWrapper(pattern, "one two three");
-        
+
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.group()).isEqualTo("one");
         assertThat(matcher.find()).isTrue();

@@ -6,7 +6,7 @@ import cgeo.geocaching.settings.TestSettings;
 import org.apache.commons.lang3.Strings;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class UnitsTest {

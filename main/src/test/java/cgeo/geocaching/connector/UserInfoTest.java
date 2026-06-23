@@ -3,14 +3,14 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserInfoTest {
 
     @Test
     public void testBasicConstructor() {
         final UserInfo userInfo = new UserInfo("TestUser", 100, UserInfo.UserInfoStatus.SUCCESSFUL);
-        
+
         assertThat(userInfo.getName()).isEqualTo("TestUser");
         assertThat(userInfo.getFinds()).isEqualTo(100);
         assertThat(userInfo.getStatus()).isEqualTo(UserInfo.UserInfoStatus.SUCCESSFUL);
@@ -20,7 +20,7 @@ public class UserInfoTest {
     @Test
     public void testFullConstructor() {
         final UserInfo userInfo = new UserInfo("TestUser", 100, UserInfo.UserInfoStatus.SUCCESSFUL, 50);
-        
+
         assertThat(userInfo.getName()).isEqualTo("TestUser");
         assertThat(userInfo.getFinds()).isEqualTo(100);
         assertThat(userInfo.getStatus()).isEqualTo(UserInfo.UserInfoStatus.SUCCESSFUL);
