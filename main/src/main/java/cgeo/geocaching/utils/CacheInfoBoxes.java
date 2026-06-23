@@ -7,8 +7,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.filters.FilterUtils;
-import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -27,7 +25,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -35,7 +32,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -48,7 +44,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class CacheInfoBoxes {
 
@@ -119,46 +114,6 @@ public class CacheInfoBoxes {
             offlineDrop.setVisibility(View.GONE);
             offlineEdit.setVisibility(View.GONE);
         }
-    }
-
-    /**
-     * Show/hide and populate the named filter matching box
-     */
-    public static void updateNamedFilterBox(final View view, final Geocache cache, final Activity activity) {
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matching = NamedFilter.getFiltersMatchingCache(cache);
-        final List<NamedFilter> activeFilters = matching.left;
-        final List<NamedFilter> inactiveFilters = matching.right;
-
-        final View box = view.findViewById(R.id.namedfilter_box);
-        if (activeFilters.isEmpty() && inactiveFilters.isEmpty()) {
-            box.setVisibility(View.GONE);
-            return;
-        }
-
-        box.setVisibility(View.VISIBLE);
-
-        final SpannableStringBuilder sb = new SpannableStringBuilder();
-        sb.append(LocalizationUtils.getString(R.string.cache_namedfilter_matching)).append(": ");
-        sb.append(TextUtils.join(activeFilters, NamedFilter::getNameAndMarker, ", "));
-        if (!activeFilters.isEmpty() && !inactiveFilters.isEmpty()) {
-            sb.append(", ");
-        }
-        final int inactiveStart = sb.length();
-        sb.append(TextUtils.join(inactiveFilters, NamedFilter::getNameAndMarker, ", "));
-        if (inactiveStart < sb.length() && activity != null) {
-            final int secondaryColor = ContextCompat.getColor(activity, R.color.colorText_listsSecondary);
-            sb.setSpan(new ForegroundColorSpan(secondaryColor), inactiveStart, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        final TextView namedfilterText = view.findViewById(R.id.namedfilter_text);
-        namedfilterText.setText(sb);
-
-        final Button namedfilterOpen = view.findViewById(R.id.namedfilter_open);
-        namedfilterOpen.setOnClickListener(v -> FilterUtils.onClickNamedFilterMenu(activity));
-        namedfilterOpen.setOnLongClickListener(v -> {
-            FilterUtils.openDialogActivateDeactivateNamedFilters(activity);
-            return true;
-        });
     }
 
 

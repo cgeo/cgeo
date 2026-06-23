@@ -18,9 +18,9 @@
         android:title="@string/caches_sort"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_named_filters"
-        android:icon="@drawable/ic_menu_myfilters"
-        android:title="@string/named_filter_activity_title"
+        android:id="@+id/menu_marker"
+        android:icon="@drawable/ic_menu_marker"
+        android:title="@string/named_filter_markers"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_switch_select_mode"

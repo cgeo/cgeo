@@ -4,6 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -19,10 +21,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -53,25 +57,34 @@ public class FilterUtils {
             v -> filteredActivity.showSavedFilterList());
     }
 
-    public static void initializeFilterMenu(final Activity activity, final int filterMenuId, @NonNull final FilteredActivity filteredActivity) {
+    public static void initializeFilterMenu(final Activity activity, final int filterMenuId, final int markerMenuId, @NonNull final FilteredActivity filteredActivity) {
         ViewUtils.registerLongClickHandlerForMenuItem(activity, filterMenuId, v -> filteredActivity.showSavedFilterList());
+
+        ViewUtils.registerLongClickHandlerForMenuItem(activity, markerMenuId, v -> {
+            final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
+            Settings.setConditionalCacheMarkersEnabled(newState);
+            GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
+            return true;
+        });
     }
 
     public static void onClickFilterMenu(@NonNull final FilteredActivity filteredActivity) {
         filteredActivity.showFilterMenu();
     }
 
-    public static void initializeNamedFilterMenu(final Activity activity, final int namedFilterMenuId, @NonNull final FilteredActivity filteredActivity) {
-        ViewUtils.registerLongClickHandlerForMenuItem(activity, namedFilterMenuId, v -> filteredActivity.showNamedFilterActivateDeactivate());
-    }
-
-    public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
-        NamedFilterActivity.startActivity(activity);
-    }
-
     /** opens a dialog to activate/deactivate named filter markers */
-    public static void openDialogActivateDeactivateNamedFilters(final Context context) {
-        final List<NamedFilter> filters = NamedFilter.getAll();
+    public static void openDialogActivateMarkers(final Activity context) {
+        final List<NamedFilter> filters = NamedFilter.getAllWithIcons();
+
+        if (filters.isEmpty()) {
+            SimpleDialog.ofContext(context)
+                .setMessage(R.string.named_filter_no_icons_message)
+                .setNeutralButton(TextParam.id(R.string.named_filter_manage_filter))
+                .setNeutralAction(() -> FilterUtils.onClickFilterMenu((FilteredActivity) context))
+                .show();
+            return;
+        }
+
         final Set<NamedFilter> preSelected = new HashSet<>();
         for (final NamedFilter nf : filters) {
             if (nf.isConditionalMarkerActive()) {
@@ -79,21 +92,16 @@ public class FilterUtils {
             }
         }
 
-        openDialogMultiselectNamedFilters(context, TextParam.id(R.string.named_filter_activate_deactivate_title), preSelected,
-                NamedFilter::activateMarker);
-    }
-
-    public static void openDialogMultiselectNamedFilters(final Context context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {
-        final List<NamedFilter> filters = NamedFilter.getAll();
-
         final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
         model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
 
-        model.setSelectedItems(preselected);
+        model.setSelectedItems(preSelected);
 
         SimpleDialog.ofContext(context)
-            .setTitle(title)
-            .selectMultiple(model, selectionListener);
+            .setTitle(R.string.named_filter_enable_markers)
+            .setNeutralButton(TextParam.id(R.string.named_filter_reorder))
+            .setNeutralAction(() -> NamedFilterPriorityActivity.startActivity(context))
+            .selectMultiple(model, NamedFilter::activateMarker);
     }
 
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
@@ -136,6 +144,16 @@ public class FilterUtils {
                     onFilterSelected.accept(newFilter);
                 }
             });
+    }
+
+    /** Returns the sorted list of unique parent group names extracted from all existing named filters. */
+    public static List<String> getNamedFilterGroups() {
+        return NamedFilter.getAll().stream()
+                .map(f -> getGroupFromFilterName(f.getName()))
+                .filter(g -> g != null && !g.isEmpty())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /** builds basic display model for named filters, initialized to "single-plain". Handles grouping */

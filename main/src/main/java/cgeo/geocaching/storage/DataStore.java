@@ -1980,7 +1980,7 @@ public class DataStore {
                                     migratedFilters.add(new NamedFilter(
                                         oldName != null ? oldName : "",
                                         gcFilter,
-                                        EmojiUtils.NO_EMOJI, false, NamedFilter.MarkerPriority.NORMAL).setId(idx + 1));
+                                        EmojiUtils.NO_EMOJI, false, NamedFilter.DEFAULT_PRIORITY).setId(idx + 1));
                                     idx++;
                                 }
                             }
@@ -2007,7 +2007,7 @@ public class DataStore {
                                             "Marker Filter " + (j + 1),
                                             markerGf,
                                             markerId,
-                                            true, NamedFilter.MarkerPriority.NORMAL)
+                                            true, NamedFilter.DEFAULT_PRIORITY)
                                             .setId(numMigratedFilters + j + 1));
                                     j++;
                                 }
