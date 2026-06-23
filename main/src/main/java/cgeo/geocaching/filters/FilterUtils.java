@@ -19,10 +19,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -136,6 +138,16 @@ public class FilterUtils {
                     onFilterSelected.accept(newFilter);
                 }
             });
+    }
+
+    /** Returns the sorted list of unique parent group names extracted from all existing named filters. */
+    public static List<String> getNamedFilterGroups() {
+        return NamedFilter.getAll().stream()
+                .map(f -> getGroupFromFilterName(f.getName()))
+                .filter(g -> g != null && !g.isEmpty())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /** builds basic display model for named filters, initialized to "single-plain". Handles grouping */

@@ -2,12 +2,14 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.InputWithParentDialogBinding;
 import cgeo.geocaching.databinding.SimpleDialogTitleViewBinding;
 import cgeo.geocaching.databinding.SimpleDialogViewBinding;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
@@ -19,6 +21,8 @@ import android.text.InputType;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -26,12 +30,17 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.viewbinding.ViewBinding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 /**
@@ -135,6 +144,7 @@ public class SimpleDialog {
     public static class InputOptions {
         private int inputType = InputType.TYPE_CLASS_TEXT;
         private String initialValue = null;
+        private String initialParent = null;
         private String label = null;
         private String suffix = null;
         private Predicate<String> inputChecker = null;
@@ -186,6 +196,16 @@ public class SimpleDialog {
         /** set maximum allowed length, 0=no limit */
         public InputOptions setMaxAllowedLength(final int maxAllowedLength) {
             this.maxAllowedLength = maxAllowedLength;
+            return this;
+        }
+
+        /**
+         * Pre-selects the parent field when using {@link #inputWithParent}.
+         * Setting this also activates rename-mode: OK is only enabled when name or parent differs from the initial values.
+         * Pass empty string for a top-level item with no parent; pass null to skip rename-mode.
+         */
+        public InputOptions setInitialParent(final String initialParent) {
+            this.initialParent = initialParent;
             return this;
         }
 
@@ -698,6 +718,148 @@ public class SimpleDialog {
 
         inputExecuteChecker(dialog, io.inputChecker, io.initialValue);
         Dialogs.moveCursorToEnd(textField);
+    }
+
+    /**
+     * Use this method to create and display an 'input with parent' dialog: an input dialog that
+     * additionally offers a dropdown to select an optional parent group prefix.
+     * The okayListener receives the full composed name (e.g. "Group:Name", or just "Name" if no parent was selected).
+     *
+     * @param nameOptions   options for the name input field (same as for {@link #input})
+     * @param parentChoices available parent/group names; a "(none)" entry is prepended automatically
+     * @param parentHint    hint label for the parent dropdown; if null no hint is shown
+     * @param okayListener  receives the full composed name on confirmation
+     */
+    /**
+     * Composes a hierarchical name from an optional parent prefix and a name, using ":" as separator.
+     * Cleans extra separators and surrounding whitespace from both parts before combining.
+     * Examples: ("Parent", "Name") → "Parent:Name"; ("", "Name") → "Name"; ("Parent:", "Name") → "Parent:Name".
+     */
+    public static String composeWithParent(final String parent, final String name) {
+        final String cleanParent = cleanNameSegments(parent);
+        final String cleanName = cleanNameSegments(name);
+        return cleanName.isEmpty() ? cleanParent : cleanParent.isEmpty() ? cleanName : cleanParent + ":" + cleanName;
+    }
+
+    private static String cleanNameSegments(final String input) {
+        if (input == null) {
+            return "";
+        }
+        return Arrays.stream(input.split(":", -1))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.joining(":"));
+    }
+
+    public void inputWithParent(final InputOptions nameOptions, final List<String> parentChoices, @Nullable final TextParam parentHint, final Consumer<String> okayListener) {
+        final InputOptions io = nameOptions == null ? new InputOptions() : nameOptions;
+
+        final String noneLabel = LocalizationUtils.getString(R.string.init_custombnitem_none);
+        final List<String> allChoices = new ArrayList<>();
+        allChoices.add(noneLabel);
+        if (parentChoices != null) {
+            allChoices.addAll(parentChoices);
+        }
+
+        final InputWithParentDialogBinding viewBinding = InputWithParentDialogBinding.inflate(LayoutInflater.from(context));
+
+        final AutoCompleteTextView parentView = viewBinding.inputParentView;
+        final TextInputLayout parentLayout = viewBinding.inputParentLayout;
+        if (parentHint != null) {
+            parentLayout.setHint(parentHint.getText(context));
+        }
+        parentView.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, allChoices));
+        // pre-select initial parent (rename mode) or "(none)" (create mode)
+        final String initialParentDisplay = io.initialParent != null && !io.initialParent.isEmpty() ? io.initialParent : noneLabel;
+        parentView.setText(initialParentDisplay, false);
+
+        final TextInputEditText nameView = viewBinding.inputNameView;
+        final TextInputLayout nameLayout = viewBinding.inputNameLayout;
+        nameView.setInputType(io.inputType);
+        if (io.initialValue != null) {
+            nameView.setText(io.initialValue);
+        }
+        if (io.hint != null) {
+            nameView.setHint(io.hint);
+        }
+        if (io.label != null) {
+            nameLayout.setHint(io.label);
+        }
+        if (io.suffix != null) {
+            nameLayout.setSuffixText(io.suffix);
+        }
+        if (io.maxAllowedLength > 0) {
+            ViewUtils.setMaxTextLength(nameView, nameLayout, io.maxAllowedLength);
+        }
+        if (io.allowedChars != null) {
+            final Pattern charPattern = Pattern.compile(io.allowedChars);
+            nameView.setFilters(new InputFilter[]{
+                    (source, start, end, dest, dstart, dend) -> {
+                        for (int i = start; i < end; i++) {
+                            if (!charPattern.matcher("" + source.charAt(i)).matches()) {
+                                return "";
+                            }
+                        }
+                        return null;
+                    }
+            });
+        }
+
+        this.customView = viewBinding.getRoot();
+
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
+        final AlertDialog dialog = dialogBinding.first;
+
+        // rename mode when initialParent is explicitly set (even as empty string = top-level)
+        final boolean isRenameMode = io.initialParent != null;
+        final String originalName = io.initialValue != null ? io.initialValue.trim() : null;
+
+        final Runnable updateOk = () -> {
+            if (positiveButton == null) {
+                return;
+            }
+            final String currentName = ViewUtils.getEditableText(nameView.getText()).trim();
+            final String currentParent = parentView.getText().toString().trim();
+            final boolean enabled;
+            if (io.inputChecker != null) {
+                enabled = io.inputChecker.test(currentName);
+            } else if (isRenameMode) {
+                final boolean currentParentIsNone = currentParent.isEmpty() || currentParent.equals(noneLabel);
+                final boolean originalParentIsNone = io.initialParent.isEmpty();
+                final boolean parentUnchanged = currentParentIsNone == originalParentIsNone
+                        && (currentParentIsNone || currentParent.equals(io.initialParent));
+                final boolean nameUnchanged = originalName != null && currentName.equals(originalName);
+                enabled = !currentName.isEmpty() && !(nameUnchanged && parentUnchanged);
+            } else {
+                enabled = !currentName.isEmpty();
+            }
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(enabled);
+        };
+
+        nameView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
+        parentView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
+
+        Keyboard.show(getContext(), nameView);
+        dialog.show();
+        updateOk.run();
+
+        finalizeCommons(dialog, which -> {
+            if (which == DialogInterface.BUTTON_POSITIVE && okayListener != null) {
+                final String name = ViewUtils.getEditableText(nameView.getText()).trim();
+                if (name.isEmpty()) {
+                    return false;
+                }
+                final String selectedParent = parentView.getText().toString().trim();
+                final String fullName = selectedParent.isEmpty() || selectedParent.equals(noneLabel)
+                        ? name : selectedParent + ":" + name;
+                okayListener.accept(fullName);
+                dialog.dismiss();
+                return true;
+            }
+            return false;
+        });
+
+        Dialogs.moveCursorToEnd(nameView);
     }
 
     private void inputExecuteChecker(final AlertDialog dialog, final Predicate<String> inputChecker, final CharSequence text) {
