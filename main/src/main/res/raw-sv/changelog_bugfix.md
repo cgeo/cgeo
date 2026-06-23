@@ -1,9 +1,15 @@
 ##
 Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
+- Fix: Cache/waypoint popup opening delayed on some devices
+- Fix: Edit cache description does not support copy & paster
+
+##
 - Fix: Deleting of log images broken (website change)
 - Change: Unify track and individual route loading buttons
 - Fix: Cache attributes not detected correctly under certain conditions
+- Fix: Logging caches (website change)
+- Fix: Logging trackables (website change)
 
 ##
 - Fix: Pocket query import broken (website change)
@@ -49,7 +55,7 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Fix: Åtgärder vid loggning av spårbara objekt blandas ibland
 
 ##
-- Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
+- Ändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
 - Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
 - Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
 - Fix: Crash on reloading waypoints in certain load conditions
@@ -66,7 +72,7 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
 - Fix: Geofence-radie-inmatningsrutan visar decimaltal
 - Fix: Synkronisering av personliga anteckningar fungerar inte
-- Ändra: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
+- Ändring: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
 
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
