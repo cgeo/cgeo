@@ -1,25 +1,23 @@
 package cgeo.geocaching.filters;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -44,38 +42,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class NamedFilter {
 
 
-    public enum MarkerPriority {
-        HIGHEST(100, R.string.named_filter_priority_highest),
-        HIGH(200, R.string.named_filter_priority_high),
-        NORMAL(300, R.string.named_filter_priority_normal),
-        LOW(400, R.string.named_filter_priority_low),
-        LOWEST(500, R.string.named_filter_priority_lowest);
-
-        private final int value;
-        @StringRes private final int resId;
-
-        MarkerPriority(final int value, final int resId) {
-            this.resId = resId;
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public String getL10n() {
-            return LocalizationUtils.getString(this.resId);
-        }
-
-        public static MarkerPriority fromValue(final int value) {
-            for (final MarkerPriority mp : values()) {
-                if (mp.value == value) {
-                    return mp;
-                }
-            }
-            return NORMAL; // default
-        }
-    }
+    public static final int DEFAULT_PRIORITY = 0;
 
     // JSON keys
     private static final String JSON_KEY_ID = "id";
@@ -91,7 +58,7 @@ public class NamedFilter {
     private GeocacheFilter filter;
     @Nullable private String markerId;
     private boolean conditionalMarkerActive;
-    private MarkerPriority conditionalMarkerPriority = MarkerPriority.NORMAL;
+    private int conditionalMarkerPriority = DEFAULT_PRIORITY;
 
     // --- static in-memory list and ID generator ---
     private static boolean cacheLoaded = false; // tracks whether we've loaded from DB yet
@@ -108,17 +75,17 @@ public class NamedFilter {
     // -------------------------------------------------------------------------
 
     public NamedFilter(@NonNull final String name, @Nullable final GeocacheFilter filter) {
-        this(name, filter, EmojiUtils.NO_EMOJI, false, MarkerPriority.NORMAL);
+        this(name, filter, EmojiUtils.NO_EMOJI, false, DEFAULT_PRIORITY);
     }
 
     public NamedFilter(@NonNull final String name, @Nullable final GeocacheFilter filter,
-                       @Nullable final String markerId, final boolean conditionalMarkerActive, final MarkerPriority conditionalMarkerPriority) {
+                       @Nullable final String markerId, final boolean conditionalMarkerActive, final int conditionalMarkerPriority) {
 
         this.name = name;
         this.filter = filter;
         this.markerId = markerId;
         this.conditionalMarkerActive = conditionalMarkerActive;
-        this.conditionalMarkerPriority = conditionalMarkerPriority == null ? MarkerPriority.NORMAL : conditionalMarkerPriority;
+        this.conditionalMarkerPriority = conditionalMarkerPriority;
     }
 
     // -------------------------------------------------------------------------
@@ -159,6 +126,11 @@ public class NamedFilter {
         return markerId;
     }
 
+    @Nullable
+    public boolean hasMarker() {
+        return null != markerId && !markerId.isEmpty();
+    }
+
     public NamedFilter setMarkerId(@Nullable final String markerId) {
         this.markerId = markerId;
         return this;
@@ -173,12 +145,12 @@ public class NamedFilter {
         return this;
     }
 
-    public MarkerPriority getConditionalMarkerPriority() {
+    public int getConditionalMarkerPriority() {
         return conditionalMarkerPriority;
     }
 
-    public NamedFilter setConditionalMarkerPriority(final MarkerPriority conditionalMarkerPriority) {
-        this.conditionalMarkerPriority = conditionalMarkerPriority == null ? MarkerPriority.NORMAL : conditionalMarkerPriority;
+    public NamedFilter setConditionalMarkerPriority(final int conditionalMarkerPriority) {
+        this.conditionalMarkerPriority = conditionalMarkerPriority;
         return this;
     }
 
@@ -215,7 +187,7 @@ public class NamedFilter {
         JsonUtils.set(node, JSON_KEY_FILTER, filter != null ? filter.toJson() : null);
         JsonUtils.setText(node, JSON_KEY_MARKER_ID, markerId);
         JsonUtils.setBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, conditionalMarkerActive);
-        JsonUtils.setInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, conditionalMarkerPriority.getValue());
+        JsonUtils.setInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, conditionalMarkerPriority);
         return node;
     }
 
@@ -231,7 +203,7 @@ public class NamedFilter {
         final GeocacheFilter filter = GeocacheFilter.createFromJson(JsonUtils.get(node, JSON_KEY_FILTER));
         final String markerId = JsonUtils.getText(node, JSON_KEY_MARKER_ID, EmojiUtils.NO_EMOJI);
         final boolean conditionalMarkerActive = JsonUtils.getBoolean(node, JSON_KEY_CONDITIONAL_MARKER_ACTIVE, false);
-        final MarkerPriority conditionalMarkerPriority = MarkerPriority.fromValue(JsonUtils.getInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, -1));
+        final int conditionalMarkerPriority = JsonUtils.getInt(node, JSON_KEY_CONDITIONAL_MARKER_PRIORITY, DEFAULT_PRIORITY);
         return new NamedFilter(name != null ? name : "", filter, markerId, conditionalMarkerActive, conditionalMarkerPriority).setId(id);
     }
 
@@ -268,13 +240,26 @@ public class NamedFilter {
         namedFilters.clear();
         namedFiltersSortedByName.clear();
         namedFiltersSortedByPrioAndName.clear();
+        int maxId = 0;
         for (final NamedFilter nf : filters) {
-            namedFilters.put(nf.id, nf);
-            namedFiltersSortedByName.add(nf);
-            namedFiltersSortedByPrioAndName.add(nf);
+            if (nf.id >= 0) {
+                namedFilters.put(nf.id, nf);
+                namedFiltersSortedByName.add(nf);
+                namedFiltersSortedByPrioAndName.add(nf);
+                if (nf.id > maxId) {
+                    maxId = nf.id;
+                }
+            }
+        }
+        for (final NamedFilter nf : filters) {
+            if (nf.id < 0) {
+                namedFilters.put(++maxId, nf);
+                namedFiltersSortedByName.add(nf);
+                namedFiltersSortedByPrioAndName.add(nf);
+            }
         }
         namedFiltersSortedByName.sort(CommonUtils.getTextSortingComparator(f -> f.name)); // sort by name for display
-        namedFiltersSortedByPrioAndName.sort(CommonUtils.getTextSortingComparator(f -> String.format(Locale.US, "%03d", f.conditionalMarkerPriority.value) + ":" + f.name)); // sort by name for display
+        namedFiltersSortedByPrioAndName.sort(Comparator.comparingInt((NamedFilter f) -> f.conditionalMarkerPriority).thenComparing(CommonUtils.getTextSortingComparator(f -> f.name)));
     }
 
     /** Returns an unmodifiable view of all named filters in priority order. */
@@ -282,6 +267,13 @@ public class NamedFilter {
     public static synchronized List<NamedFilter> getAll() {
         ensureCache();
         return Collections.unmodifiableList(namedFiltersSortedByName);
+    }
+
+    /** Returns an unmodifiable view of all named filters in priority order. */
+    @NonNull
+    public static synchronized List<NamedFilter> getAllWithIcons() {
+        ensureCache();
+        return Collections.unmodifiableList(namedFiltersSortedByName.stream().filter(NamedFilter::hasMarker).collect(Collectors.toList()));
     }
 
     /** Returns an unmodifiable view of all named filters in priority order. */
@@ -350,29 +342,21 @@ public class NamedFilter {
         GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
     }
 
-    public static synchronized NamedFilter addNew(final String name, final GeocacheFilter filter) {
+    /** Replaces an existing filter with the same name (case-insensitive), or adds a new one if none exists. */
+    public static synchronized NamedFilter addOrReplace(final String name, final GeocacheFilter filter, @Nullable final String markerId) {
         final NamedFilter newFilter = new NamedFilter(name, filter);
+        newFilter.setMarkerId(markerId);
         final List<NamedFilter> newList = getAllDeepCopy();
+        newList.removeIf(nf -> nf.getName().equalsIgnoreCase(name));
         newList.add(newFilter);
         storeAll(newList);
-        return namedFilters.get(newFilter.getId());
+        return namedFilters.values().stream().filter(nf -> nf.getName().equalsIgnoreCase(name)).findFirst().get();
     }
 
-    public static synchronized NamedFilter overwrite(final String name, final GeocacheFilter filter) {
+    public static synchronized void delete(final String name) {
         final List<NamedFilter> newList = getAllDeepCopy();
-        NamedFilter overwrite = null;
-        for (final NamedFilter nf : newList) {
-            if (Strings.CI.equals(nf.name, name)) {
-                overwrite = nf;
-                break;
-            }
-        }
-        if (overwrite != null) {
-            overwrite.setFilter(filter);
-            storeAll(newList);
-            return namedFilters.get(overwrite.getId());
-        }
-        return null;
+        newList.removeIf(nf -> nf.getName().equalsIgnoreCase(name));
+        storeAll(newList);
     }
 
     public static synchronized void activateMarker(final Collection<NamedFilter> filters) {
@@ -382,6 +366,7 @@ public class NamedFilter {
             nf.setConditionalMarkerActive(filterIds.contains(nf.getId()));
         }
         storeAll(newList);
+        Settings.setConditionalCacheMarkersEnabled(true);
     }
 
     /**

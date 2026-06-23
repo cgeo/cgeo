@@ -679,9 +679,13 @@ public final class MapMarkerUtils {
     }
 
     private static ArrayList<String> getAssignedMarkers(final Geocache cache) {
-        readLists();
-
         final ArrayList<String> result = new ArrayList<>();
+
+        if (!Settings.isConditionalCacheMarkersEnabled()) {
+            return result;
+        }
+
+        readLists();
 
         // Named filter markers are prepended so they appear first
         result.addAll(NamedFilter.getMarkersForCache(cache));

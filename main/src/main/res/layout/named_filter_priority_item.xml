@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="4dp">
+
+    <TextView
+        android:id="@+id/filter_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/buttonSize_iconButton"
+        android:gravity="center"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        android:paddingEnd="4dp"
+        tools:text="😀" />
+
+    <TextView
+        android:id="@+id/filter_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        android:singleLine="true"
+        android:ellipsize="end"
+        tools:text="My filter name" />
+
+    <ImageView
+        android:id="@+id/drag_handle"
+        android:layout_width="@dimen/buttonSize_iconButton"
+        android:layout_height="@dimen/buttonSize_iconButton"
+        android:scaleType="centerInside"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        app:srcCompat="@drawable/ic_menu_reorder"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_menu_reorder" />
+
+</LinearLayout>

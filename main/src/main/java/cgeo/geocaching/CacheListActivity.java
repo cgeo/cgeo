@@ -188,6 +188,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Nullable private String markerId = EmojiUtils.NO_EMOJI;
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
+    private Menu toolbarMenu;
 
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
@@ -550,8 +551,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
-        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
-        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, R.id.menu_marker, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
@@ -672,6 +672,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, isGcConnectorActive, !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, isGcConnectorActive, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_allcoords, R.string.caches_upload_allcoords, R.string.caches_upload_allcoords, checkedCount);
+
+            ToggleItemType.NAMED_FILTERS.toggleMenuItem(menu.findItem(R.id.menu_marker), Settings.isConditionalCacheMarkersEnabled());
 
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
@@ -814,8 +816,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             FilterUtils.onClickFilterMenu(this);
         } else if (menuItem == R.id.menu_sort) {
             openSortDialog();
-        } else if (menuItem == R.id.menu_named_filters) {
-            FilterUtils.onClickNamedFilterMenu(this);
+        } else if (menuItem == R.id.menu_marker) {
+            showNamedFilterActivateDeactivate();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -960,7 +962,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean showNamedFilterActivateDeactivate() {
-        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        FilterUtils.openDialogActivateMarkers(this);
         return true;
     }
 

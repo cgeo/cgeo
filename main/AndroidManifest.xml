@@ -854,7 +854,7 @@
         </activity>
 
         <activity
-            android:name=".filters.NamedFilterActivity"
+            android:name=".filters.NamedFilterPriorityActivity"
             android:label="@string/named_filter_activity_title" >
         </activity>
 

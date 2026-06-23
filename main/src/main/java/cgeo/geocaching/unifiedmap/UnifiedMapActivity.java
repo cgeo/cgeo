@@ -12,7 +12,6 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.FilterUtils;
-import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -295,6 +294,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
                     reloadCachesAndWaypoints();
                     invalidateOptionsMenu();
+                    ToggleItemType.NAMED_FILTERS.toggleMenuItem(toolbarMenu.findItem(R.id.menu_marker), Settings.isConditionalCacheMarkersEnabled());
                     return;
                 }
                 handleGeocodeChangedBroadcastReceived(geocode);
@@ -944,9 +944,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
-        final MenuItem itemNamedFilters = toolbarMenu.findItem(R.id.menu_named_filters);
-        final boolean anyActive = NamedFilter.getAll().stream().anyMatch(NamedFilter::isConditionalMarkerActive);
-        ToggleItemType.NAMED_FILTERS.toggleMenuItem(itemNamedFilters, anyActive);
+        ToggleItemType.NAMED_FILTERS.toggleMenuItem(toolbarMenu.findItem(R.id.menu_marker), Settings.isConditionalCacheMarkersEnabled());
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -983,8 +981,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
-        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, R.id.menu_marker, this);
 
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
@@ -1045,8 +1042,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return true;
         } else if (id == R.id.menu_filter) {
             FilterUtils.onClickFilterMenu(this);
-        } else if (id == R.id.menu_named_filters) {
-            FilterUtils.onClickNamedFilterMenu(this);
+        } else if (id == R.id.menu_marker) {
+            showNamedFilterActivateDeactivate();
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
@@ -1194,7 +1191,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public boolean showNamedFilterActivateDeactivate() {
-        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        FilterUtils.openDialogActivateMarkers(this);
         return true;
     }
 
