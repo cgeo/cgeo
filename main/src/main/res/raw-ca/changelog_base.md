@@ -33,7 +33,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Calcula les dades d'elevació que falten en importar rutes (si es descarreguen les dades d'elevació)
 - Correcció: El descarregador de tessel·les s'atura sota certes condicions (només mapes en línia d'OpenStreetMap)
 - Nou: Marcadors de catxé condicionals
-- New: Show navigation hint (arrow + distance)
+- Nou: Mostra la pista de navegació (fletxa + distància)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
