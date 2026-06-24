@@ -374,7 +374,7 @@ dependencies {
     String jacksonVersion = '2.21.3'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.22"
 
     // Jsoup HTML parsing
     implementation 'org.jsoup:jsoup:1.22.2'
