@@ -1,6 +1,10 @@
 ##
 Время обновиться! Если вы всё ещё используете Android 7 или более ранние версии, возможно, это последнее обновление c:geo для вас! В нашем следующем релизе c:geo мы откажемся от поддержки Android 5-7, чтобы снизить нашу нагрузку на обслуживание и иметь возможность обновить некоторые внешние компоненты, используемые c:geo, которые мы в настоящее время не успеваем реализовать. Мы по-прежнему будем поддерживать Android 8 вплоть до Android 16 (и более новые версии, когда они будут опубликованы), что соответствует более чем восьмилетней истории Android.
 
+- Fix: Cache/waypoint popup opening delayed on some devices
+- Fix: Edit cache description does not support copy & paster
+
+##
 - Fix: Deleting of log images broken (website change)
 - Change: Unify track and individual route loading buttons
 - Fix: Cache attributes not detected correctly under certain conditions
