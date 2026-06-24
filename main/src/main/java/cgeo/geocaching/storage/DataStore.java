@@ -6348,4 +6348,10 @@ public class DataStore {
         }
         Log.d("unlock db");
     }
+
+    /** returns number of used entries in cacheCache */
+    public static int getCacheCacheSize() {
+        return cacheCache.getSize();
+    }
+
 }
