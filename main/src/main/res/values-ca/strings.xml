@@ -762,6 +762,7 @@
     <string name="cache_namedfilter_matching">Filtres amb nom coincidents</string>
     <string name="named_filter_add">Afegeix un filtre</string>
     <string name="named_filter_empty_hint">No hi ha filtres amb nom configurats. Toca + per afegir-ne un.</string>
+    <string name="named_filter_activate_marker">Mostra el marcador - prioritat:</string>
     <string name="named_filter_enable_all_markers">Activa tots els marcadors</string>
     <string name="named_filter_markers_enabled">Marcadors activats</string>
     <string name="named_filter_markers_disabled">Marcadors desactivats</string>
