@@ -409,41 +409,25 @@ public class WherigoGame implements UI {
      * The screen specified by screenId should be made visible.
      * If a dialog or an input is open, it must be closed before
      * showing the screen.
-     * @param screenId the screen to be shown
-     * @param details if screenId is DETAILSCREEN, details of this object will be displayed
+     * @param screen the screen to be shown
+     * @param details if screen is {@link UI.Screen#DETAILSCREEN}, details of this object will be displayed
      */
     @Override
-    public void showScreen(final int screenId, final EventTable details) {
-        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
+    public void showScreen(final UI.Screen screen, final EventTable details) {
+        Log.iForce(LOG_PRAEFIX + "showScreen:" + screen + ":" + details);
 
-        switch (screenId) {
+        if (screen == null) {
+            Log.w(LOG_PRAEFIX + "showScreen called with unknown screenId");
+            return;
+        }
+
+        switch (screen) {
             case MAINSCREEN:
             case INVENTORYSCREEN:
             case ITEMSCREEN:
             case LOCATIONSCREEN:
             case TASKSCREEN:
-                //close open dialog if any
-                WherigoDialogManager.get().clear();
-                //special: also close open thing dialogs which might have been opened directly
-                WherigoThingDialogProvider.closeAllThingDialogs();
-
-                //jump to main screen: if we are already displaying the main screen then do nothing
-                final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
-                if (currentActivity instanceof WherigoActivity) {
-                    return;
-                }
-                //if we can jump to main screen then do it
-                if (currentActivity != null) {
-                    WherigoActivity.start(currentActivity, false);
-                    return;
-                }
-                //-> we can't jump to main screen eg maybe we are not currently inside c:geo. Issue a toast instead
-                final WherigoThingType type = WherigoThingType.getByWherigoScreenId(screenId);
-                if (type == null) {
-                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_game));
-                } else {
-                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_things, type.toUserDisplayableString()));
-                }
+                showMainOrListScreen(screen);
                 break;
             case DETAILSCREEN:
                 if (WherigoUtils.isVisibleToPlayer(details)) {
@@ -451,11 +435,35 @@ public class WherigoGame implements UI {
                 }
                 break;
             default:
-                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
-                // do nothing
+                Log.w(LOG_PRAEFIX + "showScreen called with unhandled screen: " + screen + " [" + details + "]");
                 break;
         }
+    }
 
+    private void showMainOrListScreen(final UI.Screen screen) {
+        //close open dialog if any
+        WherigoDialogManager.get().clear();
+        //special: also close open thing dialogs which might have been opened directly
+        WherigoThingDialogProvider.closeAllThingDialogs();
+
+        final WherigoThingType type = WherigoThingType.getByWherigoScreen(screen);
+        final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
+        if (currentActivity instanceof WherigoActivity) {
+            //already on main screen: open the requested list if applicable
+            if (type != null) {
+                WherigoViewUtils.chooseThing(currentActivity, type, thing -> WherigoViewUtils.displayThing(currentActivity, thing, false));
+            }
+        } else if (currentActivity != null) {
+            //can jump to main screen: start WherigoActivity with the requested screen
+            WherigoActivity.start(currentActivity, screen, false);
+        } else {
+            //-> we can't jump to main screen eg maybe we are not currently inside c:geo. Issue a toast instead
+            if (type == null) {
+                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_game));
+            } else {
+                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_things, type.toUserDisplayableString()));
+            }
+        }
     }
 
     @NonNull

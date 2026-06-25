@@ -5,38 +5,33 @@
 package cgeo.geocaching.wherigo.openwig;
 
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Timer extends EventTable {
 
     private static java.util.Timer globalTimer;
 
-    private static JavaFunction start = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            t.start();
-            return 0;
-        }
+    private static JavaFunction start = (callFrame, nArguments) -> {
+        Timer t = (Timer) callFrame.get(0);
+        t.start();
+        return 0;
     };
 
-    private static JavaFunction stop = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            t.stop();
-            return 0;
-        }
+    private static JavaFunction stop = (callFrame, nArguments) -> {
+        Timer t = (Timer) callFrame.get(0);
+        t.stop();
+        return 0;
     };
 
-    private static JavaFunction tick = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            //t.tick();
-            t.callEvent("OnTick", null);
-            return 0;
-        }
+    private static JavaFunction tick = (callFrame, nArguments) -> {
+        Timer t = (Timer) callFrame.get(0);
+        //t.tick();
+        t.callEvent("OnTick", null);
+        return 0;
     };
 
     public static void register () {
@@ -66,7 +61,7 @@ public class Timer extends EventTable {
     private static final int INTERVAL = 1;
     private int type = COUNTDOWN;
 
-    private static final Double ZERO = new Double(0);
+    private static final Double ZERO = 0.0;
 
     private long duration = -1;
     private long lastTick = 0;

@@ -4,13 +4,15 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.io.*;
-
+import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-import java.util.Vector;
-import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Thing extends Container {
 
@@ -18,7 +20,7 @@ public class Thing extends Container {
 
     protected String luaTostring () { return character ? "a ZCharacter instance" : "a ZItem instance"; }
 
-    public Vector actions = new Vector();
+    public List<Action> actions = new ArrayList<>();
 
     public Thing () {
         // for serialization
@@ -42,11 +44,10 @@ public class Thing extends Container {
     protected void setItem (String key, Object value) {
         if ("Commands".equals(key)) {
             // clear out existing actions
-            for (int i = 0; i < actions.size(); i++) {
-                Action a = (Action)actions.elementAt(i);
+            for (final Action a : actions) {
                 a.dissociateFromTargets();
             }
-            actions.removeAllElements();
+            actions.clear();
 
             // add new actions
             LuaTable lt = (LuaTable)value;
@@ -57,7 +58,7 @@ public class Thing extends Container {
                 if (i instanceof Double) a.name = BaseLib.numberToString((Double)i);
                 else a.name = i.toString();
                 a.setActor(this);
-                actions.addElement(a);
+                actions.add(a);
                 a.associateWithTargets();
             }
         } else super.setItem(key, value);
@@ -65,8 +66,7 @@ public class Thing extends Container {
 
     public int visibleActions() {
         int count = 0;
-        for (int i = 0; i < actions.size(); i++) {
-            Action c = (Action)actions.elementAt(i);
+        for (final Action c : actions) {
             if (!c.isEnabled()) continue;
             if (c.getActor() == this || c.getActor().visibleToPlayer()) count++;
         }

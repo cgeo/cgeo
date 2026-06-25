@@ -162,7 +162,7 @@ public final class WherigoViewUtils {
         target.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : View.GONE);
     }
 
-    private static void chooseThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType, final Consumer<EventTable> thingSelectAction) {
+    static void chooseThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType, final Consumer<EventTable> thingSelectAction) {
         chooseThing(activity, thingType.getThingsForUserDisplay(), thingType.getIconId(),
             thingType.toUserDisplayableString(), thingSelectAction);
     }
