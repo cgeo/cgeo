@@ -65,7 +65,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public void setLatitudePattern(final String latitudePattern) {
-        this.latitudePattern = latitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(latitudePattern, false);
+        this.latitudePattern = latitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(DegreeFormula.removeSpaces(latitudePattern), false);
     }
 
     public String getLongitudePattern() {
@@ -73,7 +73,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public void setLongitudePattern(final String longitudePattern) {
-        this.longitudePattern = longitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(longitudePattern, true);
+        this.longitudePattern = longitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(DegreeFormula.removeSpaces(longitudePattern), true);
     }
 
     public void setFrom(final CalculatedCoordinate other) {
