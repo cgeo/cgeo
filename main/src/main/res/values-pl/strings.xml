@@ -775,6 +775,7 @@
     <string name="cache_namedfilter_matching">Dopasowanie nazwanych filtrów</string>
     <string name="named_filter_add">Dodaj filtr</string>
     <string name="named_filter_empty_hint">Brak skonfigurowanych nazwanych filtrów. Dotknij +, aby go dodać.</string>
+    <string name="named_filter_activate_marker">Pokaż znacznik - priorytet:</string>
     <string name="named_filter_enable_all_markers">Włącz wszystkie znaczniki</string>
     <string name="named_filter_markers_enabled">Znaczniki włączone</string>
     <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
