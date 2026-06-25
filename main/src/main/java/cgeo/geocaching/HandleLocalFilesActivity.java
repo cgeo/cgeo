@@ -22,6 +22,11 @@ import androidx.core.content.ContextCompat;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
+/**
+ * Unified file handler activity for c:geo.
+ * This activity determines the file type and forwards to the appropriate activity.
+ * It is not exported directly - access is through activity aliases with specific intent filters.
+ */
 public class HandleLocalFilesActivity extends AbstractActivity {
 
     private static final String LOGPRAEFIX = "HandleLocalFilesActivity: ";
