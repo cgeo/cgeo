@@ -33,7 +33,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Oblicz brakujące dane wysokości na zaimportowanych ścieżkach (jeśli pobierane są dane wysokości)
 - Naprawiono: W pewnych sytuacjach pobierania kafelków zatrzymywało się (tylko mapy online OpenStreetMap)
 - Nowość: Warunkowe znaczniki skrytki
-- New: Show navigation hint (arrow + distance)
+- Nowość: Pokaż wskazówkę nawigacji (strzałka + odległość)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
