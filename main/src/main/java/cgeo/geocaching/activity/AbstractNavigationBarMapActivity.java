@@ -106,9 +106,14 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             b.setSkipCollapsed(false);
 
             // default initialization to avoid bumping & delayed opening (see #17450)
-            final boolean[] sheetOpenedAtLeastOnce = { false };
-            b.setPeekHeight(0);
-            b.setState(BottomSheetBehavior.STATE_HIDDEN);
+            // when a sheet is already open (switching to another cache/waypoint), keep it visible and
+            // only swap its content - otherwise hiding & reopening causes a brief intermediate animation
+            final boolean sheetAlreadyVisible = b.getState() != BottomSheetBehavior.STATE_HIDDEN;
+            final boolean[] sheetOpenedAtLeastOnce = { sheetAlreadyVisible };
+            if (!sheetAlreadyVisible) {
+                b.setPeekHeight(0);
+                b.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
 
             // the fragment views exist synchronously after commitNow(), so size & open the sheet directly
             final View view = fragment.requireView();
