@@ -81,6 +81,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
             friendsLogs.removeAll(ownLogs);
             friendsLogs.removeAll(ownerLogs);
+            ownerLogs.removeAll(ownLogs);
 
             binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
             binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
