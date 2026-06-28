@@ -4,25 +4,34 @@ import cgeo.geocaching.AttributesGridAdapter;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
+import static cgeo.geocaching.ui.ViewUtils.showToast;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -43,6 +52,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -252,9 +262,51 @@ public class CacheInfoBoxes {
         }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
+    /**
+     * Loads a cache from the server in the background if the given condition is true and a network connection is available.
+     * Shows an indeterminate progress dialog on {@code activity} while loading.
+     * Calls {@code callback} with the freshly loaded cache on the main thread.
+     * If loading is not needed, {@code callback} is called with the original {@code cache} instead.
+     * If loading fails due to missing network connectivity, a toast is shown and {@code callback} is not called.
+     *
+     * @param activity  the activity used to show the progress dialog
+     * @param needsLoad whether a server load is required
+     * @param cache     the cache to potentially reload
+     * @param callback  action to execute (on the main thread) with the resulting cache
+     */
+    private static void fetchCacheIfNeededAndCall(final Activity activity, final boolean needsLoad, final Geocache cache, final Consumer<Geocache> callback) {
+        if (needsLoad) {
+            if (Network.isConnected()) {
+                final Progress progress = new Progress();
+                progress.show(activity, LocalizationUtils.getString(R.string.cache_wherigo_no_cartridge_fetch), "", true, null);
+                AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+                    Geocache loaded = cache;
+                    final SearchResult result = Geocache.searchByGeocode(cache.getGeocode(), null, false, null);
+                    if (result != null) {
+                        final Geocache fromResult = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                        if (fromResult != null) {
+                            loaded = fromResult;
+                        }
+                    }
+                    final Geocache effectiveCache = loaded;
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        progress.dismiss();
+                        callback.accept(effectiveCache);
+                    });
+                });
+            } else {
+                showToast(activity, R.string.err_load_descr_failed);
+            }
+        } else {
+            callback.accept(cache);
+        }
+    }
+
+
     public static void updateWherigoBox(final Geocache cache, final Activity activity, @NonNull final Button wherigoButton, @Nullable final View wherigoView, @Nullable final TextView wherigoText) {
-        final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
-        final boolean isEnabled = !wherigoGuis.isEmpty();
+        final List<String> wherigoGuids = WherigoUtils.getWherigoGuids(cache);
+        final boolean wherigoGuidsAvailable = !wherigoGuids.isEmpty();
+        final boolean isEnabled = wherigoGuidsAvailable || cache.getType() == CacheType.WHERIGO;
 
         ViewUtils.setVisibility(wherigoView, isEnabled ? View.VISIBLE : View.GONE);
 
@@ -262,15 +314,29 @@ public class CacheInfoBoxes {
         ViewUtils.setText(wherigoText, (!isEnabled || Settings.hasGCCredentials()) ? R.string.cache_wherigo_start : R.string.cache_wherigo_credentials);
 
         ViewUtils.setVisibility(wherigoButton, isEnabled ? View.VISIBLE : View.GONE);
-        if (isEnabled) {
-            wherigoButton.setOnClickListener(v -> {
-                if (Settings.hasGCCredentials()) {
-                    WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
-                            WherigoActivity.startForGuid(activity, guid, cache.getGeocode(), true));
-                } else {
-                    SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
-                }
-            });
+            if (isEnabled) {
+                wherigoButton.setOnClickListener(v -> {
+                    if (Settings.hasGCCredentials()) {
+                        fetchCacheIfNeededAndCall(
+                                activity,
+                                !wherigoGuidsAvailable,
+                                cache,
+                                currentCache -> {
+                                    final List<String> guids = wherigoGuidsAvailable ? wherigoGuids : WherigoUtils.getWherigoGuids(currentCache);
+                                    if (guids.isEmpty()) {
+                                        SimpleDialog.of(activity)
+                                                .setTitle(TextParam.id(R.string.cache_wherigo_no_cartridge_title))
+                                                .setMessage(TextParam.id(R.string.cache_wherigo_no_cartridge_message))
+                                                .show();
+                                        return;
+                                    }
+                                    WherigoViewUtils.executeForOneCartridge(activity, guids, guid ->
+                                            WherigoActivity.startForGuid(activity, guid, currentCache.getGeocode(), true));
+                                });
+                    } else {
+                        SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
+                    }
+                });
         }
     }
 
