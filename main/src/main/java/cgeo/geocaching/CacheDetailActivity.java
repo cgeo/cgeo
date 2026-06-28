@@ -742,7 +742,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
-            menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
+            menu.findItem(R.id.menu_edit_personalnote).setVisible(true);
 
             // submenu waypoints
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
@@ -817,7 +817,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             new FieldNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
             new PersonalNoteExport().export(Collections.singletonList(cache), this);
-        } else if (menuItem == R.id.menu_edit_fieldnote) {
+        } else if (menuItem == R.id.menu_edit_personalnote) {
             editPersonalNote(cache, this);
         } else if (menuItem == R.id.menu_navigate) {
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
