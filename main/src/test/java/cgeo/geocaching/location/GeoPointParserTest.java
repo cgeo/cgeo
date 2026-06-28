@@ -223,6 +223,13 @@ public class GeoPointParserTest {
     }
 
     @Test
+    public void testRD() {
+        final Geopoint parsed = GeopointParser.parse("RD X 155000 Y 463000");
+        final Geopoint reference = new Geopoint(52.15517440, 5.38720621);
+        assertGeopointEquals(reference, parsed, 1.0f);
+    }
+
+    @Test
     public void testZero() {
         GeopointParser.parse("00° 00.000′ 000° 00.00′");
         GeopointParser.parse("00° 00′ 00.00″ 000° 00′ 00.00″");

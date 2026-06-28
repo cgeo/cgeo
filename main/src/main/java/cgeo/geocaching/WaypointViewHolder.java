@@ -14,7 +14,7 @@ public class WaypointViewHolder extends AbstractViewHolder {
     public WaypointViewHolder(final View rowView) {
         super(rowView);
         binding = WaypointItemBinding.bind(rowView);
-        coordinateFormatSwitcher = new CoordinatesFormatSwitcher().setView(binding.coordinates);
+        coordinateFormatSwitcher = new CoordinatesFormatSwitcher().setAvailableFormatCount(3).setView(binding.coordinates);
     }
 
     public void setCoordinate(final Geopoint coordinate) {

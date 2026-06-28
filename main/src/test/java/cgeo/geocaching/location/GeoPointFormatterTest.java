@@ -56,4 +56,15 @@ public class GeoPointFormatterTest {
         assertThat(GeopointFormatter.reformatForClipboard("10,123456 -0,123456")).isEqualTo("10.123456 -0.123456");
     }
 
+    @Test
+    public void testExtendedFormatsRoundtrip() {
+        final Geopoint point = new Geopoint("N 52° 22.366 E 004° 53.616");
+
+        final String rd = GeopointFormatter.format(GeopointFormatter.Format.RD, point);
+
+        assertThat(rd).startsWith("RD X ");
+
+        assertThat(point.distanceTo(GeopointParser.parse(rd))).isLessThan(3.0f);
+    }
+
 }

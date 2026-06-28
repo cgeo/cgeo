@@ -19,7 +19,9 @@ public enum CalculatedCoordinateType {
     PLAIN("P", R.string.waypoint_coordinate_formats_plain),
     DEGREE("DDD", "DDD.DDDDD°"),
     DEGREE_MINUTE("DMM", "DDD°MM.MMM'"),
-    DEGREE_MINUTE_SEC("DMS", "DDD°MM'SS.SSS\"");
+    DEGREE_MINUTE_SEC("DMS", "DDD°MM'SS.SSS\""),
+    UTM("UTM", "UTM"),
+    RD("RD", R.string.waypoint_coordinate_formats_rd);
 
     private static final Map<String, CalculatedCoordinateType> SHORT_NAMES = new HashMap<>();
 

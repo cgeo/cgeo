@@ -6,11 +6,14 @@ import cgeo.geocaching.databinding.CoordinatescalculateglobalDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.RDPoint;
+import cgeo.geocaching.location.UTMPoint;
 import cgeo.geocaching.models.CacheVariableList;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.UtmPatternUtils;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
@@ -54,6 +57,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -78,6 +82,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private CoordinatescalculateglobalDialogBinding binding;
 
     private final TextSpinner<CalculatedCoordinateType> displayType = new TextSpinner<>();
+    private boolean suppressUtmFieldSync = false;
+    private boolean suppressTypeRefresh = false;
 
     private CoordinateInputData createFromDialog() {
         final CoordinateInputData cid = new CoordinateInputData();
@@ -89,11 +95,12 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     }
 
     private void saveAndFinishDialog() {
+        final CoordinateInputData cid = createFromDialog();
         ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
         if (activity instanceof CoordinateInputDialog.CoordinateUpdate) {
-            ((CoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
+            ((CoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(cid);
         }
 
         //save changes to the var list
@@ -238,18 +245,42 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.notesText.setText(notes);
 
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
-            calcCoord.setLatitudePattern(s.toString());
+            if (calcCoord.getType() == CalculatedCoordinateType.UTM) {
+                syncUtmPatternsFromPlainFields();
+            } else if (calcCoord.getType() == CalculatedCoordinateType.RD) {
+                calcCoord.setLatitudePattern(normalizeRdPattern('X', s.toString()));
+            } else {
+                calcCoord.setLatitudePattern(s.toString());
+            }
             varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
-        binding.PlainLat.setText(calcCoord.getLatitudePattern());
 
         binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
-            calcCoord.setLongitudePattern(s.toString());
+            if (calcCoord.getType() == CalculatedCoordinateType.UTM) {
+                syncUtmPatternsFromPlainFields();
+            } else if (calcCoord.getType() == CalculatedCoordinateType.RD) {
+                calcCoord.setLongitudePattern(normalizeRdPattern('Y', s.toString()));
+            } else {
+                calcCoord.setLongitudePattern(s.toString());
+            }
             varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
+
+        binding.PlainThird.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+            if (calcCoord.getType() == CalculatedCoordinateType.UTM && !suppressUtmFieldSync) {
+                syncUtmPatternsFromPlainFields();
+                varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
+                updateView();
+            }
+        }));
+
+        suppressUtmFieldSync = true;
+        binding.PlainLat.setText(calcCoord.getLatitudePattern());
         binding.PlainLon.setText(calcCoord.getLongitudePattern());
+        binding.PlainThird.setText("");
+        suppressUtmFieldSync = false;
 
         binding.NonPlainFormat.setChangeListener(p -> {
             calcCoord.setLatitudePattern(p.first);
@@ -260,12 +291,10 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.ccSwitchGuided.setOnCheckedChangeListener((v, c) -> {
             Settings.putBoolean(R.string.pref_preferGuidedCoordFormulaInput, c);
-            if (!c) {
-                refreshType(PLAIN, false);
-            } else {
-                final CalculatedCoordinateType guessType = CalculatedCoordinateInputGuideView.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
-                refreshType(guessType == null ? displayType.get() : guessType, false);
-            }
+            final CalculatedCoordinateType currentType = calcCoord.getType();
+            final CalculatedCoordinateType selectedType = displayType.get() == null ? currentType : displayType.get();
+            final CalculatedCoordinateType targetType = currentType == PLAIN ? (selectedType == null ? PLAIN : selectedType) : currentType;
+            refreshType(targetType, false);
         });
 
         binding.ccPaste.setOnClickListener(v -> {
@@ -302,7 +331,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         //check if type from config is applicable
         if (calcCoord.getType() != PLAIN) {
             final CalculatedCoordinateType type = CalculatedCoordinateInputGuideView.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
-            calcCoord.setType(type == null ? PLAIN : type);
+            if (type != null) {
+                calcCoord.setType(type);
+            }
         }
 
         refreshType(calcCoord.getType(), true);
@@ -313,16 +344,21 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
+        if (suppressTypeRefresh) {
+            return;
+        }
+        suppressTypeRefresh = true;
+        try {
+        final Geopoint sourceGp = calcCoord == null ? null : calcCoord.calculateGeopoint(varList::getValue);
         calcCoord.setType(newType);
+        if (!initialLoad && sourceGp != null) {
+            applyGeopointAsPatternForType(newType, sourceGp);
+        } else if (newType == CalculatedCoordinateType.UTM) {
+            normalizeUtmPatterns();
+        }
         final boolean isGuidedMode = newType != PLAIN && Settings.getBoolean(R.string.pref_preferGuidedCoordFormulaInput, true);
 
-        Geopoint currentGp = null;
-        if (calcCoord != null) {
-            currentGp = calcCoord.calculateGeopoint(varList::getValue);
-        }
-        if (currentGp == null) {
-            currentGp = geopoint;
-        }
+        final Geopoint currentGp = sourceGp == null ? geopoint : sourceGp;
         binding.PlainFormat.setVisibility(!isGuidedMode ? View.VISIBLE : View.GONE);
         binding.NonPlainFormat.setVisibility(isGuidedMode ? View.VISIBLE : View.GONE);
         if (!isGuidedMode) {
@@ -333,31 +369,284 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         if (isGuidedMode) {
             displayType.set(newType);
         }
+        binding.ccSwitchGuided.setVisibility(View.VISIBLE);
         binding.ccPlainTools.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
 
         binding.ccPaste.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
         binding.ccPaste.setEnabled(!FormulaUtils.scanForCoordinates(Collections.singleton(ClipboardUtils.getText()), null).isEmpty());
 
         if (!isGuidedMode) {
+            configurePlainInputsForType(newType);
             if (initialLoad) {
-                binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
-                binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
+                if (newType == CalculatedCoordinateType.UTM) {
+                    applyUtmPatternsToPlainFields();
+                } else if (newType == CalculatedCoordinateType.RD) {
+                    binding.PlainLat.setText(stripAxisPrefix(calcCoord.getLatitudePattern(), 'X'));
+                    binding.PlainLon.setText(stripAxisPrefix(calcCoord.getLongitudePattern(), 'Y'));
+                    binding.PlainThird.setText("");
+                } else {
+                    binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
+                    binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
+                    binding.PlainThird.setText("");
+                }
             } else {
-                final Pair<String, String> coords = binding.NonPlainFormat.getPlain();
-                binding.PlainLat.setText(coords.first);
-                binding.PlainLon.setText(coords.second);
+                if (newType == CalculatedCoordinateType.UTM) {
+                    applyUtmPatternsToPlainFields();
+                } else {
+                    final Pair<String, String> coords = binding.NonPlainFormat.getPlain();
+                    if (newType == CalculatedCoordinateType.RD) {
+                        binding.PlainLat.setText(stripAxisPrefix(coords.first, 'X'));
+                        binding.PlainLon.setText(stripAxisPrefix(coords.second, 'Y'));
+                    } else {
+                        binding.PlainLat.setText(coords.first);
+                        binding.PlainLon.setText(coords.second);
+                    }
+                    binding.PlainThird.setText("");
+                }
             }
         } else {
+            configurePlainInputsForType(newType);
             binding.NonPlainFormat.setData(newType, calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern(), currentGp);
         }
+        } finally {
+            suppressTypeRefresh = false;
+        }
+    }
+
+    private void applyGeopointAsPatternForType(final CalculatedCoordinateType type, final Geopoint gp) {
+        final Locale locale = Locale.US;
+        switch (type) {
+            case DEGREE:
+                calcCoord.setLatitudePattern(String.format(locale, "%c %08.5f°", gp.getLatDir(), Math.abs(gp.getLatitude())));
+                calcCoord.setLongitudePattern(String.format(locale, "%c%09.5f°", gp.getLonDir(), Math.abs(gp.getLongitude())));
+                break;
+            case DEGREE_MINUTE:
+                calcCoord.setLatitudePattern(String.format(locale, "%c %02d°%02d.%03d'", gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac()));
+                calcCoord.setLongitudePattern(String.format(locale, "%c%03d°%02d.%03d'", gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac()));
+                break;
+            case DEGREE_MINUTE_SEC:
+                calcCoord.setLatitudePattern(String.format(locale, "%c %02d°%02d'%02d.%03d\"", gp.getLatDir(), gp.getDMSLatDeg(), gp.getDMSLatMin(), gp.getDMSLatSec(), gp.getDMSLatSecFrac()));
+                calcCoord.setLongitudePattern(String.format(locale, "%c%03d°%02d'%02d.%03d\"", gp.getLonDir(), gp.getDMSLonDeg(), gp.getDMSLonMin(), gp.getDMSLonSec(), gp.getDMSLonSecFrac()));
+                break;
+            case UTM:
+                final UTMPoint utm = UTMPoint.latLong2UTM(gp);
+                final String zone = String.format(locale, "%02d%c", utm.getZoneNumber(), utm.getZoneLetter());
+                final String easting = Long.toString(Math.round(utm.getEasting()));
+                final String northing = Long.toString(Math.round(utm.getNorthing()));
+                final UtmPatternUtils.UtmPatterns utmPatterns = UtmPatternUtils.createPatternsFromPlainFields(zone, easting, northing, true);
+                calcCoord.setLatitudePattern(utmPatterns.latitudePattern);
+                calcCoord.setLongitudePattern(utmPatterns.longitudePattern);
+                break;
+            case RD:
+                final RDPoint rd = RDPoint.latLong2RD(gp);
+                calcCoord.setLatitudePattern("X " + Math.round(rd.getX()));
+                calcCoord.setLongitudePattern("Y " + Math.round(rd.getY()));
+                break;
+            case PLAIN:
+            default:
+                break;
+        }
+    }
+
+    private void configurePlainInputsForType(final CalculatedCoordinateType type) {
+        final boolean isUtm = type == CalculatedCoordinateType.UTM;
+        final boolean isRd = type == CalculatedCoordinateType.RD;
+        binding.PlainThirdLayout.setVisibility(isUtm ? View.VISIBLE : View.GONE);
+        final String latHint = isUtm ? LocalizationUtils.getString(R.string.coord_input_zone)
+                : isRd ? "X" : LocalizationUtils.getString(R.string.latitude);
+        final String lonHint = isUtm ? LocalizationUtils.getString(R.string.coord_input_easting)
+                : isRd ? "Y" : LocalizationUtils.getString(R.string.longitude);
+        final String thirdHint = LocalizationUtils.getString(R.string.coord_input_northing);
+        binding.PlainLatLayout.setHint(latHint);
+        binding.PlainLonLayout.setHint(lonHint);
+        binding.PlainThirdLayout.setHint(thirdHint);
+        binding.PlainLat.setHint(latHint);
+        binding.PlainLon.setHint(lonHint);
+        binding.PlainThird.setHint(thirdHint);
+    }
+
+    private void applyUtmPatternsToPlainFields() {
+        final UtmPatternUtils.UtmFields utm = UtmPatternUtils.extractFieldsFromPatterns(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+
+        suppressUtmFieldSync = true;
+        binding.PlainLat.setText(utm.zone);
+        binding.PlainLon.setText(utm.easting);
+        binding.PlainThird.setText(utm.northing);
+        suppressUtmFieldSync = false;
+        updateView();
+    }
+
+    private void normalizeUtmPatterns() {
+        final UtmPatternUtils.UtmFields utm = UtmPatternUtils.extractFieldsFromPatterns(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+        final UtmPatternUtils.UtmPatterns patterns = UtmPatternUtils.createPatternsFromPlainFields(utm.zone, utm.easting, utm.northing, true);
+        calcCoord.setLatitudePattern(patterns.latitudePattern);
+        calcCoord.setLongitudePattern(patterns.longitudePattern);
+    }
+
+    private void syncUtmPatternsFromPlainFields() {
+        if (suppressUtmFieldSync) {
+            return;
+        }
+
+        final UtmPatternUtils.UtmPatterns patterns = UtmPatternUtils.createPatternsFromPlainFields(
+                ViewUtils.getEditableText(binding.PlainLat.getText()),
+                ViewUtils.getEditableText(binding.PlainLon.getText()),
+                ViewUtils.getEditableText(binding.PlainThird.getText()),
+                true);
+        calcCoord.setLatitudePattern(patterns.latitudePattern);
+        calcCoord.setLongitudePattern(patterns.longitudePattern);
     }
 
     private void updateView() {
         //update the displayed coordinate texts
         final ImmutableTriple<Double, CharSequence, Boolean> latData = calcCoord.calculateLatitudeData(varList::getValue);
         final ImmutableTriple<Double, CharSequence, Boolean> lonData = calcCoord.calculateLongitudeData(varList::getValue);
-        binding.latRes.setText(TextUtils.concat(latData.middle, " ", getStatusText(latData.left == null, latData.right)));
-        binding.lonRes.setText(TextUtils.concat(lonData.middle, " ", getStatusText(lonData.left == null, lonData.right)));
+        final boolean projectedType = calcCoord.getType() == CalculatedCoordinateType.UTM || calcCoord.getType() == CalculatedCoordinateType.RD;
+        final boolean geopointInvalid = projectedType && calcCoord.calculateGeopoint(varList::getValue) == null;
+        if (calcCoord.getType() == CalculatedCoordinateType.UTM) {
+            updateUtmView(latData, lonData);
+        } else if (calcCoord.getType() == CalculatedCoordinateType.RD) {
+            updateRdView(latData, lonData);
+        } else {
+            binding.zoneRes.setVisibility(View.GONE);
+            binding.latRes.setText(TextUtils.concat(latData.middle, " ", getStatusText(latData.left == null || geopointInvalid, latData.right)));
+            binding.lonRes.setText(TextUtils.concat(lonData.middle, " ", getStatusText(lonData.left == null || geopointInvalid, lonData.right)));
+        }
+    }
+
+    private void updateUtmView(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                               final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        final UtmDisplayData utmData = buildUtmDisplayData(latData, lonData);
+        final boolean zoneError = !utmData.zoneText.toUpperCase(Locale.US).matches("^[0-9]{1,2}[C-HJ-NP-X]$");
+        final boolean eastingError = !utmData.eastingText.matches("^[0-9]{5,7}$");
+        final boolean northingError = !utmData.northingText.matches("^[0-9]{6,8}$");
+        binding.zoneRes.setVisibility(View.VISIBLE);
+        binding.zoneRes.setText(TextUtils.concat("Z ", utmData.zoneText, " ", getStatusText(zoneError, latData.right)));
+        binding.latRes.setText(TextUtils.concat("E ", utmData.eastingText, " ", getStatusText(eastingError, latData.right)));
+        binding.lonRes.setText(TextUtils.concat("N ", utmData.northingText, " ", getStatusText(northingError, lonData.right)));
+    }
+
+    private UtmDisplayData buildUtmDisplayData(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                                               final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        if (!binding.ccSwitchGuided.isChecked()) {
+            return new UtmDisplayData(
+                    ViewUtils.getEditableText(binding.PlainLat.getText()).trim().toUpperCase(Locale.US),
+                    ViewUtils.getEditableText(binding.PlainLon.getText()).trim(),
+                    ViewUtils.getEditableText(binding.PlainThird.getText()).trim());
+        }
+        final String[] utmLatTokens = Objects.toString(latData.middle, "").trim().split("\\s+");
+        final String[] utmLonTokens = Objects.toString(lonData.middle, "").trim().split("\\s+");
+        final String[] rawLatTokens = StringUtils.defaultString(calcCoord.getLatitudePattern()).trim().split("\\s+");
+        final String[] rawLonTokens = StringUtils.defaultString(calcCoord.getLongitudePattern()).trim().split("\\s+");
+        final String zoneText = extractZoneFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        final String eastingText = extractEastingFromEvaluatedOrRaw(utmLatTokens, rawLatTokens);
+        final String northingText = extractNorthingFromEvaluatedOrRaw(utmLonTokens, rawLonTokens);
+        return new UtmDisplayData(zoneText, eastingText, northingText);
+    }
+
+    private static String extractZoneFromEvaluatedOrRaw(final String[] utmLatTokens, final String[] rawLatTokens) {
+        if (utmLatTokens.length >= 2) {
+            final String tokenA = utmLatTokens[0].toUpperCase(Locale.US);
+            final String tokenB = utmLatTokens[1].toUpperCase(Locale.US);
+            if (tokenA.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return tokenA;
+            }
+            if (tokenB.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return tokenB;
+            }
+        }
+        if (rawLatTokens.length >= 3) {
+            return rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
+        }
+        if (rawLatTokens.length == 2 && !rawLatTokens[0].matches("^[0-9]{1,2}$")) {
+            return rawLatTokens[1] + rawLatTokens[0].toUpperCase(Locale.US);
+        }
+        return rawLatTokens.length > 0 ? rawLatTokens[0] : StringUtils.EMPTY;
+    }
+
+    private static String extractEastingFromEvaluatedOrRaw(final String[] utmLatTokens, final String[] rawLatTokens) {
+        if (utmLatTokens.length >= 2) {
+            final String tokenA = utmLatTokens[0].toUpperCase(Locale.US);
+            final String tokenB = utmLatTokens[1].toUpperCase(Locale.US);
+            if (tokenA.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return utmLatTokens[1];
+            }
+            if (tokenB.matches("^[0-9]{1,2}[C-HJ-NP-X]$")) {
+                return utmLatTokens[0];
+            }
+        }
+        if (rawLatTokens.length >= 3) {
+            return rawLatTokens[2];
+        }
+        if (rawLatTokens.length == 2 && rawLatTokens[0].matches("^[0-9]{1,2}$")) {
+            return rawLatTokens[1];
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractNorthingFromEvaluatedOrRaw(final String[] utmLonTokens, final String[] rawLonTokens) {
+        if (utmLonTokens.length >= 3 && "N".equalsIgnoreCase(utmLonTokens[0])) {
+            return utmLonTokens[1] + utmLonTokens[2];
+        }
+        if (utmLonTokens.length >= 2 && "N".equalsIgnoreCase(utmLonTokens[0])) {
+            return utmLonTokens[1];
+        }
+        if (utmLonTokens.length >= 1) {
+            return utmLonTokens[utmLonTokens.length - 1];
+        }
+        if (rawLonTokens.length >= 3 && "N".equalsIgnoreCase(rawLonTokens[0])) {
+            return rawLonTokens[1] + rawLonTokens[2];
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private void updateRdView(final ImmutableTriple<Double, CharSequence, Boolean> latData,
+                              final ImmutableTriple<Double, CharSequence, Boolean> lonData) {
+        binding.zoneRes.setVisibility(View.GONE);
+        final Long xValue = parseLongValue(latData.middle);
+        final Long yValue = parseLongValue(lonData.middle);
+        final boolean xRangeInvalid = xValue == null || xValue < 482 || xValue > 284183;
+        final boolean yRangeInvalid = yValue == null || yValue < 306602 || yValue > 637050;
+        final CharSequence xDisplay = TextUtils.concat("X ", latData.middle);
+        final CharSequence yDisplay = TextUtils.concat("Y ", lonData.middle);
+        binding.latRes.setText(TextUtils.concat(xDisplay, " ", getStatusText(latData.left == null || xRangeInvalid, latData.right)));
+        binding.lonRes.setText(TextUtils.concat(yDisplay, " ", getStatusText(lonData.left == null || yRangeInvalid, lonData.right)));
+    }
+
+    private static String normalizeRdPattern(final char axis, final String value) {
+        final String stripped = stripAxisPrefix(value, axis);
+        if (StringUtils.isBlank(stripped)) {
+            return Character.toUpperCase(axis) + " ";
+        }
+        return Character.toUpperCase(axis) + " " + stripped;
+    }
+
+    private static String stripAxisPrefix(final String value, final char axis) {
+        final String text = StringUtils.defaultString(value).trim();
+        if (text.length() > 0 && Character.toUpperCase(text.charAt(0)) == Character.toUpperCase(axis)) {
+            return text.substring(1).trim();
+        }
+        return text;
+    }
+
+    private static Long parseLongValue(final CharSequence text) {
+        try {
+            return Long.parseLong(StringUtils.defaultString(Objects.toString(text, "")).trim());
+        } catch (final NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    private static class UtmDisplayData {
+        private final String zoneText;
+        private final String eastingText;
+        private final String northingText;
+
+        UtmDisplayData(final String zoneText, final String eastingText, final String northingText) {
+            this.zoneText = StringUtils.defaultString(zoneText);
+            this.eastingText = StringUtils.defaultString(eastingText);
+            this.northingText = StringUtils.defaultString(northingText);
+        }
     }
 
     private CharSequence getStatusText(final boolean error, final boolean warning) {

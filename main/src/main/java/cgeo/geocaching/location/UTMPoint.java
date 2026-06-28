@@ -258,13 +258,13 @@ public class UTMPoint {
     }
 
     /**
-     * Determines the correct MGRS letter designator for the given latitude
-     * returns 'Z' if latitude is outside the MGRS limits of 84N to 80S.
+     * Determines the correct UTM latitude band designator for the given latitude.
+     * Returns 'Z' if latitude is outside the supported limits of 84N to 80S.
      * <br>
      * TODO: maybe we should handle the zones A, B, Y and Z
      *
      * @param lat The float value of the latitude.
-     * @return A char value which is the MGRS zone letter.
+     * @return a char value which is the latitude band letter.
      */
     private static char getLetterDesignator(final double lat) {
         if ((84 >= lat) && (lat >= 72)) {
@@ -309,7 +309,7 @@ public class UTMPoint {
             return 'C';
         }
 
-        // This is here as an error flag to show that the Latitude is outside MGRS limits
+        // Error flag for latitude outside supported UTM band limits
         return 'Z';
     }
 
