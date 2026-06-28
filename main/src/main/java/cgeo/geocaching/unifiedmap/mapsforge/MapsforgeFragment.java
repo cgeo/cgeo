@@ -225,7 +225,9 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void prepareForTileSourceChange() {
-        ((AbstractMapsforgeTileProvider) currentTileProvider).prepareForTileSourceChange(mMapView);
+        if (currentTileProvider != null) {
+            ((AbstractMapsforgeTileProvider) currentTileProvider).prepareForTileSourceChange(mMapView);
+        }
         super.prepareForTileSourceChange();
     }
 

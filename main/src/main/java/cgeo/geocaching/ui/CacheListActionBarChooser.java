@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -115,12 +116,14 @@ public class CacheListActionBarChooser {
             } else {
                 TextParam.text(list.getTitle()).setImage(ip).applyTo(titleTv);
             }
-            if (list.getNumberOfCaches() >= 0) {
-                subtitleTv.setVisibility(View.VISIBLE);
-                subtitleTv.setText(getCacheListSubtitle(list));
-            } else {
-                subtitleTv.setVisibility(View.GONE);
-            }
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> list.getNumberOfCaches() >= 0, (hasCaches) -> {
+                if (hasCaches) {
+                    subtitleTv.setVisibility(View.VISIBLE);
+                    subtitleTv.setText(getCacheListSubtitle(list));
+                } else {
+                    subtitleTv.setVisibility(View.GONE);
+                }
+            });
         } else if (this.title != null) {
             titleTv.setText(this.title);
             subtitleTv.setVisibility(View.VISIBLE);
