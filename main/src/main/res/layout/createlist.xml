@@ -5,15 +5,15 @@
     android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/listprefix"
+        android:id="@+id/parentList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/textinput_dropdown"
         android:hint="@string/list_parent_list"
-        android:labelFor="@id/listprefixView">
+        android:labelFor="@id/parentListView">
 
         <AutoCompleteTextView
-            android:id="@+id/listprefixView"
+            android:id="@+id/parentListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/textinput_dropdown"

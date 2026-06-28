@@ -608,7 +608,7 @@
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
-    <string name="list_menu_rename_list_prefix">Rename list prefix</string>
+    <string name="list_menu_rename_parent_lists">Rename parent lists</string>
     <string name="rename_from">Rename from</string>
     <string name="rename_to">Rename to</string>
     <string name="list_menu_import">Import</string>

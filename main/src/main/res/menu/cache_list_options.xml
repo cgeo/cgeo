@@ -157,10 +157,6 @@
                 android:title="@string/list_menu_rename"
                 app:showAsAction="ifRoom|withText"/>
             <item
-                android:id="@+id/menu_rename_list_prefix"
-                android:title="@string/list_menu_rename_list_prefix"
-                app:showAsAction="never|withText"/>
-            <item
                 android:id="@+id/menu_make_list_unique"
                 android:title="@string/caches_make_list_unique"
                 android:enabled="false"
@@ -174,6 +170,10 @@
                 android:title="@string/caches_askdeletion"
                 app:showAsAction="never"
                 android:visible="false"/>
+            <item
+                android:id="@+id/menu_rename_parent_lists"
+                android:title="@string/list_menu_rename_parent_lists"
+                app:showAsAction="never|withText"/>
         </menu>
     </item>
     <item
