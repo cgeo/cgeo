@@ -554,6 +554,19 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_post_offlinelogs">Post offline logs</string>
+    <string name="caches_post_offlinelogs_message">Do you want to post the offline logs?</string>
+    <string name="caches_post_offlinelogs_progress">Posting offline logs</string>
+    <string name="caches_post_offline_logs_error">Failed to post offline log</string>
+    <string name="caches_post_offline_logs_error_message">Failed to post offline log for:</string>
+    <string name="caches_post_offline_logs_error_skip">Skip</string>
+    <string name="caches_post_offline_logs_error_retry">Retry</string>
+    <string name="caches_post_offline_logs_error_stop">Stop</string>
+    <array name="caches_post_offline_logs_error_options">
+        <item>@string/caches_post_offline_logs_error_skip</item>
+        <item>@string/caches_post_offline_logs_error_retry</item>
+        <item>@string/caches_post_offline_logs_error_stop</item>
+    </array>
     <string name="caches_warning_delete_user_data_others">Delete others</string>
     <plurals name="caches_warning_delete_user_data">
         <item quantity="zero">No caches have user data. All caches can be removed safely.</item>
