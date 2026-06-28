@@ -24,6 +24,16 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 public class StoredListGeocacheFilter extends BaseGeocacheFilter {
 
+    public static StoredListGeocacheFilter create(final Collection<StoredList> storedLists) {
+        final StoredListGeocacheFilter storedListFilter = GeocacheFilterType.STORED_LISTS.create();
+        storedListFilter.setFilterLists(CollectionStream.of(storedLists).toSet());
+        return storedListFilter;
+    }
+
+    public static StoredListGeocacheFilter create(final StoredList... storedLists) {
+        return create(List.of(storedLists));
+    }
+
     private final Set<Integer> filterListIds = new HashSet<>();
 
     public Set<StoredList> getFilterLists() {

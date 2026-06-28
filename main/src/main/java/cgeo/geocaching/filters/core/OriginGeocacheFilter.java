@@ -5,8 +5,18 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
+import java.util.Collection;
+import java.util.List;
+
 public class OriginGeocacheFilter extends ValueGroupGeocacheFilter<IConnector, IConnector> {
 
+    public static OriginGeocacheFilter create(final Collection<IConnector> connectors) {
+        return ValueGroupGeocacheFilter.create(GeocacheFilterType.ORIGIN, connectors);
+    }
+
+    public static OriginGeocacheFilter create(final IConnector... connectors) {
+        return create(List.of(connectors));
+    }
 
     @Override
     public IConnector getRawCacheValue(final Geocache cache) {

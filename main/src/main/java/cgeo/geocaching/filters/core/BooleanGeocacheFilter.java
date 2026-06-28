@@ -16,6 +16,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class BooleanGeocacheFilter extends BaseGeocacheFilter {
 
+    protected static <F extends BooleanGeocacheFilter> F create(final GeocacheFilterType type, final Boolean value) {
+        final F bf = type.create();
+        bf.setValue(value);
+        return bf;
+    }
+
     public static final String yesFlag = "yes";
     public static final String noFlag = "no";
 

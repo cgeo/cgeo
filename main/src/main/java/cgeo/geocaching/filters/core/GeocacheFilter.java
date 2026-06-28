@@ -179,10 +179,7 @@ public class GeocacheFilter implements Cloneable {
             return this;
         }
 
-        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
-        for (IGeocacheFilter f : filters) {
-            andFilter.addChild(f);
-        }
+        final AndGeocacheFilter andFilter = AndGeocacheFilter.create(filters);
         if (this.tree != null) {
             if (isAndFilter(this.tree)) {
                 for (IGeocacheFilter andChild : this.tree.getChildren()) {
@@ -257,9 +254,12 @@ public class GeocacheFilter implements Cloneable {
         if (treeNode != null) {
             tree = JsonConfigurationUtils.fromJsonConfig(treeNode, id -> {
                 switch (id) {
-                    case "AND": return new AndGeocacheFilter();
-                    case "OR": return new OrGeocacheFilter();
-                    case "NOT": return new NotGeocacheFilter();
+                    case "AND":
+                        return AndGeocacheFilter.create();
+                    case "OR":
+                        return OrGeocacheFilter.create();
+                    case "NOT":
+                        return NotGeocacheFilter.create();
                     default:
                         break;
                 }
