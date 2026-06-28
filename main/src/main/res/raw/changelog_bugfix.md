@@ -4,7 +4,9 @@ With our next feature release of c:geo we will drop support for Android 5-7 to r
 We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
 - Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paster
+- Fix: Edit cache description does not support copy & paste
+- Fix: Some crashes and "app not responding"
+- Fix: Deleting of trackable log fails (website change)
 
 ##
 - Fix: Deleting of log images broken (website change)
