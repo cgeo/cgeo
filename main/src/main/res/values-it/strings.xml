@@ -541,7 +541,6 @@
     <string name="list_menu_create">Crea nuova lista</string>
     <string name="list_menu_drop">Elimina la lista corrente</string>
     <string name="list_menu_rename">Rinomina la lista corrente</string>
-    <string name="list_menu_rename_list_prefix">Rinomina prefisso elenco</string>
     <string name="rename_from">Rinomina da</string>
     <string name="rename_to">Rinomina in</string>
     <string name="list_menu_import">Importazione</string>
