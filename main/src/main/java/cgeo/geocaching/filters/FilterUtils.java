@@ -19,10 +19,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -138,6 +140,16 @@ public class FilterUtils {
             });
     }
 
+    /** Returns the sorted list of unique parent group names extracted from all existing named filters. */
+    public static List<String> getNamedFilterGroups() {
+        return NamedFilter.getAll().stream()
+                .map(f -> getGroupFromFilterName(f.getName()))
+                .filter(g -> g != null && !g.isEmpty())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     /** builds basic display model for named filters, initialized to "single-plain". Handles grouping */
     private static SimpleDialog.ItemSelectModel<NamedFilter> buildGroupedModel(final List<NamedFilter> filters) {
         final SimpleDialog.ItemSelectModel<NamedFilter> model = new SimpleDialog.ItemSelectModel<>();
@@ -152,7 +164,7 @@ public class FilterUtils {
                 }
                 return TextParam.text(name);
             }, (f, gi) -> f.getName(), null)
-            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId(), 30) : ImageParam.id(R.drawable.ic_menu_marker))
+            .setDisplayIconMapper(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
             .activateGrouping(f -> getGroupFromFilterName(f.getName()))
             .setGroupPruner(gi -> gi.getSize() >= 2)
             .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)
@@ -163,6 +175,13 @@ public class FilterUtils {
                     name = name.substring(parentGroup.length() + NAMED_FILTER_GROUP_SEPARATOR.length());
                 }
                 return TextParam.text("**" + name + "**").setMarkdown(true);
+            })
+            .setGroupDisplayIconMapper(gi -> {
+                if (gi.getItems().isEmpty()) {
+                    return ImageParam.id(R.drawable.downloader_folder);
+                }
+                final NamedFilter first = gi.getItems().get(0);
+                return StringUtils.isNotBlank(first.getMarkerId()) ? ImageParam.emoji(first.getMarkerId()) : ImageParam.id(R.drawable.downloader_folder);
             })
             .setReducedGroupSaver("named_filters", g -> g, g -> g);
         return model;
