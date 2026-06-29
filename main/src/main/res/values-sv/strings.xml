@@ -546,7 +546,6 @@
     <string name="list_menu_create">Skapa en ny lista</string>
     <string name="list_menu_drop">Ta bort aktuell lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>
-    <string name="list_menu_rename_list_prefix">Byt namn på listprefix</string>
     <string name="rename_from">Byt namn från</string>
     <string name="rename_to">Byt namn till</string>
     <string name="list_menu_import">Importera</string>
