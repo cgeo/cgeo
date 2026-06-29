@@ -564,7 +564,6 @@
     <string name="list_menu_create">Vytvořit nový seznam</string>
     <string name="list_menu_drop">Odstranit aktuální seznam</string>
     <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
-    <string name="list_menu_rename_list_prefix">Přejmenovat předponu seznamu</string>
     <string name="rename_from">Přejmenovat z</string>
     <string name="rename_to">Přejmenovat na</string>
     <string name="list_menu_import">Import</string>
