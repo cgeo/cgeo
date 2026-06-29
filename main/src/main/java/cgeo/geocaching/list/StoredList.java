@@ -409,16 +409,19 @@ public final class StoredList extends AbstractList {
                 hierarchies.remove(0);
             }
 
+            final StoredList list = DataStore.getList(listId);
+            final String parentName = StringUtils.defaultIfEmpty(getGroupFromList(list, null), hierarchies.get(0));
+
             final InputWithParentDialogBinding viewBinding = InputWithParentDialogBinding.inflate(LayoutInflater.from(activity));
             final AutoCompleteTextView fromView = viewBinding.inputParentView;
             final TextInputEditText toView = viewBinding.inputNameView;
 
             fromView.setInputType(InputType.TYPE_NULL);
             fromView.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, hierarchies));
-            fromView.setText(hierarchies.get(0), false);
+            fromView.setText(parentName, false);
 
             viewBinding.inputNameLayout.setHint(activity.getString(R.string.rename_to));
-            toView.setText(hierarchies.get(0));
+            toView.setText(parentName);
 
             final SimpleDialog sd = SimpleDialog.of(activity)
                     .setTitle(TextParam.id(R.string.list_menu_rename_parent_lists))
