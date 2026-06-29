@@ -567,7 +567,6 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
-    <string name="list_menu_rename_list_prefix">Zmień nazwę prefiksu listy</string>
     <string name="rename_from">Zmień nazwę z</string>
     <string name="rename_to">Zmień nazwę na</string>
     <string name="list_menu_import">Import</string>
