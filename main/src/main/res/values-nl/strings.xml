@@ -539,7 +539,6 @@
     <string name="list_menu_create">Maak nieuwe lijst</string>
     <string name="list_menu_drop">Verwijder huidige lijst</string>
     <string name="list_menu_rename">Hernoem huidige lijst</string>
-    <string name="list_menu_rename_list_prefix">Lijst voorvoegsel hernoemen</string>
     <string name="rename_from">Hernoemen van</string>
     <string name="rename_to">Hernoem naar</string>
     <string name="list_menu_import">Importeer</string>
