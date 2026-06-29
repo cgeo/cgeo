@@ -511,7 +511,6 @@
     <string name="list_menu_create">Luo uusi lista</string>
     <string name="list_menu_drop">Poista nykyinen lista</string>
     <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
-    <string name="list_menu_rename_list_prefix">Nimeä listan etuliite uudelleen</string>
     <string name="rename_from">Nimeä uudelleen</string>
     <string name="rename_to">Uusi nimi:</string>
     <string name="list_menu_import">Tuo</string>
