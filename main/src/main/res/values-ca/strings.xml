@@ -556,7 +556,6 @@
     <string name="list_menu_create">Crea una llista nova</string>
     <string name="list_menu_drop">Esborra la llista actual</string>
     <string name="list_menu_rename">Reanomena la llista actual</string>
-    <string name="list_menu_rename_list_prefix">Canvia el nom del prefix de la llista</string>
     <string name="rename_from">Canvia el nom de</string>
     <string name="rename_to">Canvia el nom a</string>
     <string name="list_menu_import">Importa</string>
