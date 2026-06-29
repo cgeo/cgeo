@@ -33,7 +33,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
 - Korrektur: Anzeige von Kartenkacheln stoppt unter bestimmten Bedingungen (nur OpenStreetMap Onlinekarten)
 - Neu: Bedingte Cache-Marker
-- New: Show navigation hint (arrow + distance)
+- Neu: Navigationshinweis anzeigen (Pfeil + Entfernung)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
