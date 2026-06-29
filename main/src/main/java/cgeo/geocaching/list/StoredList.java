@@ -382,7 +382,7 @@ public final class StoredList extends AbstractList {
             SimpleDialog.of(activity)
                     .setTitle(TextParam.id(dialogTitle))
                     .setPositiveButton(TextParam.id(buttonTitle))
-                    .inputWithParent(options, DataStore.getListHierarchy(), TextParam.id(R.string.list_parent_list),
+                    .inputWithParent(options, DataStore.getListHierarchy(),
                             fullName -> runnable.call(fullName));
         }
 
@@ -413,7 +413,6 @@ public final class StoredList extends AbstractList {
             final AutoCompleteTextView fromView = viewBinding.inputParentView;
             final TextInputEditText toView = viewBinding.inputNameView;
 
-            viewBinding.inputParentLayout.setHint(activity.getString(R.string.rename_from));
             fromView.setInputType(InputType.TYPE_NULL);
             fromView.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, hierarchies));
             fromView.setText(hierarchies.get(0), false);

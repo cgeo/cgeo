@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -751,48 +752,56 @@ public class SimpleDialog {
                 .collect(Collectors.joining(":"));
     }
 
-    public void inputWithParent(final InputOptions nameOptions, final List<String> parentChoices, @Nullable final TextParam parentHint, final Consumer<String> okayListener) {
-        final InputOptions io = nameOptions == null ? new InputOptions() : nameOptions;
+    public void inputWithParent(final InputOptions nameOptions, @NonNull final List<String> parentChoices, final Consumer<String> okayListener) {
+        final InputWithParentDialogBinding viewBinding = InputWithParentDialogBinding.inflate(LayoutInflater.from(context));
+        setCustomView(viewBinding.getRoot());
 
         final String noneLabel = LocalizationUtils.getString(R.string.init_custombnitem_none);
         final List<String> allChoices = new ArrayList<>();
         allChoices.add(noneLabel);
-        if (parentChoices != null) {
-            allChoices.addAll(parentChoices);
-        }
+        allChoices.addAll(parentChoices);
 
-        final InputWithParentDialogBinding viewBinding = InputWithParentDialogBinding.inflate(LayoutInflater.from(context));
+        final AutoCompleteTextView parentSelect = viewBinding.inputParentView;
+        parentSelect.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, allChoices));
+        // pre-select initial parent or "(none)"
+        final String initialParentDisplay = nameOptions.initialParent == null || nameOptions.initialParent.isEmpty() ? noneLabel : nameOptions.initialParent;
+        parentSelect.setText(initialParentDisplay, false);
 
-        final AutoCompleteTextView parentView = viewBinding.inputParentView;
-        final TextInputLayout parentLayout = viewBinding.inputParentLayout;
-        if (parentHint != null) {
-            parentLayout.setHint(parentHint.getText(context));
-        }
-        parentView.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, allChoices));
-        // pre-select initial parent (rename mode) or "(none)" (create mode)
-        final String initialParentDisplay = io.initialParent != null && !io.initialParent.isEmpty() ? io.initialParent : noneLabel;
-        parentView.setText(initialParentDisplay, false);
+        final TextInputEditText newParentView = viewBinding.inputNewParentView;
+        final View newParentRow = viewBinding.inputNewParentRow;
 
+        viewBinding.inputParentAddButton.setOnClickListener(v -> {
+            viewBinding.inputSelectParentRow.setVisibility(View.GONE);
+            viewBinding.inputNewParentRow.setVisibility(View.VISIBLE);
+            newParentView.requestFocus();
+            Keyboard.show(getContext(), newParentView);
+        });
+        viewBinding.inputNewParentListButton.setOnClickListener(v -> {
+            viewBinding.inputNewParentRow.setVisibility(View.GONE);
+            viewBinding.inputSelectParentRow.setVisibility(View.VISIBLE);
+        });
+
+        // Apply InputOptions to the name input field
         final TextInputEditText nameView = viewBinding.inputNameView;
         final TextInputLayout nameLayout = viewBinding.inputNameLayout;
-        nameView.setInputType(io.inputType);
-        if (io.initialValue != null) {
-            nameView.setText(io.initialValue);
+        nameView.setInputType(nameOptions.inputType);
+        if (nameOptions.initialValue != null) {
+            nameView.setText(nameOptions.initialValue);
         }
-        if (io.hint != null) {
-            nameView.setHint(io.hint);
+        if (nameOptions.hint != null) {
+            nameView.setHint(nameOptions.hint);
         }
-        if (io.label != null) {
-            nameLayout.setHint(io.label);
+        if (nameOptions.label != null) {
+            nameLayout.setHint(nameOptions.label);
         }
-        if (io.suffix != null) {
-            nameLayout.setSuffixText(io.suffix);
+        if (nameOptions.suffix != null) {
+            nameLayout.setSuffixText(nameOptions.suffix);
         }
-        if (io.maxAllowedLength > 0) {
-            ViewUtils.setMaxTextLength(nameView, nameLayout, io.maxAllowedLength);
+        if (nameOptions.maxAllowedLength > 0) {
+            ViewUtils.setMaxTextLength(nameView, nameLayout, nameOptions.maxAllowedLength);
         }
-        if (io.allowedChars != null) {
-            final Pattern charPattern = Pattern.compile(io.allowedChars);
+        if (nameOptions.allowedChars != null) {
+            final Pattern charPattern = Pattern.compile(nameOptions.allowedChars);
             nameView.setFilters(new InputFilter[]{
                     (source, start, end, dest, dstart, dend) -> {
                         for (int i = start; i < end; i++) {
@@ -805,29 +814,26 @@ public class SimpleDialog {
             });
         }
 
-        this.customView = viewBinding.getRoot();
-
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
-        final AlertDialog dialog = dialogBinding.first;
+        final AlertDialog dialog = constructCommons().first;
 
         // rename mode when initialParent is explicitly set (even as empty string = top-level)
-        final boolean isRenameMode = io.initialParent != null;
-        final String originalName = io.initialValue != null ? io.initialValue.trim() : null;
+        final boolean isRenameMode = nameOptions.initialParent != null;
+        final String originalName = nameOptions.initialValue != null ? nameOptions.initialValue.trim() : null;
 
         final Runnable updateOk = () -> {
             if (positiveButton == null) {
                 return;
             }
             final String currentName = ViewUtils.getEditableText(nameView.getText()).trim();
-            final String currentParent = parentView.getText().toString().trim();
+            final String effectiveParent = getEffectiveParent(parentSelect, newParentView, newParentRow, noneLabel);
             final boolean enabled;
-            if (io.inputChecker != null) {
-                enabled = io.inputChecker.test(currentName);
+            if (nameOptions.inputChecker != null) {
+                enabled = nameOptions.inputChecker.test(currentName);
             } else if (isRenameMode) {
-                final boolean currentParentIsNone = currentParent.isEmpty() || currentParent.equals(noneLabel);
-                final boolean originalParentIsNone = io.initialParent.isEmpty();
+                final boolean currentParentIsNone = effectiveParent.isEmpty();
+                final boolean originalParentIsNone = nameOptions.initialParent.isEmpty();
                 final boolean parentUnchanged = currentParentIsNone == originalParentIsNone
-                        && (currentParentIsNone || currentParent.equals(io.initialParent));
+                        && (currentParentIsNone || effectiveParent.equals(nameOptions.initialParent));
                 final boolean nameUnchanged = originalName != null && currentName.equals(originalName);
                 enabled = !currentName.isEmpty() && !(nameUnchanged && parentUnchanged);
             } else {
@@ -837,7 +843,8 @@ public class SimpleDialog {
         };
 
         nameView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
-        parentView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
+        parentSelect.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
+        newParentView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateOk.run()));
 
         Keyboard.show(getContext(), nameView);
         dialog.show();
@@ -849,9 +856,8 @@ public class SimpleDialog {
                 if (name.isEmpty()) {
                     return false;
                 }
-                final String selectedParent = parentView.getText().toString().trim();
-                final String fullName = selectedParent.isEmpty() || selectedParent.equals(noneLabel)
-                        ? name : selectedParent + ":" + name;
+                final String effectiveParent = getEffectiveParent(parentSelect, newParentView, newParentRow, noneLabel);
+                final String fullName = effectiveParent.isEmpty() ? name : effectiveParent + ":" + name;
                 okayListener.accept(fullName);
                 dialog.dismiss();
                 return true;
@@ -860,6 +866,15 @@ public class SimpleDialog {
         });
 
         Dialogs.moveCursorToEnd(nameView);
+    }
+
+    private static String getEffectiveParent(final AutoCompleteTextView parentView, final TextInputEditText newParentView,
+            final View newParentRow, final String noneLabel) {
+        if (newParentRow.getVisibility() == View.VISIBLE) {
+            return ViewUtils.getEditableText(newParentView.getText()).trim();
+        }
+        final String selected = parentView.getText().toString().trim();
+        return selected.isEmpty() || selected.equals(noneLabel) ? "" : selected;
     }
 
     private void inputExecuteChecker(final AlertDialog dialog, final Predicate<String> inputChecker, final CharSequence text) {

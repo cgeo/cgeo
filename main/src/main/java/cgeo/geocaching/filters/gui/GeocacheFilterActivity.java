@@ -178,8 +178,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         // Save as Named Filter button
         binding.filterSaveAsNamed.setOnClickListener(v -> {
             SimpleDialog.of(this).setTitle(R.string.named_filter_save_as_title)
-                    .inputWithParent(new SimpleDialog.InputOptions(), FilterUtils.getNamedFilterGroups(),
-                            TextParam.id(R.string.named_filter_parent_group), name -> {
+                    .inputWithParent(new SimpleDialog.InputOptions(), FilterUtils.getNamedFilterGroups(), name -> {
                         if (name == null || name.trim().isEmpty()) {
                             return;
                         }

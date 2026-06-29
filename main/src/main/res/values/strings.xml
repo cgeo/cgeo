@@ -628,7 +628,6 @@
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
     <string name="list_not_available">List no longer available, switching to standard list</string>
-    <string name="list_parent_list">Parent list</string>
     <string name="list_name">List name</string>
     <string name="list_confirm_rename">Renaming from \"%1$s\" to \"%2$s\"\n%3$s\nThis action cannot be undone!</string>
     <string name="list_confirm_no_hierarchy">\nNo \":\" found - all matching lists will be transformed to top-level lists\n</string>
@@ -882,7 +881,6 @@
     <string name="named_filter_activate_deactivate_title">Activate / deactivate markers</string>
     <string name="named_filter_nofilter_label">(no filter — matches all caches)</string>
     <string name="named_filter_save_as_title">Save as named filter</string>
-    <string name="named_filter_parent_group">Parent group</string>
     <string name="named_filter_name_exists_title">Name already exists</string>
     <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
     <string name="named_filter_config_exists_title">Filter already saved</string>
@@ -893,6 +891,10 @@
     <string name="named_filter_priority_highest">Highest</string>
     <string name="named_filter_priority_low">Low</string>
     <string name="named_filter_priority_lowest">Lowest</string>
+
+    <string name="dialog_parent">Parent group</string>
+    <string name="dialog_new_parent">Create new parent</string>
+    <string name="dialog_name">Name</string>
 
     <string name="cache_filter_reference_based_on">Based on: %1$s</string>
 
