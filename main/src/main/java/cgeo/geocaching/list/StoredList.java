@@ -394,14 +394,14 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        public void promptForListPrefixRename(final Runnable runAfterRename) {
+        public void promptForParentListRename(final int listId, final Runnable runAfterRename) {
             final Activity activity = activityRef.get();
             if (activity == null) {
                 return;
             }
 
             final List<String> hierarchies = DataStore.getListHierarchy();
-            if (hierarchies.size() == 1) {
+            if (hierarchies.isEmpty()) {
                 return;
             }
 
@@ -421,13 +421,19 @@ public final class StoredList extends AbstractList {
             toView.setText(hierarchies.get(0));
 
             final SimpleDialog sd = SimpleDialog.of(activity)
-                    .setTitle(TextParam.id(R.string.list_menu_rename_list_prefix))
+                    .setTitle(TextParam.id(R.string.list_menu_rename_parent_lists))
                     .setCustomView(viewBinding);
 
             fromView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
                 toView.setText(s);
                 if (sd.getDialog() != null) {
-                    sd.getDialog().getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+                    sd.getDialog().getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+            }));
+
+            toView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                if (sd.getDialog() != null) {
+                    sd.getDialog().getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0 && !fromView.getText().toString().equals(s.toString()));
                 }
             }));
 
@@ -436,7 +442,7 @@ public final class StoredList extends AbstractList {
                 final String from = fromView.getText().toString();
                 final String to = SimpleDialog.composeWithParent("", ViewUtils.getEditableText(toView.getText()));
                 if (!Strings.CS.equals(from, to)) {
-                    SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
+                    SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_parent_lists).setMessage(TextParam.text(
                             LocalizationUtils.getString(R.string.list_confirm_rename, from, to, to.isEmpty() ? LocalizationUtils.getString(R.string.list_confirm_no_hierarchy) : ""))
                         ).confirm(() -> {
                             DataStore.renameListPrefix(from + GROUP_SEPARATOR, to + (to.isEmpty() ? "" : GROUP_SEPARATOR));
@@ -444,6 +450,8 @@ public final class StoredList extends AbstractList {
                         });
                 }
             });
+
+            sd.getDialog().getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
     }
 
