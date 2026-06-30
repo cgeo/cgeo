@@ -546,6 +546,7 @@
     <string name="list_menu_create">Skapa en ny lista</string>
     <string name="list_menu_drop">Ta bort aktuell lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>
+    <string name="list_menu_rename_parent_lists">Döp om överordnade listor</string>
     <string name="rename_from">Byt namn från</string>
     <string name="rename_to">Byt namn till</string>
     <string name="list_menu_import">Importera</string>
@@ -751,6 +752,7 @@
     <string name="cache_namedfilter_matching">Matchande namngivna filter</string>
     <string name="named_filter_add">Lägg till filter</string>
     <string name="named_filter_empty_hint">Inga namngivna filter har konfigurerats. Tryck på + för att lägga till ett.</string>
+    <string name="named_filter_activate_marker">Visa markör - prioritet:</string>
     <string name="named_filter_enable_all_markers">Aktivera alla markörer</string>
     <string name="named_filter_markers_enabled">Markörer aktiverade</string>
     <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
@@ -762,6 +764,13 @@
     <string name="named_filter_name_exists_message">Ett filter som heter \'%s\' finns redan. Skriv över?</string>
     <string name="named_filter_config_exists_title">Filtret har redan sparats</string>
     <string name="named_filter_config_exists_message">Denna filterkonfiguration är redan sparad som \'%s\'. Spara igen med ett nytt namn?</string>
+    <string name="named_filter_fill_with_named">Fyll med namngivet filter</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Hög</string>
+    <string name="named_filter_priority_highest">Högsta</string>
+    <string name="named_filter_priority_low">Låg</string>
+    <string name="named_filter_priority_lowest">Lägsta</string>
+    <string name="cache_filter_reference_based_on">Baserat på: %1$s</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
@@ -1455,6 +1464,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
+    <string name="cache_personal_note_edit_pn">Redigera personlig anteckning</string>
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
     <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
@@ -2413,6 +2423,8 @@
     </plurals>
     <string name="command_recalculate_health_score_progress">Räknar om loggars hälsopoäng…</string>
     <string name="command_recalculate_health_score_result">Loggars hälsopoäng omräknade: %d</string>
+    <string name="log_health_score_explanation_title">Logga hälsopoäng</string>
+    <string name="log_health_score_explanation">Logghälsa Betyg beräknas från högst %1$s poster eller tills en av följande loggtyper hittas:  \n%2$s  \n\nDet beräknas som:  \n`(summan av vikter av bra loggar) / (summan av vikter av bra och dåliga loggar)`\n\n**Bra loggar** är:  \n%3$s  \n\n**Dåliga loggar** är:  \n%4$s  \n\nLoggar viktas av sin ålder (nyare loggar har högre vikt).</string>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
     <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
@@ -2452,6 +2464,7 @@
     <string name="preference_colorpicker_show_width">bredd: %d</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
+    <string name="number_input_title_short">Ange värde</string>
     <string name="number_input_range">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
     <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
