@@ -33,7 +33,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Beräkna saknade höjddata vid import av spår (om höjddata laddas ner)
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 - Nytt: Villkorade cachemarkörer
-- New: Show navigation hint (arrow + distance)
+- Nytt: Visa navigeringstips (pil + avstånd)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -60,7 +60,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Tillåt markdown-formatering för att lista text i användardefinierade cacher
 - Ändra: Lagra cache innan du lägger till användarbild
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
-- New: Show own favorites in log view (Geocaching.com + offline logs)
+- Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -97,4 +97,4 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Vissa texter ignorerar språkväxling
 - Fix: "Använd brittiska inställningar" initieras inte korrekt på nya installationer
 - Förändring: Bergamot översättningsmodul med öppen källkod som ersätter Google ML Kit översättare
-- Change: New emoji selector
+- Förändring: Ny emoji-väljare
