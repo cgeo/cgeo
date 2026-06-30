@@ -556,6 +556,7 @@
     <string name="list_menu_create">Crea una llista nova</string>
     <string name="list_menu_drop">Esborra la llista actual</string>
     <string name="list_menu_rename">Reanomena la llista actual</string>
+    <string name="list_menu_rename_parent_lists">Canviar el nom de les llistes principals</string>
     <string name="rename_from">Canvia el nom de</string>
     <string name="rename_to">Canvia el nom a</string>
     <string name="list_menu_import">Importa</string>
@@ -1480,6 +1481,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
+    <string name="cache_personal_note_edit_pn">Edita la nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
     <string name="cache_menu_allowWaypointExtraction">Permetre punts de ruta de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
