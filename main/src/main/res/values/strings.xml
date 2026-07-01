@@ -3073,6 +3073,10 @@
 
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_addon_not_installed">The Wherigo Player is a separate installable module and is not installed on this device.</string>
+    <string name="wherigo_addon_install_prompt">The Wherigo Player is a separate installable module. Do you want to download and install it now?</string>
+    <string name="wherigo_addon_installing">Installing Wherigo Player…</string>
+    <string name="wherigo_addon_install_failed">Failed to install the Wherigo Player (%s).</string>
     <string name="wherigo_controls">Controls</string>
     <string name="wherigo_controls_cartridgelist_hint">View cartridges and start game</string>
     <string name="wherigo_controls_savegame_hint">Save progress of a running game</string>

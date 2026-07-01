@@ -15,9 +15,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.wherigo.WherigoActivity;
-import cgeo.geocaching.wherigo.WherigoUtils;
-import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -253,7 +250,7 @@ public class CacheInfoBoxes {
     }
 
     public static void updateWherigoBox(final Geocache cache, final Activity activity, @NonNull final Button wherigoButton, @Nullable final View wherigoView, @Nullable final TextView wherigoText) {
-        final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
+        final List<String> wherigoGuis = WherigoAddonHelper.getWherigoGuids(cache);
         final boolean isEnabled = !wherigoGuis.isEmpty();
 
         ViewUtils.setVisibility(wherigoView, isEnabled ? View.VISIBLE : View.GONE);
@@ -265,8 +262,7 @@ public class CacheInfoBoxes {
         if (isEnabled) {
             wherigoButton.setOnClickListener(v -> {
                 if (Settings.hasGCCredentials()) {
-                    WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
-                            WherigoActivity.startForGuid(activity, guid, cache.getGeocode(), true));
+                    WherigoAddonHelper.startForGuid(activity, wherigoGuis, cache.getGeocode());
                 } else {
                     SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
                 }

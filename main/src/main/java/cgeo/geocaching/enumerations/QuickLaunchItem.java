@@ -19,8 +19,7 @@ import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.wherigo.WherigoActivity;
-import cgeo.geocaching.wherigo.WherigoViewUtils;
+import cgeo.geocaching.utils.WherigoAddonHelper;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -74,7 +73,7 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, VISIBILITY.GC),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, VISIBILITY.ALL),
-        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications),
+        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.INFO, R.string.about, R.drawable.cgeo_notification, VISIBILITY.ALL)
     ));
 
@@ -129,7 +128,7 @@ public class QuickLaunchItem extends InfoItem {
                     } else if (which == VALUES.MANUAL.id) {
                         ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.manual_link_full));
                     } else if (which == VALUES.WHERIGO.id) {
-                        WherigoActivity.start(activity, hideNavigationBar);
+                        WherigoAddonHelper.start(activity);
                     } else if (which == VALUES.FAQ.id) {
                         ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.faq_link_full));
                     } else if (which == VALUES.VIEWSETTINGS.id) {

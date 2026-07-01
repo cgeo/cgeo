@@ -190,31 +190,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".wherigo.WherigoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/wherigo_player"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden" >
-
-            <!-- wherigo.com -->
-            <intent-filter tools:ignore="AppLinkWarning">
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="www.wherigo.com" />
-                <data android:host="wherigo.com" />
-                <data android:pathPrefix="/cartridge/details.aspx" />
-                <data android:pathPrefix="/cartridge/downloads.aspx" />
-            </intent-filter>
-
-        </activity>
-        <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/about"
@@ -805,13 +780,6 @@
             android:enabled="true"
             android:process=":brouter_service"
             android:foregroundServiceType="dataSync">
-        </service>
-        <service
-            android:name=".wherigo.WherigoGameService"
-            android:exported="false"
-            android:enabled="true"
-            android:stopWithTask="true"
-            android:foregroundServiceType="location">
         </service>
 
         <activity
