@@ -17,12 +17,6 @@
         android:summary="@string/init_summary_choose_list"
         android:title="@string/init_choose_list"
         app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_downloadRememberAllowMeteredNetwork"
-        android:summary="@string/init_summary_downloadRememberAllowMeteredNetwork"
-        android:title="@string/init_downloadRememberAllowMeteredNetwork"
-        app:iconSpaceReserved="false" />
     <PreferenceCategory
         android:title="@string/settings_title_gpx"
         app:iconSpaceReserved="false">
