@@ -303,6 +303,7 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
+    <string translatable="false" name="pref_downloadAllowMeteredNetwork">downloadAllowMeteredNetwork</string>
 
     <!-- category gpx -->
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>

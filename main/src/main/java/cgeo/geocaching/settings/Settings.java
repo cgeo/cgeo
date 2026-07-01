@@ -1532,6 +1532,14 @@ public class Settings {
         putBoolean(R.string.pref_brouterAutoTileDownloads, value);
     }
 
+    public static boolean getDownloadAllowMeteredNetwork() {
+        return getBoolean(R.string.pref_downloadAllowMeteredNetwork, false);
+    }
+
+    public static void setDownloadAllowMeteredNetwork(final boolean value) {
+        putBoolean(R.string.pref_downloadAllowMeteredNetwork, value);
+    }
+
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
         return needsIntervalAction(R.string.pref_brouterAutoTileDownloadsLastCheck, getBrouterAutoTileDownloadsInterval() * 24, () -> setBrouterAutoTileDownloadsLastCheck(false));
     }
