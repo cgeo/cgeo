@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.SimpleItemListModel;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -42,13 +44,15 @@ public final class WherigoAddonHelper {
         if (cache == null) {
             return Collections.emptyList();
         }
-        final String textToScan = cache.getShortDescription() + " " + cache.getDescription();
+        final String shortDesc = cache.getShortDescription();
+        final String desc = cache.getDescription();
+        final String textToScan = (shortDesc != null ? shortDesc : "") + " " + (desc != null ? desc : "");
         final Matcher matcher = PATTERN_CARTRIDGE_LINK.matcher(textToScan);
         final List<String> guids = new ArrayList<>();
         final Set<String> seen = new HashSet<>();
         while (matcher.find()) {
             final String guid = matcher.group(1);
-            if (guid != null && seen.add(guid)) {
+            if (guid != null && !guid.isEmpty() && seen.add(guid)) {
                 guids.add(guid);
             }
         }
@@ -68,6 +72,25 @@ public final class WherigoAddonHelper {
         intent.putExtra(EXTRA_WHERIGO_GUID, guid);
         intent.putExtra(EXTRA_WHERIGO_GEOCODE, geocode);
         startOrPrompt(activity, intent);
+    }
+
+    /** Starts directly if there's a single GUID, otherwise lets the user pick one first. */
+    public static void startForGuid(@NonNull final Activity activity, @NonNull final List<String> guids, @Nullable final String geocode) {
+        if (guids.isEmpty()) {
+            return;
+        }
+        if (guids.size() == 1) {
+            startForGuid(activity, guids.get(0), geocode);
+            return;
+        }
+        final SimpleDialog.ItemSelectModel<String> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(guids)
+                .setDisplayMapper(guid -> TextParam.text(guid))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+        SimpleDialog.of(activity)
+                .setTitle(R.string.cache_multiple_wherigo_cartridges_title)
+                .setMessage(R.string.cache_multiple_wherigo_cartridges_message)
+                .selectSingle(model, guid -> startForGuid(activity, guid, geocode));
     }
 
     /** Builds a plain launch intent, e.g. for use as a pinned home-screen shortcut. */

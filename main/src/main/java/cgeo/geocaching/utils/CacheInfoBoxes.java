@@ -262,7 +262,7 @@ public class CacheInfoBoxes {
         if (isEnabled) {
             wherigoButton.setOnClickListener(v -> {
                 if (Settings.hasGCCredentials()) {
-                    WherigoAddonHelper.startForGuid(activity, wherigoGuis.get(0), cache.getGeocode());
+                    WherigoAddonHelper.startForGuid(activity, wherigoGuis, cache.getGeocode());
                 } else {
                     SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
                 }
