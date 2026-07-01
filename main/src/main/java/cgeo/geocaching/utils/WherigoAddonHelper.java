@@ -1,7 +1,9 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.playservices.WherigoModuleInstaller;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -104,8 +106,22 @@ public final class WherigoAddonHelper {
     private static void startOrPrompt(@NonNull final Activity activity, @NonNull final Intent intent) {
         if (intent.resolveActivity(activity.getPackageManager()) != null) {
             activity.startActivity(intent);
+        } else if (WherigoModuleInstaller.isSupported()) {
+            promptInstall(activity, intent);
         } else {
             SimpleDialog.of(activity).setTitle(R.string.wherigo_player).setMessage(R.string.wherigo_addon_not_installed).show();
         }
+    }
+
+    private static void promptInstall(@NonNull final Activity activity, @NonNull final Intent intentToLaunchAfterInstall) {
+        SimpleDialog.of(activity)
+                .setTitle(R.string.wherigo_player)
+                .setMessage(R.string.wherigo_addon_install_prompt)
+                .confirm(() -> {
+                    ActivityMixin.showShortToast(activity, R.string.wherigo_addon_installing);
+                    WherigoModuleInstaller.requestInstall(activity,
+                            () -> activity.startActivity(intentToLaunchAfterInstall),
+                            errorMessage -> ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.wherigo_addon_install_failed, errorMessage)));
+                });
     }
 }

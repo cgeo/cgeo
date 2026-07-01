@@ -202,6 +202,10 @@ android {
         basic {
             java.srcDir 'src/nofoss/java' // "basic" shall contain non-foss code
         }
+        // "nojit" is a non-foss flavor too, so it gets the same non-foss-only code as "basic".
+        nojit {
+            java.srcDir 'src/nofoss/java'
+        }
     }
 
     testOptions {
@@ -475,6 +479,12 @@ dependencies {
     configurations.configureEach {
         exclude module: "play-services-measurement"
     }
+
+    // Play Feature Delivery, to install the :wherigo dynamic feature module on demand.
+    // Not available for the "foss" flavor, which deliberately avoids Play Core/Play Services;
+    // that flavor falls back to a no-op stub in src/foss/java, see WherigoModuleInstaller.
+    basicImplementation 'com.google.android.play:feature-delivery:2.1.2'
+    nojitImplementation 'com.google.android.play:feature-delivery:2.1.2'
 
     // Support Library Design
     implementation 'com.google.android.material:material:1.14.0'
