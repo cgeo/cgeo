@@ -2955,6 +2955,8 @@
     <string name="download_enqueing_error">Error on trying to start download</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
+    <string name="init_downloadRememberAllowMeteredNetwork">Remember metered network choice</string>
+    <string name="init_summary_downloadRememberAllowMeteredNetwork">Remember the \"allow download over metered network\" checkbox state between downloads</string>
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates found for:</string>
     <string name="download_warning">Downloads may take quite some time and can lead to significant costs, depending on your network connection.</string>
