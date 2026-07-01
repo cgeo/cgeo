@@ -189,6 +189,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
 
+    // variable for waiting for accurate position (nearby)
+    private boolean waitingForAccurateFix = true;
+
+    // for retrying one more time
+    private boolean retryOnce = true;
+
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
      */
@@ -206,6 +212,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void updateGeoData(final GeoData geoData) {
+            // if postiton is NOT good -> ignore
+            if (geoData == null
+                    || geoData.getAccuracy() > 50) {
+                return;
+            }
+
+            // first good postition -> start loader
+            if (waitingForAccurateFix) {
+                waitingForAccurateFix = false;
+                coords = geoData.getCoords();
+                restartCacheLoader(false, null);
+            }
+
             adapter.setActualCoordinates(geoData.getCoords());
         }
     };
@@ -1828,7 +1847,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 case NEAREST:
                     title = LocalizationUtils.getString(R.string.caches_nearby);
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, sortContext.getSort(), coords, true);
+
+                    if (waitingForAccurateFix) {
+                        loader = new NullGeocacheListLoader(this, search);
+                    } else {
+                        loader = new CoordsGeocacheListLoader(this, sortContext.getSort(), coords, true);
+                    }
+
                     break;
                 case COORDINATE:
                     title = coords.toString();
@@ -1939,10 +1964,26 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             updateGui();
             lph.setLastListPosition();
 
-            if (search.getError() != StatusCode.NO_ERROR) {
-                showToast(LocalizationUtils.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
+            final StatusCode error = search.getError();
+            if (error != StatusCode.NO_ERROR) {
+                // try again only once for temporary errors
+                if (retryOnce) {
+                    final boolean temporary =
+                            error == StatusCode.COMMUNICATION_ERROR ||
+                                    error == StatusCode.UNKNOWN_ERROR;
+
+                    if (temporary) {
+                        retryOnce = false;
+                        restartCacheLoader(false, null);
+                        return;
+                    }
+                }
+                showToast(LocalizationUtils.getString(R.string.err_download_fail) + ' ' + error.getErrorString() + '.');
+            } else {
+                retryOnce = true;
             }
         }
+
         showProgress(false);
         invalidateOptionsMenuCompatible();
         if (arg0 instanceof AbstractSearchLoader) {
