@@ -1,5 +1,5 @@
 ### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+c:geossa on ollut täysin uusi kartan toteutus nimeltään "UnifiedMap" jonkin aikaa, joka lopulta korvaa vanhat toteutukset Google Mapsista ja Mapsforgesta (OpenStreetMap). Tällä vanhenemisilmoituksella kerrotaan sinulle tulevasta suunnitelmasta.
 
 UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
 - Map rotation for OpenStreetMap based maps (online + offline)
