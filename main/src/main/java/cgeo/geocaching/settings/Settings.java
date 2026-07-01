@@ -1532,12 +1532,8 @@ public class Settings {
         putBoolean(R.string.pref_brouterAutoTileDownloads, value);
     }
 
-    public static boolean isDownloadRememberAllowMeteredNetwork() {
-        return getBoolean(R.string.pref_downloadRememberAllowMeteredNetwork, false);
-    }
-
     public static boolean getDownloadAllowMeteredNetwork() {
-        return isDownloadRememberAllowMeteredNetwork() && getBoolean(R.string.pref_downloadAllowMeteredNetwork, false);
+        return getBoolean(R.string.pref_downloadAllowMeteredNetwork, false);
     }
 
     public static void setDownloadAllowMeteredNetwork(final boolean value) {
