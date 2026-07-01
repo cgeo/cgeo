@@ -26,9 +26,6 @@ import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.html.HtmlUtils;
-import cgeo.geocaching.wherigo.WherigoGame;
-import cgeo.geocaching.wherigo.WherigoSavegameInfo;
-import cgeo.geocaching.wherigo.WherigoThingType;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -46,7 +43,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -139,8 +135,6 @@ public final class SystemInformation {
         body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
 
         appendPermissions(context, body);
-
-        appendWherigo(body);
 
         body.append("\n")
                 .append("\nPaths")
@@ -331,24 +325,6 @@ public final class SystemInformation {
                 appendPermission(context, body, permission);
             }
         }
-    }
-
-    private static void appendWherigo(final StringBuilder body) {
-        final WherigoGame game = WherigoGame.get();
-        final ContentStorage.FileInformation  cartridgeFileInfo = game.getCartridgeInfo() == null ? null : game.getCartridgeInfo().getFileInfo();
-        final CharSequence loadFileInfo = TextUtils.join(WherigoSavegameInfo.getAllSaveFiles(cartridgeFileInfo), WherigoSavegameInfo::toShortString, ", ");
-        final CharSequence visibleThingsCounts = TextUtils.join(Arrays.asList(WherigoThingType.values()), tt -> tt.name() + ":" + tt.getThingsForUserDisplay().size(), ", ");
-        body.append("\n")
-            .append("\nWherigo")
-            .append("\n-------")
-            .append("\n- playing:").append(game.isPlaying()).append(", debug:").append(game.isDebugMode()).append(", debugFC:").append(game.isDebugModeForCartridge())
-            .append("\n- Name: ").append(game.getCartridgeName()).append(" (").append(game.getCGuid()).append(")")
-            .append("\n- Cache context: ").append(game.getContextGeocacheName())
-            .append("\n- Last Error: ").append(game.getLastError())
-            .append("\n- Last Played: ").append(game.getLastPlayedCGuid()).append(" / ").append(game.getLastSetContextGeocode())
-            .append("\n- Visible things: ").append(visibleThingsCounts)
-            .append("\n- Cartridge File: ").append(cartridgeFileInfo)
-            .append("\n- Load Slots: ").append(loadFileInfo);
     }
 
     private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {

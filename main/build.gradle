@@ -294,6 +294,9 @@ android {
     // tests rely on JUnit-based classes
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
+
+    // the Wherigo player ships as a separate installable split APK, see wherigo/build.gradle
+    dynamicFeatures = [':wherigo']
 }
 
 ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
@@ -844,7 +847,7 @@ tasks.register('pmd', Pmd) {
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
-    exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
+    exclude '**/gen/**','**/brouter/**'
 
     reports {
         xml.required = true

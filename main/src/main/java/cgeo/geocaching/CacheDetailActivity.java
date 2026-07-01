@@ -115,7 +115,6 @@ import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
-import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -2156,7 +2155,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                 if (StringUtils.isNotBlank(description)) {
                     handleImageClick(activity, cache, description);
-                    WherigoViewUtils.htmlReplaceWherigoClickAction(activity, cache.getGeocode(), description);
                     //display various fixes
                     HtmlUtils.fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
                     fixOldGeocheckerLink(activity, cache, description);

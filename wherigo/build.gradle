@@ -1,0 +1,73 @@
+plugins {
+    // Dynamic feature module, see https://developer.android.com/guide/playcore/feature-delivery
+    id 'com.android.dynamic-feature'
+}
+
+android {
+    // shares the base app's namespace so existing "cgeo.geocaching.R" resource references
+    // inside the moved Wherigo code keep resolving without changes.
+    namespace = 'cgeo.geocaching'
+    compileSdk = 36
+
+    compileOptions {
+        coreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdk = 26
+        targetSdk = 35
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+        }
+        test {
+            setRoot("src/test/java")
+            java.srcDir 'src/test/java'
+        }
+    }
+
+    // must mirror the base app's flavor dimension/flavors so Gradle can match variants
+    flavorDimensions.add("javaCompilerTime")
+    productFlavors {
+        basic {
+            dimension = "javaCompilerTime"
+        }
+        nojit {
+            dimension = "javaCompilerTime"
+        }
+        foss {
+            dimension = "javaCompilerTime"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':main')
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
+
+    // used directly by the moved Wherigo/OpenWIG/Kahlua code; "implementation" is not
+    // transitive across module boundaries, so these must be declared again here even
+    // though :main already depends on them.
+    implementation 'org.apache.commons:commons-collections4:4.5.0'
+    implementation 'org.apache.commons:commons-lang3:3.20.0'
+    implementation "com.squareup.okhttp3:okhttp:5.3.2"
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
+    implementation 'com.github.mapsforge.vtm:vtm:0.28.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.31'
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.annotation:annotation:1.10.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.assertj:assertj-core:3.27.7"
+}
