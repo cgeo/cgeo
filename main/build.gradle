@@ -483,8 +483,8 @@ dependencies {
     // Play Feature Delivery, to install the :wherigo dynamic feature module on demand.
     // Not available for the "foss" flavor, which deliberately avoids Play Core/Play Services;
     // that flavor falls back to a no-op stub in src/foss/java, see WherigoModuleInstaller.
-    basicImplementation 'com.google.android.play:feature-delivery:2.1.2'
-    nojitImplementation 'com.google.android.play:feature-delivery:2.1.2'
+    basicImplementation 'com.google.android.play:feature-delivery:2.1.0'
+    nojitImplementation 'com.google.android.play:feature-delivery:2.1.0'
 
     // Support Library Design
     implementation 'com.google.android.material:material:1.14.0'
