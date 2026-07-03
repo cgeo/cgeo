@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- SectionHeader and SimpleItemListView are real, resolvable base-app views;
+         :wherigo depends on :main so they're available at compile/runtime, but AGP's lint
+         model for dynamic feature modules doesn't resolve custom views owned by the base module. -->
+    <issue id="MissingClass">
+        <ignore path="src/main/res/layout/wherigo_activity.xml" />
+        <ignore path="src/main/res/layout/wherigo_cartridge_details.xml" />
+        <ignore path="src/main/res/layout/wherigo_map_quickinfos.xml" />
+        <ignore path="src/main/res/layout/wherigo_thing_details.xml" />
+    </issue>
+</lint>
