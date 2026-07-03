@@ -31,7 +31,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 - Fix: Snabbinställningar på kartan kan visa knapparna "1"/"2" för tomma routing-profiler efter att ha bytt språk
 - Nytt: Beräkna saknade höjddata vid import av spår (om höjddata laddas ner)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- Fix: Nedladdare av rutor stoppas under vissa förhållanden (OpenStreetMap endast onlinekartor)
 - Nytt: Villkorade cachemarkörer
 - Nytt: Visa navigeringstips (pil + avstånd)
 
