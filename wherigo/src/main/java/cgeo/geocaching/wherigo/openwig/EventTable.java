@@ -23,8 +23,9 @@ public class EventTable implements LuaTable, Serializable {
     public LuaTable table = new LuaTableImpl();
 
     private static final JavaFunction TOSTRING = (callFrame, nArguments) -> {
-        final EventTable parent = (EventTable) callFrame.get(0);
-        callFrame.push(parent.luaTostring()); //it is ESSENTIAL not to call toString() here!
+        final Object obj = callFrame.get(0);
+        //it is ESSENTIAL not to call toString() here!
+        callFrame.push(obj instanceof EventTable parent ? parent.luaTostring() : "nil");
         return 1;
     };
 
