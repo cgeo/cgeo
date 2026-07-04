@@ -40,7 +40,10 @@ public enum WherigoLib implements JavaFunction {
     VECTORTOPOINT("VectorToPoint"),
     LOGMESSAGE("LogMessage"),
     MADE("made"),
-    GETVALUE("GetValue");
+    GETVALUE("GetValue"),
+    // custom, non-standard extension - registered under JakeDot.*, not Wherigo.*, since we're not
+    // the owners of that name/API surface. Appended last so existing save-game ids are unaffected.
+    ZTEXTBUNDLE("ZTextBundle", TextBundle.class);
 
     final String luaName;
     final Class<?> klass;
@@ -80,6 +83,11 @@ public enum WherigoLib implements JavaFunction {
         environment.rawset("Wherigo", wig);
         for (final WherigoLib fn : values()) {
             Engine.instance.savegame.addJavafunc(fn);
+            // custom, non-standard extensions don't belong in the real Wherigo namespace -
+            // exposed separately below instead
+            if (fn == ZTEXTBUNDLE) {
+                continue;
+            }
             wig.rawset(fn.luaName, fn);
         }
 
@@ -103,6 +111,12 @@ public enum WherigoLib implements JavaFunction {
         wig.rawset("LOCATIONSCREEN", LuaState.toDouble(UI.LOCATIONSCREEN));
         wig.rawset("TASKSCREEN", LuaState.toDouble(UI.TASKSCREEN));
 
+        // custom, non-standard extensions live under their own namespace, not "Wherigo" - we're
+        // not the owners of that name/API surface
+        final LuaTable jakedot = new LuaTableImpl();
+        environment.rawset("JakeDot", jakedot);
+        jakedot.rawset(ZTEXTBUNDLE.luaName, ZTEXTBUNDLE);
+
         final LuaTable pack = (LuaTable)environment.rawget("package");
         final LuaTable loaded = (LuaTable)pack.rawget("loaded");
         loaded.rawset("Wherigo", wig);
@@ -118,6 +132,7 @@ public enum WherigoLib implements JavaFunction {
         Container.register();
         Player.register();
         Timer.register();
+        TextBundle.register();
 
         Media.reset();
     }
@@ -140,7 +155,7 @@ public enum WherigoLib implements JavaFunction {
             case ZITEM -> { return construct(new Thing(false), callFrame, nArguments); }
             case ZCHARACTER -> { return construct(new Thing(true), callFrame, nArguments); }
             case CARTRIDGE -> { return construct(Engine.instance.cartridge = new Cartridge(), callFrame, nArguments); }
-            case ZONE, ZCOMMAND, ZMEDIA, ZINPUT, ZTIMER, ZTASK -> { return constructNew(callFrame, nArguments); }
+            case ZONE, ZCOMMAND, ZMEDIA, ZINPUT, ZTIMER, ZTASK, ZTEXTBUNDLE -> { return constructNew(callFrame, nArguments); }
 
             // functions:
             case MESSAGEBOX -> { return messageBox(callFrame, nArguments); }
