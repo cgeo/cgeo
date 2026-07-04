@@ -310,7 +310,7 @@ public final class LuaTableImpl implements LuaTable {
 
     public final void rawset(Object key, Object value) {
         checkKey(key);
-        rawsetHash(key, value);
+        rawsetHash(canonicalizeKey(key), value);
     }
 
     private void rawsetHash(Object key, Object value) {
@@ -336,10 +336,25 @@ public final class LuaTableImpl implements LuaTable {
 
     public final Object rawget(Object key) {
         checkKey(key);
+        key = canonicalizeKey(key);
         if (key instanceof Double) {
             BaseLib.luaAssert(!((Double) key).isNaN(), "table index is NaN");
         }
         return rawgetHash(key);
+    }
+
+    /**
+     * Lua numbers are always represented as {@link Double} internally (see
+     * {@link LuaState#toDouble} / {@link LuaState#fromDouble}). Accepting any other boxed numeric
+     * type here would let a caller create a key (e.g. an {@link Integer} from an unboxed {@code
+     * int} literal passed through the {@code Object} overload) that can never match a lookup done
+     * with the canonical Double representation, silently making the entry unreachable.
+     */
+    private static Object canonicalizeKey(final Object key) {
+        if (key instanceof Number && !(key instanceof Double)) {
+            return LuaState.toDouble(((Number) key).doubleValue());
+        }
+        return key;
     }
 
     private Object rawgetHash(Object key) {

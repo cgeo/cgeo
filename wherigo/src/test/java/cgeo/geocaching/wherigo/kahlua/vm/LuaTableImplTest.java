@@ -33,4 +33,28 @@ public class LuaTableImplTest {
 
     }
 
+    @Test
+    public void numericKeysAreCanonicalizedRegardlessOfBoxedType() {
+        // Lua numbers are always Double internally; rawset(Object, Object) must coerce any other
+        // boxed Number (e.g. the Integer a plain "1" literal autoboxes to through that overload)
+        // to the same Double a lookup would use, or the entry becomes silently unreachable
+        final LuaTable table = new LuaTableImpl();
+
+        table.rawset(1, "set with a plain int literal");
+
+        assertThat(table.rawget(1.0)).isEqualTo("set with a plain int literal");
+        assertThat(table.rawget(Integer.valueOf(1))).isEqualTo("set with a plain int literal");
+        assertThat(table.rawget(Long.valueOf(1))).isEqualTo("set with a plain int literal");
+        assertThat(table.len()).isEqualTo(1);
+    }
+
+    @Test
+    public void numericKeySetWithLongIsReadableAsDouble() {
+        final LuaTable table = new LuaTableImpl();
+
+        table.rawset(Long.valueOf(42), "set with a Long key");
+
+        assertThat(table.rawget(42.0)).isEqualTo("set with a Long key");
+    }
+
 }

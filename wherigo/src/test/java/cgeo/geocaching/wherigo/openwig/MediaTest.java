@@ -26,13 +26,6 @@ public class MediaTest {
         return entry;
     }
 
-    /** Media#setItem looks up "Resources" entries with Double keys (new Double(i)); LuaTable's
-     * rawset(Object, Object) would otherwise autobox a plain int literal to Integer, which
-     * wouldn't match, silently leaving the list looking empty (len() == 0). */
-    private static void putResource(final LuaTable resources, final int index, final LuaTable entry) {
-        resources.rawset((double) index, entry);
-    }
-
     @Test
     public void idsAreAssignedSequentially() {
         Media.reset();
@@ -67,9 +60,9 @@ public class MediaTest {
     public void resourcesPicksLastNonFdlTypeLowercased() {
         final Media media = new Media();
         final LuaTable resources = new LuaTableImpl();
-        putResource(resources, 1, resourceEntry("PNG"));
-        putResource(resources, 2, resourceEntry("fdl"));
-        putResource(resources, 3, resourceEntry("WAV"));
+        resources.rawset(1, resourceEntry("PNG"));
+        resources.rawset(2, resourceEntry("fdl"));
+        resources.rawset(3, resourceEntry("WAV"));
 
         media.rawset("Resources", resources);
 
@@ -80,8 +73,8 @@ public class MediaTest {
     public void resourcesIgnoresTrailingFdlEntry() {
         final Media media = new Media();
         final LuaTable resources = new LuaTableImpl();
-        putResource(resources, 1, resourceEntry("JPG"));
-        putResource(resources, 2, resourceEntry("fdl"));
+        resources.rawset(1, resourceEntry("JPG"));
+        resources.rawset(2, resourceEntry("fdl"));
 
         media.rawset("Resources", resources);
 
@@ -92,7 +85,7 @@ public class MediaTest {
     public void jarFilenameCombinesIdAndType() {
         final Media media = new Media();
         final LuaTable resources = new LuaTableImpl();
-        putResource(resources, 1, resourceEntry("wav"));
+        resources.rawset(1, resourceEntry("wav"));
 
         media.rawset("Resources", resources);
 
