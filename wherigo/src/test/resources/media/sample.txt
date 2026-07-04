@@ -1,0 +1,2 @@
+This is a sample Wherigo cartridge text resource.
+Used by CartridgeFileTest.
