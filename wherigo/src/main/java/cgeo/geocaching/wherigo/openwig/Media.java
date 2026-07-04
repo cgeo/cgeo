@@ -6,6 +6,7 @@ package cgeo.geocaching.wherigo.openwig;
 
 import androidx.annotation.NonNull;
 
+import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 
 import java.io.DataInputStream;
@@ -29,27 +30,27 @@ public class Media extends EventTable {
         id = media_no++;
     }
 
-    public void serialize (DataOutputStream out) throws IOException {
+    public void serialize (final DataOutputStream out) throws IOException {
         out.writeInt(id);
         super.serialize(out);
     }
 
-    public void deserialize (DataInputStream in) throws IOException {
+    public void deserialize (final DataInputStream in) throws IOException {
         media_no--; // deserialize must be called directly after construction
         id = in.readInt();
         if (id >= media_no) media_no = id + 1;
         super.deserialize(in);
     }
 
-    protected void setItem (String key, Object value) {
+    protected void setItem (final String key, final Object value) {
         if ("AltText".equals(key)) {
             altText = (String)value;
         } else if ("Resources".equals(key)) {
-            LuaTable lt = (LuaTable)value;
-            int n = lt.len();
+            final LuaTable lt = (LuaTable)value;
+            final int n = lt.len();
             for (int i = 1; i <= n; i++) {
-                LuaTable res = (LuaTable)lt.rawget(new Double(i));
-                String t = (String)res.rawget("Type");
+                final LuaTable res = (LuaTable)lt.rawget(LuaState.toDouble(i));
+                final String t = (String)res.rawget("Type");
                 if ("fdl".equals(t)) continue;
                 type = t.toLowerCase(Locale.getDefault());
             }
@@ -66,7 +67,7 @@ public class Media extends EventTable {
             if ("wav".equals(type)) mime = "audio/x-wav";
             else if ("mp3".equals(type)) mime = "audio/mpeg";
             Engine.ui.playSound(Engine.mediaFile(this), mime);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             // meh
         }
     }

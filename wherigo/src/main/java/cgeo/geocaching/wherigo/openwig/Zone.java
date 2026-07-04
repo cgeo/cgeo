@@ -60,13 +60,13 @@ public class Zone extends Thing {
 
     private static final double DEFAULT_PROXIMITY = 1500.0;
 
-    protected void setItem (String key, Object value) {
+    protected void setItem (final String key, final Object value) {
         if ("Points".equals(key) && value != null) {
-            LuaTable lt = (LuaTable) value;
-            int n = lt.len();
+            final LuaTable lt = (LuaTable) value;
+            final int n = lt.len();
             points = new ZonePoint[n];
             for (int i = 1; i <= n; i++) {
-                ZonePoint zp = (ZonePoint) lt.rawget(new Double(i));
+                final ZonePoint zp = (ZonePoint) lt.rawget(LuaState.toDouble(i));
                 points[i-1] = zp;
             }
             if (active) {
@@ -75,7 +75,7 @@ public class Zone extends Thing {
                 //setcontain();
             }
         } else if ("Active".equals(key)) {
-            boolean a = LuaState.boolEval(value);
+            final boolean a = LuaState.boolEval(value);
             if (a != active) callEvent("OnZoneState", null);
             active = a;
             if (a) preprocess();
@@ -87,7 +87,7 @@ public class Zone extends Thing {
                 Engine.instance.player.leaveZone(this);
             }
         } else if ("Visible".equals(key)) {
-            boolean a = LuaState.boolEval(value);
+            final boolean a = LuaState.boolEval(value);
             if (a != visible) callEvent("OnZoneState", null);
             visible = a;
         } else if ("DistanceRange".equals(key) && value instanceof Double) {
@@ -100,7 +100,7 @@ public class Zone extends Thing {
             preprocess();
             proximityRange = LuaState.fromDouble(value);
         } else if ("ShowObjects".equals(key)) {
-            String v = (String)value;
+            final String v = (String)value;
             if ("Always".equals(v)) {
                 showObjects = S_ALWAYS;
             } else if ("OnProximity".equals(v)) {
@@ -178,8 +178,8 @@ public class Zone extends Thing {
         bbCenter.longitude = bbLeft + ((bbRight - bbLeft) / 2);
 
         // margins for proximity bounding box
-        double proximityX = ZonePoint.m2lat((proximityRange < DEFAULT_PROXIMITY) ? DEFAULT_PROXIMITY : proximityRange);
-        double proximityY = ZonePoint.m2lon(bbCenter.latitude, (proximityRange < DEFAULT_PROXIMITY) ? DEFAULT_PROXIMITY : proximityRange);
+        final double proximityX = ZonePoint.m2lat((proximityRange < DEFAULT_PROXIMITY) ? DEFAULT_PROXIMITY : proximityRange);
+        final double proximityY = ZonePoint.m2lon(bbCenter.latitude, (proximityRange < DEFAULT_PROXIMITY) ? DEFAULT_PROXIMITY : proximityRange);
         // and the box itself
         pbbTop = bbTop + proximityX; pbbBottom = bbBottom - proximityX;
         pbbLeft = bbLeft - proximityY; pbbRight = bbRight + proximityY;
@@ -188,9 +188,9 @@ public class Zone extends Thing {
         double dist = 0;
         double xx = 0, yy = 0;
         for (int i = 0; i < points.length; i++) {
-            double x = points[i].latitude - bbCenter.latitude;
-            double y = points[i].longitude - bbCenter.longitude;
-            double dd = x*x + y*y;
+            final double x = points[i].latitude - bbCenter.latitude;
+            final double y = points[i].longitude - bbCenter.longitude;
+            final double dd = x*x + y*y;
             if (dd > dist) {
                 xx = points[i].latitude; yy = points[i].longitude;
                 dist = dd;
@@ -199,7 +199,7 @@ public class Zone extends Thing {
         diameter = bbCenter.distance(xx, yy);
     }
 
-    public void walk (ZonePoint z) {
+    public void walk (final ZonePoint z) {
         if (!active || points == null || points.length == 0 || z == null) {
             return;
         }
@@ -212,12 +212,12 @@ public class Zone extends Thing {
             if (z.latitude > bbBottom && z.latitude < bbTop && z.longitude > bbLeft && z.longitude < bbRight && points.length > 2) {
                 // yes, we need precise inside evaluation
                 // the following code is adapted from http://www.visibone.com/inpoly/
-                double xt = z.latitude, yt = z.longitude;
+                final double xt = z.latitude, yt = z.longitude;
                 double ax = points[points.length - 1].latitude, ay = points[points.length - 1].longitude;
                 boolean inside = false;
                 for (int i = 0; i < points.length; i++) {
-                    double bx = points[i].latitude, by = points[i].longitude;
-                    double x1, y1, x2, y2;
+                    final double bx = points[i].latitude, by = points[i].longitude;
+                    final double x1, y1, x2, y2;
                     if (bx > ax) {
                         x1 = ax; y1 = ay;
                         x2 = bx; y2 = by;
@@ -250,14 +250,14 @@ public class Zone extends Thing {
                 double nx = ax, ny = ay;
                 double ndist = Double.POSITIVE_INFINITY;
                 for (int i = 0; i < points.length; i++) {
-                    double bx = points[i].latitude, by = points[i].longitude;
+                    final double bx = points[i].latitude, by = points[i].longitude;
                     // find distance to vertex (ax,ay)-(bx,by)
-                    double dot_ta = (z.latitude - ax) * (bx - ax) + (z.longitude - ay) * (by - ay);
+                    final double dot_ta = (z.latitude - ax) * (bx - ax) + (z.longitude - ay) * (by - ay);
                     if (dot_ta <= 0) {// IT IS OFF THE AVERTEX
                         x = ax;
                         y = ay;
                     } else {
-                        double dot_tb = (z.latitude - bx) * (ax - bx) + (z.longitude - by) * (ay - by);
+                        final double dot_tb = (z.latitude - bx) * (ax - bx) + (z.longitude - by) * (ay - by);
                         if (dot_tb <= 0) { // SEE IF b IS THE NEAREST POINT - ANGLE IS OBTUSE
                             x = bx;
                             y = by;
@@ -267,7 +267,7 @@ public class Zone extends Thing {
                             y = ay + ((by - ay) * dot_ta) / (dot_ta + dot_tb);
                         }
                     }
-                    double dd = (x - z.latitude) * (x - z.latitude) + (y - z.longitude) * (y - z.longitude);
+                    final double dd = (x - z.latitude) * (x - z.latitude) + (y - z.longitude) * (y - z.longitude);
                     if (dd < ndist) {
                         nx = x;
                         ny = y;
@@ -326,7 +326,7 @@ public class Zone extends Thing {
         int count = 0;
         Object key = null;
         while ((key = inventory.next(key)) != null) {
-            Object o = inventory.rawget(key);
+            final Object o = inventory.rawget(key);
             if (o instanceof Player) continue;
             if (!(o instanceof Thing)) continue;
             if (((Thing)o).isVisible()) count++;
@@ -334,30 +334,30 @@ public class Zone extends Thing {
         return count;
     }
 
-    public void collectThings (LuaTable c) {
+    public void collectThings (final LuaTable c) {
         // XXX does this have to be a LuaTable? maybe it does...
         if (!showThings()) return;
         Object key = null;
         while ((key = inventory.next(key)) != null) {
-            Object z = inventory.rawget(key);
+            final Object z = inventory.rawget(key);
             if (z instanceof Thing && ((Thing)z).isVisible())
                 TableLib.rawappend(c, z);
         }
     }
 
-    public boolean contains (Thing t) {
+    public boolean contains (final Thing t) {
         if (t == Engine.instance.player) {
             return contain == INSIDE;
         } else return super.contains(t);
     }
 
-    public void serialize (DataOutputStream out) throws IOException {
+    public void serialize (final DataOutputStream out) throws IOException {
         out.writeInt(contain);
         out.writeInt(ncontain);
         super.serialize(out);
     }
 
-    public void deserialize (DataInputStream in) throws IOException {
+    public void deserialize (final DataInputStream in) throws IOException {
         contain = in.readInt();
         ncontain = in.readInt();
         super.deserialize(in);
