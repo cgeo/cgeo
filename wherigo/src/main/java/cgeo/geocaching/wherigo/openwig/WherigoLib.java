@@ -116,6 +116,7 @@ public enum WherigoLib implements JavaFunction {
         final LuaTable jakedot = new LuaTableImpl();
         environment.rawset("JakeDot", jakedot);
         jakedot.rawset(ZTEXTBUNDLE.luaName, ZTEXTBUNDLE);
+        jakedot.rawset("HttpClient", HttpClientLib.createTable());
 
         final LuaTable pack = (LuaTable)environment.rawget("package");
         final LuaTable loaded = (LuaTable)pack.rawget("loaded");
@@ -133,6 +134,7 @@ public enum WherigoLib implements JavaFunction {
         Player.register();
         Timer.register();
         TextBundle.register();
+        HttpClientLib.register();
 
         Media.reset();
     }

@@ -10,6 +10,7 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 import cgeo.geocaching.wherigo.openwig.formats.Savegame;
+import cgeo.geocaching.wherigo.openwig.platform.HttpClient;
 import cgeo.geocaching.wherigo.openwig.platform.LocationService;
 import cgeo.geocaching.wherigo.openwig.platform.UI;
 
@@ -52,6 +53,8 @@ public class Engine implements Runnable {
     public static UI ui;
     /** reference to LocationService */
     public static LocationService gps;
+    /** reference to HttpClient implementation, used by the custom JakeDot.HttpClient Lua binding */
+    public static HttpClient http;
 
     /** reference to source file */
     public CartridgeFile gwcfile;
@@ -80,10 +83,11 @@ public class Engine implements Runnable {
     private Thread thread = null;
 
     /** creates a new global Engine instance */
-    public static Engine newInstance (final CartridgeFile cf, final OutputStream log, final UI ui, final LocationService service) throws IOException {
+    public static Engine newInstance (final CartridgeFile cf, final OutputStream log, final UI ui, final LocationService service, final HttpClient http) throws IOException {
         ui.debugMsg("Creating engine...\n");
         Engine.ui = ui;
         Engine.gps = service;
+        Engine.http = http;
         instance = new Engine(cf, log);
         return instance;
     }

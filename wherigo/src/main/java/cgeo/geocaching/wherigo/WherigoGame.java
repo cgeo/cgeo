@@ -195,7 +195,7 @@ public class WherigoGame implements UI {
 
             this.lastPlayedCGuid = getCGuid();
 
-            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
+            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get(), new WherigoHttpClient());
             if (loadGame) {
                 engine.restore();
             } else {
