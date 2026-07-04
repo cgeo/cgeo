@@ -12,17 +12,20 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
 /**
  * A cartridge-defined bundle of translated text, modelled on Java's own {@code ResourceBundle}
  * file convention: one Media resource per {@code .properties} file, keyed in the "Resources"
- * table by locale tag ("" for the language-neutral default, "de", "de_AT", etc.). GetText(key)
- * walks the same language_COUNTRY_variant -> language_COUNTRY -> language -> default fallback
- * chain ResourceBundle uses, falling back one level at a time whenever a key is missing from a
- * more specific file - not just when the whole file is missing.
+ * table by language tag ("" for the language-neutral default, "de", "de_AT", etc.). GetText(key,
+ * language) walks the same language_COUNTRY_variant -> language_COUNTRY -> language -> default
+ * fallback chain ResourceBundle uses, falling back one level at a time whenever a key is missing
+ * from a more specific file - not just when the whole file is missing.
+ * <p>
+ * The language tag is a caller-supplied parameter, not the device/JVM default locale: the
+ * cartridge (or whatever tracks the player's chosen language) decides what "current language"
+ * means and passes it in explicitly, so this class has no ambient locale dependency at all.
  */
 public class TextBundle extends EventTable {
 
@@ -33,7 +36,8 @@ public class TextBundle extends EventTable {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
             final TextBundle bundle = (TextBundle) callFrame.get(0);
             final String key = (String) callFrame.get(1);
-            callFrame.push(bundle.getText(key));
+            final String language = (String) callFrame.get(2);
+            callFrame.push(bundle.getText(key, language));
             return 1;
         }
     };
@@ -56,13 +60,14 @@ public class TextBundle extends EventTable {
         }
     }
 
-    /** Resolves key against the current default locale's fallback chain, or null if not found
-     * in any of the bundle's files. */
-    public String getText(final String key) {
+    /** Resolves key against language's fallback chain, or null if not found in any of the
+     * bundle's files. language is a caller-supplied tag such as "de_AT_tirol", "de_AT", "de", or
+     * null/"" for the language-neutral default - this class never consults the device locale. */
+    public String getText(final String key, final String language) {
         if (resources == null || key == null) {
             return null;
         }
-        for (final String tag : candidateTags(Locale.getDefault())) {
+        for (final String tag : candidateTags(language)) {
             final Object entry = resources.rawget(tag);
             if (entry instanceof Media) {
                 final String value = propertiesFor((Media) entry).getProperty(key);
@@ -74,22 +79,18 @@ public class TextBundle extends EventTable {
         return null;
     }
 
-    /** language_COUNTRY_variant -> language_COUNTRY -> language -> "" (default), omitting any
-     * level whose more-specific parts are empty - the common-case ResourceBundle cascade. */
-    static List<String> candidateTags(final Locale locale) {
-        final String language = locale.getLanguage();
-        final String country = locale.getCountry();
-        final String variant = locale.getVariant();
-
+    /** Peels underscore-delimited segments off the end of language one at a time - e.g.
+     * "de_AT_tirol" -> "de_AT_tirol", "de_AT", "de", "" - always ending in "" (default). */
+    static List<String> candidateTags(final String language) {
         final List<String> tags = new ArrayList<>(4);
-        if (!language.isEmpty() && !country.isEmpty() && !variant.isEmpty()) {
-            tags.add(language + "_" + country + "_" + variant);
-        }
-        if (!language.isEmpty() && !country.isEmpty()) {
-            tags.add(language + "_" + country);
-        }
-        if (!language.isEmpty()) {
-            tags.add(language);
+        String tag = language == null ? "" : language;
+        while (!tag.isEmpty()) {
+            tags.add(tag);
+            final int lastUnderscore = tag.lastIndexOf('_');
+            if (lastUnderscore < 0) {
+                break;
+            }
+            tag = tag.substring(0, lastUnderscore);
         }
         tags.add("");
         return tags;
