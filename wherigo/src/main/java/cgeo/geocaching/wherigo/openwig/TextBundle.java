@@ -135,8 +135,8 @@ public class TextBundle extends Media {
             props = new Properties();
             sections.put(tag, props);
         }
-        try {
-            props.load(new StringReader(buffer.toString()));
+        try (StringReader reader = new StringReader(buffer.toString())) {
+            props.load(reader);
         } catch (IOException e) {
             Engine.log("TEXT: failed to parse section [" + tag + "] of text bundle media " + id + ": " + e, Engine.LOG_WARN);
         }
