@@ -6,7 +6,6 @@ package cgeo.geocaching.wherigo.openwig;
 
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
@@ -23,35 +22,26 @@ public class EventTable implements LuaTable, Serializable {
 
     public LuaTable table = new LuaTableImpl();
 
-    private LuaTable metatable = new LuaTableImpl();
+    private static final JavaFunction TOSTRING = (callFrame, nArguments) -> {
+        final EventTable parent = (EventTable) callFrame.get(0);
+        callFrame.push(parent.luaTostring()); //it is ESSENTIAL not to call toString() here!
+        return 1;
+    };
+
+    private static final LuaTable METATABLE = new LuaTableImpl();
+    static {
+        METATABLE.rawset("__tostring", TOSTRING);
+    }
 
     private boolean isDeserializing = false;
 
-    private static class TostringJavaFunc implements JavaFunction {
-
-        public EventTable parent;
-
-        public TostringJavaFunc (EventTable parent) {
-            this.parent = parent;
-        }
-
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            callFrame.push(parent.luaTostring()); //it is ESSENTIAL not to call toString() here!
-            return 1;
-        }
-    }
-
     protected String luaTostring () { return "a ZObject instance"; }
 
-    public EventTable() {
-        metatable.rawset("__tostring", new TostringJavaFunc(this));
-    }
-
-    public void serialize (DataOutputStream out) throws IOException {
+    public void serialize (final DataOutputStream out) throws IOException {
         Engine.instance.savegame.storeValue(table, out);
     }
 
-    public void deserialize (DataInputStream in) throws IOException {
+    public void deserialize (final DataInputStream in) throws IOException {
         isDeserializing = true;
         Engine.instance.savegame.restoreValue(in, this);
         isDeserializing = false;
@@ -74,7 +64,7 @@ public class EventTable implements LuaTable, Serializable {
 
     public boolean isVisible() { return visible; }
 
-    public void setPosition(ZonePoint location) {
+    public void setPosition(final ZonePoint location) {
         position = location;
         table.rawset("ObjectLocation", location);
     }
@@ -83,7 +73,7 @@ public class EventTable implements LuaTable, Serializable {
         return position != null;
     }
 
-    protected void setItem(String key, Object value) {
+    protected void setItem(final String key, final Object value) {
         if ("Name".equals(key)) {
             name = BaseLib.rawTostring(value);
         } else if ("Description".equals(key)) {
@@ -101,7 +91,7 @@ public class EventTable implements LuaTable, Serializable {
         }
     }
 
-    protected Object getItem (String key) {
+    protected Object getItem (final String key) {
         if ("CurrentDistance".equals(key)) {
             if (isLocated()) return LuaState.toDouble(position.distance(Engine.instance.player.position));
             else return LuaState.toDouble(-1);
@@ -112,16 +102,16 @@ public class EventTable implements LuaTable, Serializable {
         } else return table.rawget(key);
     }
 
-    public void setTable (LuaTable table) {
+    public void setTable (final LuaTable table) {
         Object n = null;
         while ((n = table.next(n)) != null) {
-            Object val = table.rawget(n);
+            final Object val = table.rawget(n);
             rawset(n, val);
             //if (n instanceof String) setItem((String)n, val);
         }
     }
 
-    public void callEvent(String name, Object param) {
+    public void callEvent(final String name, final Object param) {
         /*
          workaround: suppress RuntimeException if callEvent() is called at deserialiation
          @see https://github.com/cgeo/openWIG/issues/8#issuecomment-612182631
@@ -132,19 +122,19 @@ public class EventTable implements LuaTable, Serializable {
         }
 
         try {
-            Object o = table.rawget(name);
+            final Object o = table.rawget(name);
             if (o instanceof LuaClosure) {
                 Engine.log("EVNT: " + toString() + "." + name + (param!=null ? " (" + param.toString() + ")" : ""), Engine.LOG_CALL);
-                LuaClosure event = (LuaClosure) o;
+                final LuaClosure event = (LuaClosure) o;
                 Engine.state.call(event, this, param, null);
                 Engine.log("EEND: " + toString() + "." + name, Engine.LOG_CALL);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             Engine.stacktrace(t);
         }
     }
 
-    public boolean hasEvent(String name) {
+    public boolean hasEvent(final String name) {
         return (table.rawget(name)) instanceof LuaClosure;
     }
 
@@ -159,7 +149,7 @@ public class EventTable implements LuaTable, Serializable {
             (et.name == null ? "(unnamed)" : et.name);
     }
 
-    public void rawset(Object key, Object value) {
+    public void rawset(final Object key, final Object value) {
         // TODO unify rawset/setItem
         if (key instanceof String) {
             setItem((String) key, value);
@@ -168,11 +158,11 @@ public class EventTable implements LuaTable, Serializable {
         Engine.log("PROP: " + toString() + "." + key + " is set to " + (value == null ? "nil" : value.toString()), Engine.LOG_PROP);
     }
 
-    public void setMetatable (LuaTable metatable) { }
+    public void setMetatable (final LuaTable metatable) { }
 
-    public LuaTable getMetatable () { return metatable; }
+    public LuaTable getMetatable () { return METATABLE; }
 
-    public Object rawget (Object key) {
+    public Object rawget (final Object key) {
         // TODO unify rawget/getItem
         if (key instanceof String)
             return getItem((String)key);
@@ -180,7 +170,7 @@ public class EventTable implements LuaTable, Serializable {
             return table.rawget(key);
     }
 
-    public Object next (Object key) { return table.next(key); }
+    public Object next (final Object key) { return table.next(key); }
 
     public int len () { return table.len(); }
 

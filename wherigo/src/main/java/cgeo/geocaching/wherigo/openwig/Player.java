@@ -8,19 +8,16 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
 public class Player extends Thing {
 
-    private LuaTableImpl insideOfZones = new LuaTableImpl();
+    private final LuaTableImpl insideOfZones = new LuaTableImpl();
 
-    private static JavaFunction refreshLocation = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Engine.instance.player.refreshLocation();
-            return 0;
-        }
+    private static final JavaFunction refreshLocation = (callFrame, nArguments) -> {
+        Engine.instance.player.refreshLocation();
+        return 0;
     };
 
     public static void register () {
@@ -34,11 +31,11 @@ public class Player extends Thing {
         setPosition(new ZonePoint(360,360,0));
     }
 
-    public void moveTo (Container c) {
+    public void moveTo (final Container c) {
         // do nothing
     }
 
-    public void enterZone (Zone z) {
+    public void enterZone (final Zone z) {
         container = z;
         if (!TableLib.contains(insideOfZones, z)) {
             TableLib.rawappend(insideOfZones, z);
@@ -49,16 +46,16 @@ public class Player extends Thing {
         }*/
     }
 
-    public void leaveZone (Zone z) {
+    public void leaveZone (final Zone z) {
         TableLib.removeItem(insideOfZones, z);
         if (insideOfZones.len() > 0)
-            container = (Container)insideOfZones.rawget(new Double(insideOfZones.len()));
+            container = (Container)insideOfZones.rawget(LuaState.toDouble(insideOfZones.len()));
         //TableLib.removeItem(z.inventory, this);
     }
 
     protected String luaTostring () { return "a Player instance"; }
 
-    public void deserialize (DataInputStream in)
+    public void deserialize (final DataInputStream in)
     throws IOException {
         super.deserialize(in);
         Engine.instance.player = this;
@@ -69,7 +66,7 @@ public class Player extends Thing {
         int count = 0;
         Object key = null;
         while ((key = inventory.next(key)) != null) {
-            Object o = inventory.rawget(key);
+            final Object o = inventory.rawget(key);
             if (o instanceof Thing && ((Thing)o).isVisible()) count++;
         }
         return count;
@@ -83,12 +80,12 @@ public class Player extends Thing {
         Engine.instance.cartridge.walk(position);
     }
 
-    public void rawset (Object key, Object value) {
+    public void rawset (final Object key, final Object value) {
         if ("ObjectLocation".equals(key)) return;
         super.rawset(key, value);
     }
 
-    public Object rawget (Object key) {
+    public Object rawget (final Object key) {
         if ("ObjectLocation".equals(key)) return ZonePoint.copy(position);
         return super.rawget(key);
     }
