@@ -2,12 +2,9 @@ package cgeo.geocaching.wherigo.openwig;
 
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,21 +13,27 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * A cartridge-defined bundle of translated text, modelled on Java's own {@code ResourceBundle}
- * file convention: one Media resource per {@code .properties} file, keyed in the "Resources"
- * table by language tag ("" for the language-neutral default, "de", "de_AT", etc.). GetText(key,
- * language) walks the same language_COUNTRY_variant -> language_COUNTRY -> language -> default
- * fallback chain ResourceBundle uses, falling back one level at a time whenever a key is missing
- * from a more specific file - not just when the whole file is missing.
+ * A single cartridge-authored text resource holding translations for several languages, modelled
+ * on Java's own {@code ResourceBundle} file convention but consolidated into one physical file
+ * instead of one-file-per-language: sections are delimited by a "[tag]" header line (empty tag,
+ * i.e. plain "[]", for the language-neutral default), each followed by ordinary
+ * {@code key=value} properties lines up to the next header or end of file. A file with no
+ * headers at all is treated entirely as the default section.
  * <p>
- * The language tag is a caller-supplied parameter, not the device/JVM default locale: the
- * cartridge (or whatever tracks the player's chosen language) decides what "current language"
- * means and passes it in explicitly, so this class has no ambient locale dependency at all.
+ * Extends {@link Media} to reuse its existing single-resource machinery (id/type, and the
+ * "Resources" setItem that assigns this object's one physical file) - authoring this is exactly
+ * like authoring any other ZMedia, just with GetText(key, language) added on top.
+ * <p>
+ * GetText(key, language) walks the same language_COUNTRY_variant -> language_COUNTRY ->
+ * language -> default fallback chain ResourceBundle uses, falling back one level at a time
+ * whenever a key is missing from a more specific section - not just when the whole section is
+ * missing. language is a caller-supplied tag, not the device/JVM default locale: the cartridge
+ * (or whatever tracks the player's chosen language) decides what "current language" means and
+ * passes it in explicitly, so this class has no ambient locale dependency at all.
  */
-public class TextBundle extends EventTable {
+public class TextBundle extends Media {
 
-    private LuaTable resources;
-    private final Map<Integer, Properties> parsedCache = new HashMap<>();
+    private Map<String, Properties> sections;
 
     private static JavaFunction getText = new JavaFunction() {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
@@ -52,25 +55,17 @@ public class TextBundle extends EventTable {
         table.rawset("GetText", getText);
     }
 
-    protected void setItem(final String key, final Object value) {
-        if ("Resources".equals(key) && value instanceof LuaTable) {
-            resources = (LuaTable) value;
-        } else {
-            super.setItem(key, value);
-        }
-    }
-
-    /** Resolves key against language's fallback chain, or null if not found in any of the
-     * bundle's files. language is a caller-supplied tag such as "de_AT_tirol", "de_AT", "de", or
-     * null/"" for the language-neutral default - this class never consults the device locale. */
+    /** Resolves key against language's fallback chain, or null if not found in any section of
+     * this bundle's file. */
     public String getText(final String key, final String language) {
-        if (resources == null || key == null) {
+        if (key == null) {
             return null;
         }
+        ensureParsed();
         for (final String tag : candidateTags(language)) {
-            final Object entry = resources.rawget(tag);
-            if (entry instanceof Media) {
-                final String value = propertiesFor((Media) entry).getProperty(key);
+            final Properties section = sections.get(tag);
+            if (section != null) {
+                final String value = section.getProperty(key);
                 if (value != null) {
                     return value;
                 }
@@ -96,29 +91,49 @@ public class TextBundle extends EventTable {
         return tags;
     }
 
-    private Properties propertiesFor(final Media media) {
-        final Integer cacheKey = media.id;
-        final Properties cached = parsedCache.get(cacheKey);
-        if (cached != null) {
-            return cached;
+    private void ensureParsed() {
+        if (sections != null) {
+            return;
         }
-        final Properties props = new Properties();
+        sections = new HashMap<>();
         try {
-            final byte[] data = readMediaBytes(media);
+            final byte[] data = readOwnBytes();
             if (data != null) {
-                try (Reader reader = new InputStreamReader(new ByteArrayInputStream(data), StandardCharsets.UTF_8)) {
-                    props.load(reader);
-                }
+                parseSections(new String(data, StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
-            Engine.log("TEXT: failed to load properties bundle media " + media.id + ": " + e, Engine.LOG_WARN);
+            Engine.log("TEXT: failed to load text bundle media " + id + ": " + e, Engine.LOG_WARN);
         }
-        parsedCache.put(cacheKey, props);
-        return props;
     }
 
-    /** Seam for tests: production code reads the resource from the cartridge via Engine. */
-    protected byte[] readMediaBytes(final Media media) throws IOException {
-        return Engine.mediaFile(media);
+    private void parseSections(final String text) {
+        String currentTag = "";
+        final StringBuilder buffer = new StringBuilder();
+        for (final String line : text.split("\n", -1)) {
+            final String trimmed = line.trim();
+            if (trimmed.length() >= 2 && trimmed.startsWith("[") && trimmed.endsWith("]")) {
+                flushSection(currentTag, buffer);
+                currentTag = trimmed.substring(1, trimmed.length() - 1).trim();
+                buffer.setLength(0);
+            } else {
+                buffer.append(line).append('\n');
+            }
+        }
+        flushSection(currentTag, buffer);
+    }
+
+    private void flushSection(final String tag, final StringBuilder buffer) {
+        final Properties props = new Properties();
+        try {
+            props.load(new StringReader(buffer.toString()));
+        } catch (IOException e) {
+            Engine.log("TEXT: failed to parse section [" + tag + "] of text bundle media " + id + ": " + e, Engine.LOG_WARN);
+        }
+        sections.put(tag, props);
+    }
+
+    /** Seam for tests: production code reads this bundle's own resource bytes via Engine. */
+    protected byte[] readOwnBytes() throws IOException {
+        return Engine.mediaFile(this);
     }
 }
