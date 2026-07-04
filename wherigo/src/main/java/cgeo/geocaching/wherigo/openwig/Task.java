@@ -25,21 +25,21 @@ public class Task extends EventTable {
 
     protected String luaTostring () { return "a ZTask instance"; }
 
-    protected void setItem (String key, Object value) {
+    protected void setItem (final String key, final Object value) {
         if ("Active".equals(key)) {
-            boolean a = LuaState.boolEval(value);
+            final boolean a = LuaState.boolEval(value);
             if (a != active) {
                 active = a;
                 callEvent("OnSetActive", null);
             }
         } else if ("Complete".equals(key)) {
-            boolean c = LuaState.boolEval(value);
+            final boolean c = LuaState.boolEval(value);
             if (c != complete) {
                 complete = c;
                 callEvent("OnSetComplete", null);
             }
         } else if ("CorrectState".equals(key) && value instanceof String) {
-            String v = (String)value;
+            final String v = (String)value;
             int s = DONE;
             if ("Incorrect".equalsIgnoreCase(v) || "NotCorrect".equalsIgnoreCase(v)) {
                 s = FAILED;

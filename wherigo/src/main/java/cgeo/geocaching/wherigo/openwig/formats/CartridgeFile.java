@@ -37,7 +37,7 @@ public class CartridgeFile {
     protected CartridgeFile() { }
 
     private boolean fileOk () throws IOException {
-        byte[] buf = new byte[CART_ID.length];
+        final byte[] buf = new byte[CART_ID.length];
         source.seek(0);
         source.readFully(buf);
         for (int i = 0; i < buf.length; i++) if (buf[i]!=CART_ID[i]) return false;
@@ -51,9 +51,9 @@ public class CartridgeFile {
      * @return a CartridgeFile object corresponding to source
      * @throws IOException
      */
-    public static CartridgeFile read (SeekableFile source, FileHandle savefile)
+    public static CartridgeFile read (final SeekableFile source, final FileHandle savefile)
     throws IOException {
-        CartridgeFile cf = new CartridgeFile();
+        final CartridgeFile cf = new CartridgeFile();
         cf.source = source;
 
         if (!cf.fileOk()) throw new IOException("invalid cartridge file");
@@ -105,8 +105,8 @@ public class CartridgeFile {
     /** Return the Lua bytecode for this cartridge. */
     public byte[] getBytecode () throws IOException {
         source.seek(offsets[0]);
-        int len = source.readInt();
-        byte[] ffile = new byte[len];
+        final int len = source.readInt();
+        final byte[] ffile = new byte[len];
         source.readFully(ffile);
         return ffile;
     }
@@ -115,7 +115,7 @@ public class CartridgeFile {
     private byte[] lastFile = null;
 
     /** Return data of the specified data file. */
-    public byte[] getFile (int oid) throws IOException {
+    public byte[] getFile (final int oid) throws IOException {
         if (oid == lastId) return lastFile;
 
         if (oid < 1) // invalid, apparently. or bytecode - lookie no touchie
@@ -130,12 +130,12 @@ public class CartridgeFile {
         if (id == -1) return null;
 
         source.seek(offsets[id]);
-        int a = source.read();
+        final int a = source.read();
         // id of resource. 0 means deleted
         if (a < 1) return null;
 
-        int ttype = source.readInt(); // we don't need this?
-        int len = source.readInt();
+        final int ttype = source.readInt(); // we don't need this?
+        final int len = source.readInt();
 
         // we found the data - release cache
         lastFile = null;
