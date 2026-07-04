@@ -9,7 +9,8 @@ import java.io.*;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 
 public class Thing extends Container {
@@ -18,46 +19,45 @@ public class Thing extends Container {
 
     protected String luaTostring () { return character ? "a ZCharacter instance" : "a ZItem instance"; }
 
-    public Vector actions = new Vector();
+    public List<Action> actions = new ArrayList<>();
 
     public Thing () {
         // for serialization
     }
 
-    public void serialize (DataOutputStream out) throws IOException {
+    public void serialize (final DataOutputStream out) throws IOException {
         out.writeBoolean(character);
         super.serialize(out);
     }
 
-    public void deserialize (DataInputStream in) throws IOException {
+    public void deserialize (final DataInputStream in) throws IOException {
         character = in.readBoolean();
         super.deserialize(in);
     }
 
-    public Thing(boolean character) {
+    public Thing(final boolean character) {
         this.character = character;
         table.rawset("Commands", new LuaTableImpl());
     }
 
-    protected void setItem (String key, Object value) {
+    protected void setItem (final String key, final Object value) {
         if ("Commands".equals(key)) {
             // clear out existing actions
-            for (int i = 0; i < actions.size(); i++) {
-                Action a = (Action)actions.elementAt(i);
+            for (final Action a : actions) {
                 a.dissociateFromTargets();
             }
-            actions.removeAllElements();
+            actions.clear();
 
             // add new actions
-            LuaTable lt = (LuaTable)value;
+            final LuaTable lt = (LuaTable)value;
             Object i = null;
             while ((i = lt.next(i)) != null) {
-                Action a = (Action)lt.rawget(i);
+                final Action a = (Action)lt.rawget(i);
                 //a.name = (String)i;
                 if (i instanceof Double) a.name = BaseLib.numberToString((Double)i);
                 else a.name = i.toString();
                 a.setActor(this);
-                actions.addElement(a);
+                actions.add(a);
                 a.associateWithTargets();
             }
         } else super.setItem(key, value);
@@ -65,8 +65,7 @@ public class Thing extends Container {
 
     public int visibleActions() {
         int count = 0;
-        for (int i = 0; i < actions.size(); i++) {
-            Action c = (Action)actions.elementAt(i);
+        for (final Action c : actions) {
             if (!c.isEnabled()) continue;
             if (c.getActor() == this || c.getActor().visibleToPlayer()) count++;
         }

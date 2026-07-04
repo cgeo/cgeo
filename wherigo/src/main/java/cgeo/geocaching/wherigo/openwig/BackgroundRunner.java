@@ -4,7 +4,8 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.util.Vector;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BackgroundRunner extends Thread {
 
@@ -16,7 +17,7 @@ public class BackgroundRunner extends Thread {
         start();
     }
 
-    public BackgroundRunner (boolean paused) {
+    public BackgroundRunner (final boolean paused) {
         this.paused = paused;
         start();
     }
@@ -36,11 +37,11 @@ public class BackgroundRunner extends Thread {
         return instance;
     }
 
-    private Vector queue = new Vector();
+    private final Queue<Runnable> queue = new ConcurrentLinkedQueue<>();
     private boolean end = false;
     private Runnable queueProcessedListener = null;
 
-    public void setQueueListener (Runnable r) {
+    public void setQueueListener (final Runnable r) {
         queueProcessedListener = r;
     }
 
@@ -48,17 +49,16 @@ public class BackgroundRunner extends Thread {
         boolean events;
         while (!end) {
             synchronized (this) { while (paused) {
-                try { wait(); } catch (InterruptedException e) { }
+                try { wait(); } catch (final InterruptedException e) { }
                 if (end) return;
             } }
             events = false;
-            while (!queue.isEmpty()) {
+            Runnable c;
+            while ((c = queue.poll()) != null) {
                 events = true;
-                Runnable c = (Runnable)queue.firstElement();
-                queue.removeElementAt(0);
                 try {
                     c.run();
-                } catch (Throwable t) {
+                } catch (final Throwable t) {
                     t.printStackTrace();
                 }
                 if (paused) break;
@@ -67,17 +67,17 @@ public class BackgroundRunner extends Thread {
             synchronized (this) {
                 if (!queue.isEmpty()) continue;
                 if (end) return;
-                try { wait(); } catch (InterruptedException e) { }
+                try { wait(); } catch (final InterruptedException e) { }
             }
         }
     }
 
-    synchronized public void perform (Runnable c) {
-        queue.addElement(c);
+    synchronized public void perform (final Runnable c) {
+        queue.offer(c);
         notify();
     }
 
-    public static void performTask (Runnable c) {
+    public static void performTask (final Runnable c) {
         getInstance().perform(c);
     }
 

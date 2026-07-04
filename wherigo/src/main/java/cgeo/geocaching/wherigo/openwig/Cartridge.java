@@ -5,20 +5,21 @@
 package cgeo.geocaching.wherigo.openwig;
 
 import java.io.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
 public class Cartridge extends EventTable {
-    public Vector zones = new Vector();
-    public Vector timers = new Vector();
+    public List<Zone> zones = new ArrayList<>();
+    public List<Timer> timers = new ArrayList<>();
 
-    public Vector things = new Vector();
-    public Vector universalActions = new Vector();
+    public List<Thing> things = new ArrayList<>();
+    public List<Action> universalActions = new ArrayList<>();
 
-    public Vector tasks = new Vector();
+    public List<Task> tasks = new ArrayList<>();
 
     public LuaTable allZObjects = new LuaTableImpl();
 
@@ -40,19 +41,16 @@ public class Cartridge extends EventTable {
     }
 
     public void walk (final ZonePoint zp) {
-        for (int i = 0; i < zones.size(); i++) {
-            final Zone z = (Zone)zones.elementAt(i);
+        for (final Zone z : zones) {
             z.walk(zp);
         }
     }
 
     public void tick () {
-        for (int i = 0; i < zones.size(); i++) {
-            final Zone z = (Zone)zones.elementAt(i);
+        for (final Zone z : zones) {
             z.tick();
         }
-        for (int i = 0; i < timers.size(); i++) {
-            final Timer t = (Timer)timers.elementAt(i);
+        for (final Timer t : timers) {
             t.updateRemaining();
         }
 
@@ -60,8 +58,7 @@ public class Cartridge extends EventTable {
 
     public int visibleZones () {
         int count = 0;
-        for (int i = 0; i < zones.size(); i++) {
-            final Zone z = (Zone)zones.elementAt(i);
+        for (final Zone z : zones) {
             if (z.isVisible()) count++;
         }
         return count;
@@ -69,8 +66,7 @@ public class Cartridge extends EventTable {
 
     public int visibleThings () {
         int count = 0;
-        for (int i = 0; i < zones.size(); i++) {
-            final Zone z = (Zone)zones.elementAt(i);
+        for (final Zone z : zones) {
             count += z.visibleThings();
         }
         return count;
@@ -78,8 +74,7 @@ public class Cartridge extends EventTable {
 
     public LuaTable currentThings () {
         final LuaTable ret = new LuaTableImpl();
-        for (int i = 0; i < zones.size(); i++) {
-            final Zone z = (Zone)zones.elementAt(i);
+        for (final Zone z : zones) {
             z.collectThings(ret);
         }
         return ret;
@@ -87,8 +82,7 @@ public class Cartridge extends EventTable {
 
     public int visibleUniversalActions () {
         int count = 0;
-        for (int i = 0; i < universalActions.size(); i++) {
-            final Action a = (Action)universalActions.elementAt(i);
+        for (final Action a : universalActions) {
             if (a.isEnabled() && a.getActor().visibleToPlayer()) count++;
         }
         return count;
@@ -96,8 +90,7 @@ public class Cartridge extends EventTable {
 
     public int visibleTasks () {
         int count = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            final Task a = (Task)tasks.elementAt(i);
+        for (final Task a : tasks) {
             if (a.isVisible()) count++;
         }
         return count;
@@ -109,10 +102,10 @@ public class Cartridge extends EventTable {
     }
 
     private void sortObject (final Object o) {
-        if (o instanceof Task) tasks.addElement(o);
-        else if (o instanceof Zone) zones.addElement(o);
-        else if (o instanceof Timer) timers.addElement(o);
-        else if (o instanceof Thing) things.addElement(o);
+        if (o instanceof Task) tasks.add((Task) o);
+        else if (o instanceof Zone) zones.add((Zone) o);
+        else if (o instanceof Timer) timers.add((Timer) o);
+        else if (o instanceof Thing) things.add((Thing) o);
     }
 
     public void deserialize (final DataInputStream in)

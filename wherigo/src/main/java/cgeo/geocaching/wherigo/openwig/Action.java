@@ -7,7 +7,8 @@ package cgeo.geocaching.wherigo.openwig;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Action extends EventTable {
 
@@ -16,7 +17,7 @@ public class Action extends EventTable {
     private boolean enabled;
 
     private Thing actor = null;
-    private Vector targets = new Vector();
+    private final List<Thing> targets = new ArrayList<>();
     private boolean universal;
 
     public String text;
@@ -26,7 +27,7 @@ public class Action extends EventTable {
         // for serialization
     }
 
-    public Action (LuaTable table) {
+    public Action (final LuaTable table) {
         this.table = table; // XXX deep copy needed?
         Object o = null;
         while ((o = table.next(o)) != null) {
@@ -37,37 +38,35 @@ public class Action extends EventTable {
     public void associateWithTargets () {
         if (!hasParameter()) return;
         if (isReciprocal()) {
-            for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing)targets.elementAt(j);
+            for (final Thing t : targets) {
                 if (!t.actions.contains(this))
-                    t.actions.addElement(this);
+                    t.actions.add(this);
             }
         }
         if (isUniversal() && !Engine.instance.cartridge.universalActions.contains(this)) {
-            Engine.instance.cartridge.universalActions.addElement(this);
+            Engine.instance.cartridge.universalActions.add(this);
         }
     }
 
     public void dissociateFromTargets () {
         if (!hasParameter()) return;
         if (isReciprocal()) {
-            for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing)targets.elementAt(j);
-                t.actions.removeElement(this);
+            for (final Thing t : targets) {
+                t.actions.remove(this);
             }
         }
         if (isUniversal()) {
-            Engine.instance.cartridge.universalActions.removeElement(this);
+            Engine.instance.cartridge.universalActions.remove(this);
         }
     }
 
     protected String luaTostring () { return "a ZCommand instance"; }
 
-    protected void setItem (String key, Object value) {
+    protected void setItem (final String key, final Object value) {
         if ("Text".equals(key)) {
             text = (String)value;
         } else if ("CmdWith".equals(key)) {
-            boolean np = LuaState.boolEval(value);
+            final boolean np = LuaState.boolEval(value);
             if (np != parameter) {
                 if (np) {
                     parameter = true;
@@ -86,10 +85,10 @@ public class Action extends EventTable {
             associateWithTargets();
         } else if ("WorksWithList".equals(key)) {
             dissociateFromTargets();
-            LuaTable lt = (LuaTable)value;
+            final LuaTable lt = (LuaTable)value;
             Object i = null;
             while ((i = lt.next(i)) != null) {
-                targets.addElement(lt.rawget(i));
+                targets.add((Thing)lt.rawget(i));
             }
             associateWithTargets();
         } else if ("MakeReciprocal".equals(key)) {
@@ -101,35 +100,35 @@ public class Action extends EventTable {
         }
     }
 
-    public int visibleTargets(Container where) {
+    public int visibleTargets(final Container where) {
         int count = 0;
         Object key = null;
         while ((key = where.inventory.next(key)) != null) {
-            Object o = where.inventory.rawget(key);
+            final Object o = where.inventory.rawget(key);
             if (!(o instanceof Thing)) continue;
-            Thing t = (Thing)o;
+            final Thing t = (Thing)o;
             if (t.isVisible() && (targets.contains(t) || isUniversal())) count++;
         }
         return count;
     }
 
-    public int targetsInside(LuaTable v) {
+    public int targetsInside(final LuaTable v) {
         int count = 0;
         Object key = null;
         while ((key = v.next(key)) != null) {
-            Object o = v.rawget(key);
+            final Object o = v.rawget(key);
             if (!(o instanceof Thing)) continue;
-            Thing t = (Thing)o;
+            final Thing t = (Thing)o;
             if (t.isVisible() && (targets.contains(t) || isUniversal())) count++;
         }
         return count;
     }
 
-    public boolean isTarget(Thing t) {
+    public boolean isTarget(final Thing t) {
         return targets.contains(t) || isUniversal();
     }
 
-    public Vector getTargets () {
+    public List<Thing> getTargets () {
         return targets;
     }
 
@@ -149,7 +148,7 @@ public class Action extends EventTable {
         return universal;
     }
 
-    public void setActor (Thing a) {
+    public void setActor (final Thing a) {
         actor = a;
     }
 
