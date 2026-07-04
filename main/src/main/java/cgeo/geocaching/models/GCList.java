@@ -17,8 +17,13 @@ public final class GCList implements Parcelable {
     private final long lastGenerationTime;
     private final int daysRemaining;
     private final boolean bookmarkList;
+    private final boolean ownUnpublished;
 
     public GCList(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList, final String shortGuid, final String pqHash) {
+        this(guid, name, caches, downloadable, lastGenerationTime, daysRemaining, bookmarkList, shortGuid, pqHash, false);
+    }
+
+    private GCList(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList, final String shortGuid, final String pqHash, final boolean ownUnpublished) {
         this.guid = guid;
         this.name = name;
         this.caches = caches;
@@ -28,6 +33,12 @@ public final class GCList implements Parcelable {
         this.bookmarkList = bookmarkList;
         this.shortGuid = shortGuid;
         this.pqHash = pqHash;
+        this.ownUnpublished = ownUnpublished;
+    }
+
+    /** Pseudo list which fetches the caches the user owns but which are not (yet, or no longer) published. */
+    public static GCList createOwnUnpublished(final String name) {
+        return new GCList(null, name, -1, false, 0, -1, false, null, null, true);
     }
 
     protected GCList(final Parcel in) {
@@ -40,6 +51,7 @@ public final class GCList implements Parcelable {
         lastGenerationTime = in.readLong();
         daysRemaining = in.readInt();
         bookmarkList = in.readInt() != 0;
+        ownUnpublished = in.readInt() != 0;
     }
 
     public static final Creator<GCList> CREATOR = new Creator<GCList>() {
@@ -60,6 +72,10 @@ public final class GCList implements Parcelable {
 
     public boolean isBookmarkList() {
         return bookmarkList;
+    }
+
+    public boolean isOwnUnpublished() {
+        return ownUnpublished;
     }
 
     public String getGuid() {
@@ -122,5 +138,6 @@ public final class GCList implements Parcelable {
         dest.writeLong(lastGenerationTime);
         dest.writeInt(daysRemaining);
         dest.writeInt(bookmarkList ? 1 : 0);
+        dest.writeInt(ownUnpublished ? 1 : 0);
     }
 }

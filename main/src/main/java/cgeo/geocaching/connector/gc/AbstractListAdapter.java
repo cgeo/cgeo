@@ -156,7 +156,7 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
         holder.binding.download.setVisibility(pocketQuery.isDownloadable() && !selectMode ? View.VISIBLE : View.GONE);
 
         // Now we are able to parse bookmark lists without download
-        holder.binding.cachelist.setVisibility((!pocketQuery.isBookmarkList() && StringUtils.isBlank(pocketQuery.getPqHash())) || selectMode ? View.GONE : View.VISIBLE);
+        holder.binding.cachelist.setVisibility((!pocketQuery.isBookmarkList() && !pocketQuery.isOwnUnpublished() && StringUtils.isBlank(pocketQuery.getPqHash())) || selectMode ? View.GONE : View.VISIBLE);
         holder.binding.label.setText(pocketQuery.getName());
         final String info = Formatter.formatPocketQueryInfo(pocketQuery);
         holder.binding.info.setVisibility(StringUtils.isNotBlank(info) ? View.VISIBLE : View.GONE);

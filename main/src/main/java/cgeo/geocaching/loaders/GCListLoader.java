@@ -23,7 +23,10 @@ public class GCListLoader extends AbstractSearchLoader {
         if (Settings.isGCConnectorActive()) {
             final SearchResult combinedResult = new SearchResult();
             for (final GCList gcList : gcLists) {
-                if (gcList.isBookmarkList()) {
+                if (gcList.isOwnUnpublished()) {
+                    final SearchResult ownUnpublishedResult = GCParser.searchOwnUnpublishedGeocaches();
+                    combinedResult.addSearchResult(ownUnpublishedResult);
+                } else if (gcList.isBookmarkList()) {
                     final SearchResult bmResult = GCParser.searchByBookmarkList(GCConnector.getInstance(), gcList.getGuid(), 0);
                     combinedResult.addSearchResult(bmResult);
                 } else {

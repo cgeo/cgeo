@@ -869,6 +869,43 @@ public final class GCParser {
     }
 
     /**
+     * Fetches the caches which are owned by the user but not (yet, or no longer) published. Shouldn't be called on main thread!
+     *
+     * @return A non-null search result (which might be empty) on success. Null on error.
+     */
+    @Nullable
+    @WorkerThread
+    public static SearchResult searchOwnUnpublishedGeocaches() {
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/my/geocaches.aspx", new Parameters("archived", "y"));
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchOwnUnpublishedGeocaches: No data from server");
+            return null;
+        }
+
+        try {
+            final Document document = Jsoup.parse(page);
+            final List<Geocache> caches = new ArrayList<>();
+            final Pattern geocodePattern = Pattern.compile(GCConstants.GEOCODE_PATTERN);
+
+            for (final Element link : document.select("p.WrapFix a[href*=/geocache/]")) {
+                final String geocode = TextUtils.getMatch(link.attr("href"), geocodePattern, null);
+                if (StringUtils.isBlank(geocode)) {
+                    continue;
+                }
+                final Geocache cache = new Geocache();
+                cache.setGeocode(geocode);
+                cache.setName(link.text());
+                caches.add(cache);
+            }
+
+            return new SearchResult(caches);
+        } catch (final Exception e) {
+            Log.e("GCParser.searchOwnUnpublishedGeocaches: error parsing html page", e);
+            return null;
+        }
+    }
+
+    /**
      * Creates a new bookmark list. Shouldn't be called on main thread!
      *
      * @return guid of the new list.

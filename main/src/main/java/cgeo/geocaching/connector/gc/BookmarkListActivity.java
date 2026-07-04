@@ -4,7 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
+import cgeo.geocaching.utils.LocalizationUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookmarkListActivity extends AbstractListActivity {
@@ -29,12 +31,18 @@ public class BookmarkListActivity extends AbstractListActivity {
 
     @Override
     protected List<GCList> getList() {
-        return GCParser.searchBookmarkLists();
+        final List<GCList> lists = new ArrayList<>();
+        lists.add(GCList.createOwnUnpublished(LocalizationUtils.getString(R.string.list_own_unpublished_caches)));
+        final List<GCList> bookmarkLists = GCParser.searchBookmarkLists();
+        if (bookmarkLists != null) {
+            lists.addAll(bookmarkLists);
+        }
+        return lists;
     }
 
     @Override
     boolean alwaysShow(final GCList list) {
-        return PocketQueryHistory.isNew(list);
+        return list.isOwnUnpublished() || PocketQueryHistory.isNew(list);
     }
 
     @Override
