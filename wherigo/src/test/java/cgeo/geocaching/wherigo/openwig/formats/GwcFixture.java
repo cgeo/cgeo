@@ -151,7 +151,7 @@ final class GwcFixture {
         }
 
         public long skip(final long what) {
-            pos += what;
+            pos += (int) what;
             return what;
         }
 
