@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.playservices.WherigoModuleInstaller;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
@@ -128,6 +129,13 @@ public class CgeoApplication extends Application {
         } catch (Exception ex) {
             Log.e("Exception", ex);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(final Context base) {
+        super.attachBaseContext(base);
+        // makes classes/resources of an already-installed :wherigo split available without an app restart
+        WherigoModuleInstaller.installSplitCompat(this);
     }
 
     public static CgeoApplication getInstance() {
