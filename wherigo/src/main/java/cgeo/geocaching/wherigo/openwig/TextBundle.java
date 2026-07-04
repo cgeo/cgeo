@@ -38,7 +38,7 @@ public class TextBundle extends Media {
 
     private Map<String, Properties> sections;
 
-    private static JavaFunction getText = new JavaFunction() {
+    private static final JavaFunction getText = new JavaFunction() {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
             BaseLib.luaAssert(nArguments >= 2, "insufficient arguments for GetText");
             final TextBundle bundle = (TextBundle) callFrame.get(0);
