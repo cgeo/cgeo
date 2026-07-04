@@ -339,6 +339,15 @@ androidComponentsExt.onVariants(androidComponentsExt.selector().withBuildType("n
     packaging.jniLibs.useLegacyPackaging.set(true)
 }
 
+// org.gradle.workers.max in gradle.properties only throttles Gradle's own Worker API; the Test
+// task forks its own separate JVMs (default maxParallelForks = CPU core count) with no heap cap
+// configured, so running several concurrently on a memory-constrained CI agent can exceed
+// available memory and get SIGKILLed by the OOM killer with no exception/stacktrace at all.
+tasks.withType(Test).configureEach {
+    maxParallelForks = 1
+    maxHeapSize = "1g"
+}
+
 dependencies {
     // desugaring of Java 8 APIs
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'

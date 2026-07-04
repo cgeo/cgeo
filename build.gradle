@@ -26,6 +26,11 @@ plugins {
     id 'com.github.spotbugs' version '6.1.13'
 }
 
+// TODO temporary: force full stacktraces on every failure (equivalent to always passing
+// --stacktrace) so CI runs we don't control the invocation of (e.g. the upstream Jenkins job)
+// still surface enough detail to diagnose build failures. Remove once diagnosed.
+gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL
+
 /*
  * Just run this script using "gradlew", and it will show you typical examples of how to use it.
  */
