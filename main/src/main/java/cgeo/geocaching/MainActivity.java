@@ -49,9 +49,10 @@ import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.WherigoAddonHelper;
+import cgeo.geocaching.utils.WherigoInfoBarProvider;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
-import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
@@ -507,6 +508,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
             resumeDisposables.add(LocationDataProvider.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
 
+            WherigoInfoBarProvider.attach(binding.wherigoInfoBar);
+
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
 
@@ -586,7 +589,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         } else if (id == R.id.menu_helpers) {
             startActivity(new Intent(this, UsefulAppsActivity.class));
         } else if (id == R.id.menu_wherigo) {
-            startActivity(new Intent(this, WherigoActivity.class));
+            WherigoAddonHelper.start(this);
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
             wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);

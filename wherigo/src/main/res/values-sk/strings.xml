@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="wherigo_download_progress_download_status">Stiahnuté %1$s/%2$s (%3$s %%)</string>
+</resources>

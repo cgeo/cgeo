@@ -920,7 +920,6 @@
     <string name="init_login_popup_not_logged_in">No estàs registrat</string>
     <string name="init_login_manual">Inici de sessió manual</string>
     <string name="init_login_manual_description">Espereu que aparegui un lloc web i inicieu la sessió al vostre compte. Espereu fins que s\'hagi completat l\'inici de sessió. A continuació, feu clic al botó \"D\'acord\" que hi ha a sota.</string>
-    <string name="init_login_manual_wig_description">Si us plau, inicieu la sessió al vostre compte de Geocaching.com i continueu per autoritzar l\'inici de sessió de Wherigo. Espereu fins que la pàgina d\'inici de Wherigo sigui visible i, a continuació, feu clic al botó \"D\'acord\" que hi ha a sota.</string>
     <string name="init_login_manual_error_nocookie">No s\'ha trobat cap token d\'autorització. Si us plau, feu l\'inici de sessió o \"cancel·leu\" l\'inici de sessió manual.</string>
     <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
     <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
@@ -1647,7 +1646,6 @@
     <string name="cachedetails_progress_unfavorite">S\'ha esborrat de preferits</string>
     <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartutxos Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consulteu la llista de catxés per obtenir més informació sobre els cartutxos.</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - no descarregat</string>
     <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
     <string name="cache_wherigo_credentials">Per poder jugar a aquest Wherigo amb el reproductor intern de c:geo, primer heu d\'autoritzar el servei geocaching.com. Toqueu el botó de la dreta per anar a la configuració.</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
@@ -1780,7 +1778,6 @@
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
-    <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <!-- Projection -->
     <string name="projection_type_none">Sense projecció</string>
     <string name="projection_type_bearing">Direcció</string>
@@ -2713,59 +2710,9 @@
     <string name="wherigo_sound_mute">Silencia</string>
     <string name="wherigo_sound_unmute">Activa el so</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprèn el diàleg en pausa</string>
-    <string name="wherigo_dialog_pause_info">Reprèn el diàleg a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_currently_playing">Actualment jugant</string>
-    <string name="wherigo_locate_on_center">Situar al centre</string>
     <string name="wherigo_revoke_fixed_location">Revoca la ubicació fixa</string>
-    <string name="wherigo_thingtype_location">Ubicacions</string>
-    <string name="wherigo_thingtype_inventory">Inventari</string>
-    <string name="wherigo_thingtype_item">Podeu veure</string>
-    <string name="wherigo_thingtype_task">Tasques</string>
-    <string name="wherigo_thingtype_thing">Objectes</string>
-    <string name="wherigo_author">Autor</string>
-    <string name="wherigo_zone_inside">interior</string>
-    <string name="wherigo_zone_near">prop</string>
-    <string name="wherigo_zone_navigate_compass">Brúixola al centre</string>
-    <string name="wherigo_zone_copy_coordinates">Copia les coordenades del centre</string>
-    <string name="wherigo_choose_cartridge">Trieu el cartutx</string>
-    <string name="wherigo_choose_new_loadgame">Trieu un joc o un joc nou per carregar</string>
-    <string name="wherigo_choose_savegame_slot">Trieu una ranura on desar</string>
-    <string name="wherigo_savegame_name_empty">&lt;New game&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Desat automàtic</string>
-    <string name="wherigo_savegame_name_numeric">Ranura %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Empty slot&gt;</string>
-    <string name="wherigo_download_title">Descarrega el cartutx</string>
-    <string name="wherigo_download_message">El cartutx amb CGUID \"%s\" no està disponible al vostre dispositiu. El vols descarregar?</string>
-    <string name="wherigo_download_successful_title">Descàrrega correcta</string>
-    <string name="wherigo_download_failed_title">La descàrrega ha fallat</string>
-    <string name="wherigo_download_failed_message">La baixada del cartutx amb el CGUID \"%1$s\" ha fallat: %2$s</string>
-    <string name="wherigo_manual_download_title">Descarrega manualment el cartutx</string>
-    <string name="wherigo_manual_download_cguid_label">Introduïu el CGUID aquí</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: eliminació del fitxer sobrant</string>
-    <string name="wherigo_download_progress_login">Iniciant sessió…</string>
-    <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
-    <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
-    <string name="wherigo_error_title">Informe del problema Wherigo</string>
-    <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
-    <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>
-    <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
-    <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
-    <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Realment voleu suprimir la partida desada \"%2$s\" del cartutx \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Desa el progrés del joc Wherigo</string>
-    <string name="wherigo_save_game_message">Desa el progrés del joc per al cartutx \"%1$s\" a \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Introduïu el nom (opcional)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Avís: en continuar, sobreescriureu la partida desada existent de \"%1$s\"</string>
-    <string name="wherigo_dialog_push_page">Pàgina %1$s/%2$s</string>
-    <string name="wherigo_notification_service">c:geo està executant un Wherigo…</string>
-    <string name="wherigo_notification_waiting">\"%s\" t\'està esperant!</string>
     <string name="wherigo_bar_resume_dialog">Reprendre</string>
-    <string name="wherigo_toast_check_game">Wherigo: comproveu si hi ha canvis al vostre joc</string>
-    <string name="wherigo_toast_check_things">Wherigo: comproveu si hi ha canvis al vostre %s</string>
     <string name="wherigo_otm_shortcuts_title">Dreceres del Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Si voleu utilitzar c:geo Wherigo Player amb regularitat, penseu a crear un botó d\'inici ràpid o un element de menú personalitzat a Configuració -&gt; Aparença</string>
     <!-- default actions in dialogs -->
@@ -2783,7 +2730,6 @@
     <string name="expand">Expandir</string>
     <string name="close">Tanca</string>
     <string name="delete">Suprimeix</string>
-    <string name="play">Juga</string>
     <string name="copy" tools:ignore="PrivateResource">Còpia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>

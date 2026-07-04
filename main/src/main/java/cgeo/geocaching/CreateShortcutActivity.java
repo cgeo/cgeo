@@ -11,7 +11,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.wherigo.WherigoActivity;
+import cgeo.geocaching.utils.WherigoAddonHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,7 +96,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.sc_search, new Intent(this, SearchActivity.class), ID_FRAGMENT_SEARCH));
         shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class), ID_FRAGMENT_GO_TO));
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this), ID_FRAGMENT_HISTORY));
-        shortcuts.add(new Shortcut(R.string.wherigo_player, R.drawable.sc_wherigo, new Intent(this, WherigoActivity.class), ID_FRAGMENT_WHERIGO));
+        shortcuts.add(new Shortcut(R.string.wherigo_player, R.drawable.sc_wherigo, WherigoAddonHelper.buildIntent(this), ID_FRAGMENT_WHERIGO));
 
         final SimpleDialog.ItemSelectModel<Shortcut> model = new SimpleDialog.ItemSelectModel<>();
         model

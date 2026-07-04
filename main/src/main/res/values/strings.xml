@@ -424,7 +424,6 @@
     <string name="location_no_permission">Warning: no permission to get location</string>
     <string name="location_only_coarse_permission">Warning: only approximate location permission</string>
 
-
     <!-- standard menu -->
     <string name="menu_about">About c:geo</string>
     <string name="menu_helpers">Utility programs</string>
@@ -689,7 +688,6 @@
     <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_contexttype_nestedfilter_title">Nested Filter</string>
 
-
     <string name="cache_filter_include">Include</string>
     <string name="cache_filter_exclude">Exclude</string>
 
@@ -896,7 +894,6 @@
 
     <string name="cache_filter_reference_based_on">Based on: %1$s</string>
 
-
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Changelog</string>
@@ -1073,7 +1070,6 @@
     <string name="init_login_popup_not_logged_in">Not logged in</string>
     <string name="init_login_manual">Manual Login</string>
     <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'Ok\' button below.</string>
-    <string name="init_login_manual_wig_description">Please log into your Geocaching.com account and continue to authorize the Wherigo login. Wait until the Wherigo homepage is visible, then click the \'Ok\' button below.</string>
     <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
@@ -1496,7 +1492,6 @@
     <string name="persistablefolder_pickfolder">Select folder</string>
     <string name="persistablefolder_usedefault">Use default</string>
 
-
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
@@ -1870,7 +1865,6 @@
 
     <string name="cache_multiple_wherigo_cartridges_title">Multiple Wherigo cartridges</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consult cache listing for further information about the cartridges.</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - not downloaded</string>
     <string name="cache_wherigo_start">Download and play this Wherigo using c:geo\'s internal player</string>
     <string name="cache_wherigo_credentials">In order to play this Wherigo using c:geo\'s internal player you need to authorize against geocaching.com service first. Tap on the button on the right to go to configuration.</string>
     <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
@@ -1972,7 +1966,6 @@
     <string name="popup_more">More details</string>
     <string name="map_fragment_swipe_hint_text">Swipe to open details view</string>
 
-
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coordinates</string>
@@ -2024,7 +2017,6 @@
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
 
     <!-- Projection -->
     <string name="projection_type_none">No projection</string>
@@ -3073,6 +3065,7 @@
 
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_addon_not_installed">The Wherigo Player is a separate installable module and is not installed on this device.</string>
     <string name="wherigo_controls">Controls</string>
     <string name="wherigo_controls_cartridgelist_hint">View cartridges and start game</string>
     <string name="wherigo_controls_savegame_hint">Save progress of a running game</string>
@@ -3091,72 +3084,11 @@
     <string name="wherigo_sound_mute">Mute</string>
     <string name="wherigo_sound_unmute">Unmute</string>
 
-
     <string name="wherigo_controls_resume_paused_dialog">Resume paused dialog</string>
-    <string name="wherigo_dialog_pause_info">Resume dialog in Wherigo Player by tapping \"Resume paused dialog\"</string>
     <string name="wherigo_currently_playing">Currently playing</string>
-    <string name="wherigo_locate_on_center">Locate on center</string>
     <string name="wherigo_revoke_fixed_location">Revoke fixed location</string>
 
-    <string name="wherigo_thingtype_location">Locations</string>
-    <string name="wherigo_thingtype_inventory">Inventory</string>
-    <string name="wherigo_thingtype_item">You see</string>
-    <string name="wherigo_thingtype_task">Tasks</string>
-    <string name="wherigo_thingtype_thing">Things</string>
-
-    <string name="wherigo_author">Author</string>
-    <string name="wherigo_zone_inside">inside</string>
-    <string name="wherigo_zone_near">near</string>
-    <string name="wherigo_zone_navigate_compass">Compass to center</string>
-    <string name="wherigo_zone_copy_coordinates">Copy center coordinates</string>
-
-    <string name="wherigo_choose_cartridge">Choose cartridge</string>
-    <string name="wherigo_choose_new_loadgame">Choose new game or game to load</string>
-    <string name="wherigo_choose_savegame_slot">Choose a save slot</string>
-
-    <string name="wherigo_savegame_name_empty">&lt;New game&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Autosave</string>
-    <string name="wherigo_savegame_name_numeric">Slot %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Empty slot&gt;</string>
-
-    <string name="wherigo_download_title">Download cartridge</string>
-    <string name="wherigo_download_message">Cartridge with CGUID \"%s\" is not available on your device. Do you want to download it?</string>
-    <string name="wherigo_download_successful_title">Download successful</string>
-    <string name="wherigo_download_failed_title">Download failed</string>
-    <string name="wherigo_download_failed_message">Download of cartridge with CGUID \"%1$s\" failed: %2$s</string>
-    <string name="wherigo_manual_download_title">Manually download cartridge</string>
-    <string name="wherigo_manual_download_cguid_label">Enter CGUID here</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: deleting leftover file</string>
-    <string name="wherigo_download_progress_login">Logging in…</string>
-    <string name="wherigo_download_progress_started">Download started</string>
-    <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Please log in to www.wherigo.com and accept their terms and conditions first</string>
-
-    <string name="wherigo_error_title">Wherigo Problem report</string>
-    <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
-    <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```\nYou may contact the author of the cartridge [here](%2$s)</string>
-    <string name="wherigo_error_toast">Wherigo Engine reported an error. Open bug dialog for details.</string>
-
-    <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
-    <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Do you really want to delete savegame \"%2$s\" of cartridge \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Save Wherigo game progress</string>
-    <string name="wherigo_save_game_message">Save your game progress for cartridge \"%1$s\" into \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Enter name (optional)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Warning: by proceeding you will overwrite existing savegame from \"%1$s\"</string>
-
-    <string name="wherigo_dialog_push_page">Page %1$s / %2$s</string>
-
-    <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
-    <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
     <string name="wherigo_bar_resume_dialog">Resume</string>
-
-    <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
-    <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
-
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
@@ -3176,7 +3108,6 @@
     <string name="expand">Expand</string>
     <string name="close">Close</string>
     <string name="delete">Delete</string>
-    <string name="play">Play</string>
     <string name="copy" tools:ignore="PrivateResource">Copy</string>
 
     <!-- Multi-Selections -->

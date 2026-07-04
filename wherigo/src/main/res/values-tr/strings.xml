@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="play">Oynat</string>
+    <string name="wherigo_author">Sahibi</string>
+    <string name="wherigo_thingtype_inventory">Envanter</string>
+    <string name="wherigo_thingtype_item">Gördünüz</string>
+    <string name="wherigo_thingtype_location">Konumlar</string>
+    <string name="wherigo_thingtype_task">Görevler</string>
+</resources>

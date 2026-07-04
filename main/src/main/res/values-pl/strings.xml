@@ -931,7 +931,6 @@
     <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
     <string name="init_login_manual">Logowanie ręczne</string>
     <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \"OK\" poniżej.</string>
-    <string name="init_login_manual_wig_description">Zaloguj się na swoje konto Geocaching.com i kontynuuj autoryzację logowania Wherigo. Poczekaj, aż strona główna Wherigo będzie widoczna, a następnie kliknij przycisk \"OK\" poniżej.</string>
     <string name="init_login_manual_error_nocookie">Nie znaleziono tokenu autoryzacyjnego. Proszę wykonać logowanie lub \'anuluj\' manualne logowanie.</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
@@ -1676,7 +1675,6 @@
     <string name="cachedetails_progress_unfavorite">Usunięto z ulubionych</string>
     <string name="cache_multiple_wherigo_cartridges_title">Wiele kartridży Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Aby uzyskać więcej informacji na temat kartridży, należy zapoznać się z opisem skrytki.</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
     <string name="cache_wherigo_start">Pobierz i zagraj w Wherigo za pomocą wewnętrznego odtwarzacza c:geo</string>
     <string name="cache_wherigo_credentials">Aby grać w Wherigo za pomocą wewnętrznego odtwarzacza w c:geo, musisz najpierw dokonać autoryzacji w serwisie geocaching.com. Dotknij przycisku po prawej stronie, aby przejść do konfiguracji.</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -1811,7 +1809,6 @@
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
-    <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <!-- Projection -->
     <string name="projection_type_none">Brak projekcji</string>
     <string name="projection_type_bearing">Kierunek</string>
@@ -2773,59 +2770,9 @@
     <string name="wherigo_sound_mute">Wycisz</string>
     <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
-    <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie „Wznów wstrzymane okno dialogowe”</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
-    <string name="wherigo_locate_on_center">Umieść na środku</string>
     <string name="wherigo_revoke_fixed_location">Unieważnij stałą lokalizację</string>
-    <string name="wherigo_thingtype_location">Lokalizacje</string>
-    <string name="wherigo_thingtype_inventory">Inwentarz</string>
-    <string name="wherigo_thingtype_item">Widzisz</string>
-    <string name="wherigo_thingtype_task">Zadania</string>
-    <string name="wherigo_thingtype_thing">Rzeczy</string>
-    <string name="wherigo_author">Autor</string>
-    <string name="wherigo_zone_inside">wewnątrz</string>
-    <string name="wherigo_zone_near">blisko</string>
-    <string name="wherigo_zone_navigate_compass">Kompas do środka</string>
-    <string name="wherigo_zone_copy_coordinates">Kopiuj współrzędne środkowe</string>
-    <string name="wherigo_choose_cartridge">Wybierz kartridż</string>
-    <string name="wherigo_choose_new_loadgame">Wybierz nową grę lub grę do załadowania</string>
-    <string name="wherigo_choose_savegame_slot">Wybierz slot do zapisu</string>
-    <string name="wherigo_savegame_name_empty">&lt;Nowa gra&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Autozapis</string>
-    <string name="wherigo_savegame_name_numeric">Slot %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Pusty slot&gt;</string>
-    <string name="wherigo_download_title">Pobierz kartridż</string>
-    <string name="wherigo_download_message">Kartridż z CGUID \"%s\" nie jest dostępny na Twoim urządzeniu. Czy chcesz go pobrać?</string>
-    <string name="wherigo_download_successful_title">Pobrano pomyślnie</string>
-    <string name="wherigo_download_failed_title">Pobieranie nie powiodło się</string>
-    <string name="wherigo_download_failed_message">Pobieranie wkładu z CGUID \"%1$s\" nie powiodło się: %2$s</string>
-    <string name="wherigo_manual_download_title">Ręczne pobieranie wkładu</string>
-    <string name="wherigo_manual_download_cguid_label">Tutaj wprowadź CGUID</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: usuwanie pozostałego pliku</string>
-    <string name="wherigo_download_progress_login">Logowanie…</string>
-    <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
-    <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Zaloguj się najpierw na www.wherigo.com i zaakceptuj ich warunki i postanowienia</string>
-    <string name="wherigo_error_title">Raport problemu Wherigo</string>
-    <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
-    <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>
-    <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
-    <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
-    <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Czy na pewno chcesz usunąć kartridż \"%1$s\", w tym zapisane gry (%2$s)?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Usuń zapisany stan gry Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Czy na pewno chcesz usunąć zapisaną grę \"%2$s\" z kartridża \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Zapisz postęp gry Wherigo</string>
-    <string name="wherigo_save_game_message">Zapisz swój postęp w grze dla kartridża \"%1$s\" w \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Wprowadź nazwę (opcjonalnie)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Ostrzeżenie: kontynuując nadpiszesz istniejący zapis gry z \"%1$s\"</string>
-    <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
-    <string name="wherigo_notification_service">c:geo uruchamia Wherigo…</string>
-    <string name="wherigo_notification_waiting">\"%s\" czeka na Ciebie!</string>
     <string name="wherigo_bar_resume_dialog">Wznów</string>
-    <string name="wherigo_toast_check_game">Wherigo: sprawdź swoją grę pod kątem zmian</string>
-    <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
     <string name="wherigo_otm_shortcuts_title">Skróty Odtwarzacza Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać Odtwarzacz Wherigo w c:geo rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
     <!-- default actions in dialogs -->
@@ -2843,7 +2790,6 @@
     <string name="expand">Rozszerz</string>
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
-    <string name="play">Graj</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>

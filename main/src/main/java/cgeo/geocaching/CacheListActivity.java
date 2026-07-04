@@ -97,6 +97,7 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
+import cgeo.geocaching.utils.WherigoInfoBarProvider;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -509,6 +510,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
         setAppIconAsUpIndicator(true);
+
+        WherigoInfoBarProvider.attach(findViewById(R.id.wherigo_info_bar));
 
         // save current position
         final LastPositionHelper lastPosition = new LastPositionHelper(this);

@@ -902,7 +902,6 @@
     <string name="init_login_popup_not_logged_in">Inte inloggad</string>
     <string name="init_login_manual">Manuell inloggning</string>
     <string name="init_login_manual_description">Vänta på att en webbplats ska visas och logga in på ditt konto. Vänta tills inloggningen har slutförts. Klicka sedan på \"ok\"-knappen nedan.</string>
-    <string name="init_login_manual_wig_description">Logga in på ditt Geocaching.com-konto och fortsätt att godkänna Wherigo-inloggningen. Vänta tills Wherigo hemsida är synlig, klicka sedan på \"OK\" knappen nedan.</string>
     <string name="init_login_manual_error_nocookie">Ingen auktoriseringstoken hittades. Vänligen utför inloggning eller \'avbryt\' manuell inloggning.</string>
     <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
     <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
@@ -1626,7 +1625,6 @@
     <string name="cachedetails_progress_unwatch">Borttagen från bevakningslistan</string>
     <string name="cachedetails_progress_favorite">Lades till i favoriter</string>
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -1759,7 +1757,6 @@
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
-    <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <!-- Projection -->
     <string name="projection_type_none">Ingen projektion</string>
     <string name="projection_type_bearing">Bäring</string>
@@ -2679,24 +2676,7 @@
     <string name="wherigo_sound_mute">Tysta</string>
     <string name="wherigo_sound_unmute">Sätt på ljud</string>
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
-    <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
-    <string name="wherigo_thingtype_location">Platser</string>
-    <string name="wherigo_thingtype_task">Uppgifter</string>
-    <string name="wherigo_thingtype_thing">Saker</string>
-    <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
-    <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
-    <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
-    <string name="wherigo_error_title">Wherigo Problemrapport</string>
-    <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
-    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
-    <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
-    <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
     <string name="wherigo_bar_resume_dialog">Återuppta</string>
-    <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
-    <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
     <!-- default actions in dialogs -->
@@ -2714,7 +2694,6 @@
     <string name="expand">Expandera</string>
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
-    <string name="play">Spela</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiera</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>

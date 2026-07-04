@@ -1563,7 +1563,6 @@
     <string name="cachedetails_progress_favorite">Lisätty suosikkeihin</string>
     <string name="cachedetails_progress_unfavorite">Poistettu suosikeista</string>
     <string name="cache_multiple_wherigo_cartridges_title">Useita Wherigo-kasetteja</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - ei ladattu</string>
     <string name="cache_wherigo_start">Lataa ja toista tämä Wherigo käyttämällä c:geon sisäistä toistinta</string>
     <string name="cache_wherigo_credentials">Jotta voit pelata tätä Wherigoa käyttäen c:geon sisäistä soitinta, sinun täytyy valtuuttaa geocaching.comin palvelut ensin. Paina oikealla olevaa painiketta siirtyäksesi asetuksiin.</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
@@ -1690,7 +1689,6 @@
     <string name="waypoint_coordinate_formats_plain">Yksinkertainen</string>
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
-    <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
     <!-- Projection -->
     <string name="projection_type_none">Ei projektiota</string>
     <string name="projection_type_bearing">Suunta</string>
@@ -2581,58 +2579,8 @@
     <string name="wherigo_sound_mute">Mykistä</string>
     <string name="wherigo_sound_unmute">Poista mykistys</string>
     <string name="wherigo_controls_resume_paused_dialog">Jatka keskeytettyä dialogia</string>
-    <string name="wherigo_dialog_pause_info">Jatka dialogia Wherigo -toistimessa napauttamalla \"Jatka keskeytettyä dialogia\"</string>
     <string name="wherigo_currently_playing">Toistetaan nyt</string>
-    <string name="wherigo_locate_on_center">Paikanna keskelle</string>
-    <string name="wherigo_thingtype_location">Sijainnit</string>
-    <string name="wherigo_thingtype_inventory">Tavaraluettelo</string>
-    <string name="wherigo_thingtype_item">Näet</string>
-    <string name="wherigo_thingtype_task">Tehtävät</string>
-    <string name="wherigo_thingtype_thing">Asiat</string>
-    <string name="wherigo_author">Tekijä</string>
-    <string name="wherigo_zone_inside">sisällä</string>
-    <string name="wherigo_zone_near">lähellä</string>
-    <string name="wherigo_zone_navigate_compass">Kompassi keskipisteeseen</string>
-    <string name="wherigo_zone_copy_coordinates">Kopioi keskustan koordinaatit</string>
-    <string name="wherigo_choose_cartridge">Valitse kasetti</string>
-    <string name="wherigo_choose_new_loadgame">Valitse uusi peli tai ladattava peli</string>
-    <string name="wherigo_choose_savegame_slot">Valitse tallennuspaikka</string>
-    <string name="wherigo_savegame_name_empty">&lt;Uusi peli&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Automaattinen tallennus</string>
-    <string name="wherigo_savegame_name_numeric">Paikka %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Tyhjä paikka&gt;</string>
-    <string name="wherigo_download_title">Lataa kasetti</string>
-    <string name="wherigo_download_message">Kasetti CGUID:llä \"%s\" ei ole saatavilla laitteellasi. Haluatko ladata sen?</string>
-    <string name="wherigo_download_successful_title">Lataus onnistui</string>
-    <string name="wherigo_download_failed_title">Lataus epäonnistui</string>
-    <string name="wherigo_download_failed_message">Kasetin lataus CGUID:llä \"%1$s\" epäonnistui:
-%2$s</string>
-    <string name="wherigo_manual_download_title">Lataa kasetti manuaalisesti</string>
-    <string name="wherigo_manual_download_cguid_label">Syötä CGUID tähän</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: poistetaan jäljellä oleva tiedosto</string>
-    <string name="wherigo_download_progress_login">Kirjaudutaan sisään…</string>
-    <string name="wherigo_download_progress_started">Lataus aloitettiin</string>
-    <string name="wherigo_download_progress_download_status">Ladattu %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Kirjaudu sisään osoitteeseen www.wherigo.com ja hyväksy niiden ehdot ensin</string>
-    <string name="wherigo_error_title">Wherigon ongelmaraportti</string>
-    <string name="wherigo_error_game_noerror">Wherigo Engine ei ole ilmoittanut virheitä.</string>
-    <string name="wherigo_error_toast">Wherigo Engine raportoi virheen. Avaa vikavalintaikkuna saadaksesi lisätietoja.</string>
-    <string name="wherigo_confirm_stop_running_game_title">Lopeta Wherigo-pelin suorittaminen</string>
-    <string name="wherigo_confirm_stop_running_game_message">Peli on käynnissä \"%s\". Haluatko pysäyttää tämän pelin?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Poista Wherigo -kasetti</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Haluatko varmasti poistaa kasetin \"%1$s\" mukaan lukien %2$s tallennettua peliä?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Poista Wherigo -tallennus</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Haluatko varmasti poistaa tallennuksen \"%2$s\" kasetista \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Tallenna Wherigo-pelin edistys</string>
-    <string name="wherigo_save_game_message">Tallenna pelisi edistyminen kasetin \"%1$s\" sisään \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Anna nimi (valinnainen)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Varoitus: jatkamalla korvaat olemassa olevan tallennuspelin \"%1$s\"</string>
-    <string name="wherigo_dialog_push_page">Sivu %1$s / %2$s</string>
-    <string name="wherigo_notification_service">c:geo on suorittaa Wherigoa…</string>
-    <string name="wherigo_notification_waiting">\"%s\" odottaa sinua!</string>
     <string name="wherigo_bar_resume_dialog">Jatka</string>
-    <string name="wherigo_toast_check_game">Wherigo: tarkista pelisi muutosten varalta</string>
-    <string name="wherigo_toast_check_things">Wherigo: tarkista %s muutosten varalta</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo -toistimen pikakomennot</string>
     <string name="wherigo_otm_shortcuts_message">Jos haluat käyttää c:geon Wherigo -toistinta säännöllisesti, harkitse nopean käynnistyksen painikkeen tai mukautetun valikkokuvakkeen luomista kohdassa Asetukset -&gt; Ulkonäkö</string>
     <!-- default actions in dialogs -->
@@ -2650,7 +2598,6 @@
     <string name="expand">Laajenna</string>
     <string name="close">Sulje</string>
     <string name="delete">Poista</string>
-    <string name="play">Toista</string>
     <string name="copy" tools:ignore="PrivateResource">Kopioi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Valitse kaikki</string>

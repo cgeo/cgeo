@@ -7,7 +7,7 @@
     android:layout_height="fill_parent"
     tools:context=".MainActivity">
 
-    <cgeo.geocaching.wherigo.WherigoInfoBarView
+    <FrameLayout
         android:id="@+id/wherigo_info_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

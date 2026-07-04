@@ -2057,11 +2057,6 @@
     <!-- Wherigo Player -->
     <string name="wherigo_sound_mute">Sessiz</string>
     <string name="wherigo_sound_unmute">Sesi aç</string>
-    <string name="wherigo_thingtype_location">Konumlar</string>
-    <string name="wherigo_thingtype_inventory">Envanter</string>
-    <string name="wherigo_thingtype_item">Gördünüz</string>
-    <string name="wherigo_thingtype_task">Görevler</string>
-    <string name="wherigo_author">Sahibi</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
@@ -2077,7 +2072,6 @@
     <string name="expand">Genişlet</string>
     <string name="close">Kapat</string>
     <string name="delete">Sil</string>
-    <string name="play">Oynat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Tümünü Seç</string>
     <string name="multiselect_selectvisible">Görünenleri Seç</string>

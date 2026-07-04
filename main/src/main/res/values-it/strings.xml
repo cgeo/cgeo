@@ -1615,7 +1615,6 @@
     <string name="cachedetails_progress_unfavorite">Rimosso dai preferiti</string>
     <string name="cache_multiple_wherigo_cartridges_title">Cartucce multiple di Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consultare la descrizione del cache per ulteriori informazioni sulle cartucce.</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - non scaricato</string>
     <string name="cache_wherigo_start">Scarica e riproduci questo Wherigo usando il lettore interno di c:geo</string>
     <string name="cache_wherigo_credentials">Per giocare a questo Wherigo usando il motore interno di c:geo è prima è necessario autorizzare il servizio nei confronti di geocaching.com. Tocca il pulsante a destra per andare alla configurazione.</string>
     <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
@@ -1747,7 +1746,6 @@
     <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
-    <string name="copied_to_clipboard">Copiato negli appunti</string>
     <!-- Projection -->
     <string name="projection_type_none">Nessuna proiezione</string>
     <string name="projection_type_bearing">Direzione</string>
@@ -2668,59 +2666,9 @@
     <string name="wherigo_sound_mute">Silenzioso</string>
     <string name="wherigo_sound_unmute">Riattiva l\'audio</string>
     <string name="wherigo_controls_resume_paused_dialog">Riprendi la finestra in pausa</string>
-    <string name="wherigo_dialog_pause_info">Riprendi la finestra di dialogo in Wherigo toccando \"Riprendi la finestra in pausa\"</string>
     <string name="wherigo_currently_playing">Attualmente in corso</string>
-    <string name="wherigo_locate_on_center">Posiziona al centro</string>
     <string name="wherigo_revoke_fixed_location">Revoca posizione fissa</string>
-    <string name="wherigo_thingtype_location">Posizioni</string>
-    <string name="wherigo_thingtype_inventory">Inventario</string>
-    <string name="wherigo_thingtype_item">Vedi</string>
-    <string name="wherigo_thingtype_task">Compiti</string>
-    <string name="wherigo_thingtype_thing">Oggetti</string>
-    <string name="wherigo_author">Autore</string>
-    <string name="wherigo_zone_inside">all\'interno</string>
-    <string name="wherigo_zone_near">vicino</string>
-    <string name="wherigo_zone_navigate_compass">Bussola al centro</string>
-    <string name="wherigo_zone_copy_coordinates">Copia le coordinate centrali</string>
-    <string name="wherigo_choose_cartridge">Scegli Cartuccia</string>
-    <string name="wherigo_choose_new_loadgame">Inizia una nuova partita o scegli una partita da caricare</string>
-    <string name="wherigo_choose_savegame_slot">Scegli uno slot di salvataggio</string>
-    <string name="wherigo_savegame_name_empty">&lt;Nuova partita&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Salvataggio automatico</string>
-    <string name="wherigo_savegame_name_numeric">Slot %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Nuovo slot&gt;</string>
-    <string name="wherigo_download_title">Scarica cartuccia</string>
-    <string name="wherigo_download_message">La cartuccia con CGUID \"%s\" non è disponibile sul tuo dispositivo. Vuoi scaricarla?</string>
-    <string name="wherigo_download_successful_title">Download completato</string>
-    <string name="wherigo_download_failed_title">Scaricamento fallito</string>
-    <string name="wherigo_download_failed_message">Download della cartuccia con CGUID \"%1$s\" non riuscito: %2$s</string>
-    <string name="wherigo_manual_download_title">Scarica manualmente la cartuccia</string>
-    <string name="wherigo_manual_download_cguid_label">Inserisci qui il CGUID</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: eliminazione del file rimanente</string>
-    <string name="wherigo_download_progress_login">Accesso in corso…</string>
-    <string name="wherigo_download_progress_started">Scaricamento avviato</string>
-    <string name="wherigo_download_progress_download_status">Scaricato %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Effettua prima il login su www.wherigo.com e accetta i termini e le condizioni</string>
-    <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
-    <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
-    <string name="wherigo_error_game_error">Errore segnalato dal gestore di Wherigo:\n\n```\n%1$s\n```\nPuoi contattare l\'autore della cartuccia [qui](%2$s)</string>
-    <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
-    <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
-    <string name="wherigo_confirm_stop_running_game_message">Un gioco è attualmente in esecuzione per \"%s\". Vuoi interrompere questo gioco?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Elimina Cartuccia Wherigo</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Vuoi davvero eliminare la cartuccia \"%1$s\" inclusi %2$s giochi salvati?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Elimina salvataggio Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Vuoi davvero eliminare il salvataggio \"%2$s\" della cartuccia \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Salva i progressi del gioco Wherigo</string>
-    <string name="wherigo_save_game_message">Salva i tuoi progressi nel gioco per la cartuccia \"%1$s\" in \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Inserisci nome (opzionale)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Attenzione: procedendo sovrascriverai il salvataggio esistente da \"%1$s\"</string>
-    <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
-    <string name="wherigo_notification_service">c:geo sta eseguendo un Wherigo…</string>
-    <string name="wherigo_notification_waiting">\"%s\" ti sta aspettando!</string>
     <string name="wherigo_bar_resume_dialog">Riprendi</string>
-    <string name="wherigo_toast_check_game">Wherigo: controlla le modifiche al tuo gioco</string>
-    <string name="wherigo_toast_check_things">Wherigo: controlla il tuo %s per le modifiche</string>
     <string name="wherigo_otm_shortcuts_title">Scorciatoie Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Se desideri utilizzare il gestore c:geo Wherigo regolarmente, considera la creazione di un pulsante di avvio rapido o di un menu personalizzato Impostazioni -&gt; Aspetto</string>
     <!-- default actions in dialogs -->
@@ -2738,7 +2686,6 @@
     <string name="expand">Espandi</string>
     <string name="close">Chiudi</string>
     <string name="delete">Cancella</string>
-    <string name="play">Gioca</string>
     <string name="copy" tools:ignore="PrivateResource">Copia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>

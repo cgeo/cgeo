@@ -14,7 +14,7 @@
         android:layout_height="@dimen/actionbar_height"
         android:visibility="gone" />
 
-    <cgeo.geocaching.wherigo.WherigoInfoBarView
+    <FrameLayout
         android:id="@+id/wherigo_info_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

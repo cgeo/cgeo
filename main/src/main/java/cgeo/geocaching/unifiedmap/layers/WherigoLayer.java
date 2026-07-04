@@ -6,16 +6,16 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
-import cgeo.geocaching.wherigo.WherigoGame;
-import cgeo.geocaching.wherigo.WherigoUtils;
-import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.graphics.Color;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Renders the running Wherigo game's zones on the shared map, sourced from
+ * {@link WherigoZoneProvider} so this stays entirely on the base-app side of the module boundary.
+ */
 public class WherigoLayer {
 
     private static final WherigoLayer INSTANCE = new WherigoLayer();
@@ -30,11 +30,7 @@ public class WherigoLayer {
 
     private WherigoLayer() {
         //singleton
-        WherigoGame.get().addListener(type -> {
-            if (type == WherigoGame.NotifyType.START || type == WherigoGame.NotifyType.REFRESH || type == WherigoGame.NotifyType.END) {
-                refresh();
-            }
-        });
+        WherigoZoneProvider.addChangeListener(this::refresh);
     }
 
     public void setLayer(final GeoItemLayer<String> layer) {
@@ -67,8 +63,7 @@ public class WherigoLayer {
 
     private void addAllWherigoElements() {
         if (this.currentLayer != null) {
-            final List<Zone> zones = WherigoGame.get().getZones();
-            for (Zone zone : zones) {
+            for (WherigoZoneInfo zone : WherigoZoneProvider.getZones()) {
                 final GeoItem zoneItem = zoneToGeoItem(zone);
                 if (zoneItem != null) {
                     this.currentLayer.put(keyForZone(zone), zoneItem);
@@ -77,17 +72,12 @@ public class WherigoLayer {
         }
     }
 
-    private String keyForZone(final Zone zone) {
+    private String keyForZone(final WherigoZoneInfo zone) {
         return WHERIGO_KEY_PRAEFIX + zone.name;
     }
 
-    private GeoItem zoneToGeoItem(final Zone zone) {
-        if (zone == null || (!WherigoGame.get().isDebugModeForCartridge() && !WherigoUtils.isVisibleToPlayer(zone))) {
-            return null;
-        }
-
-        final int color = WherigoUtils.isVisibleToPlayer(zone) ? Color.RED : (zone.isActive() ? Color.YELLOW : Color.GRAY);
-        final List<Geopoint> geopoints = WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points));
+    private GeoItem zoneToGeoItem(final WherigoZoneInfo zone) {
+        final List<Geopoint> geopoints = zone.points;
         if (geopoints.isEmpty()) {
             return null;
         }
@@ -103,13 +93,11 @@ public class WherigoLayer {
         }
 
         return builder.setStyle(GeoStyle.builder()
-            .setStrokeColor(color)
-            .setFillColor(Color.argb(128, Color.red(color), Color.green(color), Color.blue(color)))
+            .setStrokeColor(zone.color)
+            .setFillColor(Color.argb(128, Color.red(zone.color), Color.green(zone.color), Color.blue(zone.color)))
             .setStrokeWidth(5f)
             .build()
         ).setIcon(GeoIcon.builder().setText(zone.name).build()).build();
     }
-
-
 
 }

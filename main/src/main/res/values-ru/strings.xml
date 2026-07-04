@@ -922,7 +922,6 @@
     <string name="init_login_popup_not_logged_in">Вход не выполнен</string>
     <string name="init_login_manual">Вход вручную</string>
     <string name="init_login_manual_description">Пожалуйста, дождитесь появления веб-сайта и войдите в свою учетную запись. Дождитесь завершения входа в систему. Затем нажмите кнопку \"Ок\" ниже.</string>
-    <string name="init_login_manual_wig_description">Пожалуйста, войдите в свою учетную запись Geocaching.com и авторизуйтесь под логином Wherigo. Подождите, пока не откроется домашняя страница Wherigo, затем нажмите кнопку \"Ок\" ниже.</string>
     <string name="init_login_manual_error_nocookie">Не найден токен авторизации. Пожалуйста, выполните вход в систему или \"отмените\" вход вручную.</string>
     <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
     <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
@@ -1661,7 +1660,6 @@
     <string name="cachedetails_progress_unfavorite">Удалено из избранного</string>
     <string name="cache_multiple_wherigo_cartridges_title">Несколько картриджей Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Обратитесь к списку тайников для получения дополнительной информации о картриджах.</string>
-    <string name="cache_wherigo_cartridge_not_downloaded">%s - не загружен</string>
     <string name="cache_wherigo_start">Скачать и запустить этот Wherigo с помощью встроенного в c: geo проигрывателя</string>
     <string name="cache_wherigo_credentials">Чтобы играть в эту игру, используя внутренний проигрыватель c:geo, вам сначала необходимо авторизоваться на geocaching.com. Нажмите на кнопку справа, чтобы перейти к настройке.</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
@@ -1796,7 +1794,6 @@
     <string name="waypoint_coordinate_formats_plain">Текст</string>
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
-    <string name="copied_to_clipboard">Скопировано в буфер</string>
     <!-- Projection -->
     <string name="projection_type_none">Нет проекции</string>
     <string name="projection_type_bearing">Азимут</string>
@@ -2747,59 +2744,9 @@
     <string name="wherigo_sound_mute">Без звука</string>
     <string name="wherigo_sound_unmute">Вкл. звук</string>
     <string name="wherigo_controls_resume_paused_dialog">Возобновить приостановленный диалог</string>
-    <string name="wherigo_dialog_pause_info">Возобновить диалог в Wherigo Player, нажав «Возобновить приостановленный диалог»</string>
     <string name="wherigo_currently_playing">Идёт игра</string>
-    <string name="wherigo_locate_on_center">Расположение по центру</string>
     <string name="wherigo_revoke_fixed_location">Отменить фиксированное местоположение</string>
-    <string name="wherigo_thingtype_location">Локации</string>
-    <string name="wherigo_thingtype_inventory">Инвентарь</string>
-    <string name="wherigo_thingtype_item">Вы видите</string>
-    <string name="wherigo_thingtype_task">Задачи</string>
-    <string name="wherigo_thingtype_thing">Вещи</string>
-    <string name="wherigo_author">Автор</string>
-    <string name="wherigo_zone_inside">внутри</string>
-    <string name="wherigo_zone_near">рядом</string>
-    <string name="wherigo_zone_navigate_compass">Направление компаса к центру</string>
-    <string name="wherigo_zone_copy_coordinates">Копировать координаты центра</string>
-    <string name="wherigo_choose_cartridge">Выберите картридж</string>
-    <string name="wherigo_choose_new_loadgame">Выберите новую игру или игру для загрузки</string>
-    <string name="wherigo_choose_savegame_slot">Выберите слот для сохранения</string>
-    <string name="wherigo_savegame_name_empty">&lt;Новая игра&gt;</string>
-    <string name="wherigo_savegame_name_autosave">Автосохранение</string>
-    <string name="wherigo_savegame_name_numeric">Слот %s</string>
-    <string name="wherigo_savegame_date_empty">&lt;Пустой слот&gt;</string>
-    <string name="wherigo_download_title">Скачать картридж</string>
-    <string name="wherigo_download_message">Картридж с CGUID \"%s\" недоступен на вашем устройстве. Вы хотите его загрузить?</string>
-    <string name="wherigo_download_successful_title">Загрузка прошла успешно</string>
-    <string name="wherigo_download_failed_title">Загрузка не удалась</string>
-    <string name="wherigo_download_failed_message">Загрузка картриджа с CGUID \"%1$s\" не удалась: %2$s</string>
-    <string name="wherigo_manual_download_title">Загрузка картриджа вручную</string>
-    <string name="wherigo_manual_download_cguid_label">Введите CGUID здесь</string>
-    <string name="wherigo_download_delete_leftover_toast">Wherigo: удаление оставшегося файла</string>
-    <string name="wherigo_download_progress_login">Вход в систему…</string>
-    <string name="wherigo_download_progress_started">Загрузка началась</string>
-    <string name="wherigo_download_progress_download_status">Скачано %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_download_accept_eula">Пожалуйста, войдите на сайт www.wherigo.com и сначала примите их правила и условия</string>
-    <string name="wherigo_error_title">Отчет по проблеме Wherigo</string>
-    <string name="wherigo_error_game_noerror">Движок Wherigo не сообщает об ошибках.</string>
-    <string name="wherigo_error_game_error">Движок Wherigo сообщает об ошибке:\n\n```\n%1$s\n```\nВы можете связаться с автором картриджа [здесь](%2$s)</string>
-    <string name="wherigo_error_toast">Движок Wherigo сообщил об ошибке. Откройте диалоговое окно с ошибкой для получения подробной информации.</string>
-    <string name="wherigo_confirm_stop_running_game_title">Остановка Игры Wherigo</string>
-    <string name="wherigo_confirm_stop_running_game_message">В данный момент игра запущена для \"%s\". Вы хотите остановить эту игру?</string>
-    <string name="wherigo_confirm_delete_cartridge_title">Удалить Картридж Wherigo</string>
-    <string name="wherigo_confirm_delete_cartridge_message">Вы действительно хотите удалить картридж \"%1$s\", включая %2$s сохраненные игры?</string>
-    <string name="wherigo_confirm_delete_savegame_slot_title">Удалить сохраненную игру Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Вы действительно хотите удалить сохраненную игру \"%2$s\" картриджа \"%1$s\"?</string>
-    <string name="wherigo_save_game_title">Сохранить прогресс игры Wherigo</string>
-    <string name="wherigo_save_game_message">Сохранить прогресс игры для картриджа \"%1$s\" в \"%2$s\".</string>
-    <string name="wherigo_save_game_custom_name_label">Введите имя (необязательно)</string>
-    <string name="wherigo_save_game_warning_overwrite_slot">Предупреждение: продолжая, вы перезапишете существующую сохраненную игру из \"%1$s\"</string>
-    <string name="wherigo_dialog_push_page">Страница %1$s / %2$s</string>
-    <string name="wherigo_notification_service">c:geo управляет Wherigo…</string>
-    <string name="wherigo_notification_waiting">\"%s\" ждет вас!</string>
     <string name="wherigo_bar_resume_dialog">Продолжить</string>
-    <string name="wherigo_toast_check_game">Wherigo: проверьте свою игру на наличие изменений</string>
-    <string name="wherigo_toast_check_things">Wherigo: проверьте %s на наличие изменений</string>
     <string name="wherigo_otm_shortcuts_title">Ярлыки Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Если вы хотите регулярно использовать Wherigo Player в c:geo, подумайте о создании кнопки быстрого запуска или пользовательского пункта меню для него в разделе Настройки -&gt; Оформление</string>
     <!-- default actions in dialogs -->
@@ -2817,7 +2764,6 @@
     <string name="expand">Раскрыть</string>
     <string name="close">Закрыть</string>
     <string name="delete">Удалить</string>
-    <string name="play">Играть</string>
     <string name="copy" tools:ignore="PrivateResource">Копировать</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
