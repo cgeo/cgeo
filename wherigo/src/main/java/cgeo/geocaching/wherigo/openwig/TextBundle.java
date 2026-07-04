@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo.openwig;
 
+import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 
@@ -22,7 +23,9 @@ import java.util.Properties;
  * <p>
  * Extends {@link Media} to reuse its existing single-resource machinery (id/type, and the
  * "Resources" setItem that assigns this object's one physical file) - authoring this is exactly
- * like authoring any other ZMedia, just with GetText(key, language) added on top.
+ * like authoring any other ZMedia, just with GetText(key, language) added on top. This is a
+ * custom, non-standard extension, so it's constructed as JakeDot.ZTextBundle() rather than under
+ * the real Wherigo.* namespace (see WherigoLib#register).
  * <p>
  * GetText(key, language) walks the same language_COUNTRY_variant -> language_COUNTRY ->
  * language -> default fallback chain ResourceBundle uses, falling back one level at a time
@@ -37,9 +40,10 @@ public class TextBundle extends Media {
 
     private static JavaFunction getText = new JavaFunction() {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
+            BaseLib.luaAssert(nArguments >= 2, "insufficient arguments for GetText");
             final TextBundle bundle = (TextBundle) callFrame.get(0);
             final String key = (String) callFrame.get(1);
-            final String language = (String) callFrame.get(2);
+            final String language = nArguments >= 3 ? (String) callFrame.get(2) : null;
             callFrame.push(bundle.getText(key, language));
             return 1;
         }
@@ -107,9 +111,12 @@ public class TextBundle extends Media {
     }
 
     private void parseSections(final String text) {
+        // a UTF-8 BOM (common in Windows-authored files) would otherwise stay attached to the
+        // first line, making "[]"/"[de]" fail the startsWith("[") check
+        final String cleaned = text.startsWith("\uFEFF") ? text.substring(1) : text;
         String currentTag = "";
         final StringBuilder buffer = new StringBuilder();
-        for (final String line : text.split("\n", -1)) {
+        for (final String line : cleaned.split("\n", -1)) {
             final String trimmed = line.trim();
             if (trimmed.length() >= 2 && trimmed.startsWith("[") && trimmed.endsWith("]")) {
                 flushSection(currentTag, buffer);
@@ -123,13 +130,16 @@ public class TextBundle extends Media {
     }
 
     private void flushSection(final String tag, final StringBuilder buffer) {
-        final Properties props = new Properties();
+        Properties props = sections.get(tag);
+        if (props == null) {
+            props = new Properties();
+            sections.put(tag, props);
+        }
         try {
             props.load(new StringReader(buffer.toString()));
         } catch (IOException e) {
             Engine.log("TEXT: failed to parse section [" + tag + "] of text bundle media " + id + ": " + e, Engine.LOG_WARN);
         }
-        sections.put(tag, props);
     }
 
     /** Seam for tests: production code reads this bundle's own resource bytes via Engine. */

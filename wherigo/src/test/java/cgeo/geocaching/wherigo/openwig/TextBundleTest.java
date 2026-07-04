@@ -133,6 +133,34 @@ public class TextBundleTest {
     }
 
     @Test
+    public void utf8BomAtStartOfFileDoesNotBreakFirstSectionHeader() {
+        final TestableTextBundle bundle = bundleWithText(
+            "\uFEFF[]\n" +
+            "greeting=Hello\n" +
+            "[de]\n" +
+            "greeting=Hallo\n"
+        );
+
+        assertThat(bundle.getText("greeting", "fr")).isEqualTo("Hello");
+        assertThat(bundle.getText("greeting", "de")).isEqualTo("Hallo");
+    }
+
+    @Test
+    public void sectionAppearingTwiceMergesRatherThanOverwrites() {
+        final TestableTextBundle bundle = bundleWithText(
+            "[de]\n" +
+            "greeting=Hallo\n" +
+            "[fr]\n" +
+            "greeting=Bonjour\n" +
+            "[de]\n" +
+            "farewell=Auf Wiedersehen\n"
+        );
+
+        assertThat(bundle.getText("greeting", "de")).isEqualTo("Hallo");
+        assertThat(bundle.getText("farewell", "de")).isEqualTo("Auf Wiedersehen");
+    }
+
+    @Test
     public void candidateTagsProducesFullCascadeForLanguageCountryVariant() {
         final List<String> tags = TextBundle.candidateTags("de_AT_tirol");
 
