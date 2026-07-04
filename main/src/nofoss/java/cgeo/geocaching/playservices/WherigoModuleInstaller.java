@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import java.util.function.Consumer;
 
 import com.google.android.play.core.splitcompat.SplitCompat;
+import com.google.android.play.core.splitinstall.SplitInstallHelper;
 import com.google.android.play.core.splitinstall.SplitInstallManager;
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory;
 import com.google.android.play.core.splitinstall.SplitInstallRequest;
@@ -56,6 +57,11 @@ public final class WherigoModuleInstaller {
             final int status = state.status();
             if (status == SplitInstallSessionStatus.INSTALLED) {
                 manager.unregisterListener(listenerHolder[0]);
+                // SplitCompat.install alone updates resources/classloader for this context, but
+                // starting a brand-new Activity class from a split that was *just* downloaded in
+                // this same process additionally needs the app's ApplicationInfo refreshed, or
+                // Android fails to resolve the new component (crash on first launch post-install).
+                SplitInstallHelper.updateAppInfo(activity);
                 SplitCompat.install(activity);
                 onSuccess.run();
             } else if (status == SplitInstallSessionStatus.FAILED || status == SplitInstallSessionStatus.CANCELED) {

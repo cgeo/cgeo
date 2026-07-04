@@ -24,6 +24,10 @@ android {
         targetSdk = 35
     }
 
+    // matches the "cgeo*" pattern the CI artifact upload glob looks for (main's own APK is
+    // renamed the same way via base.archivesName = "cgeo" in main/build.gradle)
+    base.archivesName = "cgeo-wherigo"
+
     buildFeatures {
         viewBinding = true
     }
