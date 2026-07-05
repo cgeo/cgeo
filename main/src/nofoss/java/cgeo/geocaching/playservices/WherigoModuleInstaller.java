@@ -44,13 +44,20 @@ public final class WherigoModuleInstaller {
 
     /**
      * Requests on-demand install of the Wherigo module. Exactly one of {@code onSuccess} or
-     * {@code onFailure} is called, on the main thread.
+     * {@code onFailure} is called, on the main thread - unless the activity has finished or been
+     * destroyed by the time the install reaches a terminal state, in which case the listener is
+     * unregistered and neither callback is called, since calling back into a dead activity would
+     * be at best a no-op and at worst a crash.
      */
     public static void requestInstall(@NonNull final Activity activity, @NonNull final Runnable onSuccess, @NonNull final Consumer<String> onFailure) {
         final SplitInstallManager manager = SplitInstallManagerFactory.create(activity);
         final SplitInstallStateUpdatedListener[] listenerHolder = new SplitInstallStateUpdatedListener[1];
 
         listenerHolder[0] = state -> {
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                manager.unregisterListener(listenerHolder[0]);
+                return;
+            }
             if (!state.moduleNames().contains(MODULE_WHERIGO)) {
                 return;
             }
