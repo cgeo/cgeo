@@ -6,6 +6,13 @@
 It also offers basic support for other geocaching platforms.
 It does not require a web browser or exports - just download and start right away.
 
+> **Fun fact:** Geocaching exists because of a single policy change. Until May 2, 2000, the US
+> government deliberately degraded public GPS signals ("Selective Availability"), so civilian
+> receivers were only accurate to about 100 meters. The very next day, Dave Ulmer hid a bucket of
+> trinkets near Portland, Oregon, posted its coordinates online, and called it the "Great American
+> GPS Stash Hunt" - now considered the first geocache. The entire hobby this app is built around
+> is basically a one-day reaction to a switch being flipped in Washington.
+
 ## Want to contribute?
 
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature.
