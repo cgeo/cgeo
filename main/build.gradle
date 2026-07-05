@@ -301,6 +301,23 @@ android {
 
     // the Wherigo player ships as a separate installable split APK, see wherigo/build.gradle
     dynamicFeatures = [':wherigo']
+
+    // Optional per-ABI APK splitting for direct-download channels (nightly/GitHub releases,
+    // F-Droid). Play Store already delivers per-device splits automatically via the App Bundle
+    // required for the :wherigo dynamic feature module, so this is off by default and only
+    // affects builds that explicitly opt in - it changes nothing about the existing CI/release
+    // pipeline unless invoked.
+    // Enable with: ./gradlew assembleRelease -PsplitApkByAbi=true
+    if (project.hasProperty('splitApkByAbi')) {
+        splits {
+            abi {
+                enable = true
+                reset()
+                include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+                universalApk = true // keep producing a universal APK as a fallback
+            }
+        }
+    }
 }
 
 ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
