@@ -308,7 +308,7 @@ android {
     // affects builds that explicitly opt in - it changes nothing about the existing CI/release
     // pipeline unless invoked.
     // Enable with: ./gradlew assembleRelease -PsplitApkByAbi=true
-    if (project.hasProperty('splitApkByAbi')) {
+    if (project.findProperty('splitApkByAbi')?.toString() == 'true') {
         splits {
             abi {
                 enable = true
