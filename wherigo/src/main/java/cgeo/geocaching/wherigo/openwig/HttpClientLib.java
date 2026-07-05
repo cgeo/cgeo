@@ -26,8 +26,11 @@ final class HttpClientLib {
     private static final JavaFunction get = new JavaFunction() {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
             BaseLib.luaAssert(nArguments >= 1, "insufficient arguments for HttpClient.Get");
+            BaseLib.luaAssert(callFrame.get(0) instanceof String, "URL must be a string");
             final String url = (String) callFrame.get(0);
-            final Map<String, String> headers = nArguments >= 2 ? toHeaderMap((LuaTable) callFrame.get(1)) : null;
+            final Object headersArg = nArguments >= 2 ? callFrame.get(1) : null;
+            BaseLib.luaAssert(headersArg == null || headersArg instanceof LuaTable, "headers must be a table");
+            final Map<String, String> headers = headersArg != null ? toHeaderMap((LuaTable) headersArg) : null;
             callFrame.push(execute(() -> Engine.http.get(url, headers)));
             return 1;
         }
@@ -36,9 +39,14 @@ final class HttpClientLib {
     private static final JavaFunction post = new JavaFunction() {
         public int call(final LuaCallFrame callFrame, final int nArguments) {
             BaseLib.luaAssert(nArguments >= 1, "insufficient arguments for HttpClient.Post");
+            BaseLib.luaAssert(callFrame.get(0) instanceof String, "URL must be a string");
             final String url = (String) callFrame.get(0);
-            final String body = nArguments >= 2 ? (String) callFrame.get(1) : null;
-            final Map<String, String> headers = nArguments >= 3 ? toHeaderMap((LuaTable) callFrame.get(2)) : null;
+            final Object bodyArg = nArguments >= 2 ? callFrame.get(1) : null;
+            BaseLib.luaAssert(bodyArg == null || bodyArg instanceof String, "body must be a string");
+            final String body = (String) bodyArg;
+            final Object headersArg = nArguments >= 3 ? callFrame.get(2) : null;
+            BaseLib.luaAssert(headersArg == null || headersArg instanceof LuaTable, "headers must be a table");
+            final Map<String, String> headers = headersArg != null ? toHeaderMap((LuaTable) headersArg) : null;
             callFrame.push(execute(() -> Engine.http.post(url, body, headers)));
             return 1;
         }
@@ -67,7 +75,9 @@ final class HttpClientLib {
         Object key = null;
         while ((key = headers.next(key)) != null) {
             final Object value = headers.rawget(key);
-            map.put(key.toString(), value == null ? null : value.toString());
+            if (value != null) {
+                map.put(key.toString(), value.toString());
+            }
         }
         return map;
     }
@@ -75,6 +85,9 @@ final class HttpClientLib {
     static LuaTable execute(final HttpCall call) {
         try {
             final HttpResult result = call.run();
+            if (result == null) {
+                return null;
+            }
             final LuaTable resultTable = new LuaTableImpl();
             resultTable.rawset("StatusCode", LuaState.toDouble(result.statusCode));
             resultTable.rawset("Body", result.body);
