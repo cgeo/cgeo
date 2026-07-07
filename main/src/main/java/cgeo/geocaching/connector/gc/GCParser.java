@@ -56,6 +56,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -864,6 +865,44 @@ public final class GCParser {
             return list;
         } catch (final Exception e) {
             Log.e("GCParser.searchBookmarkLists: error parsing html page", e);
+            return null;
+        }
+    }
+
+    /**
+     * Fetches the caches which are owned by the user but not (yet, or no longer) published. Shouldn't be called on main thread!
+     *
+     * @return A non-null search result (which might be empty) on success. Null on error.
+     */
+    @Nullable
+    @WorkerThread
+    public static SearchResult searchOwnUnpublishedGeocaches() {
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/my/geocaches.aspx", new Parameters("archived", "y"));
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchOwnUnpublishedGeocaches: No data from server");
+            return null;
+        }
+
+        try {
+            final Document document = Jsoup.parse(page);
+            final Set<String> geocodes = new LinkedHashSet<>();
+            final Pattern geocodePattern = Pattern.compile(GCConstants.GEOCODE_PATTERN);
+
+            for (final Element link : document.select("p.WrapFix a[href*=/geocache/]")) {
+                final String geocode = TextUtils.getMatch(link.attr("href"), geocodePattern, null);
+                if (StringUtils.isNotBlank(geocode)) {
+                    geocodes.add(geocode);
+                }
+            }
+
+            // The listing page only gives us geocode + name, not type/D/T/size, so fetch full details per cache.
+            final SearchResult searchResult = new SearchResult();
+            for (final String geocode : geocodes) {
+                searchResult.addSearchResult(Geocache.searchByGeocode(geocode, null, false, null));
+            }
+            return searchResult;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchOwnUnpublishedGeocaches: error parsing html page", e);
             return null;
         }
     }
