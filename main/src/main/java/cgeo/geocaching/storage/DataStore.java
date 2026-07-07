@@ -5263,6 +5263,36 @@ public class DataStore {
         });
     }
 
+    /**
+     * Overwrites the membership of {@link PseudoList#OWN_UNPUBLISHED_LIST} with the given caches. Unlike {@link #addToList},
+     * this bypasses the {@link AbstractList#isConcrete()} check, since that pseudo list is intentionally kept in sync
+     * with an external source (geocaching.com) rather than edited by the user like a normal list.
+     */
+    public static void syncOwnUnpublishedCachesList(final Collection<Geocache> caches) {
+        final int listId = PseudoList.OWN_UNPUBLISHED_LIST.id;
+        withAccessLock(() -> {
+
+            init();
+
+            database.beginTransaction();
+            try {
+                database.delete(dbTableCachesLists, dbFieldCachesLists_list_id + " = ?", new String[]{String.valueOf(listId)});
+
+                final SQLiteStatement add = PreparedStatement.ADD_TO_LIST.getStatement();
+                for (final Geocache cache : caches) {
+                    add.bindLong(1, listId);
+                    add.bindString(2, cache.getGeocode());
+                    add.execute();
+
+                    cache.getLists().add(listId);
+                }
+                database.setTransactionSuccessful();
+            } finally {
+                database.endTransaction();
+            }
+        });
+    }
+
     public static void saveLists(final Collection<Geocache> caches, final Set<Integer> listIds) {
         if (caches.isEmpty()) {
             return;
