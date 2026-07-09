@@ -107,6 +107,31 @@ public class DataStoreTest {
         }
     }
 
+    @Test
+    public void testIgnoreListMembership() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("IGNORETEST");
+        cache.setDetailed(true);
+
+        try {
+            final int before = DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID);
+
+            // save the cache so it exists before assigning list membership (mirrors how a synced/ignored
+            // cache is persisted before its list membership is set)
+            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+
+            DataStore.addToList(Collections.singletonList(cache), StoredList.IGNORE_LIST_ID);
+            assertThat(DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID)).isEqualTo(before + 1);
+            assertThat(cache.getLists()).contains(StoredList.IGNORE_LIST_ID);
+
+            DataStore.removeFromList(Collections.singletonList(cache), StoredList.IGNORE_LIST_ID);
+            assertThat(DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID)).isEqualTo(before);
+            assertThat(cache.getLists()).doesNotContain(StoredList.IGNORE_LIST_ID);
+        } finally {
+            DataStore.removeCaches(Collections.singleton(cache.getGeocode()), REMOVE_ALL);
+        }
+    }
+
     // Check that queries don't throw an exception (see issue #1429).
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
