@@ -292,6 +292,7 @@
     <string name="err_detail_premium_log_found">This cache is only available to premium members of geocaching.com. Therefore, the cache information cannot be displayed.\n\nHowever, if you have already found this cache, you can log it here.</string>
     <string name="err_watchlist_failed">Changing your watchlist failed.</string>
     <string name="err_watchlist_failed_geocodes">Changing your watchlist failed for geocodes: %s</string>
+    <string name="err_ignorelist_failed_geocodes">Changing your ignore list failed for geocodes: %s</string>
     <string name="err_application_no">c:geo can\'t find any suitable application.</string>
     <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
     <string name="err_auth_process">Authorization process failed.</string>
@@ -531,6 +532,12 @@
     <string name="caches_watch_selected">Add selected to watch list</string>
     <string name="caches_unwatch_selected">Remove selected from watch list</string>
     <string name="watchlist_background_started">Watchlist update started in background</string>
+    <string name="caches_ignore_all">Add all to ignore list</string>
+    <string name="caches_unignore_all">Remove all from ignore list</string>
+    <string name="caches_ignore_selected">Add selected to ignore list</string>
+    <string name="caches_unignore_selected">Remove selected from ignore list</string>
+    <string name="ignorelist_background_started">Ignore list update started in background</string>
+    <string name="ignorelist_sync_failed">Could not fetch your online ignore list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -616,6 +623,7 @@
     <string name="lists_title_new_caches">Pick the list (new caches)</string>
     <string name="list_inbox">Stored</string>
     <string name="list_all_lists">All caches</string>
+    <string name="list_ignore">Ignore list</string>
     <string name="list_dialog_create_title">New list</string>
     <string name="list_dialog_create">Create</string>
     <string name="list_dialog_create_err">c:geo failed to create the new list</string>
@@ -1793,6 +1801,7 @@
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_log_in_browser">Log in browser</string>
     <string name="cache_menu_ignore">Ignore cache</string>
+    <string name="cache_menu_remove_from_ignorelist">Remove from ignore list</string>
     <string name="cache_log_menu_decrypt">Decrypt/Encrypt</string>
     <string name="cache_log_menu_edit">Edit Log</string>
     <string name="menu_expand_log">Expand log</string>
@@ -1801,7 +1810,11 @@
     <string name="cache_log_menu_popup_title">Log of %s</string>
     <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
     <string name="ignore_confirm_title">Be careful</string>
-    <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
+    <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You can remove it from the ignore list again from within c:geo\'s Ignore list, or on the website.</string>
+    <string name="ignore_success">Cache added to ignore list</string>
+    <string name="ignore_failed">Could not ignore cache</string>
+    <string name="unignore_success">Cache removed from ignore list</string>
+    <string name="unignore_failed">Could not remove cache from ignore list</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_attended">Attended</string>

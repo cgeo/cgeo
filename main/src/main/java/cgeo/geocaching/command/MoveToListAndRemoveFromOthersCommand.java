@@ -2,6 +2,7 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.IgnoreListUtils;
 
 import android.app.Activity;
 
@@ -31,17 +32,21 @@ public abstract class MoveToListAndRemoveFromOthersCommand extends MoveToListCom
         for (final Geocache cache : getCaches()) {
             oldLists.put(cache.getGeocode(), new HashSet<>(cache.getLists()));
         }
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(getCaches());
         DataStore.saveLists(getCaches(), Collections.singleton(getNewListId()));
+        IgnoreListUtils.reflectMembershipChange(getCaches(), wasOnIgnoreList);
     }
 
     @Override
     protected void undoCommand() {
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(getCaches());
         for (final Geocache cache : getCaches()) {
             final Set<Integer> listIds = oldLists.get(cache.getGeocode());
             if (listIds != null) {
                 DataStore.saveLists(getCaches(), listIds);
             }
         }
+        IgnoreListUtils.reflectMembershipChange(getCaches(), wasOnIgnoreList);
     }
 
 }

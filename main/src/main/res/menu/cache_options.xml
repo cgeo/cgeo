@@ -186,6 +186,11 @@
                 android:icon="@drawable/ic_menu_cancel"
                 android:visible="false"/>
             <item
+                android:id="@+id/menu_remove_from_ignorelist"
+                android:title="@string/cache_menu_remove_from_ignorelist"
+                android:icon="@drawable/ic_menu_cancel"
+                android:visible="false"/>
+            <item
                 android:id="@+id/menu_upload_bookmarklist"
                 android:title="@string/caches_upload_bookmarklist"
                 android:icon="@drawable/ic_menu_bookmarks"

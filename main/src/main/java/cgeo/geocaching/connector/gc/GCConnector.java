@@ -10,7 +10,7 @@ import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.IDifficultyTerrainMatrixNeededCapability;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
-import cgeo.geocaching.connector.capability.IIgnoreCapability;
+import cgeo.geocaching.connector.capability.IIgnoreListCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -64,7 +64,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreListCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -584,7 +584,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
-        return false;
+        return Settings.isGCPremiumMember();
     }
 
     @Override
@@ -595,8 +595,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean removeFromIgnorelist(@NonNull final Geocache cache) {
-        // Not supported for gc.com
-        return false;
+        return GCParser.removeFromIgnoreList(cache).blockingGet();
+    }
+
+    @WorkerThread
+    @Override
+    @Nullable
+    public List<Geocache> fetchIgnoreList() {
+        return GCParser.getOnlineIgnoreList();
     }
 
     @Override

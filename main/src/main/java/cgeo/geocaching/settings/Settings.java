@@ -1418,6 +1418,14 @@ public class Settings {
         return getBoolean(R.string.pref_bookmarklistsShowNewOnly, false);
     }
 
+    public static void setIgnoreListSynced(final boolean synced) {
+        putBoolean(R.string.pref_ignoreListSynced, synced);
+    }
+
+    public static boolean isIgnoreListSynced() {
+        return getBoolean(R.string.pref_ignoreListSynced, false);
+    }
+
     public static boolean isUseCompass() {
         return useCompass;
     }

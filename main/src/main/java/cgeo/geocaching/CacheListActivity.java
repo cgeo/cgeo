@@ -91,6 +91,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -643,6 +644,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_unwatch_all, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()), WatchListUtils.anySupportsUnwatching(adapter.getCheckedOrAllCaches()));
             setMenuItemLabel(menu, R.id.menu_unwatch_all, R.string.caches_unwatch_selected, R.string.caches_unwatch_all, checkedCount);
 
+            MenuUtils.setVisible(menu, R.id.menu_ignore_management, IgnoreListUtils.anySupportsIgnoreList(adapter.getCheckedOrAllCaches()));
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_ignore_all, IgnoreListUtils.anySupportsIgnoreList(adapter.getCheckedOrAllCaches()), IgnoreListUtils.anySupportsIgnoring(adapter.getCheckedOrAllCaches()));
+            setMenuItemLabel(menu, R.id.menu_ignore_all, R.string.caches_ignore_selected, R.string.caches_ignore_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_unignore_all, IgnoreListUtils.anySupportsIgnoreList(adapter.getCheckedOrAllCaches()), IgnoreListUtils.anySupportsUnignoring(adapter.getCheckedOrAllCaches()));
+            setMenuItemLabel(menu, R.id.menu_unignore_all, R.string.caches_unignore_selected, R.string.caches_unignore_all, checkedCount);
+
             MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
@@ -874,6 +881,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             WatchListUtils.watchAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_unwatch_all) {
             WatchListUtils.unwatchAll(this, adapter.getCheckedOrAllCaches());
+        } else if (menuItem == R.id.menu_ignore_all) {
+            IgnoreListUtils.ignoreAll(this, adapter.getCheckedOrAllCaches());
+        } else if (menuItem == R.id.menu_unignore_all) {
+            IgnoreListUtils.unignoreAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
             EmojiUtils.selectEmojiPopup(this, markerId, false, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
@@ -1803,6 +1814,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         title = list.title;
                         markerId = list.emojiMarker;
                         preventAskForDeletion = list.preventAskForDeletion;
+                    }
+                    if (listId == StoredList.IGNORE_LIST_ID) {
+                        final WeakReference<CacheListActivity> activityRef = new WeakReference<>(this);
+                        IgnoreListUtils.syncOnlineIgnoreListIfNeeded(getApplicationContext(), () -> {
+                            final CacheListActivity activity = activityRef.get();
+                            if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
+                                activity.runOnUiThread(activity::refreshCurrentList);
+                            }
+                        });
                     }
 
                     loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);

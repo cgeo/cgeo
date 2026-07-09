@@ -4645,7 +4645,7 @@ public class DataStore {
 
     private static void deleteOrphanedRecords() {
         Log.d("Database clean: removing non-existing lists");
-        database.delete(dbTableCachesLists, "list_id <> " + StoredList.STANDARD_LIST_ID + " AND list_id NOT IN (SELECT _id + " + customListIdOffset + " FROM " + dbTableLists + ")", null);
+        database.delete(dbTableCachesLists, "list_id <> " + StoredList.STANDARD_LIST_ID + " AND list_id <> " + StoredList.IGNORE_LIST_ID + " AND list_id NOT IN (SELECT _id + " + customListIdOffset + " FROM " + dbTableLists + ")", null);
 
         Log.d("Database clean: removing non-existing caches from attributes");
         database.delete(dbTableAttributes, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
@@ -4932,6 +4932,10 @@ public class DataStore {
             final List<StoredList> lists = new ArrayList<>();
             if (listId == null) {
                 lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), null, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+                lists.add(new StoredList(StoredList.IGNORE_LIST_ID, LocalizationUtils.getString(R.string.list_ignore), null, true, (int) PreparedStatement.COUNT_CACHES_ON_IGNORE_LIST.simpleQueryForLong()));
+            } else if (listId == StoredList.IGNORE_LIST_ID) {
+                lists.add(new StoredList(StoredList.IGNORE_LIST_ID, LocalizationUtils.getString(R.string.list_ignore), null, true, (int) PreparedStatement.COUNT_CACHES_ON_IGNORE_LIST.simpleQueryForLong()));
+                return lists;
             }
 
             try {
@@ -4970,7 +4974,7 @@ public class DataStore {
         return withAccessLock(() -> {
 
             init();
-            if (id >= customListIdOffset) {
+            if (id >= customListIdOffset || id == StoredList.IGNORE_LIST_ID) {
                 final List<StoredList> lists = getStoredLists(id);
                 if (!lists.isEmpty()) {
                     return lists.get(0);
@@ -5560,6 +5564,7 @@ public class DataStore {
         REMOVE_SPOILERS("DELETE FROM " + dbTableSpoilers + " WHERE geocode = ?"),
         OFFLINE_LOG_ID_OF_GEOCODE("SELECT _id FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
+        COUNT_CACHES_ON_IGNORE_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.IGNORE_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend, favorite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
         CLEAN_LOG("DELETE FROM " + dbTableLogs + " WHERE geocode = ? AND date >= ? AND date <= ? AND type = ? AND author = ?"),

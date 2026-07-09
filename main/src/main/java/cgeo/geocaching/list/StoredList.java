@@ -54,6 +54,8 @@ public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, true, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
+    /** reserved list mirroring the connector's online ignore list, populated/synced by {@link cgeo.geocaching.utils.IgnoreListUtils} */
+    public static final int IGNORE_LIST_ID = 5;
     public final boolean preventAskForDeletion;
     /** emoji assigned to this list as its marker, or null/empty for "none" */
     @Nullable public final String emojiMarker;

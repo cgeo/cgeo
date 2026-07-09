@@ -113,6 +113,24 @@
                 </menu>
             </item>
             <item
+                android:id="@+id/menu_ignore_management"
+                android:icon="@drawable/ic_menu_cancel"
+                android:title="@string/cache_menu_ignore"
+                app:showAsAction="never|withText">
+                <menu>
+                    <item
+                        android:id="@+id/menu_ignore_all"
+                        android:title="@string/caches_ignore_all"
+                        android:icon="@drawable/ic_menu_cancel"
+                        app:showAsAction="ifRoom|withText"/>
+                    <item
+                        android:id="@+id/menu_unignore_all"
+                        android:title="@string/caches_unignore_all"
+                        android:icon="@drawable/ic_menu_cancel"
+                        app:showAsAction="ifRoom|withText"/>
+                </menu>
+            </item>
+            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:enabled="true"

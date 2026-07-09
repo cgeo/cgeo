@@ -3,6 +3,7 @@ package cgeo.geocaching.command;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -12,6 +13,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
@@ -60,7 +62,10 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         final List<Geocache> toDelete = new ArrayList<>();
         final List<Geocache> toRemoveFromList = new ArrayList<>();
         for (final Geocache cache : getCaches()) {
-            if (cache.getLists().size() == 1) {
+            // for the ignore list, always go through the "remove from list" path (never a plain device
+            // delete), so that removal reliably un-ignores the cache online, even if this list happens
+            // to be the cache's only list
+            if (listId != StoredList.IGNORE_LIST_ID && cache.getLists().size() == 1) {
                 toDelete.add(cache);
             } else {
                 toRemoveFromList.add(cache);
@@ -301,13 +306,23 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         }
 
         private void executeAction() {
-            if (!caches.isEmpty()) {
+            if (caches.isEmpty()) {
+                return;
+            }
+            if (listId == StoredList.IGNORE_LIST_ID) {
+                IgnoreListUtils.unignoreOnlineBatch(caches);
+            } else {
                 DataStore.removeFromList(caches, listId);
             }
         }
 
         private void undoAction() {
-            if (!caches.isEmpty()) {
+            if (caches.isEmpty()) {
+                return;
+            }
+            if (listId == StoredList.IGNORE_LIST_ID) {
+                IgnoreListUtils.ignoreOnlineBatch(caches);
+            } else {
                 DataStore.addToList(caches, listId);
             }
         }

@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
@@ -48,6 +49,7 @@ public abstract class MakeListUniqueCommand extends AbstractCommand {
             oldLists.put(geocode, backupOfLists);
         }
 
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(caches);
         final List<StoredList> lists = DataStore.getLists();
         for (final StoredList list : lists) {
             if (list.id == listId) {
@@ -55,12 +57,15 @@ public abstract class MakeListUniqueCommand extends AbstractCommand {
             }
             DataStore.removeFromList(caches, list.id);
         }
+        IgnoreListUtils.reflectMembershipChange(caches, wasOnIgnoreList);
     }
 
     @Override
     protected void undoCommand() {
         final Set<Geocache> caches = DataStore.loadCaches(oldLists.keySet(), LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(caches);
         DataStore.addToLists(caches, oldLists);
+        IgnoreListUtils.reflectMembershipChange(caches, wasOnIgnoreList);
     }
 
     @Override

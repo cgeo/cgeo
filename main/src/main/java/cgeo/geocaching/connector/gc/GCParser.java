@@ -933,6 +933,135 @@ public final class GCParser {
     }
 
     /**
+     * Removes caches from a bookmark list. Shouldn't be called on main thread!
+     *
+     * @return successful?
+     */
+    @NonNull
+    public static Single<Boolean> removeCachesFromBookmarkList(final String listGuid, final List<Geocache> geocaches) {
+        final List<Geocache> gcCaches = filterGCCaches(geocaches);
+        if (gcCaches.isEmpty()) {
+            return Single.just(true);
+        }
+
+        final ArrayNode arrayNode = JsonUtils.createArrayNode();
+        for (final Geocache geocache : gcCaches) {
+            arrayNode.add(new ObjectNode(JsonUtils.factory).put("referenceCode", geocache.getGeocode()));
+        }
+
+        final Parameters headers = new Parameters(HEADER_VERIFICATION_TOKEN, getRequestVerificationToken(gcCaches.get(0)));
+
+        return Network.completeWithSuccess(Network.deleteJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", headers, arrayNode))
+            .toSingle(() -> {
+                Log.i("GCParser.removeCachesFromBookmarkList - caches removed from GC.com bookmark list");
+                return true;
+            })
+            .onErrorReturn((throwable) -> {
+                Log.e("GCParser.removeCachesFromBookmarkList - cannot remove caches from GC.com bookmark list", throwable);
+                return false;
+            });
+    }
+
+    @NonNull
+    private static List<Geocache> filterGCCaches(final List<Geocache> geocaches) {
+        final List<Geocache> gcCaches = new ArrayList<>();
+        for (final Geocache geocache : geocaches) {
+            if (ConnectorFactory.getConnector(geocache) instanceof GCConnector) {
+                gcCaches.add(geocache);
+            }
+        }
+        return gcCaches;
+    }
+
+    // cached result of findIgnoreListBookmarkList(), keyed by username to avoid staleness across account switches
+    private static volatile String cachedIgnoreListUsername;
+    private static volatile GCList cachedIgnoreList;
+
+    /**
+     * The online ignore list is technically a bookmark list which GC.com auto-creates for every account
+     * (visible as "Ignore Listing" in the classic Bookmark Lists UI, and as "Ignore List" under "My Lists").
+     * There is no dedicated API to address it directly, so it has to be located by name among the account's
+     * bookmark lists. The result is cached in memory (per username), so that bulk operations do not have to
+     * re-fetch the whole list of bookmark lists for every single cache. Returns {@code null} if the account has
+     * no ignore list yet (i.e. nothing was ever ignored) or if it could not be located.
+     */
+    @Nullable
+    private static GCList findIgnoreListBookmarkList() {
+        final GCList cached = getCachedIgnoreList();
+        if (cached != null) {
+            return cached;
+        }
+        final List<GCList> lists = searchBookmarkLists();
+        if (lists == null) {
+            Log.w("GCParser.findIgnoreListBookmarkList: could not retrieve bookmark lists");
+            return null;
+        }
+        for (final GCList list : lists) {
+            if ("Ignore Listing".equalsIgnoreCase(StringUtils.trim(list.getName()))) {
+                cachedIgnoreList = list;
+                cachedIgnoreListUsername = GCConnector.getInstance().getUserName();
+                return list;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    private static GCList getCachedIgnoreList() {
+        return cachedIgnoreList != null && Objects.equals(cachedIgnoreListUsername, GCConnector.getInstance().getUserName()) ? cachedIgnoreList : null;
+    }
+
+    /**
+     * Fetches all caches currently on the online ignore list. Shouldn't be called on main thread!
+     *
+     * @return the caches on the online ignore list (possibly empty if none, or if the account has no ignore list
+     * yet), or {@code null} on error
+     */
+    @Nullable
+    @WorkerThread
+    public static List<Geocache> getOnlineIgnoreList() {
+        final GCList ignoreList = findIgnoreListBookmarkList();
+        if (ignoreList == null) {
+            return Collections.emptyList();
+        }
+
+        final List<Geocache> caches = new ArrayList<>();
+        int skip = 0;
+        while (true) {
+            final SearchResult result = searchByBookmarkList(GCConnector.getInstance(), ignoreList.getGuid(), skip);
+            if (result == null) {
+                Log.e("GCParser.getOnlineIgnoreList: failed to fetch ignore list contents at offset " + skip);
+                return caches.isEmpty() ? null : caches;
+            }
+            final Set<Geocache> fetched = result.getCachesFromSearchResult();
+            if (fetched.isEmpty()) {
+                break;
+            }
+            caches.addAll(fetched);
+            skip += fetched.size();
+            if (skip >= result.getTotalCount()) {
+                break;
+            }
+        }
+        return caches;
+    }
+
+    /**
+     * Removes a single cache from the online ignore list. Shouldn't be called on main thread!
+     *
+     * @return {@code false} if an error occurred, {@code true} otherwise
+     */
+    @NonNull
+    static Single<Boolean> removeFromIgnoreList(@NonNull final Geocache cache) {
+        final GCList ignoreList = findIgnoreListBookmarkList();
+        if (ignoreList == null) {
+            Log.w("GCParser.removeFromIgnoreList: could not locate the online ignore list");
+            return Single.just(false);
+        }
+        return removeCachesFromBookmarkList(ignoreList.getGuid(), Collections.singletonList(cache));
+    }
+
+    /**
      * Fetches a list of pocket queries. Shouldn't be called on main thread!
      *
      * @return A non-null list (which might be empty) on success. Null on error.

@@ -601,6 +601,7 @@
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
     <string translatable="false" name="pref_bookmarklistsShowNewOnly">bookmarklistsShowNewOnly</string>
+    <string translatable="false" name="pref_ignoreListSynced">ignoreListSynced</string>
 
     <!-- internal version numbers and counters -->
     <string translatable="false" name="pref_version">version</string>

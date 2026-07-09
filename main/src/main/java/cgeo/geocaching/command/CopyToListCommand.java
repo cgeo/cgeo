@@ -5,6 +5,7 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.Set;
 
 public abstract class CopyToListCommand extends AbstractCachesCommand {
 
@@ -40,12 +42,16 @@ public abstract class CopyToListCommand extends AbstractCachesCommand {
 
     @Override
     protected void doCommand() {
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(getCaches());
         DataStore.addToList(getCaches(), targetListId);
+        IgnoreListUtils.reflectMembershipChange(getCaches(), wasOnIgnoreList);
     }
 
     @Override
     protected void undoCommand() {
+        final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(getCaches());
         DataStore.removeFromList(getCaches(), targetListId);
+        IgnoreListUtils.reflectMembershipChange(getCaches(), wasOnIgnoreList);
     }
 
     @Override

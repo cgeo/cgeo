@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheInfoBoxes;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -222,13 +223,19 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     private void doStoreCacheOnLists(final Set<Integer> listIds) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
+            final Set<String> wasOnIgnoreList = IgnoreListUtils.snapshotIgnoreListMembership(Collections.singletonList(cache));
             DataStore.saveLists(Collections.singletonList(cache), listIds);
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> IgnoreListUtils.reflectMembershipChange(Collections.singletonList(cache), wasOnIgnoreList));
             updateViewInfoBox();
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
             progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_offline_save_title), LocalizationUtils.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                cache.store(listIds, storeCacheHandler);
+                // cache was not offline before, so it could not already have been on the local ignore list
+                IgnoreListUtils.reflectMembershipChange(Collections.singletonList(cache), Collections.emptySet());
+            }, () -> {
                 activity.invalidateOptionsMenu();
                 updateViewInfoBox();
             });
