@@ -13,6 +13,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -239,11 +240,13 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 }
                 combinedListIds.addAll(cache.getLists());
             }
+            final Set<String> wasOnIgnoreList = cache != null ? IgnoreListUtils.snapshotIgnoreListMembership(Collections.singletonList(cache)) : Collections.emptySet();
 
             // download...
             if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
+                reflectIgnoreListChange(geocode, wasOnIgnoreList);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
                 synchronized (downloadQuery) {
@@ -258,6 +261,13 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             }
         } catch (Exception ex) {
             Log.e("exception while background download", ex);
+        }
+    }
+
+    private void reflectIgnoreListChange(final String geocode, final Set<String> wasOnIgnoreList) {
+        final Geocache storedCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (storedCache != null) {
+            IgnoreListUtils.reflectMembershipChange(Collections.singletonList(storedCache), wasOnIgnoreList);
         }
     }
 
