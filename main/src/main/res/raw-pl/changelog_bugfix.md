@@ -2,9 +2,9 @@
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie związane z konserwacją kodu i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
 - Naprawiono: Wyskakujące okienko skrytki/punktu nawigacji pojawiało się z opóźnieniem na niektórych urządzeniach
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
+- Naprawiono: Podczas edycji opisu skrytki nie można było używać copy/paste
+- Naprawiono: Niektóre awarie i sytuacje, w których „aplikacja nie odpowiada”
+- Naprawiono: Usuwanie wpisu w dzienniku przedmiotów podróżnych nie powiodło się (zmiana strony)
 
 ##
 - Naprawiono: Usuwanie uszkodzonych obrazów z wpisu (zmiana strony internetowej)
