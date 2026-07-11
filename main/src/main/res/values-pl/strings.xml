@@ -567,6 +567,7 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
+    <string name="list_menu_rename_parent_lists">Zmień nazwę aktualnej listy</string>
     <string name="rename_from">Zmień nazwę z</string>
     <string name="rename_to">Zmień nazwę na</string>
     <string name="list_menu_import">Import</string>
@@ -1511,6 +1512,7 @@
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_set_coordinates">Ustaw współrzędne</string>
     <string name="cache_personal_note">Notatka osobista</string>
+    <string name="cache_personal_note_edit_pn">Edytuj notatkę osobistą</string>
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
@@ -2503,6 +2505,7 @@
     <string name="command_recalculate_health_score_progress">Przeliczanie stanu zdrowia dzienników…</string>
     <string name="command_recalculate_health_score_result">Ponownie obliczono stan zdrowia dzienników: %d</string>
     <string name="log_health_score_explanation_title">Stan zdrowia dziennika</string>
+    <string name="log_health_score_explanation">Stan zdrowia dziennika jest obliczany na podstawie ostatnich wpisów %1$s lub do czasu znalezienia jednego z następujących typów wpisów:  \n%2$s  \n\nOblicza się go jako:  \n`(suma wag złych i złych wpisów) / (suma wag złych i złych wpisów)`\n\n**Wpisy dobre** to:  \n%3$s  \n\n**Wpisy złe** to:  \n%4$s  \n\nWpisy ważone są według wieku (wpisy nowsze mają większą wagę).</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
