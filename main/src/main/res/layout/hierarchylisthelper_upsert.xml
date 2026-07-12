@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/parentListWrapper"
+            style="@style/textinput_dropdown"
+            android:hint="@string/list_parent_list"
+            android:labelFor="@id/parentList">
+
+            <AutoCompleteTextView
+                android:id="@+id/parentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                style="@style/textinput_dropdown"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/newParentAdd"
+            style="@style/button_icon"
+            android:layout_gravity="center_vertical"
+            app:icon="@drawable/ic_menu_add" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/newParentLayout"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/newParentWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            style="@style/textinput_edittext_singleline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/newParent"
+                android:inputType="textPersonName"
+                style="@style/textinput_embedded_singleline"
+                android:hint="@string/list_parent_list"
+                android:importantForAutofill="yes"
+                android:autofillHints="@string/list_parent_list" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/newParentDelete"
+            style="@style/button_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="14dp"
+            app:icon="@drawable/ic_menu_delete" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/marker"
+            style="@style/button_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="14dp"
+            android:textSize="@dimen/textSize_listsPrimary"
+            app:icon="@drawable/ic_menu_marker" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            style="@style/textinput_edittext_singleline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:inputType="textPersonName"
+                style="@style/textinput_embedded_singleline"
+                android:hint="@string/list_name"
+                android:importantForAutofill="yes"
+                android:autofillHints="@string/list_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>
