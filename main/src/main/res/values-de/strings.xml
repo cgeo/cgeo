@@ -554,6 +554,7 @@
     <string name="list_menu_create">Neue Liste</string>
     <string name="list_menu_drop">Aktuelle Liste löschen</string>
     <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
+    <string name="list_menu_rename_parent_lists">Übergeordnete Listen umbenennen</string>
     <string name="rename_from">Umbenennen von</string>
     <string name="rename_to">Umbenennen nach</string>
     <string name="list_menu_import">Importieren</string>
@@ -616,6 +617,7 @@
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
     <string name="cache_filter_category">BC-Kategorie</string>
     <string name="cache_filter_tier">BC-Stufe</string>
+    <string name="cache_filter_health_score_include_unscored">Caches mit nicht bewertbaren Logs einschließen</string>
     <string name="cache_filter_named_filter">Benannter Filter</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
@@ -756,6 +758,26 @@
     <string name="named_filter_activity_title">Benannte Filter</string>
     <string name="cache_namedfilter_matching">Passende benannte Filter</string>
     <string name="named_filter_add">Filter hinzufügen</string>
+    <string name="named_filter_empty_hint">Keine benannten Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
+    <string name="named_filter_activate_marker">Zeige Marker - Priorität:</string>
+    <string name="named_filter_enable_all_markers">Alle Marker aktivieren</string>
+    <string name="named_filter_markers_enabled">Marker aktiviert</string>
+    <string name="named_filter_markers_disabled">Marker deaktiviert</string>
+    <string name="named_filter_select_title">Filter auswählen</string>
+    <string name="named_filter_activate_deactivate_title">Marker aktivieren / deaktivieren</string>
+    <string name="named_filter_nofilter_label">(kein Filter — passt auf alle Caches)</string>
+    <string name="named_filter_save_as_title">Als benannter Filter speichern</string>
+    <string name="named_filter_name_exists_title">Name existiert bereits</string>
+    <string name="named_filter_name_exists_message">Ein Filter mit dem Namen \'%s\' existiert bereits. Überschreiben?</string>
+    <string name="named_filter_config_exists_title">Filter bereits gespeichert</string>
+    <string name="named_filter_config_exists_message">Diese Filter-Konfiguration is bereits als \'%s\' gespeichert. Erneut unter neuem Namen speichern?</string>
+    <string name="named_filter_fill_with_named">Mit benanntem Filter füllen</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Hoch</string>
+    <string name="named_filter_priority_highest">Höchste</string>
+    <string name="named_filter_priority_low">Niedrig</string>
+    <string name="named_filter_priority_lowest">Niedrigste</string>
+    <string name="cache_filter_reference_based_on">Basierend auf: %1$s</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -1456,6 +1478,7 @@
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_set_coordinates">Koordinaten festlegen</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
+    <string name="cache_personal_note_edit_pn">Persönliche Notiz bearbeiten</string>
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
     <string name="cache_menu_allowWaypointExtraction">Wegpunkte aus Notiz erlauben</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
@@ -2457,6 +2480,7 @@
     <string name="preference_colorpicker_show_width">Breite: %d</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
+    <string name="number_input_title_short">Wert festlegen</string>
     <string name="number_input_range">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
