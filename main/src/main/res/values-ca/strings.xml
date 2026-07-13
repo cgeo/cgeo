@@ -535,7 +535,6 @@
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
-    <string name="caches_recalculate_health_score">Recalcula les puntuacions d\'estat del registre</string>
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
@@ -619,7 +618,6 @@
     <string name="cache_filter_stored_since">Última actualització de detalls</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">Nivell BC</string>
-    <string name="cache_filter_health_score">Puntuació d\'estat del registre</string>
     <string name="cache_filter_health_score_include_unscored">Inclou els catxés sense registres puntuables</string>
     <string name="cache_filter_named_filter">Filtre amb nom</string>
     <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
@@ -2444,10 +2442,6 @@
         <item quantity="one">Definiu %d icona del catxé</item>
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
-    <string name="command_recalculate_health_score_progress">Recalculant les puntuacions d\'estat del registre…</string>
-    <string name="command_recalculate_health_score_result">Puntuacions d\'estat del registre recalculades: %d</string>
-    <string name="log_health_score_explanation_title">Puntuació d\'estat del registre</string>
-    <string name="log_health_score_explanation">La puntuació de l\'estat del registre es calcula a partir de com a màxim les últimes %1$s entrades o fins que es trobi un dels següents tipus de registre: \n%2$s \n\nEs calcula com: \n`(suma dels pesos dels registres bons) / (suma dels pesos dels registres bons i dolents)`\n\n**Els registres bons** són: \n%3$s \n\n**Els registres dolents** són: \n%4$s \n\nEls registres es ponderen per la seva antiguitat (els registres més nous tenen un pes més alt).</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
     <string name="live_map_status_http429">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
     <string name="live_map_status_error">Error en carregar les dades del mapa: %s</string>
