@@ -574,7 +574,7 @@
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_recalculate_health_score">Recalculate log health scores</string>
+    <string name="caches_recalculate_health_score">Recalculate cache health scores</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
@@ -674,7 +674,7 @@
     <string name="cache_filter_stored_since">Last details update</string>
     <string name="cache_filter_category">BC Category</string>
     <string name="cache_filter_tier">BC Tier</string>
-    <string name="cache_filter_health_score">Log health score</string>
+    <string name="cache_filter_health_score">Cache health score</string>
     <string name="cache_filter_health_score_include_unscored">Include caches with no scoreable logs</string>
     <string name="cache_filter_named_filter">Named Filter</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
@@ -2745,10 +2745,10 @@
         <item quantity="many">Set %d cache icons</item>
         <item quantity="other">Set %d cache icons</item>
     </plurals>
-    <string name="command_recalculate_health_score_progress">Recalculating log health scores…</string>
-    <string name="command_recalculate_health_score_result">Log health scores recalculated: %d</string>
-    <string name="log_health_score_explanation_title">Log health Score</string>
-    <string name="log_health_score_explanation">Log health Score is calculated from at most last %1$s entries or until one of the following log types is found:  \n%2$s  \n\nIt is calculated as:  \n`(sum of weights of good logs) / (sum of weights of good and bad logs)`\n\n**Good Logs** are:  \n%3$s  \n\n**Bad logs** are:  \n%4$s  \n\nLogs are weighted by their age (newer logs have higher weight).</string>
+    <string name="command_recalculate_health_score_progress">Recalculating cache health scores…</string>
+    <string name="command_recalculate_health_score_result">Cache health scores recalculated: %d</string>
+    <string name="log_health_score_explanation_title">Cache health Score</string>
+    <string name="log_health_score_explanation">The cache health score is calculated from at most last %1$s log entries or until one of the following log types is found:  \n%2$s  \n\nIt is calculated as:  \n`(sum of weights of good logs) / (sum of weights of good and bad logs)`\n\n**Good Logs** are:  \n%3$s  \n\n**Bad logs** are:  \n%4$s  \n\nLogs are weighted by their age (newer logs have higher weight).</string>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
     <string name="live_map_status_http429">Please slow down, too many requests to %s</string>
