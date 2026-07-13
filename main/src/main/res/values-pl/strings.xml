@@ -540,7 +540,6 @@
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
-    <string name="caches_recalculate_health_score">Przelicz stan zdrowia dziennika</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
@@ -630,7 +629,6 @@
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
     <string name="cache_filter_category">Kategoria BC</string>
     <string name="cache_filter_tier">Poziom BC</string>
-    <string name="cache_filter_health_score">Stan zdrowia dziennika</string>
     <string name="cache_filter_health_score_include_unscored">Dołącz skrytki bez punktowanych dzienników</string>
     <string name="cache_filter_named_filter">Nazwany filtr</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
@@ -2502,10 +2500,6 @@
         <item quantity="many">Ustaw %d ikon skrytek</item>
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
-    <string name="command_recalculate_health_score_progress">Przeliczanie stanu zdrowia dzienników…</string>
-    <string name="command_recalculate_health_score_result">Ponownie obliczono stan zdrowia dzienników: %d</string>
-    <string name="log_health_score_explanation_title">Stan zdrowia dziennika</string>
-    <string name="log_health_score_explanation">Stan zdrowia dziennika jest obliczany na podstawie ostatnich wpisów %1$s lub do czasu znalezienia jednego z następujących typów wpisów:  \n%2$s  \n\nOblicza się go jako:  \n`(suma wag złych i złych wpisów) / (suma wag złych i złych wpisów)`\n\n**Wpisy dobre** to:  \n%3$s  \n\n**Wpisy złe** to:  \n%4$s  \n\nWpisy ważone są według wieku (wpisy nowsze mają większą wagę).</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
