@@ -525,7 +525,6 @@
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
-    <string name="caches_recalculate_health_score">Räkna om loggars hälsopoäng</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
     <string name="select_icon">Välj ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version stöder inte automatisk detektering av ikoner - vissa tecken kan saknas</string>
@@ -609,7 +608,6 @@
     <string name="cache_filter_stored_since">Senaste detaljuppdateringen</string>
     <string name="cache_filter_category">BC Kategori</string>
     <string name="cache_filter_tier">BC Nivå</string>
-    <string name="cache_filter_health_score">Loggens hälsopoäng</string>
     <string name="cache_filter_health_score_include_unscored">Inkludera cacher utan poängbara loggar</string>
     <string name="cache_filter_named_filter">Namngivna filter</string>
     <string name="cache_filter_logical_filter_group">Kopplade filter</string>
@@ -2422,10 +2420,6 @@
         <item quantity="one">Ange %d cache-ikon</item>
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
-    <string name="command_recalculate_health_score_progress">Räknar om loggars hälsopoäng…</string>
-    <string name="command_recalculate_health_score_result">Loggars hälsopoäng omräknade: %d</string>
-    <string name="log_health_score_explanation_title">Logga hälsopoäng</string>
-    <string name="log_health_score_explanation">Logghälsa Betyg beräknas från högst %1$s poster eller tills en av följande loggtyper hittas:  \n%2$s  \n\nDet beräknas som:  \n`(summan av vikter av bra loggar) / (summan av vikter av bra och dåliga loggar)`\n\n**Bra loggar** är:  \n%3$s  \n\n**Dåliga loggar** är:  \n%4$s  \n\nLoggar viktas av sin ålder (nyare loggar har högre vikt).</string>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
     <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
