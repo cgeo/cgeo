@@ -370,9 +370,7 @@
     <string name="translator_model_download_success">Vertaalmodel voor %s gedownload</string>
     <string name="translator_model_download_error">Downloaden van vertaalmodel %1$s: %2$s is mislukt</string>
     <string name="translator_model">Vertaal model</string>
-    <string name="translator_tooltip">Offline vertalen met Google</string>
     <string name="translator_language_select">Selecteer brontaal</string>
-    <string name="translator_language_target_select">Selecteer doeltaal</string>
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling. Tik om de brontaal te selecteren.</string>
     <string name="translator_language_unknown">Kan taal niet identificeren. Tik om brontaal te selecteren.</string>
     <string name="translator_language_detected">Vertaal van \"%s\". Tik om de brontaal te selecteren.</string>
@@ -541,7 +539,6 @@
     <string name="list_menu_create">Maak nieuwe lijst</string>
     <string name="list_menu_drop">Verwijder huidige lijst</string>
     <string name="list_menu_rename">Hernoem huidige lijst</string>
-    <string name="list_menu_rename_list_prefix">Lijst voorvoegsel hernoemen</string>
     <string name="rename_from">Hernoemen van</string>
     <string name="rename_to">Hernoem naar</string>
     <string name="list_menu_import">Importeer</string>
@@ -570,7 +567,6 @@
     <string name="cache_filter_mode_advanced">Geavanceerd</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Overschakelen naar Basis</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Als je overschakelt naar \'Basis\' modus verliest je de filterinstellingen. Wil je doorgaan?</string>
-    <string name="cache_filter_add_button">Filtercriteria toevoegen</string>
     <string name="cache_filter_option_and_or">Gebruik OF in plaats van EN</string>
     <string name="cache_filter_option_inverse">Filter omkeren</string>
     <string name="cache_filter_option_include_inconclusive">Inclusief onduidelijke overeenkomsten</string>
@@ -626,17 +622,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
     <string name="cache_filter_storage_clear_button">Wissen</string>
-    <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
     <string name="cache_filter_storage_select_title">Filter selecteren</string>
-    <string name="cache_filter_storage_delete_title">Filter verwijderen</string>
-    <string name="cache_filter_storage_delete_message">Weet je zeker dat je dit filtersjabloon wilt verwijderen?</string>
-    <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
-    <string name="cache_filter_storage_clear_title">Wis huidige filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
-    <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
-    <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
-    <string name="cache_filter_storage_save_confirm_message">Een filter met de naam \'%s\' en andere configuratie bestaat al. Overschrijven?</string>
-    <string name="cache_filter_storage_clear_message">Wil je het huidige filter wissen?</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Zoektekst</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
@@ -751,6 +737,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -2420,7 +2407,6 @@
     <string name="preference_colorpicker_show_width">breedte: %d</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
-    <string name="number_input_title">Waarde instellen</string>
     <string name="number_input_range">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
@@ -2588,7 +2574,6 @@
     <string name="check_hillshading_found">Reliëfweergave-gegevens reeds aanwezig</string>
     <string name="check_hillshading_missing">Ontbrekende reliëfweergave-gegevens gevonden:</string>
     <string name="check_hillshading_unsupported">Waarschuwing: Reliëfweergave gegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
-    <string name="check_hillshading_tiles_menu">Controleer op ontbrekende reliëfweergave gegevens</string>
     <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
     <string name="no_updates_found">Geen updates gevonden</string>
     <string name="updates_check">Controle op updates</string>
@@ -2805,13 +2790,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
     <string name="dbi_search_title">Zoek naar</string>
     <string name="dbi_search_columnSelection">Beperken tot</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Recent gebruikt</string>
-    <string name="emoji_category_symbols">Symbolen</string>
-    <string name="emoji_category_dots">Stippen</string>
-    <string name="emoji_category_places">Plaatsen</string>
-    <string name="emoji_category_food">Eten &amp; drinken</string>
-    <string name="emoji_category_activity">Activiteit</string>
-    <string name="emoji_category_people">Mensen</string>
-    <string name="emoji_category_numbers">Nummers</string>
 </resources>
