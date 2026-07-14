@@ -511,7 +511,6 @@
     <string name="list_menu_create">Luo uusi lista</string>
     <string name="list_menu_drop">Poista nykyinen lista</string>
     <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
-    <string name="list_menu_rename_list_prefix">Nimeä listan etuliite uudelleen</string>
     <string name="rename_from">Nimeä uudelleen</string>
     <string name="rename_to">Uusi nimi:</string>
     <string name="list_menu_import">Tuo</string>
@@ -538,7 +537,6 @@
     <string name="cache_filter_mode_advanced">Edistynyt</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Vaihda perustilaan</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Vaihtaminen \'Perus\' -tilaan johtaa suodattimen asetusten menetykseen. Haluatko jatkaa?</string>
-    <string name="cache_filter_add_button">Lisää suodatinkriteeri</string>
     <string name="cache_filter_option_and_or">Käytä TAI:ta JA:n sijaan</string>
     <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
@@ -593,17 +591,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Poista</string>
     <string name="cache_filter_storage_clear_button">Tyhjennä</string>
-    <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
     <string name="cache_filter_storage_select_title">Valitse suodatin</string>
-    <string name="cache_filter_storage_delete_title">Poista suodatin</string>
-    <string name="cache_filter_storage_delete_message">Haluatko varmasti poistaa tämän suodatinmäärityksen?</string>
-    <string name="cache_filter_storage_select_clear_title">Valitse suodatin tai tyhjennä nykyinen suodatin</string>
-    <string name="cache_filter_storage_clear_title">Poisya nykyinen suodatin</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
-    <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
-    <string name="cache_filter_storage_save_confirm_title">Tallenna suodattimen ylikirjoitus</string>
-    <string name="cache_filter_storage_save_confirm_message">Suodatin, jonka nimi on \'%s\' ja eri määrityksellä on jo olemassa. Korvataanko se?</string>
-    <string name="cache_filter_storage_clear_message">Haluatko poistaa nykyisen suodattimen?</string>
     <string name="cache_filter_stringfilter_matchcase">Sama kirjainkoko</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Etsi tekstiä</string>
     <string name="cache_filter_stringfilter_info">Valinnalla \'Kuvio\', käytä jokerimerkkejä * ja ?. * edustaa nollaa, yhtä tai useampaa merkkiä, ? edustaa yhtä merkkiä. Esimerkiksi kuvio \'H?mburg*\' palauttaa tulokseksi esim. \'Homburg\' tai \'Hamburg in Night\', mutta ei \'A day in Hamburg\' tai \'Hahmburg\'.</string>
@@ -717,6 +705,7 @@
         <item>1kk</item>
         <item>&gt;1kk</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -2495,7 +2484,6 @@
     <string name="check_hillshading_found">Rinnevarjostustiedot ovat jo olemassa</string>
     <string name="check_hillshading_missing">Puuttuvat rinnevarjostustiedot löytyivät:</string>
     <string name="check_hillshading_unsupported">Varoitus: Rinnevarjostustietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
-    <string name="check_hillshading_tiles_menu">Tarkista puuttuvat rinnevarjostustiedot</string>
     <string name="mapupdate_info">Napauta tästä tarkistaaksesi kartta- ja teematiedostojen päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
     <string name="updates_check">Päivitysten tarkistus</string>
@@ -2696,7 +2684,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" on osa ensisijaista avainta, ei voida muokata"</string>
     <string name="dbi_search_title">Hae</string>
     <string name="dbi_search_columnSelection">Rajoita</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Äskettäin käytetty</string>
-    <string name="emoji_category_symbols">Symbolit</string>
 </resources>
