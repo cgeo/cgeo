@@ -876,7 +876,7 @@
     <string name="named_filter_add">Add filter</string>
     <string name="named_filter_empty_hint">No filters configured. Tap + to add one.</string>
     <string name="named_filter_activate_marker">use with prio</string>
-    <string name="named_filter_enable_all_markers">Activate/Deactivate all filters as markers</string>
+    <string name="named_filter_enable_all_markers">Apply filters as markers</string>
     <string name="named_filter_markers_enabled">Markers enabled</string>
     <string name="named_filter_markers_disabled">Markers disabled</string>
     <string name="named_filter_select_title">Select filter</string>
