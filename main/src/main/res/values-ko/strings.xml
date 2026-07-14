@@ -477,7 +477,6 @@
     <string name="cache_filter_mode_advanced">고급</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">기본으로 전환</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">\'기본\'모드로 변경하면 필터 설정이 손실됩니다. 계속 하시겠습니까?</string>
-    <string name="cache_filter_add_button">필터 기준 추가</string>
     <string name="cache_filter_option_and_or">AND 대신 OR 사용</string>
     <string name="cache_filter_option_inverse">역 필터</string>
     <string name="cache_filter_option_include_inconclusive">결정적이지 않은 일치 포함</string>
@@ -531,15 +530,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">삭제</string>
     <string name="cache_filter_storage_clear_button">지우기</string>
-    <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
     <string name="cache_filter_storage_select_title">필터 선택</string>
-    <string name="cache_filter_storage_delete_title">필터 삭제</string>
-    <string name="cache_filter_storage_delete_message">이 필터 구성을 삭제하시겠습니까?</string>
-    <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
-    <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
-    <string name="cache_filter_storage_save_confirm_title">필터 덮어 쓰기 저장</string>
-    <string name="cache_filter_storage_save_confirm_message">이름이 \'%s\'이고 다른 구성의 필터가 이미 있습니다. 덮어 쓰시겠습니까?</string>
     <string name="cache_filter_stringfilter_matchcase">일치 사례</string>
     <string name="cache_filter_stringfilter_searchtext_hint">텍스트 검색</string>
     <string name="cache_filter_stringfilter_info">\'패턴\'옵션과 함께 와일드 카드 \'*\' 및 \'?\'를 사용하십시오. \'*\'는 0 개, 하나 또는 여러 개의 문자를 나타내고 \'?\'은 하나의 단일 문자를 나타냅니다. 예를 들어 \'H?mburg*\'패턴은 \'Homburg\'또는 \'Hamburg at Night\'예와 일치하지만 \'A day in Hamburg\'또는 \'Hahmburg\'와는 일치하지 않습니다.</string>
@@ -653,6 +644,7 @@
         <item>1달</item>
         <item>&gt;1달</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -2437,5 +2429,4 @@
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
