@@ -232,6 +232,7 @@
     <string name="list_dialog_rename">Endurnefna</string>
     <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>
@@ -668,5 +669,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
