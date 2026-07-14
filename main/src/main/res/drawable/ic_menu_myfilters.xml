@@ -1,0 +1,23 @@
+<!-- composite icon: filter funnel with small save-disk (lower right) and star (lower left) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:textColorPrimary">
+
+    <!-- main filter funnel (scaled down slightly to leave room for badges) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3H19C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z"/>
+
+    <!-- small star badge (lower left) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M4.5,18L5.09,16.17L3.5,15L5.4,15L6,13L6.6,15L8.5,15L6.91,16.17L7.5,18L6,16.83Z"/>
+
+    <!-- small save/disk badge (lower right) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M19.5,16L17,16C16.72,16 16.5,16.22 16.5,16.5L16.5,21.5C16.5,21.78 16.72,22 17,22L22,22C22.28,22 22.5,21.78 22.5,21.5L22.5,18.5L19.5,16ZM19.5,21C19.09,21 18.75,20.66 18.75,20.25C18.75,19.84 19.09,19.5 19.5,19.5C19.91,19.5 20.25,19.84 20.25,20.25C20.25,20.66 19.91,21 19.5,21ZM20.75,17.75L17.75,17.75L17.75,16.75L20.75,16.75L20.75,17.75Z"/>
+</vector>
