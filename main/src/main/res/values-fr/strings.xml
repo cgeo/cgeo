@@ -359,7 +359,6 @@
     <string name="translator_model_download_error">Impossible de télécharger le modèle de traduction %1$s: %2$s</string>
     <string name="translator_model">Modèle de traduction</string>
     <string name="translator_language_select">Sélectionner la langue source</string>
-    <string name="translator_language_target_select">Sélectionner la langue cible</string>
     <string name="translator_language_unsupported">La langue (%s) n\'est pas prise en charge pour la traduction. Appuyez pour sélectionner la langue source.</string>
     <string name="translator_language_unknown">Impossible d\'identifier la langue. Appuyez pour sélectionner la langue source.</string>
     <string name="translator_language_detected">Traduire depuis «%s». Appuyez pour sélectionner la langue source.</string>
@@ -528,7 +527,6 @@
     <string name="list_menu_create">Nouvelle liste</string>
     <string name="list_menu_drop">Supprimer la liste courante</string>
     <string name="list_menu_rename">Renommer la liste courante</string>
-    <string name="list_menu_rename_list_prefix">Renommer le préfixe de liste</string>
     <string name="rename_from">Renommer de</string>
     <string name="rename_to">Renommer en</string>
     <string name="list_menu_import">Importer</string>
@@ -556,7 +554,6 @@
     <string name="cache_filter_mode_advanced">Avancé</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Basculer vers Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Passer en mode \'Basique\' entraînera la perte des paramètres de filtre. Voulez-vous continuer ?</string>
-    <string name="cache_filter_add_button">Ajouter des critères</string>
     <string name="cache_filter_option_and_or">Utilisez OU à la place de ET</string>
     <string name="cache_filter_option_inverse">Inverser filtre</string>
     <string name="cache_filter_option_include_inconclusive">Inclure les résultats non concluants</string>
@@ -612,17 +609,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Supprimer</string>
     <string name="cache_filter_storage_clear_button">Effacer</string>
-    <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
     <string name="cache_filter_storage_select_title">Sélectionner un filtre</string>
-    <string name="cache_filter_storage_delete_title">Supprimer le filtre</string>
-    <string name="cache_filter_storage_delete_message">Voulez-vous vraiment supprimer ce filtre ?</string>
-    <string name="cache_filter_storage_select_clear_title">Sélectionner un filtre ou effacer le filtre courant</string>
-    <string name="cache_filter_storage_clear_title">Effacer le filtre actuel</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Aucun filtre n\'a encore été enregistré.</string>
-    <string name="cache_filter_storage_save_title">Enregistrer et nommer le filtre</string>
-    <string name="cache_filter_storage_save_confirm_title">Écraser le filtre</string>
-    <string name="cache_filter_storage_save_confirm_message">Un filtre portant le nom \'%s\' et avec un paramétrage différent existe déjà. Souhaitez-vous l\'écraser ?</string>
-    <string name="cache_filter_storage_clear_message">Voulez-vous effacer le filtre actuel ?</string>
     <string name="cache_filter_stringfilter_matchcase">Sensible à la casse</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Texte à rechercher</string>
     <string name="cache_filter_stringfilter_info">Avec l\'option “Motif”, utilisez les jokers * et ?. * représente zéro, un ou plusieurs caractères, ? en représente qu\'un seul. Par exemple le motif “P?ris*” correspondra à \"Piris\" ou \"Paris la nuit”, mais pas à “Une journée à Paris” ou “Parsec”</string>
@@ -736,6 +723,7 @@
         <item>1m</item>
         <item>&gt;1mois</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
@@ -1249,7 +1237,6 @@
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_google_terrain">Google : Terrain</string>
-    <string name="map_source_osm_offline">Hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
@@ -2557,7 +2544,6 @@
     <string name="check_hillshading_found">Données d\'ombrage du relief déjà présentes</string>
     <string name="check_hillshading_missing">Données d\'ombrage du relief manquantes:</string>
     <string name="check_hillshading_unsupported">Attention : toutes les données d\'ombrage du relief ne sont pas disponibles pour la région sélectionnée</string>
-    <string name="check_hillshading_tiles_menu">Vérifier les données d\'ombrage du relief</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
@@ -2774,13 +2760,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" fait partie de la clé primaire, ne peut pas être modifié"</string>
     <string name="dbi_search_title">Rechercher</string>
     <string name="dbi_search_columnSelection">Restreindre à</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Récemment utilisé</string>
-    <string name="emoji_category_symbols">Symboles</string>
-    <string name="emoji_category_dots">Points</string>
-    <string name="emoji_category_places">Lieux</string>
-    <string name="emoji_category_food">Nourriture &amp; Boissons</string>
-    <string name="emoji_category_activity">Activité</string>
-    <string name="emoji_category_people">Personnes</string>
-    <string name="emoji_category_numbers">Nombres</string>
 </resources>
