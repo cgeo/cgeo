@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Tento hráč oznámil problém s keškou.</string>
     <string name="log_problem_log_full_label">Logbook je plný</string>
     <string name="log_problem_log_full_text">Tento hráč oznámil plný logbook.</string>
+    <string name="log_problem_log_wet_label">Logbook je mokrý</string>
+    <string name="log_problem_log_wet_text">Tento kešer nahlásil, že logbook je mokrý.</string>
     <string name="log_problem_damaged_label">Schránka je poškozená</string>
     <string name="log_problem_damaged_text">Tento hráč oznámil poškození schránky.</string>
     <string name="log_problem_missing_label">Keška může být ztracená</string>
@@ -232,10 +234,12 @@
     <string name="translate_external_label">Přeložit pomocí %s</string>
     <string name="translate_external_variant_app">Aplikace</string>
     <string name="translate_external_variant_web">Webová stránka</string>
+    <string name="translate_external_variant_unavailable">Není k dispozici</string>
     <string name="translate_external_none">&lt;Žádné&gt;</string>
     <string name="translate_external_app">Externí aplikace</string>
     <string name="translate_external_google">Překladač Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline překlad</string>
     <string name="translate_length_warning">Překlad prostřednictvím webové stránky může selhat v případě velkého množství textu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -371,9 +375,7 @@
     <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
     <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
     <string name="translator_model">Překladový model</string>
-    <string name="translator_tooltip">Offline překlad pomocí Google</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
-    <string name="translator_language_target_select">Vyberte cílový jazyk</string>
     <string name="translator_language_unsupported">Jazyk (%s) není pro překlad podporován. Klepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_language_unknown">Nelze určit jazyk. Klepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_language_detected">Přeložit z \"%s\". Klepnutím vyberte zdrojový jazyk.</string>
@@ -518,6 +520,16 @@
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_overwrite_offline_log">Přepsat offline log</string>
     <string name="caches_overwrite_offline_log_question">Keška má existující offline log typu „%1$s“ s textem logu. Chcete tento log přepsat?</string>
+    <string name="caches_warning_delete_user_data_others">Odstranit ostatní</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d keška má uživatelské údaje. Při odstranění kešky se uživatelské údaje ztratí.</item>
+        <item quantity="few">%1$d/%2$d kešky mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+        <item quantity="many">%1$d/%2$d kešek mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+        <item quantity="other">%1$d/%2$d kešek mají uživatelské údaje. Při odstranění kešek se uživatelské údaje ztratí.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Tato akce odstraní všechny kešky (%d) z vašeho zařízení.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Odstranění ostatních</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d kešky jsou pouze v tomto seznamu. Odstraněním těchto kešek ze seznamu je ze zařízení odstraníte.</string>
     <string name="caches_show_attributes_all">Zobrazit přehled atributů pro všechny kešky</string>
     <string name="caches_show_attributes_selected">Zobrazit přehled atributů pro vybrané kešky</string>
     <string name="caches_set_cache_icon">Natavit ikonu kešky</string>
@@ -552,7 +564,6 @@
     <string name="list_menu_create">Vytvořit nový seznam</string>
     <string name="list_menu_drop">Odstranit aktuální seznam</string>
     <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
-    <string name="list_menu_rename_list_prefix">Přejmenovat předponu seznamu</string>
     <string name="rename_from">Přejmenovat z</string>
     <string name="rename_to">Přejmenovat na</string>
     <string name="list_menu_import">Import</string>
@@ -581,7 +592,6 @@
     <string name="cache_filter_mode_advanced">Rozšířené</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Přepnout na základní</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Změna do „základního“ režimu bude mít za následek ztrátu nastavení filtru. Chceš pokračovat?</string>
-    <string name="cache_filter_add_button">Přidat kritéria filtru</string>
     <string name="cache_filter_option_and_or">Použít NEBO místo A</string>
     <string name="cache_filter_option_inverse">Invertovat filtr</string>
     <string name="cache_filter_option_include_inconclusive">Zahrnout neprůkazné shody</string>
@@ -639,17 +649,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Odstranit</string>
     <string name="cache_filter_storage_clear_button">Vyčistit</string>
-    <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
     <string name="cache_filter_storage_select_title">Vyberte filtr</string>
-    <string name="cache_filter_storage_delete_title">Odstranit filtr</string>
-    <string name="cache_filter_storage_delete_message">Opravdu chcete odstranit tuto konfiguraci filtru?</string>
-    <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
-    <string name="cache_filter_storage_clear_title">Vymazat aktuální filtr</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
-    <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
-    <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>
-    <string name="cache_filter_storage_save_confirm_message">Filtr s názvem \'%s\' a jinou konfigurací již existuje. Chcete jej přepsat?</string>
-    <string name="cache_filter_storage_clear_message">Chcete vymazat aktuální filtr?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovat velikost písmen</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Hledaný text</string>
     <string name="cache_filter_stringfilter_info">S možností \'Vzor\' použijte zástupné znaky * a ?. * představuje nulu, jeden nebo více znaků, ? představuje jeden jediný znak. Například vzor \'H?mburg*\' bude odpovídat např. \'Homburg\' nebo \'Hamburg v noci\', ale ne \'Den v Hamburgu\' nebo \'Hahmburg\'</string>
@@ -764,6 +764,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -1296,7 +1297,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
     <string name="map_source_google_terrain">Google: Terén</string>
-    <string name="map_source_osm_offline">Offline použití</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_nomap">Žádná mapa</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
@@ -1605,7 +1605,6 @@
     <string name="menu_collapse_log">Sbalit log</string>
     <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
-    <string name="cache_log_delete_reason">Důvod (max. %d znaků)</string>
     <string name="cache_log_delete_reason_default">Log byl odstraněn pomocí c:geo</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
@@ -1768,6 +1767,7 @@
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
     <string name="waypoint_calculated_coordinates_global">Vypočítat souřadnice</string>
+    <string name="waypoint_select_from_map">Vybrat z mapy</string>
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_my_coordinates_accuracy">Moje souřadnice (±%s)</string>
@@ -1841,6 +1841,7 @@
     <string name="calccoord_select_variable">Vybrat proměnnou</string>
     <string name="calccoord_new_variable">**%s** *(Nové)*</string>
     <string name="calccoord_convert_to_plain">Převod na prosté souřadnice</string>
+    <string name="calccoord_convert_to_plain_error">Vzorec nevyhodnocuje platné souřadnice.\nKonverze na obyčejné souřadnice vynuluje trasový bod na prázdné souřadnice.</string>
     <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
     <string name="calccoord_remove_spaces">Odstranit mezery</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Nahradit \'x\' symbolem \'*\'</string>
@@ -1879,8 +1880,15 @@
     <string name="formula_function_lettervalue">Hodnota slova</string>
     <string name="formula_function_roman">Římské na arabské</string>
     <string name="formula_function_vanity">Kód vanity</string>
+    <string name="formula_function_add">Přidat</string>
+    <string name="formula_function_multiply">Násobit</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Součet</string>
+    <string name="formula_function_average">Průměr</string>
     <string name="formula_function_group_simplenumeric">Jednoduchý číselný</string>
     <string name="formula_function_group_complexnumeric">Komplexní číselný</string>
+    <string name="formula_function_group_aggregatenumeric">Souhrnné číselné</string>
     <string name="formula_function_group_simplestring">Jednoduchý řetězec</string>
     <string name="formula_function_group_complexstring">Komplexní řetězec</string>
     <string name="formula_error_unexpectedtoken">Očekáváno \'%1$s\'</string>
@@ -1890,6 +1898,7 @@
     <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
     <string name="formula_error_empty">Prázdný vzorec</string>
     <string name="formula_error_numeric_overflow">Číselný přepad</string>
+    <string name="formula_error_invalid_range">Neplatný rozsah: %1$s</string>
     <string name="formula_error_other">Chyba: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Bez názvu</string>
@@ -2412,6 +2421,13 @@
     <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>
     <string name="do_not_ask_me_again">Již se neptat</string>
     <string name="geokrety_parsing_failed">Odpověď služby GeoKrety se nepodařilo zpracovat.</string>
+    <string name="command_remove_caches_from_list_progress">Odstraňování kešek</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Odstraněná %d keška</item>
+        <item quantity="few">Odstraněné %d kešky</item>
+        <item quantity="many">Odstraněno %d kešek</item>
+        <item quantity="other">Odstraněných %d kešek</item>
+    </plurals>
     <string name="command_move_caches_progress">Přesouvání kešek do seznamu %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Přesunuta %d keška</item>
@@ -2497,7 +2513,6 @@
     <string name="preference_colorpicker_show_width">šířka: %d</string>
     <string name="reset_to_default">Výchozí</string>
     <!-- number input -->
-    <string name="number_input_title">Nastavit hodnotu</string>
     <string name="number_input_range">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
@@ -2667,7 +2682,7 @@
     <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
     <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
     <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
-    <string name="check_hillshading_tiles_menu">Zkontrolovat chybějící data stínování kopců</string>
+    <string name="check_hillshading_tiles_menu">Zkontrolovat chybějící údaje o nadmořské výšce</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
@@ -2888,13 +2903,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Naposledy použito</string>
-    <string name="emoji_category_symbols">Symboly</string>
-    <string name="emoji_category_dots">Body</string>
-    <string name="emoji_category_places">Místa</string>
-    <string name="emoji_category_food">Jídlo &amp; Nápoje</string>
-    <string name="emoji_category_activity">Aktivita</string>
-    <string name="emoji_category_people">Lidé</string>
-    <string name="emoji_category_numbers">Čísla</string>
 </resources>
