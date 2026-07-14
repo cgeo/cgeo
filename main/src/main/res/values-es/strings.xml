@@ -359,7 +359,6 @@
     <string name="translator_model_download_error">Fallo al descargar el modelo de traducción %1$s: %2$s</string>
     <string name="translator_model">Modelo de traducción</string>
     <string name="translator_language_select">Seleccione el idioma de origen</string>
-    <string name="translator_language_target_select">Seleccionar idiomas a traducir</string>
     <string name="translator_language_unsupported">Idioma (%s) no disponible para traducción. Pulse para seleccionar el idioma de origen.</string>
     <string name="translator_language_unknown">No se puede identificar el idioma. Pulse para seleccionar el idioma de origen.</string>
     <string name="translator_language_detected">Traducir desde \"%s\". Pulse para seleccionar el idioma de origen.</string>
@@ -528,7 +527,6 @@
     <string name="list_menu_create">Crear nueva lista</string>
     <string name="list_menu_drop">Borrar lista actual</string>
     <string name="list_menu_rename">Renombrar la lista actual</string>
-    <string name="list_menu_rename_list_prefix">Renombrar prefijo de la lista</string>
     <string name="rename_from">Renombrar desde</string>
     <string name="rename_to">Renombrar a</string>
     <string name="list_menu_import">Importar</string>
@@ -556,7 +554,6 @@
     <string name="cache_filter_mode_advanced">Avanzado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Cambiar a Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Cambiar a modo \'Basic\' provocará la pérdida de la configuración del filtro. ¿Desea continuar?</string>
-    <string name="cache_filter_add_button">Añadir criterios de filtro</string>
     <string name="cache_filter_option_and_or">Usar OR en lugar de AND</string>
     <string name="cache_filter_option_inverse">Filtro Inverso</string>
     <string name="cache_filter_option_include_inconclusive">Incluye coincidencias no concluyentes</string>
@@ -612,17 +609,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Borrar</string>
     <string name="cache_filter_storage_clear_button">Limpiar</string>
-    <string name="cache_filter_storage_load_delete_title">Cargar o eliminar un filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
-    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
-    <string name="cache_filter_storage_delete_message">¿Está seguro de que quiere borrar esta configuración de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro o borrar el filtro actual</string>
-    <string name="cache_filter_storage_clear_title">Limpiar el filtro actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ningún filtro ha sido almacenado todavía.</string>
-    <string name="cache_filter_storage_save_title">Guardar filtro con nombre</string>
-    <string name="cache_filter_storage_save_confirm_title">Guardar filtro y sobrescribir</string>
-    <string name="cache_filter_storage_save_confirm_message">Ya existe un filtro con el nombre \'%s\' y una configuración diferente. ¿Sobrescribirlo?</string>
-    <string name="cache_filter_storage_clear_message">¿Deseas limpiar el filtro actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidir Mayus/minus</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Buscar texto</string>
     <string name="cache_filter_stringfilter_info">Con la opción \'Patrón\', usa comodines * y ?. * representa cero, uno o varios caracteres, ? representa un solo carácter. Por ejemplo, el patrón \"H?mburg*\" coincidirá, por ejemplo, \"Homburg\" o \"Hamburgo por la noche\", pero no \"Un día en Hamburg\" o \"Hahmburg\"</string>
@@ -635,6 +622,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Patrón</string>
     <string name="cache_filter_datefilter_absolute">Absoluto</string>
     <string name="cache_filter_datefilter_relative">Relativo a hoy</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignorar año</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todo</string>
@@ -736,6 +724,8 @@
         <item>1 mes</item>
         <item>&gt;1 mes</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_add">Añadir filtro</string>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
@@ -2558,7 +2548,6 @@ Nombre de archivo:%2$s</string>
     <string name="check_hillshading_found">Los datos de sombreado de relieve ya están presentes</string>
     <string name="check_hillshading_missing">Encontrados datos de sombreado de relieve:</string>
     <string name="check_hillshading_unsupported">Advertencia: Los datos de relieve no están disponibles al menos parcialmente para la región elegida</string>
-    <string name="check_hillshading_tiles_menu">Comprobar datos de relieve faltantes</string>
     <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
     <string name="updates_check">Comprobar actualizaciones</string>
@@ -2775,13 +2764,4 @@ Nombre de archivo:%2$s</string>
     <string name="dbi_edit_error_pkfield">"%s\" es parte de la clave primaria, no se puede editar"</string>
     <string name="dbi_search_title">Buscar por</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usado recientemente</string>
-    <string name="emoji_category_symbols">Símbolos</string>
-    <string name="emoji_category_dots">Puntos</string>
-    <string name="emoji_category_places">Lugares</string>
-    <string name="emoji_category_food">Comida &amp; Bebida</string>
-    <string name="emoji_category_activity">Actividad</string>
-    <string name="emoji_category_people">Personas</string>
-    <string name="emoji_category_numbers">Números</string>
 </resources>
