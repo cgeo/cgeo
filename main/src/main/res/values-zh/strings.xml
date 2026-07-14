@@ -488,7 +488,6 @@
     <string name="cache_filter_mode_advanced">高级模式</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">切换到基础模式</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">切换回基础模式将不保存筛选设置，你想要继续吗？</string>
-    <string name="cache_filter_add_button">添加筛选条件</string>
     <string name="cache_filter_option_and_or">使用OR代替AND</string>
     <string name="cache_filter_option_inverse">反向筛选</string>
     <string name="cache_filter_option_include_inconclusive">包括不确定的匹配结果</string>
@@ -543,17 +542,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">删除</string>
     <string name="cache_filter_storage_clear_button">清空</string>
-    <string name="cache_filter_storage_load_delete_title">加载或删除现有筛选</string>
     <string name="cache_filter_storage_select_title">选择筛选器</string>
-    <string name="cache_filter_storage_delete_title">删除筛选器</string>
-    <string name="cache_filter_storage_delete_message">您真的想要删除该过滤器吗？</string>
-    <string name="cache_filter_storage_select_clear_title">选择或清除当前过滤器</string>
-    <string name="cache_filter_storage_clear_title">清除当前筛选项</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">无存在的筛选设置</string>
-    <string name="cache_filter_storage_save_title">保存筛选器名称</string>
-    <string name="cache_filter_storage_save_confirm_title">复写并存储筛选设置</string>
-    <string name="cache_filter_storage_save_confirm_message">已经存在一个名为 \'%s\' 的不同筛选设置。覆盖它吗？</string>
-    <string name="cache_filter_storage_clear_message">您想要清除当前筛选设置吗？</string>
     <string name="cache_filter_stringfilter_matchcase">匹配大小写</string>
     <string name="cache_filter_stringfilter_searchtext_hint">搜索文本</string>
     <string name="cache_filter_stringfilter_info">使用\"模式\"选项时，可以使用通配符 * 和 ?.* 代表零个、一个或多个字符，? 代表一个单一字符。例如，模式 \'H?mburg*\' 将匹配 \'Homburg\' 或 \'Hamburg at Night\'，但不会匹配 \'A day in Hamburg\' 或 \'Hahmburg\'。</string>
@@ -667,6 +656,7 @@
         <item>1月</item>
         <item>&gt;1月</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>
@@ -1720,5 +1710,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
