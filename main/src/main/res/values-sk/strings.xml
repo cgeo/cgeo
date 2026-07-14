@@ -452,7 +452,6 @@
     <string name="cache_filter_mode_advanced">Rozšírené</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Prepnúť na základné</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Zmenou na režim \'Základné\' sa stratia nastavenia filtra. Chcete pokračovať?</string>
-    <string name="cache_filter_add_button">Pridať kritériá filtrovania</string>
     <string name="cache_filter_option_and_or">Použiť ALEBO namiesto A</string>
     <string name="cache_filter_option_inverse">Prevrátiť filter</string>
     <string name="cache_filter_option_include_inconclusive">Použiť nepresvedčivé zhody</string>
@@ -503,15 +502,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Odstrániť</string>
     <string name="cache_filter_storage_clear_button">Vyčistiť</string>
-    <string name="cache_filter_storage_load_delete_title">Načítať alebo odstrániť existujúci filter</string>
     <string name="cache_filter_storage_select_title">Vyberte filter</string>
-    <string name="cache_filter_storage_delete_title">Odstrániť filter</string>
-    <string name="cache_filter_storage_delete_message">Naozaj chcete odstrániť túto konfiguráciu filtra?</string>
-    <string name="cache_filter_storage_select_clear_title">Vyberte filter alebo vymažte aktuálny filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Zatiaľ nie je uložený žiadny filter.</string>
-    <string name="cache_filter_storage_save_title">Uložiť filter s názvom</string>
-    <string name="cache_filter_storage_save_confirm_title">Uložiť filter a prepísať</string>
-    <string name="cache_filter_storage_save_confirm_message">Už existuje filter s názvom \'%s\' a odlišnou konfiguráciou. Chcete ho prepísať?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovať veľkosť</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Vyhľadať text</string>
     <string name="cache_filter_stringfilter_info">Pri možnosti „Vzor“ použite zástupné znaky * a?. * predstavuje nulu, jeden alebo viac znakov, ? predstavuje jeden jediný znak. Napríklad vzor „H?mburg *“ sa bude zhodovať napr. „Homburg“ alebo „Hamburg v noci“, ale nie „deň v Hamburgu“ alebo „Hahmburg“</string>
@@ -584,6 +575,7 @@
         <item>3d</item>
         <item>&lt;3d</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
@@ -2299,5 +2291,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
