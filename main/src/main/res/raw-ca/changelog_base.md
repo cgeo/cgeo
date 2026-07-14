@@ -1,6 +1,12 @@
-De punta a punta: A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android en aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de la pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+### Notes generals de la versió
 
-Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
+**De punta a punta**
+
+A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+
+**Mapes antics**
+
+Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
 - Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
 - Popup de clúster per a Google Maps
 - Amaga les fonts de mapes que no necessites
@@ -20,6 +26,14 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
 - Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
 - Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
+- Nou: Ofereix la possibilitat de definir la icona del catxé fins i tot si el catxé encara no s'ha desat
+- Nou: Infobox per al gràfic d'elevació que mostra la distància restant, l'ascens i el descens
+- Nou: Mostra les coordenades dels punts de referència a la finestra emergent de punts de referència
+- Correcció: La configuració ràpida del mapa pot mostrar els botons "1"/"2" per als perfils d'enrutament buits després de canviar d'idioma
+- Nou: Calcula les dades d'elevació que falten en importar rutes (si es descarreguen les dades d'elevació)
+- Correcció: El descarregador de tessel·les s'atura sota certes condicions (només mapes en línia d'OpenStreetMap)
+- Nou: Marcadors de catxé condicionals
+- Nou: Mostra la pista de navegació (fletxa + distància)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -39,6 +53,14 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
+- Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
+- Nou: Suprimeix el registre fora de línia després de fusionar-lo amb el registre en línia
+- Nou: Mostra la confirmació en suprimir els catxés amb registres fora de línia
+- Nou: Mostra la confirmació en suprimir tots els catxés de la llista "Tot"
+- Nou: Permet el format Markdown per al text de llistat als catxés definides per l'usuari
+- Canvi: Emmagatzema el catxé abans d'afegir la imatge de l'usuari
+- Correcció: Error en carregar imatges incrustades directament al text de la fitxa
+- Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -69,3 +91,10 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
 - Nou: Exportació GPX: Escriu anotacions GSAK Lat/LonBeforeCorrect en exportar punts de referència originals
 - Nou: Mostra la barra de desfer en suprimir els catxés de la llista del mapa
+- Correcció: Error en el filtre de percentatge de preferits
+- Nou: Facilita l'ús de llistes simples com a llistes principals
+- Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
+- Correcció: Alguns textos ignoren el canvi d'idioma
+- Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
+- Canvi: El mòdul de traducció fora de línia de codi obert de Bergamot substitueix el traductor de codi tancat de Google ML Kit
+- Canvi: Nou selector d'emojis
