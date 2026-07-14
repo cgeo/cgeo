@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Este geocacher reportou que existe um problema com esta cache.</string>
     <string name="log_problem_log_full_label">O logbook está cheio</string>
     <string name="log_problem_log_full_text">Este geocacher reportou que o logbook está cheio.</string>
+    <string name="log_problem_log_wet_label">O livro de registos está molhado</string>
+    <string name="log_problem_log_wet_text">Este geocacher reportou que o livro de registos está molhado.</string>
     <string name="log_problem_damaged_label">O recipiente está danificado</string>
     <string name="log_problem_damaged_text">Este geocacher reportou que o recipiente está danificado.</string>
     <string name="log_problem_missing_label">A geocache poderá não estar no local</string>
@@ -232,10 +234,12 @@
     <string name="translate_external_label">Traduzir com %s</string>
     <string name="translate_external_variant_app">Aplicação</string>
     <string name="translate_external_variant_web">Página da Internet</string>
+    <string name="translate_external_variant_unavailable">Não disponível</string>
     <string name="translate_external_none">&lt;Nenhum&gt;</string>
     <string name="translate_external_app">Aplicação externa</string>
     <string name="translate_external_google">Tradutor Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Traduzir Offline com o tradutor DavidV</string>
     <string name="translate_length_warning">A tradução através da página da Internet pode falhar com grandes quantidades de texto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -370,9 +374,7 @@
     <string name="translator_model_download_success">Modelo de tradução para %s transferido</string>
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
-    <string name="translator_tooltip">Traduzir offline com o Google</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
-    <string name="translator_language_target_select">Seleccione idioma de destino</string>
     <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução. Toque para selecionar o idioma de origem.</string>
     <string name="translator_language_unknown">Não é possível identificar o idioma. Toque para selecionar o idioma de origem.</string>
     <string name="translator_language_detected">Traduzir de \"%s\". Toque para selecionar o idioma de origem.</string>
@@ -513,6 +515,14 @@
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_overwrite_offline_log">Sobrescrever o registo offline</string>
     <string name="caches_overwrite_offline_log_question">A cache possui registo offline do tipo \"%1$s\" com um texto de registo. Deseja substituir este registo?</string>
+    <string name="caches_warning_delete_user_data_others">Apagar outras</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">A cache %1$d/%2$d tem dados do utilizador. Os dados do utilizador serão perdidos ao apagar a cache.</item>
+        <item quantity="other">As caches %1$d/%2$d têm dados do utilizador. Os dados do utilizador serão perdidos ao apagar as caches.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Esta acção apagará todas as caches (%d) do seu dispositivo.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Remover outras</string>
+    <string name="caches_warning_remove_caches_from_single_list">As caches %1$d/%2$d estão apenas nesta lista. Remover essas caches da lista irá apagá-las do seu dispositivo.</string>
     <string name="caches_show_attributes_all">Mostrar visão geral de atributos para todas as caches</string>
     <string name="caches_show_attributes_selected">Mostrar visão geral de atributos para caches seleccionadas</string>
     <string name="caches_set_cache_icon">Definir ícone da cache</string>
@@ -541,7 +551,6 @@
     <string name="list_menu_create">Criar nova lista</string>
     <string name="list_menu_drop">Remover a lista actual</string>
     <string name="list_menu_rename">Mudar o nome da lista actual</string>
-    <string name="list_menu_rename_list_prefix">Renomear prefixo da lista</string>
     <string name="rename_from">Renomear de</string>
     <string name="rename_to">Renomear para</string>
     <string name="list_menu_import">Importar</string>
@@ -570,7 +579,6 @@
     <string name="cache_filter_mode_advanced">Avançado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Mudar para básico</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Mudar para o modo \'Básico\' resultará na perda das configurações de filtro. Deseja continuar?</string>
-    <string name="cache_filter_add_button">Adic. critérios de filtro</string>
     <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
@@ -626,17 +634,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Eliminar</string>
     <string name="cache_filter_storage_clear_button">Limpar</string>
-    <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
-    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
-    <string name="cache_filter_storage_delete_message">Tem a certeza que quer eliminar esta configuração de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>
-    <string name="cache_filter_storage_clear_title">Limpar filtro actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
-    <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
-    <string name="cache_filter_storage_save_confirm_title">Guardar e substituir filtro</string>
-    <string name="cache_filter_storage_save_confirm_message">Já existe um filtro com o nome \'%s\' e uma configuração diferente. Substituir?</string>
-    <string name="cache_filter_storage_clear_message">Deseja remover o filtro actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Diferenciar maiúsc. e minúsc.</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Texto a pesquisar</string>
     <string name="cache_filter_stringfilter_info">Com a opção \'Modelo\', utilizar caracteres * e ?. * representa zero, um ou vários caracteres, ? representa um único carácter. Por exemplo, o modelo \'Barr?iro*\' corresponderá a \'Barroiro\' ou \'Barreiro à noite\' mas não a \'Um dia no Barreiro\' ou \'Barrasco\'</string>
@@ -649,6 +647,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_datefilter_absolute">Absoluto</string>
     <string name="cache_filter_datefilter_relative">Relativo a hoje</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignorar ano</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
@@ -750,6 +749,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -802,6 +802,10 @@
     <string name="downloader_pending_info">Há pelo menos uma transferência em pausa ou com falhas. Deseja abrir a lista de transferências pendentes?</string>
     <string name="downloader_retry_download">Tentar de novo a transferência</string>
     <string name="downloader_retry_download_details">Quer tentar novamente a transferência do seguinte ficheiro?</string>
+    <string name="downloader_delete_all_pending">Apagar tudo</string>
+    <string name="downloader_delete_all_confirmation">Apagar todas as transferências pendentes?</string>
+    <string name="downloader_delete_all_message">Isto cancelará todas as %d transferências pendentes e removerá as partes já transferidas. Esta acção não pode ser anulada.</string>
+    <string name="downloader_deleted_all">Apagadas todas as transferências pendentes</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
     <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
@@ -845,6 +849,7 @@
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
+    <string name="settings_title_maptrail">Histórico de percurso</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
@@ -1052,6 +1057,10 @@
         <item>Claro</item>
         <item>Escuro</item>
     </string-array>
+    <string name="init_colored_theme_dark">Tema escuro colorido</string>
+    <string name="init_colored_theme_light">Tema claro colorido</string>
+    <string name="init_summary_colored_theme_dark">Usar barra de ferramentas colorida no tema escuro</string>
+    <string name="init_summary_colored_theme_light">Usar barra de ferramentas colorida no tema claro</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
@@ -1136,7 +1145,10 @@
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
+    <string name="init_maptrail_length">Comprimento Máximo</string>
     <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos — ajustar conforme a memória disponível.</string>
+    <string name="init_maptrail_maxdistance">Distância máxima</string>
+    <string name="init_maptrail_maxdistance_summary">Distância máxima até que dois pontos consecutivos do histórico do percurso fiquem conectados no mapa</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
     <string name="init_trailappearance">Aparência do histórico de percurso</string>
     <string name="init_trailappearance_summary">Seleccionar cor, opacidade e largura para a linha do histórico de percurso</string>
@@ -1558,7 +1570,6 @@
     <string name="menu_collapse_log">Encurtar registo</string>
     <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
-    <string name="cache_log_delete_reason">Motivo (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
@@ -1789,7 +1800,10 @@
     <string name="calccoord_guided_mode">Modo Guia</string>
     <string name="calccoord_guided_edit">Toque num dígito para editar</string>
     <string name="calccoord_guided_value">Valor</string>
+    <string name="calccoord_select_variable">Seleccionar a Variável</string>
+    <string name="calccoord_new_variable">**%s** *(Novo)*</string>
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
+    <string name="calccoord_convert_to_plain_error">A fórmula não resulta em coordenadas válidas. \nA conversão para coordenadas simples irá repor o ponto adicional para coordenadas vazias.</string>
     <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
     <string name="calccoord_remove_spaces">Remover espaços</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substituir \'x\' por \'*\'</string>
@@ -1828,8 +1842,15 @@
     <string name="formula_function_lettervalue">Valor da Palavra</string>
     <string name="formula_function_roman">Romano para Decimal</string>
     <string name="formula_function_vanity">Código Vanity</string>
+    <string name="formula_function_add">Adicionar</string>
+    <string name="formula_function_multiply">Multiplicar</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Máx</string>
+    <string name="formula_function_count">Contar</string>
+    <string name="formula_function_average">Média</string>
     <string name="formula_function_group_simplenumeric">Número Simples</string>
     <string name="formula_function_group_complexnumeric">Número Complexo</string>
+    <string name="formula_function_group_aggregatenumeric">Agregado numérico</string>
     <string name="formula_function_group_simplestring">Sequência de Caracteres Simples</string>
     <string name="formula_function_group_complexstring">Sequência de Caracteres Complexa</string>
     <string name="formula_error_unexpectedtoken">Esperado \'%1$s\'</string>
@@ -1839,6 +1860,7 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Fórmula vazia</string>
     <string name="formula_error_numeric_overflow">Numeração excedida</string>
+    <string name="formula_error_invalid_range">Intervalo inválido: %1$s</string>
     <string name="formula_error_other">Erro: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sem título</string>
@@ -2349,6 +2371,11 @@
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adicioná-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">A remover caches</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">%d cache removida</item>
+        <item quantity="other">%d caches removidas</item>
+    </plurals>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d cache movida</item>
@@ -2420,7 +2447,7 @@
     <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
+    <string name="number_input_range">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
@@ -2587,7 +2614,6 @@
     <string name="check_hillshading_found">Já existem dados do sombreado da altitude</string>
     <string name="check_hillshading_missing">Encontrados dados do sombreado da altitude:</string>
     <string name="check_hillshading_unsupported">Aviso: Os dados do sombreado da altitude não estão disponíveis, pelo menos em parte, para a região seleccionada</string>
-    <string name="check_hillshading_tiles_menu">Verificar dados do sombreado da altitude em falta</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
@@ -2804,13 +2830,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
     <string name="dbi_search_title">Pesquisar por</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usado recentemente</string>
-    <string name="emoji_category_symbols">Símbolos</string>
-    <string name="emoji_category_dots">Pontos</string>
-    <string name="emoji_category_places">Locais</string>
-    <string name="emoji_category_food">Alimentação e Bebidas</string>
-    <string name="emoji_category_activity">Actividade</string>
-    <string name="emoji_category_people">Pessoas</string>
-    <string name="emoji_category_numbers">Números</string>
 </resources>
