@@ -299,6 +299,7 @@
     <string name="list_dialog_rename">Preimenuj</string>
     <string name="list_not_available">Seznam ni več na voljo, preklapljam na standardni seznam</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Različica</string>
     <string name="about_changelog">Zadnje spremembe</string>
@@ -453,7 +454,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
-    <string name="map_source_osm_offline">Brez povezave</string>
     <string name="init_sendToCgeo">Pošlji v c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacije o send2cgeo</string>
     <string name="init_sendToCgeo_name">Ime naprave:</string>
@@ -990,5 +990,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
