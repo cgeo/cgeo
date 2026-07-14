@@ -439,7 +439,6 @@
     <string name="cache_filter_mode_advanced">Gelişmiş</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Temel\'e Geç</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">\'Temel\' moda geçmek filtre ayarlarının kaybolmasına sebep olacaktır. Devam etmek istiyor musunuz?</string>
-    <string name="cache_filter_add_button">Filtre ekle</string>
     <string name="cache_filter_option_and_or">VE yerine VEYA kullan</string>
     <string name="cache_filter_option_inverse">Tersine Filtre</string>
     <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
@@ -486,15 +485,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_clear_button">Temizle</string>
-    <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
     <string name="cache_filter_storage_select_title">Filtre seçin</string>
-    <string name="cache_filter_storage_delete_title">Filtreyi sil</string>
-    <string name="cache_filter_storage_delete_message">Gerçekten bu filtre şablonunu silmek istiyor musunuz?</string>
-    <string name="cache_filter_storage_select_clear_title">Filtre seçin veya mevcut filtreyi temizleyin</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
-    <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
-    <string name="cache_filter_storage_save_confirm_title">Filtreyi üzerine yazarak kaydet</string>
-    <string name="cache_filter_storage_save_confirm_message">\'%s\' isimli farklı bir filtre zaten mevcut. Üzerine yazmak ister misiniz?</string>
     <string name="cache_filter_stringfilter_matchcase">Büyük-Küçük Harf</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Metin Ara</string>
     <string name="cache_filter_stringfilter_info">‘Pattern’ opsiyonu ile şu joker karakterleri kullanın: * ve ?.* sıfır, bir veya birden fazla karakteri, ? ise tek bir karakteri temsil eder. Örneğin , ‘H?mburg*’ araması ‘Homburg’ veya ‘Homburg at Night’ ile eşleşecektir ancak ‘A day in Hamburg’ veya ‘Hahmburg’ ile eşleşmeyecektir.</string>
@@ -589,6 +580,7 @@
         <item>1ay</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -2098,5 +2090,4 @@
     <string name="mcpolling_title">Mesaj merkezi</string>
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
