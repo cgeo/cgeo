@@ -1,6 +1,12 @@
-Edge to Edge: Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser Version von c:geo aktualisiert und einige Routinen für das Bildschirmlayout geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+### Allgemeine Versionshinweise
 
-Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir endgültig die Legacy-Implementierungen für unsere Karten entfernt. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
+**Edge to Edge**
+
+Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser Version von c:geo aktualisiert und einige Routinen für das Bildschirmlayout geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+
+**Alte Karten**
+
+Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Implementierungen für unsere Karten endgültig entfernt. Du wirst automatisch zu unserer neuen Vereinheitlichten Karte weitergeleitet und solltest keine Unterschiede bemerken, dafür einige neue Funktionen. Einige davon sind
 - Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
 - Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
 - Kartenquellen ausblenden, die nicht benötigt werden
@@ -20,6 +26,14 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 - Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
+- Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
+- Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
+- Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
+- Korrektur: Kartenschnelleinstellungen zeigen nach Wechsel der App-Sprache Buttons "1"/"2" für leere Routing-Profile
+- Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
+- Korrektur: Anzeige von Kartenkacheln stoppt unter bestimmten Bedingungen (nur OpenStreetMap Onlinekarten)
+- Neu: Bedingte Cache-Marker
+- Neu: Navigationshinweis anzeigen (Pfeil + Entfernung)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -39,6 +53,14 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Korrektur: Falsche Behandlung des DNF-Status für Opencaching-Plattformen
+- Neu: Lösche das Offline-Log nach dem Zusammenführen mit dem Online-Log
+- Neu: Bestätigung beim Löschen von Caches mit Offline-Logs
+- Neu: Bestätigung beim Löschen aller Caches aus der "Alle" Liste
+- Neu: Erlaube Markdown-Formatierung für Listingtext in benutzerdefinierten Caches
+- Änderung: Cache wird beim Hinzufügen von benutzerdefinierten Bildern gespeichert
+- Korrektur: Absturz beim Laden von Bildern, die direkt in den Text eingebettet sind
+- Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -69,3 +91,10 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Systemeinstellung als Standard-Design für neue Installationen verwenden
 - Neu: GPX-Export: GSAK Lat/LonBeforeCorrect Tag beim Export von Original-Wegpunkten ergänzt
 - Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"
+- Korrektur: Absturz in Prozentsatz Favoritenfilter
+- Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
+- Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
+- Korrektur: Einige Texte ignorieren den Sprachwechsel
+- Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen
+- Änderung: Bergamot Open Source Offline-Übersetzer ersetzt Closed-Source Google ML Kit Übersetzer
+- Änderung: Neue Emoji-Auswahl
