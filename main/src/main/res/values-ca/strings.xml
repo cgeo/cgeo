@@ -621,7 +621,7 @@
     <string name="cache_filter_tier">Nivell BC</string>
     <string name="cache_filter_health_score">Puntuació de l\'estat del catxé</string>
     <string name="cache_filter_health_score_include_unscored">Inclou els catxés sense registres puntuables</string>
-    <string name="cache_filter_named_filter">Filtre amb nom</string>
+    <string name="cache_filter_named_filter">Filtre</string>
     <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
@@ -758,23 +758,23 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtres amb nom</string>
-    <string name="cache_namedfilter_matching">Filtres amb nom coincidents</string>
+    <string name="named_filter_activity_title">Filtres</string>
+    <string name="cache_namedfilter_matching">Filtres coincidents</string>
     <string name="named_filter_add">Afegeix un filtre</string>
-    <string name="named_filter_empty_hint">No hi ha filtres amb nom configurats. Toca + per afegir-ne un.</string>
-    <string name="named_filter_activate_marker">Mostra el marcador - prioritat:</string>
-    <string name="named_filter_enable_all_markers">Activa tots els marcadors</string>
+    <string name="named_filter_empty_hint">No hi ha filtres configurats. Toca + per afegir-ne un.</string>
+    <string name="named_filter_activate_marker">utilitzar amb prio</string>
+    <string name="named_filter_enable_all_markers">Aplica filtres com a marcadors</string>
     <string name="named_filter_markers_enabled">Marcadors activats</string>
     <string name="named_filter_markers_disabled">Marcadors desactivats</string>
     <string name="named_filter_select_title">Selecciona el filtre</string>
     <string name="named_filter_activate_deactivate_title">Activar/desactivar marcadors</string>
     <string name="named_filter_nofilter_label">(sense filtre — coincideix amb tots els catxés)</string>
-    <string name="named_filter_save_as_title">Desa com a filtre amb nom</string>
+    <string name="named_filter_save_as_title">Desa com a filtre</string>
     <string name="named_filter_name_exists_title">El nom ja existeix</string>
     <string name="named_filter_name_exists_message">Ja existeix un filtre anomenat \'%s\'. Voleu sobreescriure-ho?</string>
     <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
     <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
-    <string name="named_filter_fill_with_named">Ompliu amb un filtre amb nom</string>
+    <string name="named_filter_fill_with_named">Omplir amb filtre</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">Alt</string>
     <string name="named_filter_priority_highest">El més alt</string>
