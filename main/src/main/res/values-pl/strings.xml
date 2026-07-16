@@ -632,7 +632,7 @@
     <string name="cache_filter_tier">Poziom BC</string>
     <string name="cache_filter_health_score">Stan zdrowia skrytki</string>
     <string name="cache_filter_health_score_include_unscored">Dołącz skrytki bez punktowanych dzienników</string>
-    <string name="cache_filter_named_filter">Nazwany filtr</string>
+    <string name="cache_filter_named_filter">Filtr</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
@@ -771,23 +771,23 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Nazwane filtry</string>
-    <string name="cache_namedfilter_matching">Dopasowanie nazwanych filtrów</string>
+    <string name="named_filter_activity_title">Filtry</string>
+    <string name="cache_namedfilter_matching">Pasujące filtry</string>
     <string name="named_filter_add">Dodaj filtr</string>
-    <string name="named_filter_empty_hint">Brak skonfigurowanych nazwanych filtrów. Dotknij +, aby go dodać.</string>
-    <string name="named_filter_activate_marker">Pokaż znacznik - priorytet:</string>
-    <string name="named_filter_enable_all_markers">Włącz wszystkie znaczniki</string>
+    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
+    <string name="named_filter_activate_marker">używaj z prio</string>
+    <string name="named_filter_enable_all_markers">Zastosuj filtry jako znaczniki</string>
     <string name="named_filter_markers_enabled">Znaczniki włączone</string>
     <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
     <string name="named_filter_select_title">Wybierz filtr</string>
     <string name="named_filter_activate_deactivate_title">Aktywuj / dezaktywuj znaczniki</string>
     <string name="named_filter_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
-    <string name="named_filter_save_as_title">Zapisz jako nazwany filtr</string>
+    <string name="named_filter_save_as_title">Zapisz jako filtr</string>
     <string name="named_filter_name_exists_title">Nazwa już istnieje</string>
     <string name="named_filter_name_exists_message">Filtr o nazwie \'%s\' już istnieje. Nadpisać?</string>
     <string name="named_filter_config_exists_title">Filtr już zapisany</string>
     <string name="named_filter_config_exists_message">Ta konfiguracja filtra jest już zapisana jako \'%s\'. Zapisać ponownie z nową nazwą?</string>
-    <string name="named_filter_fill_with_named">Wypełnij za pomocą nazwanego filtra</string>
+    <string name="named_filter_fill_with_named">Wypełnij filtrem</string>
     <string name="named_filter_priority_normal">Normalny</string>
     <string name="named_filter_priority_high">Wysoki</string>
     <string name="named_filter_priority_highest">Najwyższy</string>
