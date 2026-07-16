@@ -626,7 +626,6 @@
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
     <string name="cache_filter_category">Kategorie BC</string>
     <string name="cache_filter_tier">Úroveň BC</string>
-    <string name="cache_filter_named_filter">Pojmenovaný filtr</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
