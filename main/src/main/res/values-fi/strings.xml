@@ -570,7 +570,6 @@
     <string name="cache_filter_stored_since">Viimeisin yksityiskohtien päivitys</string>
     <string name="cache_filter_category">BC Kategoria</string>
     <string name="cache_filter_tier">BC Taso</string>
-    <string name="cache_filter_named_filter">Sisäkkäinen suodatin</string>
     <string name="cache_filter_logical_filter_group">Sisäkkäinen suodatin</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
