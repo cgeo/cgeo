@@ -588,7 +588,6 @@
     <string name="cache_filter_stored_since">Détails de la dernière mise à jour</string>
     <string name="cache_filter_category">Catégorie BC</string>
     <string name="cache_filter_tier">Palier BC</string>
-    <string name="cache_filter_named_filter">Filtre nommé</string>
     <string name="cache_filter_logical_filter_group">Filtre imbriqué</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
