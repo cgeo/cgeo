@@ -613,7 +613,6 @@
     <string name="cache_filter_stored_since">Última actualização de detalhes</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">Nível BC</string>
-    <string name="cache_filter_named_filter">Filtro Nomeado</string>
     <string name="cache_filter_logical_filter_group">Filtro agrupado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
