@@ -620,7 +620,7 @@
     <string name="cache_filter_tier">BC-Stufe</string>
     <string name="cache_filter_health_score">Cache-Gesundheitswert</string>
     <string name="cache_filter_health_score_include_unscored">Caches mit nicht bewertbaren Logs einschließen</string>
-    <string name="cache_filter_named_filter">Benannter Filter</string>
+    <string name="cache_filter_named_filter">Filter</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -757,23 +757,23 @@
         <item>&gt;1M</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Benannte Filter</string>
-    <string name="cache_namedfilter_matching">Passende benannte Filter</string>
+    <string name="named_filter_activity_title">Filter</string>
+    <string name="cache_namedfilter_matching">Passende Filter</string>
     <string name="named_filter_add">Filter hinzufügen</string>
-    <string name="named_filter_empty_hint">Keine benannten Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
-    <string name="named_filter_activate_marker">Zeige Marker - Priorität:</string>
-    <string name="named_filter_enable_all_markers">Alle Marker aktivieren</string>
+    <string name="named_filter_empty_hint">Keine Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
+    <string name="named_filter_activate_marker">mit Prio verwenden</string>
+    <string name="named_filter_enable_all_markers">Filter als Marker anwenden</string>
     <string name="named_filter_markers_enabled">Marker aktiviert</string>
     <string name="named_filter_markers_disabled">Marker deaktiviert</string>
     <string name="named_filter_select_title">Filter auswählen</string>
     <string name="named_filter_activate_deactivate_title">Marker aktivieren / deaktivieren</string>
     <string name="named_filter_nofilter_label">(kein Filter — passt auf alle Caches)</string>
-    <string name="named_filter_save_as_title">Als benannter Filter speichern</string>
+    <string name="named_filter_save_as_title">Als Filter speichern</string>
     <string name="named_filter_name_exists_title">Name existiert bereits</string>
     <string name="named_filter_name_exists_message">Ein Filter mit dem Namen \'%s\' existiert bereits. Überschreiben?</string>
     <string name="named_filter_config_exists_title">Filter bereits gespeichert</string>
     <string name="named_filter_config_exists_message">Diese Filter-Konfiguration is bereits als \'%s\' gespeichert. Erneut unter neuem Namen speichern?</string>
-    <string name="named_filter_fill_with_named">Mit benanntem Filter füllen</string>
+    <string name="named_filter_fill_with_named">Mit Filter füllen</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">Hoch</string>
     <string name="named_filter_priority_highest">Höchste</string>
