@@ -609,7 +609,6 @@
     <string name="cache_filter_category">BC Kategori</string>
     <string name="cache_filter_tier">BC Nivå</string>
     <string name="cache_filter_health_score_include_unscored">Inkludera cacher utan poängbara loggar</string>
-    <string name="cache_filter_named_filter">Namngivna filter</string>
     <string name="cache_filter_logical_filter_group">Kopplade filter</string>
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Detaljer</string>
@@ -746,23 +745,16 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Namngivna filter</string>
-    <string name="cache_namedfilter_matching">Matchande namngivna filter</string>
     <string name="named_filter_add">Lägg till filter</string>
-    <string name="named_filter_empty_hint">Inga namngivna filter har konfigurerats. Tryck på + för att lägga till ett.</string>
-    <string name="named_filter_activate_marker">Visa markör - prioritet:</string>
-    <string name="named_filter_enable_all_markers">Aktivera alla markörer</string>
     <string name="named_filter_markers_enabled">Markörer aktiverade</string>
     <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
     <string name="named_filter_select_title">Välj filter</string>
     <string name="named_filter_activate_deactivate_title">Aktivera / inaktivera markörer</string>
     <string name="named_filter_nofilter_label">(inget filter — matchar alla cacher)</string>
-    <string name="named_filter_save_as_title">Spara som namngivet filter</string>
     <string name="named_filter_name_exists_title">Namnet finns redan</string>
     <string name="named_filter_name_exists_message">Ett filter som heter \'%s\' finns redan. Skriv över?</string>
     <string name="named_filter_config_exists_title">Filtret har redan sparats</string>
     <string name="named_filter_config_exists_message">Denna filterkonfiguration är redan sparad som \'%s\'. Spara igen med ett nytt namn?</string>
-    <string name="named_filter_fill_with_named">Fyll med namngivet filter</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">Hög</string>
     <string name="named_filter_priority_highest">Högsta</string>
