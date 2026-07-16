@@ -628,7 +628,6 @@
     <string name="cache_filter_stored_since">Дата обновления описания</string>
     <string name="cache_filter_category">Категория BC</string>
     <string name="cache_filter_tier">Уровень ВС</string>
-    <string name="cache_filter_named_filter">Именованный фильтр</string>
     <string name="cache_filter_logical_filter_group">Вложенный фильтр</string>
     <string name="cache_filtergroup_basic">Основное</string>
     <string name="cache_filtergroup_details">Детали</string>
