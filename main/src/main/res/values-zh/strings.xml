@@ -522,7 +522,6 @@
     <string name="cache_filter_stored_since">最后更新详情</string>
     <string name="cache_filter_category">BC 类别</string>
     <string name="cache_filter_tier">BC 层</string>
-    <string name="cache_filter_named_filter">名称筛选</string>
     <string name="cache_filter_logical_filter_group">嵌套筛选</string>
     <string name="cache_filtergroup_basic">基础</string>
     <string name="cache_filtergroup_details">详情</string>
