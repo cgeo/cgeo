@@ -601,7 +601,6 @@
     <string name="cache_filter_stored_since">Laatste details update</string>
     <string name="cache_filter_category">BC categorie</string>
     <string name="cache_filter_tier">BC Laag</string>
-    <string name="cache_filter_named_filter">Benoemde filter</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
