@@ -510,7 +510,6 @@
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
     <string name="cache_filter_category">BC 분류</string>
     <string name="cache_filter_tier">BC 계층</string>
-    <string name="cache_filter_named_filter">명명된 필터</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
