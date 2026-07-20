@@ -1,12 +1,12 @@
-### General release notes
+### Notas gerais de lançamento
 
-**Edge to Edge**
+**Exibição de ponta a ponta**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+Devido às políticas da Play Store, actualizámos o nível da API Android desta versão do c:geo e alterámos algumas das rotinas de disposição do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
 
-**Legacy Maps**
+**Mapas antigos**
 
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
+Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalmente as implementações antigas dos nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
 - Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
 - Janela pendente de agrupamento para o Google Maps
 - Ocultar fontes de mapa de que não precisa
@@ -29,11 +29,11 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Novo: Possibilidade para definir o ícone da cache mesmo que ela ainda não esteja armazenada
 - Novo: Caixa de informação para o gráfico de elevação que mostra a distância restante, a subida e a descida
 - Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
-- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
-- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
-- New: Conditional cache markers
-- New: Show navigation hint (arrow + distance)
+- Correcção: Configurações rápidas do mapa podia mostrar botões "1"/"2" para perfis de encaminhamento vazios, após mudar de idioma
+- Novo: Calcular dados de relevo em falta na importação de percursos (se dados de relevo forem descarregados)
+- Correcção: O programa de transferência de blocos de sombreado de altitude fecha em determinadas condições (apenas mapas online do OpenStreetMap)
+- Novo: Marcadores de cache condicionais
+- Novo: Mostrar dicas de navegação (seta + distância)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -57,10 +57,10 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Novo: Eliminar o registo offline após junção com o registo online
 - Novo: É pedida uma confirmação ao eliminar caches com registos offline
 - Novo: É pedida uma confirmação ao eliminar todas das caches da lista "Todas as caches"
-- New: Allow Markdown formatting for listing text in user-defined caches
-- Change: Store cache before adding user image
-- Fix: Crash on loading images embedded directly in listing text
-- New: Show own favorites in log view (Geocaching.com + offline logs)
+- Novo: Permite a formatação Markdown para o texto da descrição em caches definidas pelo utilizador
+- Alteração: Armazenar cache antes de adicionar imagem do utilizador
+- Correção: Falha ao carregar imagens incorporadas directamente no texto da descrição
+- Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
@@ -94,7 +94,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Correcção: Falha ao filtrar por percentagem de favoritos
 - Novidade: Agora é mais fácil utilizar listas simples como listas principais
 - Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
-- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
-- Change: New emoji selector
+- Correcção: Alguns textos a ignoravam a alteração de idioma
+- Correcção: "Usar unidades imperiais" não era inicializado correctamente em instalações novas
+- Alteração: O módulo de tradução offline de código aberto "Bergamot" substitui o tradutor proprietário "Google ML Kit"
+- Alteração: Novo selector de emoji
