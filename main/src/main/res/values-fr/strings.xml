@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">Impossible de charger le thème de rendu sélectionné. Retour au thème intégré.</string>
     <string name="err_rendertheme_invalid">Le thème de rendu sélectionné n\'est pas valide pour cette version de mapsforge. Retour au thème intégré.</string>
     <string name="err_invalid_filename_char">Le caractère \'%c\' est interdit</string>
+    <string name="err_center_coordinates_invalid">Impossible de définir le centre de la carte, les coordonnées sont invalides</string>
     <string name="warn_save_nothing">Il n\'y a rien à enregistrer.</string>
     <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
     <string name="warn_no_coordinates">Aucune coordonnée associée.</string>
@@ -325,6 +326,8 @@
     <string name="warn_calculator_state_save">Veillez à enregistrer le point de passage si vous souhaitez conserver l\'état du calculateur.</string>
     <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
     <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
+    <string name="err_trackable_error">Erreur sur l\'objet voyageur</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Trop d\'objets voyageurs marqués comme \"a visité\" - maximum de %d autorisé</string>
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
     <string name="confirm_discard_changes">Ignorer les modifications non enregistrées ?</string>
     <string name="confirm_unsent_changes_title">Modifications non envoyées</string>
@@ -354,11 +357,16 @@
     <string name="translator_model_download_success">Modèle de traduction pour %s téléchargé</string>
     <string name="translator_model_download_error">Impossible de télécharger le modèle de traduction %1$s: %2$s</string>
     <string name="translator_model">Modèle de traduction</string>
+    <string name="translator_tooltip">Traduction hors ligne avec Google</string>
     <string name="translator_language_select">Sélectionner la langue source</string>
     <string name="translator_language_target_select">Sélectionner la langue cible</string>
+    <string name="translator_language_unsupported">Langue (%s) non prise en charge pour la traduction.\nAppuyez pour sélectionner la langue source.</string>
+    <string name="translator_language_unknown">Impossible d\'identifier la langue.\nAppuyez pour sélectionner la langue source.</string>
+    <string name="translator_language_detected">Traduire depuis «%s» avec Google.\nAppuyez pour sélectionner la langue source.</string>
     <string name="translator_target_language">Traduire en \"%s\"</string>
     <string name="translator_translation_error">Échec de la traduction du texte : %s</string>
     <string name="translator_translation_initerror">Impossible d\'initialiser le traducteur</string>
+    <string name="translator_translation_success">Traduit de \"%s\".\nAppuyez sur le bouton pour restaurer l\'original</string>
     <string name="crash_activity_title">Oups ! c:geo a planté !</string>
     <string name="crash_activity_report">signaler un problème</string>
     <!-- location service -->
@@ -859,6 +867,7 @@
     <string name="settings_lc_description">Ce paramètre ajoute les Adventure Lab sur la carte.\n\n(Disponible pour les membres premium uniquement sur geocaching.com. Nécessite d\'activer le service “Géocaching”.)\n\nModifier ce paramètre nécessite de redémarrer l\'application.</string>
     <string name="settings_lc_found_state_title">État trouvé manuel</string>
     <string name="settings_lc_found_state_handling">Si coché, ne pas récupérer automatiquement l\'état trouvé des Labcaches, à la place, fournir des contrôles pour que l\'utilisateur définisse manuellement l\'état trouvé</string>
+    <string name="lc_default_description">C\'est une Adventure Lab de geocaching.com. Les Adventures peuvent seulement être jouées avec l\'application Adventure Lab de Groundspeak. Appuyez sur l\'icône Adventure Lab sur l\'onglet “Détails” pour ouvrir/installer l\'application.\nSi vous ne voulez pas voir les Adventure Lab sur votre carte et la recherche, vous pouvez les désactiver dans le menu “Paramètres”, “Services”, puis “Geocaching.com Adventure Lab”</string>
     <string name="init_summary_oc_de">Charger les caches depuis opencaching.de</string>
     <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
     <string name="init_summary_oc_pl">Charger les caches depuis opencaching.pl</string>
@@ -883,6 +892,8 @@
     <string name="init_login_popup_not_authorized">Non autorisé</string>
     <string name="init_login_popup_not_logged_in">Non connecté</string>
     <string name="init_login_manual">Connexion manuelle</string>
+    <string name="init_login_manual_description">Veuillez attendre qu\'un site web apparaisse et se connecte à votre compte. Attendez que la connexion soit terminée. Puis cliquez sur le bouton \'OK\' ci-dessous.</string>
+    <string name="init_login_manual_wig_description">Veuillez vous connecter à votre compte Geocaching.com et continuer à autoriser la connexion à Wherigo. Attendez que la page d\'accueil Wherigo soit visible, puis cliquez sur le bouton \'Ok\' ci-dessous.</string>
     <string name="init_login_manual_error_nocookie">Aucun jeton d\'autorisation n\'a été trouvé. Veuillez ouvrir une session ou annuler la connexion manuelle.</string>
     <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
     <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
@@ -1513,6 +1524,7 @@
     <string name="cache_menu_details">Détails</string>
     <string name="cache_menu_refresh"> Actualiser</string>
     <string name="cache_menu_share">Partager la cache</string>
+    <string name="cache_menu_share_with_data">Partager en incluant les données utilisateur</string>
     <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
     <string name="cache_menu_copy_list">Copier dans une autre liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (en ligne)</string>
@@ -1527,6 +1539,7 @@
     <string name="menu_collapse_log">Réduire le log</string>
     <string name="cache_log_menu_delete">Supprimer le log</string>
     <string name="cache_log_menu_popup_title">Log de %s</string>
+    <string name="cache_log_delete_reason">Raison (max. %d caractères)</string>
     <string name="cache_log_delete_reason_default">Le journal a été supprimé en utilisant c:geo</string>
     <string name="ignore_confirm_title">Soyez prudent</string>
     <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
@@ -2386,6 +2399,7 @@
     <string name="preference_colorpicker_show_width">largeur : %d</string>
     <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
+    <string name="number_input_title">Entrez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
     <string name="number_input_err_boundarymax">La valeur saisie est trop grande - réinitialisée à la valeur maximale</string>
     <string name="number_input_err_format">Format de nombre non valide</string>
