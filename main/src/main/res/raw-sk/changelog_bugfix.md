@@ -49,8 +49,8 @@ Note: If you are using internal routing, you will need to execute the following 
 - Fix: Viewing trackable details removes it from cache inventory
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
+- Oprava: Dialógové okno na stiahnutie offline prekladu sa zobrazovalo v inštaláciách bez podpory offline prekladu
+- Oprava: Zmena formátu súradníc v informačnom hárku kešky/bodu trasy
 - Fix: Log date cut off in list of logs (depending on date format and font size)
 - Fix: Event times not detected in certain conditions
 - Fix: Link in listing not clickable under certain conditions
