@@ -1,7 +1,7 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+### UnifiedMap färdplan & "gamla" kartor avskrivningsmeddelande
+c:geo har en helt ny kartimplementation som heter "UnifiedMap" sedan en tid, vilket i slutändan kommer att ersätta de gamla implementationerna av Google Maps och Mapsforge (OpenStreetMap). Detta är en avskrivningsanmälan för att informera dig om den fortsatta färdplanen.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
+UnifiedMap publicerades för ungefär ett år sedan. Det stöder fortfarande Google Maps och OpenStreetMap (online + offline), men på ett helt omarbetat tekniskt sätt, och med en hel del spännande nya funktioner som de "gamla" kartorna inte stöder, varav en del är
 - Kartrotation för OpenStreetMap-baserade kartor (online + offline)
 - Klusterpopup för Google Maps
 - Dölj kartkällor som du inte behöver
@@ -9,14 +9,14 @@ UnifiedMap got published about a year ago. It still supports Google Maps and Ope
 - Växla mellan listor direkt från kartan
 - "Körläge" för OpenStreetMap-baserade kartor
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+UnifiedMap har visat sig vara stabil sedan länge, så vi kommer att ta bort de gamla kartimplementeringarna för att minska ansträngningarna för att upprätthålla c:geo.
 
-Roadmap:
+Färdplan:
 - "Gamla" kartor är i avskrivningsläge nu - vi kommer inte att fixa buggar för dem längre.
 - UnifiedMap kommer att göras som standard för alla användare under hösten 2025.
 - "Gamla" kartimplementationer kommer att tas bort våren 2026.
 
-Until then, you can switch between the different implementations in settings => map sources.
+Fram till dess kan du växla mellan de olika implementationerna i inställningarna => kartkällor.
 
 ### Karta
 - Nyhet: Visa geofences för labsteg (UnifiedMap) - aktivera "Cirklar" i snabbinställningar på kartan för att visa dem
@@ -42,36 +42,36 @@ Until then, you can switch between the different implementations in settings => 
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
 - Fix: Talservice avbryts vid skärmrotation
-- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
+- Fix: Cache-information: Listor för cache som inte uppdaterats efter att ha tryckt på listnamnet och tagit bort cachen från den listan
 - Fix: Användaranteckning tappas när du laddar upp ett lab adventure
 - Ändra: Loggdatum-relaterade platshållare kommer att använda valt datum istället för aktuellt datum
-- New: Collapse long log entries per default
+- Ny: Kollapsa långa loggposter som standard
 
-### Wherigo player
+### Wherigo-spelare
 - Nytt: Integrerad Wherigo-spelarkontroll kontrollerar saknade inloggningsuppgifter
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
+- Ändring: Borttagen Wherigo felrapport (eftersom fel är mestadels patronrelaterade, måste rättas av patronägare)
+- Nytt: Möjlighet att navigera till en zon med kompass
+- Nytt: Möjlighet att kopiera zoncentrums koordinater till urklipp
+- Nytt: Ange zoncentrum som mål när du öppnar kartan (för att få rutt- och distansinformation för det)
 - Nyhet: Stöd för att öppna lokala Wherigo-filer
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- Förändring: Långtryck på en zon på kartan känns inte längre igen. Detta gör det möjligt för användare att göra andra grejer i kartzonen som finns på långtryck, t.ex.: skapa användardefinierad cache
+- Nyhet: Visa varning om wherigo.com rapporterar saknad EULA (som leder till misslyckad nedladdning av kassett)
 
 ### Allmänt
-- New: Redesigned search page
+- Nyhet: Omdesignad söksida
 - Nytt: Filter för antal i inventariet
 - Nytt: Stöd för koordinater i DD,DDDDDDD-format
 - Nytt: Visa senast använda filternamn i filterdialogen
 - Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
 - Fix: Felaktig höjd (använder inte höjd över havsmedelnivån)
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
-- Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Sortering av cachelistor efter avstånd fungerar inte korrekt
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
 - Fix: Färg-problem med menyikoner i ljust läge
 - Nyhet: Lägg till "Ta bort tidigare händelser" för att lista "alla"
 - Nyhet: Visa koppling för "användardefinierade cacher" som aktiv i källfiltret
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
+- Nyhet: GPX-export: exportera loggar / spårbara objekt gjorda valfria
+- Fix: Lade till knapp för att ta bort loggmallar
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
 - Fix: Kartnedladdning erbjuder trasiga (0 bytes) filer för nedladdning
 - Nytt: Lade till mappningar för vissa saknade OC-cache-typer
