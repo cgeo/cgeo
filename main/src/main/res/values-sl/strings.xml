@@ -265,7 +265,6 @@
     <string name="dont_show_again">Ne prikaži več</string>
     <string name="tap_icon_more_info">Za dodatne informacije klikni na ikono</string>
     <string name="use_slider_adjust_value">Uporabi drsnik za nastavitev vrednosti</string>
-    <string name="warn_gm_not_available">Google Zemljevidi niso na voljo.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Osnovni</string>
     <!-- location service -->
@@ -410,9 +409,7 @@
     <string name="list_dialog_rename">Preimenuj</string>
     <string name="list_not_available">Seznam ni več na voljo, preklapljam na standardni seznam</string>
     <!-- caches lists filter -->
-
     <string name="cache_filter_mode_advanced">Napredno</string>
-    <string name="cache_filter_add_button">Dodaj nov kriterij</string>
     <string name="cache_filter_option_and_or">Uporabi ALI namesto IN</string>
     <string name="cache_filter_option_inverse">Obratni (inverzni) filter</string>
     <string name="cache_filter_option_include_inconclusive">Vključi pomanjkljiva ujemanja</string>
@@ -442,12 +439,7 @@
     <string name="cache_filter_userdisplay_none">Brez</string>
     <string name="cache_filter_storage_delete_button">Izbriši</string>
     <string name="cache_filter_storage_clear_button">Počisti</string>
-    <string name="cache_filter_storage_load_delete_title">Naloži ali izbriši obstoječi filter</string>
     <string name="cache_filter_storage_select_title">Izberi filter</string>
-    <string name="cache_filter_storage_delete_title">Izbriši filter</string>
-    <string name="cache_filter_storage_delete_message">Ali res želiš izbrisati ta filter?</string>
-    <string name="cache_filter_storage_select_clear_title">Izberi filter ali izbriši izbranega</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Noben filter še ni shranjen.</string>
     <string name="cache_filter_stringfilter_matchcase">Razlikuj velike in male črke</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Išči besedilo</string>
     <string name="cache_filter_stringfilter_type_contains">Vsebuje</string>
@@ -548,7 +540,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
-
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Različica</string>
     <string name="about_changelog">Zadnje spremembe</string>
@@ -661,8 +653,6 @@
     <string name="init_signature_template_type">Vrsta</string>
     <string name="init_signature_template_location">Lokacija</string>
     <string name="init_signature_template_geocode">Geokoda</string>
-    <string name="init_ratingwanted">GCvote ocene</string>
-    <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Prikaže svoje/prijateljeve</string>
     <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
     <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
@@ -745,7 +735,6 @@
     <string name="init_dataDir">Izberi mapo</string>
     <string name="init_dataDir_note">Dodatne podatke o zakladih (kvarnike, slike iz zapisov, …) lahko shraniš na svojo zunanjo spominsko enoto (emulirana ali realna zunanja SD spominska kartica; odvisno od tvoje naprave).</string>
     <string name="init_maptrail">Pokaži sled</string>
-    <string name="init_maptrail_length">Maksimalna dolžina sledi</string>
     <string name="init_maptrail_length_summary">Nastavite maksimalno dolžino shranjene sledi (začenši ob vsakem zagonu c:geo) glede na razpoložljiv pomnilnik. Privzeta vrednost je 700 točk.</string>
     <string name="init_summary_maptrail">Ko je funkcija vključena (in GPS vklopljen), c:geo beleži vašo sled in jo prikazuje na zemljevidu.</string>
     <string name="init_trailappearance_summary">Nastavi barvo, nasičenost in debelino črte za sled.</string>
@@ -819,7 +808,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
-    <string name="map_source_osm_offline">Brez povezave</string>
     <string name="map_source_osm_offline_combined">Združen (offline)</string>
     <string name="init_sendToCgeo">Pošlji v c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacije o send2cgeo</string>
@@ -957,9 +945,7 @@
     <string name="cache_variables">Spremenljivke</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Dodatne točke (%d)</string>
     <string name="cache_waypoints_add">Dodaj točko</string>
-    <string name="cache_waypoints_add_currentLocation">Dodaj trenutno lokacijo</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj iz odložišča</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skrij obiskane točke</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_hint_not_available">Namiga ni na voljo</string>
     <string name="cache_logs">Dnevnik zapisov</string>
@@ -1008,6 +994,7 @@
     <string name="ignore_confirm_title">Previdno</string>
     <string name="ignore_confirm_message">Prezreti zaklad pomeni, da se ta zaklad ne bo več pojavil pri nalaganju podatkov iz geocaching.com. Zaklad si boste lahko znova ogledali le, če ga na spletnem mestu \"odprezrete\".</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
+    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
@@ -1052,7 +1039,6 @@
     <string name="cache_recently_viewed">Nedavno ogledani zakladi in točke</string>
     <string name="cache_recently_viewed_empty">Ni nedavno ogledanih zakladov in točk za prikaz</string>
     <string name="cache_clear_recently_viewed">počisti</string>
-    <string name="cache_whereyougo_start">Odpri WhereYouGo za prenos in zagon kartuše</string>
     <string name="cache_alc_start">Odpri aplikacijo Adventure Lab za začetek te avanture.</string>
     <string name="cache_alc_related_start">Odpri aplikacijo Adventure Lab za začetek avanture.</string>
     <string name="cache_alc_install">Namesti aplikacijo Adventure Lab za igranje te avanture.</string>
@@ -1640,7 +1626,6 @@
     <string name="downloadtile_info">c:geo ne more izračunati poti, ker manjka nekaj navigacijskih podatkovnih datotek. Ali želite prenesti manjkajoče podatke?</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Izbriši sled</string>
-    <string name="map_trailhistory_cleared">Sled je izbrisana</string>
     <string name="map_trail_show">Pokaži sled</string>
     <string name="map_trail_hide">Skrij sled</string>
     <!-- history track export -->
@@ -1668,11 +1653,5 @@
     <string name="smiley_question">Vprašanje</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Izvirnik</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
 </resources>
