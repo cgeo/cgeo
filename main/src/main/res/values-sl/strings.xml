@@ -806,7 +806,7 @@
     <string name="feature_search_geocode">Išči po GC kodi</string>
     <string name="feature_search_owner">Išči po lastniku</string>
     <string name="feature_search_finder">Išči po najditelju</string>
-    <string name="feature_favorite">Dodajanje zaklada na seznam priljubljenih...</string>
+    <string name="feature_favorite">Dodajanje zaklada na seznam priljubljenih</string>
     <string name="init_appearance_general">Splošni izgled</string>
     <string name="init_maplines_title">Prilagoditev barv za prikaz na zemljevidu</string>
     <!-- proximity notification -->
@@ -1174,7 +1174,7 @@
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <string name="quick_settings">Hitre nastavitve</string>
-    <string name="quick_settings_info">Nekaj nastavitev zemljevida (pokaži/skrij zaklade/točke, krogi, trase, ...) smo preselili v nov meni \"Hitre nastavitve\".\nMeni odprete s pritiskom na ikono, ki se nahaja na sredini spodnjega roba zemljevida.</string>
+    <string name="quick_settings_info">Nekaj nastavitev zemljevida (pokaži/skrij zaklade/točke, krogi, trase) smo preselili v nov meni \"Hitre nastavitve\".\nMeni odprete s pritiskom na ikono, ki se nahaja na sredini spodnjega roba zemljevida.</string>
     <string name="map_show_waypoints_title">Pokaži dodatne točke:</string>
     <string name="google_maps_style_default">Privzeto</string>
     <string name="google_maps_style_contrast">Visok kontrast</string>
