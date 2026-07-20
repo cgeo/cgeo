@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema seleccionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema seleccionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
     <string name="err_invalid_filename_char">Carácter \'%c\' não permitido</string>
+    <string name="err_center_coordinates_invalid">Não é possível definir o centro do mapa, coordenadas inválidas</string>
     <string name="warn_save_nothing">Não há nada para guardar.</string>
     <string name="warn_no_cache_coord">Não há caches com coordenadas.</string>
     <string name="warn_no_coordinates">Nenhumas coordenadas fornecidas.</string>
@@ -866,6 +867,7 @@
     <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
     <string name="settings_lc_found_state_title">Estado \"Encontrada\" manual</string>
     <string name="settings_lc_found_state_handling">Se marcado, não obter automaticamente o verdadeiro estado \"encontrado\" para caches Adventure Lab, em vez disso, fornecer controles para o utilizador definir manualmente o estado de \"encontrado\"</string>
+    <string name="lc_default_description">Esta é uma cache \"Adventure Lab\" (do serviço \'geocaching.com\'). As aventuras apenas podem ser jogadas dentro da aplicação \"Adventure Lab\" da Groundspeak. Toque no ícone \"Adventure Lab\" na página \"Detalhes\" para abrir/instalar a aplicação \"Adventure Lab\" para prosseguir com a aventura na mesma.\nSe não deseja ver as caches \"Adventure Lab\" no mapa e na pesquisa, pode desactivá-las em \"Definições\" - \"Serviços\" - \"Geocaching.com Adventure Lab\"</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
     <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
     <string name="init_summary_oc_pl">Carregar caches a partir de \'opencaching.pl\'</string>
@@ -890,6 +892,8 @@
     <string name="init_login_popup_not_authorized">Não autorizado</string>
     <string name="init_login_popup_not_logged_in">Sem sessão iniciada</string>
     <string name="init_login_manual">Início de Sessão Manual</string>
+    <string name="init_login_manual_description">Aguarde até que o site seja carregado e inicie sessão na sua conta. Aguarde até que o processo de início de sessão esteja concluído. Depois, clique no botão \'Ok\' abaixo.</string>
+    <string name="init_login_manual_wig_description">Inicie sessão na sua conta do Geocaching.com e continue para autorizar o início de sessão no Wherigo. Aguarde até que a página inicial do Wherigo seja apresentada e, em seguida, clique no botão \'Ok\' abaixo.</string>
     <string name="init_login_manual_error_nocookie">Não foi encontrado nenhum token de autorização. Por favor, inicie a sessão ou \'cancele\' a manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
     <string name="init_login_popup_invalid_token">Autorização inválida, volte a autorizar</string>
