@@ -46,7 +46,7 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Fix: Användardefinierad tile-leverantör stöder inte ytterligare URL-parametrar
 - Fix: Innehav / Spårbara för en cache laddats inte längre
 - Ändra: Uppdaterad intern användaragent för att ta itu med några nedladdningsproblem
-- Fix: Viewing trackable details removes it from cache inventory
+- Fix: Visa spårbara detaljer tar bort den från cache-inventering
 
 ##
 - Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
@@ -60,9 +60,9 @@ Obs: Om du använder intern routing måste du köra följande steg en gång efte
 - Ändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
 - Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
 - Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Krasch vid omladdning av vägpunkter under vissa lastförhållanden
+- Fix: Event-datum-filter fungerar inte under vissa omständigheter
+- Fix: Max längd för loggrad fungerar inte tillförlitligt i "obegränsad" inställning
 - Fix: Krasch när karta öppnas under vissa förutsättningar
 - Fix: Ingen karta visas om wherigo inte har några synliga zoner
 - Fix: Krasch på cachedetaljernas bildflik under vissa förutsättningar
