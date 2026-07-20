@@ -27,7 +27,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 - Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
 - Nytt: Erbjud att ställa in cache-ikonen även om cachen ännu inte är lagrad
-- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- Nyhet: Infobox för höjddiagram som visar resterande avstånd, stigning, nedstigning
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 - Fix: Snabbinställningar på kartan kan visa knapparna "1"/"2" för tomma routing-profiler efter att ha bytt språk
 - Nytt: Beräkna saknade höjddata vid import av spår (om höjddata laddas ner)
@@ -62,11 +62,11 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
 
-### Wherigo player
+### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
 - Nytt: Förbättrad knapphantering
 - Ny: Status auto-spara
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Nyhet: Alternativ för att skapa genväg till Wherigo-spelare på mobilens hemskärm
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
@@ -81,15 +81,15 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Ändring: Ta bort GCVote (tjänsten upphör)
 - Nyhet: Färgat verktygsfält på cache-detaljsidor
 - Nyhet: Välj flera bokmärkeslistor / fickfrågor att ladda ner
-- New: Preview bookmark lists
+- Nytt: Förhandsgranska bokmärkeslistor
 - Förändring: Öka den minsta nödvändiga Android-versionen till Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
+- Nyhet: Standard-snabbinställningar för nya installationer
+- Fix: Titlar i inmatningsdialogrutor för intervall avskurna
+- Fix: Avisering för nattliga uppdateringspunkter till vanlig APK även för FOSS variant
+- Nyhet: "Ignorera år"-alternativ för datumfilter
 - Nyhet: Gör fjärr-URI klickbar i väntande nedladdningar
 - Ändring: Använd systeminställningar som standardtema för nya installationer
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- Nyhet: GPX-export: Skriv GSAK Lat/Lon före korrigera-kommentarer vid export av ursprungliga vägpunkter
 - Nytt: Visa ångra-fältet när cacher tas bort från listan från kartan
 - Fix: Krascher i procentuellt favoritfilter
 - Nyhet: Gör det enklare att använda enkla listor som överordnade listor
