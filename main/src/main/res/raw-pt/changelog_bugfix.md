@@ -1,43 +1,43 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
 
-- Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
-
-##
-- Fix: Deleting of log images broken (website change)
-- Change: Unify track and individual route loading buttons
-- Fix: Cache attributes not detected correctly under certain conditions
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Correcção: Demora na abertura de popup em Cache/Ponto Adicional em alguns dispositivos
+- Correcção: A edição da descrição da cache não suporta a função copiar & colar
+- Correcção: Alguns bloqueios e "aplicação não responde"
+- Correcção: Apagar o registo de TB falhava (mudança na página web)
 
 ##
-- Fix: Pocket query import broken (website change)
+- Correcção: Interrupção ao eliminar imagens de registo (alteração no sítio web)
+- Alteração: Unificar os botões de carregamento de percurso e rota individual
+- Correcção: atributos da cache não detectados correctamente sob certas condições
+- Correcção: Registo de caches (alteração no site)
+- Correcção: Registo de TBs (alteração no site)
 
 ##
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Correcção: importação de Pocket query interrompida (mudança do sítio web)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Correcção: Falha ao aceder às rotas
+- Correcção: Falha na página de pontos adicionais
+- Alteração: A pesquisa por «caches próprias» começa com filtros actualizados
+- Correcção: Os pontos de Labs não guardados perdiam a informação de "visitados" ao actualizar
+- Correcção: Pedido recorrente de actualizações da fonte de blocos
+- Correcção: Local aleatório no mapeamento de uma lista (Google Maps)
+
+##
+- Correcção: Falha nos detalhes da cache
+- Correcção: Cartuchos Wherigo deixaram de ser transferidos (mudança do sítio web)
 
 ##
  - Alteração: Os ficheiros Wherigo não podem ser transferidos de momento. Visualizar instruções de mitigação
  - Correcção: O motivo da eliminação do registo não dava ênfase ao limite de comprimento
  - Novo: Registo alargado para falhas no gestor de transferências
  - Correcção: Informações do Ponto Adicional pode tornar-se muito longa, botões inacessíveis
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+ - Correcção: Algumas informações de localização eram truncadas
+ - Correcção: Encaminhamento interno não funcionava, apenas era mostrada uma linha recta
+ - Correcção: Alguns problemas na criação de pastas
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+Nota: Se estiver a usar o encaminhamento interno, precisará executar o seguinte passo uma vez, após a instalação desta versão: Vá para a página inicial do c:geo, abra "Gerir dados offline" — "Actualizar dados de encaminhamento" e deixe o c:geo instalar os ficheiros actualizados. (Motivo: A estrutura do ficheiro de dados de encaminhamento do BRouter foi alterada e todos os ficheiros de dados de encaminhamento devem corresponder à mesma versão.)
 
 ##
 - Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
