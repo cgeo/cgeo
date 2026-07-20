@@ -331,9 +331,12 @@
     <string name="err_read_bookmark_list">S\'ha produït un error en llegir les llistes de marcadors.</string>
     <string name="err_bookmark_list_overfull">Massa catxés</string>
     <string name="err_bookmark_list_overfull_description">Les llistes de marcadors només poden emmagatzemar fins a 1000 catxés; esteu intentant afegir-ne més a la llista.\n\nVoleu continuar i afegir només tants catxés com pugui contenir la llista?</string>
+    <string name="info_log_posting_background">S\'està publicant el registre…</string>
+    <string name="info_log_post_success">El registre de %s s\'ha enviat correctament</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
+    <string name="info_log_post_failed_geocode">Ha fallat la publicació del registre de %s.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
     <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
     <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
@@ -2502,6 +2505,8 @@
     <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
     <string name="notification_channel_cache_download_name">descàrrega de catxé</string>
     <string name="notification_channel_cache_download_description">notificacions de resultats per a les baixades de fons de catxés</string>
+    <string name="notification_channel_log_name">publicació de registre</string>
+    <string name="notification_channel_log_description">notificacions de progrés i errors per a la publicació de registres de catxés</string>
     <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
