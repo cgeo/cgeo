@@ -566,6 +566,7 @@
     <string name="list_menu_create">Создать новый список</string>
     <string name="list_menu_drop">Удалить текущий список</string>
     <string name="list_menu_rename">Переименовать текущий список</string>
+    <string name="list_menu_rename_parent_lists">Переименовать родительские списки</string>
     <string name="rename_from">Переименовать из</string>
     <string name="rename_to">Переименовать в</string>
     <string name="list_menu_import">Импортировать</string>
@@ -628,6 +629,7 @@
     <string name="cache_filter_stored_since">Дата обновления описания</string>
     <string name="cache_filter_category">Категория BC</string>
     <string name="cache_filter_tier">Уровень ВС</string>
+    <string name="cache_filter_health_score_include_unscored">Включать тайники без оценки их состояния</string>
     <string name="cache_filter_logical_filter_group">Вложенный фильтр</string>
     <string name="cache_filtergroup_basic">Основное</string>
     <string name="cache_filtergroup_details">Детали</string>
@@ -766,6 +768,22 @@
         <item>&gt;1м</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_add">Добавить фильтр</string>
+    <string name="named_filter_markers_enabled">Маркеры включены</string>
+    <string name="named_filter_markers_disabled">Маркеры отключены</string>
+    <string name="named_filter_select_title">Выберите фильтр</string>
+    <string name="named_filter_activate_deactivate_title">Активация/деактивация маркеров</string>
+    <string name="named_filter_nofilter_label">(без фильтра — соответствует всем тайникам)</string>
+    <string name="named_filter_name_exists_title">Такое имя уже существует</string>
+    <string name="named_filter_name_exists_message">Фильтр с именем \'%s\' уже существует. Перезаписать?</string>
+    <string name="named_filter_config_exists_title">Фильтр уже сохранен</string>
+    <string name="named_filter_config_exists_message">Эта конфигурация фильтра уже сохранена как \"%s\". Сохранить ее снова с новым именем?</string>
+    <string name="named_filter_priority_normal">Нормальный</string>
+    <string name="named_filter_priority_high">Высокий</string>
+    <string name="named_filter_priority_highest">Самый высокий</string>
+    <string name="named_filter_priority_low">Низкий</string>
+    <string name="named_filter_priority_lowest">Самый низкий</string>
+    <string name="cache_filter_reference_based_on">На основе: %1$s</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -1485,6 +1503,7 @@
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_set_coordinates">Установить координаты</string>
     <string name="cache_personal_note">Персональные заметки</string>
+    <string name="cache_personal_note_edit_pn">Редактировать личную заметку</string>
     <string name="cache_menu_preventWaypointsFromNote">Не создавать точки из текста</string>
     <string name="cache_menu_allowWaypointExtraction">Создавать точки из текста</string>
     <string name="cache_personal_note_edit">Редактировать</string>
@@ -2516,6 +2535,7 @@
     <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
+    <string name="number_input_title_short">Установите значение</string>
     <string name="number_input_range">Установите значение между %1$s и %2$s</string>
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
