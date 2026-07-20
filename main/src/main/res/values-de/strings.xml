@@ -330,9 +330,12 @@
     <string name="err_read_bookmark_list">Fehler beim Lesen der Lesezeichenliste.</string>
     <string name="err_bookmark_list_overfull">Zu viele Caches</string>
     <string name="err_bookmark_list_overfull_description">In Lesezeichenlisten können nur bis zu 1000 Caches gespeichert werden, du versuchst mehr Caches der Liste hinzuzufügen.\n\nMöchtest du fortfahren und nur so viele Caches hinzufügen, wie die Liste halten kann?</string>
+    <string name="info_log_posting_background">Log wird gesendet…</string>
+    <string name="info_log_post_success">Log für %s erfolgreich gesendet</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
+    <string name="info_log_post_failed_geocode">Senden des Logs für %s fehlgeschlagen.</string>
     <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
     <string name="info_log_post_failed_simple_reason">Überprüfe, ob du korrekt angemeldet bist und eine funktionierende Internetverbindung hast.</string>
     <string name="info_log_delete_failed_simple_reason">Überprüfe, ob du korrekt eingeloggt bist, eine funktionierende Internetverbindung hast und das Log noch nicht gelöscht wurde.</string>
@@ -2500,6 +2503,8 @@
     <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
     <string name="notification_channel_cache_download_name">Cache Downloader</string>
     <string name="notification_channel_cache_download_description">Ergebnisbenachrichtigung für Cache Downloads</string>
+    <string name="notification_channel_log_name">Log senden</string>
+    <string name="notification_channel_log_description">Fortschritts- und Fehlermeldungen für das Senden von Cache-Logs</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
     <string name="individual_route">Individuelle Route</string>
