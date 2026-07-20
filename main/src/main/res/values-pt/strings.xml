@@ -330,9 +330,12 @@
     <string name="err_read_bookmark_list">Erro ao ler as listas de marcadores.</string>
     <string name="err_bookmark_list_overfull">Demasiadas caches</string>
     <string name="err_bookmark_list_overfull_description">As listas de marcadores só podem armazenar até 1000 caches, mas está a tentar adicionar mais do que isso à lista.\n\nDeseja continuar e adicionar apenas o número de caches que a lista pode armazenar?</string>
+    <string name="info_log_posting_background">A publicar o registo…</string>
+    <string name="info_log_post_success">Registo para %s enviado com sucesso</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
+    <string name="info_log_post_failed_geocode">A publicação do registo para %s falhou.</string>
     <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
     <string name="info_log_post_failed_simple_reason">Verifique se tem a sessão iniciada correctamente e uma ligação válida à Internet.</string>
     <string name="info_log_delete_failed_simple_reason">Verifique se tem a sessão iniciada correctamente, se tem uma ligação válida à Internet e se o registo já não foi apagado.</string>
@@ -375,6 +378,7 @@
     <string name="translator_model_download_success">Modelo de tradução para %s transferido</string>
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
+    <string name="translator_tooltip">Tradução offline</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
     <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução. Toque para selecionar o idioma de origem.</string>
     <string name="translator_language_unknown">Não é possível identificar o idioma. Toque para selecionar o idioma de origem.</string>
@@ -446,6 +450,7 @@
         <item quantity="one">%d cache transferida</item>
         <item quantity="other">%d caches transferidas</item>
     </plurals>
+    <string name="caches_store_background_skipped">Caches offline ignoradas: %d</string>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -532,6 +537,7 @@
     <string name="caches_reset_cache_icons_title">Repor ícone da cache</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
+    <string name="caches_recalculate_health_score">A recalcular índice de saúde da cache</string>
     <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
     <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
@@ -552,6 +558,7 @@
     <string name="list_menu_create">Criar nova lista</string>
     <string name="list_menu_drop">Remover a lista actual</string>
     <string name="list_menu_rename">Mudar o nome da lista actual</string>
+    <string name="list_menu_rename_parent_lists">Renomear listas em nível acima</string>
     <string name="rename_from">Renomear de</string>
     <string name="rename_to">Renomear para</string>
     <string name="list_menu_import">Importar</string>
@@ -614,6 +621,9 @@
     <string name="cache_filter_stored_since">Última actualização de detalhes</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">Nível BC</string>
+    <string name="cache_filter_health_score">Índice de saúde da cache</string>
+    <string name="cache_filter_health_score_include_unscored">Incluir caches sem registos disponíveis</string>
+    <string name="cache_filter_named_filter">Filtro</string>
     <string name="cache_filter_logical_filter_group">Filtro agrupado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
@@ -750,6 +760,29 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filtros</string>
+    <string name="cache_namedfilter_matching">Filtros correspondentes</string>
+    <string name="named_filter_add">Adicionar filtro</string>
+    <string name="named_filter_empty_hint">Nenhum filtro configurado. Toque em + para adicionar um.</string>
+    <string name="named_filter_activate_marker">usar com prio</string>
+    <string name="named_filter_enable_all_markers">Aplicar filtros como marcadores</string>
+    <string name="named_filter_markers_enabled">Marcadores permitidos</string>
+    <string name="named_filter_markers_disabled">Marcadores não permitidos</string>
+    <string name="named_filter_select_title">Seleccionar filtro</string>
+    <string name="named_filter_activate_deactivate_title">Activar / desactivar marcadores</string>
+    <string name="named_filter_nofilter_label">(nenhum filtro — corresponde a todas as caches)</string>
+    <string name="named_filter_save_as_title">Guardar como filtro</string>
+    <string name="named_filter_name_exists_title">O nome já existe</string>
+    <string name="named_filter_name_exists_message">Um filtro com o nome \'%s\' já existe. Sobrescrever?</string>
+    <string name="named_filter_config_exists_title">Filtro já guardado</string>
+    <string name="named_filter_config_exists_message">Esta configuração de filtro já está guardada como \'%s\'. Voltar a guardar com um novo nome?</string>
+    <string name="named_filter_fill_with_named">Preencher com filtro</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Alta</string>
+    <string name="named_filter_priority_highest">Máxima</string>
+    <string name="named_filter_priority_low">Baixa</string>
+    <string name="named_filter_priority_lowest">Mínima</string>
+    <string name="cache_filter_reference_based_on">Com base em: %1$s</string>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -1450,6 +1483,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Definir coordenadas</string>
     <string name="cache_personal_note">Nota pessoal</string>
+    <string name="cache_personal_note_edit_pn">Editar nota pessoal</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
@@ -1733,6 +1767,7 @@
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
     <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
+    <string name="waypoint_select_from_map">Selecionar do mapa</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_my_coordinates_accuracy">As minhas coordenadas (±%s)</string>
@@ -1779,7 +1814,7 @@
     <string name="projection_type_none">Sem projecção</string>
     <string name="projection_type_bearing">Azimute</string>
     <string name="projection_type_bearing_info">Azimute %1$s%3$s, %2$s°</string>
-    <string name="projection_type_bearing_hint_angle">Azimute em º (graus)</string>
+    <string name="projection_type_bearing_hint_angle">Azimute em º</string>
     <string name="projection_type_bearing_hint_distance">Distância</string>
     <string name="projection_type_offset">Desvio</string>
     <string name="projection_type_offset_info">Desvio lat %1$s mm, lon %2$s mm</string>
@@ -1808,7 +1843,7 @@
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
     <string name="calccoord_convert_to_plain_error">A fórmula não resulta em coordenadas válidas. \nA conversão para coordenadas simples irá repor o ponto adicional para coordenadas vazias.</string>
     <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
-    <string name="calccoord_remove_spaces">Remover espaços</string>
+    <string name="calccoord_remove_spaces">Remover Espaços</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substituir \'x\' por \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Colar da área de transferência</string>
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
@@ -2410,6 +2445,10 @@
         <item quantity="one">Definir %d ícone da cache</item>
         <item quantity="other">Definir %d ícones da cache</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">A recalcular índice de saúde da cache…</string>
+    <string name="command_recalculate_health_score_result">Índice de saúde da cache recalculado: %d</string>
+    <string name="log_health_score_explanation_title">Índice de saúde da cache</string>
+    <string name="log_health_score_explanation">O índice de saúde da cache é calculado a partir de, no máximo, últimos %1$s registos ou até que seja encontrado um dos seguintes tipos de registo:  \n%2$s  \n\nIt é calculado da seguinte forma:  \n`(soma dos pesos dos registos válidos) / (soma dos pesos dos registos válidos e inválidos)`\n\n**Registos válidos** são:  \n%3$s  \n\nRegistos inválidos** são:  \n%4$s  \n\nOs registos são valorizados de acordo com a sua antiguidade (os registos mais recentes têm mais valor).</string>
     <string name="caches_refresh_all_warning">Esta acção pode originar um consumo de dados elevado. Tem a certeza que deseja actualizar todas as caches?</string>
     <string name="live_map_status_http429">Por favor, diminua a velocidade, muitas solicitações para %s</string>
     <string name="live_map_status_error">Erro ao carregar dados do mapa: %s</string>
@@ -2450,6 +2489,7 @@
     <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
+    <string name="number_input_title_short">Definir valor</string>
     <string name="number_input_range">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
@@ -2463,6 +2503,8 @@
     <string name="notification_channel_downloader_description">notificações acerca das transferências (ex: mapas offline)</string>
     <string name="notification_channel_cache_download_name">gestor de transferências de caches</string>
     <string name="notification_channel_cache_download_description">notificações do resultado das transferências de caches em segundo plano</string>
+    <string name="notification_channel_log_name">publicar registo</string>
+    <string name="notification_channel_log_description">notificações de progresso e erro para publicação de registos de cache</string>
     <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
     <string name="individual_route">Rota individual</string>
@@ -2617,6 +2659,7 @@
     <string name="check_hillshading_found">Já existem dados do sombreado da altitude</string>
     <string name="check_hillshading_missing">Encontrados dados do sombreado da altitude:</string>
     <string name="check_hillshading_unsupported">Aviso: Os dados do sombreado da altitude não estão disponíveis, pelo menos em parte, para a região seleccionada</string>
+    <string name="check_hillshading_tiles_menu">Verificar se existem dados de relevo em falta</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
