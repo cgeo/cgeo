@@ -1,100 +1,100 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Il est temps de mettre à jour ! Si vous utilisez toujours Android 7 ou plus, ce sera peut-être la dernière mise à jour c:geo pour vous ! Avec notre prochaine version de c:geo, nous allons supprimer le support d'Android 5 à 7 pour réduire notre charge de maintenance et pour être en mesure de mettre à jour certains composants externes utilisés par c:geo qui sont toujours actuellement en attente. Nous supporterons donc toujours les version d'Android 8 à 16 (et les nouvelles versions quand elles seront publiées), une période de plus de huit ans d'histoire Android.
 
-- Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
-
-##
-- Fix: Deleting of log images broken (website change)
-- Change: Unify track and individual route loading buttons
-- Fix: Cache attributes not detected correctly under certain conditions
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Correction : La popup d'ouverture de la cache/du waypoint met du temps à souvrir sur certains appareils
+- Correction : Modifier la description de la cache ne prend pas en charge la copie & coller
+- Correction : Quelques plantages et « l'application ne répond pas»
+- Correction : La suppression du journal de l'objet voyageur échoue (modification du site)
 
 ##
-- Fix: Pocket query import broken (website change)
+- Correction : Suppression des images de log cassée (modification du site)
+- Changement : Unifier les boutons de chargement des parcours et des itinéraires individuels
+- Correction : Les attributs de cache ne sont pas détectés correctement dans certaines conditions
+- Corriger : Loguer les caches (changement de site)
+- Correction : Loguer les objets voyageurs (changement de site)
 
 ##
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Correction : L'importation de Pocket query est cassée (changement de site web)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Correction : Crash lors de l'accès aux routes
+- Correction : Crash sur la page du waypoint
+- Changement : La recherche de ses "propres caches" commence par de nouveaux filtres
+- Correction : Les étapes d'adventure lab non sauvegardées perde les informations "visitées" lors de la mise à jour
+- Correction : invite récurrente pour les mises à jour des sources des tuiles
+- Correction : emplacement aléatoire lors du placement d'un liste sur la carte (Google Maps)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
-
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+- Correction : Crash dans la fiche de cache
+- Correction : Les cartouches Wherigo ne peuvent plus être téléchargées (modification du site)
 
 ##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+ - Changement : Les fichiers Wherigo ne peuvent pas être téléchargés actuellement, afficher les instructions alternatives
+ - Correction : La raison de suppression du log n'impose pas la limite de longueur
+ - Nouveau : journalisation étendue des plantages dans le gestionnaire de téléchargement
+ - Correction : La fenêtre de point de passage peut devenir trop longue, les boutons ne sont pas accessibles
+ - Correction : Certaines informations de localisation sont tronquées
+ - Correction : Le routage interne ne fonctionne plus, seule la ligne droite est affichée
+ - Correction : Quelques problèmes de création de dossier
+
+Note : Si vous utilisez un routage interne, vous devrez exécuter l'étape suivante une seule fois après l'installation de cette version : aller à l'écran d'accueil c:geo ouvrir "Gérer les données hors ligne" - "Mettre à jour les données de routage", et laisser c:geo installer les fichiers mis à jour. (Raison : la structure du fichier de données de routage BRouter a été modifiée et tous les fichiers de données de routage doivent être conformes à la même version.)
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Correction : L'analyse de la chaîne d'emplacement de la cache échoue pour certaines langues du site web
+- Correction : L'ouverture de l'objet voyageur à partir de la liste de suivi échoue
+- Correction : Le clavier peut bloquer la sélection de la liste
+- Correction : Le fournisseur de tuiles défini par l'utilisateur ne prend pas en charge les paramètres d'URL supplémentaires
+- Correction : Inventaire / les objets voyageurs d'une cache ne sont plus chargés
+- Changement : Mise à jour de l'agent utilisateur interne pour résoudre certains problèmes de téléchargement
+- Correction : Regarder les détails d'un objet voyageur le supprime de l'inventaire de la cache
 
 ##
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Correction : Boîte de dialogue de téléchargement de la traduction hors-ligne affichée dans les installations sans support de traduction hors ligne
+- Correction : Changement du format des coordonnées dans la fiche info cache/waypoint
+- Correction : la date de fermeture dans la liste des logs (en fonction du format de la date et de la taille de la police)
+- Correction : Horaires d'event non détectés dans certaines conditions
+- Correction : lien dans la liste non cliquable sous certaines conditions
+- Correction : Les actions de log des objets voyageurs sont parfois mélangées
 
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Changement: Le nombre maximum d'objets voyageurs par log visitant une cache a été réduit à 100 (à la demande de géocaching.com pour réduire la charge de leur serveur causée par des amateurs extrêmes d'objets voyageurs)
+- Correction : Certaines exceptions de sécurité possibles lorsque l'utilisateur n'a pas accordé certains droits (ex: notifications)
+- Correction : Les cercles de cache sont incomplets sur les niveaux de zoom bas (VTM seulement)
+- Correction : Crash lors du rechargement des waypoints dans certaines conditions de charge
+- Correction : Le filtre de date de l'événement ne fonctionne pas sous certaines conditions
+- Correction : La limite maximale de ligne de log ne fonctionne pas de manière fiable dans les paramètres « illimitée »
+- Correction : Crash sur l'ouverture de la carte sous certaines conditions
+- Correction : Aucune carte affichée si wherigo n'a pas de zones visibles
+- Correction : Crash sur l'onglet image des détails de la cache sous certaines conditions
+- Correction : Recherche sur la carte avec des coordonnées invalides
+- Correction : Certaines traductions ne respectent pas le paramètre c:geo-internal language
 
 ##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Changement : La carte UnifiedMap définie comme carte par défaut pour tout le monde (dans le cadre de notre roadmap vers UnifiedMap) Vous pouvez revenir en arrière dans "paramètres" - "sources de cartes" pour le moment. Le retrait des cartes historiques est prévu pour le printemps 2026 dans nos versions régulières.
+- Correction : La case à cocher Favoris est réinitialisée à la réentrée de l'écran de journal hors ligne
+- Correction : La zone d'entrée du rayon de géorepérage montre un nombre décimal
+- Correction : La synchronisation des notes personnelles ne fonctionne pas
+- Changement : Nouvelle icône pour l'importation de traces/route GPX dans les paramètres rapides de la carte
 
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Correction : Les valeurs négatives dans le graphique d'altitude ne sont pas mises à l'échelle
+- Correction : Coordonnées près de 0 cassées dans les exportations GPX
+- Correction : Quelques plantages
+- Essayer de corriger : ANR au démarrage
+- Essayer de réparer : les données de géocache manquantes sur la carte live
 
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Correction : Crash dans la recherche de mots clés
+- Correction : Crash dans la carte
+- Correction : Le texte d'indice n'est plus sélectionnable
+- Correction : plusieurs problèmes Wherigo
+
+##
+- Correction : Chiffrer/déchiffrer un indice nécessite d'abord un appui supplémentaire
+- Correction : crash de Wherigo lors de la lecture des anciens jeux sauvegardés
+- Correction : Le log à partir de c:geo n'est pas mémorisée
+- Correction : Il manque une mise à jour des données en direct pour les caches trouvées & archivées
+- Correction : Les waypoints dans la carte hors ligne ne sont pas affichés parfois
 
 ##
 - Correction: indices des caches non encryptés (changement sur le site web)
