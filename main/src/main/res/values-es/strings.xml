@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">No se ha podido cargar el tema de representación seleccionado. Se revertirá al predeterminado.</string>
     <string name="err_rendertheme_invalid">El tema de procesamiento seleccionado no es válido para esta versión de mapsforge. Se volverá al predeterminado.</string>
     <string name="err_invalid_filename_char">El carácter \'%c\' no está permitido</string>
+    <string name="err_center_coordinates_invalid">No se pudo establecer el centro del mapa, coordenadas no válidas</string>
     <string name="warn_save_nothing">No hay nada para guardar.</string>
     <string name="warn_no_cache_coord">No hay cachés con coordenadas.</string>
     <string name="warn_no_coordinates">No se han dado coordenadas.</string>
@@ -325,6 +326,8 @@
     <string name="warn_calculator_state_save">Asegúrate de guardar el waypoint si quieres conservar el estado de la calculadora.</string>
     <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
     <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
+    <string name="err_trackable_error">Error de rastreable</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Demasiados rastreables marcados como \"visita\" - máximo permitido %d</string>
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
     <string name="confirm_discard_changes">¿Quieres descartar los cambios no guardados?</string>
     <string name="confirm_unsent_changes_title">Cambios sin enviar</string>
@@ -354,11 +357,16 @@
     <string name="translator_model_download_success">Se ha descargado el modelo de traducción para %s</string>
     <string name="translator_model_download_error">Fallo al descargar el modelo de traducción %1$s: %2$s</string>
     <string name="translator_model">Modelo de traducción</string>
+    <string name="translator_tooltip">Traducir sin conexión con Google</string>
     <string name="translator_language_select">Seleccione el idioma de origen</string>
     <string name="translator_language_target_select">Seleccionar idiomas a traducir</string>
+    <string name="translator_language_unsupported">Idioma (%s) no disponible para traducción.\nPulse para seleccionar el idioma de origen.</string>
+    <string name="translator_language_unknown">No se puede identificar el idioma.\nPulse para seleccionar el idioma de origen.</string>
+    <string name="translator_language_detected">Traducir desde \"%s\" con Google.\nPulse para seleccionar el idioma de origen.</string>
     <string name="translator_target_language">Traducir al %s</string>
     <string name="translator_translation_error">Fallo al traducir el texto: %s</string>
     <string name="translator_translation_initerror">Error al inicializar el traductor</string>
+    <string name="translator_translation_success">Traducido de \"%s\".\nPulse el botón para restaurar el original</string>
     <string name="crash_activity_title">¡Ups! ¡c:geo se ha detenido!</string>
     <string name="crash_activity_report">reportar problema</string>
     <!-- location service -->
@@ -859,6 +867,7 @@
     <string name="settings_lc_description">Incluye cachés de Adventure Lab en el mapa.\n\n(Disponible solo para miembros premium \"Geocaching.com\". Requiere un servicio \"Geocaching.com\" activado.)\n\nPara cambiar esta configuración es necesario reiniciar.</string>
     <string name="settings_lc_found_state_title">Estado manual de encontrado</string>
     <string name="settings_lc_found_state_handling">Si está marcado, no se obtendrá automáticamente el estado de encontrado verdadero para los Adventure Lab, en su lugar, proporcionar controles para que el usuario establezca manualmente el estado de encontrado</string>
+    <string name="lc_default_description">Este es un caché Adventure Lab de geocaching.com. Los labs sólo se pueden jugar con la aplicación Adventure Lab de Groundspeak. Pulsa en el icono de Adventure Lab en la página \"Detalles\" para abrir/instalar la aplicación de Adventure Lab para este lab desde allí.\nSi no quieres ver etapas de Lab en el mapa y búsqueda, puedes desactivarlas usando el menú \"Configuración\" - Servicios - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Carga cachés de opencaching.de</string>
     <string name="init_oc_de_description">Autorizar que c:geo pueda usar opencaching.de para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
     <string name="init_summary_oc_pl">Carga cachés de opencaching.pl</string>
@@ -883,6 +892,8 @@
     <string name="init_login_popup_not_authorized">No autorizado</string>
     <string name="init_login_popup_not_logged_in">No has iniciado sesión</string>
     <string name="init_login_manual">Inicio de sesión manual</string>
+    <string name="init_login_manual_description">Por favor espere a que aparezca el sitio web e inicie sesión en su cuenta. Espere hasta que se haya completado el inicio de sesión. Luego haga clic en el botón \'ok\' de abajo.</string>
+    <string name="init_login_manual_wig_description">Por favor, inicia sesión en tu cuenta de Geocaching.com y continúa autorizando el inicio de sesión de Wherigo. Espere hasta que la página principal de Wherigo sea visible, luego haga clic en el botón \'Ok\' de abajo.</string>
     <string name="init_login_manual_error_nocookie">No se ha encontrado ningún token de autorización. Por favor inicie sesión o cancele el inicio de sesión manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
     <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
@@ -1528,6 +1539,7 @@
     <string name="menu_collapse_log">Colapsar registro</string>
     <string name="cache_log_menu_delete">Eliminar registro</string>
     <string name="cache_log_menu_popup_title">Registro de %s</string>
+    <string name="cache_log_delete_reason">Razón (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">Registro eliminado usando c:geo</string>
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
@@ -2388,6 +2400,7 @@ Nombre de archivo:%2$s</string>
     <string name="preference_colorpicker_show_width">ancho: %d</string>
     <string name="reset_to_default">Por defecto</string>
     <!-- number input -->
+    <string name="number_input_title">Introduzca un valor entre %1$s y %2$s</string>
     <string name="number_input_err_boundarymin">El valor introducido es demasiado pequeño - restablecido al valor mínimo</string>
     <string name="number_input_err_boundarymax">El valor introducido es demasiado grande - restablecido al valor máximo</string>
     <string name="number_input_err_format">Formato de número incorrecto</string>
