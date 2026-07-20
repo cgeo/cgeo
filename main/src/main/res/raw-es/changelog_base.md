@@ -88,13 +88,13 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Corregido: Notificación de actualización de la versión nocturna de la variante FOSS apuntaba al APK normal
 - Nuevo: Opción "Ignorar año" para los filtros de fechas
 - Nuevo: URI remoto ahora es pulsable en las descargas pendientes
-- Change: Use system-settings as default theme for new installations
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
-- Fix: Crahs in percentage favorite filter
-- New: Make it easier to use simple lists as parent lists
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
-- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
-- Change: New emoji selector
+- Cambio: Uso de los ajustes del sistema como tema predeterminado en nuevas instalaciones
+- Novo: Exportación GPX: Añadidas anotaciones GSAK "Lat/LonBeforeCorrect" en la exportación de puntos adicionales originales
+- Nuevo: Mostrar barra para deshacer cuando se borran cachés en una lista desde un mapa
+- Corregido: Detención en el filtro de porcentaje de favoritos
+- Nuevo: Ahora es más fácil utilizar listas simples como listas principales
+- Cambio: Uso de la zona horaria local (de dispositivo, no de evento) para las entradas del calendario (en lugar de UTC)
+- Corregido: Algunos textos ignoraban el cambio de idioma
+- Corregir: "Usar ajustes imperiales" no inicializaba correctamente en instalaciones nuevas
+- Cambio: Bergamot módulo de traducción sin conexión de código abierto reemplazando al traductor de Google ML Kit de código cerrado
+- Cambio: Nuevo selector de emojis
