@@ -830,6 +830,7 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap-varianter</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
@@ -1294,6 +1295,7 @@
     <string name="persistablefolder_base">Bas</string>
     <string name="persistablefolder_offline_maps">Offlinekartor</string>
     <string name="persistablefolder_offline_maps_themes">Kartteman</string>
+    <string name="persistablefolder_backgroundmaps">Bakgrundskartor</string>
     <string name="persistablefolder_offline_maps_shading">Filer för kartskuggning</string>
     <string name="persistablefolder_backup">Säkerhetskopiering</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
@@ -1408,6 +1410,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
@@ -1603,6 +1606,8 @@
     <string name="cachedetails_progress_unwatch">Borttagen från bevakningslistan</string>
     <string name="cachedetails_progress_favorite">Lades till i favoriter</string>
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Flera Wherigo-patroner</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Rådfråga cachelistan för mer information om patronerna.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
@@ -1753,6 +1758,8 @@
     <string name="variables_scanlisting_nopatternfound">Inget mönster hittades</string>
     <string name="variables_tidyup">Städa upp</string>
     <string name="variables_deleteall">Radera allt</string>
+    <string name="variables_add">Lägg till variabel</string>
+    <string name="variables_add_next">Lägg till nästa variabel</string>
     <string name="variables_deleteall_confirm_text">Vill du verkligen ta bort alla variabler för denna cache?</string>
     <string name="variables_info">Hjälp</string>
     <string name="variables_varname_dialog_title">Variabelnamn</string>
@@ -2353,6 +2360,7 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_http429">Sakta ner litegrann, för många förfrågningar till %s</string>
     <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
     <string name="live_map_status_normal">Laddar data utan problem: %s</string>
@@ -2517,6 +2525,7 @@
     <string name="receivedownload_integritycheck_failed">Integritetskontroll misslyckades</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
+    <string name="downloadbackground_title">Ladda ner bakgrundskarta</string>
     <string name="download_title">Ladda ned fil</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
@@ -2542,11 +2551,13 @@
     <string name="downloadmap_themefile">temafil</string>
     <string name="downloadmap_tilefile">rutt-datafil</string>
     <string name="downloadmap_hillshadingfile">datafil för terrängskuggning</string>
+    <string name="downloadmap_checking">Kontrollerar tillgängliga data…</string>
     <string name="downloadmap_othermapdownload">nedladdning av annan karta</string>
     <string name="downloadmap_otherthemedownload">nedladdning av annat tema</string>
     <string name="downloadmap_download">ladda ner</string>
     <string name="downloadmap_retrieving_directory_data">Hämtar mappdata…</string>
     <string name="downloadmap_checking_for_updates">Söker efter uppdateringar…</string>
+    <string name="downloadtile_title">Data saknas</string>
     <string name="downloadtile_info">c:geo kan inte beräkna den begärda rutten eftersom det saknas datafil med rutter. Vill du ladda ner saknade ruttdata?</string>
     <string name="check_tiles_menu">Sök efter saknad ruttberäkningsdata</string>
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
@@ -2634,7 +2645,13 @@
     <string name="mapthemes_foldersync_finished_toast">%1$s mappsynkronisering klar efter %2$s, %3$d av %4$s behövde synkronisering</string>
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls">Kontroller</string>
+    <string name="wherigo_controls_cartridgelist_hint">Visa patroner och starta spelet</string>
+    <string name="wherigo_controls_savegame_hint">Spara framsteg i ett pågående spel</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_stopgame_hint">Stoppa ett pågående spel</string>
+    <string name="wherigo_controls_mapzones_hint">Visa zoner för ett pågående spel på kartan</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Ladda ner en patron (cguid behövs)</string>
     <string name="wherigo_controls_reportproblem_hint">Visa senaste Wherigo-problem</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
@@ -2647,11 +2664,36 @@
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
     <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
     <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
+    <string name="wherigo_currently_playing">Spelar just nu</string>
+    <string name="wherigo_locate_on_center">Hitta på mitten</string>
+    <string name="wherigo_revoke_fixed_location">Återkalla fast plats</string>
     <string name="wherigo_thingtype_location">Platser</string>
+    <string name="wherigo_thingtype_inventory">Innehåll</string>
+    <string name="wherigo_thingtype_item">Du ser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_author">Författare</string>
+    <string name="wherigo_zone_inside">inuti</string>
+    <string name="wherigo_zone_near">nära</string>
     <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
+    <string name="wherigo_choose_cartridge">Välj patron</string>
+    <string name="wherigo_choose_new_loadgame">Välj nytt spel eller spel att ladda</string>
+    <string name="wherigo_choose_savegame_slot">Välj en sparningsplats</string>
+    <string name="wherigo_savegame_name_empty">&lt;Nytt spel&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Automatisk sparning</string>
+    <string name="wherigo_savegame_name_numeric">Plats %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Tom plats&gt;</string>
+    <string name="wherigo_download_title">Ladda ner patron</string>
+    <string name="wherigo_download_message">Patron med CGUID \"%s\" är inte tillgänglig på din enhet. Vill du ladda ner den?</string>
+    <string name="wherigo_download_successful_title">Nedladdningen lyckades</string>
+    <string name="wherigo_download_failed_title">Nedladdningen misslyckades</string>
+    <string name="wherigo_download_failed_message">Nedladdningen av patron med CGUID \"%1$s\" misslyckades: %2$s</string>
+    <string name="wherigo_manual_download_title">Ladda ner patron manuellt</string>
+    <string name="wherigo_manual_download_cguid_label">Ange CGUID här</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: tar bort överblivna filer</string>
+    <string name="wherigo_download_progress_login">Loggar in…</string>
+    <string name="wherigo_download_progress_started">Nedladdningen har börjat</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
@@ -2659,9 +2701,19 @@
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
+    <string name="wherigo_confirm_stop_running_game_title">Sluta köra Wherigo Game</string>
+    <string name="wherigo_confirm_stop_running_game_message">Ett spel körs för närvarande för \"%s\". Vill du stoppa detta spel?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Ta bort Wherigo patron</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Vill du verkligen ta bort patronen \"%1$s\" inklusive %2$s sparade partier?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Vill du verkligen ta bort savegame \"%2$s\" i patron \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Spara Wherigo-spel framsteg</string>
+    <string name="wherigo_save_game_message">Spara dina spelframsteg för patron \"%1$s\" i \"%2$s\".</string>
     <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
     <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
+    <string name="wherigo_dialog_push_page">Sida %1$s / %2$s</string>
+    <string name="wherigo_notification_service">c:geo kör en Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" väntar på dig!</string>
     <string name="wherigo_bar_resume_dialog">Återuppta</string>
     <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
