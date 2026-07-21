@@ -180,7 +180,6 @@
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
     <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
     <string name="info_log_post_retry">Suwayi og balik</string>
-    <string name="info_log_post_save">I-save sa offline</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
     <string name="info_waypoint_coordinates_cleared">Nalimpyo nga mga tiganos.</string>
     <string name="info_log_type_changed">Ang matang sa log kay giusab!</string>
