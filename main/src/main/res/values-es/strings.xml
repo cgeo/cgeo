@@ -332,12 +332,7 @@
     <string name="err_bookmark_list_overfull_description">Las listas solo pueden almacenar hasta 1000 cachés, estás intentando añadir más de ese número a la lista.\n\n¿Quieres proceder añadiendo solo hasta el límite que la lista permite?</string>
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
-    <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
     <string name="info_log_delete_failed">Fallo al eliminar el registro.</string>
-    <string name="info_log_post_failed_simple_reason">Compruebe que su sesión está correctamente iniciada y que tiene una conexión a internet válida.</string>
-    <string name="info_log_delete_failed_simple_reason">Compruebe que su sesión está correctamente iniciada, tiene una conexión a internet válida y que el registro no está ya eliminado.</string>
-    <string name="info_log_post_retry">Reintentar</string>
-    <string name="info_log_post_save">Guardar sin conexión</string>
     <string name="info_log_cleared">Registro borrado.</string>
     <string name="info_waypoint_coordinates_cleared">Coordenadas borradas.</string>
     <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
