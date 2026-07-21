@@ -284,10 +284,7 @@
     <string name="err_read_bookmark_list">Feil ved lesing av bokmerker.</string>
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
-    <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
     <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
-    <string name="info_log_post_retry">Prøv på nytt</string>
-    <string name="info_log_post_save">Lagre lokalt</string>
     <string name="info_log_cleared">Loggen ble slettet.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
     <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
