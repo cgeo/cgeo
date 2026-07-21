@@ -332,12 +332,7 @@
     <string name="err_bookmark_list_overfull_description">В списках закладок может храниться не более 1000 тайников, вы пытаетесь добавить в список больше.\n\nВы действительно хотите продолжить и добавить столько тайников, сколько может вместить список?</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
     <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
-    <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
     <string name="info_log_delete_failed">Не удалось удалить запись.</string>
-    <string name="info_log_post_failed_simple_reason">Убедитесь, что вы корректно вошли в систему и у вас есть активное подключение к Интернету.</string>
-    <string name="info_log_delete_failed_simple_reason">Убедитесь, что вы корректно вошли в систему, у вас есть активное подключение к Интернету и что запись еще не удалена.</string>
-    <string name="info_log_post_retry">Повторить</string>
-    <string name="info_log_post_save">Сохранить офлайн</string>
     <string name="info_log_cleared">Запись очищена.</string>
     <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
     <string name="info_log_type_changed">Тип записи был изменен!</string>
