@@ -312,12 +312,7 @@
     <string name="err_read_bookmark_list">Virhe luettaessa kirjanmerkkiluetteloja.</string>
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
-    <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
     <string name="info_log_delete_failed">Lokin poisto epäonnistui.</string>
-    <string name="info_log_post_failed_simple_reason">Tarkista että olet kirjautunut sisään ja että sinulla on toimiva internet-yhteys.</string>
-    <string name="info_log_delete_failed_simple_reason">Tarkista, että olet kirjautunut sisään, sinulla on toimiva internet-yhteys ja että lokia ei ole jo poistettu.</string>
-    <string name="info_log_post_retry">Yritä uudelleen</string>
-    <string name="info_log_post_save">Offline-tallennus</string>
     <string name="info_log_cleared">Loki tyhjennetty.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
     <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
