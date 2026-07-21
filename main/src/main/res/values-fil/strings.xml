@@ -184,7 +184,7 @@
     <string name="info_log_saved">ang c:geo ay matagumpay na nai-seyb ang log.</string>
     <string name="info_log_post_failed">Nabigo ang pagpopost ng log.</string>
     <string name="info_log_post_retry">Muling subukan</string>
-    <string name="info_log_post_save">I-seyb ng offline</string>
+    <string name="info_log_post_save">I-save ang offline</string>
     <string name="info_log_cleared">Nalinis na ang mag log.</string>
     <string name="info_waypoint_coordinates_cleared">Malinaw ang coordinates.</string>
     <string name="info_log_type_changed">Nabago na ang uri ng mga log!</string>
