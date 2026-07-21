@@ -334,13 +334,8 @@
     <string name="info_log_post_success">Loggen för %s har skickats</string>
     <string name="info_log_posted">c:geo har postat din logg.</string>
     <string name="info_log_saved">c:geo har sparat din logg.</string>
-    <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_post_failed_geocode">Misslyckades skicka logg för %s.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
-    <string name="info_log_post_failed_simple_reason">Kontrollera att du är korrekt inloggad och har en giltig internetanslutning.</string>
-    <string name="info_log_delete_failed_simple_reason">Kontrollera att du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan har tagits bort.</string>
-    <string name="info_log_post_retry">Försök igen</string>
-    <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
     <string name="info_log_type_changed">Typen av logg har ändrats!</string>
