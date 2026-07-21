@@ -192,7 +192,7 @@
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
     <string name="info_log_post_failed">فشل في نشر سجل الزيارة.</string>
     <string name="info_log_post_retry">أعد المحاولة</string>
-    <string name="info_log_post_save">حفظ في وضع عدم الاتصال</string>
+    <string name="info_log_post_save">حفظ بدون اتصال</string>
     <string name="info_log_cleared">تم مسح سجل تسجيل الزيارة.</string>
     <string name="info_waypoint_coordinates_cleared">تم مسح الإحداثيات.</string>
     <string name="info_log_type_changed">تم تغيير نوع سجل الزيارة!</string>
