@@ -258,9 +258,6 @@
     <string name="err_read_bookmark_list">Fejl ved læsning af bogmærkelister.</string>
     <string name="info_log_posted">Logbeskeden blev sendt.</string>
     <string name="info_log_saved">Logbeskeden blev gemt.</string>
-    <string name="info_log_post_failed">Afsendelse af logbesked fejlede.</string>
-    <string name="info_log_post_retry">Prøv igen</string>
-    <string name="info_log_post_save">Gem offline</string>
     <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
     <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
     <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
