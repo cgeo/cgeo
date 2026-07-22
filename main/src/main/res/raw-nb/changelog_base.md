@@ -45,9 +45,9 @@ Until then, you can switch between the different implementations in settings => 
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: User note gets lost on refreshing a lab adventure
 - Change: Log-date related placeholders will use chosen date instead of current date
-- New: Collapse long log entries per default
+- Nytt: Forkort lange loggtekster som standard
 
-### Wherigo player
+### Wherigo-spiller
 - New: Integrated Wherigo player checking for missing credentials
 - Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
 - New: Ability to navigate to a zone using compass
@@ -67,7 +67,7 @@ Until then, you can switch between the different implementations in settings => 
 - Fix: Nearby distance limit setting not working properly for small values
 - Fix: Sorting of cache lists by distance descending not working correctly
 - Fix: Lab caches excluded by D/T filter even with active "include uncertain"
-- Fix: Color issues with menu icons in light mode
+- Fiks: Fargeproblemer med menyikoner i lys modus
 - New: Add "Remove past events" to list "all"
 - New: Show connector for "user-defined caches" as active in source filter
 - New: GPX export: exporting logs / trackables made optional
