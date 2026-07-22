@@ -15,7 +15,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - "Driving mode" for OpenStreetMap based maps
 - Long-tap on track / individual route for further options
 
-### Map
+### 地圖
 - New: Route optimization caches calculated data
 - New: Enabling live mode keeps waypoints of currently set target visible
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
@@ -35,7 +35,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 
-### Cache details
+### Cache 細節
 - New: Detect additional characters in formulas: –, ⋅, ×
 - New: Preserve timestamp of own logs on refreshing a cache
 - New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
@@ -68,7 +68,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
 
-### General
+### 一般
 - New: Share option after logging a cache
 - Change: Do not show "needs maintenance" or "needs archived" options for own caches
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
