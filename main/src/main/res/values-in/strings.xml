@@ -183,9 +183,6 @@
     <string name="err_read_pocket_query_list">Kesalahan membaca daftar permintaan pocket.</string>
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
-    <string name="info_log_post_failed">Posting log gagal.</string>
-    <string name="info_log_post_retry">Coba kembali</string>
-    <string name="info_log_post_save">Simpan offline</string>
     <string name="info_log_cleared">Log dibersihkan.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinat telah dibersihkan.</string>
     <string name="info_log_type_changed">Jenis log telah berubah!</string>
