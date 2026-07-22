@@ -301,10 +301,7 @@
     <string name="err_read_bookmark_list">북마크 목록을 읽는 중에 오류가 발생했습니다.</string>
     <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
-    <string name="info_log_post_failed">로그 올리기가 실패했습니다.</string>
     <string name="info_log_delete_failed">로그 삭제 실패했습니다.</string>
-    <string name="info_log_post_retry">재시도</string>
-    <string name="info_log_post_save">오프라인 저장</string>
     <string name="info_log_cleared">로그를 비웠습니다.</string>
     <string name="info_waypoint_coordinates_cleared">좌표가 지워졌습니다.</string>
     <string name="info_log_type_changed">로그 유형이 변경되었습니다!</string>
