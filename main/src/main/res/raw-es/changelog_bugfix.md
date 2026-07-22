@@ -2,9 +2,9 @@
 ¡Es hora de actualizar! Si todavía estás usando Android 7 o anteriores, ¡esta podría ser la última actualización de c:geo para ti! Con nuestra próxima versión de c:geo dejaremos de dar soporte a Android 5-7 para reducir nuestra carga de mantenimiento y poder actualizar algunos componentes externos utilizados por c:geo que estábamos retrasando. Seguiremos soportando Android 8 hasta Android 16 (y versiones más recientes cuando sean publicadas), un espacio de más de ocho años de historia de Android.
 
 - Corregido: Retraso en la apertura en la ventana de Cache/punto de referencia en algunos dispositivos
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
+- Corregido: Editar la descripción del caché no soportaba copiar y pegar
+- Corregido: Algunos fallos y "app no responde"
+- Corregido: Fallo al eliminar el registro de un rastreable (cambio del sitio web)
 
 ##
 - Corregido: Borrado de imágenes de registro roto (cambio en el sitio web)
