@@ -220,9 +220,6 @@
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
     <string name="info_log_saved">c:geo успішно збережено журнал.</string>
-    <string name="info_log_post_failed">Журнал змін не вдалося.</string>
-    <string name="info_log_post_retry">Повторити спробу</string>
-    <string name="info_log_post_save">Зберегти оффлайн</string>
     <string name="info_log_cleared">Журнали очищено.</string>
     <string name="info_waypoint_coordinates_cleared">Координати вийшли.</string>
     <string name="info_log_type_changed">Тип журналу змінено!</string>
