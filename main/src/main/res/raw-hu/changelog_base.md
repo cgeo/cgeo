@@ -18,7 +18,7 @@ Roadmap:
 
 Until then, you can switch between the different implementations in settings => map sources.
 
-### Map
+### Térkép
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 - Fix: Map view not updated when removing cache from currently shown list
