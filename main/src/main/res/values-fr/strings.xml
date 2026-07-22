@@ -334,13 +334,8 @@
     <string name="info_log_post_success">Log pour %s envoyé avec succès</string>
     <string name="info_log_posted">Envoi de la visite réussi.</string>
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
-    <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
     <string name="info_log_post_failed_geocode">L\'envoi du log pour %s a échoué.</string>
     <string name="info_log_delete_failed">La suppression du log a échoué.</string>
-    <string name="info_log_post_failed_simple_reason">Vérifiez que vous êtes bien connecté et que vous avez une connexion internet valide.</string>
-    <string name="info_log_delete_failed_simple_reason">Vérifiez que vous êtes correctement connecté, que vous avez une connexion internet valide et que le log n\'est pas déjà supprimé.</string>
-    <string name="info_log_post_retry">Réessayer</string>
-    <string name="info_log_post_save">Enregistrer hors-ligne</string>
     <string name="info_log_cleared">La visite a été effacée.</string>
     <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
     <string name="info_log_type_changed">Le type de visite a été modifié !</string>
