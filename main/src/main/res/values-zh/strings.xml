@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">OC 团队评论</string>
     <string name="log_your_saved_log">你的已保存日志</string>
     <string name="log_empty_logbook">这个藏点的签到簿是空的。</string>
+    <string name="log_empty_logbook_filtered">现在选择的筛选条件隐藏了所有的日志。请至少选择一个选项。</string>
     <string name="log_image_selectfromstorage_tooltip">从手机中选择图片</string>
     <string name="log_image_camera_tooltip">使用相机拍照</string>
     <string name="log_image_selectfromown_tooltip">从手机中选择图片</string>
@@ -216,11 +217,26 @@
     <string name="log_image_titleprefix">图片</string>
     <string name="log_delete_confirm">您真的想要删除%1$s\'类型，作者为\'%2$s\'，日期为\'%3$s \'的日志吗？</string>
     <string name="log_offline_delete_confirm">您是否确实要删除您在本地保存的日志？日志类型：%1$s；日志时间：%2$s</string>
+    <string name="log_share_prefix_found">我找到%1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">我没有找到%1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">我在%1$s (%2$s):\n\n留了言</string>
+    <string name="log_share_prefix_maintenance">我上报了 %1$s (%2$s):\n\n需要维护</string>
+    <string name="log_share_prefix_archive">我认为 %1$s (%2$s) 应该被归档了\n\n</string>
+    <string name="log_share_prefix_default">我在%1$s (%2$s):\n\n留下的日志</string>
     <string name="datetime_nodateset_display">未设置日期</string>
     <!-- Contacts -->
     <string name="contact_not_found">找不到别名/昵称为%s的联系人，请先将它添加到你的联系人应用中。</string>
     <string name="contact_multiple_matches">联系人: 多个匹配</string>
     <!-- External translation -->
+    <string name="translate">翻译</string>
+    <string name="translate_external_label">用%s翻译</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">网站</string>
+    <string name="translate_external_none">&lt;无&amp;gt；</string>
+    <string name="translate_external_app">外部应用</string>
+    <string name="translate_external_google">谷歌翻译</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">使用网站翻译过大量的文本可能会失败。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
@@ -251,6 +267,7 @@
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
+    <string name="err_watchlist_failed_geocodes">使用地理编码：%s 改变关注列表失败</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
     <string name="err_auth_process">授权失败。</string>
@@ -298,6 +315,7 @@
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
     <string name="warn_log_text_fill">请为您的日志添加一些文字。</string>
+    <string name="warn_bookmarklist_select">没有选择书签列表。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
     <string name="warn_notloggedin_title">离线模式</string>
@@ -305,14 +323,11 @@
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
     <string name="err_read_pocket_query_list">读取口袋查询列表时出错。</string>
     <string name="err_read_bookmark_list">读取收藏列表出错</string>
+    <string name="err_bookmark_list_overfull">藏点过多</string>
+    <string name="err_bookmark_list_overfull_description">书签列表只能存储最多1000个藏点，你正在试图在列表中增加藏点已经超过了1000个。\n\n你是否想继续？但增加的藏点数量不能超过列表可以容纳的数量。</string>
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
     <string name="info_log_saved">c:geo 成功保存日志。</string>
-    <string name="info_log_post_failed">发布日志失败。</string>
     <string name="info_log_delete_failed">删除日志失败。</string>
-    <string name="info_log_post_failed_simple_reason">检查您已经正确登录并已经连接互联网。</string>
-    <string name="info_log_delete_failed_simple_reason">请检查您是否正确登录，并已连接互联网，日志尚未删除。</string>
-    <string name="info_log_post_retry">重试</string>
-    <string name="info_log_post_save">离线保存</string>
     <string name="info_log_cleared">日志已清除</string>
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="info_log_type_changed">日志类型已更改！</string>
@@ -332,6 +347,7 @@
     <string name="dont_show_again">不再显示</string>
     <string name="tap_icon_more_info">点击图标以获取更多信息</string>
     <string name="use_slider_adjust_value">使用滑块调整值</string>
+    <string name="snackbar_action_share">分享</string>
     <string name="gc_premium">付费会员</string>
     <string name="gc_basic">普通</string>
     <string name="translator_preference_target_lng">离线翻译</string>
@@ -347,16 +363,14 @@
     <string name="translator_model_download_success">%s 的翻译模型已下载</string>
     <string name="translator_model_download_error">下载 %1$s: %2$s 翻译模型失败</string>
     <string name="translator_model">翻译模型</string>
-    <string name="translator_tooltip">使用谷歌离线翻译</string>
     <string name="translator_language_select">选择源语言</string>
-    <string name="translator_language_target_select">选择目标语言</string>
-    <string name="translator_language_unsupported">不支持翻译语言 (%s)。\n点击选择源语言。</string>
-    <string name="translator_language_unknown">无法识别语言。\n点击选择源语言。</string>
-    <string name="translator_language_detected">使用谷歌翻译\"%s\"。\n点击选择源语言。</string>
+    <string name="translator_language_unsupported">不支持翻译语言 (%s)。点击选择源语言。</string>
+    <string name="translator_language_unknown">无法识别语言。点击选择源语言。</string>
+    <string name="translator_language_detected">翻译\"%s\"。点击选择源语言。</string>
     <string name="translator_target_language">翻译为 \"%s\"</string>
     <string name="translator_translation_error">翻译文本失败： %s</string>
     <string name="translator_translation_initerror">初始化翻译器失败</string>
-    <string name="translator_translation_success">翻译自\"%s\"，\n点击按钮显示源语言</string>
+    <string name="translator_translation_success">翻译自\"%s\"，点击按钮以恢复原始版本</string>
     <string name="crash_activity_title">哎呀！c:geo 崩溃了！</string>
     <string name="crash_activity_report">上报问题</string>
     <!-- location service -->
@@ -461,6 +475,11 @@
     <string name="caches_upload_bookmarklist">添加至书签</string>
     <string name="caches_upload_bookmarklist_all">将全部添加到书签列表</string>
     <string name="caches_upload_bookmarklist_selected">添加选中的到书签列表</string>
+    <string name="caches_watch_all">全部添加到关注列表</string>
+    <string name="caches_unwatch_all">清空关注列表</string>
+    <string name="caches_watch_selected">添加选中的内容到关注列表</string>
+    <string name="caches_unwatch_selected">从关注列表中移除选中的内容</string>
+    <string name="watchlist_background_started">关注列表启动后台更新</string>
     <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
     <string name="caches_upload_modifiedcoords_warning">您想要上传所有的 (选中的) 藏点修改过的坐标，并覆盖服务器上的现有坐标吗？这个操作不能被撤消。</string>
     <string name="caches_upload_allcoords">上传所有藏点的坐标</string>
@@ -508,7 +527,6 @@
     <string name="list_menu_create">新的列表</string>
     <string name="list_menu_drop">删除当前列表</string>
     <string name="list_menu_rename">删除当前列表</string>
-    <string name="list_menu_rename_list_prefix">重命名列表前缀</string>
     <string name="rename_from">重命名自</string>
     <string name="rename_to">重命名为</string>
     <string name="list_menu_import">导入</string>
@@ -529,6 +547,7 @@
     <string name="list_dialog_rename">重命名</string>
     <string name="list_not_available">列表不再可用，切换到标准列表</string>
     <string name="list_parent_list">父列表</string>
+    <string name="list_create_parent">&lt;建立新的父列表&gt;</string>
     <string name="list_name">列表名称</string>
     <string name="list_confirm_rename">从\"%1$s\"重命名为\"%2$s\"\n%3$s\n此操作不能撤销！</string>
     <string name="list_confirm_no_hierarchy">\n没有\":\" 找到- 所有匹配的列表都将转换为最上级列表\n</string>
@@ -910,6 +929,8 @@
     <string name="init_translation_disabled">翻译已禁用</string>
     <string name="init_date_format">日期格式</string>
     <string name="init_date_format_description">短日期的格式，例如在日志视图使用</string>
+    <string name="init_translator_external">外部翻译器</string>
+    <string name="init_translator_external_description">要使用的外部翻译应用程序</string>
     <string name="system_default">系统默认</string>
     <string name="init_showwaypoints">显示航点</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
@@ -971,6 +992,8 @@
     <string name="init_summary_cacheListInfo">选择藏点列表中显示的每个藏点的附加信息</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <string name="init_live_compass_in_navigation_action">在藏点详细中显示方向</string>
+    <string name="init_summary_live_compass_in_navigation_action">在其详细信息页中显示带有指南针方向的箭头</string>
     <string name="init_quicklaunchitems">快速启动按钮</string>
     <string name="init_summary_quicklaunchitems">在主屏幕上选择一个或多个项目作为快速启动按钮</string>
     <string name="init_custombnitem">自定义菜单项</string>
@@ -1073,7 +1096,6 @@
     <string name="init_hillshading_hq">高质量地貌晕渲</string>
     <string name="init_summary_hillshading_hq">更细致的地貌晕渲，但放大后的处理会慢50%</string>
     <string name="init_mapsource_select">选择地图来源</string>
-    <string name="init_mapsource_select_legacy">选择地图源（传统）</string>
     <string name="init_local_file_system">本地文件系统</string>
     <string name="init_base_directory_description">本地公共数据的基础文件夹</string>
     <string name="init_map_directory_description">离线地图目录</string>
@@ -1195,11 +1217,10 @@
     <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多线程 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多个线程渲染OpenStreetMap 地图</string>
-    <string name="init_title_useLegacyMap">使用旧版地图</string>
-    <string name="init_summary_useLegacyMap">使用 Google Map / Mapsforge (OSM) 地图的旧版本而不是 UnifiedMap</string>
     <string name="category_unifiedMap">统一地图</string>
     <string name="localstorage_migrate_title">本地文件的迁移</string>
     <string name="localstorage_migrate_status_major">版本 %1$d</string>
+    <string name="gui_test_title">GUI 测试屏幕</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近时通知</string>
     <string name="init_proximityNotificationGeneral">地图上的粗略的通知</string>
@@ -1347,6 +1368,10 @@
     <string name="cache_delete_generated_waypoints">删除生成的航点</string>
     <string name="cache_delete_generated_waypoints_confirm">删除这个藏点内所有生成的用户自定义航点？\n\n航点会立即被删除，无法恢复。</string>
     <string name="cache_delete_generated_waypoints_success">已删除生成的航点</string>
+    <string name="cache_select_waypoint_types">选择航点类型</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="other">%d 航点标记为已访问</item>
+    </plurals>
     <string name="cache_offline_store">存储</string>
     <string name="cache_offline_stored_ago">已存储：%s</string>
     <string name="cache_offline_not_ready">离线不可用</string>
@@ -1411,23 +1436,23 @@
     <string name="cache_advanced">高级</string>
     <string name="cache_waypoints">航点</string>
     <string name="cache_variables">变量</string>
+    <string name="cache_variables_chip_completed_variables">已完成</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">航点 (%d)</string>
     <string name="cache_waypoints_add">添加途经点</string>
     <string name="cache_waypoints_add_fromclipboard">从剪贴板中添加</string>
-    <string name="cache_waypoints_hide_visited_waypoints">隐藏访问过的航点</string>
     <string name="cache_waypoints_remove_original_waypoint">从剪贴板复制航点到此藏点。\n\n删除原始航点？</string>
     <string name="cache_hint">提示</string>
     <string name="cache_hint_not_available">没有可用的提示</string>
     <string name="cache_logs">日志本</string>
     <string name="cache_latest_logs">近期日志</string>
     <string name="cache_logs_friends_and_own">朋友/自己的日志</string>
+    <string name="cache_logs_friends">好友</string>
     <string name="cache_dialog_loading_details">正在加载藏点详细信息……</string>
     <string name="cache_dialog_loading_details_status_loadpage">加载页面</string>
     <string name="cache_dialog_loading_details_status_details">处理细节中</string>
     <string name="cache_dialog_loading_details_status_spoilers">正在加载揭密图片</string>
     <string name="cache_dialog_loading_details_status_logs">正在加载日志</string>
     <string name="cache_dialog_loading_details_status_waypoints">正在处理航点</string>
-    <string name="cache_dialog_loading_details_status_gcvote">正在加载 GCVote</string>
     <string name="cache_dialog_offline_save_title">离线</string>
     <string name="cache_dialog_offline_drop_title">离线</string>
     <string name="cache_menu_navigate">导航</string>
@@ -1466,6 +1491,7 @@
     <string name="ignore_confirm_title">小心</string>
     <string name="cache_status">状态</string>
     <string name="cache_status_offline_log">保存的日志</string>
+    <string name="cache_status_attended">已参加</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">已归档</string>
@@ -1912,7 +1938,6 @@
     <string name="add_setting_missing_type">您需要选择一个首选项类型</string>
     <string name="add_setting_already_exists">已存在同名的预设</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo 本地文件处理程序</string>
     <string name="localfile_title">打开本地文件</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">接收文件</string>
@@ -1953,9 +1978,7 @@
     <!-- Map Theme helper -->
     <!-- Wherigo Player -->
     <string name="wherigo_controls_reportproblem_hint">显示最后一个 Wherigo 问题</string>
-    <string name="wherigo_no_game_running">目前没有任何运行中的wherigo游戏</string>
     <string name="wherigo_error_game_error">Wherigo引擎报告的错误：\n\n```\n%1$s\n```\n您可通过[此处](%2$s)联系该游戏卡带的作者</string>
-    <string name="wherigo_error_email">Wherigo问题报告\n\n引擎错误: %1$s\n\nWherigo信息: %2$s</string>
     <!-- default actions in dialogs -->
     <string name="previous">上一个</string>
     <string name="skip">跳过</string>
