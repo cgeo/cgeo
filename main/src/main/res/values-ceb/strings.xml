@@ -177,8 +177,6 @@
     <string name="err_read_pocket_query_list">Nasayop og basa sa Pocket query na lista.</string>
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
-    <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
-    <string name="info_log_post_retry">Suwayi og balik</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
     <string name="info_waypoint_coordinates_cleared">Nalimpyo nga mga tiganos.</string>
     <string name="info_log_type_changed">Ang matang sa log kay giusab!</string>
