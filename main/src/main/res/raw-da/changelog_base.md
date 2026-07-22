@@ -2,7 +2,7 @@
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dette kan medføre uventede sideeffekter, især på nyere versioner af Android. Hvis du kommer ud for problemer med denne version af c:geo kan du melde dem på [Github](https://github.com/cgeo/cgeo) eller med en e-mail til [support@cgeo.org](mailto:support@cgeo.org)
 
 **Legacy Maps**
 
@@ -62,7 +62,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 
-### Wherigo player
+### Wherigo afspiller
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
