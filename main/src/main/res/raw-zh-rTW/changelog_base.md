@@ -1,7 +1,7 @@
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
+UnifiedMap got published about a year ago. UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
 - Map rotation for OpenStreetMap based maps (online + offline)
 - Cluster popup for Google Maps
 - Hide map sources you don't need
@@ -18,7 +18,7 @@ Roadmap:
 
 Until then, you can switch between the different implementations in settings => map sources.
 
-### Map
+### 地圖
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 - Fix: Map view not updated when removing cache from currently shown list
@@ -38,7 +38,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
 - Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
-### Cache details
+### Cache 細節
 - New: Offline translation of listing text and logs (experimental)
 - New: Option to share cache with user data (coordinates, personal note)
 - Fix: Speech service interrupted on screen rotation
@@ -57,7 +57,7 @@ Until then, you can switch between the different implementations in settings => 
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
 - New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
-### General
+### 一般
 - New: Redesigned search page
 - New: Inventory count filter
 - New: Support for coordinates in DD,DDDDDDD format
