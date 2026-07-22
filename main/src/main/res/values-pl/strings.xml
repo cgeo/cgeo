@@ -330,14 +330,13 @@
     <string name="err_read_bookmark_list">Błąd odczytywania list zakładek.</string>
     <string name="err_bookmark_list_overfull">Zbyt wiele skrytek</string>
     <string name="err_bookmark_list_overfull_description">Listy zakładek mogą przechowywać maksymalnie 1000 skrytek, próbujesz dodać więcej do listy.\n\nCzy chcesz kontynuować i dodać tylko tyle skrytek, ile zmieści się na liście?</string>
+    <string name="info_log_posting_background">Wpis jest publikowany…</string>
+    <string name="info_log_post_success">Wpis dot. %s został pomyślnie wysłany</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
-    <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
+    <string name="info_log_post_failed_geocode">Wysyłanie wpisu dot. %s nie powiodło się.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
-    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
-    <string name="info_log_post_retry">Spróbuj ponownie</string>
-    <string name="info_log_post_save">Zapisz offline</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy wpis nie został już usunięty.</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
     <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
     <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
@@ -2562,6 +2561,8 @@
     <string name="notification_channel_downloader_description">powiadomienia o wynikach pobierania (np. map offline)</string>
     <string name="notification_channel_cache_download_name">pobieranie skrytek</string>
     <string name="notification_channel_cache_download_description">powiadomienia o wynikach pobierania skrytek w tle</string>
+    <string name="notification_channel_log_name">wysyłanie wpisu</string>
+    <string name="notification_channel_log_description">powiadomienia o postępach i błędach przy wysyłaniu wpisów do skrytki</string>
     <string name="notification_download_receiver_title">Importowanie pobierania</string>
     <!-- individual routes -->
     <string name="individual_route">Indywidualna trasa</string>
