@@ -327,12 +327,7 @@
     <string name="err_bookmark_list_overfull_description">Bookmarklijsten kunnen maximaal 1000 caches opslaan, je probeert er meer toe te voegen aan de lijst.\n\nWil je doorgaan en alleen zoveel caches toevoegen als de lijst nog kan hebben?</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
-    <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
     <string name="info_log_delete_failed">Log verwijderen is mislukt.</string>
-    <string name="info_log_post_failed_simple_reason">Controleer of je correct bent ingelogd en een werkende internetverbinding hebt.</string>
-    <string name="info_log_delete_failed_simple_reason">Controleer of je correct bent ingelogd, een werkende internetverbinding hebt en het logboek nog niet is verwijderd.</string>
-    <string name="info_log_post_retry">Probeer opnieuw</string>
-    <string name="info_log_post_save">Off line opslaan</string>
     <string name="info_log_cleared">Log is gewist.</string>
     <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
     <string name="info_log_type_changed">Type log is gewijzigd!</string>
