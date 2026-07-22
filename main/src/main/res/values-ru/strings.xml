@@ -330,14 +330,13 @@
     <string name="err_read_bookmark_list">Не удалось прочитать списки закладок.</string>
     <string name="err_bookmark_list_overfull">Слишком много тайников</string>
     <string name="err_bookmark_list_overfull_description">В списках закладок может храниться не более 1000 тайников, вы пытаетесь добавить в список больше.\n\nВы действительно хотите продолжить и добавить столько тайников, сколько может вместить список?</string>
+    <string name="info_log_posting_background">Запись размещается…</string>
+    <string name="info_log_post_success">Запись для %s успешно отправлена</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
     <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
-    <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
+    <string name="info_log_post_failed_geocode">Не удалось отправить запись для %s.</string>
     <string name="info_log_delete_failed">Не удалось удалить запись.</string>
-    <string name="info_log_post_failed_simple_reason">Убедитесь, что вы корректно вошли в систему и у вас есть активное подключение к Интернету.</string>
-    <string name="info_log_delete_failed_simple_reason">Убедитесь, что вы корректно вошли в систему, у вас есть активное подключение к Интернету и что запись еще не удалена.</string>
-    <string name="info_log_post_retry">Повторить</string>
-    <string name="info_log_post_save">Сохранить офлайн</string>
+    <string name="info_log_delete_failed_simple_reason">Убедитесь, что вы правильно вошли в систему, у вас есть действующее подключение к Интернету и что запись уже не удалена.</string>
     <string name="info_log_cleared">Запись очищена.</string>
     <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
     <string name="info_log_type_changed">Тип записи был изменен!</string>
@@ -540,6 +539,7 @@
     <string name="caches_reset_cache_icons_title">Сбросить иконку тайника</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
     <string name="caches_set_listmarker">Установить маркер списка</string>
+    <string name="caches_recalculate_health_score">Пересчитать оценку состояния тайника</string>
     <string name="caches_askdeletion">Спросить про удаление, если пусто</string>
     <string name="select_icon">Выбрать иконку</string>
     <string name="onetime_missing_unicode_info">Ваша версия Android не поддерживает автоматическое определение иконок - некоторые символы могут отсутствовать</string>
@@ -629,7 +629,9 @@
     <string name="cache_filter_stored_since">Дата обновления описания</string>
     <string name="cache_filter_category">Категория BC</string>
     <string name="cache_filter_tier">Уровень ВС</string>
+    <string name="cache_filter_health_score">Оценка состояния тайника</string>
     <string name="cache_filter_health_score_include_unscored">Включать тайники без оценки их состояния</string>
+    <string name="cache_filter_named_filter">Фильтр</string>
     <string name="cache_filter_logical_filter_group">Вложенный фильтр</string>
     <string name="cache_filtergroup_basic">Основное</string>
     <string name="cache_filtergroup_details">Детали</string>
@@ -768,16 +770,23 @@
         <item>&gt;1м</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_activity_title">Фильтры</string>
+    <string name="cache_namedfilter_matching">Соответствующие фильтры</string>
     <string name="named_filter_add">Добавить фильтр</string>
+    <string name="named_filter_empty_hint">Фильтры не настроены. Чтобы добавить нажмите +.</string>
+    <string name="named_filter_activate_marker">использовать с приоритетом</string>
+    <string name="named_filter_enable_all_markers">Применить фильтры как маркеры</string>
     <string name="named_filter_markers_enabled">Маркеры включены</string>
     <string name="named_filter_markers_disabled">Маркеры отключены</string>
     <string name="named_filter_select_title">Выберите фильтр</string>
     <string name="named_filter_activate_deactivate_title">Активация/деактивация маркеров</string>
     <string name="named_filter_nofilter_label">(без фильтра — соответствует всем тайникам)</string>
+    <string name="named_filter_save_as_title">Сохранить как фильтр</string>
     <string name="named_filter_name_exists_title">Такое имя уже существует</string>
     <string name="named_filter_name_exists_message">Фильтр с именем \'%s\' уже существует. Перезаписать?</string>
     <string name="named_filter_config_exists_title">Фильтр уже сохранен</string>
     <string name="named_filter_config_exists_message">Эта конфигурация фильтра уже сохранена как \"%s\". Сохранить ее снова с новым именем?</string>
+    <string name="named_filter_fill_with_named">Заполнить фильтром</string>
     <string name="named_filter_priority_normal">Нормальный</string>
     <string name="named_filter_priority_high">Высокий</string>
     <string name="named_filter_priority_highest">Самый высокий</string>
@@ -2493,6 +2502,10 @@
         <item quantity="many">Установлено %d иконок тайника</item>
         <item quantity="other">Установлено %d иконок тайника</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Перерасчёт оценки состояния тайника…</string>
+    <string name="command_recalculate_health_score_result">Оценка состояния тайника пересчитана: %d</string>
+    <string name="log_health_score_explanation_title">Оценка состояния тайника</string>
+    <string name="log_health_score_explanation">Оценка состояния тайника рассчитывается не более чем по %1$s последним записям посетителей или до тех пор, пока не будет найдена одна из следующих записей: \n%2$s  \n\nРассчитывается как: \n`((сумма весов записей об успешном нахождении) / (сумма весов записей об успешном нахождении и неудачах)`\n\n** Записей об успешном нахождении**: \n%3$s  \n\n** Записей об неудачах**:  \n%4$s  \n\nЗаписи оцениваются по возрасту (более новые имеют больший вес).</string>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
     <string name="live_map_status_http429">Пожалуйста, не спешите, слишком много запросов к %s</string>
     <string name="live_map_status_error">Ошибка загрузки данных карты: %s</string>
@@ -2549,6 +2562,8 @@
     <string name="notification_channel_downloader_description">уведомления о загрузках (например, офлайн-карт)</string>
     <string name="notification_channel_cache_download_name">загрузчик тайника</string>
     <string name="notification_channel_cache_download_description">уведомления о фоновых загрузках тайников</string>
+    <string name="notification_channel_log_name">размещение записи</string>
+    <string name="notification_channel_log_description">уведомления о ходе выполнения и ошибках при публикации записей в тайники</string>
     <string name="notification_download_receiver_title">Импорт загрузки</string>
     <!-- individual routes -->
     <string name="individual_route">Личный маршрут</string>
