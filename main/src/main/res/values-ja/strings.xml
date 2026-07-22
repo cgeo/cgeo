@@ -262,6 +262,7 @@
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
     <string name="info_log_post_failed">ログの投稿に失敗しました</string>
+    <string name="info_log_delete_failed">ログの削除に失敗しました。</string>
     <string name="info_log_post_retry">再試行</string>
     <string name="info_log_post_save">オフライン保存</string>
     <string name="info_log_cleared">ログを削除しました</string>
@@ -349,6 +350,7 @@
     <string name="caches_sort_state">状態</string>
     <string name="caches_sort_storage">オフライン用に保存した日時</string>
     <string name="caches_sort_eventdate">イベント日</string>
+    <string name="caches_sort_lastfounddate">最終発見日</string>
     <string name="caches_select_mode">選択モード</string>
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
@@ -358,6 +360,7 @@
     <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
     <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
+    <string name="caches_upload_bookmarklist">ブックマークリストに追加</string>
     <string name="caches_upload_modifiedcoords">修正された座標をアップロード</string>
     <string name="caches_upload_modifiedcoords_warning">すべての(選択した)キャッシュの修正された座標をアップロードしますか? サーバー上の座標は上書きしされ、元に戻すことはできません</string>
     <string name="caches_upload_allcoords">すべてのキャッシュの座標をアップロード</string>
@@ -1433,6 +1436,7 @@
     <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
     <string name="user_menu_send_message">メッセージを送信</string>
     <string name="user_menu_send_email">メールを送る</string>
+    <string name="user_menu_open_contact">連絡先を開く</string>
     <string name="user_unknown">不明なユーザー</string>
     <!-- navigation -->
     <string name="navigation">ナビゲーション</string>
