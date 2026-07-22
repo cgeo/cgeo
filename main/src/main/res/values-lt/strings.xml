@@ -306,10 +306,7 @@
     <string name="err_read_bookmark_list">Klaida skaitant žymių sąrašus.</string>
     <string name="info_log_posted">c:geo sėkmingai paskelbė įrašą.</string>
     <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
-    <string name="info_log_post_failed">Paskelbti įrašo nepavyko.</string>
     <string name="info_log_delete_failed">Ištrinti įrašo nepavyko.</string>
-    <string name="info_log_post_retry">Kartoti</string>
-    <string name="info_log_post_save">Išsaugoti neprisijungus</string>
     <string name="info_log_cleared">Įrašas išvalytas.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinatės išvalytos.</string>
     <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
@@ -535,7 +532,6 @@
     <string name="cache_filter_stored_since">Paskutinis išsamios informacijos atnaujinimas</string>
     <string name="cache_filter_category">BC kategorija</string>
     <string name="cache_filter_tier">BC pakopa</string>
-    <string name="cache_filter_named_filter">Pavadintas filtras</string>
     <string name="cache_filter_logical_filter_group">Įdėtas filtras</string>
     <string name="cache_filtergroup_basic">Pagrindiniai</string>
     <string name="cache_filtergroup_details">Informacija</string>
@@ -863,6 +859,7 @@
     <string name="init_signature_template_type">Tipas</string>
     <string name="init_signature_template_location">Vieta</string>
     <string name="init_signature_template_geocode">Geokodas</string>
+    <string name="init_summary_bettercacher">Įkelkite slėptuvės pakopą ir kategorijas iš BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir asmeninių įrašų žurnalo papildomą puslapį</string>
     <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
@@ -1449,6 +1446,7 @@
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
+    <string name="cache_status_attended">Dalyvavo</string>
     <string name="cache_status_found">Surasta</string>
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_status_archived">Archyvuota</string>
@@ -1508,6 +1506,7 @@
     <string name="cachedetails_progress_watch">Įtraukta į stebimų sarašą</string>
     <string name="cachedetails_progress_unwatch">Pašalinta iš stebimų sąrašo</string>
     <string name="cachedetails_progress_favorite">Pridėta prie mėgstamiausių</string>
+    <string name="cachedetails_progress_unfavorite">Pašalinta iš mėgstamiausių</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
@@ -1754,6 +1753,17 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Didelis kontrastas</string>
     <string name="google_maps_style_auto">Įrenginio tema (Diena/Naktis)</string>
+    <string name="google_maps_option_group_map">Žemėlapio parinktys</string>
+    <string name="google_maps_option_show_traffic">Rodyti eismą</string>
+    <string name="google_maps_option_show_buildings">Rodyti 3D pastatus</string>
+    <string name="google_maps_option_group_theme">Temos parinktys</string>
+    <string name="google_maps_option_show_feature_theme">Rodyti temos funkcijas</string>
+    <string name="google_maps_option_show_feature_administrative_all">Rodyti administracinį</string>
+    <string name="google_maps_option_show_feature_landscape_all">Rodyti kraštovaizdį</string>
+    <string name="google_maps_option_show_feature_poi_all">Rodyti lankytinas vietas</string>
+    <string name="google_maps_option_show_feature_road_all">Rodyti kelius</string>
+    <string name="google_maps_option_show_feature_transit_all">Rodyti visuomeninį transportą</string>
+    <string name="google_maps_option_show_feature_water_all">Rodyti vandenį</string>
     <!-- search -->
     <string name="geo_search_label">Ieškoti slėptuvių netoliese</string>
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
@@ -1765,6 +1775,7 @@
     <string name="search_kw_disabled_hint">Išjungta, nes nepalaikoma geocaching.com BASIC nariams</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_finder">Surado</string>
+    <string name="search_filter">Filtras</string>
     <string name="search_filter_info_message" formatted="false">**Ieškoti pagal filtrą** ieško visų aktyvių internetinių paslaugų (pvz., geocaching.com) slėptuvių, naudodama pateiktą filtrą. Tačiau šių paslaugų paieškos galimybės paprastai yra labiau ribotos nei c:geo filtrų galimybės.\n\n- Visos paslaugos palaiko tik filtrus IR (jokių ARBA filtrų ir jokios filtro inversijos).\n- Paprastesni filtrai, pvz., ** slėptuvės tipą** arba **slėptuvės dydį** palaiko visos paslaugos. Sudėtingesni filtrai dažnai nepalaikomi arba turi tam tikrų apribojimų, pvz. **mėgstamiausi** arba **paslėpimo data**.\n- Išsamų kiekvienos paslaugos palaikomų filtrų sąrašą rasite [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltrus, kurių nepalaiko internetinė paslauga, c:geo taikys gautuose rezultatuose.</string>
     <string name="search_tb">Keliauninkas</string>
     <string name="search_destination">Atidaryti tikslą su c:geo</string>
@@ -2437,7 +2448,6 @@
     <string name="check_hillshading_found">Kalvų šešėlių duomenys jau yra</string>
     <string name="check_hillshading_missing">Rasti trūkstami kalvų šešėlių duomenys:</string>
     <string name="check_hillshading_unsupported">Įspėjimas: kalvos šešėlių duomenys bent iš dalies nepasiekiami pasirinktame regione</string>
-    <string name="check_hillshading_tiles_menu">Patikrinkite, ar trūksta kalvų šešėlių duomenų</string>
     <string name="mapupdate_info">Bakstelėkite čia, kad patikrintumėte, ar nėra žemėlapių ir temų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>
     <string name="no_updates_found">Naujinių nerasta</string>
     <string name="updates_check">Atnaujinimų patikrinimas</string>
@@ -2565,5 +2575,15 @@
         <item quantity="other">%d neskaitytų pranešimų pranešimų centre</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Pageidaujamas vaizdo dydis</string>
     <!-- db inspection -->
+    <string name="view_database">Peržiūrėti duomenų bazę</string>
+    <string name="dbi_select_title">(Pasirinkite lentelę)</string>
+    <string name="dbi_columnproperties_title">Stulpelių savybės</string>
+    <string name="dbi_columnproperties_message">Laukas: %1$s\nTipas: %2$s\nSaugykla: %3$s</string>
+    <string name="dbi_edit_title">Redaguoti „%1$s“ eilutės %2$d“</string>
+    <string name="dbi_edit_ok">Laukelis atnaujintas</string>
+    <string name="dbi_edit_error">Klaida atnaujinant lauką</string>
+    <string name="dbi_edit_error_pkfield">"%s yra pirminio rakto dalis, jo negalima redaguoti"</string>
+    <string name="dbi_search_title">Ieškoti</string>
 </resources>
