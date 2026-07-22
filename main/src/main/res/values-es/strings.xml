@@ -330,14 +330,13 @@
     <string name="err_read_bookmark_list">Error al leer las listas de marcadores.</string>
     <string name="err_bookmark_list_overfull">Demasiados cachés</string>
     <string name="err_bookmark_list_overfull_description">Las listas solo pueden almacenar hasta 1000 cachés, estás intentando añadir más de ese número a la lista.\n\n¿Quieres proceder añadiendo solo hasta el límite que la lista permite?</string>
+    <string name="info_log_posting_background">El registro se está publicando…</string>
+    <string name="info_log_post_success">Registro de %s publicado con éxito</string>
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
-    <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
+    <string name="info_log_post_failed_geocode">La publicación del registro para %s falló.</string>
     <string name="info_log_delete_failed">Fallo al eliminar el registro.</string>
-    <string name="info_log_post_failed_simple_reason">Compruebe que su sesión está correctamente iniciada y que tiene una conexión a internet válida.</string>
-    <string name="info_log_delete_failed_simple_reason">Compruebe que su sesión está correctamente iniciada, tiene una conexión a internet válida y que el registro no está ya eliminado.</string>
-    <string name="info_log_post_retry">Reintentar</string>
-    <string name="info_log_post_save">Guardar sin conexión</string>
+    <string name="info_log_delete_failed_simple_reason">Compruebe que su sesión está correctamente iniciada, tiene una conexión a internet válida y que el registro no ha sido eliminado.</string>
     <string name="info_log_cleared">Registro borrado.</string>
     <string name="info_waypoint_coordinates_cleared">Coordenadas borradas.</string>
     <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
@@ -534,6 +533,7 @@
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
+    <string name="caches_recalculate_health_score">Recalcular puntuaciones de salud de los cachés</string>
     <string name="caches_askdeletion">Solicitar borrado si está vacío</string>
     <string name="select_icon">Seleccionar icono</string>
     <string name="onetime_missing_unicode_info">Tu versión de Android no es compatible con la detección automática de iconos - puede que falten algunos caracteres</string>
@@ -554,6 +554,7 @@
     <string name="list_menu_create">Crear nueva lista</string>
     <string name="list_menu_drop">Borrar lista actual</string>
     <string name="list_menu_rename">Renombrar la lista actual</string>
+    <string name="list_menu_rename_parent_lists">Renombrar las listas de nivel superior</string>
     <string name="rename_from">Renombrar desde</string>
     <string name="rename_to">Renombrar a</string>
     <string name="list_menu_import">Importar</string>
@@ -616,7 +617,9 @@
     <string name="cache_filter_stored_since">Últimos detalles actualizados</string>
     <string name="cache_filter_category">Categoría BC</string>
     <string name="cache_filter_tier">Nivel BC</string>
+    <string name="cache_filter_health_score">Puntuación de salud del caché</string>
     <string name="cache_filter_health_score_include_unscored">Incluir cachés sin registros puntuables</string>
+    <string name="cache_filter_named_filter">Filtro</string>
     <string name="cache_filter_logical_filter_group">Filtro anidado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalles</string>
@@ -753,16 +756,23 @@
         <item>&gt;1 mes</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filtros</string>
+    <string name="cache_namedfilter_matching">Filtros coincidentes</string>
     <string name="named_filter_add">Añadir filtro</string>
+    <string name="named_filter_empty_hint">No hay filtros configurados. Pulsa + para añadir uno.</string>
+    <string name="named_filter_activate_marker">Usar con prio</string>
+    <string name="named_filter_enable_all_markers">Aplicar filtros como marcadores</string>
     <string name="named_filter_markers_enabled">Marcadores activados</string>
     <string name="named_filter_markers_disabled">Marcadores desactivados</string>
     <string name="named_filter_select_title">Seleccionar filtro</string>
     <string name="named_filter_activate_deactivate_title">Activar / desactivar marcadores</string>
     <string name="named_filter_nofilter_label">(sin filtro: coincide con todos los cachés)</string>
+    <string name="named_filter_save_as_title">Guardar como filtro</string>
     <string name="named_filter_name_exists_title">El nombre ya existe</string>
     <string name="named_filter_name_exists_message">Ya existe un filtro llamado \'%s\'. ¿Sobrescribir?</string>
     <string name="named_filter_config_exists_title">Filtro ya guardado</string>
     <string name="named_filter_config_exists_message">Esta configuración de filtro ya está guardada como \'%s\'. ¿Guardar de nuevo con un nuevo nombre?</string>
+    <string name="named_filter_fill_with_named">Rellenar con filtro</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">Alta</string>
     <string name="named_filter_priority_highest">La más alta</string>
@@ -1469,6 +1479,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establecer coordenadas</string>
     <string name="cache_personal_note">Nota personal</string>
+    <string name="cache_personal_note_edit_pn">Editar nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Evitar waypoints de la nota</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir waypoints de la nota</string>
     <string name="cache_personal_note_edit">Editar</string>
@@ -2431,6 +2442,10 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">Establecer %d icono de caché</item>
         <item quantity="other">Establecer %d iconos de caché</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Recalculando puntuaciones de salud de los cachés…</string>
+    <string name="command_recalculate_health_score_result">Puntuaciónes de salud de los cachés recalculadas: %d</string>
+    <string name="log_health_score_explanation_title">Puntuación de salud del caché</string>
+    <string name="log_health_score_explanation">La puntuación de salud de los registros se calcula a partir de, como máximo, los últimos %1$s registros o hasta que se encuentre uno de los siguientes tipos de registro:  \n%2$s  \n\nSe calcula de la siguiente forma:  \n`(suma del peso de los registros buenos) / (suma de los pesos de los registros buenos y malos)`\n\n**Registos buenos** son:  \n%3$s  \n\n**Registos malos** son:  \n%4$s  \n\nLos registros se pesan acorde a su antigüedad (los registos más recientes pesan más).</string>
     <string name="caches_refresh_all_warning">Esta acción puede ocasionar un alto tráfico de red. ¿Estás seguro de querer actualizar todos los cachés?</string>
     <string name="live_map_status_http429">Por favor, disminuya las peticiones, demasiadas solicitudes a %s</string>
     <string name="live_map_status_error">Error al cargar datos del mapa: %s</string>
@@ -2485,6 +2500,8 @@ Nombre de archivo:%2$s</string>
     <string name="notification_channel_downloader_description">notificaciones de resultados para descargas (ej: mapas sin conexión)</string>
     <string name="notification_channel_cache_download_name">Descargador de cachés</string>
     <string name="notification_channel_cache_download_description">notificaciones de resultados para las descargas en segundo plano de cachés</string>
+    <string name="notification_channel_log_name">Publicar registro</string>
+    <string name="notification_channel_log_description">notificaciones de progreso y errores para publicar registros del caché</string>
     <string name="notification_download_receiver_title">Importando descarga</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
