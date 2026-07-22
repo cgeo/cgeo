@@ -199,7 +199,11 @@
     <string name="log_delete_confirm">Er du sikker at du vil slette loggen af typen \'%1$s\' af forfatteren \'%2$s\' med logdato \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Kontakt med alias/brugernavn %s blev ikke fundet. Tilføj først kontakten under dine kontakter.</string>
     <!-- External translation -->
+    <string name="translate_external_variant_web">Hjemmeside</string>
+    <string name="translate_external_google">Google Oversæt</string>
+    <string name="translate_external_deepl">DeepL</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login-side kan ikke indlæses</string>
@@ -229,6 +233,7 @@
     <string name="err_detail_still_working">Arbejder stadig på en anden opgave.</string>
     <string name="err_detail_premium_log_found">Denne cache er kun tilgængelig for premium-medlemmer af geocaching.com. Derfor kan cacheinformationen ikke vises.\n\nMen hvis du allerede har fundet denne cache, kan du logge den her.</string>
     <string name="err_watchlist_failed">Ændring af din overvågningsliste mislykkedes.</string>
+    <string name="err_watchlist_failed_geocodes">Ændring af din overvågningsliste mislykkedes for geokoderne: %s</string>
     <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
     <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
     <string name="err_auth_process">Godkendelse fejlede.</string>
@@ -283,11 +288,10 @@
     <string name="warn_notloggedin_long">Du er endnu ikke logget på. Kun cacher, som er gemt lokalt, vil blive vist på live-kortet og online-funktioner vil ikke kunne bruges.\n\nManglende logon kan skyldes netværks- eller serverproblemer eller at konfigurationen af dine geocachingtjenester ikke er korrekt.\n\nVil du indstille geocachingtjenester nu?</string>
     <string name="err_read_pocket_query_list">Fejl ved læsning af Pocket Query-liste.</string>
     <string name="err_read_bookmark_list">Fejl ved læsning af bogmærkelister.</string>
+    <string name="err_bookmark_list_overfull">For mange caches</string>
+    <string name="err_bookmark_list_overfull_description">Bogmærkelister kan kun indeholde op til 1000 caches, og du forsøger at tilføje mere end det til listen.\n\nVil du fortsætte og tilføje så mange caches som listen kan holde?</string>
     <string name="info_log_posted">Logbeskeden blev sendt.</string>
     <string name="info_log_saved">Logbeskeden blev gemt.</string>
-    <string name="info_log_post_failed">Afsendelse af logbesked fejlede.</string>
-    <string name="info_log_post_retry">Prøv igen</string>
-    <string name="info_log_post_save">Gem offline</string>
     <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
     <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
     <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
@@ -303,6 +307,12 @@
     <string name="more_information">Mere information</string>
     <string name="undo">Fortryd</string>
     <string name="dont_show_again">Vis ikke dette igen</string>
+    <string name="tap_icon_more_info">Tryk på ikonet for mere info</string>
+    <string name="use_slider_adjust_value">Brug skyderen til at justere værdien</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Basis</string>
+    <string name="crash_activity_title">Oops! c:geo blev afbrudt!</string>
+    <string name="crash_activity_report">anmeld problem</string>
     <!-- location service -->
     <string name="loc_last">Sidst kendte</string>
     <string name="loc_net">Netværk</string>
@@ -650,6 +660,7 @@
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
+    <string name="init_signature_template_geocode">Geokode</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
     <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -937,8 +948,8 @@
     <string name="cache_images">Billeder</string>
     <string name="cache_advanced">Avanceret</string>
     <string name="cache_waypoints">Rutepunkter</string>
+    <string name="cache_waypoints_add">Tilføj waypoint</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skjul besøgte waypoints</string>
     <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Intet hint tilgængeligt</string>
@@ -1001,6 +1012,7 @@
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log gemt</string>
+    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
     <string name="cache_status_archived">Arkiveret</string>
@@ -1040,6 +1052,8 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Fra %s</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - ikke hentet</string>
+    <string name="cache_wherigo_start">Hent og afspil denne Wherigo med c:geo\'s indbyggede afspiller</string>
     <string name="context_share_as_text">Del tekst</string>
     <string name="context_share_as_link">Del link</string>
     <string name="image_category_own">Egne</string>
@@ -1155,6 +1169,10 @@
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings">Hurtige indstillinger</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
+    <string name="zoom_in">Zoom ind</string>
+    <string name="zoom_out">Zoom ud</string>
+    <string name="google_maps_style_classic">Klassisk</string>
+    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="geo_search_label">Søg i caches i nærheden</string>
     <string name="search_bar_hint">Søg caches/trackables</string>
@@ -1165,6 +1183,7 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_finder">Fundet af</string>
+    <string name="search_filter_info_message" formatted="false">**Søg med filter** søger caches på alle aktive online tjenester (f.eks. geocaching.com) ud fra et angivet filter. Men, søgefaciliteterne på disse tjenester er normalt mere begrænset end c:geos søgefelter.\n\n- Alle tjenester understøtter kun OG-filtre (ingen ELLER-filtre og ingen omvendte filtre).\n- De mere grundlæggende filtre som **cache type** eller **cache størrelse** understøttes af alle tjenester. Mere komplicerede filtre understøttes ofte ikke eller har visse begrænsninger, f.eks. **favoritter** eller **skjult dato**.\n- En detaljeret liste over understøttede filtre pr. tjeneste kan findes [her](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre som ikke understøttes af online-tjenesten vil blive anvendt af c:geo på de modtagne resultater.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Åbn destinationen i c:geo</string>
     <string name="search_address_started">Søger efter steder</string>
