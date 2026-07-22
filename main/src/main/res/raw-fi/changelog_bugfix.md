@@ -1,5 +1,5 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Aika päivittää! Jos käytät edelleen Android 7 tai vanhempaa, tämä saattaa olla viimeinen c:geon päivitys sinulle! Uuden c:geon julkaisun kanssa lopetamme tuen Android 5-7:lle vähentääksemme huoltokuormaa ja mahdollistaaksemme c:geon käyttämien ulkoisten komponenttien päivityksen, joita joudumme vielä pitämään. Tuemme edelleen Android 8-16 (ja uudempia versioita kun ne julkaistaan) yli kahdeksan vuoden Android-historian ajalta.
 
 - Fix: Cache/waypoint popup opening delayed on some devices
 - Fix: Edit cache description does not support copy & paste
@@ -37,7 +37,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
  - Fix: Internal routing no longer working, only straight line shown
  - Fix: Some folder creation issues
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+Huomautus: Jos käytät sisäistä reititystä, sinun täytyy suorittaa seuraava vaihe kerran tämän julkaisun asentamisen jälkeen: Mene c:geo aloitusnäyttöön, avaa "Hallitse offline dataa" - "Päivitä reititystiedot", ja anna c:geon asentaa päivitetyt tiedostot. (Syy: BRouterin reititystietojen rakenne on muuttunut ja kaikkien reititystiedostojen on oltava saman version mukaisia.)
 
 ##
 - Fix: Parsing cache location string fails for certain website languages
@@ -70,7 +70,7 @@ Note: If you are using internal routing, you will need to execute the following 
 - Fix: Some translations do not respect c:geo-internal language setting
 
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Vanhojen karttojen poistaminen on suunniteltu keväälle 2026 säännöllisissä julkaisuissamme.
 - Fix: Favorite checkbox gets reset on reentering offline log screen
 - Fix: Geofence radius input box shows decimal number
 - Fix: Syncing of personal notes not working
