@@ -1,7 +1,7 @@
 ### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap. This is a deprecation notice to inform you about the further roadmap.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
+UnifiedMap got published about a year ago. UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
 - Map rotation for OpenStreetMap based maps (online + offline)
 - Cluster popup for Google Maps
 - Hide map sources you don't need
@@ -54,7 +54,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Ability to copy zone center coordinates to clipboard
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - New: Support opening local Wherigo files
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- Change: Long-tap on a zone on map is no longer recognized. Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
 - New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### 通用
