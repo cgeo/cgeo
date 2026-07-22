@@ -2,17 +2,17 @@
 
 **Reunasta reunaan**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Play-kaupan käytäntöjen vuoksi olemme päivittäneet Android API -tasoa tällä c:geo-kohteiden versiolla + olemme muuttaneet joitakin näytön asettelun rutiineja. Tästä voi ilmeentyä ei-toivottuja sivuvaikutuksia, etenkin uusimmilla Android-versioilla. Jos sinulla on ongelmia tämän c:geo-version kanssa, ilmoitathan siitä joko [GitHubiin](https://github.com/cgeo/cgeo) tai sähköpostitse osoitteeseen [support@cgeo.org](mailto:support@cgeo.org)
 
 **Vanhat kartat**
 
 Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poistanut karttojemme vanhat toteutukset. Uusi UnifiedMap tulee käyttöön automaattisesti ja sinun ei pitäisi huomata eroja, paitsi muutamia uusia ominaisuuksia, joihin sisältyy
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+- Kartan kierto OpenStreetMapsiin perustuville karttoille (online + offline)
+- Ponnahdusikkuna Google Mapsille
+- Piilota kartan lähteet, joita et tarvitse
+- Korkeuskaavio reittejä ja jälkiä varten
+- Vaihda listojen välillä suoraan kartalta
+- "Ajotila" OpenStreetMap pohjaisille karttoille
 - Pitkä napautus polulla / yksittäisellä reitillä lisävalintoja varten
 
 ### Kartta
@@ -21,17 +21,17 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 - New: Show generated waypoints on map
 - New: Download caches ordered by distance
-- Fix: Doubling of individual route items
-- New: Support for Motorider theme (VTM only)
-- New: NoMap tile provider (don't show map, just caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
-- New: Offer to set cache icon even if cache is not yet stored
-- New: Infobox for elevation chart showing remaining distance, ascent, descent
-- New: Display coordinates of waypoints in waypoint popup
-- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
-- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
-- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- Korjaus: Yksittäisten reittien kohteiden kahdentuminen
+- Uusi: Tuki Motorider-teemalle (vain VTM)
+- Uusi: NoMap laattojen tarjoaja (ei näytä karttaa, vain kätköt jne.)
+- Muutos: Maksimietäisyys pisteiden liittämiseksi jälkihistoriassa laskettu 500 metriin (muokattavissa)
+- Uusi: Salli KML-tiedostojen tuonti jälkinä
+- Uusi: Mahdollisuus asettaa kätkön kuvake, vaikka kätköä ei olisikaan vielä tallennettu
+- Uusi: Inforuutu korkeuskaavioille joka näyttää etäisyyden, nousut ja laskut
+- Uusi: Näytä reittipisteiden koordinaatit reittipisteen ponnahdusikkunassa
+- Korjaus: Kartan pika-asetukset saattavat näyttää painikkeet "1"/"2" tyhjille reititysprofiileille kielen vaihtamisen jälkeen
+- Uusi: Laske puuttuvat korkeustiedot tuontiraidoista (jos korkeustiedot on ladattu)
+- Korjaus: Laattalatain pysähtyy tietyissä tilanteissa (vain OpenStreetMap-onlinekartat)
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 
@@ -39,7 +39,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Detect additional characters in formulas: –, ⋅, ×
 - New: Preserve timestamp of own logs on refreshing a cache
 - New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
-- New: Show owners' logs on "friends/own" tab
+- Uusi: Näytä omistajien lokit "ystävät/omat" välilehdessä
 - Change: "Friends/own" tab shows log counts for that tab instead of global counters
 - Change: Improved header in variable and waypoint tabs
 - Fix: Two "delete log" items shown
