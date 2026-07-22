@@ -329,11 +329,9 @@
     <string name="info_log_post_success">Log pre %s bol úspešne odoslaný</string>
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
     <string name="info_log_saved">c:geo úspešne uložilo log.</string>
-    <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
     <string name="info_log_post_failed_geocode">Log pre %s sa nepodarilo odoslať.</string>
     <string name="info_log_delete_failed">Log sa nepodarilo odstrániť.</string>
-    <string name="info_log_post_retry">Opakovať</string>
-    <string name="info_log_post_save">Uložiť offline</string>
+    <string name="info_log_delete_failed_simple_reason">Skontrolujte, či ste správne prihlásení, máte platné internetové pripojenie a či log už nie je odstránený.</string>
     <string name="info_log_cleared">Log bol vyprázdnený.</string>
     <string name="info_waypoint_coordinates_cleared">Súradnice vymazané.</string>
     <string name="info_log_type_changed">Typ logu bol zmenený!</string>
