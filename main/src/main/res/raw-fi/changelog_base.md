@@ -1,22 +1,22 @@
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geossa on ollut täysin uusi kartan toteutus nimeltään "UnifiedMap" jonkin aikaa, joka lopulta korvaa vanhat toteutukset Google Mapsista ja Mapsforgesta (OpenStreetMap). Tällä vanhenemisilmoituksella kerrotaan sinulle tulevasta suunnitelmasta.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+UnifiedMap julkaistiin noin vuosi sitten. Se tukee edelleen Google Mapsia ja OpenStreetMappia (online + offline), mutta täysin muokatulla teknisellä tavalla, ja paljon jännittäviä uusia ominaisuuksia, joita "vanhat" kartat eivät tue, joista osa on
+- Kartan kierto OpenStreetMapsiin perustuville karttoille (online + offline)
+- Ponnahdusikkuna Google Mapsille
+- Piilota kartan lähteet, joita et tarvitse
+- Korkeuskaavio reittejä ja jälkiä varten
+- Vaihda listojen välillä suoraan kartalta
+- "Ajotila" OpenStreetMap pohjaisille karttoille
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+UnfiedMap on osoittautunut vakaaksi jo jonkin aikaa, joten poistamme vanhat karttojen toteutukset vähentääksemme c:geon säilyttämistä koskevia ponnisteluja.
 
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+Suunnitelma:
+- "Vanhat" kartat ovat nyt vanhenemistilassa - emme enää korjaa vikoja.
+- UnifiedMap on oletusarvoinen kaikille käyttäjille syksyllä 2025.
+- "Vanhat" kartan toteutukset poistetaan keväällä 2026.
 
-Until then, you can switch between the different implementations in settings => map sources.
+Siihen asti voit vaihtaa eri toteutusten välillä asetuksissa => karttalähteet.
 
 ### Kartta
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
