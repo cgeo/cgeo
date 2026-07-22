@@ -2,7 +2,7 @@
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Ennek lehetnek nemkívánatos következményei, különösen az újabb Android verziókon. Ha bármilyen problémát tapasztal a c:geo ezen verziójával kapcsolatban, kérjük, jelentse azt a [GitHub](https://github.com/cgeo/cgeo)-on vagy e-mailben a [support@cgeo.org](mailto:support@cgeo.org) címen
 
 **Legacy Maps**
 
@@ -15,7 +15,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - "Driving mode" for OpenStreetMap based maps
 - Long-tap on track / individual route for further options
 
-### Map
+### Térkép
 - New: Route optimization caches calculated data
 - New: Enabling live mode keeps waypoints of currently set target visible
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
