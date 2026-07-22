@@ -208,6 +208,8 @@
     <string name="log_delete_confirm">你確定要刪除日誌類型為%1$s、作者為%2$s、日期為%3$s的日誌嗎？</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
+    <string name="contact_not_found">聯絡人找不到暱稱或小名為%s的人。請先將其加入您的聯絡人。</string>
+    <string name="contact_multiple_matches">聯絡人: 多個符合項目</string>
     <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -295,10 +297,7 @@
     <string name="err_read_bookmark_list">讀取書籤清單時出現錯誤</string>
     <string name="info_log_posted">成功發布日誌</string>
     <string name="info_log_saved">成功儲存日誌。</string>
-    <string name="info_log_post_failed">發布日誌失敗</string>
     <string name="info_log_delete_failed">刪除日誌失敗。</string>
-    <string name="info_log_post_retry">重試</string>
-    <string name="info_log_post_save">離線儲存</string>
     <string name="info_log_cleared">已清除日誌</string>
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="info_log_type_changed">日誌的種類已經改變</string>
@@ -316,6 +315,17 @@
     <string name="more_information">更多資訊</string>
     <string name="undo">復原</string>
     <string name="dont_show_again">不要再顯示</string>
+    <string name="tap_icon_more_info">點擊圖示以獲取更多訊息</string>
+    <string name="use_slider_adjust_value">使用滑桿調整數值</string>
+    <string name="gc_premium">付費會員</string>
+    <string name="gc_basic">基本</string>
+    <string name="translator_preference_target_lng">離線翻譯語言</string>
+    <string name="translator_preference_target_lng_summary">離線翻譯的目標語言</string>
+    <string name="translator_preference_nottranslate_lng">已忽略的語言</string>
+    <string name="translator_preference_nottranslate_lng_summary">不提供翻譯的原始語言</string>
+    <string name="translator_model_download_select">下載離線翻譯語言</string>
+    <string name="translator_model_download_confirm_title">確認下載語言</string>
+    <string name="translator_model_download_confirm_txt">需要下載語言 %s 的翻譯模型。模型大小約為 20-40 MB。</string>
     <!-- location service -->
     <string name="loc_last">上一次</string>
     <string name="loc_net">網絡</string>
@@ -631,6 +641,8 @@
     <string name="init_signature_template_log">日誌文字</string>
     <string name="init_signature_template_size">大小</string>
     <string name="init_signature_template_type">類型</string>
+    <string name="init_signature_template_location">位置</string>
+    <string name="init_signature_template_geocode">地理藏寶編號</string>
     <string name="init_friends_and_own_logs_wanted">顯示朋友擁有的</string>
     <string name="init_summary_friends_and_own_logs_wanted">對於朋友寫的或是自己的日誌，顯示額外的日誌頁</string>
     <string name="init_openlastdetailspage">最後的詳細資訊頁面</string>
@@ -1009,6 +1021,7 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
+    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -1164,11 +1177,13 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
+    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
     <string name="search_address">地址</string>
     <string name="search_hbu">由藏寶</string>
+    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>
