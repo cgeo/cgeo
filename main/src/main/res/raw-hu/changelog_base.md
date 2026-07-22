@@ -2,7 +2,7 @@
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Ennek lehetnek nemkívánatos következményei, különösen az újabb Android verziókon. Ha bármilyen problémát tapasztal a c:geo ezen verziójával kapcsolatban, kérjük, jelentse azt a [GitHub](https://github.com/cgeo/cgeo)-on vagy e-mailben a [support@cgeo.org](mailto:support@cgeo.org) címen
 
 **Legacy Maps**
 
@@ -16,24 +16,24 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Long-tap on track / individual route for further options
 
 ### Térkép
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- New: Route optimization caches calculated data
+- New: Enabling live mode keeps waypoints of currently set target visible
+- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
+- New: Show generated waypoints on map
+- New: Download caches ordered by distance
+- Fix: Doubling of individual route items
+- New: Support for Motorider theme (VTM only)
+- New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- New: Display coordinates of waypoints in waypoint popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
