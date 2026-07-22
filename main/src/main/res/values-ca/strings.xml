@@ -335,13 +335,9 @@
     <string name="info_log_post_success">El registre de %s s\'ha enviat correctament</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
-    <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
     <string name="info_log_post_failed_geocode">Ha fallat la publicació del registre de %s.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
-    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
-    <string name="info_log_post_retry">Anterior</string>
-    <string name="info_log_post_save">Guarda-ho  fora de línia</string>
+    <string name="info_log_delete_failed_simple_reason">Comproveu si heu iniciat la sessió correctament, si teniu una connexió a Internet vàlida i que el registre no s\'hagi suprimit ja.</string>
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
     <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
     <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
