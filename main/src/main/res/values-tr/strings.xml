@@ -1502,6 +1502,7 @@
     <string name="user_menu_open_browser">Profili tarayıcıda aç</string>
     <string name="user_menu_send_message">Mesaj gönder</string>
     <string name="user_menu_send_email">E-posta gönder</string>
+    <string name="user_menu_open_contact">Kişi kartını göster</string>
     <string name="user_unknown">Bilinmeyen kullanıcı</string>
     <!-- navigation -->
     <string name="navigation">Navigasyon</string>
