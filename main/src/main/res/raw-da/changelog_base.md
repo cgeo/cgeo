@@ -47,7 +47,7 @@ Until then, you can switch between the different implementations in settings => 
 - Change: Log-date related placeholders will use chosen date instead of current date
 - New: Collapse long log entries per default
 
-### Wherigo player
+### Wherigo afspiller
 - New: Integrated Wherigo player checking for missing credentials
 - Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
 - New: Ability to navigate to a zone using compass
@@ -62,7 +62,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Inventory count filter
 - New: Support for coordinates in DD,DDDDDDD format
 - New: Show last used filter name in filter dialog
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Nyt: Koordinatberegner: Funktion til at erstatte "x" med multiplikationssymbol
 - Fix: Incorrect altitude (not using mean above sea level)
 - Fix: Nearby distance limit setting not working properly for small values
 - Fix: Sorting of cache lists by distance descending not working correctly
