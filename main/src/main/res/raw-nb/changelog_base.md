@@ -16,7 +16,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Long-tap on track / individual route for further options
 
 ### Kart
-- New: Route optimization caches calculated data
+- Nytt: Ruteoptimalisering cacher beregnet data
 - New: Enabling live mode keeps waypoints of currently set target visible
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 - New: Show generated waypoints on map
@@ -62,7 +62,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 
-### Wherigo player
+### Wherigo-spiller
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
@@ -94,7 +94,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Crahs in percentage favorite filter
 - New: Make it easier to use simple lists as parent lists
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Fiks: Noen tekster fulgte ikke endring av språk
+- Fiks "Britiske og amerikanske lengdeenheter" ble ikke startet riktig ved nyinstallasjon
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
 - Change: New emoji selector
