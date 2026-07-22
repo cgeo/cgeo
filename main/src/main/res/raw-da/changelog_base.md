@@ -2,7 +2,7 @@
 
 **Edge to Edge**
 
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dette kan medføre uventede sideeffekter, især på nyere versioner af Android. Hvis du kommer ud for problemer med denne version af c:geo kan du melde dem på [Github](https://github.com/cgeo/cgeo) eller med en e-mail til [support@cgeo.org](mailto:support@cgeo.org)
 
 **Legacy Maps**
 
@@ -63,33 +63,38 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 
 ### Wherigo afspiller
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
-- New: Support opening local Wherigo files
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- New: Offline translation for Wherigos
+- New: Improved button handling
+- New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Generelt
-- New: Redesigned search page
-- New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
-- New: Show last used filter name in filter dialog
-- Nyt: Koordinatberegner: Funktion til at erstatte "x" med multiplikationssymbol
-- Fix: Incorrect altitude (not using mean above sea level)
-- Fix: Nearby distance limit setting not working properly for small values
-- Fix: Sorting of cache lists by distance descending not working correctly
-- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
-- Fix: Color issues with menu icons in light mode
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
-- Fix: Importing local map file gets random map name
-- Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- New: Share option after logging a cache
+- Change: Do not show "needs maintenance" or "needs archived" options for own caches
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Change: Removed references to Twitter
+- New: Delete orphaned trackfiles on clean up and restore backup
+- New: Warning on trying to add too many caches to a bookmark list
+- New: Watch/unwatch list functions
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
+- New: Delete items from search history
+- Change: Remove GCVote (service discontinued)
+- New: Colored toolbar on cache details pages
+- New: Select multiple bookmark lists / pocket queries to download
+- New: Preview bookmark lists
+- Change: Increase minimum required Android version to Android 8
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
+- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector
