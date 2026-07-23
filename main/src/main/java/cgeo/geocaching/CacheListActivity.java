@@ -82,6 +82,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -236,15 +237,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void replaceCacheListFromSearch() {
         if (search != null) {
             runOnUiThread(() -> {
-
-
-                // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
-                // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
-                final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                final SearchResult currentSearch = search;
+                // Capture the current scroll position on the UI thread before (re)loading.
                 final LastPositionHelper lph = new LastPositionHelper(this);
-                adapter.setList(cachesFromSearchResult);
-                updateGui();
-                lph.setLastListPosition();
+                // The database load can take several seconds for huge lists (e.g. 18k caches). Run it off
+                // the UI thread to keep the UI responsive. Only a single set of caches is kept in memory:
+                // it is created in the background and consumed on the UI thread.
+                AndroidRxUtils.andThenOnUi(Schedulers.io(),
+                        () -> {
+                            try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CacheListActivity.replaceCacheListFromSearch.dbLoad(#%d)", currentSearch.getCount())) {
+                                return currentSearch.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                            }
+                        },
+                        cachesFromSearchResult -> {
+                            try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CacheListActivity.replaceCacheListFromSearch.uiApply(#%d)", cachesFromSearchResult.size())) {
+                                adapter.setList(cachesFromSearchResult);
+                                updateGui();
+                                lph.setLastListPosition();
+                            }
+                        });
             });
         }
     }
@@ -1915,20 +1926,36 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onLoadFinished(@NonNull final Loader<SearchResult> arg0, final SearchResult searchIn) {
-        // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
-        // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
+        // The heavy database load (full cache data for potentially huge lists, e.g. 18k caches) is run
+        // off the UI thread to keep the UI responsive. Only a single set of caches is kept in memory:
+        // it is created in the background and consumed on the UI thread.
         if (searchIn != null) {
-            final Set<Geocache> cachesFromSearchResult = searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             final LastPositionHelper lph = new LastPositionHelper(this);
-            adapter.setList(cachesFromSearchResult);
-            search = searchIn;
-            updateGui();
-            lph.setLastListPosition();
+            AndroidRxUtils.andThenOnUi(Schedulers.io(),
+                    () -> {
+                        try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CacheListActivity.onLoadFinished.dbLoad(#%d)", searchIn.getCount())) {
+                            return searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                        }
+                    },
+                    cachesFromSearchResult -> {
+                        try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CacheListActivity.onLoadFinished.uiApply(#%d)", cachesFromSearchResult.size())) {
+                            adapter.setList(cachesFromSearchResult);
+                            search = searchIn;
+                            updateGui();
+                            lph.setLastListPosition();
 
-            if (search.getError() != StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
-            }
+                            if (search.getError() != StatusCode.NO_ERROR) {
+                                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
+                            }
+                            finishOnLoadFinished(arg0);
+                        }
+                    });
+        } else {
+            finishOnLoadFinished(arg0);
         }
+    }
+
+    private void finishOnLoadFinished(@NonNull final Loader<SearchResult> arg0) {
         showProgress(false);
         invalidateOptionsMenuCompatible();
         if (arg0 instanceof AbstractSearchLoader) {
