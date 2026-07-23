@@ -39,14 +39,27 @@ public final class IgnoreListUtils {
 
     private static void updateHandler(final Context context, final List<Geocache> caches, final boolean actionIsIgnore) {
         final Context appContext = context.getApplicationContext();
+        Log.i("IgnoreListUtils.updateHandler: " + (actionIsIgnore ? "ignoring" : "unignoring") + " " + caches.size() + " candidate cache(s)");
         ActivityMixin.showToast(appContext, LocalizationUtils.getString(R.string.ignorelist_background_started));
         final Predicate<Geocache> canAct = actionIsIgnore ? IgnoreListUtils::canIgnore : IgnoreListUtils::canUnignore;
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             final List<Geocache> candidates = filterCandidates(caches, canAct);
             final List<Geocache> succeeded = actionIsIgnore ? ignoreOnlineBatch(candidates) : unignoreOnlineBatch(candidates);
             final List<String> failedCaches = getFailedGeocodes(candidates, succeeded);
-            ActivityMixin.showToast(appContext, failedCaches.isEmpty() ? LocalizationUtils.getString(actionIsIgnore ? R.string.caches_ignore_all : R.string.caches_unignore_all) : LocalizationUtils.getString(R.string.err_ignorelist_failed_geocodes, String.join(",", failedCaches)));
+            if (!failedCaches.isEmpty()) {
+                Log.w("IgnoreListUtils.updateHandler: failed for geocodes " + String.join(",", failedCaches));
+            }
+            final String message = buildUpdateResultMessage(actionIsIgnore, failedCaches);
+            ActivityMixin.showToast(appContext, message);
         });
+    }
+
+    private static String buildUpdateResultMessage(final boolean actionIsIgnore, final List<String> failedCaches) {
+        if (failedCaches.isEmpty()) {
+            final int stringId = actionIsIgnore ? R.string.caches_ignore_all : R.string.caches_unignore_all;
+            return LocalizationUtils.getString(stringId);
+        }
+        return LocalizationUtils.getString(R.string.err_ignorelist_failed_geocodes, String.join(",", failedCaches));
     }
 
     private static List<Geocache> filterCandidates(final List<Geocache> caches, final Predicate<Geocache> canAct) {
@@ -80,10 +93,12 @@ public final class IgnoreListUtils {
      */
     public static boolean ignoreOnline(final Geocache cache) {
         if (!callOnlineIgnoreAction(cache, true)) {
+            Log.w("IgnoreListUtils.ignoreOnline: failed to ignore " + cache.getGeocode());
             return false;
         }
         cache.getLists().add(StoredList.IGNORE_LIST_ID);
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+        Log.i("IgnoreListUtils.ignoreOnline: ignored " + cache.getGeocode());
         return true;
     }
 
@@ -95,9 +110,11 @@ public final class IgnoreListUtils {
      */
     public static boolean unignoreOnline(final Geocache cache) {
         if (!callOnlineIgnoreAction(cache, false)) {
+            Log.w("IgnoreListUtils.unignoreOnline: failed to unignore " + cache.getGeocode());
             return false;
         }
         DataStore.removeFromList(Collections.singletonList(cache), StoredList.IGNORE_LIST_ID);
+        Log.i("IgnoreListUtils.unignoreOnline: unignored " + cache.getGeocode());
         return true;
     }
 
@@ -118,6 +135,7 @@ public final class IgnoreListUtils {
         if (!succeeded.isEmpty()) {
             DataStore.saveCaches(succeeded, LoadFlags.SAVE_ALL);
         }
+        Log.i("IgnoreListUtils.ignoreOnlineBatch: ignored " + succeeded.size() + "/" + caches.size() + " cache(s)");
         return succeeded;
     }
 
@@ -137,12 +155,14 @@ public final class IgnoreListUtils {
         if (!succeeded.isEmpty()) {
             DataStore.removeFromList(succeeded, StoredList.IGNORE_LIST_ID);
         }
+        Log.i("IgnoreListUtils.unignoreOnlineBatch: unignored " + succeeded.size() + "/" + caches.size() + " cache(s)");
         return succeeded;
     }
 
     private static boolean callOnlineIgnoreAction(final Geocache cache, final boolean actionIsIgnore) {
         final IConnector connector = ConnectorFactory.getConnector(cache);
         if (!(connector instanceof IIgnoreCapability)) {
+            Log.w("IgnoreListUtils.callOnlineIgnoreAction: " + cache.getGeocode() + "'s connector does not support the ignore list");
             return false;
         }
         return actionIsIgnore ? ((IIgnoreCapability) connector).addToIgnorelist(cache) : ((IIgnoreCapability) connector).removeFromIgnorelist(cache);
@@ -174,19 +194,30 @@ public final class IgnoreListUtils {
             final boolean was = wasOnIgnoreList.contains(cache.getGeocode());
             final boolean is = cache.getLists().contains(StoredList.IGNORE_LIST_ID);
             if (is != was) {
-                callOnlineIgnoreAction(cache, is);
+                Log.i("IgnoreListUtils.reflectMembershipChange: " + (is ? "ignoring" : "unignoring") + " " + cache.getGeocode() + " online to reflect a local ignore list change");
+                if (!callOnlineIgnoreAction(cache, is)) {
+                    Log.w("IgnoreListUtils.reflectMembershipChange: failed to reflect ignore list change for " + cache.getGeocode() + " online");
+                }
             }
         }
     }
 
     private static boolean canIgnore(final Geocache cache) {
         final IConnector connector = ConnectorFactory.getConnector(cache);
-        return connector instanceof IIgnoreCapability && ((IIgnoreCapability) connector).canIgnoreCache(cache) && !cache.getLists().contains(StoredList.IGNORE_LIST_ID);
+        if (!(connector instanceof IIgnoreCapability)) {
+            return false;
+        }
+        final IIgnoreCapability ignoreCap = (IIgnoreCapability) connector;
+        return ignoreCap.canIgnoreCache(cache) && !cache.getLists().contains(StoredList.IGNORE_LIST_ID);
     }
 
     private static boolean canUnignore(final Geocache cache) {
         final IConnector connector = ConnectorFactory.getConnector(cache);
-        return connector instanceof IIgnoreCapability && ((IIgnoreCapability) connector).canRemoveFromIgnoreCache(cache) && cache.getLists().contains(StoredList.IGNORE_LIST_ID);
+        if (!(connector instanceof IIgnoreCapability)) {
+            return false;
+        }
+        final IIgnoreCapability ignoreCap = (IIgnoreCapability) connector;
+        return ignoreCap.canRemoveFromIgnoreCache(cache) && cache.getLists().contains(StoredList.IGNORE_LIST_ID);
     }
 
     public static boolean anySupportsIgnoreList(final List<Geocache> caches) {
@@ -214,7 +245,9 @@ public final class IgnoreListUtils {
         }
         final Context appContext = context.getApplicationContext();
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+            Log.i("IgnoreListUtils.syncOnlineIgnoreListIfNeeded: starting initial ignore list sync");
             final SyncOutcome outcome = syncAllIgnoreListConnectors();
+            Log.i("IgnoreListUtils.syncOnlineIgnoreListIfNeeded: sync finished with outcome " + outcome);
             if (outcome == SyncOutcome.ALL_SUCCEEDED) {
                 Settings.setIgnoreListSynced(true);
             } else if (outcome == SyncOutcome.SOME_FAILED) {
@@ -251,8 +284,10 @@ public final class IgnoreListUtils {
     private static boolean fetchAndMergeIgnoreList(final IIgnoreListCapability connector) {
         final List<Geocache> ignoredCaches = connector.fetchIgnoreList();
         if (ignoredCaches == null) {
+            Log.w("IgnoreListUtils.fetchAndMergeIgnoreList: failed to fetch the online ignore list for " + connector.getName());
             return false;
         }
+        Log.i("IgnoreListUtils.fetchAndMergeIgnoreList: fetched " + ignoredCaches.size() + " cache(s) from " + connector.getName() + "'s online ignore list");
         if (!ignoredCaches.isEmpty()) {
             DataStore.addToList(ignoredCaches, StoredList.IGNORE_LIST_ID);
         }

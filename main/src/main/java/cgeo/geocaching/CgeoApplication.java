@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CgeoUncaughtExceptionHandler;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.IgnoreListUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -172,6 +173,9 @@ public class CgeoApplication extends Application {
 
                 // ensure initialization of lists
                 DataStore.getLists();
+
+                // sync online ignore list in background on app startup
+                IgnoreListUtils.syncOnlineIgnoreListIfNeeded(this, null);
 
                 // Restore cookies
                 Cookies.restoreCookies();

@@ -109,8 +109,9 @@ public class DataStoreTest {
 
     @Test
     public void testIgnoreListMembership() {
+        // geocode must resolve to a connector with ignore capacity (e.g. GCConnector), see #testIgnoreListRequiresIgnoreCapability
         final Geocache cache = new Geocache();
-        cache.setGeocode("IGNORETEST");
+        cache.setGeocode("GC1TEXT");
         cache.setDetailed(true);
 
         try {
@@ -125,6 +126,34 @@ public class DataStoreTest {
             assertThat(cache.getLists()).contains(StoredList.IGNORE_LIST_ID);
 
             DataStore.removeFromList(Collections.singletonList(cache), StoredList.IGNORE_LIST_ID);
+            assertThat(DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID)).isEqualTo(before);
+            assertThat(cache.getLists()).doesNotContain(StoredList.IGNORE_LIST_ID);
+        } finally {
+            DataStore.removeCaches(Collections.singleton(cache.getGeocode()), REMOVE_ALL);
+        }
+    }
+
+    @Test
+    public void testIgnoreListRequiresIgnoreCapability() {
+        // "OX1234" resolves to UnknownConnector (see ConnectorFactoryTest), which has no ignore capability
+        final Geocache cache = new Geocache();
+        cache.setGeocode("OX1234");
+        cache.setDetailed(true);
+
+        try {
+            final int before = DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID);
+
+            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+
+            // rejected: the connector doesn't support ignoring caches online
+            DataStore.addToList(Collections.singletonList(cache), StoredList.IGNORE_LIST_ID);
+            assertThat(DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID)).isEqualTo(before);
+            assertThat(cache.getLists()).doesNotContain(StoredList.IGNORE_LIST_ID);
+
+            // also rejected when set directly on the cache and persisted via saveCache/storeIntoDatabase
+            // (the path used by Geocache.storeCache during downloads)
+            cache.getLists().add(StoredList.IGNORE_LIST_ID);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             assertThat(DataStore.getAllStoredCachesCount(StoredList.IGNORE_LIST_ID)).isEqualTo(before);
             assertThat(cache.getLists()).doesNotContain(StoredList.IGNORE_LIST_ID);
         } finally {

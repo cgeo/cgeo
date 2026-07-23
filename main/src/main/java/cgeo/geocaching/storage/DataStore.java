@@ -6,6 +6,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -2840,6 +2841,10 @@ public class DataStore {
         // a null set otherwise.
         final Set<Integer> lists = cache.getLists();
 
+        if (lists.contains(StoredList.IGNORE_LIST_ID) && !canAddToList(cache, StoredList.IGNORE_LIST_ID)) {
+            lists.remove(StoredList.IGNORE_LIST_ID);
+        }
+
         if (lists.isEmpty()) {
             return;
         }
@@ -5171,6 +5176,18 @@ public class DataStore {
         });
     }
 
+    /**
+     * @return {@code false} if {@code listId} is the ignore list and the cache's connector doesn't support
+     * ignoring caches online, in which case the cache must not be added to the list
+     */
+    private static boolean canAddToList(final Geocache cache, final int listId) {
+        if (listId != StoredList.IGNORE_LIST_ID || ConnectorFactory.getConnector(cache) instanceof IIgnoreCapability) {
+            return true;
+        }
+        Log.w("DataStore.canAddToList: rejecting " + cache.getGeocode() + " for the ignore list, its connector does not support ignoring caches online");
+        return false;
+    }
+
     public static void moveToList(final Collection<Geocache> caches, final int oldListId, final int newListId) {
         if (caches.isEmpty()) {
             return;
@@ -5193,6 +5210,9 @@ public class DataStore {
             database.beginTransaction();
             try {
                 for (final Geocache cache : caches) {
+                    if (!canAddToList(cache, newListId)) {
+                        continue;
+                    }
                     remove.bindLong(1, oldListId);
                     remove.bindString(2, cache.getGeocode());
                     remove.execute();
@@ -5254,6 +5274,9 @@ public class DataStore {
             database.beginTransaction();
             try {
                 for (final Geocache cache : caches) {
+                    if (!canAddToList(cache, listId)) {
+                        continue;
+                    }
                     add.bindLong(1, listId);
                     add.bindString(2, cache.getGeocode());
                     add.execute();
@@ -5293,6 +5316,9 @@ public class DataStore {
                         if (!list.isConcrete()) {
                             return;
                         }
+                        if (!canAddToList(cache, listId)) {
+                            continue;
+                        }
                         add.bindLong(1, listId);
                         add.bindString(2, cache.getGeocode());
                         add.execute();
@@ -5326,6 +5352,9 @@ public class DataStore {
                     }
 
                     for (final Integer listId : lists) {
+                        if (!canAddToList(cache, listId)) {
+                            continue;
+                        }
                         add.bindLong(1, listId);
                         add.bindString(2, cache.getGeocode());
                         add.execute();

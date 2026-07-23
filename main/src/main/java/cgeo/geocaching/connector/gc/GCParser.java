@@ -1012,25 +1012,229 @@ public final class GCParser {
     }
 
     /**
-     * Fetches all caches currently on the online ignore list. Shouldn't be called on main thread!
+     * Fetches all caches currently on the online ignore list from the web interface.
+     * Shouldn't be called on main thread!
      *
-     * @return the caches on the online ignore list (possibly empty if none, or if the account has no ignore list
-     * yet), or {@code null} on error
+     * @return the caches on the online ignore list (possibly empty if none), or {@code null} on error
      */
     @Nullable
     @WorkerThread
     public static List<Geocache> getOnlineIgnoreList() {
-        final GCList ignoreList = findIgnoreListBookmarkList();
-        if (ignoreList == null) {
-            return Collections.emptyList();
+        return fetchCachesFromPlanList("ignored");
+    }
+
+    /**
+     * Fetches caches from a web plan list (ignored or favorites) by parsing the embedded JSON data.
+     * Shouldn't be called on main thread!
+     *
+     * @param listType "ignored" or "favorites"
+     * @return the caches on the list (possibly empty if none), or {@code null} on error
+     */
+    @Nullable
+    @WorkerThread
+    private static List<Geocache> fetchCachesFromPlanList(final String listType) {
+        final String url = "https://www.geocaching.com/plan/lists/" + listType;
+        final String page = GCLogin.getInstance().getRequestLogged(url, null);
+
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.fetchCachesFromPlanList: No data from server for " + listType + " list");
+            return null;
+        }
+
+        try {
+            final Document document = Jsoup.parse(page);
+            final List<Geocache> caches = new ArrayList<>();
+
+            // Extract JSON from __NEXT_DATA__ script tag
+            final Element scriptTag = document.selectFirst("script#__NEXT_DATA__");
+            if (scriptTag == null) {
+                Log.w("GCParser.fetchCachesFromPlanList: could not find __NEXT_DATA__ script tag");
+                return null;
+            }
+
+            final String jsonText = scriptTag.html();
+            final JsonNode rootNode = JsonUtils.reader.readTree(jsonText);
+
+            // Navigate to geocaches data: props.pageProps.geocaches.data
+            final JsonNode geocachesNode = rootNode.path("props").path("pageProps").path("geocaches").path("data");
+            if (!geocachesNode.isArray()) {
+                Log.w("GCParser.fetchCachesFromPlanList: geocaches data is not an array");
+                return null;
+            }
+
+            for (int i = 0; i < geocachesNode.size(); i++) {
+                final JsonNode cacheNode = geocachesNode.get(i);
+
+                // Extract geocode (referenceCode)
+                final String geocode = cacheNode.path("referenceCode").asText(null);
+                if (StringUtils.isBlank(geocode)) {
+                    continue;
+                }
+
+                // Extract name
+                final String name = cacheNode.path("name").asText(null);
+
+                // Extract geocache type ID and convert to CacheType
+                final int geocacheTypeId = cacheNode.path("geocacheType").asInt(-1);
+                final CacheType cacheType = convertGeocacheTypeIdToType(geocacheTypeId);
+
+                // Create Geocache object
+                final Geocache cache = new Geocache();
+                cache.setGeocode(geocode);
+                if (!StringUtils.isBlank(name)) {
+                    cache.setName(name);
+                }
+                if (cacheType != null) {
+                    cache.setType(cacheType);
+                }
+
+                // Extract other available properties
+                final JsonNode stateNode = cacheNode.path("state");
+                if (stateNode.isObject()) {
+                    cache.setArchived(stateNode.path("isArchived").asBoolean(false));
+                    cache.setDisabled(!stateNode.path("isAvailable").asBoolean(true));
+                    cache.setPremiumMembersOnly(stateNode.path("isPremiumOnly").asBoolean(false));
+                }
+
+                // Extract container type if available
+                final int containerTypeId = cacheNode.path("containerType").asInt(-1);
+                final CacheSize containerSize = convertContainerTypeIdToSize(containerTypeId);
+                if (containerSize != null) {
+                    cache.setSize(containerSize);
+                }
+
+                // Extract owner
+                final String owner = cacheNode.path("owner").asText(null);
+                if (!StringUtils.isBlank(owner)) {
+                    cache.setOwnerDisplayName(owner);
+                }
+
+                caches.add(cache);
+            }
+
+            Log.i("GCParser.fetchCachesFromPlanList: fetched " + caches.size() + " cache(s) from " + listType + " list");
+            return caches;
+        } catch (final Exception e) {
+            Log.e("GCParser.fetchCachesFromPlanList: error parsing " + listType + " list page", e);
+            return null;
+        }
+    }
+
+    /**
+     * Converts geocache type ID to CacheType enum
+     * Based on GC.com geocacheType IDs
+     *
+     * @param typeId the geocache type ID from the JSON
+     * @return the CacheType, or null if not recognized
+     */
+    @Nullable
+    private static CacheType convertGeocacheTypeIdToType(final int typeId) {
+        switch (typeId) {
+            case 2:
+                return CacheType.TRADITIONAL;
+            case 3:
+                return CacheType.MULTI;
+            case 4:
+                return CacheType.VIRTUAL;
+            case 5:
+                return CacheType.LETTERBOX;
+            case 6:
+                return CacheType.EVENT;
+            case 8:
+                return CacheType.MYSTERY;
+            case 9:
+                return CacheType.PROJECT_APE;
+            case 11:
+                return CacheType.WEBCAM;
+            case 12:
+                return CacheType.UNKNOWN; // Locationless Cache
+            case 13:
+                return CacheType.CITO;
+            case 137:
+                return CacheType.EARTHCACHE;
+            case 453:
+                return CacheType.MEGA_EVENT;
+            case 1304:
+                return CacheType.UNKNOWN; // GPS Adventures Exhibit
+            case 1858:
+                return CacheType.WHERIGO;
+            case 3653:
+                return CacheType.MEGA_EVENT; // Community Celebration Event
+            case 3773:
+            case 3774:
+            case 4738:
+                return CacheType.UNKNOWN; // Geocaching HQ variants
+            case 7005:
+                return CacheType.GIGA_EVENT;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Converts container type ID to CacheSize enum
+     *
+     * @param containerId the container type ID from the API
+     * @return the CacheSize, or null if not recognized
+     */
+    @Nullable
+    private static CacheSize convertContainerTypeIdToSize(final int containerId) {
+        return CacheSize.getByGcId(containerId);
+    }
+
+    /**
+     * Extracts geocache code from a URL
+     *
+     * @param url the URL to parse
+     * @return the geocache code (e.g., "GCXXXXX"), or null if not found
+     */
+    @Nullable
+    private static String extractGeocodeFromUrl(final String url) {
+        // Try to extract from /geocache/GCXXXXX or ?code=GCXXXXX
+        final Uri uri = Uri.parse(url);
+        final String code = uri.getQueryParameter("code");
+        if (!StringUtils.isBlank(code)) {
+            return code;
+        }
+
+        // Try to extract from path /geocache/GCXXXXX
+        final String[] parts = url.split("/");
+        for (int i = 0; i < parts.length - 1; i++) {
+            if ("geocache".equals(parts[i]) && parts[i + 1].matches("GC[A-Z0-9]+")) {
+                return parts[i + 1];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Fetches all caches from a bookmark list (including special lists like "ignored" or "favorites").
+     * Handles pagination automatically. Shouldn't be called on main thread!
+     *
+     * @param listId the bookmark list ID or special list name ("ignored", "favorites")
+     * @return {@code null} on error, or list of all caches in the bookmark list
+     */
+    @Nullable
+    @WorkerThread
+    public static List<Geocache> fetchAllCachesFromBookmarkList(final String listId) {
+        // Handle special list names by resolving to actual bookmark list GUID
+        String actualListId = listId;
+        if ("ignored".equalsIgnoreCase(listId)) {
+            final GCList ignoreList = findIgnoreListBookmarkList();
+            if (ignoreList == null) {
+                Log.w("GCParser.fetchAllCachesFromBookmarkList: could not find the ignore list bookmark list");
+                return null;
+            }
+            actualListId = ignoreList.getGuid();
         }
 
         final List<Geocache> caches = new ArrayList<>();
         int skip = 0;
         while (true) {
-            final SearchResult result = searchByBookmarkList(GCConnector.getInstance(), ignoreList.getGuid(), skip);
+            final SearchResult result = searchByBookmarkList(GCConnector.getInstance(), actualListId, skip);
             if (result == null) {
-                Log.e("GCParser.getOnlineIgnoreList: failed to fetch ignore list contents at offset " + skip);
+                Log.e("GCParser.fetchAllCachesFromBookmarkList: failed to fetch bookmark list contents at offset " + skip);
                 return caches.isEmpty() ? null : caches;
             }
             final Set<Geocache> fetched = result.getCachesFromSearchResult();
