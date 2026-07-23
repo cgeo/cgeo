@@ -10,6 +10,9 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -169,6 +172,9 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
             holder.binding.checkbox.setChecked(isSelected);
         }
 
+        // Add visual separator for artificial ignore list entry
+        addDividerForArtificialIgnoreList(holder, position);
+
         holder.binding.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(holder.itemView.getContext(), Collections.singletonList(pocketQuery)));
         holder.binding.download.setOnClickListener(v -> {
             PocketQueryHistory.updateLastDownload(pocketQuery);
@@ -193,6 +199,57 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
             return true;
         });
 
+    }
+
+    /**
+     * Add a visual divider above the artificial ignore list entry to separate it from regular bookmark lists.
+     */
+    private void addDividerForArtificialIgnoreList(final ViewHolder holder, final int position) {
+        if (position == 0 && activity instanceof BookmarkListActivity && BookmarkListActivity.isArtificialIgnoreList(activity.getQueries().get(0))) {
+            // Add top divider for artificial ignore list entry (first item)
+            holder.itemView.setForeground(new DividerDrawable());
+        } else {
+            holder.itemView.setForeground(null);
+        }
+    }
+
+    /**
+     * Simple drawable that draws a divider line at the top of a view.
+     */
+    private static class DividerDrawable extends android.graphics.drawable.Drawable {
+        private final Paint paint = new Paint();
+        private final int dividerColor = 0xFFBDBDBD; // Light gray divider
+        private final int dividerHeightPx = 2;
+
+        DividerDrawable() {
+            paint.setColor(dividerColor);
+            paint.setStyle(Paint.Style.FILL);
+        }
+
+        @Override
+        public void draw(final Canvas canvas) {
+            canvas.drawLine(0, 0, canvas.getWidth(), 0, paint);
+        }
+
+        @Override
+        public void setAlpha(final int alpha) {
+            paint.setAlpha(alpha);
+        }
+
+        @Override
+        public void setColorFilter(final android.graphics.ColorFilter colorFilter) {
+            paint.setColorFilter(colorFilter);
+        }
+
+        @Override
+        public int getOpacity() {
+            return android.graphics.PixelFormat.TRANSLUCENT;
+        }
+
+        @Override
+        public int getIntrinsicHeight() {
+            return dividerHeightPx;
+        }
     }
 
     public void updateView() {

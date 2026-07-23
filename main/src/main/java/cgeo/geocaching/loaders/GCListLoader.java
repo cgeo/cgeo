@@ -1,10 +1,13 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 
@@ -23,7 +26,11 @@ public class GCListLoader extends AbstractSearchLoader {
         if (Settings.isGCConnectorActive()) {
             final SearchResult combinedResult = new SearchResult();
             for (final GCList gcList : gcLists) {
-                if (gcList.isBookmarkList()) {
+                // Handle artificial ignore list entry specially
+                if (BookmarkListActivity.isArtificialIgnoreList(gcList)) {
+                    final SearchResult ignoreListResult = loadArtificialIgnoreList();
+                    combinedResult.addSearchResult(ignoreListResult);
+                } else if (gcList.isBookmarkList()) {
                     final SearchResult bmResult = GCParser.searchByBookmarkList(GCConnector.getInstance(), gcList.getGuid(), 0);
                     combinedResult.addSearchResult(bmResult);
                 } else {
@@ -35,5 +42,22 @@ public class GCListLoader extends AbstractSearchLoader {
         }
 
         return new SearchResult();
+    }
+
+    /**
+     * Load caches from the artificial ignore list entry.
+     * Fetches from the online ignore list using the web interface.
+     */
+    private SearchResult loadArtificialIgnoreList() {
+        final SearchResult result = new SearchResult();
+        try {
+            final List<Geocache> ignoreListCaches = GCParser.fetchCachesFromPlanList("ignored");
+            if (ignoreListCaches != null) {
+                result.addCaches(ignoreListCaches);
+            }
+        } catch (final Exception e) {
+            Log.e("GCListLoader.loadArtificialIgnoreList: Error loading ignore list", e);
+        }
+        return result;
     }
 }

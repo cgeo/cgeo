@@ -844,20 +844,19 @@ public final class GCParser {
             for (Iterator<JsonNode> it = json.elements(); it.hasNext(); ) {
                 final JsonNode row = it.next();
 
-                final String name = row.get("name").asText();
-                final String guid = row.get("referenceCode").asText();
-                final int count = row.get("count").asInt();
-                Date date;
-                final String lastUpdateUtc = row.get("lastUpdateUtc").asText();
-                try {
-                    date = DATE_JSON.parse(lastUpdateUtc);
-                } catch (ParseException e) {
-                    // if parsing with fractions of seconds failed, try short form
-                    date = DATE_JSON_SHORT.parse(lastUpdateUtc);
-                    Log.d("parsing bookmark list: fallback needed for '" + lastUpdateUtc + "'");
+                final String name = GCJsonParser.getStringOrNull(row, "name");
+                final String guid = GCJsonParser.getStringOrNull(row, "referenceCode");
+                final int count = GCJsonParser.getIntOrDefault(row, "count", 0);
+                final String lastUpdateUtc = GCJsonParser.getStringOrNull(row, "lastUpdateUtc");
+
+                if (StringUtils.isBlank(name) || StringUtils.isBlank(guid)) {
+                    continue;
                 }
 
-                final GCList pocketQuery = new GCList(guid, name, count, true, date.getTime(), -1, true, null, null);
+                final Date date = GCJsonParser.parseTimestamp(lastUpdateUtc);
+                final long lastUpdate = date != null ? date.getTime() : 0;
+
+                final GCList pocketQuery = new GCList(guid, name, count, true, lastUpdate, -1, true, null, null);
                 list.add(pocketQuery);
             }
 
@@ -1032,7 +1031,7 @@ public final class GCParser {
      */
     @Nullable
     @WorkerThread
-    private static List<Geocache> fetchCachesFromPlanList(final String listType) {
+    public static List<Geocache> fetchCachesFromPlanList(final String listType) {
         final String url = "https://www.geocaching.com/plan/lists/" + listType;
         final String page = GCLogin.getInstance().getRequestLogged(url, null);
 
@@ -1066,16 +1065,16 @@ public final class GCParser {
                 final JsonNode cacheNode = geocachesNode.get(i);
 
                 // Extract geocode (referenceCode)
-                final String geocode = cacheNode.path("referenceCode").asText(null);
+                final String geocode = GCJsonParser.getStringOrNull(cacheNode, "referenceCode");
                 if (StringUtils.isBlank(geocode)) {
                     continue;
                 }
 
                 // Extract name
-                final String name = cacheNode.path("name").asText(null);
+                final String name = GCJsonParser.getStringOrNull(cacheNode, "name");
 
                 // Extract geocache type ID and convert to CacheType
-                final int geocacheTypeId = cacheNode.path("geocacheType").asInt(-1);
+                final int geocacheTypeId = GCJsonParser.getIntOrDefault(cacheNode, "geocacheType", -1);
                 final CacheType cacheType = convertGeocacheTypeIdToType(geocacheTypeId);
 
                 // Create Geocache object
@@ -1091,20 +1090,20 @@ public final class GCParser {
                 // Extract other available properties
                 final JsonNode stateNode = cacheNode.path("state");
                 if (stateNode.isObject()) {
-                    cache.setArchived(stateNode.path("isArchived").asBoolean(false));
-                    cache.setDisabled(!stateNode.path("isAvailable").asBoolean(true));
-                    cache.setPremiumMembersOnly(stateNode.path("isPremiumOnly").asBoolean(false));
+                    cache.setArchived(GCJsonParser.getBooleanOrDefault(stateNode, "isArchived", false));
+                    cache.setDisabled(!GCJsonParser.getBooleanOrDefault(stateNode, "isAvailable", true));
+                    cache.setPremiumMembersOnly(GCJsonParser.getBooleanOrDefault(stateNode, "isPremiumOnly", false));
                 }
 
                 // Extract container type if available
-                final int containerTypeId = cacheNode.path("containerType").asInt(-1);
+                final int containerTypeId = GCJsonParser.getIntOrDefault(cacheNode, "containerType", -1);
                 final CacheSize containerSize = convertContainerTypeIdToSize(containerTypeId);
                 if (containerSize != null) {
                     cache.setSize(containerSize);
                 }
 
                 // Extract owner
-                final String owner = cacheNode.path("owner").asText(null);
+                final String owner = GCJsonParser.getStringOrNull(cacheNode, "owner");
                 if (!StringUtils.isBlank(owner)) {
                     cache.setOwnerDisplayName(owner);
                 }
