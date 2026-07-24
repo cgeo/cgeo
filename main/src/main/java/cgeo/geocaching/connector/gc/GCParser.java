@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -21,6 +22,7 @@ import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.UnpublishedGeocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -897,12 +899,17 @@ public final class GCParser {
                 }
             }
 
-            // The listing page only gives us geocode + name, not type/D/T/size, so fetch full details per cache.
-            final SearchResult searchResult = new SearchResult();
+            // The listing page only gives us geocode + name, not type/D/T/size, so fetch full details per cache,
+            // then load them back as UnpublishedGeocache so the rest of the app can recognize them as such.
+            final List<Geocache> unpublishedCaches = new ArrayList<>();
             for (final String geocode : geocodes) {
-                searchResult.addSearchResult(Geocache.searchByGeocode(geocode, null, false, null));
+                final SearchResult detail = Geocache.searchByGeocode(geocode, null, false, null);
+                final Geocache cache = detail == null ? null : detail.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null) {
+                    unpublishedCaches.add(new UnpublishedGeocache(cache));
+                }
             }
-            return searchResult;
+            return new SearchResult(unpublishedCaches);
         } catch (final Exception e) {
             Log.e("GCParser.searchOwnUnpublishedGeocaches: error parsing html page", e);
             return null;
