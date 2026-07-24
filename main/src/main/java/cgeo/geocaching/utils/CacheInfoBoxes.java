@@ -267,7 +267,7 @@ public class CacheInfoBoxes {
      * Shows an indeterminate progress dialog on {@code activity} while loading.
      * Calls {@code callback} with the freshly loaded cache on the main thread.
      * If loading is not needed, {@code callback} is called with the original {@code cache} instead.
-     * If loading fails due to missing network connectivity, a toast is shown and {@code callback} is not called.
+     * If loading fails (missing network connectivity or server error), a toast is shown and {@code callback} is not called.
      *
      * @param activity  the activity used to show the progress dialog
      * @param needsLoad whether a server load is required
@@ -280,25 +280,28 @@ public class CacheInfoBoxes {
                 final Progress progress = new Progress();
                 progress.show(activity, LocalizationUtils.getString(R.string.cache_wherigo_no_cartridge_fetch), "", true, null);
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                    Geocache loaded = cache;
+                    Geocache loaded = null;
                     final SearchResult result = Geocache.searchByGeocode(cache.getGeocode(), null, false, null);
                     if (result != null) {
-                        final Geocache fromResult = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-                        if (fromResult != null) {
-                            loaded = fromResult;
-                        }
+                        loaded = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                     }
                     final Geocache effectiveCache = loaded;
                     new Handler(Looper.getMainLooper()).post(() -> {
                         progress.dismiss();
-                        callback.accept(effectiveCache);
+                        if (effectiveCache != null) {
+                            callback.accept(effectiveCache);
+                        } else {
+                            showToast(activity, R.string.err_load_descr_failed);
+                        }
                     });
                 });
             } else {
                 showToast(activity, R.string.err_load_descr_failed);
             }
         } else {
-            callback.accept(cache);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                callback.accept(cache);
+            });
         }
     }
 
@@ -314,29 +317,29 @@ public class CacheInfoBoxes {
         ViewUtils.setText(wherigoText, (!isEnabled || Settings.hasGCCredentials()) ? R.string.cache_wherigo_start : R.string.cache_wherigo_credentials);
 
         ViewUtils.setVisibility(wherigoButton, isEnabled ? View.VISIBLE : View.GONE);
-            if (isEnabled) {
-                wherigoButton.setOnClickListener(v -> {
-                    if (Settings.hasGCCredentials()) {
-                        fetchCacheIfNeededAndCall(
-                                activity,
-                                !wherigoGuidsAvailable,
-                                cache,
-                                currentCache -> {
-                                    final List<String> guids = wherigoGuidsAvailable ? wherigoGuids : WherigoUtils.getWherigoGuids(currentCache);
-                                    if (guids.isEmpty()) {
-                                        SimpleDialog.of(activity)
-                                                .setTitle(TextParam.id(R.string.cache_wherigo_no_cartridge_title))
-                                                .setMessage(TextParam.id(R.string.cache_wherigo_no_cartridge_message))
-                                                .show();
-                                        return;
-                                    }
-                                    WherigoViewUtils.executeForOneCartridge(activity, guids, guid ->
-                                            WherigoActivity.startForGuid(activity, guid, currentCache.getGeocode(), true));
-                                });
-                    } else {
-                        SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
-                    }
-                });
+        if (isEnabled) {
+            wherigoButton.setOnClickListener(v -> {
+                if (Settings.hasGCCredentials()) {
+                    fetchCacheIfNeededAndCall(
+                            activity,
+                            !wherigoGuidsAvailable && !cache.isDetailed(),
+                            cache,
+                            currentCache -> {
+                                final List<String> guids = wherigoGuidsAvailable ? wherigoGuids : WherigoUtils.getWherigoGuids(currentCache);
+                                if (guids.isEmpty()) {
+                                    SimpleDialog.of(activity)
+                                            .setTitle(TextParam.id(R.string.cache_wherigo_no_cartridge_title))
+                                            .setMessage(TextParam.id(R.string.cache_wherigo_no_cartridge_message))
+                                            .show();
+                                    return;
+                                }
+                                WherigoViewUtils.executeForOneCartridge(activity, guids, guid ->
+                                        WherigoActivity.startForGuid(activity, guid, currentCache.getGeocode(), true));
+                            });
+                } else {
+                    SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
+                }
+            });
         }
     }
 
