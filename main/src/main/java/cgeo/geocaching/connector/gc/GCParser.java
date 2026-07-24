@@ -746,30 +746,11 @@ public final class GCParser {
             return null;
         }
 
-        final List<Geocache> caches = new ArrayList<>();
         try {
             final JsonNode json = JsonUtils.reader.readTree(page);
 
             final int totalCount = json.get("total").asInt();
-            final JsonNode jsonData = json.get("data");
-            for (int i = 0; i < jsonData.size(); i++) {
-                final Geocache cache = new Geocache();
-                final JsonNode properties = jsonData.get(i);
-                final JsonNode stateProps = properties.get("state");
-                cache.setName(properties.get("name").asText());
-                cache.setGeocode(properties.get("referenceCode").asText());
-                cache.setOwnerDisplayName(properties.get("owner").asText());
-                cache.setDifficulty(properties.get("difficulty").floatValue());
-                cache.setTerrain(properties.get("terrain").floatValue());
-                cache.setSize(CacheSize.getByGcId(properties.get("containerType").asInt()));
-                cache.setType(CacheType.getByWaypointType(properties.get("geocacheType").asText()));
-
-                cache.setArchived(stateProps.get("isArchived").asBoolean());
-                cache.setDisabled(!stateProps.get("isAvailable").asBoolean());
-                cache.setPremiumMembersOnly(stateProps.get("isPremiumOnly").asBoolean());
-
-                caches.add(cache);
-            }
+            final List<Geocache> caches = parseGeocachesFromListJson(json.get("data"));
 
             final int currentFetched = alreadyTaken + caches.size();
             final SearchResult searchResult = new SearchResult(caches);
@@ -784,6 +765,105 @@ public final class GCParser {
             Log.e("GCParser.searchByBookmarkLists: error parsing html page", e);
             return null;
         }
+    }
+
+    /**
+     * Parses the "geocaches" data array as returned both by the bookmark list API
+     * (/api/proxy/web/v1/lists/{bmGuid}/geocaches) and by the "special" list pages
+     * (/plan/lists/ignored, /plan/lists/favorites) into a list of (stub) geocaches.
+     */
+    @NonNull
+    private static List<Geocache> parseGeocachesFromListJson(final JsonNode jsonData) {
+        final List<Geocache> caches = new ArrayList<>();
+        for (int i = 0; i < jsonData.size(); i++) {
+            final Geocache cache = new Geocache();
+            final JsonNode properties = jsonData.get(i);
+            final JsonNode stateProps = properties.get("state");
+            cache.setName(properties.get("name").asText());
+            cache.setGeocode(properties.get("referenceCode").asText());
+            cache.setOwnerDisplayName(properties.get("owner").asText());
+            cache.setDifficulty(properties.get("difficulty").floatValue());
+            cache.setTerrain(properties.get("terrain").floatValue());
+            cache.setSize(CacheSize.getByGcId(properties.get("containerType").asInt()));
+            cache.setType(CacheType.getByWaypointType(properties.get("geocacheType").asText()));
+
+            cache.setArchived(stateProps.get("isArchived").asBoolean());
+            cache.setDisabled(!stateProps.get("isAvailable").asBoolean());
+            cache.setPremiumMembersOnly(stateProps.get("isPremiumOnly").asBoolean());
+
+            caches.add(cache);
+        }
+        return caches;
+    }
+
+    /**
+     * Fetches a page of the "special" list identified by {@code bmCode} ({@link GCList#SPECIAL_LIST_IGNORED_CODE}
+     * or {@link GCList#SPECIAL_LIST_FAVORITES_CODE}). Unlike regular bookmark lists, these lists have no GUID and
+     * aren't available through the bookmark list API, therefore the geocache data embedded as JSON in the
+     * "__NEXT_DATA__" script tag of https://www.geocaching.com/plan/lists/{bmCode} is parsed instead. Shouldn't be
+     * called on main thread!
+     */
+    @Nullable
+    @WorkerThread
+    public static SearchResult searchBySpecialList(final IConnector con, final String bmCode, final int alreadyTaken) {
+        final Parameters params = new Parameters("skip", String.valueOf(alreadyTaken), "take", "1000");
+
+        final String url = "https://www.geocaching.com/plan/lists/" + bmCode;
+        final String page = GCLogin.getInstance().getRequestLogged(url, params);
+
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchBySpecialList: No data from server");
+            return null;
+        }
+
+        return parseSpecialListPage(con, bmCode, page, alreadyTaken);
+    }
+
+    @Nullable
+    private static SearchResult parseSpecialListPage(final IConnector con, final String bmCode, final String page, final int alreadyTaken) {
+        try {
+            final Element scriptTag = Jsoup.parse(page).selectFirst("script#__NEXT_DATA__");
+            if (scriptTag == null) {
+                Log.w("GCParser.searchBySpecialList: __NEXT_DATA__ script tag not found");
+                return null;
+            }
+
+            final JsonNode geocachesNode = JsonUtils.reader.readTree(scriptTag.data()).get("props").get("pageProps").get("geocaches");
+            final int totalCount = geocachesNode.get("total").asInt();
+            final List<Geocache> caches = parseGeocachesFromListJson(geocachesNode.get("data"));
+
+            final int currentFetched = alreadyTaken + caches.size();
+            final SearchResult searchResult = new SearchResult(caches);
+            searchResult.setLeftToFetch(con, totalCount - currentFetched);
+            searchResult.setToContext(con, b -> {
+                b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, currentFetched);
+                b.putString(GCConnector.SEARCH_CONTEXT_SPECIAL_LIST, bmCode);
+            });
+
+            return searchResult;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchBySpecialList: error parsing page", e);
+            return null;
+        }
+    }
+
+    //method is only used in AndroidTests
+    @Nullable
+    static SearchResult testParseSpecialListFromText(final IConnector con, final String bmCode, final String page, final int alreadyTaken) {
+        return parseSpecialListPage(con, bmCode, page, alreadyTaken);
+    }
+
+    /**
+     * Returns the "special" geocaching.com lists (ignored / favorites) as offered at
+     * https://www.geocaching.com/plan/lists/. These aren't real bookmark lists, so they are not part of
+     * {@link #searchBookmarkLists()} and are provided as fixed entries instead.
+     */
+    @NonNull
+    public static List<GCList> getSpecialLists() {
+        final List<GCList> list = new ArrayList<>();
+        list.add(new GCList(GCList.SPECIAL_LIST_FAVORITES_CODE, LocalizationUtils.getString(R.string.list_special_favorites), -1, false, 0, -1, true, null, null, true));
+        list.add(new GCList(GCList.SPECIAL_LIST_IGNORED_CODE, LocalizationUtils.getString(R.string.list_special_ignored), -1, false, 0, -1, true, null, null, true));
+        return list;
     }
 
     @Nullable

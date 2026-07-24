@@ -3,6 +3,8 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplicationTest;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -478,5 +480,38 @@ public class GCParserTest {
         assertThat(trackablesNew.get(1).getGuid()).isNull();
         assertThat(trackablesNew.get(1).getGeocode()).isEqualTo("TBABCD5");
         assertThat(trackablesNew.get(1).getName()).isEqualTo("the test tb");
+    }
+
+    @SmallTest
+    @Test
+    public void testParseSpecialList() {
+        final String page = CgeoTestUtils.getFileContent(R.raw.plan_list_ignored);
+        final SearchResult result = GCParser.testParseSpecialListFromText(GCConnector.getInstance(), "ignored", page, 0);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getCount()).isEqualTo(2);
+
+        final List<Geocache> caches = new ArrayList<>(result.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+        caches.sort((left, right) -> left.getGeocode().compareTo(right.getGeocode()));
+
+        final Geocache multiCache = caches.get(0);
+        assertThat(multiCache.getGeocode()).isEqualTo("GC32C94");
+        assertThat(multiCache.getName()).isEqualTo("Der Pferdeeisenbahn-Wanderweg");
+        assertThat(multiCache.getOwnerDisplayName()).isEqualTo("ptom");
+        assertThat(multiCache.getDifficulty()).isEqualTo(2.5f);
+        assertThat(multiCache.getTerrain()).isEqualTo(3.5f);
+        assertThat(multiCache.getType()).isEqualTo(CacheType.MULTI);
+        assertThat(multiCache.getSize()).isEqualTo(CacheSize.REGULAR);
+        assertThat(multiCache.isArchived()).isFalse();
+        assertThat(multiCache.isDisabled()).isFalse();
+        assertThat(multiCache.isPremiumMembersOnly()).isFalse();
+
+        final Geocache eventCache = caches.get(1);
+        assertThat(eventCache.getGeocode()).isEqualTo("GCB8Q8Y");
+        assertThat(eventCache.getName()).isEqualTo("50ster Stammtisch - Grund genug zu feiern");
+        assertThat(eventCache.getOwnerDisplayName()).isEqualTo("isenfriesen");
+        assertThat(eventCache.getType()).isEqualTo(CacheType.EVENT);
+        assertThat(eventCache.isArchived()).isTrue();
+        assertThat(eventCache.isDisabled()).isTrue();
     }
 }

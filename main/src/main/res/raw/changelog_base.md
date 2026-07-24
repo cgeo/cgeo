@@ -69,6 +69,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### General
+- New: Access your "Ignore list" and "Favorites" as special bookmark lists
 - New: Share option after logging a cache
 - Change: Do not show "needs maintenance" or "needs archived" options for own caches
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups

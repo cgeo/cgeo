@@ -23,7 +23,10 @@ public class GCListLoader extends AbstractSearchLoader {
         if (Settings.isGCConnectorActive()) {
             final SearchResult combinedResult = new SearchResult();
             for (final GCList gcList : gcLists) {
-                if (gcList.isBookmarkList()) {
+                if (gcList.isSpecialList()) {
+                    final SearchResult specialResult = GCParser.searchBySpecialList(GCConnector.getInstance(), gcList.getGuid(), 0);
+                    combinedResult.addSearchResult(specialResult);
+                } else if (gcList.isBookmarkList()) {
                     final SearchResult bmResult = GCParser.searchByBookmarkList(GCConnector.getInstance(), gcList.getGuid(), 0);
                     combinedResult.addSearchResult(bmResult);
                 } else {

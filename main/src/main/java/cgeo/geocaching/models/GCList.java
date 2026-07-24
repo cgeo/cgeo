@@ -6,6 +6,11 @@ import android.os.Parcelable;
 
 public final class GCList implements Parcelable {
 
+    /** reference code (bmCode) used by geocaching.com for the "special" ignored list at /plan/lists/ignored */
+    public static final String SPECIAL_LIST_IGNORED_CODE = "ignored";
+    /** reference code (bmCode) used by geocaching.com for the "special" favorites list at /plan/lists/favorites */
+    public static final String SPECIAL_LIST_FAVORITES_CODE = "favorites";
+
     private final String guid;
 
     private String shortGuid;
@@ -17,8 +22,13 @@ public final class GCList implements Parcelable {
     private final long lastGenerationTime;
     private final int daysRemaining;
     private final boolean bookmarkList;
+    private final boolean specialList;
 
     public GCList(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList, final String shortGuid, final String pqHash) {
+        this(guid, name, caches, downloadable, lastGenerationTime, daysRemaining, bookmarkList, shortGuid, pqHash, false);
+    }
+
+    public GCList(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList, final String shortGuid, final String pqHash, final boolean specialList) {
         this.guid = guid;
         this.name = name;
         this.caches = caches;
@@ -28,6 +38,7 @@ public final class GCList implements Parcelable {
         this.bookmarkList = bookmarkList;
         this.shortGuid = shortGuid;
         this.pqHash = pqHash;
+        this.specialList = specialList;
     }
 
     protected GCList(final Parcel in) {
@@ -40,6 +51,7 @@ public final class GCList implements Parcelable {
         lastGenerationTime = in.readLong();
         daysRemaining = in.readInt();
         bookmarkList = in.readInt() != 0;
+        specialList = in.readInt() != 0;
     }
 
     public static final Creator<GCList> CREATOR = new Creator<GCList>() {
@@ -60,6 +72,16 @@ public final class GCList implements Parcelable {
 
     public boolean isBookmarkList() {
         return bookmarkList;
+    }
+
+    /**
+     * A "special" list is a geocaching.com list which is not a real (user-created) bookmark list, but a
+     * virtual one such as the "ignored" or "favorites" list found at https://www.geocaching.com/plan/lists/.
+     * Such lists have no real GUID and can't be queried through the regular bookmark list API, therefore they
+     * need to be fetched and parsed differently (see {@link cgeo.geocaching.connector.gc.GCParser#searchBySpecialList}).
+     */
+    public boolean isSpecialList() {
+        return specialList;
     }
 
     public String getGuid() {
@@ -122,5 +144,6 @@ public final class GCList implements Parcelable {
         dest.writeLong(lastGenerationTime);
         dest.writeInt(daysRemaining);
         dest.writeInt(bookmarkList ? 1 : 0);
+        dest.writeInt(specialList ? 1 : 0);
     }
 }

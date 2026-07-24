@@ -5,7 +5,10 @@ import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 public class BookmarkListActivity extends AbstractListActivity {
 
@@ -29,12 +32,17 @@ public class BookmarkListActivity extends AbstractListActivity {
 
     @Override
     protected List<GCList> getList() {
-        return GCParser.searchBookmarkLists();
+        final List<GCList> lists = new ArrayList<>(GCParser.getSpecialLists());
+        final List<GCList> bmLists = GCParser.searchBookmarkLists();
+        if (CollectionUtils.isNotEmpty(bmLists)) {
+            lists.addAll(bmLists);
+        }
+        return lists;
     }
 
     @Override
     boolean alwaysShow(final GCList list) {
-        return PocketQueryHistory.isNew(list);
+        return list.isSpecialList() || PocketQueryHistory.isNew(list);
     }
 
     @Override
