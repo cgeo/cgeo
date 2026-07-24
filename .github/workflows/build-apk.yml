@@ -10,7 +10,7 @@ on:
       - claude/unpublished-caches-bookmarklist-7d8mj7
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -39,3 +39,17 @@ jobs:
           name: cgeo-basic-debug-apk
           path: main/build/outputs/apk/basic/debug/cgeo*.apk
           if-no-files-found: error
+
+      # Also publish the APK on an orphan branch: artifact downloads go through
+      # Azure blob storage which some restricted environments cannot reach,
+      # while git access to the repo itself works.
+      - name: Push APK to apks branch
+        run: |
+          DIST_DIR=$(mktemp -d)
+          cp main/build/outputs/apk/basic/debug/cgeo*.apk "$DIST_DIR"/
+          cd "$DIST_DIR"
+          git init -b apks
+          git add .
+          git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" \
+            commit -m "APK built from $GITHUB_SHA"
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" apks
