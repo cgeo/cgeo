@@ -220,9 +220,6 @@
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
     <string name="info_log_saved">c:geo успішно збережено журнал.</string>
-    <string name="info_log_post_failed">Журнал змін не вдалося.</string>
-    <string name="info_log_post_retry">Повторити спробу</string>
-    <string name="info_log_post_save">Збережено офлайн</string>
     <string name="info_log_cleared">Журнали очищено.</string>
     <string name="info_waypoint_coordinates_cleared">Координати вийшли.</string>
     <string name="info_log_type_changed">Тип журналу змінено!</string>
@@ -327,6 +324,7 @@
     <string name="list_dialog_rename">Перейменувати</string>
     <string name="list_not_available">Список більше не доступний, перемикаючись на стандартний список</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">версія</string>
     <string name="about_changelog">журнал змін</string>
@@ -1341,5 +1339,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

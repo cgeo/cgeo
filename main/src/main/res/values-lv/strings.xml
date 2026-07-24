@@ -220,9 +220,6 @@
     <string name="err_read_pocket_query_list">Kļūda nolasot slēpņu atlašu (PQ) sarakstu.</string>
     <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
     <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
-    <string name="info_log_post_failed">Ieraksta publicēšana neizdevās.</string>
-    <string name="info_log_post_retry">Mēģināt vēlreiz</string>
-    <string name="info_log_post_save">Saglabāt bezsaistes režīmā</string>
     <string name="info_log_cleared">Ieraksts tika dzēsts.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinātas nodzēstas.</string>
     <string name="info_log_type_changed">Pieraksta tips tika mainīts!</string>
@@ -328,6 +325,7 @@
     <string name="list_dialog_rename">Pārdēvēt</string>
     <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Izmaiņas</string>
@@ -1249,5 +1247,4 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

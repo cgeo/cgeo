@@ -256,9 +256,6 @@
     <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
     <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
-    <string name="info_log_post_failed">Log küldése sikertelen.</string>
-    <string name="info_log_post_retry">Újra</string>
-    <string name="info_log_post_save">Offline mentés</string>
     <string name="info_log_cleared">A bejegyzés törölve.</string>
     <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
     <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
@@ -398,15 +395,7 @@
     <string name="cache_filter_userdisplay_not">NEM</string>
     <string name="cache_filter_storage_delete_button">Törlés</string>
     <string name="cache_filter_storage_clear_button">Törlés</string>
-    <string name="cache_filter_storage_load_delete_title">Meglévő szűrő betöltése vagy törlése</string>
     <string name="cache_filter_storage_select_title">Szűrő kiválasztása</string>
-    <string name="cache_filter_storage_delete_title">Szűrő törlése</string>
-    <string name="cache_filter_storage_delete_message">Biztosan törölni szeretnéd ezt a szűrőkonfigurációt?</string>
-    <string name="cache_filter_storage_select_clear_title">Szűrő kiválasztása vagy a jelenlegi szűrő törlése</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Még nincs tárolva szűrő.</string>
-    <string name="cache_filter_storage_save_title">Szűrő mentése névvel</string>
-    <string name="cache_filter_storage_save_confirm_title">Szűrő felülírásának mentése</string>
-    <string name="cache_filter_storage_save_confirm_message">Már létezik egy \'%s\' nevű szűrő más konfigurációval. Felülírni?</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Keresés a szövegben</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nincs jelen</string>
     <string name="cache_filter_stringfilter_type_is_present">Jelen van</string>
@@ -414,6 +403,7 @@
     <string name="cache_filter_stringfilter_type_does_not_contain">Nem tartalmaz</string>
     <string name="cache_filter_stringfilter_type_starts_with">Ezzel kezdődik</string>
     <string name="cache_filter_checkboxlist_add_all_items">Az összes elem hozzáadása</string>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>
@@ -763,6 +753,7 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
+    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -871,6 +862,7 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
+    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_address">Cím</string>
@@ -912,6 +904,7 @@
     <string name="user_menu_view_hidden">Ládák száma</string>
     <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
     <string name="user_menu_send_message">Üzenet küldése</string>
+    <string name="user_menu_open_contact">Névjegy megnyitása</string>
     <string name="user_unknown">Ismeretlen felhasználó</string>
     <!-- navigation -->
     <string name="navigation">Navigáció</string>
@@ -1274,5 +1267,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

@@ -234,10 +234,12 @@
     <string name="translate_external_label">Przetłumacz z %s</string>
     <string name="translate_external_variant_app">Aplikacja</string>
     <string name="translate_external_variant_web">Strona www</string>
+    <string name="translate_external_variant_unavailable">Niedostępne</string>
     <string name="translate_external_none">&lt;Brak&gt;</string>
     <string name="translate_external_app">Aplikacja zewnętrzna</string>
     <string name="translate_external_google">Tłumacz Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Tłumaczenie offline DavidV</string>
     <string name="translate_length_warning">Tłumaczenie przez stronę www może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -328,14 +330,13 @@
     <string name="err_read_bookmark_list">Błąd odczytywania list zakładek.</string>
     <string name="err_bookmark_list_overfull">Zbyt wiele skrytek</string>
     <string name="err_bookmark_list_overfull_description">Listy zakładek mogą przechowywać maksymalnie 1000 skrytek, próbujesz dodać więcej do listy.\n\nCzy chcesz kontynuować i dodać tylko tyle skrytek, ile zmieści się na liście?</string>
+    <string name="info_log_posting_background">Wpis jest publikowany…</string>
+    <string name="info_log_post_success">Wpis dot. %s został pomyślnie wysłany</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
-    <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
+    <string name="info_log_post_failed_geocode">Wysyłanie wpisu dot. %s nie powiodło się.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
-    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
-    <string name="info_log_post_retry">Spróbuj ponownie</string>
-    <string name="info_log_post_save">Zapisz offline</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy wpis nie został już usunięty.</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
     <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
     <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
@@ -373,9 +374,8 @@
     <string name="translator_model_download_success">Model tłumaczenia dla %s pobrany</string>
     <string name="translator_model_download_error">Nie udało się pobrać modelu tłumaczenia %1$s: %2$s</string>
     <string name="translator_model">Model tłumaczenia</string>
-    <string name="translator_tooltip">Tłumaczenie offline z Google</string>
+    <string name="translator_tooltip">Tłumaczenie offline</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
-    <string name="translator_language_target_select">Wybierz język docelowy</string>
     <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia. Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_language_unknown">Nie można zidentyfikować języka. Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_language_detected">Tłumacz z \"%s\". Dotknij, aby wybrać język źródłowy.</string>
@@ -450,6 +450,7 @@
         <item quantity="many">%d skrytek pobranych</item>
         <item quantity="other">%d skrytek pobranych</item>
     </plurals>
+    <string name="caches_store_background_skipped">Pominięte skrytki offline: %d</string>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -520,6 +521,16 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_overwrite_offline_log">Nadpisz dziennik offline</string>
     <string name="caches_overwrite_offline_log_question">Skrytka ma istniejący dziennik offline typu \"%1$s\" z wpisem. Czy chcesz nadpisać ten wpis?</string>
+    <string name="caches_warning_delete_user_data_others">Usuń inne</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d skrytka ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytki.</item>
+        <item quantity="few">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="many">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="other">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">To działanie usunie wszystkie skrytki (%d) z twojego urządzenia.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Usuń inne</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d skrytek jest tylko na tej liście. Usunięcie tych skrytek z listy usunie je z twojego urządzenia.</string>
     <string name="caches_show_attributes_all">Pokaż przegląd atrybutów dla wszystkich skrytek</string>
     <string name="caches_show_attributes_selected">Pokaż przegląd atrybutów dla wybranych skrytek</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
@@ -528,6 +539,7 @@
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="caches_recalculate_health_score">Przelicz stan zdrowia skrytki</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
@@ -554,7 +566,7 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
-    <string name="list_menu_rename_list_prefix">Zmień nazwę prefiksu listy</string>
+    <string name="list_menu_rename_parent_lists">Zmień nazwę aktualnej listy</string>
     <string name="rename_from">Zmień nazwę z</string>
     <string name="rename_to">Zmień nazwę na</string>
     <string name="list_menu_import">Import</string>
@@ -583,7 +595,6 @@
     <string name="cache_filter_mode_advanced">Zaawansowany</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Przełącz na tryb podstawowy</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Zmiana na tryb podstawowy spowoduje utratę ustawień filtrów. Czy chcesz kontynuować?</string>
-    <string name="cache_filter_add_button">Dodaj kryteria filtru</string>
     <string name="cache_filter_option_and_or">Użyj LUB zamiast ORAZ</string>
     <string name="cache_filter_option_inverse">Odwróć filtr</string>
     <string name="cache_filter_option_include_inconclusive">Dołącz niejednoznaczne dopasowania</string>
@@ -618,7 +629,9 @@
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
     <string name="cache_filter_category">Kategoria BC</string>
     <string name="cache_filter_tier">Poziom BC</string>
-    <string name="cache_filter_named_filter">Nazwany filtr</string>
+    <string name="cache_filter_health_score">Stan zdrowia skrytki</string>
+    <string name="cache_filter_health_score_include_unscored">Dołącz skrytki bez punktowanych dzienników</string>
+    <string name="cache_filter_named_filter">Filtr</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
@@ -641,17 +654,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Usuń</string>
     <string name="cache_filter_storage_clear_button">Wyczyść</string>
-    <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
     <string name="cache_filter_storage_select_title">Wybierz filtr</string>
-    <string name="cache_filter_storage_delete_title">Usuń filtr</string>
-    <string name="cache_filter_storage_delete_message">Czy na pewno chcesz usunąć tę konfigurację filtra?</string>
-    <string name="cache_filter_storage_select_clear_title">Wybierz filtr lub wyczyść bieżący filtr</string>
-    <string name="cache_filter_storage_clear_title">Wyczyść bieżący filtr</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
-    <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
-    <string name="cache_filter_storage_save_confirm_title">Nadpisz zapisany filtr</string>
-    <string name="cache_filter_storage_save_confirm_message">Filtr o nazwie \'%s\' i innej konfiguracji już istnieje. Nadpisać go?</string>
-    <string name="cache_filter_storage_clear_message">Czy chcesz wyczyścić bieżący filtr?</string>
     <string name="cache_filter_stringfilter_matchcase">Dopasuj wielkość liter</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Wyszukaj tekst</string>
     <string name="cache_filter_stringfilter_info">Z opcją \'Wzorzec\', użyj wieloznacznika * i ?. * reprezentuje brak, jeden lub wiele znaków, ? reprezentuje pojedynczy znak. Przykładowo: wzorzec \'H?mburg*\' będzie pasował do np. \'Homburg\' lub \'Hamburg w nocy\', ale nie \'Dzień w Hamburg\' lub \'Hahmburg\'</string>
@@ -766,6 +769,30 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filtry</string>
+    <string name="cache_namedfilter_matching">Pasujące filtry</string>
+    <string name="named_filter_add">Dodaj filtr</string>
+    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
+    <string name="named_filter_activate_marker">używaj z prio</string>
+    <string name="named_filter_enable_all_markers">Zastosuj filtry jako znaczniki</string>
+    <string name="named_filter_markers_enabled">Znaczniki włączone</string>
+    <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
+    <string name="named_filter_select_title">Wybierz filtr</string>
+    <string name="named_filter_activate_deactivate_title">Aktywuj / dezaktywuj znaczniki</string>
+    <string name="named_filter_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
+    <string name="named_filter_save_as_title">Zapisz jako filtr</string>
+    <string name="named_filter_name_exists_title">Nazwa już istnieje</string>
+    <string name="named_filter_name_exists_message">Filtr o nazwie \'%s\' już istnieje. Nadpisać?</string>
+    <string name="named_filter_config_exists_title">Filtr już zapisany</string>
+    <string name="named_filter_config_exists_message">Ta konfiguracja filtra jest już zapisana jako \'%s\'. Zapisać ponownie z nową nazwą?</string>
+    <string name="named_filter_fill_with_named">Wypełnij filtrem</string>
+    <string name="named_filter_priority_normal">Normalny</string>
+    <string name="named_filter_priority_high">Wysoki</string>
+    <string name="named_filter_priority_highest">Najwyższy</string>
+    <string name="named_filter_priority_low">Niski</string>
+    <string name="named_filter_priority_lowest">Najniższy</string>
+    <string name="cache_filter_reference_based_on">Na podstawie: %1$s</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -1484,6 +1511,7 @@
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_set_coordinates">Ustaw współrzędne</string>
     <string name="cache_personal_note">Notatka osobista</string>
+    <string name="cache_personal_note_edit_pn">Edytuj notatkę osobistą</string>
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
@@ -1607,7 +1635,6 @@
     <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
-    <string name="cache_log_delete_reason">Powód (maks. %d znaków)</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -1770,6 +1797,7 @@
     <string name="waypoint_coordinates">Współrzędne</string>
     <string name="waypoint_cache_coordinates">Współrzędne skrytki</string>
     <string name="waypoint_calculated_coordinates_global">Oblicz współrzędne</string>
+    <string name="waypoint_select_from_map">Wybierz z mapy</string>
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
@@ -1843,6 +1871,7 @@
     <string name="calccoord_select_variable">Wybierz zmienną</string>
     <string name="calccoord_new_variable">**%s** *(Nowa)*</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
+    <string name="calccoord_convert_to_plain_error">Wzór nie ocenia prawidłowych współrzędnych.\nKonwersja na współrzędne zwykłe zresetuje punkt nawigacji do pustych współrzędnych.</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>
@@ -2422,6 +2451,13 @@
     <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
     <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
     <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Usuwanie skrytek</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Usunięto %d skrytkę</item>
+        <item quantity="few">Usunięto %d skrytki</item>
+        <item quantity="many">Usunięto %d skrytek</item>
+        <item quantity="other">Usunięto %d skrytek</item>
+    </plurals>
     <string name="command_move_caches_progress">Przenoszę skrytki do listy %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrytkę</item>
@@ -2465,6 +2501,10 @@
         <item quantity="many">Ustaw %d ikon skrytek</item>
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Przeliczanie stanu zdrowia skrytki…</string>
+    <string name="command_recalculate_health_score_result">Przeliczony stan zdrowia skrytki: %d</string>
+    <string name="log_health_score_explanation_title">Stan zdrowia skrytki</string>
+    <string name="log_health_score_explanation">Stan zdrowia skrytki jest obliczany na podstawie ostatnich wpisów %1$s lub do czasu znalezienia jednego z następujących typów wpisów:  \n%2$s  \n\nOblicza się go jako:  \n`(suma wag złych i złych wpisów) / (suma wag złych i złych wpisów)`\n\n**Wpisy dobre** to:  \n%3$s  \n\n**Wpisy złe** to:  \n%4$s  \n\nWpisy ważone są według wieku (wpisy nowsze mają większą wagę).</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
@@ -2507,7 +2547,7 @@
     <string name="preference_colorpicker_show_width">szerokość: %d</string>
     <string name="reset_to_default">Domyślny</string>
     <!-- number input -->
-    <string name="number_input_title">Ustaw wartość</string>
+    <string name="number_input_title_short">Ustaw wartość</string>
     <string name="number_input_range">Wprowadź wartość między %1$s a %2$s</string>
     <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
     <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
@@ -2521,6 +2561,8 @@
     <string name="notification_channel_downloader_description">powiadomienia o wynikach pobierania (np. map offline)</string>
     <string name="notification_channel_cache_download_name">pobieranie skrytek</string>
     <string name="notification_channel_cache_download_description">powiadomienia o wynikach pobierania skrytek w tle</string>
+    <string name="notification_channel_log_name">wysyłanie wpisu</string>
+    <string name="notification_channel_log_description">powiadomienia o postępach i błędach przy wysyłaniu wpisów do skrytki</string>
     <string name="notification_download_receiver_title">Importowanie pobierania</string>
     <!-- individual routes -->
     <string name="individual_route">Indywidualna trasa</string>
@@ -2677,7 +2719,7 @@
     <string name="check_hillshading_found">Dane cieniowania szczytów już istnieją</string>
     <string name="check_hillshading_missing">Znaleziono brakujące dane cieniowania szczytów:</string>
     <string name="check_hillshading_unsupported">Ostrzeżenie: Dane cieniowania szczytów są przynajmniej częściowo niedostępne dla wybranego regionu</string>
-    <string name="check_hillshading_tiles_menu">Sprawdź brakujące dane cieniowania szczytów</string>
+    <string name="check_hillshading_tiles_menu">Sprawdź brakujące dane wysokości</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
@@ -2898,13 +2940,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
     <string name="dbi_search_title">Szukaj</string>
     <string name="dbi_search_columnSelection">Ogranicz do</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Ostatnio używane</string>
-    <string name="emoji_category_symbols">Symbole</string>
-    <string name="emoji_category_dots">Kropki</string>
-    <string name="emoji_category_places">Miejsca</string>
-    <string name="emoji_category_food">Jedzenie i napoje</string>
-    <string name="emoji_category_activity">Aktywność</string>
-    <string name="emoji_category_people">Ludzie</string>
-    <string name="emoji_category_numbers">Liczby</string>
 </resources>

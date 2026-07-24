@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Meddelande från OC Team</string>
     <string name="log_your_saved_log">Din sparade logg</string>
     <string name="log_empty_logbook">Cachens loggbok är tom.</string>
+    <string name="log_empty_logbook_filtered">De valda filtren döljer alla loggar. Välj minst ett alternativ.</string>
     <string name="log_image_selectfromstorage_tooltip">Välj bilder från lagring</string>
     <string name="log_image_camera_tooltip">Ta bild med kamera</string>
     <string name="log_image_selectfromown_tooltip">Välj bilder från egna bilder</string>
@@ -201,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Denna geocacharen rapporterade att det finns ett problem med denna cache.</string>
     <string name="log_problem_log_full_label">Loggboken är full</string>
     <string name="log_problem_log_full_text">Denna geocacharen rapporterade att loggboken är full.</string>
+    <string name="log_problem_log_wet_label">Loggboken är våt</string>
+    <string name="log_problem_log_wet_text">Denna geocachare rapporterade att behållaren är våt.</string>
     <string name="log_problem_damaged_label">Behållaren är skadad</string>
     <string name="log_problem_damaged_text">Denna geocacharen rapporterade att behållaren är skadad.</string>
     <string name="log_problem_missing_label">Cachen är kanske borta</string>
@@ -231,10 +234,12 @@
     <string name="translate_external_label">Översätt med %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Webbsida</string>
+    <string name="translate_external_variant_unavailable">Inte tillgänglig</string>
     <string name="translate_external_none">&lt;Ingen&gt;</string>
     <string name="translate_external_app">Extern app</string>
     <string name="translate_external_google">Google Översätt</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Översätt</string>
     <string name="translate_length_warning">Översättning via webbsida kan misslyckas med en stor mängd text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -266,6 +271,7 @@
     <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
     <string name="err_detail_premium_log_found">Den här cachen är endast tillgänglig för premium-medlemmar på geocaching.com. Därav kan inte cache-informationen visas.\n\nMen om du redan har hittat den här cachen så kan du logga den här.</string>
     <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
+    <string name="err_watchlist_failed_geocodes">Ändring av din bevakningslista misslyckades för geocoder: %s</string>
     <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
     <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
     <string name="err_auth_process">Inloggningsproceduren misslyckades.</string>
@@ -322,14 +328,14 @@
     <string name="warn_notloggedin_long">Inte inloggad (ännu). Livekartan visar bara cacher lagrade lokalt och online-funktioner fungerar inte.\n\nAntingen finns det ingen nätverksanslutning, ett serverproblem eller så måste du (åter)konfigurera dina geocachingtjänster.\n\nVill du konfigurera tjänster nu?</string>
     <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
     <string name="err_read_bookmark_list">Fel vid läsning av bokmärkeslistor.</string>
+    <string name="err_bookmark_list_overfull">För många cacher</string>
+    <string name="err_bookmark_list_overfull_description">Bokmärkeslistor kan bara lagra upp till 1000 cacher, du försöker lägga till mer än så i listan.\n\nVill du fortsätta och lägga till endast så många cacher som listan kan innehålla?</string>
+    <string name="info_log_posting_background">Loggen postas…</string>
+    <string name="info_log_post_success">Loggen för %s har skickats</string>
     <string name="info_log_posted">c:geo har postat din logg.</string>
     <string name="info_log_saved">c:geo har sparat din logg.</string>
-    <string name="info_log_post_failed">Misslyckades skicka logg.</string>
+    <string name="info_log_post_failed_geocode">Misslyckades skicka logg för %s.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
-    <string name="info_log_post_failed_simple_reason">Kontrollera att du är korrekt inloggad och har en giltig internetanslutning.</string>
-    <string name="info_log_delete_failed_simple_reason">Kontrollera att du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan har tagits bort.</string>
-    <string name="info_log_post_retry">Försök igen</string>
-    <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
     <string name="info_log_type_changed">Typen av logg har ändrats!</string>
@@ -367,9 +373,8 @@
     <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
     <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
     <string name="translator_model">Översättningsmodell</string>
-    <string name="translator_tooltip">Översätta offline med Google</string>
+    <string name="translator_tooltip">Översätt offline</string>
     <string name="translator_language_select">Välj källspråk</string>
-    <string name="translator_language_target_select">Välj målspråk</string>
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning. Tryck för att välja källspråk.</string>
     <string name="translator_language_unknown">Det går inte att identifiera språk. Tryck för att välja källspråk.</string>
     <string name="translator_language_detected">Översätt från \"%s\". Tryck för att välja källspråk.</string>
@@ -440,6 +445,7 @@
         <item quantity="one">%d cache hämtad</item>
         <item quantity="other">%d cacher hämtade</item>
     </plurals>
+    <string name="caches_store_background_skipped">Skippade offlinecacher: %d</string>
     <string name="caches_history">Senast hittade cacher</string>
     <string name="caches_on_map">Visa på karta</string>
     <string name="caches_sort">Sortering</string>
@@ -483,6 +489,11 @@
     <string name="caches_upload_bookmarklist">Lägg till i bokmärkeslistan</string>
     <string name="caches_upload_bookmarklist_all">Lägg till i bokmärkeslistan</string>
     <string name="caches_upload_bookmarklist_selected">Lägg till valda i bokmärkeslistan</string>
+    <string name="caches_watch_all">Lägg till alla i bevakningslistan</string>
+    <string name="caches_unwatch_all">Ta bort alla från bevakningslistan</string>
+    <string name="caches_watch_selected">Lägg till valda i bevakningslistan</string>
+    <string name="caches_unwatch_selected">Ta bort markerad från bevakningslistan</string>
+    <string name="watchlist_background_started">Uppdatering av bevakningslistan startad i bakgrunden</string>
     <string name="caches_upload_modifiedcoords">Ladda upp modifierade koordinater</string>
     <string name="caches_upload_modifiedcoords_warning">Vill du ladda upp modifierade koordinater för alla (markerade) cacher och skriva över befintliga koordinater på servern? Detta kan inte ångras.</string>
     <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
@@ -505,6 +516,14 @@
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
     <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
+    <string name="caches_warning_delete_user_data_others">Ta bort andra</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d cacher har användardata. Användardata försvinner när cachen tas bort.</item>
+        <item quantity="other">%1$d/%2$d cacher har användardata. Användardata försvinner när cacherna tas bort.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Denna åtgärd kommer att ta bort alla cacher (%d) från din enhet.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Ta bort andra</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d cacher finns bara på denna lista. Borttagning av dessa cacher från listan kommer att ta bort dem från din enhet.</string>
     <string name="caches_show_attributes_all">Visa attributöversikt för alla cacher</string>
     <string name="caches_show_attributes_selected">Visa attributöversikt för valda cacher</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
@@ -513,6 +532,7 @@
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
+    <string name="caches_recalculate_health_score">Räkna om loggars hälsopoäng</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
     <string name="select_icon">Välj ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version stöder inte automatisk detektering av ikoner - vissa tecken kan saknas</string>
@@ -533,7 +553,7 @@
     <string name="list_menu_create">Skapa en ny lista</string>
     <string name="list_menu_drop">Ta bort aktuell lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>
-    <string name="list_menu_rename_list_prefix">Byt namn på listprefix</string>
+    <string name="list_menu_rename_parent_lists">Döp om överordnade listor</string>
     <string name="rename_from">Byt namn från</string>
     <string name="rename_to">Byt namn till</string>
     <string name="list_menu_import">Importera</string>
@@ -562,7 +582,6 @@
     <string name="cache_filter_mode_advanced">Avancerat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Ändra till Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Att ändra till \"Basic\" läge kommer att göra att filterinställningar försvinner. Vill du fortsätta?</string>
-    <string name="cache_filter_add_button">Lägg till filterkriterie</string>
     <string name="cache_filter_option_and_or">Använd OR istället för AND</string>
     <string name="cache_filter_option_inverse">Omvänd filter</string>
     <string name="cache_filter_option_include_inconclusive">Inkludera slutgiltiga träffar</string>
@@ -597,7 +616,9 @@
     <string name="cache_filter_stored_since">Senaste detaljuppdateringen</string>
     <string name="cache_filter_category">BC Kategori</string>
     <string name="cache_filter_tier">BC Nivå</string>
-    <string name="cache_filter_named_filter">Namngivna filter</string>
+    <string name="cache_filter_health_score">Loggens hälsopoäng</string>
+    <string name="cache_filter_health_score_include_unscored">Inkludera cacher utan poängbara loggar</string>
+    <string name="cache_filter_named_filter">Filter</string>
     <string name="cache_filter_logical_filter_group">Kopplade filter</string>
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Detaljer</string>
@@ -618,17 +639,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Ta bort</string>
     <string name="cache_filter_storage_clear_button">Rensa</string>
-    <string name="cache_filter_storage_load_delete_title">Ladda eller ta bort ett befintligt filter</string>
     <string name="cache_filter_storage_select_title">Välj filter</string>
-    <string name="cache_filter_storage_delete_title">Ta bort filter</string>
-    <string name="cache_filter_storage_delete_message">Vill du verkligen ta bort den här filterkonfigurationen?</string>
-    <string name="cache_filter_storage_select_clear_title">Välj filter eller rensa nuvarande filter</string>
-    <string name="cache_filter_storage_clear_title">Rensa aktuella filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Inga filter har sparats än.</string>
-    <string name="cache_filter_storage_save_title">Spara filter med namn</string>
-    <string name="cache_filter_storage_save_confirm_title">Överskrivning av filter</string>
-    <string name="cache_filter_storage_save_confirm_message">Ett filter med namnet \'%s\' och annan konfiguration finns redan. Skriv över det?</string>
-    <string name="cache_filter_storage_clear_message">Vill du rensa det aktuella filtret?</string>
     <string name="cache_filter_stringfilter_matchcase">Matcha skiftläge</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Söktext</string>
     <string name="cache_filter_stringfilter_info">Med alternativet \"Pattern\", använd jokertecken * och ?. * representerar noll, ett eller flera tecken, ? representerar ett enda tecken. Till exempel matchar mönstret \"H?mburg*\" t.ex. \"Homburg\" eller \"Hamburg på natten\" men inte \"En dag i Hamburg\" eller \"Hahmburg\"</string>
@@ -743,6 +754,30 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filter</string>
+    <string name="cache_namedfilter_matching">Matchande filter</string>
+    <string name="named_filter_add">Lägg till filter</string>
+    <string name="named_filter_empty_hint">Inga filter konfigurerade. Tryck på + för att lägga till ett.</string>
+    <string name="named_filter_activate_marker">använd med prio</string>
+    <string name="named_filter_enable_all_markers">Tillämpa filter som markörer</string>
+    <string name="named_filter_markers_enabled">Markörer aktiverade</string>
+    <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
+    <string name="named_filter_select_title">Välj filter</string>
+    <string name="named_filter_activate_deactivate_title">Aktivera / inaktivera markörer</string>
+    <string name="named_filter_nofilter_label">(inget filter — matchar alla cacher)</string>
+    <string name="named_filter_save_as_title">Spara som filter</string>
+    <string name="named_filter_name_exists_title">Namnet finns redan</string>
+    <string name="named_filter_name_exists_message">Ett filter som heter \'%s\' finns redan. Skriv över?</string>
+    <string name="named_filter_config_exists_title">Filtret har redan sparats</string>
+    <string name="named_filter_config_exists_message">Denna filterkonfiguration är redan sparad som \'%s\'. Spara igen med ett nytt namn?</string>
+    <string name="named_filter_fill_with_named">Fyll med filter</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Hög</string>
+    <string name="named_filter_priority_highest">Högsta</string>
+    <string name="named_filter_priority_low">Låg</string>
+    <string name="named_filter_priority_lowest">Lägsta</string>
+    <string name="cache_filter_reference_based_on">Baserat på: %1$s</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
@@ -795,6 +830,10 @@
     <string name="downloader_pending_info">Det finns minst en pausad eller misslyckad nedladdning. Vill du öppna listan över väntande nedladdningar?</string>
     <string name="downloader_retry_download">Ladda ner igen</string>
     <string name="downloader_retry_download_details">Vill du försöka ladda ner följande fil igen?</string>
+    <string name="downloader_delete_all_pending">Radera alla</string>
+    <string name="downloader_delete_all_confirmation">Ta bort alla väntande nedladdningar?</string>
+    <string name="downloader_delete_all_message">Detta kommer att avbryta alla %d väntande nedladdningar och ta bort de nedladdade delarna. Denna åtgärd kan inte ångras.</string>
+    <string name="downloader_deleted_all">Tog bort alla väntande nedladdningar</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Nedladdningen misslyckades (och kommer inte att återupptas)</string>
     <string name="asdm_status_paused">Nedladdningen väntar på att försöka igen eller återuppta</string>
@@ -843,6 +882,7 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap-varianter</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
@@ -879,6 +919,7 @@
     <string name="settings_lc_description">Inkludera Adventure Lab cacher på kartan.\n\n(Endast tillgängliga för premiummedlemmar på \"Geocaching.com\". Kräver en aktiverad \"Geocaching.com\" service.)\n\nFör att ändra denna inställning krävs en omstart.</string>
     <string name="settings_lc_found_state_title">Manuellt hittad status</string>
     <string name="settings_lc_found_state_handling">Om markerad, få inte den verkliga hittade status för Adventure Lab cacher, ge i stället kontroller för användaren att manuellt ställa in det funna tillståndet</string>
+    <string name="lc_default_description">Detta är en geocaching.com Adventure Lab Cache. Äventyr kan endast spelas med Groundspeak Adventure Lab-Appen. Klicka på Adventure Lab-ikonen på sidan \"Detaljer\" för att öppna/installera Adventure Lab-appen för detta äventyr därifrån.\nOm du inte vill se Adenture Lab cacher på kartan och sökningar kan du inaktivera dem genom att använda \"inställningar\" menyn - Tjänster - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Ladda cacher från opencaching.de</string>
     <string name="init_oc_de_description">Använd c:geo med opencaching.de för att söka efter cacher samt för att filtrera dina funna cacher.</string>
     <string name="init_summary_oc_pl">Ladda cacher från opencaching.pl</string>
@@ -1270,7 +1311,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terräng</string>
-    <string name="map_source_osm_offline">Sparad lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_nomap">Ingen karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
@@ -1314,6 +1354,7 @@
     <string name="persistablefolder_base">Bas</string>
     <string name="persistablefolder_offline_maps">Offlinekartor</string>
     <string name="persistablefolder_offline_maps_themes">Kartteman</string>
+    <string name="persistablefolder_backgroundmaps">Bakgrundskartor</string>
     <string name="persistablefolder_offline_maps_shading">Filer för kartskuggning</string>
     <string name="persistablefolder_backup">Säkerhetskopiering</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
@@ -1437,6 +1478,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
+    <string name="cache_personal_note_edit_pn">Redigera personlig anteckning</string>
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
     <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
@@ -1489,6 +1531,7 @@
     <string name="cache_logs">Loggbok</string>
     <string name="cache_latest_logs">Senaste loggarna</string>
     <string name="cache_logs_friends_and_own">Vänners/egna loggar</string>
+    <string name="cache_logs_friends">Vänner</string>
     <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Hämtar från gc.com</string>
     <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
@@ -1559,7 +1602,6 @@
     <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
-    <string name="cache_log_delete_reason">Orsak (max. %d tecken)</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
@@ -1626,6 +1668,8 @@
     <string name="cachedetails_progress_unwatch">Borttagen från bevakningslistan</string>
     <string name="cachedetails_progress_favorite">Lades till i favoriter</string>
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Flera Wherigo-patroner</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Rådfråga cachelistan för mer information om patronerna.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
@@ -1718,6 +1762,7 @@
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cache koordinater</string>
     <string name="waypoint_calculated_coordinates_global">Beräkna koordinat</string>
+    <string name="waypoint_select_from_map">Välj från kartan</string>
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_my_coordinates_accuracy">Mina koordinater (±%s)</string>
@@ -1778,6 +1823,8 @@
     <string name="variables_scanlisting_nopatternfound">Inget mönster hittades</string>
     <string name="variables_tidyup">Städa upp</string>
     <string name="variables_deleteall">Radera allt</string>
+    <string name="variables_add">Lägg till variabel</string>
+    <string name="variables_add_next">Lägg till nästa variabel</string>
     <string name="variables_deleteall_confirm_text">Vill du verkligen ta bort alla variabler för denna cache?</string>
     <string name="variables_info">Hjälp</string>
     <string name="variables_varname_dialog_title">Variabelnamn</string>
@@ -1789,6 +1836,7 @@
     <string name="calccoord_select_variable">Välj variabel</string>
     <string name="calccoord_new_variable">**%s** *(Ny)*</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
+    <string name="calccoord_convert_to_plain_error">Formeln utvärderas inte till giltiga koordinater.\nKonvertering till oformaterade koordinater kommer att återställa vägpunkten till tomma koordinater.</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
     <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Ersätt \'x\' med \'*\'</string>
@@ -2356,6 +2404,11 @@
     <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
     <string name="do_not_ask_me_again">Fråga mig inte igen</string>
     <string name="geokrety_parsing_failed">Förstod inte svaret från GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Tar bort cacher</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Tog bort %d cache</item>
+        <item quantity="other">Tog bort %d cacher</item>
+    </plurals>
     <string name="command_move_caches_progress">Flytta cacher till listan %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttade %d cache</item>
@@ -2387,7 +2440,12 @@
         <item quantity="one">Ange %d cache-ikon</item>
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Räknar om loggars hälsopoäng…</string>
+    <string name="command_recalculate_health_score_result">Loggars hälsopoäng omräknade: %d</string>
+    <string name="log_health_score_explanation_title">Loggens hälsopoäng</string>
+    <string name="log_health_score_explanation">Cachens hälsopoäng beräknas från högst %1$s loggposter eller tills en av följande loggtyper hittas:  \n%2$s  \n\nDen beräknas som:  \n`(summan av vikter av bra loggar) / (summan av vikter av bra och dåliga loggar)`\n\n**Bra loggar** är:  \n%3$s  \n\n**Dåliga loggar** är:  \n%4$s  \n\nLoggar vägs av sin ålder (nyare loggar har högre vikt).</string>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_http429">Sakta ner litegrann, för många förfrågningar till %s</string>
     <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
     <string name="live_map_status_normal">Laddar data utan problem: %s</string>
@@ -2426,7 +2484,7 @@
     <string name="preference_colorpicker_show_width">bredd: %d</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Ställ in värde</string>
+    <string name="number_input_title_short">Ange värde</string>
     <string name="number_input_range">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
     <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
@@ -2440,6 +2498,8 @@
     <string name="notification_channel_downloader_description">aviseringar för hämtningar (t.ex. offline-kartor)</string>
     <string name="notification_channel_cache_download_name">cache-hämtare</string>
     <string name="notification_channel_cache_download_description">resultatnotifieringar för cachers bakgrunds-nedladdningar</string>
+    <string name="notification_channel_log_name">logg inlägg</string>
+    <string name="notification_channel_log_description">framsteg och felmeddelanden för att posta cache-loggar</string>
     <string name="notification_download_receiver_title">Importerar nedladdning</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rutt</string>
@@ -2552,6 +2612,7 @@
     <string name="receivedownload_integritycheck_failed">Integritetskontroll misslyckades</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
+    <string name="downloadbackground_title">Ladda ner bakgrundskarta</string>
     <string name="download_title">Ladda ned fil</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
@@ -2577,11 +2638,13 @@
     <string name="downloadmap_themefile">temafil</string>
     <string name="downloadmap_tilefile">rutt-datafil</string>
     <string name="downloadmap_hillshadingfile">datafil för terrängskuggning</string>
+    <string name="downloadmap_checking">Kontrollerar tillgängliga data…</string>
     <string name="downloadmap_othermapdownload">nedladdning av annan karta</string>
     <string name="downloadmap_otherthemedownload">nedladdning av annat tema</string>
     <string name="downloadmap_download">ladda ner</string>
     <string name="downloadmap_retrieving_directory_data">Hämtar mappdata…</string>
     <string name="downloadmap_checking_for_updates">Söker efter uppdateringar…</string>
+    <string name="downloadtile_title">Data saknas</string>
     <string name="downloadtile_info">c:geo kan inte beräkna den begärda rutten eftersom det saknas datafil med rutter. Vill du ladda ner saknade ruttdata?</string>
     <string name="check_tiles_menu">Sök efter saknad ruttberäkningsdata</string>
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
@@ -2591,7 +2654,7 @@
     <string name="check_hillshading_found">Terrängskuggningsdata finns redan</string>
     <string name="check_hillshading_missing">Saknar terrängskuggningsdata:</string>
     <string name="check_hillshading_unsupported">Varning: Terrängskuggningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
-    <string name="check_hillshading_tiles_menu">Sök efter saknad terrängskuggningsdata</string>
+    <string name="check_hillshading_tiles_menu">Sök efter saknad höjddata</string>
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
@@ -2668,7 +2731,13 @@
     <string name="mapthemes_foldersync_finished_toast">%1$s mappsynkronisering klar efter %2$s, %3$d av %4$s behövde synkronisering</string>
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls">Kontroller</string>
+    <string name="wherigo_controls_cartridgelist_hint">Visa patroner och starta spelet</string>
+    <string name="wherigo_controls_savegame_hint">Spara framsteg i ett pågående spel</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_stopgame_hint">Stoppa ett pågående spel</string>
+    <string name="wherigo_controls_mapzones_hint">Visa zoner för ett pågående spel på kartan</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Ladda ner en patron (cguid behövs)</string>
     <string name="wherigo_controls_reportproblem_hint">Visa senaste Wherigo-problem</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
@@ -2680,20 +2749,55 @@
     <string name="wherigo_sound_unmute">Sätt på ljud</string>
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
     <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
+    <string name="wherigo_currently_playing">Spelar just nu</string>
+    <string name="wherigo_locate_on_center">Hitta på mitten</string>
+    <string name="wherigo_revoke_fixed_location">Återkalla fast plats</string>
     <string name="wherigo_thingtype_location">Platser</string>
+    <string name="wherigo_thingtype_inventory">Innehåll</string>
+    <string name="wherigo_thingtype_item">Du ser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_author">Författare</string>
+    <string name="wherigo_zone_inside">inuti</string>
+    <string name="wherigo_zone_near">nära</string>
     <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
+    <string name="wherigo_choose_cartridge">Välj patron</string>
+    <string name="wherigo_choose_new_loadgame">Välj nytt spel eller spel att ladda</string>
+    <string name="wherigo_choose_savegame_slot">Välj en sparningsplats</string>
+    <string name="wherigo_savegame_name_empty">&lt;Nytt spel&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Automatisk sparning</string>
+    <string name="wherigo_savegame_name_numeric">Plats %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Tom plats&gt;</string>
+    <string name="wherigo_download_title">Ladda ner patron</string>
+    <string name="wherigo_download_message">Patron med CGUID \"%s\" är inte tillgänglig på din enhet. Vill du ladda ner den?</string>
+    <string name="wherigo_download_successful_title">Nedladdningen lyckades</string>
+    <string name="wherigo_download_failed_title">Nedladdningen misslyckades</string>
+    <string name="wherigo_download_failed_message">Nedladdningen av patron med CGUID \"%1$s\" misslyckades: %2$s</string>
+    <string name="wherigo_manual_download_title">Ladda ner patron manuellt</string>
+    <string name="wherigo_manual_download_cguid_label">Ange CGUID här</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: tar bort överblivna filer</string>
+    <string name="wherigo_download_progress_login">Loggar in…</string>
+    <string name="wherigo_download_progress_started">Nedladdningen har börjat</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
-    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta författaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
+    <string name="wherigo_confirm_stop_running_game_title">Sluta köra Wherigo Game</string>
+    <string name="wherigo_confirm_stop_running_game_message">Ett spel körs för närvarande för \"%s\". Vill du stoppa detta spel?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Ta bort Wherigo patron</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Vill du verkligen ta bort patronen \"%1$s\" inklusive %2$s sparade partier?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Vill du verkligen ta bort savegame \"%2$s\" i patron \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Spara Wherigo-spel framsteg</string>
+    <string name="wherigo_save_game_message">Spara dina spelframsteg för patron \"%1$s\" i \"%2$s\".</string>
     <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
     <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
+    <string name="wherigo_dialog_push_page">Sida %1$s / %2$s</string>
+    <string name="wherigo_notification_service">c:geo kör en Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" väntar på dig!</string>
     <string name="wherigo_bar_resume_dialog">Återuppta</string>
     <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
@@ -2749,6 +2853,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Önskad bildstorlek</string>
+    <string name="settings_gc_imagesize_summary">Bilder från Geocaching.com i listningar, loggar och spårbara objekt finns i olika storlekar. Välj den storlek som ska laddas när du laddar och lagrar en cache.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Oförändrad</string>
+    <string name="settings_gc_imagesize_entry_original">Maximalt</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Visa databas</string>
     <string name="dbi_select_title">(Välj tabell)</string>
@@ -2760,13 +2871,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
     <string name="dbi_search_title">Sök efter</string>
     <string name="dbi_search_columnSelection">Begränsa till</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Senast använda</string>
-    <string name="emoji_category_symbols">Symboler</string>
-    <string name="emoji_category_dots">Prickar</string>
-    <string name="emoji_category_places">Platser</string>
-    <string name="emoji_category_food">Mat &amp; dryck</string>
-    <string name="emoji_category_activity">Aktivitet</string>
-    <string name="emoji_category_people">Människor</string>
-    <string name="emoji_category_numbers">Siffror</string>
 </resources>

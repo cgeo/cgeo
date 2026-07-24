@@ -73,7 +73,7 @@
                     android:id="@+id/filter_open_named_filter_activity"
                     style="@style/button_icon"
                     android:layout_centerVertical="true"
-                    app:icon="@drawable/ic_menu_marker" />
+                    app:icon="@drawable/ic_menu_myfilters" />
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
                 android:layout_width="@dimen/buttonSize_iconButton"
                 android:layout_height="@dimen/buttonSize_iconButton"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_menu_marker"
+                app:srcCompat="@drawable/ic_menu_myfilters"
                 tools:ignore="ContentDescription" />
 
                 <TextView

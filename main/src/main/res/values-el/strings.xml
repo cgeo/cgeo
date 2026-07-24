@@ -262,9 +262,6 @@
     <string name="err_read_bookmark_list">Σφάλμα ανάγνωσης λίστας σελιδοδεικτών.</string>
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
-    <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
-    <string name="info_log_post_retry">Επανάληψη</string>
-    <string name="info_log_post_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
     <string name="info_waypoint_coordinates_cleared">Οι συντεταγμένες εκκαθαρίστηκαν.</string>
     <string name="info_log_type_changed">Ο τύπος του αρχείου καταγραφής έχει αλλάξει!</string>
@@ -418,7 +415,6 @@
     <string name="cache_filter_mode_advanced">Σύνθετες επιλογές</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Εναλλαγή σε Βασικό</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Η αλλαγή σε \'Βασική\' λειτουργία θα έχει ως αποτέλεσμα την απώλεια των ρυθμίσεων του φίλτρου. Θέλετε να συνεχίσετε;</string>
-    <string name="cache_filter_add_button">Προσθήκη κριτηρίων φίλτρου</string>
     <string name="cache_filter_option_and_or">Χρήση OR αντί του AND</string>
     <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
     <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
@@ -467,15 +463,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
-    <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
-    <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
-    <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
-    <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
-    <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
-    <string name="cache_filter_storage_save_confirm_title">Αποθήκευση φίλτρου κατά την έξοδο</string>
-    <string name="cache_filter_storage_save_confirm_message">Ένα φίλτρο με όνομα \'%s\' και διαφορετικές ρυθμίσεις υπάρχει ήδη. Αντικατάστασή του;</string>
     <string name="cache_filter_stringfilter_matchcase">Ταίριασμα Πεζών/ Κεφαλαίων</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Αναζήτηση κειμένου</string>
     <string name="cache_filter_stringfilter_info">Με την επιλογή \'Μοτίβο\', χρησιμοποιήστε τα μπαλαντέρ * και ?. Το * αντιπροσωπεύει κανέναν, έναν ή πολλούς χαρακτήρες, το ? αντιπροσωπεύει έναν μόνο χαρακτήρα. Για παράδειγμα, το μοτίβο \'H?mburg*\' θα ταιριάξει π.χ. \'Homburg\' ή \'Hamburg at Night\' αλλά όχι \'A day in Hamburg\' ή \'Hahmburg\'</string>
@@ -547,6 +535,7 @@
         <item>3μ</item>
         <item>&lt;3μ</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -951,7 +940,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_offline">Εκτός σύνδεσης</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
@@ -1198,6 +1186,7 @@
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
+    <string name="cache_status_attended">Συμμετείχα</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
@@ -1455,6 +1444,7 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
+    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -1465,6 +1455,7 @@
     <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_finder">Βρέθηκε από</string>
+    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
@@ -1522,6 +1513,7 @@
     <string name="user_menu_open_browser">Άνοιγμα προφίλ σε πρόγραμμα περιήγησης</string>
     <string name="user_menu_send_message">Αποστολή μηνύματος</string>
     <string name="user_menu_send_email">Αποστολή email</string>
+    <string name="user_menu_open_contact">Άνοιγμα κάρτας επαφής</string>
     <string name="user_unknown">Άγνωστος χρήστης</string>
     <!-- navigation -->
     <string name="navigation">Πλοήγηση</string>
@@ -2141,5 +2133,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

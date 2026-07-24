@@ -61,8 +61,8 @@
     <dimen name="buttonSize_iconButton">45dp</dimen>
 
     <!-- override androidx emojipicker category icon size (library default is 20dp) -->
-    <dimen name="emoji_picker_header_icon_width" tools:override="true">24dp</dimen>
-    <dimen name="emoji_picker_header_icon_height" tools:override="true">24dp</dimen>
+    <dimen name="emoji_picker_header_icon_width" tools:ignore="UnusedResources" tools:override="true">24dp</dimen>
+    <dimen name="emoji_picker_header_icon_height" tools:ignore="UnusedResources" tools:override="true">24dp</dimen>
     <!-- size of emoji in the grid -->
     <dimen name="emoji_picker_emoji_size">44dp</dimen>
     <dimen name="emoji_picker_title_height">56dp</dimen>

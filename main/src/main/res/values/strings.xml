@@ -350,14 +350,13 @@
     <string name="err_read_bookmark_list">Error reading bookmark lists.</string>
     <string name="err_bookmark_list_overfull">Too many caches</string>
     <string name="err_bookmark_list_overfull_description">Bookmark lists can only store up to 1000 caches, you\'re attempting to add more than that to the list.\n\nDo you want to proceed and add only as many caches as the list can hold?</string>
+    <string name="info_log_posting_background">Log is being posted…</string>
+    <string name="info_log_post_success">Log for %s successfully sent</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
-    <string name="info_log_post_failed">Posting log failed.</string>
+    <string name="info_log_post_failed_geocode">Posting log for %s failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
-    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
-    <string name="info_log_post_retry">Retry</string>
-    <string name="info_log_post_save">Save offline</string>
+    <string name="info_log_delete_failed_simple_reason">Check if you are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
     <string name="info_log_cleared">Log was cleared.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
@@ -574,7 +573,7 @@
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_recalculate_health_score">Recalculate log health scores</string>
+    <string name="caches_recalculate_health_score">Recalculate cache health scores</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
@@ -674,9 +673,9 @@
     <string name="cache_filter_stored_since">Last details update</string>
     <string name="cache_filter_category">BC Category</string>
     <string name="cache_filter_tier">BC Tier</string>
-    <string name="cache_filter_health_score">Log health score</string>
+    <string name="cache_filter_health_score">Cache health score</string>
     <string name="cache_filter_health_score_include_unscored">Include caches with no scoreable logs</string>
-    <string name="cache_filter_named_filter">Named Filter</string>
+    <string name="cache_filter_named_filter">Filter</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
@@ -871,23 +870,23 @@
     </string-array>
 
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Named Filters</string>
-    <string name="cache_namedfilter_matching">Matching named filters</string>
+    <string name="named_filter_activity_title">Filters</string>
+    <string name="cache_namedfilter_matching">Matching filters</string>
     <string name="named_filter_add">Add filter</string>
-    <string name="named_filter_empty_hint">No named filters configured. Tap + to add one.</string>
-    <string name="named_filter_activate_marker">Show marker - priority:</string>
-    <string name="named_filter_enable_all_markers">Enable all Markers</string>
+    <string name="named_filter_empty_hint">No filters configured. Tap + to add one.</string>
+    <string name="named_filter_activate_marker">use with prio</string>
+    <string name="named_filter_enable_all_markers">Apply filters as markers</string>
     <string name="named_filter_markers_enabled">Markers enabled</string>
     <string name="named_filter_markers_disabled">Markers disabled</string>
     <string name="named_filter_select_title">Select filter</string>
     <string name="named_filter_activate_deactivate_title">Activate / deactivate markers</string>
     <string name="named_filter_nofilter_label">(no filter — matches all caches)</string>
-    <string name="named_filter_save_as_title">Save as named filter</string>
+    <string name="named_filter_save_as_title">Save as filter</string>
     <string name="named_filter_name_exists_title">Name already exists</string>
     <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
     <string name="named_filter_config_exists_title">Filter already saved</string>
     <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
-    <string name="named_filter_fill_with_named">Fill with named filter</string>
+    <string name="named_filter_fill_with_named">Fill with filter</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">High</string>
     <string name="named_filter_priority_highest">Highest</string>
@@ -2745,10 +2744,10 @@
         <item quantity="many">Set %d cache icons</item>
         <item quantity="other">Set %d cache icons</item>
     </plurals>
-    <string name="command_recalculate_health_score_progress">Recalculating log health scores…</string>
-    <string name="command_recalculate_health_score_result">Log health scores recalculated: %d</string>
-    <string name="log_health_score_explanation_title">Log health Score</string>
-    <string name="log_health_score_explanation">Log health Score is calculated from at most last %1$s entries or until one of the following log types is found:  \n%2$s  \n\nIt is calculated as:  \n`(sum of weights of good logs) / (sum of weights of good and bad logs)`\n\n**Good Logs** are:  \n%3$s  \n\n**Bad logs** are:  \n%4$s  \n\nLogs are weighted by their age (newer logs have higher weight).</string>
+    <string name="command_recalculate_health_score_progress">Recalculating cache health scores…</string>
+    <string name="command_recalculate_health_score_result">Cache health scores recalculated: %d</string>
+    <string name="log_health_score_explanation_title">Cache health Score</string>
+    <string name="log_health_score_explanation">The cache health score is calculated from at most last %1$s log entries or until one of the following log types is found:  \n%2$s  \n\nIt is calculated as:  \n`(sum of weights of good logs) / (sum of weights of good and bad logs)`\n\n**Good Logs** are:  \n%3$s  \n\n**Bad logs** are:  \n%4$s  \n\nLogs are weighted by their age (newer logs have higher weight).</string>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
     <string name="live_map_status_http429">Please slow down, too many requests to %s</string>
@@ -2816,6 +2815,8 @@
     <string name="notification_channel_downloader_description">result notifications for downloads (e.g. offline maps)</string>
     <string name="notification_channel_cache_download_name">cache downloader</string>
     <string name="notification_channel_cache_download_description">result notifications for caches background downloads</string>
+    <string name="notification_channel_log_name">log posting</string>
+    <string name="notification_channel_log_description">progress and error notifications for posting cache logs</string>
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->

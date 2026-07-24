@@ -149,9 +149,6 @@
     <string name="err_read_pocket_query_list">Villa kom upp við að lesa vasafyrirspurnarlista.</string>
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
-    <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
-    <string name="info_log_post_retry">Reyna aftur</string>
-    <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>
     <string name="confirm_unsaved_changes_title">Óvistaðar breytingar</string>
     <string name="confirm_discard_wp_changes">Henda óvistuðum breytingum á vörðum?</string>
@@ -232,6 +229,7 @@
     <string name="list_dialog_rename">Endurnefna</string>
     <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>
@@ -668,5 +666,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

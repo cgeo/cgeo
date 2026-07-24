@@ -1,13 +1,19 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+### Yleiset julkaisumerkinnät
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
-- Long-tap on track / individual route for further options
+**Reunasta reunaan**
+
+Play-kaupan käytäntöjen vuoksi olemme päivittäneet Android API -tasoa tällä c:geo-kohteiden versiolla + olemme muuttaneet joitakin näytön asettelun rutiineja. Tästä voi ilmeentyä ei-toivottuja sivuvaikutuksia, etenkin uusimmilla Android-versioilla. Jos sinulla on ongelmia tämän c:geo-version kanssa, ilmoitathan siitä joko [GitHubiin](https://github.com/cgeo/cgeo) tai sähköpostitse osoitteeseen [support@cgeo.org](mailto:support@cgeo.org)
+
+**Vanhat kartat**
+
+Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poistanut karttojemme vanhat toteutukset. Uusi UnifiedMap tulee käyttöön automaattisesti ja sinun ei pitäisi huomata eroja, paitsi muutamia uusia ominaisuuksia, joihin sisältyy
+- Kartan kierto OpenStreetMapsiin perustuville karttoille (online + offline)
+- Ponnahdusikkuna Google Mapsille
+- Piilota kartan lähteet, joita et tarvitse
+- Korkeuskaavio reittejä ja jälkiä varten
+- Vaihda listojen välillä suoraan kartalta
+- "Ajotila" OpenStreetMap pohjaisille karttoille
+- Pitkä napautus polulla / yksittäisellä reitillä lisävalintoja varten
 
 ### Kartta
 - New: Route optimization caches calculated data
@@ -15,17 +21,25 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 - New: Show generated waypoints on map
 - New: Download caches ordered by distance
-- Fix: Doubling of individual route items
-- New: Support for Motorider theme (VTM only)
-- New: NoMap tile provider (don't show map, just caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Korjaus: Yksittäisten reittien kohteiden kahdentuminen
+- Uusi: Tuki Motorider-teemalle (vain VTM)
+- Uusi: NoMap laattojen tarjoaja (ei näytä karttaa, vain kätköt jne.)
+- Muutos: Maksimietäisyys pisteiden liittämiseksi jälkihistoriassa laskettu 500 metriin (muokattavissa)
+- Uusi: Salli KML-tiedostojen tuonti jälkinä
+- Uusi: Mahdollisuus asettaa kätkön kuvake, vaikka kätköä ei olisikaan vielä tallennettu
+- Uusi: Inforuutu korkeuskaavioille joka näyttää etäisyyden, nousut ja laskut
+- Uusi: Näytä reittipisteiden koordinaatit reittipisteen ponnahdusikkunassa
+- Korjaus: Kartan pika-asetukset saattavat näyttää painikkeet "1"/"2" tyhjille reititysprofiileille kielen vaihtamisen jälkeen
+- Uusi: Laske puuttuvat korkeustiedot tuontiraidoista (jos korkeustiedot on ladattu)
+- Korjaus: Laattalatain pysähtyy tietyissä tilanteissa (vain OpenStreetMap-onlinekartat)
+- New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### Kätkön tiedot
 - New: Detect additional characters in formulas: –, ⋅, ×
 - New: Preserve timestamp of own logs on refreshing a cache
 - New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
-- New: Show owners' logs on "friends/own" tab
+- Uusi: Näytä omistajien lokit "ystävät/omat" välilehdessä
 - Change: "Friends/own" tab shows log counts for that tab instead of global counters
 - Change: Improved header in variable and waypoint tabs
 - Fix: Two "delete log" items shown
@@ -39,6 +53,14 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 - Fix: Missing quick toggle in guided mode of waypoint calculator
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
+- Fix: Crash on loading images embedded directly in listing text
+- New: Show own favorites in log view (Geocaching.com + offline logs)
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos
@@ -69,3 +91,10 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Use system-settings as default theme for new installations
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
 - New: Show undo bar when deleting caches from list from map
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
+- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector

@@ -188,7 +188,11 @@ public class CacheUtils {
      * Message may be empty if neither hint nor personal note is set.
      */
     @NonNull
-    public static Pair<CharSequence, CharSequence> getHintTitleAndMessage(@NonNull final Geocache cache) {
+    public static Pair<CharSequence, CharSequence> getHintTitleAndMessage(@Nullable final Geocache cache) {
+        if (cache == null) {
+            return Pair.create("", "");
+        }
+
         final List<String> titleList = new ArrayList<>();
         final List<String> messageList = new ArrayList<>();
 

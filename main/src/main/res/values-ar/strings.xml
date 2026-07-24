@@ -189,9 +189,6 @@
     <string name="err_read_pocket_query_list">خطأ في قراءة قائمة Pocket query.</string>
     <string name="info_log_posted">c:geo قام بنجاح بتقديم سجل زيارتك.</string>
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
-    <string name="info_log_post_failed">فشل في نشر سجل الزيارة.</string>
-    <string name="info_log_post_retry">أعد المحاولة</string>
-    <string name="info_log_post_save">حفظ في وضع عدم الاتصال</string>
     <string name="info_log_cleared">تم مسح سجل تسجيل الزيارة.</string>
     <string name="info_waypoint_coordinates_cleared">تم مسح الإحداثيات.</string>
     <string name="info_log_type_changed">تم تغيير نوع سجل الزيارة!</string>
@@ -285,6 +282,7 @@
     <string name="list_dialog_rename">أعد تسمية</string>
     <string name="list_not_available">القائمة لم تعد متوفرة، الانتقال إلى القائمة الموحدة</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">الإصدار</string>
     <string name="about_changelog">سجل التغييرات</string>
@@ -1025,5 +1023,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

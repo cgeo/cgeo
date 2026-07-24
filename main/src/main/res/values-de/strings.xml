@@ -234,10 +234,12 @@
     <string name="translate_external_label">Übersetze mit %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Webseite</string>
+    <string name="translate_external_variant_unavailable">Nicht verfügbar</string>
     <string name="translate_external_none">&lt;Keine&gt;</string>
     <string name="translate_external_app">Externe App</string>
     <string name="translate_external_google">Google Übersetzer</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Übersetzer</string>
     <string name="translate_length_warning">Die Übersetzung über eine Webseite kann bei langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -328,14 +330,13 @@
     <string name="err_read_bookmark_list">Fehler beim Lesen der Lesezeichenliste.</string>
     <string name="err_bookmark_list_overfull">Zu viele Caches</string>
     <string name="err_bookmark_list_overfull_description">In Lesezeichenlisten können nur bis zu 1000 Caches gespeichert werden, du versuchst mehr Caches der Liste hinzuzufügen.\n\nMöchtest du fortfahren und nur so viele Caches hinzufügen, wie die Liste halten kann?</string>
+    <string name="info_log_posting_background">Log wird gesendet…</string>
+    <string name="info_log_post_success">Log für %s erfolgreich gesendet</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
-    <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
+    <string name="info_log_post_failed_geocode">Senden des Logs für %s fehlgeschlagen.</string>
     <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
-    <string name="info_log_post_failed_simple_reason">Überprüfe, ob du korrekt angemeldet bist und eine funktionierende Internetverbindung hast.</string>
     <string name="info_log_delete_failed_simple_reason">Überprüfe, ob du korrekt eingeloggt bist, eine funktionierende Internetverbindung hast und das Log noch nicht gelöscht wurde.</string>
-    <string name="info_log_post_retry">Wiederholen</string>
-    <string name="info_log_post_save">Offline speichern</string>
     <string name="info_log_cleared">Log wurde geleert.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaten gelöscht.</string>
     <string name="info_log_type_changed">Logtyp wurde verändert!</string>
@@ -373,9 +374,8 @@
     <string name="translator_model_download_success">Übersetzungsmodell für %s heruntergeladen</string>
     <string name="translator_model_download_error">Fehler beim Herunterladen des Übersetzungsmodells %1$s: %2$s</string>
     <string name="translator_model">Übersetzungsmodell</string>
-    <string name="translator_tooltip">Offline-Übersetzung mit Google</string>
+    <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
-    <string name="translator_language_target_select">Zielsprache wählen</string>
     <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt. Tippen, um die Ausgangssprache auszuwählen.</string>
     <string name="translator_language_unknown">Die Sprache kann nicht erkannt werden. Tippen, um die Ausgangssprache auszuwählen.</string>
     <string name="translator_language_detected">Übersetze von \"%s\". Tippe um die Ausgangssprache auszuwählen.</string>
@@ -446,6 +446,7 @@
         <item quantity="one">%d Cache heruntergeladen</item>
         <item quantity="other">%d Caches heruntergeladen</item>
     </plurals>
+    <string name="caches_store_background_skipped">Offline-Caches übersprungen: %d</string>
     <string name="caches_history">Verlauf</string>
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
@@ -516,6 +517,14 @@
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_overwrite_offline_log">Offline-Log überschreiben</string>
     <string name="caches_overwrite_offline_log_question">Vorhandenes Offline-Log vom Typ \"%1$s\" mit seinem Logtext überschreiben?</string>
+    <string name="caches_warning_delete_user_data_others">Andere löschen</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d Cache enthält Benutzerdaten - diese gehen beim Löschen des Caches verloren.</item>
+        <item quantity="other">%1$d/%2$d Caches haben Benutzerdaten - diese gehen beim Löschen der Caches verloren.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Diese Aktion löscht alle Caches (%d) von deinem Gerät.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Andere entfernen</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d Caches sind nur auf dieser Liste. Entfernen dieser Caches aus der Liste wird sie von deinem Gerät löschen.</string>
     <string name="caches_show_attributes_all">Attributübersicht für alle Caches anzeigen</string>
     <string name="caches_show_attributes_selected">Attributübersicht für ausgewählte Caches anzeigen</string>
     <string name="caches_set_cache_icon">Cache-Symbol wählen</string>
@@ -524,6 +533,7 @@
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
+    <string name="caches_recalculate_health_score">Cache-Gesundheitswerte neu berechnen</string>
     <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
@@ -544,7 +554,7 @@
     <string name="list_menu_create">Neue Liste</string>
     <string name="list_menu_drop">Aktuelle Liste löschen</string>
     <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
-    <string name="list_menu_rename_list_prefix">Listenpräfix umbenennen</string>
+    <string name="list_menu_rename_parent_lists">Übergeordnete Listen umbenennen</string>
     <string name="rename_from">Umbenennen von</string>
     <string name="rename_to">Umbenennen nach</string>
     <string name="list_menu_import">Importieren</string>
@@ -573,7 +583,6 @@
     <string name="cache_filter_mode_advanced">Erweitert</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Wechsel zu einfacher Ansicht</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Der Wechsel zur einfachen Ansicht führt zum Verwerfen einiger Filtereinstellungen. Fortfahren?</string>
-    <string name="cache_filter_add_button">Filterkriterium hinzufügen</string>
     <string name="cache_filter_option_and_or">Benutze ODER statt UND</string>
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
@@ -608,7 +617,9 @@
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
     <string name="cache_filter_category">BC-Kategorie</string>
     <string name="cache_filter_tier">BC-Stufe</string>
-    <string name="cache_filter_named_filter">Benannter Filter</string>
+    <string name="cache_filter_health_score">Cache-Gesundheitswert</string>
+    <string name="cache_filter_health_score_include_unscored">Caches mit nicht bewertbaren Logs einschließen</string>
+    <string name="cache_filter_named_filter">Filter</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -629,17 +640,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_clear_button">Leeren</string>
-    <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_select_title">Filter auswählen</string>
-    <string name="cache_filter_storage_delete_title">Filter löschen</string>
-    <string name="cache_filter_storage_delete_message">Möchtest du diese Filterkonfiguration wirklich löschen?</string>
-    <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
-    <string name="cache_filter_storage_clear_title">Aktuellen Filter löschen</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
-    <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
-    <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>
-    <string name="cache_filter_storage_save_confirm_message">Ein Filter mit dem Namen \'%s\' und einer anderen Konfiguration existiert bereits. Überschreiben?</string>
-    <string name="cache_filter_storage_clear_message">Möchtest du den aktuellen Filter löschen?</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Suchtext</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
@@ -754,6 +755,30 @@
         <item>1M</item>
         <item>&gt;1M</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_activity_title">Filter</string>
+    <string name="cache_namedfilter_matching">Passende Filter</string>
+    <string name="named_filter_add">Filter hinzufügen</string>
+    <string name="named_filter_empty_hint">Keine Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
+    <string name="named_filter_activate_marker">mit Prio verwenden</string>
+    <string name="named_filter_enable_all_markers">Filter als Marker anwenden</string>
+    <string name="named_filter_markers_enabled">Marker aktiviert</string>
+    <string name="named_filter_markers_disabled">Marker deaktiviert</string>
+    <string name="named_filter_select_title">Filter auswählen</string>
+    <string name="named_filter_activate_deactivate_title">Marker aktivieren / deaktivieren</string>
+    <string name="named_filter_nofilter_label">(kein Filter — passt auf alle Caches)</string>
+    <string name="named_filter_save_as_title">Als Filter speichern</string>
+    <string name="named_filter_name_exists_title">Name existiert bereits</string>
+    <string name="named_filter_name_exists_message">Ein Filter mit dem Namen \'%s\' existiert bereits. Überschreiben?</string>
+    <string name="named_filter_config_exists_title">Filter bereits gespeichert</string>
+    <string name="named_filter_config_exists_message">Diese Filter-Konfiguration is bereits als \'%s\' gespeichert. Erneut unter neuem Namen speichern?</string>
+    <string name="named_filter_fill_with_named">Mit Filter füllen</string>
+    <string name="named_filter_priority_normal">Normal</string>
+    <string name="named_filter_priority_high">Hoch</string>
+    <string name="named_filter_priority_highest">Höchste</string>
+    <string name="named_filter_priority_low">Niedrig</string>
+    <string name="named_filter_priority_lowest">Niedrigste</string>
+    <string name="cache_filter_reference_based_on">Basierend auf: %1$s</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -1287,7 +1312,6 @@
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terrain</string>
-    <string name="map_source_osm_offline">Offline-Verwendung</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_nomap">Keine Karte</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
@@ -1455,6 +1479,7 @@
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_set_coordinates">Koordinaten festlegen</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
+    <string name="cache_personal_note_edit_pn">Persönliche Notiz bearbeiten</string>
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
     <string name="cache_menu_allowWaypointExtraction">Wegpunkte aus Notiz erlauben</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
@@ -1578,7 +1603,6 @@
     <string name="menu_collapse_log">Log einklappen</string>
     <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
-    <string name="cache_log_delete_reason">Grund (max. %d Zeichen)</string>
     <string name="cache_log_delete_reason_default">Log wurde mit c:geo gelöscht</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -1739,6 +1763,7 @@
     <string name="waypoint_coordinates">Koordinaten</string>
     <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
     <string name="waypoint_calculated_coordinates_global">Koordinate berechnen</string>
+    <string name="waypoint_select_from_map">Wähle auf Karte</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_my_coordinates_accuracy">Meine Koordinaten (±%s)</string>
@@ -1812,6 +1837,7 @@
     <string name="calccoord_select_variable">Variable wählen</string>
     <string name="calccoord_new_variable">**%s** *(neu)*</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
+    <string name="calccoord_convert_to_plain_error">Die Formel wird nicht zu gültigen Koordinaten ausgewertet.\nUmwandeln in einfache Koordinaten wird den Wegpunkt auf leere Koordinaten zurücksetzen.</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">\'x\' durch \'*\' ersetzen</string>
@@ -1850,8 +1876,15 @@
     <string name="formula_function_lettervalue">Buchstabenwortwert</string>
     <string name="formula_function_roman">Römisch nach Dezimal</string>
     <string name="formula_function_vanity">Vanity-Code</string>
+    <string name="formula_function_add">Hinzufügen</string>
+    <string name="formula_function_multiply">Multiplizieren</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Anzahl</string>
+    <string name="formula_function_average">Durchschnitt</string>
     <string name="formula_function_group_simplenumeric">Einfache numerische Funktionen</string>
     <string name="formula_function_group_complexnumeric">Komplexe numerische Funktionen</string>
+    <string name="formula_function_group_aggregatenumeric">Numerisch zusammenfassen</string>
     <string name="formula_function_group_simplestring">Einfache Zeichenfunktionen</string>
     <string name="formula_function_group_complexstring">Komplexe Zeichenfunktionen</string>
     <string name="formula_error_unexpectedtoken">Erwartet \'%1$s\'</string>
@@ -2372,6 +2405,11 @@
     <string name="trackable_log_without_geocode">Du bist gerade dabei, ein Log ohne Geocode zu senden. Es wird empfohlen, immer einen Geocode anzugeben. Möchtest du einen hinzufügen?</string>
     <string name="do_not_ask_me_again">Nicht wieder nachfragen</string>
     <string name="geokrety_parsing_failed">Konnte die Antwort von GeoKrety.org nicht analysieren.</string>
+    <string name="command_remove_caches_from_list_progress">Caches werden entfernt</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">%d Cache entfernt</item>
+        <item quantity="other">%d Caches entfernt</item>
+    </plurals>
     <string name="command_move_caches_progress">Verschiebe Caches zu Liste %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d Cache verschoben</item>
@@ -2403,6 +2441,10 @@
         <item quantity="one">%d Cache-Symbol gespeichert</item>
         <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Neuberechnung der Cache-Gesundheitswerte…</string>
+    <string name="command_recalculate_health_score_result">Cache-Gesundheitswerte neu berechnet: %d</string>
+    <string name="log_health_score_explanation_title">Cache-Gesundheitswert</string>
+    <string name="log_health_score_explanation">Der Cache-Gesundheitswert wird entweder aus maximal %1$s Log-Einträgen oder bis einer der folgenden Log-Typen gefunden wird berechnet: \n%2$s\n\nEr wird wie folgt berechnet: \n`(Summe der Gewichte von guten Logs) / (Summe der Gewichte von guten und schlechten Logs)`\n\n**Gute Logs** sind: \n%3$s \n\n**Schlechte Logs** sind:\n%4$s \n\nLogs werden nach ihrem Alter gewichtet (neue Logs haben ein höheres Gewicht).</string>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
     <string name="live_map_status_http429">Bitte langsamer, zu viele Anfragen an %s</string>
     <string name="live_map_status_error">Fehler beim Laden der Kartendaten: %s</string>
@@ -2443,7 +2485,7 @@
     <string name="preference_colorpicker_show_width">Breite: %d</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
-    <string name="number_input_title">Wert festlegen</string>
+    <string name="number_input_title_short">Wert festlegen</string>
     <string name="number_input_range">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
@@ -2457,6 +2499,8 @@
     <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
     <string name="notification_channel_cache_download_name">Cache Downloader</string>
     <string name="notification_channel_cache_download_description">Ergebnisbenachrichtigung für Cache Downloads</string>
+    <string name="notification_channel_log_name">Log senden</string>
+    <string name="notification_channel_log_description">Fortschritts- und Fehlermeldungen für das Senden von Cache-Logs</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
     <string name="individual_route">Individuelle Route</string>
@@ -2611,7 +2655,7 @@
     <string name="check_hillshading_found">Daten für Kartenschattierung bereits vorhanden</string>
     <string name="check_hillshading_missing">Fehlende Daten für Kartenschattierung:</string>
     <string name="check_hillshading_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Daten zur Kartenschattierung verfügbar</string>
-    <string name="check_hillshading_tiles_menu">Auf fehlende Daten für Kartenschattierung prüfen</string>
+    <string name="check_hillshading_tiles_menu">Auf fehlende Höhendaten prüfen</string>
     <string name="mapupdate_info">Tippe hier, um nach Aktualisierungen von Karten- und Design-Dateien zu suchen. Lange Tippen um später erinnert zu werden.</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
     <string name="updates_check">Prüfe auf Aktualisierungen</string>
@@ -2828,13 +2872,4 @@
     <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
     <string name="dbi_search_title">Suche nach</string>
     <string name="dbi_search_columnSelection">Beschränken auf</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Zuletzt verwendet</string>
-    <string name="emoji_category_symbols">Symbole</string>
-    <string name="emoji_category_dots">Punkte</string>
-    <string name="emoji_category_places">Orte</string>
-    <string name="emoji_category_food">Essen &amp; Trinken</string>
-    <string name="emoji_category_activity">Aktivität</string>
-    <string name="emoji_category_people">Personen</string>
-    <string name="emoji_category_numbers">Zahlen</string>
 </resources>

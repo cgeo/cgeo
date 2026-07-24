@@ -220,9 +220,6 @@
     <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
     <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
     <string name="info_log_saved">c:geo huet de Log erfollegräich gespäichert.</string>
-    <string name="info_log_post_failed">Publizéieren vum Log feelgeschloen.</string>
-    <string name="info_log_post_retry">Nees probéieren</string>
-    <string name="info_log_post_save">Offline späicheren</string>
     <string name="info_log_cleared">Log ass geläscht.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaten si geläscht.</string>
     <string name="info_log_type_changed">Den Typ vu Log huet geännert!</string>
@@ -327,6 +324,7 @@
     <string name="list_dialog_rename">Ëmbenennen</string>
     <string name="list_not_available">D\'Lëscht ass net méi disponibel. D\'Standard-Lëscht gëtt nees agefouert</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versioun</string>
     <string name="about_changelog">Ännerungshiwäiser</string>
@@ -576,5 +574,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

@@ -1,6 +1,12 @@
-Edge to Edge (od krawędzi do krawędzi): Ze względu na zasady Sklepu Play, zaktualizowaliśmy poziom API Androida w tej wersji celów c:geo + zmieniliśmy niektóre z zasad układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
+### Ogólne informacje o wydaniu
 
-Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
+**Od krawędzi do krawędzi**
+
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
+
+**Starsze mapy**
+
+Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
 - Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
 - Wyskakujące okienko klastra dla Google Maps
 - Ukrywanie źródeł map, których nie potrzebujesz
@@ -20,6 +26,14 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
 - Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
 - Nowość: Zezwalaj na importowanie plików KML jako ścieżek (np. trasa przedmiotu podróżnego)
+- Nowość: Możliwość ustawienia ikony skrytki, nawet jeśli skrytka nie jest jeszcze zapisana
+- Nowość: Infoboks dla wykresu wysokości ukazującego pozostały dystans, podejścia, zejścia
+- Nowość: Wyświetlanie współrzędnych punktów nawigacji w wyskakującym okienku punktu nawigacji
+- Naprawiono: Szybkie ustawienia mapy mogły pokazywać przyciski "1"/"2" dla pustych profili routingu po zmianie języka
+- Nowość: Oblicz brakujące dane wysokości na zaimportowanych ścieżkach (jeśli pobierane są dane wysokości)
+- Naprawiono: W pewnych sytuacjach pobierania kafelków zatrzymywało się (tylko mapy online OpenStreetMap)
+- Nowość: Warunkowe znaczniki skrytki
+- Nowość: Pokaż wskazówkę nawigacji (strzałka + odległość)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -39,6 +53,14 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
 - Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
 - Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
+- Naprawiono: Nieprawidłową obsługę statusu DNF dla platform opencaching
+- Nowość: Usuwanie logowania offline po scaleniu z dziennikiem online
+- Nowość: Pokaż potwierdzenie podczas usuwania skrytek z logowaniami offline
+- Nowość: Pokaż potwierdzenie podczas usuwania wszystkich skrytek z listy „Wszystkie”
+- Nowość: Zezwalaj na formatowanie Markdown dla tekstu opisu w skrytkach zdefiniowanych przez użytkownika
+- Zmiana: Zapisz skrytkę przed dodaniem obrazu użytkownika
+- Naprawiono: Awaria przy wczytywaniu obrazów osadzonych bezpośrednio w opisie skrytki
+- Nowość: Pokaż własne ulubione w widoku dziennika (Geocaching.com + dzienniki offline)
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -69,3 +91,10 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Zmiana: Użyj ustawień systemowych jako domyślnego motywu dla nowych instalacji
 - Nowość: Eksport GPX: Zapisz adnotacje GSAK Lat/LonBeforeCorrect podczas eksportowania oryginalnych punktów nawigacji
 - Nowość: Pokaż pasek cofania podczas usuwania skrytek z listy z mapy
+- Naprawiono: Awarie w filtrowaniu ulubionych wg procentów
+- Nowość: Łatwiejsze korzystanie z prostych list jako list nadrzędnych
+- Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
+- Naprawiono: Niektóre teksty ignorowały zmianę języka
+- Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
+- Zmiana: Moduł tłumaczenia offline Bergamot (open source) zastępuje Google ML Kit (closed-source)
+- Zmiana: Nowy selektor emoji

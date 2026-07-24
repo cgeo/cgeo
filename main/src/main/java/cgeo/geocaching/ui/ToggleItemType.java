@@ -26,7 +26,7 @@ public enum ToggleItemType {
             R.string.cache_menu_speechDeactivate, R.string.cache_menu_speechActivate, R.string.talking_enabled, R.string.talking_disabled),
     WAYPOINTS_FROM_NOTE(-1, -1, R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote,
             R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote),
-    NAMED_FILTERS(R.drawable.ic_menu_marker, R.drawable.ic_menu_marker_off,
+    NAMED_FILTERS(R.drawable.ic_menu_myfilters, R.drawable.ic_menu_myfilters_off,
             R.string.named_filter_activity_title, R.string.named_filter_activity_title, R.string.named_filter_markers_enabled, R.string.named_filter_markers_disabled);
 
     @DrawableRes

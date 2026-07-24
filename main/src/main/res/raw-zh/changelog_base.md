@@ -1,6 +1,12 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+### General release notes
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. 可能会带来一些未知的副作用，特别是在一些新的安卓版本上。 If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
 - Map rotation for OpenStreetMap based maps (online + offline)
 - Cluster popup for Google Maps
 - Hide map sources you don't need
@@ -12,7 +18,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 ### 地图
 - New: Route optimization caches calculated data
 - New: Enabling live mode keeps waypoints of currently set target visible
-- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
+- New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Show generated waypoints on map
 - New: Download caches ordered by distance
 - Fix: Doubling of individual route items
@@ -20,6 +26,14 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 - New: Allow importing KML files as tracks (eg: trackable itinerary)
+- New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- New: Display coordinates of waypoints in waypoint popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### 藏点详细信息
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -39,15 +53,23 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 - Fix: Missing quick toggle in guided mode of waypoint calculator
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
+- Fix: Crash on loading images embedded directly in listing text
+- New: Show own favorites in log view (Geocaching.com + offline logs)
 
 ### Wherigo player
-- New: Offline translation for Wherigos
+- New: Offline translation of listing text and logs (experimental)
 - New: Improved button handling
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### 通用
-- New: Share option after logging a cache
+- New: Option to share cache with user data (coordinates, personal note)
 - Change: Do not show "needs maintenance" or "needs archived" options for own caches
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
 - Change: Removed references to Twitter
@@ -69,3 +91,10 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Use system-settings as default theme for new installations
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
 - New: Show undo bar when deleting caches from list from map
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
+- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector

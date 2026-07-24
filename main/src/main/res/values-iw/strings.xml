@@ -195,9 +195,6 @@
     <string name="err_read_pocket_query_list">שגיאה בקריאת רשימת Pocket Query.</string>
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
-    <string name="info_log_post_failed">פירסום הלוג נכשל.</string>
-    <string name="info_log_post_retry">נסה שנית</string>
-    <string name="info_log_post_save">שמור באופן לא מקוון</string>
     <string name="info_log_cleared">הלוג נוקה.</string>
     <string name="info_waypoint_coordinates_cleared">קואורדינטות נמחקו.</string>
     <string name="info_log_type_changed">סוג הלוג השתנה!</string>
@@ -292,6 +289,7 @@
     <string name="list_dialog_rename">שנה שם</string>
     <string name="list_not_available">הרשימה לא זמינה יותר. עובר לרשימה הסטנדרטית</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">גירסה</string>
     <string name="about_changelog">יומן שינויים</string>
@@ -461,5 +459,4 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>
