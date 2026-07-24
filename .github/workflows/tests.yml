@@ -25,15 +25,32 @@ permissions:
   pull-requests: write
 
 jobs:
+  # Any new commit pushed to a fork PR invalidates the previous review: strip the label
+  # so privileged jobs below cannot auto-run against unreviewed code, and ask for re-review.
+  # See the "labeled"-only condition on all privileged jobs below for the enforcement side.
+  revoke-label-on-new-commit:
+    if: >
+      github.event_name == 'pull_request_target' &&
+      github.event.action == 'synchronize' &&
+      github.event.pull_request.head.repo.full_name != github.repository &&
+      contains(github.event.pull_request.labels.*.name, 'ok-to-test')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove ok-to-test label and request re-review
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr edit "$PR_NUMBER" --remove-label ok-to-test
+          gh pr comment "$PR_NUMBER" --body "A new commit was pushed to this pull request. The \`ok-to-test\` label has been removed: privileged CI jobs (secrets, write-scoped token) will not run until a maintainer reviews the new commit and re-applies the \`ok-to-test\` label."
+
   check-websites:
     if: >
       github.event_name != 'pull_request_target' ||
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
-        (
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-        )
+        github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
       )
     runs-on: ubuntu-latest
     steps:
@@ -52,8 +69,7 @@ jobs:
         github.event.pull_request.head.repo.full_name != github.repository &&
         (
           github.event.action == 'opened' || github.event.action == 'reopened' ||
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test')
         )
       )
     runs-on: ubuntu-latest
@@ -121,10 +137,7 @@ jobs:
       github.event_name != 'pull_request_target' ||
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
-        (
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-        )
+        github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
       )
     runs-on: ubuntu-latest
     outputs:
@@ -159,10 +172,7 @@ jobs:
       github.event_name != 'pull_request_target' ||
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
-        (
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-        )
+        github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
       )
     runs-on: ubuntu-latest
     needs: check-secrets
@@ -172,8 +182,19 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      # The PR head may have modified this (or any other) local composite action; resolving it from
+      # the PR's own checkout would run attacker-controlled code with access to all secrets below.
+      # Pin it to the base branch instead, checked out to a separate path.
+      - name: Checkout trusted composite actions from base branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: .github-trusted
+          sparse-checkout: |
+            .github/actions
+
       - name: Setup cgeo preferences and keystore
-        uses: ./.github/actions/cgeo-preferences
+        uses: ./.github-trusted/.github/actions/cgeo-preferences
         with:
           KEY_STORE: ${{ secrets.KEY_STORE }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -244,10 +265,7 @@ jobs:
       github.event_name != 'pull_request_target' ||
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
-        (
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-        )
+        github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
       )
     runs-on: ubuntu-latest
     needs: check-secrets
@@ -257,8 +275,18 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      # See the same step in the checkstyle job: pin local composite actions to the base
+      # branch so a fork PR cannot rewrite them to exfiltrate the secrets passed below.
+      - name: Checkout trusted composite actions from base branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: .github-trusted
+          sparse-checkout: |
+            .github/actions
+
       - name: Setup cgeo preferences and keystore
-        uses: ./.github/actions/cgeo-preferences
+        uses: ./.github-trusted/.github/actions/cgeo-preferences
         with:
           KEY_STORE: ${{ secrets.KEY_STORE }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -333,10 +361,7 @@ jobs:
         github.event_name != 'pull_request_target' ||
         (
           github.event.pull_request.head.repo.full_name != github.repository &&
-          (
-            (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-          )
+          github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
         )
       )
     # > It is now recommended to use the Ubuntu (ubuntu-latest) runners which
@@ -361,8 +386,18 @@ jobs:
             sudo udevadm control --reload-rules
             sudo udevadm trigger --name-match=kvm
 
+      # See the same step in the checkstyle job: pin local composite actions to the base
+      # branch so a fork PR cannot rewrite them to exfiltrate the secrets passed below.
+      - name: Checkout trusted composite actions from base branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: .github-trusted
+          sparse-checkout: |
+            .github/actions
+
       - name: Setup cgeo preferences and keystore
-        uses: ./.github/actions/cgeo-preferences
+        uses: ./.github-trusted/.github/actions/cgeo-preferences
         with:
           KEY_STORE: ${{ secrets.KEY_STORE }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -528,10 +563,7 @@ jobs:
         github.event_name != 'pull_request_target' ||
         (
           github.event.pull_request.head.repo.full_name != github.repository &&
-          (
-            (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
-          )
+          github.event.action == 'labeled' && github.event.label.name == 'ok-to-test'
         )
       )
     runs-on: ubuntu-latest
