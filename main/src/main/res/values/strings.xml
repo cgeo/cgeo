@@ -439,6 +439,8 @@
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bookmark lists</string>
     <string name="list_own_unpublished_caches">Own Unpublished Caches</string>
+    <string name="own_unpublished_new_draft">New draft</string>
+    <string name="own_unpublished_show_on_live_map">Show on live map</string>
     <string name="menu_invert_order">Invert order</string>
 
     <!-- main screen -->
