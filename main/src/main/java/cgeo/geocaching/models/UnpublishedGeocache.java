@@ -1,9 +1,14 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.utils.Log;
+
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A {@link Geocache} that is known to be one of the owner's own caches which is not (yet, or no longer)
@@ -30,5 +35,13 @@ public class UnpublishedGeocache extends Geocache {
                 Log.e("UnpublishedGeocache: could not copy field '" + field.getName() + "' from source cache", e);
             }
         }
+    }
+
+    @Override
+    @NonNull
+    public List<StatusCode> getStatusCodes() {
+        final List<StatusCode> codes = new ArrayList<>(super.getStatusCodes());
+        codes.add(StatusCode.UNPUBLISHED_CACHE);
+        return codes;
     }
 }
