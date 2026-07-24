@@ -50,8 +50,18 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
     /** per-log (temporary) translation status, keyed by log instance so each log toggles independently */
     private final Map<LogEntry, OfflineTranslateUtils.Status> translationStatusByLog = new IdentityHashMap<>();
 
+    /** lazily created, reused for the lifetime of the activity to avoid stacking up progress dialogs on repeated log deletions */
+    private LogActivityHelper logActivityHelper;
+
     private OfflineTranslateUtils.Status getTranslationStatus(final LogEntry log) {
         return translationStatusByLog.computeIfAbsent(log, l -> new OfflineTranslateUtils.Status());
+    }
+
+    private LogActivityHelper getLogActivityHelper(final AbstractActionBarActivity activity) {
+        if (logActivityHelper == null) {
+            logActivityHelper = new LogActivityHelper(activity);
+        }
+        return logActivityHelper;
     }
 
     @Override
@@ -173,7 +183,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 if (LogUtils.canDeleteLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
-                        it -> new LogActivityHelper(activity)
+                        it -> getLogActivityHelper(activity)
                             .setLogResultConsumer((type, result) -> {
                                 if (!result.isOk()) {
                                     SimpleDialog.of(activity)
