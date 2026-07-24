@@ -18,7 +18,7 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider implements 
     final int mapType;
 
     AbstractGoogleTileProvider(final int mapType, final @StringRes int nameRes) {
-        super(2, 21, new Pair<>("", false));
+        super(999, 0, new Pair<>("", false));
         this.mapType = mapType;
         this.tileProviderName = LocalizationUtils.getString(nameRes);
         this.supportsThemeOptions = true;
