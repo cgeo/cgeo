@@ -800,6 +800,16 @@ public class Geocache implements INamedGeoCoordinate {
         return !isDisabled() && !isArchived();
     }
 
+    /**
+     * Status codes that apply to this specific cache instance, on top of whatever the regular archived/disabled/etc.
+     * flags already express. The base implementation always returns an empty list; specialized subclasses (e.g.
+     * {@link UnpublishedGeocache}) can add their own.
+     */
+    @NonNull
+    public List<StatusCode> getStatusCodes() {
+        return Collections.emptyList();
+    }
+
     public boolean isPremiumMembersOnly() {
         return BooleanUtils.isTrue(premiumMembersOnly);
     }
