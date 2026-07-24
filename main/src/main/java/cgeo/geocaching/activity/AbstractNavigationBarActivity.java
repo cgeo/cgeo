@@ -6,6 +6,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
+import cgeo.geocaching.OwnUnpublishedCachesActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
 import cgeo.geocaching.SearchResult;
@@ -149,6 +150,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
             if (selectedListId == PseudoList.HISTORY_LIST.id) {
                 startActivity(CacheListActivity.getHistoryIntent(this));
+            } else if (selectedListId == PseudoList.OWN_UNPUBLISHED_LIST.id) {
+                startActivity(new Intent(this, OwnUnpublishedCachesActivity.class));
             } else {
                 Settings.setLastDisplayedList(selectedListId);
                 startActivity(CacheListActivity.getActivityOfflineIntent(this));

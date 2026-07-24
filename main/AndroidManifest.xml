@@ -439,6 +439,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".OwnUnpublishedCachesActivity"
+            android:label="@string/list_own_unpublished_caches">
+        </activity>
+        <activity
             android:name=".unifiedmap.UnifiedMapActivity"
             android:label="@string/map_map"
             android:windowSoftInputMode="adjustNothing">
