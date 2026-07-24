@@ -1814,6 +1814,8 @@
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Premium Members only</string>
+    <string name="cache_status_unpublished">Unpublished</string>
+    <string name="cache_status_awaiting_publication">Awaiting Publication</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Set cache name</string>
