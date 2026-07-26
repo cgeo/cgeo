@@ -61,6 +61,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Changement: Stocker le cache avant d'ajouter une image utilisateur
 - Correction : Crash lors du chargement des images intégrées directement dans le texte de la liste
 - Nouveau : Afficher ses propres favoris dans la vue des logs (Geocaching.com + logs hors-ligne)
+- New: Sending log is done in background
 
 ### Wherigo Player
 - Nouveau : Traduction hors ligne pour les caches Wherigo
