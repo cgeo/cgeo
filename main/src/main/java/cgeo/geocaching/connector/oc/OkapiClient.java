@@ -31,6 +31,7 @@ import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.RatingGeocacheFilter;
+import cgeo.geocaching.filters.core.SelfOwnedGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
@@ -444,6 +445,15 @@ final class OkapiClient {
                 // If uuid ==null then user is not known on oc platform.
                 // In that case, set a nonexisting uuid so the search will return no result
                 valueMap.put("owner_uuid", uuid == null ? "unknown-user" : uuid);
+                break;
+            case SELF_OWNED:
+                // Get the owner name for this specific OC connector
+                final String ownName = SelfOwnedGeocacheFilter.getOwnerNameForConnector(connector);
+                if (StringUtils.isNotEmpty(ownName)) {
+                    final String ownUuid = getUserUUID(connector, ownName);
+                    valueMap.put("owner_uuid", ownUuid == null ? "unknown-user" : ownUuid);
+                }
+                // If ownName is empty (user not logged in), don't add any filter criterion
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;

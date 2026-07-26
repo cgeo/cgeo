@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.SelfOwnedGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.StringFilter;
@@ -39,6 +40,8 @@ import androidx.annotation.WorkerThread;
 import java.util.List;
 import java.util.Map;
 import static java.lang.Boolean.FALSE;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GCMap {
 
@@ -127,7 +130,7 @@ public class GCMap {
 
         final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
         for (BaseGeocacheFilter baseFilter : filterAndChain) {
-            fillForBasicFilter(baseFilter, search);
+            fillForBasicFilter(baseFilter, search, connector);
         }
 
         search.setSort(GCWebAPI.WebApiSearch.SortType.getByCGeoSortType(sort.getEffectiveType()), sort.isEffectiveAscending());
@@ -136,7 +139,7 @@ public class GCMap {
 
     }
 
-    private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
+    private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search, final IConnector connector) {
         switch (basicFilter.getType()) {
             case TYPE:
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
@@ -176,8 +179,8 @@ public class GCMap {
                 search.setTerrain(((TerrainGeocacheFilter) basicFilter).getMinRangeValue(), ((TerrainGeocacheFilter) basicFilter).getMaxRangeValue());
                 break;
             case DIFFICULTY_TERRAIN:
-                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, search);
-                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, search);
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, search, connector);
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, search, connector);
                 break;
             case DIFFICULTY_TERRAIN_MATRIX:
                 final DifficultyTerrainMatrixGeocacheFilter matrixFilter = (DifficultyTerrainMatrixGeocacheFilter) basicFilter;
@@ -190,6 +193,12 @@ public class GCMap {
                 break;
             case OWNER:
                 search.setHiddenBy(((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                break;
+            case SELF_OWNED:
+                final String ownUsername = SelfOwnedGeocacheFilter.getOwnerNameForConnector(connector);
+                if (StringUtils.isNotEmpty(ownUsername)) {
+                    search.setHiddenBy(ownUsername);
+                }
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
