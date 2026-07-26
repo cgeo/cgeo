@@ -61,6 +61,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Ändra: Lagra cache innan du lägger till användarbild
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
+- New: Sending log is done in background
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
