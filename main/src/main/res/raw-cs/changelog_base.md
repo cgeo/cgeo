@@ -61,6 +61,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Změna: Uložení kešky před přidáním obrázku uživatele
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
+- New: Sending log is done in background
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
