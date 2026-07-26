@@ -97,6 +97,15 @@ public class ListenerHelper<T> {
         }
     }
 
+    public int size() {
+        lock.readLock().lock();
+        try {
+            return listeners.size();
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
     @NonNull
     @Override
     public String toString() {
