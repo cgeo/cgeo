@@ -38,12 +38,19 @@ import androidx.annotation.NonNull;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
     private static final String PARAM_WHERIGO_GEOCODE = "wherigo_geocode";
+
+    private static final AtomicInteger LIVE_INSTANCE_COUNT = new AtomicInteger(0);
+
+    public static int getLiveInstanceCount() {
+        return LIVE_INSTANCE_COUNT.get();
+    }
 
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
@@ -81,19 +88,14 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LIVE_INSTANCE_COUNT.incrementAndGet();
 
         Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS);
-
-        this.wherigoListenerId = WherigoGame.get().addListener(this::refreshGui);
-        this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui());
 
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
 
         wherigoThingTypeModel = WherigoViewUtils.createThingTypeTable(this, binding.wherigoThingTypeList, thing -> WherigoViewUtils.displayThing(this, thing, false));
-
-        refreshGui(null);
-        refreshMusicGui();
 
         binding.viewCartridges.setOnClickListener(v -> startGame());
         binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
@@ -314,10 +316,25 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     @Override
-    public final void onDestroy() {
-        super.onDestroy();
+    public final void onResume() {
+        super.onResume();
+        this.wherigoListenerId = WherigoGame.get().addListener(this::refreshGui);
+        this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui());
+        refreshGui(null);
+        refreshMusicGui();
+    }
+
+    @Override
+    public final void onPause() {
         WherigoGame.get().removeListener(wherigoListenerId);
         WherigoGame.get().getAudioManager().removeListener(wherigoAudioManagerListenerId);
+        super.onPause();
+    }
+
+    @Override
+    public final void onDestroy() {
+        LIVE_INSTANCE_COUNT.decrementAndGet();
+        super.onDestroy();
     }
 
 }

@@ -150,7 +150,10 @@ public class WherigoCartridgeInfo {
             if (guidFilter != null && !guidFilter.test(getGuid(candidate))) {
                 continue;
             }
-            result.add(new WherigoCartridgeInfo(candidate, true, false));
+            final WherigoCartridgeInfo ciCandidate = new WherigoCartridgeInfo(candidate, true, false);
+            if (ciCandidate.getCartridgeFile() != null) {
+                result.add(ciCandidate);
+            }
         }
         return result;
     }
