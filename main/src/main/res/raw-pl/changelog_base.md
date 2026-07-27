@@ -61,6 +61,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Zmiana: Zapisz skrytkę przed dodaniem obrazu użytkownika
 - Naprawiono: Awaria przy wczytywaniu obrazów osadzonych bezpośrednio w opisie skrytki
 - Nowość: Pokaż własne ulubione w widoku dziennika (Geocaching.com + dzienniki offline)
+- Nowość: Wysyłanie wpisu jest wykonywane w tle
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo

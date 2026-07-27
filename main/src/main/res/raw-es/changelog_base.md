@@ -61,6 +61,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Cambio: Almacena el caché antes de añadir la imagen del usuario
 - Corregido: Fallo en las imágenes que cargan directamente incrustadas en la descripción
 - Nuevo: Muestra tus propios favoritos en la vista del registro (Geocaching.com + registros sin conexión)
+- New: Sending log is done in background
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos

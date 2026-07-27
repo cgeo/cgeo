@@ -61,6 +61,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Alteração: Armazenar cache antes de adicionar imagem do utilizador
 - Correção: Falha ao carregar imagens incorporadas directamente no texto da descrição
 - Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
+- New: Sending log is done in background
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos

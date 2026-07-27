@@ -61,6 +61,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - Change: Store cache before adding user image
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
+- New: Sending log is done in background
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos
