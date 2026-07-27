@@ -61,7 +61,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Änderung: Cache wird beim Hinzufügen von benutzerdefinierten Bildern gespeichert
 - Korrektur: Absturz beim Laden von Bildern, die direkt in den Text eingebettet sind
 - Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
-- New: Sending log is done in background
+- Neu: Das Senden eines Cachelogs erfolgt im Hintergrund
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
