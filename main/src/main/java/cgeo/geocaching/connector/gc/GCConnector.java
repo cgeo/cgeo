@@ -73,6 +73,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static final String SEARCH_CONTEXT_SORT = "sc_gc_sort";
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
     public static final String SEARCH_CONTEXT_BOOKMARK = "sc_gc_bm_id";
+    public static final String SEARCH_CONTEXT_SPECIAL_LIST = "sc_gc_special_list";
 
     @NonNull
     private static final String GC_BASE_URL = "https://www.geocaching.com/";
@@ -247,6 +248,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (StringUtils.isNotEmpty(bmGuid)) {
             final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
             return GCParser.searchByBookmarkList(this, bmGuid, alreadyTook);
+        }
+
+        // Special lists (ignored / favorites) are likewise limited and can be paged through without a filter
+        final String specialListCode = context.getString(SEARCH_CONTEXT_SPECIAL_LIST);
+        if (StringUtils.isNotEmpty(specialListCode)) {
+            final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
+            return GCParser.searchBySpecialList(this, specialListCode, alreadyTook);
         }
 
         final String filterConfig = context.getString(SEARCH_CONTEXT_FILTER);
