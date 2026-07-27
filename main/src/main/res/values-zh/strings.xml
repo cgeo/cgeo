@@ -408,7 +408,7 @@
     <string name="caches_more_caches_no">没有更多藏点</string>
     <string name="caches_more_caches_currently">当前</string>
     <plurals name="caches_more_caches_next_x">
-        <item quantity="other">加载接下来的 %1$d 藏点</item>
+        <item quantity="other">加载接下来的 %1$d 个藏点</item>
     </plurals>
     <string name="caches_more_caches_all_remaining">载入剩余的藏点</string>
     <string name="caches_store_offline">离线存储</string>
