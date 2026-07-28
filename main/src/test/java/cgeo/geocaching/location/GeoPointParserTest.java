@@ -373,6 +373,23 @@ public class GeoPointParserTest {
     }
 
     @Test
+    public void test8713() {
+        // decimal degrees with trailing hemisphere (e.g. mapy.cz): "50.3481209N, 7.0445565E"
+        final Geopoint ref = new Geopoint(50.3481209, 7.0445565);
+        assertGeopointEquals(GeopointParser.parse("50.3481209N, 7.0445565E"), ref, 1e-6f);
+        // without space after the comma separator
+        assertGeopointEquals(GeopointParser.parse("50.3481209N,7.0445565E"), ref, 1e-6f);
+        // with a space before the hemisphere letter
+        assertGeopointEquals(GeopointParser.parse("50.3481209 N, 7.0445565 E"), ref, 1e-6f);
+        // with degree sign
+        assertGeopointEquals(GeopointParser.parse("50.3481209°N, 7.0445565°E"), ref, 1e-6f);
+        // German "O" (Ost) equals East
+        assertGeopointEquals(GeopointParser.parse("50.3481209N, 7.0445565O"), ref, 1e-6f);
+        // southern and western hemisphere yield negative values
+        assertGeopointEquals(GeopointParser.parse("50.3481209S, 7.0445565W"), new Geopoint(-50.3481209, -7.0445565), 1e-6f);
+    }
+
+    @Test
     public void parseMultipleCoordinatesWithCorrectStartEndPositions() {
         final String initalText = "@n1 (W) N48 01.194 E011 43.814\n" +
                 "@n2 (W) N48 01.194 E011 43.814";

@@ -99,3 +99,4 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
 - Change: New emoji selector
+- New: Support parsing coordinates with trailing hemisphere (e.g. mapy.cz "50.3481209N, 7.0445565E")
