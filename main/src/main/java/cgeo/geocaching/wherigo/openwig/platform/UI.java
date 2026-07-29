@@ -1,13 +1,11 @@
-/*
- File initially copied to c:geo from https://github.com/cgeo/openWIG in April 2025.
- Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package cz.matejcik.openwig.platform
- */
 package cgeo.geocaching.wherigo.openwig.platform;
 
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
 
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
+
+import androidx.annotation.Nullable;
 
 /** API for interaction with users from within Wherigo game.
  * <p>
@@ -20,13 +18,25 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
  * to reflect changes performed by Lua script.
  */
 public interface UI {
-    // showScreen codes
-    public static final int MAINSCREEN = 0;
-    public static final int DETAILSCREEN = 1;
-    public static final int INVENTORYSCREEN = 2;
-    public static final int ITEMSCREEN = 3;
-    public static final int LOCATIONSCREEN = 4;
-    public static final int TASKSCREEN = 5;
+
+    /** Screen identifiers for {@link #showScreen(Screen, EventTable)}.
+     * The {@link #ordinal()} value matches the Wherigo protocol constants used by the Lua VM.
+     */
+    enum Screen {
+        MAINSCREEN,
+        DETAILSCREEN,
+        INVENTORYSCREEN,
+        ITEMSCREEN,
+        LOCATIONSCREEN,
+        TASKSCREEN;
+
+        /** Returns the {@code Screen} whose {@link #ordinal()} equals {@code id}, or {@code null} if unknown. */
+        @Nullable
+        public static Screen fromId(final int id) {
+            final Screen[] values = values();
+            return id >= 0 && id < values.length ? values[id] : null;
+        }
+    }
 
     /** Forces screen update for items that might have been changed.
      * Called after every Lua event that might have changed data
@@ -115,13 +125,13 @@ public interface UI {
 
     /** Shows a specified screen
      * <p>
-     * The screen specified by screenId should be made visible.
+     * The screen specified by screen should be made visible.
      * If a dialog or an input is open, it must be closed before
      * showing the screen.
-     * @param screenId the screen to be shown
-     * @param details if screenId is DETAILSCREEN, details of this object will be displayed
+     * @param screen the screen to be shown
+     * @param details if screen is {@link Screen#DETAILSCREEN}, details of this object will be displayed
      */
-    public void showScreen (int screenId, EventTable details);
+    public void showScreen (Screen screen, EventTable details);
 
     /** Plays a sound asynchronously
      * <p>
@@ -155,3 +165,4 @@ public interface UI {
      */
     public void command(String cmd);
 }
+
