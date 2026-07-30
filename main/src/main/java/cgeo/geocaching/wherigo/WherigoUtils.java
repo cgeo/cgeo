@@ -282,6 +282,30 @@ public final class WherigoUtils {
         }
     }
 
+    public static byte[] getFileSafe(final CartridgeFile cartridgeFile, final int oid) {
+        if (cartridgeFile == null) {
+            return null;
+        }
+        try {
+            return cartridgeFile.getFile(oid);
+        } catch (Exception e) {
+            Log.w("WHERIGO: Couldn't read file with oid " + oid + " from cartridge " + cartridgeFile.name, e);
+            return null;
+        }
+    }
+
+    public static byte[] getMediaFileSafe(final Media media) {
+        if (media == null) {
+            return null;
+        }
+        try {
+            return Engine.mediaFile(media);
+        } catch (Exception e) {
+            Log.w("WHERIGO: Couldn't read file from media " + media, e);
+            return null;
+        }
+    }
+
     public static Drawable getDrawableForImageData(@Nullable final Context ctx, final byte[] data) {
         if (data == null || data.length == 0) {
             return null;

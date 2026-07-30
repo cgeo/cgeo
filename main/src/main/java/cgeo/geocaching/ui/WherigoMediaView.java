@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoMediaViewBinding;
 import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.Media;
 
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.function.Supplier;
 
@@ -121,13 +121,7 @@ public class WherigoMediaView extends LinearLayout {
             return;
         }
 
-        setMediaData(media.id, media.type, media.jarFilename(), media.altText, () -> {
-            try {
-                return Engine.mediaFile(media);
-            } catch (IOException ex) {
-                return null;
-            }
-        });
+        setMediaData(media.id, media.type, media.jarFilename(), media.altText, () -> WherigoUtils.getMediaFileSafe(media));
 
     }
 
