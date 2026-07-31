@@ -68,6 +68,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Ulepszona obsługa przycisku
 - Nowość: Automatyczne zapisywanie statusu
 - Nowość: Opcja tworzenia skrótu do odtwarzacza Wherigo na ekranie głównym Twojego telefonu
+- Fix: Missing/wrong media files lead to error
 
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
