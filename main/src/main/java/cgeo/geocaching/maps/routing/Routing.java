@@ -332,7 +332,7 @@ public final class Routing {
     @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up would not improve readability
     private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest, @Nullable final ArrayList<Float> elevation, @Nullable final TurnInstruction turnInstruction) {
         if (turnInstruction == null) {
-            Log.e("no turnInstruction given:\n" + Arrays.toString(Thread.currentThread().getStackTrace()));
+            Log.w("no turnInstruction given:\n" + Arrays.toString(Thread.currentThread().getStackTrace()));
         }
 
         final Bundle params = new Bundle();
@@ -346,7 +346,6 @@ public final class Routing {
         params.putString(PROFILE_PARAMTERKEY, Settings.getRoutingProfile()); // profile filename, used only by internal routing engine
 
         final String gpx = routingServiceConnection == null ? null : routingServiceConnection.getTrackFromParams(params);
-        Log.e("gpx=" + gpx);
 
         if (gpx == null) {
             Log.i("brouter returned no data");
