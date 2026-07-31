@@ -68,6 +68,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Nouveau : Amélioration de la gestion des boutons
 - Nouveau : Enregistrement automatique du statut
 - Nouveau : Possibilité de créer un raccourci vers Wherigo sur l'écran d'accueil de votre mobile
+- Fix: Missing/wrong media files lead to error
 
 ### Général
 - Nouveau : Option de partage après avoir logué une cache
