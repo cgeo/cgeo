@@ -68,6 +68,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Improved button handling
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Fix: Missing/wrong media files lead to error
 
 ### Yleinen
 - New: Share option after logging a cache
