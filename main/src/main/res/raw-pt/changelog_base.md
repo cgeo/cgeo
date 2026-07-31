@@ -68,6 +68,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Melhorado o funcionamento dos botões
 - Novo: Gravação automática do estado
 - Novo: Opção de criar atalho para o módulo Wherigo no ecrã inicial do seu smartphone
+- Fix: Missing/wrong media files lead to error
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
