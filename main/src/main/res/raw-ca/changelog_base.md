@@ -68,7 +68,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Millora del maneig dels botons
 - Nou: Desament automàtic de l'estat
 - Nou: Opció per crear una drecera al reproductor Wherigo a la pantalla d'inici del mòbil
-- Fix: Missing/wrong media files lead to error
+- Correcció: Els fitxers multimèdia que falten o són incorrectes provoquen un error
 
 ### General
 - Nou: opció de compartir després de registrar un catxé
