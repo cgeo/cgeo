@@ -294,6 +294,9 @@ public class ElevationChart {
     /** hides chart and map marker */
     private void closeChart(final GeoItemLayer<String> geoItemLayer) {
         chartBlock.setVisibility(View.GONE);
+        if (chart != null) {
+            chart.setOnChartValueSelectedListener(null);
+        }
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
         LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
     }
