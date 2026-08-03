@@ -162,13 +162,6 @@ public class PebbleMapService extends Service {
         return null;
     }
 
-    public void setMapRenderer(final PebbleMapRenderer renderer) {
-        this.mapRenderer = renderer;
-        if (currentLocation != null) {
-            triggerRender();
-        }
-    }
-
     private void triggerRender() {
         if (renderHandler != null) {
             renderHandler.post(this::maybeStartRender);
