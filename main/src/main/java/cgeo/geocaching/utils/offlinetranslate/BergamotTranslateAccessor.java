@@ -2,6 +2,7 @@ package cgeo.geocaching.utils.offlinetranslate;
 
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -17,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.zip.GZIPInputStream;
 
@@ -67,8 +67,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
      * cache is not thread safe. Translations are serialized inside the native library anyway,
      * so this costs no throughput.
      */
-    private static final Scheduler NATIVE_SCHEDULER =
-        Schedulers.from(Executors.newSingleThreadExecutor(r -> new Thread(r, "bergamot-native")));
+    private static final Scheduler NATIVE_SCHEDULER = AndroidRxUtils.singleThreadPool();
 
     // All language codes with Release-status models in both directions in Mozilla's registry.
     // Verified against https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json
