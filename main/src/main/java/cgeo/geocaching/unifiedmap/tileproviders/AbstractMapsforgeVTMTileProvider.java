@@ -7,6 +7,9 @@ import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+
+import java.util.Collections;
+import java.util.List;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
@@ -42,8 +45,12 @@ public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvi
         }
     }
 
-    protected Uri getMapUri() {
+    public Uri getMapUri() {
         return mapUri;
+    }
+
+    public List<Uri> getMapUris() {
+        return Collections.singletonList(mapUri);
     }
 
     @Override

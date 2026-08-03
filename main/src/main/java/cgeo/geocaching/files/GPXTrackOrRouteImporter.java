@@ -65,7 +65,7 @@ public class GPXTrackOrRouteImporter {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private static IGeoItemSupplier doInBackground(final Context context, final Uri uri) {
+    public static IGeoItemSupplier doInBackground(final Context context, final Uri uri) {
         try {
             // default: import properly formatted routes or tracks
             Route route = parse(new GPXTrackOrRouteParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);

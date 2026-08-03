@@ -150,7 +150,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         } else {
             try {
                 //get the theme
-                final XmlRenderTheme xmlRenderTheme = createThemeFor(selectedTheme);
+                final XmlRenderTheme xmlRenderTheme = createThemeFor(selectedTheme, this);
 
                 // Validate the theme
                 org.mapsforge.map.rendertheme.rule.RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
@@ -193,7 +193,16 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         DisplayModel.symbolScale = symbolScale / 100f;
     }
 
+    public static XmlRenderTheme getSelectedRenderTheme(final XmlRenderThemeMenuCallback callback) {
+        final ThemeData selectedTheme = setSelectedMapTheme(Settings.getSelectedMapRenderTheme());
+        return selectedTheme == null ? MapsforgeThemes.OSMARENDER : createThemeFor(selectedTheme, callback);
+    }
+
     private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) {
+        return createThemeFor(theme, this);
+    }
+
+    private static XmlRenderTheme createThemeFor(@NonNull final ThemeData theme, @NonNull final XmlRenderThemeMenuCallback callback) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 
@@ -205,11 +214,13 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         try {
             if (!isZipTheme) {
                 if (UriUtils.isFileUri(theme.fileInfo.uri)) {
-                    xmlRenderTheme = new ExternalRenderTheme(UriUtils.toFile(theme.fileInfo.uri), this);
+                    xmlRenderTheme = new ExternalRenderTheme(UriUtils.toFile(theme.fileInfo.uri), callback);
                 } else {
                     //this is the SLOW THEME path. Show OneTimeDialog to warn user about this
-                    Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_THEME_FIX_SLOWNESS);
-                    xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, this);
+                    if (callback instanceof MapsforgeThemeHelper) {
+                        Dialogs.basicOneTimeMessage(((MapsforgeThemeHelper) callback).activity, OneTimeDialogs.DialogType.MAP_THEME_FIX_SLOWNESS);
+                    }
+                    xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, callback);
                     xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
                 }
             } else {
@@ -224,7 +235,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                             cachedZipProviderFilename = themeIdTokens[0];
                         }
                     }
-                    xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
+                    xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, callback);
                 }
             }
         } catch (Exception ex) {

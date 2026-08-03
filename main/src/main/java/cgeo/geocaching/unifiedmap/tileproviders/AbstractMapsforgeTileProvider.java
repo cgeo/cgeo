@@ -8,6 +8,9 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.mapsforge.map.layer.TileLayer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.view.MapView;
@@ -34,8 +37,12 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
         return new MapsforgeFragment();
     }
 
-    protected Uri getMapUri() {
+    public Uri getMapUri() {
         return mapUri;
+    }
+
+    public List<Uri> getMapUris() {
+        return Collections.singletonList(mapUri);
     }
 
     @Override
