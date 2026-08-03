@@ -13,7 +13,7 @@ public class OfflineLogGeocacheFilter extends StringGeocacheFilter {
         if (!getStringFilter().isFilled()) {
             return "";
         }
-        return cache.hasLogOffline() ? cache.getOfflineLog().log : "";
+        return cache.hasLogOffline() && cache.getOfflineLog() != null ? cache.getOfflineLog().log : "";
     }
 
     @Override
