@@ -127,6 +127,12 @@
                 android:enabled="false"
                 app:showAsAction="never"/>
             <item
+                android:id="@+id/menu_set_final_wp_as_corrected_coords"
+                android:title="@string/caches_set_final_wp_as_corrected_coords_all"
+                android:icon="@drawable/ic_menu_final"
+                android:enabled="false"
+                app:showAsAction="never"/>
+            <item
                 android:id="@+id/menu_recalculate_health_score"
                 android:title="@string/caches_recalculate_health_score"
                 android:enabled="false"
