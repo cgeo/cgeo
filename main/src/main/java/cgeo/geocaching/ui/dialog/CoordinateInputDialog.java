@@ -17,6 +17,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.unifiedmap.DefaultMap;
+import cgeo.geocaching.utils.AveragedCoordsUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -45,8 +46,10 @@ import androidx.appcompat.widget.Toolbar;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.google.android.material.textfield.TextInputLayout;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -71,7 +74,7 @@ public class CoordinateInputDialog {
     private List<EditText> orderedInputs;
     private Geopoint gp;
     private static Geopoint cacheCoordinates;
-    private Disposable geoDisposable;
+    private final CompositeDisposable geoDisposable = new CompositeDisposable();
     private CoordinateDialogDisplayModeEnum waypointOptions = CoordinateDialogDisplayModeEnum.Normal;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
@@ -251,7 +254,7 @@ public class CoordinateInputDialog {
         final Button setFromMap = binding.map;
         final Button clearCoordinates = binding.clear;
 
-        // Do noy display any option buttons if simple mode
+        // Do not display any option buttons if simple mode
         if (waypointOptions == CoordinateDialogDisplayModeEnum.Simple) {
             useCurrentLocation.setVisibility(View.GONE);
             useCacheCoordinates.setVisibility(View.GONE);
@@ -261,8 +264,20 @@ public class CoordinateInputDialog {
             clearCoordinates.setVisibility(View.GONE);
         } else {
             useCurrentLocation.setOnClickListener(v -> {
-                gp = currentCoords();
-                updateGui();
+                useCurrentLocation.setEnabled(false);
+                final Geopoint savedCoords = gp;
+                final Disposable[] acuDisposable = new Disposable[1];
+                final AveragedCoordsUtils acu = new AveragedCoordsUtils(context, currentCoords(), binding.averagingPlaceholder, newCoords -> {
+                    gp = newCoords;
+                    updateGui();
+                }, newCoords -> {
+                    gp = newCoords == null ? savedCoords : newCoords;
+                    updateGui();
+                    useCurrentLocation.setEnabled(true);
+                    geoDisposable.remove(acuDisposable[0]);
+                });
+                acuDisposable[0] = acu.start(GeoDirHandler.UPDATE_GEODATA, 250, TimeUnit.MILLISECONDS);
+                geoDisposable.add(acuDisposable[0]);
             });
 
             // For waypoints only - option to select coordinates from map
@@ -340,7 +355,7 @@ public class CoordinateInputDialog {
 
         dialog.show();
 
-        geoDisposable = geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
+        geoDisposable.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     // Close dialog and return selected coordinates to caller
