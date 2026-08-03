@@ -570,6 +570,10 @@
     <string name="caches_set_cache_icon">Set cache icon</string>
     <string name="caches_set_cache_icon_all">Set cache icon for all caches</string>
     <string name="caches_set_cache_icon_selected">Set cache icon for selected caches</string>
+    <string name="caches_set_final_wp_as_corrected_coords_all">Set Final as coordinates</string>
+    <string name="caches_set_final_wp_as_corrected_coords_selected">Set Final as coordinates (selected)</string>
+    <string name="caches_set_final_wp_as_corrected_coords_info">Apply the finals waypoint as corrected coordinates on %1$d caches.</string>
+    <string name="caches_set_final_wp_as_corrected_coords_none_found">No caches with final waypoint found.</string>
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>

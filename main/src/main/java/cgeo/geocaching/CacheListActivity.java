@@ -57,6 +57,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoData;
@@ -116,11 +117,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
 import androidx.loader.app.LoaderManager;
@@ -647,6 +650,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_set_cache_icon, R.string.caches_set_cache_icon_selected, R.string.caches_set_cache_icon_all, checkedCount);
+            MenuUtils.setEnabled(menu, R.id.menu_set_final_wp_as_corrected_coords, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_set_final_wp_as_corrected_coords, R.string.caches_set_final_wp_as_corrected_coords_selected, R.string.caches_set_final_wp_as_corrected_coords_all, checkedCount);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
 
             // Manage Lists submenu
@@ -753,6 +758,57 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
             }
         }.execute();
+    }
+
+    private void setFinalWpAsCorrectedCoords() {
+        final List<Geocache> candidates = adapter.getCheckedOrAllCaches();
+        final List<Geocache> matching = new ArrayList<>();
+        for (final Geocache cache : candidates) {
+            int count = 0;
+            for (final Waypoint wp : cache.getWaypoints()) {
+                if (wp.isFinalWithCoords()) {
+                    count++;
+                }
+            }
+            if (count == 1) {
+                matching.add(cache);
+            }
+        }
+        if (matching.isEmpty()) {
+            showToast(LocalizationUtils.getString(R.string.caches_set_final_wp_as_corrected_coords_none_found));
+            return;
+        }
+        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
+        final View layout = View.inflate(this, R.layout.dialog_set_final_wp_as_corrected_coords, null);
+
+        builder.setTitle(R.string.caches_set_final_wp_as_corrected_coords_all)
+                .setView(layout)
+                .setMessage(LocalizationUtils.getString(R.string.caches_set_final_wp_as_corrected_coords_info, matching.size()))
+                .setPositiveButton(R.string.ok, (dialog, which) ->
+                    applyFinalWpAsCorrectedCoords(matching, ((RadioGroup) layout.findViewById(R.id.radioGroup)).getCheckedRadioButtonId() == R.id.radio_also_online))
+                .setNegativeButton(R.string.cancel, null)
+                .create().show();
+    }
+
+    private void applyFinalWpAsCorrectedCoords(final List<Geocache> caches, final boolean uploadOnline) {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+            for (final Geocache cache : caches) {
+                final Waypoint finalWp = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords);
+                if (finalWp != null) {
+                    if (!cache.hasUserModifiedCoords()) {
+                        cache.createOriginalWaypoint(cache.getCoords());
+                    }
+                    cache.setCoords(finalWp.getCoords());
+                    DataStore.saveUserModifiedCoords(cache);
+                }
+            }
+        }, () -> {
+            adapter.setSelectMode(false);
+            refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+            if (uploadOnline) {
+                new BatchUploadModifiedCoordinates(true).export(caches, CacheListActivity.this);
+            }
+        });
     }
 
     @Override
@@ -878,6 +934,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             EmojiUtils.selectEmojiPopup(this, markerId, false, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
             EmojiUtils.selectEmojiPopup(this, null, true, null, this::setCacheIcons);
+        } else if (menuItem == R.id.menu_set_final_wp_as_corrected_coords) {
+            setFinalWpAsCorrectedCoords();
         } else if (menuItem == R.id.menu_set_askfordeletion) {
             setPreventAskForDeletion(false);
         } else {
