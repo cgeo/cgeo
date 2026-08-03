@@ -107,13 +107,27 @@ public class CacheInfoBoxes {
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
-            offlineText.setText(Formatter.formatStoredAgo(cache.getDetailedUpdate()));
+            final long detailedUpdate = cache.getDetailedUpdate();
+            offlineText.setText(Formatter.formatStoredAgo(detailedUpdate));
+            // allow toggling between the relative ("stored ... ago") and the exact date by tapping the text
+            offlineText.setTag(Boolean.FALSE);
+            offlineText.setClickable(true);
+            offlineText.setOnClickListener(v -> {
+                final boolean showExact = !Boolean.TRUE.equals(offlineText.getTag());
+                offlineText.setTag(showExact);
+                offlineText.setText(showExact
+                        ? Formatter.formatStoredExact(detailedUpdate)
+                        : Formatter.formatStoredAgo(detailedUpdate));
+            });
 
             offlineStore.setVisibility(View.GONE);
             offlineDrop.setVisibility(View.VISIBLE);
             offlineEdit.setVisibility(View.VISIBLE);
         } else {
             offlineText.setText(LocalizationUtils.getString(R.string.cache_offline_not_ready));
+            offlineText.setOnClickListener(null);
+            offlineText.setClickable(false);
+            offlineText.setTag(null);
 
             offlineStore.setVisibility(View.VISIBLE);
             offlineDrop.setVisibility(View.GONE);
