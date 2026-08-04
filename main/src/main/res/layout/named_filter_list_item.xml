@@ -57,7 +57,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <CheckBox
+        <TextView
             android:id="@+id/activate_marker_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

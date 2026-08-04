@@ -61,16 +61,12 @@ public class FilterUtils {
         filteredActivity.showFilterMenu();
     }
 
-    public static void initializeNamedFilterMenu(final Activity activity, final int namedFilterMenuId, @NonNull final FilteredActivity filteredActivity) {
-        ViewUtils.registerLongClickHandlerForMenuItem(activity, namedFilterMenuId, v -> filteredActivity.showNamedFilterActivateDeactivate());
-    }
-
     public static void onClickNamedFilterMenu(@NonNull final Activity activity) {
         NamedFilterActivity.startActivity(activity);
     }
 
     /** opens a dialog to activate/deactivate named filter markers */
-    public static void openDialogActivateDeactivateNamedFilters(final Context context) {
+    public static void openDialogActivateDeactivateNamedFilters(final Activity context) {
         final List<NamedFilter> filters = NamedFilter.getAll();
         final Set<NamedFilter> preSelected = new HashSet<>();
         for (final NamedFilter nf : filters) {
@@ -83,16 +79,19 @@ public class FilterUtils {
                 NamedFilter::activateMarker);
     }
 
-    public static void openDialogMultiselectNamedFilters(final Context context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {
+    public static void openDialogMultiselectNamedFilters(final Activity context, final TextParam title, final Set<NamedFilter> preselected, final Consumer<Set<NamedFilter>> selectionListener) {
         final List<NamedFilter> filters = NamedFilter.getAll();
+        final List<NamedFilter> filtersWithIcon = filters.stream().filter(nf -> null != nf.getMarkerId()).collect(Collectors.toList());
 
-        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filters);
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(filtersWithIcon);
         model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
 
         model.setSelectedItems(preselected);
 
         SimpleDialog.ofContext(context)
             .setTitle(title)
+            .setNeutralButton(TextParam.id(R.string.named_filter_manage))
+            .setNeutralAction(() -> NamedFilterActivity.startActivity(context))
             .selectMultiple(model, selectionListener);
     }
 

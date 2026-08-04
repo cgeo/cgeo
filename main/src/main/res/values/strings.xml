@@ -870,11 +870,13 @@
     </string-array>
 
     <!-- named filter activity -->
+    <string name="named_filter_markers">Markers</string>
+    <string name="named_filter_manage">Manage</string>
     <string name="named_filter_activity_title">Filters</string>
     <string name="cache_namedfilter_matching">Matching filters</string>
     <string name="named_filter_add">Add filter</string>
     <string name="named_filter_empty_hint">No filters configured. Tap + to add one.</string>
-    <string name="named_filter_activate_marker">use with prio</string>
+    <string name="named_filter_activate_marker">Prio:</string>
     <string name="named_filter_enable_all_markers">Apply filters as markers</string>
     <string name="named_filter_markers_enabled">Markers enabled</string>
     <string name="named_filter_markers_disabled">Markers disabled</string>
@@ -886,7 +888,7 @@
     <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
     <string name="named_filter_config_exists_title">Filter already saved</string>
     <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
-    <string name="named_filter_fill_with_named">Fill with filter</string>
+    <string name="named_filter_fill_with_named">Load</string>
     <string name="named_filter_priority_normal">Normal</string>
     <string name="named_filter_priority_high">High</string>
     <string name="named_filter_priority_highest">Highest</string>

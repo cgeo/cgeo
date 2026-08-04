@@ -982,7 +982,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
         FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
-        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
 
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
@@ -1044,7 +1043,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_filter) {
             FilterUtils.onClickFilterMenu(this);
         } else if (id == R.id.menu_named_filters) {
-            FilterUtils.onClickNamedFilterMenu(this);
+            showNamedFilterActivateDeactivate();
         } else if (id == R.id.menu_store_caches) {
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
