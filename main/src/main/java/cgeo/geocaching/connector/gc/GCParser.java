@@ -1942,27 +1942,28 @@ public final class GCParser {
 
     @NonNull
     static Single<Boolean> uploadPersonalNote(@NonNull final Geocache cache) {
-        final String userToken = getUserToken(cache);
-        if (StringUtils.isEmpty(userToken)) {
+        final String token = getRequestVerificationToken(cache);
+        if (StringUtils.isEmpty(token)) {
             return Single.just(false);
         }
 
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        jo.putObject("dto").put("et", StringUtils.defaultString(cache.getPersonalNote())).put("ut", userToken);
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("cacheId", cache.getCacheId()).put("note", StringUtils.defaultString(cache.getPersonalNote()));
+        final Parameters headers = new Parameters("__requestverificationtoken", token);
 
-        final String uriSuffix = "SetUserCacheNote";
-
-        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-
-        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
-            .toSingle(() -> {
-                Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
-                return true;
-            })
-            .onErrorReturn((throwable) -> {
-                Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
-                return false;
-            });
+        try {
+            return Network.completeWithSuccess(Network.postJsonRequest("https://www.geocaching.com/seek/geocache.cachenote", headers, jo))
+                .toSingle(() -> {
+                    Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
+                    return true;
+                })
+                .onErrorReturn((throwable) -> {
+                    Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
+                    return false;
+                });
+        } catch (final Exception e) {
+            Log.e("GCParser.uploadPersonalNote - cannot upload personal note", e);
+            return Single.just(false);
+        }
     }
 
     @WorkerThread
