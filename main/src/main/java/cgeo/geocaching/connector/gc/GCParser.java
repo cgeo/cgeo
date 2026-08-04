@@ -198,13 +198,6 @@ public final class GCParser {
         return result;
     }
 
-    //method is only used in AndroidTests: parses a page and returns only the resulting status code,
-    //without any network access or database side effects (isolates {@link #parseCacheFromText}).
-    @NonNull
-    static StatusCode testParseCacheStatus(@Nullable final String page) {
-        return parseCacheFromText(page, null).left;
-    }
-
     /**
      * Parse cache from text and return either an error code or a cache object in a pair. Note that inline logs are
      * not parsed nor saved, while the cache itself is.

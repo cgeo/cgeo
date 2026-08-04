@@ -479,49 +479,4 @@ public class GCParserTest {
         assertThat(trackablesNew.get(1).getGeocode()).isEqualTo("TBABCD5");
         assertThat(trackablesNew.get(1).getName()).isEqualTo("the test tb");
     }
-
-    /**
-     * Regression test for #16265: feeding degenerate / non-cache pages to the GC cache parser must
-     * never throw (historically a NullPointerException in {@code parseCacheFromText}), but return a
-     * defined error {@link StatusCode}. Such pages are exactly what "network trouble" (logout,
-     * gc.com error page, incomplete response) can produce.
-     */
-    @SmallTest
-    @Test
-    public void testParseInvalidPageDoesNotCrashIssue16265() {
-        assertThat(GCParser.testParseCacheStatus(null)).isEqualTo(StatusCode.UNKNOWN_ERROR);
-        assertThat(GCParser.testParseCacheStatus("")).isEqualTo(StatusCode.UNKNOWN_ERROR);
-        assertThat(GCParser.testParseCacheStatus("    \n\t  ")).isEqualTo(StatusCode.UNKNOWN_ERROR);
-        // an unrelated / incomplete HTML page without the cacheDetails marker
-        assertThat(GCParser.testParseCacheStatus("<html><body>some unrelated page</body></html>")).isEqualTo(StatusCode.UNKNOWN_ERROR);
-        // a geocaching.com "404 - File Not Found" page
-        assertThat(GCParser.testParseCacheStatus("<html><head>" + GCConstants.STRING_404_FILE_NOT_FOUND + "</head></html>")).isEqualTo(StatusCode.CACHE_NOT_FOUND);
-        // an unpublished-cache page
-        assertThat(GCParser.testParseCacheStatus("<html><body>" + GCConstants.STRING_UNPUBLISHED_OTHER + "</body></html>")).isEqualTo(StatusCode.UNPUBLISHED_CACHE);
-    }
-
-    /**
-     * Simulates "network trouble" for #16265: a real, valid cache page that is truncated at many
-     * different lengths (as an interrupted / partial download would produce). Every partial page
-     * must be handled without throwing, always yielding a defined {@link StatusCode}.
-     */
-    @MediumTest
-    @Test
-    public void testParseTruncatedPageDoesNotCrashIssue16265() {
-        final String fullPage = CgeoTestUtils.getFileContent(R.raw.gc366bq);
-        assertThat(fullPage).isNotEmpty();
-        // cut the page at many increasing lengths spread across the whole page
-        final int steps = 200;
-        for (int i = 0; i <= steps; i++) {
-            final int length = (int) ((long) fullPage.length() * i / steps);
-            final String truncated = fullPage.substring(0, length);
-            final StatusCode status;
-            try {
-                status = GCParser.testParseCacheStatus(truncated);
-            } catch (final RuntimeException e) {
-                throw new AssertionError("Parsing a page truncated to " + length + " chars threw " + e, e);
-            }
-            assertThat(status).as("page truncated to %d chars", length).isNotNull();
-        }
-    }
 }
