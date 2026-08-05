@@ -29,7 +29,7 @@
     <string name="ape">APE藏点</string>
     <string name="gchq">Geocaching总部</string>
     <string name="gchqceleb">Geocaching总部庆典</string>
-    <string name="gps">GPS探险展览</string>
+    <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching总部街区聚会</string>
     <string name="locationless">无位置 (反向) 藏点</string>
     <string name="advlab">冒险型实验藏点</string>
@@ -54,7 +54,7 @@
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC总部</string>
     <string name="gchqceleb_short">GC HQ Cel</string>
-    <string name="gps_short">GPS展示</string>
+    <string name="gps_short">GPS Exhibit</string>
     <string name="block_short">GCHQ区块</string>
     <string name="locationless_short">无位置</string>
     <string name="advlab_short">Adv Lab</string>
@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">OC 团队评论</string>
     <string name="log_your_saved_log">你的已保存日志</string>
     <string name="log_empty_logbook">这个藏点的签到簿是空的。</string>
+    <string name="log_empty_logbook_filtered">现在选择的筛选条件隐藏了所有的日志。请至少选择一个选项。</string>
     <string name="log_image_selectfromstorage_tooltip">从手机中选择图片</string>
     <string name="log_image_camera_tooltip">使用相机拍照</string>
     <string name="log_image_selectfromown_tooltip">从手机中选择图片</string>
@@ -201,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">这个寻宝者报告此藏点有问题。</string>
     <string name="log_problem_log_full_label">签到簿已写满</string>
     <string name="log_problem_log_full_text">这个寻宝者报告签到簿已写满。</string>
+    <string name="log_problem_log_wet_label">签到簿已湿透</string>
+    <string name="log_problem_log_wet_text">这个宝友器报告签到簿已湿透。</string>
     <string name="log_problem_damaged_label">容器已损坏</string>
     <string name="log_problem_damaged_text">这个寻宝者报告容器已损坏。</string>
     <string name="log_problem_missing_label">此藏点可能已经丢失</string>
@@ -216,15 +219,28 @@
     <string name="log_image_titleprefix">图片</string>
     <string name="log_delete_confirm">您真的想要删除%1$s\'类型，作者为\'%2$s\'，日期为\'%3$s \'的日志吗？</string>
     <string name="log_offline_delete_confirm">您是否确实要删除您在本地保存的日志？日志类型：%1$s；日志时间：%2$s</string>
+    <string name="log_share_prefix_found">我找到%1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">我没有找到%1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">我在%1$s (%2$s):\n\n留了言</string>
+    <string name="log_share_prefix_maintenance">我上报了 %1$s (%2$s):\n\n需要维护</string>
+    <string name="log_share_prefix_archive">我认为 %1$s (%2$s) 应该被归档了\n\n</string>
+    <string name="log_share_prefix_default">我在%1$s (%2$s):\n\n留下的日志</string>
     <string name="datetime_nodateset_display">未设置日期</string>
     <!-- Contacts -->
     <string name="contact_not_found">找不到别名/昵称为%s的联系人，请先将它添加到你的联系人应用中。</string>
     <string name="contact_multiple_matches">联系人: 多个匹配</string>
-    <!-- translation -->
-    <string name="translate">在谷歌翻译应用翻译</string>
-    <string name="translate_to_sys_lang">翻译为 %s (网络)</string>
-    <string name="translate_to_english">翻译为英语（网页）</string>
-    <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
+    <!-- External translation -->
+    <string name="translate">翻译</string>
+    <string name="translate_external_label">用%s翻译</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">网站</string>
+    <string name="translate_external_variant_unavailable">不可用</string>
+    <string name="translate_external_none">&lt;无&amp;gt；</string>
+    <string name="translate_external_app">外部应用</string>
+    <string name="translate_external_google">谷歌翻译</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV 离线翻译</string>
+    <string name="translate_length_warning">使用网站翻译过大量的文本可能会失败。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
@@ -255,6 +271,7 @@
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
+    <string name="err_watchlist_failed_geocodes">使用藏点编号（GC码）：%s 改变关注列表失败</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
     <string name="err_auth_process">授权失败。</string>
@@ -302,6 +319,7 @@
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
     <string name="warn_log_text_fill">请为您的日志添加一些文字。</string>
+    <string name="warn_bookmarklist_select">没有选择书签列表。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
     <string name="warn_notloggedin_title">离线模式</string>
@@ -309,14 +327,15 @@
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
     <string name="err_read_pocket_query_list">读取口袋查询列表时出错。</string>
     <string name="err_read_bookmark_list">读取收藏列表出错</string>
+    <string name="err_bookmark_list_overfull">藏点过多</string>
+    <string name="err_bookmark_list_overfull_description">书签列表只能存储最多1000个藏点，你正在试图在列表中增加藏点已经超过了1000个。\n\n你是否想继续？但增加的藏点数量不能超过列表可以容纳的数量。</string>
+    <string name="info_log_posting_background">正在发布日志…</string>
+    <string name="info_log_post_success">成功发布%s的日志</string>
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
     <string name="info_log_saved">c:geo 成功保存日志。</string>
-    <string name="info_log_post_failed">发布日志失败。</string>
+    <string name="info_log_post_failed_geocode">发布 %s 的寻宝日志失败。</string>
     <string name="info_log_delete_failed">删除日志失败。</string>
-    <string name="info_log_post_failed_simple_reason">检查您已经正确登录并已经连接互联网。</string>
-    <string name="info_log_delete_failed_simple_reason">请检查您是否正确登录，并已连接互联网，日志尚未删除。</string>
-    <string name="info_log_post_retry">重试</string>
-    <string name="info_log_post_save">离线保存</string>
+    <string name="info_log_delete_failed_simple_reason">请检查您是否已正确登录，网络连接是否有效，以及该日志是否已被删除。</string>
     <string name="info_log_cleared">日志已清除</string>
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="info_log_type_changed">日志类型已更改！</string>
@@ -336,9 +355,7 @@
     <string name="dont_show_again">不再显示</string>
     <string name="tap_icon_more_info">点击图标以获取更多信息</string>
     <string name="use_slider_adjust_value">使用滑块调整值</string>
-    <string name="warn_gm_not_available">谷歌地图不可用。</string>
-    <string name="switch_to_mf">您的 Google Play 服务已过时。您想切换到 Mapsforge 地图提供商吗？</string>
-    <string name="switched_to_mf">默认地图已切换到 Mapsforge 地图提供商。现在重新启动您的地图。</string>
+    <string name="snackbar_action_share">分享</string>
     <string name="gc_premium">付费会员</string>
     <string name="gc_basic">普通</string>
     <string name="translator_preference_target_lng">离线翻译</string>
@@ -354,16 +371,15 @@
     <string name="translator_model_download_success">%s 的翻译模型已下载</string>
     <string name="translator_model_download_error">下载 %1$s: %2$s 翻译模型失败</string>
     <string name="translator_model">翻译模型</string>
-    <string name="translator_tooltip">使用谷歌离线翻译</string>
+    <string name="translator_tooltip">离线翻译</string>
     <string name="translator_language_select">选择源语言</string>
-    <string name="translator_language_target_select">选择目标语言</string>
-    <string name="translator_language_unsupported">不支持翻译语言 (%s)。\n点击选择源语言。</string>
-    <string name="translator_language_unknown">无法识别语言。\n点击选择源语言。</string>
-    <string name="translator_language_detected">使用谷歌翻译\"%s\"。\n点击选择源语言。</string>
+    <string name="translator_language_unsupported">不支持翻译语言 (%s)。点击选择源语言。</string>
+    <string name="translator_language_unknown">无法识别语言。点击选择源语言。</string>
+    <string name="translator_language_detected">翻译\"%s\"。点击选择源语言。</string>
     <string name="translator_target_language">翻译为 \"%s\"</string>
     <string name="translator_translation_error">翻译文本失败： %s</string>
     <string name="translator_translation_initerror">初始化翻译器失败</string>
-    <string name="translator_translation_success">翻译自\"%s\"，\n点击按钮显示源语言</string>
+    <string name="translator_translation_success">翻译自\"%s\"，点击按钮以恢复原始版本</string>
     <string name="crash_activity_title">哎呀！c:geo 崩溃了！</string>
     <string name="crash_activity_report">上报问题</string>
     <!-- location service -->
@@ -372,7 +388,7 @@
     <string name="loc_fused">融合定位</string>
     <string name="loc_low_power">低电量</string>
     <string name="loc_home">家庭坐标</string>
-    <string name="loc_sat">卫星地图</string>
+    <string name="loc_sat">卫星</string>
     <string name="loc_trying">正在尝试定位</string>
     <string name="loc_no_addr">未知地址</string>
     <string name="loc_gps_disabled">GPS 已禁用</string>
@@ -390,7 +406,7 @@
     <string name="menu_update_mapdata">更新地图数据</string>
     <string name="menu_delete_offline_data">删除离线数据</string>
     <string name="menu_history">历史</string>
-    <string name="menu_search_clipboard">从剪贴板加载geocode</string>
+    <string name="menu_search_clipboard">从剪贴板加载藏点编号（GC码）</string>
     <string name="menu_history_longstring">查找历史</string>
     <string name="menu_lists_pocket_queries">口袋查询</string>
     <string name="menu_lists_bookmarklists">书签列表</string>
@@ -401,14 +417,14 @@
     <string name="advanced_search_button">搜索</string>
     <string name="stored_caches_button">已存储</string>
     <string name="any_button">转到</string>
-    <string name="unknown_scan">在扫描结果中找不到任何地理编码。</string>
+    <string name="unknown_scan">在扫描结果中找不到任何藏点编号（GC码）。</string>
     <!-- caches -->
     <string name="caches_no_cache">这里没有藏点</string>
     <string name="caches_more_caches">加载更多藏点</string>
     <string name="caches_more_caches_no">没有更多藏点</string>
     <string name="caches_more_caches_currently">当前</string>
     <plurals name="caches_more_caches_next_x">
-        <item quantity="other">加载接下来的 %1$d 藏点</item>
+        <item quantity="other">加载接下来的 %1$d 个藏点</item>
     </plurals>
     <string name="caches_more_caches_all_remaining">载入剩余的藏点</string>
     <string name="caches_store_offline">离线存储</string>
@@ -423,8 +439,9 @@
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">下载失败， %1$d/%2$d 藏点已下载</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">下载失败， %1$d/%2$d 藏点已下载</string>
     <plurals name="caches_store_background_result">
-        <item quantity="other">%d 藏点已下载</item>
+        <item quantity="other">%d 个藏点已下载</item>
     </plurals>
+    <string name="caches_store_background_skipped">跳过离线藏点：%d</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -437,7 +454,7 @@
     <string name="caches_sort_favorites">已被标记为喜爱</string>
     <string name="caches_sort_favorites_ratio">收藏 [%]</string>
     <string name="caches_sort_name">应用名</string>
-    <string name="caches_sort_geocode">藏点编码</string>
+    <string name="caches_sort_geocode">藏点编号（GC码）</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
     <string name="caches_sort_inventory">可追踪物计数</string>
@@ -468,12 +485,17 @@
     <string name="caches_upload_bookmarklist">添加至书签</string>
     <string name="caches_upload_bookmarklist_all">将全部添加到书签列表</string>
     <string name="caches_upload_bookmarklist_selected">添加选中的到书签列表</string>
+    <string name="caches_watch_all">全部添加到关注列表</string>
+    <string name="caches_unwatch_all">清空关注列表</string>
+    <string name="caches_watch_selected">添加选中的内容到关注列表</string>
+    <string name="caches_unwatch_selected">从关注列表中移除选中的内容</string>
+    <string name="watchlist_background_started">关注列表启动后台更新</string>
     <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
     <string name="caches_upload_modifiedcoords_warning">您想要上传所有的 (选中的) 藏点修改过的坐标，并覆盖服务器上的现有坐标吗？这个操作不能被撤消。</string>
     <string name="caches_upload_allcoords">上传所有藏点的坐标</string>
     <string name="caches_upload_allcoords_dialogtitle">警告 - 正在上传所有坐标</string>
     <string name="caches_upload_allcoords_warning">这将用 c:geo 中当前的列表坐标覆盖您的列表中所有的 (或者选定的) 藏点的现有坐标！ 这只适用于特殊情况，例如：当您导入一个包含校正坐标的 GPX 文件作为列表坐标时。 此操作无法撤消，您应当只在知道自己在做什么的情况下使用它。 在正常情况下，您可能宁愿在同一菜单中使用 \"上传修改过的坐标\"功能。</string>
-    <string name="caches_share_geocodes">分享Geocodes清单</string>
+    <string name="caches_share_geocodes">分享藏点编号（GC码）s清单</string>
     <string name="caches_refresh_selected">刷新选中项</string>
     <string name="caches_refresh_all">刷新全部</string>
     <string name="caches_move_selected">移动选中的</string>
@@ -490,6 +512,13 @@
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
     <string name="caches_overwrite_offline_log">覆盖离线日记</string>
     <string name="caches_overwrite_offline_log_question">藏点已经存在类型为 \"%1$s\" 的离线日志。您想要覆盖这个日志吗？</string>
+    <string name="caches_warning_delete_user_data_others">删除其他</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="other">%2$d 个藏点中有 %1$d 个包含用户数据。删除这些藏点将导致用户数据丢失。</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">此操作将从您的设备中删除所有藏点 (%d)。</string>
+    <string name="caches_warning_remove_from_list_user_data_others">移除其他</string>
+    <string name="caches_warning_remove_caches_from_single_list">%2$d 个藏点中有 %1$d 个仅存在于此列表中。从列表中移除这些藏点将从您的设备中将其彻底删除。</string>
     <string name="caches_show_attributes_all">显示所有藏点的属性概述</string>
     <string name="caches_show_attributes_selected">显示选中藏点的属性概述</string>
     <string name="caches_set_cache_icon">设置藏点图标</string>
@@ -498,6 +527,7 @@
     <string name="caches_reset_cache_icons_title">重置藏点图标</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">设置列表标记</string>
+    <string name="caches_recalculate_health_score">重新计算藏点健康评分</string>
     <string name="caches_askdeletion">如果空则请求删除</string>
     <string name="select_icon">选择图标</string>
     <string name="onetime_missing_unicode_info">您的 Android 版本不支持自动检测支持的图标 - 某些字符可能不存在</string>
@@ -505,7 +535,7 @@
         <item quantity="other">找到 %d 个</item>
     </plurals>
     <plurals name="user_finds_offline">
-        <item quantity="other">%d 次离线登录</item>
+        <item quantity="other">%d 个离线日志</item>
     </plurals>
     <plurals name="caches_stored_offline">
         <item quantity="other">存储了 %d 个藏点</item>
@@ -514,8 +544,8 @@
     <string name="menu_lists">管理列表</string>
     <string name="list_menu_create">新的列表</string>
     <string name="list_menu_drop">删除当前列表</string>
-    <string name="list_menu_rename">删除当前列表</string>
-    <string name="list_menu_rename_list_prefix">重命名列表前缀</string>
+    <string name="list_menu_rename">重命名当前列表</string>
+    <string name="list_menu_rename_parent_lists">重命名父列表</string>
     <string name="rename_from">重命名自</string>
     <string name="rename_to">重命名为</string>
     <string name="list_menu_import">导入</string>
@@ -523,7 +553,7 @@
     <string name="lists_title">选择列表</string>
     <string name="lists_title_new_caches">选择列表 (新藏点)</string>
     <string name="list_inbox">已存储</string>
-    <string name="list_all_lists">所有缓存</string>
+    <string name="list_all_lists">所有藏点</string>
     <string name="list_dialog_create_title">新的列表</string>
     <string name="list_dialog_create">创建</string>
     <string name="list_dialog_create_err">c:geo 创建新列表失败</string>
@@ -536,6 +566,7 @@
     <string name="list_dialog_rename">重命名</string>
     <string name="list_not_available">列表不再可用，切换到标准列表</string>
     <string name="list_parent_list">父列表</string>
+    <string name="list_create_parent">&lt;建立新的父列表&gt;</string>
     <string name="list_name">列表名称</string>
     <string name="list_confirm_rename">从\"%1$s\"重命名为\"%2$s\"\n%3$s\n此操作不能撤销！</string>
     <string name="list_confirm_no_hierarchy">\n没有\":\" 找到- 所有匹配的列表都将转换为最上级列表\n</string>
@@ -543,7 +574,6 @@
     <string name="cache_filter_mode_advanced">高级模式</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">切换到基础模式</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">切换回基础模式将不保存筛选设置，你想要继续吗？</string>
-    <string name="cache_filter_add_button">添加筛选条件</string>
     <string name="cache_filter_option_and_or">使用OR代替AND</string>
     <string name="cache_filter_option_inverse">反向筛选</string>
     <string name="cache_filter_option_include_inconclusive">包括不确定的匹配结果</string>
@@ -578,7 +608,9 @@
     <string name="cache_filter_stored_since">最后更新详情</string>
     <string name="cache_filter_category">BC 类别</string>
     <string name="cache_filter_tier">BC 层</string>
-    <string name="cache_filter_named_filter">名称筛选</string>
+    <string name="cache_filter_health_score">藏点健康评分</string>
+    <string name="cache_filter_health_score_include_unscored">包含没有可评分日志的藏点</string>
+    <string name="cache_filter_named_filter">筛选器</string>
     <string name="cache_filter_logical_filter_group">嵌套筛选</string>
     <string name="cache_filtergroup_basic">基础</string>
     <string name="cache_filtergroup_details">详情</string>
@@ -598,17 +630,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">删除</string>
     <string name="cache_filter_storage_clear_button">清空</string>
-    <string name="cache_filter_storage_load_delete_title">加载或删除现有筛选</string>
     <string name="cache_filter_storage_select_title">选择筛选器</string>
-    <string name="cache_filter_storage_delete_title">删除筛选器</string>
-    <string name="cache_filter_storage_delete_message">您真的想要删除该过滤器吗？</string>
-    <string name="cache_filter_storage_select_clear_title">选择或清除当前过滤器</string>
-    <string name="cache_filter_storage_clear_title">清除当前筛选项</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">无存在的筛选设置</string>
-    <string name="cache_filter_storage_save_title">保存筛选器名称</string>
-    <string name="cache_filter_storage_save_confirm_title">复写并存储筛选设置</string>
-    <string name="cache_filter_storage_save_confirm_message">已经存在一个名为 \'%s\' 的不同筛选设置。覆盖它吗？</string>
-    <string name="cache_filter_storage_clear_message">您想要清除当前筛选设置吗？</string>
     <string name="cache_filter_stringfilter_matchcase">匹配大小写</string>
     <string name="cache_filter_stringfilter_searchtext_hint">搜索文本</string>
     <string name="cache_filter_stringfilter_info">使用\"模式\"选项时，可以使用通配符 * 和 ?.* 代表零个、一个或多个字符，? 代表一个单一字符。例如，模式 \'H?mburg*\' 将匹配 \'Homburg\' 或 \'Hamburg at Night\'，但不会匹配 \'A day in Hamburg\' 或 \'Hahmburg\'。</string>
@@ -621,6 +643,7 @@
     <string name="cache_filter_stringfilter_type_pattern">模式</string>
     <string name="cache_filter_datefilter_absolute">绝对值</string>
     <string name="cache_filter_datefilter_relative">相对于今天</string>
+    <string name="cache_filter_datefilter_ignoreyear">忽略年份</string>
     <string name="cache_filter_datefilter_label_from">从：</string>
     <string name="cache_filter_datefilter_label_to">到：</string>
     <string name="cache_filter_checkboxlist_selectallnone">全选</string>
@@ -722,6 +745,30 @@
         <item>1月</item>
         <item>&gt;1月</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_activity_title">筛选器</string>
+    <string name="cache_namedfilter_matching">匹配的过滤器</string>
+    <string name="named_filter_add">添加筛选条件</string>
+    <string name="named_filter_empty_hint">未配置过滤器。点击 + 添加一个。</string>
+    <string name="named_filter_activate_marker">优先使用</string>
+    <string name="named_filter_enable_all_markers">将过滤器应用为标记</string>
+    <string name="named_filter_markers_enabled">标记已启用</string>
+    <string name="named_filter_markers_disabled">标记已禁用</string>
+    <string name="named_filter_select_title">选择过滤器</string>
+    <string name="named_filter_activate_deactivate_title">启用 / 禁用标记</string>
+    <string name="named_filter_nofilter_label">(无过滤器 — 匹配所有藏点)</string>
+    <string name="named_filter_save_as_title">另存为过滤器</string>
+    <string name="named_filter_name_exists_title">名称已存在</string>
+    <string name="named_filter_name_exists_message">名为“%s”的过滤器已存在。是否覆盖？</string>
+    <string name="named_filter_config_exists_title">过滤器已保存</string>
+    <string name="named_filter_config_exists_message">此过滤器配置已保存为“%s”。是否以新名称再次保存？</string>
+    <string name="named_filter_fill_with_named">使用过滤器填充</string>
+    <string name="named_filter_priority_normal">标准</string>
+    <string name="named_filter_priority_high">高</string>
+    <string name="named_filter_priority_highest">最高</string>
+    <string name="named_filter_priority_low">低</string>
+    <string name="named_filter_priority_lowest">最低</string>
+    <string name="cache_filter_reference_based_on">基于 %1$s</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>
@@ -774,6 +821,10 @@
     <string name="downloader_pending_info">至少有一个暂停或失败的下载。您想要打开待下载列表吗？</string>
     <string name="downloader_retry_download">重新下载</string>
     <string name="downloader_retry_download_details">您想要重新下载以下文件吗？</string>
+    <string name="downloader_delete_all_pending">全部删除</string>
+    <string name="downloader_delete_all_confirmation">删除所有待处理的下载？</string>
+    <string name="downloader_delete_all_message">这将取消所有 %d 个待处理的下载并移除已下载的部分。此操作无法撤销。</string>
+    <string name="downloader_deleted_all">已删除所有待处理的下载</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">下载失败且不会重试</string>
     <string name="asdm_status_paused">正在等待重试或恢复下载</string>
@@ -800,10 +851,10 @@
     <string name="settings_title_appearance">外观</string>
     <string name="settings_summary_appearance">配置距离单位、语言和应用颜色。</string>
     <string name="settings_title_cachedetails">藏点详细信息</string>
-    <string name="settings_summary_cachedetails">自定义缓存信息的显示。</string>
-    <string name="settings_title_offlinedata">离线延迟</string>
+    <string name="settings_summary_cachedetails">自定义藏点信息的显示。</string>
+    <string name="settings_title_offlinedata">离线数据</string>
     <string name="settings_summary_offlinedata">配置需要保存以供离线使用的数据，存储位置以及 GPX 文件的目录。</string>
-    <string name="settings_title_logging">登陆</string>
+    <string name="settings_title_logging">日志记录</string>
     <string name="settings_summary_logging">配置您的签名并设置日志选项。</string>
     <string name="settings_title_map_sources">地图来源</string>
     <string name="settings_summary_map_sources">设置地图资源和离线地图设置。</string>
@@ -817,6 +868,7 @@
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
+    <string name="settings_title_maptrail">历史路径</string>
     <string name="settings_title_map_behavior">地图行为</string>
     <string name="settings_title_map_style">地图样式</string>
     <string name="settings_hide_tileproviders_title">隐藏地图来源</string>
@@ -832,7 +884,7 @@
     <string name="confirm_data_dir_move_title">移动藏点数据文件夹？</string>
     <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
     <string name="settings_title_basicmembers">基础会员可用选项</string>
-    <string name="settings_title_navigation">导航中</string>
+    <string name="settings_title_navigation">路线规划与导航</string>
     <string name="settings_summary_navigation">配置离线路径，决定首选的导航方法并选择外部导航应用程序。</string>
     <string name="settings_title_system">系统</string>
     <string name="settings_summary_system">系统特定设置和调试选项。</string>
@@ -853,27 +905,26 @@
     <string name="settings_info_facebook_login">您不能使用您的 Facebook 或 Google 帐号在 c:geo 上登录 geocaching.com。但有一个简单的解决办法…</string>
     <string name="settings_authorize">授权 c:geo</string>
     <string name="settings_reauthorize">更新或删除授权</string>
-    <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
-    <string name="settings_su_description">授权 c: geo 与寻宝游戏搜索缓存。</string>
+    <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索藏点。</string>
+    <string name="settings_su_description">授权 c: geo 与geocaching.su寻找藏点。</string>
     <string name="settings_lc_description">在地图上包含Adventure Lab藏点。\n\n(仅限\"Geocaching.com\"会员使用，需要在\"Geocaching.com\"激活服务。)\n\n更改此设置需要重新启动。</string>
     <string name="settings_lc_found_state_title">手动发现状态</string>
     <string name="settings_lc_found_state_handling">如果选中，不会自动获取Adventure Lab 藏点的真实“找到”状态， 相反，提供用户手动设置“已找到”状态的控制</string>
-    <string name="init_summary_oc_de">从 opencaching.de 加载缓存</string>
+    <string name="lc_default_description">这是一个 geocaching.com Adventure Lab 藏点。Adventures 只能使用 Groundspeak Adventure Lab 应用. 点击\"详细信息\"页面上的 Adventure Lab 图标来打开/安装这个 Adventure Lab 应用。\n如果您不想在您的地图和搜索中看到Adenture Lab 藏点， 您可以使用\"设置\"菜单-服务-Geocaching.com Adventure Lab来停用</string>
+    <string name="init_summary_oc_de">从 opencaching.de 加载藏点</string>
     <string name="init_oc_de_description">授权 c:geo 使用 opencaching.de 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_pl">从 opencaching.pl 加载缓存</string>
+    <string name="init_summary_oc_pl">从 opencaching.pl 加载藏点</string>
     <string name="init_oc_pl_description">授权 c:geo 使用 opencaching.pl 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_nl">从 opencaching.nl 加载缓存</string>
+    <string name="init_summary_oc_nl">从 opencaching.nl 加载藏点</string>
     <string name="init_oc_nl_description">授权 c:geo 使用 opencaching.nl 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_us">从 opencaching.us 加载缓存</string>
+    <string name="init_summary_oc_us">从 opencaching.us 加载藏点</string>
     <string name="init_oc_us_description">授权 c:geo 使用 opencaching.us 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_ro">从 opencaching 加载缓存</string>
+    <string name="init_summary_oc_ro">从 opencaching 加载藏点</string>
     <string name="init_oc_ro_description">授权 c:geo 使用 opencaching.ro 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
-    <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
-    <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="init_gcvote_password_description">为了能够给藏点打分，您需要遵循 GCVote.com 的使用说明，然后在这里输入您的 GCVote 密码。</string>
+    <string name="init_summary_oc_uk">从 opencaching.us 加载藏点</string>
+    <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索藏点和访问/筛选您找到的藏点。</string>
+    <string name="init_summary_su">从 opencaching.pl 加载藏点</string>
     <string name="err_vote_send_rating">发送评分时出错。</string>
-    <string name="vote_sent">发送评分成功</string>
     <string name="init_login_popup">登录</string>
     <string name="init_login_popup_working">正在登录…</string>
     <string name="init_login_popup_ok">登录成功</string>
@@ -882,6 +933,8 @@
     <string name="init_login_popup_not_authorized">未授权</string>
     <string name="init_login_popup_not_logged_in">未登录</string>
     <string name="init_login_manual">手动登录</string>
+    <string name="init_login_manual_description">请等待网页出现并登录您的账户。等待登录完成后，点击下方的“确定”按钮。</string>
+    <string name="init_login_manual_wig_description">请登录您的 Geocaching.com 账户并继续授权 Wherigo 登录。等待 Wherigo 主页显示后，点击下方的“确定”按钮。</string>
     <string name="init_login_manual_error_nocookie">未找到授权令牌。请进行登录或“取消”手动登录。</string>
     <string name="init_login_popup_invalid_timestamp">本地时间无效，调整设备时间</string>
     <string name="init_login_popup_invalid_token">授权无效，重新授权</string>
@@ -916,9 +969,10 @@
     <string name="init_signature_template_size">尺寸</string>
     <string name="init_signature_template_type">类型</string>
     <string name="init_signature_template_location">位置</string>
-    <string name="init_signature_template_geocode">藏点编码</string>
-    <string name="init_ratingwanted">GCvote 评分</string>
-    <string name="init_summary_ratingwanted">从 GCvote.com 加载藏点评分</string>
+    <string name="init_signature_template_geocode">藏点编号（GC码）</string>
+    <string name="init_signature_template_tblocation_geocache_code">追踪物 - 藏点编号（GC码）</string>
+    <string name="init_signature_template_tblocation_geocache_name">追踪物 - 藏点名称</string>
+    <string name="init_signature_template_tblocation_user">追踪物 - 用户</string>
     <string name="init_summary_bettercacher">从 BetterCacher.org 载入藏点等级和类别</string>
     <string name="init_friends_and_own_logs_wanted">显示好友的 / 自己的</string>
     <string name="init_summary_friends_and_own_logs_wanted">为朋友和自己的日志显示额外的日志页面</string>
@@ -932,6 +986,8 @@
     <string name="init_translation_disabled">翻译已禁用</string>
     <string name="init_date_format">日期格式</string>
     <string name="init_date_format_description">短日期的格式，例如在日志视图使用</string>
+    <string name="init_translator_external">外部翻译器</string>
+    <string name="init_translator_external_description">要使用的外部翻译应用程序</string>
     <string name="system_default">系统默认</string>
     <string name="init_showwaypoints">显示航点</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
@@ -970,7 +1026,7 @@
     <string name="selected_position">选定的位置</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的航点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
-    <string name="init_prevent_cache_note_merge">覆盖个人藏点笔记</string>
+    <string name="init_prevent_cache_note_merge">覆盖个人笔记</string>
     <string name="init_summary_prevent_cache_note_merge">如果启用此设置，c:geo 将永久删除本地存储的笔记，并以服务器上的个人笔记代替。 不会进行合并。</string>
     <string name="init_customtabs_as_browser">使用 Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
@@ -993,6 +1049,8 @@
     <string name="init_summary_cacheListInfo">选择藏点列表中显示的每个藏点的附加信息</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <string name="init_live_compass_in_navigation_action">在藏点详细中显示方向</string>
+    <string name="init_summary_live_compass_in_navigation_action">在其详细信息页中显示带有指南针方向的箭头</string>
     <string name="init_quicklaunchitems">快速启动按钮</string>
     <string name="init_summary_quicklaunchitems">在主屏幕上选择一个或多个项目作为快速启动按钮</string>
     <string name="init_custombnitem">自定义菜单项</string>
@@ -1003,7 +1061,7 @@
     <string name="init_title_collapse_log_limit">日志行限制</string>
     <string name="init_summary_collapse_log_limit">日志显示的最大行数。更多的行将被折叠。 </string>
     <!-- names for CacheListInfoItem -->
-    <string name="cacheListInfoItem_Geocode">藏点编码</string>
+    <string name="cacheListInfoItem_Geocode">藏点编号（GC码）</string>
     <string name="cacheListInfoItem_Difficulty">难度</string>
     <string name="cacheListInfoItem_Terrain">海拔</string>
     <string name="cacheListInfoItem_MemberState">高级用户状态</string>
@@ -1021,6 +1079,10 @@
         <item>日间模式</item>
         <item>夜间模式</item>
     </string-array>
+    <string name="init_colored_theme_dark">彩色深色主题</string>
+    <string name="init_colored_theme_light">彩色浅色主题</string>
+    <string name="init_summary_colored_theme_dark">在深色主题中使用彩色工具栏</string>
+    <string name="init_summary_colored_theme_light">在浅色主题中使用彩色工具栏</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">默认屏幕</string>
     <string name="init_wallpaper">壁纸</string>
@@ -1095,7 +1157,6 @@
     <string name="init_hillshading_hq">高质量地貌晕渲</string>
     <string name="init_summary_hillshading_hq">更细致的地貌晕渲，但放大后的处理会慢50%</string>
     <string name="init_mapsource_select">选择地图来源</string>
-    <string name="init_mapsource_select_legacy">选择地图源（传统）</string>
     <string name="init_local_file_system">本地文件系统</string>
     <string name="init_base_directory_description">本地公共数据的基础文件夹</string>
     <string name="init_map_directory_description">离线地图目录</string>
@@ -1106,8 +1167,10 @@
     <string name="init_dataDir">选择数据文件夹</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_maptrail">显示历史轨迹</string>
-    <string name="init_maptrail_length">历史轨迹最大长度</string>
+    <string name="init_maptrail_length">最大长度</string>
     <string name="init_maptrail_length_summary">设置历史轨迹最大长度 (c:geo 每次启动时强制执行)。默认值为 700点 - 根据可用内存进行调整。</string>
+    <string name="init_maptrail_maxdistance">最大距离</string>
+    <string name="init_maptrail_maxdistance_summary">地图上历史轨迹中两个连续点保持连接的最大距离</string>
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
     <string name="init_trailappearance">历史轨迹外观</string>
     <string name="init_trailappearance_summary">选择历史航迹线的颜色、不透明性和线宽度</string>
@@ -1206,7 +1269,7 @@
     <string name="feature_search_keyword">按关键字搜索</string>
     <string name="feature_search_live_map">实时地图</string>
     <string name="feature_search_center">按位置搜索</string>
-    <string name="feature_search_geocode">通过地理编码搜索</string>
+    <string name="feature_search_geocode">通过藏点编号（GC码）搜索</string>
     <string name="feature_search_owner">按所有者搜索</string>
     <string name="feature_search_finder">按寻找者搜索</string>
     <string name="feature_favorite">添加藏点到收藏夹</string>
@@ -1218,15 +1281,14 @@
     <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多线程 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多个线程渲染OpenStreetMap 地图</string>
-    <string name="init_title_useLegacyMap">使用旧版地图</string>
-    <string name="init_summary_useLegacyMap">使用 Google Map / Mapsforge (OSM) 地图的旧版本而不是 UnifiedMap</string>
     <string name="category_unifiedMap">统一地图</string>
     <string name="localstorage_migrate_title">本地文件的迁移</string>
     <string name="localstorage_migrate_status_major">版本 %1$d</string>
+    <string name="gui_test_title">GUI 测试屏幕</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近时通知</string>
     <string name="init_proximityNotificationGeneral">地图上的粗略的通知</string>
-    <string name="init_summary_proximityNotificationGeneral">如果当前地图上显示的任何藏点或航点距离比距离更近或距离更近，则播放一个通知声音。 两个距离使用不同的音调。</string>
+    <string name="init_summary_proximityNotificationGeneral">如果地图上当前可见的任何宝藏或航点靠近至远距离或近距离范围内，则播放一次通知。两种距离使用不同的音效。</string>
     <string name="init_proximityNotificationSpecific">特定航点距离通知</string>
     <string name="init_summary_proximityNotificationSpecific">如果当前选择的缓存或航点距离比远距或近距更近，则重复发出通知。 如果打开缓存或航点详细信息，显示地图上的缓存或航点弹出窗口或激活指南针，则适用。 两个距离使用不同的音调。</string>
     <string name="far_distance">远距：</string>
@@ -1240,8 +1302,8 @@
     <string name="map_source_google_map">谷歌地图：默认地图</string>
     <string name="map_source_google_satellite">谷歌地图：卫星地图</string>
     <string name="map_source_google_terrain">谷歌地图：地形</string>
-    <string name="map_source_osm_offline">离线</string>
     <string name="map_source_osm_offline_combined">合并(离线)</string>
+    <string name="map_source_nomap">无地图</string>
     <string name="map_source_attribution_dialog_title">地图属性</string>
     <string name="init_sendToCgeo">发送至 c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeo信息</string>
@@ -1304,6 +1366,7 @@
     <string name="folder_move_finished_title">文件夹内容已被移动</string>
     <string name="folder_copy_finished_dialog_message">%1$s 文件夹的内容已复制到 %2$s。\n\n%4$s的%3$s和 %6$s的%5$s 已处理。</string>
     <string name="folder_move_finished_dialog_message">%1$s 文件夹的内容已移动到 %2$s。\n\n%4$s的%3$s和 %6$s的%5$s 已处理。</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">处理文件 %2$s 时操作失败，错误代码为 %1$s。</string>
     <string name="folder_move_finished_dialog_tap">点击“确定”来完成文件夹更改。</string>
     <plurals name="file_count">
         <item quantity="other">%1$d个文件</item>
@@ -1371,6 +1434,10 @@
     <string name="cache_delete_generated_waypoints">删除生成的航点</string>
     <string name="cache_delete_generated_waypoints_confirm">删除这个藏点内所有生成的用户自定义航点？\n\n航点会立即被删除，无法恢复。</string>
     <string name="cache_delete_generated_waypoints_success">已删除生成的航点</string>
+    <string name="cache_select_waypoint_types">选择航点类型</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="other">%d 航点标记为已访问</item>
+    </plurals>
     <string name="cache_offline_store">存储</string>
     <string name="cache_offline_stored_ago">已存储：%s</string>
     <string name="cache_offline_not_ready">离线不可用</string>
@@ -1393,6 +1460,7 @@
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_set_coordinates">设置坐标</string>
     <string name="cache_personal_note">个人笔记</string>
+    <string name="cache_personal_note_edit_pn">编辑个人笔记</string>
     <string name="cache_menu_preventWaypointsFromNote">停止读取笔记中的航点</string>
     <string name="cache_menu_allowWaypointExtraction">允许从笔记中读取航点</string>
     <string name="cache_personal_note_edit">编辑</string>
@@ -1435,61 +1503,90 @@
     <string name="cache_advanced">高级</string>
     <string name="cache_waypoints">航点</string>
     <string name="cache_variables">变量</string>
+    <string name="cache_variables_chip_completed_variables">已完成</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">航点 (%d)</string>
     <string name="cache_waypoints_add">添加途经点</string>
-    <string name="cache_waypoints_add_currentLocation">添加当前位置</string>
     <string name="cache_waypoints_add_fromclipboard">从剪贴板中添加</string>
-    <string name="cache_waypoints_hide_visited_waypoints">隐藏访问过的航点</string>
     <string name="cache_waypoints_remove_original_waypoint">从剪贴板复制航点到此藏点。\n\n删除原始航点？</string>
     <string name="cache_hint">提示</string>
     <string name="cache_hint_not_available">没有可用的提示</string>
     <string name="cache_logs">日志本</string>
     <string name="cache_latest_logs">近期日志</string>
     <string name="cache_logs_friends_and_own">朋友/自己的日志</string>
+    <string name="cache_logs_friends">好友</string>
     <string name="cache_dialog_loading_details">正在加载藏点详细信息……</string>
     <string name="cache_dialog_loading_details_status_loadpage">加载页面</string>
     <string name="cache_dialog_loading_details_status_details">处理细节中</string>
     <string name="cache_dialog_loading_details_status_spoilers">正在加载揭密图片</string>
     <string name="cache_dialog_loading_details_status_logs">正在加载日志</string>
     <string name="cache_dialog_loading_details_status_waypoints">正在处理航点</string>
-    <string name="cache_dialog_loading_details_status_gcvote">正在加载 GCVote</string>
+    <string name="cache_dialog_loading_details_status_cache">正在缓存数据</string>
+    <string name="cache_dialog_loading_details_status_render">渲染视图</string>
     <string name="cache_dialog_offline_save_title">离线</string>
+    <string name="cache_dialog_offline_save_message">正在保存藏点以供离线使用…</string>
     <string name="cache_dialog_offline_drop_title">离线</string>
+    <string name="cache_dialog_offline_drop_message">正在从设备内存中移除藏点…</string>
+    <string name="cache_menu_speechDeactivate">停止朗读</string>
+    <string name="cache_menu_speechActivate">开始朗读</string>
+    <string name="talking_disabled">朗读已禁用</string>
+    <string name="talking_enabled">朗读已启用</string>
     <string name="cache_menu_navigate">导航</string>
     <string name="cache_menu_target">设为目标</string>
     <string name="cache_menu_navigation_drive">导航（驾驶模式）</string>
     <string name="cache_menu_navigation_drive_select_target">选择目标</string>
     <string name="cache_menu_navigation_walk">导航（步行模式）</string>
+    <string name="cache_menu_navigation_transit">导航 (公交)</string>
     <string name="cache_menu_navigation_bike">导航（自行车模式）</string>
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
+    <string name="cache_menu_sygic_walk">Sygic (步行)</string>
+    <string name="cache_menu_sygic_drive">Sygic (驾车)</string>
     <string name="cache_menu_radar">雷达</string>
     <string name="cache_menu_map">地图</string>
     <string name="cache_menu_map_ext">其他外部应用</string>
+    <string name="cache_menu_map_ext_nolabel">其他外部应用 (仅坐标)</string>
     <string name="cache_menu_streetview">街景视图</string>
     <string name="cache_menu_browser">在浏览器中打开</string>
     <string name="no_browser_found">未找到可用的浏览器</string>
     <string name="cache_menu_open_with">打开方式…</string>
+    <string name="cache_menu_visit">记录寻宝</string>
+    <string name="cache_empty_log">c:geo 无法提交您的日志，因为内容为空。</string>
+    <string name="cache_menu_visit_offline">快速离线记录</string>
+    <string name="cache_menu_spoilers">剧透图片</string>
     <string name="cache_menu_around">周边藏点</string>
+    <string name="around">%s 周边</string>
     <string name="menu_caches">管理藏点</string>
+    <string name="cache_menu_event">添加到日历</string>
+    <string name="cache_menu_extract_waypoints">提取航点</string>
+    <string name="cache_menu_scan_calculated_waypoints">扫描航点公式</string>
     <string name="cache_menu_set_found">设置为已找到</string>
     <string name="cache_menu_set_DNF">设置为未找到</string>
+    <string name="cache_menu_reset_foundstate">重置找到状态</string>
+    <string name="cache_foundstate_updated">找到状态已更新</string>
     <string name="cache_menu_set_cache_icon">设置藏点图标</string>
     <string name="cache_menu_change_description_style">更改描述样式</string>
     <string name="cache_icon_updated">藏点图标已更新</string>
     <string name="cache_menu_details">详细资料</string>
     <string name="cache_menu_refresh">刷新</string>
     <string name="cache_menu_share">分享藏点</string>
+    <string name="cache_menu_share_with_data">分享 (含用户数据)</string>
     <string name="cache_menu_move_list">移动到另一个列表</string>
     <string name="cache_menu_copy_list">复制到另一个列表</string>
-    <string name="cache_menu_vote">投票</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (在线)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (离线)</string>
+    <string name="cache_menu_challenge_checker">扫描挑战验证器</string>
     <string name="cache_menu_log_in_browser">在浏览器中写日志</string>
     <string name="cache_menu_ignore">忽略藏点</string>
     <string name="cache_log_menu_decrypt">解密/加密</string>
     <string name="cache_log_menu_edit">编辑日志</string>
+    <string name="menu_expand_log">展开日志</string>
+    <string name="menu_collapse_log">折叠日志</string>
     <string name="cache_log_menu_delete">删除日志</string>
     <string name="cache_log_menu_popup_title">%s 日志</string>
     <string name="cache_log_delete_reason_default">日志已使用 c:geo 删除</string>
     <string name="ignore_confirm_title">小心</string>
+    <string name="ignore_confirm_message">忽略藏点意味着当从地理定位加载数据时，这个藏点将永远不会再次出现。 您只能在网站上取消忽略它才能再次看到藏点。</string>
     <string name="cache_status">状态</string>
     <string name="cache_status_offline_log">保存的日志</string>
     <string name="cache_status_attended">已参加</string>
@@ -1499,7 +1596,7 @@
     <string name="cache_status_disabled">已下线</string>
     <string name="cache_status_active">在线</string>
     <string name="cache_status_premium">仅限 Premium 会员</string>
-    <string name="cache_geocode">Geocode</string>
+    <string name="cache_geocode">藏点编号（GC码）</string>
     <string name="cache_name">名字</string>
     <string name="cache_name_set">设置藏点名字</string>
     <string name="cache_name_updated">藏点名字已更新</string>
@@ -1510,7 +1607,7 @@
     <string name="cache_mode">模式</string>
     <string name="cache_mode_linear">线性</string>
     <string name="cache_mode_random">随机</string>
-    <string name="cache_distance">游览路程</string>
+    <string name="cache_distance">距离</string>
     <string name="cache_difficulty">藏点难度</string>
     <string name="cache_terrain">地形难度</string>
     <string name="cache_difficulty_terrain">D/T</string>
@@ -1520,6 +1617,7 @@
     <string name="cache_favorite">我的最爱</string>
     <string name="cache_owner">宝主</string>
     <string name="cache_hidden">隐藏</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">日期</string>
     <string name="cache_location">地点</string>
     <string name="cache_coordinates">坐标</string>
@@ -1540,80 +1638,203 @@
     <string name="cache_image_rename">重命名</string>
     <string name="cache_image_delete">删除</string>
     <string name="cache_image_title_camera_prefix">照片</string>
+    <string name="cache_image_background">藏点介绍背景图片</string>
     <string name="cache_share_field">分享</string>
     <string name="cache_time_full_hours">点</string>
-    <string name="cache_whereyougo_start">打开 WhereYouGo来下载并启动此cartridge</string>
-    <string name="cache_whereyougo_install">安装WhereYouGo来下载并启动此cartridge</string>
+    <string name="cache_listed_on">发布于 %s</string>
+    <string name="cache_recently_viewed">最近查看</string>
+    <string name="cache_recently_viewed_empty">没有最近查看的藏点</string>
+    <string name="cache_clear_recently_viewed">清除</string>
+    <string name="cachedetails_progress_refresh">%s已刷新</string>
+    <string name="cachedetails_progress_watch">已添加到关注列表</string>
+    <string name="cachedetails_progress_unwatch">已从关注列表中移除</string>
+    <string name="cachedetails_progress_favorite">已添加到收藏</string>
+    <string name="cachedetails_progress_unfavorite">已从收藏中移除</string>
+    <string name="cache_multiple_wherigo_cartridges_title">多个 Wherigo 卡带</string>
+    <string name="cache_multiple_wherigo_cartridges_message">请查阅藏点介绍以获取关于卡带的更多信息。</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - 未下载</string>
+    <string name="cache_wherigo_start">使用 c:geo 内置播放器下载并游玩此 Wherigo</string>
+    <string name="cache_wherigo_credentials">为了使用 c:geo 内置播放器游玩此 Wherigo，您需要先通过 geocaching.com 服务授权。点击右侧按钮进入配置。</string>
+    <string name="cache_chirpwolf_start">此藏点可能使用了 Chirp 发射器或其他类型的无线信标。您可以打开 Chirp Wolf 来读取 Chirp 数据。</string>
+    <string name="cache_chirpwolf_install">此藏点可能使用了 Chirp 发射器或其他类型的无线信标。您可以安装 Chirp Wolf 来读取 Chirp 数据。</string>
     <string name="cache_alc_start">打开Adventure Lab来开始这个adventure</string>
+    <string name="cache_alc_related_start">打开 Adventure Lab 开始游玩相关冒险</string>
+    <string name="cache_alc_install">安装 Adventure Lab 播放器以游玩此冒险</string>
+    <string name="cache_bettercacher_open">在 BetterCacher.org 上打开藏点</string>
     <string name="context_share_as_text">分享文本</string>
     <string name="context_share_as_link">分享链接</string>
     <string name="image_category_uncategorized">未分类</string>
+    <string name="image_category_own">自有</string>
+    <string name="image_category_listing">介绍</string>
+    <string name="image_category_log">日志</string>
+    <string name="image_listing_spoiler">剧透</string>
+    <string name="image_listing_background">背景</string>
+    <string name="image_listing_gallery">图库</string>
+    <string name="context_map_add_to_route">追加到路线</string>
+    <string name="context_map_add_to_route_start">添加到路线开头</string>
+    <string name="context_map_remove_from_route_start">从开头移除</string>
+    <string name="context_map_remove_from_route_pos">从位置 %d 移除</string>
+    <string name="context_map_remove_from_route_end">从末尾移除</string>
+    <string name="context_map_star_show">显示到航点的连线</string>
+    <string name="context_map_star_hide">隐藏到航点的连线</string>
+    <string name="edit">编辑</string>
+    <string name="showElevationChart">显示海拔图表</string>
+    <string name="create_internal_cache">创建自定义藏点</string>
     <string name="create_internal_cache_short">新藏点</string>
+    <string name="create_internal_cache_currentlist">使用当前列表</string>
+    <string name="internal_cache_default_names">自定义藏点 #%1$s</string>
+    <string name="internal_cache_default_description">这是一个自定义藏点</string>
+    <string name="internal_cache_default_owner">您</string>
+    <string name="internal_goto_targets_title">“前往”目标</string>
+    <string name="internal_goto_targets_description">此藏点存储了您最近的“前往”目标。一旦您使用了主菜单中的“前往”功能，它就会自动创建。输入的坐标将存储为此藏点的航点。如果您不再需要这些坐标，可以安全地删除此藏点或其任何航点。您也可以将此藏点移动到您选择的任何其他列表中。</string>
     <string name="goto_targets_deprecation_title">废弃功能提醒</string>
     <string name="goto_targets_deprecation_notice">“转到”功能已废弃，并将在未来版本中删除该功能。请使用“用户自定义宝藏”功能。</string>
     <string name="init_longtap_map">长按地图</string>
+    <string name="init_summary_longtap_map">启用地图图标长按 (创建个人路线) 或地图空白处长按 (创建自定义藏点 / 航点)</string>
+    <string name="init_show_routing_menu">显示路线菜单</string>
+    <string name="init_summary_show_routing_menu">长按藏点会显示一个带有高级选项的菜单，用于将藏点添加至路线或从路线中移除。如果禁用，藏点将直接被添加或移除。</string>
+    <string name="init_ActionbarAutohide">点击时隐藏工具栏</string>
+    <string name="init_summary_ActionbarAutohide">点击地图空白处以隐藏/显示工具栏</string>
+    <string name="init_autozoom_consider_lastcenter">在地图上显示列表时恢复地图位置</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">当在地图上显示藏点列表时，如果之前离开地图时的位置在列表范围内，则恢复预览位置，否则缩放以适应所有藏点。</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">当在地图上显示藏点列表时，设置地图缩放和边界以适应所有藏点。</string>
+    <string name="goto_targets_list">自定义藏点</string>
+    <string name="clear_goto_history_title">清除前往历史</string>
+    <string name="clear_goto_history">这将删除除最近五个以外的所有历史航点</string>
+    <string name="internal_connector_name">自定义藏点</string>
     <!-- html styles -->
     <string name="html_style_default">默认</string>
+    <string name="html_style_default_no_contrast_fix">默认 (无对比度修正)</string>
     <string name="html_style_monochrome">黑白</string>
+    <string name="html_style_source_formatted">HTML 源码格式化</string>
     <string name="html_style_source">HTML源</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
     <string name="cc_hint_fraction">分数</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">从 %1$s 加载藏点</string>
     <string name="gpx_import_loading_waypoints_with_filename">从 %1$s 加载waypoint</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="other">已从 %2$s 导入 %1$d 个藏点</item>
+    </plurals>
+    <string name="gpx_import_static_maps_skipped">静态地图下载已中止</string>
     <string name="gpx_import_title_reading_file">正在读取文件</string>
     <string name="gpx_import_title">导入 GPX</string>
+    <string name="gpx_import_title_caches_imported">结果</string>
     <string name="gpx_import_title_caches_import_failed">导入失败</string>
     <string name="gpx_import_error_io">无法读取文件</string>
     <string name="gpx_import_error_parser">文件格式错误</string>
     <string name="gpx_import_error_unexpected">未知错误</string>
+    <string name="gpx_import_canceled_with_filename">来自 %1$s 的 GPX 导入已取消</string>
+    <string name="gpx_import_select_list_title">导入 GPX 到列表</string>
     <!-- import -->
     <string name="web_import_title">从 Send2cgeo 导入</string>
+    <string name="web_import_waiting">正在等待来自 send2cgeo 的新藏点…</string>
     <string name="web_downloading">正在下载</string>
     <string name="web_downloaded">已下载</string>
     <!-- popup -->
     <string name="popup_more">更多详情</string>
+    <string name="map_fragment_swipe_hint_text">滑动以打开详情</string>
     <!-- waypoint -->
+    <string name="waypoint">航点</string>
     <string name="waypoint_coordinates">坐标</string>
     <string name="waypoint_cache_coordinates">藏点坐标</string>
     <string name="waypoint_calculated_coordinates_global">计算坐标</string>
+    <string name="waypoint_select_from_map">从地图选择</string>
+    <string name="waypoint_custom">自定义</string>
     <string name="waypoint_my_coordinates">我的坐标</string>
-    <string name="waypoint_my_coordinates_accuracy">当前所在位置 (±%s)</string>
+    <string name="waypoint_my_coordinates_accuracy">当前所在位置 (精度：±%s)</string>
     <string name="waypoint_name">名字</string>
     <string name="waypoint_edit">编辑</string>
+    <string name="waypoint_geofence">地理围栏</string>
+    <string name="waypoint_geofence_summary">设置地理围栏半径 (单位：米)</string>
     <string name="waypoint_copy_coordinates">复制坐标</string>
     <string name="waypoint_clear_coordinates">清除坐标</string>
     <string name="waypoint_delete">删除</string>
     <string name="waypoint_edit_title">编辑路径点</string>
     <string name="waypoint_add_title">添加途经点</string>
     <string name="waypoint_added">已添加路径点</string>
+    <string name="waypoint_added_current_location">航点 (%1$s) 已添加 (精度：±%2$s)</string>
     <string name="waypoint_note">备注</string>
+    <string name="waypoint_user_note">用户备注</string>
     <string name="waypoint_visited">已到访</string>
+    <string name="waypoint_set_visited">航点已设为已访问</string>
+    <string name="waypoint_set_visited_types">将航点设为已访问</string>
+    <string name="waypoint_unset_visited">航点已设为未访问</string>
     <string name="waypoint_save">保存</string>
-    <string name="waypoint_loading">正在加载路径点</string>
+    <string name="waypoint_loading">正在加载航点…</string>
+    <string name="waypoint_do_not_touch_cache_coordinates">不更改藏点坐标</string>
+    <string name="waypoint_set_as_cache_coords">在 c:geo 中设为藏点坐标</string>
+    <string name="waypoint_save_and_modify_on_website">在 c:geo 和网站上同时设为藏点坐标</string>
     <string name="waypoint_reset_cache_coords">重置藏点坐标</string>
+    <string name="waypoint_coordinates_has_been_reset_on_website">藏宝坐标已在网站上更新。</string>
     <string name="waypoint_localy_reset_cache_coords">在c:geo重置</string>
+    <string name="waypoint_reset_local_and_remote_cache_coords">在 c:geo 和网站上同时更新</string>
+    <string name="waypoint_coordinates_couldnt_be_modified_on_website">网站不支持修改藏点坐标。</string>
+    <string name="waypoint_coordinates_upload_error">在网站上修改坐标时发生错误。</string>
+    <string name="waypoint_coordinates_has_been_modified_on_website">网站上的藏点坐标已修改为：%s。</string>
     <string name="waypoint_done">已完成</string>
+    <string name="waypoint_duplicate">复制航点</string>
+    <string name="waypoint_toclipboard">复制航点到剪贴板</string>
+    <string name="waypoint_copy_of">（副本）</string>
+    <string name="waypoint_open_geochecker">打开 Geochecker</string>
+    <string name="waypointcalc_notes_prompt">在此输入备注…</string>
+    <string name="waypoint_coordinate_formats_plain">纯文本</string>
     <string name="from_clipboard">从剪贴板</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
+    <string name="copied_to_clipboard">已复制到剪贴板</string>
     <!-- Projection -->
+    <string name="projection_type_none">无投影</string>
+    <string name="projection_type_bearing">方位角</string>
+    <string name="projection_type_bearing_info">方位角 %1$s%3$s, %2$s°</string>
     <string name="projection_type_bearing_hint_angle">方位角（°）</string>
+    <string name="projection_type_bearing_hint_distance">距离</string>
+    <string name="projection_type_offset">偏移量</string>
+    <string name="projection_type_offset_info">偏移 纬度 %1$s mm, 经度 %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">纬度偏移 (微秒)</string>
+    <string name="projection_type_offset_hint_longitude">经度偏移 (微秒)</string>
     <!-- Variables -->
     <string name="variables_titletext">使用此页面来记下值并进行此寻找藏点所需的计算。</string>
+    <string name="variables_titletext_short">数值与计算</string>
+    <string name="variables_scanlisting">扫描介绍</string>
+    <string name="variables_scanlisting_choosepattern_title">选择匹配模式</string>
+    <string name="variables_scanlisting_nopatternfound">未能匹配模式</string>
+    <string name="variables_tidyup">整理</string>
     <string name="variables_deleteall">全部刪除</string>
+    <string name="variables_add">添加变量</string>
+    <string name="variables_add_next">添加下一个变量</string>
+    <string name="variables_deleteall_confirm_text">您确定要删除此藏点的所有变量吗？</string>
     <string name="variables_info">帮助</string>
     <string name="variables_varname_dialog_title">变量名称</string>
     <string name="variables_varname_dialog_message">输入变量名称 (可为空)</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">引导模式</string>
     <string name="calccoord_guided_edit">点击一个数字进行编辑</string>
+    <string name="calccoord_guided_value">数值</string>
+    <string name="calccoord_select_variable">选择变量</string>
+    <string name="calccoord_new_variable">**%s** *(新建)*</string>
+    <string name="calccoord_convert_to_plain">转换为普通坐标</string>
+    <string name="calccoord_convert_to_plain_error">该公式无法计算出有效的坐标。\n转换为普通坐标会将该航点重置为空坐标。</string>
+    <string name="calccoord_plain_tools_title">普通工具</string>
     <string name="calccoord_remove_spaces">移除空格</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">将“x”替换为“*”</string>
     <string name="calccoord_paste_from_clipboard">从剪切板中粘贴</string>
     <string name="calccoord_generate_title">创建途经点</string>
     <string name="calccoord_generate_showonmap">地图上显示</string>
+    <string name="calccoord_generate_waypointnameprefix">已生成</string>
     <string name="calccoord_generate_error_novarwithrange">找不到范围内的有效变量 (e.g: [:0-9] 或 [:0,2,7])</string>
+    <string name="calccoord_generate_error_novalidgeopoints">没有组合返回有效的坐标</string>
+    <string name="calccoord_generate_error_nogeopointselected">未选择坐标</string>
+    <string name="calccoord_migrate_title">航点迁移</string>
+    <string name="calccoord_migrate_migrate">迁移</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">迁移自</string>
+    <string name="calccoord_migrate_cancel">取消</string>
+    <string name="calccoord_migrate_dismiss">放弃数据</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">已放弃</string>
+    <string name="calccoord_migrate_infotext_markdown">在此航点中发现旧版坐标计算：\n\n%1$s\n\n您可以将其迁移到新的藏点计算坐标，如下所示：\n\n%2$s\n\n包含新藏点变量：%3$s\n\n请选择：\n- %4$s 按建议执行迁移\n- %5$s 永久放弃发现的计算数据\n- %6$s 继续而不迁移。下次打开航点编辑时将再次询问。请注意，编辑航点坐标可能会删除本地计算数据。</string>
     <!-- Formula -->
     <string name="formula">公式</string>
     <string name="formula_choose_function">选择函数</string>
@@ -1628,27 +1849,94 @@
     <string name="formula_function_length">字符串长度</string>
     <string name="formula_function_substring">子字符串</string>
     <string name="formula_function_chars">选择字符</string>
+    <string name="formula_function_rot13">ROT13 变换</string>
+    <string name="formula_function_rot">ROT 变换</string>
+    <string name="formula_function_checksum">Checksum</string>
+    <string name="formula_function_ichecksum">迭代Checksum</string>
+    <string name="formula_function_lettervalue">Word Value</string>
+    <string name="formula_function_roman">罗马数字转十进制</string>
+    <string name="formula_function_vanity">虚荣代码 (Vanity Code)</string>
+    <string name="formula_function_add">加</string>
+    <string name="formula_function_multiply">乘</string>
+    <string name="formula_function_min">最小值</string>
+    <string name="formula_function_max">最大值</string>
+    <string name="formula_function_count">计数</string>
+    <string name="formula_function_average">平均值</string>
+    <string name="formula_function_group_simplenumeric">简单数值</string>
+    <string name="formula_function_group_complexnumeric">复杂数值</string>
+    <string name="formula_function_group_aggregatenumeric">聚合数值</string>
+    <string name="formula_function_group_simplestring">简单字符串</string>
+    <string name="formula_function_group_complexstring">复杂字符串</string>
+    <string name="formula_error_unexpectedtoken">预期为“%1$s”</string>
+    <string name="formula_error_wrongparamcount">参数数量错误，预期 %1$s-%2$s，实际为 %3$s</string>
+    <string name="formula_error_wrongtype">类型错误，预期“%1$s”，实际为类型“%3$s”的“%2$s”</string>
+    <string name="formula_error_missingvarvalue">缺失：%1$s</string>
+    <string name="formula_error_cyclicdependency">循环依赖：%1$s</string>
+    <string name="formula_error_empty">空公式</string>
+    <string name="formula_error_numeric_overflow">数值溢出</string>
+    <string name="formula_error_invalid_range">无效范围：%1$s</string>
+    <string name="formula_error_other">错误：“%1$s”</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">无标题</string>
+    <string name="imageview_mimetype">Mime 类型</string>
+    <string name="imageview_width_height">%1$d x %2$d 像素</string>
     <string name="imageview_error">无法加载图片</string>
+    <string name="imageview_metadata_geopoint">地理坐标点</string>
+    <string name="imageview_metadata_comment">评论</string>
     <!-- map -->
     <string name="map_map">地图</string>
+    <string name="map_live">在线藏点地图</string>
+    <string name="map_offline">离线</string>
+    <string name="map_view_map">地图视图</string>
+    <string name="map_rotation">地图朝向</string>
+    <string name="map_dot_mode">使用紧凑图标</string>
+    <string name="map_show_circles">宝盒禁区圈</string>
+    <string name="map_showc_own">自己的</string>
     <string name="map_showc_found">已找到</string>
     <string name="map_showc_disabled">已下线</string>
     <string name="map_showc_archived">已归档</string>
+    <string name="map_showc_found_offline">已找到 (离线)</string>
+    <string name="map_showwp_original">原始</string>
+    <string name="map_showwp_parking">停车点</string>
+    <string name="map_showwp_visited">已访问</string>
+    <string name="init_renderthemefolder_synctolocal">同步主题</string>
+    <string name="init_summary_renderthemefolder_synctolocal">这将把您的主题同步到应用私有文件夹中，以牺牲部分设备存储空间为代价来提高地图查看器的启动性能。</string>
+    <string name="onetime_mapthemefixslow_title">修复地图主题渲染缓慢</string>
+    <string name="onetime_mapthemefixslow_message">使用未压缩的地图主题可能会降低地图查看器的启动性能。您可以压缩或同步您的主题，以获得更快的性能并减少启动地图时的延迟。</string>
+    <string name="map_theme_select">选择地图主题</string>
+    <string name="map_theme_options">主题选项</string>
     <string name="map_language">地图语言</string>
-    <string name="map_live_enable">启用实时模式</string>
-    <string name="map_live_disable">禁用实时模式</string>
-    <string name="map_live_disabled">实时模式已禁用</string>
-    <string name="map_live_disabled_hint">实时模式已禁用。您只能看到已保存的藏点。在菜单中启用实时模式</string>
+    <string name="map_live_enable">启用在线藏点地图</string>
+    <string name="map_live_disable">禁用在线藏点地图</string>
+    <string name="map_live_disabled">在线藏点地图已禁用</string>
+    <string name="map_live_disabled_hint">在线藏点地图已禁用。您只能看到已保存的藏点。在菜单中启用实时模式。</string>
     <string name="map_as_list">显示为列表</string>
     <string name="map_select_multiple_items">请选择</string>
+    <string name="map_routing">路线规划</string>
+    <string name="map_routing_activate_title">启用路线规划</string>
+    <string name="map_routing_activate">由于没有激活路线引擎，某些路线规划模式目前不可用。\n\n您是否要激活 c:geo 的内置路线引擎并下载路线数据？</string>
+    <string name="map_autorotation">地图自动旋转</string>
+    <string name="map_autorotation_disable">是否禁用地图自动旋转？\n\n您可以通过“地图旋转”菜单再次启用它</string>
     <string name="quick_settings">快速设置</string>
+    <string name="quick_settings_info">部分地图设置 (地图设置、隐藏、路线规划) 已移至新的“快捷设置”弹出窗口。\n您可以通过地图底部中央的图标打开此窗口。</string>
+    <string name="zoom_in">放大</string>
+    <string name="zoom_out">缩小</string>
+    <string name="other_settings">其他设置</string>
     <string name="map_show_caches_title">显示藏点：</string>
+    <string name="map_show_waypoints_title">显示航点：</string>
     <string name="map_show_other_title">显示其它</string>
+    <string name="map_settings_cache_filter_too_complex_title">藏点过滤器过于复杂</string>
+    <string name="map_settings_cache_filter_too_complex_message">当前的藏点过滤器过于复杂，无法在此应用额外选项。这通常意味着过滤器包含 NOT 或 OR 表达式，而非简单的 AND 逻辑。</string>
+    <string name="google_maps_style_default">默认</string>
+    <string name="google_maps_style_night">夜间</string>
+    <string name="google_maps_style_classic">经典</string>
+    <string name="google_maps_style_retro">复古</string>
+    <string name="google_maps_style_contrast">高对比度</string>
     <string name="google_maps_style_auto">设备主题 (日间/夜间)</string>
     <string name="google_maps_option_group_map">地图选项</string>
     <string name="google_maps_option_show_traffic">显示路况</string>
     <string name="google_maps_option_show_buildings">显示三维建筑</string>
+    <string name="google_maps_option_group_theme">主题选项</string>
     <string name="google_maps_option_show_feature_theme">显示主题功能</string>
     <string name="google_maps_option_show_feature_administrative_all">显示行政区</string>
     <string name="google_maps_option_show_feature_landscape_all">显示横屏</string>
@@ -1662,45 +1950,132 @@
     <string name="search_bar_hint_settings">搜索设置</string>
     <string name="search_coordinates">坐标</string>
     <string name="search_address">地址</string>
+    <string name="search_geo">藏点编号（GC码）</string>
     <string name="search_kw">关键词</string>
     <string name="search_kw_disabled_hint">由于您是BASIC会员，该功能已被禁用</string>
     <string name="search_hbu">藏宝者</string>
     <string name="search_finder">发现者：</string>
     <string name="search_filter">筛选器</string>
+    <string name="search_filter_info_message" formatted="false">**按过滤器搜索**会使用提供的过滤器在所有活跃的在线服务 (如 geocaching.com) 上搜索藏点。然而，这些服务的搜索能力通常比 c:geo 的过滤功能更有限。\n\n- 所有服务仅支持 AND 过滤器 (不支持 OR 过滤器和过滤器反转)。\n- 所有服务都支持**藏点类型**或**藏点规格**等基础过滤器。更复杂的过滤器通常不受支持或存在限制，例如**收藏点**或**隐藏日期**。\n- 各服务支持的过滤器详细列表可以在[此处](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)找到。\n\n在线服务不支持的过滤器将由 c:geo 应用于接收到的结果上。</string>
     <string name="search_tb">旅行虫</string>
     <string name="most_recent">最近</string>
     <string name="search_destination">在c:geo中打开目的地</string>
+    <string name="add_target_to">添加目标到</string>
     <string name="search_address_started">搜索地点</string>
     <string name="search_address_result">找到的地点</string>
     <string name="search_own_caches">我的藏点</string>
+    <string name="search_pocket_title">Pocket Query</string>
+    <string name="search_bookmark_list">书签列表</string>
+    <string name="search_pocket_is_new">新的</string>
+    <string name="search_pocket_loading">正在加载 Pocket Query</string>
+    <string name="search_bookmark_loading">正在加载书签列表</string>
+    <string name="search_bookmark_select">选择书签列表</string>
+    <string name="search_bookmark_new">创建新书签列表</string>
+    <string name="search_bookmark_adding_caches_success">所有 GC 藏点已添加到选定的书签列表</string>
+    <string name="search_bookmark_adding_caches_failed">无法将藏点添加到书签列表</string>
+    <string name="search_bookmark_create_new_failed">无法创建新书签列表</string>
     <!-- trackable -->
     <string name="trackable">旅行虫</string>
+    <string name="trackable_details_loading">正在加载追踪物详情…</string>
+    <string name="trackable_log_touch">记录接触 (Touch)</string>
     <string name="trackable_browser_open">在浏览器中打开</string>
     <string name="trackable_refresh">刷新</string>
+    <string name="trackable_goal">目标</string>
     <string name="trackable_details">详情</string>
     <string name="trackable_image">图片</string>
+    <string name="trackable_code">追踪物编号</string>
     <string name="trackable_name">名称</string>
+    <string name="trackable_brand">品牌</string>
     <string name="trackable_type">类型</string>
     <string name="trackable_owner">宝主</string>
+    <string name="trackable_spotted">现身于</string>
+    <string name="trackable_spotted_in_cache">位于</string>
     <string name="trackable_spotted_at_user">在谁的手上</string>
     <string name="trackable_spotted_unknown_location">未知位置</string>
     <string name="trackable_spotted_owner">在其所有者的手中</string>
     <string name="trackable_spotted_archived">已归档</string>
+    <string name="trackable_origin">来源</string>
+    <string name="trackable_unknown">未知</string>
+    <string name="trackable_released">发布日期</string>
+    <string name="trackable_distance">旅行距离</string>
+    <string name="trackable_touch">接触 (Touch)</string>
+    <string name="trackable_not_activated">追踪物未激活</string>
+    <string name="trackable_travelbug">旅行虫</string>
+    <string name="trackable_status">状态</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
+    <string name="geokret_type_traditional">传统</string>
+    <string name="geokret_type_book_or_media">书籍或电子媒体</string>
+    <string name="geokret_type_human">人类</string>
+    <string name="geokret_type_coin">硬币</string>
+    <string name="geokret_type_post">邮件</string>
     <!-- user -->
+    <string name="user_menu_title">关于</string>
+    <string name="user_menu_view_hidden">发布的藏点</string>
+    <string name="user_menu_view_found">找到的藏点</string>
+    <string name="user_menu_open_browser">在浏览器中打开个人资料</string>
+    <string name="user_menu_send_message">发送消息</string>
+    <string name="user_menu_send_email">发送电子邮件</string>
+    <string name="user_menu_open_contact">在联系人中搜索</string>
+    <string name="user_unknown">未知用户</string>
     <!-- navigation -->
+    <string name="navigation">导航</string>
+    <string name="compass_title">指南针</string>
+    <string name="use_gps">仅使用 GPS</string>
+    <string name="use_compass">融合定位</string>
+    <string name="destination_select">选择目的地</string>
+    <string name="navigation_direct_navigation">直线导航</string>
+    <string name="osmand_marker_cgeo">来自 c:geo 的标记</string>
+    <string name="device_heading_label">设备：</string>
+    <string name="device_orientation">方向</string>
+    <string name="device_orientation_label">方向：</string>
     <!-- device orientation types -->
+    <string name="do_unknown">未知</string>
+    <string name="do_auto">自动</string>
+    <string name="do_flat">水平</string>
+    <string name="do_upright">垂直</string>
     <!-- helpers -->
+    <string name="helper_calendar_pastevent_title">过去的 Event</string>
+    <string name="helper_calendar_pastevent_question">该 Event 日期已过。仍然添加吗？</string>
     <string name="helper_sendtocgeo_title">发送至 c:geo</string>
     <string name="helper_sendtocgeo_description">Send to c:geo是一个<strong>电脑上</strong>的浏览器插件。当你浏览geocaching.com的时候，你可以点击按钮把藏点发送到你的手机上。</string>
     <string name="helper_locus_description">您的手机或平板电脑的户外导航应用。离线查看地形图，跟踪您的路线，寻宝，使用语音导览，甚至做更多的事情。</string>
     <string name="helper_gpsstatus_description">您可以在此应用程序中与 c:geo一起使用雷达。它还提供许多其他与GPS相关的信息。</string>
     <string name="helper_gps_locker_description">GPS Locker可以在你切换应用或者熄屏的时候依然保持GPS信号。</string>
     <string name="helper_google_translate_title">Google 翻译</string>
+    <string name="helper_google_translate_description">如果您在 Google 翻译应用中下载了离线翻译包，则可以通过长按藏点介绍文本，在 c:geo 中轻松翻译 (无需互联网连接)。</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf 允许您读取 ANT+/Garmin Chirp 标签的数据，这是 ANT+/Chirp 藏点所必需的。</string>
+    <string name="helper_alc_description">适用于手机或平板电脑的 Adventure Lab 播放器应用。</string>
+    <string name="helper_gcwizard_description">GC Wizard 包含大量用于简单密码学、大地测量和科学计算的工具，以及数百套各种符号。</string>
     <!-- export -->
+    <string name="share_export">分享 / 导出</string>
+    <string name="export">导出</string>
+    <string name="export_upload">导出 / 上传</string>
+    <string name="export_progress">导出：%1$s</string>
+    <string name="export_exportedto">已导出到</string>
+    <string name="export_failed">导出失败</string>
+    <string name="export_gpx">导出 GPX</string>
+    <string name="export_fieldnotes">导出野外笔记 (Field Notes)</string>
+    <string name="fieldnotes">野外笔记</string>
+    <string name="export_fieldnotes_info">野外笔记将导出到 /sdcard/field-notes，并以当前日期和时间作为文件名。</string>
+    <string name="export_fieldnotes_upload">上传到 geocaching.com</string>
+    <string name="export_fieldnotes_uploading">正在上传…</string>
+    <string name="export_fieldnotes_upload_success">上传到 geocaching.com 成功</string>
+    <string name="export_fieldnotes_onlynew">仅限上次导出后的内容</string>
+    <string name="export_fieldnotes_creating">正在创建野外笔记…</string>
+    <string name="export_gpx_info">GPX 文件将导出到 %1$s，并以当前日期和时间作为文件名。</string>
+    <string name="export_confirm_title">正在导出 %1$s</string>
+    <string name="export_confirm_message">目标路径：%1$s\n文件名：%2$s</string>
+    <string name="export_persnotes">上传个人备注</string>
+    <string name="export_persnotes_uploading">正在上传个人备注 %1$d</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="other">成功上传了 %1$d 条备注</item>
+    </plurals>
     <string name="export_modifiedcoords">更改后的坐标</string>
     <string name="export_modifiedcoords_uploading">%1$d已上传</string>
     <string name="export_modifiedcoords_success">上传成功</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">上传完成：%1$d 失败 / %2$d 成功</string>
     <string name="export_modifiedcoords_error">上传失败</string>
+    <string name="filename_without_extension">文件名 (不含扩展名)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">狗狗允许</string>
     <string name="attribute_dogs_no">狗狗禁止</string>
@@ -1708,7 +2083,10 @@
     <string name="attribute_bicycles_no">自行车禁止</string>
     <string name="attribute_motorcycles_yes">摩托车允许</string>
     <string name="attribute_motorcycles_no">摩托车禁止</string>
+    <string name="attribute_quads_yes">允许四轮摩托车</string>
+    <string name="attribute_quads_no">禁止四轮摩托车</string>
     <string name="attribute_jeeps_yes">允许越野车</string>
+    <string name="attribute_jeeps_no">禁止越野车辆</string>
     <string name="attribute_snowmobiles_yes">允许雪地摩托</string>
     <string name="attribute_snowmobiles_no">禁止雪地摩托</string>
     <string name="attribute_horses_yes">马匹允许</string>
@@ -1721,7 +2099,7 @@
     <string name="attribute_kids_no">不适合孩童</string>
     <string name="attribute_onehour_yes">少于一小时</string>
     <string name="attribute_onehour_no">大于一小时</string>
-    <string name="attribute_scenic_yes">观景台</string>
+    <string name="attribute_scenic_yes">景点</string>
     <string name="attribute_scenic_no">无景观</string>
     <string name="attribute_hiking_yes">高强度徒步</string>
     <string name="attribute_hiking_no">无高强度徒步</string>
@@ -1734,6 +2112,7 @@
     <string name="attribute_night_yes">推荐夜间前往</string>
     <string name="attribute_night_no">不推荐夜间前往</string>
     <string name="attribute_winter_yes">冬季可前往</string>
+    <string name="attribute_cacti_yes">附近有仙人掌</string>
     <string name="attribute_winter_no">冬季不可前往</string>
     <string name="attribute_stealth_yes">需要小心麻瓜</string>
     <string name="attribute_stealth_no">无需小心麻瓜</string>
@@ -1743,6 +2122,8 @@
     <string name="attribute_field_puzzle_no">无需现场解谜</string>
     <string name="attribute_nightcache_yes">夜间藏点</string>
     <string name="attribute_nightcache_no">非夜间藏点</string>
+    <string name="attribute_parkngrab_yes">即停即取</string>
+    <string name="attribute_parkngrab_no">非即停即取</string>
     <string name="attribute_abandonedbuilding_yes">废弃建筑</string>
     <string name="attribute_abandonedbuilding_no">无废弃建筑</string>
     <string name="attribute_hike_short_yes">短程徒步(小于1公里)</string>
@@ -1759,6 +2140,10 @@
     <string name="attribute_frontyard_no">非私人住宅</string>
     <string name="attribute_teamwork_yes">需要团队合作</string>
     <string name="attribute_teamwork_no">无需团队合作</string>
+    <string name="attribute_landf_yes">Lost and found tour</string>
+    <string name="attribute_landf_no">不是Lost and found tour</string>
+    <string name="attribute_partnership_yes">合作伙伴藏点</string>
+    <string name="attribute_partnership_no">非合作伙伴藏点</string>
     <string name="attribute_fee_yes">需要过路费或停车费</string>
     <string name="attribute_rappelling_yes">需要攀爬装备</string>
     <string name="attribute_boat_yes">需要船只</string>
@@ -1768,6 +2153,7 @@
     <string name="attribute_snowshoes_yes">需要雪地靴</string>
     <string name="attribute_skiis_yes">需要越野雪橇</string>
     <string name="attribute_s_tool_yes">需要特殊工具</string>
+    <string name="attribute_wirelessbeacon_yes">无线信标</string>
     <string name="attribute_treeclimbing_yes">需要爬树</string>
     <string name="attribute_treeclimbing_no">无需爬树</string>
     <string name="attribute_poisonoak_yes">注意有毒植物</string>
@@ -1800,6 +2186,12 @@
     <string name="attribute_fuel_no">附近无加油站</string>
     <string name="attribute_food_yes">附近有餐饮</string>
     <string name="attribute_food_no">附近无餐饮</string>
+    <string name="attribute_oc_only_yes">只能在 Opencaching 写日志</string>
+    <string name="attribute_oc_only_no">不只能在 Opencaching 写日志</string>
+    <string name="attribute_link_only_yes">仅提供指向另一个藏点门户的超链接</string>
+    <string name="attribute_link_only_no">不仅是一个指向另一个藏点门户的超链接</string>
+    <string name="attribute_letterbox_yes">信箱 (需要印章)</string>
+    <string name="attribute_letterbox_no">非信箱 (不需要印章)</string>
     <string name="attribute_railway_yes">附近有活动的铁道</string>
     <string name="attribute_railway_no">附近没有活动的铁道</string>
     <string name="attribute_syringe_yes">有急救服务</string>
@@ -1820,11 +2212,50 @@
     <string name="attribute_inside_no">非封闭空间</string>
     <string name="attribute_in_water_yes">在水里</string>
     <string name="attribute_in_water_no">不在水里</string>
+    <string name="attribute_no_gps_yes">非 GPS 寻宝方式（信箱宝、指南针定向等）</string>
+    <string name="attribute_no_gps_no">需要 GPS</string>
     <string name="attribute_overnight_yes">需要过夜</string>
     <string name="attribute_overnight_no">无需过夜</string>
+    <string name="attribute_specific_times_yes">仅在指定时间可用</string>
+    <string name="attribute_specific_times_no">不仅在指定时间可用</string>
+    <string name="attribute_day_yes">仅限白天</string>
+    <string name="attribute_day_no">不仅限白天</string>
+    <string name="attribute_tide_yes">受潮汐影响</string>
+    <string name="attribute_tide_no">不受潮汐影响</string>
+    <string name="attribute_all_seasons_yes">全季节可用</string>
+    <string name="attribute_all_seasons_no">非全季节可用</string>
+    <string name="attribute_breeding_yes">繁殖季节 / 自然保护区</string>
+    <string name="attribute_breeding_no">非繁殖季节 / 非自然保护区</string>
+    <string name="attribute_snow_proof_yes">防雪藏匿点</string>
+    <string name="attribute_snow_proof_no">非防雪藏匿点</string>
+    <string name="attribute_compass_yes">需要罗盘</string>
+    <string name="attribute_compass_no">不需要罗盘</string>
+    <string name="attribute_cave_yes">需要洞穴装备</string>
+    <string name="attribute_cave_no">不需要洞穴装备</string>
+    <string name="attribute_aircraft_yes">需要飞行器</string>
+    <string name="attribute_aircraft_no">不需要飞行器</string>
+    <string name="attribute_investigation_yes">需要调查</string>
+    <string name="attribute_investigation_no">不需要调查</string>
+    <string name="attribute_puzzle_yes">谜题 / 神秘</string>
+    <string name="attribute_puzzle_no">非谜题 / 神秘</string>
+    <string name="attribute_arithmetic_yes">算术题</string>
+    <string name="attribute_arithmetic_no">非算术题</string>
+    <string name="attribute_other_cache_yes">其他藏点类型</string>
+    <string name="attribute_other_cache_no">非其他藏点类型</string>
+    <string name="attribute_ask_owner_yes">向宝主询问起始条件</string>
     <string name="attribute_ask_owner_no">不要向所有者询问开始条件</string>
+    <string name="attribute_unknown_yes">存在未知属性</string>
+    <string name="attribute_unknown_no">不存在未知属性</string>
+    <string name="attribute_geotour_yes">GeoTour 的一部分</string>
+    <string name="attribute_geotour_no">非 GeoTour 的一部分</string>
+    <string name="attribute_kids_2_yes">适合带小孩</string>
+    <string name="attribute_kids_2_no">不适合带小孩</string>
+    <string name="attribute_historic_site_yes">历史遗迹</string>
+    <string name="attribute_historic_site_no">非历史遗迹</string>
     <string name="attribute_magnetic_yes">磁铁型藏点</string>
     <string name="attribute_magnetic_no">非磁铁型藏点</string>
+    <string name="attribute_usb_cache_yes">USB 藏点</string>
+    <string name="attribute_usb_cache_no">非 USB 藏点</string>
     <string name="attribute_shovel_yes">可能需要铲子</string>
     <string name="attribute_shovel_no">无需铲子</string>
     <string name="attribute_specific_access_yes">特定时间才可前往（可能需要门票）</string>
@@ -1835,16 +2266,26 @@
     <string name="attribute_nature_cache_no">非藏在自然环境中</string>
     <string name="attribute_byop_yes">自带签到笔</string>
     <string name="attribute_byop_no">无需自带签到笔</string>
+    <string name="attribute_safari_cache_yes">逆向藏点</string>
+    <string name="attribute_safari_cache_no">非逆向藏点</string>
+    <string name="attribute_quick_cache_yes">快速藏点</string>
+    <string name="attribute_quick_cache_no">非快速藏点</string>
     <string name="attribute_wherigo_yes">Wherigo藏点</string>
     <string name="attribute_wherigo_no">非Wherigo藏点</string>
     <string name="attribute_audio_cache_yes">描述包含一个音频文件</string>
     <string name="attribute_audio_cache_no">描述不包含音频文件</string>
     <string name="attribute_geohotel_yes">GeoHotel 藏点</string>
     <string name="attribute_geohotel_no">非 GeoHotel 藏点</string>
+    <string name="attribute_survey_marker_yes">靠近测量标志</string>
+    <string name="attribute_survey_marker_no">不靠近测量标志</string>
     <string name="attribute_offset_cache_yes">坐标偏移型藏点</string>
     <string name="attribute_offset_cache_no">非坐标偏移型藏点</string>
+    <string name="attribute_bonuscache_yes">奖励藏点 (Bonus cache)</string>
     <string name="attribute_powertrail_yes">Power Trail的一部分</string>
     <string name="attribute_challengecache_yes">挑战型藏点</string>
+    <string name="attribute_hqsolutionchecker_yes">Geocaching.com 答案检查器已启用</string>
+    <string name="attribute_handicaching_yes">已在 Handicaching.com 评分</string>
+    <string name="attribute_handicaching_no">未在 Handicaching.com 评分</string>
     <string name="attribute_munzee_yes">包含 Munzee</string>
     <string name="attribute_munzee_no">不包含 Munzee</string>
     <string name="attribute_ads_yes">包含广告</string>
@@ -1857,62 +2298,231 @@
     <string name="attribute_trackables_no">不可放trackables</string>
     <string name="attribute_historic_yes">废弃建筑/废墟</string>
     <string name="attribute_historic_no">非废弃建筑/废墟</string>
+    <string name="attribute_blind_people_yes">残障：盲人</string>
+    <string name="attribute_blind_people_no">非残障：盲人</string>
+    <string name="attribute_unknown">未知属性</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">藏点状态</string>
+    <string name="cat_tools">装备</string>
     <string name="cat_type">类型</string>
     <string name="cat_location">藏点位置</string>
+    <string name="cat_duration">距离 / 时长</string>
+    <string name="cat_surrounding">藏点周边</string>
+    <string name="cat_permissions">权限</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
+    <string name="quote">让地理藏宝更简单，让玩家更“懒惰”。</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support_title">支持</string>
+    <string name="website_title">网站</string>
+    <string name="facebook_link"><a href="">c:geo 页面</a></string>
+    <string name="fangroup_link"><a href="">德国用户组</a></string>
     <string name="market_title">Google Play</string>
+    <string name="market_link"><a href="">Google Play 上的 c:geo</a></string>
+    <string name="github_title">错误追踪器</string>
+    <string name="faq_title">常见问题 (FAQ)</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">有新版本可用。\n点击安装。</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">有新的 Nightly 版本可用。\n点击安装。</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">有新的发布候选版 (RC) 可用。\n点击安装。</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 的变动导致 c:geo 出现问题。\n我们已知晓并正在处理，请给我们一些时间！</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 的变动导致动态地图出现问题。\n我们已知晓并正在处理，请给我们一些时间！</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 目前无法 (完全) 访问。\n您可能会在 c:geo 中遇到各种问题。</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">您似乎正在使用较旧版本的 Android。此版本的 c:geo 不再与您的设备兼容，可能会运行失败或表现异常！\n点击此消息获取更多信息。</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">您正在使用的 c:geo 版本似乎已发布超过一年。由于网站或其他技术变动，某些功能可能已失效。请阅读我们的常见问题 (FAQ) 了解如何升级。</string>
     <!-- text-to-speech for compass view -->
+    <string name="tts_service">语音罗盘</string>
+    <string name="tts_started">语音已启动</string>
+    <string name="tts_stopped">语音已停止</string>
+    <string name="tts_running">语音服务正在运行…</string>
+    <string name="err_tts_lang_not_supported">当前语言不支持文字转语音 (TTS)。</string>
+    <string name="tts_one_kilometer">1 公里</string>
+    <plurals name="tts_kilometers">
+        <item quantity="other">%s 公里</item>
+    </plurals>
+    <string name="tts_one_meter">1 米</string>
+    <plurals name="tts_meters">
+        <item quantity="other">%s 米</item>
+    </plurals>
+    <string name="tts_one_mile">1 英里</string>
+    <plurals name="tts_miles">
+        <item quantity="other">%s 英里</item>
+    </plurals>
+    <string name="tts_one_foot">1 英尺</string>
+    <plurals name="tts_feet">
+        <item quantity="other">%s 英尺</item>
+    </plurals>
+    <string name="tts_one_oclock">1 点钟方向</string>
+    <string name="tts_oclock">%s 点钟方向</string>
     <!-- various -->
+    <string name="clipboard_copy_ok">已复制到剪贴板</string>
     <string name="clipboard_copy_failed">复制到剪贴板失败</string>
+    <plurals name="days_ago">
+        <item quantity="other">%d 天前</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 快捷方式</string>
     <string name="create_shortcut">创建快捷方式</string>
+    <string name="failed_creating_shortcut">创建快捷方式失败</string>
+    <string name="send">发送</string>
     <string name="confirm_log_title">特殊日志类型</string>
+    <string name="confirm_log_message">您想要记录“%s”。确定吗？</string>
     <string name="confirm_report_problem_title">上报问题</string>
     <string name="confirm_report_problem_message">您要报告 \'%s\'。确定吗？</string>
     <!-- Geokrety -->
-    <string name="trackable_title_log_without_geocode">未设置地理编码</string>
-    <string name="trackable_log_without_geocode">你将要发送一个没有地理编码的日志。我们鼓励你设置一个。你想现在添加吗？</string>
+    <string name="init_summary_geokrety">启用来自 GeoKrety.org 的追踪物</string>
+    <string name="init_geokrety_description">授权 c:geo 使用 GeoKrety.org 以记录 GeoKrety 追踪物。</string>
+    <string name="init_geokrety_userid">用户 ID：%s</string>
+    <string name="trackable_title_log_without_geocode">未设置藏点编号（GC码）</string>
+    <string name="trackable_log_without_geocode">你将要发送一个没有藏点编号（GC码）的日志。我们鼓励你设置一个。你想现在添加吗？</string>
     <string name="do_not_ask_me_again">不再询问</string>
+    <string name="geokrety_parsing_failed">解析 GeoKrety 响应失败。</string>
+    <string name="command_remove_caches_from_list_progress">正在移除藏点</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="other">已移除 %d 个藏点</item>
+    </plurals>
+    <string name="command_move_caches_progress">正在将藏点移动到列表 %1s</string>
+    <plurals name="command_move_caches_result">
+        <item quantity="other">已移动 %d 个藏点</item>
+    </plurals>
+    <string name="command_copy_caches_progress">正在将藏点复制到列表 %1s</string>
     <plurals name="command_copy_caches_result">
         <item quantity="other">%d个宝已复制</item>
+    </plurals>
+    <string name="command_delete_caches_progress">正在删除藏点</string>
+    <plurals name="command_delete_caches_result">
+        <item quantity="other">已删除 %d 个藏点</item>
+    </plurals>
+    <string name="command_rename_list_result">列表已重命名</string>
+    <string name="command_delete_list_result">列表已删除</string>
+    <string name="command_unique_list_result">已从其他列表中删除藏点</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="other">推荐此藏点 (剩余 %d 个)</item>
     </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="other">将此藏点设为FP（还有%d个FP可用）</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">正在设置藏点图标</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="other">已设置 %d 个藏点图标</item>
+    </plurals>
+    <string name="command_recalculate_health_score_progress">正在重新计算藏点健康评分…</string>
+    <string name="command_recalculate_health_score_result">已重新计算藏点健康评分：%d</string>
+    <string name="log_health_score_explanation_title">藏点健康评分</string>
+    <string name="log_health_score_explanation">藏点健康评分是根据最近最多 %1$s 条日志计算的，或者直到发现以下日志类型之一：\n%2$s \n\n计算公式为：\n`(正面日志权重之和) / (正面和负面日志权重之和)`\n\n**正面日志**包括：\n%3$s \n\n**负面日志**包括：\n%4$s \n\n日志根据其时间进行加权 (越新的日志权重越高)。</string>
+    <string name="caches_refresh_all_warning">此操作可能会产生大量网络流量。您确定要批量刷新所有藏点吗？</string>
+    <string name="live_map_status_http429">请慢点，对 %s 的请求过于频繁</string>
+    <string name="live_map_status_error">加载地图数据出错：%s</string>
+    <string name="live_map_status_partial">部分结果 (放大地图以减少加载的藏点数量)：%s</string>
+    <string name="live_map_status_normal">数据加载正常：%s</string>
+    <string name="list_list_headline">列表：</string>
+    <plurals name="extract_waypoints_result">
+        <item quantity="other">已提取 %d 个航点</item>
+    </plurals>
+    <string name="link_gc_checker">可通过浏览器使用 geocaching.com 坐标检查器</string>
+    <string name="link_gallery">图库中有可用图片 (%d)</string>
+    <string name="geochecker_available">可通过浏览器使用 Geochecker</string>
     <!-- calendar adder -->
     <string name="event_fail">添加 uid 为“%1”的事件到日历失败</string>
     <string name="init_low_disk_space">磁盘空间过低</string>
+    <string name="init_low_disk_space_message">藏点数据文件夹的存储空间不足。这可能会导致 c:geo 运行异常。请清理一些空间。</string>
     <string name="init_confirm_debug">c:geo正在调试模式中运行！</string>
+    <string name="list_confirm_debug_message">调试模式会导致不稳定！您是否要停用调试模式？</string>
     <!-- permission handling -->
+    <string name="permission_missing">缺少权限</string>
     <string name="permission_ask_again">稍后再问</string>
+    <string name="permission_goto_app_details">打开应用信息</string>
+    <string name="permission_contacts_read_explanation_title">联系人读取权限</string>
+    <string name="permission_contacts_read_explanation">c:geo 可以使用玩家名称在您的通讯录中搜索联系人。为此，您必须授权 c:geo 读取您的通讯录。否则，将无法使用此功能。</string>
     <string name="permission_location_explanation_title">位置权限</string>
+    <string name="permission_location_explanation">c:geo 针对 GPS 数据 (精确位置) 进行了优化，用于定位您的位置并计算到藏点的距离和方向。如果没有此权限，基于位置的功能将无法正常工作。</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo会将数据写入您的手机存储或 SD 卡，例如，当您下载藏点以便离线使用、导入或导出文的时候。 在一些Android版本中，您需要为这些操作另外授权。</string>
     <string name="permission_legacy_write_external_storage_explanation_title">写入外部存储权限</string>
     <string name="permission_post_notifications_explanation">c:geo在您下载或者靠近藏点时会发送通知（如果已开启通知）</string>
     <string name="permission_post_notifications_explanation_title">通知权限</string>
     <string name="storage_permission_needed">需要储存权限来运行此功能</string>
     <!-- colors -->
+    <string name="preference_colorpicker_select_color_scheme">选择配色方案</string>
+    <string name="preference_colorpicker_select_color">选择颜色</string>
+    <string name="preference_colorpicker_select_opaqueness">选择不透明度</string>
+    <string name="preference_colorpicker_select_width">选择线宽</string>
+    <string name="preference_colorpicker_show_width">宽度：%d</string>
+    <string name="reset_to_default">默认</string>
     <!-- number input -->
+    <string name="number_input_title_short">设置数值</string>
+    <string name="number_input_range">请输入一个介于 %1$s 和 %2$s 之间的数值</string>
     <string name="number_input_err_boundarymin">输入的值太小 - 重置为最小值</string>
     <string name="number_input_err_boundarymax">输入的值太大 - 重置为最大值</string>
     <string name="number_input_err_format">数字格式无效。</string>
     <!-- notification / channel texts -->
     <string name="notification_channel_proximity_name">接近时通知</string>
+    <string name="notification_channel_proximity_description">用于显示附近的藏点</string>
+    <string name="notification_channel_foreground_name">前台服务</string>
+    <string name="notification_channel_foreground_description">当 c:geo 在后台工作时显示通知</string>
+    <string name="notification_channel_downloader_name">c:geo 下载器</string>
+    <string name="notification_channel_downloader_description">下载结果通知 (例如离线地图)</string>
+    <string name="notification_channel_cache_download_name">藏点下载器</string>
+    <string name="notification_channel_cache_download_description">藏点后台下载结果通知</string>
+    <string name="notification_channel_log_name">记录发布</string>
+    <string name="notification_channel_log_description">发布藏点日志时的进度和错误通知</string>
+    <string name="notification_download_receiver_title">正在导入下载内容</string>
     <!-- individual routes -->
+    <string name="individual_route">个人路线</string>
+    <string name="individual_route_added">已添加到路线</string>
+    <string name="individual_route_removed">已从路线中移除</string>
+    <string name="individual_route_error_toggling_waypoint">切换航点时出错</string>
+    <string name="individual_route_error_single_waypoint_mode">在单个航点模式下不可用</string>
+    <string name="map_sort_individual_route">排序个人路线</string>
     <string name="map_refresh_individual_route">刷新</string>
+    <string name="map_export_route">导出为路线</string>
+    <string name="map_export_track">导出为轨迹</string>
+    <string name="map_load_from_GPX">从 GPX 加载</string>
     <string name="map_load_individual_route">加载个人路由</string>
+    <string name="map_load_individual_route_confirm">覆盖现有路线？</string>
+    <string name="map_autotarget_individual_route">将路线起点设为目标</string>
+    <string name="map_disable_autotarget_individual_route">“将路线起点设为目标”已禁用</string>
+    <string name="map_manual_target_route_name">当前导航</string>
     <string name="map_clear_manual_targets">清除路由目标</string>
+    <string name="map_manual_targets_cleared">手动目标已清除</string>
+    <string name="map_clear_individual_route">清除个人路线</string>
+    <string name="map_clear_individual_route_confirm">您是否要从个人路线中移除所有藏点/航点？</string>
+    <string name="sorted_route_saved">个人路线已保存</string>
+    <string name="load_individual_route_error">加载个人路线时出错</string>
+    <string name="route_item_point">路线点</string>
+    <string name="route_item_not_yet_loaded">路线项尚未加载</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="other">路线已加载，包含 %d 个路线点</item>
+    </plurals>
+    <string name="individual_route_set_as_start_title">设为路线起点</string>
+    <string name="individual_route_set_as_start_message">将此项设为路线起点，并将所有后续项移动到当前路线的顶部？</string>
+    <string name="route_optimization">路线优化</string>
+    <string name="route_optimization_info">路线优化是一项实验性功能，用于优化路线以缩短距离。路线将从列表的第一点计算到最后一点，并以优化的顺序访问路线上的其他点。\n\n由于移动设备的时间和计算能力限制，无法评估所有可能的解决方案，因此它使用近似算法来计算可能的优化。\n\n计算分为两个步骤：计算路线中每两点之间的距离，然后尝试找到一条可接受的路线。这可能不是最短的路线，因此您可以根据需要多次重复第二步。</string>
+    <string name="initial_route_length">初始路线长度：%d</string>
+    <string name="optimized_route_length">优化后的路线长度：%d</string>
+    <string name="route_optimization_out_of_bounds">路线优化适用于包含 3 到 100 个点的路线</string>
+    <string name="generating_distance_matrix">正在生成距离矩阵</string>
+    <string name="running_route_optimizations">正在运行路线优化</string>
+    <string name="route_optimization_finished">路线优化已完成</string>
     <!-- changed permissions one time message -->
     <string name="changed_permissions_title">已更改权限</string>
     <string name="changed_permissions_info">Android 系统引入了c:geo所需的新权限。运行c:geo配置向导以检查此权限并获得更详细的信息。 您可以现在运行向导，也可以稍后在 c:geo 主屏幕上运行它的菜单项。\n\n您想现在运行配置向导吗？</string>
     <!-- individual track -->
+    <string name="map_load_track">从 GPX 加载轨迹/路线</string>
+    <string name="load_track_error">加载轨迹/路线时出错</string>
     <string name="load_track_error_named">加载路径错误: \"%s\"</string>
+    <string name="map_clear_track">清除路线/轨迹</string>
+    <string name="map_clear_track_confirm">您是否要移除路线/轨迹“%s”？</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">路线 / 轨迹选项</string>
+    <string name="routes_tracks_menu">路线 / 轨迹</string>
+    <string name="routes_tracks_color">选择颜色</string>
+    <string name="routes_tracks_change_name">更改名称</string>
+    <string name="center">居中</string>
+    <string name="track">轨迹</string>
+    <string name="make_visible">设为可见</string>
+    <string name="hide">隐藏</string>
     <!-- distance units -->
     <string name="unit_m">米</string>
     <string name="unit_km">千米</string>
@@ -1924,17 +2534,30 @@
     <string name="switch_on">打开</string>
     <string name="switch_manual">手动</string>
     <string name="switch_auto">自动</string>
+    <string name="switch_auto_lowpower">自动 (低功耗)</string>
+    <string name="switch_auto_precise">自动 (精确)</string>
     <string name="switch_default">（默认设置）</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="show_all">显示全部</string>
+    <string name="lists_only_new">仅限新建</string>
+    <string name="pq_only_dl">可下载</string>
+    <string name="routingmode_straight">直线</string>
     <string name="routingmode_walk">步行</string>
     <string name="routingmode_bike">自行车</string>
     <string name="routingmode_car">驾车</string>
+    <string name="routingmode_user1">用户 1</string>
+    <string name="routingmode_user2">用户 2</string>
+    <string name="routingmode_none">(无)</string>
     <!-- view settings -->
     <string name="view_settings">查看设置</string>
     <string name="delete_setting">删除设置</string>
+    <string name="delete_setting_warning">是否从设置中删除键值“%s”？\n\n此操作无法撤销。</string>
     <string name="edit_setting">编辑设置\"%s\"</string>
+    <string name="edit_setting_error_unknown_type">未知的设置类型 - 不支持编辑</string>
+    <string name="edit_setting_error_invalid_data">输入了无效数据“%s”。设置值保持不变。</string>
+    <string name="activate_editmode_title">激活编辑模式</string>
+    <string name="activate_editmode_warning">您正在进入危险区域！\n\n直接更改设置可能会导致 c:geo 运行混乱，甚至可能导致程序无法再次启动，请务必小心！\n\n您确定要自担风险继续操作吗？</string>
     <string name="add_setting">添加设置</string>
     <string name="add_setting_preference_name">昵称</string>
     <string name="add_setting_preference_type">首选项类型</string>
@@ -1942,25 +2565,103 @@
     <string name="add_setting_missing_type">您需要选择一个首选项类型</string>
     <string name="add_setting_already_exists">已存在同名的预设</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo 本地文件处理程序</string>
     <string name="localfile_title">打开本地文件</string>
+    <string name="localfile_cannot_handle">读取文件出错，或者 c:geo 无法处理此文件类型。</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">接收文件</string>
     <string name="receivedownload_success">文件成功保存到 \"%s\"</string>
     <string name="receivedownload_error">接收文件时出错</string>
     <string name="receivedownload_error_io_exception">接收文件时发生I/O 错误。您的文件夹 \"%s是否可写？</string>
+    <string name="receivedownload_error_filenotfound_exception">接收文件时发生“文件未找到”错误。</string>
+    <string name="receivedownload_amount_copied">已复制 %s</string>
+    <string name="receivedownload_cancelled">文件传输已取消</string>
+    <string name="receivedownload_integritycheck_failed">完整性检查失败</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">下载离线地图</string>
+    <string name="downloadbackground_title">下载背景地图</string>
     <string name="download_title">下载文件</string>
+    <string name="downloadmap_info">点击“保存”图标为您所在的区域选择地图文件。\n\n下载将在后台进行。传输完成后，文件将复制到 c:geo 地图文件夹并设为当前地图。\n\n请注意：下载地图可能会产生大量网络流量！</string>
     <string name="downloadmap_filename">正在下载 %s</string>
     <string name="downloadmap_keep_temporary_files">保留临时文件</string>
+    <string name="downloadmap_keep_temporary_files_summary">某些下载源支持 c:geo 不使用的额外文件。将这些额外文件保留在系统的下载文件夹中，而不是将其删除</string>
+    <string name="downloadmanager_not_available">无法下载文件，系统下载管理器不可用</string>
+    <string name="download_started">已在后台开始下载</string>
+    <string name="download_enqueing_error">尝试开始下载时出错</string>
+    <string name="downloadmap_target_not_writable">选定的目标“%s”不可写 - 下载的地图文件已保存在系统下载文件夹中，必须手动移动到地图文件夹。</string>
+    <string name="downloadmap_allow_metered_network">允许通过计费网络 (如：移动数据连接) 下载</string>
+    <string name="download_confirmation">%1$s是否下载文件“%2$s”？%3$s</string>
+    <string name="download_confirmation_updates">发现以下更新：</string>
+    <string name="download_warning">下载可能需要相当长的时间，并且根据您的网络连接情况，可能会产生高额费用。</string>
+    <string name="download_error">下载失败，错误代码 #%d</string>
+    <string name="downloadmap_handling">下载本身将由系统的下载管理器在后台处理。下载开始后 (可能需要一点时间)，您应该会看到一条通知。</string>
+    <string name="button_continue">继续</string>
+    <string name="downloadmap_onedirup">(向上一级)</string>
+    <string name="downloadmap_checkforupdates_button">检查更新</string>
+    <string name="downloadmap_available_updates">可用更新</string>
+    <string name="downloadmap_no_updates_found">未发现地图更新</string>
+    <string name="downloadmap_directory">文件夹</string>
+    <string name="downloadmap_mapfile">地图文件</string>
+    <string name="downloadmap_themefile">主题文件</string>
+    <string name="downloadmap_tilefile">路线数据文件</string>
+    <string name="downloadmap_hillshadingfile">地形阴影数据文件</string>
+    <string name="downloadmap_checking">正在检查可用数据…</string>
+    <string name="downloadmap_othermapdownload">其他地图下载</string>
+    <string name="downloadmap_otherthemedownload">其他主题下载</string>
+    <string name="downloadmap_download">下载</string>
+    <string name="downloadmap_retrieving_directory_data">正在检索文件夹数据…</string>
+    <string name="downloadmap_checking_for_updates">正在检查更新…</string>
+    <string name="downloadtile_title">缺少数据</string>
+    <string name="downloadtile_info">由于缺少某些路线数据文件，c:geo 无法计算请求的路线。您是否要下载缺失的路线数据？</string>
+    <string name="check_tiles_menu">检查缺失的路线数据</string>
+    <string name="check_tiles_found">路线数据已存在</string>
+    <string name="check_tiles_missing">发现缺失的路线数据：</string>
+    <string name="check_tiles_unsupported">警告：所选区域的路线数据至少部分不可用</string>
+    <string name="tileupdate_info">点击此处检查已下载路线数据文件的更新。长按以推迟。</string>
+    <string name="check_hillshading_found">地形阴影数据已存在</string>
+    <string name="check_hillshading_missing">发现缺失的地形阴影数据：</string>
+    <string name="check_hillshading_unsupported">警告：所选区域的地形阴影数据至少部分不可用</string>
+    <string name="check_hillshading_tiles_menu">检查缺失的海拔数据</string>
+    <string name="mapupdate_info">点击此处检查地图和主题文件的更新。长按以推迟。</string>
     <string name="no_updates_found">无可用更新</string>
     <string name="updates_check">检查更新</string>
+    <string name="delete_items">删除项目</string>
+    <plurals name="files_deleted">
+        <item quantity="other">已删除 %1$d 个文件</item>
+    </plurals>
+    <string name="no_files_selected">未选择文件</string>
+    <string name="mapserver_mapsforge_info">基础地图，不需要地图主题</string>
+    <string name="mapserver_openandromaps_info">详细地图，需要“Elevate”地图主题</string>
+    <string name="mapserver_openandromaps_themes_info">详细地图主题，专为“OpenAndroMaps”地图构建</string>
+    <string name="mapserver_freizeitkarte_info">详细地图，需要“freizeitkarte”地图主题之一。</string>
+    <string name="mapserver_freizeitkarte_themes_info">详细地图主题，专为“Freizeitkarte”地图构建</string>
+    <string name="mapserver_osmpaws_info">详细地图，需要“paws_4”地图主题。</string>
+    <string name="mapserver_osmpaws_themes_info">详细地图主题，专为“Paws”地图构建</string>
+    <string name="mapserver_hylly_info">芬兰详细地图，需要“Hylly”地图主题之一</string>
+    <string name="mapserver_hylly_themes_info">详细地图主题，专为“Hylly”地图构建</string>
+    <string name="brouter_info">离线路线规划服务</string>
+    <string name="hillshading_info">离线地形阴影</string>
+    <string name="maptheme_elevate_categoryinfo">适用于：[A] 区域, [P] 兴趣点, [R] 路线, [W] 道路</string>
     <string name="maptheme_vtm_scaling_summary">离线地图缩放选项 (仅适用于 VTM，需要重启)</string>
+    <string name="maptheme_scale_map_title">地图缩放因子</string>
+    <string name="maptheme_scale_map_summary">缩放地图；100% = 不缩放</string>
+    <string name="maptheme_scale_text_title">文本缩放系数</string>
+    <string name="maptheme_scale_text_summary">额外缩放地图中的文本标签；100% = 无额外缩放</string>
+    <string name="maptheme_scale_symbol_title">符号缩放系数</string>
+    <string name="maptheme_scale_symbol_summary">额外缩放地图中的符号大小；100% = 无额外缩放</string>
+    <string name="maptheme_show3Dbuildings">以 3D 形式显示建筑物</string>
+    <string name="vtm_theme_variant">主题变体</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">清除历史轨迹</string>
+    <string name="map_trail_show">显示历史轨迹</string>
+    <string name="map_trail_hide">隐藏历史轨迹</string>
     <!-- history track export -->
+    <string name="trailhistory">历史轨迹</string>
+    <string name="export_trailhistory_title">导出历史轨迹</string>
+    <string name="export_trailhistory_success">已将历史轨迹导出至 \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">导出后清除历史轨迹</string>
     <!-- individual route export -->
+    <string name="export_individualroute_title">导出个人路线</string>
+    <string name="export_individualroute_success">已将个人路线导出至 \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">配置向导</string>
     <string name="wizard_welcome_title">欢迎使用 c:geo</string>
@@ -1975,17 +2676,98 @@
     <string name="wizard_permissions_folder_title">设置文件夹： %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo需要一个本地文件夹来存储数据，如GPX文件、备份、现场笔记和日志。 默认情况下，这些文件被存储在base folder文件夹里。在下一步中选择或创建这样它。\n\n如果您是老版本升级，请在root目录下选择已有的文件夹\"cgeo\"。\n提示：你可能需要取消隐藏内部储存空间才能显示那些文件夹。</string>
     <string name="wizard_mapfolder_request_explanation">c:geo需要一个本地文件夹来存储离线地图文件。</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo 需要一个本地文件夹来存储离线地图的主题文件。</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo 需要一个本地文件夹来存储 GPX 文件（例如用于导入/导出藏点或轨迹）。</string>
+    <string name="wizard_broutertilesfolder_request_explanation">为了使用集成的路由切片数据自动下载和更新功能，您需要设置一个切片数据文件夹。</string>
+    <string name="wizard_select_or_create">请在下一步中选择或创建此类文件夹。</string>
+    <string name="wizard_platforms_title">配置服务</string>
+    <string name="wizard_platforms_intro">要使用 c:geo 寻找藏点，您需要一个 c:geo 支持的地理藏宝服务账号。\n请在下方选择所需的服务，以登录现有账号或创建新账号。</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching 及其他</string>
+    <string name="wizard_advanced_restore_label">恢复</string>
+    <string name="wizard_advanced_restore_info">如果您有之前安装的备份，可以恢复设置和/或藏点数据。</string>
+    <string name="status_not_ok">错误</string>
     <string name="wizard_status_title">配置状态</string>
     <string name="wizard_status_basefolder">base folder</string>
     <string name="wizard_status_platform">geocaching服务</string>
     <string name="wizard_not_now">暂不</string>
     <string name="wizard_skip_wizard_warning">c:geo在配置完成之前可能无法正常工作。 根据缺失的配置文件， c:geo 可能无法读取/存储数据，如离线地图、藏点、日志等。\n\n当您觉得准备好完成设置时，请在主菜单中选择“配置向导”或重启 c:geo。</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$s 文件夹同步在 %2$s 后完成，%4$s 中的 %3$d 个需要同步</string>
     <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo 播放器</string>
+    <string name="wherigo_controls">控制</string>
+    <string name="wherigo_controls_cartridgelist_hint">查看卡带并开始游戏</string>
+    <string name="wherigo_controls_savegame_hint">保存正在运行的游戏进度</string>
+    <string name="wherigo_controls_loadgame_hint">加载已存储的存档</string>
+    <string name="wherigo_controls_stopgame_hint">停止正在运行的游戏</string>
+    <string name="wherigo_controls_mapzones_hint">在地图上显示正在运行的游戏区域</string>
+    <string name="wherigo_controls_downloadcartridge_hint">下载卡带（需要 CGUID）</string>
     <string name="wherigo_controls_reportproblem_hint">显示最后一个 Wherigo 问题</string>
-    <string name="wherigo_no_game_running">目前没有任何运行中的wherigo游戏</string>
+    <string name="wherigo_controls_cache_context">藏点上下文</string>
+    <string name="wherigo_controls_cache_link">查看藏点详情</string>
+    <string name="wherigo_sound_title">声音控制</string>
+    <string name="wherigo_sound_continue">继续</string>
+    <string name="wherigo_sound_restart">从头开始</string>
+    <string name="wherigo_sound_pause">暂停</string>
+    <string name="wherigo_sound_mute">静音</string>
+    <string name="wherigo_sound_unmute">取消静音</string>
+    <string name="wherigo_controls_resume_paused_dialog">恢复暂停的对话</string>
+    <string name="wherigo_dialog_pause_info">点击“恢复暂停的对话”以在 Wherigo 播放器中恢复对话</string>
+    <string name="wherigo_currently_playing">当前正在播放</string>
+    <string name="wherigo_locate_on_center">定位到中心</string>
+    <string name="wherigo_revoke_fixed_location">撤销固定位置</string>
+    <string name="wherigo_thingtype_location">位置</string>
+    <string name="wherigo_thingtype_inventory">物品栏</string>
+    <string name="wherigo_thingtype_item">你看到</string>
+    <string name="wherigo_thingtype_task">任务</string>
+    <string name="wherigo_thingtype_thing">物品</string>
+    <string name="wherigo_author">作者</string>
+    <string name="wherigo_zone_inside">内部</string>
+    <string name="wherigo_zone_near">附近</string>
+    <string name="wherigo_zone_navigate_compass">罗盘指向中心</string>
+    <string name="wherigo_zone_copy_coordinates">复制中心坐标</string>
+    <string name="wherigo_choose_cartridge">选择卡带</string>
+    <string name="wherigo_choose_new_loadgame">选择新游戏或要加载的游戏</string>
+    <string name="wherigo_choose_savegame_slot">选择存档槽位</string>
+    <string name="wherigo_savegame_name_empty">&lt;新游戏&gt;</string>
+    <string name="wherigo_savegame_name_autosave">自动存档</string>
+    <string name="wherigo_savegame_name_numeric">槽位 %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;空槽位&gt;</string>
+    <string name="wherigo_download_title">下载卡带</string>
+    <string name="wherigo_download_message">您的设备上没有 CGUID 为 \"%s\" 的卡带。是否要下载？</string>
+    <string name="wherigo_download_successful_title">下载成功</string>
+    <string name="wherigo_download_failed_title">下载失败</string>
+    <string name="wherigo_download_failed_message">下载 CGUID 为 \"%1$s\" 的卡带失败：%2$s</string>
+    <string name="wherigo_manual_download_title">手动下载卡带</string>
+    <string name="wherigo_manual_download_cguid_label">在此输入 CGUID</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo：正在删除残留文件</string>
+    <string name="wherigo_download_progress_login">正在登录…</string>
+    <string name="wherigo_download_progress_started">下载已开始</string>
+    <string name="wherigo_download_progress_download_status">已下载 %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">请先登录 www.wherigo.com 并接受其条款和条件</string>
+    <string name="wherigo_error_title">Wherigo 问题报告</string>
+    <string name="wherigo_error_game_noerror">Wherigo 引擎未报告错误。</string>
     <string name="wherigo_error_game_error">Wherigo引擎报告的错误：\n\n```\n%1$s\n```\n您可通过[此处](%2$s)联系该游戏卡带的作者</string>
-    <string name="wherigo_error_email">Wherigo问题报告\n\n引擎错误: %1$s\n\nWherigo信息: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo 引擎报告了一个错误。打开错误对话框查看详情。</string>
+    <string name="wherigo_confirm_stop_running_game_title">停止运行 Wherigo 游戏</string>
+    <string name="wherigo_confirm_stop_running_game_message">\"%s\" 的游戏当前正在运行。是否要停止此游戏？</string>
+    <string name="wherigo_confirm_delete_cartridge_title">删除 Wherigo 卡带</string>
+    <string name="wherigo_confirm_delete_cartridge_message">确定要删除卡带 \"%1$s\" 及其 %2$s 个存档吗？</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">删除 Wherigo 存档</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">确定要删除卡带 \"%1$s\" 的存档 \"%2$s\" 吗？</string>
+    <string name="wherigo_save_game_title">保存 Wherigo 游戏进度</string>
+    <string name="wherigo_save_game_message">将卡带 \"%1$s\" 的游戏进度保存到 \"%2$s\"。</string>
+    <string name="wherigo_save_game_custom_name_label">输入名称（可选）</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">警告：继续操作将覆盖来自 \"%1$s\" 的现有存档</string>
+    <string name="wherigo_dialog_push_page">第 %1$s / %2$s 页</string>
+    <string name="wherigo_notification_service">c:geo 正在运行 Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" 正在等你！</string>
+    <string name="wherigo_bar_resume_dialog">恢复</string>
+    <string name="wherigo_toast_check_game">Wherigo：检查您的游戏变动</string>
+    <string name="wherigo_toast_check_things">Wherigo：检查您的 %s 变动</string>
+    <string name="wherigo_otm_shortcuts_title">Wherigo 播放器快捷方式</string>
+    <string name="wherigo_otm_shortcuts_message">如果您想经常使用 c:geo Wherigo 播放器，请考虑在“设置 -> 外观”下为其创建快速启动按钮或自定义菜单项</string>
     <!-- default actions in dialogs -->
     <string name="previous">上一个</string>
     <string name="skip">跳过</string>
@@ -1998,17 +2780,59 @@
     <string name="redo">撤销</string>
     <string name="ok" tools:ignore="ButtonCase">确定</string>
     <string name="optimize">优化</string>
+    <string name="expand">展开</string>
+    <string name="close">关闭</string>
+    <string name="delete">删除</string>
+    <string name="play">播放</string>
+    <string name="copy" tools:ignore="PrivateResource">复制</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">全选</string>
+    <string name="multiselect_selectvisible">选择可见项</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">微笑</string>
+    <string name="smiley_big_smile">大笑</string>
+    <string name="smiley_cool">酷</string>
+    <string name="smiley_blush">脸红</string>
+    <string name="smiley_tongue">吐舌头</string>
+    <string name="smiley_evil">邪恶</string>
+    <string name="smiley_shocked">震惊</string>
+    <string name="smiley_wink">眨眼</string>
+    <string name="smiley_clown">小丑</string>
+    <string name="smiley_blackeye">黑眼圈</string>
+    <string name="smiley_8ball">8号球</string>
+    <string name="smiley_frown">皱眉</string>
+    <string name="smiley_shy">害羞</string>
+    <string name="smiley_angry">生气</string>
+    <string name="smiley_dead">晕倒</string>
+    <string name="smiley_sleepy">困倦</string>
+    <string name="smiley_kisses">亲亲</string>
+    <string name="smiley_approve">赞成</string>
+    <string name="smiley_disapprove">反对</string>
+    <string name="smiley_question">疑问</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">消息中心</string>
+    <string name="mcpolling_summary">定期检查消息中心是否有新消息</string>
+    <plurals name="mcupdate">
+        <item quantity="other">消息中心有 %d 条未读消息</item>
+    </plurals>
     <!-- GC image size conversion -->
-    <string name="settings_gc_imagesize_summary">在Geocaching.com的列表、日志和可追踪物中图片大小不同。请选择加载和存储藏点时要加载的图片大小。</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>原始坐标</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_title">首选图片大小</string>
+    <string name="settings_gc_imagesize_summary">来自 Geocaching.com 的藏点描述、日志和追踪物图片有多种尺寸。请选择加载和存储藏点时要加载的尺寸。“不改变”将加载作者在页面中包含的原始版本。</string>
+    <string name="settings_gc_imagesize_entry_unchanged">不改变</string>
+    <string name="settings_gc_imagesize_entry_original">最大</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
-    <!-- emoji categories -->
+    <string name="view_database">查看数据库</string>
+    <string name="dbi_select_title">(选择表)</string>
+    <string name="dbi_columnproperties_title">列属性</string>
+    <string name="dbi_columnproperties_message">字段：%1$s\n类型：%2$s\n存储：%3$s</string>
+    <string name="dbi_edit_title">编辑第 %2$d 行的 \"%1$s\"</string>
+    <string name="dbi_edit_ok">字段已更新</string>
+    <string name="dbi_edit_error">更新字段时出错</string>
+    <string name="dbi_edit_error_pkfield">"%s\" 是主键的一部分，无法编辑"</string>
+    <string name="dbi_search_title">搜索</string>
+    <string name="dbi_search_columnSelection">限制于</string>
 </resources>

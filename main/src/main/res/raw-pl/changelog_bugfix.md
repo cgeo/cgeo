@@ -1,119 +1,123 @@
 ##
-Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie związane z konserwacją kodu i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
-- Naprawiono: Wyskakujące okienko skrytki/punktu nawigacji pojawiało się z opóźnieniem na niektórych urządzeniach
-- Naprawiono: Podczas edycji opisu skrytki nie można było używać copy/paste
-- Naprawiono: Niektóre awarie i sytuacje, w których „aplikacja nie odpowiada”
-- Naprawiono: Usuwanie wpisu w dzienniku przedmiotów podróżnych nie powiodło się (zmiana strony)
+- Fix: Cannot upload changed coordinates (website change)
+- Fix: Cannot upload personal notes (website change)
 
 ##
-- Naprawiono: Usuwanie uszkodzonych obrazów z wpisu (zmiana strony internetowej)
-- Zmiana: Ujednolicenie przycisków wczytywania ścieżek i indywidualnych tras
-- Naprawiono: Atrybuty skrytki nie były poprawnie wykrywane w pewnych okolicznościach
-- Naprawiono: Logowanie skrytek (zmiana strony internetowej)
-- Naprawiono: Logowanie przedmiotów podróżnych (zmiana strony internetowej)
+- Fix: Cache/waypoint popup opening delayed on some devices
+- Fix: Edit cache description does not support copy & paste
+- Fix: Some crashes and "app not responding"
+- Fix: Deleting of trackable log fails (website change)
 
 ##
-- Naprawiono: Uszkodzony import Pocket query (zmiany na stronie internetowej)
+- Fix: Deleting of log images broken (website change)
+- Change: Unify track and individual route loading buttons
+- Fix: Cache attributes not detected correctly under certain conditions
+- Fix: Logging caches (website change)
+- Fix: Logging trackables (website change)
 
 ##
-- Naprawiono: Awaria podczas dostępu do tras
-- Naprawiono: Awaria na stronie z punktem nawigacji
-- Zmiana: Wyszukiwanie własnych skrytek rozpoczyna się z nowymi filtrami
-- Naprawiono: Niezapisane etapy labów tracą informacje o „odwiedzeniu” po odświeżeniu
-- Naprawiono: Okresowy monit o aktualizacje źródła kafelków
-- Naprawiono: Losowa lokalizacja przy mapowaniu listy (Google Maps)
+- Fix: Pocket query import broken (website change)
 
 ##
-- Naprawiono: Awaria w informacjach o skrytce
-- Naprawiono: Wkłady Wherigo nie mogą być już pobierane (zmiana struktury strony internetowej)
+- Fix: Crash when accessing routes
+- Fix: Crash on waypoint page
+- Change: Search for "own caches" starts with fresh filters
+- Fix: Unsaved lab adventure stages losing "visited" info on refresh
+- Fix: Recurring prompt for tile source updates
+- Fix: Random location on mapping a list (Google Maps)
 
 ##
- - Zmiana: Pliki Wherigo nie mogą być obecnie pobierane, zamiast tego wyświetlana jest dokładna instrukcja
- - Naprawiono: Powód usunięcia dziennika nie wymusza ograniczenia długości
- - Nowość: Rozszerzone logowanie błędów dla awarii w menedżerze pobierania
- - Naprawiono: Informacje o punkcie nawigacji czasami były zbyt długie, a przyciski nieosiągalne
- - Naprawiono: Niektóre informacje o lokalizacji były obcięte
- - Naprawiono: Routing nie działał, pokazywana była tylko linia prosta
- - Naprawiono: Pewne problemy podczas tworzenia folderu
-
-Uwaga: Jeśli używasz wewnętrznego routingu, musisz wykonać następujący krok raz po zainstalowaniu tej wersji: Przejdź do ekranu głównego c:geo, otwórz „Zarządzaj danymi offline” - „Aktualizuj dane routingu” i pozwól c:geo zainstalować zaktualizowane pliki. (Powód: struktura danych routingu BRouter uległa zmianie i wszystkie pliki danych muszą być teraz zgodne z tą samą wersją.)
+- Fix: Crash in cache infosheet
+- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
 
 ##
-- Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
-- Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
-- Naprawiono: Klawiatura może blokować wybór listy
-- Naprawiono: Dostawca kafelków zdefiniowany przez użytkownika nie obsługuje dodatkowych parametrów URL
-- Naprawiono: Inwentarz / Przedmioty podróżne ze skrytki nie są wczytywane
-- Zmiana: Zaktualizowano wpis user-agent w celu rozwiązania problemów z pobieraniem
-- Naprawiono: Przeglądanie szczegółów przedmiotów podróżnych usuwa je z inwentarza skrytki
+ - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
+ - Fix: Log delete reason does not enforce lengh limit
+ - New: Extended logging for crashes in download manager
+ - Fix: Waypoint infosheet can become too long, buttons unreachable
+ - Fix: Some location info gets truncated
+ - Fix: Internal routing no longer working, only straight line shown
+ - Fix: Some folder creation issues
+
+Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
 
 ##
-- Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
-- Naprawiono: Format współrzędnych zmieniający się w arkuszu informacji o skrytce/punkcie nawigacji
-- Naprawiono: Data logowania była przycinana na liście logowań (w zależności od formatu daty i rozmiaru czcionki)
-- Naprawiono: W pewnych sytuacjach nie był wykrywany czas wydarzenia
-- Naprawiono: W pewnych sytuacjach linki w opisie skrytki były nieklikalne
-- Naprawiono: Działania związane z logowaniem przedmiotów podróżnych czasami się mieszały
+- Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
 
 ##
-- Zmiana: Maksymalna liczba odwiedzin przedmiotów podróżnych GC na dziennik skrytki zmniejszona do 100 (wg żądania z geocaching.com, aby zmniejszyć obciążenie serwera spowodowane przez ekstremalnych miłośników „podróżników”)
-- Naprawiono: Niektóre możliwe wyjątki dotyczące bezpieczeństwa, gdy użytkownik nie przyznał pewnych praw (np. powiadomienia)
-- Naprawiono: Niekompletne okręgi wokół skrytek przy niskim poziomie powiększenia (tylko VTM)
-- Naprawiono: Awaria przy przeładowaniu punktów nawigacji w niektórych sytuacjach
-- Naprawiono: W niektórych sytuacjach filtr daty wydarzenia nie działał
-- Naprawiono: Maksymalny limit logów nie działa niezawodnie przy ustawieniu „nieograniczona”
-- Naprawiono: W określonych warunkach awaria przy otwarciu mapy
-- Naprawiono: Mapa się nie wyświetała jeśli wherigo nie miało widocznych stref
-- Naprawiono: W pewnych sytuacjach występował błąd na karcie obrazów w szczegółach skrytki
-- Naprawiono: Wyszukiwanie na mapie z nieprawidłowymi współrzędnymi
-- Naprawiono: Niektóre tłumaczenia nie są zgodne z wewnętrznymi ustawieniami języka w c:geo
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
 
 ##
-- Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
-- Naprawiono: Pole wyboru Ulubione było resetowane przy ponowym wejściu na ekran logowania offline
-- Naprawiono: Pole do wpisywania promienia geofence pokazuje liczbę dziesiętną
-- Naprawiono: Synchronizacja notatek osobistych nie działała
-- Zmiana: Nowa ikona dla importu śladu GPX/trasy w szybkich ustawieniach śladu/trasy na mapie
+- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
+- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
+- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
-- Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
-- Naprawiono: Współrzędne bliskie 0 uszkadzane przy eksporcie GPX
-- Naprawiono: Kilka awarii
-- Próba naprawienia: Aplikacja nie odpowiada podczas uruchamiania
-- Próba naprawienia: Brak danych skrytek na mapie na żywo
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
+- Fix: Geofence radius input box shows decimal number
+- Fix: Syncing of personal notes not working
+- Change: New icon for GPX track/route import in map track/route quick settings
 
 ##
-- Naprawiono: Awaria podczas wyszukiwania słów kluczowych
-- Naprawiono: Awaria na mapie
-- Naprawiono: Tekst wskazówki nie jest już możliwy do zaznaczenia
-- Naprawiono: Kilka problemów z Wherigo
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
-- Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
-- Naprawiono: Błąd Wherigo podczas czytania starych zapisanych gier
-- Naprawiono: Logowanie wywołane w c:geo czasami nie było zapamiętane
-- Naprawiono: Brak aktualizacji danych na żywo dla znalezionych i zarchiwizowanych skrytek
-- Naprawiono: Punkty nawigacji na mapie offline nie są czasami wyświetlane
+- Fix: Crash in keyword search
+- Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
-- Naprawiono: Niezaszyfrowane wskazówki skrytki (zmiana strony internetowej)
-- Naprawiono: Skrytki Lab nie były wczytywane w aplikacji (zmiana strony internetowej, będziesz musiał zaktualizować zapisane Laby, aby móc wywoływać je z c:geo ponownie)
-- Naprawiono: UnifiedMap VTM: Przełączanie 3D budynków nie działa dla połączonych map
-- Naprawiono: Tłumaczenie offline: Czasami język opisu skrytki był wykrywany jako --
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
 
 ##
-- Naprawiono: Awaria w module tłumaczenia
-- Naprawiono: Błąd przy wykrywaniu logowania (zmiana strony)
-- Naprawiono: Awaria przy pobieraniu wkładu Wherigo
-- Naprawiono: „Wczytaj więcej” nie przestrzega filtrów offline
+- Fix: Unencrypted cache hints (website change)
+- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
-- Naprawiono: Inwentarz przedmiotów podróżnych nie był ładowany podczas logowania skrytki
+- Fix: Crash in translation module
+- Fix: Login detection fails (website change)
+- Fix: Crash on retrieving Wherigo cartridge
+- Fix: "Load more" does not respect offline filters
 
 ##
-- Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
-- Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+- Fix: Trackable inventory not loaded while logging a cache
+
+##
+- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
+- Fix: Finished Wherigo tasks not marked as finished or failed
 
 
 

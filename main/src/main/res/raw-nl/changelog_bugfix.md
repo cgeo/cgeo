@@ -1,6 +1,10 @@
 ##
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
+- Fix: Cannot upload changed coordinates (website change)
+- Fix: Cannot upload personal notes (website change)
+
+##
 - Fix: Cache/waypoint popup opening delayed on some devices
 - Fix: Edit cache description does not support copy & paste
 - Fix: Some crashes and "app not responding"
@@ -57,12 +61,12 @@ Note: If you are using internal routing, you will need to execute the following 
 - Fix: Logging actions for trackables get mixed up sometimes
 
 ##
-- Wijziging: Maximum aantal GC trackables die per cachelogboek op bezocht gezet kunnen worden, is teruggebracht tot 100 (op verzoek van geocaching.com om hun serverbelasting veroorzaakt door extreme trackable lovers te verminderen)
-- Oplossing: Enkele mogelijke beveiligingsuitzonderingen wanneer de gebruiker bepaalde permissies niet heeft toegekend (bv. meldingen)
-- Oplossing: Cache cirkels onvolledig op lage zoomniveaus (VTM alleen)
-- Oplossing: Crash bij het herladen van waypoints in bepaalde condities
-- Oplossing: Event datum filter werkt niet onder bepaalde omstandigheden
-- Oplossing: Maximale logregellimiet werkt niet betrouwbaar met de instelling "onbeperkt"
+- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
+- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
+- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
 - Fix: Crash on opening map under certain conditions
 - Fix: No map shown if wherigo has no visible zones
 - Fix: Crash on cache details' image tab under certain conditions
@@ -70,50 +74,50 @@ Note: If you are using internal routing, you will need to execute the following 
 - Fix: Some translations do not respect c:geo-internal language setting
 
 ##
-- Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
-- Oplossing: Favorieten checkbox wordt gereset bij het opnieuw openen van offline logboekscherm
-- Oplossing: Geofencradius invoervak toont decimaal nummer
-- Oplossing: Synchronisatie van persoonlijke notities werkt niet
-- Wijziging: Nieuw pictogram voor GPX track/route import in kaart track/route snelle instellingen
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
+- Fix: Geofence radius input box shows decimal number
+- Fix: Syncing of personal notes not working
+- Change: New icon for GPX track/route import in map track/route quick settings
 
 ##
-- Oplossing: Negatieve waarden in de hoogte grafiek niet geschaald
-- Fix: Coördinaten in de buurt van 0 gebroken in GPX export
-- Oplossing: Enkele crashes
-- Poging tot reparatie: ANR bij opstarten
-- Poging tot reparatie: Ontbrekende geocache gegevens op de live kaart
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
-- Oplossing: Crash in trefwoord zoeken
-- Oplossing: Crash op kaart
-- Oplossing: Hint tekst niet langer selecteerbaar
-- Oplossing: Verschillende Wherigo problemen
+- Fix: Crash in keyword search
+- Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
-- Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
-- Oplossing: Wherigo crash bij het lezen van oude opgeslagen spellen
-- Oplossing: Logging van c:geo word soms niet onthouden
-- Fix: Ontbrekende live data update voor gevonden & gearchiveerde caches
-- Oplossing: waypoints in offline kaart worden niet soms weergegeven
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
 
 ##
-- Oplossing: Onversleutelde cache hints (website wijziging)
-- Oplossing: Lab Avonturen laden niet in de app (website verandering, je zal opgeslagen lab avonturen moeten bijwerken om ze weer aan te kunnen roepen vanuit c:geo)
-- Oplossing: UnifiedMap VTM: Wisselen van 3D-gebouwen werkt niet voor gecombineerde kaarten
-- Oplossing: Offline vertaling: Listing taal soms gedetecteerd als --
+- Fix: Unencrypted cache hints (website change)
+- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
-- Oplossing: Crash in vertaalmodule
-- Oplossing: Login detectie mislukt (website wijziging)
-- Oplossing: Crash bij het ophalen van Wherigo cartridge
-- Oplossing: "Meer laden" respecteert de offline filters niet
+- Fix: Crash in translation module
+- Fix: Login detection fails (website change)
+- Fix: Crash on retrieving Wherigo cartridge
+- Fix: "Load more" does not respect offline filters
 
 ##
-- Oplossing: Trackable inventaris niet geladen tijdens het loggen van een cache
+- Fix: Trackable inventory not loaded while logging a cache
 
 ##
-- Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
-- Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
+- Fix: Finished Wherigo tasks not marked as finished or failed
 
 
 

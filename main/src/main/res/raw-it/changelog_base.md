@@ -1,80 +1,102 @@
-### Tabella di marcia per UnifiedMap & "vecchia" mappa
-c:geo, da qualche tempo, ha una nuova implementazione della mappa chiamata "UnifiedMap", che alla fine sostituirà le vecchie implementazioni di Google Maps e Mapsforge (OpenStreetMap). Questo è un avviso per informarvi sulla prossima roadmap.
+### General release notes
 
-UnifiedMap è stato pubblicato circa un anno fa. Supporta ancora Google Maps e OpenStreetMap (online + offline), ma in modo completamente rielaborato e con un sacco di eccitanti nuove caratteristiche che le "vecchie" mappe non supportano, alcune delle quali sono
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
 - Rotazione delle mappe basate su OpenStreetMap (online e offline)
 - Cluster popup per Google Maps
 - Nascondi le fonti delle mappe che non ti servono
 - Grafico di elevazione per percorsi e tracce
 - Passaggio tra le liste direttamente dalla mappa
 - "Modalità di guida" per mappe basate su OpenStreetMap
-
-UnfiedMap ha dimostrato di essere stabile da un bel po' di tempo, quindi rimuoveremo le vecchie implementazioni della mappa per ridurre l'impegno nella mantenzione di c:geo.
-
-Tabella di marcia:
-- Le "vecchie" mappe saranno abbandonate - non risolveremo più i bug.
-- UnifiedMap (mappa unificata) sarà resa predefinita per tutti gli utenti nell'autunno del 2025.
-- Le implementazioni della "vecchia" mappa saranno rimosse nella primavera 2026.
-
-Fino ad allora, sarà possibile passare tra le diverse implementazioni nelle impostazioni => Sorgenti mappa.
+- Long-tap on track / individual route for further options
 
 ### Mappa
-- Nuovo: Mostra l'area (geofence) intorno ai vari step degli Adventure Lab (UnifiedMap) - abilita "Cerchi" nelle impostazioni rapide della mappa per mostrarla
-- Nuovo: Opzione per impostare cerchi con raggio personalizzato per i waypoint (opzione del menu contestuale "geofence")
-- Corretto: vista mappa non aggiornata quando si rimuove un cache dalla lista attualmente visualizzata
-- Corretto: numero di cache nella lista non aggiornato modificando i contenuti della lista
-- Cambia: Mantieni la vista corrente nella mappatura di un elenco, se tutte le cache sono compatibili con la vista corrente
-- Nuovo: Segui la mia posizione nel grafico di elevazione (UnifiedMap)
-- Nuovo: abilita le azioni "vai a" / "copia in" per "mostra come elenco"
-- Nuovo: Supporto per il tema Elevate Winter nel downloader di mappe
-- Nuovo: Ombreggiamento Adattivo, modalità alta qualità opzionale (UnifiedMap Mapsforge)
-- Nuovo: Riprogettata la finestra di dialogo delle impostazioni rapide per percorsi/tracce
-- Nuovo: Tocco prolungato sull'icona della selezione della mappa per selezionare la sorgente di tasselli della mappa precedente (UnifiedMap)
-- Nuovo: Consenti l'impostazione del nome visualizzato per le mappe offline (UnifiedMap)
-- Nuovo: Tocco prolungato su "mappa live" per caricare i cache offline
-- Nuovo: Offline hillshading per UnifiedMap (variante VTM)
-- Nuovo: Supporto per mappe in background (UnifiedMap)
-- Corretto: icone compatte che non tornano a grandi icone sullo zoom in modalità automatica (UnifiedMap)
-- Nuovo: Azioni a lungo tocco nel foglio informativo cache: Codice GC, titolo cache, coordinate, note personali/indizio
-- Cambia: cambia il foglio infosheet della cache a lungo tocco per il selettore emoji per un tocco corto per risolvere la collisione
+- New: Route optimization caches calculated data
+- New: Enabling live mode keeps waypoints of currently set target visible
+- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
+- New: Show generated waypoints on map
+- New: Download caches ordered by distance
+- Fix: Doubling of individual route items
+- New: Support for Motorider theme (VTM only)
+- New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- New: Display coordinates of waypoints in waypoint popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
+- New: Conditional cache markers
+- New: Show navigation hint (arrow + distance)
 
 ### Dettagli del cache
-- Nuovo: Traduzione offline del testo della descrizione e dei log (sperimentale)
-- Nuovo: Opzione per condividere il cache con i dati utente (coordinate, nota personale)
-- Corretto: Servizio vocale interrotto sulla rotazione dello schermo
-- Corretto: Dettagli della cache: Elenca per la cache non aggiornata dopo aver toccato il nome della lista una rimozione della cache da quella lista
-- Corretto: La nota utente si perde durante l'aggiornamento di un'adventure lab
-- Modifica: i segnaposto relativi alla data di log utilizzeranno la data scelta invece della data corrente
-- Nuovo: Comprimi le voci di log lunghe per impostazione predefinita
+- New: Detect additional characters in formulas: –, ⋅, ×
+- New: Preserve timestamp of own logs on refreshing a cache
+- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
+- New: Show owners' logs on "friends/own" tab
+- Change: "Friends/own" tab shows log counts for that tab instead of global counters
+- Change: Improved header in variable and waypoint tabs
+- Fix: Two "delete log" items shown
+- Fix: c:geo crashing in cache details when rotating screen
+- Change: More compact layout for "adding new waypoint"
+- New: Option to load images for geocaching.com caches in "unchanged" size
+- New: Variables view can be filtered
+- New: Visualize calculated coordinates overflow in waypoint list
+- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
+- Fix: Crash on loading images embedded directly in listing text
+- New: Show own favorites in log view (Geocaching.com + offline logs)
+- New: Sending log is done in background
 
 ### Wherigo player
-- Nuovo: Controllo lettore Wherigo integrato per le credenziali mancanti
-- Modifica: Rimosso la segnalazione di bug Wherigo (poiché gli errori sono per lo più correlati alla cartuccia, devono essere risolti dal proprietario della cartuccia)
-- Nuovo: Capacità di navigare in una zona usando la bussola
-- Nuovo: possibilità di copiare negli appunti le coordinate del centro di un'area
-- Nuovo: Imposta il centro della zona come obiettivo quando si apre la mappa (per ottenere informazioni sul percorso e sulla distanza per esso)
-- Nuovo: Supporto all'apertura dei file Wherigo locali
-- Cambio: il tocco prolungato su una zona sulla mappa non è più riconosciuto. Questo permette agli utenti di fare altre cose nell'area della mappa disponibile con un tocco prolungato, es.: creare un cache definito dall'utente
-- Nuovo: Avviso se wherigo.com segnala la mancanza di EULA (che porta a un errore nel download della cartuccia)
+- New: Offline translation for Wherigos
+- New: Improved button handling
+- New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Fix: Missing/wrong media files lead to error
 
 ### Generale
-- Nuovo: pagina di ricerca ridisegnata
-- Nuovo: filtro conteggio inventario
-- Nuovo: Supporto delle coordinate in formato DD, DDDDDDD
-- Nuovo: mostra l'ultimo nome del filtro usato nella finestra del filtro
-- Nuovo: Calcolatore di coordinate: Funzione per sostituire "x" con simbolo di moltiplicazione
-- Corretto: altitudine errata (non con media sul livello del mare)
-- Corretto: impostazione limite di distanza nelle vicinanze non funziona correttamente per valori piccoli
-- Corretto: Ordinamento di elenchi di cache per distanza discendente non funziona correttamente
-- Corretto: Cache di laboratorio escluse dal filtro D/T anche con "include incerto" attivo
-- Corretto: Problemi di colore con le icone del menu in modalità light
-- Nuovo: Aggiungi "Rimuovi gli eventi passati" per elencare "tutti"
-- Nuovo: Mostra connettore per le "cache definite dall'utente" come attive nel filtro sorgente
-- Nuovo: Esportazione GPX: esportazione di registri / trackables resi opzionali
-- Nuovo: Aggiunto il pulsante per eliminare i modelli di log
-- Corretto: l'importazione del file di mappa locale ottiene il nome casuale della mappa
-- Corretto: Download mappa con file corrotti (0 byte) per il download
-- Nuovo: Aggiunte mappature per alcuni tipi di cache OC mancanti
-- Nuovo: Sposta gli elenchi "usati di recente" nella finestra di selezione degli elenchi in alto premendo il pulsante "usato di recente"
-- Nuovo: Condividi l'elenco dei geocodici dalla lista cache
-- Modifica: "Navigazione (car)" ecc. usa il parametro "q=" invece del parametro "ll=" obsoleto
+- New: Share option after logging a cache
+- Change: Do not show "needs maintenance" or "needs archived" options for own caches
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Change: Removed references to Twitter
+- New: Delete orphaned trackfiles on clean up and restore backup
+- New: Warning on trying to add too many caches to a bookmark list
+- New: Watch/unwatch list functions
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
+- New: Delete items from search history
+- Change: Remove GCVote (service discontinued)
+- New: Colored toolbar on cache details pages
+- New: Select multiple bookmark lists / pocket queries to download
+- New: Preview bookmark lists
+- Change: Increase minimum required Android version to Android 8
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
+- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
+- Change: New emoji selector

@@ -178,8 +178,7 @@
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
@@ -257,9 +256,6 @@
     <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
     <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
-    <string name="info_log_post_failed">Log küldése sikertelen.</string>
-    <string name="info_log_post_retry">Újra</string>
-    <string name="info_log_post_save">Offline mentés</string>
     <string name="info_log_cleared">A bejegyzés törölve.</string>
     <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
     <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
@@ -399,15 +395,7 @@
     <string name="cache_filter_userdisplay_not">NEM</string>
     <string name="cache_filter_storage_delete_button">Törlés</string>
     <string name="cache_filter_storage_clear_button">Törlés</string>
-    <string name="cache_filter_storage_load_delete_title">Meglévő szűrő betöltése vagy törlése</string>
     <string name="cache_filter_storage_select_title">Szűrő kiválasztása</string>
-    <string name="cache_filter_storage_delete_title">Szűrő törlése</string>
-    <string name="cache_filter_storage_delete_message">Biztosan törölni szeretnéd ezt a szűrőkonfigurációt?</string>
-    <string name="cache_filter_storage_select_clear_title">Szűrő kiválasztása vagy a jelenlegi szűrő törlése</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Még nincs tárolva szűrő.</string>
-    <string name="cache_filter_storage_save_title">Szűrő mentése névvel</string>
-    <string name="cache_filter_storage_save_confirm_title">Szűrő felülírásának mentése</string>
-    <string name="cache_filter_storage_save_confirm_message">Már létezik egy \'%s\' nevű szűrő más konfigurációval. Felülírni?</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Keresés a szövegben</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nincs jelen</string>
     <string name="cache_filter_stringfilter_type_is_present">Jelen van</string>
@@ -415,6 +403,7 @@
     <string name="cache_filter_stringfilter_type_does_not_contain">Nem tartalmaz</string>
     <string name="cache_filter_stringfilter_type_starts_with">Ezzel kezdődik</string>
     <string name="cache_filter_checkboxlist_add_all_items">Az összes elem hozzáadása</string>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>
@@ -488,7 +477,6 @@
     <string name="init_summary_oc_uk">Ládák letöltése az opencache.uk-ról</string>
     <string name="init_oc_uk_description">A c:geo hitelesítése az opencache.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
     <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
-    <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
     <string name="init_login_popup">Bejelentkezés</string>
     <string name="init_login_popup_working">Bejelentkezés a geocaching.com-ra…</string>
     <string name="init_login_popup_ok">Bejelentkezés ok</string>
@@ -514,8 +502,6 @@
     <string name="init_signature_template_log">Log szöveg</string>
     <string name="init_signature_template_size">Méret</string>
     <string name="init_signature_template_type">Típus</string>
-    <string name="init_ratingwanted">GCVote értékelés</string>
-    <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése</string>
     <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
     <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
@@ -733,7 +719,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Spoiler képek betöltése</string>
     <string name="cache_dialog_loading_details_status_logs">Logok betöltése</string>
     <string name="cache_dialog_loading_details_status_waypoints">Útpontok feldolgozása</string>
-    <string name="cache_dialog_loading_details_status_gcvote">A GCVote betöltése</string>
     <string name="cache_dialog_loading_details_status_cache">Láda adatai</string>
     <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
     <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
@@ -762,7 +747,6 @@
     <string name="cache_menu_share">Láda megosztása</string>
     <string name="cache_menu_move_list">Mozgatás másik listára</string>
     <string name="cache_menu_copy_list">Másolás másik listára</string>
-    <string name="cache_menu_vote">Értékelés</string>
     <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése</string>
     <string name="cache_menu_ignore">Láda mellőzése</string>
     <string name="ignore_confirm_title">Légy óvatos</string>
@@ -805,7 +789,7 @@
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
@@ -1270,7 +1254,6 @@
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_clear_trailhistory">Nyomvonal-előzmények törlése</string>
-    <string name="map_trailhistory_cleared">Nyomvonal-előzmények törölve</string>
     <string name="map_trail_show">Ösvény be</string>
     <!-- history track export -->
     <!-- individual route export -->
@@ -1283,12 +1266,5 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Eredeti</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

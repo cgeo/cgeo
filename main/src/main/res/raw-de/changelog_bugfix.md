@@ -1,10 +1,14 @@
 ##
 Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
+- Korrektur: Kann geänderte Koordinaten nicht hochladen (Webseitenänderung)
+- Korrektur: Kann persönliche Notizen nicht hochladen (Webseitenänderung)
+
+##
 - Fix: Cache- / Wegpunkt-Popup öffnet auf einigen Geräten verzögert
 - Fix: Cache-Beschreibung Bearbeiten unterstützt kein Kopieren & Einfügen
 - Korrektur: Einige Abstürze und "App reagiert nicht"
-- Korrektur: Löschen von Trackable-Logs schlägt fehl (Änderung der Webseite)
+- Korrektur: Löschen von Trackable-Logs schlägt fehl (Webseitenänderung)
 
 ##
 - Korrektur: Löschen von Logbildern defekt (Webseitenänderung)
@@ -60,60 +64,60 @@ Hinweis: Wenn du das interne Routing verwendest, führe nach der Installation di
 - Änderung: Maximale Anzahl von "Besuchen" von GC-Trackables pro Cache-Log auf 100 reduziert (auf Bitte von geocaching.com hin, um die Serverlast zu reduzieren, die durch extreme Trackable-Liebhaber verursacht wird)
 - Korrektur: Mögliche Sicherheits-Abbrüche, wenn der Benutzer bestimmte Rechte nicht gewährt hat (z. B.: Benachrichtigungen)
 - Korrektur: Cache-Kreise unvollständig bei niedrigen Zoomstufen (nur VTM)
-- Korrektur: Absturz beim Laden von Wegpunkten unter bestimmten Lastbedingungen
-- Korrektur: Event-Filter funktioniert unter bestimmten Bedingungen nicht
-- Korrektur: Maximales Log-Limit funktioniert nicht zuverlässig in der "unbegrenzten" Einstellung
-- Korrektur: Absturz beim Öffnen OSM-basierter Karten unter bestimmten Bedingungen
-- Fix: Keine Karte angezeigt, wenn in Wherigo keine sichtbaren Zonen vorhanden sind
-- Korrektur: Absturz beim Bilder-Tab der Cache-Details unter bestimmten Bedingungen
-- Korrektur: Kartensuche mit ungültigen Koordinaten
-- Korrektur: Einige Übersetzungen berücksichtigen die c:geo-interne Sprachauswahl nicht
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
-- Änderung: Die Vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (ein Schritt zur Ablösung der alten Karten). Kann vorläufig unter "Einstellungen" - "Kartenquellen" noch umgeschaltet werden. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
-- Korrektur: Favoriten-Checkbox wird beim erneuten Öffnen des Offline-Logs zurückgesetzt
-- Korrektur: Geofence Radius Eingabefeld zeigt Dezimalzahl an
-- Korrektur: Synchronisation von persönlichen Notizen funktioniert nicht
-- Änderung: Neues Icon für GPX-Track/Routenimport in Track-/Routen-Schnelleinstellungen auf Karte
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
+- Fix: Geofence radius input box shows decimal number
+- Fix: Syncing of personal notes not working
+- Change: New icon for GPX track/route import in map track/route quick settings
 
 ##
-- Korrektur: Negative Werte im Höhendiagramm nicht skaliert
-- Korrektur: Koordinaten nahe 0 in GPX-Exporten fehlerhaft
-- Korrektur: Mehrere Abstürze
-- Mögliche Korrektur: Langsamer Programmstart
-- Mögliche Korrektur: Fehlende Geocache-Daten auf Live-Karte
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
-- Korrektur: Absturz bei der Stichwortsuche
-- Korrektur: Absturz in der Karte
-- Korrektur: Hinweistext nicht mehr auswählbar
-- Korrektur: Mehrere Wherigo-Probleme
+- Fix: Crash in keyword search
+- Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
-- Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
-- Korrektur: Wherigo Absturz beim Lesen alter Spielstände
-- Korrektur: Fund-Log von innerhalb c:geo manchmal nicht gespeichert
-- Korrektur: Fehlendes Live-Datenupdate für gefundene & archivierte Caches
-- Korrektur: Wegpunkte werden in der Offline-Karte manchmal nicht angezeigt
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
 
 ##
-- Fix: Cache-Hinweise nicht mehr verschlüsselt (Webseiten-Änderung)
-- Fix: Labcaches können in der App nicht geöffnet werden (Webseiten-Änderung, du musst gespeicherte Labcaches aktualisieren um sie erneut aus c:geo zu öffnen)
-- Korrektur: UnifiedMap VTM: Umschalten von 3D-Gebäude funktioniert nicht für kombinierte Karten
-- Fix: Offline-Übersetzung: Listing-Sprache manchmal als -- erkannt
+- Fix: Unencrypted cache hints (website change)
+- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
-- Korrektur: Absturz in Übersetzungsfunktion
-- Korrektur: Loginerkennung fehlgeschlagen (Website-Änderung)
-- Korrektur: Absturz beim Abrufen der Wherigo-Cartridge
-- Fix: "Mehr laden" ignoriert Offline-Filter
+- Fix: Crash in translation module
+- Fix: Login detection fails (website change)
+- Fix: Crash on retrieving Wherigo cartridge
+- Fix: "Load more" does not respect offline filters
 
 ##
-- Korrektur: Trackable Inventar beim Loggen eines Caches nicht geladen
+- Fix: Trackable inventory not loaded while logging a cache
 
 ##
-- Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
-- Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
+- Fix: Finished Wherigo tasks not marked as finished or failed
 
 
 
