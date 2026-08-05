@@ -3,6 +3,7 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.StatusResult;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
@@ -20,7 +21,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
-import static cgeo.geocaching.connector.gc.GCLogin.initializeWebview;
 
 import android.app.AlertDialog;
 import android.net.Uri;
@@ -159,7 +159,7 @@ public class WherigoDownloader {
         binding.info.setText(R.string.init_login_manual_wig_description);
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
-        initializeWebview(binding.webview);
+        GCLogin.initializeWebview(binding.webview);
 
         WindowCompat.enableEdgeToEdge(this.activity.getWindow());
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
@@ -173,6 +173,7 @@ public class WherigoDownloader {
         dialog.setOnDismissListener(d -> onResult.accept(confirmed.get()));
 
         CookieManager.getInstance().removeAllCookies(b -> {
+            GCLogin.injectGcCookiesIntoWebView();
             binding.webview.loadUrl(LOGIN_PAGE);
             binding.okButton.setOnClickListener(bo -> {
                 // Extract the wherigo auth cookie from the WebView.

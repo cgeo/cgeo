@@ -216,6 +216,7 @@ public class EmojiUtils {
         if (showResetAllAction || StringUtils.isNotBlank(currentValue)) {
             if (cache == null) {
                 dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
+                MenuUtils.setButtonTint(dialogButtonLeft);
             } else {
                 dialogButtonLeft.setIcon(getTintedCacheIcon(context, cache));
                 dialogButtonLeft.setIconTint(null);

@@ -157,28 +157,32 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 }
             }, 300);
 
-            if (swipeToOpenFragment != null) {
-                final Activity that = this;
-                final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
-                    @Override
-                    public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
-                        if (newState == BottomSheetBehavior.STATE_HIDDEN && sheetOpenedAtLeastOnce[0]) {
-                            sheetRemoveFragment();
-                        }
+            final Activity that = this;
+            final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN && sheetOpenedAtLeastOnce[0]) {
+                        sheetRemoveFragment();
+                    }
+                    if (swipeToOpenFragment != null) {
                         if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                             onUpSwipeAction.run();
                             ActivityMixin.overrideTransitionToFade(that);
                             ActivityMixin.postDelayed(() -> sheetRemoveFragment(), 500);
                         }
                     }
+                }
 
-                    @Override
-                    public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                @Override
+                public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                    if (swipeToOpenFragment != null) {
                         swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
                     }
-                };
+                }
+            };
 
-                b.addBottomSheetCallback(callback);
+            b.addBottomSheetCallback(callback);
+            if (swipeToOpenFragment != null) {
                 swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
             }
         } else { // landscape mode uses SideSheet

@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -15,6 +16,8 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuItemImpl;
 
 import javax.annotation.Nullable;
+
+import com.google.android.material.button.MaterialButton;
 
 public class MenuUtils {
 
@@ -79,17 +82,16 @@ public class MenuUtils {
             if (!anyMenuItemVisible) {
                 return;
             }
-            final Resources res = ColorUtils.getThemedContext().getResources();
-            tintMenuIconsAndTitles(menu, res.getColor(R.color.colorTextActionBar), res.getColor(R.color.colorIconMenu));
+            tintMenuIconsAndTitles(menu);
         }, 100);
     }
 
     @SuppressLint("RestrictedApi")
-    private static void tintMenuIconsAndTitles(final Menu menu, final int actionBarColor, final int menuColor) {
+    private static void tintMenuIconsAndTitles(final Menu menu) {
         for (int i = 0; i < menu.size(); i++) {
-            final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
+            final MenuItem item = menu.getItem(i);
             // choose color depending on state
-            final int color = ColorUtils.setAlpha(item.isActionButton() ? actionBarColor : menuColor, item.isEnabled() ? 255 : 128);
+            final int color = getTintColor(item);
 
             // color menu item title
             final SpannableString s = new SpannableString(item.getTitle());
@@ -97,14 +99,31 @@ public class MenuUtils {
             item.setTitle(s);
 
             // color icon, if present
-            final Drawable drw = item.getIcon();
-            if (null != drw) {
-                drw.mutate().setTint(color);
-                item.setIcon(drw);
-            }
+            tintMenuIcon(item);
             if (null != item.getSubMenu()) {
-                tintMenuIconsAndTitles(item.getSubMenu(), actionBarColor, menuColor);
+                tintMenuIconsAndTitles(item.getSubMenu());
             }
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private static int getTintColor(final MenuItem menuItem) {
+        final MenuItemImpl item = (MenuItemImpl) menuItem;
+        final Resources res = ColorUtils.getThemedContext().getResources();
+        return ColorUtils.setAlpha(item.isActionButton() ? res.getColor(R.color.colorTextActionBar, null) : res.getColor(R.color.colorIconMenu, null), item.isEnabled() ? 255 : 128);
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void tintMenuIcon(final MenuItem item) {
+        final Drawable drw = item.getIcon();
+        if (null != drw) {
+            drw.mutate().setTint(getTintColor(item));
+            item.setIcon(drw);
+        }
+    }
+
+    public static void setButtonTint(final MaterialButton button) {
+        final Resources res = ColorUtils.getThemedContext().getResources();
+        button.setIconTint(ColorStateList.valueOf(res.getColor(R.color.colorTextActionBar, null)));
     }
 }
