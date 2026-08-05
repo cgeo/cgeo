@@ -1,11 +1,11 @@
 package cgeo.geocaching.speech;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.PluralsRes;
 import androidx.annotation.StringRes;
@@ -65,9 +65,9 @@ public class TextFactory {
             // example: "5 kilometers" - always without decimal digits
             final int quantity = Math.round(farDistance);
             if (quantity == 1) {
-                return getString(farOneId, quantity, String.valueOf(quantity));
+                return LocalizationUtils.getString(farOneId, String.valueOf(quantity));
             }
-            return getQuantityString(farId, quantity, String.valueOf(quantity));
+            return LocalizationUtils.getQuantityString(farId, quantity, String.valueOf(quantity));
         }
         if (farDistance >= farNearAway) {
             // example: "2.2 kilometers" - decimals if necessary
@@ -77,14 +77,14 @@ public class TextFactory {
                 // this is an int - e.g. 2 kilometers
                 final int quantity = (int) precision0;
                 if (quantity == 1) {
-                    return getString(farOneId, quantity, String.valueOf(quantity));
+                    return LocalizationUtils.getString(farOneId, String.valueOf(quantity));
                 }
-                return getQuantityString(farId, quantity, String.valueOf(quantity));
+                return LocalizationUtils.getQuantityString(farId, quantity, String.valueOf(quantity));
             }
             // this is no int - e.g. 1.7 kilometers
             final String digits = String.format(Locale.getDefault(), "%.1f", farDistance);
             // always use the plural (9 leads to plural)
-            return getQuantityString(farId, 9, digits);
+            return LocalizationUtils.getQuantityString(farId, 9, digits);
         }
         // example: "34 meters"
         int quantity = nearDistance;
@@ -93,17 +93,9 @@ public class TextFactory {
             quantity = (int) Math.round(quantity / 10.0) * 10;
         }
         if (quantity == 1) {
-            return getString(nearOneId, quantity, String.valueOf(quantity));
+            return LocalizationUtils.getString(nearOneId, String.valueOf(quantity));
         }
-        return getQuantityString(nearId, quantity, String.valueOf(quantity));
-    }
-
-    private static String getString(@StringRes final int resourceId, final Object... formatArgs) {
-        return CgeoApplication.getInstance().getString(resourceId, formatArgs);
-    }
-
-    private static String getQuantityString(@PluralsRes final int resourceId, final int quantity, final Object... formatArgs) {
-        return CgeoApplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
+        return LocalizationUtils.getQuantityString(nearId, quantity, String.valueOf(quantity));
     }
 
     private static String getDirection(final Geopoint position, final Geopoint target, final float direction) {
@@ -122,6 +114,6 @@ public class TextFactory {
             }
         }
 
-        return getString(hours == 1 ? R.string.tts_one_oclock : R.string.tts_oclock, String.valueOf(hours));
+        return LocalizationUtils.getString(hours == 1 ? R.string.tts_one_oclock : R.string.tts_oclock, String.valueOf(hours));
     }
 }

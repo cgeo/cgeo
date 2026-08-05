@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 //Android uses different RegEx implementation than Java JRE.
 //-> so we repeat critical tests in instrumented mode to ensure Android works correct

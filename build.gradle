@@ -7,13 +7,10 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:8.9.2'
+        classpath 'com.android.tools.build:gradle:8.13.2'
 
         // un-mocking of portable Android classes
-        classpath 'com.github.bjoernq:unmockplugin:0.7.9'
-
-        // monitor our application method limit
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0'
+        classpath 'com.github.bjoernq:unmockplugin:0.9.0'
     }
 }
 
@@ -22,11 +19,11 @@ plugins {
     id 'idea'
 
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'com.github.ben-manes.versions' version '0.54.0'
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
-    id 'com.github.spotbugs' version '6.0.18'
+    id 'com.github.spotbugs' version '6.1.13'
 }
 
 /*
@@ -67,7 +64,7 @@ tasks.register('cgeoHelp') {
         println '    gradlew dependencies main:dependencies'
         println ''
         println 'check gradle dependencies for updates:'
-        println '    gradlew dependencyUpdates'
+        println '    gradlew dependencyUpdates --no-parallel'
         println ''
         println 'Use "gradlew tasks" for more available tasks.'
         println ''
@@ -90,23 +87,8 @@ allprojects {
                         //if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
                         //    selection.reject('Release candidate')
                         //}
-
-                        // see https://assertj.github.io/doc/#assertj-core-android
-                        // AssertJ Core 3.x is compatible with Android API Level 26+, except for soft assertions and assumptions.
-                        // AssertJ Core 2.x is Android compatible with Android API Level 26+ and API Level < 26 except for Path assertions.
-                        if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
-                            selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
-                        }
-
-                        // Apache Commons IO 2.6 fails in FileUtils.deleteDirectory()
-                        // (uses java.nio.file.Path - which is first contained in Android API26)
-                        if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
-                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime untli API26.")
-                        }
                     }
                 }
-                // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
-                force 'com.google.guava:guava:26.0-jre'
             }
         }
     }
@@ -122,11 +104,26 @@ subprojects {
         google()
         // integrate as last one - for versions by commit ID
         maven {
-            url 'https://jitpack.io'
+            url = 'https://jitpack.io'
         }
         // Used for Mapsforge and VTM Snapshots
         maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        // Prebuilt Bergamot offline-translator native libraries, published as
+        // GitHub Release assets by cgeo/offline-translator (build-libs.yml).
+        // Scoped via content {} so it is consulted only for that one artifact.
+        ivy {
+            url = 'https://github.com/cgeo/offline-translator/releases/download'
+            patternLayout {
+                artifact '[revision]/[artifact].[ext]'
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeModule('cgeo', 'bergamot-sys')
+            }
         }
     }
 

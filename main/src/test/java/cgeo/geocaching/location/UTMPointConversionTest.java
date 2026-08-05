@@ -9,8 +9,8 @@ import static java.lang.String.valueOf;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /*
  * Test the UTMPoint class with testcases from an Excel sheet provided here: http://www.uwgb.edu/dutchs/UsefulData/UTMFormulas.htm

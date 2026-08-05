@@ -4,7 +4,7 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.TextUtils;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class GCConstantsTest {

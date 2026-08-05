@@ -3,8 +3,8 @@ package cgeo.geocaching.location;
 import android.os.Build;
 
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeopointTest {
 

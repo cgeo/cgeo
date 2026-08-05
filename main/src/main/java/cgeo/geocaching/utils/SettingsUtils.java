@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class SettingsUtils {
@@ -128,7 +128,7 @@ public class SettingsUtils {
     }
 
     public static void setPrefClick(final PreferenceFragmentCompat preferenceFragment, @StringRes final int res, final Runnable action) {
-        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(res));
+        final Preference preference = preferenceFragment.findPreference(LocalizationUtils.getPlainString(res));
         if (preference != null) {
             preference.setOnPreferenceClickListener(p -> {
                 action.run();
@@ -138,18 +138,18 @@ public class SettingsUtils {
     }
 
     public static void setPrefSummary(final PreferenceFragmentCompat preferenceFragment, @StringRes final int res, final String summary) {
-        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(res));
+        final Preference preference = preferenceFragment.findPreference(LocalizationUtils.getPlainString(res));
         if (preference != null) {
             preference.setSummary(summary);
         }
     }
 
     public static void setPrefSummaryActiveStatus(final PreferenceFragmentCompat preferenceFragment, @StringRes final int resConnector, final boolean isActive) {
-        setPrefSummary(preferenceFragment, resConnector, isActive ? preferenceFragment.getString(R.string.settings_service_active) : "");
+        setPrefSummary(preferenceFragment, resConnector, isActive ? LocalizationUtils.getString(R.string.settings_service_active) : "");
     }
 
     public static void setAuthTitle(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId, final boolean authorized) {
-        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(prefKeyId));
+        final Preference preference = preferenceFragment.findPreference(LocalizationUtils.getPlainString(prefKeyId));
         if (preference != null) {
             preference.setTitle(authorized ? R.string.settings_reauthorize : R.string.settings_authorize);
         }
@@ -157,7 +157,7 @@ public class SettingsUtils {
 
     public static void updateOAuthPreference(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId, final boolean authorized) {
         setAuthTitle(preferenceFragment, prefKeyId, authorized);
-        setPrefSummary(preferenceFragment, prefKeyId, preferenceFragment.getString(authorized ? R.string.auth_connected : R.string.auth_unconnected));
+        setPrefSummary(preferenceFragment, prefKeyId, LocalizationUtils.getString(authorized ? R.string.auth_connected : R.string.auth_unconnected));
     }
 
     public static void updateOpenCachingAuthPreference(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId) {
@@ -168,7 +168,7 @@ public class SettingsUtils {
 
     public static void initPublicFolders(final PreferenceFragmentCompat preferenceFragment, final ContentStorageActivityHelper csah) {
         for (PersistableFolder folder : PersistableFolder.values()) {
-            final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(folder.getPrefKeyId()));
+            final Preference preference = preferenceFragment.findPreference(LocalizationUtils.getPlainString(folder.getPrefKeyId()));
             if (preference == null) {
                 continue;
             }
@@ -190,7 +190,7 @@ public class SettingsUtils {
         final List<Long> freeSpaces = new ArrayList<>();
         int selectedDirIndex = -1;
         for (final File dir : extDirs) {
-            if (StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+            if (Strings.CS.equals(currentExtDir, dir.getAbsolutePath())) {
                 selectedDirIndex = directories.size();
             }
             final long freeSpace = FileUtils.getFreeDiskSpace(dir);
@@ -202,7 +202,7 @@ public class SettingsUtils {
         assert activity != null;
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
+        builder.setTitle(LocalizationUtils.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
         builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(activity,
                 android.R.layout.simple_list_item_single_choice,
                 formatDirectoryNames(activity, directories, freeSpaces)) {
@@ -227,7 +227,7 @@ public class SettingsUtils {
         }, selectedDirIndex, (dialog, itemId) -> {
             SimpleDialog.of(activity).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm(() -> {
                 final File dir = extDirs.get(itemId);
-                if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                if (!Strings.CS.equals(currentExtDir, dir.getAbsolutePath())) {
                     LocalStorage.changeExternalPrivateCgeoDir(activity, dir.getAbsolutePath());
                 }
                 Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
@@ -243,9 +243,8 @@ public class SettingsUtils {
         final List<CharSequence> truncated = Formatter.truncateCommonSubdir(directories);
         final List<CharSequence> formatted = new ArrayList<>(truncated.size());
         for (int i = 0; i < truncated.size(); i++) {
-            formatted.add(activity.getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
+            formatted.add(LocalizationUtils.getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
         }
         return formatted;
     }
-
 }

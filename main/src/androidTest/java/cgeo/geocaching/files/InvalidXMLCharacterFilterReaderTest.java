@@ -7,7 +7,7 @@ import java.io.StringReader;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InvalidXMLCharacterFilterReaderTest {
 

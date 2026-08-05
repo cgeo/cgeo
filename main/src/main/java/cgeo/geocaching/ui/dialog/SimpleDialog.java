@@ -8,8 +8,6 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CommonUtils;
-import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
@@ -26,11 +24,12 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.util.Consumer;
-import androidx.core.util.Predicate;
-import androidx.core.util.Supplier;
+import androidx.viewbinding.ViewBinding;
 
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -46,6 +45,7 @@ public class SimpleDialog {
 
     private TextParam title;
     private TextParam message;
+    private View customView;
 
     private TextParam positiveButton = TextParam.id(android.R.string.ok);
     private TextParam negativeButton = TextParam.id(android.R.string.cancel);
@@ -87,8 +87,7 @@ public class SimpleDialog {
 
         private AlertDialog dialog;
 
-        private Action1<ItemSelectModel<T>> selectionChangedListener = null;
-        private Action2<ItemSelectModel<T>, Integer> buttonClickedListener = null;
+        private Predicate<ItemSelectModel<T>> selectionChangedListener = null;
 
         /** Set choice mode. For SINGLE-RADIO, it can be defined whether clicking on item immediately means choice */
         public ItemSelectModel<T> setChoiceMode(final ChoiceMode choiceMode, final boolean singleSelectWithOk) {
@@ -117,14 +116,8 @@ public class SimpleDialog {
         }
 
         /** Sets a listener to be called on a selection change */
-        public ItemSelectModel<T> setSelectionChangedListener(final Action1<ItemSelectModel<T>> selectionChangedListener) {
+        public ItemSelectModel<T> setSelectionChangedListener(final Predicate<ItemSelectModel<T>> selectionChangedListener) {
             this.selectionChangedListener = selectionChangedListener;
-            return this;
-        }
-
-        /** Sets a listener to be called if any button is clicked (positive, negative or neutral) */
-        public ItemSelectModel<T> setButtonClickedListener(final Action2<ItemSelectModel<T>, Integer> buttonClickedListener) {
-            this.buttonClickedListener = buttonClickedListener;
             return this;
         }
 
@@ -147,6 +140,7 @@ public class SimpleDialog {
         private Predicate<String> inputChecker = null;
         private String allowedChars = null;
         private String hint = null;
+        private int maxAllowedLength = 0;
 
         /** input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed */
         public InputOptions setInputType(final int inputType) {
@@ -189,6 +183,12 @@ public class SimpleDialog {
             return this;
         }
 
+        /** set maximum allowed length, 0=no limit */
+        public InputOptions setMaxAllowedLength(final int maxAllowedLength) {
+            this.maxAllowedLength = maxAllowedLength;
+            return this;
+        }
+
     }
 
 
@@ -218,6 +218,15 @@ public class SimpleDialog {
         return setTitle(TextParam.id(stringId, params));
     }
 
+    public SimpleDialog setCustomView(final View customView) {
+        this.customView = customView;
+        return this;
+    }
+
+    public SimpleDialog setCustomView(final ViewBinding customBinding) {
+        this.customView = customBinding.getRoot();
+        return this;
+    }
 
     public SimpleDialog setMessage(final TextParam message) {
         this.message = message;
@@ -347,6 +356,12 @@ public class SimpleDialog {
             this.message.applyTo(binding.dialogMessage);
         } else {
             binding.dialogMessage.setVisibility(View.GONE);
+        }
+        if (this.customView != null) {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
+            binding.dialogCustomviewholder.addView(this.customView);
+        } else {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
         }
 
         return new Pair<>(dialog, binding);
@@ -478,17 +493,21 @@ public class SimpleDialog {
      * @param options           the item select options
      * @param selectionListener convenient listener which is called when "positive" button is clicked
      */
-    public final <T> void selectSingle(final ItemSelectModel<T> options, final Consumer<T> selectionListener) {
+    public final <T> void selectSingle(@Nullable final ItemSelectModel<T> options, @Nullable final Consumer<T> selectionListener) {
+        selectSinglePre(options, selectionListener == null ? null : item -> {
+            selectionListener.accept(item);
+            return true;
+        });
+    }
+
+    public final <T> void selectSinglePre(@Nullable final ItemSelectModel<T> options, @Nullable final Predicate<T> selectionListener) {
         // This is just a convenience method to call "selectItems" with single selection in mind
         // Do NOT place any further logic here, otherwise it won't be available for multi-select
-        if (options.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX) {
+        if (options != null && options.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX) {
             options.setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO, true);
         }
-        selectItems(options, selectMulti -> {
-            if (selectionListener != null) {
-                selectionListener.accept(CommonUtils.first(selectMulti));
-            }
-        });
+        selectItems(options, selectionListener == null ? null :
+                selectMulti -> selectionListener.test(CommonUtils.first(selectMulti)));
     }
 
     /**
@@ -500,12 +519,19 @@ public class SimpleDialog {
      * @param selectionListener convenient listener which is called when "positive" button is clicked
      */
     public final <T> void selectMultiple(final ItemSelectModel<T> options, final Consumer<Set<T>> selectionListener) {
+        selectMultiplePre(options, selectionListener == null ? null : items -> {
+            selectionListener.accept(items);
+            return true;
+        });
+    }
+
+    public final <T> void selectMultiplePre(final ItemSelectModel<T> options, final Predicate<Set<T>> selectionListener) {
         options.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
         selectItems(options, selectionListener);
     }
 
     @SuppressWarnings("PMD.NPathComplexity")
-    private <T> void selectItems(final ItemSelectModel<T> options, final Consumer<Set<T>> selectionListener) {
+    private <T> void selectItems(@Nullable final ItemSelectModel<T> options, @Nullable final Predicate<Set<T>> selectionListener) {
         final ItemSelectModel<T> model = options == null ? new ItemSelectModel<>() : options;
         final boolean selectionConfirmedViaButton = model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX || model.singleSelectWithOk;
 
@@ -544,9 +570,10 @@ public class SimpleDialog {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     if (selectionListener != null) {
-                        //default action on OK button is to close and pass selection to listener
-                        selectionListener.accept(model.getSelectedItems());
-                        dialog.dismiss();
+                        //default action on OK button is to pass selection to listener
+                        if (selectionListener.test(model.getSelectedItems())) {
+                            dialog.dismiss();
+                        }
                         handled = true;
                     }
                     break;
@@ -561,24 +588,26 @@ public class SimpleDialog {
                     //do nothing
                     break;
             }
-            if (!handled && model.buttonClickedListener != null) {
-                model.buttonClickedListener.call(model, which);
-                handled = true;
-            }
             return handled;
         });
 
         model.addChangeListeners(ct -> {
             adjustButtonEnablement(model, dialog);
             if (model.selectionChangedListener != null && ct == SimpleItemListModel.ChangeType.SELECTION) {
-                model.selectionChangedListener.call(model);
+                if (model.selectionChangedListener.test(model)) {
+                    dialog.dismiss();
+                    return;
+                }
             }
             if (!selectionConfirmedViaButton  && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 //special handling of "single immediate select" (on click)
                 if (selectionListener != null) {
-                    selectionListener.accept(model.getSelectedItems());
+                    if (selectionListener.test(model.getSelectedItems())) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
             }
         });
         adjustButtonEnablement(model, dialog);
@@ -628,6 +657,9 @@ public class SimpleDialog {
          }
          if (io.suffix != null) {
              textLayout.setSuffixText(io.suffix);
+         }
+         if (io.maxAllowedLength > 0) {
+             ViewUtils.setMaxTextLength(textField, textLayout, io.maxAllowedLength);
          }
 
         if (io.inputChecker != null) {

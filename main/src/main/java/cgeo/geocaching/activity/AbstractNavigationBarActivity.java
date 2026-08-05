@@ -16,8 +16,6 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -28,10 +26,13 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.DefaultMap;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.Version;
@@ -44,6 +45,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +59,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.core.graphics.Insets;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -64,6 +67,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationBarView;
+
 
 public abstract class AbstractNavigationBarActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
     private static final String STATE_BACKUPUTILS = "backuputils";
@@ -113,10 +117,19 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
 
+        // Set up the toolbar
+        setSupportActionBar(binding.appToolbar.getRoot());
+
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
         // will be called if c:geo cannot log in
         startLoginIssueHandler();
+    }
+
+    @Override
+    @Nullable
+    public View getActionBarView() {
+        return binding == null ? null : binding.appToolbar.getRoot();
     }
 
     @Nullable
@@ -146,9 +159,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private boolean onMapLongClicked() {
-        if (Settings.useLegacyMaps()) {
-            return false;
-        }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
             DefaultMap.startActivityList(this, selectedListId, null);
             ActivityMixin.overrideTransitionToFade(this);
@@ -227,6 +237,27 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         ActivityMixin.overrideTransitionToFade(this);
     }
 
+    @NonNull
+    @Override
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsForActivityContent(def);
+        if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
+            //-> navbar is NOT shown, we have to handle all insets (including bottom)
+            return insets;
+        }
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return Insets.of(0, insets.top, insets.right, insets.bottom);
+        }
+        return Insets.of(insets.left, insets.top, insets.right, 0);
+    }
+
+    @NonNull
+    protected Insets calculateInsetsWithToolbarInPortrait(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsWithToolbarInPortrait(def);
+        final boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        return Insets.of(isPortrait ? insets.left : 0, insets.top, insets.right, isPortrait && !hideNavigationBar ? 0 : insets.bottom);
+    }
+
     @Override
     public void onBackPressed() {
         if (isTaskRoot() && !(this instanceof MainActivity)) {
@@ -250,6 +281,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             binding.activityNavigationBar.setVisibility(View.VISIBLE);
             ((NavigationBarView) binding.activityNavigationBar).setSelectedItemId(menuId);
         }
+        //if navigationbar is hidden or revealted (again) then activityContent's padding needs to be refreshed
+        refreshActivityContentInsets();
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
         final ActionBar actionBar = getSupportActionBar();
@@ -533,7 +566,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             cLog.add("mls");
 
             //sync map Theme folder
-            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+            MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
             cLog.add("rth");
 
             // automated backup check
@@ -550,22 +583,24 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                 Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)));
             }
 
+            // Cleanup for removed ML Kit offline translation
+            LocalStorage.cleanupMLKitfiles();
         }
     }
 
     private void checkRestore() {
-        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+        if (DataStore.isNewlyCreatedDatabase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
             restoreMessageShown = true;
             Dialogs.newBuilder(this)
-                    .setTitle(res.getString(R.string.init_backup_restore))
-                    .setMessage(res.getString(R.string.init_restore_confirm))
+                    .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))
+                    .setMessage(LocalizationUtils.getString(R.string.init_restore_confirm))
                     .setCancelable(false)
-                    .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
+                    .setPositiveButton(LocalizationUtils.getString(android.R.string.ok), (dialog, id) -> {
                         dialog.dismiss();
                         DataStore.resetNewlyCreatedDatabase();
                         backupUtils.restore(BackupUtils.newestBackupFolder(false));
                     })
-                    .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
+                    .setNegativeButton(LocalizationUtils.getString(android.R.string.cancel), (dialog, id) -> {
                         dialog.cancel();
                         DataStore.resetNewlyCreatedDatabase();
                     })

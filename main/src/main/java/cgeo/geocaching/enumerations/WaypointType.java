@@ -2,6 +2,7 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -114,16 +115,12 @@ public enum WaypointType {
         if (CgeoApplication.getInstance() == null) {
             return name();
         }
-        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+        return LocalizationUtils.getString(stringId);
     }
 
     @NonNull
     public final String getNameForNewWaypoint() {
-        //enable local unit testing
-        if (CgeoApplication.getInstance() == null) {
-            return name();
-        }
-        return CgeoApplication.getInstance().getBaseContext().getString(stringIdNewWpt);
+        return LocalizationUtils.getStringWithFallback(stringIdNewWpt, name());
     }
 
     @NonNull

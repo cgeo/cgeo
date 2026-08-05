@@ -8,13 +8,11 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.BooleanUtils;
 
 public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
@@ -65,20 +63,6 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
                 LocationDataProvider.getInstance().currentGeo().getCoords() : coordinate;
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        super.setConfig(config);
-        useCurrentPosition = config.getFirstValue(CONFIG_KEY_USE_CURRENT_POS, false, BooleanUtils::toBoolean);
-        coordinate = config.getFirstValue(CONFIG_KEY_COORD, null, s -> GeopointParser.parse(s, null));
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig config = super.getConfig();
-        config.putList(CONFIG_KEY_USE_CURRENT_POS, Boolean.toString(useCurrentPosition));
-        config.putList(CONFIG_KEY_COORD, coordinate == null ? "-" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, coordinate));
-        return config;
-    }
 
     @Nullable
     @Override

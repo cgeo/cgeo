@@ -28,6 +28,12 @@
             android:title="@string/init_customtabs_as_browser"
             android:summary="@string/init_summary_customtabs_as_browser"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_live_compass_in_navigation_action"
+            android:title="@string/init_live_compass_in_navigation_action"
+            android:summary="@string/init_summary_live_compass_in_navigation_action"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

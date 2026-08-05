@@ -1,19 +1,21 @@
 package cgeo.geocaching.list;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 public abstract class PseudoList extends AbstractList {
-
     private static final int ALL_LIST_ID = 2;
+
+    public final @DrawableRes int drawableId;
     /**
      * list entry to show all caches
      */
-    public static final PseudoList ALL_LIST = new PseudoList(ALL_LIST_ID, R.string.list_all_lists) {
+    public static final PseudoList ALL_LIST = new PseudoList(ALL_LIST_ID, R.string.list_all_lists, R.drawable.ic_menu_list_group) {
         @Override
         public int getNumberOfCaches() {
             return DataStore.getAllCachesCount();
@@ -24,7 +26,7 @@ public abstract class PseudoList extends AbstractList {
     /**
      * list entry to create a new list
      */
-    public static final AbstractList NEW_LIST = new PseudoList(NEW_LIST_ID, R.string.list_menu_create) {
+    public static final AbstractList NEW_LIST = new PseudoList(NEW_LIST_ID, R.string.list_menu_create, R.drawable.ic_menu_add) {
         @Override
         public int getNumberOfCaches() {
             return -1;
@@ -35,7 +37,7 @@ public abstract class PseudoList extends AbstractList {
     /**
      * list entry to show log history
      */
-    public static final AbstractList HISTORY_LIST = new PseudoList(HISTORY_LIST_ID, R.string.menu_history) {
+    public static final AbstractList HISTORY_LIST = new PseudoList(HISTORY_LIST_ID, R.string.menu_history, R.drawable.ic_menu_recent_history) {
         @Override
         public int getNumberOfCaches() {
             return DataStore.getAllStoredCachesCount(HISTORY_LIST_ID);
@@ -45,18 +47,23 @@ public abstract class PseudoList extends AbstractList {
     /**
      * private constructor to have all instances as constants in the class
      */
-    private PseudoList(final int id, @StringRes final int titleResourceId) {
-        super(id, CgeoApplication.getInstance().getString(titleResourceId));
+    private PseudoList(final int id, @StringRes final int titleResourceId, @DrawableRes final int iconResId) {
+        super(id, "", titleResourceId);
+        this.drawableId = iconResId;
     }
 
     @Override
     public String getTitleAndCount() {
-        return "<" + title + ">";
+        return "<" + getTitle() + ">";
     }
 
     @Override
     @NonNull
     public String getTitle() {
+        // Dynamically retrieve the localized string to support language changes
+        if (titleResourceId != 0) {
+            return LocalizationUtils.getString(titleResourceId);
+        }
         return title;
     }
 

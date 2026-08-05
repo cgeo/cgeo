@@ -6,6 +6,9 @@ import cgeo.geocaching.settings.Settings;
 import android.app.Activity;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+
 /**
  * Similar to AbstractNavigationBarActivity, but
  * - placed in custom menu slot of bottom navigation
@@ -45,5 +48,10 @@ public class CustomMenuEntryActivity extends AbstractNavigationBarActivity {
         parent.startActivity(intent);
     }
 
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
+    }
 
 }

@@ -18,7 +18,7 @@ import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.internal.schedulers.SingleScheduler;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WorkerTaskTest {
 
@@ -202,7 +202,7 @@ public class WorkerTaskTest {
             //ignore
         }
     }
-    
+
     private static void log(final String message) {
         System.out.println(message);
     }

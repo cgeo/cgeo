@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.Log;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
@@ -33,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,6 +43,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -53,6 +56,22 @@ public final class LogUtils {
         //no instance
     }
 
+    public static final Comparator<LogEntry> LOG_ENTRY_DATE_COMPARATOR = (a, b) -> {
+        return Long.compare(getDaysSinceEpochZoneCorrected(b.date), getDaysSinceEpochZoneCorrected(a.date));
+    };
+
+    /**
+     * Gets timezone-corrected days passed since Unix epoch for given time
+     */
+    public static long getDaysSinceEpochZoneCorrected(final long date) {
+        final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+
+        // move time
+        final long localMillis = date + offsetMillis;
+
+        // get days since epoch
+        return localMillis / 86_400_000L;
+    }
 
     /** get title for a log image in the list */
     public static String getLogImageTitle(final Image image, final int imagePos, final int imageCount) {
@@ -64,6 +83,40 @@ public final class LogUtils {
             return imageTitlePrafix; // number is unnecessary if only one image is posted
         }
         return imageTitlePrafix + " " + (imagePos + 1);
+    }
+
+    /**
+     * Check if the LogEntry is owned by the current configured user of cache-connector.
+     *
+     * @return {@code true} if LogEntry is from current user
+     */
+    public static boolean isOwnLog(@NonNull final LogEntry logEntry, @NonNull final Geocache cache) {
+        final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
+        if (!(connector instanceof ILogin)) {
+            return false;
+        }
+
+        final String ownName = ((ILogin) connector).getUserName();
+        return logEntry.author.equalsIgnoreCase(ownName);
+    }
+
+    public static boolean isOwnerLog(@NonNull final LogEntry logEntry, @NonNull final Geocache cache) {
+        final String cacheOwnerGuid = cache.getOwnerGuid();
+        if (!StringUtils.isBlank(cacheOwnerGuid) && !StringUtils.isBlank(logEntry.authorGuid) && logEntry.authorGuid.equals(cacheOwnerGuid)) {
+            return true;
+        }
+
+        final String cacheOwnerUserId = cache.getOwnerUserId();
+        if (!StringUtils.isBlank(cacheOwnerUserId) && !StringUtils.isBlank(logEntry.authorGuid) && logEntry.authorGuid.equals(cacheOwnerUserId)) {
+            return true;
+        }
+
+        final String ownerName = cache.getOwnerDisplayName();
+        if (!StringUtils.isBlank(ownerName) && !StringUtils.isBlank(logEntry.author) && logEntry.author.equalsIgnoreCase(ownerName)) {
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
@@ -80,7 +133,7 @@ public final class LogUtils {
 
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
-    static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
+    public static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
 
 
         try (ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), logEntry)) {
@@ -164,6 +217,7 @@ public final class LogUtils {
                 postGenericInventoryLogs(cache, logEntry, inventory.values(), progress);
 
                 cache.notifyChange();
+
                 return logResult;
 
             } catch (final RuntimeException e) {
@@ -237,7 +291,7 @@ public final class LogUtils {
 
 
     @WorkerThread
-    static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
+    public static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
         final IConnector cacheConnector = loggingManager.getConnector();
 

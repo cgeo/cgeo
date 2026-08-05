@@ -7,7 +7,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotificationByCoords;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionAction;
@@ -23,16 +22,22 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,6 +72,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.hint.locationStatus.updatePermissions());
 
+    private static final int REQUEST_CODE_LOG = 1001;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +82,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
-                .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -121,7 +128,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         if (cache != null) {
             setCacheTitleBar(cache);
         } else {
-            setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), res.getString(R.string.navigation)));
+            setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), LocalizationUtils.getString(R.string.navigation)));
         }
 
         // make sure we can control the TTS volume
@@ -213,7 +220,11 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_hint).setVisible(cache != null && StringUtils.isNotEmpty(cache.getHint()));
+
+        final MenuItem hintItem = menu.findItem(R.id.menu_hint);
+        final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
+        final boolean showHintButton = StringUtils.isNotEmpty(title);
+        hintItem.setVisible(showHintButton);
 
         final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
         ttsMenuItem.setVisible(cache != null);
@@ -242,10 +253,11 @@ public class CompassActivity extends AbstractActionBarActivity {
                 binding.hint.offlineHintSeparator2.setVisibility(View.GONE);
                 binding.hint.offlineHintText.setVisibility(View.GONE);
             } else {
+                final Pair<CharSequence, CharSequence> hintTexts = CacheUtils.getHintTitleAndMessage(cache);
                 binding.hint.offlineHintSeparator1.setVisibility(View.VISIBLE);
                 binding.hint.offlineHintSeparator2.setVisibility(View.VISIBLE);
                 binding.hint.offlineHintText.setVisibility(View.VISIBLE);
-                binding.hint.offlineHintText.setText(cache.getHint());
+                binding.hint.offlineHintText.setText(hintTexts.second);
             }
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             return true; // to satisfy static code analysis
@@ -254,6 +266,17 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
         return true;
     }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.location_status));
+        }
+    }
+
+
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
         setDestCoords(coords);
@@ -382,9 +405,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(d.resId));
         }
     }
 

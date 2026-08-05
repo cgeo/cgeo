@@ -4,17 +4,26 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public abstract class AbstractList {
 
     public final int id;
     @NonNull
     public final String title;
+    @StringRes
+    protected final int titleResourceId;
+
     private static final SparseArray<AbstractList> LISTS = new SparseArray<>();
 
     public AbstractList(final int id, @NonNull final String title) {
+        this(id, title, 0);
+    }
+
+    public AbstractList(final int id, @NonNull final String title, @StringRes final int titleResourceId) {
         this.id = id;
         this.title = title;
+        this.titleResourceId = titleResourceId;
         LISTS.put(id, this);
     }
 

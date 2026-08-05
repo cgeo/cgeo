@@ -21,8 +21,8 @@ import java.util.function.Function;
 
 import org.assertj.core.data.Offset;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FormulaTest {
 
@@ -359,6 +359,16 @@ public class FormulaTest {
         assertThat(eval("ichecksum(-888.235)")).isEqualTo(-7);
         assertThat(eval("lettervalue('Test123')")).isEqualTo(20 + 5 + 19 + 20 + 1 + 2 + 3);
         assertThat(eval("lettervalue(-888.123)")).isEqualTo(30);
+    }
+
+    @Test
+    public void rangeFunctions() {
+        assertThat(eval("add('0-5')")).isEqualTo(1 + 2 + 3 + 4 + 5);
+        assertThat(eval("multiply('1-5')")).isEqualTo(2 * 3 * 4 * 5);
+        assertThat(eval("min(-99;1;3;99)")).isEqualTo(-99);
+        assertThat(eval("max(-99;1;3;99)")).isEqualTo(99);
+        assertThat(eval("count(10;'1-5')")).isEqualTo(6);
+        assertThat(eval("avg(10;'1-4')")).isEqualTo((10 + 1 + 2 + 3 + 4) / 5d);
     }
 
     @Test

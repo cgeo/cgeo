@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.util.AggregatedUrlToIdParser;
 import cgeo.geocaching.connector.gc.util.SingleUrlToIdParser;
 import cgeo.geocaching.connector.gc.util.UrlToIdParser;
@@ -13,11 +14,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Optional;
 
-public class ImportBookmarkLinks extends AppCompatActivity {
+public class ImportBookmarkLinks extends AbstractActivity {
 
     public static final String BOOKMARK_LIST_API_PREFIX =
             "https://www.geocaching.com/api/live/v1/gpx/list/";
@@ -45,7 +45,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(final @Nullable Bundle savedInstanceState) {
+    public void onCreate(final @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Optional.ofNullable(getIntent())
                 .map(Intent::getDataString)

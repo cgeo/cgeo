@@ -2,13 +2,13 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -92,18 +92,6 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         numberRangeFilter.setRangeFromValues(values, minUnlimitedValue, maxUnlimitedValue);
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        numberRangeFilter.setConfig(config.getDefaultList());
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig config = new LegacyFilterConfig();
-        config.putDefaultList(numberRangeFilter.getConfig());
-        return config;
-    }
-
 
     @Override
     public boolean isFiltering() {
@@ -125,7 +113,11 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
 
     @Override
     protected String getUserDisplayableConfig() {
-        return numberRangeFilter.getUserDisplayableConfig();
+        return getUserDisplayableConfig(null);
+    }
+
+    String getUserDisplayableConfig(@Nullable final Function<T, String> converter) {
+        return numberRangeFilter.getUserDisplayableConfig(converter);
     }
 
     @Nullable

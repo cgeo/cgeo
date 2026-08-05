@@ -16,7 +16,7 @@ import cgeo.geocaching.test.NotForIntegrationTests;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This test is intended to run regularly on our CI server, to verify the availability of several geocaching websites

@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.al;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -27,7 +26,7 @@ import java.util.EnumSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
+import org.apache.commons.lang3.Strings;
 
 public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort {
 
@@ -47,7 +46,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private ALConnector() {
         // singleton
-        name = LocalizationUtils.getString(R.string.settings_title_lc);
+        name = LocalizationUtils.getPlainString(R.string.settings_title_lc);
         prefKey = R.string.preference_screen_al;
     }
 
@@ -68,12 +67,11 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         return PATTERN_AL_CODE.matcher(geocode).matches();
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"AL%"};
     }
-
 
     @Override
     @NonNull
@@ -106,7 +104,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getExtraDescription() {
-        return CgeoApplication.getInstance().getString(R.string.lc_default_description);
+        return LocalizationUtils.getString(R.string.lc_default_description);
     }
 
     @Override
@@ -136,8 +134,8 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         return searchByViewport(viewport, null);
     }
 
-    @NonNull
     @Override
+    @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
         try {
             final Collection<Geocache> caches = ALApi.searchByFilter(filter, viewport, this, 100);
@@ -151,14 +149,14 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         }
     }
 
-    @NonNull
     @Override
+    @NonNull
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN);
     }
 
-    @NonNull
     @Override
+    @NonNull
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
         try {
             final Collection<Geocache> caches = ALApi.searchByFilter(filter, null, this, 100);
@@ -171,11 +169,10 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         }
     }
 
-
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         final String user = Settings.getUserName();
-        return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), user);
+        return StringUtils.isNotEmpty(user) && Strings.CI.equals(cache.getOwnerDisplayName(), user);
     }
 
     @Override
@@ -219,4 +216,3 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         return super.getGeocodeFromUrl(url);
     }
 }
-

@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import static cgeo.geocaching.models.CalculatedCoordinateType.DEGREE_MINUTE;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatedCoordinateInputGuideViewTest {
 

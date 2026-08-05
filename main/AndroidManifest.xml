@@ -12,10 +12,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" android:minSdkVersion="34" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" android:minSdkVersion="34" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="33" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
      <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -77,7 +77,7 @@
 		<!-- Register for global search in Android. https://developer.android.com/guide/topics/search/search-dialog.html -->
         <meta-data
             android:name="android.app.default_searchable"
-            android:value=".SearchActivity" />
+            android:value="cgeo.geocaching.SearchActivity" />
 
         <!-- Android Backup Service, to restore settings on new devices. https://developer.android.com/google/backup/index.html -->
         <meta-data
@@ -98,9 +98,13 @@
             android:value="3.0" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:theme="@style/SplashScreenTheme"
-            android:exported="true" >
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustNothing">
+            <!-- 'adjustNothing' fixes the issue described in #11610 -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,15 +116,6 @@
             </intent-filter>
 
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/cgeo"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustNothing" >
-            <!-- 'adjustNothing' fixes the issue described in #11610 -->
-            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
         <activity android:name=".DBInspectionActivity"
             android:exported="false"
@@ -239,13 +234,9 @@
             >
         </activity>
         <activity
-            android:name=".helper.QueryMapFile"
-            android:exported="true">
-        </activity>
-        <activity
             android:name=".EditWaypointActivity"
             android:label="@string/waypoint_edit_title"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name=".NavigateAnyPointActivity"
@@ -448,28 +439,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:exported="true"
-            android:name=".maps.MapActivity"
-            android:label="@string/map_map" >
-        </activity>
-        <activity
-            android:name=".maps.google.v2.GoogleMapActivity"
-            android:label="@string/map_map"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
-            android:name=".maps.mapsforge.v6.NewMap"
-            android:label="@string/map_map"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
             android:name=".unifiedmap.UnifiedMapActivity"
             android:label="@string/map_map"
             android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
+            android:name=".CrashActivity"
+            android:exported="false"
+            />
+        <activity
             android:name=".log.LogCacheActivity"
-            android:label="@string/log_new_log" >
+            android:label="@string/log_new_log"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".log.LogTrackableActivity"
@@ -873,6 +854,11 @@
         </activity>
 
         <activity
+            android:name=".filters.NamedFilterActivity"
+            android:label="@string/named_filter_activity_title" >
+        </activity>
+
+        <activity
             android:name=".connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
@@ -917,18 +903,6 @@
         </activity>
 
         <activity
-            android:name=".settings.GCVoteAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_pocket_title">
@@ -964,7 +938,6 @@
                 <data android:scheme="mf-theme" />
             </intent-filter>
         </activity>
-        <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
         <activity android:name=".unifiedmap.mapsforgevtm.MapsforgeThemeSettings" />
         <activity android:name=".unifiedmap.mapsforge.MapsforgeThemeSettings" />
 
@@ -1001,6 +974,11 @@
             android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
 
+        <!-- Background log poster -->
+        <service
+            android:name=".service.LogPostingService"
+            android:foregroundServiceType="dataSync"/>
+
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
     </application>
@@ -1011,6 +989,7 @@
         <package android:name="btools.routingapp" />
         <package android:name="com.eclipsim.gpsstatus2" />
         <package android:name="com.google.android.apps.translate" />
+        <package android:name="com.deepl.mobiletranslator" />
         <package android:name="com.google.android.street" />
         <package android:name="com.google.zxing.client.android" />
         <package android:name="com.groundspeak.react.adventures" />

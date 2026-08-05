@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TextUtilsTest {
 
@@ -267,6 +267,12 @@ public class TextUtilsTest {
 
         assertThat(TextUtils.containsHtml("Special char &; doesn't exist")).isFalse();
 
+    }
+
+    @Test
+    public void isEqualStripHtmlIgnoreSpaces() {
+        assertThat(TextUtils.isEqualStripHtmlIgnoreSpaces("This is a test \n with linebreak", "This is a test <br> with linebreak")).isTrue();
+        assertThat(TextUtils.isEqualStripHtmlIgnoreSpaces("<p>This is a test with html", "This is a test with html")).isTrue();
     }
 
     @Test

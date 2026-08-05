@@ -3,6 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.GeoItemHolder;
+import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.ContentStorage;
@@ -78,6 +79,11 @@ public class GPXTrackOrRouteImporter {
             if (null == route) {
                 route = parse(new GPXWptAsTrackParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
             }
+            // try kml format
+            if (null == route) {
+                // route = parse(new KmlAsTrackParser("http://earth.google.com/kml/2.2", "2.2"), uri);
+                route = parse(new KmlAsTrackParser("http://earth.google.com/kml/2.2", "2.2"), uri);
+            }
             // as last resort ignore missing namespace identifier
             if (null == route) {
                 route = parse(new GPXTrackOrRouteParser("", "1.0"), uri);
@@ -88,6 +94,9 @@ public class GPXTrackOrRouteImporter {
             if (null == route) {
                 return parseAsGeoJson(context, uri);
             }
+
+            RouteTrackUtils.addMissingElevationData(route);
+
             return route;
         } catch (IOException e) {
             Log.e("Problem accessing GPX Track file '" + uri + "'. Maybe file was removed or renamed by user?", e);

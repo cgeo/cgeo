@@ -10,7 +10,6 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -23,7 +22,6 @@ import java.lang.reflect.Constructor;
 import java.util.concurrent.atomic.AtomicReference;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
-
 
 public class DebugUtils {
 
@@ -43,40 +41,39 @@ public class DebugUtils {
             }
             final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
 
-            ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
+            ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, LocalizationUtils.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
         }, 1000);
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
+        askUserToReportProblem(context, errorMsg, true);
+    }
+
+    public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg, final boolean showErrorTextIfAvailable) {
         final StringBuilder message = new StringBuilder();
-        if (errorMsg != null) {
-            message.append(context.getString(R.string.debug_user_error_errortext)).append("\n[")
+        if (showErrorTextIfAvailable && errorMsg != null) {
+            message.append(LocalizationUtils.getString(R.string.debug_user_error_errortext)).append("\n[")
                     .append(errorMsg).append("]\n\n");
             Log.w("User was asked to report problem: " + errorMsg);
         }
-        message.append(context.getString(R.string.debug_user_error_explain_options));
+        message.append(LocalizationUtils.getString(R.string.debug_user_error_explain_options));
 
         SimpleDialog.of(context)
                 .setTitle(R.string.debug_user_error_report_title)
                 .setMessage(TextParam.text(message.toString()))
                 .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
                 .confirm(
-                        () -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg)
+                        () -> createLogcatHelper(context, true, true, errorMsg == null ? null : LocalizationUtils.getString(R.string.debug_user_error_report_title) + ": " + errorMsg)
                 );
     }
 
     public static void createLogcat(@NonNull final Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            // no differentiation possible on older systems, so no need to ask
-            createLogcatHelper(activity, true, false, null);
-        } else {
-            SimpleDialog.of(activity)
-                    .setTitle(R.string.about_system_write_logcat)
-                    .setMessage(R.string.about_system_write_logcat_type)
-                    .setButtons(R.string.about_system_write_logcat_type_standard, R.string.cancel, R.string.about_system_write_logcat_type_extended)
-                    .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
-                    .confirm(() -> createLogcatHelper(activity, false, false, null));
-        }
+        SimpleDialog.of(activity)
+                .setTitle(R.string.about_system_write_logcat)
+                .setMessage(R.string.about_system_write_logcat_type)
+                .setButtons(R.string.about_system_write_logcat_type_standard, R.string.cancel, R.string.about_system_write_logcat_type_extended)
+                .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
+                .confirm(() -> createLogcatHelper(activity, false, false, null));
     }
 
 
@@ -88,14 +85,10 @@ public class DebugUtils {
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final ProcessBuilder builder = new ProcessBuilder();
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                    builder.command("logcat", "-d", "-f", file.getAbsolutePath());
+                if (fullInfo) {
+                    builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
                 } else {
-                    if (fullInfo) {
-                        builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
-                    } else {
-                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
-                    }
+                    builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
                 }
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
@@ -131,7 +124,7 @@ public class DebugUtils {
     private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final Uri logfileUri) {
         final String systemInfo = SystemInformation.getSystemInformation(activity);
         final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
-        ShareUtils.shareAsEmail(activity, String.format(activity.getString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
+        ShareUtils.shareAsEmail(activity, String.format(LocalizationUtils.getPlainString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
     }
 
 

@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -185,13 +184,13 @@ public class ContentStorageActivityHelper {
         final ImmutableTriple<String, String, String> folderInfo = getInternationalizedFolderInfoStrings(folder.getFolder());
 
         //create the message;
-        final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
+        final String folderData = LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
                 folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
-        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
+        final String defaultFolder = LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog
-                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                .setTitle(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
                 .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
                 .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                     d.dismiss();
@@ -306,8 +305,7 @@ public class ContentStorageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(type == null ? "*/*" : type);
-        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Attribute is supported starting SDK26 / O
+        if (startUri != null) {
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }
         if (action == SelectAction.SELECT_FILE_MULTIPLE) {
@@ -343,7 +341,7 @@ public class ContentStorageActivityHelper {
         // show internal storage
         intent.putExtra(Intents.EXTRA_SHOW_ADVANCED, true);
 
-        if (realStartUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (realStartUri != null) {
             if (UriUtils.isFileUri(realStartUri)) {
                 realStartUri = UriUtils.getPseudoTreeUriForFileUri(realStartUri);
             }
@@ -461,7 +459,7 @@ public class ContentStorageActivityHelper {
             dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
             dialog
                     .setView(dialogView)
-                    .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                    .setTitle(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
                     .setPositiveButton(android.R.string.ok, (d, p) -> {
                         d.dismiss();
                         continuePersistableFolderSelectionCopyMove(folder, targetUri, cc[0], action);

@@ -5,8 +5,6 @@ import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func3;
 
-import android.annotation.TargetApi;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -32,7 +30,6 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
 
 /** Utility class to execute asynchronous worker tasks in the context of an activity or other lifecycle-owner. */
-@TargetApi(24)
 public class WorkerTask<I, P, R>  {
 
     private static final Map<String, WorkerTask<?, ?, ?>> taskStore = new HashMap<>();

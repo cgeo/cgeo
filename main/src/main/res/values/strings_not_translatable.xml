@@ -172,7 +172,7 @@
     zenobios||c|
     </string>
 
-    <!-- this one is a MarkDown-formatted string; %1 will be replaced with a MarkDown-prepared version of "components2" -->
+    <!-- this one is a MarkDown-formatted string; %1 will be replaced with a MarkDown-prepared version of "components2", %2 with BRouter version string -->
     <string translatable="false" name="components">
     - [Mapsforge](https://code.google.com/p/mapsforge/) (OSM-rendering)\n
     - [The Noun Project](https://thenounproject.com/) (basis for attribute icons):\n%1
@@ -183,7 +183,8 @@
     - OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data [licensed](https://www.openstreetmap.org/copyright/en) under Creative Commons 2.0 BY-SA.\n
     - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/), © [cyclosm.org](https://www.cyclosm.org/) and  © [opentopomap.org](https://www.opentopomap.org/).\n
     - Map Downloader supports maps from [Mapsforge](https://github.com/mapsforge), [OpenAndroMaps](https://www.openandromaps.org), [Freizeitkarte](https://www.freizeitkarte-osm.de/), [Hylly](https://kartat.hylly.org/) and [OSM Paws](https://osm.paws.cz/).\n
-    - Routing © 2024 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE))\n
+    - Routing © 2024 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE)), based on BRouter version %2\n
+    - Offline translation using results from [Bergamot project](https://browser.mt/) via David Ventura\'s [offline-translator](https://github.com/DavidVentura/offline-translator) ([GPL-3.0 license](https://github.com/DavidVentura/offline-translator/?tab=GPL-3.0-1-ov-file#readme))\n
     </string>
 
     <!-- see comment for "components" -->
@@ -209,7 +210,6 @@
     <string translatable="false" name="caches_menu_organicmaps">Organic Maps</string>
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
-    <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
     <string translatable="false" name="support_mail"><a href="">support@cgeo.org</a></string>
     <string translatable="false" name="manual_link"><a href="">manual.cgeo.org</a></string>
     <string translatable="false" name="github_link"><a href="">github.com/cgeo/cgeo/issues</a></string>
@@ -248,11 +248,8 @@
     <string translatable="false" name="auth_ocuk">opencache.uk</string>
     <string translatable="false" name="init_su">Geocaching.su</string>
     <string translatable="false" name="auth_su">geocaching.su</string>
-    <string translatable="false" name="init_gcvote">GCvote.com</string>
     <string translatable="false" name="init_bettercacher">BetterCacher.org</string>
     <string translatable="false" name="facebook_title">Facebook</string>
-    <string translatable="false" name="twitter_title">Twitter</string>
-    <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
     <string translatable="false" name="cache_menu_pebble">Pebble</string>
     <string translatable="false" name="init_geokrety">GeoKrety.org</string>
     <string translatable="false" name="trackable_geokrety">GeoKrety</string>
@@ -268,15 +265,7 @@
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
 
-    <!-- link data to WhereYouGo - must be according to WhereYouGo configuration in their AndroidManifest.xml -->
-    <string translatable="false" name="whereyougo_action_Mapsforge">"menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"</string>
-
-    <!-- WhereYouGo helper - must be the same values as in WhereYouGo -->
-    <string translatable="false" name="cgeo_queryMapFile_resultParam">mapfile</string>
-    <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
-
     <!-- play store ids -->
-    <string translatable="false" name="package_whereyougo">menion.android.whereyougo</string>
     <string translatable="false" name="package_chirpwolf">de.wolffire.chirpwolf</string>
     <string translatable="false" name="package_brouter">btools.routingapp</string>
     <string translatable="false" name="package_google_translate">com.google.android.apps.translate</string>
@@ -336,12 +325,6 @@
 
     <string translatable="false" name="mapserver_osmpaws_themes_name">Paws Themes</string>
     <string translatable="false" name="mapserver_osmpaws_themes_downloadurl">https://osm.paws.cz/paws_themes/</string>
-
-    <string translatable="false" name="maptheme_legend_elevate">https://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
-    <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
-    <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
-    <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
-    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>

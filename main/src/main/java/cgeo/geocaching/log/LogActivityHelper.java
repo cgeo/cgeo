@@ -6,15 +6,13 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.service.LogPostingService;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
-
-import android.annotation.TargetApi;
 
 import androidx.activity.ComponentActivity;
 
@@ -24,16 +22,11 @@ import java.util.function.BiConsumer;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /** Helper class to use in Activities which want to use cache/trackable logging functionality */
-@TargetApi(24)
 public class LogActivityHelper {
 
     private final ComponentActivity activity;
 
     private final WorkerTask<ImmutableTriple<Geocache, LogEntry, String>, String, LogResult> logDeleteTask;
-
-    private final WorkerTask<ImmutableTriple<Geocache, LogEntry, LogEntry>, String, LogResult> logEditTask;
-
-    private final WorkerTask<ImmutableTriple<Geocache, OfflineLogEntry, Map<String, Trackable>>, String, LogResult> logCreateTask;
 
     private final WorkerTask<ImmutableTriple<Geocache, TrackableLogEntry, TrackableConnector>, String, LogResult> logCreateTrackableTask;
 
@@ -46,32 +39,10 @@ public class LogActivityHelper {
     public LogActivityHelper(final ComponentActivity activity) {
         this.activity = activity;
 
-        logCreateTask = WorkerTask.<ImmutableTriple<Geocache, OfflineLogEntry, Map<String, Trackable>>, String, LogResult>of(
-                "log-create",
-                (input, progress, cancelFlag) -> LogUtils.createLogTaskLogic(input.left, input.middle, input.right, progress),
-                AndroidRxUtils.networkScheduler)
-            .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.log_posting_log)))
-            .observeResult(activity, result -> {
-                if (logResultConsumer != null) {
-                    logResultConsumer.accept(ResultType.CREATE, result);
-                }
-            }, null);
-
-        logEditTask = WorkerTask.<ImmutableTriple<Geocache, LogEntry, LogEntry>, String, LogResult>of(
-                "log-edit",
-                (input, progress, cancelFlag) -> LogUtils.editLogTaskLogic(input.left, input.middle, input.right, progress),
-                AndroidRxUtils.networkScheduler)
-            .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.cache_log_menu_edit)))
-            .observeResult(activity, result -> {
-                if (logResultConsumer != null) {
-                    logResultConsumer.accept(ResultType.EDIT, result);
-                }
-            }, null);
-
         logDeleteTask = WorkerTask.<ImmutableTriple<Geocache, LogEntry, String>, String, LogResult>of(
                 "log-delete",
                 (input, progress, cancelFlag) -> LogUtils.deleteLogTaskLogic(input.left, input.middle, input.right, progress),
-                AndroidRxUtils.networkScheduler)
+                cgeo.geocaching.utils.AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.cache_log_menu_delete)))
             .observeResult(activity, result -> {
                 if (logResultConsumer != null) {
@@ -82,14 +53,13 @@ public class LogActivityHelper {
         logCreateTrackableTask = WorkerTask.<ImmutableTriple<Geocache, TrackableLogEntry, TrackableConnector>, String, LogResult>of(
                 "log-create-trackable",
                 (input, progress, cancelFlag) -> LogUtils.createLogTrackableTaskLogic(input.left, input.middle, input.right, progress),
-                AndroidRxUtils.networkScheduler)
+                cgeo.geocaching.utils.AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.log_posting_log)))
             .observeResult(activity, result -> {
                 if (logResultConsumer != null) {
                     logResultConsumer.accept(ResultType.CREATE_TRACKABLE, result);
                 }
             }, null);
-
     }
 
     /** Set an optional consumer for the result of the various log actions */
@@ -98,16 +68,14 @@ public class LogActivityHelper {
         return this;
     }
 
-    /** call this method when the parent activity finishes. It cleans up ressources */
+    /** call this method when the parent activity finishes. It cleans up resources */
     public void finish() {
         logDeleteTask.finish();
-        logEditTask.finish();
-        logCreateTask.finish();
     }
 
     /** create a log on the geocaching platform */
     public void createLog(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
-        logCreateTask.start(new ImmutableTriple<>(cache, logEntry, inventory));
+        LogPostingService.startCreate(activity, cache, logEntry, inventory);
     }
 
     /** edit a log on the geocaching platform */
@@ -117,10 +85,8 @@ public class LogActivityHelper {
             ActivityMixin.showToast(activity, "Can't edit log");
             return;
         }
-
-        logEditTask.start(new ImmutableTriple<>(cache, oldEntry, newEntry));
+        LogPostingService.startEdit(activity, cache, oldEntry, newEntry);
     }
-
 
     /** delete a log on the geocaching platform */
     public void deleteLog(final Geocache cache, final LogEntry entry) {
@@ -134,10 +100,10 @@ public class LogActivityHelper {
             .setMessage(TextParam.id(R.string.log_delete_confirm,
                 entry.logType.getL10n(), entry.author, Formatter.formatShortDateVerbally(entry.date)))
             .setButtons(SimpleDialog.ButtonTextSet.YES_NO);
-        if (entry.isOwn()) {
+        if (LogUtils.isOwnLog(entry, cache)) {
             dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
         } else {
-            dialog.input(new SimpleDialog.InputOptions().setInputChecker(s -> s.length() <= MAX_ALLOWED_CHARS_DELETE_REASON).setLabel(String.format(activity.getString(R.string.cache_log_delete_reason), MAX_ALLOWED_CHARS_DELETE_REASON)), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));
+            dialog.input(new SimpleDialog.InputOptions().setMaxAllowedLength(MAX_ALLOWED_CHARS_DELETE_REASON), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));
         }
     }
 
@@ -145,6 +111,4 @@ public class LogActivityHelper {
     public void createLogTrackable(final Geocache cache, final TrackableLogEntry logEntry, final TrackableConnector connector) {
         logCreateTrackableTask.start(new ImmutableTriple<>(cache, logEntry, connector));
     }
-
-
 }

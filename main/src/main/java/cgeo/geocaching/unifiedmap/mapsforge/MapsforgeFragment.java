@@ -12,10 +12,11 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
-import cgeo.geocaching.unifiedmap.layers.mbtiles.MBTilesLayer;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOnlineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -44,6 +45,7 @@ import org.mapsforge.core.util.LatLongUtils;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.mbtiles.TileMBTilesLayer;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
@@ -128,7 +130,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         mMapView.getMapScaleBar().setMarginHorizontal(mapAttPx);
 
         if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
-            for (MBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
+            for (TileMBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
                 mMapView.getLayerManager().getLayers().add(backgroundMap);
             }
         }
@@ -153,7 +155,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(LocalizationUtils.getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
@@ -185,11 +187,17 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         super.onResume();
         // mMapView.onResume();
         mMapView.getModel().mapViewPosition.addObserver(this);
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mMapView);
+        }
     }
 
     @Override
     public void onPause() {
         // mMapView.onPause();
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mMapView);
+        }
         super.onPause();
 
         mMapView.getModel().mapViewPosition.removeObserver(this);
@@ -448,13 +456,17 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
         @Override
         public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, true);
+            final int[] location = new int[2];
+            mMapView.getLocationOnScreen(location);
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], true);
             return true;
         }
 
         @Override
         public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, false);
+            final int[] location = new int[2];
+            mMapView.getLocationOnScreen(location);
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], false);
             return true;
         }
 

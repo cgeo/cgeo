@@ -162,4 +162,9 @@ public class CalculatedCoordinate implements Parcelable {
         return toConfig();
     }
 
+    public boolean hasWarning(final Function<String, Value> varMap) {
+        final ImmutableTriple<Double, CharSequence, Boolean> latData = calculateLatitudeData(varMap);
+        final ImmutableTriple<Double, CharSequence, Boolean> lonData = calculateLongitudeData(varMap);
+        return latData.right || lonData.right;
+    }
 }

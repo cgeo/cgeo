@@ -2,10 +2,12 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -17,22 +19,11 @@ public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
         setType(GeocacheFilterType.LOGICAL_FILTER_GROUP);
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        //Logical filter has no config
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        //Logical filter has no config
-        return null;
-    }
-
     public ObjectNode getJsonConfig() {
         return null;
     }
 
-    public void setJsonConfig(final ObjectNode config) {
+    public void setJsonConfig(@NonNull final ObjectNode config) {
         //empty on purpose
     }
 
@@ -97,5 +88,24 @@ public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
     public boolean isFiltering() {
         return getFilteringChildrenCount() > 0;
     }
+
+    @NonNull
+    @Override
+    public IGeocacheFilter simplify(@NonNull final Function<IGeocacheFilter, Boolean> criterion) {
+        final Boolean crit = criterion.apply(this);
+        if (crit == null) {
+            if (getChildren().isEmpty()) {
+                return this;
+            }
+            final List<IGeocacheFilter> simplifiedChildren = new ArrayList<>();
+            for (IGeocacheFilter child : getChildren()) {
+                simplifiedChildren.add(child.simplify(criterion));
+            }
+            return simplifyFor(simplifiedChildren);
+        }
+        return crit ? ConstantGeocacheFilter.ALWAYS_TRUE : ConstantGeocacheFilter.ALWAYS_FALSE;
+    }
+
+    protected abstract IGeocacheFilter simplifyFor(List<IGeocacheFilter> simplifiedChildren);
 
 }

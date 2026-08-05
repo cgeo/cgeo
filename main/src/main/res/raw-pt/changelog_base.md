@@ -1,80 +1,101 @@
-### Plano estratégico do Mapa Unificado & aviso de obsolescência mapas "antigos"
-O c:geo tem já há algum tempo uma implementação de mapas nova chamada "Mapa Unificado", que irá no final substituir as implementações do Google Maps e Mapsforge (OpenStreetMap). Isto é um aviso de obscelecência para te informar acerca do próximo plano estratégico.
+### Notas gerais de lançamento
 
-O Mapa Unificado foi disponibilizado à cerca de um ano. Ele ainda suporta o Google Maps e o OpenStreetMap (online + offline), mas de uma forma técnica completamente remodelada. e com uma série de novas e empolgantes funcionalidades que os mapas "antigos" não suportam, algumas das quais
+**Exibição de ponta a ponta**
+
+Devido às políticas da Play Store, actualizámos o nível da API Android desta versão do c:geo e alterámos algumas das rotinas de disposição do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+
+**Mapas antigos**
+
+Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalmente as implementações antigas dos nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
 - Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
 - Janela pendente de agrupamento para o Google Maps
 - Ocultar fontes de mapa de que não precisa
 - Gráfico de altitude para rotas e percursos
 - Alternar entre listas directamente do mapa
 - "Modo de condução" para mapas baseados no OpenStreetMap
-
-O Mapa Unificado provou ser estável há já bastante tempo, assim removeremos as antigas implementações do mapa para reduzir os esforços de manutenção do c:geo.
-
-Roteiro:
-- Mapas "Antigos" agora estão em modo de depreciação — não vamos corrigir mais erros para eles.
-- O Mapa Unificado será definido como padrão para todos os utilizadores no outono de 2025.
-- As implementações de mapa "Antigos" serão removidas na primavera de 2026.
-
-Até lá, pode alternar entre as diferentes implementações nas definições => fontes de mapas.
+- Toque longo no percurso / rota individual para mais opções
 
 ### Mapa
-- Novo: Mostrar perímetro de resposta para os pontos de AdventureLab (Mapa Unificado) — active "círculos" nas configurações rápidas do mapa para mostrá-los
-- Novo: Opção para definir círculos com raio individual para pontos adicionais (opção de menu "perímetro de resposta")
-- Correcção: Visualização do mapa não era actualizada ao remover a cache da lista actualmente mostrada
-- Correcção: Número de caches no selector de lista não era actualizado ao alterar o conteúdo da lista
-- Alteração: Manter a visualização actual no mapeamento de uma lista, se todas as caches couberem na visualização actual
-- Novo: "Siga a minha localização" no gráfico de altitude (Mapa Unificado)
-- Novo: Permitir as acções "mover para" / "copiar para" em "mostrar como lista"
-- Novo: Suporte para o tema Elevate Winter no gestor de transferências de mapas
-- Novo: Sombreado adaptativo de altitude, modo de alta qualidade opcional (Mapa Unificado Mapsforge)
-- Novo: Redesenhado menu de definições rápidas de percursos/rotas
-- Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
-- Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
-- Novo: Toque longo no botão "Activar em tempo real" para carregar caches offline
-- Novo: Sombreado de altitude offline para o Mapa Unificado (variante VTM)
-- Novo: Suporte para mapas de plano de fundo (Mapa Unificado)
-- Correcção: Ícones compactos não voltam para ícones grandes no zoom no modo automático (Mapa Unificado)
-- Novo: Acções de toque longo no separador de informações da cache: código GC, título, coordenadas, nota pessoal/dica
-- Alteração: Altera o separador de informações da cache para o seletor de emoji para um toque curto para resolver colisão
+- Novo: Optimização de rota armazena dados calculados
+- Novo: Os pontos adicionais do destino definido permanecem visíveis se o modo em tempo real for ligado
+- Novo: Toque longo na linha de navegação abre o gráfico de elevação (Mapa Unificado)
+- Novo: Mostrar os pontos adicionais gerados no mapa
+- Novo: Transferência de caches ordenadas por distância
+- Correcção: duplicação de pontos individuais da rota
+- Novo: Suporte para o tema Motorider (apenas VTM)
+- Novo: Tipo de mapas: Sem Mapa (não mostra mapa, apenas caches etc.)
+- Alteração: Distância máxima para conectar pontos no histórico do percurso reduzido para 500m (configurável)
+- Novo: Permitir a importação de ficheiros KML como percursos (por exemplo: itinerário de TB)
+- Novo: Possibilidade para definir o ícone da cache mesmo que ela ainda não esteja armazenada
+- Novo: Caixa de informação para o gráfico de elevação que mostra a distância restante, a subida e a descida
+- Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
+- Correcção: Configurações rápidas do mapa podia mostrar botões "1"/"2" para perfis de encaminhamento vazios, após mudar de idioma
+- Novo: Calcular dados de relevo em falta na importação de percursos (se dados de relevo forem descarregados)
+- Correcção: O programa de transferência de blocos de sombreado de altitude fecha em determinadas condições (apenas mapas online do OpenStreetMap)
+- Novo: Marcadores de cache condicionais
+- Novo: Mostrar dicas de navegação (seta + distância)
 
 ### Detalhes da cache
-- Novo: Tradutor offline de texto da listing e registos (experimental)
-- Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
-- Correcção: Serviço de fala interrompido na rotação do ecrã
-- Correcção: Detalhes da cache: Listas para a cache não eram actualizadas depois de tocar no nome da lista e remover essa cache dessa lista
-- Correcção: a nota pessoal era perdida ao actualizar uma AL (Adventure Lab)
-- Alteração: Data de registo relacionada com os marcadores de posição usarão a data escolhida em vez da actual
-- Novo: Encurtar registos longos por defeito
+- Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
+- Novo: Mantém data/hora dos próprios registos ao actualizar uma cache
+- Novo: Visualização opcional de mini bússola (ver configurações => detalhes da cache => Mostrar direcção na visualização de detalhes da cache)
+- Novo: Mostrar registos do proprietário da cache no separador "amigos/meus"
+- Alteração: O separador "Amigos/Meus" mostra a contagem de registos para aquele separador em vez da contagem total de registos
+- Alteração: Melhorado o cabeçalho nos separadores de variáveis e pontos adicionais
+- Correcção: O item "eliminar registo" aparecia repetidamente
+- Correcção: O c:geo fechava inesperadamente nos detalhes da cache quando o ecrã era rodado
+- Alteração: Interface mais compacta para "adicionar novo ponto adicional"
+- Novo: Opção para carregar imagens para caches do geocaching.com em tamanho “inalterado”
+- Novo: Visualização de variáveis pode ser filtrada
+- Novo: Visualizar coordenadas calculadas que excedem os limites na lista de pontos adicionais
+- Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
+- Novo: Espaços para registo de TB (nome da geocache, código da geocache, utilizador)
+- Alteração: Removida a hiperligação desactualizada do leitor WhereYouGo. O leitor Wherigo interno é agora o padrão para Wherigos.
+- Correcção: Em ausência o botão de activação/desactivação no modo guiado da calculadora de pontos adicionais
+- Novo: Agregar funções com suporte de intervalo: som/soma, min/mínimo, máx/máximo, cnt/contar, méd/média, multiplicar/produto/prod
+- Correcção: manipulação incorreta do estado de DNF para plataformas de opencaching
+- Novo: Eliminar o registo offline após junção com o registo online
+- Novo: É pedida uma confirmação ao eliminar caches com registos offline
+- Novo: É pedida uma confirmação ao eliminar todas das caches da lista "Todas as caches"
+- Novo: Permite a formatação Markdown para o texto da descrição em caches definidas pelo utilizador
+- Alteração: Armazenar cache antes de adicionar imagem do utilizador
+- Correção: Falha ao carregar imagens incorporadas directamente no texto da descrição
+- Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
+- New: Sending log is done in background
 
 ### Wherigo
-- Novo: Verificação integrada de falta de credenciais para Wherigo
-- Alteração: Relatório Wherigo removido (pois os erros estão principalmente relacionados com cartuchos, precisam ser corrigidos pelo dono de cartucho)
-- Novo: Capacidade de navegar para uma zona usando a bússola
-- Novo: Capacidade de copiar coordenadas do centro da zona para a área de transferência
-- Novo: Definir o centro da zona como alvo ao abrir o mapa (para obter informações de encaminhamento e distância para ele)
-- Novo: Suporte para abrir ficheiros Wherigo locais
-- Alteração: Toque longo numa zona do mapa já não é reconhecido. Isso permite que os utilizadores façam outras coisas na área da zona do mapa, disponíveis no toque longo, por exemplo: criar uma cache definido pelo utilizador
-- Novo: Mostra um aviso se wherigo.com reportar a falta de EULA (que leva a falha na transferência do cartucho)
+- Novo: Tradução offline para Wherigos
+- Novo: Melhorado o funcionamento dos botões
+- Novo: Gravação automática do estado
+- Novo: Opção de criar atalho para o módulo Wherigo no ecrã inicial do seu smartphone
 
 ### Geral
-- Novo: Página de pesquisa redesenhada
-- Novo: Filtro de contagem de inventário
-- Novo: Suporte para formato de coordenadas DD,DDDDDDD
-- Novo: Mostrar o último nome de filtro usado na caixa de diálogo do filtro
-- Novo: Calculadora de coordenadas: Função para substituir "x" pelo símbolo de multiplicação
-- Correcção: Altitude incorreta (não está a usar a média acima do nível do mar)
-- Correcção: Configuração de limite de distância próxima não funcionava correctamente para valores pequenos
-- Correcção: Ordenação das listas de caches por distância decrescente não funcionava correctamente
-- Correcção: Lab caches excluídas pelo filtro D/T mesmo com a opção activa "incluir incertas"
-- Correcção: problemas de cor com os ícones do menu no modo claro
-- Novo: Adicionar "Remover eventos passados" à lista "todos"
-- Novo: Mostrar conector para "caches definidos pelo utilizador" como activo no filtro de origem
-- Novo: Exportar GPX: tornado opcional a exportação de registos / trackables
-- Novo: Adicionado botão para apagar modelos de registo
-- Correcção: Ao importar o ficheiro de mapa local é atribuído um nome aleatório ao mapa
-- Correcção: Motor de transferência do mapa a disponibilizar ficheiros com erro (0 bytes) para transferência
-- Novo: Adicionados mapeamentos para alguns tipos de cache OC ausentes
-- Novo: Mover listas "utilizadas recentemente" na caixa de diálogo de selecção de lista para o topo ao pressionar o botão "utilizadas recentemente"
-- Novo: Partilha de geo-códigos a partir da lista de caches
-- Alteração: "Navegação (carro)", etc. utiliza o parâmetro "q=" em vez do parâmetro desactualizado "ll="
+- Novo: Opção de partilhar depois de registar uma cache
+- Alteração: Não mostrar as opções "precisa de manutenção" ou "precisa de arquivamento" para as próprias caches
+- Correcção: Restaurar uma cópia de segurança pode duplicar ficheiros de percursos no armazenamento interno e subsequentes cópias de segurança
+- Alteração: Removidas as referências ao Twitter
+- Novo: Apagar ficheiros de percurso órfãos na limpeza e restauro de cópia de segurança
+- Novo: Aviso ao tentar adicionar muitas caches para uma lista de marcadores
+- Novo: Funções observar/não observar numa lista
+- Novo: Oferecer tradução sem rede com as aplicações do Google Tradutor ou do DeepL (se instalado)
+- Novo: Excluir itens do histórico de pesquisa
+- Alteração: Remover GCVote (serviço descontinuado)
+- Novo: Barra de ferramentas colorida nas páginas de detalhes das caches
+- Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
+- Novo: Pré-visualizar listas de marcadores
+- Alteração: Elevada a versão mínima necessária do Android para o Android 8
+- Novo: Botões rápidos padrão para novas instalações
+- Correcção: Títulos incompletos em caixas de inserção de dados
+- Correcção: Notificação actualização de versão noturna da variante FOSS apontava para o APK normal
+- Novo: Opção de "Ignorar ano" para filtros de datas
+- Novo: Tornar URI remoto clicável em transferências pendentes
+- Alteração: Usar definições de sistema como tema padrão para novas instalações
+- Novo: Exportação GPX: Escrita das anotações GSAK "Lat/LonBeforeCorrect" na exportação de pontos adicionais originais
+- Novo: Exibir barra de anular quando apagar caches da lista do mapa
+- Correcção: Falha ao filtrar por percentagem de favoritos
+- Novidade: Agora é mais fácil utilizar listas simples como listas principais
+- Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
+- Correcção: Alguns textos a ignoravam a alteração de idioma
+- Correcção: "Usar unidades imperiais" não era inicializado correctamente em instalações novas
+- Alteração: O módulo de tradução offline de código aberto "Bergamot" substitui o tradutor proprietário "Google ML Kit"
+- Alteração: Novo selector de emoji

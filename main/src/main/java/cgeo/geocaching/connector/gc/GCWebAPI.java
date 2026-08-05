@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
@@ -57,7 +56,7 @@ public class GCWebAPI {
     /**
      * maximum number of elements to retrieve with one call
      */
-    private static final int MAX_TAKE = 50;
+    private static final int MAX_TAKE = 1000;
 
     private GCWebAPI() {
         // Utility class, do not instantiate
@@ -777,7 +776,7 @@ public class GCWebAPI {
     }
 
     @WorkerThread
-    static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
+    static SearchResult searchCaches(final IConnector con, final WebApiSearch search) {
         final SearchResult result = new SearchResult();
 
         try {
@@ -851,9 +850,6 @@ public class GCWebAPI {
             tryGuessMissingDistances(foundCaches, search);
 
             result.addAndPutInCache(foundCaches);
-            if (includeGcVote) {
-                GCVote.loadRatings(foundCaches);
-            }
         } catch (RuntimeException re) {
             Log.w("GCWebAPI: problem executing search", re);
             result.setError(GCConnector.getInstance(), StatusCode.COMMUNICATION_ERROR);
@@ -915,7 +911,7 @@ public class GCWebAPI {
      */
     @NonNull
     @WorkerThread
-    static List<TrackableInventoryEntry> getTrackableInventory() {
+    static List<TrackableInventoryEntry> getTrackableInventory(final int totalTrackables) {
         final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
         int skip = 0;
         TrackableInventoryEntry[] entries;
@@ -924,7 +920,7 @@ public class GCWebAPI {
             //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
             trackableInventoryEntries.addAll(Arrays.asList(entries));
             skip += MAX_TAKE;
-        } while (entries.length == MAX_TAKE);
+        } while (trackableInventoryEntries.size() < totalTrackables);
         return trackableInventoryEntries;
     }
 

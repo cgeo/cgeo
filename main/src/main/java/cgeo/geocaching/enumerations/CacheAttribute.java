@@ -1,8 +1,8 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.gui.AttributesFilterViewHolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.util.SparseArray;
 
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 // static maps need to be initialized later in enums
 @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
@@ -186,7 +186,7 @@ public enum CacheAttribute {
      */
     @NonNull
     public String getL10n(final boolean enabled) {
-        return CgeoApplication.getInstance().getString(
+        return LocalizationUtils.getString(
                 enabled ? stringIdYes : stringIdNo);
     }
 
@@ -257,7 +257,7 @@ public enum CacheAttribute {
     }
 
     public static boolean isEnabled(@Nullable final String attributeName) {
-        return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
+        return !Strings.CI.endsWith(attributeName, INTERNAL_NO);
     }
 
     public static boolean hasRecognizedAttributeIcon(@NonNull final List<String> attributes) {
@@ -304,5 +304,4 @@ public enum CacheAttribute {
         }
         return filteredAttributes;
     }
-
 }

@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.ButtonPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 
@@ -28,6 +29,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
         activity.setTitle(R.string.settings_title_map_content_behavior);
+
 
         updateNotificationAudioInfo();
 
@@ -66,7 +68,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         assert bp != null;
         final String current = Settings.getString(keyId, "");
 
-        bp.setSummary(StringUtils.isNotBlank(current) ? Uri.parse(current).getLastPathSegment() : getString(R.string.proximitynotification_internal));
+        bp.setSummary(StringUtils.isNotBlank(current) ? Uri.parse(current).getLastPathSegment() : LocalizationUtils.getString(R.string.proximitynotification_internal));
         if (StringUtils.isNotBlank(current)) {
             bp.hideButton(false);
             bp.setCallback(() -> {

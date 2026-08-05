@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.text.WordUtils;
 
@@ -423,8 +424,8 @@ public class Image implements Parcelable {
 
         return Objects.equals(serviceImageId, image.serviceImageId)
                 && uri.equals(image.uri)
-                && StringUtils.equals(title, image.title)
-                && StringUtils.equals(description, image.description)
+                && Strings.CS.equals(title, image.title)
+                && Strings.CS.equals(description, image.description)
                 && targetScale == image.targetScale
                 && category == image.category;
     }

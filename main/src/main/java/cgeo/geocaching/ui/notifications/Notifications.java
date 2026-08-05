@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Notification;
 import android.content.Context;
@@ -30,6 +31,10 @@ public class Notifications {
 
     public static final int ID_WHERIGO_SERVICE_NOTIFICATION_ID = 114;
     public static final int ID_WHERIGO_NEW_DIALOG_ID = 115;
+
+    public static final int ID_LOG_CREATE_NOTIFICATION = 120;
+    public static final int ID_LOG_EDIT_NOTIFICATION = 121;
+    public static final int ID_LOG_POST_ERROR_NOTIFICATION = 122;
 
     private Notifications() {
         // no instances
@@ -69,7 +74,7 @@ public class Notifications {
     }
 
     public static NotificationCompat.Builder createNotification(final Context context, final NotificationChannels channel, final int title) {
-        return createNotification(context, channel, context.getString(title));
+        return createNotification(context, channel, LocalizationUtils.getString(title));
     }
 
     public static NotificationCompat.Builder createTextContentNotification(final Context context, final NotificationChannels channel, final String title, final String text) {
@@ -79,7 +84,7 @@ public class Notifications {
     }
 
     public static NotificationCompat.Builder createTextContentNotification(final Context context, final NotificationChannels channel, final int title, final String text) {
-        return createTextContentNotification(context, channel, context.getString(title), text);
+        return createTextContentNotification(context, channel, LocalizationUtils.getString(title), text);
     }
 
     public static void cancel(@Nullable final Context context, final int id) {

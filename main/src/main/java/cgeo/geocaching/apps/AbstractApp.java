@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -59,7 +58,7 @@ public abstract class AbstractApp implements App {
     }
 
     protected static String getString(@StringRes final int resourceId) {
-        return CgeoApplication.getInstance().getString(resourceId);
+        return LocalizationUtils.getString(resourceId);
     }
 
     @Override

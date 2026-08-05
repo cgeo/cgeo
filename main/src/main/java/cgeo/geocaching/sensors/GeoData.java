@@ -1,7 +1,6 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -35,7 +34,7 @@ public class GeoData extends Location {
             DUMMY_LOCATION.setLatitude(48.85308);
             DUMMY_LOCATION.setLongitude(2.34962);
         } else {
-            final GeoPointImpl lastMapPosition = Settings.getMapCenter();
+            final Geopoint lastMapPosition = Settings.getMapCenter();
             DUMMY_LOCATION.setLatitude(lastMapPosition.getLatitudeE6() / 1E6);
             DUMMY_LOCATION.setLongitude(lastMapPosition.getLongitudeE6() / 1E6);
         }

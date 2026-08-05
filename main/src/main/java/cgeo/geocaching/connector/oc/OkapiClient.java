@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -39,6 +40,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -84,7 +86,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
-import static java.lang.Boolean.FALSE;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -134,6 +135,7 @@ final class OkapiClient {
     private static final String CACHE_STATUS_ARCHIVED = "Archived";
     private static final String CACHE_STATUS_DISABLED = "Temporarily unavailable";
     private static final String CACHE_IS_FOUND = "is_found";
+    private static final String CACHE_IS_NOT_FOUND = "is_not_found";
     private static final String CACHE_SIZE_DEPRECATED = "size";
     private static final String CACHE_SIZE2 = "size2";
     private static final String CACHE_VOTES = "rating_votes";
@@ -191,7 +193,7 @@ final class OkapiClient {
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2|attr_acodes|attrnames";
-    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_recommended";
+    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_not_found|is_recommended";
     private static final String SERVICE_CACHE_CORE_CURRENT_L3_FIELDS = "is_watched";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|req_passwd|trackables";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|willattends|short_description";
@@ -234,6 +236,20 @@ final class OkapiClient {
         return result.isSuccess ? parseCache(result.data) : null;
     }
 
+    static void markOwnAndOwnerLogs(final Geocache cache, final List<LogEntry> parsedLogs) {
+        // Mark own and owner logs as friend logs for the friends tab
+        for (int i = 0; i < parsedLogs.size(); i++) {
+            final LogEntry log = parsedLogs.get(i);
+            final boolean isOwner = LogUtils.isOwnerLog(log, cache);
+            final boolean isOwn = LogUtils.isOwnLog(log, cache);
+
+            if ((isOwn || isOwner) && !log.friend) {
+                final LogEntry updatedLog = log.buildUpon().setFriend(true).build();
+                parsedLogs.set(i, updatedLog);
+            }
+        }
+    }
+
     @WorkerThread
     public static long getCacheFoundDate(final String geoCode) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
@@ -252,7 +268,7 @@ final class OkapiClient {
         final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
         final List<LogEntry> logs = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode);
         for (LogEntry log : logs) {
-            if (log.logType.id == 2 || log.logType.id == 10) {
+            if (log.logType == LogType.FOUND_IT || log.logType == LogType.ATTENDED || log.logType == LogType.DIDNT_FIND_IT) {
                 return log.date;
             }
         }
@@ -333,7 +349,7 @@ final class OkapiClient {
             return new SearchResult();
         }
         final GeocacheFilter filter = GeocacheFilter.createFromConfig(filterConfig);
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(connector), OriginGeocacheFilter.class);
         if (origin != null && !origin.allowsCachesOf(connector)) {
             return new SearchResult();
         }
@@ -346,31 +362,27 @@ final class OkapiClient {
     @WorkerThread
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
 
-        final Geopoint searchCoords;
-        final String radius;
-
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
-        } else {
-            // search around current position by default
-            searchCoords = null;
-            radius = DEFAULT_RADIUS;
-        }
-
-        //fill in the defaults
+        // fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("limit", "" + take);
         valueMap.put("offset", "" + skip);
-        fillSearchParameterCenter(valueMap, params, searchCoords, radius);
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            final String radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
+            fillSearchParameterCenter(valueMap, params, df.getEffectiveCoordinate(), radius);
+        } else {
+            // search around current position by default
+            // (but limit only the number of retrieved caches, not the search radius)
+            fillSearchParameterCenter(valueMap, params, null, null);
+        }
 
         String finder = null;
 
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
+        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible(connector)) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return new SearchResult(); //no need to search if connector is filtered out itself
             }
@@ -469,11 +481,16 @@ final class OkapiClient {
                     valueMap.put("status", value.substring(1));
                 }
 
-                if (statusFilter.getStatusFound() != null) {
-                    valueMap.put("found_status", statusFilter.getStatusFound() ? "found_only" : "notfound_only");
+                final Boolean statusFound = statusFilter.getStatusFound();
+                if (statusFound != null) {
+                    valueMap.put("found_status", statusFound ? "found_only" : "notfound_only");
                 }
-                if (FALSE.equals(statusFilter.getStatusOwned())) {
+
+                final Boolean statusOwned = statusFilter.getStatusOwned();
+                if (Boolean.FALSE.equals(statusOwned)) {
                     valueMap.put("exclude_my_own", "true");
+                } else if (Boolean.TRUE.equals(statusOwned) && (connector instanceof ILogin)) {
+                    valueMap.put("owner_uuid", getUserUUID(connector, ((ILogin) connector).getUserName()));
                 }
                 break;
             case LOGS_COUNT:
@@ -507,11 +524,13 @@ final class OkapiClient {
 
     }
 
-    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, final String radius) {
+    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, @Nullable final String radius) {
         final Geopoint usedCenter = center != null ? center : LocationDataProvider.getInstance().currentGeo().getCoords();
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
         valueMap.put("center", centerString);
-        valueMap.put("radius", radius);
+        if (radius != null) {
+            valueMap.put("radius", radius);
+        }
         params.removeKey("search_method");
         params.put("search_method", METHOD_SEARCH_NEAREST);
     }
@@ -834,12 +853,16 @@ final class OkapiClient {
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
-            if (cache.isFound()) {
+            if (cache.isFound() || cache.isDNF()) {
                 cache.setVisitedDate(getCacheFoundDate(cache.getGeocode()));
             }
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);
+
+            // save logs
+            final List<LogEntry> logs = parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode());
+            markOwnAndOwnerLogs(cache, logs);
+            DataStore.saveLogs(cache.getGeocode(), logs, true);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
@@ -868,7 +891,9 @@ final class OkapiClient {
         cache.setLocation(region == null ? country : (country == null ? region : region + ", " + country));
 
         if (response.has(CACHE_IS_FOUND)) {
-            cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
+            final boolean isFound = response.get(CACHE_IS_FOUND).asBoolean();
+            cache.setFound(isFound);
+            cache.setDNF(!isFound && response.has(CACHE_IS_NOT_FOUND) && response.get(CACHE_IS_NOT_FOUND).asBoolean());
         }
         if (response.has(CACHE_IS_WATCHED)) {
             cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
@@ -882,12 +907,10 @@ final class OkapiClient {
         cache.setOwnerDisplayName(owner);
         // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
         cache.setOwnerUserId(owner);
-        final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
-        if (StringUtils.isNotEmpty(profile)) {
-            final String id = StringUtils.substringAfter(profile, "userid=");
-            if (StringUtils.isNotEmpty(id)) {
-                cache.setOwnerUserId(id);
-            }
+        final String ownerId = parseUserId(response.get(CACHE_OWNER));
+        if (StringUtils.isNotEmpty(ownerId)) {
+            cache.setOwnerUserId(ownerId);
+            cache.setOwnerGuid(ownerId);
         }
 
         final Map<LogType, Integer> logCounts = cache.getLogCounts();
@@ -930,6 +953,14 @@ final class OkapiClient {
         return user.get(USER_USERNAME).asText();
     }
 
+    private static String parseUserId(final JsonNode user) {
+        final String profile = user.get(CACHE_USER_PROFILE).asText();
+        if (StringUtils.isBlank(profile)) {
+            return "";
+        }
+        return StringUtils.substringAfter(profile, "userid=");
+    }
+
     @NonNull
     private static List<LogEntry> parseLogs(final ArrayNode logsJSON, final String geocode) {
         final List<LogEntry> result = new LinkedList<>();
@@ -942,10 +973,12 @@ final class OkapiClient {
                 final LogEntry log = new LogEntry.Builder()
                         .setServiceLogId(logResponse.get(LOG_UUID).asText().trim() + ":" + logResponse.get(LOG_INTERNAL_ID).asText().trim())
                         .setAuthor(parseUser(logResponse.get(LOG_USER)))
+                        .setAuthorGuid(parseUserId((logResponse.get(LOG_USER))))
                         .setDate(date.getTime())
                         .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
                         .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES), geocode))
-                        .setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
+                        .setLog(logResponse.get(LOG_COMMENT).asText().trim())
+                        .build();
                 result.add(log);
             } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);

@@ -1,10 +1,8 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.App;
-import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationTransitApp;
@@ -19,6 +17,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.view.MenuItem;
@@ -107,7 +106,6 @@ public final class NavigationAppFactory {
          */
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
-        WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
         MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme),
         ORGANICMAP(new OrganicMapsApp(), 29, R.string.pref_navigation_menu_organicmaps),
@@ -306,7 +304,7 @@ public final class NavigationAppFactory {
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
-            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.err_location_unknown));
             return;
         }
 
@@ -326,7 +324,7 @@ public final class NavigationAppFactory {
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
-            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.err_location_unknown));
             return;
         }
         navigateWaypoint(activity, waypoint, getDefaultNavigationApplication(defaultNavigation));
@@ -337,7 +335,7 @@ public final class NavigationAppFactory {
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geopoint destination) {
         if (destination == null) {
-            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.err_location_unknown));
             return;
         }
 

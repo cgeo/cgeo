@@ -1,17 +1,17 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -29,20 +29,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
-
-            final ProgressDialog waitDialog = new ProgressDialog(getActivity());
-            waitDialog.setTitle(getString(R.string.init_maintenance_start));
-            waitDialog.setMessage(getString(R.string.init_maintenance_ongoing));
-            waitDialog.setCancelable(false);
-            waitDialog.show();
-
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> {
-                final Activity activity = getActivity();
-                if (activity != null) {
-                    ActivityMixin.showShortToast(activity, R.string.init_maintenance_finished);
-                }
-                waitDialog.dismiss();
-            });
+            DownloaderUtils.deleteOrphanedData(getActivity());
             return true;
         });
 
@@ -63,7 +50,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         } else {
             final AtomicLong usedBytes = new AtomicLong();
             dataDirPreference.setOnPreferenceClickListener(preference -> {
-                final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
+                final ProgressDialog progress = ProgressDialog.show(getActivity(), LocalizationUtils.getString(R.string.calculate_dataDir_title), LocalizationUtils.getString(R.string.calculate_dataDir), true, false);
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
                     // calculate disk usage
                     usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));

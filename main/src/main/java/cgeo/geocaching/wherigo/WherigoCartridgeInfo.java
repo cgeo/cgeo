@@ -79,10 +79,10 @@ public class WherigoCartridgeInfo {
         }
         try {
             if (forceIcon || readIcon) {
-                this.iconData = closedCartridgeFile.getFile(closedCartridgeFile.iconId);
+                this.iconData = WherigoUtils.getFileSafe(closedCartridgeFile, closedCartridgeFile.iconId);
             }
             if (forceSplash || readSplash) {
-                this.splashData = closedCartridgeFile.getFile(closedCartridgeFile.splashId);
+                this.splashData = WherigoUtils.getFileSafe(closedCartridgeFile, closedCartridgeFile.splashId);
             }
         } catch (Exception e) {
             Log.w("Problem reading data from cartridgeFile " + this, e);
@@ -150,7 +150,10 @@ public class WherigoCartridgeInfo {
             if (guidFilter != null && !guidFilter.test(getGuid(candidate))) {
                 continue;
             }
-            result.add(new WherigoCartridgeInfo(candidate, true, false));
+            final WherigoCartridgeInfo ciCandidate = new WherigoCartridgeInfo(candidate, true, false);
+            if (ciCandidate.getCartridgeFile() != null) {
+                result.add(ciCandidate);
+            }
         }
         return result;
     }

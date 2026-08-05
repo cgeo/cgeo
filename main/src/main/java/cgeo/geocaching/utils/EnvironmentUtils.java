@@ -39,6 +39,13 @@ public class EnvironmentUtils {
     public static long getFreeMemory(final Context context) {
         final ActivityManager.MemoryInfo memInfo = getMemoryInfo(context);
         return memInfo == null ? -1 : memInfo.availMem;
+    }
 
+    /** total mem usage in kBytes (app's private memory + size of shared libs) */
+    public static Integer getOwnMemoryFootprint(final Context context) {
+        final int pid = android.os.Process.myPid();
+        final ActivityManager am =  (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        final android.os.Debug.MemoryInfo[] memInfos = am.getProcessMemoryInfo(new int[]{pid});
+        return memInfos == null || memInfos.length == 0 ? null : memInfos[0].getTotalPss();
     }
 }

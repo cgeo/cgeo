@@ -1,10 +1,10 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -72,7 +72,7 @@ public class HillshadingTileDownloader extends AbstractDownloader {
     public HashMap<String, Download> getAvailableTiles(final Set<String> foldernames) {
         final HashMap<String, Download> tiles = new HashMap<>();
 
-        final String url = CgeoApplication.getInstance().getString(R.string.hillshading_downloadurl);
+        final String url = LocalizationUtils.getPlainString(R.string.hillshading_downloadurl);
         for (String foldername : foldernames) {
             tiles.putAll(getAvailableTilesSubfolder(url + foldername + "/"));
         }

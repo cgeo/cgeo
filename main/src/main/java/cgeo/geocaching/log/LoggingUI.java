@@ -5,8 +5,8 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public final class LoggingUI extends AbstractUIFactory {
+public final class LoggingUI {
+    public static final int REQUEST_CODE_LOG = 1001;
 
     private LoggingUI() {
         // utility class
@@ -67,14 +68,19 @@ public final class LoggingUI extends AbstractUIFactory {
         }
 
         public String getL10n() {
-            return res.getString(stringId);
+            return LocalizationUtils.getString(stringId);
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
+    public static boolean isMenuItemSelected(final MenuItem item) {
+        final int itemId = item.getItemId();
+        return itemId == R.id.menu_log_visit || itemId == R.id.menu_log_visit_offline;
+    }
+
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, @NonNull final Geocache cache, final DialogInterface.OnDismissListener listener) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_log_visit) {
-            cache.logVisit(activity);
+            cache.logVisitForResult(activity, REQUEST_CODE_LOG);
         } else if (itemId == R.id.menu_log_visit_offline) {
             showOfflineMenu(cache, activity, listener);
         } else {
@@ -89,7 +95,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
-        if (GCConnector.getInstance().canHandle(cache.getGeocode())) {
+        if (GCConnector.getInstance().canHandle(cache.getGeocode()) && !cache.isOwner()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
             logTypes.add(LogType.NEEDS_ARCHIVE);
         }
@@ -180,8 +186,11 @@ public final class LoggingUI extends AbstractUIFactory {
         if (cache == null) {
             return;
         }
-        menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
+
+        final boolean supportsLogging = cache.supportsLogging();
+        final boolean isOfflineLogging = Settings.getLogOffline();
+        menu.findItem(R.id.menu_log_visit).setVisible(supportsLogging && !isOfflineLogging);
+        menu.findItem(R.id.menu_log_visit_offline).setVisible(supportsLogging && isOfflineLogging);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {

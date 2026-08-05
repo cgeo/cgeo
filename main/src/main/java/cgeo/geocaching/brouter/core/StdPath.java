@@ -5,6 +5,7 @@
  */
 package cgeo.geocaching.brouter.core;
 
+@SuppressWarnings("checkstyle:MemberName")
 final class StdPath extends OsmPath {
     // Gravitational constant, g
     private static final double GRAVITY = 9.81;  // in meters per second^(-2)
@@ -64,6 +65,7 @@ final class StdPath extends OsmPath {
     }
 
     @Override
+    @SuppressWarnings({"checkstyle:LocalFinalVariableName", "checkstyle:LocalVariableName"})
     protected double processWaySection(final RoutingContext rc, final double distance, final double deltaH, final double elevation, final double angle, final double cosangle, final boolean isStartpoint, final int nsection, final int lastpriorityclassifier) {
         // calculate the costfactor inputs
         final float turncostbase = rc.expctxWay.getTurncost();
@@ -106,7 +108,84 @@ final class StdPath extends OsmPath {
         final int dist = (int) distance; // legacy arithmetics needs int
 
         // penalty for turning angle
-        final int turncost = (int) ((1. - cosangle) * turncostbase + 0.2); // e.g. turncost=90 -> 90 degree = 90m penalty
+        int turncost = (int) ((1. - cosangle) * turncostbase + 0.2); // e.g. turncost=90 -> 90 degree = 90m penalty
+
+
+        final int newPrio = (int) rc.expctxWay.getPriorityClassifier();
+        final int oldPrio = lastpriorityclassifier;
+
+        if (rc.bikeMode) {
+            //   If the turn is LEFT and coming from "primary|secondary" to a lower priority highway
+            //   AND estimated_crossing_class is defined on the node, than penalty!!!
+
+            if (rc.consider_crossing && oldPrio > 0 && nsection == 0  && angle < 0 && oldPrio >= rc.crossing_Prio_H && newPrio <= rc.crossing_Prio_L) {
+                int class_index = 0;
+                if (sourceNode.nodeDescription != null) {
+                    final boolean nodeAccessGranted = rc.expctxWay.getNodeAccessGranted() != 0.;
+                    final String node_tags = rc.expctxNode.getKeyValueDescription(nodeAccessGranted, sourceNode.nodeDescription);
+                    class_index = node_tags.indexOf("estimated_crossing_class=");
+                    if (class_index > -1) {
+                        final String crossing_class  = node_tags.substring(class_index + 25, class_index + 26);
+                        int additional_turn_cost = 0;
+                        if (crossing_class.equals("1")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class1;
+                        }
+                        if (crossing_class.equals("2")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class2;
+                        }
+                        if (crossing_class.equals("3")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class3;
+                        }
+                        if (crossing_class.equals("4")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class4;
+                        }
+                        if (crossing_class.equals("5")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class5;
+                        }
+                        if (crossing_class.equals("6")) {
+                            additional_turn_cost = rc.cost_ToLeft_from_H_class6;
+                        }
+                        turncost += additional_turn_cost;
+                    }
+                }
+            }
+
+            // for left-hand traffic
+            // If the turn is RIGHT and coming from "primary|secondary" to a lower priority HW AND estimated_crossing_class is defined on the node, than penalty!!!
+
+            if (rc.consider_crossing && oldPrio > 0 && nsection == 0  && angle > 0 && oldPrio >= rc.crossing_Prio_H && newPrio <= rc.crossing_Prio_L) {
+                int class_index = 0;
+                if (sourceNode.nodeDescription != null) {
+                    final boolean nodeAccessGranted = rc.expctxWay.getNodeAccessGranted() != 0.;
+                    final String node_tags = rc.expctxNode.getKeyValueDescription(nodeAccessGranted, sourceNode.nodeDescription);
+                    class_index = node_tags.indexOf("estimated_crossing_class=");
+                    if (class_index > -1) {
+                        final String crossing_class  = node_tags.substring(class_index + 25, class_index + 26);
+                        int additional_turn_cost = 0;
+                        if (crossing_class.equals("1")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class1;
+                        }
+                        if (crossing_class.equals("2")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class2;
+                        }
+                        if (crossing_class.equals("3")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class3;
+                        }
+                        if (crossing_class.equals("4")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class4;
+                        }
+                        if (crossing_class.equals("5")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class5;
+                        }
+                        if (crossing_class.equals("6")) {
+                            additional_turn_cost = rc.cost_ToRight_from_H_class6;
+                        }
+                        turncost += additional_turn_cost;
+                    }
+                }
+            }
+        }
+
         if (message != null) {
             message.linkturncost += turncost;
             message.turnangle = (float) angle;

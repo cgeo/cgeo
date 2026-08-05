@@ -6,6 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -43,8 +44,8 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
             final String deviceCode = Settings.getWebDeviceCode();
 
             final ProgressDialog progressDialog = ProgressDialog.show(activity,
-                    activity.getString(R.string.init_sendToCgeo),
-                    activity.getString(R.string.init_sendToCgeo_registering), true);
+                    LocalizationUtils.getString(R.string.init_sendToCgeo),
+                    LocalizationUtils.getString(R.string.init_sendToCgeo_registering), true);
             progressDialog.setCancelable(false);
 
             AndroidRxUtils.bindActivity(activity, Observable.defer(() -> {

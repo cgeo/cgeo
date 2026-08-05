@@ -93,5 +93,10 @@
             android:layout="@layout/preference_button"
             android:title="@string/view_database"
             app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_gui_testscreen"
+            android:layout="@layout/preference_button"
+            android:title="@string/gui_test_title"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

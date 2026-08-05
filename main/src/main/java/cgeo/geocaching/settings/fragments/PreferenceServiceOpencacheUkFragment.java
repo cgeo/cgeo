@@ -11,7 +11,7 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentCompat {
     @Override
@@ -22,7 +22,7 @@ public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentComp
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ocuk_website));
         final String urlOrHost = OCPreferenceKeys.OC_UK.authParams.host;
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
-            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            final String url = Strings.CS.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });

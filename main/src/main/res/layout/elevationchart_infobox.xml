@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/elevation_infobox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="2dp"
+    android:background="@drawable/colored_border">
+
+    <ImageView
+        android:id="@+id/elevationSymbol"
+        android:layout_width="@dimen/textSize_detailsSecondary"
+        android:layout_height="@dimen/textSize_detailsSecondary"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/elevation"/>
+    <TextView
+        android:id="@+id/elevationText"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/elevationSymbol"
+        style="@style/elevation_infobox_text" />
+
+    <TextView
+        android:id="@+id/distanceSymbol"
+        android:layout_below="@id/elevationSymbol"
+        android:text="→"
+        tools:ignore="hardcodedText"
+        style="@style/elevation_infobox_symbol" />
+    <TextView
+        android:id="@+id/distanceText"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/elevationText"
+        android:layout_toEndOf="@id/distanceSymbol"
+        style="@style/elevation_infobox_text" />
+
+    <TextView
+        android:id="@+id/upSymbol"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/distanceSymbol"
+        android:text="↑"
+        tools:ignore="hardcodedText"
+        style="@style/elevation_infobox_symbol" />
+    <TextView
+        android:id="@+id/upText"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/distanceText"
+        android:layout_toEndOf="@id/upSymbol"
+        style="@style/elevation_infobox_text" />
+
+    <TextView
+        android:id="@+id/downSymbol"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/upSymbol"
+        android:text="↓"
+        tools:ignore="hardcodedText"
+        style="@style/elevation_infobox_symbol" />
+    <TextView
+        android:id="@+id/downText"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/upText"
+        android:layout_toEndOf="@id/downSymbol"
+        style="@style/elevation_infobox_text" />
+</RelativeLayout>

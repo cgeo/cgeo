@@ -1,8 +1,8 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -46,7 +46,7 @@ public class MapDownloaderHyllyThemes extends AbstractThemeDownloader {
     // hylly uses different servers for update check and download, need to map here
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return CgeoApplication.getInstance().getString(R.string.mapserver_hylly_updatecheckurl);
+        return LocalizationUtils.getPlainString(R.string.mapserver_hylly_updatecheckurl);
     }
 
     @NonNull

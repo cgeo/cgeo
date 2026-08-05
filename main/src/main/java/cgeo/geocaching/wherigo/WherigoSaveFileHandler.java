@@ -1,6 +1,10 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.platform.FileHandle;
@@ -14,6 +18,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
+
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class WherigoSaveFileHandler implements FileHandle {
 
@@ -27,14 +34,20 @@ public class WherigoSaveFileHandler implements FileHandle {
     private State state = State.IDLE;
     private WherigoSavegameInfo saveGame = null;
 
+    private long lastSaveTime = 0;
+    private String lastSaveThingState = null;
+    private long lastUnsavedSafeWorthyAction = 0;
+
     public static WherigoSaveFileHandler get() {
         return INSTANCE;
     }
 
     private WherigoSaveFileHandler() {
         //singleton
-    }
 
+        //start autosave-thread
+        AndroidRxUtils.runPeriodically(Schedulers.single(), this::checkAutosave, 0, 60000);
+    }
 
     public void setCartridge(final ContentStorage.FileInformation cartridgeFileInfo) {
         this.cartridgeFileInfo = cartridgeFileInfo;
@@ -51,9 +64,34 @@ public class WherigoSaveFileHandler implements FileHandle {
         Engine.requestSync();
     }
 
-    public void loadSaveFinished() {
+    public void reset() {
         state = State.IDLE;
         saveGame = null;
+    }
+
+    public void saveFinished() {
+        //mark game as saved
+        this.lastSaveTime = System.currentTimeMillis();
+        this.lastSaveThingState = WherigoThingType.getVisibleThingState();
+        this.lastUnsavedSafeWorthyAction = 0;
+
+        reset();
+    }
+
+    public void markSafeWorthyAction() {
+        this.lastUnsavedSafeWorthyAction = System.currentTimeMillis();
+    }
+
+    public void checkAutosave() {
+        if (!WherigoGame.get().isPlaying() || state != State.IDLE || System.currentTimeMillis() - lastSaveTime < 30000) {
+            return;
+        }
+        final boolean safeWorthyAction = lastUnsavedSafeWorthyAction > 0 && System.currentTimeMillis() - lastUnsavedSafeWorthyAction > 10000;
+        final boolean thingVisibilityChanged = !Objects.equals(WherigoThingType.getVisibleThingState(), lastSaveThingState);
+        if (safeWorthyAction || thingVisibilityChanged) {
+            Log.iForce("WHERIGO: c-geo-triggered autosave, safeWorthyAction=" + safeWorthyAction + ", thingVisibilityChanged=" + thingVisibilityChanged);
+            save(null);
+        }
     }
 
     @Override
@@ -94,6 +132,7 @@ public class WherigoSaveFileHandler implements FileHandle {
         if (state != State.SAVING || saveGameToUse == null) {
             saveGameToUse = WherigoSavegameInfo.getAutoSavefile(cartridgeFileInfo);
         }
+        ViewUtils.showToast(null, LocalizationUtils.getString(R.string.waypoint_save) + ": " + saveGameToUse.getUserDisplayableName());
 
         final ContentStorage.FileInformation saveFileInfo = ContentStorage.get().getFileInfo(cartridgeFileInfo.parentFolder, saveGameToUse.getSavefileName());
         final Uri uri;

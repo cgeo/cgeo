@@ -10,6 +10,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.downloader.HillshadingTileDownloader.HILLSHADING_TILE_FILEEXTENSION;
 
@@ -33,6 +34,7 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 class ReceiveDownload {
     private Uri uri = null;
@@ -79,7 +81,7 @@ class ReceiveDownload {
                 while ((ze = zis.getNextEntry()) != null) {
                     String filename = ze.getName();
                     final int posExt = filename.lastIndexOf('.');
-                    if (posExt != -1 && ((StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (StringUtils.equalsIgnoreCase(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
+                    if (posExt != -1 && ((Strings.CI.equals(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (Strings.CI.equals(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
                         filename = downloader.toVisibleFilename(filename);
                         // found map file within zip
                         if (guessFilename(filename)) {
@@ -96,7 +98,7 @@ class ReceiveDownload {
             }
         } else {
             Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                    context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(context.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
+                    context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, LocalizationUtils.getString(R.string.downloadmap_target_not_writable, downloader.targetFolder)
             ));
         }
         return Worker.Result.failure();
@@ -110,7 +112,7 @@ class ReceiveDownload {
             filename = FileUtils.getFilenameFromPath(filename);
             if (StringUtils.isNotBlank(downloader.forceExtension)) {
                 final int posExt = filename.lastIndexOf('.');
-                if (posExt == -1 || !(StringUtils.equalsIgnoreCase(downloader.forceExtension, filename.substring(posExt)))) {
+                if (posExt == -1 || !(Strings.CI.equals(downloader.forceExtension, filename.substring(posExt)))) {
                     filename += downloader.forceExtension;
                 }
             }
@@ -153,7 +155,7 @@ class ReceiveDownload {
         }
         switch (status) {
             case SUCCESS:
-                resultMsg = String.format(context.getString(R.string.receivedownload_success), fileinfo);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_success, fileinfo);
                 if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
                     CompanionFileUtils.writeInfo(sourceURL, filename, StringUtils.isNotBlank(displayName) ? displayName : CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                 }
@@ -161,19 +163,19 @@ class ReceiveDownload {
                 resultId = Worker.Result.success();
                 break;
             case CANCELLED:
-                resultMsg = context.getString(R.string.receivedownload_cancelled);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_cancelled);
                 break;
             case IO_EXCEPTION:
-                resultMsg = String.format(context.getString(R.string.receivedownload_error_io_exception), downloader.targetFolder.toUserDisplayableValue());
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_error_io_exception, downloader.targetFolder.toUserDisplayableValue());
                 break;
             case FILENOTFOUND_EXCEPTION:
-                resultMsg = context.getString(R.string.receivedownload_error_filenotfound_exception);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_error_filenotfound_exception);
                 break;
             case INTEGRITY_CHECK_ERROR:
-                resultMsg = context.getString(R.string.receivedownload_integritycheck_failed);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_integritycheck_failed);
                 break;
             default:
-                resultMsg = context.getString(R.string.receivedownload_error);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_error);
                 break;
         }
         Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
@@ -207,7 +209,7 @@ class ReceiveDownload {
     }
 
     private String normalized(final String filename) {
-        return StringUtils.replace(StringUtils.lowerCase(filename), "-", "_");
+        return Strings.CS.replace(StringUtils.lowerCase(filename), "-", "_");
     }
 
     private CopyStates copyInternal(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final boolean isZipFile, final String nameWithinZip, final boolean potentiallyKeepTemporaryFile) {
@@ -288,7 +290,7 @@ class ReceiveDownload {
                 outputStream.write(buffer, 0, length);
                 bytesCopied += length;
                 if ((System.currentTimeMillis() - lastPublishTime) > 500) { // avoid message flooding
-                    notification.setContentText(context.getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)));
+                    notification.setContentText(LocalizationUtils.getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)));
                     updateForegroundNotification.run();
                     lastPublishTime = System.currentTimeMillis();
                 }
@@ -301,5 +303,4 @@ class ReceiveDownload {
             IOUtils.closeQuietly(inputStream, outputStream);
         }
     }
-
 }

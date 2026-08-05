@@ -191,6 +191,7 @@
     <string name="log_problem_needs_maintenance_text">Denne geocacheren rapporterte at det er et problem med denne cachen.</string>
     <string name="log_problem_log_full_label">Loggboken er full</string>
     <string name="log_problem_log_full_text">Denne geocacheren rapporterte at loggboken er full.</string>
+    <string name="log_problem_log_wet_label">Loggboken er våt</string>
     <string name="log_problem_damaged_label">Beholderen er skadet</string>
     <string name="log_problem_damaged_text">Denne geocacheren rapporterte at beholderen er skadet.</string>
     <string name="log_problem_missing_label">Cachen kan ha forsvunnet</string>
@@ -204,11 +205,22 @@
     <string name="log_image_info_scaled">skalert</string>
     <string name="log_image_info_notscaled">ikke skalert</string>
     <string name="log_image_titleprefix">Bilde</string>
+    <string name="log_share_prefix_found">Jeg fant %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Jeg logget \"trenger vedlikehold\" på %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
-    <!-- translation -->
-    <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
+    <!-- External translation -->
+    <string name="translate">Oversett</string>
+    <string name="translate_external_label">Oversett med %s</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Nettside</string>
+    <string name="translate_external_variant_unavailable">Utilgjengelig</string>
+    <string name="translate_external_none">&lt;Ingen&gt;</string>
+    <string name="translate_external_app">Ekstern app</string>
+    <string name="translate_external_google">Google Oversetter</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Oversettelse via nettsted kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
@@ -293,12 +305,11 @@
     <string name="warn_notloggedin_long">Ikke logget inn (ennå). Live-kartet vil bare viser cacher som er lagret lokalt og online-funksjoner vil ikke virke.\n\nEnten mangler du nettverksforbindelse, det er et serverproblem eller så må du endre geocaching-tjenestene i Innstillinger.\n\nVil du endre tjenestene nå?</string>
     <string name="err_read_pocket_query_list">Feil under lesing av Pocket query-listen.</string>
     <string name="err_read_bookmark_list">Feil ved lesing av bokmerker.</string>
+    <string name="err_bookmark_list_overfull">For mange cacher</string>
+    <string name="err_bookmark_list_overfull_description">Bokmerkelister kan lagre maksimalt 1000 cacher. Du prøver å legge til mer enn det i listen.\n\nVil du fortsette, og bare legge til opp til det antallet listen kan inneholde?</string>
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
-    <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
     <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
-    <string name="info_log_post_retry">Prøv på nytt</string>
-    <string name="info_log_post_save">Lagre lokalt</string>
     <string name="info_log_cleared">Loggen ble slettet.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
     <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
@@ -318,9 +329,7 @@
     <string name="dont_show_again">Ikke vis igjen</string>
     <string name="tap_icon_more_info">Trykk på ikonet for å få mer info</string>
     <string name="use_slider_adjust_value">Bruk glidebryteren for å justere verdien</string>
-    <string name="warn_gm_not_available">Google Maps er ikke tilgjengelig.</string>
-    <string name="switch_to_mf">Google Play Service på din enhet er utdatert. Vil du endre karttjeneste til Mapsforge i stedet?</string>
-    <string name="switched_to_mf">Standard kart byttet til Mapsforge kartleverandør. Start kartet på nytt nå.</string>
+    <string name="snackbar_action_share">Del</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Grunnleggende</string>
     <string name="translator_preference_nottranslate_lng">Ignorerte språk</string>
@@ -331,10 +340,10 @@
     <string name="translator_model_download_confirm_txt">Oversettelsesmodell for %s språk må lastes ned. Filstørrelse er omtrent 20-40 MB.</string>
     <string name="translator_model">Oversettelsesmodell</string>
     <string name="translator_language_select">Velg kildespråk</string>
-    <string name="translator_language_target_select">Velg målspråk</string>
     <string name="translator_target_language">Oversett til \"%s\"</string>
     <string name="translator_translation_error">Kunne ikke oversette tekst: %s</string>
     <string name="translator_translation_initerror">Mislyktes i å starte oversetter</string>
+    <string name="translator_translation_success">Oversatt fra \"%s\". Trykk knappen for å gjenopprette original</string>
     <string name="crash_activity_title">Uff da! c:geo krasjet!</string>
     <string name="crash_activity_report">raporter et problem</string>
     <!-- location service -->
@@ -432,6 +441,11 @@
     <string name="caches_upload_bookmarklist">Legg til bokmerkeliste</string>
     <string name="caches_upload_bookmarklist_all">Legg alle til i bokmerkeliste</string>
     <string name="caches_upload_bookmarklist_selected">Legg til valgte i bokmerkeliste</string>
+    <string name="caches_watch_all">Legg alle til i overvåkningsliste</string>
+    <string name="caches_unwatch_all">Fjern alle fra overvåkningsliste</string>
+    <string name="caches_watch_selected">Legg til valgte i overvåkningsliste</string>
+    <string name="caches_unwatch_selected">Fjern valgte fra overvåkningsliste</string>
+    <string name="watchlist_background_started">Oppdatering av overvåkningsliste startet i bakgrunnen</string>
     <string name="caches_upload_modifiedcoords">Last opp korrigerte koordinater</string>
     <string name="caches_upload_modifiedcoords_warning">Vil du laste opp korrigerte koordianter for alle (valgte) cacher og overskrive de eksisterende koordinatene på serveren? Dette kan ikke angres.</string>
     <string name="caches_upload_allcoords">Last opp koordinater for alle cacher</string>
@@ -453,6 +467,8 @@
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
     <string name="caches_overwrite_offline_log">Skriv over offlineloggen</string>
+    <string name="caches_warning_delete_user_data_others">Slett andre</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Fjern andre</string>
     <string name="caches_set_cache_icon">Angi cacheikon</string>
     <string name="caches_set_cache_icon_all">Angi cache-ikon for alle cacher</string>
     <string name="caches_set_cache_icon_selected">Angi cache-ikon for valgte cacher</string>
@@ -504,7 +520,6 @@
     <string name="cache_filter_mode_advanced">Avansert</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Bytt til Enkel</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Bytte til \'Enkel\' modus gjør at filterinnstillinger forsvinner. Vil du fortsette?</string>
-    <string name="cache_filter_add_button">Legg til filterkriterie</string>
     <string name="cache_filter_option_and_or">Bruk ELLER i stedet for OG</string>
     <string name="cache_filter_option_inverse">Invertert Filter</string>
     <string name="cache_filter_option_include_inconclusive">Inkluder ufullstendige treff</string>
@@ -530,6 +545,7 @@
     <string name="cache_filter_hidden">Gjemt dato</string>
     <string name="cache_filter_eventdate">Eventdato</string>
     <string name="cache_filter_logs_count">Antall logger</string>
+    <string name="cache_filter_inventory_count">Antall sporbare</string>
     <string name="cache_filter_last_found">Dato for sist funn</string>
     <string name="cache_filter_log_entry">Logginnhold</string>
     <string name="cache_filter_location">Sted</string>
@@ -538,7 +554,6 @@
     <string name="cache_filter_stored_since">Sist oppdaterte detaljer</string>
     <string name="cache_filter_category">BC-kategori</string>
     <string name="cache_filter_tier">BC-nivå</string>
-    <string name="cache_filter_named_filter">Navngitt filter</string>
     <string name="cache_filter_logical_filter_group">Koblet filter</string>
     <string name="cache_filtergroup_basic">Enkel</string>
     <string name="cache_filtergroup_details">Detaljer</string>
@@ -559,16 +574,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Slett</string>
     <string name="cache_filter_storage_clear_button">Tøm</string>
-    <string name="cache_filter_storage_load_delete_title">Last eller slett et eksisterende filter</string>
     <string name="cache_filter_storage_select_title">Velg filter</string>
-    <string name="cache_filter_storage_delete_title">Slett filter</string>
-    <string name="cache_filter_storage_delete_message">Vil du virkelig slette denne filterkonfigurasjonen?</string>
-    <string name="cache_filter_storage_select_clear_title">Velg filter eller nullstill gjeldende filter</string>
-    <string name="cache_filter_storage_clear_title">Fjern gjeldende filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filter er lagret ennå.</string>
-    <string name="cache_filter_storage_save_title">Lagre filter med navn</string>
-    <string name="cache_filter_storage_save_confirm_title">Lagre filter med overskriving</string>
-    <string name="cache_filter_storage_save_confirm_message">Et filter med navnet %s med en forskjellig konfigurasjon finnes allerede. Vil du overskrive det?</string>
     <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Søketekst</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Er ikke med</string>
@@ -580,6 +586,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
     <string name="cache_filter_datefilter_absolute">Absolutt</string>
     <string name="cache_filter_datefilter_relative">Relativt til i dag</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignorer år</string>
     <string name="cache_filter_datefilter_label_from">Fra:</string>
     <string name="cache_filter_datefilter_label_to">Til:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Velg alle</string>
@@ -677,6 +684,7 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
@@ -723,6 +731,10 @@
     <string name="downloader_pending_downloads">Ventende nedlastinger</string>
     <string name="downloader_cancel_download">Avbryt nedlasting</string>
     <string name="downloader_retry_download">Nytt forsøk på nedlasting</string>
+    <string name="downloader_delete_all_pending">Slett alle</string>
+    <string name="downloader_delete_all_confirmation">Slette alle ventende nedlastinger?</string>
+    <string name="downloader_delete_all_message">Dette vil avbryte alle %d ventende nedlastinger og fjerne de pågående nedlastninger. Dette kan ikke angres.</string>
+    <string name="downloader_deleted_all">Slettet alle ventende nedlastinger</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Nedlasting mislyktes (og vil ikke starte automatisk på nytt)</string>
     <string name="asdm_status_paused">Nedlasting venter på å prøve på nytt eller fortsette</string>
@@ -806,9 +818,7 @@
     <string name="init_summary_oc_uk">Last cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencache.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
     <string name="init_summary_su">Last cacher fra Geocaching.su</string>
-    <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
     <string name="err_vote_send_rating">Feil under sending av vurdering.</string>
-    <string name="vote_sent">Stemmegivning sendt</string>
     <string name="init_login_popup">Logg inn</string>
     <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
     <string name="init_login_popup_ok">Innlogging fullført</string>
@@ -851,8 +861,6 @@
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Sted</string>
     <string name="init_signature_template_geocode">GC-kode</string>
-    <string name="init_ratingwanted">GCvote-rangering</string>
-    <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners / egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
     <string name="init_openlastdetailspage">Sist brukte fane</string>
@@ -994,6 +1002,7 @@
     <string name="settings_info_themes_title">Info om karttemaene</string>
     <string name="settings_info_themes">c:geo støtter tilpassede temaer for frakoblet-kart. Disse kan brukes til å endre fargen på kartet (f.eks for å ha et nattesyn-kart) eller for å fremheve visse objekter som sykkelveier eller høyde-linjer i kartet.\n\nGjennom å arbeide med temaer som ikke er zippet over kartet, kan du redusere åpningsevnen for kartviseren. I dette tilfellet kan mappen temamappe eventuelt synkroniseres til en app-privat mappe for raskere tilgang (på bekostning av litt lagringsplass).</string>
     <string name="settings_info_hillshading_title">Info om terrengskygge</string>
+    <string name="settings_info_hillshading">Terrengskygge er en teknikk for å vise høydeendringer i terrenget ved å legge til en skyggeeffekt i kartet. Bakker vil bli mørkere eller lysere for å gi en 3D-effekt.\nTerrengskyggedata kan lastes ned fra menyen i kartet.\nTerrengskygge er ikke kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrengskygge</string>
     <string name="init_hillshading_hq">Høykvalitets terrengskygge</string>
     <string name="init_summary_hillshading_hq">Mer detaljert terrengskygge, men ~50%% tregere å laste når du zoomer ut</string>
@@ -1008,7 +1017,6 @@
     <string name="init_dataDir">Velg mappe for data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
     <string name="init_maptrail">Vis spor</string>
-    <string name="init_maptrail_length">Historikkspor maks. lengde</string>
     <string name="init_maptrail_length_summary">Angi maksimal lengde på historiesporet (håndhevet ved hver oppstart av c:geo). Standardverdien er 700 poeng - juster i henhold til tilgjengelig minne.</string>
     <string name="init_summary_maptrail">Vis spor på kart</string>
     <string name="init_trackappearance_summary">Velg farge, gjennomsiktighet og bredde for spor-/rutelinje. Spor/ruter består av flere veipunkter og kan lastes inn via en GPX spor-/rute-fil.</string>
@@ -1113,7 +1121,6 @@
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
     <string name="map_source_google_terrain">Google: Terreng</string>
-    <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
@@ -1292,9 +1299,7 @@
     <string name="cache_variables">Variabler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Veipunkter (%d)</string>
     <string name="cache_waypoints_add">Legg til veipunkt</string>
-    <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skjul besøkte veipunkter</string>
     <string name="cache_waypoints_remove_original_waypoint">Veipunkt kopiert fra utklippstavlen til denne cachen.\n\nFjern opprinnelige veipunkt?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
@@ -1307,7 +1312,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Laster spoiler-bilder</string>
     <string name="cache_dialog_loading_details_status_logs">Laster logger</string>
     <string name="cache_dialog_loading_details_status_waypoints">Behandler veipunkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Laster GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Bufrer data</string>
     <string name="cache_dialog_loading_details_status_render">Klargjør visning</string>
     <string name="cache_dialog_offline_save_title">Lagret lokalt</string>
@@ -1356,7 +1360,6 @@
     <string name="cache_menu_copy_list">Kopier til en annen liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (lokalt lagret)</string>
-    <string name="cache_menu_vote">Avgi stemme</string>
     <string name="cache_menu_challenge_checker">Søk etter utfordringssjekkere</string>
     <string name="cache_menu_log_in_browser">Logg i nettleseren</string>
     <string name="cache_menu_ignore">Ignorer cache</string>
@@ -1431,8 +1434,6 @@
     <string name="cachedetails_progress_unwatch">Fjernet fra overvåkningsliste</string>
     <string name="cachedetails_progress_favorite">Lagt til i favoritter</string>
     <string name="cachedetails_progress_unfavorite">Fjern fra favoritter</string>
-    <string name="cache_whereyougo_start">Åpne WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
-    <string name="cache_whereyougo_install">Installer WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
     <string name="cache_chirpwolf_start">Denne cachen bruker kanskje en chirp-sender eller en annen type trådløs signaler. For å lese chirp data kan du åpne Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Denne cachen bruker kanskje en chirp-sender eller en annen type trådløs signaler. For å lese chirp data kan du installere Chirp Wolf.</string>
     <string name="cache_alc_start">Åpne Adventure Lab for å begynne å spille dette eventyret</string>
@@ -1467,7 +1468,7 @@
     <string name="html_style_default">Standard</string>
     <string name="html_style_monochrome">Monokrom</string>
     <string name="html_style_source">HTML-kilde</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
@@ -1670,7 +1671,6 @@
     <string name="search_kw">Nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
     <string name="search_finder">Funnet av</string>
-    <string name="search_filter">Filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_destination">Åpne mål i c:geo</string>
     <string name="add_target_to">Legg til mål til</string>
@@ -2164,7 +2164,6 @@
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/veipunkter fra din individuelle rute?</string>
-    <string name="map_individual_route_cleared">Individuell rute fjernet</string>
     <string name="sorted_route_saved">Individuell rute lagret</string>
     <string name="load_individual_route_error">Feil ved lasting av individuell rute</string>
     <string name="route_item_point">Rutepunkt</string>
@@ -2228,7 +2227,6 @@
     <string name="add_setting_missing_type">Du må velge en preferansetype</string>
     <string name="add_setting_already_exists">En preferanse med dette navnet finnes allerede</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo lokal filbehandler</string>
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2262,7 +2260,6 @@
     <string name="check_hillshading_found">Terrengskyggedata er allerede på plass</string>
     <string name="check_hillshading_missing">Fant manglende terrengskyggedata:</string>
     <string name="check_hillshading_unsupported">Advarsel: Terrengskyggedata er minst delvis utilgjengelig for det valgte området</string>
-    <string name="check_hillshading_tiles_menu">Se etter manglende terrengskyggedata</string>
     <string name="no_updates_found">Fant ingen oppdateringer</string>
     <string name="updates_check">Oppdateringssjekk</string>
     <plurals name="files_deleted">
@@ -2276,7 +2273,6 @@
     <string name="hillshading_info">Offline terrengskygge</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slett sporhistorikk</string>
-    <string name="map_trailhistory_cleared">sporhistorikk slettet</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_trail_hide">Skjul sporhistorikk</string>
     <!-- history track export -->
@@ -2363,12 +2359,5 @@
     <string name="mcpolling_title">Meldingssenter</string>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Foretrukket bildestørrelse</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

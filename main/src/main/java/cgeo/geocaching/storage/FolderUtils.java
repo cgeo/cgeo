@@ -16,7 +16,6 @@ import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
@@ -24,6 +23,7 @@ import android.system.Os;
 import android.system.StructStatVfs;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
@@ -49,8 +49,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Collection of higher-level utility functions for Folders.
@@ -74,7 +72,6 @@ public class FolderUtils {
     }
 
     private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER }
-
 
     public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder) {
         return getAllFiles(folder, null);
@@ -170,7 +167,7 @@ public class FolderUtils {
          */
         public ImmutableTriple<String, String, String> getUserDisplayableFolderInfoStrings() {
 
-            //create the message
+            // create the message
             final String incompletePraefix = resultIsIncomplete ? ">=" : "";
             final String fileCount = incompletePraefix + LocalizationUtils.getPlural(R.plurals.file_count, this.fileCount);
             final String folderCount = incompletePraefix + LocalizationUtils.getPlural(R.plurals.folder_count, this.dirCount);
@@ -178,9 +175,7 @@ public class FolderUtils {
 
             return new ImmutableTriple<>(fileCount, folderCount, folderSize);
         }
-
     }
-
 
     /**
      * returns folder informations with regards to files/dirs currently in folder
@@ -190,7 +185,7 @@ public class FolderUtils {
     }
 
     /**
-     * returns folder informations with regards to files/dirs currently in folder, restricts scan to a maximum of subfolders e.g. to reduce info gathering time
+     * returns folder information with regards to files/dirs currently in folder, restricts scan to a maximum of subfolders e.g. to reduce info gathering time
      */
     public FolderInfo getFolderInfo(final Folder folder, final int maxSubfolderScan) {
         try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
@@ -407,7 +402,6 @@ public class FolderUtils {
         return fi.lastModified + "-" + fi.size;
     }
 
-
     private static String getParentPath(final String path) {
         if (path == null) {
             return null;
@@ -488,7 +482,7 @@ public class FolderUtils {
     public void copyAllAsynchronousWithGui(final Activity activity, final Folder source, final Folder target, final boolean move, final Consumer<FolderProcessResult> callback) {
         FolderProcessTask.process(
                 activity,
-                activity.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
+                LocalizationUtils.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
                 ci -> copyAll(source, target, move, null, ci),
                 folderProcessResult -> displayCopyAllDoneDialog(activity, folderProcessResult, source, target, move, callback)
         );
@@ -498,7 +492,7 @@ public class FolderUtils {
         final String message = getCopyAllDoneMessage(activity, folderProcessResult, source, target, move);
 
         Dialogs.newBuilder(activity)
-                .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
+                .setTitle(LocalizationUtils.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
                 .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, (dd, pp) -> {
@@ -516,25 +510,25 @@ public class FolderUtils {
                 .create().show();
     }
 
-    @NotNull
+    @NonNull
     private String getCopyAllDoneMessage(final Activity activity, final FolderProcessResult folderProcessResult, final Folder source, final Folder target, final boolean move) {
 
         final String filesCopied = folderProcessResult.filesModified < 0 ? "-" : "" + folderProcessResult.filesModified;
-        final String filesTotal = folderProcessResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, folderProcessResult.filesInSource);
+        final String filesTotal = folderProcessResult.filesInSource < 0 ? "-" : plurals(R.plurals.file_count, folderProcessResult.filesInSource);
         final String foldersCopied = folderProcessResult.dirsModified < 0 ? "-" : "" + folderProcessResult.dirsModified;
-        final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, folderProcessResult.dirsInSource);
+        final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(R.plurals.folder_count, folderProcessResult.dirsInSource);
 
         String message =
-                activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
+                LocalizationUtils.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
                         source.toUserDisplayableString(), target.toUserDisplayableString(),
                         filesCopied, filesTotal, foldersCopied, foldersTotal);
 
         if (folderProcessResult.result != ProcessResult.OK) {
-            message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
+            message += "\n\n" + LocalizationUtils.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
                     folderProcessResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(folderProcessResult.failedFile.uri));
         }
 
-        message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);
+        message += "\n\n" + LocalizationUtils.getString(R.string.folder_move_finished_dialog_tap);
         return message;
     }
 
@@ -595,7 +589,6 @@ public class FolderUtils {
             return createFolderProcessResult(
                     isCancelled(cancelFlag) ? ProcessResult.ABORTED : (copyResult.left == null ? ProcessResult.OK : ProcessResult.FAILURE), copyResult.left, copyResult.middle, copyResult.right, sourceCopyCount);
         }
-
     }
 
     /**
@@ -654,14 +647,14 @@ public class FolderUtils {
                 return TreeWalkResult.CONTINUE;
             }
         });
-        //delete marker file
+        // delete marker file
         pls.delete(targetMarkerFileUri);
 
         final boolean sourceTargetSameDir = markerFoundInSubdir[0] && !markerFoundInSubdir[1];
         return new ImmutablePair<>(sourceTargetSameDir ? Collections.emptyList() : listToCopy, new ImmutablePair<>(copyCounts[0], copyCounts[1]));
     }
 
-    @NotNull
+    @NonNull
     private ImmutableTriple<ContentStorage.FileInformation, Integer, Integer> copyAllSecondPassCopyMove(
             final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList, final boolean move, final Consumer<FolderProcessStatus> statusListener, final AtomicBoolean cancelFlag, final ImmutablePair<Integer, Integer> sourceCopyCount) {
 
@@ -719,7 +712,6 @@ public class FolderUtils {
         return new FolderProcessResult(status, failedFile, filesCopied, dirsCopied, sourceCopyCount == null ? -1 : sourceCopyCount.left, sourceCopyCount == null ? -1 : sourceCopyCount.right);
     }
 
-
     /**
      * Generates a string representation of given folder as JSON string
      *
@@ -762,7 +754,6 @@ public class FolderUtils {
         });
 
         return pretty ? currFolder.toPrettyString() : currFolder.toString();
-
     }
 
     /**
@@ -816,7 +807,6 @@ public class FolderUtils {
         }
     }
 
-
     /**
      * Returns a pair of longs where left one is free space in bytes and right one is number of files
      */
@@ -848,7 +838,6 @@ public class FolderUtils {
 
         return new ImmutablePair<>(stats.f_bavail * stats.f_bsize, stats.f_files);
     }
-
 
     private boolean treeWalk(final Folder root, final Func1<ImmutablePair<ContentStorage.FileInformation, Boolean>, TreeWalkResult> callback) {
         return treeWalk(root, false, callback);
@@ -910,12 +899,12 @@ public class FolderUtils {
         protected FolderProcessResult doInBackgroundInternal(final Void[] params) {
             return this.process.call(ci -> {
                 final String filesCopied = ci.filesProcessed < 0 ? "-" : "" + ci.filesProcessed;
-                final String filesTotal = ci.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, ci.filesInSource);
+                final String filesTotal = ci.filesInSource < 0 ? "-" : plurals(R.plurals.file_count, ci.filesInSource);
                 final String foldersCopied = ci.dirsProcessed < 0 ? "-" : "" + ci.dirsProcessed;
-                final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, ci.dirsInSource);
+                final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(R.plurals.folder_count, ci.dirsInSource);
 
-                final String statusString = activity.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
-                final String progressString = activity.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
+                final String statusString = LocalizationUtils.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
+                final String progressString = LocalizationUtils.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
                 publishProgress(statusString + "\n" + progressString);
             });
         }
@@ -925,12 +914,9 @@ public class FolderUtils {
                 callback.accept(result);
             }
         }
-
     }
 
-    private static String plurals(final Context context, final int id, final int quantity) {
-        return context.getResources().getQuantityString(id, quantity, quantity);
+    private static String plurals(final int id, final int quantity) {
+        return LocalizationUtils.getPlural(id, quantity);
     }
-
-
 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -18,6 +19,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.os.Build;
@@ -29,17 +31,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class InstallWizardActivity extends AppCompatActivity {
+public class InstallWizardActivity extends AbstractActivity {
 
     public static final String BUNDLE_MODE = "wizardmode";
     private static final String BUNDLE_STEP = "step";
     private static final String BUNDLE_CSAH = "csah";
     private static final String BUNDLE_BACKUPUTILS = "backuputils";
 
-    private static final boolean DO_LEGACY_WRITE_STORAGE = android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q; // < SDK29
+    private static final boolean DO_LEGACY_WRITE_STORAGE = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q; // < SDK29
 
     public enum WizardMode {
         WIZARDMODE_DEFAULT(0),
@@ -71,7 +73,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
     private final PermissionAction<Void> askLegacyStoragePermissionAction = PermissionAction.register(this, PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE, b -> gotoNext());
-    private final PermissionAction<Void> askNotificationsPermissionAction = PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext());
+    private final PermissionAction<Void> askNotificationsPermissionAction = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext()) : null);
 
     // dialog elements
     private TextView title = null;
@@ -180,9 +182,11 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLegacyWriteStorage, 0);
                 break;
             case WIZARD_PERMISSIONS_NOTIFICATIONS:
-                title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
-                PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
+                    PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
+                    setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                }
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
@@ -229,12 +233,12 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_END: {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
-                info.append(getString(R.string.wizard_status_title)).append(":\n")
-                        .append(getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                info.append(LocalizationUtils.getString(R.string.wizard_status_title)).append(":\n")
+                        .append(LocalizationUtils.getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? LocalizationUtils.getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)).append("\n")
                         .append(DO_LEGACY_WRITE_STORAGE ?
-                                getString(R.string.permission_legacy_write_external_storage_explanation_title) + ": " + (hasLegacyWriteStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)) + "\n" : "")
-                        .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_platform));
+                                LocalizationUtils.getString(R.string.permission_legacy_write_external_storage_explanation_title) + ": " + (hasLegacyWriteStoragePermission() ? LocalizationUtils.getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)) + "\n" : "")
+                        .append(LocalizationUtils.getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? LocalizationUtils.getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)).append("\n")
+                        .append(LocalizationUtils.getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 final StringBuilder platforms = new StringBuilder();
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
@@ -245,9 +249,9 @@ public class InstallWizardActivity extends AppCompatActivity {
                     platformConfigured = true;
                 }
                 if (platformConfigured) {
-                    info.append(": ").append(getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
+                    info.append(": ").append(LocalizationUtils.getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
                 } else {
-                    info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
+                    info.append(": ").append(LocalizationUtils.getString(R.string.status_not_ok)).append("\n");
                 }
                 button1Info.setVisibility(View.VISIBLE);
                 button1Info.setText(info);
@@ -351,9 +355,9 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private boolean stepCanBeSkipped() {
-        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasLocationPermission() && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))))
-                || (step == WizardStep.WIZARD_PERMISSIONS_LEGACY_WRITE_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || !DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))
-                || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
+        return (step == WizardStep.WIZARD_PERMISSIONS && ((hasLocationPermission() && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))))
+                || (step == WizardStep.WIZARD_PERMISSIONS_LEGACY_WRITE_STORAGE && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))
+                || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && hasLocationPermission())
                 || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
@@ -409,25 +413,26 @@ public class InstallWizardActivity extends AppCompatActivity {
         return !DO_LEGACY_WRITE_STORAGE || PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions();
     }
 
+    @RequiresApi(33)
     private void requestNotifications() {
         setSkip(this::gotoNext, 0);
         askNotificationsPermissionAction.launch(null, true);
     }
 
     private static boolean hasNotificationsPermission() {
-        return PermissionContext.NOTIFICATIONS.hasAllPermissions();
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || PermissionContext.NOTIFICATIONS.hasAllPermissions();
     }
 
     public static boolean needsNotificationsPermission() {
-        return android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationsPermission();
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationsPermission();
     }
 
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods
 
     private void setFolderInfo(final PersistableFolder folder, @StringRes final int info, final boolean addSelectOrCreateInfo) {
-        title.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
-        final String temp = getString(info) + (addSelectOrCreateInfo ? " " + getString(R.string.wizard_select_or_create) : "");
+        title.setText(LocalizationUtils.getString(R.string.wizard_permissions_folder_title, LocalizationUtils.getPlainString(folder.getNameKeyId())));
+        final String temp = LocalizationUtils.getString(info) + (addSelectOrCreateInfo ? " " + LocalizationUtils.getString(R.string.wizard_select_or_create) : "");
         text.setText(temp);
     }
 

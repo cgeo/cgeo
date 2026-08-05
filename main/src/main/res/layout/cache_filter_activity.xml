@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cachefilter_activity_viewroot"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/activity_content"
+    tools:context=".filters.gui.GeocacheFilterActivity">
+
+<ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:layout_marginTop="10dip"
+    android:clipToPadding="false"
     tools:context=".filters.gui.GeocacheFilterActivity" >
 
     <LinearLayout
@@ -27,65 +34,102 @@
             android:layout_centerVertical="true"
             android:text="@string/cache_filter_mode_advanced" />
 
-        <Button
-            android:id="@+id/filter_additem"
-            style="@style/button"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/filter_basic_advanced"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:layout_margin="6dp"
-            android:text="@string/cache_filter_add_button"
-            app:icon="@drawable/ic_menu_add" />
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/filter_additem"
+                style="@style/button_icon"
+                android:layout_centerVertical="true"
+                app:icon="@drawable/ic_menu_add" />
 
-   <View
-        style="@style/separator_horizontal"
-        android:layout_marginTop="1dp" />
+            <LinearLayout
+                android:id="@+id/filter_named_filter_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-     <RelativeLayout
-         android:id="@+id/filter_storage_options"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content">
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/filter_storage_manage"
-            style="@style/button_icon"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:tooltipText="@string/cache_filter_storage_load_delete_title"
-            app:icon="@drawable/ic_menu_manage_list" />
+                <Button
+                    android:id="@+id/filter_fill_with_named"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_manage_list" />
 
-        <Button
-            android:id="@+id/filter_storage_save"
-            style="@style/button_icon"
-            android:layout_toRightOf="@+id/filter_storage_manage"
-            android:layout_centerVertical="true"
-            android:tooltipText="@string/cache_filter_storage_save_title"
-            app:icon="@drawable/ic_menu_save" />
+                <Button
+                    android:id="@+id/filter_save_as_named"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_save" />
 
-         <TextView
-             android:id="@+id/filter_storage_name"
-             android:hint="@string/cache_name"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_centerVertical="true"
-             android:layout_marginLeft="5dp"
-             android:layout_toRightOf="@+id/filter_storage_save"
-             android:ellipsize="end"
-             android:maxLines="1"
-             android:textSize="@dimen/textSize_detailsPrimary" />
+                <Button
+                    android:id="@+id/filter_open_named_filter_activity"
+                    style="@style/button_icon"
+                    android:layout_centerVertical="true"
+                    app:icon="@drawable/ic_menu_myfilters" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
     <View
-        android:id="@+id/filter_storage_options_line"
         style="@style/separator_horizontal"
         android:layout_marginTop="1dp" />
+
+        <LinearLayout
+            android:id="@+id/filter_reference_named_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp" >
+
+            <ImageView
+                android:layout_width="@dimen/buttonSize_iconButton"
+                android:layout_height="@dimen/buttonSize_iconButton"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_menu_myfilters"
+                tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/filter_reference_named_filter_id"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/filter_reference_named_filter_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    style="@style/text_note"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Based on: abc" />
+
+            <Button
+                android:id="@+id/filter_reference_named_filter_delete"
+                style="@style/button_icon"
+                app:icon="@drawable/ic_menu_delete" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/filter_reference_named_filter_line"
+            style="@style/separator_horizontal"
+            android:layout_marginTop="1dp" />
 
     <LinearLayout
         android:id="@+id/filter_props_checkboxes"
@@ -137,3 +181,5 @@
     </LinearLayout>
 
 </ScrollView>
+
+</LinearLayout>

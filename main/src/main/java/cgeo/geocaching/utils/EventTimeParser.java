@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import java.text.ParseException;
@@ -94,7 +93,7 @@ public class EventTimeParser {
      */
     private static List<Pattern> getEventTimePatterns() {
         if (EVENT_TIME_PATTERNS.isEmpty()) {
-            final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+            final String hourLocalized = LocalizationUtils.getString(R.string.cache_time_full_hours);
 
             // 12:34
             EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));

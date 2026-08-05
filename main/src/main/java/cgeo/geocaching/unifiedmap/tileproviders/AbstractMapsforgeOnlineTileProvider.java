@@ -1,7 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
-import static cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource.MAPNIK_TILE_DOWNLOAD_UA;
 
 import android.net.Uri;
 
@@ -63,36 +62,10 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
 
     @Override
     public void addTileLayer(final MapsforgeFragment fragment, final MapView map) {
-        mfTileSource.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA); // @todo
+        mfTileSource.setUserAgent("cgeo");
         tileLayer = new TileDownloadLayer(fragment.getTileCache(), map.getModel().mapViewPosition, mfTileSource, AndroidGraphicFactory.INSTANCE);
-        map.getLayerManager().getLayers().add(tileLayer);
-        onResume(); // start tile downloader
+        map.getLayerManager().getLayers().add(0, tileLayer); // insert at the bottom of the stack so overlays stay on top
+        ((TileDownloadLayer) tileLayer).onResume();
     }
 
-    // ========================================================================
-    // Lifecycle methods
-
-    @Override
-    public void onPause() {
-        if (tileLayer != null) {
-            ((TileDownloadLayer) tileLayer).onPause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (tileLayer != null) {
-            ((TileDownloadLayer) tileLayer).onResume();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        if (tileLayer != null) {
-            tileLayer.onDestroy();
-        }
-        super.onDestroy();
-    }
 }

@@ -1,9 +1,10 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * LogEntry and OfflineLogEntry unit tests
@@ -60,7 +61,7 @@ public class LogEntryTest {
 
     @Test
     public void testGetImageTitles() {
-        final String defaultTitle = "• " + CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
+        final String defaultTitle = "\u2022 " + LocalizationUtils.getString(R.string.cache_log_image_default_title);
 
         LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
@@ -110,13 +111,15 @@ public class LogEntryTest {
 
     @Test
     public void testIsOwn() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
         final LogEntry logEntry1 = new LogEntry.Builder().setAuthor("userthatisnotthedefaultuser").setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry2 = new LogEntry.Builder().setAuthor(Settings.getUserName()).setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry3 = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
-        assertThat(logEntry1.isOwn()).isFalse();
-        assertThat(logEntry2.isOwn()).isTrue();
-        assertThat(logEntry3.isOwn()).isTrue();
+        assertThat(LogUtils.isOwnLog(logEntry1, cache)).isFalse();
+        assertThat(LogUtils.isOwnLog(logEntry2, cache)).isTrue();
+        assertThat(LogUtils.isOwnLog(logEntry3, cache)).isTrue();
     }
 
     @Test
@@ -220,6 +223,20 @@ public class LogEntryTest {
         assertThat(otherLogEntry.logImages.size()).isEqualTo(0);
         assertThat(otherLogEntry.inventoryActions.size()).isEqualTo(0);
 
+    }
+
+    @Test
+    public void testIsMatchingLog() {
+        final LogEntry logEntry = new LogEntry.Builder().setAuthor("testUser").setDate(178672529).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final OfflineLogEntry offlineLogEntry = new OfflineLogEntry.Builder().setAuthor("testUser").setDate(178672000).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final LogEntry logEntryEmpty = new LogEntry.Builder().setAuthor("testUser").setDate(178672000).setLogType(LogType.FOUND_IT).setLog("").build();
+        final LogEntry logEntryUser = new LogEntry.Builder().setAuthor("testUserDifferent").setDate(178672529).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final LogEntry logEntryDate = new LogEntry.Builder().setAuthor("testUser").setDate(718867252).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+
+        assertThat(logEntry.isMatchingLog(offlineLogEntry)).isTrue();
+        assertThat(logEntry.isMatchingLog(logEntryUser)).isFalse();
+        assertThat(logEntry.isMatchingLog(logEntryDate)).isFalse();
+        assertThat(logEntry.isMatchingLog(logEntryEmpty)).isTrue();
     }
 
     public static byte[] marshall(final Parcelable parceable) {

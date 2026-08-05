@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
 
@@ -98,7 +99,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
             filename = FileNameCreator.WHERIGO.createName();
         }
         filename = filename.replace("_", "-");
-        if (StringUtils.equalsAnyIgnoreCase(filename.substring(filename.length() - 4), ".gwc")) {
+        if (Strings.CI.equalsAny(filename.substring(filename.length() - 4), ".gwc")) {
             filename = filename.substring(0, filename.length() - 4);
         }
         Log.iForce(LOGPRAEFIX + "Wherigo final filename:" + filename);

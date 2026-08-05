@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 
@@ -49,8 +49,8 @@ public class OCAuthParams extends OAuthParameters {
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",
                 https,
-                CgeoApplication.getInstance().getString(consumerKeyResId),
-                CgeoApplication.getInstance().getString(consumerSecretResId),
+                LocalizationUtils.getPlainString(consumerKeyResId),
+                LocalizationUtils.getPlainString(consumerSecretResId),
                 callback);
         this.authTitleResId = authTitleResId;
         this.tokenPublicPrefKey = tokenPublicPrefKey;

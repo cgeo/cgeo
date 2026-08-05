@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
     private final Uri uri;

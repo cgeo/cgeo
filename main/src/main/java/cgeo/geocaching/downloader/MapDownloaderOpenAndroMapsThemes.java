@@ -1,12 +1,12 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -41,7 +41,7 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
     private MapDownloaderOpenAndroMapsThemes() {
         super(Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS, R.string.mapserver_openandromaps_themes_downloadurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
-        baseUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_base_downloadurl);
+        baseUrl = LocalizationUtils.getPlainString(R.string.mapserver_openandromaps_themes_base_downloadurl);
     }
 
     @Override

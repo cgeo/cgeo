@@ -4,9 +4,13 @@ import cgeo.geocaching.ImageEditActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.databinding.ImagelistFragmentBinding;
 import cgeo.geocaching.databinding.ImagelistItemBinding;
 import cgeo.geocaching.log.LogUtils;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -17,6 +21,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -117,7 +122,7 @@ public class ImageListFragment extends Fragment {
                 }
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
-                ActivityMixin.showToast(getActivity(), getString(R.string.err_select_logimage_failed));
+                ActivityMixin.showToast(getActivity(), LocalizationUtils.getString(R.string.err_select_logimage_failed));
             }
             return true;
 
@@ -274,7 +279,7 @@ public class ImageListFragment extends Fragment {
                 scaledWidth = scaledImageSizes.left;
                 scaledHeight = scaledImageSizes.middle;
             }
-            final String isScaled = getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
+            final String isScaled = LocalizationUtils.getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
 
             final ContentStorage.FileInformation imageFileInfo = localImageUri == null ? null : ContentStorage.get().getFileInfo(localImageUri);
             final long fileSize = imageFileInfo == null ? 0 : imageFileInfo.size;
@@ -285,7 +290,7 @@ public class ImageListFragment extends Fragment {
             final long roughCompressedSize = width * height == 0 ? 0 :
                 ((fileSize * ((long) scaledHeight * scaledWidth) / 10 / ((long) width * height)) / 1024) * 1024;
 
-            return getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
+            return LocalizationUtils.getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
 
         @NonNull
@@ -317,6 +322,16 @@ public class ImageListFragment extends Fragment {
         selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
+
+        // Get max lengths from logging manager based on connector
+        if (geocode != null) {
+            final IConnector connector = ConnectorFactory.getConnector(geocode);
+            final Geocache cache = new Geocache();
+            cache.setGeocode(geocode);
+            final ILoggingManager loggingManager = connector.getLoggingManager(cache);
+            selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_CAPTION_LENGTH, loggingManager.getMaxImageCaptionLength());
+            selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_DESCRIPTION_LENGTH, loggingManager.getMaxImageDescriptionLength());
+        }
 
         requireActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }

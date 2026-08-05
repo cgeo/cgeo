@@ -1,8 +1,12 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ColorUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
+
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -154,12 +158,12 @@ public enum CacheType {
 
     @NonNull
     public final String getL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+        return LocalizationUtils.getString(stringId);
     }
 
     @NonNull
     public final String getShortL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(shortStringId);
+        return LocalizationUtils.getString(shortStringId);
     }
 
     public boolean isEvent() {
@@ -193,5 +197,26 @@ public enum CacheType {
 
     public boolean isVirtual() {
         return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
+    }
+
+    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isEnabled, final boolean isLightSkin) {
+        final int actionbarColor;
+        if (cacheType != null) {
+            // convert to HSL
+            final int colorInt = context.getResources().getColor(isEnabled ? cacheType.typeColor : R.color.cacheType_disabled);
+
+            final float[] hsl = ColorUtils.getHslValues(colorInt);
+
+            // darker color by 15%
+            final float offSet1 = Settings.getSaturationOffset(isLightSkin);
+            final float offSet2 = Settings.getLightnessOffset(isLightSkin);
+            hsl[1] = Math.max(0f, Math.min(1f, hsl[1] + offSet1));
+            hsl[2] = Math.max(0f, Math.min(1f, hsl[2] + offSet2));
+
+            actionbarColor = ColorUtils.getColorFromHslValues(hsl);
+        } else {
+            actionbarColor = context.getResources().getColor(R.color.colorBackgroundActionBar);
+        }
+        return actionbarColor;
     }
 }

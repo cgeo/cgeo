@@ -5,6 +5,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
 
+import java.util.List;
+
 public class NotGeocacheFilter extends AndGeocacheFilter {
 
     @Override
@@ -29,4 +31,36 @@ public class NotGeocacheFilter extends AndGeocacheFilter {
     public String toUserDisplayableString(final int level) {
         return LocalizationUtils.getString(R.string.cache_filter_userdisplay_not) + "[" + super.toUserDisplayableString(level) + "]";
     }
+
+    @Override
+    protected IGeocacheFilter simplifyFor(final List<IGeocacheFilter> simplifiedChildren) {
+        //special case: double-NOT
+        if (simplifiedChildren.size() == 1 && simplifiedChildren.get(0) instanceof NotGeocacheFilter) {
+            if (simplifiedChildren.get(0).getChildren().size() == 1) {
+                return simplifiedChildren.get(0).getChildren().get(0);
+            } else {
+                final AndGeocacheFilter innerAnd = new AndGeocacheFilter();
+                innerAnd.getChildren().addAll(simplifiedChildren.get(0).getChildren());
+                return innerAnd;
+            }
+        }
+
+        //else: optimize inner-and
+        final NotGeocacheFilter result = new NotGeocacheFilter();
+        for (IGeocacheFilter child : simplifiedChildren) {
+            if (child == ConstantGeocacheFilter.ALWAYS_FALSE) {
+                return ConstantGeocacheFilter.ALWAYS_TRUE;
+            }
+            if (child instanceof AndGeocacheFilter && !(child instanceof NotGeocacheFilter)) {
+                result.getChildren().addAll(child.getChildren());
+            } else if (child != ConstantGeocacheFilter.ALWAYS_TRUE) {
+                result.getChildren().add(child);
+            }
+        }
+        if (result.getChildren().isEmpty()) {
+            return ConstantGeocacheFilter.ALWAYS_FALSE;
+        }
+        return result;
+    }
+
 }

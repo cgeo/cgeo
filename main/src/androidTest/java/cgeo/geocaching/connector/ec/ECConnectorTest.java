@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ECConnectorTest {
 

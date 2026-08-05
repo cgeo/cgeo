@@ -26,6 +26,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -59,6 +60,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xml.sax.SAXException;
 
 abstract class GPXParser extends FileParser {
@@ -131,7 +133,7 @@ abstract class GPXParser extends FileParser {
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
     private boolean wptEmptyCoordinates = false;
-    private int cacheAssignedEmoji = 0;
+    @Nullable private String cacheAssignedEmoji = null;
     private List<LogEntry> logs = new ArrayList<>();
 
     /**
@@ -281,7 +283,7 @@ abstract class GPXParser extends FileParser {
                     DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
-                        && (StringUtils.containsIgnoreCase(type, "waypoint") || terraChildWaypoint)) {
+                        && (Strings.CI.contains(type, "waypoint") || terraChildWaypoint)) {
                     addWaypointToCache();
                 }
 
@@ -293,7 +295,7 @@ abstract class GPXParser extends FileParser {
 
                 if (cache.getName().length() > 2 || StringUtils.isNotBlank(parentCacheCode)) {
                     if (StringUtils.isBlank(parentCacheCode)) {
-                        if (StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
+                        if (Strings.CI.contains(scriptUrl, "extremcaching")) {
                             parentCacheCode = cache.getName().substring(2);
                         } else if (terraChildWaypoint) {
                             parentCacheCode = StringUtils.left(cache.getGeocode(), cache.getGeocode().length() - 1);
@@ -317,10 +319,10 @@ abstract class GPXParser extends FileParser {
                         String cacheName = cache.getName();
                         if (wptUserDefined) {
                             // try to deduct original prefix from wpt name
-                            if (StringUtils.endsWithIgnoreCase(cacheName, parentCacheCode.substring(2))) {
+                            if (Strings.CI.endsWith(cacheName, parentCacheCode.substring(2))) {
                                 cacheName = cacheName.substring(0, cacheName.length() - parentCacheCode.length() + 2);
                             }
-                            if (StringUtils.startsWithIgnoreCase(cacheName, Waypoint.PREFIX_OWN + "-")) {
+                            if (Strings.CI.startsWith(cacheName, Waypoint.PREFIX_OWN + "-")) {
                                 cacheName = cacheName.substring(4);
                             }
                         }
@@ -374,7 +376,7 @@ abstract class GPXParser extends FileParser {
             String content = body.trim();
 
             // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
-            if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
+            if (Strings.CI.startsWith(content, "GCEC") && Strings.CI.contains(scriptUrl, "extremcaching")) {
                 content = content.substring(2);
             }
 
@@ -651,7 +653,7 @@ abstract class GPXParser extends FileParser {
             if (log.logType != LogType.UNKNOWN) {
                 if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
-                    if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                    if (connector instanceof ILogin && Strings.CS.equals(log.author, ((ILogin) connector).getUserName())) {
                         cache.setFound(true);
                         cache.setVisitedDate(log.date);
                     }
@@ -811,7 +813,7 @@ abstract class GPXParser extends FileParser {
             if (log.logType != LogType.UNKNOWN) {
                 if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
-                    if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                    if (connector instanceof ILogin && Strings.CS.equals(log.author, ((ILogin) connector).getUserName())) {
                         cache.setFound(true);
                         cache.setVisitedDate(log.date);
                     }
@@ -843,7 +845,7 @@ abstract class GPXParser extends FileParser {
     }
 
     private static String trimHtml(final String html) {
-        return StringUtils.trim(StringUtils.removeEnd(StringUtils.removeStart(html, "<br>"), "<br>"));
+        return StringUtils.trim(Strings.CS.removeEnd(Strings.CS.removeStart(html, "<br>"), "<br>"));
     }
 
     protected void addOriginalCoordinates() {
@@ -868,7 +870,7 @@ abstract class GPXParser extends FileParser {
 
             final Element cgeo = cacheParent.getChild(cgeoNamespace, "cacheExtension");
             final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmoji");
-            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = Integer.parseInt(assignedEmoji.trim()));
+            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmoji));
         }
     }
 
@@ -960,7 +962,7 @@ abstract class GPXParser extends FileParser {
         wptVisited = false;
         wptUserDefined = false;
         wptEmptyCoordinates = false;
-        cacheAssignedEmoji = 0;
+        cacheAssignedEmoji = null;
         logs = new ArrayList<>();
 
         cache = createCache();
@@ -1020,10 +1022,10 @@ abstract class GPXParser extends FileParser {
             return false;
         }
         final boolean valid = (type == null && subtype == null && sym == null)
-                || StringUtils.contains(type, "geocache")
-                || StringUtils.contains(sym, "geocache")
-                || StringUtils.containsIgnoreCase(sym, "waymark")
-                || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
+                || Strings.CS.contains(type, "geocache")
+                || Strings.CS.contains(sym, "geocache")
+                || Strings.CI.contains(sym, "waymark")
+                || (Strings.CI.contains(sym, "terracache") && !terraChildWaypoint);
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             terraChildWaypoint = true;
         }
@@ -1070,7 +1072,7 @@ abstract class GPXParser extends FileParser {
     }
 
     protected void setUrlName(final String urlName) {
-        if (StringUtils.isNotBlank(urlName) && StringUtils.startsWith(cache.getGeocode(), "WM") && cache.getName().equals(cache.getGeocode())) {
+        if (StringUtils.isNotBlank(urlName) && Strings.CS.startsWith(cache.getGeocode(), "WM") && cache.getName().equals(cache.getGeocode())) {
             cache.setName(StringUtils.trim(urlName));
         }
     }

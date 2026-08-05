@@ -13,4 +13,6 @@ public interface TagValueValidator {
     boolean isLookupIdxUsed(int idx);
 
     void setDecodeForbidden(boolean decodeForbidden);
+
+    boolean checkStartWay(byte[] ab);
 }

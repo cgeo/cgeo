@@ -88,7 +88,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         EDIT_EXISTING //edit an existing online log entry (as of now not storable offline)
     }
 
-    private enum SaveMode { NORMAL, FORCE, SKIP }
+    private enum SaveMode { NORMAL, FORCE, SKIP, SENDING }
 
     protected LogcacheActivityBinding binding;
 
@@ -115,6 +115,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private LogEntry originalLogEntry = null;
 
     private boolean readyToPost = false;
+    private Runnable pendingPost = null; // set by sendLogInternal(), consumed by onStop()
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -139,6 +140,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     public static void startForCreate(@NonNull final Context fromActivity, final String geocode) {
         startActivityInternal(fromActivity, geocode, null);
+    }
+
+    public static void startForCreateForResult(@NonNull final Activity fromActivity, final String geocode, final int requestCode) {
+        final Intent intent = new Intent(fromActivity, LogCacheActivity.class);
+        intent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        fromActivity.startActivityForResult(intent, requestCode);
     }
 
     public static void startForEdit(@NonNull final Context fromActivity, final String geocode, final LogEntry logEntry) {
@@ -176,7 +183,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
-        binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
+        binding = LogcacheActivityBinding.bind(findViewById(R.id.activity_content));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type)
@@ -250,7 +257,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             }
         }
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
-
         refreshGui();
 
         requestKeyboardForLogging();
@@ -340,7 +346,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             final boolean editExistingFavorite = this.logEditMode == LogEditMode.EDIT_EXISTING && isFavorite;
 
             final int remainingPoints = availableFavoritePoints + (editExistingFavorite ? 1 : 0);
-            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
+            binding.favoriteCheck.setText(LocalizationUtils.getPlural(loggingManager.getFavoriteCheckboxText(), remainingPoints));
             // If fav check is set then ALWAYS make the checkbox visible and set the checked state accordingly
             // see https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609 and https://github.com/cgeo/cgeo/issues/17593
             if (availableFavoritePoints > 0 || editExistingFavorite || favIsChecked) {
@@ -413,6 +419,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     public void onStop() {
         saveLog();
+        if (pendingPost != null) {
+            final Runnable post = pendingPost;
+            pendingPost = null;
+            post.run();
+        }
         super.onStop();
     }
 
@@ -458,7 +469,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW) {
+        if (logEditMode != LogEditMode.CREATE_NEW || saveMode == SaveMode.SENDING) {
             return;
         }
 
@@ -553,21 +564,61 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
             return;
         }
+        // Capture view data now (before the activity tears down), but delay starting the
+        // service until onStop() so that saveLog()'s async storeLogOffline is always
+        // scheduled before the background post begins.
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
-            logActivityHelper.editLog(cache, this.originalLogEntry,
-                getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
+            final LogEntry newEntry = getEntryFromView()
+                .buildUponOfflineLogEntry()
+                .setServiceLogId(this.originalLogEntry.serviceLogId)
+                .build();
+            pendingPost = () -> logActivityHelper.editLog(cache, this.originalLogEntry, newEntry);
         } else {
-            logActivityHelper.createLog(cache, getEntryFromView(), inventoryAdapter.getInventory());
+            final OfflineLogEntry entry = getEntryFromView();
+            final Map<String, Trackable> inv = inventoryAdapter.getInventory();
+            pendingPost = () -> logActivityHelper.createLog(cache, entry, inv);
         }
+        showShortToast(LocalizationUtils.getString(R.string.info_log_posting_background));
+        finish(SaveMode.SENDING);
     }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
+        if (!statusResult.isOk()) {
+            // Activity already exiting (immediate-send path) or error (notification handles it).
+            return;
+        }
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.isOk()) {
 
             final String currentLogText = currentLogText();
             if (!StringUtils.isBlank(currentLogText)) {
                 Settings.setLastCacheLog(currentLogText);
+            }
+
+            final LogContext logContext = getLogContext();
+            final LogType logType = logContext.getLogEntry().logType;
+            final String cacheName = logContext.getCache().getName();
+            final String cacheUrl = logContext.getCache().getUrl();
+            final String prefix;
+            switch (logType) {
+                case FOUND_IT:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_found, cacheName, cacheUrl);
+                    break;
+                case DIDNT_FIND_IT:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_dnf, cacheName, cacheUrl);
+                    break;
+                case NOTE:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_note, cacheName, cacheUrl);
+                    break;
+                case NEEDS_MAINTENANCE:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_maintenance, cacheName, cacheUrl);
+                    break;
+                case NEEDS_ARCHIVE:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_archive, cacheName, cacheUrl);
+                    break;
+                default:
+                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_default, cacheName, cacheUrl);
+                    break;
             }
 
             //reset Gui and all values
@@ -578,17 +629,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             imageListFragment.clearImages();
             imageListFragment.adjustImagePersistentState();
 
-            showToast(res.getString(R.string.info_log_posted));
+            final Intent shareIntent = new Intent();
+            shareIntent.putExtra("EXTRA_SHARE_TEXT", prefix + currentLogText);
+            setResult(Activity.RESULT_OK, shareIntent);
+
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (!LogCacheActivity.this.isFinishing()) {
-            SimpleDialog.of(LogCacheActivity.this)
-                    .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.id(R.string.info_log_post_failed_simple_reason))
-                    .setButtons(R.string.info_log_post_retry, R.string.cancel, logEditMode == LogEditMode.CREATE_NEW ? R.string.info_log_post_save : 0)
-                    .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
-                    .confirm(this::sendLogInternal);
         }
+        // On error the LogPostingService shows a tappable system notification.
     }
 
     @Override
@@ -903,7 +951,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         @Override
         protected String getResultMessage() {
-            return getContext().getString(R.string.info_log_cleared);
+            return LocalizationUtils.getString(R.string.info_log_cleared);
         }
 
         @Override

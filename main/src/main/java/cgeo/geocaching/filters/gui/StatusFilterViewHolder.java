@@ -86,6 +86,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND, false);
         statusDnf = createGroup(ll, StatusGeocacheFilter.StatusType.DNF, true);
         statusHasOfflineFoundLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_FOUND_LOG, false);
+        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, false);
         statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
         statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED, true);
         statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE, true);
@@ -93,7 +94,6 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM, true);
         statusHasTrackable = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_TRACKABLE, true);
         statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE, true);
-        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, true);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY, true);
         statusCorrectedCoordinates = createGroup(ll, StatusGeocacheFilter.StatusType.CORRECTED_COORDINATES, true);
         statusHasUserDefinedWaypoints = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_USER_DEFINED_WAYPOINTS, true);

@@ -181,8 +181,7 @@
     <string name="log_image_titleprefix">Εικόνα</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Η μετάφραση ενδέχεται να αποτύχει σε μεγάλα κείμενα.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
@@ -263,9 +262,6 @@
     <string name="err_read_bookmark_list">Σφάλμα ανάγνωσης λίστας σελιδοδεικτών.</string>
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
-    <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
-    <string name="info_log_post_retry">Επανάληψη</string>
-    <string name="info_log_post_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
     <string name="info_waypoint_coordinates_cleared">Οι συντεταγμένες εκκαθαρίστηκαν.</string>
     <string name="info_log_type_changed">Ο τύπος του αρχείου καταγραφής έχει αλλάξει!</string>
@@ -281,9 +277,6 @@
     <string name="more_information">Περισσότερες πληροφορίες</string>
     <string name="undo">Αναίρεση</string>
     <string name="dont_show_again">Να μην εμφανιστεί ξανά</string>
-    <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
-    <string name="switch_to_mf">Η υπηρεσία Google Play είναι παρωχημένη. Αντ\'αυτής θέλετε να χρησιμοποιήσετε τον πάροχο χαρτών Mapsforge;</string>
-    <string name="switched_to_mf">Ο προεπιλεγμένος χάρτης άλλαξε στον πάροχο χαρτών Mapsforge. Επανεκκινήστε τον χάρτη σας.</string>
     <!-- location service -->
     <string name="loc_last">Τελευταία γνωστή</string>
     <string name="loc_net">Δίκτυο</string>
@@ -422,7 +415,6 @@
     <string name="cache_filter_mode_advanced">Σύνθετες επιλογές</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Εναλλαγή σε Βασικό</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Η αλλαγή σε \'Βασική\' λειτουργία θα έχει ως αποτέλεσμα την απώλεια των ρυθμίσεων του φίλτρου. Θέλετε να συνεχίσετε;</string>
-    <string name="cache_filter_add_button">Προσθήκη κριτηρίων φίλτρου</string>
     <string name="cache_filter_option_and_or">Χρήση OR αντί του AND</string>
     <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
     <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
@@ -471,15 +463,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
-    <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
-    <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
-    <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
-    <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
-    <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
-    <string name="cache_filter_storage_save_confirm_title">Αποθήκευση φίλτρου κατά την έξοδο</string>
-    <string name="cache_filter_storage_save_confirm_message">Ένα φίλτρο με όνομα \'%s\' και διαφορετικές ρυθμίσεις υπάρχει ήδη. Αντικατάστασή του;</string>
     <string name="cache_filter_stringfilter_matchcase">Ταίριασμα Πεζών/ Κεφαλαίων</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Αναζήτηση κειμένου</string>
     <string name="cache_filter_stringfilter_info">Με την επιλογή \'Μοτίβο\', χρησιμοποιήστε τα μπαλαντέρ * και ?. Το * αντιπροσωπεύει κανέναν, έναν ή πολλούς χαρακτήρες, το ? αντιπροσωπεύει έναν μόνο χαρακτήρα. Για παράδειγμα, το μοτίβο \'H?mburg*\' θα ταιριάξει π.χ. \'Homburg\' ή \'Hamburg at Night\' αλλά όχι \'A day in Hamburg\' ή \'Hahmburg\'</string>
@@ -551,6 +535,7 @@
         <item>3μ</item>
         <item>&lt;3μ</item>
     </string-array>
+    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -684,9 +669,7 @@
     <string name="init_summary_oc_uk">Φόρτωση κρυπτών από opencaching.uk</string>
     <string name="init_oc_uk_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.uk, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
-    <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
     <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
-    <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
     <string name="init_login_popup_ok">Επιτυχής σύνδεση</string>
@@ -728,8 +711,6 @@
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
     <string name="init_signature_template_geocode">Γεωκωδικός</string>
-    <string name="init_ratingwanted">Βαθμολογία GCvote</string>
-    <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
     <string name="init_summary_friends_and_own_logs_wanted">Εμφάνιση επιπλέον σελίδας ημερολογίου για αρχεία καταγραφής φίλων και δικών μου</string>
     <string name="init_openlastdetailspage">Τελευταία καταχώρηση</string>
@@ -863,7 +844,6 @@
     <string name="init_dataDir">Επιλέξτε φάκελο</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
     <string name="init_maptrail">Προβολή ιστορικού ιχνών</string>
-    <string name="init_maptrail_length">Μέγιστο μήκος ιστορικών διαδρομών</string>
     <string name="init_maptrail_length_summary">Ορίστε το μέγιστο μήκος των ιστορικών διαδρομών (θα επιβάλλεται σε κάθε εκκίνηση του c:geo). Η προεπιλεγμένη τιμή είναι 700 - ρυθμίστε την ανάλογα με την διαθέσιμη μνήμη.</string>
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
@@ -960,7 +940,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_offline">Εκτός σύνδεσης</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
@@ -1138,9 +1117,7 @@
     <string name="cache_variables">Μεταβλητές</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
     <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
-    <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
@@ -1153,7 +1130,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Φόρτωση εικόνων spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Φόρτωση καταγραφών</string>
     <string name="cache_dialog_loading_details_status_waypoints">Επεξεργασία σημείων αναφοράς</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Φόρτωση του GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Προσωρινή αποθήκευση δεδομένων</string>
     <string name="cache_dialog_loading_details_status_render">Εμφάνιση σελίδας</string>
     <string name="cache_dialog_offline_save_title">Εκτός σύνδεσης</string>
@@ -1201,7 +1177,6 @@
     <string name="cache_menu_copy_list">Αντιγραφή σε διαφορετική λίστα</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Σε σύνδεση)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (χωρίς σύνδεση)</string>
-    <string name="cache_menu_vote">Ψηφίστε</string>
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_log_in_browser">Συνδεθείτε στο πρόγραμμα περιήγησης</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
@@ -1263,8 +1238,6 @@
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
-    <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
-    <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να εγκαταστησετε το Chirp Wolf.</string>
     <string name="cache_alc_start">Ανοίξτε το Adventure Lab, για να αρχίσετε να παίζετε αυτή την περιπέτεια</string>
@@ -1290,7 +1263,7 @@
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">Μοίρες</string>
     <string name="cc_hint_minutes">Λεπτά</string>
     <string name="cc_hint_seconds">Δευτερόλεπτα</string>
@@ -1972,7 +1945,6 @@
     <string name="map_manual_targets_cleared">Έγινε εκκαθάριση των χειροκίνητων στόχων</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
-    <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
     <string name="sorted_route_saved">Έγινε αποθήκευση της μεμονωμένης διαδρομής</string>
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
@@ -2020,7 +1992,6 @@
     <string name="add_setting_missing_type">Πρέπει να επιλέξετε έναν τύπο προτίμησης</string>
     <string name="add_setting_already_exists">Υπάρχει ήδη προτίμηση με το ίδιο όνομα</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo διαχειριστής τοπικού αρχείου</string>
     <string name="localfile_title">Άνοιγμα τοπικού αρχείου</string>
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2085,7 +2056,6 @@
     <string name="maptheme_scale_symbol_summary">Επιπλέον κλιμακώνει ετικέτες κειμένου στο χάρτη; 100% = χωρίς κλιμάκωση</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
-    <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
     <string name="map_trail_show">Προβολή ιστορικού ιχνών</string>
     <string name="map_trail_hide">Απόκρυψη ιστορικού διαδρομών</string>
     <!-- history track export -->
@@ -2162,12 +2132,5 @@
     <string name="smiley_question">Ερώτηση</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Αρχικό</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
-    <!-- emoji categories -->
 </resources>

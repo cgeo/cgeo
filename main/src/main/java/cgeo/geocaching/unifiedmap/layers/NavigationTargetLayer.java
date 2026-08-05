@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.settings.Settings;
@@ -13,17 +14,22 @@ import cgeo.geocaching.unifiedmap.LocUpdater;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Arrays;
 
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 public class NavigationTargetLayer {
 
-    private static final String KEY_TARGET_PATH = "TARGETPATH";
+    public static final String KEY_TARGET_PATH = "TARGETPATH";
+    private static final Scheduler ROUTE_UPDATE_SCHEDULER = AndroidRxUtils.singleThreadPool(); // serialize requests
 
     private final GeoStyle lineStyle = GeoStyle.builder()
             .setStrokeColor(MapLineUtils.getDirectionColor())
@@ -35,13 +41,10 @@ public class NavigationTargetLayer {
     final GeoItemLayer<String> layer;
 
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
+    private Disposable pendingUpdate = null;
 
     public NavigationTargetLayer(final UnifiedMapActivity activity, final GeoItemLayer<String> layer) {
-        mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo), () -> {
-            if (activity.getMapFragment() != null) {
-                activity.getMapFragment().adaptLayoutForActionBar(null);
-            }
-        });
+        mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo));
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
         this.layer = layer;
 
@@ -58,15 +61,15 @@ public class NavigationTargetLayer {
             } else {
                 mapDistanceDrawer.setTargetGeocode(null);
                 mapDistanceDrawer.setTarget(null);
-                mapDistanceDrawer.drawDistance(showBothDistances, 0, 0);
+                mapDistanceDrawer.drawDistance(showBothDistances, 0, 0, 0, 0.0f);
             }
 
-            repaintHelper(target);
+            triggerRepaint();
         });
 
         viewModel.location.observe(activity, locationFloatPair -> {
-            if (locationFloatPair.needsRepaintForDistanceOrAccuracy && viewModel.target.getValue() != null) {
-                repaintHelper(viewModel.target.getValue());
+            if (locationFloatPair.needsRepaintForDistanceOrAccuracy) {
+                triggerRepaint();
             }
         });
 
@@ -74,39 +77,41 @@ public class NavigationTargetLayer {
     }
 
     public void triggerRepaint() {
-        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
-        if (target != null) {
-            repaintHelper(target);
+        // drop scheduled but not yet started updates, their result would be superseded by this newer position
+        if (pendingUpdate != null) {
+            pendingUpdate.dispose();
+            pendingUpdate = null;
         }
-    }
 
-    private void repaintHelper(final UnifiedMapViewModel.Target target) {
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
 
-        if (currentLocation != null && target.geopoint != null) {
-            final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
-            final Geopoint[] routingPoints = Routing.getTrack(currentGp, target.geopoint);
-
-            float routedDistance = 0.0f;
-            if (routingPoints.length > 2 || Settings.isMapDirection()) {
-                for (int i = 1; i < routingPoints.length; i++) {
-                    routedDistance += routingPoints[i - 1].distanceTo(routingPoints[i]);
-                }
-            }
-
-            if (Settings.getRoutingMode() != RoutingMode.OFF) {
-                layer.put(KEY_TARGET_PATH, GeoPrimitive.createPolyline(Arrays.asList(routingPoints), lineStyle).buildUpon()
-                        .setZLevel(LayerHelper.ZINDEX_DIRECTION_LINE).build());
-            } else {
-                layer.remove(KEY_TARGET_PATH);
-            }
-
-            mapDistanceDrawer.drawDistance(showBothDistances, currentGp.distanceTo(target.geopoint), routedDistance);
-
+        if (currentLocation == null || target == null || target.geopoint == null) {
+            layer.remove(KEY_TARGET_PATH);
+            return;
         }
 
-        if (target.geopoint == null) {
+        final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
+        final Routing.TurnInstruction turnInstruction = new Routing.TurnInstruction();
+        pendingUpdate = AndroidRxUtils.andThenOnUi(ROUTE_UPDATE_SCHEDULER, () -> viewModel.navigationTargetRoute.getValue().update(currentGp, target.geopoint, turnInstruction), () -> repaint(turnInstruction));
+    }
+
+    private void repaint(final Routing.TurnInstruction turnInstruction) {
+        viewModel.navigationTargetRoute.notifyDataChanged();
+
+        if (turnInstruction.resultPosition < 1) {
+            Log.e("no turn instruction found:\n" + Arrays.toString(Thread.currentThread().getStackTrace()));
+        }
+
+        if (Settings.getRoutingMode() != RoutingMode.OFF) {
+            final GeoGroup.Builder geoGroup = GeoGroup.builder();
+            GeoGroup.forAllPrimitives(viewModel.navigationTargetRoute.getValue().getItem(), segment ->
+                    geoGroup.addItems(GeoPrimitive.createPolyline(segment.getPoints(), lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_DIRECTION_LINE).build()));
+            layer.put(KEY_TARGET_PATH, geoGroup.build());
+        } else {
             layer.remove(KEY_TARGET_PATH);
         }
+
+        mapDistanceDrawer.drawDistance(showBothDistances, viewModel.navigationTargetRoute.getValue().getStraightDistance(), viewModel.navigationTargetRoute.getValue().getDistance(), turnInstruction.getSymbolFromInstruction(), turnInstruction.distanceFromStart);
     }
 }

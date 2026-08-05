@@ -1,15 +1,14 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +31,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private LinearLayout avatarFrame;
 
     private enum CredentialActivityMapping {
-        GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
-        GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVote.getInstance());
+        GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance());
 
         public final int prefKeyId;
         private final Class<?> authActivity;
@@ -57,7 +55,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private CredentialActivityMapping getAuthorization() {
         final String prefKey = getKey();
         for (final CredentialActivityMapping auth : CredentialActivityMapping.values()) {
-            if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
+            if (auth.prefKeyId != NO_KEY && prefKey.equals(LocalizationUtils.getPlainString(auth.prefKeyId))) {
                 return auth;
             }
         }

@@ -11,7 +11,6 @@ import cgeo.geocaching.utils.functions.Action3;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -175,10 +174,7 @@ public class ImageActivityHelper {
         //ACTION_GET_CONTENT provides nicer support for images and allows remote image access
         //ACTION_OPEN_DOCUMENT seems to allow only local files, but supports a startUri (which ACTION_GET_CONTENT does not)
         final Intent intent = new Intent(hasStartUrl ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT);
-        // Attribute is supported starting SDK26 / O
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, hasStartUrl ? startUri : PersistableFolder.BASE.getUri());
-        }
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, hasStartUrl ? startUri : PersistableFolder.BASE.getUri());
 
         if (onlyImages) {
             setImageMimeTypes(intent);

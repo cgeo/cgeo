@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -195,6 +196,13 @@ public interface IConnector {
     boolean uploadModifiedCoordinates(@NonNull Geocache cache, @NonNull Geopoint wpt);
 
     /**
+     * Does connector support updating cache data from online source?
+     */
+    default boolean hasOnlineSource() {
+        return this instanceof ISearchByGeocode;
+    }
+
+    /**
      * Return {@code true} if this connector is active for online interaction (download details, do searches, ...). If
      * this is {@code false}, the connector will still be used for already stored offline caches.
      */
@@ -299,6 +307,12 @@ public interface IConnector {
      */
     @Nullable
     String getCreateAccountUrl();
+
+    /**
+     * @return the URL to an account for a user or {@code null}
+     */
+    @Nullable
+    String getMyAccountUrl();
 
     /**
      * abbreviation of the connector name for shorter display, e.g. for main page login status

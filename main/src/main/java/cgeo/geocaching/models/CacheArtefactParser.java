@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Parses texts for cache artefacts. Currently supports:
@@ -43,6 +42,7 @@ public class CacheArtefactParser {
 
     //Constants for waypoint parsing
     public static final String PARSING_CALCULATED_COORD = "{" + CalculatedCoordinate.CONFIG_KEY + "|";
+    private static final String PARSING_PROJECTION_COORD = "{" + Waypoint.WP_PROJECTION_CONFIG_KEY + "|";
 
     public static final String PARSING_VISITED_FLAG = "{v}";
     private static final String PARSING_NAME_PRAEFIX = "@";
@@ -134,13 +134,17 @@ public class CacheArtefactParser {
 
         //search calculated waypoints
         parseWaypointsWithSpecificCoords(text, PARSING_CALCULATED_COORD);
-
     }
 
     private void parseWaypointsWithCoords(final String text) {
         final String cleanedText = removeCalculatedCoords(text);
         final Collection<GeopointWrapper> matches = GeopointParser.parseAll(cleanedText);
         for (final GeopointWrapper match : matches) {
+            // GeopointWrapper positions are relative to the internally-used substring/modified text;
+            // skip coordinates that fall inside a {P|...} projection block in that text
+            if (isInsideBlock(match, PARSING_PROJECTION_COORD)) {
+                continue;
+            }
             final Waypoint wp = parseSingleWaypoint(match, waypoints.size() + 1);
             if (wp != null) {
                 waypoints.add(wp);
@@ -150,6 +154,29 @@ public class CacheArtefactParser {
 
     private String removeCalculatedCoords(final String text) {
         return text.replaceAll(Pattern.quote(PARSING_CALCULATED_COORD) + ".*?" + Pattern.quote("}"), "");
+    }
+
+    /**
+     * Returns true if the coordinate match falls entirely within a {@code {prefix...}} block in its associated text.
+     */
+    private static boolean isInsideBlock(final GeopointWrapper match, final String blockPrefix) {
+        final String matchText = match.getText();
+        int idx = 0;
+        while (true) {
+            final int blockStart = matchText.indexOf(blockPrefix, idx);
+            if (blockStart < 0) {
+                break;
+            }
+            final int blockEnd = matchText.indexOf("}", blockStart);
+            if (blockEnd < 0) {
+                break;
+            }
+            if (match.getStart() >= blockStart && match.getEnd() <= blockEnd + 1) {
+                return true;
+            }
+            idx = blockEnd + 1;
+        }
+        return false;
     }
 
     private void parseWaypointsWithSpecificCoords(final String text, final String parsingCoord) {
@@ -284,7 +311,7 @@ public class CacheArtefactParser {
     /**
      * try to parse a name out of given words. If not possible, empty is returned
      */
-    @NotNull
+    @NonNull
     private ImmutablePair<String, String> parseNameAndPrefix(final String[] words, final WaypointType wpType) {
         if (words.length == 0 || !words[0].startsWith(PARSING_NAME_PRAEFIX)) {
             return new ImmutablePair<>("", "");
@@ -521,5 +548,4 @@ public class CacheArtefactParser {
             addVariable(varName, value, highPrio);
         }
     }
-
 }

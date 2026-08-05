@@ -8,8 +8,6 @@ import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
-
 public class TerraCachingConnector extends AbstractConnector {
 
     @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(TC|CC|LC)[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
@@ -54,10 +52,9 @@ public class TerraCachingConnector extends AbstractConnector {
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"TC%", "CC%", "LC%"};
     }
-
 }

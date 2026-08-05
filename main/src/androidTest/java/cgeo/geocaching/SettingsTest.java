@@ -5,7 +5,7 @@ import cgeo.geocaching.settings.Settings;
 import android.annotation.TargetApi;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @TargetApi(8)
 public class SettingsTest {

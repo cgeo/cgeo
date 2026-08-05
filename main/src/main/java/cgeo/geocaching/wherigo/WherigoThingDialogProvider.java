@@ -5,11 +5,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -66,9 +67,12 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, WherigoUtils.getEventTableNameForDisplay(eventTable, true));
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        dialog.setView(binding.getRoot());
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--", binding.getRoot());
+
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+            TranslationUtils.prepareForTranslation(eventTable.name, eventTable.description));
 
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> {
@@ -99,9 +103,13 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         if (eventTable instanceof Zone) {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
-        //description and media
+        //media
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
-        ViewUtils.setIfDiffers(binding.description, WherigoGame.get().toDisplayText(eventTable.description));
+
+        //title
+        control.setTitle(eventTable.name);
+        //description
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
@@ -126,7 +134,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
         WherigoViewUtils.setViewActions(actions, binding.dialogActionlist, 1,
                 a -> a instanceof Action ?
-                    TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
+                    TextParam.text(WherigoUtils.getUserDisplayableActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
                     ((ThingAction) a).getTextParam(),
                 item -> {
                     if (item instanceof Action) {

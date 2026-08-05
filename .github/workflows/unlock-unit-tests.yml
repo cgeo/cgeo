@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Release a lock
-        uses: suzuki-shunsuke/lock-action@latest
-        with:
-          mode: unlock
-          key: unit-test
+      - name: Unlock live tests
+        if: always()
+        run: |
+          curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"

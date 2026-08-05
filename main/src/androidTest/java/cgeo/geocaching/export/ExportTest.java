@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExportTest {
 

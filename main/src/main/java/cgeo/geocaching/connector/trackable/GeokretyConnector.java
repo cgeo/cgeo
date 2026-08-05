@@ -32,8 +32,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
 
@@ -103,7 +104,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getServiceTitle() {
-        return CgeoApplication.getInstance().getString(R.string.init_geokrety);
+        return LocalizationUtils.getPlainString(R.string.init_geokrety);
     }
 
     @Override
@@ -124,7 +125,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public static Trackable searchTrackable(final String geocode) {
         final int gkid;
 
-        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+        if (Strings.CI.startsWith(geocode, "GK")) {
             gkid = getId(geocode);
             if (gkid < 0) {
                 Log.d("GeokretyConnector.searchTrackable: Unable to retrieve GK numeric ID by ReferenceNumber");
@@ -409,7 +410,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "godzina", String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", trackableLog.getLog() == null ? "" : trackableLog.getLog(),
-                    "app", LocalizationUtils.getString(R.string.app_name),
+                    "app", LocalizationUtils.getPlainString(R.string.app_name),
                     "app_ver", Version.getVersionName(CgeoApplication.getInstance()),
                     "mobile_lang", Settings.getApplicationLocale() + ".UTF-8"
             );

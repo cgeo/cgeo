@@ -2,11 +2,10 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.MapSelectableItem;
@@ -93,32 +92,12 @@ public class GeoItemSelectorUtils {
         throw new IllegalArgumentException("unsupported IWaypoint type"); // can never happen
     }
 
-    public static View createGeoItemView(final Context context, final GeoitemRef geoitemRef, final View view) {
-        if (StringUtils.isNotEmpty(geoitemRef.getGeocode())) {
-            if (geoitemRef.getType() == CoordinateType.CACHE) {
-                final Geocache cache = DataStore.loadCache(geoitemRef.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                if (cache != null) {
-                    return createGeocacheItemView(context, cache, view);
-                }
-            } else if (geoitemRef.getType() == CoordinateType.WAYPOINT) {
-                final Waypoint waypoint = DataStore.loadWaypoint(geoitemRef.getId());
-                if (waypoint != null) {
-                    return createWaypointItemView(context, waypoint, view);
-                }
-            }
-        }
-
-        // Fallback - neither a cache nor waypoint. should never happen...
-        setViewValues(view, TextParam.text(geoitemRef.getName()), TextParam.text(geoitemRef.getGeocode()), ImageParam.id(geoitemRef.getMarkerId()));
-
-        return view;
-    }
-
     public static View createRouteView(final Route route, final View view) {
-        final boolean isIndividualRoute = route.getName().isEmpty();
+        final boolean isIndividualRoute = RouteTrackUtils.isIndividualRoute(route);
+        final boolean isNavigationTargetRoute = RouteTrackUtils.isNavigationTargetRoute(route);
         final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
-        final ImageParam routeIcon = ImageParam.id(R.drawable.ic_menu_route);
-        final TextParam routeInfo = isIndividualRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
+        final ImageParam routeIcon = isNavigationTargetRoute ? ImageParam.id(Settings.getRoutingMode().drawableId) : ImageParam.id(R.drawable.ic_menu_route);
+        final TextParam routeInfo = isIndividualRoute || isNavigationTargetRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
         setViewValues(view, routeName, routeInfo, routeIcon);
         return view;
     }

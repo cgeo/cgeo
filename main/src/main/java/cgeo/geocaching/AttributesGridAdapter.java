@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -87,8 +88,8 @@ public class AttributesGridAdapter extends BaseAdapter {
             imageView.setContentDescription(attrib.getL10n(CacheAttribute.isEnabled(attributeName)));
         } else {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
-            ViewUtils.setTooltip(imageView, TextParam.text(context.getString(R.string.attribute_unknown)));
-            imageView.setContentDescription(context.getString(R.string.attribute_unknown));
+            ViewUtils.setTooltip(imageView, TextParam.text(LocalizationUtils.getString(R.string.attribute_unknown)));
+            imageView.setContentDescription(LocalizationUtils.getString(R.string.attribute_unknown));
         }
     }
 

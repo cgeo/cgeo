@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.AboutActivity;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
@@ -10,6 +11,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -19,7 +22,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
-import cgeo.geocaching.maps.MapOptions;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.maps.MapUtils;
@@ -38,6 +41,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
@@ -62,18 +66,19 @@ import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -88,6 +93,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SelectCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport;
@@ -103,6 +109,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -128,7 +135,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -136,6 +142,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
@@ -145,6 +152,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
+    private static final int REQUEST_CODE_LOG = 1001;
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
@@ -185,7 +193,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onCreate(savedInstanceState);
         acquireUnifiedMap(this);
 
-        HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        setContentView(R.layout.unifiedmap_activity);
+        showSpacer(true);
         if (null != findViewById(R.id.live_map_status)) {
             findViewById(R.id.live_map_status).getBackground().mutate();
         }
@@ -199,7 +208,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.mapType = extraMapType;
         }
 
-        // set cache reload state according to whether this is a first map initialization or a resumte
+        // set cache reload state according to whether this is a first map initialization or a resume
         this.cacheReloadState = savedInstanceState == null ? CacheReloadState.INITIALIZE : CacheReloadState.RESUME;
 
         viewModel.followMyLocation.setValue(viewModel.mapType.followMyLocation);
@@ -222,7 +231,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.followMyLocation.observe(this, this::initFollowMyLocation);
         viewModel.location.observe(this, this::handleLocUpdate);
 
-        //wherigo
+        // wherigo
         final View view = findViewById(R.id.map_wherigo_popup);
         if (view != null) {
             view.setOnClickListener(v -> openWherigoPopup());
@@ -245,7 +254,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         new CoordsIndicatorLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, clickableItemsLayer);
-        navigationTargetLayer = new NavigationTargetLayer(this, nonClickableItemsLayer);
+        navigationTargetLayer = new NavigationTargetLayer(this, clickableItemsLayer);
         new CacheCirclesLayer(this, nonClickableItemsLayer);
         new GeofenceCirclesLayer(this, nonClickableItemsLayer);
 
@@ -258,7 +267,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         changeMapSource(Settings.getTileProvider());
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.reloadIndividualRoute(), this);
@@ -278,11 +287,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.zoomLevel.observe(this, zoomLevel -> refreshListChooser());
 
 
-        MapUtils.showMapOneTimeMessages(this, viewModel.mapType.type.compatibilityMapMode);
+        MapUtils.showMapOneTimeMessages(this, viewModel.mapType.type);
 
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    reloadCachesAndWaypoints();
+                    invalidateOptionsMenu();
+                    return;
+                }
                 handleGeocodeChangedBroadcastReceived(geocode);
             }
         });
@@ -344,7 +358,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (oldFragment != null) {
             mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource));
         } else {
-            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode), null, () -> onMapReadyTasks(newSource));
+            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type), null, () -> onMapReadyTasks(newSource));
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -360,7 +374,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapDataAfterSettingsChanged, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), viewModel.mapType.filterContext));
 
         // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::handleLongTapOnRoutesOrTracks));
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::showElevationChart));
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue());
 
         // react to mapType
@@ -384,8 +398,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             case UMTT_PlainMap:
                 // restore last saved position and zoom
                 if (setDefaultCenterAndZoom) {
-                    mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode));
-                    mapFragment.setCenter(Settings.getUMMapCenter());
+                    mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type));
+                    mapFragment.setCenter(Settings.getMapCenter());
                 }
                 break;
             case UMTT_Viewport:
@@ -403,14 +417,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // load cache/waypoint, focus map on it, and set it as target
                 final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
-                    }
                     if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
                         viewModel.caches.write(false, Set::clear);
                         final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
                         if (waypoint != null) {
                             if (setDefaultCenterAndZoom) {
+                                mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                                 mapFragment.setCenter(waypoint.getCoords());
                             }
                             viewModel.waypoints.write(wps -> {
@@ -421,28 +433,44 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                 onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
                             }
                         }
-                    } else if (cache.getCoords() != null) { // geocache mode: display ONLY geocache and its waypoints
-                        viewModel.caches.write(false, c -> {
-                            c.clear();
-                            c.add(cache);
-                        });
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.setCenter(cache.getCoords());
-                        }
-                        viewModel.waypoints.write(wps -> {
-                            wps.clear();
-                            final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
-                            MapUtils.filter(waypoints, getFilterContext());
-                            wps.addAll(waypoints);
-                        });
-                        if (!isTargetSet()) {
-                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
+                    } else { // geocache mode: display ONLY geocache and its waypoints, if coordinates are available
+                        final Geopoint cacheCoordinates = cache.getCoords();
+                        final Waypoint firstWaypoint = cacheCoordinates == null ? cache.getFirstMatchingWaypoint(wp -> wp.getCoords() != null) : null;
+                        final Geopoint currentCoordinates = null != firstWaypoint ? firstWaypoint.getCoords() : cacheCoordinates;
+
+                        if (null != currentCoordinates) {
+                            viewModel.caches.write(false, c -> {
+                                c.clear();
+                                // we can only display the cache if it has coordinates
+                                if (null != cacheCoordinates) {
+                                    c.add(cache);
+                                }
+                            });
+
+                            viewModel.waypoints.write(wps -> {
+                                wps.clear();
+                                final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+                                MapUtils.filter(waypoints, getFilterContext());
+                                wps.addAll(waypoints);
+                            });
+
+                            if (setDefaultCenterAndZoom) {
+                                // for cache with no coordinates (generated waypoints), we want to zoom to the waypoints
+                                final boolean zoomToWaypoints = null == cacheCoordinates || Settings.getZoomIncludingWaypoints();
+                                mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, zoomToWaypoints));
+                                mapFragment.setCenter(currentCoordinates);
+                            }
+
+                            if (!isTargetSet()) {
+                                onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(currentCoordinates, cache.getGeocode()));
+                            }
                         }
                     }
                     viewModel.waypoints.notifyDataChanged();
                 }
                 break;
             case UMTT_TargetCoords:
+            case UMTT_SelectCoords:
                 // set given coords as map center
                 if (setDefaultCenterAndZoom) {
                     mapFragment.setCenter(mapType.coords);
@@ -492,10 +520,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 break;
         }
 
-
         if (this.cacheReloadState == CacheReloadState.RESUME) {
-            mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode));
-            mapFragment.setCenter(Settings.getUMMapCenter());
+            mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type));
+            mapFragment.setCenter(Settings.getMapCenter());
         }
         //reset cacheReloadState
         this.cacheReloadState = CacheReloadState.REFRESH;
@@ -510,7 +537,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void restoreOrSetViewport(final Viewport vp) {
-        final Geopoint storedMapCenter = Settings.getUMMapCenter();
+        final Geopoint storedMapCenter = Settings.getMapCenter();
         if (Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false) && vp.contains(storedMapCenter)) {
             mapFragment.setCenter(storedMapCenter);
         } else {
@@ -569,13 +596,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         liveMapStatus.setOnClickListener(v -> showLiveStatusDialog());
 
-        //hide status if we are live
+        // hide status if we are live
         if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
             spinner.setVisibility(View.GONE);
             liveMapStatus.setVisibility(View.GONE);
             return;
         }
-        //set live map status
+        // set live map status
         if (status.isError() || status.isPartial(viewport)) {
             liveMapStatus.setImageResource(status.isError() ? R.drawable.ic_menu_error : R.drawable.ic_menu_partial);
             liveMapStatus.getBackground().setTint(getResources().getColor(status.isError() ? R.color.cacheMarker_archived : R.color.osm_zoomcontrol));
@@ -583,7 +610,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else {
             liveMapStatus.setVisibility(View.GONE);
         }
-        //set spinner
+        // set spinner
         switch (status.loadState) {
             case RUNNING:
                 spinner.setVisibility(View.VISIBLE);
@@ -624,7 +651,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return;
         }
 
-        //build message
+        // build message
         final StringBuilder errors = new StringBuilder();
         final StringBuilder partials = new StringBuilder();
         final StringBuilder normals = new StringBuilder();
@@ -649,33 +676,37 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {
 
-        if (viewModel.mapType.waypointId > 0) { // single waypoint mode. No refresh in this case
+        if (viewModel.mapType.type == UMTT_TargetGeocode) { // single waypoint mode. No refresh in this case
             return;
         }
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
         final Viewport viewport = viewModel.viewport.getValue();
 
-        //should waypoints be displayed at all?
-        final boolean waypointsAreVisible = viewModel.mapType.isSingleCacheView() || (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold());
-        if (!waypointsAreVisible) {
-            viewModel.waypoints.write(Set::clear);
-            return;
-        }
-
-        //show all waypoints be displayed or just the ones from visible caches?
         Schedulers.io().scheduleDirect(() -> {
-            final Set<Waypoint> waypoints;
-            final boolean showAll = viewModel.mapType.enableLiveMap();
-            if (showAll) {
-                waypoints = DataStore.loadWaypoints(viewport);
-            } else {
-                waypoints = viewModel.caches.readWithResult(caches -> {
+            final Set<Waypoint> waypoints = new HashSet<>();
+
+            if (viewModel.mapType.hasTarget()) {
+                waypoints.addAll(viewModel.caches.readWithResult(caches -> {
                     final Set<Waypoint> wpSet = new HashSet<>();
-                    for (final Geocache c : caches) {
-                        wpSet.addAll(c.getWaypoints());
-                    }
+                    final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                    wpSet.addAll(cache.getWaypoints());
                     return wpSet;
-                });
+                }));
+            }
+
+            if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+                // should all waypoints be displayed or just the ones from visible caches?
+                if (viewModel.mapType.enableLiveMap()) {
+                    waypoints.addAll(DataStore.loadWaypoints(viewport));
+                } else {
+                    waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                        final Set<Waypoint> wpSet = new HashSet<>();
+                        for (final Geocache c : caches) {
+                            wpSet.addAll(c.getWaypoints());
+                        }
+                        return wpSet;
+                    }));
+                }
             }
 
             //filter waypoints
@@ -686,7 +717,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             });
         });
     }
-
 
     public void replaceSearchResultByGeocaches(final SearchResult searchResult) {
         Log.d(LOGPRAEFIX + "replace " + searchResult.getGeocodes());
@@ -703,7 +733,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @NonNull
     private String calculateTitle() {
         if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
-            return getString(R.string.map_live);
+            return LocalizationUtils.getString(R.string.map_live);
         }
         if (viewModel.mapType.type == UMTT_TargetGeocode) {
             final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
@@ -711,7 +741,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 return StringUtils.defaultIfBlank(cache.getName(), "");
             }
         }
-        return StringUtils.defaultIfEmpty(viewModel.mapType.title, getString(R.string.map_offline));
+        return StringUtils.defaultIfEmpty(viewModel.mapType.title, LocalizationUtils.getString(R.string.map_offline));
     }
 
     private void refreshListChooser() {
@@ -852,7 +882,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     public int getSelectedBottomItemId() {
         return viewModel == null || viewModel.mapType == null || viewModel.mapType.type == UMTT_PlainMap ||
-                viewModel.mapType.type == UMTT_Viewport || viewModel.mapType.type == UMTT_List || viewModel.mapType.type == UMTT_TargetCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
+                viewModel.mapType.type == UMTT_Viewport || viewModel.mapType.type == UMTT_List || viewModel.mapType.type == UMTT_TargetCoords || viewModel.mapType.type == UMTT_SelectCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
@@ -865,6 +895,45 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
+        // Avoid blocking UI thread by not calling DataStore.loadCache() directly here.
+        // Instead load cache data asynchronously if a target geocode is set and
+        // update menu items on the UI thread when the load completes.
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
+        final MenuItem hintItem = menu.findItem(R.id.menu_hint);
+        final MenuItem logVisitItem = menu.findItem(R.id.menu_log_visit);
+        final MenuItem logVisitOfflineItem = menu.findItem(R.id.menu_log_visit_offline);
+        hintItem.setVisible(false);
+        logVisitItem.setVisible(false);
+        logVisitOfflineItem.setVisible(false);
+
+        if (target != null && StringUtils.isNotBlank(target.geocode)) {
+            // hide until we know the cache details
+            final String geocode = target.geocode;
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                        Geocache dbCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                        if (dbCache == null) {
+                            dbCache = DataStore.loadCacheTexts(geocode);
+                        }
+                        return dbCache;
+                    },
+                    cache -> {
+                        // ensure target did not change while we were loading
+                        final UnifiedMapViewModel.Target currentTarget = viewModel.target.getValue();
+                        if (currentTarget == null || !Strings.CS.equals(currentTarget.geocode, geocode)) {
+                            return;
+                        }
+
+                        // show hint if cache is detailed
+                        final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
+                        final boolean showHintButton = StringUtils.isNotEmpty(title);
+                        hintItem.setEnabled(showHintButton);
+                        hintItem.setVisible(showHintButton);
+
+                        LoggingUI.onPrepareOptionsMenu(menu, cache);
+                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
+                    });
+        }
+
         // init followMyLocation
         initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
 
@@ -873,19 +942,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
-        final View liveButton = findViewById(R.id.menu_map_live);
-        if (liveButton != null) {
-            liveButton.setOnLongClickListener(v -> {
-                viewModel.mapType = new UnifiedMapType(); // switch to PLAIN mode
-                viewModel.transientIsLiveEnabled.setValue(false);
-                Settings.setLiveMap(false);
-                reloadCachesAndWaypoints();
-                return true;
-            });
-        }
+        final MenuItem itemNamedFilters = toolbarMenu.findItem(R.id.menu_named_filters);
+        final boolean anyActive = NamedFilter.getAll().stream().anyMatch(NamedFilter::isConditionalMarkerActive);
+        ToggleItemType.NAMED_FILTERS.toggleMenuItem(itemNamedFilters, anyActive);
 
         // map rotation state
-        menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always (xml definition) when CGeoMap/NewMap is removed
         final int mapRotation = Settings.getMapRotation();
         switch (mapRotation) {
             case MAPROTATION_OFF:
@@ -911,7 +972,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
 
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return result;
     }
@@ -920,17 +981,21 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
+        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
+
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
-        initializeMapViewLongClick();
+        initializeLongClicks();
         return result;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        if (id == R.id.menu_map_live) {
+        if (id == android.R.id.home) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (id == R.id.menu_map_live) {
             if (viewModel.mapType.enableLiveMap()) {
                 Settings.setLiveMap(!Settings.isLiveMap());
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
@@ -940,7 +1005,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     reloadCachesAndWaypoints();
                 }
             } else {
-                viewModel.mapType = new UnifiedMapType();
+                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType);
                 viewModel.transientIsLiveEnabled.setValue(true);
                 Settings.setLiveMap(true);
                 refreshListChooser();
@@ -977,27 +1042,41 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_filter) {
-            showFilterMenu();
+            FilterUtils.onClickFilterMenu(this);
+        } else if (id == R.id.menu_named_filters) {
+            FilterUtils.onClickNamedFilterMenu(this);
         } else if (id == R.id.menu_store_caches) {
-            final Set<String> geocodes = viewModel.caches.readWithResult(caches ->
-                    mapFragment.getViewport()
-                            .filter(caches)
-                            .stream()
-                            .map(Geocache::getGeocode)
-                            .collect(Collectors.toSet()));
-            CacheDownloaderService.downloadCaches(this, geocodes, false, false, () -> viewModel.caches.notifyDataChanged(false));
+            final List<Geocache> list = viewModel.caches.readWithResult(caches ->
+                    mapFragment.getViewport().filter(caches));
+            new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
+        } else if (id == R.id.menu_hint) {
+            boolean hintIsAvailable = false;
+            final Geocache targetCache = getCurrentTargetCache();
+            if (targetCache != null) {
+                final Pair<CharSequence, CharSequence> hintTitleAndMessage = CacheUtils.getHintTitleAndMessage(targetCache);
+                if (StringUtils.isNotEmpty(hintTitleAndMessage.second)) {
+                    hintIsAvailable = true;
+                    SimpleDialog.ofContext(this).setTitle(TextParam.text(hintTitleAndMessage.first)).setMessage(TextParam.text(hintTitleAndMessage.second)).show();
+                }
+            }
+
+            if (!hintIsAvailable) {
+                SimpleDialog.ofContext(this).setTitle(R.string.cache_hint).setMessage(TextParam.id(R.string.cache_hint_not_available)).show();
+            }
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
             mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::handleLongTapOnRoutesOrTracks);
+            routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::showElevationChart);
         } else if (id == R.id.menu_select_mapview) {
             // dynamically create submenu to reflect possible changes in map sources
             final View v = findViewById(R.id.menu_select_mapview);
             if (v != null) {
                 final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
                 menu.inflate(R.menu.map_mapview);
+                DownloaderUtils.addManageOfflineDataMenu(this, menu.getMenu().findItem(R.id.menu_manage_offline_data));
                 TileProviderFactory.addMapviewMenuItems(this, menu);
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.setForceShowIcon(true);
@@ -1027,13 +1106,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 Settings.setPreviousTileProvider(tileProvider);
                 changeMapSource(tileProviderLocal);
             }
+
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
-            } else {
-                return super.onOptionsItemSelected(item);
+            } else if (LoggingUI.isMenuItemSelected(item)) {
+                final Geocache targetCache = getCurrentTargetCache();
+                if (targetCache != null) {
+                    return LoggingUI.onMenuItemSelected(item, this, targetCache, null);
+                }
             }
+            return super.onOptionsItemSelected(item);
         }
-        MenuUtils.tintToolbarAndOverflowIcons(toolbarMenu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
         return true;
     }
 
@@ -1041,7 +1125,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // zoom, bearing & heading methods
 
     private void saveCenterAndZoom() {
-        Settings.setMapZoom(viewModel.mapType.type.compatibilityMapMode, mapFragment.getCurrentZoom());
+        Settings.setMapZoom(viewModel.mapType.type, mapFragment.getCurrentZoom());
         Settings.setMapCenter(mapFragment.getCenter());
     }
 
@@ -1068,6 +1152,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             viewModel.mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
             refreshMapData(true);
+        } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
         }
     }
 
@@ -1085,12 +1171,29 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void showFilterMenu() {
-        FilterUtils.openFilterActivity(this, viewModel.mapType.filterContext, viewModel.caches.getListCopy());
+        final Collection<Geocache> filteredList = viewModel.caches.getListCopy();
+
+        GeocacheFilterActivity.selectFilter(
+                this,
+                viewModel.mapType.filterContext,
+                filteredList, true);
     }
 
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, viewModel.mapType.filterContext);
+        FilterUtils.openDialogSelectNamedFilter(this,
+                TextParam.id(R.string.cache_filter_storage_select_title),
+                viewModel.mapType.filterContext,
+                selectedFilter -> {
+                    refreshWithFilter(viewModel.mapType.filterContext.get());
+                });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateDeactivateNamedFilters(this);
+        return true;
     }
 
     @Override
@@ -1188,6 +1291,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             } else if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && isLongTap) {
                 result.add(new MapSelectableItem(viewModel.individualRoute.getValue()));
+            } else if (key.startsWith(NavigationTargetLayer.KEY_TARGET_PATH) && isLongTap) {
+                result.add(new MapSelectableItem(viewModel.navigationTargetRoute.getValue()));
             } else if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             } else if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX) && !isLongTap) {
@@ -1207,14 +1312,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (result.isEmpty()) {
             if (isLongTap) {
                 viewModel.longTapCoords.setValue(touchedPoint);
-                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(null, "", viewModel.mapType.fromList), viewModel::setTarget)
-                        .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
-                        .show();
+                if (viewModel.mapType.type == UMTT_SelectCoords) {
+                    MapUtils.showSelectFromMapDialog(this, touchedPoint);
+                } else {
+                    MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget)
+                            .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
+                            .show();
+                }
             } else {
                 if (sheetRemoveFragment()) {
                     return;
                 }
-                mapFragment.adaptLayoutForActionBar(HideActionBarUtils.toggleActionBar(this));
+                ActionBarUtils.toggleActionBar(this);
                 GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, "", isLongTap);
             }
         } else if (result.size() == 1) {
@@ -1267,10 +1376,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             } else if (item.isRoute() && routeTrackUtils != null && item.getRoute() != null) {
                 // individual route or track
-                if (lastElevationChartRoute != null && StringUtils.equals(item.getRoute().getName(), lastElevationChartRoute)) {
+                if (lastElevationChartRoute != null && Strings.CS.equals(item.getRoute().getName(), lastElevationChartRoute)) {
                     elevationChartUtils.removeElevationChart();
                 } else {
-                    routeTrackUtils.showRouteTrackContextMenu(tapX, tapY, this::handleLongTapOnRoutesOrTracks, RouteTrackUtils.isIndividualRoute(item.getRoute()) ? viewModel.individualRoute.getValue() : item.getRoute());
+                    routeTrackUtils.showRouteTrackContextMenu(tapX, tapY, this::showElevationChart,
+                            RouteTrackUtils.isIndividualRoute(item.getRoute()) ? viewModel.individualRoute.getValue() : item.getRoute(),
+                            RouteTrackUtils.isNavigationTargetRoute(item.getRoute()) ? () -> viewModel.setTarget(null, null) : null);
                 }
             }
         } else if (routeItem != null) {
@@ -1294,32 +1405,46 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    private void handleLongTapOnRoutesOrTracks(final Route item, final boolean forceShowElevationChart) {
+    private void hideElevationChart(final boolean alsoClearManualTarget) {
+        elevationChartUtils.removeElevationChart();
+        lastElevationChartRoute = null;
+
+        if (alsoClearManualTarget) {
+            viewModel.setTarget(null, null);
+        }
+    }
+
+    private void showElevationChart(final Route item, final boolean forceShowElevationChart) {
         // elevation charts for individual route and/or routes/tracks
         if (elevationChartUtils == null) {
             elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
         }
         if (forceShowElevationChart && lastElevationChartRoute != null) {
-            elevationChartUtils.removeElevationChart();
-            lastElevationChartRoute = null;
+            hideElevationChart(false);
         }
-        if (lastElevationChartRoute != null && StringUtils.equals(item.getName(), lastElevationChartRoute)) {
+        if (lastElevationChartRoute != null && Strings.CS.equals(item.getName(), lastElevationChartRoute)) {
             elevationChartUtils.removeElevationChart();
         } else {
-            elevationChartUtils.showElevationChart(item, routeTrackUtils);
+            elevationChartUtils.showElevationChart(item, routeTrackUtils, () -> hideElevationChart(RouteTrackUtils.isNavigationTargetRoute(item)));
             lastElevationChartRoute = item.getName();
             if (RouteTrackUtils.isIndividualRoute(item)) {
                 viewModel.individualRoute.observe(this, individualRoute -> {
                     if (lastElevationChartRoute != null && lastElevationChartRoute.isEmpty()) { // still individual route being shown?
-                        elevationChartUtils.showElevationChart(individualRoute, routeTrackUtils);
+                        elevationChartUtils.showElevationChart(individualRoute, routeTrackUtils, () -> hideElevationChart(false));
+                    }
+                });
+            } else if (RouteTrackUtils.isNavigationTargetRoute(item)) {
+                viewModel.navigationTargetRoute.observe(this, navigationTargetRoute -> {
+                    if (lastElevationChartRoute != null && lastElevationChartRoute.equals(item.getName())) { // still navigation target route being shown?
+                        elevationChartUtils.showElevationChart(navigationTargetRoute, routeTrackUtils, () -> hideElevationChart(true));
                     }
                 });
             } else {
                 viewModel.trackUpdater.observe(this, event -> {
                     if (viewModel.getTracks().getRoute(event.peek()) instanceof Route) {
                         final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
-                        if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
-                            elevationChartUtils.showElevationChart(route, routeTrackUtils);
+                        if (route != null && Strings.CS.equals(lastElevationChartRoute, route.getName())) {
+                            elevationChartUtils.showElevationChart(route, routeTrackUtils, () -> hideElevationChart(false));
                         }
                     }
                 });
@@ -1382,6 +1507,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     protected void onStop() {
         this.resumeDisposables.clear();
+        sheetManageLifecycleOnStop(viewModel);
         super.onStop();
     }
 
@@ -1421,16 +1547,20 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onResume() {
+        super.onResume();
+        setAppIconAsUpIndicator(true);
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
+            return; // prevent further execution on the old activity instance
         }
+
+        reloadCachesAndWaypoints();
+        MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
         if (Settings.removeFromRouteOnLog()) {
             viewModel.reloadIndividualRoute();
         }
-        super.onResume();
-        reloadCachesAndWaypoints();
-        MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
+
         if (tileProvider != null) {
             tileProvider.onResume();
         }
@@ -1456,7 +1586,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onDestroy();
     }
 
-    private void initializeMapViewLongClick() {
+    private void initializeLongClicks() {
         new Handler().post(() -> {
             final View mapViewSelect = findViewById(R.id.menu_select_mapview);
             if (mapViewSelect != null) {
@@ -1464,6 +1594,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     final AbstractTileProvider localTileProvider = Settings.getPreviousTileProvider();
                     Settings.setPreviousTileProvider(tileProvider);
                     changeMapSource(localTileProvider);
+                    return true;
+                });
+            }
+
+            final View liveButton = findViewById(R.id.menu_map_live);
+            if (liveButton != null) {
+                liveButton.setOnLongClickListener(v -> {
+                    viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
+                    viewModel.transientIsLiveEnabled.setValue(false);
+                    Settings.setLiveMap(false);
+                    reloadCachesAndWaypoints();
                     return true;
                 });
             }

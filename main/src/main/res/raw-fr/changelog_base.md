@@ -1,80 +1,101 @@
-### Annonce de dépréciation des cartes UnifiedMap & "ancienne" cartes
-c:geo a une toute nouvelle implémentation de cartes appelée "UnifiedMap" depuis quelque temps, qui finira par remplacer les anciennes implémentations de Google Maps et Mapsforge (OpenStreetMap). Ceci est un avis de dépréciation pour vous informer de la future feuille de route.
+### Notes générales de publication
 
-UnifiedMap a été publié il y a environ un an. Il supporte toujours Google Maps et OpenStreetMap (en ligne + hors ligne), mais de manière technique entièrement retravaillée, et avec beaucoup de nouvelles fonctionnalités excitantes que les "anciennes" cartes ne prennent pas en charge, dont certaines sont
+**Bord à bord**
+
+En raison des politiques du Play Store, nous avons mis à jour le niveau de l'API Android cette version de c:geo cibles + nous avons modifié certaines routines de mise en page de l'écran. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+
+**Anciennes cartes**
+
+Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement supprimé les implémentations héritées de nos cartes. Vous passerez automatiquement à notre nouvelle UnifiedMap et ne remarquerez aucune différence, sauf quelques nouvelles fonctionnalités, dont certaines sont
 - Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
 - Pop-up de cluster pour Google Maps
 - Cacher les sources de carte dont vous n'avez pas besoin
 - Graphique d'altitude pour les routes et les pistes
 - Basculer entre les listes directement depuis la carte
 - Mode "Conduite" pour les cartes basées sur OpenStreetMap
-
-UnfiedMap s'est avéré stable depuis un certain temps, donc nous allons supprimer les anciennes implémentations de cartes pour réduire les efforts pour maintenir c:geo.
-
-Feuille de route :
-- Les cartes "anciennes" sont actuellement en mode dépréciation - nous ne corrigerons plus de bugs pour elles.
-- UnifiedMap sera la carte par défaut pour tous les utilisateurs à l'automne 2025.
-- Les implémentations de cartes "anciennes" seront supprimées au printemps 2026.
-
-D'ici là, vous pouvez basculer entre les différentes implémentations dans settings => sources de cartes.
+- Appui long sur la piste / route individuelle pour plus d'options
 
 ### Carte
-- Nouveau : Afficher les géorepérages pour les étapes de lab (UnifiedMap) - activer "Cercles" dans les paramètres rapides de la carte pour les afficher
-- Nouveau : Option permettant de définir des cercles avec un rayon individuel aux waypoints (option de menu contextuel "geofence")
-- Correction : la vue de la carte n'a pas été mise à jour lors de la suppression d'une cache de la liste affichée
-- Correction : Le nombre de caches dans le sélecteur de liste n'est pas mis à jour lors du changement du contenu de la liste
-- Changement: Garder la vue actuelle lors du mappage d'une liste, si toutes les caches entrent dans la fenêtre d'affichage actuelle
-- Nouveau : Suivre mon emplacement dans le diagramme d'altitude (UnifiedMap)
-- Nouveau : Activer les actions "déplacer vers" / "copier vers" pour "afficher comme liste"
-- Nouveau : Prise en charge du thème Elevate Winter dans le téléchargeur de cartes
-- Nouveau : ombrage de colline adaptatif, mode optionnel de haute qualité (UnifiedMap Mapsforge)
-- Nouveau : Boîte de dialogue de configuration rapide des routes/pistes relancées
-- Nouveau : Appuyez longuement sur l'icône de sélection de carte pour sélectionner le fournisseur de tuiles précédent (UnifiedMap)
-- Nouveau : Permettre de définir le nom d'affichage pour les cartes hors ligne dans un fichier compagnon (UnifiedMap)
-- Nouveau : Appuyez longuement sur "activer le bouton live" pour charger les caches hors ligne
-- Nouveau : ombrage hors-ligne pour UnifiedMap (VTM variant)
-- Nouveau : prise en charge des cartes d'arrière plan (UnifiedMap VTM uniquement)
-- Correction : Les icônes compactes ne redeviennent pas grandes en zoomant en mode automatique (UnifiedMap)
-- Nouveau: Actions de appui long dans la fiche de cache : code GC, titre de la cache, coordonnées, note personnelle/indice
-- Changement : Bascule la fiche de cache pour un sélecteur d'émoticônes sur appui court pour résoudre la collision
+- Nouveau: L'optimisation des itinéraires met en cache les données calculées
+- Nouveau : L'activation du mode live garde les waypoints de la cible actuellement définie visibles
+- Nouveau : Un appui long sur la ligne de navigation ouvre le graphique d'altitude (UnifiedMap)
+- Nouveau : Afficher les waypoints générés sur la carte
+- Nouveau : Téléchargement des caches triées par distance
+- Correction : Doublage des éléments de route individuels
+- Nouveau : Prise en charge du thème Motorider (VTM uniquement)
+- Nouveau : Fournisseur de tuiles qui n'affiche pas de carte (ne pas afficher de carte, juste des caches, etc.)
+- Changement: Distance maximale des points de connexion sur la piste historique abaissée à 500m (configurable)
+- Nouveau : Permettre l'importation de fichiers KML en tant que pistes (ex: itinéraire trackable)
+- Nouveau : Offre de définir l'icône de cache même si la cache n'est pas encore stockée
+- Nouveau : Boite d'information pour le graphique d'altitude montrant la distance restante, montée, descente
+- Nouveau : Afficher les coordonnées des waypoints dans la popup des waypoints
+- Correction : Les paramètres rapides de la carte peuvent afficher les boutons "1"/"2" pour les profils de routage vides après changement de langue
+- Nouveau : Calcul des données d'altitude manquantes lors de l'importation de pistes (si les données d'altitude sont téléchargées)
+- Correction : Arrêt du téléchargeur de tuiles dans certaines conditions (cartes en ligne OpenStreetMap uniquement)
+- Nouveau : marqueurs de cache conditionnels
+- New: Show navigation hint (arrow + distance)
 
 ### Détails de la cache
-- Nouveau : Traduction hors ligne du texte de la liste et des logs (expérimental)
-- Nouveau : Possibilité de partager une cache avec ses données utilisateur (coordonnées, note personnelle)
-- Correction : Service vocal interrompu lors de la rotation de l'écran
-- Correction : Détails de la cache : La liste des caches n'est pas mise à jour après avoir tapé sur le nom de la liste et supprimé cette cache de cette liste
-- Correction : La note de l'utilisateur est perdue en rafraîchissant une adventure lab
-- Changement : Les espaces réservés liés à la date de log utiliseront la date choisie au lieu de la date courante
-- Nouveau : Réduire les entrées de log longues par défaut
+- Nouveau : Détecter les caractères supplémentaires dans les formules : –,  , ×
+- Nouveau : Conserver l'horodatage de ses propres logs lors de l'actualisation d'une cache
+- Nouveau : Vue mini boussole facultative (voir paramètres => détails de la cache => Afficher la direction dans la vue détaillée de la cache)
+- Nouveau : Afficher les logs des propriétaires dans l'onglet "vous / amis"
+- Changement: l'onglet "Vous / amis" affiche le nombre de logs pour cet onglet au lieu de compteurs globaux
+- Changement : Amélioration de l'en-tête dans les onglets variables et waypoint
+- Correction : Deux éléments « supprimer le journal» affichés
+- Correction : c:geo plantait dans les détails de la cache lors de la rotation de l'écran
+- Changement : Mise en page plus compacte pour "ajouter un nouveau waypoint"
+- Nouveau: Possibilité de charger les images des caches de geocaching.com en taille "inchangée"
+- Nouveau : la vue des variables peut être filtrée
+- Nouveau : Visualiser le débordement des coordonnées calculées dans la liste des waypoints
+- Nouveau : Entrée de menu dans la liste des waypoints pour marquer certains types de waypoints comme visités
+- Nouveau : Variables pour le log des objets voyageurs (nom de la géocache, code de la géocache, utilisateur)
+- Changement : Suppression du lien vers l'application WhereYouGo obsolète. Le lecteur intégré de cartouches Wherigo est maintenant pris par défaut pour les cartouches Wherigos.
+- Correction : Il manque un raccourci dans le mode guidé de la calculatrice de waypoint
+- Nouveau: fonctions agrégées avec support de l'intervalle : add/somme, min/minimum, max/maximum, cnt/nombre, avg/moyenne, multiply/produit/prod
+- Correction : gestion incorrecte du statut DNF pour les plates-formes opencaching
+- Nouveau : Supprimer le log hors ligne après la fusion avec le log en ligne
+- Nouveau : Afficher la confirmation lors de la suppression des caches avec des logs hors ligne
+- Nouveau : Afficher la confirmation lors de la suppression de toutes les caches de la liste "Toutes"
+- Nouveau : Permettre le formatage Markdown pour le texte des caches définies par l'utilisateur
+- Changement: Stocker le cache avant d'ajouter une image utilisateur
+- Correction : Crash lors du chargement des images intégrées directement dans le texte de la liste
+- Nouveau : Afficher ses propres favoris dans la vue des logs (Geocaching.com + logs hors-ligne)
+- New: Sending log is done in background
 
 ### Wherigo Player
-- Nouveau : Le lecteur Wherigo intégré vérifie les identifiants manquants
-- Changement : Retrait du rapport de bogue Wherigo (les erreurs sont principalement liées aux cartouches, doivent être corrigées par le propriétaire de la cartouche)
-- Nouveau : Possibilité de naviguer vers une zone en utilisant la boussole
-- Nouveau : Possibilité de copier les coordonnées du centre de zone dans le presse-papiers
-- Nouveau : Définir le centre de la zone comme cible lors de l'ouverture de la carte (pour obtenir les informations sur le routage et la distance pour elle)
-- Nouveau : Support de l'ouverture de fichiers Wherigo locaux
-- Changement : Un appui long sur une zone sur la carte n'est plus reconnu. Cela permet aux utilisateurs de faire d'autres choses dans la zone de la carte disponible sur appui long, par exemple: créer un cache défini par l'utilisateur
-- Nouveau : Afficher l'avertissement si wherigo.com signale que le CLUF est manquant (ce qui entraîne une défaillance du téléchargement des cartouches)
+- Nouveau : Traduction hors ligne pour les caches Wherigo
+- Nouveau : Amélioration de la gestion des boutons
+- Nouveau : Enregistrement automatique du statut
+- Nouveau : Possibilité de créer un raccourci vers Wherigo sur l'écran d'accueil de votre mobile
 
 ### Général
-- Nouveau: page de recherche réorganisée
-- Nouveau : Filtre de nombre d'inventaire
-- Nouveau : Prise en charge des coordonnées au foramt DD,DDDDDDD
-- Nouveau : Afficher le nom du dernier filtre utilisé dans la boîte de dialogue de filtre
-- Nouveau : Calculatrice de coordonnées : Fonction pour remplacer "x" par le symbole de multiplication
-- Correction : Altitude incorrecte (pas avec une moyenne au-dessus du niveau de la mer)
-- Correction : Le réglage de la limite de distance à proximité ne fonctionne pas correctement pour les petites valeurs
-- Correction : Le tri des listes de caches par distance décroissante ne fonctionne pas correctement
-- Corriger : Lab caches exclues par le filtre D/T même avec les « incertitudes inclus» actifs
-- Correction : Problèmes de couleur avec les icônes du menu en mode clair
-- Nouveau : Ajouter "Supprimer les événements passés" à la liste "all"
-- Nouveau : Afficher le connecteur pour les "caches définies par l'utilisateur" comme actif dans le filtre source
-- Nouveau : export GPX : exportation des logs / objets voyageurs rendus facultatifs
-- Nouveau : bouton ajouté pour supprimer les modèles de log
-- Correction : L'importation du fichier de carte local obtient un nom de carte aléatoire
-- Correction : Téléchargement de cartes proposant des fichiers cassés (0 octets) pour le téléchargement
-- Nouveau: Ajout de mappings pour certains types de cache OC manquants
-- Nouveau : Déplacer les listes "récemment utilisées" en haut dans la boîte de dialogue de sélection de liste lors de l'appui sur le bouton "récemment utilisé"
-- Nouveau : Partager la liste des géocodes de la liste des caches
-- Changement: "Navigation (voiture)" etc. utilisez le paramètre "q=" au lieu du paramètre obsolète "ll="
+- Nouveau : Option de partage après avoir logué une cache
+- Changement : Ne pas afficher les options "besoin de maintenance" ou "a besoin d'être archivé" pour ses propres caches
+- Correction : La restauration d'une sauvegarde peut dupliquer les fichiers de suivi dans le stockage interne et les sauvegardes suivantes
+- Changement : Références supprimées à Twitter
+- Nouveau : Supprimer les fichiers de suivi orphelins lors du nettoyage et de la restauration de la sauvegarde
+- Nouveau: Avertissement en essayant d'ajouter trop de caches à une liste de favoris
+- Nouveau: Fonctions de surveillance des listes
+- Nouveau : Possibilité de traduction hors ligne avec les applications Google Translate ou DeepL (si installé)
+- Nouveau : Supprimer les éléments de l'historique de recherche
+- Changement : Suppression de GCVote (service arrêté)
+- Nouveau : Barre d'outils colorée sur les pages de détails de la cache
+- Nouveau : Sélection de plusieurs listes de bookmarks / pocket queries à télécharger
+- Nouveau: Aperçu des listes de favoris
+- Changement: Augmentation de la version minimale requise d'Android vers Android 8
+- Nouveau : Boutons rapides par défaut pour les nouvelles installations
+- Corriger : Les titres dans les boîtes de dialogue d'entrée de la plage sont coupées
+- Correction : Notification de mise à jour de la version nightly vers l'APK régulier, même pour la variante FOSS
+- Nouveau: option "Ignorer l'année" pour les filtres de date
+- Nouveau : Rendre l'URI distant cliquable dans les téléchargements en attente
+- Changement : Utiliser les paramètres système comme thème par défaut pour les nouvelles installations
+- Nouveau : exportation GPX : Écrire les annotations GSAK Lat/LonBeforeCorrect lors de l'exportation des waypoints d'origine
+- Nouveau : Afficher la barre d'annulation lors de la suppression des caches de la liste de la carte
+- Correction : Crahs dans le filtre favori en pourcentage
+- Nouveau : Faciliter l'utilisation de listes simples comme listes parentes
+- Changement : Utiliser le fuseau horaire local (de l'appareil, pas de l'événement) pour les entrées du calendrier (au lieu de l'UTC)
+- Correction : Certains textes ne tiennent pas compte du changement de langue
+- Correction : « Utiliser les unités impériales » pas correctement initialisé lors d'une nouvelle installation
+- Changement: module de traduction hors ligne Bergamot open source remplaçant le traducteur Google ML Kit à source fermée
+- Changement : Nouveau sélecteur d'émoji

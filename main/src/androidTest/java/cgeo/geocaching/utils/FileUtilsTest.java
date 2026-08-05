@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileUtilsTest {
 

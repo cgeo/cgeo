@@ -10,7 +10,7 @@ import cgeo.geocaching.brouter.mapaccess.OsmNode;
 
 public final class SearchBoundary {
 
-    public int direction;
+    public final int direction;
     private final int minlon0;
     private final int minlat0;
     private final int maxlon0;

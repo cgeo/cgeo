@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
@@ -29,8 +30,6 @@ import java.util.List;
 public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable input;
-    private WherigoThingDetailsBinding binding;
-
 
     /**
      * Handles Wherigo/OpenWIG Input Dialogs. The following is copied from OpenWIG code for reference
@@ -65,13 +64,17 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         final WherigoGame game = WherigoGame.get();
 
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
+        final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player), binding.getRoot());
 
-        binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        dialog.setView(binding.getRoot());
-        binding.description.setText(game.toDisplayText((String) input.table.rawget("Text")));
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+            TranslationUtils.prepareForTranslation(binding.description.getText()));
 
         binding.media.setMedia((Media) input.table.rawget("Media"));
+        final Object descr = input.table.rawget("Text");
+        binding.description.setText(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
+
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {
             //noinspection SetTextI18n (debug info only)
@@ -80,6 +83,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         final String type = (String) input.rawget("InputType");
         boolean handled = false;
+        final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
 
         if ("Text".equals(type)) {
             binding.dialogInputLayout.setVisibility(VISIBLE);
@@ -89,6 +93,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                     control.setPauseOnDismiss(false);
                     control.dismiss();
                     Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
+                    WherigoSaveFileHandler.get().markSafeWorthyAction();
                 } else {
                     control.dismiss();
                 }
@@ -97,6 +102,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 control.setPauseOnDismiss(false);
                 control.dismiss();
                 Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
+                WherigoSaveFileHandler.get().markSafeWorthyAction();
             });
             Keyboard.show(activity, binding.dialogInputEdittext);
 
@@ -106,18 +112,14 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             final LuaTable choicesTable = (LuaTable) input.table.rawget("Choices");
             final List<String> choices = new ArrayList<>(choicesTable.len());
             for (int i = 0; i < choicesTable.len(); i++) {
-                String choice = (String) choicesTable.rawget((double) (i + 1));
-                if (choice == null) {
-                    choice = "-";
-                }
+                final String choiceRaw = (String) choicesTable.rawget((double) (i + 1));
+                final String choice = choiceRaw == null ? "-" : choiceRaw;
                 choices.add(choice);
             }
 
             if (!choices.isEmpty()) {
 
                 binding.dialogItemlistview.setVisibility(VISIBLE);
-
-                final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
                 choiceModel
                     .setItems(choices)
                     .setDisplayMapper(s -> TextParam.text(game.toDisplayText(s)))
@@ -130,6 +132,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                         if (item) {
                             control.setPauseOnDismiss(false);
                             control.dismiss();
+                            WherigoSaveFileHandler.get().markSafeWorthyAction();
                             Engine.callEvent(input, "OnGetInput", CommonUtils.first(choiceModel.getSelectedItems()));
                         } else {
                             control.dismiss();
@@ -144,12 +147,15 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             WherigoViewUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, 1, item -> WherigoUtils.TP_OK_BUTTON, item -> {
                 control.setPauseOnDismiss(false);
                 control.dismiss();
+                WherigoSaveFileHandler.get().markSafeWorthyAction();
                 Engine.callEvent(input, "OnGetInput", null);
             });
         }
+
+        //retrigger choice paint on trasnlation events
+        control.setOnGameNotificationListener((d, nt) -> choiceModel.triggerRepaint());
+
         dialog.show();
         return dialog;
-
     }
-
 }
