@@ -1,14 +1,14 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
-- Fix: Cannot upload changed coordinates (website change)
-- Fix: Cannot upload personal notes (website change)
+- Korrektur: Kann geänderte Koordinaten nicht hochladen (Webseitenänderung)
+- Korrektur: Kann persönliche Notizen nicht hochladen (Webseitenänderung)
 
 ##
-- Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
+- Fix: Cache- / Wegpunkt-Popup öffnet auf einigen Geräten verzögert
+- Fix: Cache-Beschreibung Bearbeiten unterstützt kein Kopieren & Einfügen
+- Korrektur: Einige Abstürze und "App reagiert nicht"
+- Korrektur: Löschen von Trackable-Logs schlägt fehl (Webseitenänderung)
 
 ##
 - Korrektur: Löschen von Logbildern defekt (Webseitenänderung)
