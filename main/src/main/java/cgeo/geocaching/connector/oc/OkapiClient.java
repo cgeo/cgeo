@@ -363,6 +363,9 @@ final class OkapiClient {
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        if (GeocacheFilter.isAlwaysFalse(filters)) {
+            return new SearchResult();
+        }
 
         // fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
@@ -382,7 +385,7 @@ final class OkapiClient {
 
         String finder = null;
 
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible(connector)) {
+        for (BaseGeocacheFilter baseFilter : filters) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return new SearchResult(); //no need to search if connector is filtered out itself
             }
