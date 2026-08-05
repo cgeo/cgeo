@@ -358,7 +358,12 @@ public class NamedFilter {
 
 
     public static synchronized NamedFilter addNew(final String name, final GeocacheFilter filter) {
+        return addNew(name, filter, EmojiUtils.NO_EMOJI);
+    }
+
+    public static synchronized NamedFilter addNew(final String name, final GeocacheFilter filter, @Nullable final String markerId) {
         final NamedFilter newFilter = new NamedFilter(name, filter);
+        newFilter.setMarkerId(markerId);
         final List<NamedFilter> newList = getAllDeepCopy();
         newList.add(newFilter);
         storeAll(newList);
