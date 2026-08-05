@@ -11,59 +11,59 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Deleting of trackable log fails (website change)
 
 ##
-- Fix: Deleting of log images broken (website change)
-- Change: Unify track and individual route loading buttons
-- Fix: Cache attributes not detected correctly under certain conditions
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Korrektur: Löschen von Logbildern defekt (Webseitenänderung)
+- Änderung: Vereinheitlichung der Buttons zum Laden von Tracks und Individueller Route
+- Fix: Cache-Attribute unter bestimmten Bedingungen nicht korrekt erkannt
+- Korrektur: Loggen von Caches (Webseitenänderung)
+- Korrektur: Loggen von Trackables (Webseitenänderung)
 
 ##
-- Fix: Pocket query import broken (website change)
+- Korrektur: Import von Pocket Queries schlägt fehl (Webseitenänderung)
 
 ##
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Korrektur: Absturz beim Zugriff auf Routen
+- Korrektur: Absturz auf Wegpunkt-Seite
+- Änderung: Suche nach "eigenen Caches" beginnt mit neuen Filtern
+- Korrektur: Nicht gespeicherte Lab-Wegpunkte verlieren "besucht"-Information beim Aktualisieren
+- Korrektur: Wiederkehrende Aufforderung für Update von Routingdaten
+- Korrektur: Zufällige Kartenposition bei Anzeige einer Liste (Google Maps)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Korrektur: Absturz im Cache-Popup
+- Korrektur: Wherigo-Cartridges können nicht mehr heruntergeladen werden (Webseitenänderung)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+ - Änderung: Wherigo-Dateien können momentan nicht heruntergeladen werden, zeige Umgehungslösung an
+ - Korrektur: Grund für das Löschen von Logs erzwingt keine Längenbegrenzung
+ - Neu: Erweitertes Logging für Abstürze im Download-Manager
+ - Korrektur: Wegpunktpopup kann zu lang werden, Buttons nicht erreichbar
+ - Korrektur: Bestimmte Standortinformationen werden abgeschnitten
+ - Korrektur: Internes Routing funktioniert nicht mehr, nur gerade Linie angezeigt
+ - Korrektur: Probleme beim Erstellen von Ordnern
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
-
-##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+Hinweis: Wenn du das interne Routing verwendest, führe nach der Installation dieser Version einmalig folgenden Schritt aus: Gehe zum c:geo Startbildschirm, öffne "Offline-Daten verwalten" - "Routingdaten aktualisieren" und lass c:geo die Updates installieren. (Grund: BRouter Routing Datenstruktur hat sich geändert und alle Routing-Datendateien müssen der gleichen Version entsprechen.)
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Korrektur: Erkennung der Cacheregion schlägt bei manchen Website-Sprachen fehl
+- Korrektur: Öffnen von Trackables aus der Watchlist schlägt fehl
+- Korrektur: Die Tastatur blockiert ggf. die Listenauswahl
+- Korrektur: Benutzerdefinierter Kartenanbieter unterstützt keine zusätzlichen URL-Parameter
+- Korrektur: Inventar / Trackables eines Caches werden nicht mehr geladen/aktualisiert
+- Änderung: Interner User-Agent aktualisiert, um einige Download-Probleme zu lösen
+- Korrektur: Ansehen der Trackable-Details entfernt ihn aus dem Cache-Inventar
 
 ##
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Korrektur: Download-Dialog für Offline-Übersetzungen wird auch in Installationen ohne Unterstützung von Offline-Übersetzungen angezeigt
+- Korrektur: Koordinatenformat wechselt auf Cache/Wegpunkt-Infoseite
+- Korrektur: Logdatum in Logliste abgeschnitten (je nach Datumsformat und Schriftgröße)
+- Korrektur: Event-Zeiten unter bestimmten Bedingungen nicht erkannt
+- Korrektur: Link in Listings unter bestimmten Bedingungen nicht anklickbar
+- Korrektur: Log-Aktionen für Trackables werden manchmal vertauscht
+
+##
+- Änderung: Maximale Anzahl von "Besuchen" von GC-Trackables pro Cache-Log auf 100 reduziert (auf Bitte von geocaching.com hin, um die Serverlast zu reduzieren, die durch extreme Trackable-Liebhaber verursacht wird)
+- Korrektur: Mögliche Sicherheits-Abbrüche, wenn der Benutzer bestimmte Rechte nicht gewährt hat (z. B.: Benachrichtigungen)
+- Korrektur: Cache-Kreise unvollständig bei niedrigen Zoomstufen (nur VTM)
 - Fix: Crash on reloading waypoints in certain load conditions
 - Fix: Event date filter not working under certain conditions
 - Fix: Max log line limit not working reliably in "unlimited" setting
