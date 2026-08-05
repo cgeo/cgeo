@@ -2,7 +2,6 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -29,7 +28,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NonNull final Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
-            this.progressMessage = LocalizationUtils.getString(progressMessageId);
+            this.progressMessage = context.getString(progressMessageId);
         }
     }
 
@@ -57,21 +56,8 @@ public abstract class AbstractCommand implements Command {
      * <p>
      * This runs in a <b>non</b> UI thread.
      * </p>
-     * <p>
-     * The default implementation is a no-op.  Override only when {@link #supportsUndo()} returns
-     * {@code true} (the default).
-     * </p>
      */
-    protected void undoCommand() {
-    }
-
-    /**
-     * Returns whether this command supports undo.  When {@code false}, the Snackbar shown after
-     * execution will not include an UNDO action button.  Defaults to {@code true}.
-     */
-    protected boolean supportsUndo() {
-        return true;
-    }
+    protected abstract void undoCommand();
 
     /**
      * Called after the execution of {@link #doCommand()} or {@link #undoCommand()} finished.
@@ -138,15 +124,10 @@ public abstract class AbstractCommand implements Command {
         @SuppressLint("WrongConstant")
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
-                final View navBar = context.findViewById(R.id.activity_navigationBar);
-                final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
-
-                final Snackbar snackbar = Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
-                        .setAnchorView(isNavBarVisible ? navBar : context.findViewById(android.R.id.navigationBarBackground));
-                if (supportsUndo()) {
-                    snackbar.setAction(LocalizationUtils.getString(R.string.undo), this);
-                }
-                snackbar.show();
+                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
+                        .setAction(context.getString(R.string.undo), this)
+                        .setAnchorView(context.findViewById(R.id.activity_navigationBar))
+                        .show();
             }
         }
 

@@ -50,17 +50,6 @@ public class NoopTranslateAccessor implements ITranslateAccessor {
     @Override
     public ITranslatorImpl getTranslator(final String sourceLanguage, final String targetLanguage) {
         return new ITranslatorImpl() {
-
-            @Override
-            public String getSourceLanguage() {
-                return sourceLanguage;
-            }
-
-            @Override
-            public String getTargetLanguage() {
-                return targetLanguage;
-            }
-
             @Override
             public void translate(final String source, final Consumer<String> onSuccess, final Consumer<Exception> onError) {
                 runOnScheduler(() -> onSuccess.accept(source));

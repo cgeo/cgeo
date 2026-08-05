@@ -1,9 +1,9 @@
 package cgeo.geocaching.settings.fragments;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -13,7 +13,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class PreferenceServiceGeocachingComAdventureLabsFragment extends PreferenceFragmentCompat {
     @Override
@@ -26,7 +25,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_al_website));
         final String urlOrHost = ALConnector.getInstance().getHost();
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
-            final String url = Strings.CS.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
@@ -57,6 +56,6 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         final int lcStatusTextId = gcConnectorActive && Settings.isGCPremiumMember() ?
                 R.string.settings_service_active : R.string.settings_service_active_unavailable;
 
-        return LocalizationUtils.getString(lcStatusTextId);
+        return CgeoApplication.getInstance().getString(lcStatusTextId);
     }
 }

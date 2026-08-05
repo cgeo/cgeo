@@ -6,11 +6,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
-import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -41,7 +40,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
         final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
         final ProgressDialog waitDialog =
-                ProgressDialog.show(this, LocalizationUtils.getString(R.string.search_address_started), keyword, true);
+                ProgressDialog.show(this, res.getString(R.string.search_address_started), keyword, true);
         waitDialog.setCancelable(true);
         lookupAddressInBackground(keyword, adapter, waitDialog);
     }
@@ -59,7 +58,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
         }, throwable -> {
             finish();
             Log.w("AddressList: Problem retrieving address data", throwable);
-            showToast(LocalizationUtils.getString(R.string.err_unknown_address));
+            showToast(res.getString(R.string.err_unknown_address));
         });
     }
 

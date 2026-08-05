@@ -3,17 +3,17 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class UnitsTest {
 
     private static void assertDistance(final String expected, final float distance) {
         final String actual = Units.getDistanceFromKilometers(distance);
-        if (!Strings.CS.equals(expected, actual.replace(',', '.'))) { // make 1.2 the same as 1,2
+        if (!StringUtils.equals(expected, actual.replace(',', '.'))) { // make 1.2 the same as 1,2
             fail("getHumanDistance(" + distance +
                     ") [metric: " + (!Settings.useImperialUnits() ? "yes" : "no") +
                     "] fails to match " + expected + ": " + actual);
@@ -65,7 +65,7 @@ public class UnitsTest {
 
     private static void assertSpeed(final String expected, final float kilometersPerHour) {
         final String actual = Units.getSpeed(kilometersPerHour);
-        if (!Strings.CS.equals(expected, actual.replace(',', '.'))) {
+        if (!StringUtils.equals(expected, actual.replace(',', '.'))) {
             fail("speed " + actual + " does not match expected " + expected);
         }
     }

@@ -1,6 +1,7 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.utils.JsonUtils;
 
@@ -23,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Abstraction of geographic point. This class is immutable.
  */
-public final class Geopoint implements ICoordinate, Parcelable {
+public final class Geopoint implements GeoPointImpl, Parcelable {
 
     public enum LatLon {
         LAT,
@@ -318,6 +319,7 @@ public final class Geopoint implements ICoordinate, Parcelable {
         }
     }
 
+    @Override
     public Geopoint getCoords() {
         return this;
     }

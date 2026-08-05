@@ -4,6 +4,7 @@
     android:id="@+id/image_gallery"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:padding="4dip"
     tools:context=".CacheDetailActivity$ImageGalleryCreator">
 
 </cgeo.geocaching.ui.ImageGalleryView>

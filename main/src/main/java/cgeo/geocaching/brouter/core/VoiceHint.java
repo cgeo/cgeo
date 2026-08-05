@@ -26,10 +26,6 @@ public class VoiceHint {
     public static final int RNLB = 14; // Roundabout left
     public static final int TU = 15; // 180 degree u-turn
     public static final int BL = 16; // Beeline routing
-    public static final int EL = 17; // exit left
-    public static final int ER = 18; // exit right
-
-    public static final int END = 100; // end point
 
     public int ilon;
     public int ilat;
@@ -41,9 +37,6 @@ public class VoiceHint {
     public double distanceToNext;
     public int indexInTrack;
     float angle = Float.MAX_VALUE;
-    float lowerBadWayAngle = -181;
-    float higherBadWayAngle = 181;
-
     public boolean turnAngleConsumed;
     public boolean needsRealTurn;
     int maxBadPrio = -1;
@@ -71,7 +64,7 @@ public class VoiceHint {
         return cmd;
     }
 
-    public int getJsonCommandIndex(final int timode) {
+    public int getJsonCommandIndex() {
         switch (cmd) {
             case TLU:
                 return 10;
@@ -103,10 +96,6 @@ public class VoiceHint {
                 return 14;
             case BL:
                 return 16;
-            case EL:
-                return timode == 2 || timode == 9 ? 17 : 8;
-            case ER:
-                return timode == 2 || timode == 9 ? 18 : 9;
             case OFFR:
                 return 12;
             default:
@@ -121,7 +110,7 @@ public class VoiceHint {
     /*
      * used by comment style, osmand style
      */
-    public String getCommandString(final int timode) {
+    public String getCommandString() {
         switch (cmd) {
             case TLU:
                 return "TU";  // should be changed to TLU when osmand uses new voice hint constants
@@ -153,14 +142,8 @@ public class VoiceHint {
                 return "RNLB" + (-roundaboutExit);
             case BL:
                 return "BL";
-            case EL:
-                return timode == 2 || timode == 9 ? "EL" : "KL";
-            case ER:
-                return timode == 2 || timode == 9 ? "ER" : "KR";
             case OFFR:
                 return "OFFR";
-            case END:
-                return "END";
             default:
                 throw new IllegalArgumentException("unknown command: " + cmd);
         }
@@ -169,7 +152,7 @@ public class VoiceHint {
     /*
      * used by trkpt/sym style
      */
-    public String getCommandString(final int c, final int timode) {
+    public String getCommandString(int c) {
         switch (c) {
             case TLU:
                 return "TLU";
@@ -201,10 +184,6 @@ public class VoiceHint {
                 return "RNLB" + (-roundaboutExit);
             case BL:
                 return "BL";
-            case EL:
-                return timode == 2 || timode == 9 ? "EL" : "KL";
-            case ER:
-                return timode == 2 || timode == 9 ? "ER" : "KR";
             case OFFR:
                 return "OFFR";
             default:
@@ -215,7 +194,7 @@ public class VoiceHint {
     /*
      * used by gpsies style
      */
-    public String getSymbolString(final int timode) {
+    public String getSymbolString() {
         switch (cmd) {
             case TU:
                 return "TU";
@@ -245,10 +224,6 @@ public class VoiceHint {
                 return "RNLB" + (-roundaboutExit);
             case BL:
                 return "BL";
-            case EL:
-                return timode == 2 || timode == 9 ? "EL" : "KL";
-            case ER:
-                return timode == 2 || timode == 9 ? "ER" : "KR";
             case OFFR:
                 return "OFFR";
             default:
@@ -291,10 +266,6 @@ public class VoiceHint {
                 return "roundabout_e" + (-roundaboutExit);
             case BL:
                 return "beeline";
-            case EL:
-                return "exit_left";
-            case ER:
-                return "exit_right";
             default:
                 throw new IllegalArgumentException("unknown command: " + cmd);
         }
@@ -303,7 +274,7 @@ public class VoiceHint {
     /*
      * used by osmand style
      */
-    public String getMessageString(final int timode) {
+    public String getMessageString() {
         switch (cmd) {
             case TLU:
                 return "u-turn"; // should be changed to u-turn-left when osmand uses new voice hint constants
@@ -333,10 +304,6 @@ public class VoiceHint {
                 return "Take exit " + roundaboutExit;
             case RNLB:
                 return "Take exit " + (-roundaboutExit);
-            case EL:
-                return timode == 2 || timode == 9 ? "exit left" : "keep left";
-            case ER:
-                return timode == 2 || timode == 9 ? "exit right" : "keep right";
             default:
                 throw new IllegalArgumentException("unknown command: " + cmd);
         }
@@ -375,10 +342,6 @@ public class VoiceHint {
                 return 26 + roundaboutExit;
             case RNLB:
                 return 26 - roundaboutExit;
-            case EL:
-                return 9;
-            case ER:
-                return 10;
             default:
                 throw new IllegalArgumentException("unknown command: " + cmd);
         }
@@ -417,10 +380,6 @@ public class VoiceHint {
                 return 1008 + roundaboutExit;
             case RNLB:
                 return 1008 + roundaboutExit;
-            case EL:
-                return 1015;
-            case ER:
-                return 1014;
             default:
                 throw new IllegalArgumentException("unknown command: " + cmd);
         }
@@ -461,10 +420,6 @@ public class VoiceHint {
                 return "RNLB" + (-roundaboutExit);
             case BL:
                 return "BL";
-            case EL:
-                return "EL";
-            case ER:
-                return "ER";
             case OFFR:
                 return "OFFR";
             default:
@@ -507,10 +462,6 @@ public class VoiceHint {
                 return "take exit " + (-roundaboutExit);
             case BL:
                 return "beeline";
-            case EL:
-                return "exit left";
-            case ER:
-                return "exit right";
             case OFFR:
                 return "offroad";
             default:
@@ -519,6 +470,8 @@ public class VoiceHint {
     }
 
     public void calcCommand() {
+        float lowerBadWayAngle = -181;
+        float higherBadWayAngle = 181;
         if (badWays != null) {
             for (MessageData badWay : badWays) {
                 if (badWay.isBadOneway()) {
@@ -582,11 +535,7 @@ public class VoiceHint {
             } else if (lowerBadWayAngle >= -100.f && higherBadWayAngle < 45.f) {
                 cmd = KL;
             } else {
-                if (lowerBadWayAngle > -35.f && higherBadWayAngle > 55.f) {
-                    cmd = KR;
-                } else {
-                    cmd = C;
-                }
+                cmd = C;
             }
         } else if (cmdAngle < 5.f) {
             if (lowerBadWayAngle > -30.f) {
@@ -603,11 +552,7 @@ public class VoiceHint {
             } else if (lowerBadWayAngle > -45.f && higherBadWayAngle <= 100.f) {
                 cmd = KR;
             } else {
-                if (lowerBadWayAngle < -55.f && higherBadWayAngle < 35.f) {
-                    cmd = KL;
-                } else {
-                    cmd = C;
-                }
+                cmd = C;
             }
         } else if (cmdAngle < 45.f) {
             cmd = TSLR;
@@ -654,18 +599,6 @@ public class VoiceHint {
 
     private void appendTurnGeometry(final StringBuilder sb, final MessageData msg) {
         sb.append("(").append((int) (msg.turnangle + 0.5)).append(")").append(msg.priorityclassifier);
-    }
-
-
-    public boolean hasGiveWay() {
-        if (oldWay != null && oldWay.nodeKeyValues != null) {
-            if (oldWay.wayKeyValues.contains("reversedirection=yes")) {
-                return (oldWay.nodeKeyValues.contains("highway=give_way") || oldWay.nodeKeyValues.contains("highway=stop")) && oldWay.nodeKeyValues.contains("direction=backward");
-            } else {
-                return (oldWay.nodeKeyValues.contains("highway=give_way") || oldWay.nodeKeyValues.contains("highway=stop")) && !oldWay.nodeKeyValues.contains("direction=backward");
-            }
-        }
-        return false;
     }
 
 }

@@ -63,13 +63,6 @@
         android:visibility="gone"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/menu_clear_target"
-        android:icon="@drawable/ic_menu_clear_target"
-        android:title="@string/map_clear_manual_targets"
-        app:iconTint="@color/colorIconMenu"
-        android:visibility="gone"
-        app:showAsAction="always"/>
-    <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
         app:iconTint="@color/colorIconMenu"

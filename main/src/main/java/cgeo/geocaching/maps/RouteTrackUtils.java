@@ -11,7 +11,6 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteOptimizationHelper;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.NavigationTargetRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
@@ -29,16 +28,13 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -66,9 +62,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.map.android.hills.DemFolderAndroidContent;
-import org.mapsforge.map.elevation.ElevationAPI;
-import org.mapsforge.map.layer.hills.DemFolder;
 
 public class RouteTrackUtils {
 
@@ -148,10 +141,10 @@ public class RouteTrackUtils {
     // route/track context menu-related methods
 
     /** show a popup for track/individual route, opened by using a long-tap on that item on the map */
-    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action2<Route, Boolean> handleLongTapOnRoutesOrTracks, final Route route, final Runnable onDelete) {
+    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action2<Route, Boolean> handleLongTapOnRoutesOrTracks, final Route route) {
         final SimplePopupMenu menu = SimplePopupMenu.of(activity).setMenuContent(R.menu.map_routetrack_context).setPosition(new Point(tapX, tapY), 0);
         menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, handleLongTapOnRoutesOrTracks != null, route, true));
-        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route, onDelete));
+        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route, null));
         menu.show();
     }
 
@@ -159,27 +152,24 @@ public class RouteTrackUtils {
         MenuUtils.enableIconsInOverflowMenu(menu);
 
         final boolean isIndividualRoute = isIndividualRoute(route);
-        final boolean isNavigationTargetRoute = isNavigationTargetRoute(route);
         final MenuItem elevationChart = menu.findItem(R.id.menu_showElevationChart);
         configureMenuItem(elevationChart, showElevationChart, null);
         elevationChart.setEnabled(route instanceof Route);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute && !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute && !isNavigationTargetRoute, null);
+        configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_center), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_optimize), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_refresh), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_invert_order), isIndividualRoute, null);
-        configureMenuItem(menu.findItem(R.id.menu_visibility), route != null && !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_delete), !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_clear_target), isNavigationTargetRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_visibility), route != null, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_delete), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.indivroute_export_route), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_export_track), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_load), isIndividualRoute, null);
         configureVisibility(menu.findItem(R.id.menu_visibility), route != null && route.isHidden());
     }
 
-    @SuppressLint("AlwaysShowAction")
     private static void configureMenuItem(final MenuItem item, final boolean visible, final Boolean hidePerDefault) {
         item.setVisible(visible);
         if (hidePerDefault != null) {
@@ -189,7 +179,7 @@ public class RouteTrackUtils {
 
     private static void configureVisibility(final MenuItem item, final boolean isHidden) {
         item.setIcon(isHidden ? R.drawable.visibility_off : R.drawable.visibility);
-        item.setTitle(LocalizationUtils.getString(isHidden ? R.string.make_visible : R.string.hide));
+        item.setTitle(CgeoApplication.getInstance().getString(isHidden ? R.string.make_visible : R.string.hide));
     }
 
     public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
@@ -212,7 +202,7 @@ public class RouteTrackUtils {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
         } else if (id == R.id.menu_rename) {
             tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
-                    .setTitle(TextParam.text(LocalizationUtils.getString(R.string.routes_tracks_change_name)))
+                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
                     .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
                         if (StringUtils.isNotBlank(newName)) {
                             tracks.setDisplayname(key, newName);
@@ -247,17 +237,13 @@ public class RouteTrackUtils {
                     }
                 });
             } else {
-                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(LocalizationUtils.getString(R.string.map_clear_track_confirm, tracks.getDisplayname(key)))).confirm(() -> {
+                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
                     tracks.remove(key);
                     updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
                     if (onDelete != null) {
                         onDelete.run();
                     }
                 }));
-            }
-        } else if (id == R.id.menu_clear_target) {
-            if (onDelete != null) {
-                onDelete.run();
             }
         } else if (id == R.id.menu_refresh && isIndividualRoute(route)) {
             // create list of geocodes contained in individual route (including geocodes for contained waypoints)
@@ -454,55 +440,4 @@ public class RouteTrackUtils {
     public static boolean isIndividualRoute(final IGeoItemSupplier route) {
         return route instanceof IndividualRoute;
     }
-
-    public static boolean isNavigationTargetRoute(final IGeoItemSupplier route) {
-        return route instanceof NavigationTargetRoute;
-    }
-
-    /**
-     * Adds missing elevation data (tracks only)
-     */
-    public static void addMissingElevationData(final Route route) {
-        if (!route.isRouteable()) {
-            final RouteSegment[] segments = route.getSegments();
-            for (RouteSegment segment : segments) {
-                if (null == segment.getElevation() || segment.getElevation().size() != segment.getSize()) {
-                    final ArrayList<Float> newElevation = getElevation(segment.getPoints());
-                    if (newElevation != null && !newElevation.isEmpty()) {
-                        segment.setElevation(newElevation);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Retrieves elevation data for given list of points
-     * <br />
-     * Uses fast elevation data retrieval from Mapsforge's hillshading routines - requires
-     * hillshading data to be downloaded first, but is independent of current map type
-     */
-    @Nullable
-    public static ArrayList<Float> getElevation(@NonNull final ArrayList<Geopoint> points) {
-        if (points.isEmpty()) {
-            return null;
-        }
-
-        final List<double[]> tempIn = new ArrayList<>();
-        for (Geopoint geo : points) {
-            tempIn.add(new double[]{ geo.getLatitude(), geo.getLongitude()});
-        }
-
-        final Context context = CgeoApplication.getInstance();
-        final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
-        final double[] tempOut = new double[points.size()];
-        new ElevationAPI(shadingFolder).getElevation(tempIn, tempOut);
-
-        final ArrayList<Float> result = new ArrayList<>(tempOut.length);
-        for (double d : tempOut) {
-            result.add((float) d);
-        }
-        return result;
-    }
-
 }

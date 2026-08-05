@@ -5,7 +5,6 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import cgeo.geocaching.brouter.mapaccess.MatchedWaypoint;
 import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
@@ -14,7 +13,7 @@ public class OsmNodeNamed extends OsmNode {
     public double radius; // radius of nogopoint (in meters)
     public double nogoWeight;  // weight for nogopoint
     public boolean isNogo = false;
-    public byte wpttype = MatchedWaypoint.WAYPOINT_TYPE_SHAPING; // set default type
+    public boolean direct = false; // mark direct routing
 
     public OsmNodeNamed() {
     }

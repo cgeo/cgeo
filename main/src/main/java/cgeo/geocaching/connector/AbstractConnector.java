@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
@@ -18,7 +19,6 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -57,8 +57,8 @@ public abstract class AbstractConnector implements IConnector {
         return strippedList;
     }
 
+    @NotNull
     @Override
-    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"%"}; //will match everything
     }
@@ -80,6 +80,7 @@ public abstract class AbstractConnector implements IConnector {
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
         throw new UnsupportedOperationException();
     }
+
 
     @Override
     public boolean supportsLogging() {
@@ -156,7 +157,7 @@ public abstract class AbstractConnector implements IConnector {
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String urlPrefix = getCacheUrlPrefix();
-        if (StringUtils.isEmpty(urlPrefix) || Strings.CS.startsWith(url, urlPrefix)) {
+        if (StringUtils.isEmpty(urlPrefix) || StringUtils.startsWith(url, urlPrefix)) {
             final String geocode = url.substring(urlPrefix.length());
             if (canHandle(geocode)) {
                 return geocode;
@@ -353,7 +354,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     private static String feature(@StringRes final int featureResourceId) {
-        return LocalizationUtils.getString(featureResourceId);
+        return CgeoApplication.getInstance().getString(featureResourceId);
     }
 
     @Override
@@ -399,18 +400,12 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     public String getShortHost() {
-        return Strings.CS.remove(getHost(), "www.");
+        return StringUtils.remove(getHost(), "www.");
     }
 
     @Override
     @Nullable
     public String getCreateAccountUrl() {
-        return null;
-    }
-
-    @Override
-    @Nullable
-    public String getMyAccountUrl() {
         return null;
     }
 

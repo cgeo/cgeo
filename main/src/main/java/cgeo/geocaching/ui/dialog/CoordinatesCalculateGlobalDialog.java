@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.CoordinatescalculateglobalDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.CacheVariableList;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
@@ -13,7 +14,6 @@ import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
 import cgeo.geocaching.ui.SimpleItemListModel;
@@ -21,7 +21,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -74,7 +73,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private VariableList varList;
     private VariableListView.VariablesListAdapter varListAdapter;
 
-    private static DialogCallback callback;
     private CoordinatescalculateglobalDialogBinding binding;
 
     private final TextSpinner<CalculatedCoordinateType> displayType = new TextSpinner<>();
@@ -92,8 +90,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
-        if (activity instanceof CoordinateInputDialog.CoordinateUpdate) {
-            ((CoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
+        if (activity instanceof CoordinatesInputDialog.CoordinateUpdate) {
+            ((CoordinatesInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
 
         //save changes to the var list
@@ -106,8 +104,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     /**
      * Displays an instance of the calculator dialog
      */
-    public static void show(final FragmentManager mgr, final DialogCallback callbackMethod, final CoordinateInputData initialState) {
-        callback = callbackMethod;
+    public static void show(final FragmentManager mgr, final CoordinateInputData initialState) {
         final CoordinatesCalculateGlobalDialog ccd = new CoordinatesCalculateGlobalDialog();
         final Bundle args = new Bundle();
         args.putParcelable(ARG_INPUT_DATA, initialState);
@@ -138,9 +135,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                     this.varList = cache.getVariables();
                 }
             }
-        }
-        if (varList == null) {
-            varList = new VariableList();
+            if (varList == null) {
+                varList = new VariableList();
+            }
         }
     }
 
@@ -170,7 +167,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding = CoordinatescalculateglobalDialogBinding.inflate(inflater, container, false);
         binding.NonPlainFormat.setVisibility(View.GONE);
-        binding.NonPlainFormat.setVariableList(varList);
         binding.ccSwitchGuided.setChecked(false);
         binding.ccGuidedFormat.setVisibility(View.GONE);
 
@@ -198,21 +194,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         }
 
         binding.convertToPlain.setOnClickListener(v -> {
-            // When the callback is hit it will clear the calculator state associated with the waypoint
             final CoordinateInputData cid = createFromDialog();
-            final Geopoint plainGp = cid.getGeopoint();
-            if (plainGp == null) {
-                SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_convert_to_plain)
-                        .setMessage(TextParam.id(R.string.calccoord_convert_to_plain_error))
-                        .setPositiveButton(TextParam.id(R.string.button_continue))
-                        .setNegativeButton(TextParam.id(R.string.cancel))
-                        .confirm(() -> {
-                            callback.onDialogClosed(null);
-                            dismiss();
-                        });
-                return;
-            }
-            callback.onDialogClosed(plainGp);
+            cid.setCalculatedCoordinate(null);
+            CoordinatesInputDialog.show(this.requireActivity().getSupportFragmentManager(), cid);
             dismiss();
         });
 
@@ -259,7 +243,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         });
 
         binding.ccSwitchGuided.setOnCheckedChangeListener((v, c) -> {
-            Settings.putBoolean(R.string.pref_preferGuidedCoordFormulaInput, c);
             if (!c) {
                 refreshType(PLAIN, false);
             } else {
@@ -313,8 +296,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
+        if (!initialLoad && calcCoord.getType() == newType) {
+            return;
+        }
+
         calcCoord.setType(newType);
-        final boolean isGuidedMode = newType != PLAIN && Settings.getBoolean(R.string.pref_preferGuidedCoordFormulaInput, true);
 
         Geopoint currentGp = null;
         if (calcCoord != null) {
@@ -323,22 +309,22 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         if (currentGp == null) {
             currentGp = geopoint;
         }
-        binding.PlainFormat.setVisibility(!isGuidedMode ? View.VISIBLE : View.GONE);
-        binding.NonPlainFormat.setVisibility(isGuidedMode ? View.VISIBLE : View.GONE);
-        if (!isGuidedMode) {
+        binding.PlainFormat.setVisibility(newType == PLAIN ? View.VISIBLE : View.GONE);
+        binding.NonPlainFormat.setVisibility(newType != PLAIN ? View.VISIBLE : View.GONE);
+        if (newType == PLAIN) {
             binding.NonPlainFormat.unmarkButtons();
         }
-        binding.ccGuidedFormat.setVisibility(!isGuidedMode ? View.GONE : View.VISIBLE);
-        binding.ccSwitchGuided.setChecked(isGuidedMode);
-        if (isGuidedMode) {
+        binding.ccGuidedFormat.setVisibility(newType == PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccSwitchGuided.setChecked(newType != PLAIN);
+        if (newType != PLAIN) {
             displayType.set(newType);
         }
-        binding.ccPlainTools.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
+        binding.ccPlainTools.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
 
-        binding.ccPaste.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
+        binding.ccPaste.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
         binding.ccPaste.setEnabled(!FormulaUtils.scanForCoordinates(Collections.singleton(ClipboardUtils.getText()), null).isEmpty());
 
-        if (!isGuidedMode) {
+        if (newType == PLAIN) {
             if (initialLoad) {
                 binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
                 binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
@@ -446,7 +432,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         }
 
         if (changed) {
-            ActivityMixin.showShortToast(this.getActivity(), LocalizationUtils.getString(R.string.waypoint_added));
+            ActivityMixin.showShortToast(this.getActivity(), getString(R.string.waypoint_added));
         }
     }
 

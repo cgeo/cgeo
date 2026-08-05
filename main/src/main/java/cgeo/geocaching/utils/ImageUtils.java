@@ -45,7 +45,6 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.BitmapCompat;
 import androidx.core.util.Predicate;
@@ -83,7 +82,6 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
@@ -367,7 +365,7 @@ public final class ImageUtils {
      */
     public static boolean containsPattern(final String url, final String[] patterns) {
         for (final String entry : patterns) {
-            if (Strings.CI.contains(url, entry)) {
+            if (StringUtils.containsIgnoreCase(url, entry)) {
                 return true;
             }
         }
@@ -537,9 +535,6 @@ public final class ImageUtils {
         // Manipulate the URL to load the requested size.
         final GCImageSize preferredSize = EnumUtils.getEnum(ImageUtils.GCImageSize.class,
                 Settings.getString(R.string.pref_gc_imagesize, null), GCImageSize.ORIGINAL);
-        if (preferredSize == GCImageSize.UNCHANGED) {
-            return imageUrl;
-        }
         MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
         if (matcherViewstates.find()) {
             return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
@@ -553,21 +548,18 @@ public final class ImageUtils {
     }
 
     public enum GCImageSize {
-        UNCHANGED("", "", R.string.settings_gc_imagesize_entry_unchanged),
-        ORIGINAL("", "", R.string.settings_gc_imagesize_entry_original),
-        LARGE("_l", "large/", R.string.settings_gc_imagesize_entry_large),
-        DISPLAY("_d", "display/", R.string.settings_gc_imagesize_entry_diplay),
-        SMALL("_sm", "small/", R.string.settings_gc_imagesize_entry_small),
-        THUMB("_t", "thumb/", R.string.settings_gc_imagesize_entry_thumb);
+        ORIGINAL("", ""),
+        LARGE("_l", "large/"),
+        DISPLAY("_d", "display/"),
+        SMALL("_sm", "small/"),
+        THUMB("_t", "thumb/");
 
         private final String suffix;
         private final String pathname;
-        private final int label;
 
-        GCImageSize(final String suffix, final String pathname, final @StringRes int label) {
+        GCImageSize(final String suffix, final String pathname) {
             this.suffix = suffix;
             this.pathname = pathname;
-            this.label = label;
         }
 
         public String getPathname() {
@@ -576,10 +568,6 @@ public final class ImageUtils {
 
         public String getSuffix() {
             return suffix;
-        }
-
-        public int getLabel() {
-            return label;
         }
     }
 
@@ -759,7 +747,7 @@ public final class ImageUtils {
         //go through file provider so we can share the Uri with e.g. camera app
         return new ImmutablePair<>(imageFileName, FileProvider.getUriForFile(
                 CgeoApplication.getInstance().getApplicationContext(),
-                LocalizationUtils.getPlainString(R.string.file_provider_authority),
+                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
                 image));
     }
 
@@ -865,7 +853,7 @@ public final class ImageUtils {
             return null;
         }
         file.deleteOnExit();
-        final String authority = LocalizationUtils.getPlainString(R.string.file_provider_authority);
+        final String authority = context.getString(R.string.file_provider_authority);
         return FileProvider.getUriForFile(context, authority, file);
 
     }

@@ -41,10 +41,9 @@ public class DisplayUtils {
         return metrics;
     }
 
-    public static int calculateNoOfColumns(final Context context, final @DimenRes int columnWidthRes) {
+    public static int calculateNoOfColumns(final Context context, final float columnWidthDp) {
         final DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         final float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
-        final float columnWidthDp = getDimensionInDp(context.getResources(), columnWidthRes);
         return (int) (screenWidthDp / columnWidthDp + 0.5);
     }
 

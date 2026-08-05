@@ -9,16 +9,10 @@
     android:background="@color/colorBackgroundActionBar">
 
     <Space
-        android:id="@+id/spacer"
+        android:id="@+id/actionBarSpacer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height"
-        android:visibility="gone" />
-
-    <cgeo.geocaching.wherigo.WherigoInfoBarView
-        android:id="@+id/wherigo_info_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spacer"/>
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/filter_bar"
@@ -26,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/sort_bar"
-        android:layout_below="@id/wherigo_info_bar"
+        android:layout_below="@id/actionBarSpacer"
         android:orientation="horizontal"
         android:visibility="gone"
         tools:ignore="UseCompoundDrawables"

@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
@@ -7,11 +8,10 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFileUtils.isValidMapFile;
+import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -32,7 +32,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TileProviderFactory {
@@ -55,7 +54,7 @@ public class TileProviderFactory {
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
             boolean hide = false;
             for (String comp : hideTileproviders) {
-                if (Strings.CS.equals(comp, tileProvider.getId())) {
+                if (StringUtils.equals(comp, tileProvider.getId())) {
                     hide = true;
                 }
             }
@@ -76,8 +75,9 @@ public class TileProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && ctp.supportsHillshading());
         parentMenu.findItem(R.id.menu_backgroundmap).setCheckable(true).setChecked(Settings.getMapBackgroundMapLayer()).setVisible(ctp.supportsBackgroundMaps());
+        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getTileProvider().supportsHillshading());
         parentMenu.findItem(R.id.menu_download_backgroundmap).setVisible(ctp.supportsBackgroundMaps);
-        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
+        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
@@ -171,16 +171,13 @@ public class TileProviderFactory {
                 registerTileProvider(data.right);
             }
         }
-
         // --------------------------------------------------------------------
-        // "no map" tile provider
-        registerTileProvider(new NoMapMapsforgeTileProvider());
     }
 
     private static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        final String mapsKey = LocalizationUtils.getPlainString(R.string.maps_api2_key);
-        if (StringUtils.length(mapsKey) < 30 || Strings.CS.contains(mapsKey, "key")) {
+        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
+        if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;
         }
@@ -272,4 +269,5 @@ public class TileProviderFactory {
     public static void resetLanguages() {
         languages = new String[]{};
     }
+
 }

@@ -14,6 +14,9 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ScalableDrawable;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.functions.Func2;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,10 +30,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -43,7 +44,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -65,26 +65,20 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
+import androidx.core.util.Consumer;
+import androidx.core.util.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.progressindicator.CircularProgressIndicatorSpec;
-import com.google.android.material.progressindicator.IndeterminateDrawable;
-import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -109,7 +103,7 @@ public class ViewUtils {
     }
 
     public static float dpToPixelFloat(final float dp) {
-        return dp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density);
+        return dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density);
     }
 
     public static int spToPixel(final float sp) {
@@ -117,11 +111,11 @@ public class ViewUtils {
     }
 
     public static float spToPixelFloat(final float sp) {
-        return sp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().scaledDensity);
+        return sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity);
     }
 
     public static int pixelToDp(final float px) {
-        return (int) (px / (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density));
+        return (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
     public static void setTooltip(final View view, final TextParam text) {
@@ -146,45 +140,6 @@ public class ViewUtils {
             return;
         }
         view.setVisibility(visibility);
-    }
-
-    /**
-     * Sets text for given TextView (without crashing on null view)
-     */
-    public static void setText(final TextView view, final String text) {
-        if (view != null) {
-            view.setText(text);
-        }
-    }
-
-    /**
-     * Sets text for given TextView (without crashing on null view)
-     */
-    public static void setText(final TextView view, final @StringRes int textId) {
-        TextParam.id(textId).applyTo(view);
-    }
-
-    public static void setMaxTextLength(@NonNull final EditText textField, @Nullable final TextInputLayout textLayout, final int maxLength) {
-        if (textLayout != null) {
-            textLayout.setCounterEnabled(maxLength > 0);
-            textLayout.setCounterMaxLength(maxLength);
-        }
-
-        if (maxLength > 0) {
-            final InputFilter.LengthFilter lengthFilter = new InputFilter.LengthFilter(maxLength);
-            textField.setFilters(new InputFilter[]{lengthFilter});
-        }
-    }
-
-    /** implicitly sets focus on touch + forwards touch event to trigger original action */
-    @SuppressLint("ClickableViewAccessibility")
-    public static void setImplicitFocusOnTouch(@NonNull final TextView tv) {
-        tv.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                v.requestFocus();
-            }
-            return false;
-        });
     }
 
     /**
@@ -225,7 +180,7 @@ public class ViewUtils {
      *                          May return null for some columns, in which case those are empty
      * @return new ViewGroup holding the column layout. If "root" was not null, then "root" is returned.
      */
-    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Function<Integer, View> columnViewCreator) {
+    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Func1<Integer, View> columnViewCreator) {
 
         final List<Float> columnWidths = new ArrayList<>();
         for (int c = 0; c < columnCount * 2 - 1; c++) {
@@ -238,13 +193,13 @@ public class ViewUtils {
                 return ViewUtils.createVerticalSeparator(ctx, !withSeparator);
             }
 
-            return columnViewCreator.apply(i / 2);
+            return columnViewCreator.call(i / 2);
         }, (i, f) -> f);
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, String> itemTextMapper) {
+    public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, String> itemTextMapper) {
         return createHorizontallyDistributedViews(ctx, root, items, (idx, item) -> {
-            final String itemText = item == null ? null : itemTextMapper.apply(idx, item);
+            final String itemText = item == null ? null : itemTextMapper.call(idx, item);
             if (itemText != null) {
                 final TextView tv = new TextView(ctx);
                 tv.setText(itemText);
@@ -259,11 +214,11 @@ public class ViewUtils {
         });
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator) {
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator) {
         return createHorizontallyDistributedViews(ctx, root, items, viewCreator, null);
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator, final BiFunction<Integer, T, Float> weightCreator) {
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator, final Func2<Integer, T, Float> weightCreator) {
 
         final LinearLayout viewGroup = root == null ? new LinearLayout(ctx) : root;
         viewGroup.setOrientation(LinearLayout.HORIZONTAL);
@@ -271,9 +226,9 @@ public class ViewUtils {
         int idx = 0;
         for (T item : items) {
             final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.weight = weightCreator == null ? 1 : weightCreator.apply(idx, item);
+            lp.weight = weightCreator == null ? 1 : weightCreator.call(idx, item);
 
-            View itemView = viewCreator.apply(idx, item);
+            View itemView = viewCreator.call(idx, item);
             if (itemView == null) {
                 itemView = new View(ctx);
             }
@@ -779,9 +734,9 @@ public class ViewUtils {
     }
 
     /** null-safe call to view */
-    public static void applyToView(@Nullable final View view, final Consumer<View> applyMethod) {
+    public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
         if (view != null) {
-            applyMethod.accept(view);
+            applyMethod.call(view);
         }
     }
 
@@ -845,7 +800,7 @@ public class ViewUtils {
         if (gp != null) {
             textView.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
         } else {
-            textView.setText(String.format("%s%n%s", LocalizationUtils.getPlainString(R.string.waypoint_latitude_null), LocalizationUtils.getPlainString(R.string.waypoint_longitude_null)));
+            textView.setText(String.format("%s%n%s", LocalizationUtils.getString(R.string.waypoint_latitude_null), LocalizationUtils.getString(R.string.waypoint_longitude_null)));
         }
     }
 
@@ -857,7 +812,7 @@ public class ViewUtils {
         final String latText = StringUtils.trim(latlonText[0]);
         final String lonText = StringUtils.trim(latlonText[1]);
 
-        if (!latText.equals(LocalizationUtils.getPlainString(R.string.waypoint_latitude_null)) && !lonText.equals(LocalizationUtils.getPlainString(R.string.waypoint_longitude_null))) {
+        if (!latText.equals(LocalizationUtils.getString(R.string.waypoint_latitude_null)) && !lonText.equals(LocalizationUtils.getString(R.string.waypoint_longitude_null))) {
             try {
                 return new Geopoint(latText, lonText);
             } catch (final Geopoint.ParseException e) {
@@ -899,32 +854,5 @@ public class ViewUtils {
 
     public static String getEditableText(@Nullable final Editable editable) {
         return editable == null ? "" : editable.toString();
-    }
-
-    public static Consumer<Boolean> createCircularProgressSetter(final Button button) {
-        if (!(button instanceof MaterialButton) || APP_RESOURCES == null) {
-            return x -> { };
-        }
-
-        final MaterialButton mButton = (MaterialButton) button;
-        final Drawable originalIcon = mButton.getIcon();
-
-        //create circular icon
-        @SuppressLint("PrivateResource")
-        final CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(button.getContext(), null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_Small);
-        spec.indicatorSize = ViewUtils.dpToPixel(APP_RESOURCES.getDimension(R.dimen.buttonSize_iconButton) / APP_RESOURCES.getDisplayMetrics().density / 1.8f);
-        final Drawable circularIcon = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec);
-
-        return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
-    }
-
-    /** to be used in Activity.onCreateOptionsMenu to set a long click handler for menu items */
-    public static void registerLongClickHandlerForMenuItem(final Activity ctx, final int viewId, final Predicate<View> longClickHandler) {
-        new Handler().post(() -> {
-            final View view = ctx.findViewById(viewId);
-            if (view != null) {
-                view.setOnLongClickListener(v -> longClickHandler.test(v));
-            }
-        });
     }
 }

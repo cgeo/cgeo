@@ -133,11 +133,8 @@ public final class DirectWeaver extends ByteDataWriter {
                     WaypointMatcher matcher = wayTags == null || wayTags.accessType < 2 ? null : waypointMatcher;
                     final int ilontarget = ilon + dlonRemaining;
                     final int ilattarget = ilat + dlatRemaining;
-                    if (matcher != null) {
-                       final boolean useAsStartWay = wayTags == null || wayValidator.checkStartWay(wayTags.data);
-                        if (!matcher.start(ilon, ilat, ilontarget, ilattarget, useAsStartWay)) {
-                            matcher = null;
-                        }
+                    if (matcher != null && !matcher.start(ilon, ilat, ilontarget, ilattarget)) {
+                        matcher = null;
                     }
 
                     final int transcount = bc.decodeVarBits();

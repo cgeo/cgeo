@@ -34,7 +34,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public final class Formatter {
 
@@ -181,9 +180,9 @@ public final class Formatter {
         final int diff = CalendarUtils.daysSince(date);
         switch (diff) {
             case 0:
-                return LocalizationUtils.getString(R.string.log_today);
+                return CgeoApplication.getInstance().getString(R.string.log_today);
             case 1:
-                return LocalizationUtils.getString(R.string.log_yesterday);
+                return CgeoApplication.getInstance().getString(R.string.log_yesterday);
             default:
                 return null;
         }
@@ -222,7 +221,7 @@ public final class Formatter {
         boolean newlineRequested = false;
         for (SpannableString s : infos) {
             if (s.length() > 0) {
-                if (Strings.CS.equals(s, "\n")) {
+                if (StringUtils.equals(s, "\n")) {
                     if (sb.length() > 0) {
                         newlineRequested = true;
                     }
@@ -251,7 +250,7 @@ public final class Formatter {
                 }
             } else if (item == CacheListInfoItem.VALUES.MEMBERSTATE.id) {
                 if (cache.isPremiumMembersOnly()) {
-                    infos.add(new SpannableString(LocalizationUtils.getString(R.string.cache_premium)));
+                    infos.add(new SpannableString(CgeoApplication.getInstance().getString(R.string.cache_premium)));
                 }
             } else if (item == CacheListInfoItem.VALUES.SIZE.id) {
                 if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
@@ -360,7 +359,7 @@ public final class Formatter {
             infos.add(waypointType.getL10n());
         }
         if (waypoint.isUserDefined()) {
-            infos.add(LocalizationUtils.getString(R.string.waypoint_custom));
+            infos.add(CgeoApplication.getInstance().getString(R.string.waypoint_custom));
         } else {
             if (StringUtils.isNotBlank(waypoint.getPrefix())) {
                 infos.add(waypoint.getPrefix());
@@ -375,7 +374,7 @@ public final class Formatter {
     @NonNull
     public static String formatDaysAgo(final long date) {
         final int days = CalendarUtils.daysSince(date);
-        return LocalizationUtils.getPlural(R.plurals.days_ago, days);
+        return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
     }
 
     @NonNull
@@ -387,20 +386,20 @@ public final class Formatter {
         if (updatedTimeMillis == 0L) {
             ago = "";
         } else if (minutes < 15) {
-            ago = LocalizationUtils.getString(R.string.cache_offline_time_mins_few);
+            ago = CgeoApplication.getInstance().getString(R.string.cache_offline_time_mins_few);
         } else if (minutes < 60) {
-            ago = LocalizationUtils.getPlural(R.plurals.cache_offline_about_time_mins, (int) minutes);
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_mins, (int) minutes, (int) minutes);
         } else if (days < 2) {
-            ago = LocalizationUtils.getPlural(R.plurals.cache_offline_about_time_hours, (int) (minutes / 60));
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_hours, (int) (minutes / 60), (int) (minutes / 60));
         } else if (days < DAYS_PER_MONTH) {
-            ago = LocalizationUtils.getPlural(R.plurals.cache_offline_about_time_days, (int) days);
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_days, (int) days, (int) days);
         } else if (days < 365) {
-            ago = LocalizationUtils.getPlural(R.plurals.cache_offline_about_time_months, (int) (days / DAYS_PER_MONTH));
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_months, (int) (days / DAYS_PER_MONTH), (int) (days / DAYS_PER_MONTH));
         } else {
-            ago = LocalizationUtils.getString(R.string.cache_offline_about_time_year);
+            ago = CgeoApplication.getInstance().getString(R.string.cache_offline_about_time_year);
         }
 
-        return LocalizationUtils.getString(R.string.cache_offline_stored_ago, ago);
+        return String.format(CgeoApplication.getInstance().getString(R.string.cache_offline_stored_ago), ago);
     }
 
     /**
@@ -454,19 +453,23 @@ public final class Formatter {
         final List<String> infos = new ArrayList<>(3);
         final int caches = pocketQuery.getCaches();
         if (caches >= 0) {
-            infos.add(LocalizationUtils.getPlural(R.plurals.cache_counts, caches));
+            infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches));
         }
 
         final long lastGenerationTime = pocketQuery.getLastGenerationTime();
         if (lastGenerationTime > 0) {
-            infos.add(Formatter.formatShortDateVerbally(lastGenerationTime) + (PocketQueryHistory.isNew(pocketQuery) ? " (" + LocalizationUtils.getString(R.string.search_pocket_is_new) + ")" : ""));
+            infos.add(Formatter.formatShortDateVerbally(lastGenerationTime) + (PocketQueryHistory.isNew(pocketQuery) ? " (" + CgeoApplication.getInstance().getString(R.string.search_pocket_is_new) + ")" : ""));
         }
 
         final int daysRemaining = pocketQuery.getDaysRemaining();
         if (daysRemaining == 0) {
-            infos.add(LocalizationUtils.getString(R.string.last_day_available));
+            infos.add(CgeoApplication.getInstance().getString(R.string.last_day_available));
         } else if (daysRemaining > 0) {
-            infos.add(LocalizationUtils.getPlural(R.plurals.days_remaining, daysRemaining));
+            infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining, daysRemaining, daysRemaining));
+        }
+
+        if (pocketQuery.isBookmarkList()) {
+            infos.add(CgeoApplication.getInstance().getResources().getString(R.string.search_bookmark_list));
         }
 
         return StringUtils.join(infos, SEPARATOR);

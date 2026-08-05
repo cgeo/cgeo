@@ -6,7 +6,7 @@ import cgeo.geocaching.models.Geocache;
 import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
+import org.jetbrains.annotations.NotNull;
 
 public class GeopeitusConnector extends AbstractConnector {
 
@@ -41,14 +41,15 @@ public class GeopeitusConnector extends AbstractConnector {
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return Strings.CS.startsWith(geocode, "GE") && isNumericId(geocode.substring(2));
+        return StringUtils.startsWith(geocode, "GE") && isNumericId(geocode.substring(2));
     }
 
+    @NotNull
     @Override
-    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"GE%"};
     }
+
 
     @Override
     @NonNull

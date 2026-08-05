@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Waypoint;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
 public class FormatterTest  {
@@ -44,7 +45,7 @@ public class FormatterTest  {
     public void testOwnWaypoint() {
         final Waypoint own = new Waypoint("my own", WaypointType.OWN, true);
         own.setPrefix(Waypoint.PREFIX_OWN);
-        assertFormatting(own, LocalizationUtils.getString(R.string.waypoint_custom));
+        assertFormatting(own, CgeoApplication.getInstance().getString(R.string.waypoint_custom));
     }
 
     private static void assertFormatting(final Waypoint waypoint, final String expected) {
@@ -104,7 +105,7 @@ public class FormatterTest  {
     @Test
     public void testFormatStoredAgo() {
         // skip test on non english device
-        if (!Strings.CS.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+        if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
             return;
         }
         assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored ");

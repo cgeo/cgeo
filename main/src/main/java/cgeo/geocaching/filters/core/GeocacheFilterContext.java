@@ -59,7 +59,7 @@ public class GeocacheFilterContext implements Parcelable {
     public void set(final GeocacheFilter filter) {
         if (filter != null) {
             final GeocacheFilter currentFilter = get();
-            final boolean sameFilter = currentFilter.filtersSame(filter);
+            final boolean sameFilter = currentFilter.filtersSame(filter) && currentFilter.getName().equals(filter.getName());
             if (currentFilter.isFiltering() && !sameFilter) {
                 previousFilter = currentFilter;
             }

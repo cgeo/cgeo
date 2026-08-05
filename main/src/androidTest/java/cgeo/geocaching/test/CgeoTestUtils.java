@@ -33,8 +33,8 @@ import java.util.EnumSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.compress.utils.IOUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public final class CgeoTestUtils {
 

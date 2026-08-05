@@ -1,7 +1,6 @@
 package cgeo.geocaching.helper;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 
@@ -11,13 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Helper activity to copy simple content to clipboard
  */
-public class CopyToClipboardActivity extends AbstractActivity {
+public class CopyToClipboardActivity extends AppCompatActivity {
 
 
     @Nullable

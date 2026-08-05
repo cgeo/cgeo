@@ -39,6 +39,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -49,50 +50,77 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeocacheFilterTest {
 
     @Test
     public void emptyFilter() {
-        assertFilterFromConfig("", null);
-        assertFilterFromConfig(null, null);
-        assertFilterFromConfig("   ", null);
+        assertFilterFromConfig("", "", null);
+        assertFilterFromConfig(null, "", null);
+        assertFilterFromConfig("   ", "", null);
     }
 
     @Test
     public void emptyFilterWithName() {
-        assertFilterFromConfig("[myname]", null);
-        assertFilterFromConfig("[myname", null);
-        assertFilterFromConfig("[]", null);
-        assertFilterFromConfig("[test\\]\\:test]", null);
+        assertFilterFromConfig("[myname]", "myname", null);
+        assertFilterFromConfig("[myname", "myname", null);
+        assertFilterFromConfig("[]", "", null);
+        assertFilterFromConfig("[test\\]\\:test]", "test]:test", null);
     }
 
     @Test
     public void emptyNameWithFilter() {
-        assertFilterFromConfig("{\"tree\": { \"type\":\"name\" } }", NameGeocacheFilter.class);
+        assertFilterFromConfig("name", "", NameGeocacheFilter.class);
+    }
+
+    @Test
+    public void bothfilled() {
+        assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
+        assertFilterFromConfig("[myfilter] name", "myfilter", NameGeocacheFilter.class);
+        assertFilterFromConfig("[myfilter] AND(name)", "myfilter", AndGeocacheFilter.class);
     }
 
     @Test
     public void checkInconclusive() {
-        GeocacheFilter filter = assertFilterFromConfig("{\"tree\": { \"type\":\"name\" } }", NameGeocacheFilter.class);
+        GeocacheFilter filter = assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
         assertThat(filter.isIncludeInconclusive()).isFalse();
-        filter = assertFilterFromConfig("{\"inconclusive\":true, \"tree\": { \"type\":\"name\" } }", NameGeocacheFilter.class);
+        filter = assertFilterFromConfig("[inconclusive=true:myfilter]name", "myfilter", NameGeocacheFilter.class);
         assertThat(filter.isIncludeInconclusive()).isTrue();
     }
 
     @Test
     public void checkAdvancedView() {
-        GeocacheFilter filter = assertFilterFromConfig("{\"tree\": { \"type\":\"name\" } }", NameGeocacheFilter.class);
+        GeocacheFilter filter = assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
         assertThat(filter.isOpenInAdvancedMode()).isFalse();
-        filter = assertFilterFromConfig("{\"advanced\":true, \"tree\": { \"type\":\"name\" } }", NameGeocacheFilter.class);
+        filter = assertFilterFromConfig("[advanced=true:myfilter]name", "myfilter", NameGeocacheFilter.class);
         assertThat(filter.isOpenInAdvancedMode()).isTrue();
     }
 
-    private GeocacheFilter assertFilterFromConfig(final String config, final Class<? extends IGeocacheFilter> expectedFilterClass) {
-        final GeocacheFilter filter = GeocacheFilter.createFromConfig(config);
+    private GeocacheFilter assertFilterFromConfig(final String config, final String expectedName, final Class<? extends IGeocacheFilter> expectedFilterClass) {
+        final GeocacheFilter filter;
+        try {
+            filter = LegacyFilterConfig.parseLegacy(null, config, true);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+        assertThat(filter.getName()).as("name for ' " + config + "'").isEqualTo(expectedName);
         assertThat(filter.getTree() == null ? null : filter.getTree().getClass()).as("treeclass for ' " + config + "'").isEqualTo(expectedFilterClass);
         return filter;
+    }
+
+    @Test
+    public void legacyParsing() throws ParseException {
+        final String filterConfig = "[=:inconclusive=false:advanced=true]AND(rating:2.0:-;NOT(OR(status:has_user_defined_waypoints_yes:solved_mystery_yes;name:test:contains));difficulty_terrain_matrix:1.0-1.0:1.5-2.5:2.0-2.0:1.5-2.0:include-wo-dt=true)";
+        final GeocacheFilter filter = LegacyFilterConfig.parseLegacy(null, filterConfig, true);
+
+        final String json = filter.toConfig();
+        final GeocacheFilter filter2 = GeocacheFilter.createFromConfig(json);
+        final String config2 = filter2.toConfig();
+
+        assertThat(config2).isEqualTo(json);
+        //assertThat(json).isEqualTo("nojson");
+        //assertThat(json.length()).isEqualTo(2);
     }
 
     @Test
@@ -103,8 +131,9 @@ public class GeocacheFilterTest {
             filterTree.addChild(type.create());
         }
 
-        final GeocacheFilter filter = GeocacheFilter.create(false, false, filterTree);
+        final GeocacheFilter filter = GeocacheFilter.create("test", false, false, filterTree);
         assertFilterConfig(filter);
+        assertThat(filter.getName()).isEqualTo("test");
     }
 
     @Test
@@ -115,20 +144,25 @@ public class GeocacheFilterTest {
             filterTree.addChild(getFilledInstance(type));
         }
 
-        final GeocacheFilter filter = GeocacheFilter.create(true, true, filterTree);
+        final GeocacheFilter filter = GeocacheFilter.create("test", true, true, filterTree);
         assertFilterConfig(filter);
+        assertThat(filter.getName()).isEqualTo("test");
     }
 
 
-    private static void assertFilterConfig(final GeocacheFilter filter) {
+    private static void assertFilterConfig(final GeocacheFilter filter) throws ParseException {
         final String filterJson = filter.toConfig();
 
         final GeocacheFilter filterFromJson = GeocacheFilter.createFromConfig(filterJson);
         assertThat(filterFromJson.toConfig()).isEqualTo(filterJson);
+        assertThat(filterFromJson.getName()).isEqualTo(filter.getName());
         assertThat(filterFromJson.isIncludeInconclusive()).isEqualTo(filter.isIncludeInconclusive());
         assertThat(filterFromJson.isOpenInAdvancedMode()).isEqualTo(filter.isOpenInAdvancedMode());
         assertThat(filterFromJson.isFiltering()).isEqualTo(filter.isFiltering());
         assertThat(filterFromJson.toUserDisplayableString()).isEqualTo(filter.toUserDisplayableString());
+
+        //legacy
+        assertThat(LegacyFilterConfig.toLegacyConfig(filterFromJson)).isEqualTo(LegacyFilterConfig.toLegacyConfig(filter));
     }
 
     private static IGeocacheFilter getFilledInstance(final GeocacheFilterType type) {
@@ -237,7 +271,6 @@ public class GeocacheFilterTest {
             case LOGICAL_FILTER_GROUP:
             case LIST_ID:
             case VIEWPORT:
-            case HEALTH_SCORE:
                 // nothing to do
                 break;
             default:

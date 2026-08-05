@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -12,13 +11,15 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.List;
 
 
-public class StartWebviewActivity extends AbstractActivity {
+public class StartWebviewActivity extends AppCompatActivity {
 
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final String url = getIntent().getDataString();

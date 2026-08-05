@@ -9,7 +9,6 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.ProgressDialog;
@@ -18,7 +17,6 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BookmarkUtils {
     private static final String NEW_LIST_GUID = "FakeList";
@@ -28,7 +26,7 @@ public class BookmarkUtils {
     }
 
     public static void askAndUploadCachesToBookmarkList(final Context context, final List<Geocache> geocaches) {
-        final ProgressDialog waitDialog = ProgressDialog.show(context, LocalizationUtils.getString(R.string.search_bookmark_list), LocalizationUtils.getString(R.string.search_bookmark_loading), true, true);
+        final ProgressDialog waitDialog = ProgressDialog.show(context, context.getString(R.string.search_bookmark_list), context.getString(R.string.search_bookmark_loading), true, true);
         waitDialog.setCancelable(true);
         loadAndAskForSelection(context, geocaches, waitDialog);
     }
@@ -43,7 +41,7 @@ public class BookmarkUtils {
 
             final List<GCList> bmLists = GCParser.searchBookmarkLists();
             if (bmLists == null) {
-                ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.err_read_bookmark_list));
+                ActivityMixin.showToast(context, context.getString(R.string.err_read_bookmark_list));
                 return;
             }
 
@@ -58,18 +56,11 @@ public class BookmarkUtils {
             final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " (" + l.getCaches() + ")")))
-                .setDisabledItems(lists.stream().filter(l -> l.getCaches() >= 1000).collect(Collectors.toSet()))
+                .setDisplayMapper((l) -> TextParam.text(l.getName()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
-                    .selectSingle(model, l -> {
-                        if (geocaches.size() > (1000 - l.getCaches())) {
-                            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, l));
-                        } else {
-                            processSelection(context, geocaches, l);
-                        }
-                    });
+                    .selectSingle(model, l -> processSelection(context, geocaches, l));
 
         });
     }
@@ -80,7 +71,7 @@ public class BookmarkUtils {
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
                         final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
                         if (guid == null) {
-                            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.search_bookmark_create_new_failed));
+                            ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
                             return;
                         }
                         showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches).blockingGet());
@@ -92,6 +83,6 @@ public class BookmarkUtils {
     }
 
     private static void showResult(final Context context, final boolean success) {
-        ActivityMixin.showToast(context, LocalizationUtils.getString(success ? R.string.search_bookmark_adding_caches_success : R.string.search_bookmark_adding_caches_failed));
+        ActivityMixin.showToast(context, context.getString(success ? R.string.search_bookmark_adding_caches_success : R.string.search_bookmark_adding_caches_failed));
     }
 }

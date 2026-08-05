@@ -25,8 +25,6 @@ Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.k
 */
 package cgeo.geocaching.wherigo.kahlua.stdlib;
 
-import java.util.Locale;
-
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
@@ -677,7 +675,7 @@ public final class StringLib implements JavaFunction {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
         String s = getStringArg(callFrame,1,names[LOWER]);
 
-        callFrame.push(s.toLowerCase(Locale.getDefault()));
+        callFrame.push(s.toLowerCase());
         return 1;
     }
 
@@ -685,7 +683,7 @@ public final class StringLib implements JavaFunction {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
         String s = getStringArg(callFrame,1,names[UPPER]);
 
-        callFrame.push(s.toUpperCase(Locale.getDefault()));
+        callFrame.push(s.toUpperCase());
         return 1;
     }
 

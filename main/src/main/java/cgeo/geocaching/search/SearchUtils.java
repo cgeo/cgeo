@@ -83,8 +83,7 @@ public class SearchUtils {
     public static void handleDropDownVisibility(final Activity activity, final SearchView searchView, final MenuItem menuSearch) {
         final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchAutoComplete.setOnDismissListener(() -> {
-            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0
-                    && !searchAutoComplete.isPressed()) {
+            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
                 searchAutoComplete.showDropDown();
             }
         });
@@ -93,15 +92,6 @@ public class SearchUtils {
         if (activityViewroot != null) {
             activityViewroot.setOnInterceptTouchEventListener(ev -> {
                 if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                    // Don't intercept touches inside the SearchView (allows long-press paste)
-                    final int[] loc = new int[2];
-                    searchView.getLocationOnScreen(loc);
-                    final float x = ev.getRawX();
-                    final float y = ev.getRawY();
-                    if (x >= loc[0] && x <= loc[0] + searchView.getWidth()
-                            && y >= loc[1] && y <= loc[1] + searchView.getHeight()) {
-                        return false;
-                    }
                     menuSearch.collapseActionView();
                     searchView.setIconified(true);
                     return true; // intercept touch event to do not trigger an unwanted action
@@ -112,17 +102,4 @@ public class SearchUtils {
         }
     }
 
-    public static void setSearchViewColor(final SearchView searchView) {
-        if (searchView != null) {
-            final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-            setSearchViewColor(searchAutoComplete);
-        }
-    }
-
-    public static void setSearchViewColor(final AutoCompleteTextView searchAutoCompleteView) {
-        if (searchAutoCompleteView != null) {
-            searchAutoCompleteView.setTextColor(searchAutoCompleteView.getContext().getResources().getColor(R.color.colorTextActionBar));
-            searchAutoCompleteView.setHintTextColor(searchAutoCompleteView.getContext().getResources().getColor(R.color.colorTextActionBar));
-        }
-    }
 }

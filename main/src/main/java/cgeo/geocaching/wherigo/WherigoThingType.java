@@ -94,19 +94,4 @@ public enum WherigoThingType {
         return WHERIGOSCREENID_TO_TYPE.get(wherigoScreenId);
     }
 
-    public static List<EventTable> getEverything() {
-        final List<EventTable> result = new ArrayList<>();
-        for (WherigoThingType type : values()) {
-            result.addAll(type.getAllThings());
-        }
-        return result;
-    }
-
-    public static String getVisibleThingState() {
-        return getEverything().stream()
-            .filter(WherigoUtils::isVisibleToPlayer)
-            .map(et -> et.getClass().getSimpleName() + ":" + et.name)
-            .sorted().collect(Collectors.joining(","));
-    }
-
 }

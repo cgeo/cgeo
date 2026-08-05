@@ -118,14 +118,7 @@ git_checkout_local() {
     fi
   fi
 
-  # Explicitly set the push remote so that `git push` targets the correct remote
-  # branch regardless of any remote.pushDefault configured globally.
-  if ! git config "branch.${BRANCH}.pushRemote" "$remote_name"; then
-    _git_fail "Failed to set push remote for branch '$BRANCH'."
-    return 1
-  fi
-
-  echo "Checked out local branch '$BRANCH' tracking '$remote_name/$BRANCH' (pull+push → $remote_name/$BRANCH)."
+  echo "Checked out local branch '$BRANCH' tracking '$remote_name/$BRANCH'."
 }
 
 # git_squash MESSAGE BASE_BRANCH_OR_COMMIT_COUNT

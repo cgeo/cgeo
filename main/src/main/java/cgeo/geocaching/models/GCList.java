@@ -1,10 +1,8 @@
 package cgeo.geocaching.models;
 
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public final class GCList implements Parcelable {
+public final class GCList {
 
     private final String guid;
 
@@ -29,30 +27,6 @@ public final class GCList implements Parcelable {
         this.shortGuid = shortGuid;
         this.pqHash = pqHash;
     }
-
-    protected GCList(final Parcel in) {
-        guid = in.readString();
-        shortGuid = in.readString();
-        pqHash = in.readString();
-        caches = in.readInt();
-        name = in.readString();
-        downloadable = in.readInt() != 0;
-        lastGenerationTime = in.readLong();
-        daysRemaining = in.readInt();
-        bookmarkList = in.readInt() != 0;
-    }
-
-    public static final Creator<GCList> CREATOR = new Creator<GCList>() {
-        @Override
-        public GCList createFromParcel(final Parcel in) {
-            return new GCList(in);
-        }
-
-        @Override
-        public GCList[] newArray(final int size) {
-            return new GCList[size];
-        }
-    };
 
     public boolean isDownloadable() {
         return downloadable;
@@ -86,10 +60,6 @@ public final class GCList implements Parcelable {
         return isBookmarkList() ? Uri.parse("https://www.geocaching.com/api/live/v1/gpx/list/" + guid) : Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + guid + "&src=web");
     }
 
-    public String getMimeType() {
-        return isBookmarkList() ? "application/xml" : "application/zip";
-    }
-
     public String getShortGuid() {
         return shortGuid;
     }
@@ -106,21 +76,4 @@ public final class GCList implements Parcelable {
         this.pqHash = pqHash;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeString(guid);
-        dest.writeString(shortGuid);
-        dest.writeString(pqHash);
-        dest.writeInt(caches);
-        dest.writeString(name);
-        dest.writeInt(downloadable ? 1 : 0);
-        dest.writeLong(lastGenerationTime);
-        dest.writeInt(daysRemaining);
-        dest.writeInt(bookmarkList ? 1 : 0);
-    }
 }

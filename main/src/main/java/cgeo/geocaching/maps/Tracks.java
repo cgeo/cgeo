@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class Tracks {
 
@@ -154,7 +154,7 @@ public class Tracks {
 
     public int getColor(@NonNull final String key) {
         for (Track track : data) {
-            if (Strings.CS.equals(track.trackfile.getKey(), key)) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
                 return track.trackfile.getColor();
             }
         }
@@ -171,7 +171,7 @@ public class Tracks {
 
     public int getWidth(@NonNull final String key) {
         for (Track track : data) {
-            if (Strings.CS.equals(track.trackfile.getKey(), key)) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
                 return track.trackfile.getWidth();
             }
         }

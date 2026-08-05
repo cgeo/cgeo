@@ -34,7 +34,6 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlSerializer;
 
 public final class GpxSerializer {
@@ -211,25 +210,12 @@ public final class GpxSerializer {
                 }
             }
         }
-        if (cache.hasUserModifiedCoords() && cache.hasWaypoints()) {
-            final Waypoint wp = cache.getOriginalWaypoint();
-            if (wp != null && wp.getCoords() != null) {
-                gpx.startTag(NS_GSAK, "LatBeforeCorrect");
-                gpx.text(Double.toString(wp.getCoords().getLatitude()));
-                gpx.endTag(NS_GSAK, "LatBeforeCorrect");
-                gpx.startTag(NS_GSAK, "LonBeforeCorrect");
-                gpx.text(Double.toString(wp.getCoords().getLongitude()));
-                gpx.endTag(NS_GSAK, "LonBeforeCorrect");
-            }
-        }
         gpx.endTag(NS_GSAK, "wptExtension");
     }
 
     private void writeCGeoExtensions(@NonNull final Geocache cache) throws IOException {
         gpx.startTag(NS_CGEO, "cacheExtension");
-        if (StringUtils.isNotBlank(cache.getAssignedEmoji())) {
-            XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmoji", cache.getAssignedEmoji());
-        }
+        XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmoji", String.valueOf(cache.getAssignedEmoji()));
         gpx.endTag(NS_CGEO, "cacheExtension");
     }
 
@@ -303,7 +289,7 @@ public final class GpxSerializer {
         }
         // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            if (StringUtils.isBlank(wp.getPrefix()) || Strings.CI.equals(Waypoint.PREFIX_OWN, wp.getPrefix())) {
+            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase(Waypoint.PREFIX_OWN, wp.getPrefix())) {
                 maxPrefix++;
                 wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
             }
@@ -438,7 +424,7 @@ public final class GpxSerializer {
 
     private static String getLocationPart(@NonNull final Geocache cache, final int partIndex) {
         final String location = cache.getLocation();
-        if (Strings.CS.contains(location, ", ")) {
+        if (StringUtils.contains(location, ", ")) {
             final String[] parts = StringUtils.split(location, ',');
             if (parts.length == 2) {
                 return StringUtils.trim(parts[partIndex]);

@@ -6,7 +6,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.LocationDataProvider;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,7 @@ public class CruiserNavigationApp extends AbstractPointNavigationApp {
     static final String ACTION = "com.devemux86.intent.action.NAVIGATION";
 
     protected CruiserNavigationApp() {
-        super(R.string.cache_menu_cruiser, null, LocalizationUtils.getPlainString(R.string.package_cruiser));
+        super(R.string.cache_menu_cruiser, null, getString(R.string.package_cruiser));
     }
 
     @Override
@@ -47,7 +46,7 @@ public class CruiserNavigationApp extends AbstractPointNavigationApp {
         final GeoData geo = LocationDataProvider.getInstance().currentGeo();
         final Intent intent = new Intent();
         intent.setAction(ACTION);
-        intent.setPackage(LocalizationUtils.getPlainString(R.string.package_cruiser));
+        intent.setPackage(getString(R.string.package_cruiser));
         intent.putExtra("LATITUDE", new double[]{geo.getLatitude(), coords.getLatitude()});
         intent.putExtra("LONGITUDE", new double[]{geo.getLongitude(), coords.getLongitude()});
         if (StringUtils.isNotBlank(info)) {

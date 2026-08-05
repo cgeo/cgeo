@@ -4,12 +4,12 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.OFFLINE;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
@@ -22,14 +22,19 @@ public class UnifiedMapType implements Parcelable {
     public static final String BUNDLE_MAPTYPE = "maptype";
 
     public enum UnifiedMapTypeType {
-        UMTT_PlainMap,          // open map (from bottom navigation)
-        UMTT_Viewport,          // open map, shows and scales to a given Viewport
-        UMTT_TargetGeocode,     // set cache or waypoint as target
-        UMTT_TargetCoords,      // set coords as target
-        UMTT_SelectCoords,      // select coordinates from map, starting at given position
-        UMTT_List,              // display list contents
-        UMTT_SearchResult       // show and scale to searchresult
+        UMTT_PlainMap(MapMode.LIVE),          // open map (from bottom navigation)
+        UMTT_Viewport(MapMode.LIVE),          // open map, shows and scales to a given Viewport
+        UMTT_TargetGeocode(MapMode.SINGLE),     // set cache or waypoint as target
+        UMTT_TargetCoords(MapMode.COORDS),      // set coords as target
+        UMTT_List(MapMode.LIST),              // display list contents
+        UMTT_SearchResult(MapMode.LIST);       // show and scale to searchresult
         // to be extended
+
+        public final MapMode compatibilityMapMode;
+
+        UnifiedMapTypeType(final MapMode compatibilityMapMode) {
+            this.compatibilityMapMode = compatibilityMapMode;
+        }
     }
 
     public UnifiedMapTypeType type;
@@ -43,8 +48,6 @@ public class UnifiedMapType implements Parcelable {
     public boolean followMyLocation = false;
     public Viewport viewport;
     // reminder: add additional fields to parcelable methods below
-
-    public static final int REQUEST_CODE_GET_COORDS = 10004;
 
     /** default UnifiedMapType is PlainMap with no further data */
     public UnifiedMapType() {
@@ -110,13 +113,6 @@ public class UnifiedMapType implements Parcelable {
         this.coords = coords;
     }
 
-    public static UnifiedMapType getPlainMapWithTarget(final UnifiedMapType mapType) {
-        final UnifiedMapType umt = new UnifiedMapType();
-        umt.target = mapType.target;
-        umt.waypointId = mapType.waypointId;
-        return umt;
-    }
-
     /** get launch intent */
     public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
@@ -126,27 +122,15 @@ public class UnifiedMapType implements Parcelable {
 
     /** launch fresh map with current settings */
     public void launchMap(final Context fromActivity) {
-        // dismiss the originating map's cache popup so it isn't restored when the user navigates back
-        if (fromActivity instanceof UnifiedMapActivity) {
-            ((UnifiedMapActivity) fromActivity).sheetRemoveFragment();
-        }
         fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
-
-    /** launch fresh map to select coordinates from map */
-    public void launchMapWithSelectCoordinates(final Context fromActivity) {
-        type = UnifiedMapTypeType.UMTT_SelectCoords;
-        final Intent intent = getLaunchMapIntent(fromActivity);
-        ((Activity) fromActivity).startActivityForResult(intent, REQUEST_CODE_GET_COORDS);
-    }
-
 
     public boolean enableLiveMap() {
         return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
     }
 
-    public boolean hasTarget() {
-        return target != null && !target.isEmpty();
+    public boolean isSingleCacheView() {
+        return type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_TargetGeocode;
     }
     // ========================================================================
     // parcelable methods

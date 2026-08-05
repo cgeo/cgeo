@@ -86,7 +86,6 @@ public class Action extends EventTable {
             associateWithTargets();
         } else if ("WorksWithList".equals(key)) {
             dissociateFromTargets();
-            targets.clear();
             LuaTable lt = (LuaTable)value;
             Object i = null;
             while ((i = lt.next(i)) != null) {

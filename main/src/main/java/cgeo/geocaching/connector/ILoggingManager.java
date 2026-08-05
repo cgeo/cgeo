@@ -94,10 +94,6 @@ public interface ILoggingManager {
 
     boolean isImageCaptionMandatory();
 
-    int getMaxImageCaptionLength();
-
-    int getMaxImageDescriptionLength();
-
     @NonNull
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
 

@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 
@@ -24,7 +23,7 @@ class CompassApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        CompassActivity.startActivityPoint(context, coords, LocalizationUtils.getString(R.string.navigation_direct_navigation));
+        CompassActivity.startActivityPoint(context, coords, getString(R.string.navigation_direct_navigation));
     }
 
     @Override

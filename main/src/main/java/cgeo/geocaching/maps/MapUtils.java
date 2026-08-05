@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -11,7 +12,6 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
@@ -37,10 +37,9 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
-import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -56,6 +55,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class MapUtils {
 
@@ -124,19 +125,9 @@ public class MapUtils {
         final boolean excludeWpParking = Settings.isExcludeWpParking();
         final boolean excludeWpVisited = Settings.isExcludeWpVisited();
 
-        final Set<String> geocodes = new HashSet<>();
-        for (final Waypoint wp : waypoints) {
-            geocodes.add(wp.getGeocode());
-        }
-        final HashMap<String, Geocache> cacheByGeocode = new HashMap<>();
-        for (final Geocache cache : DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB)) {
-            cacheByGeocode.put(cache.getGeocode(), cache);
-        }
-
         final List<Waypoint> removeList = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
-            final Geocache cache = cacheByGeocode.get(wp.getGeocode());
-            wp.setParentGeocache(cache);
+            final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
             if (cache == null ||
                     (filter != null && !filter.filter(cache)) ||
@@ -158,7 +149,7 @@ public class MapUtils {
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext), getActiveMapFilterSavedDifferently(filterContext));
     }
 
     @Nullable
@@ -170,12 +161,27 @@ public class MapUtils {
         return null;
     }
 
+    @Nullable
+    private static Boolean getActiveMapFilterSavedDifferently(final GeocacheFilterContext filterContext) {
+        final GeocacheFilter filter = filterContext.get();
+        if (filter.isFiltering()) {
+            return filter.isSavedDifferently();
+        }
+        return null;
+    }
+
     // one-time messages to be shown for maps
-    public static void showMapOneTimeMessages(final Activity activity, final UnifiedMapType.UnifiedMapTypeType mapType) {
+    public static void showMapOneTimeMessages(final Activity activity, final MapMode mapMode) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
-        if ((mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport) && !Settings.isLiveMap()) {
+        if (mapMode == MapMode.LIVE && !Settings.isLiveMap()) {
             Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_LIVE_DISABLED);
         }
+    }
+
+    // workaround for colored ActionBar titles/subtitles
+    // @todo remove after switching map ActionBar to Toolbar
+    public static Spanned getColoredValue(final String value) {
+        return Html.fromHtml("<font color=\"" + String.format("#%06X", 0xFFFFFF & CgeoApplication.getInstance().getResources().getColor(R.color.colorTextActionBar)) + "\">" + value + "</font>");
     }
 
     // check whether routing tile data is available for the whole viewport given
@@ -217,7 +223,7 @@ public class MapUtils {
         } else {
             // if external routing configured: try to open BRouter downloader
             try {
-                final String bRouterPackage = LocalizationUtils.getPlainString(R.string.package_brouter);
+                final String bRouterPackage = activity.getString(R.string.package_brouter);
                 final Intent intent = new Intent();
                 intent.setComponent(new ComponentName(bRouterPackage, bRouterPackage + ".BInstallerActivity"));
                 activity.startActivity(intent);
@@ -330,7 +336,7 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final int fromList, final Action2<Geopoint, String> setTarget) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
@@ -340,7 +346,7 @@ public class MapUtils {
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
                 })
-                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, fromList, true))
+                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
                 .addItemClickListener(R.id.menu_coords, item -> {
                     final AtomicReference<TextView> textview = new AtomicReference<>();
@@ -358,7 +364,7 @@ public class MapUtils {
                     textview.set(tv1);
                     tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
                     tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
-                    TooltipCompat.setTooltipText(tv1, LocalizationUtils.getString(R.string.selected_position));
+                    TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
 
                     final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
@@ -391,45 +397,6 @@ public class MapUtils {
                 .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true, 0));
     }
 
-
-    /**
-     * show  dialog for confirming selected coordinates from map
-     */
-    public static void showSelectFromMapDialog(final Activity activity, final Geopoint longClickGeopoint) {
-        final AtomicReference<TextView> textview = new AtomicReference<>();
-        final AlertDialog dialog = Dialogs.newBuilder(activity)
-                .setTitle(R.string.selected_position)
-                .setView(R.layout.dialog_selected_position)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.ok, (d, which) -> {
-                    /* finish activity  */
-                    final Intent result = new Intent();
-                    result.putExtra("coords", GeopointFormatter.reformatForClipboard(textview.get().getText()));
-                    activity.setResult(Activity.RESULT_OK, result);
-                    activity.finish();
-                })
-                .show();
-
-        final TextView tv1 = dialog.findViewById(R.id.tv1);
-        assert tv1 != null;
-        textview.set(tv1);
-        tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
-        tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
-        TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
-        new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
-        final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
-        final float distance = longClickGeopoint.distanceTo(currentPosition);
-        TextParam.text(Units.getDistanceFromKilometers(distance)).setImage(ImageParam.id(R.drawable.routing_straight)).setTooltip(R.string.distance).applyTo(dialog.findViewById(R.id.tv2));
-
-        final float elevation = Routing.getElevation(longClickGeopoint);
-        if (!Float.isNaN(elevation)) {
-            TextParam.text(Units.formatElevation(elevation)).setImage(ImageParam.id(R.drawable.elevation)).setTooltip(R.string.elevation_selected).applyTo(dialog.findViewById(R.id.tv4));
-            final float elevationCurrent = Routing.getElevation(currentPosition);
-            if (!Float.isNaN(elevationCurrent)) {
-                TextParam.text(Units.formatElevation(elevation - elevationCurrent)).setImage(ImageParam.id(R.drawable.height)).setTooltip(R.string.elevation_difference).applyTo(dialog.findViewById(R.id.tv3));
-            }
-        }
-    }
     private static void updateRouteTrackButtonVisibility(final Runnable updateRouteTrackButtonVisibility) {
         if (updateRouteTrackButtonVisibility != null) {
             updateRouteTrackButtonVisibility.run();
@@ -458,31 +425,31 @@ public class MapUtils {
 
         if (routeIsNotEmpty) {
             final String routeItemIdentifier = routeItem.getIdentifier();
-            final boolean isStart = Strings.CS.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
+            final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
             if (isStart) {
-                addMenuHelper(activity, menu, 0, LocalizationUtils.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             for (int i = 1; i < segments.length - 1; i++) {
-                if (Strings.CS.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
-                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), LocalizationUtils.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
+                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
-            isEnd = (segments.length > 1) && Strings.CS.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
+            isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
             if (isEnd) {
-                addMenuHelper(activity, menu, segments.length - 1, LocalizationUtils.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             } else {
-                addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             if (!isStart) {
-                addMenuHelper(activity, menu, baseId, LocalizationUtils.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId, activity.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
         } else {
-            addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
         }
 
         final float elevation = Routing.getElevation(routeItem.getPoint());
         if (!Float.isNaN(elevation)) {
-            menu.addMenuItem(baseId + 100, LocalizationUtils.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
+            menu.addMenuItem(baseId + 100, activity.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
         }
     }
 
@@ -533,9 +500,9 @@ public class MapUtils {
 
         final float textWidth = elevationTextPaint.measureText(info) + 10;
         final float yPos = height - 0.45f * textSizeInPx;
-        canvas.drawLine((width - textWidth) / 2, yPos, (width + textWidth) / 2, yPos, elevationPaint);
+        canvas.drawLine((float) (width - textWidth) / 2, yPos, (float) (width + textWidth) / 2, yPos, elevationPaint);
 
-        canvas.drawText(info, width / 2, height - 4, elevationTextPaint);
+        canvas.drawText(info, (int) (width / 2), height - 4, elevationTextPaint);
 
         return bm;
     }

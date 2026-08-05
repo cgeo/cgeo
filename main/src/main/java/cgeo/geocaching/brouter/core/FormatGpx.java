@@ -1,6 +1,5 @@
 package cgeo.geocaching.brouter.core;
 
-import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.mapaccess.MatchedWaypoint;
 import cgeo.geocaching.brouter.util.StringUtils;
 
@@ -53,7 +52,7 @@ public class FormatGpx extends Formatter {
             sb.append("<!--          cmd    idx        lon        lat d2next  geometry -->\n");
             sb.append("<!-- $turn-instruction-start$\n");
             for (VoiceHint hint : t.voiceHints.list) {
-                sb.append(String.format(Locale.getDefault(), "     $turn$%6s;%6d;%10s;%10s;%6d;%s$\n", hint.getCommandString(turnInstructionMode), hint.indexInTrack,
+                sb.append(String.format(Locale.getDefault(), "     $turn$%6s;%6d;%10s;%10s;%6d;%s$\n", hint.getCommandString(), hint.indexInTrack,
                         formatILon(hint.ilon), formatILat(hint.ilat), (int) (hint.distanceToNext), hint.formatGeometry()));
             }
             sb.append("    $turn-instruction-end$ -->\n");
@@ -72,7 +71,7 @@ public class FormatGpx extends Formatter {
         if (turnInstructionMode == 3) {
             sb.append(" creator=\"OsmAndRouter\" version=\"1.1\">\n");
         } else {
-            sb.append(" creator=\"BRouter-" + BRouterConstants.version + "\" version=\"1.1\">\n");
+            sb.append(" creator=\"BRouter-" + OsmTrack.version + "\" version=\"1.1\">\n");
         }
         if (turnInstructionMode == 9) {
             sb.append(" <metadata>\n");
@@ -113,7 +112,7 @@ public class FormatGpx extends Formatter {
                 first.append("    <offset>0</offset>\n  </extensions>\n </rtept>\n");
             }
             if (turnInstructionMode == 8) {
-                if (t.matchedWaypoints.get(0).wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT && t.voiceHints.list.get(0).indexInTrack == 0) {
+                if (t.matchedWaypoints.get(0).direct && t.voiceHints.list.get(0).indexInTrack == 0) {
                     // has a voice hint do nothing, voice hint will do
                 } else {
                     sb.append(first.toString());
@@ -127,7 +126,7 @@ public class FormatGpx extends Formatter {
                 sb.append("  <rtept lat=\"").append(formatILat(hint.ilat)).append("\" lon=\"")
                         .append(formatILon(hint.ilon)).append("\">\n")
                         .append("   <desc>")
-                        .append(turnInstructionMode == 3 ? hint.getMessageString(turnInstructionMode) : hint.getCruiserMessageString())
+                        .append(turnInstructionMode == 3 ? hint.getMessageString() : hint.getCruiserMessageString())
                         .append("</desc>\n   <extensions>\n");
 
                 rteTime = t.getVoiceHintTime(i + 1);
@@ -138,7 +137,7 @@ public class FormatGpx extends Formatter {
                     lastRteTime = rteTime;
                 }
                 sb.append("    <turn>")
-                        .append(turnInstructionMode == 3 ? hint.getCommandString(turnInstructionMode) : hint.getCruiserCommandString())
+                        .append(turnInstructionMode == 3 ? hint.getCommandString() : hint.getCruiserCommandString())
                         .append("</turn>\n    <turn-angle>").append("" + (int) hint.angle)
                         .append("</turn-angle>\n    <offset>").append("" + hint.indexInTrack).append("</offset>\n  </extensions>\n </rtept>\n");
             }
@@ -159,7 +158,7 @@ public class FormatGpx extends Formatter {
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
                         .append(formatILat(hint.ilat)).append("\">")
                         .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
-                        .append("<name>").append(hint.getMessageString(turnInstructionMode)).append("</name>")
+                        .append("<name>").append(hint.getMessageString()).append("</name>")
                         .append("<extensions><locus:rteDistance>").append("" + hint.distanceToNext).append("</locus:rteDistance>");
                 final float rteTime = t.getVoiceHintTime(i + 1);
                 if (rteTime != lastRteTime) { // add timing only if available
@@ -177,9 +176,9 @@ public class FormatGpx extends Formatter {
             for (VoiceHint hint : t.voiceHints.list) {
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
                         .append(formatILat(hint.ilat)).append("\">")
-                        .append("<name>").append(hint.getMessageString(turnInstructionMode)).append("</name>")
-                        .append("<sym>").append(hint.getSymbolString(turnInstructionMode).toLowerCase(Locale.ROOT)).append("</sym>")
-                        .append("<type>").append(hint.getSymbolString(turnInstructionMode)).append("</type>")
+                        .append("<name>").append(hint.getMessageString()).append("</name>")
+                        .append("<sym>").append(hint.getSymbolString().toLowerCase(Locale.ROOT)).append("</sym>")
+                        .append("<type>").append(hint.getSymbolString()).append("</type>")
                         .append("</wpt>\n");
             }
         }
@@ -201,38 +200,27 @@ public class FormatGpx extends Formatter {
 
         for (int i = 0; i <= t.pois.size() - 1; i++) {
             final OsmNodeNamed poi = t.pois.get(i);
-            formatWaypointGpx(sb, poi, "poi");
+            sb.append(" <wpt lon=\"").append(formatILon(poi.ilon)).append("\" lat=\"")
+                    .append(formatILat(poi.ilat)).append("\">\n")
+                    .append("  <name>").append(StringUtils.escapeXml10(poi.name)).append("</name>\n")
+                    .append(" </wpt>\n");
         }
 
         if (t.exportWaypoints) {
             for (int i = 0; i <= t.matchedWaypoints.size() - 1; i++) {
                 final MatchedWaypoint wt = t.matchedWaypoints.get(i);
+                sb.append(" <wpt lon=\"").append(formatILon(wt.waypoint.ilon)).append("\" lat=\"")
+                        .append(formatILat(wt.waypoint.ilat)).append("\">\n")
+                        .append("  <name>").append(StringUtils.escapeXml10(wt.name)).append("</name>\n");
                 if (i == 0) {
-                    formatWaypointGpx(sb, wt, wt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT ? "beeline" : "via");
+                    sb.append("  <type>from</type>\n");
                 } else if (i == t.matchedWaypoints.size() - 1) {
-                    formatWaypointGpx(sb, wt, "via");
+                    sb.append("  <type>to</type>\n");
                 } else {
-                    if (wt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
-                        formatWaypointGpx(sb, wt, "beeline");
-                    } else if (wt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_MEETING) {
-                        formatWaypointGpx(sb, wt, "via");
-                    } else {
-                        formatWaypointGpx(sb, wt, "shaping");
-                    }
+                    sb.append("  <type>via</type>\n");
                 }
+                sb.append(" </wpt>\n");
             }
-        }
-        if (t.exportCorrectedWaypoints) {
-            sb.append("\n");
-            for (int i = 0; i <= t.matchedWaypoints.size() - 1; i++) {
-                final MatchedWaypoint wt = t.matchedWaypoints.get(i);
-                if (wt.correctedpoint != null) {
-                    final OsmNodeNamed n = new OsmNodeNamed(wt.correctedpoint);
-                    n.name = wt.name + "_corr";
-                    formatWaypointGpx(sb, n, "shaping");
-                }
-            }
-            sb.append("\n");
         }
         sb.append(" <trk>\n");
         if (turnInstructionMode == 9
@@ -281,13 +269,9 @@ public class FormatGpx extends Formatter {
                         sele += "<name>" + mwpt.name + "</name>";
                     }
                     sele += "<desc>" + hint.getCruiserMessageString() + "</desc>";
-                    sele += "<sym>" + hint.getCommandString(hint.cmd, turnInstructionMode) + "</sym>";
+                    sele += "<sym>" + hint.getCommandString(hint.cmd) + "</sym>";
                     if (mwpt != null) {
-                        if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_MEETING) {
-                            sele += "<type>via</type>";
-                        } else {
-                            sele += "<type>shaping</type>";
-                        }
+                        sele += "<type>Via</type>";
                     }
                     sele += "<extensions>";
                     if (t.showspeed) {
@@ -302,7 +286,7 @@ public class FormatGpx extends Formatter {
                         sele += "<brouter:speed>" + (((int) (speed * 10)) / 10.f) + "</brouter:speed>";
                     }
 
-                    sele += "<brouter:voicehint>" + hint.getCommandString(turnInstructionMode) + ";" + (int) (hint.distanceToNext) + "," + hint.formatGeometry() + "</brouter:voicehint>";
+                    sele += "<brouter:voicehint>" + hint.getCommandString() + ";" + (int) (hint.distanceToNext) + "," + hint.formatGeometry() + "</brouter:voicehint>";
                     if (n.message != null && n.message.wayKeyValues != null && !n.message.wayKeyValues.equals(lastway)) {
                         sele += "<brouter:way>" + n.message.wayKeyValues + "</brouter:way>";
                         lastway = n.message.wayKeyValues;
@@ -314,12 +298,12 @@ public class FormatGpx extends Formatter {
 
                 }
                 if (idx == 0 && hint == null) {
-                    if (mwpt != null && mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                    if (mwpt != null && mwpt.direct) {
                         sele += "<desc>beeline</desc>";
                     } else {
                         sele += "<desc>start</desc>";
                     }
-                    sele += "<type>via</type>";
+                    sele += "<type>Via</type>";
 
                 } else if (idx == t.nodes.size() - 1 && hint == null) {
 
@@ -328,17 +312,13 @@ public class FormatGpx extends Formatter {
 
                 } else {
                     if (mwpt != null && hint == null) {
-                        if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                        if (mwpt.direct) {
                             // bNextDirect = true;
                             sele += "<desc>beeline</desc>";
                         } else {
                             sele += "<desc>" + mwpt.name + "</desc>";
                         }
-                        if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_MEETING) {
-                            sele += "<type>via</type>";
-                        } else {
-                            sele += "<type>shaping</type>";
-                        }
+                        sele += "<type>Via</type>";
                         bNextDirect = false;
                     }
                 }
@@ -375,13 +355,13 @@ public class FormatGpx extends Formatter {
             if (turnInstructionMode == 2) { // locus style new
                 if (hint != null) {
                     if (mwpt != null) {
-                        if (!mwpt.name.startsWith("via") && !mwpt.name.startsWith("from") && !mwpt.name.startsWith("to") && !mwpt.name.startsWith("rt")) {
+                        if (!mwpt.name.startsWith("via") && !mwpt.name.startsWith("from") && !mwpt.name.startsWith("to")) {
                             sele += "<name>" + mwpt.name + "</name>";
                         }
-                        if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT && bNextDirect) {
+                        if (mwpt.direct && bNextDirect) {
                             sele += "<src>" + hint.getLocusSymbolString() + "</src><sym>pass_place</sym><type>Shaping</type>";
                             // bNextDirect = false;
-                        } else if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                        } else if (mwpt.direct) {
                             if (idx == 0) {
                                 sele += "<sym>pass_place</sym><type>Via</type>";
                             } else {
@@ -407,7 +387,7 @@ public class FormatGpx extends Formatter {
                         if (mwpt != null && !mwpt.name.startsWith("from")) {
                             sele += "<name>" + mwpt.name + "</name>";
                         }
-                        if (mwpt != null && mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                        if (mwpt != null && mwpt.direct) {
                             bNextDirect = true;
                         }
                         sele += "<sym>pass_place</sym>";
@@ -430,12 +410,12 @@ public class FormatGpx extends Formatter {
 
                     } else {
                         if (mwpt != null) {
-                            if (!mwpt.name.startsWith("via") && !mwpt.name.startsWith("from") && !mwpt.name.startsWith("to") && !mwpt.name.startsWith("rt")) {
+                            if (!mwpt.name.startsWith("via") && !mwpt.name.startsWith("from") && !mwpt.name.startsWith("to")) {
                                 sele += "<name>" + mwpt.name + "</name>";
                             }
-                            if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT && bNextDirect) {
+                            if (mwpt.direct && bNextDirect) {
                                 sele += "<src>beeline</src><sym>pass_place</sym><type>Shaping</type>";
-                            } else if (mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                            } else if (mwpt.direct) {
                                 if (idx == 0) {
                                     sele += "<sym>pass_place</sym><type>Via</type>";
                                 } else {
@@ -447,12 +427,11 @@ public class FormatGpx extends Formatter {
                                 bNextDirect = false;
                             } else if (mwpt.name.startsWith("via") ||
                                     mwpt.name.startsWith("from") ||
-                                    mwpt.name.startsWith("to") ||
-                                    mwpt.name.startsWith("rt")) {
+                                    mwpt.name.startsWith("to")) {
                                 if (bNextDirect) {
                                     sele += "<src>beeline</src><sym>pass_place</sym><type>Shaping</type>";
                                 } else {
-                                    sele += "<sym>pass_place</sym><type>Shaping</type>";
+                                    sele += "<sym>pass_place</sym><type>Via</type>";
                                 }
                                 bNextDirect = false;
                             } else {
@@ -481,7 +460,7 @@ public class FormatGpx extends Formatter {
             final StringWriter sw = new StringWriter(8192);
             final BufferedWriter bw = new BufferedWriter(sw);
             formatGpxHeader(bw);
-            formatWaypointGpx(bw, n, null);
+            formatWaypointGpx(bw, n);
             formatGpxFooter(bw);
             bw.close();
             sw.close();
@@ -497,14 +476,14 @@ public class FormatGpx extends Formatter {
         sb.append(" xmlns=\"http://www.topografix.com/GPX/1/1\" \n");
         sb.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n");
         sb.append(" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\" \n");
-        sb.append(" creator=\"BRouter-" + BRouterConstants.version + "\" version=\"1.1\">\n");
+        sb.append(" creator=\"BRouter-" + OsmTrack.version + "\" version=\"1.1\">\n");
     }
 
     public void formatGpxFooter(BufferedWriter sb) throws IOException {
         sb.append("</gpx>\n");
     }
 
-    public void formatWaypointGpx(BufferedWriter sb, OsmNodeNamed n, String type) throws IOException {
+    public void formatWaypointGpx(BufferedWriter sb, OsmNodeNamed n) throws IOException {
         sb.append(" <wpt lon=\"").append(formatILon(n.ilon)).append("\" lat=\"")
                 .append(formatILat(n.ilat)).append("\">");
         if (n.getSElev() != Short.MIN_VALUE) {
@@ -515,24 +494,6 @@ public class FormatGpx extends Formatter {
         }
         if (n.nodeDescription != null && rc != null) {
             sb.append("<desc>").append(rc.expctxWay.getKeyValueDescription(false, n.nodeDescription)).append("</desc>");
-        }
-        if (type != null) {
-            sb.append("<type>").append(type).append("</type>");
-        }
-        sb.append("</wpt>\n");
-    }
-
-    public void formatWaypointGpx(BufferedWriter sb, MatchedWaypoint wp, String type) throws IOException {
-        sb.append(" <wpt lon=\"").append(formatILon(wp.waypoint.ilon)).append("\" lat=\"")
-                .append(formatILat(wp.waypoint.ilat)).append("\">");
-        if (wp.waypoint.getSElev() != Short.MIN_VALUE) {
-            sb.append("<ele>").append("" + wp.waypoint.getElev()).append("</ele>");
-        }
-        if (wp.name != null) {
-            sb.append("<name>").append(StringUtils.escapeXml10(wp.name)).append("</name>");
-        }
-        if (type != null) {
-            sb.append("<type>").append(type).append("</type>");
         }
         sb.append("</wpt>\n");
     }

@@ -54,11 +54,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WherigoGame implements UI {
 
-    private static final String LOG_PRAEFIX = "WHERIGOGAME";
-
-    private String logPrefix() {
-        return LOG_PRAEFIX + " (L:" + listeners.size() + ",Q:" + Engine.getEventQueueSize() + ",A:" + WherigoActivity.getLiveInstanceCount() + "): ";
-    }
+    private static final String LOG_PRAEFIX = "WHERIGOGAME: ";
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
@@ -112,7 +108,7 @@ public class WherigoGame implements UI {
             WherigoLib.env.put(WherigoLib.PLATFORM, platform);
         } catch (Exception e) {
             // not really important
-            Log.d(logPrefix() + "unable to set name/platform for OpenWIG", e);
+            Log.d(LOG_PRAEFIX + "unable to set name/platform for OpenWIG", e);
         }
     }
 
@@ -173,9 +169,8 @@ public class WherigoGame implements UI {
             } else {
                 engine.start();
             }
-
         } catch (IOException ie) {
-            Log.e(logPrefix() + "Problem", ie);
+            Log.e(LOG_PRAEFIX + "Problem", ie);
         }
     }
 
@@ -310,7 +305,7 @@ public class WherigoGame implements UI {
     }
 
     public void notifyListeners(final NotifyType type) {
-        Log.d(logPrefix() + "notify for " + type);
+        Log.d(LOG_PRAEFIX + "notify for " + type);
         listeners.executeOnMain(ntConsumer -> ntConsumer.accept(type));
     }
 
@@ -338,9 +333,9 @@ public class WherigoGame implements UI {
     public void start() {
         this.cartridge = Engine.instance.cartridge;
         isPlaying = true;
-        Log.iForce(logPrefix() + "pos: " + GP_CONVERTER.from(cartridge.position));
+        Log.iForce(LOG_PRAEFIX + "pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);
-        WherigoSaveFileHandler.get().reset(); // ends a probable LOAD
+        WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
         WherigoLocationProvider.get().connect();
         WherigoGameService.startService();
     }
@@ -372,7 +367,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void showError(final String errorMessage) {
-        Log.w(logPrefix() + "ERROR: " + errorMessage);
+        Log.w(LOG_PRAEFIX + "ERROR: " + errorMessage);
 
         if (errorMessage != null) {
             this.lastError = errorMessage +
@@ -386,7 +381,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void debugMsg(final String s) {
-        Log.w(logPrefix() + s);
+        Log.w(LOG_PRAEFIX + s);
     }
 
     @Override
@@ -396,13 +391,13 @@ public class WherigoGame implements UI {
 
     @Override
     public void pushDialog(final String[] strings, final Media[] media, final String s, final String s1, final LuaClosure luaClosure) {
-        Log.iForce(logPrefix() + "pushDialog:" + Arrays.asList(strings) + "/" + s + "/" + s1 + "/" + Arrays.asList(media));
+        Log.iForce(LOG_PRAEFIX + "pushDialog:" + Arrays.asList(strings) + "/" + s + "/" + s1 + "/" + Arrays.asList(media));
         WherigoDialogManager.get().display(new WherigoPushDialogProvider(strings, media, s, s1, luaClosure));
     }
 
     @Override
     public void pushInput(final EventTable input) {
-        Log.iForce(logPrefix() + "pushInput:" + input);
+        Log.iForce(LOG_PRAEFIX + "pushInput:" + input);
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
@@ -418,7 +413,7 @@ public class WherigoGame implements UI {
      */
     @Override
     public void showScreen(final int screenId, final EventTable details) {
-        Log.iForce(logPrefix() + "showScreen:" + screenId + ":" + details);
+        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
 
         switch (screenId) {
             case MAINSCREEN:
@@ -455,7 +450,7 @@ public class WherigoGame implements UI {
                 }
                 break;
             default:
-                Log.w(logPrefix() + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
+                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
                 // do nothing
                 break;
         }
@@ -470,7 +465,7 @@ public class WherigoGame implements UI {
     @Override
     public void playSound(final byte[] data, final String mime) {
 
-        Log.iForce(logPrefix() + "play sound (type = " + mime + ", length=" + (data == null ? "null" : data.length) + ")");
+        Log.iForce(LOG_PRAEFIX + "play sound (type = " + mime + ", length=" + (data == null ? "null" : data.length) + ")");
         if (data == null || data.length == 0) {
             return;
         }
@@ -487,7 +482,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void unblock() {
-        WherigoSaveFileHandler.get().saveFinished(); // Ends a running SAVE
+        WherigoSaveFileHandler.get().loadSaveFinished(); // Ends a running SAVE
     }
 
     /**
@@ -498,7 +493,7 @@ public class WherigoGame implements UI {
      */
     @Override
     public void command(final String cmd) {
-        Log.iForce(logPrefix() + "command:" + cmd);
+        Log.iForce(LOG_PRAEFIX + "command:" + cmd);
         if ("StopSound".equals(cmd)) {
             this.audioManager.pause();
         } else if ("Alert".equals(cmd)) {
@@ -532,5 +527,4 @@ public class WherigoGame implements UI {
     public String toString() {
         return "isPlaying:" + isPlaying + ", name:" + getCartridgeName() + ", cguid:" + getCGuid() + ", context: " + getContextGeocacheName();
     }
-
 }

@@ -24,9 +24,9 @@ public final class PhysicalFile implements Closeable {
     public int divisor = 80;
     public byte elevationType = 3;
     private FileByteReader fbr = null;
-    final long[] fileIndex = new long[25];
+    long[] fileIndex = new long[25];
     int[] fileHeaderCrcs;
-    final String fileName;
+    String fileName;
 
     public PhysicalFile(final String fileName, final FileInputStream fis, final DataBuffers dataBuffers, final int lookupVersion) throws IOException {
         this.fileName = fileName;
@@ -89,6 +89,11 @@ public final class PhysicalFile implements Closeable {
         this.fbr.readFully(startPos, length, buffer);
     }
 
+    @Override
+    public void close() {
+        IOUtils.closeQuietly(fbr);
+    }
+
     /**
      * Checks the integrity of the file using the build-in checksums.
      * <br>
@@ -123,11 +128,6 @@ public final class PhysicalFile implements Closeable {
             IOUtils.closeQuietly(pf);
         }
         return null;
-    }
-
-    @Override
-    public void close() {
-        IOUtils.closeQuietly(fbr);
     }
 
 }

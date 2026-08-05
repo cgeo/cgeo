@@ -1,20 +1,19 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -268,6 +267,10 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusHasUserDefinedWaypoints = statusHasWaypoint;
     }
 
+    @Override
+    public void setConfig(final LegacyFilterConfig config) {
+        setConfigInternal(config.getDefaultList());
+    }
 
     private void setConfigInternal(final List<String> configValues) {
         statusOwned = null;
@@ -321,6 +324,12 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         }
     }
 
+    @Override
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig result = new LegacyFilterConfig();
+        result.putDefaultList(getConfigInternal());
+        return result;
+    }
 
     private List<String> getConfigInternal() {
         final List<String> result = new ArrayList<>();
@@ -374,34 +383,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         } else {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (statusOwned != null) {
-                // A cache is considered "owned" if the logged-in user's name matches the cache owner
-                // for at least one active connector that supports login (ILogin).
-                // The geocode prefix (sqlLikeExp) is used to restrict the owner check to caches
-                // belonging to that specific connector (e.g. GC* for geocaching.com) (AND clause).
-                // If statusOwned is false, the entire OR block is wrapped in a NOT clause.
-                if (!statusOwned) {
-                    sqlBuilder.openWhere(SqlBuilder.WhereType.NOT);
-                }
-                sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-                final List<IConnector> connectors = ConnectorFactory.getActiveConnectors();
-                for (final IConnector connector : connectors) {
-                    if (connector instanceof ILogin) {
-                        sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-                        final String username = ((ILogin) connector).getUserName();
-                        sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + "."
-                                + DataStore.dbFieldCaches_owner_real + ") = LOWER(?)", username);
-                        sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-                        for (String sqlLikeExp : connector.getGeocodeSqlLikeExpressions()) {
-                            sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode LIKE ?", sqlLikeExp);
-                        }
-                        sqlBuilder.closeWhere();
-                        sqlBuilder.closeWhere();
-                    }
-                }
-                sqlBuilder.closeWhere();
-                if (!statusOwned) {
-                    sqlBuilder.closeWhere();
-                }
+                sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_owner_real + ") " + (statusOwned ? "=" : "<>") + " LOWER(?)", Settings.getUserName());
             }
             if (statusFound != null) {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_found + (statusFound ? "= 1" : "<> 1"));

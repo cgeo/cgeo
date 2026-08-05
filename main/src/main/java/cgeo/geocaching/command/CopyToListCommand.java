@@ -5,7 +5,6 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -32,7 +31,7 @@ public abstract class CopyToListCommand extends AbstractCachesCommand {
             final AbstractList list = AbstractList.getListById(newListId);
             if (list != null) {
                 final String newListName = list.getTitle();
-                setProgressMessage(LocalizationUtils.getString(R.string.command_copy_caches_progress, newListName));
+                setProgressMessage(getContext().getString(R.string.command_copy_caches_progress, newListName));
                 CopyToListCommand.super.execute();
             }
         }, true, sourceListId);
@@ -52,6 +51,6 @@ public abstract class CopyToListCommand extends AbstractCachesCommand {
     @Nullable
     protected String getResultMessage() {
         final int size = getCaches().size();
-        return LocalizationUtils.getPlural(R.plurals.command_copy_caches_result, size);
+        return getContext().getResources().getQuantityString(R.plurals.command_copy_caches_result, size, size);
     }
 }

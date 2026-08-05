@@ -6,7 +6,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.annotation.SuppressLint;
@@ -53,13 +52,13 @@ public class FieldNoteExport extends AbstractExport {
     @SuppressLint("SetTextI18n")
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(LocalizationUtils.getString(R.string.export_confirm_title, LocalizationUtils.getString(R.string.fieldnotes)));
+        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.fieldnotes)));
 
         final View layout = View.inflate(activity, R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(LocalizationUtils.getString(R.string.export_confirm_message, UriUtils.toUserDisplayableString(PersistableFolder.FIELD_NOTES.getUri()), fileName));
+        text.setText(activity.getString(R.string.export_confirm_message, UriUtils.toUserDisplayableString(PersistableFolder.FIELD_NOTES.getUri()), fileName));
 
         final CheckBox uploadOption = layout.findViewById(R.id.upload);
         uploadOption.setChecked(Settings.getFieldNoteExportUpload());
@@ -67,7 +66,7 @@ public class FieldNoteExport extends AbstractExport {
         onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
 
         if (Settings.getFieldnoteExportDate() > 0) {
-            onlyNewOption.setText(LocalizationUtils.getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
+            onlyNewOption.setText(activity.getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
         }
 
         builder.setPositiveButton(R.string.export, (dialog, which) -> {

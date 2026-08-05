@@ -3,7 +3,6 @@ package cgeo.geocaching.brouter.core;
 import cgeo.geocaching.brouter.mapaccess.MatchedWaypoint;
 import cgeo.geocaching.brouter.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FormatKml extends Formatter {
@@ -12,7 +11,7 @@ public class FormatKml extends Formatter {
     }
 
     @Override
-    public String format(final OsmTrack t) {
+    public String format(OsmTrack t) {
         final StringBuilder sb = new StringBuilder(8192);
 
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -44,7 +43,7 @@ public class FormatKml extends Formatter {
         sb.append("        </LineString>\n");
         sb.append("      </Placemark>\n");
         sb.append("    </Folder>\n");
-        if (t.exportWaypoints || t.exportCorrectedWaypoints || !t.pois.isEmpty()) {
+        if (t.exportWaypoints || !t.pois.isEmpty()) {
             if (!t.pois.isEmpty()) {
                 sb.append("    <Folder>\n");
                 sb.append("      <name>poi</name>\n");
@@ -63,19 +62,6 @@ public class FormatKml extends Formatter {
                 }
                 createFolder(sb, "end", t.matchedWaypoints.subList(size - 1, size));
             }
-            if (t.exportCorrectedWaypoints) {
-                final List<OsmNodeNamed> list = new ArrayList<>();
-                for (int i = 0; i < t.matchedWaypoints.size(); i++) {
-                    final MatchedWaypoint wp = t.matchedWaypoints.get(i);
-                    if (wp.correctedpoint != null) {
-                        final OsmNodeNamed n = new OsmNodeNamed(wp.correctedpoint);
-                        n.name = wp.name + "_corr";
-                        list.add(n);
-                    }
-                }
-                final int size = list.size();
-                createViaFolder(sb, "via_corr", list.subList(0, size));
-            }
         }
         sb.append("  </Document>\n");
         sb.append("</kml>\n");
@@ -83,7 +69,7 @@ public class FormatKml extends Formatter {
         return sb.toString();
     }
 
-    private void createFolder(final StringBuilder sb, final String type, final List<MatchedWaypoint> waypoints) {
+    private void createFolder(StringBuilder sb, String type, List<MatchedWaypoint> waypoints) {
         sb.append("    <Folder>\n");
         sb.append("      <name>").append(type).append("</name>\n");
         for (int i = 0; i < waypoints.size(); i++) {
@@ -93,20 +79,7 @@ public class FormatKml extends Formatter {
         sb.append("    </Folder>\n");
     }
 
-    private void createViaFolder(final StringBuilder sb, final String type, final List<OsmNodeNamed> waypoints) {
-        if (waypoints.isEmpty()) {
-            return;
-        }
-        sb.append("    <Folder>\n");
-        sb.append("      <name>").append(type).append("</name>\n");
-        for (int i = 0; i < waypoints.size(); i++) {
-            final OsmNodeNamed wp = waypoints.get(i);
-            createPlaceMark(sb, wp.name, wp.ilat, wp.ilon);
-        }
-        sb.append("    </Folder>\n");
-    }
-
-    private void createPlaceMark(final StringBuilder sb, final String name, final int ilat, final int ilon) {
+    private void createPlaceMark(StringBuilder sb, String name, int ilat, int ilon) {
         sb.append("      <Placemark>\n");
         sb.append("        <name>").append(StringUtils.escapeXml10(name)).append("</name>\n");
         sb.append("        <Point>\n");

@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -12,7 +11,7 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompat {
     @Override
@@ -23,7 +22,7 @@ public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompa
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_sendtocgeo_website));
         final String urlOrHost = "send2.cgeo.org";
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
-            final String url = Strings.CS.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
@@ -34,6 +33,6 @@ public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompa
         super.onResume();
         final Activity activity = requireActivity();
         activity.setTitle(R.string.init_sendToCgeo);
-        setPrefClick(this, R.string.pref_fakekey_sendtocgeo_info, () -> ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.settings_send2cgeo_url)));
+        setPrefClick(this, R.string.pref_fakekey_sendtocgeo_info, () -> ShareUtils.openUrl(activity, activity.getString(R.string.settings_send2cgeo_url)));
     }
 }

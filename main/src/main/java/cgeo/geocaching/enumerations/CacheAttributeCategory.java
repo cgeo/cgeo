@@ -2,7 +2,6 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -51,15 +50,15 @@ public enum CacheAttributeCategory {
     public static String getNameById(final Context context, final int categoryId) {
         for (CacheAttributeCategory cacheAttributeCategory : CacheAttributeCategory.values()) {
             if (cacheAttributeCategory.categoryId == categoryId) {
-                return LocalizationUtils.getString(cacheAttributeCategory.categoryNameResId);
+                return context.getString(cacheAttributeCategory.categoryNameResId);
             }
         }
         return null;
     }
 
     @Nullable
-    public String getName() {
-        return LocalizationUtils.getString(categoryNameResId);
+    public String getName(final Context context) {
+        return context.getString(categoryNameResId);
     }
 
     public static List<CacheAttributeCategory> getOrderedCategoryList() {

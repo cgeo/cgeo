@@ -1,11 +1,11 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.oscim.core.BoundingBox;
 import org.oscim.layers.tile.buildings.BuildingLayer;
@@ -32,7 +31,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
     private final List<ImmutablePair<String, Uri>> maps;
 
     MapsforgeVTMMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
-        super(LocalizationUtils.getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
+        super(CgeoApplication.getInstance().getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
         this.maps = maps;
     }
 
@@ -89,7 +88,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             for (String language : languagesPreference.split(",")) {
                 boolean found = false;
                 for (String comp : languages) {
-                    if (Strings.CS.equals(comp, language)) {
+                    if (StringUtils.equals(comp, language)) {
                         found = true;
                         break;
                     }
@@ -100,4 +99,5 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             }
         }
     }
+
 }

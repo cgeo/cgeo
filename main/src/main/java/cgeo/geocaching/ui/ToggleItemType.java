@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.MenuUtils;
 
+import android.os.Build;
 import android.view.MenuItem;
 
 import androidx.annotation.DrawableRes;
@@ -26,9 +26,7 @@ public enum ToggleItemType {
     TOGGLE_SPEECH(R.drawable.ic_menu_text_to_speech_on, R.drawable.ic_menu_text_to_speech_off,
             R.string.cache_menu_speechDeactivate, R.string.cache_menu_speechActivate, R.string.talking_enabled, R.string.talking_disabled),
     WAYPOINTS_FROM_NOTE(-1, -1, R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote,
-            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote),
-    NAMED_FILTERS(R.drawable.ic_menu_myfilters, R.drawable.ic_menu_myfilters_off,
-            R.string.named_filter_activity_title, R.string.named_filter_activity_title, R.string.named_filter_markers_enabled, R.string.named_filter_markers_disabled);
+            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote);
 
     @DrawableRes
     private final int drawableActiveId;
@@ -61,10 +59,9 @@ public enum ToggleItemType {
             }
             if (-1 != drawableActiveId && -1 != drawableInactiveId) {
                 menuItem.setIcon(active ? drawableActiveId : drawableInactiveId);
-                MenuUtils.tintMenuIcon(menuItem);
             }
-            if (-1 != hintActiveId && -1 != hintInactiveId) {
-                menuItem.setTooltipText(LocalizationUtils.getString(active ? hintActiveId : hintInactiveId));
+            if (-1 != hintActiveId && -1 != hintInactiveId && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                menuItem.setTooltipText(CgeoApplication.getInstance().getString(active ? hintActiveId : hintInactiveId));
             }
         }
     }

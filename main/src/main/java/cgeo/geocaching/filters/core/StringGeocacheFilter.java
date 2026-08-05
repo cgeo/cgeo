@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,17 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
         return stringFilter.matches(gcValue);
     }
 
+    @Override
+    public void setConfig(final LegacyFilterConfig config) {
+        stringFilter.setConfig(config.get(null));
+    }
+
+    @Override
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
+        config.put(null, stringFilter.getConfig());
+        return config;
+    }
 
     @Nullable
     @Override

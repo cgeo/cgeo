@@ -5,9 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GroupedListTest {
 
@@ -91,6 +90,8 @@ public class GroupedListTest {
 
         list.removeGroup(1);
         assertList(list);
+
+
     }
 
     @Test
@@ -100,6 +101,7 @@ public class GroupedListTest {
         assertList(list, "0:one");
         list.remove(0);
         assertList(list);
+
     }
 
     @Test
@@ -118,9 +120,12 @@ public class GroupedListTest {
         list.addToGroup("two", 2);
         assertList(list, "0:one", "2:two");
 
-        assertThatThrownBy(() -> list.remove(2))
-                .isInstanceOf(IndexOutOfBoundsException.class);
-
+        try {
+            list.remove(2); // expect exception
+            Assert.fail("Exception expected");
+        } catch (IndexOutOfBoundsException ioobe) {
+            //ok, ignore
+        }
         //check that list is unchanged
         assertList(list, "0:one", "2:two");
     }
@@ -133,18 +138,19 @@ public class GroupedListTest {
         list.addToGroup("three", 2);
         assertList(list, "0:one", "2:three", "2:two");
 
-        assertThat(list.groupSize(0)).isEqualTo(1);
-        assertThat(list.groupSize(1)).isEqualTo(0);
-        assertThat(list.groupSize(2)).isEqualTo(2);
+        Assert.assertEquals(1, list.groupSize(0));
+        Assert.assertEquals(0, list.groupSize(1));
+        Assert.assertEquals(2, list.groupSize(2));
 
-        assertThat(list.groupStart(0)).isEqualTo(0);
-        assertThat(list.groupStart(1)).isEqualTo(-1);
-        assertThat(list.groupStart(2)).isEqualTo(1);
+        Assert.assertEquals(0, list.groupStart(0));
+        Assert.assertEquals(-1, list.groupStart(1));
+        Assert.assertEquals(1, list.groupStart(2));
 
-        assertThat(list.groupFor(0)).isEqualTo(0);
-        assertThat(list.groupFor(1)).isEqualTo(2);
-        assertThat(list.groupFor(2)).isEqualTo(2);
-        assertThat(list.groupFor(3)).isEqualTo(-1);
+        Assert.assertEquals(0, list.groupFor(0));
+        Assert.assertEquals(2, list.groupFor(1));
+        Assert.assertEquals(2, list.groupFor(2));
+        Assert.assertEquals(-1, list.groupFor(3));
+
     }
 
     @Test
@@ -158,6 +164,7 @@ public class GroupedListTest {
         list.addToGroup("four", 2);
         assertList(list, "2:four", "5:one", "two", "6:three");
     }
+
 
     @Test
     public void mixedAddRemove() {
@@ -189,21 +196,22 @@ public class GroupedListTest {
         list.addToGroup("three", 2);
         assertList(list, "0:one", "2:three", "2:two");
 
-        assertThat(list.groupIndexOf(0, "one")).isEqualTo(0);
-        assertThat(list.groupIndexOf(2, "one")).isEqualTo(-1);
-        assertThat(list.groupIndexOf(2, "three")).isEqualTo(1);
-        assertThat(list.groupIndexOf(2, "two")).isEqualTo(2);
-        assertThat(list.groupIndexOf(0, "three")).isEqualTo(-1);
-        assertThat(list.groupIndexOf(0, "two")).isEqualTo(-1);
 
-        assertThat(list.groupIndexOf(0, "nonexistingelement")).isEqualTo(-1);
-        assertThat(list.groupIndexOf(3, "one")).isEqualTo(-1);
-        assertThat(list.groupIndexOf(3, "two")).isEqualTo(-1);
+        Assert.assertEquals(0, list.groupIndexOf(0, "one"));
+        Assert.assertEquals(-1, list.groupIndexOf(2, "one"));
+        Assert.assertEquals(1, list.groupIndexOf(2, "three"));
+        Assert.assertEquals(2, list.groupIndexOf(2, "two"));
+        Assert.assertEquals(-1, list.groupIndexOf(0, "three"));
+        Assert.assertEquals(-1, list.groupIndexOf(0, "two"));
+
+        Assert.assertEquals(-1, list.groupIndexOf(0, "nonexistingelement"));
+        Assert.assertEquals(-1, list.groupIndexOf(3, "one"));
+        Assert.assertEquals(-1, list.groupIndexOf(3, "two"));
     }
 
     private void assertList(final GroupedList<String> list, final String ... entry) {
         final String msg = " (Expected: " + Arrays.asList(entry) + ", provided: " + list + ")";
-        assertThat(list).as("Size not matching" + msg).hasSameSizeAs(entry);
+        Assert.assertEquals("Size not matching" + msg, entry.length, list.size());
 
         final Map<Integer, Integer> expectedGroupStarts = new HashMap<>();
         final Map<Integer, Integer> expectedGroupSizes = new HashMap<>();
@@ -215,11 +223,11 @@ public class GroupedListTest {
                 final String[] tokens = entry[i].split(":");
                 e = tokens[1];
                 final int newGroup = Integer.parseInt(tokens[0]);
-                assertThat(newGroup).as("new group must be greater than current group").isGreaterThanOrEqualTo(currentGroup);
+                Assert.assertTrue("new group must be greater than current group", newGroup >= currentGroup);
                 currentGroup = newGroup;
             }
-            assertThat(list.get(i)).as("Index " + i + " not equal" + msg).isEqualTo(e);
-            assertThat(list.groupFor(i)).as("Group on index " + i + " not equal" + msg).isEqualTo(currentGroup);
+            Assert.assertEquals("Index " + i + " not equal" + msg, e, list.get(i));
+            Assert.assertEquals("Group on index " + i + " not equal" + msg, currentGroup, list.groupFor(i));
 
             if (!expectedGroupStarts.containsKey(currentGroup)) {
                 expectedGroupStarts.put(currentGroup, i);
@@ -229,10 +237,12 @@ public class GroupedListTest {
         }
 
         //assert grouplist metadata
-        assertThat(list.groups().size()).as("Group size differs from expected" + msg).isEqualTo(expectedGroupSizes.size());
+        Assert.assertEquals("Group size differs from expected" + msg, expectedGroupSizes.size(), list.groups().size());
         for (int group : expectedGroupStarts.keySet()) {
-            assertThat(list.groupStart(group)).as("Group " + group + " start pos unexpected" + msg).isEqualTo(expectedGroupStarts.get(group));
-            assertThat(list.groupSize(group)).as("Group " + group + " size unexpected" + msg).isEqualTo(expectedGroupSizes.get(group));
+            Assert.assertEquals("Group " + group + " start pos unexpected" + msg, (int) expectedGroupStarts.get(group), list.groupStart(group));
+            Assert.assertEquals("Group " + group + " size unexpected" + msg, (int) expectedGroupSizes.get(group), list.groupSize(group));
         }
+
     }
+
 }

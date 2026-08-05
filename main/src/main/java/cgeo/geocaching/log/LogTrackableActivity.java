@@ -12,6 +12,7 @@ import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
+import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
@@ -21,11 +22,10 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.R.string;
@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -121,7 +122,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                     break;
                 }
             }
-            showToast(LocalizationUtils.getString(R.string.info_log_type_changed));
+            showToast(res.getString(R.string.info_log_type_changed));
         }
     }
 
@@ -134,7 +135,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logtrackable_activity);
-        binding = LogtrackableActivityBinding.bind(findViewById(R.id.activity_content));
+        binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
 
@@ -168,7 +169,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
 
         // no given data
         if (geocode == null) {
-            showToast(LocalizationUtils.getString(R.string.err_tb_display));
+            showToast(res.getString(R.string.err_tb_display));
             finish();
             return;
         }
@@ -184,7 +185,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         loggingManager = connector.getTrackableLoggingManager(geocode);
 
         if (loggingManager == null) {
-            showToast(LocalizationUtils.getString(R.string.err_tb_not_loggable));
+            showToast(res.getString(R.string.err_tb_not_loggable));
             finish();
         }
 
@@ -203,9 +204,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                     showProgress(false);
 
                     if (StringUtils.isNotBlank(geocode)) {
-                        showToast(LocalizationUtils.getString(R.string.err_tb_not_found, geocode));
+                        showToast(res.getString(R.string.err_tb_not_found, geocode));
                     } else {
-                        showToast(LocalizationUtils.getString(R.string.err_tb_find_that));
+                        showToast(res.getString(R.string.err_tb_find_that));
                     }
 
                     setResult(RESULT_CANCELED);
@@ -224,12 +225,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         // We're in LogTrackableActivity, so trackable must be loggable ;)
         if (!trackable.isLoggable()) {
             showProgress(false);
-            showToast(LocalizationUtils.getString(R.string.err_tb_not_loggable));
+            showToast(res.getString(R.string.err_tb_not_loggable));
             finish();
             return;
         }
 
-        setTitle(LocalizationUtils.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(), trackable.getName()));
+        setTitle(res.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(), trackable.getName()));
 
         // Display tracking code if we have, and move cursor next
         if (trackingCode != null) {
@@ -285,7 +286,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode, null));
+        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
     }
 
     public void updateForNewType() {
@@ -330,7 +331,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         @Override
         public void onClick(final View theView) {
 
-            CoordinateInputDialog.showLocation(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+            NewCoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
         }
 
         public void onCoordinatesUpdated(final Geopoint input) {
@@ -405,12 +406,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                 sendLog();
             } else {
                 // Redirect user to concerned connector settings
-                //Dialogs.confirmYesNo(this, LocalizationUtils.getString(R.string.settings_title_open_settings), LocalizationUtils.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                //Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
                 SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                     } else {
-                        showToast(LocalizationUtils.getString(R.string.err_trackable_no_preference_activity));
+                        showToast(res.getString(R.string.err_trackable_no_preference_activity));
                     }
                 });
             }
@@ -471,7 +472,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
 
     private void onPostExecuteInternal(final LogResult status) {
         if (status.isOk()) {
-            showToast(LocalizationUtils.getString(R.string.info_log_posted));
+            showToast(res.getString(R.string.info_log_posted));
             finish();
         } else {
             showToast(status.getErrorString());
@@ -482,6 +483,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void finish() {
         super.finish();
         this.logActivityHelper.finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        final boolean result = super.onCreateOptionsMenu(menu);
+        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
+            if (template.getTemplateString().equals("NUMBER") || template.getTemplateString().equals("ONLINENUM")) {
+                menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());
+            }
+        }
+        return result;
     }
 
     @Override

@@ -2,7 +2,6 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -38,7 +37,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         // show 3D option for building layer
         show3Doption = requireActivity().getIntent().getBooleanExtra(SHOW3DOPTION, false);
         // the preference category serves as the hook to add a list preference to allow users to select a style
-        this.renderthemeMenu = findPreference(LocalizationUtils.getPlainString(R.string.pref_theme_menu));
+        this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
     }
 
@@ -67,7 +66,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
 
         if (show3Doption) {
             final CheckBoxPreference cb3D = new CheckBoxPreference(activity);
-            cb3D.setKey(LocalizationUtils.getPlainString(R.string.pref_buildingLayer3D));
+            cb3D.setKey(activity.getString(R.string.pref_buildingLayer3D));
             cb3D.setTitle(R.string.maptheme_show3Dbuildings);
             cb3D.setChecked(Settings.getBuildings3D());
             cb3D.setIconSpaceReserved(false);

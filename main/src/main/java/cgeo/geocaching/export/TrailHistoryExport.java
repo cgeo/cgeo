@@ -7,7 +7,6 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileNameCreator;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.view.View;
@@ -34,7 +33,7 @@ public class TrailHistoryExport {
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(LocalizationUtils.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename));
+        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename));
 
         final CheckBox clearAfterExport = layout.findViewById(R.id.clear_trailhistory_after_export);
         clearAfterExport.setChecked(Settings.getClearTrailAfterExportStatus());

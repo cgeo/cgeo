@@ -2,7 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import androidx.preference.MultiSelectListPreference;
 import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
@@ -24,7 +23,7 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         final CharSequence[] languageCodes = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::getCode).toArray(CharSequence[]::new);
 
         final ListPreference translateTargetLngPref = findPreference(getString(R.string.pref_translation_language));
-        translateTargetLngPref.setEntries(ArrayUtils.insert(0, languageNames, LocalizationUtils.getString(R.string.translator_preference_disable), LocalizationUtils.getString(R.string.translator_preference_application_language)));
+        translateTargetLngPref.setEntries(ArrayUtils.insert(0, languageNames, getString(R.string.translator_preference_disable), getString(R.string.translator_preference_application_language)));
         translateTargetLngPref.setEntryValues(ArrayUtils.insert(0, languageCodes, OfflineTranslateUtils.LANGUAGE_INVALID, OfflineTranslateUtils.LANGUAGE_AUTOMATIC));
         translateTargetLngPref.setOnPreferenceChangeListener((preference, newValue) -> {
             setTranslateLanguageSummary(translateTargetLngPref, newValue.toString());
@@ -52,19 +51,19 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     private void setTranslateLanguageSummary(final ListPreference languagePref, final String newValue) {
         final Locale appLocale = Settings.getApplicationLocale();
 
-        if (Strings.CS.equals(newValue, OfflineTranslateUtils.LANGUAGE_INVALID)) {
-            languagePref.setSummary(LocalizationUtils.getString(R.string.init_translation_disabled));
-        } else if (Strings.CS.equals(newValue, OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
+        if (StringUtils.equals(newValue, OfflineTranslateUtils.LANGUAGE_INVALID)) {
+            languagePref.setSummary(getString(R.string.init_translation_disabled));
+        } else if (StringUtils.equals(newValue, OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
             final OfflineTranslateUtils.Language systemLang = OfflineTranslateUtils.getAppLanguageOrDefault();
             final OfflineTranslateUtils.Language appLanguage = Settings.getApplicationLanguage();
             final String appLanguageDisplayName = appLanguage.getDisplayName();
 
             if (systemLang.equals(appLanguage)) {
-                languagePref.setSummary(String.format("%s: %s", LocalizationUtils.getString(R.string.init_use_application_language), appLanguageDisplayName));
+                languagePref.setSummary(String.format("%s: %s", getString(R.string.init_use_application_language), appLanguageDisplayName));
             } else {
-                languagePref.setSummary(String.format("%s: %s\n%s", LocalizationUtils.getString(R.string.init_use_application_language),
-                        LocalizationUtils.getString(R.string.translator_language_unsupported, appLanguageDisplayName),
-                        LocalizationUtils.getString(R.string.translator_target_language, systemLang.getDisplayName())));
+                languagePref.setSummary(String.format("%s: %s\n%s", getString(R.string.init_use_application_language),
+                        getString(R.string.translator_language_unsupported, appLanguageDisplayName),
+                        getString(R.string.translator_target_language, systemLang.getDisplayName())));
             }
         } else {
             final Locale newLocale = new Locale(newValue);

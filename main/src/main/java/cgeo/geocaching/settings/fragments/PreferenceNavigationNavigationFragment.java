@@ -2,7 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
@@ -31,7 +30,7 @@ public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCo
             if (appEnum.app.isInstalled()) {
                 PreferenceUtils.setEnabled(preference, true);
             } else {
-                PreferenceUtils.setSummary(preference, LocalizationUtils.getString(R.string.settings_navigation_disabled));
+                PreferenceUtils.setSummary(preference, getString(R.string.settings_navigation_disabled));
             }
         }
     }

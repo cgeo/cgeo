@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class EditNoteDialog extends AbstractFullscreenDialog {
 
@@ -52,13 +53,11 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
     }
 
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NotNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_edit_note, container, false);
 
         toolbar = view.findViewById(R.id.toolbar);
-
-        applyEdge2Edge(view);
 
         return view;
     }
@@ -70,7 +69,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
     }
 
     @Override
-    public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 

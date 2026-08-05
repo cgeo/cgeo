@@ -48,7 +48,6 @@ import io.reactivex.rxjava3.processors.PublishProcessor;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
@@ -442,11 +441,11 @@ public class HtmlImage implements Html.ImageGetter {
         final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
 
         // special case for scheme relative URLs
-        if (Strings.CS.startsWith(url, "//")) {
+        if (StringUtils.startsWith(url, "//")) {
             return StringUtils.isEmpty(hostUrl) ? "https:" + url : Uri.parse(hostUrl).getScheme() + ":" + url;
         }
 
-        if (!Strings.CS.startsWith(url, "/")) {
+        if (!StringUtils.startsWith(url, "/")) {
             Log.w("unusable relative URL for geocache " + geocode + ": " + url);
             return null;
         }

@@ -2,10 +2,12 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.os.Build;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Supplier;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -131,7 +133,26 @@ public class CommonUtils {
         };
     }
 
-    /** executes a given action on each 'partitionSize' number of elements of the given collection. If false is returned, action is abandoned */
+
+    /** Returns a ThreadLocal with initial value given by passed Supplier.
+     * Use this method instead of ThreadLocal.withInitial() for SDK<26;
+     */
+    public static <T> ThreadLocal<T> threadLocalWithInitial(final Supplier<T> supplier) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return ThreadLocal.withInitial(supplier::get);
+        }
+
+        return new ThreadLocal<T>() {
+
+            @Override
+            protected T initialValue() {
+                return supplier.get();
+            }
+        };
+    }
+
+    /** executes a given action on each 'partitionSize' numer of elements of the given collection. If false is returned, action is abandoned */
     public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Func1<List<T>, Boolean> action) {
         final List<T> sublist = new ArrayList<>(partitionSize);
         int cnt = 0;
@@ -144,7 +165,6 @@ public class CommonUtils {
                     return;
                 }
                 sublist.clear();
-                cnt = 0;
             }
         }
         if (!sublist.isEmpty()) {

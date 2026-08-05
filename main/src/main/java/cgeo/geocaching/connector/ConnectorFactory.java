@@ -55,7 +55,6 @@ import io.reactivex.rxjava3.functions.BiConsumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
@@ -337,7 +336,7 @@ public final class ConnectorFactory {
     @NonNull
     public static IConnector getConnectorByName(final String connectorName) {
         for (final IConnector connector : CONNECTORS) {
-            if (Strings.CS.equals(connectorName, connector.getName())) {
+            if (StringUtils.equals(connectorName, connector.getName())) {
                 return connector;
             }
         }
@@ -492,4 +491,5 @@ public final class ConnectorFactory {
     public static void forceRelog() {
         forceRelog = true;
     }
+
 }

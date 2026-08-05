@@ -13,7 +13,6 @@ import java.util.Objects;
 import okhttp3.HttpUrl;
 import okhttp3.HttpUrl.Builder;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
@@ -38,7 +37,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
      * Percent encode following <a href="http://tools.ietf.org/html/rfc5849#section-3.6">...</a>
      */
     static String percentEncode(@NonNull final String url) {
-        return Strings.CS.replace(Network.rfc3986URLEncode(url), "*", "%2A");
+        return StringUtils.replace(Network.rfc3986URLEncode(url), "*", "%2A");
     }
 
     /**
@@ -144,4 +143,5 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     public Parameters add(final String key, final String value) {
         return put(key, value);
     }
+
 }

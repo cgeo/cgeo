@@ -18,11 +18,6 @@
         android:title="@string/caches_sort"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_named_filters"
-        android:icon="@drawable/ic_menu_myfilters"
-        android:title="@string/named_filter_activity_title"
-        app:showAsAction="ifRoom|withText"/>
-    <item
         android:id="@+id/menu_switch_select_mode"
         android:icon="@drawable/ic_menu_select_start"
         android:title="@string/caches_select_mode"
@@ -95,24 +90,6 @@
                 android:title="@string/caches_upload_bookmarklist_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
-                android:id="@+id/menu_watch_management"
-                android:icon="@drawable/ic_menu_watch"
-                android:title="@string/feature_watch_list"
-                app:showAsAction="never|withText">
-                <menu>
-                    <item
-                        android:id="@+id/menu_watch_all"
-                        android:title="@string/caches_watch_all"
-                        android:icon="@drawable/ic_menu_watch"
-                        app:showAsAction="ifRoom|withText"/>
-                    <item
-                        android:id="@+id/menu_unwatch_all"
-                        android:title="@string/caches_unwatch_all"
-                        android:icon="@drawable/ic_menu_watch_remove"
-                        app:showAsAction="ifRoom|withText"/>
-                </menu>
-            </item>
-            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:enabled="true"
@@ -126,11 +103,6 @@
                 android:title="@string/caches_set_cache_icon_all"
                 android:enabled="false"
                 app:showAsAction="never"/>
-            <item
-                android:id="@+id/menu_recalculate_health_score"
-                android:title="@string/caches_recalculate_health_score"
-                android:enabled="false"
-                app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_create_internal_cache"
                 android:title="@string/create_internal_cache"
@@ -157,6 +129,10 @@
                 android:title="@string/list_menu_rename"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_rename_list_prefix"
+                android:title="@string/list_menu_rename_list_prefix"
+                app:showAsAction="never|withText"/>
+            <item
                 android:id="@+id/menu_make_list_unique"
                 android:title="@string/caches_make_list_unique"
                 android:enabled="false"
@@ -170,10 +146,6 @@
                 android:title="@string/caches_askdeletion"
                 app:showAsAction="never"
                 android:visible="false"/>
-            <item
-                android:id="@+id/menu_rename_parent_lists"
-                android:title="@string/list_menu_rename_parent_lists"
-                app:showAsAction="never|withText"/>
         </menu>
     </item>
     <item

@@ -6,7 +6,6 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ColorUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -156,7 +155,7 @@ public class CacheListActionBarChooser {
     }
 
     private CharSequence getCacheNumber(final int count) {
-        return LocalizationUtils.getPlural(R.plurals.cache_counts, count);
+        return context.getResources().getQuantityString(R.plurals.cache_counts, count, count);
     }
 
 }

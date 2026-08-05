@@ -12,7 +12,7 @@ import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.LinkResolverDef;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class MarkdownUtils {
 
@@ -29,7 +29,7 @@ public class MarkdownUtils {
                             final Uri uri = Uri.parse(link);
                             if (uri != null) {
                                 // filter links to c:geo-internal settings
-                                if (Strings.CS.equals(uri.getScheme(), LocalizationUtils.getPlainString(R.string.settings_scheme))) {
+                                if (StringUtils.equals(uri.getScheme(), context.getString(R.string.settings_scheme))) {
                                     SettingsActivity.openForSettingsLink(uri, context);
                                 } else {
                                     new LinkResolverDef().resolve(view, link);
@@ -40,4 +40,5 @@ public class MarkdownUtils {
                 })
                 .build();
     }
+
 }

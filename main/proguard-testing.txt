@@ -1,0 +1,4 @@
+# AssertJ
+-dontwarn java.nio.**
+-dontwarn java.lang.management.**
+-dontwarn org.assertj.core.internal.**

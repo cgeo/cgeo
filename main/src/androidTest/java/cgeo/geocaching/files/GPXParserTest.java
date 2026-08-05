@@ -11,7 +11,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sorting.GeocodeComparator;
@@ -36,11 +35,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.junit.Rule;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.within;
 import static org.junit.Assert.fail;
 
 public class GPXParserTest  {
@@ -265,7 +264,7 @@ public class GPXParserTest  {
         assertThat(log.date).isEqualTo(parseTime("2011-09-11T07:00:00Z"));
         assertThat(log.found).isEqualTo(-1);
         assertThat(log.log).isEqualTo("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
-        assertThat(LogUtils.isOwnLog(log, cache)).isFalse();
+        assertThat(log.isOwn()).isFalse();
         assertThat(log.getDisplayText()).isEqualTo(log.log);
         assertThat(CalendarUtils.daysSince(log.date)).isGreaterThan(700);
 

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Reader;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 /**
  * Filter reader which can filter out invalid XML characters and character references.
@@ -50,10 +49,10 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                         final int entityLength = readPos - entityStart + 1;
                         if (entityLength <= 8) { // &#xFFFD;
                             final String entity = new String(cbuf, entityStart, entityLength);
-                            if (Strings.CS.startsWith(entity, "&#")) {
+                            if (StringUtils.startsWith(entity, "&#")) {
                                 final String numberString = StringUtils.substringBetween(entity, "&#", ";");
                                 final int value;
-                                if (Strings.CS.startsWith(numberString, "x")) {
+                                if (StringUtils.startsWith(numberString, "x")) {
                                     value = Integer.parseInt(numberString.substring(1), 16);
                                 } else {
                                     value = Integer.parseInt(numberString);

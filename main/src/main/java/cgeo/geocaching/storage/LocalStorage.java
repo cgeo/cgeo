@@ -13,7 +13,6 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -52,7 +51,6 @@ public final class LocalStorage {
     private static final String TRACKFILE_CACHE_DIR_NAME = "trackfiles";
 
     private static final String WHERIGO_DIRNAME = "wherigo";
-    private static final String BERGAMOT_DIR_NAME = "bergamot";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
@@ -208,14 +206,6 @@ public final class LocalStorage {
         return dir;
     }
 
-    /**
-     * Directory for Bergamot offline translation model files.
-     */
-    @NonNull
-    public static File getBergamotDirectory() {
-        return new File(getInternalCgeoDirectory(), BERGAMOT_DIR_NAME);
-    }
-
     @NonNull
     public static File getMapThemeInternalSyncDir() {
         final File dir = new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
@@ -363,7 +353,7 @@ public final class LocalStorage {
 
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
-        progress.show(fromActivity, LocalizationUtils.getString(R.string.init_datadirmove_datadirmove), LocalizationUtils.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
+        progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
             final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
@@ -386,7 +376,7 @@ public final class LocalStorage {
             return Observable.just(success);
         }).subscribeOn(Schedulers.io())).subscribe(success -> {
             progress.dismiss();
-            final String message = success ? LocalizationUtils.getString(R.string.init_datadirmove_success) : LocalizationUtils.getString(R.string.init_datadirmove_failed);
+            final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_datadirmove_datadirmove).setMessage(TextParam.text(message)).show();
         });
     }
@@ -439,7 +429,7 @@ public final class LocalStorage {
         MigrateTask(@NonNull final Activity activity, final int currentVersion, final int finalVersion) {
             super(
                     activity,
-                    LocalizationUtils.getString(R.string.localstorage_migrate_title),
+                    activity.getString(R.string.localstorage_migrate_title),
                     "---");
             this.currentVersion = currentVersion;
             this.finalVersion = finalVersion;
@@ -454,7 +444,7 @@ public final class LocalStorage {
 
         private void displayProgress(final String minorStatus) {
             publishProgress(
-                    LocalizationUtils.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
+                    activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
                             (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
                             (minorStatus == null ? "" : "\n" + minorStatus));
         }
@@ -515,27 +505,6 @@ public final class LocalStorage {
             Settings.setLocalStorageVersion(result);
         }
 
-    }
-
-    /**
-     cleans remainders of ML Kit offline translation:
-     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.translate.models/ had subfolders with the actual models
-     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.InstallationId
-     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.RemoteConfig
-     /data/data/cgeo.geocaching/shared_prefs/com.google.mlkit.internal.xml
-     */
-    public static void cleanupMLKitfiles() {
-        final File baseFolder = CgeoApplication.getInstance().getNoBackupFilesDir();
-        if (baseFolder != null) {
-            final File folder = new File(baseFolder, "com.google.mlkit.translate.models");
-            if (folder.exists()) {
-                FileUtils.deleteDirectory(folder);
-                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.InstallationId"));
-                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.RemoteConfig"));
-                FileUtils.deleteIgnoringFailure(new File(new File(CgeoApplication.getInstance().getDataDir(), "shared_prefs"), "com.google.mlkit.internal.xml"));
-                Log.e("ML Kit cleanup finished");
-            }
-        }
     }
 
 }

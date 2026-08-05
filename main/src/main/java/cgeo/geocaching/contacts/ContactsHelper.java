@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 /** Provides access to Android Contacts */
 public class ContactsHelper {
@@ -44,6 +43,7 @@ public class ContactsHelper {
         searchUser(userName);
     }
 
+
     @NonNull
     private List<Pair<Integer, String>> findContacts(@NonNull final String searchName, final Uri uri, @NonNull final String idColumnName, @NonNull final String selectionColumnName, final boolean like) {
         final String[] projection = {idColumnName, selectionColumnName, ContactsContract.Contacts.DISPLAY_NAME};
@@ -57,13 +57,14 @@ public class ContactsHelper {
                 final String foundName = cursor.getString(1);
                 final String displayName = cursor.getString(2);
                 result.add(new Pair<>(foundId, StringUtils.isNotEmpty(displayName) &&
-                        !Strings.CI.equals(foundName, displayName) ? foundName + " (" + displayName + ")" : foundName));
+                        !StringUtils.equalsIgnoreCase(foundName, displayName) ? foundName + " (" + displayName + ")" : foundName));
             }
         } catch (final Exception e) {
             Log.e("ContactsHelper.findContacts", e);
         }
         return result;
     }
+
 
     public void searchUser(final String userName) {
 
@@ -120,4 +121,5 @@ public class ContactsHelper {
         intent.setData(uri);
         activity.startActivity(intent);
     }
+
 }

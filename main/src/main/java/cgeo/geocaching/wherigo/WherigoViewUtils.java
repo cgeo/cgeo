@@ -36,14 +36,9 @@ import android.text.Spannable;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -83,42 +78,17 @@ public final class WherigoViewUtils {
         }
     }
 
-    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final CharSequence title, @NonNull final View contentView) {
+    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final CharSequence title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         final AlertDialog dialog = builder.create();
-        final boolean hasTitle = !StringUtils.isBlank(title);
-        if (hasTitle) {
+        if (!StringUtils.isBlank(title)) {
             final WherigoDialogTitleViewBinding titleBinding = WherigoDialogTitleViewBinding.inflate(LayoutInflater.from(activity));
             titleBinding.dialogTitle.setText(title);
             dialog.setCustomTitle(titleBinding.getRoot());
             titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog));
         }
-        dialog.setView(contentView);
-
-        //apply edge2edge
-        WindowCompat.enableEdgeToEdge(activity.getWindow());
-        ViewCompat.setOnApplyWindowInsetsListener(contentView, (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
-            //if dialog has a title then "divide" padding between title bar and content. Otherwise all to content
-            if (hasTitle) {
-                contentView.setPadding(innerPadding.left, 0, innerPadding.right, innerPadding.bottom);
-                final View titleView = dialog.findViewById(R.id.dialog_title_content);
-                titleView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, 0);
-            } else {
-                contentView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
-            }
-
-            return windowInsets;
-        });
-
         return dialog;
-    }
 
-    public static void setTitle(final Dialog dialog, final String title) {
-        final View view = dialog.findViewById(R.id.dialog_title);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(title);
-        }
     }
 
     public static <T> void setViewActions(final Iterable<T> actions, final SimpleItemListView view, final int columnCount, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
@@ -143,8 +113,7 @@ public final class WherigoViewUtils {
                 final List<EventTable> things = type.getThingsForUserDisplay();
                 final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
                 final CharSequence description = TextUtils.join(things, i ->
-                        WherigoUtils.getUserDisplayableName(i, false), ", ");
-
+                        WherigoUtils.getEventTableNameForDisplay(i, false), ", ");
                 final WherigolistItemBinding typeBinding = WherigolistItemBinding.bind(view);
                 typeBinding.name.setText(name);
                 typeBinding.description.setText(description);
@@ -176,13 +145,14 @@ public final class WherigoViewUtils {
         }
         if (things.size() == 1) {
             thingSelectAction.accept(things.get(0));
+            //displayThing(activity, things.get(0), false);
             return;
         }
 
         final SimpleDialog.ItemSelectModel<EventTable> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(things)
-            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getUserDisplayableName(item, false)))
+            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getEventTableNameForDisplay(item, false)))
             .setDisplayIconMapper(item -> {
                 final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
                 return iconDrawable == null ? ImageParam.id(defaultIconId) : ImageParam.drawable(iconDrawable);

@@ -1,10 +1,12 @@
 package cgeo.geocaching.connector.capability;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.LocalizationUtils;
+
+import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -16,27 +18,28 @@ import androidx.annotation.WorkerThread;
 public interface IVotingCapability extends IConnector {
 
     static String getDefaultFiveStarsDescription(final float rating) {
+        final Application app = CgeoApplication.getInstance();
         switch (Math.round(rating * 2f)) {
             case 2:
-                return LocalizationUtils.getString(R.string.log_stars_1_description);
+                return app.getString(R.string.log_stars_1_description);
             case 3:
-                return LocalizationUtils.getString(R.string.log_stars_15_description);
+                return app.getString(R.string.log_stars_15_description);
             case 4:
-                return LocalizationUtils.getString(R.string.log_stars_2_description);
+                return app.getString(R.string.log_stars_2_description);
             case 5:
-                return LocalizationUtils.getString(R.string.log_stars_25_description);
+                return app.getString(R.string.log_stars_25_description);
             case 6:
-                return LocalizationUtils.getString(R.string.log_stars_3_description);
+                return app.getString(R.string.log_stars_3_description);
             case 7:
-                return LocalizationUtils.getString(R.string.log_stars_35_description);
+                return app.getString(R.string.log_stars_35_description);
             case 8:
-                return LocalizationUtils.getString(R.string.log_stars_4_description);
+                return app.getString(R.string.log_stars_4_description);
             case 9:
-                return LocalizationUtils.getString(R.string.log_stars_45_description);
+                return app.getString(R.string.log_stars_45_description);
             case 10:
-                return LocalizationUtils.getString(R.string.log_stars_5_description);
+                return app.getString(R.string.log_stars_5_description);
             default:
-                return LocalizationUtils.getString(R.string.log_no_rating);
+                return app.getString(R.string.log_no_rating);
         }
     }
 

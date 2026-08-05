@@ -24,7 +24,6 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 
@@ -32,7 +31,7 @@ import androidx.preference.ListPreference;
 
 import java.io.InputStream;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.backend.AssetAdapter;
 import org.oscim.theme.IRenderTheme.ThemeException;
 import org.oscim.theme.ThemeFile;
@@ -46,7 +45,6 @@ public enum VtmThemes implements ThemeFile {
 
     DEFAULT("vtm/default.xml"),
     MAPZEN("vtm/mapzen.xml"),
-    MOTORIDER("vtm/motorider.xml"),
     NEWTRON("vtm/newtron.xml"),
     OPENMAPTILES("vtm/openmaptiles.xml"),
     OSMAGRAY("vtm/osmagray.xml"),
@@ -104,7 +102,7 @@ public enum VtmThemes implements ThemeFile {
         final ListPreference themeVariants = new ListPreference(context);
         themeVariants.setTitle(R.string.vtm_theme_variant);
         themeVariants.setSummary(getDefaultVariant().name());
-        themeVariants.setKey(LocalizationUtils.getPlainString(R.string.pref_vtm_default));
+        themeVariants.setKey(context.getString(R.string.pref_vtm_default));
         final CharSequence[] variants = new CharSequence[VtmThemes.values().length];
         int i = 0;
         for (VtmThemes vtmTheme : VtmThemes.values()) {
@@ -126,7 +124,7 @@ public enum VtmThemes implements ThemeFile {
     public static VtmThemes getDefaultVariant() {
         final String vtmDefaultVariantName = Settings.getVtmDefaultVariantName();
         for (VtmThemes vtmTheme : VtmThemes.values()) {
-            if (Strings.CS.equals(vtmTheme.name(), vtmDefaultVariantName)) {
+            if (StringUtils.equals(vtmTheme.name(), vtmDefaultVariantName)) {
                 return vtmTheme;
             }
         }

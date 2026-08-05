@@ -9,7 +9,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -116,48 +115,32 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
     }
 
     private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final ArrayList<String> profiles, final int number) {
-        String current = Settings.getRoutingProfile(mode);
+        final String current = StringUtils.defaultIfBlank(Settings.getRoutingProfile(mode), getString(R.string.routingmode_none));
         final ListPreference pref = findPreference(getString(prefId));
         assert pref != null;
 
         final ArrayList<String> prefProfiles = new ArrayList<>(profiles);
-        final ArrayList<String> prefValues = new ArrayList<>(profiles);
         if (number > 0) {
-            // Add localized "none" as display entry, but use empty string as value
-            prefProfiles.add(LocalizationUtils.getString(R.string.routingmode_none));
-            prefValues.add("");
+            prefProfiles.add(getString(R.string.routingmode_none));
 
-            final String title = LocalizationUtils.getString(R.string.init_brouterProfileUserNumber, number);
+            final String title = String.format(getString(R.string.init_brouterProfileUserNumber), number);
             pref.setDialogTitle(title);
             pref.setTitle(title);
-
-            // Migrate: if current value is not in available profiles list (and not blank), reset to empty
-            if (StringUtils.isNotBlank(current) && !profiles.contains(current)) {
-                current = "";
-            }
         }
 
         final CharSequence[] entries = prefProfiles.toArray(new CharSequence[0]);
-        final CharSequence[] values = prefValues.toArray(new CharSequence[0]);
+        final CharSequence[] values = prefProfiles.toArray(new CharSequence[0]);
 
         pref.setEntries(entries);
         pref.setEntryValues(values);
-
-        // Set summary: if current is blank/empty, show localized "none"
-        final String displayValue = StringUtils.isBlank(current) ? LocalizationUtils.getString(R.string.routingmode_none) : current;
-        pref.setSummary(displayValue);
-
+        pref.setSummary(current);
         pref.setOnPreferenceChangeListener((preference, newValue) -> {
-            final String value = newValue.toString();
-            final String summary = StringUtils.isBlank(value) ? LocalizationUtils.getString(R.string.routingmode_none) : value;
-            preference.setSummary(summary);
+            preference.setSummary(newValue.toString());
             return true;
         });
 
-        // Set current selection
-        final String normalizedCurrent = StringUtils.defaultString(current);
-        for (int i = 0; i < values.length; i++) {
-            if (normalizedCurrent.equals(values[i].toString())) {
+        for (int i = 0; i < entries.length; i++) {
+            if (current.contentEquals(entries[i])) {
                 pref.setValueIndex(i);
                 break;
             }
@@ -165,7 +148,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
     }
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
-        final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter));
+        final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
         PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
         PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
     }

@@ -31,11 +31,6 @@
 
 -keep class androidx.appcompat.widget.ShareActionProvider { <init>(...); }
 
-# androidx.lifecycle 2.10.0+ ProGuard/R8 rules to prevent AbstractMethodError with DefaultLifecycleObserver
--keep class * implements androidx.lifecycle.DefaultLifecycleObserver {
-    public void * (androidx.lifecycle.LifecycleOwner);
-}
-
 # Apache commons ----------------------------------------------------------------------------------
 
 # apache.commons.collections has some bean related collections, which are undefined in Android
@@ -125,19 +120,6 @@
 
 # used in tests
 -keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
-
-# Locus -------------------------------------------------------------------------------------------
-
-# Keep Locus API objects
--keep class locus.api.objects.** { *; }
-
-# Bergamot offline translation library -------------------------------------------------------------
-
-# The native library (libbergamot-sys.so) uses JNI to create instances of these Java classes
-# (e.g. DetectionResult) via JNIEnv::NewObjectV, looking them up by name at runtime.
-# Without these rules, R8 strips/renames these classes in non-debug builds, causing the
-# JNI method-ID lookup (mid) to return null and aborting with SIGABRT.
--keep class dev.davidv.bergamot.** { *; }
 
 # Unsorted ----------------------------------------------------------------------------------------
 

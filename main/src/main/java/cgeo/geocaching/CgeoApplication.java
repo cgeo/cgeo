@@ -5,10 +5,10 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CgeoUncaughtExceptionHandler;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
+import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
@@ -22,6 +22,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -35,7 +36,6 @@ import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -49,8 +49,6 @@ public class CgeoApplication extends Application {
     private static CgeoApplication instance;
     private final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
     private final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
-
-    private Context localeContext;
 
     private final LifecycleInfo lifecycleInfo;
 
@@ -154,8 +152,7 @@ public class CgeoApplication extends Application {
 
             TransactionSizeLogger.get().setRequested();
 
-            // error handlers
-            CgeoUncaughtExceptionHandler.installUncaughtExceptionHandler(this);
+            OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
             setupRxJavaErrorHandler();
 
             Settings.setAppThemeAutomatically(this);
@@ -269,25 +266,10 @@ public class CgeoApplication extends Application {
      * Enforce a specific language if the user decided so.
      */
     public void initApplicationLocale() {
-        final Locale locale = Settings.getApplicationLocale();
-        // Set default locale for Java-side formatting (String.format, toLowerCase, etc.)
-        Locale.setDefault(locale);
-        // Create a locale-aware context for Android resource lookups (getString, etc.)
-        final Configuration config = new Configuration(getResources().getConfiguration());
-        config.setLocale(locale);
-        localeContext = createConfigurationContext(config);
-    }
-
-    /**
-     * Returns a Context configured with the user-selected application locale.
-     * Use this context for string resource lookups instead of getApplicationContext().
-     */
-    @NonNull
-    public Context getLocaleContext() {
-        if (localeContext == null) {
-            initApplicationLocale();
-        }
-        return localeContext;
+        final Configuration config = getResources().getConfiguration();
+        config.locale = Settings.getApplicationLocale();
+        final Resources resources = getResources();
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     public AtomicInteger getLowPrioNotificationCounter() {

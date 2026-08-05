@@ -121,12 +121,11 @@ public final class WherigoUtils {
         return result;
     }
 
-    public static String getUserDisplayableActionText(final Action action) {
+    public static String getActionText(final Action action) {
         if (action == null || action.text == null) {
             return "-";
         }
-        final String actionText = action.text;
-        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? actionText : actionText + " (debug)";
+        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? action.text : action.text + " (debug)";
     }
 
     public static void callAction(final Thing thing, final Action action, final Activity activity) {
@@ -189,6 +188,32 @@ public final class WherigoUtils {
         return builder.getViewport();
     }
 
+    public static CharSequence getEventTableNameForDisplay(final EventTable et, final boolean doShort) {
+        if (et == null) {
+            return "--";
+        }
+        CharSequence name = WherigoGame.get().toDisplayText(et.name);
+        if (et instanceof Task) {
+            switch (((Task) et).state()) {
+                case Task.DONE:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
+                    break;
+                case Task.FAILED:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (!doShort && et instanceof Zone) {
+            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")");
+        }
+        if (!WherigoUtils.isVisibleToPlayer(et)) {
+            name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
+        }
+        return name;
+    }
+
     public static String eventTableDebugInfo(final EventTable et) {
         if (et == null) {
             return "null";
@@ -208,7 +233,7 @@ public final class WherigoUtils {
             final List<Action> actions = WherigoUtils.getActions((Thing) et, true);
             msg.append("\n- Actions (").append(actions.size()).append("):");
             for (Action act : actions) {
-                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getUserDisplayableActionText(act)).append(", univ=").append(act.isUniversal()).append(")");
+                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getActionText(act)).append(", univ=").append(act.isUniversal()).append(")");
             }
         }
         if (et instanceof Zone) {
@@ -231,7 +256,7 @@ public final class WherigoUtils {
             msg.append(")");
         }
         if (et instanceof Task) {
-            msg.append("\n- TaskState:").append(((Task) et).state());
+            msg.append("\n- taskstate:").append(((Task) et).state());
         }
         msg.append("\n- Raw:").append(et);
         return msg.toString();
@@ -279,30 +304,6 @@ public final class WherigoUtils {
             seekableFile.close();
         } catch (Exception e) {
             Log.w("WHEERIGO: Couldn't access seekable file inside cartridge", e);
-        }
-    }
-
-    public static byte[] getFileSafe(final CartridgeFile cartridgeFile, final int oid) {
-        if (cartridgeFile == null) {
-            return null;
-        }
-        try {
-            return cartridgeFile.getFile(oid);
-        } catch (Exception e) {
-            Log.w("WHERIGO: Couldn't read file with oid " + oid + " from cartridge " + cartridgeFile.name, e);
-            return null;
-        }
-    }
-
-    public static byte[] getMediaFileSafe(final Media media) {
-        if (media == null) {
-            return null;
-        }
-        try {
-            return Engine.mediaFile(media);
-        } catch (Exception e) {
-            Log.w("WHERIGO: Couldn't read file from media " + media, e);
-            return null;
         }
     }
 
@@ -544,31 +545,4 @@ public final class WherigoUtils {
         return geocode.trim() + ": " + cache.getName().trim();
     }
 
-    public static CharSequence getUserDisplayableName(final EventTable et, final boolean doShort) {
-        if (et == null) {
-            return "--";
-        }
-        //translation
-        CharSequence name = WherigoGame.get().toDisplayText(et.name);
-        //special things for certain types of elements
-        if (et instanceof Task) {
-            switch (((Task) et).state()) {
-                case Task.DONE:
-                    name = TextUtils.concat(EmojiUtils.GREEN_CHECK_BOXED + " ", name);
-                    break;
-                case Task.FAILED:
-                    name = TextUtils.concat(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK + " ", name);
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (!doShort && et instanceof Zone) {
-            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")");
-        }
-        if (!WherigoUtils.isVisibleToPlayer(et)) {
-            name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
-        }
-        return name;
-    }
 }

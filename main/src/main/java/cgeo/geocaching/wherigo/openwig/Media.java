@@ -11,7 +11,6 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Locale;
 
 public class Media extends EventTable {
 
@@ -51,7 +50,7 @@ public class Media extends EventTable {
                 LuaTable res = (LuaTable)lt.rawget(new Double(i));
                 String t = (String)res.rawget("Type");
                 if ("fdl".equals(t)) continue;
-                type = t.toLowerCase(Locale.getDefault());
+                type = t.toLowerCase();
             }
         } else super.setItem(key, value);
     }

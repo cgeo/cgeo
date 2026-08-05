@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -50,13 +51,13 @@ public abstract class AbstractDownloader {
     AbstractDownloader(final Download.DownloadType offlineMapType, final Uri mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;
         this.mapBase = mapBase;
-        this.mapSourceName = mapSourceName == 0 ? "" : LocalizationUtils.getString(mapSourceName);
-        this.mapSourceInfo = mapSourceInfo == 0 ? "" : LocalizationUtils.getString(mapSourceInfo);
-        this.projectUrl = projectUrl == 0 ? "" : LocalizationUtils.getPlainString(projectUrl);
+        this.mapSourceName = mapSourceName == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceName);
+        this.mapSourceInfo = mapSourceInfo == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceInfo);
+        this.projectUrl = projectUrl == 0 ? "" : CgeoApplication.getInstance().getString(projectUrl);
         if (projectUrl != 0) {
             this.mapSourceInfo += (mapSourceInfo != 0 ? "\n" : "") + "(" + this.projectUrl + ")";
         }
-        this.likeItUrl = likeItUrl == 0 ? "" : LocalizationUtils.getPlainString(likeItUrl);
+        this.likeItUrl = likeItUrl == 0 ? "" : CgeoApplication.getInstance().getString(likeItUrl);
         this.targetFolder = targetFolder;
     }
 

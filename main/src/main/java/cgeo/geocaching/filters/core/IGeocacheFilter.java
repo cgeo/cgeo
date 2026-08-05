@@ -4,10 +4,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.config.IJsonConfigurable;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.function.Function;
 
 /**
  * Base interface to be implemented by all Geocache-Filters
@@ -34,15 +31,6 @@ public interface IGeocacheFilter extends IJsonConfigurable<IGeocacheFilter> {
      * If this filter is configured in a way that it will actually perform a filtering, this method shall return true
      */
     boolean isFiltering();
-
-    /**
-     * Tries to simplify filter tree and returns a simplified version if possible. May return self.
-     * @param criterion if application to this or any child node returns "true" or "false",
-     *   then this (sub-)tree is considered to always return true/false. If null then subtree is more complex
-     * @return possibly simplified filter tree
-     */
-    @NonNull
-    IGeocacheFilter simplify(@NonNull Function<IGeocacheFilter, Boolean> criterion);
 
     /**
      * For efficient selection of geocaches from DB passing this filter, filter classes shall implement this method

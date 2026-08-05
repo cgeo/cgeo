@@ -3,7 +3,6 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsFragment;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.StringRes;
@@ -20,7 +19,7 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider implements 
     AbstractGoogleTileProvider(final int mapType, final @StringRes int nameRes) {
         super(2, 21, new Pair<>("", false));
         this.mapType = mapType;
-        this.tileProviderName = LocalizationUtils.getString(nameRes);
+        this.tileProviderName = CgeoApplication.getInstance().getString(nameRes);
         this.supportsThemeOptions = true;
     }
 

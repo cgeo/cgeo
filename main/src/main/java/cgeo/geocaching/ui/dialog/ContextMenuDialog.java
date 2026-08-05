@@ -4,18 +4,16 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Represents a dialog usable as a context menu for various elements.
@@ -28,7 +26,7 @@ public class ContextMenuDialog {
     private String title;
 
     private final List<Item> items = new ArrayList<>();
-    private Consumer<Integer> dialogClickAction;
+    private Action1<Integer> dialogClickAction;
 
     public ContextMenuDialog setTitle(final String title) {
         this.title = title;
@@ -50,12 +48,12 @@ public class ContextMenuDialog {
     }
 
     public ContextMenuDialog addItem(@StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(new Item(LocalizationUtils.getString(textId), icon, selectAction));
+        items.add(new Item(this.activity.getResources().getString(textId), icon, selectAction));
         return this;
     }
 
     public ContextMenuDialog addItem(final int pos, @StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(pos, new Item(LocalizationUtils.getString(textId), icon, selectAction));
+        items.add(pos, new Item(this.activity.getResources().getString(textId), icon, selectAction));
         return this;
     }
 
@@ -64,7 +62,7 @@ public class ContextMenuDialog {
         return this;
     }
 
-    public ContextMenuDialog setOnClickAction(final Consumer<Integer> clickAction) {
+    public ContextMenuDialog setOnClickAction(final Action1<Integer> clickAction) {
         this.dialogClickAction = clickAction;
         return this;
     }
@@ -80,7 +78,7 @@ public class ContextMenuDialog {
             if (dialogClickAction != null) {
                 final int pos = this.items.indexOf(it);
                 if (pos >= 0) {
-                    dialogClickAction.accept(pos);
+                    dialogClickAction.call(pos);
                 }
             }
         };
@@ -107,7 +105,6 @@ public class ContextMenuDialog {
             this.selectAction = selectAction;
         }
 
-        @NonNull
         @Override
         public String toString() {
             return text;

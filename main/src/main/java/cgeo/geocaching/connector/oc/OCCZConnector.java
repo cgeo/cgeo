@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class OCCZConnector extends OCBaseConnector {
 
@@ -22,7 +21,7 @@ public class OCCZConnector extends OCBaseConnector {
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final Uri uri = Uri.parse(url);
-        if (!Strings.CI.contains(uri.getHost(), getShortHost())) {
+        if (!StringUtils.containsIgnoreCase(uri.getHost(), getShortHost())) {
             return null;
         }
 
@@ -40,4 +39,5 @@ public class OCCZConnector extends OCBaseConnector {
         }
         return super.getGeocodeFromUrl(url);
     }
+
 }

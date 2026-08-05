@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Stack;
 
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class UserDisplayableStringTest {
@@ -92,7 +92,7 @@ public class UserDisplayableStringTest {
         statusFilter.setStatusOwned(true);
         filterConfig.addChild(statusFilter);
 
-        final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
 
         final String valueOutput = "Cache Type: Trad, Status: Found=Yes, Owned=Yes";
 
@@ -114,7 +114,7 @@ public class UserDisplayableStringTest {
         statusFilter.setStatusOwned(true);
         filterConfig.addChild(statusFilter);
 
-        final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
 
         final String valueOutput = "Cache Type: Trad OR Status: Found=Yes, Owned=Yes";
 
@@ -136,7 +136,7 @@ public class UserDisplayableStringTest {
         statusFilter.setStatusOwned(true);
         filterConfig.addChild(statusFilter);
 
-        final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
 
         final String valueOutput = "NOT[Cache Type: Trad, Status: Found=Yes, Owned=Yes]";
 

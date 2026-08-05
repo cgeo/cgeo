@@ -8,10 +8,8 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.ui.dialog.SimpleDialogExamples;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.DebugUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PreferenceUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -44,13 +42,12 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_view_database, () -> startActivity(new Intent(activity, DBInspectionActivity.class)));
-        setPrefClick(this, R.string.pref_fakekey_gui_testscreen, () -> SimpleDialogExamples.createTestDialog(activity));
 
         if (BranchDetectionHelper.isDeveloperBuild()) {
             Preference testDir = findPreference(getString(R.string.pref_persistablefolder_testdir));
             if (testDir == null) {
                 testDir = new Preference(getActivity());
-                testDir.setKey(LocalizationUtils.getPlainString(R.string.pref_persistablefolder_testdir));
+                testDir.setKey(getString(R.string.pref_persistablefolder_testdir));
                 testDir.setTitle("Directory for Unit Tests. This setting is only needed for development and only visible in developer builds");
                 testDir.setIconSpaceReserved(false);
 

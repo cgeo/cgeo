@@ -83,7 +83,6 @@ public class FormulaUtils {
         //no instance
     }
 
-    @NonNull
     public static Value substring(final boolean indexStartsWithZero, @NonNull final ValueList valueList) {
         valueList.assertCheckCount(1, 3, false);
         final String value = valueList.getAsString(0, "");
@@ -116,7 +115,6 @@ public class FormulaUtils {
         return Value.of(value.substring(start, start + length));
     }
 
-    @NonNull
     public static Value ifFunction(final ValueList values) {
         values.assertCheckCount(0, -1, false);
         final int ifConditionCount = values.size() / 2;
@@ -129,7 +127,6 @@ public class FormulaUtils {
         return hasElse ? values.get(values.size() - 1) : Value.of(0);
     }
 
-    @NonNull
     public static Value selectChars(final ValueList values) {
         values.assertCheckCount(1, -1, false);
         final String value = values.getAsString(0, "");
@@ -151,7 +148,6 @@ public class FormulaUtils {
         return result;
     }
 
-    @NonNull
     public static Value truncRound(final ValueList valueList, final boolean trunc) {
         valueList.assertCheckCount(1, 2, false);
         valueList.assertCheckTypes((v, i) -> {
@@ -164,7 +160,6 @@ public class FormulaUtils {
         return Value.of(valueList.getAsDecimal(0).setScale((int) valueList.get(1).getAsLong(), trunc ? RoundingMode.DOWN : RoundingMode.HALF_UP));
     }
 
-    @NonNull
     public static Value checksum(final ValueList valueList, final boolean iterative) {
         valueList.assertCheckCount(1, 1, false);
         return Value.of(checksum(valueList.get(0), iterative));
@@ -203,7 +198,6 @@ public class FormulaUtils {
         return lv;
     }
 
-    @NonNull
     public static Value rot(final ValueList valueList, final boolean isRot13) {
         valueList.assertCheckCount(1, isRot13 ? 1 : 2, false);
         valueList.assertCheckTypes((v, i) -> {
@@ -239,15 +233,6 @@ public class FormulaUtils {
             }
         }
         return sb.toString();
-    }
-
-    @NonNull
-    public static Value average(final ValueList valueList) {
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Value value : valueList) {
-            sum = sum.add(value.getAsDecimal());
-        }
-        return Value.of(sum.divide(BigDecimal.valueOf(valueList.size()), RoundingMode.HALF_UP));
     }
 
     public static List<Pair<String, String>> scanForCoordinates(final Collection<String> texts, final Collection<Pair<String, String>> excludePairs) {

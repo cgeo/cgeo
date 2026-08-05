@@ -7,6 +7,7 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.utils.AsynchronousMapWrapper;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 
@@ -40,8 +41,8 @@ import java.util.function.Predicate;
  */
 public class GeoItemLayer<K> {
 
-    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP = ThreadLocal.withInitial(HashMap::new);
-    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP_2 = ThreadLocal.withInitial(HashMap::new);
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP = CommonUtils.threadLocalWithInitial(HashMap::new);
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP_2 = CommonUtils.threadLocalWithInitial(HashMap::new);
     private final String id;
     private final Map<K, Pair<GeoItem, Boolean>> itemMap = new HashMap<>();
     //private final Lock lock = new ReentrantLock(); //-> locking is done via synchronized
@@ -210,7 +211,7 @@ public class GeoItemLayer<K> {
                 batchEndMsg = providerLayer.onMapChangeBatchEnd(processedCount);
             }
             if (addProcessedInBatch > 0 || removeProcessedInBatch > 0 || replaceProcessedInBatch > 0) {
-                Log.d(logPraefix + "BATCH-END - " +
+                Log.iForce(logPraefix + "BATCH-END - " +
                         "ADDS:" + addProcessedInBatch + "(" + addProcessed + "), " +
                         "REMOVES:" + removeProcessedInBatch + "(" + removeProcessed + "), " +
                         "REPLACES:" + replaceProcessedInBatch + "(" + replaceProcessed + ")" +

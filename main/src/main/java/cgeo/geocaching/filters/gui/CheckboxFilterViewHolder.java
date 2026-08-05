@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jetbrains.annotations.Nullable;
 
 public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
@@ -43,27 +43,24 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
     private final int columnCount;
     private Set<T> alwaysVisibleItems = null;
-    private final boolean allIsNone;
 
     private List<LinearLayout> columns;
     private Map<T, Integer> statistics;
     private boolean statsAreComplete = false;
 
-    /**
-     *
-     * @param filterAccessor how to access and display the filter-specific configuration items
-     * @param colCount number of display columns
-     * @param alwaysVisibleItems if null then ALL values are visible. If emptySet() then only selected values are visible.
-     */
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, @Nullable final Set<T> alwaysVisibleItems, final boolean allIsNone) {
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
+        this(filterAccessor, 1, null);
+    }
+
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, final Set<T> alwaysVisibleItems) {
         this.filterAccessor = filterAccessor;
         this.columnCount = colCount;
-        this.allIsNone = allIsNone;
         if (alwaysVisibleItems != null) {
             this.alwaysVisibleItems = new HashSet<>();
             this.alwaysVisibleItems.addAll(alwaysVisibleItems);
         }
     }
+
 
     public View createView() {
 
@@ -74,7 +71,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        // selectall/none
+        //selectall/none
         ll.addView(ViewUtils.createColumnView(getActivity(), null, columnCount, false, i -> {
             if (i < columnCount - 1) {
                 return null;
@@ -90,7 +87,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             this.visibleValues.retainAll(this.alwaysVisibleItems);
         }
 
-        // addItems / addallItems
+        //addItems / addallItems
         final LinearLayout llButtons = new LinearLayout(getActivity());
         llButtons.setOrientation(LinearLayout.HORIZONTAL);
         llButtons.addView(createAddItemButton(ll));
@@ -158,6 +155,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return this.addAllItemsButton;
     }
 
+
     void relayout() {
 
         for (ViewGroup column : this.columns) {
@@ -206,7 +204,12 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             for (Geocache cache : FilterViewHolderCreator.getListInfoFilteredList()) {
                 final Set<T> cValues = filterAccessor.getCacheValues(filter, cache);
                 for (T cValue : cValues) {
-                    stats.compute(cValue, (k, cnt) -> cnt == null ? 1 : cnt + 1);
+                    if (stats.containsKey(cValue)) {
+                        final Integer cnt = stats.get(cValue);
+                        stats.put(cValue, cnt == null ? 1 : cnt + 1);
+                    } else {
+                        stats.put(cValue, 1);
+                    }
                 }
             }
         }
@@ -226,7 +229,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                 break;
             }
         }
-        // avoid that setting all/none-checkbox leads to setting other checkbox values here
+        //avoid that setting all/none-checkbox leads to setting other checkbox values here
         selectAllNoneBroadcast = false;
         selectAllNoneCheckbox.right.setChecked(allChecked);
         selectAllNoneBroadcast = true;
@@ -252,7 +255,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        if (!allIsNone || !areAllSelected()) {
+        if (getAllNoneSelected() == null) {
             for (T value : filterAccessor.getSelectableValuesAsArray()) {
                 if (this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked()) {
                     set.add(value);
@@ -263,13 +266,20 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return filter;
     }
 
-    private boolean areAllSelected() {
+    private Boolean getAllNoneSelected() {
+        boolean foundNonSelected = false;
+        boolean foundSelected = false;
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
             final boolean selected = this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked();
-            if (!selected) {
-                return false;
-            }
+            foundNonSelected |= !selected;
+            foundSelected |= selected;
         }
-        return true;
+        if (foundNonSelected && !foundSelected) {
+            return false;
+        }
+        if (!foundNonSelected && foundSelected) {
+            return true;
+        }
+        return null;
     }
 }

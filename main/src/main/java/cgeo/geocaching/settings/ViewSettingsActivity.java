@@ -4,14 +4,12 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
-import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import static cgeo.geocaching.utils.SettingsUtils.getType;
 
@@ -53,7 +51,6 @@ import javax.annotation.Nullable;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class ViewSettingsActivity extends CustomMenuEntryActivity {
@@ -84,7 +81,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
-        setTitle(LocalizationUtils.getString(R.string.view_settings));
+        setTitle(getString(R.string.view_settings));
         setUpNavigationEnabled(true);
 
         allItems = new ArrayList<>();
@@ -98,17 +95,6 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 allItems.add(new KeyValue(key, value.toString(), type));
             }
         }
-
-        final Map<String, ?> nonConfigSettings = Settings.getNonSharedPreferences();
-        for (Map.Entry<String, ?> entry : nonConfigSettings.entrySet()) {
-            final Object value = entry.getValue();
-            final String key = entry.getKey();
-            final SettingsUtils.SettingsType type = getType(value);
-            if (value != null) { // should not happen, but...
-                allItems.add(new KeyValue(key, value.toString(), type));
-            }
-        }
-
         Collections.sort(allItems, Comparator.comparing(o -> o.key));
         filteredItems = new ArrayList<>();
         filteredItems.addAll(allItems);
@@ -172,7 +158,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                         final int max = allItems.size();
                         for (int i = 0; i < max; i++) {
                             final KeyValue data = allItems.get(i);
-                            if (Strings.CI.contains(data.key, check) || Strings.CI.contains(data.value, check)) {
+                            if (StringUtils.containsIgnoreCase(data.key, check) || StringUtils.containsIgnoreCase(data.value, check)) {
                                 filtered.add(data);
                             }
                         }
@@ -258,7 +244,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
             model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO, true)
                 .setItems(items).setDisplayMapper((l) -> TextParam.text(l ? "true" : "false"))
-                .setSelectedItems(Collections.singleton(Strings.CS.equals(keyValue.value, "true") ? TRUE : FALSE));
+                .setSelectedItems(Collections.singleton(StringUtils.equals(keyValue.value, "true") ? TRUE : FALSE));
 
             SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key))
                     .selectSingle(model, (l) -> editItemHelper(position, keyValue, String.valueOf(l)));
@@ -276,7 +262,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                     inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
                     break;
             }
-            Dialogs.input(this, LocalizationUtils.getString(R.string.edit_setting, keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
+            Dialogs.input(this, String.format(getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
         }
     }
 
@@ -290,7 +276,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
         } catch (XmlPullParserException e) {
             showToast(R.string.edit_setting_error_unknown_type);
         } catch (NumberFormatException e) {
-            showToast(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data, newValue));
+            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
         }
     }
 
@@ -331,7 +317,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                             } catch (XmlPullParserException e) {
                                 showToast(R.string.edit_setting_error_unknown_type);
                             } catch (NumberFormatException e) {
-                                showToast(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data, preferenceName));
+                                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), preferenceName));
                             }
                         }
                     }
@@ -342,7 +328,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
 
     private int findItem(final String key) {
         for (int i = 0; i < filteredItems.size(); i++) {
-            if (Strings.CS.equals(filteredItems.get(i).key, key)) {
+            if (StringUtils.equals(filteredItems.get(i).key, key)) {
                 return i;
             }
         }
@@ -389,7 +375,6 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 return true;
             }
         });
-        SearchUtils.setSearchViewColor(searchView);
 
         return true;
     }
@@ -422,4 +407,5 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
             super.onBackPressed();
         }
     }
+
 }

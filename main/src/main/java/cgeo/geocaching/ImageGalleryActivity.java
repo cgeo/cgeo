@@ -1,25 +1,16 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 
 public class ImageGalleryActivity extends AbstractActionBarActivity {
 
@@ -74,20 +65,5 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
         fromActivity.startActivity(logImgIntent);
     }
 
-
-    /**
-     * change the titlebar icon and text to show the current geocache
-     */
-    private void setCacheTitleBar(@Nullable final String geocode) {
-        if (StringUtils.isEmpty(geocode)) {
-            return;
-        }
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        if (cache == null) {
-            Log.e("ImageGalleryActivity.setCacheTitleBar: cannot find the cache " + geocode);
-            return;
-        }
-        setCacheTitleBar(cache);
-    }
 
 }

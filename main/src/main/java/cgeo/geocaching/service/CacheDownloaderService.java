@@ -2,7 +2,6 @@ package cgeo.geocaching.service;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -13,8 +12,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -28,11 +27,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -61,9 +58,9 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         return isDownloadPending(geocache.getGeocode());
     }
 
-    public static void downloadCaches(final Activity context, final Collection<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    public static void downloadCaches(final Activity context, final Set<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (geocodes.isEmpty()) {
-            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.warn_save_nothing));
+            ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
             return;
         }
         if (isOffline) {
@@ -114,7 +111,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), isOffline, true, isOffline, onStartCallback);
     }
 
-    private static void askForListsIfNecessaryAndDownload(final Activity context, final Collection<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (isOffline) {
             downloadCachesInternal(context, geocodes, null, keepExistingLists, forceRedownload, onStartCallback);
         } else if (Settings.getChooseList()) {
@@ -125,37 +122,26 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         }
     }
 
-    private static void downloadCachesInternal(final Activity context, final Collection<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
+    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
 
         final ArrayList<String> newGeocodes = new ArrayList<>();
-        int cachesSkipped = 0;
 
         for (String geocode : geocodes) {
-            // only enqueue online connectors
-            if (ConnectorFactory.getConnector(geocode).hasOnlineSource()) {
-                final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, keepExistingLists, forceRedownload);
-                final boolean isNewGeocode;
-                synchronized (downloadQuery) {
-                    isNewGeocode = downloadQuery.get(geocode) == null;
-                    properties.merge(downloadQuery.get(geocode));
-                    downloadQuery.put(geocode, properties);
-                }
-                if (isNewGeocode) {
-                    newGeocodes.add(geocode);
-                }
-            } else {
-                cachesSkipped++;
+            final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, keepExistingLists, forceRedownload);
+            final boolean isNewGeocode;
+            synchronized (downloadQuery) {
+                isNewGeocode = downloadQuery.get(geocode) == null;
+                properties.merge(downloadQuery.get(geocode));
+                downloadQuery.put(geocode, properties);
+            }
+            if (isNewGeocode) {
+                newGeocodes.add(geocode);
             }
         }
 
-        if (cachesSkipped > 0) {
-            ViewUtils.showShortToast(context, String.format(Locale.getDefault(), context.getString(R.string.caches_store_background_skipped), cachesSkipped));
-        }
         if (newGeocodes.isEmpty()) {
             return;
         }
-
-        Log.d("DOWNLOAD: " + newGeocodes);
 
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
@@ -176,11 +162,11 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         shouldStop = false;
         final PendingIntent actionCancelIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(this, StopCacheDownloadServiceReceiver.class),
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+                ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
-                .addAction(R.drawable.ic_menu_cancel, LocalizationUtils.getString(android.R.string.cancel), actionCancelIntent);
+                .addAction(R.drawable.ic_menu_cancel, getString(android.R.string.cancel), actionCancelIntent);
     }
 
     @Override
@@ -264,10 +250,10 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     @Override
     public void onDestroy() {
         if (!downloadQuery.isEmpty()) {
-            showEndNotification(LocalizationUtils.getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
+            showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else if (cachesDownloaded.get() != 1) { // see #15881
-            showEndNotification(LocalizationUtils.getPlural(R.plurals.caches_store_background_result, cachesDownloaded.get()));
+            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
         }
         downloadQuery.clear();
         super.onDestroy();

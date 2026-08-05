@@ -82,8 +82,8 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public void reloadRoute(final UpdateIndividualRoute updateRoute) {
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal,
-                () -> updateRoute(updateRoute));
+        clearRouteInternal(null, false);
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(updateRoute));
     }
 
     public void updateRoute(final UpdateIndividualRoute routeUpdater) {
@@ -97,10 +97,6 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public void clearRoute(final UpdateIndividualRoute routeUpdater) {
-        if (loadingRoute) {
-            return;
-        }
-
         clearRouteInternal(routeUpdater, true);
     }
 
@@ -127,12 +123,6 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     private synchronized void loadRouteInternal() {
-        if (loadingRoute) {
-            return;
-        }
-
-        clearRouteInternal(null, false);
-        
         loadingRoute = true;
         Log.d("[RouteTrackDebug] Individual route: Start loading from database");
         final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();

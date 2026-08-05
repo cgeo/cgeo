@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.UriPermission;
 import android.net.Uri;
+import android.os.Build;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.webkit.MimeTypeMap;
@@ -41,8 +42,6 @@ public final class UriUtils {
     public static final String SCHEME_FILE = ContentResolver.SCHEME_FILE;
 
     public static final String SCHEME_ANDROID_RESOURCE = ContentResolver.SCHEME_ANDROID_RESOURCE;
-
-    public static final String SCHEME_DATA = "data";
 
     private static final Map<String, String> VOLUME_MAP = getVolumeMap();
 
@@ -209,7 +208,7 @@ public final class UriUtils {
         volumeMap.put("primary", null); //the most common one where we will NOT put text for
         volumeMap.put("home", "[Documents]"); //example Uri pointing to /Documents/cgeo: content://com.android.externalstorage.documents/tree/home%3Acgeo
 
-        if (CgeoApplication.getInstance() != null) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && CgeoApplication.getInstance() != null) {
             final Context context = CgeoApplication.getInstance().getApplicationContext();
             final StorageManager storageManager = ContextCompat.getSystemService(context, StorageManager.class);
             final List<StorageVolume> storageVolumes = storageManager.getStorageVolumes();
@@ -257,7 +256,7 @@ public final class UriUtils {
             return uri;
         }
         if (isFileUri(uri)) {
-            return FileProvider.getUriForFile(ctx, LocalizationUtils.getPlainString(R.string.file_provider_authority), toFile(uri));
+            return FileProvider.getUriForFile(ctx, ctx.getString(R.string.file_provider_authority), toFile(uri));
         }
         return null;
     }
@@ -270,14 +269,6 @@ public final class UriUtils {
             return false;
         }
         return SCHEME_CONTENT.equals(uri.getScheme());
-    }
-
-    /** Returns whether this inline data-uri */
-    public static boolean isDataUri(final Uri uri) {
-        if (uri == null) {
-            return false;
-        }
-        return SCHEME_DATA.equals(uri.getScheme());
     }
 
     /** Returns whether this Uri is a resource Uri */

@@ -30,10 +30,6 @@ import android.webkit.CookieManager;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.UiThread;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -53,7 +49,7 @@ import java.util.regex.Pattern;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.utils.IOUtils;
 
 public class WherigoDownloader {
@@ -161,13 +157,6 @@ public class WherigoDownloader {
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
 
-        WindowCompat.enableEdgeToEdge(this.activity.getWindow());
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
-            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
-            return windowInsets;
-        });
-
         // Confirmed = OK with a usable cookie. Anything else (cancel, back, outside-tap, activity destroy) is treated as cancelled.
         final AtomicBoolean confirmed = new AtomicBoolean(false);
         dialog.setOnDismissListener(d -> onResult.accept(confirmed.get()));
@@ -237,9 +226,9 @@ public class WherigoDownloader {
                 return cartridgeNotFound(type);
             }
             final Response response = downloadResponse.getResponse();
-            if (Strings.CS.startsWith(type, "text/html")) {
+            if (StringUtils.startsWith(type, "text/html")) {
                 final String body = downloadResponse.getBodyString();
-                if (Strings.CS.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
+                if (StringUtils.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
                     return new StatusResult(StatusCode.UNAPPROVED_LICENSE, LocalizationUtils.getString(R.string.wherigo_download_accept_eula));
                 } else {
                     return cartridgeNotFound(type);
@@ -297,5 +286,6 @@ public class WherigoDownloader {
             success = success & (completed == total);
             return success ? StatusResult.OK : new StatusResult(StatusCode.COMMUNICATION_ERROR, errorMsg);
     }
+
 
 }

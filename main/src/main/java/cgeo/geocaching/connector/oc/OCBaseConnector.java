@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class OCBaseConnector extends AbstractConnector {
 
@@ -109,7 +108,7 @@ public class OCBaseConnector extends AbstractConnector {
         // host.tld/geocode
         final String shortHost = getShortHost();
         final Uri uri = Uri.parse(url);
-        if (!Strings.CI.contains(uri.getHost(), shortHost)) {
+        if (!StringUtils.containsIgnoreCase(uri.getHost(), shortHost)) {
             return null;
         }
         final String path = uri.getPath();
@@ -146,4 +145,5 @@ public class OCBaseConnector extends AbstractConnector {
     protected String getSchemeAndHost() {
         return getSchemePart() + host;
     }
+
 }

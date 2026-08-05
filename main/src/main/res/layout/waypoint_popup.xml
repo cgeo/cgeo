@@ -8,9 +8,7 @@
     android:windowBackground="@android:color/transparent"
     tools:context=".WaypointPopupFragment">
 
-    <include
-        android:id="@+id/swipe_up_indicator"
-        layout="@layout/swipe_up_indicator" />
+    <include layout="@layout/swipe_up_indicator" />
 
     <include
         android:id="@+id/toolbar"

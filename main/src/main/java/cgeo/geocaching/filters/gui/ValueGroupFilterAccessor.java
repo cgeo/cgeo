@@ -20,7 +20,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
 
 
     private final List<D> selectableValues = new ArrayList<>();
-    @SuppressWarnings({"unchecked", "PMD.ClassCastExceptionWithToArray"})
+    @SuppressWarnings("unchecked")
     private D[] selectableValuesAsArray = (D[]) Collections.emptyList().toArray();
 
     private Func1<F, Collection<D>> filterValueGetter;
@@ -37,7 +37,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
                 .setGeocacheSingleValueGetter(ValueGroupGeocacheFilter::getCacheValue);
     }
 
-    @SuppressWarnings({"unchecked", "PMD.ClassCastExceptionWithToArray"})
+    @SuppressWarnings("unchecked")
     public ValueGroupFilterAccessor<D, F> setSelectableValues(final Collection<D> selectableValues) {
         this.selectableValues.clear();
         this.selectableValues.addAll(selectableValues);

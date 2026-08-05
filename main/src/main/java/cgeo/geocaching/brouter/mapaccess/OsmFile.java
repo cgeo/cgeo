@@ -16,9 +16,9 @@ import cgeo.geocaching.brouter.util.Crc32Utils;
 
 import java.io.IOException;
 
-public final class OsmFile {
-    public final int lonDegree;
-    public final int latDegree;
+final class OsmFile {
+    public int lonDegree;
+    public int latDegree;
     public String filename;
     private PhysicalFile rafile = null;
     private long fileOffset;

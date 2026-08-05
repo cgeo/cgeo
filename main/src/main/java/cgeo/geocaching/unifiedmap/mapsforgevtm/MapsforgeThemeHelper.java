@@ -38,7 +38,6 @@ import java.util.Set;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.oscim.android.theme.ContentRenderTheme;
 import org.oscim.android.theme.ContentResolverResourceProvider;
 import org.oscim.map.Map;
@@ -123,7 +122,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             return;
         }
 
-        // try to apply stored value
+        //try to apply stored value
         ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme(Settings.getTileProvider()));
 
         if (selectedTheme == null) {
@@ -188,7 +187,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
                 }
             } else {
-                // always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
+                //always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
                 synchronized (cachedZipMutex) {
                     if (cachedZipProvider == null || !themeIdTokens[0].equals(cachedZipProviderFilename)) {
                         if (theme.fileInfo.size > ZIP_FILE_SIZE_LIMIT) {
@@ -218,20 +217,20 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         final String currentThemeId = Settings.getSelectedMapRenderTheme(tileProvider);
 
         final List<String> names = new ArrayList<>();
-        names.add(LocalizationUtils.getString(R.string.switch_default));
+        names.add(activity.getString(R.string.switch_default));
         int currentItem = 0;
         int idx = 1;
         final List<ThemeData> selectableAvThemes = getAvailableThemes();
         for (final ThemeData theme : selectableAvThemes) {
             names.add(theme.userDisplayableName);
-            if (Strings.CS.equals(currentThemeId, theme.id)) {
+            if (StringUtils.equals(currentThemeId, theme.id)) {
                 currentItem = idx;
             }
             idx++;
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(LocalizationUtils.getString(R.string.map_theme_select));
+        builder.setTitle(activity.getString(R.string.map_theme_select));
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
             // Adjust index because of <default> selection
             setSelectedTheme(newItem > 0 ? selectableAvThemes.get(newItem - 1) : null);
@@ -291,10 +290,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
      */
     private static ThemeData setSelectedMapThemeInternal(final String themeIdCandidate) {
-        // try to apply stored value
+        //try to apply stored value
         ThemeData selectedTheme = null;
         final List<ThemeData> avThemes = getAvailableThemes();
-        // search for exact match first
+        //search for exact match first
         for (ThemeData avTheme : avThemes) {
             if (avTheme.id.equals(themeIdCandidate)) {
                 selectedTheme = avTheme;
@@ -302,7 +301,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             }
         }
 
-        // if no exact match found, check special cases
+        //if no exact match found, check special cases
         if (selectedTheme == null) {
             for (ThemeData avTheme : avThemes) {
                 final String avThemeId = avTheme.id;
@@ -389,10 +388,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
      * @return user display theme name
      */
     private static String toUserDisplayableName(final FileInformation file, final String zipPath) {
-        String userDisplay = Strings.CS.removeEnd(file.name, ".xml");
+        String userDisplay = StringUtils.removeEnd(file.name, ".xml");
         if (zipPath != null) {
             final int idx = zipPath.lastIndexOf("/");
-            userDisplay = userDisplay + "/" + Strings.CS.removeEnd(idx < 0 ? zipPath : zipPath.substring(idx + 1), ".xml");
+            userDisplay = userDisplay + "/" + StringUtils.removeEnd(idx < 0 ? zipPath : zipPath.substring(idx + 1), ".xml");
         }
         return userDisplay;
     }
@@ -404,4 +403,5 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     public static boolean isThemeSynchronizationActive() {
         return Settings.getSyncMapRenderThemeFolder();
     }
+
 }

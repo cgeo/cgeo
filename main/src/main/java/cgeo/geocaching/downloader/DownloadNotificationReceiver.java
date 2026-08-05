@@ -3,7 +3,6 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.DownloadManager;
@@ -40,7 +39,7 @@ public class DownloadNotificationReceiver extends BroadcastReceiver {
                                         final int idx = cursor.getColumnIndex(DownloadManager.COLUMN_REASON);
                                         if (idx >= 0) {
                                             final int error = cursor.getInt(idx);
-                                            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.download_error, error));
+                                            ActivityMixin.showToast(context, String.format(context.getString(R.string.download_error), error));
                                             Log.d("download #" + pendingDownload + " failed with error #" + error);
                                         } else {
                                             Log.e("download #" + pendingDownload + " failed with unknown error");

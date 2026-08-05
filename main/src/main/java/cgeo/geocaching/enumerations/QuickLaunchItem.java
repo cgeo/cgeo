@@ -1,6 +1,5 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.AboutActivity;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.DBInspectionActivity;
@@ -17,7 +16,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -49,8 +47,7 @@ public class QuickLaunchItem extends InfoItem {
         MESSAGECENTER(10),
         MANUAL(6),
         FAQ(7),
-        WHERIGO(11),
-        INFO(13);
+        WHERIGO(11);
 
         public final int id;
         VALUES(final int id) {
@@ -74,8 +71,7 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, VISIBILITY.GC),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, VISIBILITY.ALL),
-        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications),
-        new QuickLaunchItem(VALUES.INFO, R.string.about, R.drawable.cgeo_notification, VISIBILITY.ALL)
+        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications)
     ));
 
     @DrawableRes public int iconRes;
@@ -127,19 +123,17 @@ public class QuickLaunchItem extends InfoItem {
                     } else if (which == VALUES.MESSAGECENTER.id) {
                         ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
                     } else if (which == VALUES.MANUAL.id) {
-                        ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.manual_link_full));
+                        ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full));
                     } else if (which == VALUES.WHERIGO.id) {
                         WherigoActivity.start(activity, hideNavigationBar);
                     } else if (which == VALUES.FAQ.id) {
-                        ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.faq_link_full));
+                        ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
                     } else if (which == VALUES.VIEWSETTINGS.id) {
                         final Intent intent = new Intent(activity, ViewSettingsActivity.class);
                         AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
                         activity.startActivity(intent);
                     } else if (which == VALUES.VIEWDATABASE.id) {
                         activity.startActivity(new Intent(activity, DBInspectionActivity.class));
-                    } else if (which == VALUES.INFO.id) {
-                        activity.startActivity(new Intent(activity, AboutActivity.class));
                     } else {
                         throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
                     }

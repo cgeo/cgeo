@@ -157,8 +157,7 @@ public final class MicroCache2 extends MicroCache {
                     WaypointMatcher matcher = wayTags == null || wayTags.accessType < 2 ? null : waypointMatcher;
                     final int ilontarget = ilon + dlonRemaining;
                     final int ilattarget = ilat + dlatRemaining;
-                    final boolean useAsStartWay = wayValidator.checkStartWay(wayTags.data);
-                    if (matcher != null && !matcher.start(ilon, ilat, ilontarget, ilattarget, useAsStartWay)) {
+                    if (matcher != null && !matcher.start(ilon, ilat, ilontarget, ilattarget)) {
                         matcher = null;
                     }
 

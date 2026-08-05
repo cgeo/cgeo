@@ -25,13 +25,10 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
@@ -64,7 +61,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class TrackableActivity extends TabbedViewPagerActivity {
 
@@ -121,7 +117,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
         setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
-        setTitle(LocalizationUtils.getString(R.string.trackable));
+        setTitle(res.getString(R.string.trackable));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -144,7 +140,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             // check if port part needs to be removed
             String address = uri.toString();
             if (uri.getPort() > 0) {
-                address = Strings.CS.remove(address, ":" + uri.getPort());
+                address = StringUtils.remove(address, ":" + uri.getPort());
             }
             geocode = ConnectorFactory.getTrackableFromURL(address);
             final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(address);
@@ -174,7 +170,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                     guid = null;
                     id = id.toLowerCase(Locale.US);
                 } else {
-                    showToast(LocalizationUtils.getString(R.string.err_tb_details_open));
+                    showToast(res.getString(R.string.err_tb_details_open));
                     finish();
                     return;
                 }
@@ -191,7 +187,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
         // no given data
         if (geocode == null && guid == null && id == null) {
-            showToast(LocalizationUtils.getString(R.string.err_tb_display));
+            showToast(res.getString(R.string.err_tb_display));
             finish();
             return;
         }
@@ -202,7 +198,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
         } else if (StringUtils.isNotBlank(geocode)) {
             message = geocode;
         } else {
-            message = LocalizationUtils.getString(R.string.trackable);
+            message = res.getString(R.string.trackable);
         }
 
         if (savedInstanceState != null) {
@@ -249,7 +245,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     }
 
     private void refreshTrackable(final String message) {
-        waitDialog = ProgressDialog.show(this, message, LocalizationUtils.getString(R.string.trackable_details_loading), true, true);
+        waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
         createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
                 newTrackable -> {
                     if (trackingCode != null) {
@@ -258,7 +254,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                     act(newTrackable);
                 }, throwable -> {
                     Log.w("unable to retrieve trackable information", throwable);
-                    showToast(LocalizationUtils.getString(R.string.err_tb_find_that));
+                    showToast(res.getString(R.string.err_tb_find_that));
                     finish();
                 }, () -> act(null)));
     }
@@ -278,9 +274,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             ShareUtils.openUrl(this, trackable.getUrl(), true);
         } else if (itemId == R.id.menu_refresh_trackable) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
-        } else if (itemId == R.id.menu_translate) {
-            TranslationUtils.translate(this, getTranslationText(trackable));
-            refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -294,9 +287,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
             menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
         }
-        MenuUtils.setVisible(menu.findItem(R.id.menu_translate), trackable != null && TranslationUtils.isEnabled());
-        menu.findItem(R.id.menu_translate).setTitle(TranslationUtils.getTranslationLabel());
-
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -313,9 +303,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 CacheListActivity.startActivityKeyword(this, fallbackKeywordSearch);
             } else {
                 if (StringUtils.isNotBlank(geocode)) {
-                    showToast(LocalizationUtils.getString(R.string.err_tb_not_found, geocode));
+                    showToast(res.getString(R.string.err_tb_not_found, geocode));
                 } else {
-                    showToast(LocalizationUtils.getString(R.string.err_tb_find_that));
+                    showToast(res.getString(R.string.err_tb_find_that));
                 }
             }
 
@@ -414,25 +404,19 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
         }
+
     }
 
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.IMAGEGALLERY.id) {
-            String title = LocalizationUtils.getString(Page.find(pageId).resId);
+            String title = this.getString(Page.find(pageId).resId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return title;
         }
-        return LocalizationUtils.getString(Page.find(pageId).resId);
-    }
-
-    public static String getTranslationText(final Trackable trackable) {
-        if (trackable == null) {
-            return "";
-        }
-        return TranslationUtils.prepareForTranslation(trackable.getGoal(), trackable.getDetails());
+        return this.getString(Page.find(pageId).resId);
     }
 
     protected long[] getOrderedPages() {
@@ -452,7 +436,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     }
 
     public static class DetailsViewCreator extends TabbedViewPagerFragment<TrackableDetailsViewBinding> {
-        private final boolean descriptionTranslated = false;
+        private boolean descriptionTranslated = false;
 
         @Override
         public TrackableDetailsViewBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -488,7 +472,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             }
 
             // trackable name
-            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : LocalizationUtils.getString(R.string.trackable_unknown)).valueView;
+            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : activity.res.getString(R.string.trackable_unknown)).valueView;
             activity.addShareAction(nameTxtView);
 
             // missing status
@@ -501,7 +485,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             if (StringUtils.isNotBlank(trackable.getType())) {
                 tbType = TextUtils.stripHtml(trackable.getType());
             } else {
-                tbType = LocalizationUtils.getString(R.string.trackable_unknown);
+                tbType = activity.res.getString(R.string.trackable_unknown);
             }
             details.add(R.string.trackable_brand, trackable.getBrand().getLabel());
             details.add(R.string.trackable_type, tbType);
@@ -514,12 +498,12 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             final LogType logType = trackable.getLogType();
             if (logDate != null && logType != null) {
                 final Uri uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("LUID=" + trackable.getLogGuid()).build();
-                final TextView logView = details.add(R.string.trackable_status, LocalizationUtils.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).valueView;
+                final TextView logView = details.add(R.string.trackable_status, activity.res.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).valueView;
                 logView.setOnClickListener(v -> ShareUtils.openUrl(activity, uri.toString()));
             }
 
             // trackable owner
-            final TextView owner = details.add(R.string.trackable_owner, LocalizationUtils.getString(R.string.trackable_unknown)).valueView;
+            final TextView owner = details.add(R.string.trackable_owner, activity.res.getString(R.string.trackable_unknown)).valueView;
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(HtmlCompat.fromHtml(trackable.getOwner(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 owner.setOnClickListener(UserClickListener.forOwnerOf(trackable));
@@ -536,20 +520,20 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 switch (trackable.getSpottedType()) {
                     case Trackable.SPOTTED_CACHE:
                         // TODO: the whole sentence fragment should not be constructed, but taken from the resources
-                        text = new StringBuilder(LocalizationUtils.getString(R.string.trackable_spotted_in_cache)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        text = new StringBuilder(activity.res.getString(R.string.trackable_spotted_in_cache)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
                         break;
                     case Trackable.SPOTTED_USER:
                         // TODO: the whole sentence fragment should not be constructed, but taken from the resources
-                        text = new StringBuilder(LocalizationUtils.getString(R.string.trackable_spotted_at_user)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        text = new StringBuilder(activity.res.getString(R.string.trackable_spotted_at_user)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
                         break;
                     case Trackable.SPOTTED_UNKNOWN:
-                        text = new StringBuilder(LocalizationUtils.getString(R.string.trackable_spotted_unknown_location));
+                        text = new StringBuilder(activity.res.getString(R.string.trackable_spotted_unknown_location));
                         break;
                     case Trackable.SPOTTED_OWNER:
-                        text = new StringBuilder(LocalizationUtils.getString(R.string.trackable_spotted_owner));
+                        text = new StringBuilder(activity.res.getString(R.string.trackable_spotted_owner));
                         break;
                     case Trackable.SPOTTED_ARCHIVED:
-                        text = new StringBuilder(LocalizationUtils.getString(R.string.trackable_spotted_archived));
+                        text = new StringBuilder(activity.res.getString(R.string.trackable_spotted_archived));
                         break;
                     default:
                         text = new StringBuilder("N/A");
@@ -640,14 +624,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.image.addView(trackableImage);
             }
 
-            //external translation
-            TranslationUtils.registerTranslation(
-                getActivity(),
-                binding.descriptionTranslateExternalButton,
-                binding.descriptionTranslateExternal,
-                binding.descriptionTranslateExternalNote,
-                () -> getTranslationText(trackable));
-
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
 
             final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
@@ -672,7 +648,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                     unsupportedLng -> {
                         cda.translationStatus.abortTranslation();
-                        binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng));
+                        binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, unsupportedLng));
                     }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
         translator -> {
                         if (null == translator) {
@@ -688,6 +664,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                         }
                     });
         }
+
     }
 
     public void addShareAction(final TextView view) {

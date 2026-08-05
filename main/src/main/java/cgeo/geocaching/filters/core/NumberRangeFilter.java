@@ -12,9 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
-
-import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -185,13 +182,11 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     protected String getUserDisplayableConfig() {
-        return getUserDisplayableConfig(null);
-    }
-
-    protected String getUserDisplayableConfig(@Nullable final Function<T, String> converter) {
         final T minValue = getMinRangeValue();
         final T maxValue = getMaxRangeValue();
-        return UserDisplayableStringUtils.getUserDisplayableConfig(minValue, maxValue, converter);
+        final String minValueString = minValue != null ? minValue.toString() : null;
+        final String maxValueString = maxValue != null ? maxValue.toString() : null;
+        return UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
     }
 
     private boolean isEqualValue(final T v1, final T v2) {

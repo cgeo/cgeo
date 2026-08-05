@@ -1,12 +1,13 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class EventTimeParserTest {
 
@@ -110,7 +111,7 @@ public class EventTimeParserTest {
     }
 
     private static String getHoursKeyword() {
-        return LocalizationUtils.getString(R.string.cache_time_full_hours);
+        return CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
     }
 
 }

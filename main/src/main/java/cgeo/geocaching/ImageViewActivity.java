@@ -26,7 +26,6 @@ import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.transition.Transition;
@@ -46,7 +45,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -230,7 +228,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setFixedActionBar(false);
+        getSupportActionBar().hide(); //do not use normal Action Bar
         setThemeAndContentView(R.layout.imageview_activity);
         enableViewTransitions(this);
         postponeEnterTransition();
@@ -270,7 +268,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         imageAdapter = new ImageAdapter(this);
 
-        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.activity_content));
+        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_activityroot));
         mainBinding.imageviewViewpager.setAdapter(imageAdapter);
         startPagerPos = imagePos + imageAdapter.getCount() / 2;
         mainBinding.imageviewViewpager.setCurrentItem(startPagerPos);
@@ -425,7 +423,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
             setFinishResult();
             finishAfterTransition();
-        }, imageAdapter::toggleFullImageView);
+        }, () -> imageAdapter.toggleFullImageView());
 
         //trigger enter transition if this is start
         if (pagerPos == startPagerPos) {
@@ -568,32 +566,19 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         state.putInt(PARAM_IMAGE_LIST_POS, pos);
         state.putInt(PARAM_IMAGE_LIST_SIZE, images.size());
 
-        final boolean imageListRequiresPaging = images.size() > IMAGELIST_INTENT_MAX_SIZE;
-        final int startPos = imageListRequiresPaging ? Math.max(0, Math.min(images.size() - IMAGELIST_INTENT_MAX_SIZE, pos - IMAGELIST_INTENT_MAX_SIZE / 2)) : 0;
-        final int endPos = imageListRequiresPaging ? startPos + IMAGELIST_INTENT_MAX_SIZE : images.size();
-        final List<Image> imageList = images.subList(startPos, endPos);
-
-        if (imageListRequiresPaging || containsDataUriImage(imageList)) {
+        if (images.size() > IMAGELIST_INTENT_MAX_SIZE) {
             IMAGE_LIST_CACHE.clear();
             IMAGE_LIST_CACHE.addAll(images);
             state.putInt(PARAM_IMAGE_LIST_CACHEID, IMAGE_LIST_CACHE_ID.addAndGet(1));
+            final int startPos = Math.max(0, Math.min(images.size() - IMAGELIST_INTENT_MAX_SIZE, pos - IMAGELIST_INTENT_MAX_SIZE / 2));
             state.putInt(PARAM_IMAGE_LIST_STARTPOS, startPos);
-            state.putParcelableArrayList(PARAM_IMAGE_LIST, sanitizeUrlsForDataUrls(imageList));
+            state.putParcelableArrayList(PARAM_IMAGE_LIST,
+                    new ArrayList<>(images.subList(startPos, startPos + IMAGELIST_INTENT_MAX_SIZE)));
         } else {
             state.putParcelableArrayList(PARAM_IMAGE_LIST, images instanceof ArrayList ? (ArrayList<Image>) images : new ArrayList<>(images));
             state.putInt(PARAM_IMAGE_LIST_STARTPOS, 0);
             state.remove(PARAM_IMAGE_LIST_CACHEID);
         }
-    }
-
-    private static boolean containsDataUriImage(final List<Image> images) {
-        return images.stream().anyMatch(img -> img != null && UriUtils.isDataUri(img.getUri()));
-    }
-
-    private static ArrayList<Image> sanitizeUrlsForDataUrls(final List<Image> images) {
-        return images.stream()
-                .map(img -> img != null && UriUtils.isDataUri(img.getUri()) ? img.buildUpon().setUrl(Uri.EMPTY).build() : img)
-                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

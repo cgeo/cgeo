@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.NavigationTargetRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
@@ -50,7 +49,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
     public final MutableLiveData<LocUpdater.LocationWrapper> location = new MutableLiveData<>();
     public final MutableLiveData<Target> target = new MutableLiveData<>();
-    public final ConstantLiveData<NavigationTargetRoute> navigationTargetRoute = new ConstantLiveData<>(new NavigationTargetRoute());
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
     @NonNull public UnifiedMapType mapType = new UnifiedMapType();
@@ -77,7 +75,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
     public final MutableLiveData<Float> zoomLevel = new MutableLiveData<>();
     public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
-    public final MutableLiveData<Boolean> transientIsConditionalMarkersEnabled = new MutableLiveData<>(false);
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);

@@ -1,13 +1,12 @@
 package cgeo.geocaching.log;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.os.Parcel;
@@ -27,7 +26,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Entry in a log book.
@@ -74,8 +72,6 @@ public class LogEntry implements Parcelable {
     @NonNull public final String cacheGuid; // used for trackables
     /** Spotted cache geocode */
     @NonNull public final String cacheGeocode; // used for trackables
-    /** Is markes as favorite */
-    public final boolean favorite;
 
     @NonNull
     public Date getDate() {
@@ -113,7 +109,6 @@ public class LogEntry implements Parcelable {
         cacheName = StringUtils.defaultString(in.readString());
         cacheGuid = StringUtils.defaultString(in.readString());
         cacheGeocode = StringUtils.defaultString(in.readString());
-        favorite = in.readInt() == 1;
     }
 
     @Override
@@ -132,7 +127,6 @@ public class LogEntry implements Parcelable {
         dest.writeString(cacheName);
         dest.writeString(cacheGuid);
         dest.writeString(cacheGeocode);
-        dest.writeInt(favorite ? 1 : 0);
     }
 
     public static final Parcelable.Creator<LogEntry> CREATOR = new Parcelable.Creator<LogEntry>() {
@@ -190,7 +184,6 @@ public class LogEntry implements Parcelable {
         String cacheName = ""; // used for trackables
         String cacheGuid = ""; // used for trackables
         String cacheGeocode = ""; // used for trackables
-        boolean favorite = false;
 
 
         /** Build an immutable {@link LogEntry} Object. */
@@ -368,15 +361,6 @@ public class LogEntry implements Parcelable {
             this.reportProblem = reportProblem;
             return self();
         }
-
-        public boolean isFavorite() {
-            return favorite;
-        }
-
-        public T setFavorite(final boolean favorite) {
-            this.favorite = favorite;
-            return self();
-        }
     }
 
     /**
@@ -399,7 +383,6 @@ public class LogEntry implements Parcelable {
         this.cacheGuid = builder.cacheGuid;
         this.cacheGeocode = builder.cacheGeocode;
         this.reportProblem = builder.reportProblem == null ? ReportProblemType.NO_PROBLEM : builder.reportProblem;
-        this.favorite = builder.favorite;
     }
 
     /**
@@ -427,8 +410,7 @@ public class LogEntry implements Parcelable {
             .setLogImages(logImages)
             .setCacheName(cacheName)
             .setCacheGuid(cacheGuid)
-            .setCacheGeocode(cacheGeocode)
-            .setFavorite(favorite);
+            .setCacheGeocode(cacheGeocode);
     }
 
 
@@ -443,7 +425,7 @@ public class LogEntry implements Parcelable {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(id).append(logType).append(author).append(log).append(date).append(found)
-                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode).append(favorite)
+                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode)
                 .build();
     }
 
@@ -504,7 +486,7 @@ public class LogEntry implements Parcelable {
             }
         }
         if (titles.isEmpty()) {
-            titles.add(LocalizationUtils.getString(R.string.cache_log_image_default_title));
+            titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
         }
         return "• " + StringUtils.join(titles, "\n• ");
     }
@@ -523,27 +505,11 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Checks if the logs represent the same log entry:
-     * Same log type, same author, same day (ignoring time).
-     * Same log-text (or one can be empty). Ignore log-text for found logs
-     * (as there should be only a unique one - at least for that day)
+     * Check if the LogEntry is owned by the current configured user on geocaching.com connector.
+     *
+     * @return {@code true} if LogEntry is from current user
      */
-    public boolean isMatchingLog(final LogEntry log) {
-        final boolean sameType = this.logType == log.logType;
-        final boolean sameAuthor = this.author.compareTo(log.author) == 0;
-
-        if (!sameType || !sameAuthor) {
-            return false;
-        }
-
-        final boolean sameLogText = this.logType.isFoundLog()
-                || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log)
-                || this.log.isEmpty() || log.log.isEmpty();
-        return DateUtils.isSameDay(new Date(this.date), new Date(log.date))
-                && sameLogText;
-    }
-
-    public long getLogAgeInDaysSinceEpochZoneCorrected() {
-        return LogUtils.getDaysSinceEpochZoneCorrected(date);
+    public boolean isOwn() {
+        return author.equalsIgnoreCase(Settings.getUserName());
     }
 }

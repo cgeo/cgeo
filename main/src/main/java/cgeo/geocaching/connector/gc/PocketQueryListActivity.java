@@ -12,7 +12,6 @@ public class PocketQueryListActivity extends AbstractListActivity {
         title = R.string.menu_lists_pocket_queries;
         progressInfo = R.string.search_pocket_loading;
         errorReadingList = R.string.err_read_pocket_query_list;
-        warnNoSelectedList = R.string.warn_pocket_query_select;
         switchLabel = R.string.pq_only_dl;
     }
 
@@ -34,10 +33,5 @@ public class PocketQueryListActivity extends AbstractListActivity {
     @Override
     boolean alwaysShow(final GCList list) {
         return list.isDownloadable();
-    }
-
-    @Override
-    boolean supportMultiPreview() {
-        return true;
     }
 }

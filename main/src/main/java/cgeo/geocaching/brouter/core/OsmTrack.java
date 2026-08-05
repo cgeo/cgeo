@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class OsmTrack {
+    static final String version = "1.7.5";
 
     // csv-header-line
     public MatchedWaypoint endPoint;
@@ -37,12 +38,11 @@ public final class OsmTrack {
     public Map<String, String> params;
 
     public List<OsmNodeNamed> pois = new ArrayList<>();
-    public final List<OsmPathElement> nodes = new ArrayList<>();
+    public List<OsmPathElement> nodes = new ArrayList<>();
     public String message = null;
     public List<String> messageList = null;
     public String name = "unset";
     public boolean exportWaypoints = false;
-    public boolean exportCorrectedWaypoints = false;
     public int distance;
     public int ascend;
     public int plainAscend;
@@ -296,7 +296,6 @@ public final class OsmTrack {
         }
         final float t0 = ourSize > 0 ? nodes.get(ourSize - 1).getTime() : 0;
         final float e0 = ourSize > 0 ? nodes.get(ourSize - 1).getEnergy() : 0;
-        final int c0 = ourSize > 0 ? nodes.get(ourSize - 1).cost : 0;
         for (i = 0; i < t.nodes.size(); i++) {
             final OsmPathElement e = t.nodes.get(i);
             if (i == 0 && ourSize > 0 && nodes.get(ourSize - 1).getSElev() == Short.MIN_VALUE) {
@@ -305,7 +304,6 @@ public final class OsmTrack {
             if (i > 0 || ourSize == 0) {
                 e.setTime(e.getTime() + t0);
                 e.setEnergy(e.getEnergy() + e0);
-                e.cost = e.cost + c0;
                 if (e.message != null) {
                     if (!(e.message.lon == e.getILon() && e.message.lat == e.getILat())) {
                         e.message.lon = e.getILon();
@@ -401,13 +399,14 @@ public final class OsmTrack {
         voiceHints.setTransportMode(rc.carMode, rc.bikeMode);
         voiceHints.turnInstructionMode = rc.turnInstructionMode;
 
-        if (detourMap == null && !rc.hasDirectRouting) {
-            // only when no direct way points
+        if (detourMap == null) {
             return;
         }
         int nodeNr = nodes.size() - 1;
         OsmPathElement node = nodes.get(nodeNr);
         while (node != null) {
+            if (node.origin != null) {
+            }
             node = node.origin;
         }
 
@@ -415,17 +414,6 @@ public final class OsmTrack {
         final List<VoiceHint> inputs = new ArrayList<>();
         while (node != null) {
             if (node.origin != null) {
-                if (nodeNr == nodes.size() - 1) {
-                    final VoiceHint input = new VoiceHint();
-                    inputs.add(0, input);
-                    input.ilat = node.getILat();
-                    input.ilon = node.getILon();
-                    input.selev = node.getSElev();
-                    input.goodWay = node.message;
-                    input.oldWay = node.message;
-                    input.indexInTrack = nodes.size() - 1;
-                    input.cmd = VoiceHint.END;
-                }
                 final VoiceHint input = new VoiceHint();
                 inputs.add(input);
                 input.ilat = node.origin.getILat();
@@ -439,29 +427,25 @@ public final class OsmTrack {
                         rc.turnInstructionMode == 2 ||
                         rc.turnInstructionMode == 9) {
                     final MatchedWaypoint mwpt = getMatchedWaypoint(nodeNr);
-                    if (mwpt != null && mwpt.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT) {
+                    if (mwpt != null && mwpt.direct) {
                         input.cmd = VoiceHint.BL;
                         input.angle = nodeNr == 0 ? node.origin.message.turnangle : node.message.turnangle;
                         input.distanceToNext = node.calcDistance(node.origin);
                     }
                 }
 
-                if (detourMap != null) {
-                    final OsmPathElementHolder detours = detourMap.get(node.origin.getIdFromPos());
-                    if (nodeNr >= 0 && detours != null) {
-                        OsmPathElementHolder h = detours;
-                        while (h != null) {
-                            final OsmPathElement e = h.node;
-                            input.addBadWay(startSection(e, node.origin));
-                            h = h.nextHolder;
-                        }
+                final OsmPathElementHolder detours = detourMap.get(node.origin.getIdFromPos());
+                if (nodeNr >= 0 && detours != null) {
+                    OsmPathElementHolder h = detours;
+                    while (h != null) {
+                        final OsmPathElement e = h.node;
+                        input.addBadWay(startSection(e, node.origin));
+                        h = h.nextHolder;
                     }
+                } else if (nodeNr == 0 && detours != null) {
+                    final OsmPathElement e = detours.node;
+                    input.addBadWay(startSection(e, e));
                 }
-                /* else if (nodeNr == 0 && detours != null) {
-                  OsmPathElementHolder h = detours;
-                  OsmPathElement e = h.node;
-                  input.addBadWay(startSection(e, e));
-                } */
             }
             node = node.origin;
         }
@@ -490,7 +474,10 @@ public final class OsmTrack {
     }
 
     public float getVoiceHintTime(final int i) {
-        if (!voiceHints.list.isEmpty() && i < voiceHints.list.size()) {
+        if (voiceHints.list.isEmpty()) {
+            return 0f;
+        }
+        if (i < voiceHints.list.size()) {
             return voiceHints.list.get(i).getTime();
         }
         if (nodes.isEmpty()) {

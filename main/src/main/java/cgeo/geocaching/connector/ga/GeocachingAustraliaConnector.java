@@ -5,7 +5,8 @@ import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class GeocachingAustraliaConnector extends AbstractConnector {
 
@@ -40,14 +41,15 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return (Strings.CI.startsWith(geocode, "GA") || Strings.CI.startsWith(geocode, "TP")) && isNumericId(geocode.substring(2));
+        return (StringUtils.startsWithIgnoreCase(geocode, "GA") || StringUtils.startsWithIgnoreCase(geocode, "TP")) && isNumericId(geocode.substring(2));
     }
 
+    @NotNull
     @Override
-    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"GA%", "TP%"};
     }
+
 
     @Override
     @NonNull

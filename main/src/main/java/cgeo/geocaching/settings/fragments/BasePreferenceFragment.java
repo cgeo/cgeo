@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings.fragments;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.PreferenceTextAlwaysShow;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
@@ -41,19 +41,18 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // services (all)
             R.string.preference_screen_services,
             // appearance
-            R.string.pref_theme_setting, R.string.pref_quicklaunchitems,
+            R.string.pref_theme_setting,
             R.string.pref_selected_language, R.string.pref_units_imperial,
             R.string.pref_cacheListInfo,
             // cache details
             R.string.pref_friendlogswanted,
             R.string.pref_livelist,
-            R.string.pref_live_compass_in_navigation_action,
             R.string.pref_rot13_hint,
             // map sources
-            R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
+            R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
             R.string.pref_persistablefolder_offlinemaps,
             R.string.pref_fakekey_info_offline_mapthemes, R.string.pref_persistablefolder_offlinemapthemes,
-            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden,
+            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden, R.string.pref_useLegacyMap,
             // map content & behavior
             R.string.pref_maptrail,
             R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,
@@ -178,7 +177,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
     private void lazyInitPreferenceKeys() {
         if (basicPreferences[0] == null) {
             for (int i = 0; i < basicPreferencesInt.length; i++) {
-                basicPreferences[i] = LocalizationUtils.getPlainString(basicPreferencesInt[i]);
+                basicPreferences[i] = CgeoApplication.getInstance().getString(basicPreferencesInt[i]);
             }
         }
     }

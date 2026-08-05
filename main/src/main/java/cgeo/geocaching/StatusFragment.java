@@ -4,7 +4,6 @@ import cgeo.geocaching.databinding.StatusBinding;
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
@@ -60,7 +59,7 @@ public class StatusFragment extends Fragment {
                         @SuppressLint("DiscouragedApi") // use of getIdentifier is intended to interact with our notification server
                         final int messageId = res.getIdentifier(status.messageId, "string", packageName);
                         if (messageId != 0) {
-                            message = LocalizationUtils.getString(messageId);
+                            message = res.getString(messageId);
                         }
                     }
 

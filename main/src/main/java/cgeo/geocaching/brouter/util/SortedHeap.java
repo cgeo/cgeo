@@ -111,12 +111,12 @@ public final class SortedHeap<V> {
     }
 
     private static final class SortedBin {
-        public final SortedHeap parent;
+        public SortedHeap parent;
         public SortedBin next;
         public SortedBin nextNonEmpty;
-        public final int binsize;
-        public final int[] al; // key array
-        public final Object[] vla; // value array
+        public int binsize;
+        public int[] al; // key array
+        public Object[] vla; // value array
         public int lv; // low value
         public int lp; // low pointer
 

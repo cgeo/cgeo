@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.ui.ViewUtils;
@@ -60,7 +61,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             @Override
             public boolean onSingleTapUp(final @NonNull MotionEvent event) {
                 final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), false);
+                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
                 return true;
             }
 
@@ -68,7 +69,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             public void onLongPress(final @NonNull MotionEvent event) {
                 if (!mapIsCurrentlyMoving) {
                     final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), true);
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
                 }
             }
         });
@@ -134,6 +135,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
         });
+
+        adaptLayoutForActionBar(true);
 
         initLayers();
         onMapReadyTasks.run();
@@ -216,6 +219,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
+            // mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
+            // mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
             final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
                     new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
                     new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);

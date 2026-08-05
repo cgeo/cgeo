@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -21,7 +22,6 @@ import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
 import com.mapswithme.maps.api.MapsWithMeApi;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
@@ -54,7 +54,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
         if (point != null) {
             final String id = point.getId();
             // for unknown reason the ID is now actually a URI in recent maps.me versions
-            if (Strings.CS.contains(id, "&id=")) {
+            if (StringUtils.contains(id, "&id=")) {
                 return StringUtils.substringAfter(id, "&id=");
             }
             return id;
@@ -64,6 +64,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
     private static PendingIntent getPendingIntent(final Context context) {
         final Intent intent = new Intent(context, CacheDetailActivity.class);
-        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        return PendingIntent.getActivity(context, 0, intent, ProcessUtils.getFlagImmutable());
     }
+
 }

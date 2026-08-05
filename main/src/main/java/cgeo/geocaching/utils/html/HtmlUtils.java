@@ -41,7 +41,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -104,7 +103,7 @@ public final class HtmlUtils {
     @NonNull
     public static String removeExtraTags(final String htmlIn) {
         String html = StringUtils.trim(htmlIn);
-        while (Strings.CS.startsWith(html, "<") && Strings.CS.endsWith(html, ">")) {
+        while (StringUtils.startsWith(html, "<") && StringUtils.endsWith(html, ">")) {
             final String tag = "<" + StringUtils.substringBetween(html, "<", ">") + ">";
             final int tagLength = tag.length();
             if (tagLength >= 10) {
@@ -112,7 +111,7 @@ public final class HtmlUtils {
             }
             final String endTag = "</" + StringUtils.substring(tag, 1);
             final int endTagIndex = html.length() - endTag.length();
-            if (!Strings.CS.startsWith(html, tag) || !Strings.CS.endsWith(html, endTag) || Strings.CS.indexOf(html, endTag) != endTagIndex) {
+            if (!StringUtils.startsWith(html, tag) || !StringUtils.endsWith(html, endTag) || StringUtils.indexOf(html, endTag) != endTagIndex) {
                 break;
             }
             html = StringUtils.substring(html, tagLength, endTagIndex).trim();
@@ -177,7 +176,7 @@ public final class HtmlUtils {
 
     /** replaces found URLSpans with given text with a new action */
     public static void replaceUrlClickAction(final Spannable spannable, final String urlText, final Consumer<URLSpan> newAction) {
-        replaceUrlClickAction(spannable, (span, spn, start, end) -> Strings.CS.equals(spn.subSequence(start, end), urlText), newAction);
+        replaceUrlClickAction(spannable, (span, spn, start, end) -> StringUtils.equals(spn.subSequence(start, end), urlText), newAction);
     }
 
     /** replaces found URLSpans with given condition with a new action */
@@ -188,7 +187,7 @@ public final class HtmlUtils {
             final int start = spannable.getSpanStart(span);
             final int end = spannable.getSpanEnd(span);
             final Boolean result = filter == null ? Boolean.TRUE : filter.call(span, spannable, start, end);
-            if (result == null || result) {
+            if (result == null || Boolean.TRUE.equals(result)) {
                 final int flags = spannable.getSpanFlags(span);
                 spannable.removeSpan(span);
                 spannable.setSpan(new ClickableSpan() {

@@ -1,34 +1,61 @@
 package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.filters.FilterUtils;
-import cgeo.geocaching.filters.NamedFilter;
-import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class NamedFilterFilterViewHolder<T, F extends IGeocacheFilter> extends CheckboxFilterViewHolder<T, F> {
+public class NamedFilterFilterViewHolder extends BaseFilterViewHolder<NamedFilterGeocacheFilter> {
 
-        public NamedFilterFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
-            super(filterAccessor, 1, Collections.emptySet(), false);
-        }
+    private final TextSpinner<GeocacheFilter> selectSpinner = new TextSpinner<>();
 
-        @Override
-        protected View.OnClickListener getAddItemButtonCallback() {
-            return v -> FilterUtils.openDialogMultiselectNamedFilters(getActivity(), TextParam.id(R.string.named_filter_select_title), null, nfs -> {
-                final Set<Integer> nfIds = nfs.stream().map(NamedFilter::getId).collect(Collectors.toSet());
-                final Set<T> selectedListsSet = filterAccessor.getSelectableValues().stream().filter(nf -> nfIds.contains(((NamedFilter) nf).getId())).collect(Collectors.toSet());
-                visibleValues.addAll(selectedListsSet);
-                for (T value : selectedListsSet) {
-                    getValueCheckbox(value).right.setChecked(true);
-                }
-                relayout();
-            });
+    @Override
+    public View createView() {
+        final LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+
+        final Button button = ViewUtils.createButton(getActivity(), ll, TextParam.text(""));
+        button.setMinimumWidth(ViewUtils.dpToPixel(200));
+        selectSpinner.setTextView(button);
+
+        final List<GeocacheFilter> namedFilters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
+        TextUtils.sortListLocaleAware(namedFilters, GeocacheFilter::getName);
+        namedFilters.add(0, null);
+        selectSpinner
+                .setValues(namedFilters)
+                .set(null)
+                .setDisplayMapperPure(f ->
+                        f == null ? LocalizationUtils.getString(R.string.cache_filter_userdisplay_none) : f.getName());
+        final LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        llParams.bottomMargin = ViewUtils.dpToPixel(10);
+        ll.addView(button, llParams);
+
+        return ll;
     }
+
+    @Override
+    public void setViewFromFilter(final NamedFilterGeocacheFilter filter) {
+        selectSpinner.set(filter.getNamedFilter());
+    }
+
+    @Override
+    public NamedFilterGeocacheFilter createFilterFromView() {
+        final NamedFilterGeocacheFilter filter = createFilter();
+        filter.setNamedFilter(selectSpinner.get());
+        return filter;
+    }
+
 }

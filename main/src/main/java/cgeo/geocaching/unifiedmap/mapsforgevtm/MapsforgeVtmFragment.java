@@ -17,7 +17,6 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -161,7 +160,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(LocalizationUtils.getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
@@ -434,15 +433,11 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         public boolean onGesture(final Gesture g, final MotionEvent e) {
             if (g instanceof Gesture.Tap) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                final int[] location = new int[2];
-                mMapView.getLocationOnScreen(location);
-                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX() + location[0], (int) e.getY() + location[1], false);
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), false);
                 return true;
             } else if (g instanceof Gesture.LongPress) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                final int[] location = new int[2];
-                mMapView.getLocationOnScreen(location);
-                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX() + location[0], (int) e.getY() + location[1], true);
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), true);
                 return true;
             }
             return false;

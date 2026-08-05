@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
@@ -35,7 +36,6 @@ import java.util.EnumSet;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability, IFavoriteCapability, IVotingCapability {
 
@@ -159,8 +159,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
-        final String userName = getUserName();
-        return StringUtils.isNotEmpty(userName) && Strings.CI.equals(cache.getOwnerDisplayName(), userName);
+        return StringUtils.isNotEmpty(getUserName()) && StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
     }
 
     @Override
@@ -173,6 +172,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
         //not supported
     }
 
+
     @Override
     public int getCachesFound() {
         return userInfo.getFinds();
@@ -184,7 +184,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @Override
     public String getLoginStatusString() {
-        return LocalizationUtils.getString(userInfo.getStatus().resId);
+        return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
     }
 
     @Override

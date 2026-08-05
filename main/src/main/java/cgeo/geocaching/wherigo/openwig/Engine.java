@@ -260,12 +260,6 @@ public class Engine implements Runnable {
         instance.end = true;
     }
 
-    /** returns current event queue size, or 0 if no engine is running */
-    public static int getEventQueueSize () {
-        if (instance == null || instance.eventRunner == null) return 0;
-        return instance.eventRunner.queueSize();
-    }
-
     /** builds and calls a dialog from a Message table */
     public static void message (LuaTable message) {
         String[] texts = {removeHtml((String)message.rawget("Text"))};

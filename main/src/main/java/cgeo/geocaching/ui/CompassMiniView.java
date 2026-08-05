@@ -88,7 +88,7 @@ public final class CompassMiniView extends View {
         targetCoords = point;
     }
 
-    public void updateAzimuth(final float azimuth) {
+    void updateAzimuth(final float azimuth) {
         this.azimuth = azimuth;
         updateDirection();
     }
@@ -98,7 +98,7 @@ public final class CompassMiniView extends View {
         updateDirection();
     }
 
-    public void updateCurrentCoords(@NonNull final Geopoint currentCoords) {
+    void updateCurrentCoords(@NonNull final Geopoint currentCoords) {
         if (targetCoords == null) {
             return;
         }

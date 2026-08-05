@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 /**
  * Parse coordinates.
@@ -297,7 +296,7 @@ public class GeopointParser {
             // Handle empty degrees part (see #4620)
             final String strippedGroup2 = StringUtils.stripEnd(group2, "°");
             final Double result = createCoordinate(group1, strippedGroup2, group3, "");
-            if (StringUtils.isBlank(group1) && (!Strings.CS.endsWith(group2, "°") || isNotZero(result))) {
+            if (StringUtils.isBlank(group1) && (!StringUtils.endsWith(group2, "°") || isNotZero(result))) {
                 return null;
             }
 

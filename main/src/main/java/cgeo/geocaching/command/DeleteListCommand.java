@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -20,7 +19,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     private final int listId;
     private Set<String> geocodes;
     private String listName;
-    @Nullable private String markerId;
+    private int markerId;
     private boolean preventAskForDeletion;
 
     protected DeleteListCommand(@NonNull final Activity context, final int listId) {
@@ -35,7 +34,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
         // remember list details, as we have to create a new list eventually
         final StoredList list = DataStore.getList(listId);
         listName = list.getTitle();
-        markerId = list.emojiMarker;
+        markerId = list.markerId;
         preventAskForDeletion = list.preventAskForDeletion;
         DataStore.removeList(listId);
     }
@@ -56,7 +55,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     @Override
     @Nullable
     protected String getResultMessage() {
-        return LocalizationUtils.getString(R.string.command_delete_list_result);
+        return getContext().getString(R.string.command_delete_list_result);
     }
 
 }

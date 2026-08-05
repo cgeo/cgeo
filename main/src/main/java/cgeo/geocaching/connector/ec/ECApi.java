@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.ec;
 
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 final class ECApi {
 
@@ -9,6 +9,7 @@ final class ECApi {
     }
 
     static String getIdFromGeocode(final String geocode) {
-        return Strings.CI.removeStart(geocode, "EC");
+        return StringUtils.removeStartIgnoreCase(geocode, "EC");
     }
+
 }

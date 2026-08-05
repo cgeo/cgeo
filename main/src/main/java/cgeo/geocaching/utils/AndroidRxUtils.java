@@ -92,8 +92,8 @@ public class AndroidRxUtils {
         AndroidSchedulers.mainThread().createWorker().schedule(action);
     }
 
-    public static Disposable andThenOnUi(final Scheduler scheduler, final Runnable background, final Runnable foreground) {
-        return scheduler.createWorker().schedule(() -> {
+    public static void andThenOnUi(final Scheduler scheduler, final Runnable background, final Runnable foreground) {
+        scheduler.createWorker().schedule(() -> {
             background.run();
             AndroidSchedulers.mainThread().createWorker().schedule(foreground);
         });
@@ -191,10 +191,6 @@ public class AndroidRxUtils {
                 return result1;
             }
         }).blockingGet();
-    }
-
-    public static Scheduler singleThreadPool() {
-        return Schedulers.from(newFixedDiscardingThreadPool(1, "singleThread"));
     }
 
     /**

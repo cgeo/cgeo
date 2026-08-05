@@ -10,7 +10,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -46,12 +45,6 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
     private static long close429warning = 0;
 
     private final ViewTreeObserver.OnGlobalLayoutListener[] layoutListeners = new ViewTreeObserver.OnGlobalLayoutListener[1];
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        setFixedActionBar(false);
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public void onBackPressed() {
@@ -254,18 +247,9 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
     // - restore current value
     // - open new sheet (if non-empty)
     public void sheetManageLifecycleOnStart(@Nullable final UnifiedMapViewModel.SheetInfo sheetInfo, @NonNull final Action1<UnifiedMapViewModel.SheetInfo> setSheetInfo) {
+        sheetRemoveFragment();
         setSheetInfo.call(sheetInfo);
         sheetShowDetails(sheetInfo);
-    }
-
-    public void sheetManageLifecycleOnStop(@Nullable final UnifiedMapViewModel viewModel) {
-        if (viewModel == null) {
-            sheetRemoveFragment();
-            return;
-        }
-        final UnifiedMapViewModel.SheetInfo si = viewModel.sheetInfo.getValue();
-        sheetRemoveFragment();
-        viewModel.sheetInfo.setValue(si);
     }
 
     @Override
@@ -303,7 +287,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                         if (v != null) {
                             v.setImageResource(R.drawable.warning);
                             v.getBackground().setTint(getResources().getColor(R.color.colorAccent));
-                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(LocalizationUtils.getString(R.string.live_map_status_http429, intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
+                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_http429), intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
                             new Handler(Looper.getMainLooper()).post(() -> v.setVisibility(View.VISIBLE));
                         }
                     }

@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +25,17 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,6 +45,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
+import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -46,9 +57,9 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
+import okhttp3.TlsVersion;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -64,10 +75,10 @@ public final class Network {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
+    protected static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
 
-    static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
-    static final MediaType MEDIA_TYPE_TEXT_PLAIN = MediaType.parse("text/plain; charset=utf-8");
+    protected static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
+    protected static final MediaType MEDIA_TYPE_TEXT_PLAIN = MediaType.parse("text/plain; charset=utf-8");
 
     private static OkHttpClient getNewHttpClient() {
         final OkHttpClient.Builder client = new OkHttpClient.Builder()
@@ -80,7 +91,42 @@ public final class Network {
                 .addInterceptor(new HeadersInterceptor())
                 .addInterceptor(new LoggingInterceptor());
 
-        return client.build();
+        return enableTls12OnPreLollipop(client).build();
+    }
+
+    private static OkHttpClient.Builder enableTls12OnPreLollipop(final OkHttpClient.Builder builder) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
+            try {
+                final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+                        TrustManagerFactory.getDefaultAlgorithm());
+                trustManagerFactory.init((KeyStore) null);
+                final TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+                if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
+                    throw new IllegalStateException("Unexpected default trust managers:"
+                            + Arrays.toString(trustManagers));
+                }
+                final X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
+
+                final SSLContext sc = SSLContext.getInstance("TLSv1.2");
+                sc.init(null, null, null);
+                builder.sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()), trustManager);
+
+                final ConnectionSpec cs = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+                        .tlsVersions(TlsVersion.TLS_1_2)
+                        .build();
+
+                final List<ConnectionSpec> specs = new ArrayList<>();
+                specs.add(cs);
+                specs.add(ConnectionSpec.COMPATIBLE_TLS);
+                specs.add(ConnectionSpec.CLEARTEXT);
+
+                builder.connectionSpecs(specs);
+            } catch (final Exception exc) {
+                Log.e("Error while setting TLS 1.2", exc);
+            }
+        }
+
+        return builder;
     }
 
     public static final Function<String, Single<? extends ObjectNode>> stringToJson = s -> {
@@ -173,6 +219,7 @@ public final class Network {
                                             final String fileFieldName, final String fileContentType, final File file) {
         return postRequest(uri, params, headers, fileFieldName, fileContentType, file).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }
+
 
     /**
      * POST HTTP request with Json POST DATA
@@ -463,6 +510,7 @@ public final class Network {
         return request("GET", uri, params, null, cacheFile);
     }
 
+
     /**
      * GET HTTP request
      *
@@ -609,7 +657,7 @@ public final class Network {
                 final String uri = resp.request().url().toString();
                 if (resp.isSuccessful()) {
                     final MediaType mediaType = MediaType.parse(resp.header("content-type", ""));
-                    if (mediaType == null || !Strings.CS.equals(mediaType.type(), "text") || !Strings.CS.equals(mediaType.subtype(), "html")) {
+                    if (mediaType == null || !StringUtils.equals(mediaType.type(), "text") || !StringUtils.equals(mediaType.subtype(), "html")) {
                         throw new IOException("unable to parse non HTML page with media type " + mediaType + " for " + uri);
                     }
                     final InputStream inputStream = resp.body().byteStream();
@@ -679,7 +727,7 @@ public final class Network {
     @Nullable
     public static String rfc3986URLEncode(final String text) {
         final String encoded = encode(text);
-        return encoded != null ? Strings.CS.replace(encoded.replace("+", "%20"), "%7E", "~") : null;
+        return encoded != null ? StringUtils.replace(encoded.replace("+", "%20"), "%7E", "~") : null;
     }
 
     @Nullable
@@ -715,4 +763,5 @@ public final class Network {
         final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
 }

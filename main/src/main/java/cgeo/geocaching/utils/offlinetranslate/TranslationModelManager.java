@@ -11,8 +11,7 @@ import cgeo.geocaching.utils.Log;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import io.reactivex.rxjava3.disposables.Disposable;
+import java.util.function.Supplier;
 
 /**
  * Manages Language Models which are downloaded to local device
@@ -25,11 +24,11 @@ public class TranslationModelManager {
     private static final String LOGPRAEFIX = "[TranslationModelManager]: ";
 
     private final Object mutex = new Object();
-    private final Set<String> supportedLanguages;
+    private Set<String> supportedLanguages = Collections.emptySet();
     private final Set<String> availableLanguages = new HashSet<>();
     private final Set<String> pendingLanguages = new HashSet<>();
 
-    private final ListenerHelper<Runnable> listeners = new ListenerHelper<>();
+    private final ListenerHelper<Supplier<Boolean>> listeners = new ListenerHelper<>();
 
     public static TranslationModelManager get() {
         return INSTANCE;
@@ -56,8 +55,8 @@ public class TranslationModelManager {
                     availableLanguages.clear();
                     availableLanguages.addAll(languages);
                     pendingLanguages.removeAll(availableLanguages);
+                    Log.iForce(LOGPRAEFIX + "available languages:" + availableLanguages + "/pending:" + pendingLanguages);
                     callListeners();
-                    Log.iForce(LOGPRAEFIX + "Available languages:" + availableLanguages + "/pending:" + pendingLanguages);
                 }
             }
         }, error -> Log.e(LOGPRAEFIX + " could not retrieve available models", error));
@@ -86,13 +85,13 @@ public class TranslationModelManager {
     }
 
 
-    public Disposable registerListener(final Runnable onChange) {
-        return listeners.addListenerWithDisposable(onChange);
+    public void registerListener(final Supplier<Boolean> onChange) {
+        listeners.addListener(onChange);
     }
 
     private void callListeners() {
         synchronized (mutex) {
-            listeners.execute(null, Runnable::run);
+            listeners.executeWithRemove(null, Supplier::get);
         }
     }
 
@@ -110,7 +109,6 @@ public class TranslationModelManager {
             ViewUtils.showToast(null, TextParam.id(R.string.translator_model_download_success, languageString), true);
             synchronized (mutex) {
                 availableLanguages.add(language);
-                callListeners();
             }
         }, ex -> {
             Log.e(LOGPRAEFIX + "Download of language '" + language + "' failed", ex);

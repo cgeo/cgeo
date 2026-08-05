@@ -1,10 +1,10 @@
 package cgeo.geocaching.ui.notifications;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.NotificationChannel;
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.StringRes;
 import androidx.core.app.NotificationManagerCompat;
@@ -15,8 +15,7 @@ public enum NotificationChannels {
     FOREGROUND_SERVICE_NOTIFICATION(R.string.notification_channel_foreground_name, R.string.notification_channel_foreground_description, NotificationManagerCompat.IMPORTANCE_LOW),
     DOWNLOADER_RESULT_NOTIFICATION(R.string.notification_channel_downloader_name, R.string.notification_channel_downloader_description, NotificationManagerCompat.IMPORTANCE_HIGH),
     CACHES_DOWNLOADED_NOTIFICATION(R.string.notification_channel_cache_download_name, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT),
-    WHERIGO_NOTIFICATION(R.string.wherigo, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT),
-    LOG_RESULT_NOTIFICATION(R.string.notification_channel_log_name, R.string.notification_channel_log_description, NotificationManagerCompat.IMPORTANCE_DEFAULT);
+    WHERIGO_NOTIFICATION(R.string.wherigo, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT);
 
     public final int channelDisplayableTitle;
     public final int channelDisplayableDescription;
@@ -31,14 +30,16 @@ public enum NotificationChannels {
     public static void createNotificationChannels(final Context context) {
         final NotificationManagerCompat manager = Notifications.getNotificationManager(context);
 
-        for (NotificationChannels channel : NotificationChannels.values()) {
-            final NotificationChannel notificationChannel = new NotificationChannel(
-                    channel.name(),
-                    LocalizationUtils.getString(channel.channelDisplayableTitle),
-                    channel.channelImportance
-            );
-            notificationChannel.setDescription(LocalizationUtils.getString(channel.channelDisplayableDescription));
-            manager.createNotificationChannel(notificationChannel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            for (NotificationChannels channel : NotificationChannels.values()) {
+                final NotificationChannel notificationChannel = new NotificationChannel(
+                        channel.name(),
+                        context.getString(channel.channelDisplayableTitle),
+                        channel.channelImportance
+                );
+                notificationChannel.setDescription(context.getString(channel.channelDisplayableDescription));
+                manager.createNotificationChannel(notificationChannel);
+            }
         }
     }
 }

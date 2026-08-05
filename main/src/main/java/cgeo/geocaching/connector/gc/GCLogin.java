@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.databinding.GcManualLoginBinding;
@@ -12,14 +13,13 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
@@ -32,10 +32,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -52,7 +48,6 @@ import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -194,20 +189,22 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
+        final Context ctx = CgeoApplication.getInstance();
+
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_missing_login), retry);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_missing_login), retry);
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
         final String username = credentials.getUserName();
 
-        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_working));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         try {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_loginpage1), retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage1), retry);
                 return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
@@ -218,13 +215,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -235,32 +232,32 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (loginData.contains("<div class=\"g-recaptcha\" data-sitekey=\"")) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_captcha), retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_captcha), retry);
                 return resetGcCustomDate(StatusCode.LOGIN_CAPTCHA_ERROR);
             }
 
             if (loginData.contains("id=\"signup-validation-error\"")) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_bad_login, username), retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_bad_login, username), retry);
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("content=\"account/join/success\"")) {
-                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_not_validated, username), retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_not_validated, username), retry);
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_unknown_error, username), retry, loginData);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error, username), retry, loginData);
             if (retry) {
                 getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
-            logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
-            logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_communication_error), retry);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry);
             return StatusCode.CONNECTION_FAILED_GC;
         }
     }
@@ -330,7 +327,7 @@ public class GCLogin extends AbstractLogin {
             return false;
         }
 
-        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_ok));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         final String username = GCParser.getUsername(page);
         setActualLoginStatus(StringUtils.isNotBlank(username));
@@ -341,7 +338,7 @@ public class GCLogin extends AbstractLogin {
             return true;
         }
 
-        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_failed));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
         return false;
     }
 
@@ -407,7 +404,7 @@ public class GCLogin extends AbstractLogin {
 
     private void setHomeLocation() {
         final String homeLocationStr = retrieveHomeLocation();
-        if (StringUtils.isNotBlank(homeLocationStr) && !Strings.CS.equals(homeLocationStr, Settings.getHomeLocation())) {
+        if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
             Log.i("Setting home location to " + homeLocationStr);
             Settings.setHomeLocation(homeLocationStr);
         }
@@ -609,7 +606,7 @@ public class GCLogin extends AbstractLogin {
      * remove the white space from cache details pages.
      */
     private static boolean canRemoveWhitespace(final String uri) {
-        return !Strings.CS.contains(uri, "cache_details");
+        return !StringUtils.contains(uri, "cache_details");
     }
 
     private StatusCode completeLoginProcess() {
@@ -626,20 +623,12 @@ public class GCLogin extends AbstractLogin {
     }
 
     @UiThread
-    public void performManualLogin(@NonNull final Activity activity, final Runnable callback) {
+    public void performManualLogin(@NonNull final Context activity, final Runnable callback) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
-
-        WindowCompat.enableEdgeToEdge(activity.getWindow());
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
-            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
-            return windowInsets;
-        });
-
         CookieManager.getInstance().removeAllCookies(b -> {
             final String url = "https://www.geocaching.com";
             binding.webview.loadUrl(url + "/account/signin");
@@ -659,7 +648,7 @@ public class GCLogin extends AbstractLogin {
 
                 dialog.dismiss();
                 //set to state "logging in..."
-                setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_working));
+                setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
                 callback.run();
 
                 //perform the log-in and set state afterwards
@@ -670,10 +659,10 @@ public class GCLogin extends AbstractLogin {
                             return;
                         }
                     } catch (final Exception ex) {
-                        logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
+                        logLastLoginError(CgeoApplication.getInstance().getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
                         Log.w("GCLogin: Exception on manual login", ex);
                     }
-                    setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_failed));
+                    setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
                 }, callback);
             });
             binding.cancelButton.setOnClickListener(bo -> dialog.dismiss());

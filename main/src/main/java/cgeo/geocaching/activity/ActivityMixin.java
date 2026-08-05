@@ -5,7 +5,6 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -31,6 +30,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class ActivityMixin {
 
     private ActivityMixin() {
@@ -38,8 +39,15 @@ public final class ActivityMixin {
     }
 
     public static void setTitle(final Activity activity, final CharSequence text) {
-        if (activity instanceof AbstractActionBarActivity) {
-            ActionBarUtils.setTitle((AbstractActionBarActivity) activity, text);
+        if (StringUtils.isBlank(text)) {
+            return;
+        }
+
+        if (activity instanceof AppCompatActivity) {
+            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(text);
+            }
         }
     }
 

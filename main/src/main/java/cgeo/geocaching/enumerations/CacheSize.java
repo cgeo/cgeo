@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +11,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 
 /**
  * Enum listing cache sizes
@@ -61,7 +60,7 @@ public enum CacheSize {
                 FIND_BY_ID.put(cs.ocSize2.toLowerCase(Locale.US), cs);
             }
             // also add the size icon names of the website
-            final String imageName = Strings.CS.replace(StringUtils.lowerCase(cs.id), " ", "_");
+            final String imageName = StringUtils.replace(StringUtils.lowerCase(cs.id), " ", "_");
             FIND_BY_ID.put(imageName, cs);
         }
         // add medium as additional string for Regular
@@ -146,7 +145,7 @@ public enum CacheSize {
 
     @NonNull
     public final String getL10n() {
-        return LocalizationUtils.getString(stringId);
+        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
     }
 
     @NonNull

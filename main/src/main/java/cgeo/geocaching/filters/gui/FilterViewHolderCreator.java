@@ -5,13 +5,11 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.CategoryGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
-import cgeo.geocaching.filters.core.NamedFilterGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -38,8 +36,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class FilterViewHolderCreator {
 
@@ -70,7 +66,7 @@ public class FilterViewHolderCreator {
                 result = new StringFilterViewHolder<>();
                 break;
             case INVENTORY_COUNT:
-                result = new NumberCountFilterViewHolder<>(0, 100);
+                result = new NumberCountFilterViewHolder(0, 100);
                 break;
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
@@ -79,7 +75,7 @@ public class FilterViewHolderCreator {
                                         CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
                                 .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
                                 .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
-                        2, null, true);
+                        2, null);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -145,7 +141,7 @@ public class FilterViewHolderCreator {
                 result = createStoredListFilterViewHolder();
                 break;
             case NAMED_FILTER:
-                result = createNamedFilterFilterViewHolder();
+                result = new NamedFilterFilterViewHolder();
                 break;
             case ORIGIN:
                 result = new CheckboxFilterViewHolder<>(
@@ -153,7 +149,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(ConnectorFactory.getConnectors())
                                 .setValueDisplayTextGetter(IConnector::getDisplayName)
                                 .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)), 1,
-                        new HashSet<>(ConnectorFactory.getActiveConnectors()), false);
+                        new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;
             case STORED_SINCE:
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
@@ -170,7 +166,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(Category.getAllCategoriesExceptUnknown())
                                 .setValueDisplayTextGetter(Category::getI18nText)
                                 .setValueDrawableGetter(c -> ImageParam.id(c.getIconId())),
-                        2, null, false);
+                        2, null);
                 break;
             case TIER:
                 result = new CheckboxFilterViewHolder<>(
@@ -178,10 +174,7 @@ public class FilterViewHolderCreator {
                                 .setSelectableValues(Tier.values())
                                 .setValueDisplayTextGetter(Tier::getI18nText)
                                 .setValueDrawableGetter(t -> ImageParam.id(t.getIconId())),
-                        2, null, false);
-                break;
-            case HEALTH_SCORE:
-                result = new HealthScoreFilterViewHolder();
+                        2, null);
                 break;
             case LOGICAL_FILTER_GROUP:
                 result = new LogicalFilterViewHolder();
@@ -266,24 +259,10 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(allLists)
                         .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
                         .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
-                        .setValueDrawableGetter(f -> StringUtils.isNotBlank(f.emojiMarker) ? ImageParam.emoji(f.emojiMarker) : ImageParam.id(R.drawable.ic_menu_list))
+                        .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_list))
                         .setValueDisplayTextGetter(f -> f.title)
                         .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
-        return new StoredListsFilterViewHolder<>(vgfa);
-    }
-
-    private static IFilterViewHolder<?> createNamedFilterFilterViewHolder() {
-
-        final List<NamedFilter> allNamedFilters = NamedFilter.getAll();
-        final ValueGroupFilterAccessor<NamedFilter, NamedFilterGeocacheFilter> vgfa =
-                new ValueGroupFilterAccessor<NamedFilter, NamedFilterGeocacheFilter>()
-                    .setSelectableValues(allNamedFilters)
-                    .setFilterValueGetter(NamedFilterGeocacheFilter::getNamedFilters)
-                    .setFilterValueSetter(NamedFilterGeocacheFilter::setNamedFilters)
-                    .setValueDrawableGetter(f -> StringUtils.isNotBlank(f.getMarkerId()) ? ImageParam.emoji(f.getMarkerId()) : ImageParam.id(R.drawable.ic_menu_marker))
-                    .setValueDisplayTextGetter(NamedFilter::getName);
-
-        return new NamedFilterFilterViewHolder<>(vgfa);
+        return new StoredListsFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
 }

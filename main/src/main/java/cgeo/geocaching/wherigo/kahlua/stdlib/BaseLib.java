@@ -35,7 +35,6 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaThread;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.function.Function;
 
 public final class BaseLib implements JavaFunction {
@@ -657,7 +656,7 @@ public final class BaseLib implements JavaFunction {
                 return LuaState.toDouble(Integer.parseInt(s, radix));
             }
         } catch (NumberFormatException e) {
-            s = s.toLowerCase(Locale.getDefault());
+            s = s.toLowerCase();
             if (s.endsWith("nan")) {
                 return LuaState.toDouble(Double.NaN);
             }

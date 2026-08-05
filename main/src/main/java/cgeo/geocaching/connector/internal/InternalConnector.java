@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class InternalConnector extends AbstractConnector implements ISearchByGeocode {
 
@@ -93,11 +94,6 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
-    public boolean hasOnlineSource() {
-        return false;
-    }
-
-    @Override
     public boolean isActive() {
         return true;
     }
@@ -135,11 +131,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
+    @NotNull
     @Override
-    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{PREFIX + "%"};
     }
+
 
     @Override
     public int getCacheMapMarkerId() {
@@ -206,12 +203,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     /* creates user-defined cache list if requested */
     protected static int getUdcListId(final Context context) {
         for (StoredList list : DataStore.getLists()) {
-            if (list.getTitle().trim().equals(LocalizationUtils.getString(R.string.goto_targets_list).trim())) {
+            if (list.getTitle().trim().equals(context.getString(R.string.goto_targets_list).trim())) {
                 return list.id;
             }
         }
 
-        int newListId = DataStore.createList(LocalizationUtils.getString(R.string.goto_targets_list));
+        int newListId = DataStore.createList(context.getString(R.string.goto_targets_list));
         if (newListId == -1) {
             // fallback for errors during new list creation
             newListId = StoredList.STANDARD_LIST_ID;
@@ -230,7 +227,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id, may be NEW_LIST
      */
-    private static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, @Nullable final String assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
+    private static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
             int newListId = listId;
@@ -241,9 +238,9 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // create new cache
             final Geocache cache = new Geocache();
             cache.setGeocode(geocode);
-            cache.setName(StringUtils.isEmpty(name) ? LocalizationUtils.getString(R.string.internal_cache_default_names, geocode) : name);
-            cache.setOwnerDisplayName(LocalizationUtils.getString(R.string.internal_cache_default_owner));
-            cache.setDescription(StringUtils.isEmpty(description) ? LocalizationUtils.getString(R.string.internal_cache_default_description) : description);
+            cache.setName(StringUtils.isEmpty(name) ? String.format(context.getString(R.string.internal_cache_default_names), geocode) : name);
+            cache.setOwnerDisplayName(context.getString(R.string.internal_cache_default_owner));
+            cache.setDescription(StringUtils.isEmpty(description) ? context.getString(R.string.internal_cache_default_description) : description);
             cache.setAssignedEmoji(assignedEmoji);
             cache.setDetailed(true);
             cache.setType(CacheType.USER_DEFINED);
@@ -265,7 +262,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, GEOCODE_HISTORY_CACHE, LocalizationUtils.getString(R.string.internal_goto_targets_title), LocalizationUtils.getString(R.string.internal_goto_targets_description), EmojiUtils.NO_EMOJI, null, UDC_LIST);
+        assertCacheExists(context, GEOCODE_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
     }
 
     /**
@@ -279,7 +276,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param listId        cache list's id
      * @return geocode      geocode of the newly created cache
      */
-    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, @Nullable final String assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
+    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         String geocode;
         do {
             geocode = PREFIX + generateRandomId();
@@ -323,8 +320,8 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         // This cross-converting solves a tinting issue described in #11715. Sorry, it is ugly but the only possibility we have found so far.
         dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable())));
         dialogButton.setIconTint(null);
-        dialogButton.setTooltipText(context.getText(R.string.caches_set_cache_icon));
-        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), false, temporaryCache, assignedEmoji -> {
+        dialogButton.setHint(R.string.caches_set_cache_icon);
+        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
             dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
         }));

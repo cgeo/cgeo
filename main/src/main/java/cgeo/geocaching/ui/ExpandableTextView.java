@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 
 public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextView {
     private boolean isCollapsible = false;
-    private boolean wasExpanded = false;
     private View.OnClickListener stackedOnClickListener = null;
 
     public ExpandableTextView(final Context context) {
@@ -40,7 +39,7 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
             final int lineLimit = Settings.getLogLineLimit();
             final int lineCount = getLineCount();
             isCollapsible = lineLimit > 0 && lineCount > lineLimit;
-            setCollapse(isCollapsible && !wasExpanded);
+            setCollapse(isCollapsible);
         });
     }
 
@@ -56,9 +55,6 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
         final int lineLimit = Settings.getLogLineLimit();
         setMaxLines(collapse && lineLimit > 0 ? lineLimit : Integer.MAX_VALUE);
         setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, collapse ? R.drawable.ic_menu_more : 0);
-        if (!collapse) {
-            wasExpanded = true;
-        }
     }
 
     @Override
