@@ -1,123 +1,119 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
-- Fix: Cannot upload changed coordinates (website change)
-- Fix: Cannot upload personal notes (website change)
-
-##
-- Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
+- Correcció: L'obertura emergent de catxés/punts de referència s'endarrereix en alguns dispositius
+- Correcció: L'edició de la descripció del catxé no admet copiar i enganxar
+- Correcció: Alguns errors i "l'aplicació no respon"
+- Correcció: Error en suprimir el registre rastrejable (canvi de lloc web)
 
 ##
-- Fix: Deleting of log images broken (website change)
-- Change: Unify track and individual route loading buttons
-- Fix: Cache attributes not detected correctly under certain conditions
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Correcció: L'eliminació d'imatges de registre està trencada (canvi de lloc web)
+- Canvi: Unifica els botons de càrrega de pistes i rutes individuals
+- Correcció: Els atributs del catxé no es detecten correctament en determinades condicions
+- Correcció: Registre de catxés (canvi de lloc web)
+- Correcció: Registre de rastrejables (canvi de lloc web)
 
 ##
-- Fix: Pocket query import broken (website change)
+- Correcció: La importació de consultes de Pocket no funciona correctament (canvi de lloc web)
 
 ##
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Correcció: Error en accedir a rutes
+- Correcció: Error a la pàgina de punts de referència
+- Canvi: La cerca de "catxés pròpis" comença amb filtres nous
+- Correcció: Les etapes de lab aventure no desades perdien la informació de "visitada" en actualitzar-les
+- Correcció: Sol·licitud recurrent per a actualitzacions de la font de les tessel·les
+- Correcció: Ubicació aleatòria en un mapa d'una llista (Google Maps)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Correcció: Error a la fitxa informativa del catxé
+- Correcció: Ja no es poden descarregar els cartutxos Wherigo (canvi de lloc web)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+ - Canvi: Actualment no es poden descarregar els fitxers de Wherigo, mostreu les instruccions de mitigació
+ - Correcció: El motiu de l'eliminació del registre no aplica el límit de longitud
+ - Nou: Registre ampliat per a errors al gestor de descàrregues
+ - Correcció: El full d'informació dels punts de referència pot arribar a ser massa llarg i els botons són inaccessibles
+ - Correcció: Alguna informació d'ubicació es trunca
+ - Correcció: L'encaminament intern ja no funciona, només es mostra la línia recta
+ - Correcció: Alguns problemes de creació de carpetes
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
-
-##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+Nota: Si feu servir l'encaminament intern, haureu d'executar el pas següent un cop instal·lat aquesta versió: Aneu a la pantalla d'inici de c:geo, obriu "Gestiona dades fora de línia" - "Actualitza dades d'encaminament" i deixeu que c:geo instal·li els fitxers actualitzats. (Motiu: L'estructura del fitxer de dades d'encaminament de BRouter ha canviat i tots els fitxers de dades d'encaminament han de complir la mateixa versió.)
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
+- Correcció: Error en obrir un element rastrejable des de la llista de seguiment
+- Correcció: El teclat pot estar bloquejant la selecció de la llista
+- Correcció: El proveïdor definit per l'usuari no admet paràmetres d'URL addicionals
+- Correcció: L'inventari / els elements rastrejables d'un catxé ja no es carreguen
+- Canvi: S'ha actualitzat l'agent d'usuari intern per solucionar alguns problemes de descàrrega
+- Correcció: En visualitzar els detalls rastrejables, s'eliminen de l'inventari del catxé
 
 ##
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
+- Correcció: Canvi de format de coordenades a la fitxa informativa del catxé/punt de referència
+- Correcció: Data de registre tallada a la llista de registres (segons el format de data i la mida de la lletra)
+- Correcció: No es detecten els horaris de les trobades en determinades condicions
+- Correcció: L'enllaç de la fitxa no es pot fer clic en determinades condicions
+- Correcció: Les accions de registre per als elements rastrejables de vegades es barregen
 
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Canvi: S'ha reduït a 100 el nombre màxim de visites de rastrejables de GC per registre de catxé (segons la sol·licitud de geocaching.com per reduir la càrrega del servidor causada pels amants extrems dels rastrejables)
+- Correcció: Algunes possibles excepcions de seguretat quan l'usuari no ha atorgat certs drets (per exemple: notificacions)
+- Correcció: Cercles de catxés incomplets en nivells de zoom baixos (només VTM)
+- Correcció: Error en recarregar punts de referència en determinades condicions de càrrega
+- Correcció: El filtre de data d'esdeveniment no funciona en determinades condicions
+- Correcció: El límit màxim de línia de registre no funciona de manera fiable en la configuració "il·limitada"
+- Correcció: Error en obrir el mapa sota certes condicions
+- Correcció: No es mostra el mapa si wherigo no té zones visibles
+- Correcció: Error a la pestanya d'imatge dels detalls de catxé en determinades condicions
+- Correcció: Cerques de mapes amb coordenades no vàlides
+- Correcció: Algunes traduccions no respecten la configuració d'idioma c:geo-intern
 
 ##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
+- Correcció: La casella de selecció de preferits es restableix en tornar a entrar a la pantalla de registre fora de línia
+- Correcció: El quadre d'entrada del radi de la geozona mostra un nombre decimal
+- Correcció: La sincronització de notes personals no funciona
+- Canvi: Nova icona per a la importació de rutes/tracks GPX a la configuració ràpida de rutes/tracks del mapa
 
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Correcció: Els valors negatius del gràfic d'elevació no s'escalen
+- Correcció: Coordenades properes a 0 trencades a les exportacions GPX
+- Correcció: Alguns errors
+- Intenta solucionar: ANR a l'inici
+- Intenta solucionar: Falten dades de catxés al mapa en directe
 
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Correcció: Error en la cerca de paraules clau
+- Correcció: Error al mapa
+- Correcció: El text de la pista ja no es pot seleccionar
+- Correcció: Diversos problemes amb Wherigo
 
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Correcció: Xifrar/desxifrar una pista requereix un toc addicional inicialment
+- Correcció: Wherigo s'ha bloquejat en llegir partides guardades antigues
+- Correcció: De vegades no es recorda el registre des de c:geo
+- Correcció: Falta una actualització de dades en directe per a trobats & catxés arxivats
+- Correcció: Els punts de referència del mapa fora de línia de vegades no es mostren
 
 ##
-- Fix: Crash in translation module
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Correcció: Suggeriments de catxé sense xifrar (canvi de lloc web)
+- Correcció: Els Labs no es carregaven a l'aplicació (canvi de lloc web, haureu d'actualitzar els Adventure labs emmagatzemades per poder tornar-les a cridar des de c:geo)
+- Correcció: UnifiedMap VTM: L'activació o desactivació d'edificis en 3D no funciona per a mapes combinats
+- Correcció: Traducció fora de línia: De vegades es detecta l'idioma de la llista com a --
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Correcció: Error al mòdul de traducció
+- Correcció: La detecció d'inici de sessió falla (canvi de lloc web)
+- Correcció: Error en recuperar el cartutx Wherigo
+- Correcció: "Carrega'n més" no respecta els filtres fora de línia
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Correcció: L'inventari rastrejable no es carregava en registrar un catxé
+
+##
+- Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
+- Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
 
 
 

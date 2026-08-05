@@ -219,7 +219,8 @@
     <!-- Contacts -->
     <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
     <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
-    <!-- External translation -->
+    <!-- translation -->
+    <string name="translate_length_warning">Vertimas gali nepavykti jei tekstas labai ilgas.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
@@ -306,7 +307,10 @@
     <string name="err_read_bookmark_list">Klaida skaitant žymių sąrašus.</string>
     <string name="info_log_posted">c:geo sėkmingai paskelbė įrašą.</string>
     <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
+    <string name="info_log_post_failed">Paskelbti įrašo nepavyko.</string>
     <string name="info_log_delete_failed">Ištrinti įrašo nepavyko.</string>
+    <string name="info_log_post_retry">Kartoti</string>
+    <string name="info_log_post_save">Išsaugoti neprisijungus</string>
     <string name="info_log_cleared">Įrašas išvalytas.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinatės išvalytos.</string>
     <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
@@ -326,6 +330,9 @@
     <string name="dont_show_again">Daugiau neberodyti</string>
     <string name="tap_icon_more_info">Norėdami gauti daugiau informacijos, bakstelėkite piktogramą</string>
     <string name="use_slider_adjust_value">Norėdami sureguliuoti vertę, naudokite slankiklį</string>
+    <string name="warn_gm_not_available">Google Maps neprieinami.</string>
+    <string name="switch_to_mf">Jūsų Google Play Service pasenusi. Ar perjungti į Mapsforge žemėlapių tiekėją?</string>
+    <string name="switched_to_mf">Numatytasis žemėlapis perjungtas į Mapsforge žemėlapių teikėją. Iš naujo paleiskite žemėlapį dabar.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Pagrindinis</string>
     <!-- location service -->
@@ -499,6 +506,7 @@
     <string name="cache_filter_mode_advanced">Išplėstiniai</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Perjunkite į Pagrindinis</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Pakeitus režimą į Pagrindinis, prarasite filtro nustatymus. Ar norite tęsti?</string>
+    <string name="cache_filter_add_button">Pridėti filtro kriterijus</string>
     <string name="cache_filter_option_and_or">Vietoj IR naudokite ARBA</string>
     <string name="cache_filter_option_inverse">Atvirkštinis filtras</string>
     <string name="cache_filter_option_include_inconclusive">Įtraukiti dviprasmiškus atitikmenis</string>
@@ -532,6 +540,7 @@
     <string name="cache_filter_stored_since">Paskutinis išsamios informacijos atnaujinimas</string>
     <string name="cache_filter_category">BC kategorija</string>
     <string name="cache_filter_tier">BC pakopa</string>
+    <string name="cache_filter_named_filter">Pavadintas filtras</string>
     <string name="cache_filter_logical_filter_group">Įdėtas filtras</string>
     <string name="cache_filtergroup_basic">Pagrindiniai</string>
     <string name="cache_filtergroup_details">Informacija</string>
@@ -554,7 +563,17 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
     <string name="cache_filter_storage_clear_button">Išvalyti</string>
+    <string name="cache_filter_storage_load_delete_title">Įkelkite arba ištrinkite esamą filtrą</string>
     <string name="cache_filter_storage_select_title">Pasirinkite filtrą</string>
+    <string name="cache_filter_storage_delete_title">Ištrinti failą</string>
+    <string name="cache_filter_storage_delete_message">Ar tikrai norite ištrinti šią filtro konfigūraciją?</string>
+    <string name="cache_filter_storage_select_clear_title">Pasirinkite filtrą arba išvalykite esamą filtrą</string>
+    <string name="cache_filter_storage_clear_title">Išvalyti esamą filtrą</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Filtras dar nėra išsaugotas.</string>
+    <string name="cache_filter_storage_save_title">Išsaugoti filtrą su pavadinimu</string>
+    <string name="cache_filter_storage_save_confirm_title">Išsaugoti filtro perrašymą</string>
+    <string name="cache_filter_storage_save_confirm_message">Filtras su pavadinimu \'%s\' ir kitokia konfigūracija jau yra. Perrašyti?</string>
+    <string name="cache_filter_storage_clear_message">Ar norite išvalyti dabartinį filtrą?</string>
     <string name="cache_filter_stringfilter_matchcase">Skirti raidžių lygį</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Paieškos tekstas</string>
     <string name="cache_filter_stringfilter_info">Naudodami parinktį \'Ruošinys\', naudokite pakaitos simbolius * ir ?. * reiškia nulį, vieną ar kelis simbolius, ? reiškia vieną simbolį. Pavyzdžiui, ruošinys \'H?mburg*\' atitiks pvz. \'Homburg\' arba \'Hamburg naktį\', bet ne \'Diena Hamburge\' ar \'Hahmburg\'</string>
@@ -668,7 +687,6 @@
         <item>1 mėn</item>
         <item>&gt;1 mėn</item>
     </string-array>
-    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -815,7 +833,9 @@
     <string name="init_summary_oc_uk">Įkelti slėptuves iš opencache.uk</string>
     <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencache.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
+    <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
     <string name="err_vote_send_rating">Siunčiant įvertinimą įvyko klaida.</string>
+    <string name="vote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="init_login_popup">Prisijungti</string>
     <string name="init_login_popup_working">Prisijungiama…</string>
     <string name="init_login_popup_ok">Prisijungta</string>
@@ -859,6 +879,8 @@
     <string name="init_signature_template_type">Tipas</string>
     <string name="init_signature_template_location">Vieta</string>
     <string name="init_signature_template_geocode">Geokodas</string>
+    <string name="init_ratingwanted">GCvote reitingas</string>
+    <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_summary_bettercacher">Įkelkite slėptuvės pakopą ir kategorijas iš BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir asmeninių įrašų žurnalo papildomą puslapį</string>
@@ -1037,6 +1059,7 @@
     <string name="init_dataDir">Pasirinkite duomenų aplanką</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus geoslėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
+    <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
     <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
     <string name="init_trailappearance">Istorijos pėdsako išvaizda</string>
@@ -1161,6 +1184,7 @@
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
     <string name="map_source_google_terrain">Google: Reljefas</string>
+    <string name="map_source_osm_offline">Išsaugoma</string>
     <string name="map_source_osm_offline_combined">Sujungtas (Neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio savybės</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
@@ -1369,7 +1393,9 @@
     <string name="cache_variables">Kintamieji</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Kelio taškai (%d)</string>
     <string name="cache_waypoints_add">Pridėti kelio tašką</string>
+    <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Slėpti aplankytus kelio taškus</string>
     <string name="cache_waypoints_remove_original_waypoint">Kelio taškas nukopijuotas iš iškarpinės į šią slėptuvę.\n\nPašalinti pradinį kelio tašką?</string>
     <string name="cache_hint">Užuomina</string>
     <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -1382,6 +1408,7 @@
     <string name="cache_dialog_loading_details_status_spoilers">Įkeliami užuominos vaizdai</string>
     <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apdorojami kelio taškai</string>
+    <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
     <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
     <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
     <string name="cache_dialog_offline_save_title">Išsaugoma</string>
@@ -1434,6 +1461,7 @@
     <string name="cache_menu_copy_list">Kopijuoti į kitą sąrašą</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (neprisijungus)</string>
+    <string name="cache_menu_vote">Balsuoti</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_log_in_browser">Užregistruoti naršyklėje</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
@@ -1507,6 +1535,8 @@
     <string name="cachedetails_progress_unwatch">Pašalinta iš stebimų sąrašo</string>
     <string name="cachedetails_progress_favorite">Pridėta prie mėgstamiausių</string>
     <string name="cachedetails_progress_unfavorite">Pašalinta iš mėgstamiausių</string>
+    <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
+    <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
@@ -1550,7 +1580,7 @@
     <string name="html_style_monochrome">Vienspalvė</string>
     <string name="html_style_source_formatted">Suformatuotas HTML šaltinis</string>
     <string name="html_style_source">HTML pirminis tekstas</string>
-    <!-- coordinate input dialog -->
+    <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
     <string name="cc_hint_seconds">sekundės</string>
@@ -2316,6 +2346,7 @@
     <string name="map_manual_targets_cleared">Rankiniai tikslai išvalyti</string>
     <string name="map_clear_individual_route">Išvalyti asmeninį maršrutą</string>
     <string name="map_clear_individual_route_confirm">Ar norite pašalinti visas slėptuves/kelio taškus iš asmeninio maršruto?</string>
+    <string name="map_individual_route_cleared">Asmeninis maršrutas išvalytas</string>
     <string name="sorted_route_saved">Asmeninis maršrutas išsaugotas</string>
     <string name="load_individual_route_error">Klaida įkeliant asmeninį maršrutą</string>
     <string name="route_item_point">Maršruto taškas</string>
@@ -2394,6 +2425,7 @@
     <string name="add_setting_missing_type">Turite pasirinkti pageidaujamą tipą</string>
     <string name="add_setting_already_exists">Nuostata šiuo pavadinimu jau yra</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2448,6 +2480,7 @@
     <string name="check_hillshading_found">Kalvų šešėlių duomenys jau yra</string>
     <string name="check_hillshading_missing">Rasti trūkstami kalvų šešėlių duomenys:</string>
     <string name="check_hillshading_unsupported">Įspėjimas: kalvos šešėlių duomenys bent iš dalies nepasiekiami pasirinktame regione</string>
+    <string name="check_hillshading_tiles_menu">Patikrinkite, ar trūksta kalvų šešėlių duomenų</string>
     <string name="mapupdate_info">Bakstelėkite čia, kad patikrintumėte, ar nėra žemėlapių ir temų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>
     <string name="no_updates_found">Naujinių nerasta</string>
     <string name="updates_check">Atnaujinimų patikrinimas</string>
@@ -2475,6 +2508,7 @@
     <string name="vtm_theme_variant">Temos variantai</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Išvalyti pėdsaką</string>
+    <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
     <string name="map_trail_show">Rodyti pėdsaką</string>
     <string name="map_trail_hide">Slėpti pėdsaką</string>
     <!-- history track export -->
@@ -2576,6 +2610,12 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Pageidaujamas vaizdo dydis</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Originalus</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <string name="view_database">Peržiūrėti duomenų bazę</string>
     <string name="dbi_select_title">(Pasirinkite lentelę)</string>
@@ -2586,4 +2626,5 @@
     <string name="dbi_edit_error">Klaida atnaujinant lauką</string>
     <string name="dbi_edit_error_pkfield">"%s yra pirminio rakto dalis, jo negalima redaguoti"</string>
     <string name="dbi_search_title">Ieškoti</string>
+    <!-- emoji categories -->
 </resources>

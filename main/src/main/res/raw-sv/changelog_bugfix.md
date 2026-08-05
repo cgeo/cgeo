@@ -1,123 +1,119 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
-- Fix: Cannot upload changed coordinates (website change)
-- Fix: Cannot upload personal notes (website change)
-
-##
-- Fix: Cache/waypoint popup opening delayed on some devices
-- Fix: Edit cache description does not support copy & paste
-- Fix: Some crashes and "app not responding"
-- Fix: Deleting of trackable log fails (website change)
+- Fix: Cache/vägpunkt popup som öppnas försenat på vissa enheter
+- Fix: Redigera cachebeskrivning stöder inte kopiera & klistra
+- Fix: Vissa krascher och "appen svarar inte"
+- Fix: Borttagning av spårbar logg misslyckas (ändring av webbplatsen)
 
 ##
-- Fix: Deleting of log images broken (website change)
-- Change: Unify track and individual route loading buttons
-- Fix: Cache attributes not detected correctly under certain conditions
-- Fix: Logging caches (website change)
-- Fix: Logging trackables (website change)
+- Fix: Radering av loggbilder trasig (webbplatsändring)
+- Ändring: Enhetliga spår och enskilda ruttladdningsknappar
+- Fix: Cache-attribut upptäcks inte korrekt under vissa förhållanden
+- Fix: Loggning av cacher (ändring av webbplatsen)
+- Fix: Loggning av spårbara (ändring av webbplatsen)
 
 ##
-- Fix: Pocket query import broken (website change)
+- Fix: Pocket query import trasig (webbplats-ändring)
 
 ##
-- Fix: Crash when accessing routes
-- Fix: Crash on waypoint page
-- Change: Search for "own caches" starts with fresh filters
-- Fix: Unsaved lab adventure stages losing "visited" info on refresh
-- Fix: Recurring prompt for tile source updates
-- Fix: Random location on mapping a list (Google Maps)
+- Fix: Krasch vid åtkomst till rutter
+- Fix: Krasch på waypoint-sidan
+- Ändra: Sök efter "egna cacher" börjar med färska filter
+- Fix: Osparade labbäventyr-steg förlorar "besökt"-information vid uppdatering
+- Fix: Återkommande fråga för källuppdateringar av rutor
+- Fix: Slumpmässig plats när en lista visas på karta (Google Maps)
 
 ##
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
+- Fix: Krasch i cache infoblad
+- Fix: Wherigo-cartridges kan inte laddas ner längre (webbplatsändring)
 
 ##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+ - Ändra: Wherigo-filer kan inte laddas ner för närvarande, visa instruktioner för åtgärder
+ - Fix: Orsak till radering av logg upprätthåller inte längdgräns
+ - Nytt: Utökad loggning för krascher i nedladdningshanteraren
+ - Fix: Waypoint infosheet kan bli för lång, knappar oåtkomliga
+ - Fix: Viss platsinformation blir trunkerad
+ - Fix: Intern routing fungerar inte längre, endast rak linje visas
+ - Fix: Några problem med att skapa mappar
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
-
-##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+Obs: Om du använder intern routing måste du köra följande steg en gång efter installationen av denna utgåva: Gå till c:geo startskärm, öppna "Hantera offline data" - "Uppdatera routing data" och låt c:geo installera de uppdaterade filerna. (Orsak: BRouter routing datafil-struktur har förändrats och alla routing datafiler måste följa samma version.)
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Fix: Tolkning av cache-platssträng misslyckas för vissa språk på webbplatsen
+- Fix: Att öppna spårbar från bevakningslistan misslyckas
+- FIx: Tangentbord kan blockera listval
+- Fix: Användardefinierad tile-leverantör stöder inte ytterligare URL-parametrar
+- Fix: Innehav / Spårbara för en cache laddats inte längre
+- Ändra: Uppdaterad intern användaragent för att ta itu med några nedladdningsproblem
+- Fix: Visa spårbara detaljer tar bort den från cache-inventering
 
 ##
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
+- Fix: Koordinatformat ändras i cache/vägpunkt informationsblad
+- Fix: Inloggningsdatum avskurna i listan över loggar (beroende på datumformat och teckenstorlek)
+- Fix: Händelsetider kan inte upptäckas under vissa förhållanden
+- Fix: Länk i listan inte klickbar under vissa villkor
+- Fix: Åtgärder vid loggning av spårbara objekt blandas ibland
 
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Ändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
+- Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
+- Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
+- Fix: Krasch vid omladdning av vägpunkter under vissa lastförhållanden
+- Fix: Event-datum-filter fungerar inte under vissa omständigheter
+- Fix: Max längd för loggrad fungerar inte tillförlitligt i "obegränsad" inställning
+- Fix: Krasch när karta öppnas under vissa förutsättningar
+- Fix: Ingen karta visas om wherigo inte har några synliga zoner
+- Fix: Krasch på cachedetaljernas bildflik under vissa förutsättningar
+- Fix: Kartsökningar med ogiltiga koordinater
+- Fix: Vissa översättningar respekterar inte c:geo-interna språkinställningar
 
 ##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
+- Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
+- Fix: Geofence-radie-inmatningsrutan visar decimaltal
+- Fix: Synkronisering av personliga anteckningar fungerar inte
+- Ändring: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
 
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Fix: Negativa värden i höjddiagram skalas inte
+- Fix: Koordinater nära 0 felaktiga i GPX-export
+- Fix: Vissa krascher
+- Försök att fixa: ANR vid start
+- Försök att fixa: Saknar geocache-data på livekartan
 
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Fix: Krasch vid sökning på nyckelord
+- Fix: Krasch i kartan
+- Fix: Tipstext inte längre valbar
+- Fix: Flera Wherigo-problem
 
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Fix: Kryptera/dekryptera en ledtråd behöver ett extra tryck initialt
+- Fix: Wherigo kraschar vid läsning av gamla sparade spel
+- Fix: Loggning inifrån c:geo inte ihågkommen ibland
+- Fix: Saknar live-data-uppdatering för hittade & arkiverade cacher
+- Fix: Vägpunkter i offline-karta visas inte ibland
 
 ##
-- Fix: Crash in translation module
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Fix: Okrypterade cache-tips (ändring av webbplatsen)
+- Fix: Lab Adventures laddas inte i appen (webbplats ändras, du kommer att behöva uppdatera lagrade lab-äventyr för att kunna använda dem från c:geo igen)
+- Fix: UnifiedMap VTM: Växla 3D-byggnader fungerar inte för kombinerade kartor
+- Fix: Offline-översättning: Listspråk detekteras ibland som --
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Fix: Krasch i översättningsmodulen
+- Fix: Inloggningsdetektering misslyckas (webbplatsändring)
+- Fix: Krasch vid hämtning av Wherigo-cartridge
+- Fix: "Ladda mer" tar inte hänsyn till offline-filter
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Fix: Inventarie med spårbara inte laddat vid loggning av en cache
+
+##
+- Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
+- Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
 
 
 

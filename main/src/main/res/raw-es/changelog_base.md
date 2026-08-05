@@ -1,102 +1,80 @@
-### Notas de la actualización
+### Aviso de deprecación de mapas "antiguos" & UnifiedMap hoja de ruta
+c:geo tiene una implementación de mapa completamente nueva llamada "UnifiedMap" desde un tiempo, que reemplazará en última instancia las viejas implementaciones de Google Maps y Mapsforge (OpenStreetMap). Este es un aviso de deprecación para informarle acerca de la nueva hoja de ruta.
 
-**De borde a borde**
-
-Debido a las políticas de Play Store hemos actualizado la versión de la API de Android en esta versión de c:geo targets + hemos cambiado algunas de las rutas de diseño de pantalla. Esto podría producir efectos secundarios no deseados, especialmente en las versiones más recientes de Android. Si experimenta algún problema con esta versión de c:geo, por favor informe ya sea en [GitHub](https://github.com/cgeo/cgeo) o por correo electrónico a [support@cgeo.org](mailto:support@cgeo.org)
-
-**Mapas antiguos**
-
-Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente hemos eliminado los mapas antiguos. Cambiarás al nuevo UnifiedMap automáticamente y no deberías notar diferencias excepto un par de nuevas opciones, algunas de las cuales son
+UnifiedMap se publicó hace aproximadamente un año. Todavía soporta Google Maps y OpenStreetMap (online + offline), pero de una manera técnica completamente reelaborada y con muchas nuevas características emocionantes que los "antiguos" mapas no soportan, algunas de las cuales son
 - Mapa de rotación para mapas basados en OpenStreetMap (online + offline)
 - Popup de cluster para Google Maps
 - Ocultar fuentes de mapa que no necesitas
 - Gráfico de reconocimiento de rutas y pistas
 - Cambiar entre listas directamente desde el mapa
 - "Modo de conducción" para mapas basados en OpenStreetMap
-- Mantén pulsado en los tracks/rutas individuales para ver más opciones
+
+UnfiedMap ha demostrado ser estable desde hace algún tiempo, por lo que eliminaremos las implementaciones de mapas antiguas para reducir los esfuerzos de mantenimiento de c:geo.
+
+Hoja de Ruta:
+- Los mapas "Antiguos" están ahora en modo de deprecación - ya no arreglaremos errores para ellos.
+- UnifiedMap será la elección por defecto para todos los usuarios en otoño de 2025.
+- Las implementaciones de mapas "Antiguos" se eliminarán en la primavera de 2026.
+
+Hasta entonces, puede cambiar entre las diferentes implementaciones en ajustes => fuentes de mapas.
 
 ### UnifiedMap
-- Nuevo: Optimización del calculo de rutas de cachés
-- Nuevo: Activar el modo live (en vivo) mantiene visibles los waypoints del objetivo actual
-- Nuevo: Un toque largo en la línea de navegación abre el mapa de terreno (UnifiedMap)
-- Nuevo: Mostrar waypoints generados en el mapa
-- Nuevo: Descargar cachés ordenados por distancia
-- Corregido: Duplicación de elementos de ruta individuales
-- Nuevo: Soporte para el tema Motorider (solo VTM)
-- Nuevo: proveedor de baldosas NoMap (no mostrar mapa, solo cachés etc.)
-- Cambio: Distancia máxima para conectar puntos en el historial bajados a 500m (configurable)
-- Nuevo: Ahora se permite importar archivos KML como rutas (ej: Itinerario de rastreables)
-- Nuevo: Ahora se puede definir el icono del caché aunque aún no esté almacenado
-- Nuevo: Caja de información para los gráficos de elevación mostrando distancia restante en subida y en descenso
-- Nuevo: Mostrar coordenadas de los puntos de referencia en el pop-up
-- Corregido: Los ajustes de búsqueda rápida del mapa podrán mostrar los botones "1"/"2" para perfiles de enrutamiento vacíos después de cambiar de idioma
-- Nuevo: Cálculo de los datos de elevación faltantes en rutas importadas (Si se descargan los datos de elevación)
-- Corregido: El descargador de teselas ya no para bajo ciertas condiciones (OpenStreetMap mapas online)
-- Nuevo: Marcadores de cachés condicionales
-- Nuevo: Mostrar pista de navegación (flecha + distancia)
+- Nuevo: Mostrar perímetros de respuesta para etapas de Adventure Labs (UnifiedMap) - habilite "Círculos" en los ajustes rápidos del mapa para mostrarlos
+- Nuevo: Opción para establecer círculos con radio individual para puntos adicionales (opción de menú contextual "perímetro de respuesta")
+- Corregido: La vista del mapa no se actualiza al eliminar la caché de la lista actual
+- Corregido: Número de caché en el selector de lista no actualizaba al cambiar el contenido de la lista
+- Cambio: Se mantendrá la vista actual al mapear una lista, si todos los cachés entran en la vista actual
+- Nuevo: Sigue mi ubicación en el gráfico de elevación (UnifiedMap)
+- Nuevo: Activar las acciones "mover a" / "copiar a" para "mostrar como lista"
+- Nuevo: Soporte para el tema Elevate Winter en el descargador de mapas
+- Nuevo: Sombreado de relieve adaptativo, modo opcional de alta calidad (UnifiedMap Mapsforge)
+- Nuevo: Rediseño del diálogo de ajustes rápidos de rutas/pistas
+- Nuevo: Pulsación larga en el icono de selección de mapa para seleccionar el proveedor de teselas anterior (UnifiedMap)
+- Nuevo: Permite configurar el nombre de los mapas sin conexión en el archivo complementario (UnifiedMap)
+- Nuevo: Pulsación larga en "botón activar en vivo" para cargar cachés sin conexión
+- Nuevo: Sombreado de relieve sin conexión para UnifiedMap (variante VTM)
+- Nuevo: Soporte para mapas en segundo plano (UnifiedMap)
+- Corregido: Iconos compactos que no regresan a su tamaño grande al acercarse de modo automático (UnifiedMap)
+- Nuevo: Acciones con pulsaciones largas en la hoja de información del caché: código GC, título del caché, coordenadas, notas personales/pista
+- Cambio: Cambia el toque largo en la hoja de información del caché para el selector de emojis por un toque corto para resolver la colisión
 
 ### Detalles del caché
-- Nuevo: Detectar caracteres adicionales en fórmulas: –, ⋅, ×
-- Nuevo: Se preservará la hora y día de los registros propios al actualizar un caché
-- Nuevo: Opcional mini vista de la brújula (ver configuración => detalles del caché => Mostrar dirección en los detalles del caché)
-- Nuevo: Se mostrarán los registros de los propietarios en la pestaña "amigos/propios"
-- Cambio: La pestaña "amigos/propios" muestra el contador de registros para esa pestaña en lugar de los contadores globales
-- Cambio: Cabecera mejorada en las pestañas de variables y waypoints
-- Corregido: Se mostrarán dos elementos de "borrar registro"
-- Corregido: La aplicación de c:geo ya no se detiene en los detalles del caché al girar la pantalla
-- Cambio: Diseño más compacto para "añadir nuevo waypoint"
-- Nuevo: Opción de cargar imágenes para cachés de geocaching.com en tamaño "sin cambios"
-- Nuevo: La vista de variables puede ser filtrada
-- Nuevo: Visualiza las coordenadas calculadas que exceden los límites en la lista de puntos de referencia
-- Nuevo: Opción de marcar los puntos de referencia como visitados en la lista de puntos de referencia
-- Nuevo: Elementos de relleno para registro de rastreables (Nombre, GC, usuario)
-- Cambio: Eliminado el enlace al ejecutador desfasado de WhereYouGo. El ejecutador de wherigos integrado se usará por defecto.
-- Corregido: El botón faltante de activación/desactivación del modo guiado en el calculador de puntos de referencia
-- Nuevo: Agregadas funciones con soporte de intervalo: sum/suma, min/mínimo, max/máximo, cnt/cuenta, med/media, multiplicar/produto/prod
-- Corregido: El incorrecto manejo del estado de DNF para las plataformas de opencaching
-- Nuevo: Borrar registro sin conexión después de fusionar con el log en línea
-- Nuevo: Mostrar confirmación cuando se eliminan cachés con registros sin conexión
-- Nuevo: Mostrar confirmación cuando se borran todos los cachés de la lista "Todos"
-- Nuevo: Se permite el formato Markdown para el texto de la descripción en cachés definidos por el usuario
-- Cambio: Almacena el caché antes de añadir la imagen del usuario
-- Corregido: Fallo en las imágenes que cargan directamente incrustadas en la descripción
-- Nuevo: Muestra tus propios favoritos en la vista del registro (Geocaching.com + registros sin conexión)
-- New: Sending log is done in background
+- Nuevo: Traducción sin conexión del texto de los listados y registros (experimental)
+- Nuevo: Opción para compartir cachés con datos de usuario (coordenadas, notas personales)
+- Corregido: Servicio de voz interrumpido al rotar la pantalla
+- Corregido: Detalles del caché: Listas de cachés no actualizadas después de tocar en el nombre de la lista y eliminando ese caché de esa lista
+- Corregido: La nota del usuario se pierde al actualizar un Adventure Lab
+- Cambio: Los marcadores de posición relacionados con fecha de registro usarán la fecha elegida en lugar de la fecha actual
+- Nuevo: Las entradas de registro largas se colapsarán por defecto
 
 ### Ejecutador de Wherigos
-- Nuevo: Traducción sin conexión para Wherigos
-- Nuevo: Manejo de botones mejorado
-- Nuevo: Estado del autoguardado
-- Nuevo: Opción de crear un acceso directo al ejecutador de wherigos en la pantalla principal del teléfono
-- Fix: Missing/wrong media files lead to error
+- Nuevo: Comprobación de credenciales faltantes integrada en el Ejecutador de Wherigos
+- Cambio: Eliminado informe de error Wherigo (ya que los errores están en su mayoría relacionados con cartuchos, necesitan ser corregidos por el propietario de cartucho)
+- Nuevo: Posibilidad de navegar a una zona usando la brújula
+- Nuevo: Posibilidad de copiar las coordenadas del centro de zona al portapapeles
+- Nuevo: Establecer el centro de zona como objetivo al abrir el mapa (para obtener información de ruta e información de distancia hacia él)
+- Nuevo: Soporte para abrir archivos locales de Wherigo
+- Cambio: Ya no se reconocen pulsaciones largas en una zona del mapa. Esto permite a los usuarios hacer otras cosas en el área de la zona del mapa disponible con toques largos, por ejemplo: crear un caché definido por el usuario
+- Nuevo: Mostrar advertencia si wherigo.com informa de que falta el EULA (lo que conduce a una descarga fallida de cartucho)
 
 ### General
-- Nuevo: Opción de compartir después de registrar un caché
-- Cambio: No mostrar las opciones "Necesita atención del propietario" o "Necesita atención del revisor" para cachés propios
-- Corregido: Restaurar una copia de seguridad puede duplicar archivos de almacenamiento interno y copias de seguridad posteriores
-- Cambio: Referencias eliminadas a Twitter
-- Nuevo: Borrar archivos huérfanos al limpiar y restaurar la copia de seguridad
-- Nuevo: Advertencia al intentar añadir demasiados cachés a una lista de marcadores
-- Nuevo: Opción de añadir/no añadir una lista a seguimiento
-- Nuevo: Ofrecer traducción sin conexión con las aplicaciones Google Translate o DeepL (si están instaladas)
-- Nuevo: Borrar elementos del historial de búsqueda
-- Cambio: GCVote eliminado (servicio interrumpido)
-- Nuevo: Barra de herramientas coloreada la página de detalles del caché
-- Nuevo: Selecciona múltiples listas de marcadores / pocket queries para descargar
-- Nuevo: Previsualiza listas de marcadores
-- Cambio: Incremento de la versión mínima requerida de Android a Android 8
-- Nuevo: Botones rápidos predeterminados para nuevas instalaciones
-- Corregido: Títulos cortados en el diálogo de inserción de datos
-- Corregido: Notificación de actualización de la versión nocturna de la variante FOSS apuntaba al APK normal
-- Nuevo: Opción "Ignorar año" para los filtros de fechas
-- Nuevo: URI remoto ahora es pulsable en las descargas pendientes
-- Cambio: Uso de los ajustes del sistema como tema predeterminado en nuevas instalaciones
-- Novo: Exportación GPX: Añadidas anotaciones GSAK "Lat/LonBeforeCorrect" en la exportación de puntos adicionales originales
-- Nuevo: Mostrar barra para deshacer cuando se borran cachés en una lista desde un mapa
-- Corregido: Detención en el filtro de porcentaje de favoritos
-- Nuevo: Ahora es más fácil utilizar listas simples como listas principales
-- Cambio: Uso de la zona horaria local (de dispositivo, no de evento) para las entradas del calendario (en lugar de UTC)
-- Corregido: Algunos textos ignoraban el cambio de idioma
-- Corregir: "Usar ajustes imperiales" no inicializaba correctamente en instalaciones nuevas
-- Cambio: Bergamot módulo de traducción sin conexión de código abierto reemplazando al traductor de Google ML Kit de código cerrado
-- Cambio: Nuevo selector de emojis
+- Nuevo: Página de búsqueda rediseñada
+- Nuevo: Filtro de recuento de inventario
+- Nuevo: Soporte para coordenadas en formato DD, DDDDDD
+- Nuevo: Mostrar el último nombre de filtro usado en el filtro de diálogo
+- Nuevo: Calculadora de coordenadas: Función para reemplazar "x" con el símbolo de multiplicación
+- Corregido: Altitud incorrecta (no usando la media sobre el nivel del mar)
+- Corregido: El ajuste del límite de distancia cercano no funcionaba correctamente para valores pequeños
+- Corregido: Ordenar las listas de cachés por distancia descendente no funcionaba correctamente
+- Corregido: Cachés Adventure Lab excluidos en el filtro D/T incluso con "incluir incierto" activo
+- Corregido: Problemas de color con los iconos de menú en modo claro
+- Nuevo: Añadir "Eliminar eventos pasados" a la lista "todos"
+- Nuevo: Mostrar conector para "cachés definidos por el usuario" como activos en el filtro de origen
+- Nuevo: Exporte de GPX: exportación de registros / rastreables ahora es opcional
+- Nuevo: Botón añadido para eliminar plantillas de registro
+- Corregido: Importar archivo de mapa local obtiene un nombre aleatorio para el mapa
+- Corregido: El descargador de mapas ofrece archivos rotos (0 bytes) para descargar
+- Nuevo: Se añadieron mapeados para algunos tipos de cachés OC faltantes
+- Nuevo: Mover listas "usadas recientemente" en el diálogo de selección a la parte superior pulsando el botón "usado recientemente"
+- Nuevo: Compartir lista de geocódigos de la lista de cachés
+- Cambio: "Navegación (coche)" etc. usará el parámetro "q=" en lugar del parámetro "ll=" obsoleto

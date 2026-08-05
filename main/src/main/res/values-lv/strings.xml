@@ -143,7 +143,8 @@
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_titleprefix">Attēls</string>
     <!-- Contacts -->
-    <!-- External translation -->
+    <!-- translation -->
+    <string name="translate_length_warning">Tulkojums var neizdoties liela teksta apjoma dēļ.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
@@ -220,6 +221,9 @@
     <string name="err_read_pocket_query_list">Kļūda nolasot slēpņu atlašu (PQ) sarakstu.</string>
     <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
     <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
+    <string name="info_log_post_failed">Ieraksta publicēšana neizdevās.</string>
+    <string name="info_log_post_retry">Mēģināt vēlreiz</string>
+    <string name="info_log_post_save">Saglabāt bezsaistes režīmā</string>
     <string name="info_log_cleared">Ieraksts tika dzēsts.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinātas nodzēstas.</string>
     <string name="info_log_type_changed">Pieraksta tips tika mainīts!</string>
@@ -234,6 +238,9 @@
     <string name="more_information">Vairāk informācijas</string>
     <string name="undo">Atcelt</string>
     <string name="dont_show_again">Vairs nerādīt</string>
+    <string name="warn_gm_not_available">Google Maps nav pieejams.</string>
+    <string name="switch_to_mf">Tava Google Play Service versija ir novecojusi. Vai vēlies tā vietā pārslēgties uz Mapsforge karšu sniedzēju?</string>
+    <string name="switched_to_mf">Noklusējuma kartes pārslēgtas uz Mapsforge. Tagad pārstartējiet savu karti.</string>
     <!-- location service -->
     <string name="loc_last">Pēdējais zināmais</string>
     <string name="loc_net">Tīkls</string>
@@ -325,7 +332,6 @@
     <string name="list_dialog_rename">Pārdēvēt</string>
     <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
     <!-- caches lists filter -->
-    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Izmaiņas</string>
@@ -407,7 +413,9 @@
     <string name="init_summary_oc_uk">Ielādēt slēpņus no opencache.uk</string>
     <string name="init_oc_uk_description">Atļaut c:geo un opencaching.us meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
     <string name="init_summary_su">Ielādēt slēpņus no Geocaching.su</string>
+    <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, tev jāseko instrukcijām GCVote.com mājas lapā un jāievada sava GCVote parole šeit.</string>
     <string name="err_vote_send_rating">Ir notikusi kļūme sūtot vērtējumu.</string>
+    <string name="vote_sent">Novērtējums ir sekmīgi nosūtīts</string>
     <string name="init_login_popup">Pieteikšanās</string>
     <string name="init_login_popup_working">Piesakās sistēmā…</string>
     <string name="init_login_popup_ok">Pieteikšanās izpildīta veiksmīgi</string>
@@ -434,6 +442,8 @@
     <string name="init_signature_template_log">Ieraksta teksts</string>
     <string name="init_signature_template_size">Izmērs</string>
     <string name="init_signature_template_type">Pēc tipa</string>
+    <string name="init_ratingwanted">GCvote reitings</string>
+    <string name="init_summary_ratingwanted">Ielādēt slēpņu novērtējumus no GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rādīt draugu / savus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rādīt papildu lapu ar draugu un saviem apmeklējuma ierakstiem</string>
     <string name="init_openlastdetailspage">Pēdējā atvērtā sadaļa</string>
@@ -553,6 +563,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satelīta karte</string>
+    <string name="map_source_osm_offline">Bezsaistes režīmā</string>
     <string name="map_source_osm_offline_combined">Apvienota (Bezsaistes)</string>
     <string name="init_sendToCgeo">Sūtīt uz c:geo</string>
     <string name="settings_info_send2cgeo_title">Info par send2cgeo</string>
@@ -649,6 +660,7 @@
     <string name="cache_list_select_last">Iepriekšējā atlase</string>
     <string name="cache_images">Attēli</string>
     <string name="cache_waypoints">Starpposmi</string>
+    <string name="cache_waypoints_add_currentLocation">Pievienot pašreizējo atrašanās vietu</string>
     <string name="cache_waypoints_add_fromclipboard">Pievienot no starpliktuves (clipboard)</string>
     <string name="cache_hint">Mājiens</string>
     <string name="cache_hint_not_available">Nekādi mājieni nav pieejami</string>
@@ -660,6 +672,7 @@
     <string name="cache_dialog_loading_details_status_spoilers">Ielādē \"spoiler\" attēlus</string>
     <string name="cache_dialog_loading_details_status_logs">Ielādē ierakstus</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apstrādā starpposmus</string>
+    <string name="cache_dialog_loading_details_status_gcvote">Ielādē GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
     <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
     <string name="cache_dialog_offline_save_title">Bezsaistes režīmā</string>
@@ -695,6 +708,7 @@
     <string name="cache_menu_copy_list">Kopēt uz citu sarakstu</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (tiešsaistes)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (bezsaistes)</string>
+    <string name="cache_menu_vote">Balsot</string>
     <string name="cache_menu_challenge_checker">Meklēt izaicinājuma (challenge cache) pārbaudītāju</string>
     <string name="cache_menu_ignore">Ignorēt slēpni</string>
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
@@ -736,6 +750,8 @@
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
     <string name="cache_listed_on">Publicēts %s</string>
+    <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
+    <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\"Iet uz\" (\'Go to\') mērķi</string>
@@ -743,7 +759,7 @@
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
     <!-- html styles -->
-    <!-- coordinate input dialog -->
+    <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grādi</string>
     <string name="cc_hint_minutes">minūtes</string>
     <string name="cc_hint_seconds">sekundes</string>
@@ -1249,4 +1265,5 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

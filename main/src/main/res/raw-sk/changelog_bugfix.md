@@ -1,10 +1,6 @@
 ##
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
-- Fix: Cannot upload changed coordinates (website change)
-- Fix: Cannot upload personal notes (website change)
-
-##
 - Fix: Cache/waypoint popup opening delayed on some devices
 - Fix: Edit cache description does not support copy & paste
 - Fix: Some crashes and "app not responding"
@@ -53,8 +49,8 @@ Note: If you are using internal routing, you will need to execute the following 
 - Fix: Viewing trackable details removes it from cache inventory
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
+- Oprava: Dialógové okno na stiahnutie offline prekladu sa zobrazovalo v inštaláciách bez podpory offline prekladu
+- Oprava: Zmena formátu súradníc v informačnom hárku kešky/bodu trasy
 - Fix: Log date cut off in list of logs (depending on date format and font size)
 - Fix: Event times not detected in certain conditions
 - Fix: Link in listing not clickable under certain conditions

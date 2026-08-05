@@ -143,7 +143,8 @@
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
-    <!-- External translation -->
+    <!-- translation -->
+    <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
@@ -220,6 +221,9 @@
     <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
     <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
     <string name="info_log_saved">c:geo huet de Log erfollegräich gespäichert.</string>
+    <string name="info_log_post_failed">Publizéieren vum Log feelgeschloen.</string>
+    <string name="info_log_post_retry">Nees probéieren</string>
+    <string name="info_log_post_save">Offline späicheren</string>
     <string name="info_log_cleared">Log ass geläscht.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaten si geläscht.</string>
     <string name="info_log_type_changed">Den Typ vu Log huet geännert!</string>
@@ -234,6 +238,9 @@
     <string name="more_information">weider Informatiounen</string>
     <string name="undo">Réckgängeg</string>
     <string name="dont_show_again">Net méi uweisen</string>
+    <string name="warn_gm_not_available">Google Maps ass net verfügbar.</string>
+    <string name="switch_to_mf">De Google Play Service ass veraltert. Wëlls du op Mapsforge Kaarten ëmschalten?</string>
+    <string name="switched_to_mf">D\'Standard Kaart gouf op d\'Mapsforge Kaart ëmgeschalt. D\'Kaart wgl. nees nei starten.</string>
     <!-- location service -->
     <string name="loc_last">Läscht Positioun</string>
     <string name="loc_net">Netzwierk</string>
@@ -324,7 +331,6 @@
     <string name="list_dialog_rename">Ëmbenennen</string>
     <string name="list_not_available">D\'Lëscht ass net méi disponibel. D\'Standard-Lëscht gëtt nees agefouert</string>
     <!-- caches lists filter -->
-    <!-- named filter activity -->
     <!-- about -->
     <string name="about_version">Versioun</string>
     <string name="about_changelog">Ännerungshiwäiser</string>
@@ -404,7 +410,9 @@
     <string name="init_summary_oc_uk">Cachen vun opencaching.uk lueden</string>
     <string name="init_oc_uk_description">c:geo erlaben op opencaching.uk zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="init_summary_su">Cachen vu Geocaching.su lueden</string>
+    <string name="init_gcvote_password_description">Fir ee Cache bewäerten ze kënnen, folleg d\'Uleedung op GCVote.com a tipp däin GCVote-Passwort hei.</string>
     <string name="err_vote_send_rating">Feeler beim Verschécken vun der Bewäertung.</string>
+    <string name="vote_sent">Bewäertung erfollegräich verschéckt</string>
     <string name="init_login_popup">Umellen</string>
     <string name="init_login_popup_working">Umeldung…</string>
     <string name="init_login_popup_ok">Umellen OK</string>
@@ -431,6 +439,8 @@
     <string name="init_signature_template_log">Log Text</string>
     <string name="init_signature_template_size">Gréisst</string>
     <string name="init_signature_template_type">Typ</string>
+    <string name="init_ratingwanted">GCVote-Bewäertung</string>
+    <string name="init_summary_ratingwanted">Cache-Bewertung vu GCVote.com lueden</string>
     <string name="init_friends_and_own_logs_wanted">Eegen Logs a Logs vu Frënn uweisen</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zousätzlech Logbuchsäite fir Logs vun dir an denge Frënn uweisen</string>
     <string name="init_openlastdetailspage">Detailer uweisen vun der leschter Säit déi besicht gouf</string>
@@ -485,7 +495,7 @@
     <!-- days remaining -->
     <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
-    <!-- coordinate input dialog -->
+    <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
     <!-- popup -->
@@ -575,4 +585,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
