@@ -178,22 +178,22 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         // Save as Named Filter button
         binding.filterSaveAsNamed.setOnClickListener(v -> {
             SimpleDialog.of(this).setTitle(R.string.named_filter_save_as_title)
-                    .inputWithParent(new SimpleDialog.InputOptions(), FilterUtils.getNamedFilterGroups(), name -> {
+                    .inputWithParent(new SimpleDialog.InputOptions().setDefaultIconRes(R.drawable.ic_menu_filter), FilterUtils.getNamedFilterGroups(), (name, marker) -> {
                         if (name == null || name.trim().isEmpty()) {
                             return;
                         }
                         if (NamedFilter.nameExists(name)) {
                             SimpleDialog.of(this).setTitle(R.string.named_filter_name_exists_title)
                                     .setMessage(R.string.named_filter_name_exists_message, name)
-                                    .confirm(() -> saveViewAsNewNamedFilter(name));
+                                    .confirm(() -> saveViewAsNewNamedFilter(name, marker));
                         } else {
                             final NamedFilter existing = NamedFilter.filterConfigExists(getFilterFromView());
                             if (existing != null) {
                                 SimpleDialog.of(this).setTitle(R.string.named_filter_config_exists_title)
                                         .setMessage(R.string.named_filter_config_exists_message, existing.getName())
-                                        .confirm(() -> saveViewAsNewNamedFilter(name));
+                                        .confirm(() -> saveViewAsNewNamedFilter(name, marker));
                             } else {
-                                saveViewAsNewNamedFilter(name);
+                                saveViewAsNewNamedFilter(name, marker);
                             }
                         }
                     });
@@ -206,9 +206,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         ViewUtils.setTooltip(binding.filterOpenNamedFilterActivity, TextParam.id(R.string.named_filter_activity_title));
     }
 
-    private void saveViewAsNewNamedFilter(final String newName) {
+    private void saveViewAsNewNamedFilter(final String newName, @Nullable final String markerId) {
         adjustNamedFilterReferenceViewFor(null);
-        final NamedFilter newNamedFilter = NamedFilter.addNew(newName, getFilterFromView());
+        final NamedFilter newNamedFilter = NamedFilter.addNew(newName, getFilterFromView(), markerId);
         adjustNamedFilterReferenceViewFor(newNamedFilter);
     }
 

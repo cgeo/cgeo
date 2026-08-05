@@ -5,16 +5,19 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.InputWithParentDialogBinding;
 import cgeo.geocaching.databinding.SimpleDialogTitleViewBinding;
 import cgeo.geocaching.databinding.SimpleDialogViewBinding;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -25,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -35,14 +39,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Builder-like class for simple dialogs based on {@link AlertDialog}.
@@ -152,6 +159,8 @@ public class SimpleDialog {
         private String allowedChars = null;
         private String hint = null;
         private int maxAllowedLength = 0;
+        private String initialMarker = null;
+        private int defaultIconRes = R.drawable.ic_menu_list;
 
         /** input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed */
         public InputOptions setInputType(final int inputType) {
@@ -207,6 +216,18 @@ public class SimpleDialog {
          */
         public InputOptions setInitialParent(final String initialParent) {
             this.initialParent = initialParent;
+            return this;
+        }
+
+        /** pre-selects the icon/emoji marker shown left of the name field in {@link #inputWithParent}; null/empty means "no marker" */
+        public InputOptions setInitialMarker(@Nullable final String initialMarker) {
+            this.initialMarker = initialMarker;
+            return this;
+        }
+
+        /** icon shown in the marker button when no emoji is selected; use e.g. {@code R.drawable.ic_menu_list} or {@code R.drawable.ic_menu_filter} */
+        public InputOptions setDefaultIconRes(@DrawableRes final int defaultIconRes) {
+            this.defaultIconRes = defaultIconRes;
             return this;
         }
 
@@ -752,9 +773,28 @@ public class SimpleDialog {
                 .collect(Collectors.joining(":"));
     }
 
-    public void inputWithParent(final InputOptions nameOptions, @NonNull final List<String> parentChoices, final Consumer<String> okayListener) {
+    public void inputWithParent(final InputOptions nameOptions, @NonNull final List<String> parentChoices, final BiConsumer<String, String> okayListener) {
         final InputWithParentDialogBinding viewBinding = InputWithParentDialogBinding.inflate(LayoutInflater.from(context));
         setCustomView(viewBinding.getRoot());
+
+        // icon/emoji marker, shown left of the name field
+        final MaterialButton markerButton = viewBinding.inputMarkerButton;
+        final String[] markerHolder = {nameOptions.initialMarker};
+        final ColorStateList defaultIconTint = markerButton.getIconTint();
+        final Runnable applyMarker = () -> {
+            if (StringUtils.isNotBlank(markerHolder[0])) {
+                markerButton.setIcon(ImageParam.emoji(markerHolder[0]).getAsDrawable(context));
+                markerButton.setIconTint(null);
+            } else {
+                markerButton.setIconResource(nameOptions.defaultIconRes);
+                markerButton.setIconTint(defaultIconTint);
+            }
+        };
+        applyMarker.run();
+        markerButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, markerHolder[0], false, null, newMarker -> {
+            markerHolder[0] = newMarker;
+            applyMarker.run();
+        }));
 
         final String noneLabel = LocalizationUtils.getString(R.string.init_custombnitem_none);
         final List<String> allChoices = new ArrayList<>();
@@ -858,7 +898,7 @@ public class SimpleDialog {
                 }
                 final String effectiveParent = getEffectiveParent(parentSelect, newParentView, newParentRow, noneLabel);
                 final String fullName = effectiveParent.isEmpty() ? name : effectiveParent + ":" + name;
-                okayListener.accept(fullName);
+                okayListener.accept(fullName, markerHolder[0]);
                 dialog.dismiss();
                 return true;
             }

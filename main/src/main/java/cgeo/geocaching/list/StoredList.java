@@ -36,6 +36,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -325,13 +326,14 @@ public final class StoredList extends AbstractList {
 
         public void promptForListCreation(@NonNull final Action1<Integer> runAfterwards, final String newListName) {
             // We need to update the list cache by creating a new StoredList object here.
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+            handleListNameInput(newListName, EmojiUtils.NO_EMOJI, R.string.list_dialog_create_title, R.string.list_dialog_create, (listName, marker) -> {
                 final Activity activity = activityRef.get();
                 if (activity == null) {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, false, 0);
+                DataStore.setListEmoji(newId, marker);
+                new StoredList(newId, listName, marker, false, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     runAfterwards.call(newId);
@@ -343,13 +345,14 @@ public final class StoredList extends AbstractList {
 
         public void promptForListCreation(@NonNull final Action1<Set<Integer>> runAfterwards, final Set<Integer> selectedLists, final String newListName) {
             // We need to update the list cache by creating a new StoredList object here.
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+            handleListNameInput(newListName, EmojiUtils.NO_EMOJI, R.string.list_dialog_create_title, R.string.list_dialog_create, (listName, marker) -> {
                 final Activity activity = activityRef.get();
                 if (activity == null) {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, false, 0);
+                DataStore.setListEmoji(newId, marker);
+                new StoredList(newId, listName, marker, false, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     selectedLists.remove(PseudoList.NEW_LIST.id);
@@ -362,7 +365,7 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        private void handleListNameInput(final String defaultValue, final int dialogTitle, final int buttonTitle, final Action1<String> runnable) {
+        private void handleListNameInput(final String defaultValue, @Nullable final String initialMarker, final int dialogTitle, final int buttonTitle, final BiConsumer<String, String> runnable) {
             final Activity activity = activityRef.get();
             if (activity == null) {
                 return;
@@ -373,7 +376,7 @@ public final class StoredList extends AbstractList {
             final String oldPrefixWithoutSeparator = Strings.CS.endsWith(oldPrefix, GROUP_SEPARATOR)
                     ? oldPrefix.substring(0, oldPrefix.length() - 1) : oldPrefix;
 
-            final SimpleDialog.InputOptions options = new SimpleDialog.InputOptions().setInitialValue(current);
+            final SimpleDialog.InputOptions options = new SimpleDialog.InputOptions().setInitialValue(current).setInitialMarker(initialMarker).setDefaultIconRes(R.drawable.ic_menu_list);
             if (defaultValue != null) {
                 // rename mode: OK is only enabled when something changed
                 options.setInitialParent(oldPrefixWithoutSeparator);
@@ -382,14 +385,14 @@ public final class StoredList extends AbstractList {
             SimpleDialog.of(activity)
                     .setTitle(TextParam.id(dialogTitle))
                     .setPositiveButton(TextParam.id(buttonTitle))
-                    .inputWithParent(options, DataStore.getListHierarchy(),
-                            fullName -> runnable.call(fullName));
+                    .inputWithParent(options, DataStore.getListHierarchy(), runnable);
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
             final StoredList list = DataStore.getList(listId);
-            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, listName -> {
+            handleListNameInput(list.title, list.emojiMarker, R.string.list_dialog_rename_title, R.string.list_dialog_rename, (listName, marker) -> {
                 DataStore.renameList(listId, listName);
+                DataStore.setListEmoji(listId, marker);
                 runAfterRename.run();
             });
         }
