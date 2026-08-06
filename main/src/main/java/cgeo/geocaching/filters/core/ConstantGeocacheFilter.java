@@ -10,15 +10,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ConstantGeocacheFilter extends BaseGeocacheFilter {
 
-    public static final ConstantGeocacheFilter ALWAYS_TRUE = new ConstantGeocacheFilter(true);
-    public static final ConstantGeocacheFilter ALWAYS_FALSE = new ConstantGeocacheFilter(false);
-    public static final ConstantGeocacheFilter ALWAYS_NULL = new ConstantGeocacheFilter(null);
+    public static final ConstantGeocacheFilter ALWAYS_TRUE = new ConstantGeocacheFilter(true, GeocacheFilterType.ALWAYS_TRUE);
+    public static final ConstantGeocacheFilter ALWAYS_FALSE = new ConstantGeocacheFilter(false, GeocacheFilterType.ALWAYS_FALSE);
+    public static final ConstantGeocacheFilter ALWAYS_NULL = new ConstantGeocacheFilter(null, GeocacheFilterType.ALWAYS_NULL);
 
 
     private final Boolean value;
 
-    private ConstantGeocacheFilter(final Boolean value) {
+    private ConstantGeocacheFilter(final Boolean value, final GeocacheFilterType type) {
         this.value = value;
+        setType(type);
     }
 
     @Override

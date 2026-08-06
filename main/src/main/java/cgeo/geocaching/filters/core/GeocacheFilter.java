@@ -288,19 +288,9 @@ public class GeocacheFilter implements Cloneable {
             return null;
         };
         if (this.getTree() != null) {
-            final IGeocacheFilter simplifiedTree = this.getTree().simplify(function);
-            // ALWAYS_TRUE does not impose a search restriction and must not be passed to connectors as a basic filter.
-            // ALWAYS_FALSE is kept as a marker so connectors can skip the search altogether.
-            if (simplifiedTree != ConstantGeocacheFilter.ALWAYS_TRUE) {
-                getAndChainIfPossibleInternal(simplifiedTree, result);
-            }
+            getAndChainIfPossibleInternal(this.getTree().simplify(function), result);
         }
         return result;
-    }
-
-    /** Returns whether an AND chain signals that no cache can match for the requested connector. */
-    public static boolean isAlwaysFalse(final List<BaseGeocacheFilter> filters) {
-        return filters.contains(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
     /**
@@ -413,3 +403,4 @@ public class GeocacheFilter implements Cloneable {
     }
 
 }
+

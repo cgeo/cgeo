@@ -104,26 +104,10 @@ public class GeocacheFilterTest {
     }
 
     @Test
-    public void andChainOmitsAlwaysTrueResult() {
-        final GeocacheFilter filter = GeocacheFilter.create(false, false, and(
-                GeocacheFilterType.TYPE.create(),
-                GeocacheFilterType.DIFFICULTY_TERRAIN.create(),
-                GeocacheFilterType.STATUS.create()));
-
-        final List<BaseGeocacheFilter> chain = filter.getAndChainIfPossible(null);
-
-        assertThat(chain).isEmpty();
-        assertThat(GeocacheFilter.isAlwaysFalse(chain)).isFalse();
-    }
-
-    @Test
-    public void andChainPreservesAlwaysFalseResult() {
-        final GeocacheFilter filter = GeocacheFilter.create(false, false, ConstantGeocacheFilter.ALWAYS_FALSE);
-
-        final List<BaseGeocacheFilter> chain = filter.getAndChainIfPossible(null);
-
-        assertThat(chain).containsExactly(ConstantGeocacheFilter.ALWAYS_FALSE);
-        assertThat(GeocacheFilter.isAlwaysFalse(chain)).isTrue();
+    public void constantFiltersHaveTypes() {
+        assertThat(ConstantGeocacheFilter.ALWAYS_TRUE.getType()).isEqualTo(GeocacheFilterType.ALWAYS_TRUE);
+        assertThat(ConstantGeocacheFilter.ALWAYS_FALSE.getType()).isEqualTo(GeocacheFilterType.ALWAYS_FALSE);
+        assertThat(ConstantGeocacheFilter.ALWAYS_NULL.getType()).isEqualTo(GeocacheFilterType.ALWAYS_NULL);
     }
 
     // =====================================================================
