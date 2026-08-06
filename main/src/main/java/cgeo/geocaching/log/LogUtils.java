@@ -131,6 +131,12 @@ public final class LogUtils {
         LogCacheActivity.startForEdit(activity, cache.getGeocode(), entry);
     }
 
+    // Offline log drafts are stored verbatim; trim leading/trailing whitespace only here, right before a log is uploaded or exported (#6631).
+    @NonNull
+    public static String trimForPublishing(@Nullable final String log) {
+        return StringUtils.trimToEmpty(log);
+    }
+
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
     public static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
@@ -141,9 +147,10 @@ public final class LogUtils {
                 final ILoggingManager loggingManager = cache.getLoggingManager();
                 final IConnector cacheConnector = loggingManager.getConnector();
 
-                //Upload new log entry
+                //Upload new log entry (trim the log only now, right before publishing; the offline draft stays verbatim - #6631)
                 progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
-                final LogResult logResult = loggingManager.createLog(logEntry, inventory);
+                final OfflineLogEntry logEntryToUpload = logEntry.buildUponOfflineLogEntry().setLog(trimForPublishing(logEntry.log)).build();
+                final LogResult logResult = loggingManager.createLog(logEntryToUpload, inventory);
                 if (!logResult.isOk()) {
                     return logResult;
                 }
