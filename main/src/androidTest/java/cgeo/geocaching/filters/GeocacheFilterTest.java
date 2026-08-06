@@ -40,12 +40,12 @@ import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
 
+import androidx.core.util.Pair;
+
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -98,7 +98,7 @@ public class GeocacheFilterTest {
     @Test
     public void genericEmptyFilter() throws ParseException {
 
-        final IGeocacheFilter filterTree = new AndGeocacheFilter();
+        final IGeocacheFilter filterTree = AndGeocacheFilter.create();
         for (GeocacheFilterType type : GeocacheFilterType.values()) {
             filterTree.addChild(type.create());
         }
@@ -109,8 +109,8 @@ public class GeocacheFilterTest {
 
     @Test
     public void genericFilledFilter() throws ParseException {
-
-        final IGeocacheFilter filterTree = new AndGeocacheFilter();
+        
+        final IGeocacheFilter filterTree = AndGeocacheFilter.create();
         for (GeocacheFilterType type : GeocacheFilterType.values()) {
             filterTree.addChild(getFilledInstance(type));
         }
@@ -132,104 +132,85 @@ public class GeocacheFilterTest {
     }
 
     private static IGeocacheFilter getFilledInstance(final GeocacheFilterType type) {
-        final IGeocacheFilter filter = type.create();
         switch (type) {
             case TYPE:
-                ((TypeGeocacheFilter) filter).setValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MYSTERY));
-                break;
+                return TypeGeocacheFilter.create(CacheType.TRADITIONAL, CacheType.MYSTERY);
             case NAME:
-                ((NameGeocacheFilter) filter).getStringFilter().setTextValue("name");
-                break;
+                return NameGeocacheFilter.create("name", false, StringFilter.StringFilterType.CONTAINS);
             case OWNER:
-                ((OwnerGeocacheFilter) filter).getStringFilter().setTextValue("owner");
-                ((OwnerGeocacheFilter) filter).getStringFilter().setMatchCase(true);
-                ((OwnerGeocacheFilter) filter).getStringFilter().setFilterType(StringFilter.StringFilterType.PATTERN);
-                break;
+                return OwnerGeocacheFilter.create("owner", true, StringFilter.StringFilterType.PATTERN);
             case DESCRIPTION:
-                ((DescriptionGeocacheFilter) filter).getStringFilter().setTextValue(null);
-                break;
+                return DescriptionGeocacheFilter.create(null, false, StringFilter.StringFilterType.CONTAINS);
             case SIZE:
-                ((SizeGeocacheFilter) filter).setValues(Collections.singletonList(CacheSize.LARGE));
-                break;
+                return SizeGeocacheFilter.create(CacheSize.LARGE);
             case PERSONAL_NOTE:
-                ((PersonalNoteGeocacheFilter) filter).getStringFilter().setMatchCase(true);
-                break;
+                return PersonalNoteGeocacheFilter.create(null, true, StringFilter.StringFilterType.CONTAINS);
             case DIFFICULTY_TERRAIN:
-                ((DifficultyAndTerrainGeocacheFilter) filter).difficultyGeocacheFilter.setMinMaxRange(1f, 3f);
-                ((DifficultyAndTerrainGeocacheFilter) filter).difficultyGeocacheFilter.setSpecialNumber(0f, true);
-                ((DifficultyAndTerrainGeocacheFilter) filter).terrainGeocacheFilter.setMinMaxRange(null, 4f);
-                break;
+                final DifficultyAndTerrainGeocacheFilter dtFilter = DifficultyAndTerrainGeocacheFilter.create(
+                        Pair.create(1f, 3f),
+                        Pair.create(null, 4f));
+                dtFilter.difficultyGeocacheFilter.setSpecialNumber(0f, true);
+                return dtFilter;
             case DIFFICULTY_TERRAIN_MATRIX:
-                ((DifficultyTerrainMatrixGeocacheFilter) filter).addDtCombi(1f, 4f);
-                ((DifficultyTerrainMatrixGeocacheFilter) filter).addDtCombi(2f, 3f);
-                ((DifficultyTerrainMatrixGeocacheFilter) filter).setIncludeCachesWoDt(false);
-                break;
+                final DifficultyTerrainMatrixGeocacheFilter dtmFilter = DifficultyTerrainMatrixGeocacheFilter.create(
+                        List.of(Pair.create(1f, 4f), Pair.create(2f, 3f)));
+                dtmFilter.setIncludeCachesWoDt(false);
+                return dtmFilter;
             case RATING:
-                ((RatingGeocacheFilter) filter).setMinMaxRange(1f, null);
-                break;
+                return RatingGeocacheFilter.create(1f, null);
             case STATUS:
-                ((StatusGeocacheFilter) filter).setStatusFound(true);
-                ((StatusGeocacheFilter) filter).setExcludeActive(true);
-                ((StatusGeocacheFilter) filter).setStatusHasTrackable(false);
-                break;
+                final StatusGeocacheFilter statusFilter = StatusGeocacheFilter.create(
+                        Collections.singletonList(StatusGeocacheFilter.StatusType.FOUND),
+                        Collections.singletonList(StatusGeocacheFilter.StatusType.HAS_TRACKABLE));
+                statusFilter.setExcludeActive(true);
+                return statusFilter;
             case ATTRIBUTES:
-                final Map<CacheAttribute, Boolean> atts = new HashMap<>();
-                atts.put(CacheAttribute.AIRCRAFT, true);
-                atts.put(CacheAttribute.WADING, false);
-                ((AttributesGeocacheFilter) filter).setAttributes(atts);
-                ((AttributesGeocacheFilter) filter).setInverse(true);
-                ((AttributesGeocacheFilter) filter).setSources(5);
-                break;
+                final AttributesGeocacheFilter attribFilter = AttributesGeocacheFilter.create(
+                        Collections.singletonList(CacheAttribute.AIRCRAFT),
+                        Collections.singletonList(CacheAttribute.WADING));
+                attribFilter.setInverse(true);
+                attribFilter.setSources(5);
+                return attribFilter;
             case OFFLINE_LOG:
-                ((OfflineLogGeocacheFilter) filter).getStringFilter().setTextValue("abc");
-                break;
+                return OfflineLogGeocacheFilter.create("abc", false, StringFilter.StringFilterType.CONTAINS);
             case FAVORITES:
-                ((FavoritesGeocacheFilter) filter).setPercentage(true);
-                break;
+                final FavoritesGeocacheFilter favFilter = type.create();
+                favFilter.setPercentage(true);
+                return favFilter;
             case DISTANCE:
-                ((DistanceGeocacheFilter) filter).setCoordinate(Geopoint.ZERO);
-                ((DistanceGeocacheFilter) filter).setUseCurrentPosition(true);
-                ((DistanceGeocacheFilter) filter).setMinMaxRange(1f, 5f);
-                break;
+                final DistanceGeocacheFilter distFilter = DistanceGeocacheFilter.create(1f, null);
+                distFilter.setCoordinate(Geopoint.ZERO);
+                distFilter.setUseCurrentPosition(true);
+                return distFilter;
             case HIDDEN:
             case EVENT_DATE:
-                ((HiddenGeocacheFilter) filter).setMinMaxDate(new Date(123), new Date(456));
-                ((HiddenGeocacheFilter) filter).setRelativeMinMaxDays(-5, 5);
-                break;
+                final HiddenGeocacheFilter eventDateFilter = HiddenGeocacheFilter.create(new Date(123), new Date(456));
+                eventDateFilter.setRelativeMinMaxDays(-5, 5);
+                return eventDateFilter;
             case LOGS_COUNT:
-                ((LogsCountGeocacheFilter) filter).setLogType(LogType.FOUND_IT);
-                ((LogsCountGeocacheFilter) filter).setMinMaxRange(1, 500);
-                break;
+                return LogsCountGeocacheFilter.create(LogType.FOUND_IT, 1, 500);
             case LAST_FOUND:
-                ((LastFoundGeocacheFilter) filter).setRelativeMinMaxDays(-5, 5);
-                ((LastFoundGeocacheFilter) filter).setMinMaxDate(new Date(123), new Date(456));
-                break;
+                final LastFoundGeocacheFilter lastFoundFilter = LastFoundGeocacheFilter.create(new Date(123), new Date(456));
+                lastFoundFilter.setRelativeMinMaxDays(-5, 5);
+                return lastFoundFilter;
             case LOG_ENTRY:
-                ((LogEntryGeocacheFilter) filter).setInverse(true);
-                ((LogEntryGeocacheFilter) filter).setFoundByUser("user");
-                ((LogEntryGeocacheFilter) filter).setLogText("logtext");
-                break;
+                final LogEntryGeocacheFilter logEntryFilter = LogEntryGeocacheFilter.create("logtext", "user");
+                logEntryFilter.setInverse(true);
+                return logEntryFilter;
             case LOCATION:
-                ((LocationGeocacheFilter) filter).getStringFilter().setTextValue("abc");
-                break;
+                return LocationGeocacheFilter.create("abc", false, StringFilter.StringFilterType.CONTAINS);
             case STORED_LISTS:
-                ((StoredListGeocacheFilter) filter).setFilterLists(Collections.singletonList(DataStore.getLists().get(0)));
-                break;
+                return StoredListGeocacheFilter.create(DataStore.getLists().get(0));
             case ORIGIN:
-                ((OriginGeocacheFilter) filter).setValues(Collections.singletonList(GCConnector.getInstance()));
-                break;
+                return OriginGeocacheFilter.create(GCConnector.getInstance());
             case STORED_SINCE:
-                ((StoredSinceGeocacheFilter) filter).setMinMaxDate(null, new Date(1000));
-                break;
+                return StoredSinceGeocacheFilter.create(null, new Date(1000));
             case CATEGORY:
-                ((CategoryGeocacheFilter) filter).setCategories(Collections.singletonList(Category.BC_GADGET));
-                break;
+                return CategoryGeocacheFilter.create(Category.BC_GADGET);
             case TIER:
-                ((TierGeocacheFilter) filter).setValues(Arrays.asList(Tier.BC_BLUE, Tier.BC_GOLD));
-                break;
+                return TierGeocacheFilter.create(Tier.BC_BLUE, Tier.BC_GOLD);
             case INVENTORY_COUNT:
-                ((InventoryCountFilter) filter).setRangeFromValues(Arrays.asList(), 1, 10);
-                break;
+                return InventoryCountFilter.create(Collections.emptyList(), 1, 10);
             case DIFFICULTY:
             case TERRAIN:
             case INDIVIDUAL_ROUTE:
@@ -238,12 +219,11 @@ public class GeocacheFilterTest {
             case LIST_ID:
             case VIEWPORT:
             case HEALTH_SCORE:
-                // nothing to do
-                break;
+                return type.create();
             default:
                 Assert.fail(String.format("Filter %s missing", type.getTypeId()));
                 break;
         }
-        return filter;
+        return type.create();
     }
 }

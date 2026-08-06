@@ -21,6 +21,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
 
+    public static NamedFilterGeocacheFilter create(final Collection<NamedFilter> namedFilters) {
+        final NamedFilterGeocacheFilter filter = GeocacheFilterType.NAMED_FILTER.create();
+        filter.setNamedFilters(namedFilters);
+        return filter;
+    }
+
+    public static NamedFilterGeocacheFilter create(final NamedFilter... namedFilters) {
+        return create(List.of(namedFilters));
+    }
+
     private final Set<Integer> namedFilterIds = new HashSet<>();
 
     private static final ThreadLocal<Set<Integer>> nestingTracker = new ThreadLocal<>();
@@ -182,8 +192,7 @@ public class NamedFilterGeocacheFilter extends BaseGeocacheFilter {
         if (namedFilterList.size() == 1) {
             return namedFilterList.get(0).simplify(criterion);
         }
-        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
-        orFilter.getChildren().addAll(namedFilterList);
+        final OrGeocacheFilter orFilter = OrGeocacheFilter.create(namedFilterList);
         return orFilter.simplify(criterion);
     }
 }

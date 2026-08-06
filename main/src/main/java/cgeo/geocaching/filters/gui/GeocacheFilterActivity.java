@@ -397,14 +397,13 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         IGeocacheFilter filter = null;
 
         if (filterListAdapter.getItemCount() > 0) {
-            filter = andOrFilterCheckbox.isChecked() ? new OrGeocacheFilter() : new AndGeocacheFilter();
-            for (IFilterViewHolder<?> f : filterListAdapter.getItems()) {
-                filter.addChild(FilterViewHolderCreator.createFrom(f));
-            }
+            final List<IGeocacheFilter> filterList = CollectionStream.of(filterListAdapter.getItems())
+                    .map(FilterViewHolderCreator::createFrom)
+                    .toList();
+
+            filter = andOrFilterCheckbox.isChecked() ? OrGeocacheFilter.create(filterList) : AndGeocacheFilter.create(filterList);
             if (inverseFilterCheckbox.isChecked()) {
-                final IGeocacheFilter notFilter = new NotGeocacheFilter();
-                notFilter.addChild(filter);
-                filter = notFilter;
+                filter = NotGeocacheFilter.create(filter);
             }
         }
 
