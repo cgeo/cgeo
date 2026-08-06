@@ -67,7 +67,9 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="noExcludeDescendants"
                 android:orientation="vertical">
-                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/PlainLatLayout"
+                    style="@style/textinput_edittext_singleline">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/PlainLat"
                         style="@style/textinput_embedded_singleline"
@@ -75,12 +77,25 @@
                         android:hint="@string/latitude" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/PlainLonLayout"
+                    style="@style/textinput_edittext_singleline">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/PlainLon"
                         style="@style/textinput_embedded_singleline"
                         android:inputType="text"
                         android:hint="@string/longitude" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/PlainThirdLayout"
+                    style="@style/textinput_edittext_singleline"
+                    android:visibility="gone">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/PlainThird"
+                        style="@style/textinput_embedded_singleline"
+                        android:inputType="text"
+                        android:hint="@string/coord_input_northing" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -116,6 +131,20 @@
                 android:id="@+id/variable_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/zoneRes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/edittext_dialog"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+
+                android:gravity="right"
+                android:textAlignment="gravity"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/latRes"

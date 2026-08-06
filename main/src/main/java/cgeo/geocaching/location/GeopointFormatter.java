@@ -109,6 +109,11 @@ public class GeopointFormatter {
         UTM,
 
         /**
+         * Example: "RD X 155000 Y 463000"
+         */
+        RD,
+
+        /**
          * Example: N48+12.345+E11+12.345
          **/
         GEOCHECKERCOM,
@@ -204,6 +209,10 @@ public class GeopointFormatter {
 
             case UTM: {
                 return UTMPoint.latLong2UTM(gp).toString();
+            }
+
+            case RD: {
+                return RDPoint.latLong2RD(gp).toString();
             }
 
             case GEOCHECKERCOM:
