@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -229,6 +230,27 @@ public class EmojiUtils {
         }
 
         dialog.show();
+    }
+
+    public static void initializeEmojiMarkerButton(final Button markerBtn, final String initialValue) {
+        setEmojiMarkerButton(markerBtn, initialValue);
+        markerBtn.setOnClickListener(v ->
+            selectEmojiPopup(markerBtn.getContext(), markerBtn.getText().toString(), false, null,
+            newValue -> setEmojiMarkerButton(markerBtn, newValue)));
+    }
+
+    private static void setEmojiMarkerButton(final Button markerBtn, final String value) {
+        if (StringUtils.isNotBlank(value)) {
+            markerBtn.setText(value);
+            if (markerBtn instanceof MaterialButton) {
+                ((MaterialButton) markerBtn).setIcon(null);
+            }
+        } else {
+            markerBtn.setText(null);
+            if (markerBtn instanceof MaterialButton) {
+                ((MaterialButton) markerBtn).setIconResource(R.drawable.ic_menu_marker_off);
+            }
+        }
     }
 
     // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.

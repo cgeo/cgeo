@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.HierarchicalListHelper;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -42,6 +43,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -94,6 +96,38 @@ public final class StoredList extends AbstractList {
         private final WeakReference<Activity> activityRef;
 
         public static final String GROUP_SEPARATOR = ":";
+
+        private static final HierarchicalListHelper.HierarchyAccessor<AbstractList> HIERARCHY_ACCESSOR = new HierarchicalListHelper.HierarchyAccessor<AbstractList>() {
+
+
+            @NonNull
+            @Override
+            public String getFullName(final AbstractList item) {
+                return item.getTitle();
+            }
+
+            @Override
+            public TextParam getDisplayText(final AbstractList item, final String simpleName) {
+                if (item instanceof StoredList) {
+                    return TextParam.text(simpleName + " [" + ((StoredList) item).count + "]");
+                }
+                return TextParam.text(item.getTitleAndCount());
+            }
+
+            @Override
+            public boolean supportsMarkers() {
+                return true;
+            }
+
+            @Nullable
+            @Override
+            public String getMarker(final AbstractList item) {
+                if (item instanceof StoredList) {
+                    return ((StoredList) item).emojiMarker;
+                }
+                return null;
+            }
+        };
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
@@ -226,7 +260,7 @@ public final class StoredList extends AbstractList {
             return CommonUtils.getNullHandlingComparator((p1, p2) -> collator.compare(getSortString(p1, selectedIds), getSortString(p2, selectedIds)), true);
         }
 
-        private String getSortString(final Object item, final Set<Integer> selectedIds) {
+        private static String getSortString(final Object item, final Set<Integer> selectedIds) {
             //Stored list sorting:
             // A. If displayed: "Create new"
             // B. If displayed: "Stored",
@@ -332,13 +366,13 @@ public final class StoredList extends AbstractList {
 
         public void promptForListCreation(@NonNull final Action1<Integer> runAfterwards, final String newListName) {
             // We need to update the list cache by creating a new StoredList object here.
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+            handleListNameInput(null, R.string.list_dialog_create_title, R.string.list_dialog_create, (listName, marker) -> {
                 final Activity activity = activityRef.get();
                 if (activity == null) {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, false, 0);
+                new StoredList(newId, listName, marker, false, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     runAfterwards.call(newId);
@@ -350,13 +384,14 @@ public final class StoredList extends AbstractList {
 
         public void promptForListCreation(@NonNull final Action1<Set<Integer>> runAfterwards, final Set<Integer> selectedLists, final String newListName) {
             // We need to update the list cache by creating a new StoredList object here.
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+            handleListNameInput(null, R.string.list_dialog_create_title, R.string.list_dialog_create, (listName, marker) -> {
                 final Activity activity = activityRef.get();
                 if (activity == null) {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, false, 0);
+                DataStore.setListEmoji(newId, marker);
+                new StoredList(newId, listName, marker, false, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     selectedLists.remove(PseudoList.NEW_LIST.id);
@@ -369,56 +404,58 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        private void handleListNameInput(final String defaultValue, final int dialogTitle, final int buttonTitle, final Action1<String> runnable) {
+        private void handleListNameInput(final StoredList currentList, final int dialogTitle, final int buttonTitle, final BiConsumer<String, String> runnable) {
             final Activity activity = activityRef.get();
             if (activity == null) {
                 return;
             }
 
-            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
-            final TextInputLayout parentList = menu.findViewById(R.id.parentList);
-            final AutoCompleteTextView parentListView = menu.findViewById(R.id.parentListView);
-            final TextInputEditText listname = menu.findViewById(R.id.title);
+            HierarchicalListHelper.of(HIERARCHY_ACCESSOR).upsertItem(activity, getMenuLists(true, -1), currentList, dialogTitle, buttonTitle, runnable);
 
-            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
-            final String oldPrefix = defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "";
-
-            final List<String> hierarchies = DataStore.getListHierarchy();
-            hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
-            hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
-            parentList.setVisibility(View.VISIBLE);
-            parentListView.setText(Strings.CS.endsWith(oldPrefix, GROUP_SEPARATOR) ? oldPrefix.substring(0, oldPrefix.length() - 1) : oldPrefix);
-            parentListView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item, hierarchies));
-
-            ((EditText) menu.findViewById(R.id.title)).setText(current);
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
-                    .setTitle(dialogTitle)
-                    .setPositiveButton(buttonTitle, ((d, which) -> {
-                            // same logic as in updateButtonState()
-                            String prefix = "";
-                        final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.parentListView))).getText().toString().trim();
-                            if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
-                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString().trim();
-                            } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp;
-                            }
-                            prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
-                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString().trim()));
-                        }))
-                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
-                    .setView(menu);
-            Keyboard.show(activity, menu.findViewById(R.id.title));
-            final AlertDialog dialog = builder.show();
-            ((NewListAdapter) parentListView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
-
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            final String oldListname = Objects.requireNonNull(listname.getText()).toString();
-            parentListView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, s.toString(), oldListname, listname.getText().toString(), false)));
-            ((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, parentListView.getText().toString(), oldListname, listname.getText().toString(), false)));
-            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, parentListView.getText().toString(), oldListname, s.toString(), false)));
-
-            ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
-            ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
+//            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+//            final TextInputLayout parentList = menu.findViewById(R.id.parentList);
+//            final AutoCompleteTextView parentListView = menu.findViewById(R.id.parentListView);
+//            final TextInputEditText listname = menu.findViewById(R.id.title);
+//
+//            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
+//            final String oldPrefix = defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "";
+//
+//            final List<String> hierarchies = DataStore.getListHierarchy();
+//            hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+//            hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
+//            parentList.setVisibility(View.VISIBLE);
+//            parentListView.setText(Strings.CS.endsWith(oldPrefix, GROUP_SEPARATOR) ? oldPrefix.substring(0, oldPrefix.length() - 1) : oldPrefix);
+//            parentListView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item, hierarchies));
+//
+//            ((EditText) menu.findViewById(R.id.title)).setText(current);
+//            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+//                    .setTitle(dialogTitle)
+//                    .setPositiveButton(buttonTitle, ((d, which) -> {
+//                            // same logic as in updateButtonState()
+//                            String prefix = "";
+//                        final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.parentListView))).getText().toString().trim();
+//                            if (Strings.CS.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
+//                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString().trim();
+//                            } else if (!Strings.CS.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
+//                                prefix = temp;
+//                            }
+//                            prefix += (prefix.isEmpty() || Strings.CS.endsWith(prefix, GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
+//                            runnable.call(handleListNameInputHelper(prefix, ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString().trim()));
+//                        }))
+//                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+//                    .setView(menu);
+//            Keyboard.show(activity, menu.findViewById(R.id.title));
+//            final AlertDialog dialog = builder.show();
+//            ((NewListAdapter) parentListView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
+//
+//            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+//            final String oldListname = Objects.requireNonNull(listname.getText()).toString();
+//            parentListView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, s.toString(), oldListname, listname.getText().toString(), false)));
+//            ((TextInputEditText) Objects.requireNonNull(dialog.findViewById(R.id.newParent))).addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, parentListView.getText().toString(), oldListname, listname.getText().toString(), false)));
+//            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> updateButtonState(dialog, oldPrefix, parentListView.getText().toString(), oldListname, s.toString(), false)));
+//
+//            ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
+//            ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
         }
 
         private static void updateButtonState(final AlertDialog dialog, @Nullable final String oldPrefix, @Nullable final String newPrefix, @Nullable final String oldListname, @Nullable final String newListname, final boolean ignoreEmptyPrefix) {
@@ -462,8 +499,9 @@ public final class StoredList extends AbstractList {
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
             final StoredList list = DataStore.getList(listId);
-            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, listName -> {
+            handleListNameInput(list, R.string.list_dialog_rename_title, R.string.list_dialog_rename, (listName, marker) -> {
                 DataStore.renameList(listId, listName);
+                DataStore.setListEmoji(listId, marker);
                 runAfterRename.run();
             });
         }
