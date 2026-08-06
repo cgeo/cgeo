@@ -1,101 +1,11 @@
-### Notes generals de la versió
-
-**De punta a punta**
-
-A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
-
-**Mapes antics**
-
-Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
-- Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
-- Popup de clúster per a Google Maps
-- Amaga les fonts de mapes que no necessites
-- Carta de cotes de rutes i tracks
-- Canvia entre llistes directament des del mapa
-- "Mode de conducció" per a mapes basats en OpenStreetMap
-- Toqueu llargament el track / ruta individual per veure més opcions
-
 ### Mapa
-- Nou: l'optimització de la ruta guarda les dades calculades
-- Nou: activar el mode en directe manté visibles els punts de referència de l'objectiu establert actualment
-- Nou: Si toqueu llargament la línia de navegació, s'obre el gràfic d'elevació (UnifiedMap)
-- Nou: Mostra els punts de referència generats al mapa
-- Nou: Descarrega els catxés ordenats per distància
-- Correcció: Duplicació d'elements de ruta individuals
-- Nou: Suport per al tema Motorider (només VTM)
-- Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
-- Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
-- Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
-- Nou: Ofereix la possibilitat de definir la icona del catxé fins i tot si el catxé encara no s'ha desat
-- Nou: Infobox per al gràfic d'elevació que mostra la distància restant, l'ascens i el descens
-- Nou: Mostra les coordenades dels punts de referència a la finestra emergent de punts de referència
-- Correcció: La configuració ràpida del mapa pot mostrar els botons "1"/"2" per als perfils d'enrutament buits després de canviar d'idioma
-- Nou: Calcula les dades d'elevació que falten en importar rutes (si es descarreguen les dades d'elevació)
-- Correcció: El descarregador de tessel·les s'atura sota certes condicions (només mapes en línia d'OpenStreetMap)
-- Nou: Marcadors de catxé condicionals
-- Nou: Mostra la pista de navegació (fletxa + distància)
+-
 
 ### Detalls del catxé
-- Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
-- Nou: conserva la marca de temps dels propis registres en actualitzar un catxé
-- Novetat: minivisualització de la brúixola opcional (vegeu la configuració => detalls del catxé => Mostra la direcció a la vista detallada del catxé)
-- Nou: Mostra els registres dels propietaris a la pestanya "amics/propis"
-- Canvi: La pestanya "Amics/propis" mostra els recomptes de registre d'aquesta pestanya en lloc dels comptadors globals
-- Canvi: Millora de la capçalera a les pestanyes de variables i punts de referència
-- Correcció: Es mostren dos elements de "supressió del registre"
-- Correcció: c:geo es bloqueja als detalls del catxé en girar la pantalla
-- Canvi: Disseny més compacte per "afegir un nou punt de referència"
-- Nou: Opció per carregar imatges pels catxés de geocaching.com en mida "sense canvis"
-- Nou: la vista de variables es pot filtrar
-- Nou: Visualitza el desbordament de coordenades calculades a la llista de punts de referència
-- Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
-- Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
-- Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
-- Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
-- Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
-- Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
-- Nou: Suprimeix el registre fora de línia després de fusionar-lo amb el registre en línia
-- Nou: Mostra la confirmació en suprimir els catxés amb registres fora de línia
-- Nou: Mostra la confirmació en suprimir tots els catxés de la llista "Tot"
-- Nou: Permet el format Markdown per al text de llistat als catxés definides per l'usuari
-- Canvi: Emmagatzema el catxé abans d'afegir la imatge de l'usuari
-- Correcció: Error en carregar imatges incrustades directament al text de la fitxa
-- Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
-- Nou: L'enviament del registre es fa en segon pla
+- New: Toggle stored-on-device date between relative and exact
 
 ### Wherigo Player
-- Nou: Traducció fora de línia per a Wherigos
-- Nou: Millora del maneig dels botons
-- Nou: Desament automàtic de l'estat
-- Nou: Opció per crear una drecera al reproductor Wherigo a la pantalla d'inici del mòbil
+-
 
 ### General
-- Nou: opció de compartir després de registrar un catxé
-- Canvi: no mostri les opcions "necessita manteniment" o "necessita arxivar" per a els catxés propis
-- Correcció: La restauració d'una còpia de seguretat pot duplicar els fitxers de track a l'emmagatzematge intern i a les còpies de seguretat posteriors
-- Canvi: S'han eliminat les referències a Twitter
-- Nou: Elimina els fitxers de pista orfes en netejar i restaurar la còpia de seguretat
-- Nou: Avís en intentar afegir massa catxés a una llista de marcadors
-- Nou: Funcions de llista de seguiment/no seguiment
-- Nou: Ofereix traducció fora de línia amb les aplicacions de Google Translate o DeepL (si estan instal·lades)
-- Nou: Suprimeix elements de l'historial de cerca
-- Canvi: Elimina GCVote (servei descontinuat)
-- Nou: Barra d'eines de color a les pàgines de detalls de catxé
-- Nou: seleccioneu diverses llistes de marcadors / pocket queries per descarregar
-- Nou: Previsualitza les llistes de marcadors
-- Canvi: Augmentar la versió mínima requerida d'Android a Android 8
-- Nou: Botons ràpids predeterminats per a les noves instal·lacions
-- Correcció: Els títols dels diàlegs d'entrada de rang es tallen
-- Correcció: La notificació d'actualització nocturna apunta a l'APK normal, fins i tot per a la variant FOSS.
-- Nou: opció "Ignora l'any" per als filtres de data
-- Nou: Feu que l'URI remot sigui clicable a les descàrregues pendents
-- Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
-- Nou: Exportació GPX: Escriu anotacions GSAK Lat/LonBeforeCorrect en exportar punts de referència originals
-- Nou: Mostra la barra de desfer en suprimir els catxés de la llista del mapa
-- Correcció: Error en el filtre de percentatge de preferits
-- Nou: Facilita l'ús de llistes simples com a llistes principals
-- Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
-- Correcció: Alguns textos ignoren el canvi d'idioma
-- Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
-- Canvi: El mòdul de traducció fora de línia de codi obert de Bergamot substitueix el traductor de codi tancat de Google ML Kit
-- Canvi: Nou selector d'emojis
+- 
