@@ -392,11 +392,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         finish(SaveMode.NORMAL);
     }
 
-    public void finish(final SaveMode saveMode) {
+    private void finish(final SaveMode saveMode) {
         saveLog(saveMode);
-        if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
-            Settings.setLastCacheLog(lastSavedState.log);
-        }
+
         logActivityHelper.finish();
         super.finish();
     }
@@ -469,7 +467,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW || saveMode == SaveMode.SENDING) {
+        if (logEditMode != LogEditMode.CREATE_NEW) {
+            return;
+        }
+
+        final String cacheLog = currentLogText();
+        if (StringUtils.isNotEmpty(cacheLog)) {
+            Settings.setLastCacheLog(cacheLog);
+        }
+
+        if (saveMode == SaveMode.SENDING) {
             return;
         }
 
