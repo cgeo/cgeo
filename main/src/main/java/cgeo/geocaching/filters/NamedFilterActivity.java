@@ -115,7 +115,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
             }
 
             // Row 3: activate marker checkbox
-            holder.itemBinding.activateMarkerCheckbox.setOnCheckedChangeListener(null);
+            /*holder.itemBinding.activateMarkerCheckbox.setOnCheckedChangeListener(null);
             holder.itemBinding.activateMarkerCheckbox.setChecked(item.isConditionalMarkerActive());
             holder.itemBinding.activateMarkerCheckbox.setOnCheckedChangeListener((v, checked) -> {
                 final int pos = holder.getBindingAdapterPosition();
@@ -124,7 +124,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
                     updateEnableAllMarkersCheckbox();
                 }
             });
-            holder.markerPrioSpinner.set(item.getConditionalMarkerPriority());
+            holder.markerPrioSpinner.set(item.getConditionalMarkerPriority());*/
         }
 
         @NonNull
@@ -229,17 +229,6 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
 
         navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
-        binding.enableAllMarkersCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (updatingEnableAllCheckbox) {
-                return;
-            }
-            final List<NamedFilter> items = filterAdapter.getItems();
-            for (final NamedFilter nf : items) {
-                nf.setConditionalMarkerActive(isChecked);
-            }
-            filterAdapter.notifyDataSetChanged();
-        });
-
         updateEmptyHint();
     }
 
@@ -335,7 +324,6 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
     private void updateEmptyHint() {
         final boolean isEmpty = filterAdapter.getItemCount() == 0;
         binding.emptyHint.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-        binding.enableAllMarkersCheckbox.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
         binding.namedFilterList.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
         updateEnableAllMarkersCheckbox();
     }
@@ -344,7 +332,6 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
         final List<NamedFilter> items = filterAdapter.getItems();
         final boolean allActive = !items.isEmpty() && items.stream().allMatch(NamedFilter::isConditionalMarkerActive);
         updatingEnableAllCheckbox = true;
-        binding.enableAllMarkersCheckbox.setChecked(allActive);
         updatingEnableAllCheckbox = false;
     }
 

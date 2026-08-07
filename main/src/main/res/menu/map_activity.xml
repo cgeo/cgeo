@@ -54,9 +54,9 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_named_filters"
-        android:icon="@drawable/ic_menu_myfilters"
+        android:icon="@drawable/ic_menu_marker"
         android:showAsAction="ifRoom"
-        android:title="@string/named_filter_activity_title"
+        android:title="@string/named_filter_markers"
         android:visible="true"
         app:showAsAction="ifRoom|withText"/>
     <item

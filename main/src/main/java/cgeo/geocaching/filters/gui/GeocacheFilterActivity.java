@@ -486,7 +486,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.andOrFilterCheckbox.setChecked(false);
         this.includeInconclusiveFilterCheckbox.setChecked(false);
 
-        this.binding.filterNamedFilterOptions.setVisibility(View.GONE);
+        //this.binding.filterNamedFilterOptions.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxes.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxesLine.setVisibility(View.GONE);
         this.binding.filterAdditem.setVisibility(View.GONE);

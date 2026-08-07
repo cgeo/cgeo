@@ -551,7 +551,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, R.id.menu_filter, this);
-        FilterUtils.initializeNamedFilterMenu(this, R.id.menu_named_filters, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
