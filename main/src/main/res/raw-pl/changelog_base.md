@@ -2,7 +2,7 @@
 -
 
 ### Szczegóły skrytki
-- New: Toggle stored-on-device date between relative and exact
+- Nowość: Przełącz datę zapisaną na urządzeniu między względną i dokładną
 
 ### Odtwarzacz Wherigo
 -
