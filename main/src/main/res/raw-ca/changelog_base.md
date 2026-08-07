@@ -2,7 +2,7 @@
 -
 
 ### Detalls del catxé
-- New: Toggle stored-on-device date between relative and exact
+- Nou: alterna la data emmagatzemada al dispositiu entre relativa i exacta
 
 ### Wherigo Player
 -
