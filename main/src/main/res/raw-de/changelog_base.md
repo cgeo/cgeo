@@ -68,6 +68,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Verbesserter Umgang mit Schaltflächen
 - Neu: Automatische Speicherung des Status
 - Neu: Option zum Erstellen einer Verknüpfung zum Wherigo-Player auf dem Startbildschirm des Handys
+- Fix: Missing/wrong media files lead to error
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
