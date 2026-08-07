@@ -2,7 +2,7 @@
 -
 
 ### Cache-Details
-- New: Toggle stored-on-device date between relative and exact
+- Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut
 
 ### Wherigo Player
 -
