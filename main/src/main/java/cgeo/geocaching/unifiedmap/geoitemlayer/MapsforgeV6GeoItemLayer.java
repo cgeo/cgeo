@@ -18,7 +18,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.graphics.Style;
@@ -40,6 +42,43 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
     private int defaultZLevel;
 
     private MapsforgeV6ZLevelGroupLayer groupLayer;
+
+    private final MarkerBitmapCache markerBitmaps = new MarkerBitmapCache();
+
+    /**
+     * Mapsforge needs its own copy of every marker bitmap, but many markers share the same source bitmap
+     * (all caches of one type look alike). Creating one copy per marker wastes a full ARGB_8888 bitmap each
+     * time, so copies are shared and released via Mapsforge's reference counting instead.
+     * <br>
+     * Reference counting contract: a freshly created bitmap has a count of 0, meaning "one owner" - which is
+     * this cache. Every marker handed the bitmap increments, {@link Marker#onDestroy()} decrements again, and
+     * the bitmap is only destroyed once the count drops below 0.
+     */
+    private static final class MarkerBitmapCache extends LinkedHashMap<Bitmap, org.mapsforge.core.graphics.Bitmap> {
+
+        private static final long serialVersionUID = 1L;
+        private static final int MAX_ENTRIES = 256;
+
+        MarkerBitmapCache() {
+            super(16, 0.75f, true);
+        }
+
+        @Override
+        protected boolean removeEldestEntry(final Map.Entry<Bitmap, org.mapsforge.core.graphics.Bitmap> eldest) {
+            if (size() <= MAX_ENTRIES) {
+                return false;
+            }
+            eldest.getValue().decrementRefCount(); // give up this cache's own reference
+            return true;
+        }
+
+        void release() {
+            for (org.mapsforge.core.graphics.Bitmap bitmap : values()) {
+                bitmap.decrementRefCount();
+            }
+            clear();
+        }
+    }
 
     public MapsforgeV6GeoItemLayer(final MapView mapView) {
         this.mapView = mapView;
@@ -76,6 +115,9 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
             }
             groupLayer.requestRedraw();
         }
+        // the markers created from these bitmaps have been destroyed above, so releasing our own
+        // reference now actually frees them
+        markerBitmaps.release();
         this.mapView = null;
     }
 
@@ -144,7 +186,7 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
         return null;
     }
 
-    private static Marker createMarker(final Geopoint point, final GeoIcon icon) {
+    private Marker createMarker(final Geopoint point, final GeoIcon icon) {
         if (point == null || icon == null || icon.getBitmap() == null) {
             return null;
         }
@@ -155,11 +197,27 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
 
         final Marker newMarker = new Marker(
                 latLong(point),
-                AndroidGraphicFactory.convertToBitmap(new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap)),
+                getMarkerBitmap(bitmap),
                 (int) ((-icon.getXAnchor() + 0.5f) * bitmap.getWidth()),
                 (int) ((-icon.getYAnchor() + 0.5f) * bitmap.getHeight()));
         newMarker.setBillboard(!icon.isFlat());
         return newMarker;
+    }
+
+    /**
+     * Gets the Mapsforge representation of the given bitmap, creating it on first use.
+     * The returned bitmap carries one additional reference for the marker it is about to be handed to.
+     */
+    private org.mapsforge.core.graphics.Bitmap getMarkerBitmap(final Bitmap bitmap) {
+        org.mapsforge.core.graphics.Bitmap markerBitmap = markerBitmaps.get(bitmap);
+        if (markerBitmap == null) {
+            // do NOT wrap the source bitmap directly: it is owned by MapMarkerUtils' marker cache and would
+            // be recycled by Mapsforge once the last marker using it is destroyed
+            markerBitmap = AndroidGraphicFactory.convertToBitmap(new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap));
+            markerBitmaps.put(bitmap, markerBitmap);
+        }
+        markerBitmap.incrementRefCount();
+        return markerBitmap;
     }
 
     private static Paint createPaint(@ColorInt final int color) {
