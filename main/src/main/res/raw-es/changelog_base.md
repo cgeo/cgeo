@@ -68,6 +68,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Nuevo: Manejo de botones mejorado
 - Nuevo: Estado del autoguardado
 - Nuevo: Opción de crear un acceso directo al ejecutador de wherigos en la pantalla principal del teléfono
+- Fix: Missing/wrong media files lead to error
 
 ### General
 - Nuevo: Opción de compartir después de registrar un caché
