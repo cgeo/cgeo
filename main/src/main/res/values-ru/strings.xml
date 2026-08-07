@@ -1177,7 +1177,7 @@
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo поддерживает пользовательские темы для офлайн-карт. Они могут быть использованы для изменения цветового стиля карты (например, тёмный режим) или для выделения некоторых объектов, таких как велодорожки или линии уровней высот.\n\nРабота с несжатыми темами карт может снизить производительность открытия карты. В этом случае пользовательская папка темы может быть синхронизирована с локальной папкой приложения для ускорения доступа (ценой некоторого увеличения расхода внутренней памяти).</string>
     <string name="settings_info_hillshading_title">Информация о затенении высот</string>
-    <string name="settings_info_hillshading">Затенение высот- это метод создания топографических карт рельефа путем добавления к карте эффекта освещения для обозначения изменения высоты. Склоны будут затемнены или осветлены для создания 3D-эффекта.\nДанные о затенении можно загрузить из меню заливки карт.\nНе совместим с вариантом VTM в ЕдинойКарте.</string>
+    <string name="settings_info_hillshading">Затенение высот- это технология создания топографических карт рельефа путем добавления эффекта освещения к карте для обозначения изменений высоты. Склоны будут затемнены/высветлены для создания 3D-эффекта.\nДанные о затенении высот можно загрузить из меню карты.\nНе совместимо с вариантом ЕдинаяКарта VTM.</string>
     <string name="settings_hillshading_enable">Затенение высот</string>
     <string name="init_hillshading_hq">Высококачественное затенение высот</string>
     <string name="init_summary_hillshading_hq">Более детальное наложение теней высот, но на ~50% медленнее отрисовывается при уменьшении масштаба</string>
@@ -2581,7 +2581,7 @@
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
     <string name="map_disable_autotarget_individual_route">\"Установить начало маршрута как цель\" отключено</string>
     <string name="map_manual_target_route_name">Текущая навигация</string>
-    <string name="map_clear_manual_targets">Очистить цель навигации</string>
+    <string name="map_clear_manual_targets">Сбросить цель навигации</string>
     <string name="map_manual_targets_cleared">Ручные цели очищены</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
@@ -2744,7 +2744,7 @@
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="hillshading_info">Оффлайн затенение высот</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
-    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования оффлайн карт (только для VTM, требуется перезапуск)</string>
+    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования для офлайн-карт (только для VTM, требуется перезагрузка)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>

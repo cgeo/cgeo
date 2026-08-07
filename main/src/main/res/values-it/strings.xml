@@ -1114,7 +1114,7 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
     <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
-    <string name="settings_info_hillshading">L\'ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono essere scaricate dal menu in sovraimpressione sulle mappe.\n Non compatibile con la variante VTM delle UnifiedMaps.</string>
+    <string name="settings_info_hillshading">L\'ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per evidenziare i rilievi. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono essere scaricate dal menu in sovraimpressione sulle mappe.\n Non compatibile con la variante VTM delle UnifiedMaps.</string>
     <string name="settings_hillshading_enable">Ombreggiatura</string>
     <string name="init_hillshading_hq">Ombreggiatura di alta qualità</string>
     <string name="init_summary_hillshading_hq">Ombreggiatura più dettagliata ma rendering ~50%% più lento quando ingrandito</string>
@@ -2455,7 +2455,7 @@
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
     <string name="map_manual_target_route_name">Navigazione corrente</string>
-    <string name="map_clear_manual_targets">Cancella obiettivo di routing</string>
+    <string name="map_clear_manual_targets">Cancella la destinazione del percorso</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
