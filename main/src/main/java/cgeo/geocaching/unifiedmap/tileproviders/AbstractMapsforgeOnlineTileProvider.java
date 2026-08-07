@@ -62,6 +62,7 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
 
     @Override
     public void addTileLayer(final MapsforgeFragment fragment, final MapView map) {
+        removeTileLayer(map); // remove existing tile layer to avoid stacking of stale layers
         mfTileSource.setUserAgent("cgeo");
         tileLayer = new TileDownloadLayer(fragment.getTileCache(), map.getModel().mapViewPosition, mfTileSource, AndroidGraphicFactory.INSTANCE);
         map.getLayerManager().getLayers().add(0, tileLayer); // insert at the bottom of the stack so overlays stay on top
