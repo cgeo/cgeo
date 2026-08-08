@@ -470,9 +470,10 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             if (colStatus >= 0) {
                                 final int status = c.getInt(colStatus);
                                 if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                                    // show only a single dialog, no matter how many downloads are blocked/failed; PendingDownloadsActivity lists them all
                                     SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm(() -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
                                     Settings.setPendingDownloadsLastCheck(false);
-                                    break;
+                                    return;
                                 }
                             }
                         }
