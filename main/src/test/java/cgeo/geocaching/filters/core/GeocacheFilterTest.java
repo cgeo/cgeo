@@ -103,6 +103,13 @@ public class GeocacheFilterTest {
         assertThat(caches).containsExactly(g1, g2);
     }
 
+    @Test
+    public void constantFiltersHaveTypes() {
+        assertThat(ConstantGeocacheFilter.ALWAYS_TRUE.getType()).isEqualTo(GeocacheFilterType.ALWAYS_TRUE);
+        assertThat(ConstantGeocacheFilter.ALWAYS_FALSE.getType()).isEqualTo(GeocacheFilterType.ALWAYS_FALSE);
+        assertThat(ConstantGeocacheFilter.ALWAYS_NULL.getType()).isEqualTo(GeocacheFilterType.ALWAYS_NULL);
+    }
+
     // =====================================================================
     // BaseGeocacheFilter.simplify
     // =====================================================================

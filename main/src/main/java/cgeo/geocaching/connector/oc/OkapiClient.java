@@ -382,7 +382,7 @@ final class OkapiClient {
 
         String finder = null;
 
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible(connector)) {
+        for (BaseGeocacheFilter baseFilter : filters) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return new SearchResult(); //no need to search if connector is filtered out itself
             }

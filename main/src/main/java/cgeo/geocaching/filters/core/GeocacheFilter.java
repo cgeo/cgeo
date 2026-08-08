@@ -403,4 +403,3 @@ public class GeocacheFilter implements Cloneable {
     }
 
 }
-
