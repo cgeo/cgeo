@@ -40,6 +40,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
@@ -88,6 +89,13 @@ public class MapUtils {
 
     private static TextPaint elevationTextPaint = null;
     private static Paint elevationPaint = null;
+
+    /**
+     * The elevation marker is repainted on every location update, but its content only changes when the
+     * displayed elevation text changes - so keep the last few bitmaps instead of allocating a new one
+     * several times per second.
+     */
+    private static final LeastRecentlyUsedMap<String, Bitmap> ELEVATION_BITMAP_CACHE = new LeastRecentlyUsedMap.LruCache<>(32);
 
     public static Set<Geocache> getGeocachesFromDatabase(final Viewport viewport, final GeocacheFilter filter) {
         if (viewport == null || viewport.isJustADot()) {
@@ -508,6 +516,23 @@ public class MapUtils {
     // elevation handling -------------------------------------------------------------------------------------------
 
     public static Bitmap getElevationBitmap(final Resources res, final int markerHeight, final double altitude) {
+        final String info = Units.formatElevation((float) altitude);
+        final String cacheKey = markerHeight + "|" + info;
+        synchronized (ELEVATION_BITMAP_CACHE) {
+            final Bitmap cached = ELEVATION_BITMAP_CACHE.get(cacheKey);
+            if (cached != null) {
+                return cached;
+            }
+        }
+
+        final Bitmap bm = createElevationBitmap(res, markerHeight, info);
+        synchronized (ELEVATION_BITMAP_CACHE) {
+            ELEVATION_BITMAP_CACHE.put(cacheKey, bm);
+        }
+        return bm;
+    }
+
+    private static Bitmap createElevationBitmap(final Resources res, final int markerHeight, final String info) {
         final float textSizeInPx = ViewUtils.dpToPixel(14f);
         final int width = (int) (8 * textSizeInPx);
         final int height = markerHeight + (int) (2 * textSizeInPx) + 2;
@@ -529,7 +554,6 @@ public class MapUtils {
 
         final Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         final android.graphics.Canvas canvas = new android.graphics.Canvas(bm);
-        final String info = Units.formatElevation((float) altitude);
 
         final float textWidth = elevationTextPaint.measureText(info) + 10;
         final float yPos = height - 0.45f * textSizeInPx;

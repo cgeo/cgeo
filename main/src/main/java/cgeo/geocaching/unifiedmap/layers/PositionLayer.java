@@ -28,6 +28,8 @@ public class PositionLayer {
     private static final String KEY_ELEVATION = "elevation";
 
     private final Bitmap markerPosition = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
+    /** caches the rotated variants of the position marker, which would otherwise be recreated on every update */
+    private final GeoIcon.BitmapProvider markerPositionProvider = new GeoIcon.RotatedBitmapProvider(markerPosition);
 
     private final GeoStyle accuracyStyle = GeoStyle.builder()
             .setStrokeWidth(1.0f)
@@ -49,9 +51,11 @@ public class PositionLayer {
             // always update position indicator, no matter if it's because of position or heading
             layer.put(KEY_POSITION,
                     GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
-                                    .setRotation(locationWrapper.heading)
+                                    // round to full degrees, so an unchanged heading results in an equal
+                                    // icon and the marker doesn't need to be redrawn at all
+                                    .setRotation(Math.round(locationWrapper.heading))
                                     .setFlat(true)
-                                    .setBitmap(markerPosition).build())
+                                    .setBitmapProvider(markerPositionProvider).build())
                             .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
 
             if (locationWrapper.location.hasAltitude() && Settings.showElevation()) {
