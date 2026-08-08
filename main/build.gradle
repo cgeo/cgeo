@@ -198,10 +198,6 @@ android {
             resources.srcDirs = ['src/androidTest/res']
             res.srcDirs = ['src/androidTest/res']
         }
-        // resources specific to flavor "basic".
-        basic {
-            java.srcDir 'src/nofoss/java' // "basic" shall contain non-foss code
-        }
     }
 
     testOptions {
@@ -283,11 +279,6 @@ android {
         nojit {
             dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
-        }
-
-        foss {
-            dimension = "javaCompilerTime"
-            buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
 
