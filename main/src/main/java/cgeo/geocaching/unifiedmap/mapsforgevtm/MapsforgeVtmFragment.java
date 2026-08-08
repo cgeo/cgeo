@@ -73,6 +73,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     protected Map.UpdateListener mapUpdateListener;
     private View mapAttribution;
     private boolean doReapplyTheme = false;
+    private MapEventsReceiver mapEventsReceiver = null;
 
     private Event lastEvent = null;
 
@@ -185,7 +186,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
             applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
             doReapplyTheme = false;
         }
-        mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
+        if (mapEventsReceiver == null) {
+            mapEventsReceiver = new MapsforgeVtmFragment.MapEventsReceiver(mMap);
+            mMapLayers.add(mapEventsReceiver);
+        }
     }
 
     @Override
@@ -203,6 +207,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     @Override
     public void onDestroyView() {
+        mapEventsReceiver = null;
         mMapView.onDestroy();
         themeHelper.disposeTheme();
         super.onDestroyView();
