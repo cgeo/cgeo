@@ -14,6 +14,9 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.pebble.PebbleMapConstants;
+import cgeo.geocaching.pebble.PebbleMapConverter;
+import androidx.core.util.Consumer;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
@@ -291,6 +294,26 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     // public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
     // }
 
+
+    // ========================================================================
+    // Pebble map export
+
+    @Override
+    public void requestPebbleBitmap(final Consumer<byte[]> callback) {
+        if (mMap == null) {
+            super.requestPebbleBitmap(callback);
+            return;
+        }
+        mMap.snapshot(bitmap -> {
+            if (bitmap == null) {
+                callback.accept(new byte[0]);
+            } else {
+                final byte[] frame = PebbleMapConverter.toColor8(bitmap, PebbleMapConstants.MAP_WIDTH, PebbleMapConstants.MAP_HEIGHT);
+                bitmap.recycle();
+                callback.accept(frame);
+            }
+        });
+    }
 
     // ========================================================================
     // Tap handling methods

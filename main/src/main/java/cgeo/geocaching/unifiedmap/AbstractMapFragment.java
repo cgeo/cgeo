@@ -12,6 +12,10 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.pebble.PebbleMapConstants;
+import cgeo.geocaching.pebble.PebbleMapConverter;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
@@ -290,4 +294,21 @@ public abstract class AbstractMapFragment extends Fragment {
         ((UnifiedMapActivity) requireActivity()).onTap(latitudeE6, longitudeE6, x, y, isLongTap);
     }
 
+
+    public void requestPebbleBitmap(final Consumer<byte[]> callback) {
+        final View view = getView();
+        if (view == null || view.getWidth() == 0 || view.getHeight() == 0) {
+            callback.accept(new byte[0]);
+            return;
+        }
+        final int w = view.getWidth();
+        final int h = view.getHeight();
+        final Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        final byte[] frame = PebbleMapConverter.toColor8(bitmap, PebbleMapConstants.MAP_WIDTH, PebbleMapConstants.MAP_HEIGHT);
+        bitmap.recycle();
+        callback.accept(frame);
+    }
 }
+
