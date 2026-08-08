@@ -1183,6 +1183,7 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_finder">Fundet af</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Søg med filter** søger caches på alle aktive online tjenester (f.eks. geocaching.com) ud fra et angivet filter. Men, søgefaciliteterne på disse tjenester er normalt mere begrænset end c:geos søgefelter.\n\n- Alle tjenester understøtter kun OG-filtre (ingen ELLER-filtre og ingen omvendte filtre).\n- De mere grundlæggende filtre som **cache type** eller **cache størrelse** understøttes af alle tjenester. Mere komplicerede filtre understøttes ofte ikke eller har visse begrænsninger, f.eks. **favoritter** eller **skjult dato**.\n- En detaljeret liste over understøttede filtre pr. tjeneste kan findes [her](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre som ikke understøttes af online-tjenesten vil blive anvendt af c:geo på de modtagne resultater.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Åbn destinationen i c:geo</string>

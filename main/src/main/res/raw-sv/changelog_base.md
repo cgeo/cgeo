@@ -68,6 +68,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Förbättrad knapphantering
 - Ny: Status auto-spara
 - Nyhet: Alternativ för att skapa genväg till Wherigo-spelare på mobilens hemskärm
+- Fix: Saknade/fel mediefiler leder till fel
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache

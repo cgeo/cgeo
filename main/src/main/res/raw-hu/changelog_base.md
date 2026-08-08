@@ -68,6 +68,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Improved button handling
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Fix: Missing/wrong media files lead to error
 
 ### General
 - New: Share option after logging a cache

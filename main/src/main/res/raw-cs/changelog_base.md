@@ -68,6 +68,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Novinka: Vylepšené ovládání tlačítek
 - Novinka: Automatické ukládání stavu
 - Novinka: Možnost vytvořit zástupce pro přehrávač Wherigo na domovské obrazovce vašeho mobilního telefonu
+- Fix: Missing/wrong media files lead to error
 
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky

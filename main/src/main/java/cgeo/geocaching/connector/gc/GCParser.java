@@ -558,7 +558,9 @@ public final class GCParser {
 
             if (!wpList.contains("No additional waypoints to display.")) {
                 wpEnd = wpList.indexOf("</table>");
-                wpList = wpList.substring(0, wpEnd);
+                if (wpEnd > -1) {
+                    wpList = wpList.substring(0, wpEnd);
+                }
 
                 wpBegin = wpList.indexOf("<tbody>");
                 wpEnd = wpList.indexOf("</tbody>");
