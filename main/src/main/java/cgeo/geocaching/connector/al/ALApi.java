@@ -287,7 +287,6 @@ final class ALApi {
                 return null;
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
-            Log.d("_AL importCacheFromJson: " + json.toPrettyString());
             return parseCacheDetail(json);
         } catch (final Exception e) {
             Log.w("_AL importCacheFromJSON", e);
@@ -304,7 +303,6 @@ final class ALApi {
                 return Collections.emptyList();
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
-            Log.d("_AL importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {
                 return Collections.emptyList();
