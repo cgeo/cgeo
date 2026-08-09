@@ -145,7 +145,7 @@ public class TileProviderFactory {
             // sort according to displayName and register
             final List<ImmutablePair<String, AbstractMapsforgeOfflineTileProvider>> offlineMaps = new ArrayList<>();
             for (ImmutablePair<String, Uri> data : temp) {
-                final AbstractMapsforgeOfflineTileProvider tp = new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 999, 0);
+                final AbstractMapsforgeOfflineTileProvider tp = new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18); // @todo: get actual values for zoomMin/zoomMax
                 offlineMaps.add(new ImmutablePair<>(tp.getDisplayName(data.left), tp));
             }
             Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
