@@ -216,10 +216,21 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
-            final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
-                    new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
-                    new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);
-            mMap.animateCamera(cu);
+            final View view = requireView();
+            if (view.getWidth() == 0 || view.getHeight() == 0) {
+                //See Bug #14948: w/o map width/height the bounds can't be calculated
+                // -> postpone animation to later on UI thread (where map width/height will be set)
+                view.post(() -> zoomToBounds(bounds));
+            } else {
+                // Use setOnMapLoadedCallback to ensure animateCamera is not discarded before the
+                // first render. The callback fires immediately if the map is already loaded.
+                mMap.setOnMapLoadedCallback(() -> {
+                    final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
+                            new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
+                            new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);
+                    mMap.animateCamera(cu);
+                });
+            }
         }
     }
 
