@@ -317,13 +317,7 @@ public class NamedFilter {
 
     /** Case-insensitive check whether a filter with the given name exists. */
     public static synchronized boolean nameExists(@NonNull final String name) {
-        ensureCache();
-        for (final NamedFilter nf : namedFiltersSortedByName) {
-            if (nf.name.equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
+        return getFirstByName(name) != null;
     }
 
     /**
@@ -356,13 +350,29 @@ public class NamedFilter {
         GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
     }
 
-
     public static synchronized NamedFilter addNew(final String name, final GeocacheFilter filter) {
         final NamedFilter newFilter = new NamedFilter(name, filter);
         final List<NamedFilter> newList = getAllDeepCopy();
         newList.add(newFilter);
         storeAll(newList);
         return namedFilters.get(newFilter.getId());
+    }
+
+    public static synchronized NamedFilter overwrite(final String name, final GeocacheFilter filter) {
+        final List<NamedFilter> newList = getAllDeepCopy();
+        NamedFilter overwrite = null;
+        for (final NamedFilter nf : newList) {
+            if (Strings.CI.equals(nf.name, name)) {
+                overwrite = nf;
+                break;
+            }
+        }
+        if (overwrite != null) {
+            overwrite.setFilter(filter);
+            storeAll(newList);
+            return namedFilters.get(overwrite.getId());
+        }
+        return null;
     }
 
     public static synchronized void activateMarker(final Collection<NamedFilter> filters) {

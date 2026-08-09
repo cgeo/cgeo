@@ -177,15 +177,20 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         // Save as Named Filter button
         binding.filterSaveAsNamed.setOnClickListener(v -> {
+            final NamedFilter refNamedFilter = NamedFilter.getById(NumberUtils.toInt(binding.filterReferenceNamedFilterId.getText().toString(), -1));
+            final SimpleDialog.InputOptions io = new SimpleDialog.InputOptions();
+            if (refNamedFilter != null) {
+                io.setInitialValue(refNamedFilter.getName());
+            }
             SimpleDialog.of(this).setTitle(R.string.named_filter_save_as_title)
-                    .input(new SimpleDialog.InputOptions(), name -> {
+                    .input(io, name -> {
                         if (name == null || name.trim().isEmpty()) {
                             return;
                         }
                         if (NamedFilter.nameExists(name)) {
                             SimpleDialog.of(this).setTitle(R.string.named_filter_name_exists_title)
                                     .setMessage(R.string.named_filter_name_exists_message, name)
-                                    .confirm(() -> saveViewAsNewNamedFilter(name));
+                                    .confirm(() -> saveViewAsOverwriteFilter(name));
                         } else {
                             final NamedFilter existing = NamedFilter.filterConfigExists(getFilterFromView());
                             if (existing != null) {
@@ -210,6 +215,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         adjustNamedFilterReferenceViewFor(null);
         final NamedFilter newNamedFilter = NamedFilter.addNew(newName, getFilterFromView());
         adjustNamedFilterReferenceViewFor(newNamedFilter);
+    }
+
+    private void saveViewAsOverwriteFilter(final String name) {
+        adjustNamedFilterReferenceViewFor(null);
+        final NamedFilter namedFilter = NamedFilter.overwrite(name, getFilterFromView());
+        adjustNamedFilterReferenceViewFor(namedFilter);
     }
 
     @Override

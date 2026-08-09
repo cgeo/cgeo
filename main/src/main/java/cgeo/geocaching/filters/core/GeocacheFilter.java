@@ -205,6 +205,10 @@ public class GeocacheFilter implements Cloneable {
             }
             return "(" + displayName + ")*";
         }
+        return toUserDisplayableStringRaw();
+    }
+
+    public String toUserDisplayableStringRaw() {
         if (getTree() == null) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
