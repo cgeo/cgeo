@@ -13,7 +13,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import java.util.Collection;
@@ -43,6 +42,8 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
     private Resources resources;
     private int defaultZLevel;
 
+    private final BitmapDescriptorCache bitmapDescriptors = new BitmapDescriptorCache();
+
     public GoogleV2GeoItemLayer(final GoogleMap map, final Resources resources) {
         this.map = map;
         this.resources = resources;
@@ -70,6 +71,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             remove(v.first, v.second);
         }
 
+        bitmapDescriptors.clear();
         this.map = null;
         this.resources = null;
     }
@@ -130,7 +132,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
         final GeoIcon icon = item.getIcon();
         if (icon != null && item.getCenter() != null && icon.getBitmap() != null) {
             marker = map.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorCache.toBitmapDescriptor(new BitmapDrawable(resources, icon.getBitmap())))
+                .icon(bitmapDescriptors.fromBitmap(icon.getBitmap()))
                 .rotation(icon.getRotation())
                 .flat(icon.isFlat())
                 .position(GP_CONVERTER.to(item.getCenter()))

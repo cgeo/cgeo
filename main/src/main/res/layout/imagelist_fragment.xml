@@ -57,11 +57,9 @@
                            app:spanCount="1" -->
 
         <androidx.recyclerview.widget.RecyclerView
-
             android:id="@+id/image_list"
             android:layout_width="match_parent"
-
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"
@@ -70,9 +68,7 @@
             android:padding="4dip"
             android:scrollbars="none"
             tools:ignore="NestedScrolling"
-            tools:listitem="@layout/imagelist_item">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/imagelist_item" />
     </RelativeLayout>
 </LinearLayout>
 
