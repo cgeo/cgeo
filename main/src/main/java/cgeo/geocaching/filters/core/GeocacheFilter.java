@@ -288,7 +288,13 @@ public class GeocacheFilter implements Cloneable {
             return null;
         };
         if (this.getTree() != null) {
-            getAndChainIfPossibleInternal(this.getTree().simplify(function), result);
+            final IGeocacheFilter simplified = this.getTree().simplify(function);
+            if (simplified == ConstantGeocacheFilter.ALWAYS_FALSE) {
+                //special marker: the whole filter can never match, so let callers know that the search can be skipped entirely
+                result.add(ConstantGeocacheFilter.ALWAYS_FALSE);
+            } else {
+                getAndChainIfPossibleInternal(simplified, result);
+            }
         }
         return result;
     }
@@ -307,12 +313,23 @@ public class GeocacheFilter implements Cloneable {
         return null;
     }
 
+    /**
+     * Helper method to be used in conjunction with {@link #getAndChainIfPossible(IConnector)} to check whether the
+     * given chain represents a filter that can never match any cache, meaning the search can safely be skipped.
+     */
+    public static boolean isAlwaysFalse(final List<BaseGeocacheFilter> filters) {
+        return filters.size() == 1 && filters.get(0) == ConstantGeocacheFilter.ALWAYS_FALSE;
+    }
+
     private void getAndChainIfPossibleInternal(final IGeocacheFilter filterToCheck, final List<BaseGeocacheFilter> chain) {
 
         if (isAndFilter(filterToCheck)) {
             for (IGeocacheFilter fChild : filterToCheck.getChildren()) {
                 getAndChainIfPossibleInternal(fChild, chain);
             }
+        } else if (filterToCheck == ConstantGeocacheFilter.ALWAYS_TRUE) {
+            //imposes no restriction on the search, so it can safely be omitted from the chain
+            return;
         } else if (filterToCheck instanceof BaseGeocacheFilter) {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }

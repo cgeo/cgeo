@@ -436,4 +436,42 @@ public class GeocacheFilterTest {
         assertThat(children).hasSize(1);
         assertThat(children.get(0)).isInstanceOf(OrGeocacheFilter.class);
     }
+
+    // =====================================================================
+    // GeocacheFilter.getAndChainIfPossible
+    // (regression tests for crash when a filter tree simplifies to a constant filter, see NPE
+    // in GCMap.fillForBasicFilter/ConstantGeocacheFilter having no GeocacheFilterType)
+    // =====================================================================
+
+    @Test
+    public void getAndChainIfPossibleWithAllNonFilteringChildrenIsEmpty() {
+        // whole tree simplifies to ALWAYS_TRUE; it must not end up as an entry in the chain
+        final GeocacheFilter filter = GeocacheFilter.create(false, false, and(ConstantGeocacheFilter.ALWAYS_TRUE, ConstantGeocacheFilter.ALWAYS_TRUE));
+        assertThat(filter.getAndChainIfPossible(null)).isEmpty();
+    }
+
+    @Test
+    public void getAndChainIfPossibleWithSingleAlwaysTrueTreeIsEmpty() {
+        final GeocacheFilter filter = GeocacheFilter.create(false, false, ConstantGeocacheFilter.ALWAYS_TRUE);
+        assertThat(filter.getAndChainIfPossible(null)).isEmpty();
+    }
+
+    @Test
+    public void getAndChainIfPossibleOmitsAlwaysTrueButKeepsFilteringSibling() {
+        final IGeocacheFilter a = leaf("A");
+        final GeocacheFilter filter = GeocacheFilter.create(false, false, and(ConstantGeocacheFilter.ALWAYS_TRUE, a));
+        assertThat(filter.getAndChainIfPossible(null)).containsExactly((BaseGeocacheFilter) a);
+    }
+
+    @Test
+    public void getAndChainIfPossibleWithAlwaysFalseTreeReturnsAlwaysFalseMarker() {
+        final GeocacheFilter filter = GeocacheFilter.create(false, false, ConstantGeocacheFilter.ALWAYS_FALSE);
+        final List<BaseGeocacheFilter> chain = filter.getAndChainIfPossible(null);
+        assertThat(GeocacheFilter.isAlwaysFalse(chain)).isTrue();
+    }
+
+    @Test
+    public void getAndChainIfPossibleWithEmptyTreeIsNotAlwaysFalse() {
+        assertThat(GeocacheFilter.isAlwaysFalse(GeocacheFilter.createEmpty().getAndChainIfPossible(null))).isFalse();
+    }
 }

@@ -208,6 +208,9 @@ final class ALApi {
         final GeocacheFilter filter = pFilter == null ? GeocacheFilter.createEmpty() : pFilter;
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        if (GeocacheFilter.isAlwaysFalse(filters)) {
+            return new ArrayList<>();
+        }
         // Origin excludes Lab
         final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
