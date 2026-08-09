@@ -37,8 +37,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Stack;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -57,9 +61,85 @@ public final class HtmlUtils {
     @ColorInt public static final int COLOR_LTBLUE = 0xFFADD8E6;
     @ColorInt public static final int COLOR_REDDISH = 0xFFFF5733;
 
-
     private HtmlUtils() {
         // utility class
+    }
+
+    /** Helper class to render HTML lists (numbered and unnumbered). Separated class to make unit-testable */
+    public static class HtmlListRenderHelper {
+
+        //Holds the list stack. null represents an unnumbered list, a positive integer represents the next number to be used
+        private Stack<Integer> listStack = new Stack<>();
+
+        public void startList(final boolean numbered) {
+            startList(numbered, 1);
+        }
+
+        public void startList(final boolean numbered, final int startNumber) {
+            listStack.push(numbered ? startNumber : null);
+        }
+
+        public void endList() {
+            if (!listStack.isEmpty()) {
+                listStack.pop();
+            }
+        }
+
+        // returns null on unnumbered lists, or number to use on numbered lists
+        public Integer listItem() {
+            if (listStack.isEmpty()) {
+                return null;
+            }
+            final Integer currentNumber = listStack.peek();
+            if (currentNumber == null) {
+                return null; // Unnumbered list
+            } else {
+                listStack.pop();
+                listStack.push(currentNumber + 1); // Increment the number for the next item
+                return currentNumber; // Numbered list
+            }
+        }
+
+        public int intend() {
+            return listStack.size();
+        }
+    }
+
+    // matches opening or closing ol/ul/li tags (with optional attributes), case-insensitive
+    private static final Pattern LIST_TAG_PATTERN = Pattern.compile("<(/?)\\s*(ol|ul|li)\\b([^>]*)>", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Replaces all occurrences of opening or closing {@code ol}, {@code ul} and {@code li} tags with the
+     * corresponding custom tags ({@link UnknownTagsHandler#CUSTOM_OL_TAG}, {@link UnknownTagsHandler#CUSTOM_UL_TAG},
+     * {@link UnknownTagsHandler#CUSTOM_LI_TAG}). Attributes on the tags are preserved, matching is case-insensitive.
+     */
+    @NonNull
+    public static String replaceListTagsWithCustomTags(final String html) {
+        if (StringUtils.isBlank(html)) {
+            return html == null ? StringUtils.EMPTY : html;
+        }
+        final Matcher matcher = LIST_TAG_PATTERN.matcher(html);
+        final StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            final String slash = matcher.group(1);
+            final String tag = matcher.group(2).toLowerCase(Locale.US);
+            final String attributes = matcher.group(3);
+            final String customTag;
+            switch (tag) {
+                case "ol":
+                    customTag = UnknownTagsHandler.CUSTOM_OL_TAG;
+                    break;
+                case "ul":
+                    customTag = UnknownTagsHandler.CUSTOM_UL_TAG;
+                    break;
+                default:
+                    customTag = UnknownTagsHandler.CUSTOM_LI_TAG;
+                    break;
+            }
+            matcher.appendReplacement(result, Matcher.quoteReplacement("<" + slash + customTag + attributes + ">"));
+        }
+        matcher.appendTail(result);
+        return result.toString();
     }
 
     /**
@@ -260,7 +340,8 @@ public final class HtmlUtils {
     }
 
     public static Pair<Spannable, Boolean> renderHtml(final String html, final Function<String, Drawable> imageGetter) {
-        final String preparedHtml = prepareParseBody(html);
+        String preparedHtml = prepareParseBody(html);
+        preparedHtml = replaceListTagsWithCustomTags(preparedHtml);
         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
         final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(preparedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());

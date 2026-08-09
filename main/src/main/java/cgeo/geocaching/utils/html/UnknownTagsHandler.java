@@ -12,17 +12,17 @@ import org.xml.sax.XMLReader;
 
 public class UnknownTagsHandler implements TagHandler {
 
-    private enum ListType {
-        Ordered, Unordered
-    }
+    public static final String CUSTOM_OL_TAG = "custom-ol";
+    public static final String CUSTOM_UL_TAG = "custom-ul";
+    public static final String CUSTOM_LI_TAG = "custom-li";
+
+    private final HtmlUtils.HtmlListRenderHelper htmlListRenderHelper = new HtmlUtils.HtmlListRenderHelper();
 
     private static final int UNDEFINED_POSITION = -1;
 
     private int countCells = 0;
     private int strikePos = UNDEFINED_POSITION;
     private boolean problematicDetected = false;
-    private int listIndex = 0;
-    private ListType listType = ListType.Unordered;
 
     @Override
     public void handleTag(final boolean opening, final String tag, final Editable output,
@@ -37,9 +37,11 @@ public class UnknownTagsHandler implements TagHandler {
             handleTr(opening, output);
         } else if ("pre".equalsIgnoreCase(tag)) {
             handleProblematic();
-        } else if ("ol".equalsIgnoreCase(tag)) {
+        } else if (CUSTOM_OL_TAG.equalsIgnoreCase(tag)) {
             handleOl(opening);
-        } else if ("li".equalsIgnoreCase(tag)) {
+        } else if (CUSTOM_UL_TAG.equalsIgnoreCase(tag)) {
+            handleUl(opening);
+        } else if (CUSTOM_LI_TAG.equalsIgnoreCase(tag)) {
             handleLi(opening, output);
         } else if ("dt".equalsIgnoreCase(tag)) {
             handleDT(opening, output);
@@ -87,10 +89,17 @@ public class UnknownTagsHandler implements TagHandler {
     // with no handling for alpha or Roman numbers or arbitrary numbering.
     private void handleOl(final boolean opening) {
         if (opening) {
-            listIndex = 1;
-            listType = ListType.Ordered;
+            htmlListRenderHelper.startList(true);
         } else {
-            listType = ListType.Unordered;
+            htmlListRenderHelper.endList();
+        }
+    }
+
+    private void handleUl(final boolean opening) {
+        if (opening) {
+            htmlListRenderHelper.startList(false);
+        } else {
+            htmlListRenderHelper.endList();
         }
     }
 
@@ -104,11 +113,12 @@ public class UnknownTagsHandler implements TagHandler {
 
     private void handleLi(final boolean opening, final Editable output) {
         if (opening) {
-            if (listType == ListType.Ordered) {
-                output.append("\n  ").append(String.valueOf(listIndex++)).append(". ");
-            } else {
-                output.append("\n  • ");
-            }
+            final Integer number = htmlListRenderHelper.listItem();
+            final String listSymbol = number == null ? "•" : number + ".";
+            final String intendCover = "                   ";
+            final int intendLength = Math.max(0, Math.min(intendCover.length(), (htmlListRenderHelper.intend() - 1) * 3));
+            final String intend = intendCover.substring(0, intendLength);
+            output.append("\n").append(intend).append(listSymbol).append(" ");
         }
     }
 
