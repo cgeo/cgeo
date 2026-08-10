@@ -34,6 +34,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Oprava: Stahovač map se za určitých podmínek zastaví (pouze online mapy OpenStreetMap)
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
+- Change: Reduce memory requirements of map activity
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -62,6 +63,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
