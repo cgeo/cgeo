@@ -34,6 +34,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Corregido: El descargador de teselas ya no para bajo ciertas condiciones (OpenStreetMap mapas online)
 - Nuevo: Marcadores de cachés condicionales
 - Nuevo: Mostrar pista de navegación (flecha + distancia)
+- Change: Reduce memory requirements of map activity
 
 ### Detalles del caché
 - Nuevo: Detectar caracteres adicionales en fórmulas: –, ⋅, ×
@@ -62,6 +63,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Corregido: Fallo en las imágenes que cargan directamente incrustadas en la descripción
 - Nuevo: Muestra tus propios favoritos en la vista del registro (Geocaching.com + registros sin conexión)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
