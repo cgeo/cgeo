@@ -1593,7 +1593,7 @@
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">已归档</string>
-    <string name="cache_status_disabled">已下线</string>
+    <string name="cache_status_disabled">已禁用</string>
     <string name="cache_status_active">在线</string>
     <string name="cache_status_premium">仅限 Premium 会员</string>
     <string name="cache_geocode">藏点编号（GC码）</string>
@@ -1893,7 +1893,7 @@
     <string name="map_show_circles">宝盒禁区圈</string>
     <string name="map_showc_own">自己的</string>
     <string name="map_showc_found">已找到</string>
-    <string name="map_showc_disabled">已下线</string>
+    <string name="map_showc_disabled">已禁用</string>
     <string name="map_showc_archived">已归档</string>
     <string name="map_showc_found_offline">已找到 (离线)</string>
     <string name="map_showwp_original">原始</string>
