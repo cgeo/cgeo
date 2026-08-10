@@ -34,6 +34,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Naprawiono: W pewnych sytuacjach pobierania kafelków zatrzymywało się (tylko mapy online OpenStreetMap)
 - Nowość: Warunkowe znaczniki skrytki
 - Nowość: Pokaż wskazówkę nawigacji (strzałka + odległość)
+- Change: Reduce memory requirements of map activity
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -62,6 +63,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Naprawiono: Awaria przy wczytywaniu obrazów osadzonych bezpośrednio w opisie skrytki
 - Nowość: Pokaż własne ulubione w widoku dziennika (Geocaching.com + dzienniki offline)
 - Nowość: Wysyłanie wpisu jest wykonywane w tle
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
