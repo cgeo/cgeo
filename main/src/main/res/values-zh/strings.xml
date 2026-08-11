@@ -314,7 +314,7 @@
     <string name="warn_no_connector">当前没有活跃的地理藏宝服务提供这种类型的搜索。</string>
     <string name="warn_search_help_title">需要帮助吗？</string>
     <string name="warn_search_help_address">输入地址或位置名称。 例如，使用邮政地址 \"Radlicka 100, Prague, Czech Republic\"，城市名称 \"Berlin\"，或者只是一个类似 \"Yellowstone Park\" 的名称。</string>
-    <string name="warn_search_help_gccode">输入藏点的代码，例如 \"GC1VCAZ\"。</string>
+    <string name="warn_search_help_gccode">输入藏点编号，例如 \"GC1VCAZ\"。</string>
     <string name="warn_search_help_keyword">输入藏点名称的全部或部分。例如 “夜间藏点”。</string>
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
@@ -465,12 +465,12 @@
     <string name="caches_sort_storage">存储在设备上的日期</string>
     <string name="caches_sort_eventdate">事件日期</string>
     <string name="caches_sort_lastfounddate">最后找到日期</string>
-    <string name="caches_select_mode">选择模式：</string>
+    <string name="caches_select_mode">多选</string>
     <string name="caches_select_next20">选择下20个宝</string>
     <string name="caches_select_next100">选择下100个宝</string>
     <string name="caches_select_mode_exit">退出选择模式</string>
     <string name="caches_select_invert">反转选择</string>
-    <string name="caches_nearby">附近的</string>
+    <string name="caches_nearby">附近</string>
     <string name="caches_remove_all">删除列表中所有内容</string>
     <string name="caches_remove_selected">删除列表中所选的项目</string>
     <string name="caches_remove_all_completely">删除设备中所有藏点</string>
@@ -679,7 +679,7 @@
     <string name="cache_filter_status_exclude_disabled">排除已下线的藏点</string>
     <string name="cache_filter_status_exclude_archived">排除已归档的藏点</string>
     <string name="cache_filter_boolean_individualroute_contained">包含在路线中</string>
-    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">包括没有难度/海拔数据的藏点</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">包括没有难度/地形评分的藏点</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">使用 gc.com 填充</string>
     <string name="cache_filter_nested_filter_modify">修改</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">子过滤器当前为空</string>
@@ -754,7 +754,7 @@
     <string name="named_filter_enable_all_markers">将过滤器应用为标记</string>
     <string name="named_filter_markers_enabled">标记已启用</string>
     <string name="named_filter_markers_disabled">标记已禁用</string>
-    <string name="named_filter_select_title">选择过滤器</string>
+    <string name="named_filter_select_title">选择筛选器</string>
     <string name="named_filter_activate_deactivate_title">启用 / 禁用标记</string>
     <string name="named_filter_nofilter_label">(无过滤器 — 匹配所有藏点)</string>
     <string name="named_filter_save_as_title">另存为过滤器</string>
@@ -1593,7 +1593,7 @@
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">已归档</string>
-    <string name="cache_status_disabled">已下线</string>
+    <string name="cache_status_disabled">已禁用</string>
     <string name="cache_status_active">在线</string>
     <string name="cache_status_premium">仅限 Premium 会员</string>
     <string name="cache_geocode">藏点编号（GC码）</string>
@@ -1885,7 +1885,7 @@
     <string name="imageview_metadata_comment">评论</string>
     <!-- map -->
     <string name="map_map">地图</string>
-    <string name="map_live">在线藏点地图</string>
+    <string name="map_live">实时</string>
     <string name="map_offline">离线</string>
     <string name="map_view_map">地图视图</string>
     <string name="map_rotation">地图朝向</string>
@@ -1893,7 +1893,7 @@
     <string name="map_show_circles">宝盒禁区圈</string>
     <string name="map_showc_own">自己的</string>
     <string name="map_showc_found">已找到</string>
-    <string name="map_showc_disabled">已下线</string>
+    <string name="map_showc_disabled">已禁用</string>
     <string name="map_showc_archived">已归档</string>
     <string name="map_showc_found_offline">已找到 (离线)</string>
     <string name="map_showwp_original">原始</string>
@@ -1906,10 +1906,10 @@
     <string name="map_theme_select">选择地图主题</string>
     <string name="map_theme_options">主题选项</string>
     <string name="map_language">地图语言</string>
-    <string name="map_live_enable">启用在线藏点地图</string>
-    <string name="map_live_disable">禁用在线藏点地图</string>
-    <string name="map_live_disabled">在线藏点地图已禁用</string>
-    <string name="map_live_disabled_hint">在线藏点地图已禁用。您只能看到已保存的藏点。在菜单中启用实时模式。</string>
+    <string name="map_live_enable">启用实时地图</string>
+    <string name="map_live_disable">禁用实时地图</string>
+    <string name="map_live_disabled">实时模式已禁用</string>
+    <string name="map_live_disabled_hint">实时模式已禁用。您只能看到已保存的藏点。在菜单中启用实时模式</string>
     <string name="map_as_list">显示为列表</string>
     <string name="map_select_multiple_items">请选择</string>
     <string name="map_routing">路线规划</string>

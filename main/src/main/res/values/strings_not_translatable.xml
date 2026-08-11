@@ -334,4 +334,7 @@
 
     <!-- default marker -->
     <string translatable="false" name="hyphen">-</string>
+
+    <!-- about: changelog -->
+    <string translatable="false" name="about_changelog_betaupdate">Beta release update</string>
 </resources>

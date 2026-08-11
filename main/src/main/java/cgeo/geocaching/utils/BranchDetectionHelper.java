@@ -1,11 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.CgeoApplication;
 
 public class BranchDetectionHelper {
 
     // should contain the version name of the last feature release
-    public static final String FEATURE_VERSION_NAME = "2026.08.07-RC";
+    public static final String FEATURE_VERSION_NAME = "2026.08.11-RC";
 
     // should contain version names of active bugfix releases since last feature release, oldest first
     // empty the part within curly brackets when creating a new release branch from master
@@ -40,6 +41,13 @@ public class BranchDetectionHelper {
     @SuppressWarnings("ConstantConditions")
     public static boolean isFossBuild() {
         return BuildConfig.FLAVOR.equals("foss");
+    }
+
+    /**
+     * @return true, if version string ends with "-RC"
+     */
+    public static boolean isReleaseCandidate() {
+        return Version.getVersionName(CgeoApplication.getInstance()).endsWith("-RC");
     }
 
 }

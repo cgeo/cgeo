@@ -34,6 +34,7 @@
 - 修复：瓦片下载器在某些条件下停止的问题 (仅限 OpenStreetMap 在线地图)
 - 新增：条件藏点标记
 - 新增：显示导航提示 (箭头 + 距离)
+- Change: Reduce memory requirements of map activity
 
 ### 藏点详细信息
 - 新增：识别公式中的额外字符：–, ⋅, ×
@@ -62,6 +63,7 @@
 - 修复：加载直接嵌入在描述文本中的图片时崩溃的问题
 - 新增：在记录视图中显示自己的收藏点 (Geocaching.com + 离线记录)
 - 新增：发送记录现在在后台完成
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo 播放器
 - 新增：Wherigo 离线翻译
