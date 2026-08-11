@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.CgeoApplication;
 
 public class BranchDetectionHelper {
 
@@ -40,6 +41,13 @@ public class BranchDetectionHelper {
     @SuppressWarnings("ConstantConditions")
     public static boolean isFossBuild() {
         return BuildConfig.FLAVOR.equals("foss");
+    }
+
+    /**
+     * @return true, if version string ends with "-RC"
+     */
+    public static boolean isReleaseCandidate() {
+        return Version.getVersionName(CgeoApplication.getInstance()).endsWith("-RC");
     }
 
 }

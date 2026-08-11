@@ -232,6 +232,11 @@ public class AboutActivity extends TabbedViewPagerActivity {
             final String changelogBugfix = prepareChangelogBugfix(activity);
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
+                if (BranchDetectionHelper.isReleaseCandidate()) {
+                    final String changelogBetaUpdate = FileUtils.getChangelogBetaUpdate(activity);
+                    markwon.setMarkdown(binding.changelogBetaupdate, "## " + LocalizationUtils.getString(R.string.about_changelog_betaupdate) + "\n\n" + changelogBetaUpdate);
+                    binding.changelogBetaupdate.setVisibility(View.VISIBLE);
+                }
                 if (StringUtils.isNotEmpty(changelogBugfix) && (!changelogBugfix.equals("##"))) {
                     markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + LocalizationUtils.getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
                 } else {
