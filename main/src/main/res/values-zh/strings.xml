@@ -465,7 +465,7 @@
     <string name="caches_sort_storage">存储在设备上的日期</string>
     <string name="caches_sort_eventdate">事件日期</string>
     <string name="caches_sort_lastfounddate">最后找到日期</string>
-    <string name="caches_select_mode">选择模式：</string>
+    <string name="caches_select_mode">多选</string>
     <string name="caches_select_next20">选择下20个宝</string>
     <string name="caches_select_next100">选择下100个宝</string>
     <string name="caches_select_mode_exit">退出选择模式</string>
@@ -754,7 +754,7 @@
     <string name="named_filter_enable_all_markers">将过滤器应用为标记</string>
     <string name="named_filter_markers_enabled">标记已启用</string>
     <string name="named_filter_markers_disabled">标记已禁用</string>
-    <string name="named_filter_select_title">选择过滤器</string>
+    <string name="named_filter_select_title">选择筛选器</string>
     <string name="named_filter_activate_deactivate_title">启用 / 禁用标记</string>
     <string name="named_filter_nofilter_label">(无过滤器 — 匹配所有藏点)</string>
     <string name="named_filter_save_as_title">另存为过滤器</string>
