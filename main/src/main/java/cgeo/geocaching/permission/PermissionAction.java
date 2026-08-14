@@ -121,7 +121,7 @@ public class PermissionAction<T> {
                     .setNegativeButton(TextParam.id(R.string.cancel))
                     .setNeutralButton(TextParam.id(R.string.permission_goto_app_details))
                     .setNeutralAction(this::openApplicationSettings)
-                    .show(() -> launchPermissionRequest(parameter));
+                    .confirm(() -> launchPermissionRequest(parameter));
         }
 
     }
