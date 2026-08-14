@@ -307,11 +307,13 @@ androidComponentsExt.onVariants(androidComponentsExt.selector().all()) { variant
         String currentFileName = output.outputFileName.get()
         output.outputFileName.set(currentFileName.replace("-basic-", "-"))
 
-        // special version code for nightly, rc and legacy builds
+        // special version code for nightly, rc, release and legacy builds
         if (variant.buildType == 'nightly') {
-            output.versionCode.set(versionCodeFromDate(10000000))
+            output.versionCode.set(versionCodeFromDate(100009)) // year+1, and "9" suffix
         } else if (variant.buildType == 'rc') {
-            output.versionCode.set(versionCodeFromDate(-1))
+            output.versionCode.set(versionCodeFromDate(versionCodeDigit('RC_VERSIONCODE_DIGIT', 0)))
+        } else if (variant.buildType == 'release') {
+            output.versionCode.set(versionCodeFromDate(versionCodeDigit('RELEASE_VERSIONCODE_DIGIT', 2)))
         } else if (variant.buildType == 'legacy') {
             String legacyName = System.getenv('LEGACY_VERSION_NAME')
             Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
@@ -631,11 +633,26 @@ tasks.register('verifyCgeoKeys') {
     }
 }
 
-// version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
-static int versionCodeFromDate(offset) {
+// version number = current date (YYYYMMDD) * 10 + a per-build-type last digit
+// that defines which builds supersede each other on a device (higher digit wins on the same day)
+static int versionCodeFromDate(int lastDigit) {
     Date date = new Date()
     String formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate) + offset
+    return Integer.valueOf(formattedDate) * 10 + lastDigit
+}
+
+// read the configurable last digit of the version code from an environment variable (set via the Jenkins UI),
+// falling back to the given default. Must be a single digit 0-9 so it does not shift the date part.
+static int versionCodeDigit(String envName, int defaultDigit) {
+    String raw = System.getenv(envName)
+    if (raw == null || raw.trim().isEmpty()) {
+        return defaultDigit
+    }
+    int digit = raw.trim() as Integer
+    if (digit < 0 || digit > 9) {
+        throw new InvalidUserDataException("$envName must be a single digit 0-9, was: $raw")
+    }
+    return digit
 }
 
 // version name based on current date
