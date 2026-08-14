@@ -689,7 +689,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 waypoints.addAll(viewModel.caches.readWithResult(caches -> {
                     final Set<Waypoint> wpSet = new HashSet<>();
                     final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
-                    wpSet.addAll(cache.getWaypoints());
+                    if (cache != null) {
+                        wpSet.addAll(cache.getWaypoints());
+                    }
                     return wpSet;
                 }));
             }
