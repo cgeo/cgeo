@@ -64,6 +64,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Nuevo: Muestra tus propios favoritos en la vista del registro (Geocaching.com + registros sin conexión)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
