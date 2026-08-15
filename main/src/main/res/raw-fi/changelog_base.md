@@ -64,6 +64,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos
