@@ -64,6 +64,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
