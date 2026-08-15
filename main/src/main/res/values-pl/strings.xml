@@ -2887,6 +2887,8 @@
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
+    <string name="pause">Wstrzymaj</string>
+    <string name="resume">Wznów</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
