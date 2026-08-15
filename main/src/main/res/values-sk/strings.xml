@@ -2820,6 +2820,8 @@
     <string name="delete">Odstrániť</string>
     <string name="play">Hrať</string>
     <string name="copy" tools:ignore="PrivateResource">Kopírovať</string>
+    <string name="pause">Pozastaviť</string>
+    <string name="resume">Obnoviť</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrať všetko</string>
     <string name="multiselect_selectvisible">Vybrať viditeľné</string>
