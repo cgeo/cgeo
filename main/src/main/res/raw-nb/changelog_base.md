@@ -64,6 +64,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - Neu: Logs werden nun im Hintergrund gesendet
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo-spiller
 - New: Offline translation for Wherigos
