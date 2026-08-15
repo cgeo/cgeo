@@ -2757,6 +2757,8 @@
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
     <string name="copy" tools:ignore="PrivateResource">Copia</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Riprendi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>
