@@ -64,6 +64,7 @@
 - 新增：在记录视图中显示自己的收藏点 (Geocaching.com + 离线记录)
 - 新增：发送记录现在在后台完成
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo 播放器
 - 新增：Wherigo 离线翻译
