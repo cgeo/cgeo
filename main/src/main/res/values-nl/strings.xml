@@ -2733,6 +2733,8 @@
     <string name="delete">Verwijderen</string>
     <string name="play">Spelen</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiëren</string>
+    <string name="pause">Pauzeren</string>
+    <string name="resume">Hervatten</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
