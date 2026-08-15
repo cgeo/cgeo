@@ -241,6 +241,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/waypoint_my_coordinates" />
+    <FrameLayout
+        android:id="@+id/averaging_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 		<Button
 			android:id="@+id/cache"

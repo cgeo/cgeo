@@ -32,6 +32,7 @@ import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.storage.CacheCache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -2681,7 +2682,6 @@ public class Settings {
         return rawLanguage;
     }
 
-
     public static @NonNull Set<String> getLanguagesToNotTranslate() {
         final Set<String> lngs = new HashSet<>();
         if (sharedPrefs == null) {
@@ -2694,5 +2694,9 @@ public class Settings {
             lngs.add(targetLng.getCode());
         }
         return lngs;
+    }
+
+    public static int getCacheCacheSize() {
+        return getInt(R.string.pref_cachecache_size, CacheCache.DEFAULT_CACHED_CACHES);
     }
 }
