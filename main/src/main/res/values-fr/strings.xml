@@ -2819,6 +2819,8 @@
     <string name="delete">Supprimer</string>
     <string name="play">Jouer</string>
     <string name="copy" tools:ignore="PrivateResource">Copier</string>
+    <string name="pause">Mettre en pause</string>
+    <string name="resume">Reprendre</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Tout sélectionner</string>
     <string name="multiselect_selectvisible">Sélectionner les éléments visibles</string>
