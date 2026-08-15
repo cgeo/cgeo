@@ -64,6 +64,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Nouveau : Afficher ses propres favoris dans la vue des logs (Geocaching.com + logs hors-ligne)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo Player
 - Nouveau : Traduction hors ligne pour les caches Wherigo
