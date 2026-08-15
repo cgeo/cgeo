@@ -64,6 +64,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
 - Nou: L'enviament del registre es fa en segon pla
 - Correcció: Inventari ocult en el registre sota certes condicions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
