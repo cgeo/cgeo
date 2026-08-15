@@ -2888,6 +2888,8 @@
     <string name="delete">Удалить</string>
     <string name="play">Играть</string>
     <string name="copy" tools:ignore="PrivateResource">Копировать</string>
+    <string name="pause">Пауза</string>
+    <string name="resume">Продолжить</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
     <string name="multiselect_selectvisible">Выбрать видимое</string>
