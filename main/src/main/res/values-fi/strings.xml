@@ -2771,6 +2771,8 @@
     <string name="delete">Poista</string>
     <string name="play">Toista</string>
     <string name="copy" tools:ignore="PrivateResource">Kopioi</string>
+    <string name="pause">Keskeytä</string>
+    <string name="resume">Jatka</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Valitse kaikki</string>
     <string name="multiselect_selectvisible">Valitse näkyvät</string>
