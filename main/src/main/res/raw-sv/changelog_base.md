@@ -64,6 +64,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
