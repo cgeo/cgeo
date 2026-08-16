@@ -11,7 +11,6 @@ import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
@@ -166,8 +165,7 @@ public class SuApi {
         //for now we have to assume that SUConnector supports only SINGLE criteria search
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
-        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
-        if (of != null && !of.allowsCachesOf(connector)) {
+        if (GeocacheFilter.blocksEverything(filters)) {
             return new ArrayList<>();
         }
         final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
