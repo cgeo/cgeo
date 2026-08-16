@@ -549,7 +549,7 @@
     <string name="rename_from">重命名自</string>
     <string name="rename_to">重命名为</string>
     <string name="list_menu_import">导入</string>
-    <string name="list_title">選擇一個播放清單</string>
+    <string name="list_title">选择列表</string>
     <string name="lists_title">选择列表</string>
     <string name="lists_title_new_caches">选择列表 (新藏点)</string>
     <string name="list_inbox">已存储</string>
@@ -1180,8 +1180,8 @@
     <string name="init_routeappearance_summary">为单个路由线选择颜色、不透明和线宽度。 一个单独的路由是通过长按航点或藏点来实现。 (您需要先启用长按功能，见地图设置。)</string>
     <string name="init_trackappearance">GPX 轨迹/路由外观</string>
     <string name="init_trackappearance_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些航点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
-    <string name="init_circlecolor">圆环线颜色</string>
-    <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
+    <string name="init_circlecolor">宝盒禁区圈颜色</string>
+    <string name="init_circlecolor_summary">选择宝盒禁区圈的颜色和不透明度。宝盒禁区圈代表藏点或物理航点周围最小半径。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
     <string name="init_geofencecolor">地理围栏圈选颜色</string>
     <string name="init_geofencecolor_summary">选择地理围圈的颜色和不透明度。 圆圈用于视觉展示为航点定义的地理围栏(通常适用于Geocaching.com 的lab adventure中的阶段)</string>
     <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
