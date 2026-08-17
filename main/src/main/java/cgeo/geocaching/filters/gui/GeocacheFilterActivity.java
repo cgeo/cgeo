@@ -33,6 +33,7 @@ import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRAN
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -386,7 +387,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void adjustNamedFilterReferenceViewFor(@Nullable final NamedFilter filter) {
-        binding.filterStorageName.setText(filter == null ? "" : filter.getNameAndMarker());
+        final boolean unsavedFilter = this.filterContext.get().getTree() != null && filter != null && !this.filterContext.get().filtersSame(filter.getFilter());
+        binding.filterStorageName.setText(filter == null ? "" : unsavedFilter ? "(" + filter.getName() + ")*" : filter.getNameAndMarker());
+        binding.filterStorageName.setTypeface(null, unsavedFilter ? Typeface.ITALIC : Typeface.NORMAL);
+        binding.filterSaveAsNamed.setIconResource(unsavedFilter ? R.drawable.ic_menu_unsaved : R.drawable.ic_menu_save);
         binding.filterReferenceNamedFilterId.setText(filter == null ? "-1" : "" + filter.getId());
         binding.filterStorageDelete.setVisibility(filter == null ? View.GONE : View.VISIBLE);
     }
