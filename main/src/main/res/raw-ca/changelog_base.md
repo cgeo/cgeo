@@ -3,10 +3,10 @@
 
 ### Detalls del catxé
 - Nou: alterna la data emmagatzemada al dispositiu entre relativa i exacta
-- Fix: Stacked progress dialogs when deleting multiple logs
+- Correcció: Diàlegs de progrés apilats en suprimir diversos registres
 
 ### Wherigo Player
 -
 
 ### General
-- Fix: Multiple pending download dialogs on main screen
+- Correcció: Diversos diàlegs de descàrrega pendents a la pantalla principal
