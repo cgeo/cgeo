@@ -27,13 +27,13 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/filter_fill_with_named"
                 style="@style/button_icon"
                 android:tooltipText="@string/named_filter_fill_with_named"
-                app:icon="@drawable/ic_menu_manage_list" />
+                app:icon="@drawable/ic_menu_list" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/filter_save_as_named"
                 style="@style/button_icon"
                 android:tooltipText="@string/named_filter_save_as"
@@ -56,7 +56,7 @@
                 android:ellipsize="end"
                 android:maxLines="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/filter_storage_delete"
                 style="@style/button_icon"
                 android:tooltipText="@string/named_filter_delete"
