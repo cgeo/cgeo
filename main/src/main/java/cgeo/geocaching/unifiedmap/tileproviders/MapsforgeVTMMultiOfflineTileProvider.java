@@ -84,6 +84,15 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
         fragment.applyTheme();
     }
 
+    @Override
+    public List<Uri> getMapUris() {
+        final List<Uri> result = new ArrayList<>();
+        for (final ImmutablePair<String, Uri> data : maps) {
+            result.add(data.right);
+        }
+        return result;
+    }
+
     private void checkLanguage(final ArrayList<String> languages, final String languagesPreference) {
         if (StringUtils.isNotBlank(languagesPreference)) {
             for (String language : languagesPreference.split(",")) {

@@ -126,6 +126,18 @@ Android Studio needs to be configured for which device(s) c:geo will be deployed
 You can create several profiles for a physical device attached via USB, as well as virtual devices that are run in an emulator.
 (If the emulator is not installed yet, do so via File => Settings, Appearance & Behaviour => System Settings => Android SDK, tab "SDK Tools", check "Android Emulator", and apply.)
 
+## Pebble live map
+
+When an offline Mapsforge or VTM map is selected, c:geo can stream a live map to a Pebble watch.
+Start the `PebbleMapService` from the map options menu (Pebble watch icon) or from the map toolbar.
+The service renders a 200x228 8-bit map around your current GPS location and sends it to the watch in chunks.
+
+Watch controls:
+
+- **SELECT**: request an immediate refresh
+- **UP / DOWN**: zoom in / out on the watch
+- **LONG SELECT**: toggle auto-refresh (10 s on / off)
+
 ## License
 
 c:geo is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

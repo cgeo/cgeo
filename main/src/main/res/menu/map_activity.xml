@@ -173,4 +173,9 @@
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"
         android:title="@string/map_as_list"/>
+    <item
+        android:id="@+id/menu_pebble_map_start"
+        android:icon="@drawable/ic_menu_watch"
+        android:title="@string/menu_pebble_map_start"
+        app:showAsAction="never"/>
 </menu>
