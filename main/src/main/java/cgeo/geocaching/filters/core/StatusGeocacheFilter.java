@@ -23,11 +23,19 @@ import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
+
+    public static StatusGeocacheFilter create(final Collection<StatusType> yesStati, final Collection<StatusType> noStati) {
+        final StatusGeocacheFilter filter = GeocacheFilterType.STATUS.create();
+        yesStati.forEach(status -> filter.setStatusValue(status, true));
+        noStati.forEach(status -> filter.setStatusValue(status, false));
+        return filter;
+    }
 
     private static final int USERDISPLAY_MAXELEMENTS = 2;
 
@@ -75,6 +83,26 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private boolean excludeActive = false;
     private boolean excludeDisabled = false;
     private boolean excludeArchived = false;
+
+    private void setStatusValue(final StatusType status, final boolean value) {
+        switch (status) {
+            case OWNED: statusOwned = value; break;
+            case FOUND: statusFound = value; break;
+            case DNF: statusDnf = value; break;
+            case STORED: statusStored = value; break;
+            case FAVORITE: statusFavorite = value; break;
+            case WATCHLIST: statusWatchlist = value; break;
+            case PREMIUM: statusPremium = value; break;
+            case HAS_TRACKABLE: statusHasTrackable = value; break;
+            case HAS_OWN_VOTE: statusHasOwnVote = value; break;
+            case HAS_OFFLINE_LOG: statusHasOfflineLog = value; break;
+            case HAS_OFFLINE_FOUND_LOG: statusHasOfflineFoundLog = value; break;
+            case SOLVED_MYSTERY: statusSolvedMystery = value; break;
+            case CORRECTED_COORDINATES: statusCorrectedCoordinates = value; break;
+            case HAS_USER_DEFINED_WAYPOINTS: statusHasUserDefinedWaypoints = value; break;
+            default: break;
+        }
+    }
 
 
     private Boolean statusOwned = null;
