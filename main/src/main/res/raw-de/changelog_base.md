@@ -64,7 +64,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
 - Neu: Das Senden eines Cachelogs erfolgt im Hintergrund
 - Korrektur: Trackables unter bestimmten Bedingungen nicht sichtbar beim Loggen
-- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Neu: Positionsmittelung beim Erstellen von Wegpunkten / Festlegen von Koordinaten für benutzerdefinierte Caches
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
