@@ -144,6 +144,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -2045,21 +2049,34 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
         private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll, final HtmlStyle descriptionStyle,
                            final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Exception> errorConsumer) {
+            final boolean useWebView = descriptionStyle == HtmlStyle.WEBVIEW && !useMarkdown(cache);
             binding.descriptionRenderFully.setVisibility(View.GONE);
-            binding.description.setText(TextUtils.setSpan(LocalizationUtils.getString(translator != null ? R.string.cache_description_translating_and_rendering : R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
-            binding.description.setVisibility(View.VISIBLE);
+            if (useWebView) {
+                binding.description.setVisibility(View.GONE);
+                binding.descriptionWebview.setVisibility(View.VISIBLE);
+                binding.descriptionWebview.loadDataWithBaseURL(null, "<html><body><i>" + LocalizationUtils.getString(translator != null ? R.string.cache_description_translating_and_rendering : R.string.cache_description_rendering) + "</i></body></html>", "text/html", "utf-8", null);
+            } else {
+                binding.descriptionWebview.setVisibility(View.GONE);
+                binding.description.setText(TextUtils.setSpan(LocalizationUtils.getString(translator != null ? R.string.cache_description_translating_and_rendering : R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+                binding.description.setVisibility(View.VISIBLE);
+            }
             AndroidRxUtils.computationScheduler.scheduleDirect(() ->
-                    createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle, translator, status, p -> {
+                    createDescriptionContent(activity, cache, useWebView ? false : restrictLength, binding.description, descriptionStyle, translator, status, p -> {
                         if (activity.isFinishing() || activity.isDestroyed()) {
                             return;
                         }
-                        displayDescription(activity, cache, p.first, binding.description);
+                        if (useWebView) {
+                            displayDescriptionInWebView(activity, cache, p.first.toString(), binding.descriptionWebview);
+                        } else {
+                            displayDescription(activity, cache, p.first, binding.description);
+                        }
                         if (translator != null) {
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
 
                         if (status == null || Strings.CS.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
-                            OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);
+                            final String languageDetectionText = useWebView ? p.first.toString() : binding.description.getText().toString();
+                            OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, languageDetectionText + " " + binding.hint.getText().toString(), this::translateListing);
                         }
 
                         // we need to use post, so that the textview is layouted before scrolling gets called
@@ -2068,7 +2085,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         } else if (initialScroll != 0) {
                             binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                         }
-                        if (p.second) {
+                        if (!useWebView && p.second) {
                             binding.descriptionRenderFully.post(() -> {
                                 binding.descriptionRenderFully.setVisibility(View.VISIBLE);
                                 binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
@@ -2102,6 +2119,41 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 Log.e("Problem with description", ex);
                 ActivityMixin.showToast(activity, R.string.err_load_descr_failed);
             }
+        }
+
+        @SuppressLint("SetJavaScriptEnabled")
+        @MainThread
+        private static void displayDescriptionInWebView(final Activity activity, final Geocache cache, final String descriptionHtml, final WebView descriptionWebView) {
+            final WebSettings webSettings = descriptionWebView.getSettings();
+            webSettings.setJavaScriptEnabled(false);
+            webSettings.setAllowFileAccess(false);
+            webSettings.setAllowContentAccess(false);
+            webSettings.setDomStorageEnabled(false);
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setUseWideViewPort(true);
+            webSettings.setBuiltInZoomControls(true);
+            webSettings.setDisplayZoomControls(false);
+            webSettings.setSupportZoom(true);
+            webSettings.setDefaultTextEncodingName("utf-8");
+            descriptionWebView.setBackgroundColor(Color.TRANSPARENT);
+            descriptionWebView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(final WebView view, final WebResourceRequest request) {
+                    if (request != null && request.getUrl() != null) {
+                        ShareUtils.openUrl(activity, request.getUrl().toString());
+                    }
+                    return true;
+                }
+
+                @Override
+                public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+                    ShareUtils.openUrl(activity, url);
+                    return true;
+                }
+            });
+            final IConnector connector = ConnectorFactory.getConnector(cache);
+            final String baseUrl = connector == null ? null : connector.getHostUrl() + "/";
+            descriptionWebView.loadDataWithBaseURL(baseUrl, descriptionHtml, "text/html", "utf-8", null);
         }
 
         private static void displayDescriptionHelper(final Activity activity, final Geocache cache, final CharSequence renderedDescription, final TextView descriptionView) {
@@ -2147,6 +2199,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             try {
                 if (useMarkdown(cache)) {
                     return new Pair<>(descriptionText, textTooLong && restrictLength);
+                }
+                if (descriptionStyle == HtmlStyle.WEBVIEW) {
+                    return new Pair<>(descriptionText, false);
                 }
                 //Format to HTML. This takes time on long listings or those with e.g. many images...
                 final HtmlImage imageGetter = new HtmlImage(cache.getGeocode(), true, false, descriptionView, false);
