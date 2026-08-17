@@ -1733,6 +1733,7 @@
     <string name="cc_hint_seconds">Sekunden</string>
     <string name="cc_hint_fraction">Bruchteil</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates">Positionsmittelung…</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
@@ -2821,6 +2822,8 @@
     <string name="delete">Löschen</string>
     <string name="play">Spielen</string>
     <string name="copy" tools:ignore="PrivateResource">Kopieren</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Fortsetzen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
