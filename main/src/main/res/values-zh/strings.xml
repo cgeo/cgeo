@@ -290,8 +290,8 @@
     <string name="err_tb_not_loggable">该可追踪物的日志功能不可用。</string>
     <string name="err_tb_not_found">c:geo 找不到可追踪物 %s.</string>
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
-    <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加航点到哪个藏点。</string>
-    <string name="err_waypoint_add_failed">c:geo 无法添加您的航点。</string>
+    <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加途径点到哪个藏点。</string>
+    <string name="err_waypoint_add_failed">c:geo 无法添加您的途径点。</string>
     <string name="err_log_load_data">c:geo 无法加载记录到访所需的数据。</string>
     <string name="err_log_post_missing_tracking_code">缺少追踪代码。</string>
     <string name="err_log_post_missing_coordinates">缺少坐标。</string>
@@ -341,14 +341,14 @@
     <string name="info_log_type_changed">日志类型已更改！</string>
     <string name="info_select_logimage_cancelled">图像选择或捕获已取消。</string>
     <string name="info_cache_saved">已存储藏点到本地</string>
-    <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
+    <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存途径点。</string>
     <string name="err_trackable_log_not_anonymous">无法匿名从 c:geo 登录 %1$s 。您想要打开设置来填写您的 %2$s 认证吗？</string>
     <string name="err_trackable_no_preference_activity">抱歉，找不到合适的首选项屏幕。</string>
     <string name="confirm_unsaved_changes_title">未保存的更改</string>
     <string name="confirm_discard_changes">要放弃未保存的改动吗？</string>
     <string name="confirm_unsent_changes_title">未提交的更改</string>
     <string name="confirm_unsent_changes">要放弃未提交的修改吗？</string>
-    <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
+    <string name="confirm_discard_wp_changes">丢弃未保存的途径点更改？</string>
     <string name="warn_log_load_additional_data">c:geo 无法加载用于记录日志的额外数据 （可追踪物、收藏点）</string>
     <string name="more_information">更多信息</string>
     <string name="undo">撤消</string>
@@ -549,7 +549,7 @@
     <string name="rename_from">重命名自</string>
     <string name="rename_to">重命名为</string>
     <string name="list_menu_import">导入</string>
-    <string name="list_title">選擇一個播放清單</string>
+    <string name="list_title">选择列表</string>
     <string name="lists_title">选择列表</string>
     <string name="lists_title_new_caches">选择列表 (新藏点)</string>
     <string name="list_inbox">已存储</string>
@@ -670,7 +670,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">有离线Found日志的</string>
     <string name="cache_filter_status_select_label_solved_mystery">已解决的谜宝</string>
     <string name="cache_filter_status_select_label_corrected_coordinates">有修改坐标的</string>
-    <string name="cache_filter_status_select_label_has_user_defined_waypoints">有用户自定义waypoint的</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">有用户自定义途径点的</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">此过滤器设置只会影响谜题藏点。如果您想要排除其他藏点类型，请定义一个适当的藏点类型过滤器。\n\n当谜题藏宝具有更改后的坐标或填入了具有有效坐标的最终途经点时，即被视为\"已解决\"。</string>
     <string name="cache_filter_status_active">在线</string>
     <string name="cache_filter_status_disabled">已下线</string>
@@ -866,7 +866,7 @@
     <string name="settings_title_map_hillshading">离线地图山坡阴影</string>
     <string name="settings_title_offline_routing">离线路线规划</string>
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
-    <string name="settings_title_waypoints">航点</string>
+    <string name="settings_title_waypoints">途径点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_maptrail">历史路径</string>
     <string name="settings_title_map_behavior">地图行为</string>
@@ -989,12 +989,12 @@
     <string name="init_translator_external">外部翻译器</string>
     <string name="init_translator_external_description">要使用的外部翻译应用程序</string>
     <string name="system_default">系统默认</string>
-    <string name="init_showwaypoints">显示航点</string>
-    <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
-    <string name="init_zoomincludingwaypoints">缩放包括航点</string>
-    <string name="init_zoomincludingwaypoints_description">如果在地图上显示单个藏点：是否应调整缩放以包括其所有航点？</string>
-    <string name="init_visitedWaypointsSemiTransparent">已访问的航点半透明显示</string>
-    <string name="init_visitedWaypointsSemiTransparent_description">用半透明背景标记已访问的航点</string>
+    <string name="init_showwaypoints">显示途径点</string>
+    <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其途径点。</string>
+    <string name="init_zoomincludingwaypoints">缩放包括途径点</string>
+    <string name="init_zoomincludingwaypoints_description">如果在地图上显示单个藏点：是否应调整缩放以包括其所有途径点？</string>
+    <string name="init_visitedWaypointsSemiTransparent">已访问的途径点半透明显示</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">用半透明背景标记已访问的途径点</string>
     <string name="init_brouterThreshold">计算路径</string>
     <string name="init_brouterThreshold_description">离线路径规划计算路线的最大距离。</string>
     <string name="init_brouterShowBothDistances">显示直线距离</string>
@@ -1024,8 +1024,8 @@
     <string name="distance">距离</string>
     <string name="copy_coordinates">复制坐标</string>
     <string name="selected_position">选定的位置</string>
-    <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
-    <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的航点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
+    <string name="init_global_wp_extraction_disable">禁用途径点提取功能</string>
+    <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的途径点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
     <string name="init_prevent_cache_note_merge">覆盖个人笔记</string>
     <string name="init_summary_prevent_cache_note_merge">如果启用此设置，c:geo 将永久删除本地存储的笔记，并以服务器上的个人笔记代替。 不会进行合并。</string>
     <string name="init_customtabs_as_browser">使用 Chrome WebView</string>
@@ -1089,13 +1089,13 @@
     <string name="init_summary_wallpaper">将设备壁纸显示为主屏幕背景</string>
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
-    <string name="init_backup_summary">请注意，此功能可以备份藏点，航点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>
+    <string name="init_backup_summary">请注意，此功能可以备份藏点，途径点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>
     <string name="init_restore_title">恢复备份</string>
-    <string name="init_backup_caches">藏点和航点</string>
+    <string name="init_backup_caches">藏点和途径点</string>
     <string name="init_backup_program_settings">程序设置</string>
     <string name="init_backup_logins">包括帐户数据</string>
     <string name="init_backup_logins_summary">这将把您输入的登录凭据存储在备份中。</string>
-    <string name="init_backup">备份藏点 / 航点</string>
+    <string name="init_backup">备份藏点 / 途径点</string>
     <string name="init_backup_backup">备份</string>
     <string name="init_backup_finished">备份完成</string>
     <string name="init_backup_backup_failed">备份失败</string>
@@ -1136,7 +1136,7 @@
     <string name="init_restore_version_error">意外的格式 - 无法还原数据库。\n\n预期版本是 %1$d,\n备份版本为 %2$d</string>
     <string name="backup_tracks_error">创建航迹备份时出错。</string>
     <string name="settings_title_backup">备份 / 恢复</string>
-    <string name="settings_summary_backup">执行藏点 / 航点数据和程序设置的备份和恢复。</string>
+    <string name="settings_summary_backup">执行藏点 / 途径点数据和程序设置的备份和恢复。</string>
     <string name="init_backup_settings_logins">备份帐户数据</string>
     <string name="init_backup_settings_backup_full_confirm">您想要存储敏感的帐户相关数据吗？这些数据可能会被其他应用程序读取。</string>
     <string name="settings_savingerror">保存设置出错</string>
@@ -1177,13 +1177,13 @@
     <string name="init_directionappearance">方向外观</string>
     <string name="init_directionappearance_summary">选择方向线的颜色、透明度和线宽度。如果安装BRouter 应用程序并启用了路由，将会有方向线显示，是一条直线到您选定的导航目标 或者指定的路由导航路径。</string>
     <string name="init_routeappearance">单个路径外观</string>
-    <string name="init_routeappearance_summary">为单个路由线选择颜色、不透明和线宽度。 一个单独的路由是通过长按航点或藏点来实现。 (您需要先启用长按功能，见地图设置。)</string>
+    <string name="init_routeappearance_summary">为单个路由线选择颜色、不透明和线宽度。 一个单独的路由是通过长按途径点或藏点来实现。 (您需要先启用长按功能，见地图设置。)</string>
     <string name="init_trackappearance">GPX 轨迹/路由外观</string>
-    <string name="init_trackappearance_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些航点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
-    <string name="init_circlecolor">圆环线颜色</string>
-    <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
+    <string name="init_trackappearance_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些途径点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
+    <string name="init_circlecolor">宝盒禁区圈颜色</string>
+    <string name="init_circlecolor_summary">选择宝盒禁区圈的颜色和不透明度。宝盒禁区圈代表藏点或物理途径点周围最小半径。圆环里不允许其它藏点或实际途径点存在。(适用于 geocaching.com)</string>
     <string name="init_geofencecolor">地理围栏圈选颜色</string>
-    <string name="init_geofencecolor_summary">选择地理围圈的颜色和不透明度。 圆圈用于视觉展示为航点定义的地理围栏(通常适用于Geocaching.com 的lab adventure中的阶段)</string>
+    <string name="init_geofencecolor_summary">选择地理围圈的颜色和不透明度。 圆圈用于视觉展示为途径点定义的地理围栏(通常适用于Geocaching.com 的lab adventure中的阶段)</string>
     <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
     <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
@@ -1202,7 +1202,7 @@
     <string name="init_default_navigation_tool_description">您可以在此选择您首选的导航工具。</string>
     <string name="init_default_navigation_tool_select">选择工具</string>
     <string name="init_default_navigation_tool_2_description">您可以在此选择您的第二个导航工具。长按藏点标题旁边的导航图标以激活它。</string>
-    <string name="init_navigation_menu_description">这里您可以为藏点或航点选择在导航菜单中显示哪些可用的导航方法。 此设备上没有安装被禁用的工具。</string>
+    <string name="init_navigation_menu_description">这里您可以为藏点或途径点选择在导航菜单中显示哪些可用的导航方法。 此设备上没有安装被禁用的工具。</string>
     <string name="init_debug_title">调试信息</string>
     <string name="init_debug_note">c: geo 可以生成大量的调试信息。激活此设置将影响 c: geo 的稳定性, 只有在要求您向开发人员发送日志时才建议这样做。请保持调试日志禁用在正常使用 c: geo!</string>
     <string name="init_debug">激活调试日志</string>
@@ -1224,8 +1224,8 @@
     <string name="init_iconsizes">图标大小</string>
     <string name="init_mapCacheScaling_title">藏点图标缩放</string>
     <string name="init_mapCacheScaling_description">藏点图标的缩放系数(%)</string>
-    <string name="init_mapWpScaling_title">waypoint图标缩放</string>
-    <string name="init_mapWpScaling_description">航点图标的缩放系数(%)</string>
+    <string name="init_mapWpScaling_title">途径点图标缩放</string>
+    <string name="init_mapWpScaling_description">途径点图标的缩放系数(%)</string>
     <string name="init_maintenance">维护</string>
     <string name="init_maintenance_directories_note">已删除的藏点通过 c:geo 进行内部缓存72小时，以防止意外数据丢失。 除此之外，c:geo还在专用文件夹中存储与藏点相关的图像和其他文件。 在一些特殊情况下，这种数据可能不会被删除，尽管在藏点中已经不再存储。 这个功能可以用于清理这种无主数据。</string>
     <string name="init_maintenance_directories">删除孤立的文件</string>
@@ -1288,9 +1288,9 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近时通知</string>
     <string name="init_proximityNotificationGeneral">地图上的粗略的通知</string>
-    <string name="init_summary_proximityNotificationGeneral">如果地图上当前可见的任何宝藏或航点靠近至远距离或近距离范围内，则播放一次通知。两种距离使用不同的音效。</string>
-    <string name="init_proximityNotificationSpecific">特定航点距离通知</string>
-    <string name="init_summary_proximityNotificationSpecific">如果当前选择的缓存或航点距离比远距或近距更近，则重复发出通知。 如果打开缓存或航点详细信息，显示地图上的缓存或航点弹出窗口或激活指南针，则适用。 两个距离使用不同的音调。</string>
+    <string name="init_summary_proximityNotificationGeneral">如果地图上当前可见的任何宝藏或途径点靠近至远距离或近距离范围内，则播放一次通知。两种距离使用不同的音效。</string>
+    <string name="init_proximityNotificationSpecific">特定途径点距离通知</string>
+    <string name="init_summary_proximityNotificationSpecific">如果当前选择的缓存或途径点距离比远距或近距更近，则重复发出通知。 如果打开缓存或途径点详细信息，显示地图上的缓存或途径点弹出窗口或激活指南针，则适用。 两个距离使用不同的音调。</string>
     <string name="far_distance">远距：</string>
     <string name="near_distance">近距</string>
     <string name="init_proximity_notification_type">通知类型</string>
@@ -1427,16 +1427,16 @@
     <string name="cache_offline_refresh">刷新</string>
     <string name="cache_offline_drop">从列表中移除</string>
     <string name="cache_offline_delete">删除</string>
-    <string name="cache_delete_userdefined_waypoints">删除用户定义的航点</string>
-    <string name="cache_delete_userdefined_waypoints_confirm">删除这个藏点内所有用户自定义航点？\n\n航点会立即被删除，无法恢复。</string>
-    <string name="cache_delete_userdefined_waypoints_note">注意：您已经启用了“笔记中的航点”功能。如果您的个人笔记中有c:geo识别的坐标，航点将被自动重新创建。 您可以在个人笔记编辑对话框中禁用此功能。</string>
-    <string name="cache_delete_userdefined_waypoints_success">用户定义的航点已删除</string>
-    <string name="cache_delete_generated_waypoints">删除生成的航点</string>
-    <string name="cache_delete_generated_waypoints_confirm">删除这个藏点内所有生成的用户自定义航点？\n\n航点会立即被删除，无法恢复。</string>
-    <string name="cache_delete_generated_waypoints_success">已删除生成的航点</string>
-    <string name="cache_select_waypoint_types">选择航点类型</string>
+    <string name="cache_delete_userdefined_waypoints">删除用户定义的途径点</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">删除这个藏点内所有用户自定义途径点？\n\n途径点会立即被删除，无法恢复。</string>
+    <string name="cache_delete_userdefined_waypoints_note">注意：您已经启用了“笔记中的途径点”功能。如果您的个人笔记中有c:geo识别的坐标，途径点将被自动重新创建。 您可以在个人笔记编辑对话框中禁用此功能。</string>
+    <string name="cache_delete_userdefined_waypoints_success">用户定义的途径点已删除</string>
+    <string name="cache_delete_generated_waypoints">删除生成的途径点</string>
+    <string name="cache_delete_generated_waypoints_confirm">删除这个藏点内所有生成的用户自定义途径点？\n\n途径点会立即被删除，无法恢复。</string>
+    <string name="cache_delete_generated_waypoints_success">已删除生成的途径点</string>
+    <string name="cache_select_waypoint_types">选择途径点类型</string>
     <plurals name="cache_waypoints_marked_as_visited_success">
-        <item quantity="other">%d 航点标记为已访问</item>
+        <item quantity="other">%d 途径点标记为已访问</item>
     </plurals>
     <string name="cache_offline_store">存储</string>
     <string name="cache_offline_stored_ago">已存储：%s</string>
@@ -1461,16 +1461,16 @@
     <string name="cache_set_coordinates">设置坐标</string>
     <string name="cache_personal_note">个人笔记</string>
     <string name="cache_personal_note_edit_pn">编辑个人笔记</string>
-    <string name="cache_menu_preventWaypointsFromNote">停止读取笔记中的航点</string>
-    <string name="cache_menu_allowWaypointExtraction">允许从笔记中读取航点</string>
+    <string name="cache_menu_preventWaypointsFromNote">停止读取笔记中的途径点</string>
+    <string name="cache_menu_allowWaypointExtraction">允许从笔记中读取途径点</string>
     <string name="cache_personal_note_edit">编辑</string>
-    <string name="cache_personal_note_storewaypoints">添加/更新航点</string>
-    <string name="cache_personal_note_removewaypoints">删除航点</string>
-    <string name="cache_personal_note_removedwaypoints">航点已删除</string>
-    <string name="cache_personal_note_removewaypoints_nowaypoints">未找到可删除的航点</string>
-    <string name="cache_personal_note_storewaypoints_success">航点被添加到个人笔记</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">未找到可存储的航点</string>
-    <string name="cache_personal_note_preventWaypointsExtraction">禁用航点提取功能</string>
+    <string name="cache_personal_note_storewaypoints">添加/更新途径点</string>
+    <string name="cache_personal_note_removewaypoints">删除途径点</string>
+    <string name="cache_personal_note_removedwaypoints">途径点已删除</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">未找到可删除的途径点</string>
+    <string name="cache_personal_note_storewaypoints_success">途径点被添加到个人笔记</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">未找到可存储的途径点</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">禁用途径点提取功能</string>
     <string name="cache_personal_note_limit">个人笔记限制</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">此个人笔记将被截断。 %1$d 字符被缩减成 %3$s (最大字数 %2$d)。</string>
     <string name="cache_personal_note_upload">上传</string>
@@ -1501,13 +1501,13 @@
     <string name="cache_list_select_last">上一次的选择</string>
     <string name="cache_images">图片</string>
     <string name="cache_advanced">高级</string>
-    <string name="cache_waypoints">航点</string>
+    <string name="cache_waypoints">途径点</string>
     <string name="cache_variables">变量</string>
     <string name="cache_variables_chip_completed_variables">已完成</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">航点 (%d)</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">途径点 (%d)</string>
     <string name="cache_waypoints_add">添加途经点</string>
     <string name="cache_waypoints_add_fromclipboard">从剪贴板中添加</string>
-    <string name="cache_waypoints_remove_original_waypoint">从剪贴板复制航点到此藏点。\n\n删除原始航点？</string>
+    <string name="cache_waypoints_remove_original_waypoint">从剪贴板复制途径点到此藏点。\n\n删除原始途径点？</string>
     <string name="cache_hint">提示</string>
     <string name="cache_hint_not_available">没有可用的提示</string>
     <string name="cache_logs">日志本</string>
@@ -1519,7 +1519,7 @@
     <string name="cache_dialog_loading_details_status_details">处理细节中</string>
     <string name="cache_dialog_loading_details_status_spoilers">正在加载揭密图片</string>
     <string name="cache_dialog_loading_details_status_logs">正在加载日志</string>
-    <string name="cache_dialog_loading_details_status_waypoints">正在处理航点</string>
+    <string name="cache_dialog_loading_details_status_waypoints">正在处理途径点</string>
     <string name="cache_dialog_loading_details_status_cache">正在缓存数据</string>
     <string name="cache_dialog_loading_details_status_render">渲染视图</string>
     <string name="cache_dialog_offline_save_title">离线</string>
@@ -1558,8 +1558,8 @@
     <string name="around">%s 周边</string>
     <string name="menu_caches">管理藏点</string>
     <string name="cache_menu_event">添加到日历</string>
-    <string name="cache_menu_extract_waypoints">提取航点</string>
-    <string name="cache_menu_scan_calculated_waypoints">扫描航点公式</string>
+    <string name="cache_menu_extract_waypoints">提取途径点</string>
+    <string name="cache_menu_scan_calculated_waypoints">扫描途径点公式</string>
     <string name="cache_menu_set_found">设置为已找到</string>
     <string name="cache_menu_set_DNF">设置为未找到</string>
     <string name="cache_menu_reset_foundstate">重置找到状态</string>
@@ -1664,7 +1664,7 @@
     <string name="context_share_as_text">分享文本</string>
     <string name="context_share_as_link">分享链接</string>
     <string name="image_category_uncategorized">未分类</string>
-    <string name="image_category_own">自有</string>
+    <string name="image_category_own">我的</string>
     <string name="image_category_listing">介绍</string>
     <string name="image_category_log">日志</string>
     <string name="image_listing_spoiler">剧透</string>
@@ -1675,8 +1675,8 @@
     <string name="context_map_remove_from_route_start">从开头移除</string>
     <string name="context_map_remove_from_route_pos">从位置 %d 移除</string>
     <string name="context_map_remove_from_route_end">从末尾移除</string>
-    <string name="context_map_star_show">显示到航点的连线</string>
-    <string name="context_map_star_hide">隐藏到航点的连线</string>
+    <string name="context_map_star_show">显示到途径点的连线</string>
+    <string name="context_map_star_hide">隐藏到途径点的连线</string>
     <string name="edit">编辑</string>
     <string name="showElevationChart">显示海拔图表</string>
     <string name="create_internal_cache">创建自定义藏点</string>
@@ -1686,11 +1686,11 @@
     <string name="internal_cache_default_description">这是一个自定义藏点</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">“前往”目标</string>
-    <string name="internal_goto_targets_description">此藏点存储了您最近的“前往”目标。一旦您使用了主菜单中的“前往”功能，它就会自动创建。输入的坐标将存储为此藏点的航点。如果您不再需要这些坐标，可以安全地删除此藏点或其任何航点。您也可以将此藏点移动到您选择的任何其他列表中。</string>
+    <string name="internal_goto_targets_description">此藏点存储了您最近的“前往”目标。一旦您使用了主菜单中的“前往”功能，它就会自动创建。输入的坐标将存储为此藏点的途径点。如果您不再需要这些坐标，可以安全地删除此藏点或其任何途径点。您也可以将此藏点移动到您选择的任何其他列表中。</string>
     <string name="goto_targets_deprecation_title">废弃功能提醒</string>
     <string name="goto_targets_deprecation_notice">“转到”功能已废弃，并将在未来版本中删除该功能。请使用“用户自定义宝藏”功能。</string>
     <string name="init_longtap_map">长按地图</string>
-    <string name="init_summary_longtap_map">启用地图图标长按 (创建个人路线) 或地图空白处长按 (创建自定义藏点 / 航点)</string>
+    <string name="init_summary_longtap_map">启用地图图标长按 (创建个人路线) 或地图空白处长按 (创建自定义藏点 / 途径点)</string>
     <string name="init_show_routing_menu">显示路线菜单</string>
     <string name="init_summary_show_routing_menu">长按藏点会显示一个带有高级选项的菜单，用于将藏点添加至路线或从路线中移除。如果禁用，藏点将直接被添加或移除。</string>
     <string name="init_ActionbarAutohide">点击时隐藏工具栏</string>
@@ -1700,7 +1700,7 @@
     <string name="init_summary_autozoom_consider_lastcenter_off">当在地图上显示藏点列表时，设置地图缩放和边界以适应所有藏点。</string>
     <string name="goto_targets_list">自定义藏点</string>
     <string name="clear_goto_history_title">清除前往历史</string>
-    <string name="clear_goto_history">这将删除除最近五个以外的所有历史航点</string>
+    <string name="clear_goto_history">这将删除除最近五个以外的所有历史途径点</string>
     <string name="internal_connector_name">自定义藏点</string>
     <!-- html styles -->
     <string name="html_style_default">默认</string>
@@ -1716,7 +1716,7 @@
     <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">从 %1$s 加载藏点</string>
-    <string name="gpx_import_loading_waypoints_with_filename">从 %1$s 加载waypoint</string>
+    <string name="gpx_import_loading_waypoints_with_filename">从 %1$s 加载途径点</string>
     <plurals name="gpx_import_caches_imported_with_filename">
         <item quantity="other">已从 %2$s 导入 %1$d 个藏点</item>
     </plurals>
@@ -1739,7 +1739,7 @@
     <string name="popup_more">更多详情</string>
     <string name="map_fragment_swipe_hint_text">滑动以打开详情</string>
     <!-- waypoint -->
-    <string name="waypoint">航点</string>
+    <string name="waypoint">途径点</string>
     <string name="waypoint_coordinates">坐标</string>
     <string name="waypoint_cache_coordinates">藏点坐标</string>
     <string name="waypoint_calculated_coordinates_global">计算坐标</string>
@@ -1757,15 +1757,15 @@
     <string name="waypoint_edit_title">编辑路径点</string>
     <string name="waypoint_add_title">添加途经点</string>
     <string name="waypoint_added">已添加路径点</string>
-    <string name="waypoint_added_current_location">航点 (%1$s) 已添加 (精度：±%2$s)</string>
+    <string name="waypoint_added_current_location">途径点 (%1$s) 已添加 (精度：±%2$s)</string>
     <string name="waypoint_note">备注</string>
     <string name="waypoint_user_note">用户备注</string>
     <string name="waypoint_visited">已到访</string>
-    <string name="waypoint_set_visited">航点已设为已访问</string>
-    <string name="waypoint_set_visited_types">将航点设为已访问</string>
-    <string name="waypoint_unset_visited">航点已设为未访问</string>
+    <string name="waypoint_set_visited">途径点已设为已访问</string>
+    <string name="waypoint_set_visited_types">将途径点设为已访问</string>
+    <string name="waypoint_unset_visited">途径点已设为未访问</string>
     <string name="waypoint_save">保存</string>
-    <string name="waypoint_loading">正在加载航点…</string>
+    <string name="waypoint_loading">正在加载途径点…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">不更改藏点坐标</string>
     <string name="waypoint_set_as_cache_coords">在 c:geo 中设为藏点坐标</string>
     <string name="waypoint_save_and_modify_on_website">在 c:geo 和网站上同时设为藏点坐标</string>
@@ -1777,8 +1777,8 @@
     <string name="waypoint_coordinates_upload_error">在网站上修改坐标时发生错误。</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">网站上的藏点坐标已修改为：%s。</string>
     <string name="waypoint_done">已完成</string>
-    <string name="waypoint_duplicate">复制航点</string>
-    <string name="waypoint_toclipboard">复制航点到剪贴板</string>
+    <string name="waypoint_duplicate">复制途径点</string>
+    <string name="waypoint_toclipboard">复制途径点到剪贴板</string>
     <string name="waypoint_copy_of">（副本）</string>
     <string name="waypoint_open_geochecker">打开 Geochecker</string>
     <string name="waypointcalc_notes_prompt">在此输入备注…</string>
@@ -1817,7 +1817,7 @@
     <string name="calccoord_select_variable">选择变量</string>
     <string name="calccoord_new_variable">**%s** *(新建)*</string>
     <string name="calccoord_convert_to_plain">转换为普通坐标</string>
-    <string name="calccoord_convert_to_plain_error">该公式无法计算出有效的坐标。\n转换为普通坐标会将该航点重置为空坐标。</string>
+    <string name="calccoord_convert_to_plain_error">该公式无法计算出有效的坐标。\n转换为普通坐标会将该途径点重置为空坐标。</string>
     <string name="calccoord_plain_tools_title">普通工具</string>
     <string name="calccoord_remove_spaces">移除空格</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">将“x”替换为“*”</string>
@@ -1828,13 +1828,13 @@
     <string name="calccoord_generate_error_novarwithrange">找不到范围内的有效变量 (e.g: [:0-9] 或 [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">没有组合返回有效的坐标</string>
     <string name="calccoord_generate_error_nogeopointselected">未选择坐标</string>
-    <string name="calccoord_migrate_title">航点迁移</string>
+    <string name="calccoord_migrate_title">途径点迁移</string>
     <string name="calccoord_migrate_migrate">迁移</string>
     <string name="calccoord_migrate_migrate_usernote_praefix">迁移自</string>
     <string name="calccoord_migrate_cancel">取消</string>
     <string name="calccoord_migrate_dismiss">放弃数据</string>
     <string name="calccoord_migrate_dismiss_usernote_praefix">已放弃</string>
-    <string name="calccoord_migrate_infotext_markdown">在此航点中发现旧版坐标计算：\n\n%1$s\n\n您可以将其迁移到新的藏点计算坐标，如下所示：\n\n%2$s\n\n包含新藏点变量：%3$s\n\n请选择：\n- %4$s 按建议执行迁移\n- %5$s 永久放弃发现的计算数据\n- %6$s 继续而不迁移。下次打开航点编辑时将再次询问。请注意，编辑航点坐标可能会删除本地计算数据。</string>
+    <string name="calccoord_migrate_infotext_markdown">在此途径点中发现旧版坐标计算：\n\n%1$s\n\n您可以将其迁移到新的藏点计算坐标，如下所示：\n\n%2$s\n\n包含新藏点变量：%3$s\n\n请选择：\n- %4$s 按建议执行迁移\n- %5$s 永久放弃发现的计算数据\n- %6$s 继续而不迁移。下次打开途径点编辑时将再次询问。请注意，编辑途径点坐标可能会删除本地计算数据。</string>
     <!-- Formula -->
     <string name="formula">公式</string>
     <string name="formula_choose_function">选择函数</string>
@@ -1891,7 +1891,7 @@
     <string name="map_rotation">地图朝向</string>
     <string name="map_dot_mode">使用紧凑图标</string>
     <string name="map_show_circles">宝盒禁区圈</string>
-    <string name="map_showc_own">自己的</string>
+    <string name="map_showc_own">我的</string>
     <string name="map_showc_found">已找到</string>
     <string name="map_showc_disabled">已禁用</string>
     <string name="map_showc_archived">已归档</string>
@@ -1923,7 +1923,7 @@
     <string name="zoom_out">缩小</string>
     <string name="other_settings">其他设置</string>
     <string name="map_show_caches_title">显示藏点：</string>
-    <string name="map_show_waypoints_title">显示航点：</string>
+    <string name="map_show_waypoints_title">显示途径点：</string>
     <string name="map_show_other_title">显示其它</string>
     <string name="map_settings_cache_filter_too_complex_title">藏点过滤器过于复杂</string>
     <string name="map_settings_cache_filter_too_complex_message">当前的藏点过滤器过于复杂，无法在此应用额外选项。这通常意味着过滤器包含 NOT 或 OR 表达式，而非简单的 AND 逻辑。</string>
@@ -2419,7 +2419,7 @@
     <string name="live_map_status_normal">数据加载正常：%s</string>
     <string name="list_list_headline">列表：</string>
     <plurals name="extract_waypoints_result">
-        <item quantity="other">已提取 %d 个航点</item>
+        <item quantity="other">已提取 %d 个途径点</item>
     </plurals>
     <string name="link_gc_checker">可通过浏览器使用 geocaching.com 坐标检查器</string>
     <string name="link_gallery">图库中有可用图片 (%d)</string>
@@ -2472,8 +2472,8 @@
     <string name="individual_route">个人路线</string>
     <string name="individual_route_added">已添加到路线</string>
     <string name="individual_route_removed">已从路线中移除</string>
-    <string name="individual_route_error_toggling_waypoint">切换航点时出错</string>
-    <string name="individual_route_error_single_waypoint_mode">在单个航点模式下不可用</string>
+    <string name="individual_route_error_toggling_waypoint">切换途径点时出错</string>
+    <string name="individual_route_error_single_waypoint_mode">在单个途径点模式下不可用</string>
     <string name="map_sort_individual_route">排序个人路线</string>
     <string name="map_refresh_individual_route">刷新</string>
     <string name="map_export_route">导出为路线</string>
@@ -2487,7 +2487,7 @@
     <string name="map_clear_manual_targets">清除路由目标</string>
     <string name="map_manual_targets_cleared">手动目标已清除</string>
     <string name="map_clear_individual_route">清除个人路线</string>
-    <string name="map_clear_individual_route_confirm">您是否要从个人路线中移除所有藏点/航点？</string>
+    <string name="map_clear_individual_route_confirm">您是否要从个人路线中移除所有藏点/途径点？</string>
     <string name="sorted_route_saved">个人路线已保存</string>
     <string name="load_individual_route_error">加载个人路线时出错</string>
     <string name="route_item_point">路线点</string>
