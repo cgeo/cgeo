@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.PrefCustomMap;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
@@ -109,8 +110,10 @@ public class TileProviderFactory {
             registerTileProvider(new CyclosmSource());
             registerTileProvider(new OpenTopoMapSource());
 
-            if (UserDefinedMapsforgeOnlineSource.isConfigured()) {
-                registerTileProvider(new UserDefinedMapsforgeOnlineSource());
+            for (PrefCustomMap customMap : Settings.getCustomMaps()) {
+                if (StringUtils.isNotBlank(customMap.getName()) && CustomMapUrl.isValidTemplate(customMap.getUrl())) {
+                    registerTileProvider(new CustomMapsforgeOnlineSource(customMap));
+                }
             }
         }
 
@@ -121,8 +124,10 @@ public class TileProviderFactory {
             registerTileProvider(new CyclosmVTMSource());
             registerTileProvider(new OpenTopoMapVTMSource());
 
-            if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
-                registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
+            for (PrefCustomMap customMap : Settings.getCustomMaps()) {
+                if (StringUtils.isNotBlank(customMap.getName()) && CustomMapUrl.isValidTemplate(customMap.getUrl())) {
+                    registerTileProvider(new CustomMapsforgeVTMOnlineSource(customMap));
+                }
             }
         }
 

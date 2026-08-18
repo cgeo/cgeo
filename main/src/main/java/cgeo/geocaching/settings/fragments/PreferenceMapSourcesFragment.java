@@ -2,14 +2,14 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
+import cgeo.geocaching.settings.CustomMapPreference;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.PrefCustomMap;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.PreferenceUtils;
-import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -19,39 +19,25 @@ import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import java.util.HashMap;
+import static java.util.UUID.randomUUID;
 
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
+    private PreferenceCategory customMapsCategory;
     private ListPreference prefTileProvicers;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_map_sources, rootKey);
         prefTileProvicers = findPreference(getString(R.string.pref_tileprovider));
+        customMapsCategory = findPreference(getString(R.string.preference_category_map_sources_custommaps));
 
         initMapSourcePreference();
-
-        final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
-        // new unified map providers
-        final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
-        final String[] tpEntries = new String[tileproviders.size()];
-        final String[] tpValues = new String[tileproviders.size()];
-        int i = 0;
-        for (AbstractTileProvider tileProvider : tileproviders.values()) {
-            tpEntries[i] = tileProvider.getTileProviderName();
-            tpValues[i] = tileProvider.getId();
-            i++;
-        }
-        hideTileprovidersPref.setEntries(tpEntries);
-        hideTileprovidersPref.setEntryValues(tpValues);
-
-        setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
-            setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
-            setFlagForRestartRequired();
-            return true;
-        });
+        initHiddenMapSourcesPreference();
+        recreateCustomMapPreferences();
 
         final ListPreference unifiedMapVariants = findPreference(getString(R.string.pref_unifiedMapVariants));
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
@@ -115,8 +101,55 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
     }
 
-    private void setUserDefinedTileProviderUriSummary(final String uri) {
-        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, LocalizationUtils.getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
+    private void initHiddenMapSourcesPreference() {
+        final MultiSelectListPreference hiddenMapSources = findPreference(getString(R.string.pref_tileprovider_hidden));
+        final HashMap<String, AbstractTileProvider> tileProviders = TileProviderFactory.getTileProviders();
+        final String[] entries = new String[tileProviders.size()];
+        final String[] values = new String[tileProviders.size()];
+        int index = 0;
+        for (AbstractTileProvider tileProvider : tileProviders.values()) {
+            entries[index] = tileProvider.getTileProviderName();
+            values[index] = tileProvider.getId();
+            index++;
+        }
+        hiddenMapSources.setEntries(entries);
+        hiddenMapSources.setEntryValues(values);
+    }
+
+    private void recreateCustomMapPreferences() {
+        customMapsCategory.removeAll();
+        customMapsCategory.setVisible(true);
+        for (PrefCustomMap customMap : Settings.getCustomMaps()) {
+            customMapsCategory.addPreference(createCustomMapPreference(customMap));
+        }
+        final Preference addMap = new Preference(requireContext());
+        addMap.setTitle(R.string.settings_custom_maps_add);
+        addMap.setLayoutResource(R.layout.preference_button);
+        addMap.setIconSpaceReserved(false);
+        addMap.setOnPreferenceClickListener(preference -> {
+            createCustomMapPreference(new PrefCustomMap(randomUUID().toString(), "", "")).launchEditDialog();
+            return true;
+        });
+        customMapsCategory.addPreference(addMap);
+    }
+
+    private CustomMapPreference createCustomMapPreference(final PrefCustomMap customMap) {
+        final CustomMapPreference preference = new CustomMapPreference(requireContext(), customMap);
+        preference.setOnPreferenceChangeListener((pref, newValue) -> {
+            refreshCustomMaps();
+            return true;
+        });
+        return preference;
+    }
+
+    private void refreshCustomMaps() {
+        TileProviderFactory.buildTileProviderList(true);
+        Settings.resetTileProvider();
+        Settings.setTileProvider(Settings.getTileProvider());
+        initMapSourcePreference();
+        initHiddenMapSourcesPreference();
+        recreateCustomMapPreferences();
+        setFlagForRestartRequired();
     }
 
 }

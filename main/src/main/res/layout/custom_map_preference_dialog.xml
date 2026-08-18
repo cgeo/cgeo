@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/custom_map_name_layout"
+        style="@style/textinput_edittext">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/custom_map_name"
+            style="@style/textinput_embedded"
+            android:hint="@string/settings_custom_map_name"
+            android:inputType="textCapSentences" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/custom_map_url_layout"
+        style="@style/textinput_edittext">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/custom_map_url"
+            style="@style/textinput_embedded"
+            android:hint="@string/settings_custom_map_url"
+            android:importantForAutofill="no"
+            android:inputType="textUri|textNoSuggestions"
+            android:minLines="3" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="@string/settings_custom_map_help"
+        android:textSize="@dimen/textSize_detailsSecondary" />
+
+</LinearLayout>
