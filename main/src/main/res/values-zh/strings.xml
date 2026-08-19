@@ -61,10 +61,10 @@
     <string name="userdefined_short">用户自定义</string>
     <string name="unknown_short">未知</string>
     <!-- cache sizes -->
-    <string name="cache_size_micro">微小</string>
-    <string name="cache_size_small">小</string>
-    <string name="cache_size_regular">常规</string>
-    <string name="cache_size_large">大</string>
+    <string name="cache_size_micro">微型</string>
+    <string name="cache_size_small">小型</string>
+    <string name="cache_size_regular">中型</string>
+    <string name="cache_size_large">大型</string>
     <string name="cache_size_other">其它</string>
     <string name="cache_size_virtual">虚拟</string>
     <string name="cache_size_notchosen">未选择</string>
