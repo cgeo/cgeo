@@ -583,6 +583,28 @@ public class GeocacheTest {
     }
 
     @Test
+    public void testMergeNameWhenGeocodeUsedAsName() {
+        // Test for issue #17797: When importing route GPX, cache name should not be overwritten with geocode
+        final Geocache stored = new Geocache();
+        stored.setGeocode("GC12345");
+        stored.setName("My Awesome Cache");
+        stored.setDetailed(true);
+        stored.setCoords(new Geopoint(40.0, 8.0));
+        saveFreshCacheToDB(stored);
+
+        // Simulate a cache imported from a route GPX where the name field contains the geocode
+        final Geocache imported = new Geocache();
+        imported.setGeocode("GC12345");
+        imported.setName("GC12345"); // Name is set to geocode (the problem)
+        imported.setCoords(new Geopoint(40.0, 8.0));
+
+        imported.gatherMissingFrom(stored);
+
+        // The name should be taken from the stored cache, not kept as the geocode
+        assertThat(imported.getName()).as("merged name should not be geocode").isEqualTo("My Awesome Cache");
+    }
+
+    @Test
     public void testMergeLocalUserModifiedCoordsNotServerSideModified() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
