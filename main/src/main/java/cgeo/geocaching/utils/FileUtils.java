@@ -435,6 +435,10 @@ public final class FileUtils {
         return getRawResourceAsString(context, R.raw.changelog_bugfix);
     }
 
+    public static String getChangelogBetaUpdate(final Context context) {
+        return getRawResourceAsString(context, R.raw.changelog_betaupdate);
+    }
+
     @NonNull
     public static String replaceNonFilenameChars(@Nullable final String text) {
         if (StringUtils.isBlank(text)) {

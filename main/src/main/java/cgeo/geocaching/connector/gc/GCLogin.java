@@ -681,6 +681,18 @@ public class GCLogin extends AbstractLogin {
         });
     }
 
+    /**
+     * Injects the app's current geocaching.com session cookies into the WebView CookieManager so that any
+     * third-party login flow that redirects through geocaching.com OAuth skips login
+     */
+    public static void injectGcCookiesIntoWebView() {
+        final String gcUrl = "https://www.geocaching.com";
+        final CookieManager cm = CookieManager.getInstance();
+        for (final Cookie c : cgeo.geocaching.network.Cookies.cookieJar.loadForRequest(HttpUrl.get(gcUrl))) {
+            cm.setCookie(gcUrl, c.name() + "=" + c.value() + "; Domain=.geocaching.com; Path=/");
+        }
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     public static void initializeWebview(final WebView webView) {
         webView.setWebChromeClient(new WebChromeClient());

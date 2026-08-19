@@ -111,7 +111,7 @@ public class NamedFilterActivity extends AbstractActionBarActivity {
             if (filter == null || !filter.isFiltering()) {
                 holder.itemBinding.filterDescription.setText(LocalizationUtils.getString(R.string.named_filter_nofilter_label));
             } else {
-                holder.itemBinding.filterDescription.setText(filter.toUserDisplayableString());
+                holder.itemBinding.filterDescription.setText(filter.toUserDisplayableStringRaw());
             }
 
             // Row 3: activate marker checkbox

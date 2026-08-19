@@ -34,6 +34,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Nedladdare av rutor stoppas under vissa förhållanden (OpenStreetMap endast onlinekartor)
 - Nytt: Villkorade cachemarkörer
 - Nytt: Visa navigeringstips (pil + avstånd)
+- Change: Reduce memory requirements of map activity
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -62,12 +63,14 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
 - Nytt: Förbättrad knapphantering
 - Ny: Status auto-spara
 - Nyhet: Alternativ för att skapa genväg till Wherigo-spelare på mobilens hemskärm
+- Fix: Saknade/fel mediefiler leder till fel
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache

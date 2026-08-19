@@ -34,6 +34,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Correcció: El descarregador de tessel·les s'atura sota certes condicions (només mapes en línia d'OpenStreetMap)
 - Nou: Marcadors de catxé condicionals
 - Nou: Mostra la pista de navegació (fletxa + distància)
+- Canvi: Reduir els requisits de memòria de l'activitat del mapa
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -62,12 +63,14 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Correcció: Error en carregar imatges incrustades directament al text de la fitxa
 - Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
 - Nou: L'enviament del registre es fa en segon pla
+- Correcció: Inventari ocult en el registre sota certes condicions
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
 - Nou: Millora del maneig dels botons
 - Nou: Desament automàtic de l'estat
 - Nou: Opció per crear una drecera al reproductor Wherigo a la pantalla d'inici del mòbil
+- Correcció: Els fitxers multimèdia que falten o són incorrectes provoquen un error
 
 ### General
 - Nou: opció de compartir després de registrar un catxé

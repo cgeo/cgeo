@@ -34,6 +34,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - Korjaus: Laattalatain pysähtyy tietyissä tilanteissa (vain OpenStreetMap-onlinekartat)
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
+- Change: Reduce memory requirements of map activity
 
 ### Kätkön tiedot
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -62,12 +63,14 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Fix: Missing/wrong media files lead to error
 
 ### Yleinen
 - New: Share option after logging a cache

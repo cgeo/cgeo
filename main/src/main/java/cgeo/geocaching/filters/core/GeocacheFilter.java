@@ -205,6 +205,10 @@ public class GeocacheFilter implements Cloneable {
             }
             return "(" + displayName + ")*";
         }
+        return toUserDisplayableStringRaw();
+    }
+
+    public String toUserDisplayableStringRaw() {
         if (getTree() == null) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
@@ -295,8 +299,16 @@ public class GeocacheFilter implements Cloneable {
 
     /**
      * Helper method to be used in conjunction with {@link #getAndChainIfPossible(IConnector)} ()} by search providers
-     * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
+     * returns true if this filter blocks ALL caches
      */
+    public static boolean blocksEverything(final List<BaseGeocacheFilter> filters) {
+        return filters != null && filters.size() == 1 && filters.get(0) == ConstantGeocacheFilter.ALWAYS_FALSE;
+    }
+
+        /**
+         * Helper method to be used in conjunction with {@link #getAndChainIfPossible(IConnector)} ()} by search providers
+         * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
+         */
     @SuppressWarnings("unchecked")
     public static <T extends BaseGeocacheFilter> T findInChain(final List<BaseGeocacheFilter> filters, final Class<T> filterClazz) {
         for (BaseGeocacheFilter filter : filters) {

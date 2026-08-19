@@ -1350,7 +1350,6 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setAlcMode(final int alcMode) {
-        Log.d("_AL setAlcMode: " + alcMode);
         this.alcMode = alcMode;
     }
 

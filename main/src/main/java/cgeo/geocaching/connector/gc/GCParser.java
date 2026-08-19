@@ -558,7 +558,9 @@ public final class GCParser {
 
             if (!wpList.contains("No additional waypoints to display.")) {
                 wpEnd = wpList.indexOf("</table>");
-                wpList = wpList.substring(0, wpEnd);
+                if (wpEnd > -1) {
+                    wpList = wpList.substring(0, wpEnd);
+                }
 
                 wpBegin = wpList.indexOf("<tbody>");
                 wpEnd = wpList.indexOf("</tbody>");
@@ -1914,55 +1916,62 @@ public final class GCParser {
 
     @NonNull
     static Single<Boolean> editModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
-        final String userToken = getUserToken(cache);
-        if (StringUtils.isEmpty(userToken)) {
+        final String token = getRequestVerificationToken(cache);
+        if (StringUtils.isEmpty(token)) {
             return Single.just(false);
         }
 
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        final ObjectNode dto = jo.putObject("dto").put("ut", userToken);
-        if (wpt != null) {
-            dto.putObject("data").put("lat", wpt.getLatitudeE6() / 1E6).put("lng", wpt.getLongitudeE6() / 1E6);
+        final Parameters headers = new Parameters("__requestverificationtoken", token);
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("cacheId", cache.getCacheId());
+
+        final Single<Response> response;
+        try {
+            if (wpt != null) {
+                jo.put("lat", wpt.getLatitudeE6() / 1E6).put("lng", wpt.getLongitudeE6() / 1E6);
+                response = Network.postJsonRequest("https://www.geocaching.com/seek/geocache.usercoordinate", headers, jo);
+            } else {
+                response = Network.deleteJsonRequest("https://www.geocaching.com/seek/geocache.usercoordinate", headers, jo);
+            }
+        } catch (final Exception e) {
+            Log.e("GCParser.editModifiedCoordinates - cannot modify coordinates", e);
+            return Single.just(false);
         }
 
-        final String uriSuffix = wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
-
-        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-
-        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
-            .toSingle(() -> {
-                Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
-                return true;
-            })
-            .onErrorReturn((throwable) -> {
-                Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords", throwable);
-                return false;
-            });
+        return Network.completeWithSuccess(response)
+                .toSingle(() -> {
+                    Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+                    return true;
+                })
+                .onErrorReturn((throwable) -> {
+                    Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords", throwable);
+                    return false;
+                });
     }
 
     @NonNull
     static Single<Boolean> uploadPersonalNote(@NonNull final Geocache cache) {
-        final String userToken = getUserToken(cache);
-        if (StringUtils.isEmpty(userToken)) {
+        final String token = getRequestVerificationToken(cache);
+        if (StringUtils.isEmpty(token)) {
             return Single.just(false);
         }
 
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        jo.putObject("dto").put("et", StringUtils.defaultString(cache.getPersonalNote())).put("ut", userToken);
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("cacheId", cache.getCacheId()).put("note", StringUtils.defaultString(cache.getPersonalNote()));
+        final Parameters headers = new Parameters("__requestverificationtoken", token);
 
-        final String uriSuffix = "SetUserCacheNote";
-
-        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-
-        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
-            .toSingle(() -> {
-                Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
-                return true;
-            })
-            .onErrorReturn((throwable) -> {
-                Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
-                return false;
-            });
+        try {
+            return Network.completeWithSuccess(Network.postJsonRequest("https://www.geocaching.com/seek/geocache.cachenote", headers, jo))
+                .toSingle(() -> {
+                    Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
+                    return true;
+                })
+                .onErrorReturn((throwable) -> {
+                    Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
+                    return false;
+                });
+        } catch (final Exception e) {
+            Log.e("GCParser.uploadPersonalNote - cannot upload personal note", e);
+            return Single.just(false);
+        }
     }
 
     @WorkerThread

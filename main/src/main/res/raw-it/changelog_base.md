@@ -34,6 +34,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Tile downloader stopping under certain conditions (OpenStreetMap online maps only)
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
+- Change: Reduce memory requirements of map activity
 
 ### Dettagli del cache
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -62,12 +63,14 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: Crash on loading images embedded directly in listing text
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo player
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
 - New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Fix: Missing/wrong media files lead to error
 
 ### Generale
 - New: Share option after logging a cache

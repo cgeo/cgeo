@@ -34,6 +34,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Correcção: O programa de transferência de blocos de sombreado de altitude fecha em determinadas condições (apenas mapas online do OpenStreetMap)
 - Novo: Marcadores de cache condicionais
 - Novo: Mostrar dicas de navegação (seta + distância)
+- Change: Reduce memory requirements of map activity
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -62,12 +63,14 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Correção: Falha ao carregar imagens incorporadas directamente no texto da descrição
 - Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
 - New: Sending log is done in background
+- Fix: Inventory hidden on logging under certain conditions
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
 - Novo: Melhorado o funcionamento dos botões
 - Novo: Gravação automática do estado
 - Novo: Opção de criar atalho para o módulo Wherigo no ecrã inicial do seu smartphone
+- Fix: Missing/wrong media files lead to error
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache

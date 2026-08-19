@@ -90,13 +90,14 @@ public class MenuUtils {
     private static void tintMenuIconsAndTitles(final Menu menu) {
         for (int i = 0; i < menu.size(); i++) {
             final MenuItem item = menu.getItem(i);
-            // choose color depending on state
-            final int color = getTintColor(item);
 
-            // color menu item title
-            final SpannableString s = new SpannableString(item.getTitle());
-            s.setSpan(new ForegroundColorSpan(color), 0, s.length(), 0);
-            item.setTitle(s);
+            // Color items in the menu, not in toolbar
+            final MenuItemImpl itemImpl = (MenuItemImpl) item;
+            if (!itemImpl.isActionButton()) {
+                final SpannableString s = new SpannableString(item.getTitle());
+                s.setSpan(new ForegroundColorSpan(getTintColor(item)), 0, s.length(), 0);
+                item.setTitle(s);
+            }
 
             // color icon, if present
             tintMenuIcon(item);

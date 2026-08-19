@@ -458,7 +458,6 @@
     <string name="caches_sort_geocode">Geokód</string>
     <string name="caches_sort_rating">hodnotenia</string>
     <string name="caches_sort_vote">vlastného hodnotenia</string>
-    <string name="caches_sort_inventory">Počet trasovateľných predmetov</string>
     <string name="caches_sort_date_hidden">dátumu skrytia</string>
     <string name="caches_sort_date_logged">Dátum logu (vlastný log)</string>
     <string name="caches_sort_finds">počtu nájdení</string>
@@ -612,7 +611,6 @@
     <string name="cache_filter_hidden">Dátum skrytia</string>
     <string name="cache_filter_eventdate">Dátum eventu</string>
     <string name="cache_filter_logs_count">Počet logov</string>
-    <string name="cache_filter_inventory_count">Počet trasovateľných predmetov</string>
     <string name="cache_filter_last_found">Dátum posledného nálezu</string>
     <string name="cache_filter_log_entry">Položka logu</string>
     <string name="cache_filter_location">Miesto</string>
@@ -1157,7 +1155,6 @@
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">Aplikácia c:geo podporuje vlastné t=my pre offline mapy. Tie sa dajú použiť na zmenu štýlu farieb mapy (napr. môžete mať nočnú mapu), prípadne na zvýraznenie určitých objektov, ako sú napríklad cyklotrasy alebo vrstevnice na mape.\n\nPráca s nezbalenými mapovými témami môže znížiť výkon otvárania prezerača. V takom prípade môže byť priečinok s témou voliteľne synchronizovaný do lokálneho súkromného priečinka aplikácie pre rýchlejší prístup (na úkor nejakého miesta v ukladacom priestore).</string>
     <string name="settings_info_hillshading_title">Informácie o tieňovaní kopcov</string>
-    <string name="settings_info_hillshading">Tieňovanie kopcov je technika na vytváranie topografických máp reliéfu pridaním svetelného efektu do mapy, ktorý označuje zmeny nadmorskej výšky. Svahy sa stmavia/zosvetlia, aby sa vygeneroval 3D efekt.\nÚdaje pre tieňovanie je možné stiahnuť cez ponuku mapy.\nNie je kompatibilné s variantom UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Tieňovanie</string>
     <string name="init_hillshading_hq">Tieňovanie vo vysokej kvalite</string>
     <string name="init_summary_hillshading_hq">Podrobnejšie prekrytie tieňovaním, ale asi 50 % percent pomalšie vykresľovanie pri oddialení</string>
@@ -1281,7 +1278,6 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
-    <string name="category_unifiedMap">Jednotná mapa</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
     <string name="localstorage_migrate_status_major">Verzia %1$d</string>
     <string name="gui_test_title">Testovacia obrazovka GUI</string>
@@ -1472,7 +1468,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">pred viac ako rokom</string>
     <string name="cache_premium">Platený účet</string>
-    <string name="cache_inventory">Trasovateľné predmety</string>
     <string name="cache_log_image_default_title">Fotografia</string>
     <string name="cache_set_coordinates">Nastavenie súradníc</string>
     <string name="cache_personal_note">Osobná poznámka</string>
@@ -1838,13 +1833,11 @@
     <string name="calccoord_convert_to_plain">Prevod na obyčajné súradnice</string>
     <string name="calccoord_convert_to_plain_error">Vzorec nevyhodnocuje platné súradnice.\nKonverzia na obyčajné súradnice vynuluje bod trasy na prázdne súradnice.</string>
     <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
-    <string name="calccoord_remove_spaces">Odstrániť medzery</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Nahradiť „x“ znakom „*“</string>
     <string name="calccoord_paste_from_clipboard">Vložiť zo schránky</string>
     <string name="calccoord_generate_title">Generovať body trasy</string>
     <string name="calccoord_generate_showonmap">Zobraziť na mape</string>
     <string name="calccoord_generate_waypointnameprefix">Vygenerované</string>
-    <string name="calccoord_generate_error_novarwithrange">Nenašla sa žiadna platná premenná s rozsahmi (napr: [:0-9] alebo [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Žiadna kombinácia neviedla k platným súradniciam</string>
     <string name="calccoord_generate_error_nogeopointselected">Nie sú zvolené žiadne súradnice</string>
     <string name="calccoord_migrate_title">Prenos bodu trasy</string>
@@ -1970,7 +1963,6 @@
     <string name="add_target_to">Pridať cieľ do</string>
     <string name="search_address_started">Vyhľadávanie miest</string>
     <string name="search_address_result">Nájdené miesta</string>
-    <string name="search_own_caches">Moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Zoznam záložiek</string>
     <string name="search_pocket_is_new">nové</string>
@@ -2526,7 +2518,6 @@
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
     <string name="map_disable_autotarget_individual_route">Funkcia \"Nastaviť začiatok trasy ako cieľ\" vypnutá</string>
     <string name="map_manual_target_route_name">Aktuálna navigácia</string>
-    <string name="map_clear_manual_targets">Vymazať cieľ trasy</string>
     <string name="map_manual_targets_cleared">Ručné ciele vymazané</string>
     <string name="map_clear_individual_route">Vymazať individuálnu trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete zo svojej indiviulduálnej trasy odstrániť všetky kešky/body trasy?</string>
@@ -2688,7 +2679,6 @@
     <string name="brouter_info">Služba offline navigácie</string>
     <string name="hillshading_info">Offline tieňovanie</string>
     <string name="maptheme_elevate_categoryinfo">Týka sa: [A] Oblasti, [P] POI, [R] Trasy, [W] Spôsoby</string>
-    <string name="maptheme_vtm_scaling_summary">Možnosti zmeny mierky pre offline mapy (len VTM, vyžaduje reštart)</string>
     <string name="maptheme_scale_map_title">Mierkový faktor mapy</string>
     <string name="maptheme_scale_map_summary">Mierka mapy; 100 % = bez mierky</string>
     <string name="maptheme_scale_text_title">Mierka textu</string>
@@ -2750,7 +2740,6 @@
     <string name="wherigo_controls_stopgame_hint">Zastavenie prebiehajúcej hry</string>
     <string name="wherigo_controls_mapzones_hint">Zobrazenie zón prebiehajúcej hry na mape</string>
     <string name="wherigo_controls_downloadcartridge_hint">Stiahnutie carttridge (je potrebné cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Zobraziť posledný problém Wherigo</string>
     <string name="wherigo_controls_cache_context">Kontext kešky</string>
     <string name="wherigo_controls_cache_link">Prejsť na detaily kešky</string>
     <string name="wherigo_sound_title">Ovládanie zvuku</string>
@@ -2795,7 +2784,6 @@
     <string name="wherigo_download_accept_eula">Najprv sa prihláste na www.wherigo.com a prijmite zmluvné podmienky</string>
     <string name="wherigo_error_title">Hlásenie problému s Wherigo</string>
     <string name="wherigo_error_game_noerror">Nebola hlásená žiadna chyba v prostredí Wherigo.</string>
-    <string name="wherigo_error_game_error">Chyba hlásená prostredím Wherigo:\n\n```\n%1$s\n```\n[TU] môžete kontaktovať autora cartridge(%2$s)</string>
     <string name="wherigo_error_toast">Prostredie Wherigo hlási chybu. Podrobnosti nájdete v dialógovom okne chyby.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavenie hrania Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Momentálne je spustená hra pre \"%s\". Chcete túto hru zastaviť?</string>

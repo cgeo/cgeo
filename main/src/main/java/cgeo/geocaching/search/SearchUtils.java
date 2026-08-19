@@ -93,13 +93,11 @@ public class SearchUtils {
         if (activityViewroot != null) {
             activityViewroot.setOnInterceptTouchEventListener(ev -> {
                 if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                    // Don't intercept touches inside the SearchView (allows long-press paste)
+                    // Don't intercept touches inside the SearchView (allows long-press paste) or menu item
                     final int[] loc = new int[2];
                     searchView.getLocationOnScreen(loc);
-                    final float x = ev.getRawX();
                     final float y = ev.getRawY();
-                    if (x >= loc[0] && x <= loc[0] + searchView.getWidth()
-                            && y >= loc[1] && y <= loc[1] + searchView.getHeight()) {
+                    if (y >= loc[1] && y <= loc[1] + searchView.getHeight()) {
                         return false;
                     }
                     menuSearch.collapseActionView();

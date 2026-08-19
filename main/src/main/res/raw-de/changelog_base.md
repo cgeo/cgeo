@@ -34,6 +34,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Korrektur: Anzeige von Kartenkacheln stoppt unter bestimmten Bedingungen (nur OpenStreetMap Onlinekarten)
 - Neu: Bedingte Cache-Marker
 - Neu: Navigationshinweis anzeigen (Pfeil + Entfernung)
+- Änderung: Verringere Speicheranforderungen für Karte
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -62,12 +63,14 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Korrektur: Absturz beim Laden von Bildern, die direkt in den Text eingebettet sind
 - Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
 - Neu: Das Senden eines Cachelogs erfolgt im Hintergrund
+- Korrektur: Trackables unter bestimmten Bedingungen nicht sichtbar beim Loggen
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
 - Neu: Verbesserter Umgang mit Schaltflächen
 - Neu: Automatische Speicherung des Status
 - Neu: Option zum Erstellen einer Verknüpfung zum Wherigo-Player auf dem Startbildschirm des Handys
+- Korrektur: Fehlende/falsche Mediendateien führen zu einem Fehler
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches

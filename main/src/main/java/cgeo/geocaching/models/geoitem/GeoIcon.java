@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+import android.util.SparseArray;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -116,6 +117,90 @@ public class GeoIcon implements Parcelable {
         @NonNull
         public String toString() {
             return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px, hash:" + bitmap.hashCode());
+        }
+    }
+
+    /**
+     * A bitmap provider which keeps the rotated variants of its bitmap, rounded to full degrees.
+     * <br>
+     * Meant for markers whose rotation changes permanently (e.g. the own-position indicator): without
+     * caching, every single update would allocate a new bitmap via {@link ImageUtils#rotateBitmap}.
+     */
+    public static class RotatedBitmapProvider implements BitmapProvider {
+
+        private final Bitmap bitmap;
+        private final SparseArray<Bitmap> rotatedBitmaps = new SparseArray<>();
+
+        public RotatedBitmapProvider(final Bitmap bitmap) {
+            this.bitmap = bitmap;
+        }
+
+        @Override
+        public Bitmap getBitmap() {
+            return bitmap;
+        }
+
+        @Override
+        public Bitmap getRotatedBitmap(final float angleInDegree) {
+            if (bitmap == null) {
+                return null;
+            }
+            final int angle = Math.floorMod(Math.round(angleInDegree), 360);
+            Bitmap rotated = rotatedBitmaps.get(angle);
+            if (rotated == null) {
+                rotated = ImageUtils.rotateBitmap(bitmap, angle);
+                rotatedBitmaps.put(angle, rotated);
+            }
+            return rotated;
+        }
+
+        // Parcelable stuff
+
+        public RotatedBitmapProvider(final Parcel in) {
+            this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            dest.writeParcelable(bitmap, flags);
+        }
+
+        public static final Creator<RotatedBitmapProvider> CREATOR = new Creator<RotatedBitmapProvider>() {
+            @Override
+            public RotatedBitmapProvider createFromParcel(final Parcel in) {
+                return new RotatedBitmapProvider(in);
+            }
+
+            @Override
+            public RotatedBitmapProvider[] newArray(final int size) {
+                return new RotatedBitmapProvider[size];
+            }
+        };
+
+        // equals/hashCode stuff
+
+        @Override
+        public boolean equals(final Object o) {
+            if (!(o instanceof RotatedBitmapProvider)) {
+                return false;
+            }
+            return Objects.equals(bitmap, ((RotatedBitmapProvider) o).bitmap);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(bitmap);
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px, hash:" + bitmap.hashCode() + ", rotations:" + rotatedBitmaps.size());
         }
     }
 
