@@ -460,7 +460,7 @@ dependencies {
     implementation project(":organicmaps-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.20.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.21.0'
 
     String okhttpVersion = '5.4.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
