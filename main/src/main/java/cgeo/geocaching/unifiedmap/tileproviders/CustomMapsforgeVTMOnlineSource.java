@@ -1,5 +1,7 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
+
 import cgeo.geocaching.settings.Settings.PrefCustomMap;
 
 import android.net.Uri;
@@ -8,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 import org.apache.commons.lang3.StringUtils;
-
-import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
 
 public class CustomMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnlineTileProvider {
 
