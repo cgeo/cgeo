@@ -29,7 +29,6 @@ import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.RatingGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -349,8 +348,8 @@ final class OkapiClient {
             return new SearchResult();
         }
         final GeocacheFilter filter = GeocacheFilter.createFromConfig(filterConfig);
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(connector), OriginGeocacheFilter.class);
-        if (origin != null && !origin.allowsCachesOf(connector)) {
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        if (GeocacheFilter.blocksEverything(filters)) {
             return new SearchResult();
         }
         final int alreadyTook = context.getInt(SEARCH_CONTEXT_TOOK_TOTAL, 0);
@@ -363,6 +362,9 @@ final class OkapiClient {
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        if (GeocacheFilter.blocksEverything(filters)) {
+            return new SearchResult();
+        }
 
         // fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
@@ -383,9 +385,6 @@ final class OkapiClient {
         String finder = null;
 
         for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible(connector)) {
-            if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
-                return new SearchResult(); //no need to search if connector is filtered out itself
-            }
             if (baseFilter instanceof LogEntryGeocacheFilter) {
                 finder = ((LogEntryGeocacheFilter) baseFilter).getFoundByUser();
             }

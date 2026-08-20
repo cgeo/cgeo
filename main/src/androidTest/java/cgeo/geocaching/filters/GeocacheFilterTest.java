@@ -235,6 +235,7 @@ public class GeocacheFilterTest {
             case INDIVIDUAL_ROUTE:
             case NAMED_FILTER:
             case LOGICAL_FILTER_GROUP:
+            case CONSTANT_FILTER:
             case LIST_ID:
             case VIEWPORT:
             case HEALTH_SCORE:
