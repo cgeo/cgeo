@@ -404,6 +404,20 @@ public final class Formatter {
     }
 
     /**
+     * Format the timestamp when a cache was stored on the device as an exact date,
+     * e.g. "Stored 29 July 2026". Uses the device-configured date format and always
+     * includes the year. Counterpart to {@link #formatStoredAgo(long)}.
+     *
+     * @param updatedTimeMillis milliseconds since the epoch, or 0 if unknown
+     * @return the formatted string
+     */
+    @NonNull
+    public static String formatStoredExact(final long updatedTimeMillis) {
+        final String date = updatedTimeMillis == 0L ? "" : formatFullDate(updatedTimeMillis);
+        return LocalizationUtils.getString(R.string.cache_offline_stored_ago, date);
+    }
+
+    /**
      * Formatting of the hidden date of a cache
      *
      * @return {@code null} or hidden date of the cache (or event date of the cache) in human readable format

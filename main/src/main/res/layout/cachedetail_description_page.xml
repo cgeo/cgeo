@@ -28,6 +28,14 @@
             tools:text="This is the cache description. It might be very long..."
             tools:visibility="visible" />
 
+        <WebView
+            android:id="@+id/description_webview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:layout_marginBottom="12dip"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/description_render_fully"
             style="@style/button_full"
