@@ -465,6 +465,7 @@
 
     <string name="caches_store_offline">Store offline</string>
     <string name="caches_store_offline_map">Store caches offline</string>
+    <string name="menu_export_events_to_calendar">Export events to a calendar</string>
     <string name="caches_store_selected">Store selected</string>
     <string name="caches_store_background_title">Download caches</string>
     <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
@@ -2325,6 +2326,10 @@
     <string name="export_gpx_info">The GPX file will be exported to %1$s with the current date and time as its file name.</string>
     <string name="export_confirm_title">Exporting %1$s</string>
     <string name="export_confirm_message">To Path: %1$s\nFile Name: %2$s</string>
+    <string name="export_events_title">Export events</string>
+    <string name="export_events_no_events">No future events found on map</string>
+    <string name="export_events_success">Events exported successfully</string>
+    <string name="export_events_fail">Failed to export events</string>
     <string name="export_persnotes">Upload personal notes</string>
     <string name="export_persnotes_uploading">Uploading personal note %1$d</string>
     <plurals name="export_persnotes_upload_success">
@@ -2782,6 +2787,8 @@
     <string name="permission_goto_app_details">Open Application Info</string>
 
     <string name="permission_contacts_read_explanation_title">Contacts read permission</string>
+    <string name="permission_calendar_explanation">c:geo needs access to your calendar to export events.</string>
+    <string name="permission_calendar_explanation_title">Calendar permission</string>
     <string name="permission_contacts_read_explanation">c:geo can search for contacts in your address book using cacher names. To do this, you must authorize c:geo to read your address book. Otherwise, usage of this function is not possible.</string>
     <string name="permission_location_explanation_title">Location permission</string>
     <string name="permission_location_explanation">c:geo is optimized for usage with GPS data (fine location) to locate your position and calculate distance and direction to geocaches. Without this permission, location-based functions will not work as expected.</string>
