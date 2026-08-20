@@ -24,11 +24,17 @@ import org.oscim.tiling.source.bitmap.BitmapTileSource;
 
 class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTileProvider {
 
+    private final boolean useDiskCache;
     private String tilePath;
 
     AbstractMapsforgeVTMOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
+        this(name, uri, tilePath, zoomMin, zoomMax, mapAttribution, true);
+    }
+
+    AbstractMapsforgeVTMOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution, final boolean useDiskCache) {
         super(name, uri, zoomMin, zoomMax, mapAttribution);
         this.tilePath = tilePath;
+        this.useDiskCache = useDiskCache;
         // tilePath: "/cyclosm/{Z}/{X}/{Y}.png"
         new AbstractTileSource(new String[]{uri.getHost()}, 443) {
             @Override
@@ -74,8 +80,10 @@ class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTilePro
 
     public BitmapTileLayer getBitmapTileLayer(final Map map) {
         final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
-        httpBuilder.cache(cache);
+        if (useDiskCache) {
+            final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
+            httpBuilder.cache(cache);
+        }
         final BitmapTileSource tileSource = BitmapTileSource.builder()
                 .url(mapUri.toString())
                 .tilePath(tilePath)

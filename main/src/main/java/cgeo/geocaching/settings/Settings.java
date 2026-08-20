@@ -41,6 +41,9 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.CustomMapUrl;
+import cgeo.geocaching.unifiedmap.tileproviders.CustomMapsforgeOnlineSource;
+import cgeo.geocaching.unifiedmap.tileproviders.CustomMapsforgeVTMOnlineSource;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -75,6 +78,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -244,6 +248,54 @@ public class Settings {
         }
     }
 
+    public static class PrefCustomMap {
+        private final @NonNull String id;
+        private final @NonNull String name;
+        private final @NonNull String url;
+
+        @JsonCreator
+        public PrefCustomMap(@JsonProperty("id") final String id, @JsonProperty("name") final String name, @JsonProperty("url") final String url) {
+            this.id = StringUtils.defaultString(id);
+            this.name = StringUtils.defaultString(name);
+            this.url = StringUtils.defaultString(url);
+        }
+
+        @NonNull
+        public String getId() {
+            return id;
+        }
+
+        @NonNull
+        public String getName() {
+            return name;
+        }
+
+        @NonNull
+        public String getUrl() {
+            return url;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (getClass() != o.getClass()) {
+                return false;
+            }
+            final PrefCustomMap customMap = (PrefCustomMap) o;
+            return customMap.getId().equals(id);
+        }
+
+        @Override
+        public int hashCode() {
+            return id.hashCode();
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return name;
+        }
+    }
+
     public enum RenderThemeScaleType { MAP, TEXT, SYMBOL }
 
     //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
@@ -271,7 +323,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 11;
+        return 12;
     }
 
     public static Map<String, Object> getNonSharedPreferences() {
@@ -535,6 +587,38 @@ public class Settings {
             setActualVersion(11);
         }
 
+        if (currentVersion < 12) {
+            boolean migrationSuccessful = true;
+            final String legacyUrl = getString(R.string.old_pref_userDefinedTileProviderUri, null);
+            if (StringUtils.isNotBlank(legacyUrl) && getCustomMaps().isEmpty()) {
+                final PrefCustomMap customMap = new PrefCustomMap(UUID.randomUUID().toString(), LocalizationUtils.getPlainString(R.string.settings_custom_maps_migrated_name), CustomMapUrl.migrateLegacyTemplate(legacyUrl));
+                try {
+                    final Editor e = sharedPrefs.edit();
+                    e.putString(getKey(R.string.pref_customMaps), MAPPER.writeValueAsString(Collections.singletonList(customMap)));
+                    e.putString(getKey(R.string.pref_tileprovider), migrateLegacyCustomMapProviderId(getString(R.string.pref_tileprovider, null), customMap.getId()));
+                    e.putString(getKey(R.string.pref_previous_tileprovider), migrateLegacyCustomMapProviderId(getString(R.string.pref_previous_tileprovider, null), customMap.getId()));
+                    e.remove(getKey(R.string.old_pref_userDefinedTileProviderUri));
+                    e.apply();
+                } catch (JsonProcessingException e) {
+                    migrationSuccessful = false;
+                    Log.e("Failure migrating custom map settings: " + e.getMessage());
+                }
+            }
+            if (migrationSuccessful) {
+                setActualVersion(12);
+            }
+        }
+
+    }
+
+    private static String migrateLegacyCustomMapProviderId(final String providerId, final String customMapId) {
+        if (StringUtils.startsWith(providerId, "cgeo.geocaching.unifiedmap.tileproviders.UserDefinedMapsforgeOnlineSource:")) {
+            return CustomMapsforgeOnlineSource.getId(customMapId);
+        }
+        if (StringUtils.startsWith(providerId, "cgeo.geocaching.unifiedmap.tileproviders.UserDefinedMapsforgeVTMOnlineSource:")) {
+            return CustomMapsforgeVTMOnlineSource.getId(customMapId);
+        }
+        return providerId;
     }
 
     private static String getKey(final int prefKeyId) {
@@ -1289,6 +1373,10 @@ public class Settings {
         }
     }
 
+    public static synchronized void resetTileProvider() {
+        tileProvider = null;
+    }
+
     public static void setPreviousTileProvider(final AbstractTileProvider tileProvider) {
         if (tileProvider != null) {
             putString(R.string.pref_previous_tileprovider, tileProvider.getId());
@@ -1312,9 +1400,40 @@ public class Settings {
         return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
     }
 
-    @Nullable
-    public static String getUserDefinedTileProviderUri() {
-        return getString(R.string.pref_userDefinedTileProviderUri, null);
+    @NonNull
+    public static List<PrefCustomMap> getCustomMaps() {
+        try {
+            return MAPPER.readValue(getString(R.string.pref_customMaps, "[]"), new TypeReference<List<PrefCustomMap>>() {
+            });
+        } catch (JsonProcessingException e) {
+            Log.e("Failure parsing custom map settings: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    public static void putCustomMap(final PrefCustomMap customMap) {
+        final List<PrefCustomMap> customMaps = getCustomMaps();
+        final int index = customMaps.indexOf(customMap);
+        if (index < 0) {
+            customMaps.add(customMap);
+        } else {
+            customMaps.set(index, customMap);
+        }
+        putCustomMaps(customMaps);
+    }
+
+    public static void removeCustomMap(final PrefCustomMap customMap) {
+        final List<PrefCustomMap> customMaps = getCustomMaps();
+        customMaps.remove(customMap);
+        putCustomMaps(customMaps);
+    }
+
+    private static void putCustomMaps(final List<PrefCustomMap> customMaps) {
+        try {
+            putString(R.string.pref_customMaps, MAPPER.writeValueAsString(customMaps));
+        } catch (JsonProcessingException e) {
+            Log.e("Failure writing custom map settings: " + e.getMessage());
+        }
     }
 
     public static void setMapLanguage(@Nullable final String language) {
@@ -2480,7 +2599,8 @@ public class Settings {
                 LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_public),
                 LocalizationUtils.getPlainString(R.string.pref_su_tokensecret), LocalizationUtils.getPlainString(R.string.pref_su_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_public),
                 LocalizationUtils.getPlainString(R.string.pref_fakekey_geokrety_authorization),
-                LocalizationUtils.getPlainString(R.string.pref_cookiejar)
+                LocalizationUtils.getPlainString(R.string.pref_cookiejar),
+                LocalizationUtils.getPlainString(R.string.pref_customMaps)
         );
         return sensitiveKeys;
     }
