@@ -60,6 +60,7 @@ import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.GeofenceCirclesLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
+import cgeo.geocaching.unifiedmap.layers.OwnUnpublishedCachesLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
@@ -260,6 +261,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
+        new OwnUnpublishedCachesLayer(this, clickableItemsLayer);
 
         WherigoLayer.get().setLayer(clickableItemsLayer);
 

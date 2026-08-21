@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -21,6 +22,7 @@ import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.UnpublishedGeocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -56,6 +58,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -866,6 +869,49 @@ public final class GCParser {
             return list;
         } catch (final Exception e) {
             Log.e("GCParser.searchBookmarkLists: error parsing html page", e);
+            return null;
+        }
+    }
+
+    /**
+     * Fetches the caches which are owned by the user but not (yet, or no longer) published. Shouldn't be called on main thread!
+     *
+     * @return A non-null search result (which might be empty) on success. Null on error.
+     */
+    @Nullable
+    @WorkerThread
+    public static SearchResult searchOwnUnpublishedGeocaches() {
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/my/geocaches.aspx", new Parameters("archived", "y"));
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchOwnUnpublishedGeocaches: No data from server");
+            return null;
+        }
+
+        try {
+            final Document document = Jsoup.parse(page);
+            final Set<String> geocodes = new LinkedHashSet<>();
+            final Pattern geocodePattern = Pattern.compile(GCConstants.GEOCODE_PATTERN);
+
+            for (final Element link : document.select("p.WrapFix a[href*=/geocache/]")) {
+                final String geocode = TextUtils.getMatch(link.attr("href"), geocodePattern, null);
+                if (StringUtils.isNotBlank(geocode)) {
+                    geocodes.add(geocode);
+                }
+            }
+
+            // The listing page only gives us geocode + name, not type/D/T/size, so fetch full details per cache,
+            // then load them back as UnpublishedGeocache so the rest of the app can recognize them as such.
+            final List<Geocache> unpublishedCaches = new ArrayList<>();
+            for (final String geocode : geocodes) {
+                final SearchResult detail = Geocache.searchByGeocode(geocode, null, false, null);
+                final Geocache cache = detail == null ? null : detail.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null) {
+                    unpublishedCaches.add(new UnpublishedGeocache(cache));
+                }
+            }
+            return new SearchResult(unpublishedCaches);
+        } catch (final Exception e) {
+            Log.e("GCParser.searchOwnUnpublishedGeocaches: error parsing html page", e);
             return null;
         }
     }

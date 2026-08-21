@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
@@ -183,6 +184,9 @@ public final class CacheDetailsCreator {
         }
         if (cache.isPremiumMembersOnly()) {
             states.add(LocalizationUtils.getString(R.string.cache_status_premium));
+        }
+        for (final StatusCode statusCode : cache.getStatusCodes()) {
+            states.add(statusCode.getErrorString());
         }
         if (!states.isEmpty()) {
             add(R.string.cache_status, StringUtils.join(states, ", "));

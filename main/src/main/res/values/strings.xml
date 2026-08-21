@@ -438,6 +438,9 @@
     <string name="menu_history_longstring">Finds history</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bookmark lists</string>
+    <string name="list_own_unpublished_caches">Own Unpublished Caches</string>
+    <string name="own_unpublished_new_draft">New draft</string>
+    <string name="own_unpublished_show_on_live_map">Show on live map</string>
     <string name="menu_invert_order">Invert order</string>
 
     <!-- main screen -->
@@ -1811,6 +1814,8 @@
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Premium Members only</string>
+    <string name="cache_status_unpublished">Unpublished</string>
+    <string name="cache_status_awaiting_publication">Awaiting Publication</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Set cache name</string>
