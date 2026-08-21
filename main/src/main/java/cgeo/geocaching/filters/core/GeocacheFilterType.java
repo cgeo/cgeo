@@ -44,7 +44,8 @@ public enum GeocacheFilterType {
     TIER("tier", R.string.cache_filter_tier, R.string.cache_filtergroup_details, TierGeocacheFilter::new),
     HEALTH_SCORE("health_score", R.string.cache_filter_health_score, R.string.cache_filtergroup_details, HealthScoreGeocacheFilter::new),
     NAMED_FILTER("named_filter", R.string.cache_filter_named_filter, R.string.cache_filtergroup_special, NamedFilterGeocacheFilter::new),
-    LOGICAL_FILTER_GROUP(null, R.string.cache_filter_logical_filter_group, R.string.cache_filtergroup_special, AndGeocacheFilter::new);
+    LOGICAL_FILTER_GROUP("logical", R.string.cache_filter_logical_filter_group, R.string.cache_filtergroup_special, AndGeocacheFilter::new),
+    CONSTANT_FILTER("constant", 0, 0, () -> ConstantGeocacheFilter.ALWAYS_TRUE);
 
 
     private final String typeId;

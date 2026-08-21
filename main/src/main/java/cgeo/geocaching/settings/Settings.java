@@ -2386,6 +2386,14 @@ public class Settings {
         }
     }
 
+    public static boolean isConditionalCacheMarkersEnabled() {
+        return getBoolean(R.string.pref_conditionalCacheMarkersEnabled, true);
+    }
+
+    public static void setConditionalCacheMarkersEnabled(final boolean enabled) {
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, enabled);
+    }
+
     /**
      * checks whether legacy folder needs to be migrated
      * (legacy value is set and not yet migrated)

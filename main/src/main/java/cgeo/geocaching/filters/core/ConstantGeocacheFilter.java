@@ -26,6 +26,11 @@ public class ConstantGeocacheFilter extends BaseGeocacheFilter {
         return "CONSTANT";
     }
 
+    @Override
+    public GeocacheFilterType getType() {
+        return GeocacheFilterType.CONSTANT_FILTER;
+    }
+
     @Nullable
     @Override
     public ObjectNode getJsonConfig() {

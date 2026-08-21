@@ -7,7 +7,6 @@ import cgeo.geocaching.databinding.CacheFilterActivityBinding;
 import cgeo.geocaching.databinding.CacheFilterListItemBinding;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
-import cgeo.geocaching.filters.NamedFilterActivity;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -22,6 +21,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.InputWithParentDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
@@ -33,6 +33,7 @@ import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRAN
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -159,7 +160,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         });
             }
         });
-        this.binding.filterReferenceNamedFilterDelete.setOnClickListener(v -> adjustNamedFilterReferenceViewFor(null));
     }
 
     @Override
@@ -171,56 +171,82 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         // Add Named Filter criterion button
         binding.filterFillWithNamed.setOnClickListener(v -> {
             FilterUtils.openDialogSelectNamedFilter(this, TextParam.id(R.string.named_filter_fill_with_named), null, selected ->
-                fillViewFromFilter(selected == null ? null : selected.toConfig(), true));
+                fillViewFromFilter(selected == null ? null : selected.toConfig(), false));
         });
         ViewUtils.setTooltip(binding.filterFillWithNamed, TextParam.id(R.string.named_filter_fill_with_named));
 
         // Save as Named Filter button
         binding.filterSaveAsNamed.setOnClickListener(v -> {
-            final NamedFilter refNamedFilter = NamedFilter.getById(NumberUtils.toInt(binding.filterReferenceNamedFilterId.getText().toString(), -1));
-            final SimpleDialog.InputOptions io = new SimpleDialog.InputOptions();
-            if (refNamedFilter != null) {
-                io.setInitialValue(refNamedFilter.getName());
-            }
-            SimpleDialog.of(this).setTitle(R.string.named_filter_save_as_title)
-                    .input(io, name -> {
-                        if (name == null || name.trim().isEmpty()) {
-                            return;
-                        }
-                        if (NamedFilter.nameExists(name)) {
-                            SimpleDialog.of(this).setTitle(R.string.named_filter_name_exists_title)
-                                    .setMessage(R.string.named_filter_name_exists_message, name)
-                                    .confirm(() -> saveViewAsOverwriteFilter(name));
-                        } else {
-                            final NamedFilter existing = NamedFilter.filterConfigExists(getFilterFromView());
-                            if (existing != null) {
-                                SimpleDialog.of(this).setTitle(R.string.named_filter_config_exists_title)
-                                        .setMessage(R.string.named_filter_config_exists_message, existing.getName())
-                                        .confirm(() -> saveViewAsNewNamedFilter(name));
-                            } else {
-                                saveViewAsNewNamedFilter(name);
-                            }
-                        }
+            final int refId = NumberUtils.toInt(binding.filterReferenceNamedFilterId.getText().toString(), -1);
+            final NamedFilter referenced = NamedFilter.getById(refId);
+            openSaveFilterDialog(referenced != null ? referenced.getName() : null, referenced != null ? referenced.getMarkerId() : null);
+        });
+        ViewUtils.setTooltip(binding.filterSaveAsNamed, TextParam.id(R.string.named_filter_save_as));
+
+        // Delete Named Filter button
+        binding.filterStorageDelete.setOnClickListener(v -> {
+            final String filterName = binding.filterStorageName.getText().toString();
+            SimpleDialog.of(this).setTitle(R.string.named_filter_delete)
+                    .setMessage(R.string.named_filter_storage_delete_message, filterName)
+                    .confirm(() -> {
+                        NamedFilter.delete(filterName);
+                        binding.filterStorageName.setText("");
                     });
         });
-        ViewUtils.setTooltip(binding.filterSaveAsNamed, TextParam.id(R.string.named_filter_save_as_title));
-
-        // Open NamedFilterActivity button
-        binding.filterOpenNamedFilterActivity.setOnClickListener(v ->
-                NamedFilterActivity.startActivity(this));
-        ViewUtils.setTooltip(binding.filterOpenNamedFilterActivity, TextParam.id(R.string.named_filter_activity_title));
     }
 
-    private void saveViewAsNewNamedFilter(final String newName) {
+    private void openSaveFilterDialog(@Nullable final String prefillName, @Nullable final String prefillMarker) {
+        String initialName = null;
+        String initialParent = null;
+        if (prefillName != null) {
+            final int colonIdx = prefillName.lastIndexOf(':');
+            if (colonIdx > 0) {
+                initialParent = prefillName.substring(0, colonIdx);
+                initialName = prefillName.substring(colonIdx + 1);
+            } else {
+                initialName = prefillName;
+            }
+        }
+        final InputWithParentDialog.Options opts = new InputWithParentDialog.Options()
+                .setDefaultIconRes(R.drawable.ic_menu_filter)
+                .setInitialName(initialName)
+                .setInitialMarker(prefillMarker);
+        if (initialParent != null) {
+            opts.setInitialParentPrefill(initialParent);
+        }
+        InputWithParentDialog.of(this)
+                .setTitle(R.string.named_filter_save_as)
+                .show(opts, FilterUtils.getNamedFilterGroups(), this::handleFilterSave);
+    }
+
+    private void handleFilterSave(final String name, final String marker) {
+        if (name == null || name.trim().isEmpty()) {
+            return;
+        }
+        if (NamedFilter.nameExists(name)) {
+            SimpleDialog.of(this).setTitle(R.string.named_filter_name_exists_title)
+                    .setMessage(R.string.named_filter_name_exists_message, name)
+                    .confirm(
+                        () -> saveViewAsNamedFilter(name, marker),
+                        () -> openSaveFilterDialog(name, marker));
+        } else {
+            final NamedFilter existing = NamedFilter.filterConfigExists(getFilterFromView());
+            if (existing != null) {
+                SimpleDialog.of(this).setTitle(R.string.named_filter_config_exists_title)
+                        .setMessage(R.string.named_filter_config_exists_message, existing.getName())
+                        .confirm(
+                            () -> saveViewAsNamedFilter(name, marker),
+                            () -> openSaveFilterDialog(name, marker));
+            } else {
+                saveViewAsNamedFilter(name, marker);
+            }
+        }
+    }
+
+    private void saveViewAsNamedFilter(final String newName, @Nullable final String markerId) {
         adjustNamedFilterReferenceViewFor(null);
-        final NamedFilter newNamedFilter = NamedFilter.addNew(newName, getFilterFromView());
+        final NamedFilter newNamedFilter = NamedFilter.addOrReplace(newName, getFilterFromView(), markerId);
         adjustNamedFilterReferenceViewFor(newNamedFilter);
-    }
-
-    private void saveViewAsOverwriteFilter(final String name) {
-        adjustNamedFilterReferenceViewFor(null);
-        final NamedFilter namedFilter = NamedFilter.overwrite(name, getFilterFromView());
-        adjustNamedFilterReferenceViewFor(namedFilter);
     }
 
     @Override
@@ -248,7 +274,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
-        menu.findItem(R.id.menu_item_delete).setVisible(true);
+        menu.findItem(R.id.menu_item_reset).setVisible(true);
         return true;
     }
 
@@ -256,7 +282,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle presses on the action bar items
         final int itemId = item.getItemId();
-        if (itemId == R.id.menu_item_delete) {
+        if (itemId == R.id.menu_item_reset) {
             clearView();
             return true;
         } else if (itemId == R.id.menu_item_save) {
@@ -361,10 +387,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void adjustNamedFilterReferenceViewFor(@Nullable final NamedFilter filter) {
-        binding.filterReferenceNamedFilter.setVisibility(filter == null ? View.GONE : View.VISIBLE);
-        binding.filterReferenceNamedFilterLine.setVisibility(filter == null ? View.GONE : View.VISIBLE);
-        binding.filterReferenceNamedFilterName.setText(filter == null ? "" : LocalizationUtils.getString(R.string.cache_filter_reference_based_on, filter.getNameAndMarker()));
+        final boolean unsavedFilter = this.filterContext.get().getTree() != null && filter != null && !this.filterContext.get().filtersSame(filter.getFilter());
+        binding.filterStorageName.setText(filter == null ? "" : unsavedFilter ? "(" + filter.getName() + ")*" : filter.getNameAndMarker());
+        binding.filterStorageName.setTypeface(null, unsavedFilter ? Typeface.ITALIC : Typeface.NORMAL);
+        binding.filterSaveAsNamed.setIconResource(unsavedFilter ? R.drawable.ic_menu_unsaved : R.drawable.ic_menu_save);
         binding.filterReferenceNamedFilterId.setText(filter == null ? "-1" : "" + filter.getId());
+        binding.filterStorageDelete.setVisibility(filter == null ? View.GONE : View.VISIBLE);
     }
 
     private void finishWithResult() {
@@ -497,7 +525,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.andOrFilterCheckbox.setChecked(false);
         this.includeInconclusiveFilterCheckbox.setChecked(false);
 
-        this.binding.filterNamedFilterOptions.setVisibility(View.GONE);
+        //this.binding.filterNamedFilterOptions.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxes.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxesLine.setVisibility(View.GONE);
         this.binding.filterAdditem.setVisibility(View.GONE);
