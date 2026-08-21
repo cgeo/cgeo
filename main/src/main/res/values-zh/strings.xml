@@ -21,7 +21,7 @@
     <string name="mega">大型活动藏点</string>
     <string name="giga">超大型活动藏点</string>
     <string name="earth">地质藏点</string>
-    <string name="cito">去污藏点</string>
+    <string name="cito">去污纳宝</string>
     <string name="webcam">网络摄像头藏点</string>
     <string name="virtual">虚拟藏点</string>
     <string name="wherigo">Wherigo藏点</string>
@@ -33,7 +33,7 @@
     <string name="block">Geocaching总部街区聚会</string>
     <string name="locationless">无位置 (反向) 藏点</string>
     <string name="advlab">冒险型实验藏点</string>
-    <string name="userdefined">用户自定义藏点</string>
+    <string name="userdefined">自定义藏点</string>
     <string name="unknown">未知类型</string>
     <string name="other">其他的</string>
     <string name="event_special">特殊活动</string>
@@ -58,7 +58,7 @@
     <string name="block_short">GCHQ区块</string>
     <string name="locationless_short">无位置</string>
     <string name="advlab_short">Adv Lab</string>
-    <string name="userdefined_short">用户自定义</string>
+    <string name="userdefined_short">自定义</string>
     <string name="unknown_short">未知</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">微型</string>
@@ -293,7 +293,7 @@
     <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加途径点到哪个藏点。</string>
     <string name="err_waypoint_add_failed">c:geo 无法添加您的途径点。</string>
     <string name="err_log_load_data">c:geo 无法加载记录到访所需的数据。</string>
-    <string name="err_log_post_missing_tracking_code">缺少追踪代码。</string>
+    <string name="err_log_post_missing_tracking_code">缺少追踪编号。</string>
     <string name="err_log_post_missing_coordinates">缺少坐标。</string>
     <string name="err_website_message">该网站的答复内容如下： </string>
     <string name="err_log_post_failed">似乎您的日志未被上载，请在藏点源网页上进行检查。</string>
