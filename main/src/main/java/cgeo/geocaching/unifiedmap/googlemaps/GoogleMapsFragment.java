@@ -48,6 +48,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private LatLngBounds lastBounds = null;
 
     private boolean mapIsCurrentlyMoving;
+    private boolean mapIsInAnimation = false; // to suppress bearing updates temporarily
 
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
@@ -224,7 +225,19 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
                     new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
                     new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);
-            mMap.animateCamera(cu);
+            // block bearing updates while zooming
+            mapIsInAnimation = true;
+            mMap.animateCamera(cu, new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    mapIsInAnimation = false;
+                }
+
+                @Override
+                public void onCancel() {
+                    mapIsInAnimation = false;
+                }
+            });
         }
     }
 
@@ -263,7 +276,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setBearing(final float bearing) {
-        if (mMap != null) {
+        if (mMap != null && !mapIsInAnimation) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
         }
     }
