@@ -35,6 +35,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Warunkowe znaczniki skrytki
 - Nowość: Pokaż wskazówkę nawigacji (strzałka + odległość)
 - Zmiana: Zmniejszenie wymagania pamięci dla aktywności mapy
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
