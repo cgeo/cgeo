@@ -35,6 +35,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Marcadors de catxé condicionals
 - Nou: Mostra la pista de navegació (fletxa + distància)
 - Canvi: Reduir els requisits de memòria de l'activitat del mapa
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
