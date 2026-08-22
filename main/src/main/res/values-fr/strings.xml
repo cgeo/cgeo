@@ -573,8 +573,6 @@
     <string name="list_dialog_rename_title">Renommer la liste</string>
     <string name="list_dialog_rename">Renommer</string>
     <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
-    <string name="list_parent_list">Liste parente</string>
-    <string name="list_create_parent">&lt;Créer une nouvelle liste parente&gt;</string>
     <string name="list_name">Nom de la liste</string>
     <string name="list_confirm_rename">Renommage de \"%1$s\" à \"%2$s\"\n%3$s\nCette action ne peut pas être annulée !</string>
     <string name="list_confirm_no_hierarchy">\nAucun \":\" trouvé - toutes les listes correspondantes seront transformées en listes de premier niveau\n</string>
@@ -755,29 +753,15 @@
         <item>&gt;1mois</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtres</string>
-    <string name="cache_namedfilter_matching">Filtres correspondants</string>
-    <string name="named_filter_add">Ajouter un filtre</string>
-    <string name="named_filter_empty_hint">Aucun filtre configuré. Appuyez sur + pour en ajouter un.</string>
-    <string name="named_filter_activate_marker">utiliser avec priorité</string>
-    <string name="named_filter_enable_all_markers">Appliquer les filtres comme marqueurs</string>
-    <string name="named_filter_markers_enabled">Marqueurs activés</string>
-    <string name="named_filter_markers_disabled">Marqueurs désactivés</string>
     <string name="named_filter_select_title">Sélectionner un filtre</string>
-    <string name="named_filter_activate_deactivate_title">Activer / désactiver les marqueurs</string>
-    <string name="named_filter_nofilter_label">(pas de filtre — correspond à toutes les caches)</string>
-    <string name="named_filter_save_as_title">Enregistrer en tant que filtre</string>
+    <string name="named_filter_empty_hint">Aucun filtre configuré. Appuyez sur + pour en ajouter un.</string>
     <string name="named_filter_name_exists_title">Le nom existe déjà</string>
     <string name="named_filter_name_exists_message">Un filtre nommé \'%s\' existe déjà. Écraser ?</string>
     <string name="named_filter_config_exists_title">Filtre déjà enregistré</string>
     <string name="named_filter_config_exists_message">Cette configuration de filtre est déjà enregistrée en tant que «%s». Enregistrer à nouveau avec un nouveau nom?</string>
-    <string name="named_filter_fill_with_named">Remplir avec le filtre</string>
-    <string name="named_filter_priority_normal">Normale</string>
-    <string name="named_filter_priority_high">Élevée</string>
-    <string name="named_filter_priority_highest">La plus élevée</string>
-    <string name="named_filter_priority_low">Basse</string>
-    <string name="named_filter_priority_lowest">La plus basse</string>
-    <string name="cache_filter_reference_based_on">Basé sur: %1$s</string>
+    <string name="named_filter_markers_enabled">Marqueurs activés</string>
+    <string name="named_filter_markers_disabled">Marqueurs désactivés</string>
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
