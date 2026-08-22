@@ -586,8 +586,6 @@
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
-    <string name="list_parent_list">Lista nadrzędna</string>
-    <string name="list_create_parent">&lt;Utwórz nową listę nadrzędną&gt;</string>
     <string name="list_name">Nazwa listy</string>
     <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
     <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
@@ -770,29 +768,15 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtry</string>
-    <string name="cache_namedfilter_matching">Pasujące filtry</string>
-    <string name="named_filter_add">Dodaj filtr</string>
-    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
-    <string name="named_filter_activate_marker">używaj z prio</string>
-    <string name="named_filter_enable_all_markers">Zastosuj filtry jako znaczniki</string>
-    <string name="named_filter_markers_enabled">Znaczniki włączone</string>
-    <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
     <string name="named_filter_select_title">Wybierz filtr</string>
-    <string name="named_filter_activate_deactivate_title">Aktywuj / dezaktywuj znaczniki</string>
-    <string name="named_filter_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
-    <string name="named_filter_save_as_title">Zapisz jako filtr</string>
+    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
     <string name="named_filter_name_exists_title">Nazwa już istnieje</string>
     <string name="named_filter_name_exists_message">Filtr o nazwie \'%s\' już istnieje. Nadpisać?</string>
     <string name="named_filter_config_exists_title">Filtr już zapisany</string>
     <string name="named_filter_config_exists_message">Ta konfiguracja filtra jest już zapisana jako \'%s\'. Zapisać ponownie z nową nazwą?</string>
-    <string name="named_filter_fill_with_named">Wypełnij filtrem</string>
-    <string name="named_filter_priority_normal">Normalny</string>
-    <string name="named_filter_priority_high">Wysoki</string>
-    <string name="named_filter_priority_highest">Najwyższy</string>
-    <string name="named_filter_priority_low">Niski</string>
-    <string name="named_filter_priority_lowest">Najniższy</string>
-    <string name="cache_filter_reference_based_on">Na podstawie: %1$s</string>
+    <string name="named_filter_markers_enabled">Znaczniki włączone</string>
+    <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
