@@ -35,6 +35,7 @@
 - Новое: Символы тайников на основе условий
 - Новое: Отображение навигационной подсказки (стрелка + расстояние)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Детали тайника
 - Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
