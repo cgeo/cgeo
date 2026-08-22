@@ -35,6 +35,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Marcadores de cache condicionais
 - Novo: Mostrar dicas de navegação (seta + distância)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
