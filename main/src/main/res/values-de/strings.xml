@@ -574,8 +574,6 @@
     <string name="list_dialog_rename_title">Liste umbenennen</string>
     <string name="list_dialog_rename">Umbenennen</string>
     <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
-    <string name="list_parent_list">Übergeordnete Liste</string>
-    <string name="list_create_parent">&lt;Neue übergeordnete Liste erstellen&gt;</string>
     <string name="list_name">Listenname</string>
     <string name="list_confirm_rename">Umbenennen von \"%1$s\" zu \"%2$s\"\n%3$s\nDiese Aktion kann nicht rückgängig gemacht werden!</string>
     <string name="list_confirm_no_hierarchy">\nKein \":\" gefunden - alle übereinstimmenden Listen werden top-level Listen\n</string>
@@ -756,29 +754,15 @@
         <item>&gt;1M</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filter</string>
-    <string name="cache_namedfilter_matching">Passende Filter</string>
-    <string name="named_filter_add">Filter hinzufügen</string>
-    <string name="named_filter_empty_hint">Keine Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
-    <string name="named_filter_activate_marker">mit Prio verwenden</string>
-    <string name="named_filter_enable_all_markers">Filter als Marker anwenden</string>
-    <string name="named_filter_markers_enabled">Marker aktiviert</string>
-    <string name="named_filter_markers_disabled">Marker deaktiviert</string>
     <string name="named_filter_select_title">Filter auswählen</string>
-    <string name="named_filter_activate_deactivate_title">Marker aktivieren / deaktivieren</string>
-    <string name="named_filter_nofilter_label">(kein Filter — passt auf alle Caches)</string>
-    <string name="named_filter_save_as_title">Als Filter speichern</string>
+    <string name="named_filter_empty_hint">Keine Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
     <string name="named_filter_name_exists_title">Name existiert bereits</string>
     <string name="named_filter_name_exists_message">Ein Filter mit dem Namen \'%s\' existiert bereits. Überschreiben?</string>
     <string name="named_filter_config_exists_title">Filter bereits gespeichert</string>
     <string name="named_filter_config_exists_message">Diese Filter-Konfiguration is bereits als \'%s\' gespeichert. Erneut unter neuem Namen speichern?</string>
-    <string name="named_filter_fill_with_named">Mit Filter füllen</string>
-    <string name="named_filter_priority_normal">Normal</string>
-    <string name="named_filter_priority_high">Hoch</string>
-    <string name="named_filter_priority_highest">Höchste</string>
-    <string name="named_filter_priority_low">Niedrig</string>
-    <string name="named_filter_priority_lowest">Niedrigste</string>
-    <string name="cache_filter_reference_based_on">Basierend auf: %1$s</string>
+    <string name="named_filter_markers_enabled">Marker aktiviert</string>
+    <string name="named_filter_markers_disabled">Marker deaktiviert</string>
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
