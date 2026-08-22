@@ -269,6 +269,7 @@
     <string name="list_not_available">Ang listahan kay dili na magamit, pagbalhin ngadto sa standard nga lista</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Ang bersyon</string>
     <string name="about_system">Ang Sistema</string>
