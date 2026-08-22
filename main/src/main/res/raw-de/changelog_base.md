@@ -35,6 +35,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Bedingte Cache-Marker
 - Neu: Navigationshinweis anzeigen (Pfeil + Entfernung)
 - Änderung: Verringere Speicheranforderungen für Karte
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
