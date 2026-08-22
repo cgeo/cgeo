@@ -35,6 +35,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
