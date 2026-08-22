@@ -35,6 +35,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Nouveau : marqueurs de cache conditionnels
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Détails de la cache
 - Nouveau : Détecter les caractères supplémentaires dans les formules : –,  , ×
