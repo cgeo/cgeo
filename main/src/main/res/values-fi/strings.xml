@@ -566,8 +566,6 @@
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
     <string name="list_not_available">Luettelo ei ole enää saatavilla, vaihdetaan oletusluetteloon</string>
-    <string name="list_parent_list">Pääluettelo</string>
-    <string name="list_create_parent">&lt;Luo uusi ylälista&gt;</string>
     <string name="list_name">Listan nimi</string>
     <string name="list_confirm_rename">Uudelleennimetään \"%1$s\". Uusi nimi: \"%2$s\"\n%3$s\nTätä toimintoa ei voi peruuttaa!</string>
     <string name="list_confirm_no_hierarchy">\n\":\" ei löytynyt - kaikki vastaavat listat muutetaan ylimmän tason listoiksi\n</string>
@@ -745,6 +743,7 @@
         <item>&gt;1kk</item>
     </string-array>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
