@@ -578,8 +578,6 @@
     <string name="list_dialog_rename_title">Premenovať zoznam</string>
     <string name="list_dialog_rename">Premenovať</string>
     <string name="list_not_available">Zoznam nie je k dispozícii, prechod na štandardný zoznam</string>
-    <string name="list_parent_list">Nadradený zoznam</string>
-    <string name="list_create_parent">&lt;Vytvoriť nový nadradený zoznam&gt;</string>
     <string name="list_name">Názov zoznamu</string>
     <string name="list_confirm_rename">Premenovanie z „%1$s“ na „%2$s“\n%3$s\nTento úkon sa nedá vrátiť!</string>
     <string name="list_confirm_no_hierarchy">\nNenájdené „:“ – všetky zodpovedajúce zoznamy sa premenia na zoznamy najvyššej úrovne\n</string>
@@ -762,29 +760,15 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtre</string>
-    <string name="cache_namedfilter_matching">Zodpovedajúce filtre</string>
-    <string name="named_filter_add">Pridať filter</string>
-    <string name="named_filter_empty_hint">Nie sú nakonfigurované žiadne filtre. Pridajte nejaké ťuknutím na +.</string>
-    <string name="named_filter_activate_marker">použiť s prioritou</string>
-    <string name="named_filter_enable_all_markers">Použiť filtre ako značky</string>
-    <string name="named_filter_markers_enabled">Značky povolené</string>
-    <string name="named_filter_markers_disabled">Značky zakázané</string>
     <string name="named_filter_select_title">Vyberte filter</string>
-    <string name="named_filter_activate_deactivate_title">Aktivácia/deaktivácia značiek</string>
-    <string name="named_filter_nofilter_label">(bez filtra — zhoduje sa so všetkými keškami)</string>
-    <string name="named_filter_save_as_title">Uložiť ako filter</string>
+    <string name="named_filter_empty_hint">Nie sú nakonfigurované žiadne filtre. Pridajte nejaké ťuknutím na +.</string>
     <string name="named_filter_name_exists_title">Názov už existuje</string>
     <string name="named_filter_name_exists_message">Filter s názvom „%s“ už existuje. Prepísať?</string>
     <string name="named_filter_config_exists_title">Filter je už uložený</string>
     <string name="named_filter_config_exists_message">Táto konfigurácia filtra je už uložená ako „%s“. Uložiť znova s ​​novým názvom?</string>
-    <string name="named_filter_fill_with_named">Vyplniť filtrom</string>
-    <string name="named_filter_priority_normal">Normálna</string>
-    <string name="named_filter_priority_high">Vysoká</string>
-    <string name="named_filter_priority_highest">Najvyššia</string>
-    <string name="named_filter_priority_low">Nízka</string>
-    <string name="named_filter_priority_lowest">Najnižšia</string>
-    <string name="cache_filter_reference_based_on">Založené na: %1$s</string>
+    <string name="named_filter_markers_enabled">Značky povolené</string>
+    <string name="named_filter_markers_disabled">Značky zakázané</string>
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
