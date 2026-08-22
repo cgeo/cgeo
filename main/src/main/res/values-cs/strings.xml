@@ -578,8 +578,6 @@
     <string name="list_dialog_rename_title">Přejmenovat seznam</string>
     <string name="list_dialog_rename">Přejmenovat</string>
     <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
-    <string name="list_parent_list">Nadřazený seznam</string>
-    <string name="list_create_parent">&lt;Vytvořit nový nadřazený seznam&gt;</string>
     <string name="list_name">Název seznamu</string>
     <string name="list_confirm_rename">Přejmenování z \"%1$s\" na \"%2$s\"\n%3$s\nTuto akci nelze vrátit zpět!</string>
     <string name="list_confirm_no_hierarchy">\nNenalezeno \":\" - všechny odpovídající seznamy budou převedeny na nejvyšší úroveň\n</string>
@@ -759,6 +757,8 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Název</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
