@@ -325,6 +325,8 @@
     <string name="list_not_available">D\'Lëscht ass net méi disponibel. D\'Standard-Lëscht gëtt nees agefouert</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Numm</string>
     <!-- about -->
     <string name="about_version">Versioun</string>
     <string name="about_changelog">Ännerungshiwäiser</string>

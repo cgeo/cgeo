@@ -555,8 +555,6 @@
     <string name="list_dialog_rename_title">Rinomina lista</string>
     <string name="list_dialog_rename">Rinomina</string>
     <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
-    <string name="list_parent_list">Elenco principale</string>
-    <string name="list_create_parent">&lt;Crea nuova lista parent&gt;</string>
     <string name="list_name">Nome elenco</string>
     <string name="list_confirm_rename">Rinomina da \"%1$s\" in \"%2$s\"\n%3$s\nQuesta azione non può essere annullata!</string>
     <string name="list_confirm_no_hierarchy">\nNessun \":\" trovato - tutte gli elenchi corrispondenti saranno trasformati in elenchi di primo livello\n</string>
@@ -734,6 +732,8 @@
         <item>&gt;1 mese</item>
     </string-array>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Nome</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -2757,6 +2757,8 @@
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
     <string name="copy" tools:ignore="PrivateResource">Copia</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Riprendi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>

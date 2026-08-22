@@ -35,6 +35,7 @@
 - Новое: Символы тайников на основе условий
 - Новое: Отображение навигационной подсказки (стрелка + расстояние)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Детали тайника
 - Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
@@ -64,6 +65,7 @@
 - Новое: Отображение личного избранного в режиме просмотра записей (Geocaching.com + автономные журналы)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo player
 - Новое: Оффлайн перевод для Wherigo
