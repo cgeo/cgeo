@@ -641,6 +641,7 @@
         <item>&gt;1달</item>
     </string-array>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
