@@ -230,6 +230,7 @@
     <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>
