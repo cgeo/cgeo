@@ -35,6 +35,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Nuevo: Marcadores de cachés condicionales
 - Nuevo: Mostrar pista de navegación (flecha + distancia)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detalles del caché
 - Nuevo: Detectar caracteres adicionales en fórmulas: –, ⋅, ×
