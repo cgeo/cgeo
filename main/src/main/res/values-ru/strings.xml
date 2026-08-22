@@ -586,8 +586,6 @@
     <string name="list_dialog_rename_title">Переименовать список</string>
     <string name="list_dialog_rename">Переименовать</string>
     <string name="list_not_available">Этот список больше недоступен, переключаюсь на список по умолчанию</string>
-    <string name="list_parent_list">Родительский список</string>
-    <string name="list_create_parent">&lt;Создать новый родительский список&gt;</string>
     <string name="list_name">Имя списка</string>
     <string name="list_confirm_rename">Переименование из \"%1$s\" в \"%2$s\"\n%3$s\nЭто действие невозможно отменить!</string>
     <string name="list_confirm_no_hierarchy">\nНе найдено \":\" - все соответствующие списки будут преобразованы в списки верхнего уровня\n</string>
@@ -770,29 +768,16 @@
         <item>&gt;1м</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Фильтры</string>
-    <string name="cache_namedfilter_matching">Соответствующие фильтры</string>
-    <string name="named_filter_add">Добавить фильтр</string>
-    <string name="named_filter_empty_hint">Фильтры не настроены. Чтобы добавить нажмите +.</string>
-    <string name="named_filter_activate_marker">использовать с приоритетом</string>
-    <string name="named_filter_enable_all_markers">Применить фильтры как маркеры</string>
-    <string name="named_filter_markers_enabled">Маркеры включены</string>
-    <string name="named_filter_markers_disabled">Маркеры отключены</string>
     <string name="named_filter_select_title">Выберите фильтр</string>
-    <string name="named_filter_activate_deactivate_title">Активация/деактивация маркеров</string>
-    <string name="named_filter_nofilter_label">(без фильтра — соответствует всем тайникам)</string>
-    <string name="named_filter_save_as_title">Сохранить как фильтр</string>
+    <string name="named_filter_empty_hint">Фильтры не настроены. Чтобы добавить нажмите +.</string>
     <string name="named_filter_name_exists_title">Такое имя уже существует</string>
     <string name="named_filter_name_exists_message">Фильтр с именем \'%s\' уже существует. Перезаписать?</string>
     <string name="named_filter_config_exists_title">Фильтр уже сохранен</string>
     <string name="named_filter_config_exists_message">Эта конфигурация фильтра уже сохранена как \"%s\". Сохранить ее снова с новым именем?</string>
-    <string name="named_filter_fill_with_named">Заполнить фильтром</string>
-    <string name="named_filter_priority_normal">Нормальный</string>
-    <string name="named_filter_priority_high">Высокий</string>
-    <string name="named_filter_priority_highest">Самый высокий</string>
-    <string name="named_filter_priority_low">Низкий</string>
-    <string name="named_filter_priority_lowest">Самый низкий</string>
-    <string name="cache_filter_reference_based_on">На основе: %1$s</string>
+    <string name="named_filter_markers_enabled">Маркеры включены</string>
+    <string name="named_filter_markers_disabled">Маркеры отключены</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Название</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
