@@ -325,6 +325,7 @@
     <string name="list_not_available">Список більше не доступний, перемикаючись на стандартний список</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">версія</string>
     <string name="about_changelog">журнал змін</string>
