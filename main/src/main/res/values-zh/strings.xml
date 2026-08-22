@@ -565,8 +565,6 @@
     <string name="list_dialog_rename_title">重命名列表</string>
     <string name="list_dialog_rename">重命名</string>
     <string name="list_not_available">列表不再可用，切换到标准列表</string>
-    <string name="list_parent_list">父列表</string>
-    <string name="list_create_parent">&lt;建立新的父列表&gt;</string>
     <string name="list_name">列表名称</string>
     <string name="list_confirm_rename">从\"%1$s\"重命名为\"%2$s\"\n%3$s\n此操作不能撤销！</string>
     <string name="list_confirm_no_hierarchy">\n没有\":\" 找到- 所有匹配的列表都将转换为最上级列表\n</string>
@@ -746,29 +744,15 @@
         <item>&gt;1月</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">筛选器</string>
-    <string name="cache_namedfilter_matching">匹配的过滤器</string>
-    <string name="named_filter_add">添加筛选条件</string>
-    <string name="named_filter_empty_hint">未配置过滤器。点击 + 添加一个。</string>
-    <string name="named_filter_activate_marker">优先使用</string>
-    <string name="named_filter_enable_all_markers">将过滤器应用为标记</string>
-    <string name="named_filter_markers_enabled">标记已启用</string>
-    <string name="named_filter_markers_disabled">标记已禁用</string>
     <string name="named_filter_select_title">选择筛选器</string>
-    <string name="named_filter_activate_deactivate_title">启用 / 禁用标记</string>
-    <string name="named_filter_nofilter_label">(无过滤器 — 匹配所有藏点)</string>
-    <string name="named_filter_save_as_title">另存为过滤器</string>
+    <string name="named_filter_empty_hint">未配置过滤器。点击 + 添加一个。</string>
     <string name="named_filter_name_exists_title">名称已存在</string>
     <string name="named_filter_name_exists_message">名为“%s”的过滤器已存在。是否覆盖？</string>
     <string name="named_filter_config_exists_title">过滤器已保存</string>
     <string name="named_filter_config_exists_message">此过滤器配置已保存为“%s”。是否以新名称再次保存？</string>
-    <string name="named_filter_fill_with_named">使用过滤器填充</string>
-    <string name="named_filter_priority_normal">标准</string>
-    <string name="named_filter_priority_high">高</string>
-    <string name="named_filter_priority_highest">最高</string>
-    <string name="named_filter_priority_low">低</string>
-    <string name="named_filter_priority_lowest">最低</string>
-    <string name="cache_filter_reference_based_on">基于 %1$s</string>
+    <string name="named_filter_markers_enabled">标记已启用</string>
+    <string name="named_filter_markers_disabled">标记已禁用</string>
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>
@@ -1614,7 +1598,7 @@
     <string name="cache_rating">评分</string>
     <string name="cache_own_rating">您的评分</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
-    <string name="cache_favorite">我的最爱</string>
+    <string name="cache_favorite">收藏</string>
     <string name="cache_owner">宝主</string>
     <string name="cache_hidden">隐藏</string>
     <string name="cache_bettercacher">BetterCacher</string>
