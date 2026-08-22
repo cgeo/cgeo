@@ -35,6 +35,7 @@
 - 新增：条件藏点标记
 - 新增：显示导航提示 (箭头 + 距离)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### 藏点详细信息
 - 新增：识别公式中的额外字符：–, ⋅, ×
