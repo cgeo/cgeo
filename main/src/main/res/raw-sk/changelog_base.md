@@ -35,6 +35,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detaily kešky
 - New: Detect additional characters in formulas: –, ⋅, ×
