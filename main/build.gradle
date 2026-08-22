@@ -343,7 +343,7 @@ dependencies {
     // from cgeo/offline-translator's GitHub Release. Resolved via the ivy
     // repository declared in the root build.gradle. Replaces the formerly
     // checked-in jniLibs/*.so and dev/davidv/bergamot/*.java.
-    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.1@aar'
+    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.2@aar'
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.5.0'
