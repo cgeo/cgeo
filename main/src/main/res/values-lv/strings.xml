@@ -326,6 +326,7 @@
     <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Izmaiņas</string>
