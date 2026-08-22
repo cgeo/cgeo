@@ -573,8 +573,6 @@
     <string name="list_dialog_rename_title">Byt namn på listan</string>
     <string name="list_dialog_rename">Byt namn</string>
     <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
-    <string name="list_parent_list">Överordnad lista</string>
-    <string name="list_create_parent">&lt;Skapa ny överordnad lista &gt;</string>
     <string name="list_name">Listnamn</string>
     <string name="list_confirm_rename">Byter namn från \"%1$s\" till \"%2$s\"\n%3$s\nDenna åtgärd kan inte ångras!</string>
     <string name="list_confirm_no_hierarchy">\nIngen \":\" hittad - alla matchande listor kommer att omvandlas till topplistor\n</string>
@@ -755,29 +753,16 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filter</string>
-    <string name="cache_namedfilter_matching">Matchande filter</string>
-    <string name="named_filter_add">Lägg till filter</string>
-    <string name="named_filter_empty_hint">Inga filter konfigurerade. Tryck på + för att lägga till ett.</string>
-    <string name="named_filter_activate_marker">använd med prio</string>
-    <string name="named_filter_enable_all_markers">Tillämpa filter som markörer</string>
-    <string name="named_filter_markers_enabled">Markörer aktiverade</string>
-    <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
     <string name="named_filter_select_title">Välj filter</string>
-    <string name="named_filter_activate_deactivate_title">Aktivera / inaktivera markörer</string>
-    <string name="named_filter_nofilter_label">(inget filter — matchar alla cacher)</string>
-    <string name="named_filter_save_as_title">Spara som filter</string>
+    <string name="named_filter_empty_hint">Inga filter konfigurerade. Tryck på + för att lägga till ett.</string>
     <string name="named_filter_name_exists_title">Namnet finns redan</string>
     <string name="named_filter_name_exists_message">Ett filter som heter \'%s\' finns redan. Skriv över?</string>
     <string name="named_filter_config_exists_title">Filtret har redan sparats</string>
     <string name="named_filter_config_exists_message">Denna filterkonfiguration är redan sparad som \'%s\'. Spara igen med ett nytt namn?</string>
-    <string name="named_filter_fill_with_named">Fyll med filter</string>
-    <string name="named_filter_priority_normal">Normal</string>
-    <string name="named_filter_priority_high">Hög</string>
-    <string name="named_filter_priority_highest">Högsta</string>
-    <string name="named_filter_priority_low">Låg</string>
-    <string name="named_filter_priority_lowest">Lägsta</string>
-    <string name="cache_filter_reference_based_on">Baserat på: %1$s</string>
+    <string name="named_filter_markers_enabled">Markörer aktiverade</string>
+    <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Namn</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
