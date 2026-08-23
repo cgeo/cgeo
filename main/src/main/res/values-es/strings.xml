@@ -574,8 +574,6 @@
     <string name="list_dialog_rename_title">Renombrar lista</string>
     <string name="list_dialog_rename">Renombrar</string>
     <string name="list_not_available">La lista ya no está disponible, cambiando a la lista estándar</string>
-    <string name="list_parent_list">Lista padre</string>
-    <string name="list_create_parent">&lt;Crear nueva lista base&gt;</string>
     <string name="list_name">Nombre de la lista</string>
     <string name="list_confirm_rename">Renombrando de \"%1$s\" a \"%2$s\"\n%3$s\n¡Esta acción no se puede deshacer!</string>
     <string name="list_confirm_no_hierarchy">\nNo se encontró \":\" - todas las listas coincidentes se transformarán en listas de nivel superior\n</string>
@@ -756,29 +754,16 @@
         <item>&gt;1 mes</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtros</string>
-    <string name="cache_namedfilter_matching">Filtros coincidentes</string>
-    <string name="named_filter_add">Añadir filtro</string>
-    <string name="named_filter_empty_hint">No hay filtros configurados. Pulsa + para añadir uno.</string>
-    <string name="named_filter_activate_marker">Usar con prio</string>
-    <string name="named_filter_enable_all_markers">Aplicar filtros como marcadores</string>
-    <string name="named_filter_markers_enabled">Marcadores activados</string>
-    <string name="named_filter_markers_disabled">Marcadores desactivados</string>
     <string name="named_filter_select_title">Seleccionar filtro</string>
-    <string name="named_filter_activate_deactivate_title">Activar / desactivar marcadores</string>
-    <string name="named_filter_nofilter_label">(sin filtro: coincide con todos los cachés)</string>
-    <string name="named_filter_save_as_title">Guardar como filtro</string>
+    <string name="named_filter_empty_hint">No hay filtros configurados. Pulsa + para añadir uno.</string>
     <string name="named_filter_name_exists_title">El nombre ya existe</string>
     <string name="named_filter_name_exists_message">Ya existe un filtro llamado \'%s\'. ¿Sobrescribir?</string>
     <string name="named_filter_config_exists_title">Filtro ya guardado</string>
     <string name="named_filter_config_exists_message">Esta configuración de filtro ya está guardada como \'%s\'. ¿Guardar de nuevo con un nuevo nombre?</string>
-    <string name="named_filter_fill_with_named">Rellenar con filtro</string>
-    <string name="named_filter_priority_normal">Normal</string>
-    <string name="named_filter_priority_high">Alta</string>
-    <string name="named_filter_priority_highest">La más alta</string>
-    <string name="named_filter_priority_low">Bajo</string>
-    <string name="named_filter_priority_lowest">La más baja</string>
-    <string name="cache_filter_reference_based_on">Basado en: %1$s</string>
+    <string name="named_filter_markers_enabled">Marcadores activados</string>
+    <string name="named_filter_markers_disabled">Marcadores desactivados</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Nombre</string>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
@@ -2822,6 +2807,8 @@ Nombre de archivo:%2$s</string>
     <string name="delete">Eliminar</string>
     <string name="play">Jugar</string>
     <string name="copy" tools:ignore="PrivateResource">Copiar</string>
+    <string name="pause">Pausar</string>
+    <string name="resume">Reanudar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar todo</string>
     <string name="multiselect_selectvisible">Seleccionar visibles</string>

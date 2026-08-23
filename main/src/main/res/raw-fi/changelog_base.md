@@ -35,6 +35,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Kätkön tiedot
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -64,6 +65,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos

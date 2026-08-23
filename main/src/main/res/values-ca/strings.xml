@@ -567,6 +567,8 @@
     <string name="list_dialog_create_title">Llista nova</string>
     <string name="list_dialog_create">Crea</string>
     <string name="list_dialog_create_err">El c:geo no ha pogut crear la nova llista</string>
+    <string name="list_already_exists_title">La llista ja existeix</string>
+    <string name="list_already_exists_message">Ja existeix una llista anomenada \'%s\'. Voleu utilitzar la llista existent?</string>
     <string name="list_dialog_remove_title">Elimina la llista</string>
     <string name="list_dialog_remove_description">Voleu eliminar la llista actual? Tots els catxés de la llista es desplaçaran a \"Desats\".</string>
     <string name="list_dialog_remove_nowempty">La llista és buida. Voleu eliminar-la?</string>
@@ -575,8 +577,6 @@
     <string name="list_dialog_rename_title">Canvia el nom de la llista</string>
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
-    <string name="list_parent_list">Llista parental</string>
-    <string name="list_create_parent">&lt;Crea una nova llista principal&gt;</string>
     <string name="list_name">Nom de la llista</string>
     <string name="list_confirm_rename">S\'està canviant el nom de \"%1$s\" a \"%2$s\"\n%3$s\n Aquesta acció no es pot desfer!</string>
     <string name="list_confirm_no_hierarchy">\nNo s\'ha trobat cap \":\" totes les llistes coincidents es transformaran en llistes de nivell superior\n</string>
@@ -588,6 +588,7 @@
     <string name="cache_filter_option_inverse">Filtre invers</string>
     <string name="cache_filter_option_include_inconclusive">Incloure coincidències poc concloents</string>
     <string name="cache_filter_option_include_inconclusive_info">S’inclou el catxé al resultat quan un filtre necessita informació sobre el catxé que no està disponible.</string>
+    <string name="cache_filter_add_button">Afegeix criteris de filtre</string>
     <string name="cache_filter_hint_on_empty_filter_list">Toqueu a sobre \"Afegeix criteris de filtre\" per afegir un filtre</string>
     <string name="cache_filter_name">Nom del Catxé</string>
     <string name="cache_filter_type">Tipus de Catxé</string>
@@ -757,29 +758,30 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtres</string>
-    <string name="cache_namedfilter_matching">Filtres coincidents</string>
-    <string name="named_filter_add">Afegeix un filtre</string>
-    <string name="named_filter_empty_hint">No hi ha filtres configurats. Toca + per afegir-ne un.</string>
-    <string name="named_filter_activate_marker">utilitzar amb prio</string>
-    <string name="named_filter_enable_all_markers">Aplica filtres com a marcadors</string>
-    <string name="named_filter_markers_enabled">Marcadors activats</string>
-    <string name="named_filter_markers_disabled">Marcadors desactivats</string>
+    <string name="named_filter_manage_filter">Gestiona el filtre</string>
     <string name="named_filter_select_title">Selecciona el filtre</string>
-    <string name="named_filter_activate_deactivate_title">Activar/desactivar marcadors</string>
-    <string name="named_filter_nofilter_label">(sense filtre — coincideix amb tots els catxés)</string>
-    <string name="named_filter_save_as_title">Desa com a filtre</string>
+    <string name="named_filter_empty_hint">No hi ha filtres configurats. Toca + per afegir-ne un.</string>
+    <string name="named_filter_fill_with_named">Carrega el filtre</string>
+    <string name="named_filter_save_as">Desa el filtre</string>
+    <string name="named_filter_delete">Suprimeix el filtre</string>
+    <string name="named_filter_storage_delete_message">De veritat voleu suprimir el filtre \'%s\'?</string>
     <string name="named_filter_name_exists_title">El nom ja existeix</string>
     <string name="named_filter_name_exists_message">Ja existeix un filtre anomenat \'%s\'. Voleu sobreescriure-ho?</string>
     <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
     <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
-    <string name="named_filter_fill_with_named">Omplir amb filtre</string>
-    <string name="named_filter_priority_normal">Normal</string>
-    <string name="named_filter_priority_high">Alt</string>
-    <string name="named_filter_priority_highest">El més alt</string>
-    <string name="named_filter_priority_low">Baix</string>
-    <string name="named_filter_priority_lowest">El més baix</string>
-    <string name="cache_filter_reference_based_on">Basat en: %1$s</string>
+    <string name="named_filter_markers">Marcadors</string>
+    <string name="named_filter_markers_enabled">Marcadors activats</string>
+    <string name="named_filter_markers_disabled">Marcadors desactivats</string>
+    <string name="named_filter_manage">Gestiona</string>
+    <string name="named_filter_no_icons_message">No hi ha filtres emmagatzemats amb una icona assignada. Desa\'n un per utilitzar-lo com a marcador.</string>
+    <string name="named_filter_reorder">Prioritat</string>
+    <string name="named_filter_activity_title">Prioritat del marcador</string>
+    <string name="named_filter_enable_markers">Selecciona marcadors</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Progenitor</string>
+    <string name="dialog_parent_select">Selecciona el Progenitor</string>
+    <string name="dialog_parent_new">Crea un nou progenitor</string>
+    <string name="dialog_name">Nom</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1734,6 +1736,7 @@
     <string name="cc_hint_seconds">segons</string>
     <string name="cc_hint_fraction">fracció</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates">Fent la mitjana de les meves coordenades…</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
@@ -2823,6 +2826,8 @@
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
     <string name="copy" tools:ignore="PrivateResource">Còpia</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Reprendre</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>

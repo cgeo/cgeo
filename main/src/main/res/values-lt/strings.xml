@@ -669,6 +669,8 @@
         <item>&gt;1 mėn</item>
     </string-array>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Pavadinimas</string>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
