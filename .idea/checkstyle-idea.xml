@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.26.1</checkstyleVersion>
+    <checkstyleVersion>13.9.0</checkstyleVersion>
     <scanScope>JavaOnlyWithTests</scanScope>
     <scanBeforeCheckin>true</scanBeforeCheckin>
     <option name="thirdPartyClasspath" />
@@ -12,7 +12,14 @@
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="cgeo-checks" type="PROJECT_RELATIVE" scope="All" description="cgeo">$PROJECT_DIR$/checkstyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="cgeo-checks" type="PROJECT_RELATIVE" scope="All" description="cgeo">
+          $PROJECT_DIR$/checkstyle.xml
+          <option name="properties">
+            <map>
+              <entry key="config_loc" value="" />
+            </map>
+          </option>
+        </ConfigurationLocation>
       </list>
     </option>
   </component>
