@@ -35,6 +35,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Marcadors de catxé condicionals
 - Nou: Mostra la pista de navegació (fletxa + distància)
 - Canvi: Reduir els requisits de memòria de l'activitat del mapa
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -64,6 +65,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Mostra els preferits propis a la vista de registre (Geocaching.com + registres fora de línia)
 - Nou: L'enviament del registre es fa en segon pla
 - Correcció: Inventari ocult en el registre sota certes condicions
+- Nou: Mitjana de coordenades en crear punts de referència / establir coordenades per a catxés definits per l'usuari
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos

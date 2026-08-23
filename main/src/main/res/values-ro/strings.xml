@@ -327,6 +327,8 @@
     <string name="cache_filter_storage_select_title">Selectare filtru</string>
     <string name="cache_filter_checkboxlist_add_all_items">Adaugă toate elementele</string>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Nume</string>
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>

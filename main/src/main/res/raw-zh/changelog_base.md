@@ -35,6 +35,7 @@
 - 新增：条件藏点标记
 - 新增：显示导航提示 (箭头 + 距离)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### 藏点详细信息
 - 新增：识别公式中的额外字符：–, ⋅, ×
@@ -50,7 +51,7 @@
 - 新增：变量视图现在可以过滤
 - 新增：在航点列表中可视化显示计算坐标的溢出
 - 新增：航点列表菜单项，可将特定类型的航点标记为已访问
-- 新增：追踪物记录占位符 (藏点名称、藏点代码、用户)
+- 新增：追踪物记录占位符 (藏点名称、藏点编号、用户)
 - 变更：移除了指向已过时的 WhereYouGo 播放器的链接。 内置 Wherigo 播放器现在是 Wherigo 的默认播放器。
 - 修复：航点计算器引导模式中缺失快速切换开关的问题
 - 新增：支持范围的聚合函数：add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
@@ -64,6 +65,7 @@
 - 新增：在记录视图中显示自己的收藏点 (Geocaching.com + 离线记录)
 - 新增：发送记录现在在后台完成
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo 播放器
 - 新增：Wherigo 离线翻译

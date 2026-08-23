@@ -404,6 +404,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Ezzel kezdődik</string>
     <string name="cache_filter_checkboxlist_add_all_items">Az összes elem hozzáadása</string>
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">Név</string>
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>

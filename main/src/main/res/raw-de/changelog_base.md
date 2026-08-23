@@ -35,6 +35,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Bedingte Cache-Marker
 - Neu: Navigationshinweis anzeigen (Pfeil + Entfernung)
 - Änderung: Verringere Speicheranforderungen für Karte
+- Korrektur: Google Map setzt bei Kartenanzeige einer Cacheliste die Position auf N0 / W0 zurück
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -64,6 +65,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Eigene Favoriten in der Logansicht anzeigen (Geocaching.com + Offline-Logs)
 - Neu: Das Senden eines Cachelogs erfolgt im Hintergrund
 - Korrektur: Trackables unter bestimmten Bedingungen nicht sichtbar beim Loggen
+- Neu: Positionsmittelung beim Erstellen von Wegpunkten / Festlegen von Koordinaten für benutzerdefinierte Caches
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos

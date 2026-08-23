@@ -578,6 +578,8 @@
     <string name="list_dialog_create_title">Nowa lista</string>
     <string name="list_dialog_create">Utwórz</string>
     <string name="list_dialog_create_err">c:geo nie mógł utworzyć nowej listy</string>
+    <string name="list_already_exists_title">Lista już istnieje</string>
+    <string name="list_already_exists_message">Lista o nazwie \'%s\' już istnieje. Użyć istniejącą listę?</string>
     <string name="list_dialog_remove_title">Usuń listę</string>
     <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki z tej listy zostaną przeniesione do listy „Zapisane”.</string>
     <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
@@ -586,8 +588,6 @@
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
-    <string name="list_parent_list">Lista nadrzędna</string>
-    <string name="list_create_parent">&lt;Utwórz nową listę nadrzędną&gt;</string>
     <string name="list_name">Nazwa listy</string>
     <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
     <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
@@ -599,6 +599,7 @@
     <string name="cache_filter_option_inverse">Odwróć filtr</string>
     <string name="cache_filter_option_include_inconclusive">Dołącz niejednoznaczne dopasowania</string>
     <string name="cache_filter_option_include_inconclusive_info">Czy włączyć skrytkę do wyników, gdy filtr potrzebuje informacji o skrytce, która nie jest dostępna.</string>
+    <string name="cache_filter_add_button">Dodaj kryteria filtru</string>
     <string name="cache_filter_hint_on_empty_filter_list">Dotknij \'Dodaj kryteria filtra\' powyżej, aby dodać filtr</string>
     <string name="cache_filter_name">Nazwa skrytki</string>
     <string name="cache_filter_type">Typ skrytki</string>
@@ -770,29 +771,30 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
-    <string name="named_filter_activity_title">Filtry</string>
-    <string name="cache_namedfilter_matching">Pasujące filtry</string>
-    <string name="named_filter_add">Dodaj filtr</string>
-    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
-    <string name="named_filter_activate_marker">używaj z prio</string>
-    <string name="named_filter_enable_all_markers">Zastosuj filtry jako znaczniki</string>
-    <string name="named_filter_markers_enabled">Znaczniki włączone</string>
-    <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
+    <string name="named_filter_manage_filter">Zarządzaj filtrami</string>
     <string name="named_filter_select_title">Wybierz filtr</string>
-    <string name="named_filter_activate_deactivate_title">Aktywuj / dezaktywuj znaczniki</string>
-    <string name="named_filter_nofilter_label">(brak filtru — oznacza wszystkie skrytki)</string>
-    <string name="named_filter_save_as_title">Zapisz jako filtr</string>
+    <string name="named_filter_empty_hint">Nie skonfigurowano filtrów. Dotknij +, aby go dodać.</string>
+    <string name="named_filter_fill_with_named">Wczytaj filtr</string>
+    <string name="named_filter_save_as">Zapisz filtr</string>
+    <string name="named_filter_delete">Usuń filtr</string>
+    <string name="named_filter_storage_delete_message">Czy na pewno chcesz usunąć filtr \'%s\'?</string>
     <string name="named_filter_name_exists_title">Nazwa już istnieje</string>
     <string name="named_filter_name_exists_message">Filtr o nazwie \'%s\' już istnieje. Nadpisać?</string>
     <string name="named_filter_config_exists_title">Filtr już zapisany</string>
     <string name="named_filter_config_exists_message">Ta konfiguracja filtra jest już zapisana jako \'%s\'. Zapisać ponownie z nową nazwą?</string>
-    <string name="named_filter_fill_with_named">Wypełnij filtrem</string>
-    <string name="named_filter_priority_normal">Normalny</string>
-    <string name="named_filter_priority_high">Wysoki</string>
-    <string name="named_filter_priority_highest">Najwyższy</string>
-    <string name="named_filter_priority_low">Niski</string>
-    <string name="named_filter_priority_lowest">Najniższy</string>
-    <string name="cache_filter_reference_based_on">Na podstawie: %1$s</string>
+    <string name="named_filter_markers">Znaczniki</string>
+    <string name="named_filter_markers_enabled">Znaczniki włączone</string>
+    <string name="named_filter_markers_disabled">Znaczniki wyłączone</string>
+    <string name="named_filter_manage">Zarządzaj</string>
+    <string name="named_filter_no_icons_message">Brak przechowywanych filtrów z przypisaną ikoną. Zapisz jeden, aby użyć go jako znacznika.</string>
+    <string name="named_filter_reorder">Priorytet</string>
+    <string name="named_filter_activity_title">Priorytet znacznika</string>
+    <string name="named_filter_enable_markers">Wybierz znaczniki</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Nadrzędny</string>
+    <string name="dialog_parent_select">Wybierz element nadrzędny</string>
+    <string name="dialog_parent_new">Utwórz nowy element nadrzędny</string>
+    <string name="dialog_name">Nazwa</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -1765,6 +1767,7 @@
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates">Uśrednianie moich współrzędnych…</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrytek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów nawigacji z %1$s</string>
@@ -2887,6 +2890,8 @@
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
+    <string name="pause">Wstrzymaj</string>
+    <string name="resume">Wznów</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>

@@ -283,6 +283,8 @@
     <string name="list_not_available">القائمة لم تعد متوفرة، الانتقال إلى القائمة الموحدة</string>
     <!-- caches lists filter -->
     <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
+    <string name="dialog_name">الاسم</string>
     <!-- about -->
     <string name="about_version">الإصدار</string>
     <string name="about_changelog">سجل التغييرات</string>

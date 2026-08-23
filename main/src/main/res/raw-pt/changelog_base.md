@@ -35,6 +35,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Marcadores de cache condicionais
 - Novo: Mostrar dicas de navegação (seta + distância)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -64,6 +65,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Mostrar os próprios favoritos na visualização de registo (Geocaching.com + registos offline)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos

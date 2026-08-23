@@ -1,8 +1,8 @@
 This update includes the following fixes and changes since last beta release:
 
-- Not able to save filters under existing name/ID ([#18450](https://github.com/cgeo/cgeo/issues/18450))
-- Loading errors on live map ([#18400](https://github.com/cgeo/cgeo/issues/18400))
-- Trackables not visible in log dialog ([#18187](https://github.com/cgeo/cgeo/issues/18187))
-- High memory consumption on map ([#18404](https://github.com/cgeo/cgeo/issues/18404))
-- Layer and event receiver stacking on Mapsforge map ([#18404](https://github.com/cgeo/cgeo/issues/18404))
-- Crashes on Google Maps ([#18415](https://github.com/cgeo/cgeo/issues/18415))
+- Prevent map crash, hopefully fixing "live map not loading caches" ([#18400](https://github.com/cgeo/cgeo/issues/18400))
+- Adjust trackables detection, hopefully fixing "only 20 trackables listed while logging" ([#18394](https://github.com/cgeo/cgeo/issues/18394))
+- Avoid resetting GM to N0/W0 on mapping list ([#18502](https://github.com/cgeo/cgeo/issues/18502))
+- Updates to new dynamic markers feature ([#18430](https://github.com/cgeo/cgeo/issues/18430))
+- Prevent crash of Audio Manager in Wherigos ([#18485](https://github.com/cgeo/cgeo/issues/18485))
+- Averaging coordinates in coordinate input/edit dialog ([#9398](https://github.com/cgeo/cgeo/issues/9398))

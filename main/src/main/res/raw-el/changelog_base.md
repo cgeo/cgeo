@@ -35,6 +35,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Conditional cache markers
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
+- Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
 ### Λεπτομέρειες κρύπτης
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -64,6 +65,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Show own favorites in log view (Geocaching.com + offline logs)
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
+- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
 
 ### Wherigo player
 - New: Offline translation for Wherigos
