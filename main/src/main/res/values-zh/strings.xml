@@ -662,7 +662,7 @@
     <string name="cache_filter_status_select_label_favorite">我给了FP的</string>
     <string name="cache_filter_status_select_label_watchlist">我的关注列表</string>
     <string name="cache_filter_status_select_label_premium">付费会员</string>
-    <string name="cache_filter_status_select_label_has_trackable">有旅行虫</string>
+    <string name="cache_filter_status_select_label_has_trackable">有追踪物</string>
     <string name="cache_filter_status_select_label_has_own_vote">我打了分的</string>
     <string name="cache_filter_status_select_label_has_offline_log">有离线日志的</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">有离线Found日志的</string>
@@ -904,11 +904,11 @@
     <string name="init_oc_nl_description">授权 c:geo 使用 opencaching.nl 来搜索藏点和访问/筛选您发现的藏点。</string>
     <string name="init_summary_oc_us">从 opencaching.us 加载藏点</string>
     <string name="init_oc_us_description">授权 c:geo 使用 opencaching.us 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_ro">从 opencaching 加载藏点</string>
+    <string name="init_summary_oc_ro">从 opencaching.ro 加载藏点</string>
     <string name="init_oc_ro_description">授权 c:geo 使用 opencaching.ro 来搜索藏点和访问/筛选您发现的藏点。</string>
-    <string name="init_summary_oc_uk">从 opencaching.us 加载藏点</string>
+    <string name="init_summary_oc_uk">从 opencaching.uk 加载藏点</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索藏点和访问/筛选您找到的藏点。</string>
-    <string name="init_summary_su">从 opencaching.pl 加载藏点</string>
+    <string name="init_summary_su">从 geocaching.su 加载藏点</string>
     <string name="err_vote_send_rating">发送评分时出错。</string>
     <string name="init_login_popup">登录</string>
     <string name="init_login_popup_working">正在登录…</string>
@@ -1173,7 +1173,7 @@
     <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_include_logs">包括日志</string>
-    <string name="init_include_travelbugs">包括旅行虫</string>
+    <string name="init_include_travelbugs">包括追踪物</string>
     <string name="init_trackautovisit">访问可追踪物</string>
     <string name="init_summary_trackautovisit">默认情况下将可追踪物设置为 “已访问”</string>
     <string name="init_sigautoinsert">自动插入</string>
@@ -1931,7 +1931,7 @@
     <string name="google_maps_option_show_feature_water_all">显示水域</string>
     <!-- search -->
     <string name="geo_search_label">搜索附近藏点</string>
-    <string name="search_bar_hint">搜索藏点/旅行虫</string>
+    <string name="search_bar_hint">搜索藏点/追踪物</string>
     <string name="search_bar_hint_settings">搜索设置</string>
     <string name="search_coordinates">坐标</string>
     <string name="search_address">地址</string>
@@ -1942,7 +1942,7 @@
     <string name="search_finder">发现者：</string>
     <string name="search_filter">筛选器</string>
     <string name="search_filter_info_message" formatted="false">**按过滤器搜索**会使用提供的过滤器在所有活跃的在线服务 (如 geocaching.com) 上搜索藏点。然而，这些服务的搜索能力通常比 c:geo 的过滤功能更有限。\n\n- 所有服务仅支持 AND 过滤器 (不支持 OR 过滤器和过滤器反转)。\n- 所有服务都支持**藏点类型**或**藏点规格**等基础过滤器。更复杂的过滤器通常不受支持或存在限制，例如**收藏点**或**隐藏日期**。\n- 各服务支持的过滤器详细列表可以在[此处](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)找到。\n\n在线服务不支持的过滤器将由 c:geo 应用于接收到的结果上。</string>
-    <string name="search_tb">旅行虫</string>
+    <string name="search_tb">追踪物</string>
     <string name="most_recent">最近</string>
     <string name="search_destination">在c:geo中打开目的地</string>
     <string name="add_target_to">添加目标到</string>
@@ -1960,7 +1960,7 @@
     <string name="search_bookmark_adding_caches_failed">无法将藏点添加到书签列表</string>
     <string name="search_bookmark_create_new_failed">无法创建新书签列表</string>
     <!-- trackable -->
-    <string name="trackable">旅行虫</string>
+    <string name="trackable">追踪物</string>
     <string name="trackable_details_loading">正在加载追踪物详情…</string>
     <string name="trackable_log_touch">记录接触 (Touch)</string>
     <string name="trackable_browser_open">在浏览器中打开</string>
@@ -2158,7 +2158,7 @@
     <string name="attribute_water_yes">附近有饮用水</string>
     <string name="attribute_water_no">附近无饮用水</string>
     <string name="attribute_restrooms_yes">附近有公厕</string>
-    <string name="attribute_restrooms_no">附近无公测</string>
+    <string name="attribute_restrooms_no">附近无公厕</string>
     <string name="attribute_phone_yes">附近有电话亭</string>
     <string name="attribute_phone_no">附近无电话亭</string>
     <string name="attribute_picnic_yes">附近可野餐</string>
@@ -2762,7 +2762,7 @@
     <string name="back">返回</string>
     <string name="cancel">取消</string>
     <string name="use">使用</string>
-    <string name="redo">撤销</string>
+    <string name="redo">重做</string>
     <string name="ok" tools:ignore="ButtonCase">确定</string>
     <string name="optimize">优化</string>
     <string name="expand">展开</string>
