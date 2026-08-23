@@ -566,6 +566,8 @@
     <string name="list_dialog_create_title">Neue Liste</string>
     <string name="list_dialog_create">Erstellen</string>
     <string name="list_dialog_create_err">c:geo konnte die neue Liste nicht erstellen</string>
+    <string name="list_already_exists_title">Liste bereits vorhanden</string>
+    <string name="list_already_exists_message">Eine Liste mit dem Namen \'%s\' existiert bereits. Bestehende Liste verwenden?</string>
     <string name="list_dialog_remove_title">Liste entfernen</string>
     <string name="list_dialog_remove_description">Soll die aktuelle Liste gelöscht werden? Alle Caches dieser Liste werden in die Standardliste verschoben.</string>
     <string name="list_dialog_remove_nowempty">Die Liste ist leer. Soll sie gelöscht werden?</string>
@@ -585,6 +587,7 @@
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
+    <string name="cache_filter_add_button">Filterkriterium hinzufügen</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tippe oben auf \'Filterkriterium hinzufügen\' um einen Filter hinzuzufügen</string>
     <string name="cache_filter_name">Cache-Name</string>
     <string name="cache_filter_type">Cache-Typ</string>
@@ -754,15 +757,27 @@
         <item>&gt;1M</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Filter verwalten</string>
     <string name="named_filter_select_title">Filter auswählen</string>
     <string name="named_filter_empty_hint">Keine Filter konfiguriert. Tippe auf +, um einen hinzuzufügen.</string>
+    <string name="named_filter_fill_with_named">Filter laden</string>
+    <string name="named_filter_save_as">Filter speichern</string>
+    <string name="named_filter_delete">Filter löschen</string>
+    <string name="named_filter_storage_delete_message">Möchtest du den Filter \'%s\' wirklich löschen?</string>
     <string name="named_filter_name_exists_title">Name existiert bereits</string>
     <string name="named_filter_name_exists_message">Ein Filter mit dem Namen \'%s\' existiert bereits. Überschreiben?</string>
     <string name="named_filter_config_exists_title">Filter bereits gespeichert</string>
     <string name="named_filter_config_exists_message">Diese Filter-Konfiguration is bereits als \'%s\' gespeichert. Erneut unter neuem Namen speichern?</string>
+    <string name="named_filter_markers">Marker</string>
     <string name="named_filter_markers_enabled">Marker aktiviert</string>
     <string name="named_filter_markers_disabled">Marker deaktiviert</string>
+    <string name="named_filter_manage">Verwalten</string>
+    <string name="named_filter_no_icons_message">Es gibt keine gespeicherten Filter mit einem zugewiesenen Symbol. Speichere einen, um ihn als Marker zu verwenden.</string>
+    <string name="named_filter_reorder">Priorität</string>
+    <string name="named_filter_activity_title">Marker-Priorität</string>
+    <string name="named_filter_enable_markers">Marker auswählen</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Übergeordnet</string>
     <string name="dialog_name">Name</string>
     <!-- about -->
     <string name="about_version">Version</string>
