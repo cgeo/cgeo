@@ -28,13 +28,12 @@
             android:summary="%s"
             android:title="@string/settings_unifiedMapVariants_title"
             app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.TextPreference
-            android:defaultValue=""
-            android:key="@string/pref_userDefinedTileProviderUri"
-            android:title="@string/settings_userDefinedTileProvider"
-            android:summary="@string/settings_userDefinedTileProviderUri"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/preference_category_map_sources_custommaps"
+        android:title="@string/settings_custom_maps_title"
+        android:summary="@string/settings_custom_maps_summary"
+        app:iconSpaceReserved="false" />
     <PreferenceCategory
         android:title="@string/settings_title_offline_maps"
         app:iconSpaceReserved="false">

@@ -1009,6 +1009,17 @@
     <string name="settings_hide_tileproviders_title">Hide Map Sources</string>
     <string name="settings_hide_tileproviders_summary">Exclude one or more map sources from map source selection</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap variants</string>
+    <string name="settings_custom_maps_title">Custom online maps</string>
+    <string name="settings_custom_maps_summary">Maps downloaded from a URL</string>
+    <string name="settings_custom_maps_add">Add custom map</string>
+    <string name="settings_custom_maps_migrated_name">Custom map</string>
+    <string name="settings_custom_map_configured">XYZ tile source configured</string>
+    <string name="settings_custom_map_name">Name</string>
+    <string name="settings_custom_map_url">URL template</string>
+    <string name="settings_custom_map_help">Enter a complete HTTP or HTTPS URL containing {z}, {x}, and {y}. Uppercase placeholders are also supported. The URL can include query parameters such as an API key. Custom maps use only temporary in-memory caching.</string>
+    <string name="settings_custom_map_remove_confirm">Remove this custom map?</string>
+    <string name="settings_custom_map_missing_name">Enter a map name</string>
+    <string name="settings_custom_map_invalid_url">Enter a valid HTTP or HTTPS URL containing {z}, {x}, and {y}</string>
     <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_title_data_dir">Geocache data folder</string>

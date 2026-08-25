@@ -210,7 +210,9 @@
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
     <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <string translatable="false" name="preference_category_map_sources_custommaps">fakekey_category_map_sources_custommaps</string>
+    <string translatable="false" name="pref_customMaps">customMaps</string>
+    <string translatable="false" name="old_pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
