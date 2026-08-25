@@ -241,7 +241,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             CacheInfoBoxes.updateOfflineBox(view, cache,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheInfoBoxes.updateCacheLists(view, cache, null);
+            CacheInfoBoxes.updateCacheListsAndMatchingFilters(view, cache, null);
         }
     }
 

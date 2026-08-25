@@ -77,4 +77,22 @@
             android:tooltipText="@string/cache_offline_store"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/frame_buttons_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/frame_buttons"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/marker_button"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_marker"
+            android:layout_marginLeft="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:tooltipText="@string/named_filter_markers"/>
+    </LinearLayout>
+
 </RelativeLayout>

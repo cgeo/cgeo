@@ -378,14 +378,17 @@ public class NamedFilter {
      * Returns an empty pair if {@code cache} is null.
      */
     @NonNull
-    public static synchronized ImmutablePair<List<NamedFilter>, List<NamedFilter>> getFiltersMatchingCache(@Nullable final Geocache cache) {
+    public static synchronized ImmutablePair<List<NamedFilter>, List<NamedFilter>> getFiltersMatchingCache(@Nullable final Geocache cache, final boolean onlyActive) {
         if (cache == null) {
             return new ImmutablePair<>(Collections.emptyList(), Collections.emptyList());
         }
         ensureCache();
         final List<NamedFilter> active = new ArrayList<>();
-        final List<NamedFilter> passive = new ArrayList<>();
+        final List<NamedFilter> passive = !onlyActive ? new ArrayList<>() : Collections.emptyList();
         for (final NamedFilter nf : namedFiltersSortedByPrioAndName) {
+            if (onlyActive && !nf.conditionalMarkerActive) {
+                continue;
+            }
             final boolean matches = filterMatches(nf, cache);
             if (matches) {
                 if (nf.conditionalMarkerActive) {
@@ -404,7 +407,7 @@ public class NamedFilter {
      */
     @NonNull
     public static List<String> getMarkersForCache(@Nullable final Geocache cache) {
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> pair = getFiltersMatchingCache(cache);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> pair = getFiltersMatchingCache(cache, true);
         final List<String> result = new ArrayList<>();
         for (final NamedFilter nf : pair.left) {
             if (StringUtils.isNotBlank(nf.markerId)) {

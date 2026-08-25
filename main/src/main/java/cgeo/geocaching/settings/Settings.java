@@ -197,6 +197,29 @@ public class Settings {
         }
     }
 
+    /**
+     * Controls which {@link cgeo.geocaching.filters.NamedFilter}s matching the currently displayed cache
+     * are shown in the cache details view.
+     */
+    public enum NamedFilterDisplayMode {
+        /** Do not show any matching named filters. */
+        NONE(R.string.named_filter_display_mode_none),
+        /** Only show matching named filters whose marker is currently active. */
+        ACTIVE_ONLY(R.string.named_filter_display_mode_active_only),
+        /** Show all matching named filters, active and inactive. */
+        ALL(R.string.named_filter_display_mode_all);
+
+        private final @StringRes int displayNameResId;
+
+        NamedFilterDisplayMode(final @StringRes int displayNameResId) {
+            this.displayNameResId = displayNameResId;
+        }
+
+        public String getDisplayName() {
+            return LocalizationUtils.getString(displayNameResId);
+        }
+    }
+
     public static class PrefLogTemplate {
         private final @NonNull String key;
         private final String title;
@@ -1116,6 +1139,13 @@ public class Settings {
 
     public static boolean useLiveCompassInNavigationAction() {
         return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
+    }
+
+    @NonNull
+    public static NamedFilterDisplayMode getNamedFilterDisplayMode() {
+        return EnumUtils.getEnum(NamedFilterDisplayMode.class,
+                getString(R.string.pref_named_filter_display_mode, NamedFilterDisplayMode.ACTIVE_ONLY.name()),
+                NamedFilterDisplayMode.ACTIVE_ONLY);
     }
 
     public static boolean isTrackableAutoVisit() {

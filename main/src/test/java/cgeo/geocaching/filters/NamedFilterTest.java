@@ -176,7 +176,7 @@ public class NamedFilterTest {
 
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
         assertThat(result.getLeft()).containsExactly(activeNf);
         assertThat(result.getRight()).containsExactly(passiveNf);
     }
@@ -192,7 +192,7 @@ public class NamedFilterTest {
         NamedFilter.storeAll(Collections.singletonList(
                 new NamedFilter("NoMatch", gf, EMOJI_SMILEY, true, 0).setId(1)));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
         assertThat(result.getLeft()).isEmpty();
         assertThat(result.getRight()).isEmpty();
     }
@@ -206,7 +206,7 @@ public class NamedFilterTest {
         final NamedFilter passiveNf = new NamedFilter("AllPassive", null, EMOJI_HEART, false, 0).setId(2);
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
         assertThat(result.getLeft()).containsExactly(activeNf);
         assertThat(result.getRight()).containsExactly(passiveNf);
     }
@@ -214,7 +214,7 @@ public class NamedFilterTest {
     @Test
     public void testGetFiltersMatchingCacheNullCacheReturnsEmptyPair() {
         NamedFilter.addOrReplace("Test", null, EmojiUtils.NO_EMOJI);
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(null);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(null, false);
         assertThat(result.getLeft()).isEmpty();
         assertThat(result.getRight()).isEmpty();
     }
@@ -276,7 +276,7 @@ public class NamedFilterTest {
 
         // This should not throw or hang
         final Geocache cache = new Geocache();
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
         // No specific assertion about result content — just verify no infinite loop
         assertThat(result).isNotNull();
     }
