@@ -1302,6 +1302,10 @@
     <string name="feature_voting">Ocenianie skrytek</string>
     <string name="init_appearance_general">Ogólny wygląd</string>
     <string name="init_cachedetail_behaviour">Zachowanie</string>
+    <string name="init_named_filter_display_mode">Nazwane filtry w szczegółach skrytki</string>
+    <string name="named_filter_display_mode_none">Nie pokazuj</string>
+    <string name="named_filter_display_mode_active_only">Tylko jeśli znacznik jest aktywny</string>
+    <string name="named_filter_display_mode_all">Pokaż wszystkie pasujące filtry</string>
     <string name="init_cachedetail_note">Osobista notatka do skrytki</string>
     <string name="init_maplines_title">Dostosowanie kolorów mapy</string>
     <string name="init_map_other">Inne</string>
@@ -2514,6 +2518,7 @@
     <string name="live_map_status_partial">Częściowe wyniki (przybliż, aby zmniejszyć liczbę skrytek do wczytania): %s</string>
     <string name="live_map_status_normal">Wczytywanie danych bez problemów: %s</string>
     <string name="list_list_headline">Lista:</string>
+    <string name="filters_list_headline">Filtry:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
         <item quantity="few">%d punkty nawigacji zostały wyciągnięte</item>
