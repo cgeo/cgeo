@@ -1289,6 +1289,10 @@
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_appearance_general">Aparença general</string>
     <string name="init_cachedetail_behaviour">Comportament</string>
+    <string name="init_named_filter_display_mode">Filtres amb nom als detalls del catxé</string>
+    <string name="named_filter_display_mode_none">No mostrar</string>
+    <string name="named_filter_display_mode_active_only">Només si el marcador està actiu</string>
+    <string name="named_filter_display_mode_all">Mostra tots els filtres coincidents</string>
     <string name="init_cachedetail_note">Nota de catxé personal</string>
     <string name="init_maplines_title">Personalització dels colors del mapa</string>
     <string name="init_map_other">Altres</string>
@@ -2456,6 +2460,7 @@
     <string name="live_map_status_partial">Resultats parcials (apropa per reduir el nombre de catxés per carregar): %s</string>
     <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
+    <string name="filters_list_headline">Filtres:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
         <item quantity="other">%d punts de ruta extrets</item>
