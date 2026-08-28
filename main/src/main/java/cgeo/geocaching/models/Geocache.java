@@ -1910,8 +1910,45 @@ public class Geocache implements INamedGeoCoordinate {
                 }
             }
             changeVariables(newVars);
+
+            for (final String listName : cacheArtefactParser.getListNames()) {
+                changed |= assignToListByName(listName);
+            }
         }
         return changed;
+    }
+
+    /**
+     * Assigns this cache to the stored list with given name (case-insensitive match). If no such list exists yet,
+     * a new one is created (using the exact, case-sensitive name given).
+     *
+     * @return true if the cache was newly assigned to the list, false if it was already assigned (or name was blank)
+     */
+    private boolean assignToListByName(final String name) {
+        if (StringUtils.isBlank(name)) {
+            return false;
+        }
+        Integer listId = null;
+        for (final StoredList list : DataStore.getLists()) {
+            if (list.id != StoredList.STANDARD_LIST_ID && list.getTitle().equalsIgnoreCase(name)) {
+                listId = list.id;
+                break;
+            }
+        }
+        if (listId == null) {
+            final int newListId = DataStore.createList(name);
+            if (newListId < 0) {
+                return false;
+            }
+            //make sure the newly created list is registered
+            DataStore.getList(newListId);
+            listId = newListId;
+        }
+        if (getLists().contains(listId)) {
+            return false;
+        }
+        DataStore.addToList(Collections.singletonList(this), listId);
+        return true;
     }
 
     /** Returns a map of variables which differ from list and parsing user notes */

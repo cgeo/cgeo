@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -63,6 +64,9 @@ public class CacheArtefactParser {
     private static final String PARSING_VAR_LETTERS_NUMERIC = "[^A-Za-z0-9]([A-Za-z]+)\\s*=\\s*([0-9]+(?:[,.][0-9]+)?)[^0-9]";
     private static final Pattern PARSING_VARS = Pattern.compile(PARSING_VAR_LETTERS_FULL + "|" + PARSING_VAR_LETTERS_NUMERIC);
 
+    //Constants for stored list parsing
+    private static final String PARSING_LIST_PREFIX = "#";
+
     //general members
     private final Geocache cache;
     private final String namePrefix;
@@ -72,6 +76,9 @@ public class CacheArtefactParser {
 
     //parsed Variables
     private final Map<String, String> variables = new HashMap<>();
+
+    //parsed stored list names
+    private final Collection<String> listNames = new LinkedHashSet<>();
 
     /**
      * Detect coordinates in the given text and converts them to user-defined waypoints.
@@ -95,16 +102,19 @@ public class CacheArtefactParser {
     public CacheArtefactParser parse(@Nullable final String text) {
         waypoints.clear();
         variables.clear();
+        listNames.clear();
 
         if (text != null) {
             //if a backup is found, we parse it first
             for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
                 parseWaypointsFromString(backup);
                 parseVariablesFromString(backup, true);
+                parseListsFromString(backup);
             }
             final String remainder = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "");
             parseWaypointsFromString(remainder);
             parseVariablesFromString(remainder, false);
+            parseListsFromString(remainder);
         }
 
         return this;
@@ -120,6 +130,12 @@ public class CacheArtefactParser {
     @NonNull
     public Map<String, String> getVariables() {
         return variables;
+    }
+
+    /** returns names of stored lists previously parsed using {@link #parse(String)} */
+    @NonNull
+    public Collection<String> getListNames() {
+        return listNames;
     }
 
     private void parseWaypointsFromString(final String text) {
@@ -429,12 +445,24 @@ public class CacheArtefactParser {
      * @return new text, or null if waypoints could not be placed due to size restrictions
      */
     public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars) {
+        return putParseableWaypointsInText(text, waypoints, vars, null);
+    }
+
+    /**
+     * Replaces waypoints (and stored list names) stored in text with the ones passed as parameter.
+     *
+     * @param text      text to search and replace waypoints in
+     * @param waypoints new waypoints to store
+     * @param listNames names of stored lists the cache belongs to
+     * @return new text, or null if waypoints could not be placed due to size restrictions
+     */
+    public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars, final Collection<String> listNames) {
         String cleanText = removeParseableWaypointsFromText(text);
         if (!cleanText.isEmpty()) {
             cleanText = cleanText + "\n\n";
         }
 
-        final String newWaypoints = getParseableText(waypoints, vars, true);
+        final String newWaypoints = getParseableText(waypoints, vars, true, listNames);
         return cleanText + newWaypoints;
     }
 
@@ -447,6 +475,18 @@ public class CacheArtefactParser {
      * @return parseable text for wayppints, or null if maxsize cannot be met
      */
     public static String getParseableText(final Collection<Waypoint> waypoints, final VariableList vars, final boolean includeBackupTags) {
+        return getParseableText(waypoints, vars, includeBackupTags, null);
+    }
+
+    /**
+     * Tries to create a parseable text containing all information from given waypoints, variables
+     * and stored list names, meeting a given maximum text size. Different strategies are applied to meet
+     * that text size.
+     * if 'includeBackupTags' is set, then returned text is surrounded by tags
+     *
+     * @return parseable text for waypoints, or null if maxsize cannot be met
+     */
+    public static String getParseableText(final Collection<Waypoint> waypoints, final VariableList vars, final boolean includeBackupTags, final Collection<String> listNames) {
         //no streaming allowed
         final List<String> waypointsAsStrings = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
@@ -454,6 +494,10 @@ public class CacheArtefactParser {
         }
         if (vars != null) {
             waypointsAsStrings.add(getParseableVariableString(vars.toMap()));
+        }
+        final String listsText = getParseableListString(listNames);
+        if (!listsText.isEmpty()) {
+            waypointsAsStrings.add(listsText);
         }
         return (includeBackupTags ? BACKUP_TAG_OPEN + "\n" : "") +
                 StringUtils.join(waypointsAsStrings, "\n") +
@@ -547,5 +591,44 @@ public class CacheArtefactParser {
             pos = matcher.end(group + 1);
             addVariable(varName, value, highPrio);
         }
+    }
+
+    /**
+     * Parses given text for lines containing stored list names, prefixed with "#".
+     * A line may contain several lists, each one separated by an additional "#".
+     */
+    private void parseListsFromString(final String text) {
+        for (final String line : text.split("\n", -1)) {
+            final String trimmedLine = line.trim();
+            if (!trimmedLine.startsWith(PARSING_LIST_PREFIX)) {
+                continue;
+            }
+            for (final String part : trimmedLine.split(PARSING_LIST_PREFIX, -1)) {
+                final String listName = part.trim();
+                if (!listName.isEmpty()) {
+                    listNames.add(listName);
+                }
+            }
+        }
+    }
+
+    /**
+     * creates parseable text containing given stored list names, one line per name, prefixed with "#"
+     */
+    public static String getParseableListString(final Collection<String> listNames) {
+        if (listNames == null || listNames.isEmpty()) {
+            return "";
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (final String listName : listNames) {
+            if (StringUtils.isBlank(listName)) {
+                continue;
+            }
+            if (sb.length() > 0) {
+                sb.append("\n");
+            }
+            sb.append(PARSING_LIST_PREFIX).append(listName.trim());
+        }
+        return sb.toString();
     }
 }

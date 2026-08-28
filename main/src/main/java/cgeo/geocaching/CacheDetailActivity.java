@@ -2915,12 +2915,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 userModifiedWaypoints.add(w);
             }
         }
-        if (userModifiedWaypoints.isEmpty() && cache.getVariables().isEmpty()) {
+        final List<String> listNames = new ArrayList<>();
+        for (final StoredList list : DataStore.getLists()) {
+            if (list.id != StoredList.STANDARD_LIST_ID && cache.getLists().contains(list.id)) {
+                listNames.add(list.getTitle());
+            }
+        }
+        if (userModifiedWaypoints.isEmpty() && cache.getVariables().isEmpty() && listNames.isEmpty()) {
             showShortToast(LocalizationUtils.getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
             return;
         }
 
-        final String newNote = CacheArtefactParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables());
+        final String newNote = CacheArtefactParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables(), listNames);
         setNewPersonalNote(newNote);
         showShortToast(R.string.cache_personal_note_storewaypoints_success);
     }
