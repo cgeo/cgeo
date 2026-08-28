@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -205,7 +206,7 @@ public class CacheInfoBoxes {
                 marker.setOnClickListener(v -> FilterUtils.openDialogActivateMarkers(cacheDetailActivity));
             }
         }
-        appendMatchingNamedFilters(builder, cache);
+        appendMatchingNamedFilters(builder, cache, cacheDetailActivity);
 
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
         offlineLists.setText(builder);
@@ -216,9 +217,10 @@ public class CacheInfoBoxes {
     /**
      * Appends the named filters matching {@code cache} to {@code builder} (preceded by a line break if
      * {@code builder} is not empty), depending on {@link Settings#getNamedFilterDisplayMode()}.
-     * Active filters are shown in the default text color, inactive (passive) ones grayed out. Not clickable.
+     * Active filters are shown in the standard link color, inactive (passive) ones grayed out.
+     * The filter name is clickable (its optional marker prefix is not).
      */
-    private static void appendMatchingNamedFilters(final SpannableStringBuilder builder, final Geocache cache) {
+    private static void appendMatchingNamedFilters(final SpannableStringBuilder builder, final Geocache cache, final CacheDetailActivity cacheDetailActivity) {
         final Settings.NamedFilterDisplayMode mode = Settings.getNamedFilterDisplayMode();
         if (mode == Settings.NamedFilterDisplayMode.NONE) {
             return;
@@ -233,10 +235,10 @@ public class CacheInfoBoxes {
 
         final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
         for (final NamedFilter filter : activeFilters) {
-            appendNamedFilter(filtersBuilder, filter, false);
+            appendNamedFilter(filtersBuilder, filter, false, cacheDetailActivity);
         }
         for (final NamedFilter filter : passiveFilters) {
-            appendNamedFilter(filtersBuilder, filter, true);
+            appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
         }
         filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
 
@@ -246,12 +248,27 @@ public class CacheInfoBoxes {
         builder.append(filtersBuilder);
     }
 
-    private static void appendNamedFilter(final SpannableStringBuilder builder, final NamedFilter filter, final boolean inactive) {
+    private static void appendNamedFilter(final SpannableStringBuilder builder, final NamedFilter filter, final boolean inactive, final CacheDetailActivity cacheDetailActivity) {
         if (builder.length() > 0) {
             builder.append(", ");
         }
+
+        if (StringUtils.isNotBlank(filter.getMarkerId())) {
+            builder.append(filter.getMarkerId()).append(" ");
+        }
         final int start = builder.length();
-        builder.append(filter.getNameAndMarker());
+        builder.append(filter.getName());
+        builder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull final View widget) {
+                Settings.setLastDisplayedList(PseudoList.ALL_LIST.id);
+                if (cacheDetailActivity != null) {
+                    cacheDetailActivity.setNeedsRefresh();
+                }
+                CacheListActivity.startActivityOffline(widget.getContext(), filter);
+            }
+        }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         if (inactive) {
             builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CgeoApplication.getInstance(), R.color.colorTextHint)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
@@ -271,7 +288,7 @@ public class CacheInfoBoxes {
                 if (cacheDetailActivity != null) {
                     cacheDetailActivity.setNeedsRefresh();
                 }
-                CacheListActivity.startActivityOffline(view.getContext());
+                CacheListActivity.startActivityOffline(view.getContext(), null);
             }
         }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }

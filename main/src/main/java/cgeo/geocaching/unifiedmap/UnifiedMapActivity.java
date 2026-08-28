@@ -755,7 +755,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (viewModel.mapType.fromList != 0) {
             //List
-            listChooser.setList(viewModel.mapType.fromList, visibleCaches, false);
+            listChooser.setList(viewModel.mapType.fromList, -1, visibleCaches, false);
         } else if (viewModel.mapType.type == UMTT_TargetGeocode) {
             //single cache
             final Geocache targetCache = getCurrentTargetCache();
