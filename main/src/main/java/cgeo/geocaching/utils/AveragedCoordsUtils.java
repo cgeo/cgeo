@@ -5,6 +5,7 @@ import cgeo.geocaching.databinding.AveragingBoxBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.ui.NotifyOnTouchOutsideElement;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
+import java.text.NumberFormat;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,12 +31,15 @@ public class AveragedCoordsUtils extends GeoDirHandler {
     private long latitude;
     private long longitude;
     private long divisor;
+    private int counter;
+    final AveragingBoxBinding binding;
 
-    public AveragedCoordsUtils(@NonNull final Context activity, @NonNull final Geopoint initialCoords, @NonNull final FrameLayout container, @NonNull final Action1<Geopoint> averagingCallback, @NonNull final Action1<Geopoint> resultCallback) {
+    public AveragedCoordsUtils(@NonNull final Context activity, @NonNull final NotifyOnTouchOutsideElement touchInterceptor, @NonNull final Geopoint initialCoords, @NonNull final FrameLayout container, @NonNull final Action1<Geopoint> averagingCallback, @NonNull final Action1<Geopoint> resultCallback) {
         this.activityRef = new WeakReference<>(activity);
         this.container = container;
         this.averagingCallback = averagingCallback;
         this.resultCallback = resultCallback;
+        counter = 0;
 
         divisor = 1000;
         latitude = initialCoords.getLatitudeE6() * divisor;
@@ -45,15 +50,29 @@ public class AveragedCoordsUtils extends GeoDirHandler {
             container.removeAllViews();
         }
         container.setVisibility(View.VISIBLE);
-        final AveragingBoxBinding binding = AveragingBoxBinding.inflate(LayoutInflater.from(activity), container, true);
+        binding = AveragingBoxBinding.inflate(LayoutInflater.from(activity), container, true);
 
         // inject layout at given container
         binding.averagingCancel.setOnClickListener(v1 -> returnToCaller(false));
-        binding.averagingPause.setOnClickListener(v2 -> {
-            isAveraging.set(!isAveraging.get());
-            binding.averagingPause.setText(isAveraging.get() ? R.string.pause : R.string.resume);
-        });
+        binding.averagingPause.setOnClickListener(v2 -> toggleTo(!isAveraging.get()));
         binding.averagingOk.setOnClickListener(v3 -> returnToCaller(true));
+
+        touchInterceptor.setExceptionElement(binding.averagingBox, () -> toggleTo(false));
+    }
+
+    private void toggleTo(final boolean newIsAveraging) {
+        isAveraging.set(newIsAveraging);
+        binding.averagingPause.setText(newIsAveraging ? R.string.pause : R.string.resume);
+        setCounter();
+
+    }
+
+    private void setCounter() {
+        if (isAveraging.get()) {
+            binding.averagingInfo.setText(LocalizationUtils.getString(R.string.averaging_my_coordinates2, NumberFormat.getIntegerInstance().format(counter)));
+        } else {
+            binding.averagingInfo.setText(LocalizationUtils.getString(R.string.averaging_my_coordinates2, LocalizationUtils.getString(R.string.averaging_paused)));
+        }
     }
 
     private void returnToCaller(final boolean success) {
@@ -95,5 +114,7 @@ public class AveragedCoordsUtils extends GeoDirHandler {
         longitude += (long) (geoData.getLongitude() * 1e6) * factor;
 
         averagingCallback.call(getGeopoint());
+        counter++;
+        setCounter();
     }
 }
