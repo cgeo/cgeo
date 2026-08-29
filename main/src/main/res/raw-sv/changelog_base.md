@@ -1,20 +1,3 @@
-### Allmän versionsinformation
-
-**Kant till kant**
-
-På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo riktar sig mot + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
-
-**Äldre kartor**
-
-Äldre kartor: Som meddelats med utgåvorna från 2025.07.17 och 2025.12.01, har vi äntligen tagit bort äldre implementationer för våra kartor. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
-- Kartrotation för OpenStreetMap-baserade kartor (online + offline)
-- Klusterpopup för Google Maps
-- Dölj kartkällor som du inte behöver
-- Höjddiagram för rutter och spår
-- Växla mellan listor direkt från kartan
-- "Körläge" för OpenStreetMap-baserade kartor
-- Långtryck på spåret / individuell rutt för ytterligare alternativ
-
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
 - Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
@@ -36,6 +19,17 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Visa navigeringstips (pil + avstånd)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Äldre kartor**
+
+Äldre kartor: Som meddelats med utgåvorna från 2025.07.17 och 2025.12.01, har vi äntligen tagit bort äldre implementationer för våra kartor. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
+- Kartrotation för OpenStreetMap-baserade kartor (online + offline)
+- Klusterpopup för Google Maps
+- Dölj kartkällor som du inte behöver
+- Höjddiagram för rutter och spår
+- Växla mellan listor direkt från kartan
+- "Körläge" för OpenStreetMap-baserade kartor
+- Långtryck på spåret / individuell rutt för ytterligare alternativ
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -104,3 +98,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: "Använd brittiska inställningar" initieras inte korrekt på nya installationer
 - Förändring: Bergamot översättningsmodul med öppen källkod som ersätter Google ML Kit översättare
 - Förändring: Ny emoji-väljare
+
+**Kant till kant**
+
+På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo riktar sig mot + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
