@@ -751,6 +751,9 @@ public final class MapMarkerUtils {
     private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final float scaling) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
+        if (StringUtils.containsNone(ratingLetter, 'd', 't') || r < 5) {
+            return new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_notavailable, null), scaling);
+        }
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
     }
 
