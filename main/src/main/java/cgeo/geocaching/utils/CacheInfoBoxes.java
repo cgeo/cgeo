@@ -3,10 +3,13 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.AttributesGridAdapter;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -25,6 +28,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -32,6 +36,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -44,6 +49,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 
 public class CacheInfoBoxes {
 
@@ -188,18 +195,80 @@ public class CacheInfoBoxes {
         return false;
     }
 
-    public static void updateCacheLists(final View view, final Geocache cache, @Nullable final CacheDetailActivity cacheDetailActivity) {
+    public static void updateCacheListsAndMatchingFilters(final View view, final Geocache cache, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final SpannableStringBuilder builder = new SpannableStringBuilder();
-        for (final Integer listId : cache.getLists()) {
-            if (builder.length() > 0) {
-                builder.append(", ");
+
+        // only display "Lists: ..." if the cache is actually stored offline (i.e. part of at least one list)
+        if (cache.isOffline()) {
+            final SpannableStringBuilder listsBuilder = new SpannableStringBuilder();
+            for (final Integer listId : cache.getLists()) {
+                if (listsBuilder.length() > 0) {
+                    listsBuilder.append(", ");
+                }
+                appendClickableList(listsBuilder, view, listId, cacheDetailActivity);
             }
-            appendClickableList(builder, view, listId, cacheDetailActivity);
+            listsBuilder.insert(0, LocalizationUtils.getString(R.string.list_list_headline) + " ");
+            builder.append(listsBuilder);
         }
-        builder.insert(0, LocalizationUtils.getString(R.string.list_list_headline) + " ");
+
+        final View marker = view.findViewById(R.id.marker_button);
+        if (marker != null) {
+            final boolean enableMarkerButton = cacheDetailActivity != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
+            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
+            if (enableMarkerButton) {
+                marker.setOnClickListener(v -> FilterUtils.openDialogActivateMarkers(cacheDetailActivity));
+            }
+        }
+        appendMatchingNamedFilters(builder, cache);
+
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
         offlineLists.setText(builder);
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
+        offlineLists.setVisibility(builder.length() > 0 ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * Appends the named filters matching {@code cache} to {@code builder} (preceded by a line break if
+     * {@code builder} is not empty), depending on {@link Settings#getNamedFilterDisplayMode()}.
+     * Active filters are shown in the default text color, inactive (passive) ones grayed out. Not clickable.
+     */
+    private static void appendMatchingNamedFilters(final SpannableStringBuilder builder, final Geocache cache) {
+        final Settings.NamedFilterDisplayMode mode = Settings.getNamedFilterDisplayMode();
+        if (mode == Settings.NamedFilterDisplayMode.NONE) {
+            return;
+        }
+
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY);
+        final List<NamedFilter> activeFilters = matches.left;
+        final List<NamedFilter> passiveFilters = matches.right;
+        if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {
+            return;
+        }
+
+        final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
+        for (final NamedFilter filter : activeFilters) {
+            appendNamedFilter(filtersBuilder, filter, false);
+        }
+        for (final NamedFilter filter : passiveFilters) {
+            appendNamedFilter(filtersBuilder, filter, true);
+        }
+        filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
+
+        if (builder.length() > 0) {
+            builder.append("\n");
+        }
+        builder.append(filtersBuilder);
+    }
+
+    private static void appendNamedFilter(final SpannableStringBuilder builder, final NamedFilter filter, final boolean inactive) {
+        if (builder.length() > 0) {
+            builder.append(", ");
+        }
+        final int start = builder.length();
+        builder.append(filter.getNameAndMarker());
+        if (inactive) {
+            builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CgeoApplication.getInstance(), R.color.colorTextHint)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
     }
 
     private static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId, @Nullable final CacheDetailActivity cacheDetailActivity) {

@@ -33,12 +33,6 @@
                 android:tooltipText="@string/named_filter_fill_with_named"
                 app:icon="@drawable/ic_menu_list" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/filter_save_as_named"
-                style="@style/button_icon"
-                android:tooltipText="@string/named_filter_save_as"
-                app:icon="@drawable/ic_menu_save" />
-
             <TextView
                 android:id="@+id/filter_reference_named_filter_id"
                 android:layout_width="1dp"
@@ -55,6 +49,12 @@
                 style="@style/text_default"
                 android:ellipsize="end"
                 android:maxLines="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/filter_save_as_named"
+                style="@style/button_icon"
+                android:tooltipText="@string/named_filter_save_as"
+                app:icon="@drawable/ic_menu_save" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/filter_storage_delete"

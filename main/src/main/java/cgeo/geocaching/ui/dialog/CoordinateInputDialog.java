@@ -267,7 +267,7 @@ public class CoordinateInputDialog {
                 useCurrentLocation.setEnabled(false);
                 final Geopoint savedCoords = gp;
                 final Disposable[] acuDisposable = new Disposable[1];
-                final AveragedCoordsUtils acu = new AveragedCoordsUtils(context, currentCoords(), binding.averagingPlaceholder, newCoords -> {
+                final AveragedCoordsUtils acu = new AveragedCoordsUtils(context, binding.touchInterceptor, currentCoords(), binding.averagingPlaceholder, newCoords -> {
                     gp = newCoords;
                     updateGui();
                 }, newCoords -> {

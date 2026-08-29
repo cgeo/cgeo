@@ -1426,6 +1426,10 @@
     <string name="feature_voting">Voting for caches</string>
     <string name="init_appearance_general">General appearance</string>
     <string name="init_cachedetail_behaviour">Behaviour</string>
+    <string name="init_named_filter_display_mode">Named filters in cache details</string>
+    <string name="named_filter_display_mode_none">Do not show</string>
+    <string name="named_filter_display_mode_active_only">Only if marker is active</string>
+    <string name="named_filter_display_mode_all">Show all matching filters</string>
     <string name="init_cachedetail_note">Personal Cache Note</string>
     <string name="init_maplines_title">Map colors customization</string>
     <string name="init_map_other">Other</string>
@@ -1940,7 +1944,8 @@
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
     <string name="hash_symbol">#</string>
-    <string name="averaging_my_coordinates">Averaging my coordinates…</string>
+    <string name="averaging_my_coordinates2">Averaging my coordinates… (%s)</string>
+    <string name="averaging_paused">paused</string>
 
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
@@ -2759,6 +2764,7 @@
     <string name="live_map_status_normal">Loading data without problems: %s</string>
 
     <string name="list_list_headline">Lists:</string>
+    <string name="filters_list_headline">Filters:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="zero">%d waypoints extracted</item>
         <item quantity="one">%d waypoint extracted</item>

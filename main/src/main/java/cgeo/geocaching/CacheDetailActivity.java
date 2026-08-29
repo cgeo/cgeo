@@ -1260,7 +1260,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                CacheInfoBoxes.updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, null);
+                CacheInfoBoxes.updateCacheListsAndMatchingFilters(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, null);
             }
         }.execute();
     }
@@ -1423,10 +1423,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache attributes
             CacheInfoBoxes.updateAttributes(cache, binding.attributesText, binding.attributesGrid, activity);
 
-            // list
+            // list and matching filters
             CacheInfoBoxes.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), null, new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheInfoBoxes.updateCacheLists(binding.getRoot(), cache, activity);
+            CacheInfoBoxes.updateCacheListsAndMatchingFilters(binding.getRoot(), cache, activity);
 
             // watchlist
             binding.addToWatchlist.setOnClickListener(new AddToWatchlistClickListener());
