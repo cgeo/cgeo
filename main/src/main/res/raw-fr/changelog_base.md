@@ -1,20 +1,3 @@
-### Notes générales de publication
-
-**Bord à bord**
-
-En raison des politiques du Play Store, nous avons mis à jour le niveau de l'API Android cette version de c:geo cibles + nous avons modifié certaines routines de mise en page de l'écran. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
-
-**Anciennes cartes**
-
-Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement supprimé les implémentations héritées de nos cartes. Vous passerez automatiquement à notre nouvelle UnifiedMap et ne remarquerez aucune différence, sauf quelques nouvelles fonctionnalités, dont certaines sont
-- Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
-- Pop-up de cluster pour Google Maps
-- Cacher les sources de carte dont vous n'avez pas besoin
-- Graphique d'altitude pour les routes et les pistes
-- Basculer entre les listes directement depuis la carte
-- Mode "Conduite" pour les cartes basées sur OpenStreetMap
-- Appui long sur la piste / route individuelle pour plus d'options
-
 ### Carte
 - Nouveau: L'optimisation des itinéraires met en cache les données calculées
 - Nouveau : L'activation du mode live garde les waypoints de la cible actuellement définie visibles
@@ -36,6 +19,17 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Anciennes cartes**
+
+Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement supprimé les implémentations héritées de nos cartes. Vous passerez automatiquement à notre nouvelle UnifiedMap et ne remarquerez aucune différence, sauf quelques nouvelles fonctionnalités, dont certaines sont
+- Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
+- Pop-up de cluster pour Google Maps
+- Cacher les sources de carte dont vous n'avez pas besoin
+- Graphique d'altitude pour les routes et les pistes
+- Basculer entre les listes directement depuis la carte
+- Mode "Conduite" pour les cartes basées sur OpenStreetMap
+- Appui long sur la piste / route individuelle pour plus d'options
 
 ### Détails de la cache
 - Nouveau : Détecter les caractères supplémentaires dans les formules : –,  , ×
@@ -104,3 +98,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Correction : « Utiliser les unités impériales » pas correctement initialisé lors d'une nouvelle installation
 - Changement: module de traduction hors ligne Bergamot open source remplaçant le traducteur Google ML Kit à source fermée
 - Changement : Nouveau sélecteur d'émoji
+
+**Bord à bord**
+
+En raison des politiques du Play Store, nous avons mis à jour le niveau de l'API Android cette version de c:geo cibles + nous avons modifié certaines routines de mise en page de l'écran. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
