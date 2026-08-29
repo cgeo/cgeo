@@ -20,6 +20,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
@@ -273,6 +274,10 @@ abstract class GPXParser extends FileParser {
                     }
                     // modify cache depending on the use case/connector
                     afterParsing(cache);
+
+                    //invalidate list tags in PN to avoid list creation
+                    cache.setPersonalNote(
+                        CacheArtefactParser.markListsAsIgnored(cache.getPersonalNote(), null));
 
                     // finally store the cache in the database
                     result.add(geocode);

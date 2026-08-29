@@ -30,6 +30,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Image;
@@ -120,6 +121,7 @@ import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -5178,6 +5180,7 @@ public class DataStore {
         if (!list.isConcrete()) {
             return;
         }
+        final Set<String> oldListNamesLower = getListNamesLower(Collections.singleton(oldListId));
 
         withAccessLock(() -> {
 
@@ -5192,6 +5195,7 @@ public class DataStore {
                     remove.bindLong(1, oldListId);
                     remove.bindString(2, cache.getGeocode());
                     remove.execute();
+                    removeListsFromPersonalNotes(cache, oldListNamesLower);
 
                     add.bindLong(1, newListId);
                     add.bindString(2, cache.getGeocode());
@@ -5208,6 +5212,8 @@ public class DataStore {
     }
 
     public static void removeFromList(final Collection<Geocache> caches, final int oldListId) {
+        final Set<String> oldListNamesLower = getListNamesLower(Collections.singleton(oldListId));
+
         withAccessLock(() -> {
 
             init();
@@ -5220,6 +5226,7 @@ public class DataStore {
                     remove.bindLong(1, oldListId);
                     remove.bindString(2, cache.getGeocode());
                     remove.execute();
+                    removeListsFromPersonalNotes(cache, oldListNamesLower);
                     cache.getLists().remove(oldListId);
                 }
                 database.setTransactionSuccessful();
@@ -5279,6 +5286,11 @@ public class DataStore {
                 for (final Geocache cache : caches) {
                     remove.bindString(1, cache.getGeocode());
                     remove.execute();
+
+                    final Set<String> listNamesLower = getListNamesLower(
+                        cache.getLists().stream().filter(listId -> !listIds.contains(listId))
+                        .collect(Collectors.toSet()));
+                    removeListsFromPersonalNotes(cache, listNamesLower);
                     cache.getLists().clear();
 
                     for (final Integer listId : listIds) {
@@ -5551,6 +5563,7 @@ public class DataStore {
         HISTORY_COUNT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ")"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
+        UPDATE_PERSONAL_NOTE("UPDATE " + dbTableCaches + " SET personal_note = ? WHERE geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
         REMOVE_ALL_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ?"),
         UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
@@ -5634,6 +5647,7 @@ public class DataStore {
             final SQLiteStatement remove = PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
             final Map<String, Set<Integer>> oldLists = new HashMap<>();
 
+
             database.beginTransaction();
             try {
                 final Set<String> geocodes = new HashSet<>(caches.size());
@@ -5642,6 +5656,7 @@ public class DataStore {
 
                     remove.bindString(1, cache.getGeocode());
                     remove.execute();
+                    removeListsFromPersonalNotes(cache, null);
                     geocodes.add(cache.getGeocode());
 
                     cache.getLists().clear();
@@ -5656,6 +5671,24 @@ public class DataStore {
 
             return oldLists;
         });
+    }
+
+    private static Set<String> getListNamesLower(final Collection<Integer> listIds) {
+        return CacheArtefactParser.getListNamesLower(listIds);
+    }
+
+    private static void removeListsFromPersonalNotes(final Geocache cache, final Set<String> listNamesLower) {
+        if (cache == null || StringUtils.isBlank(cache.getPersonalNote())) {
+            return;
+        }
+
+        final String newPersonalNote = CacheArtefactParser.markListsAsIgnored(cache.getPersonalNote(), listNamesLower);
+        cache.setPersonalNote(newPersonalNote);
+
+        final SQLiteStatement pn = PreparedStatement.UPDATE_PERSONAL_NOTE.getStatement();
+        pn.bindString(1, newPersonalNote);
+        pn.bindString(2, cache.getGeocode());
+        pn.execute();
     }
 
     @Nullable

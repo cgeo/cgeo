@@ -1714,6 +1714,10 @@ public class Settings {
         return getBoolean(R.string.pref_personal_cache_note_merge_disable, false);
     }
 
+    public static boolean isPersonalNoteListExtractionDisabled() {
+        return getBoolean(R.string.pref_personal_note_list_extraction_disable, false);
+    }
+
     public static int getLastDetailsPage() {
         return getInt(R.string.pref_lastdetailspage, 1);
     }

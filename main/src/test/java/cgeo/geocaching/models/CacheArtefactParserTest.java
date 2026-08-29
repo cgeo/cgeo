@@ -7,7 +7,9 @@ import cgeo.geocaching.location.GeopointFormatter;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -606,6 +608,108 @@ public class CacheArtefactParserTest {
         }
         final Map<String, String> vars = parser.getVariables();
         assertThat(vars).isEqualTo(expectedVarMap);
+    }
+
+    @Test
+    public void testParseListNames() {
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse("some note\n#My List\nmore note\n#List2#List3\nlast line");
+        assertThat(parser.getListNames()).containsExactly("My List", "List2", "List3");
+    }
+
+    @Test
+    public void testParseListNamesTrimmed() {
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse("  #  My List  #  List2  \n");
+        assertThat(parser.getListNames()).containsExactly("My List", "List2");
+    }
+
+    @Test
+    public void testParseListNamesNoHashNoList() {
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse("some note without any hash");
+        assertThat(parser.getListNames()).isEmpty();
+    }
+
+    @Test
+    public void testParseListNamesIgnoresHashInsideLine() {
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse("note with a # somewhere in the middle");
+        assertThat(parser.getListNames()).isEmpty();
+    }
+
+    @Test
+    public void testGetParseableListString() {
+        assertThat(CacheArtefactParser.getParseableListString(Arrays.asList("List1", "List2"))).isEqualTo("#List1\n#List2");
+        assertThat(CacheArtefactParser.getParseableListString(new ArrayList<>())).isEmpty();
+        assertThat(CacheArtefactParser.getParseableListString(null)).isEmpty();
+    }
+
+    @Test
+    public void putParseableWaypointsInTextWithLists() {
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        final String gpStr = toParseableWpString(gp);
+
+        final String waypoints = "@wp1 (X) " + gpStr + " \"note\"";
+        final CacheArtefactParser cacheArtefactParser = createParser("Prefix");
+        final Collection<Waypoint> wps = cacheArtefactParser.parse(waypoints).getWaypoints();
+
+        final String note = "";
+        final String noteAfter = CacheArtefactParser.putParseableWaypointsInText(note, wps, null, Arrays.asList("List1", "List2"));
+        assertThat(noteAfter).isEqualTo("{c:geo-start}\n" + waypoints + "\n#List1\n#List2\n{c:geo-end}");
+
+        //check round trip: re-parsing yields the same list names
+        final CacheArtefactParser reparsed = createParser("Prefix").parse(noteAfter);
+        assertThat(reparsed.getListNames()).containsExactly("List1", "List2");
+    }
+
+    @Test
+    public void testMarkListAsIgnored() {
+        final String text = "some note\n#My List\nmore note\n#List2#List3\nlast line";
+        // case-insensitive match
+        final String marked = CacheArtefactParser.markListsAsIgnored(text, Collections.singleton("my list"));
+        assertThat(marked).isEqualTo("some note\n#-My List\nmore note\n#List2#List3\nlast line");
+
+        // re-parsing must no longer find the marked list, others remain untouched
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse(marked);
+        assertThat(parser.getListNames()).containsExactly("List2", "List3");
+    }
+
+    @Test
+    public void testMarkListAsIgnoredIsIdempotent() {
+        final String text = "#My List";
+        final String markedOnce = CacheArtefactParser.markListsAsIgnored(text, Collections.singleton("my list"));
+        final String markedTwice = CacheArtefactParser.markListsAsIgnored(text, Collections.singleton("my list"));
+        assertThat(markedTwice).isEqualTo(markedOnce);
+        assertThat(markedOnce).isEqualTo("#-My List");
+    }
+
+    @Test
+    public void testMarkListAsIgnoredNoMatch() {
+        final String text = "#My List#List2";
+        assertThat(CacheArtefactParser.markListsAsIgnored(text, Collections.singleton("Unknown"))).isEqualTo(text);
+    }
+
+    @Test
+    public void testMarkAllListsAsIgnored() {
+        final String text = "some note\n  #  My List  #  List2  \nmore note\n#-AlreadyIgnored#List3\nlast line";
+        final String marked = CacheArtefactParser.markListsAsIgnored(text, null);
+        assertThat(marked).isEqualTo("some note\n  #-  My List  #-  List2  \nmore note\n#-AlreadyIgnored#-List3\nlast line");
+
+        // re-parsing must find no list names at all anymore
+        final CacheArtefactParser parser = createParser("Praefix");
+        parser.parse(marked);
+        assertThat(parser.getListNames()).isEmpty();
+    }
+
+    @Test
+    public void testMarkListsAsIgnoredNullAndNoLists() {
+        assertThat(CacheArtefactParser.markListsAsIgnored(null, null)).isNull();
+
+        final String noListText = "just a normal note without any hash";
+        assertThat(CacheArtefactParser.markListsAsIgnored(noListText, Collections.singleton("List"))).isEqualTo(noListText);
+        assertThat(CacheArtefactParser.markListsAsIgnored(noListText, null)).isEqualTo(noListText);
     }
 
     @Test

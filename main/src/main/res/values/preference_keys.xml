@@ -192,6 +192,7 @@
     <string translatable="false" name="pref_livelist">livelist</string>
     <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
     <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
+    <string translatable="false" name="pref_personal_note_list_extraction_disable">personalNoteListExtractionDisable</string>
     <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
     <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>

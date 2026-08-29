@@ -95,6 +95,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.reactivex.rxjava3.core.Scheduler;
@@ -1910,6 +1911,46 @@ public class Geocache implements INamedGeoCoordinate {
                 }
             }
             changeVariables(newVars);
+
+            changed |= assignToListsByName(cacheArtefactParser.getListNames());
+        }
+        return changed;
+    }
+
+    /**
+     * Assigns this cache to the stored lists with given names (case-insensitive match). If for a name no list exists yet,
+     * a new one is created (using the exact, case-sensitive name given).
+     *
+     * @return true if the cache was newly assigned to any list, false if it was not assigend
+     * (eg already assigned to all lists or names were blank)
+     */
+    private boolean assignToListsByName(final Collection<String> listNames) {
+        if (listNames == null || listNames.isEmpty()) {
+            return false;
+        }
+        final Map<String, String> uniqueNames = listNames.stream().map(StringUtils::trimToNull).filter(Objects::nonNull)
+            .collect(Collectors.toMap(String::toLowerCase, s -> s, (e, r) -> e, HashMap::new));
+        boolean changed = false;
+
+        //handle existing lists
+        for (final StoredList list : DataStore.getLists()) {
+            if (list.id == StoredList.STANDARD_LIST_ID || getLists().contains(list.id)) {
+                uniqueNames.remove(list.getTitle().toLowerCase());
+                continue;
+            }
+            if (uniqueNames.remove(list.getTitle().toLowerCase()) != null) {
+                DataStore.addToList(Collections.singletonList(this), list.id);
+                changed = true;
+            }
+        }
+        //new lists
+        for (final String name : uniqueNames.values()) {
+            final int newListId = DataStore.createList(name);
+            if (newListId >= 0) {
+                changed = true;
+                //make sure the newly created list is registered
+                DataStore.getList(newListId);
+            }
         }
         return changed;
     }
