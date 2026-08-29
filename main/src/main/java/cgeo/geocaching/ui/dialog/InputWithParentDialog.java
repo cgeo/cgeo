@@ -66,6 +66,14 @@ public class InputWithParentDialog {
         }
 
         /**
+         * Overwrite rename-mode
+         */
+        public Options setRenameMode(final boolean renameMode) {
+            this.renameMode = renameMode;
+            return this;
+        }
+
+        /**
          * Prefill the parent dropdown without activating rename-mode.
          * OK is enabled as long as the name field is non-empty.
          */

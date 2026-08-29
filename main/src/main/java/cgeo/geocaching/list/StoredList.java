@@ -376,6 +376,9 @@ public final class StoredList extends AbstractList {
                     .setDefaultIconRes(R.drawable.ic_menu_list);
             if (defaultValue != null) {
                 options.setInitialParent(oldPrefixWithoutSeparator);
+                if (buttonTitle == R.string.list_dialog_create) {
+                    options.setRenameMode(false);
+                }
             }
 
             InputWithParentDialog.of(activity)
