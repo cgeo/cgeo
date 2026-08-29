@@ -1733,7 +1733,8 @@
     <string name="cc_hint_seconds">Sekunden</string>
     <string name="cc_hint_fraction">Bruchteil</string>
     <string name="hash_symbol">#</string>
-    <string name="averaging_my_coordinates">Positionsmittelung…</string>
+    <string name="averaging_my_coordinates2">Positionsmittelung… (%s)</string>
+    <string name="averaging_paused">pausiert</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
@@ -2452,6 +2453,7 @@
     <string name="live_map_status_partial">Teilergebnisse (Reinzoomen, um die Anzahl der zu ladenden Caches zu reduzieren): %s</string>
     <string name="live_map_status_normal">Lade Daten ohne Probleme: %s</string>
     <string name="list_list_headline">Listen:</string>
+    <string name="filters_list_headline">Filter:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
         <item quantity="other">%d Wegpunkte extrahiert</item>
