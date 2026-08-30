@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
 
 public class FilterUtils {
@@ -77,11 +78,13 @@ public class FilterUtils {
         final List<NamedFilter> filters = NamedFilter.getAllWithIcons();
 
         if (filters.isEmpty()) {
-            SimpleDialog.ofContext(context)
-                .setMessage(R.string.named_filter_no_icons_message)
-                .setNeutralButton(TextParam.id(R.string.named_filter_manage_filter))
-                .setNeutralAction(() -> FilterUtils.onClickFilterMenu((FilteredActivity) context))
-                .show();
+            final SimpleDialog dialog = SimpleDialog.ofContext(context)
+                .setMessage(R.string.named_filter_no_icons_message);
+            if (context instanceof FilteredActivity) {
+                dialog.setNeutralButton(TextParam.id(R.string.named_filter_manage_filter))
+                   .setNeutralAction(() -> FilterUtils.onClickFilterMenu((FilteredActivity) context));
+            }
+            dialog.show();
             return;
         }
 
@@ -102,6 +105,22 @@ public class FilterUtils {
             .setNeutralButton(TextParam.id(R.string.named_filter_reorder))
             .setNeutralAction(() -> NamedFilterPriorityActivity.startActivity(context))
             .selectMultiple(model, NamedFilter::activateMarker);
+    }
+
+    public static void registerFilterActivateDeactivateButton(final Activity activity, final View button) {
+        if (button instanceof MaterialButton) {
+            ((MaterialButton) button).setIconResource(Settings.isConditionalCacheMarkersEnabled() ? R.drawable.ic_menu_marker : R.drawable.ic_menu_marker_off);
+        }
+        button.setOnClickListener(v -> openDialogActivateMarkers(activity));
+        button.setOnLongClickListener(v -> {
+            final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
+            Settings.setConditionalCacheMarkersEnabled(newState);
+            if (button instanceof MaterialButton) {
+                ((MaterialButton) button).setIconResource(Settings.isConditionalCacheMarkersEnabled() ? R.drawable.ic_menu_marker : R.drawable.ic_menu_marker_off);
+            }
+            GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
+            return true;
+        });
     }
 
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
