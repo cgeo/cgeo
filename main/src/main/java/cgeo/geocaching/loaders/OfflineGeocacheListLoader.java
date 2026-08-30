@@ -2,6 +2,7 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -20,11 +21,12 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
     private final boolean sortInverse;
     private final int limit;
 
-    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId, final int namedFilterId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         super(activity);
         this.searchCenter = searchCenter;
         this.listId = listId;
-        this.filter = filter;
+        final NamedFilter namedFilter = NamedFilter.getById(namedFilterId);
+        this.filter = GeocacheFilter.createAnd(filter, namedFilter == null ? null : namedFilter.getFilter());
         this.sort = sort;
         this.sortInverse = sortInverse;
         this.limit = limit;

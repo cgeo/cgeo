@@ -151,7 +151,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                 startActivity(CacheListActivity.getHistoryIntent(this));
             } else {
                 Settings.setLastDisplayedList(selectedListId);
-                startActivity(CacheListActivity.getActivityOfflineIntent(this));
+                startActivity(CacheListActivity.getActivityOfflineIntent(this, null));
             }
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
@@ -160,7 +160,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     private boolean onMapLongClicked() {
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
-            DefaultMap.startActivityList(this, selectedListId, null);
+            DefaultMap.startActivityList(this, selectedListId, -1, null);
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
@@ -357,7 +357,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         if (id == MENU_MAP) {
             return DefaultMap.getLiveMapIntent(fromActivity);
         } else if (id == MENU_LIST) {
-            return CacheListActivity.getActivityOfflineIntent(fromActivity);
+            return CacheListActivity.getActivityOfflineIntent(fromActivity, null);
         } else if (id == MENU_SEARCH) {
             return new Intent(fromActivity, SearchActivity.class);
         } else if (id == MENU_CUSTOM) {

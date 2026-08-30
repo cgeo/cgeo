@@ -129,8 +129,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         }
 
         setTitle(LocalizationUtils.getString(filterContext.getType().titleId));
-        fillViewFromFilter(filterContext.get().toConfig(), false);
-        originalFilterConfig = getFilterFromView().toConfig();
+        originalFilterConfig = filterContext.get().toConfig();
+        fillViewFromFilter(originalFilterConfig, false);
 
         navUpHandler = ActivityMixin.registerBackNavigationInterceptor(this, this::onNavigationIntercepted);
 
@@ -169,9 +169,16 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
+        final Runnable showListSelection = () -> FilterUtils.openDialogSelectNamedFilter(
+                this, TextParam.id(R.string.named_filter_fill_with_named), null,
+                selected -> {
+                    originalFilterConfig = selected == null ? null : selected.toConfig();
+                    fillViewFromFilter(selected == null ? null : originalFilterConfig, false);
+                });
         binding.filterFillWithNamed.setOnClickListener(v -> {
-            FilterUtils.openDialogSelectNamedFilter(this, TextParam.id(R.string.named_filter_fill_with_named), null, selected ->
-                fillViewFromFilter(selected == null ? null : selected.toConfig(), false));
+            if (!askForUnsavedChanges(showListSelection)) {
+                showListSelection.run();
+            }
         });
         ViewUtils.setTooltip(binding.filterFillWithNamed, TextParam.id(R.string.named_filter_fill_with_named));
 
@@ -185,12 +192,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         // Delete Named Filter button
         binding.filterStorageDelete.setOnClickListener(v -> {
-            final String filterName = binding.filterStorageName.getText().toString();
+            final String filterName = binding.filterDisplayName.getText().toString();
             SimpleDialog.of(this).setTitle(R.string.named_filter_delete)
                     .setMessage(R.string.named_filter_storage_delete_message, filterName)
                     .confirm(() -> {
-                        NamedFilter.delete(filterName);
-                        binding.filterStorageName.setText("");
+                        NamedFilter.delete(binding.filterStorageName.getText().toString());
+                        adjustNamedFilterReferenceViewFor(null);
                     });
         });
     }
@@ -236,7 +243,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         .setMessage(R.string.named_filter_config_exists_message, existing.getName())
                         .confirm(
                             () -> saveViewAsNamedFilter(name, marker),
-                            () -> openSaveFilterDialog(name, marker));
+                            () -> openSaveFilterDialog(name, marker),
+                            () -> renameNamedFilter(existing.getName(), name, marker), TextParam.id(R.string.rename));
             } else {
                 saveViewAsNamedFilter(name, marker);
             }
@@ -245,8 +253,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void saveViewAsNamedFilter(final String newName, @Nullable final String markerId) {
         adjustNamedFilterReferenceViewFor(null);
-        final NamedFilter newNamedFilter = NamedFilter.addOrReplace(newName, getFilterFromView(), markerId);
+        final GeocacheFilter newFilter = getFilterFromView();
+        final NamedFilter newNamedFilter = NamedFilter.addOrReplace(newName, newFilter, markerId);
+        originalFilterConfig = newFilter.toConfig();
         adjustNamedFilterReferenceViewFor(newNamedFilter);
+    }
+
+    private void renameNamedFilter(final String oldName, final String newName, @Nullable final String markerId) {
+        NamedFilter.delete(oldName);
+        saveViewAsNamedFilter(newName, markerId);
     }
 
     @Override
@@ -387,9 +402,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void adjustNamedFilterReferenceViewFor(@Nullable final NamedFilter filter) {
-        final boolean unsavedFilter = this.filterContext.get().getTree() != null && filter != null && !this.filterContext.get().filtersSame(filter.getFilter());
-        binding.filterStorageName.setText(filter == null ? "" : unsavedFilter ? "(" + filter.getName() + ")*" : filter.getNameAndMarker());
-        binding.filterStorageName.setTypeface(null, unsavedFilter ? Typeface.ITALIC : Typeface.NORMAL);
+        // final boolean unsavedFilter = this.filterContext.get().getTree() != null && filter != null && !this.filterContext.get().filtersSame(filter.getFilter());
+        final GeocacheFilter originalFilter = filter == null ? null : GeocacheFilter.createFromConfig(originalFilterConfig);
+        final boolean unsavedFilter = originalFilter != null && !originalFilter.filtersSame(filter.getFilter());
+        binding.filterStorageName.setText(filter == null ? "" : filter.getName());
+        binding.filterDisplayName.setText(filter == null ? "" : unsavedFilter ? "(" + filter.getNameAndMarker() + ")*" : filter.getNameAndMarker());
+        binding.filterDisplayName.setTypeface(null, unsavedFilter ? Typeface.ITALIC : Typeface.NORMAL);
         binding.filterSaveAsNamed.setIconResource(unsavedFilter ? R.drawable.ic_menu_unsaved : R.drawable.ic_menu_save);
         binding.filterReferenceNamedFilterId.setText(filter == null ? "-1" : "" + filter.getId());
         binding.filterStorageDelete.setVisibility(filter == null ? View.GONE : View.VISIBLE);
@@ -406,6 +424,19 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         finish();
     }
 
+    private boolean askForUnsavedChanges(final Runnable onConfirm) {
+        if (originalFilterConfig != null) {
+            final GeocacheFilter newFilter = getFilterFromView();
+            final GeocacheFilter originalFilter = GeocacheFilter.createFromConfig(originalFilterConfig);
+            if (!originalFilter.filtersSame(newFilter)) {
+                SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
+                        .confirm(onConfirm);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Called when the user attempts to leave via back press or navigate up.
      *
@@ -413,14 +444,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
      * @return true to STOP navigation (a confirmation dialog was shown), false to CONTINUE
      */
     private boolean onNavigationIntercepted(final Runnable navigationAction) {
-        final GeocacheFilter newFilter = getFilterFromView();
-        final boolean filterWasChanged = originalFilterConfig != null && !originalFilterConfig.equals(newFilter.toConfig());
-        if (filterWasChanged) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes)
-                    .confirm(navigationAction);
-            return true;
-        }
-        return false;
+        return askForUnsavedChanges(navigationAction);
     }
 
     @Override

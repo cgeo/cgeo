@@ -295,6 +295,12 @@ public class NamedFilter {
         return namedFilters.get(id);
     }
 
+    @Nullable
+    public static synchronized GeocacheFilter getFilterbyId(final int id) {
+        final NamedFilter nf = getById(id);
+        return nf != null ? nf.filter : null;
+    }
+
     /** Find any filter by its name; returns null if not found; returns any filter if multiple exists with that name */
     @Nullable
     public static synchronized NamedFilter getFirstByName(final String name) {

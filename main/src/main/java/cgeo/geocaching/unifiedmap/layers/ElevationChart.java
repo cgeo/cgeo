@@ -12,7 +12,6 @@ import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -24,7 +23,6 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
-import javax.annotation.Nullable;
 
 import info.appdev.charting.charts.LineChart;
 import info.appdev.charting.components.Legend;
@@ -62,7 +58,7 @@ public class ElevationChart {
     private boolean expanded = Settings.getBoolean(R.string.pref_elevationChartExpanded, false);
     private final MarkerView mv;
 
-    private static class Data {
+    static class Data {
         Geopoint point;
         int upRemaining;
         int downRemaining;
@@ -82,7 +78,8 @@ public class ElevationChart {
         this.geoItemLayer = geoItemLayer;
         toolbar = activity.findViewById(R.id.toolbar);
         res = activity.getResources();
-        mv = new MarkerView(activity, R.layout.elevationchart_infobox);
+        mv = new ElevationChartMarkerView(activity, R.layout.elevationchart_infobox);
+        mv.setChartView(chart);
     }
 
     public void removeElevationChart() {
@@ -118,7 +115,6 @@ public class ElevationChart {
                             geoItemLayer.put(ELEVATIONCHART_MARKER, marker);
                         }
                     }
-                    updateInfoBox(e);
                 }
 
                 @Override
@@ -252,18 +248,6 @@ public class ElevationChart {
 
         final YAxis yAxis2 = chart.getAxisRight();
         yAxis2.setEnabled(false);
-    }
-
-    private void updateInfoBox(@Nullable final EntryFloat entry) {
-        final RelativeLayout info = mv.findViewById(R.id.elevation_infobox);
-        if (info == null || entry == null) {
-            return;
-        }
-        final Data data = (Data) entry.getData();
-        ViewUtils.setText(mv.findViewById(R.id.elevationText), Units.formatElevation(entry.getY()));
-        ViewUtils.setText(mv.findViewById(R.id.distanceText), data == null ? "" : Units.getDistanceFromMeters(data.distanceRemaining / 100f));
-        ViewUtils.setText(mv.findViewById(R.id.upText), data == null ? "" : Units.formatElevation(data.upRemaining / 100f));
-        ViewUtils.setText(mv.findViewById(R.id.downText), data == null ? "" : Units.formatElevation(data.downRemaining / 100f));
     }
 
     /** find position on track closest to given coords (max 100m) and highlight it */

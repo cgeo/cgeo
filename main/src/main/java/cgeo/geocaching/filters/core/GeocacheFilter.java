@@ -196,6 +196,16 @@ public class GeocacheFilter implements Cloneable {
         return this;
     }
 
+    public static GeocacheFilter createAnd(final GeocacheFilter ... filters) {
+        final GeocacheFilter result = createEmpty();
+        for (final GeocacheFilter filter : filters) {
+            if (filter != null && filter.getTree() != null) {
+                result.and(filter.getTree());
+            }
+        }
+        return result;
+    }
+
     public String toUserDisplayableString() {
         final NamedFilter liveFilter = NamedFilter.getById(referencedNamedFilterId);
         if (liveFilter != null) {

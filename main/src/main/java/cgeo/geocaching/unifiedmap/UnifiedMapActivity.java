@@ -12,6 +12,7 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -481,7 +482,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // load list of caches belonging to list and scale map to see them all
                 final AtomicReference<Viewport> viewport3 = new AtomicReference<>();
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, mapType.filterContext.get(), null, false, -1);
+                    final GeocacheFilter filter = GeocacheFilter.createAnd(mapType.filterContext.get(), NamedFilter.getFilterbyId(mapType.fromNamedFilter));
+                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, filter, null, false, -1);
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     replaceSearchResultByGeocaches(searchResult);
                 }, () -> {
@@ -755,7 +757,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (viewModel.mapType.fromList != 0) {
             //List
-            listChooser.setList(viewModel.mapType.fromList, visibleCaches, false);
+            listChooser.setList(viewModel.mapType.fromList, viewModel.mapType.fromNamedFilter, visibleCaches, false);
         } else if (viewModel.mapType.type == UMTT_TargetGeocode) {
             //single cache
             final Geocache targetCache = getCurrentTargetCache();
@@ -1082,9 +1084,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 menu.show();
             }
         } else if (id == R.id.menu_as_list) {
-            final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
-                    mapFragment.getViewport().filter(vmCaches));
-            CacheListActivity.startActivityMap(this, new SearchResult(caches));
+            if (viewModel.mapType.type == UMTT_List) {
+                Settings.setLastDisplayedList(viewModel.mapType.fromList);
+                CacheListActivity.startActivityOffline(this, NamedFilter.getById(viewModel.mapType.fromNamedFilter));
+            } else {
+                final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
+                        mapFragment.getViewport().filter(vmCaches));
+                CacheListActivity.startActivityMap(this, new SearchResult(caches));
+            }
         } else if (id == R.id.menu_hillshading) {
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());

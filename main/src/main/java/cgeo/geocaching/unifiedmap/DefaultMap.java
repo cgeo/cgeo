@@ -58,19 +58,19 @@ public final class DefaultMap {
         new UnifiedMapType(search, title).launchMap(fromActivity);
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
+    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList, final int fromNamedFilter) {
         if (fromList == 0) {
             final Geopoint referencePoint = fromActivity instanceof CacheListActivity ? ((CacheListActivity) fromActivity).getReferencePoint() : null;
             new UnifiedMapType(search, title, referencePoint).launchMap(fromActivity); // same as above
         } else {
             // no longer allowed / CacheListActivity directly launches into startActivityList in this case
-            startActivityList(fromActivity, fromList, null);
+            startActivityList(fromActivity, fromList, fromNamedFilter, null);
         }
     }
 
-    public static void startActivityList(final Activity fromActivity, final int fromList, final @Nullable GeocacheFilterContext filterContext) {
+    public static void startActivityList(final Activity fromActivity, final int fromList, final int fromNamedFilter, final @Nullable GeocacheFilterContext filterContext) {
         if (fromList != 0) {
-            final UnifiedMapType mapType = new UnifiedMapType(fromList, filterContext);
+            final UnifiedMapType mapType = new UnifiedMapType(fromList, fromNamedFilter, filterContext);
             mapType.launchMap(fromActivity);
         }
     }
