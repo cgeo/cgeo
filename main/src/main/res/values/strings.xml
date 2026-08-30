@@ -3251,4 +3251,6 @@
     <string name="dbi_search_title">Search for</string>
     <string name="dbi_search_columnSelection">Restrict to</string>
 
+    <string name="menu_pebble_map_start">Start Pebble Map</string>
+    <string name="menu_pebble_map_stop">Stop Pebble Map</string>
 </resources>

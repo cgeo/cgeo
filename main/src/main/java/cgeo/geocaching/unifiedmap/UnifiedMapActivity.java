@@ -35,6 +35,7 @@ import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.pebble.PebbleMapService;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -84,6 +85,10 @@ import cgeo.geocaching.wherigo.WherigoGame;
 import cgeo.geocaching.wherigo.WherigoThingType;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
+import cgeo.geocaching.pebble.PebbleMapHandler;
+import cgeo.geocaching.pebble.PebbleMapHost;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Consumer;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
@@ -143,7 +148,7 @@ import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
-public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
+public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver, PebbleMapHost {
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 
@@ -156,6 +161,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
     private AbstractMapFragment mapFragment = null;
+    private PebbleMapHandler pebbleMapHandler;
     private final List<GeoItemLayer<?>> layers = new ArrayList<>();
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
@@ -191,6 +197,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         acquireUnifiedMap(this);
+        pebbleMapHandler = new PebbleMapHandler(this, this);
 
         setContentView(R.layout.unifiedmap_activity);
         showSpacer(true);
@@ -972,6 +979,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
 
+        final MenuItem pebbleItem = menu.findItem(R.id.menu_pebble_map_start);
+        if (pebbleItem != null) {
+            pebbleItem.setTitle(PebbleMapService.isRunning ? R.string.menu_pebble_map_stop : R.string.menu_pebble_map_start);
+        }
+
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return result;
@@ -1093,6 +1105,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             Settings.setMapBackgroundMapLayer(!Settings.getMapBackgroundMapLayer());
             item.setChecked(Settings.getMapBackgroundMapLayer());
             changeMapSource(mapFragment.currentTileProvider);
+        } else if (id == R.id.menu_pebble_map_start) {
+            if (PebbleMapService.isRunning) {
+                stopService(new Intent(this, PebbleMapService.class));
+            } else {
+                ContextCompat.startForegroundService(this, new Intent(this, PebbleMapService.class));
+            }
         } else { // dynamic submenus: Map language, Map source
             final String language = TileProviderFactory.getLanguage(id);
             final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
@@ -1512,6 +1530,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void onPause() {
+        pebbleMapHandler.stop();
         if (mapFragment != null) {
             saveCenterAndZoom();
         }
@@ -1544,9 +1563,42 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         unifiedMapActivity = new WeakReference<>(newUnifiedMapActivity);
     }
 
+    // PebbleMapHost implementation
+
+    @Override
+    public void capturePebbleMap(final Consumer<byte[]> callback) {
+        if (mapFragment == null) {
+            callback.accept(new byte[0]);
+        } else {
+            mapFragment.requestPebbleBitmap(callback);
+        }
+    }
+
+    @Override
+    public void zoomIn() {
+        if (mapFragment != null) {
+            mapFragment.zoomInOut(true);
+        }
+    }
+
+    @Override
+    public void zoomOut() {
+        if (mapFragment != null) {
+            mapFragment.zoomInOut(false);
+        }
+    }
+
+    @Override
+    public void setZoom(final int zoomLevel) {
+        if (mapFragment != null) {
+            mapFragment.setZoom(zoomLevel);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        pebbleMapHandler.start();
         setAppIconAsUpIndicator(true);
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
@@ -1579,6 +1631,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onDestroy() {
+        if (pebbleMapHandler != null) {
+            pebbleMapHandler.destroy();
+        }
         if (tileProvider != null) {
             tileProvider.onDestroy();
         }

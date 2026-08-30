@@ -395,6 +395,9 @@ dependencies {
     // Locus Maps integration
     implementation 'com.github.asamm.locus-api:locus-api-android:0.9.72'
 
+    // Pebble smartwatch integration
+    implementation 'com.getpebble:pebblekit:4.0.0'
+
     // -- Mapsforge / Mapsforge --
 
     // Mapsforge official version

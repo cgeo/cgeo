@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" android:minSdkVersion="34" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="33" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
@@ -797,6 +798,13 @@
         <service
             android:name=".speech.SpeechService"
             android:label="@string/tts_service"
+            android:foregroundServiceType="location">
+        </service>
+        <service
+            android:name=".pebble.PebbleMapService"
+            android:label="Pebble Map Service"
+            android:exported="false"
+            android:enabled="true"
             android:foregroundServiceType="location">
         </service>
         <service
