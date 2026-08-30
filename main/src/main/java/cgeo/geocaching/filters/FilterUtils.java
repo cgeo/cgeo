@@ -146,6 +146,24 @@ public class FilterUtils {
             });
     }
 
+    /**
+     * opens dialog to select multi @NamedFilter among named filters.
+     */
+    public static void openDialogMultiSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final Consumer<Set<NamedFilter>> onFiltersSelected, final Set<NamedFilter> exceptFilters) {
+        final List<NamedFilter> namedFilters = NamedFilter.getAll().stream()
+                .filter(f -> !exceptFilters.contains(f)).collect(Collectors.toList());
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(namedFilters);
+        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
+
+        SimpleDialog.ofContext(context)
+                .setTitle(title != null ? title : TextParam.id(R.string.named_filter_select_title))
+                .selectMultiple(model, selectedNamedFilter -> {
+                    if (onFiltersSelected != null) {
+                        onFiltersSelected.accept(selectedNamedFilter);
+                    }
+                });
+    }
+
     /** Returns the sorted list of unique parent group names extracted from all existing named filters. */
     public static List<String> getNamedFilterGroups() {
         return NamedFilter.getAll().stream()
