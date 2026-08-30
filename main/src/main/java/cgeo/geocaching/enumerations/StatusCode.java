@@ -31,7 +31,9 @@ public enum StatusCode {
     LOG_POST_ERROR_GK(R.string.err_log_post_failed_gk),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
-    LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
+    LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed),
+    UNPUBLISHED(R.string.cache_status_unpublished),
+    AWAITING_PUBLICATION(R.string.cache_status_awaiting_publication);
 
     @StringRes
     public final int errorString;

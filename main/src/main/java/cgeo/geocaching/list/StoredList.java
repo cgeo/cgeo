@@ -235,6 +235,7 @@ public final class StoredList extends AbstractList {
             // D. Grouped and ungrouped user lists w/o selected items (each level sorted alphabetically, groups and lists intermixed)
             // E. If displayed: "All"
             // F. If displayed: "History"
+            // G. If displayed: "Own Unpublished Caches"
 
             if (item instanceof ItemGroup) {
                 return "D-" + ((ItemGroup<?, ?>) item).getGroup().toString();
@@ -257,6 +258,9 @@ public final class StoredList extends AbstractList {
             }
             if (list.id == PseudoList.HISTORY_LIST.id) {
                 return "F";
+            }
+            if (list.id == PseudoList.OWN_UNPUBLISHED_LIST.id) {
+                return "G";
             }
             if (selectedIds != null && selectedIds.contains(list.id)) {
                 return "C-" + list.getTitle();
@@ -323,6 +327,9 @@ public final class StoredList extends AbstractList {
                 }
                 if (!exceptListIds.contains(PseudoList.HISTORY_LIST.id)) {
                     lists.add(PseudoList.HISTORY_LIST);
+                }
+                if (!exceptListIds.contains(PseudoList.OWN_UNPUBLISHED_LIST.id)) {
+                    lists.add(PseudoList.OWN_UNPUBLISHED_LIST);
                 }
             }
             if (!exceptListIds.contains(PseudoList.NEW_LIST.id)) {

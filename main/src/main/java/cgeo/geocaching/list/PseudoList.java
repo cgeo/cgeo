@@ -44,6 +44,17 @@ public abstract class PseudoList extends AbstractList {
         }
     };
 
+    private static final int OWN_UNPUBLISHED_LIST_ID = 5;
+    /**
+     * list entry to show the user's own caches which are not (yet, or no longer) published, kept in sync with geocaching.com on every access
+     */
+    public static final AbstractList OWN_UNPUBLISHED_LIST = new PseudoList(OWN_UNPUBLISHED_LIST_ID, R.string.list_own_unpublished_caches, R.drawable.ic_menu_owned) {
+        @Override
+        public int getNumberOfCaches() {
+            return DataStore.getAllStoredCachesCount(OWN_UNPUBLISHED_LIST_ID);
+        }
+    };
+
     /**
      * private constructor to have all instances as constants in the class
      */

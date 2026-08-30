@@ -51,6 +51,7 @@ import cgeo.geocaching.loaders.LiveFilterGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
+import cgeo.geocaching.loaders.OwnUnpublishedGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.SearchFilterGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
@@ -1791,6 +1792,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     if (listId == PseudoList.ALL_LIST.id) {
                         title = LocalizationUtils.getString(R.string.list_all_lists);
                         markerId = EmojiUtils.NO_EMOJI;
+                    } else if (listId == PseudoList.OWN_UNPUBLISHED_LIST.id) {
+                        title = LocalizationUtils.getString(R.string.list_own_unpublished_caches);
+                        markerId = EmojiUtils.NO_EMOJI;
                     } else if (listId <= StoredList.TEMPORARY_LIST.id) {
                         listId = StoredList.STANDARD_LIST_ID;
                         title = LocalizationUtils.getString(R.string.stored_caches_button);
@@ -1807,7 +1811,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         preventAskForDeletion = list.preventAskForDeletion;
                     }
 
-                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);
+                    loader = listId == PseudoList.OWN_UNPUBLISHED_LIST.id
+                            ? new OwnUnpublishedGeocacheListLoader(this, coords, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit)
+                            : new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);
 
                     break;
                 case HISTORY:
