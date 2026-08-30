@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -427,7 +428,11 @@ public class SimpleDialog {
      * A confirm dialog always has at least a positive action and shows at least a positive and a negative button.
      * Provide up to two listeners to define actions for 'positive' and 'negative'.
      */
-    public void confirm(final Runnable positive, final Runnable negative) {
+    public void confirm(@NonNull final Runnable positive, @NonNull final Runnable negative) {
+        confirm(positive, negative, null, null);
+    }
+
+    public void confirm(final Runnable positive, final Runnable negative, @Nullable final Runnable neutral, @Nullable final TextParam neutralButtonText) {
         //"confirm" always needs at least "OK" and "cancel"
         if (positiveButton == null) {
             setPositiveButton(TextParam.id(R.string.ok));
@@ -435,10 +440,13 @@ public class SimpleDialog {
         if (negativeButton == null) {
             setNegativeButton(TextParam.id(R.string.cancel));
         }
-        showInternal(positive, negative);
+        if (neutral != null) {
+            setNeutralButton(neutralButtonText);
+        }
+        showInternal(positive, negative, neutral);
     }
 
-    private void showInternal(final Runnable positive, final Runnable negative) {
+    private void showInternal(@Nullable final Runnable positive, @Nullable final Runnable negative, @Nullable final Runnable neutral) {
         final AlertDialog dialog = constructCommons().first;
         if (negative != null) {
             dialog.setOnCancelListener(dialogInterface -> negative.run());
@@ -460,6 +468,13 @@ public class SimpleDialog {
                         return true;
                     }
                     break;
+                case DialogInterface.BUTTON_NEUTRAL:
+                    if (neutral != null) {
+                        neutral.run();
+                        dialog.dismiss();
+                        return true;
+                    }
+                    break;
                 default:
                     //do nothing
                     break;
@@ -477,7 +492,7 @@ public class SimpleDialog {
      */
     public void show(final Runnable positive) {
         setNegativeButton(null);
-        showInternal(positive, null);
+        showInternal(positive, null, null);
     }
 
     public void show() {

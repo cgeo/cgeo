@@ -243,7 +243,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         .setMessage(R.string.named_filter_config_exists_message, existing.getName())
                         .confirm(
                             () -> saveViewAsNamedFilter(name, marker),
-                            () -> openSaveFilterDialog(name, marker));
+                            () -> openSaveFilterDialog(name, marker),
+                            () -> renameNamedFilter(existing.getName(), name, marker), TextParam.id(R.string.rename));
             } else {
                 saveViewAsNamedFilter(name, marker);
             }
@@ -256,6 +257,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         final NamedFilter newNamedFilter = NamedFilter.addOrReplace(newName, newFilter, markerId);
         originalFilterConfig = newFilter.toConfig();
         adjustNamedFilterReferenceViewFor(newNamedFilter);
+    }
+
+    private void renameNamedFilter(final String oldName, final String newName, @Nullable final String markerId) {
+        NamedFilter.delete(oldName);
+        saveViewAsNamedFilter(newName, markerId);
     }
 
     @Override

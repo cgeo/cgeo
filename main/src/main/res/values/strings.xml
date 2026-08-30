@@ -3190,6 +3190,7 @@
     <string name="copy" tools:ignore="PrivateResource">Copy</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <string name="rename">Rename</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
