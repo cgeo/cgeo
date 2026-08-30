@@ -1141,7 +1141,6 @@
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">Aplikácia c:geo podporuje vlastné t=my pre offline mapy. Tie sa dajú použiť na zmenu štýlu farieb mapy (napr. môžete mať nočnú mapu), prípadne na zvýraznenie určitých objektov, ako sú napríklad cyklotrasy alebo vrstevnice na mape.\n\nPráca s nezbalenými mapovými témami môže znížiť výkon otvárania prezerača. V takom prípade môže byť priečinok s témou voliteľne synchronizovaný do lokálneho súkromného priečinka aplikácie pre rýchlejší prístup (na úkor nejakého miesta v ukladacom priestore).</string>
     <string name="settings_info_hillshading_title">Informácie o tieňovaní kopcov</string>
-    <string name="settings_info_hillshading">Tieňovanie kopcov je technika na vytváranie topografických máp reliéfu pridaním svetelného efektu do mapy, ktorý označuje zmeny nadmorskej výšky. Svahy sa stmavia/zosvetlia, aby sa vygeneroval 3D efekt.\nÚdaje pre tieňovanie je možné stiahnuť cez ponuku mapy.\nNie je kompatibilné s variantom UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Tieňovanie</string>
     <string name="init_hillshading_hq">Tieňovanie vo vysokej kvalite</string>
     <string name="init_summary_hillshading_hq">Podrobnejšie prekrytie tieňovaním, ale asi 50 % percent pomalšie vykresľovanie pri oddialení</string>
