@@ -217,25 +217,27 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
         //using dir.listFiles() is FAR too slow. Thus we have to create an explicit query
 
-        return queryDir(dir, new String[]{
-                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                DocumentsContract.Document.COLUMN_MIME_TYPE,
-                DocumentsContract.Document.COLUMN_LAST_MODIFIED,
-                DocumentsContract.Document.COLUMN_SIZE,
-
-        }, c -> fileInfoFromCursor(c, null, dir, folder));
+        return queryDir(dir, FILE_INFO_COLUMNS, c -> fileInfoFromCursor(c, null, dir, folder));
     }
 
     /**
      * retrieves a FileInformation object from the current cursor row retrieved by using {@link #queryDir(Uri, String[], Func1)} columns
      */
     private static ContentStorage.FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
-        final String documentId = c.getString(0);
-        final String name = c.getString(1);
-        final String mimeType = c.getString(2);
-        final long lastMod = c.getLong(3);
-        final long size = c.getLong(4);
+        final int documentIdColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID);
+        final String documentId = documentIdColumn < 0 ? "" : c.getString(documentIdColumn);
+
+        final int nameColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME);
+        final String name = nameColumn < 0 ? "" : c.getString(nameColumn);
+
+        final int mimeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE);
+        final String mimeType = mimeColumn < 0 ? "" : c.getString(mimeColumn);
+
+        final int lastModColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED);
+        final long lastMod = lastModColumn < 0 ? -1 : c.getLong(lastModColumn);
+
+        final int sizeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_SIZE);
+        final long size = sizeColumn < 0 ? -1 : c.getLong(sizeColumn);
 
         final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
         final Uri uri = docUri != null ? docUri :
