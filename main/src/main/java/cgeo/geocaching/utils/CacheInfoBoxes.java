@@ -203,7 +203,7 @@ public class CacheInfoBoxes {
             final boolean enableMarkerButton = cacheDetailActivity != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
             marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
             if (enableMarkerButton) {
-                marker.setOnClickListener(v -> FilterUtils.openDialogActivateMarkers(cacheDetailActivity));
+                FilterUtils.registerFilterActivateDeactivateButton(cacheDetailActivity, marker);
             }
         }
         appendMatchingNamedFilters(builder, cache, cacheDetailActivity);
@@ -226,19 +226,20 @@ public class CacheInfoBoxes {
             return;
         }
 
+        final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
+
         final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY);
         final List<NamedFilter> activeFilters = matches.left;
         final List<NamedFilter> passiveFilters = matches.right;
         if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {
-            return;
-        }
-
-        final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
-        for (final NamedFilter filter : activeFilters) {
-            appendNamedFilter(filtersBuilder, filter, false, cacheDetailActivity);
-        }
-        for (final NamedFilter filter : passiveFilters) {
-            appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
+            filtersBuilder.append("-");
+        } else {
+            for (final NamedFilter filter : activeFilters) {
+                appendNamedFilter(filtersBuilder, filter, !Settings.isConditionalCacheMarkersEnabled(), cacheDetailActivity);
+            }
+            for (final NamedFilter filter : passiveFilters) {
+                appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
+            }
         }
         filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
 
