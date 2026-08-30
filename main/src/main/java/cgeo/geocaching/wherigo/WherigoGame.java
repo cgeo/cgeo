@@ -66,7 +66,7 @@ public class WherigoGame implements UI {
     );
 
     public enum NotifyType {
-        REFRESH, START, END, LOCATION, DIALOG_OPEN, DIALOG_CLOSE
+        REFRESH, START, SAVED, END, LOCATION, DIALOG_OPEN, DIALOG_CLOSE
     }
 
     private final AudioManager audioManager = new AudioManager();
@@ -488,6 +488,7 @@ public class WherigoGame implements UI {
     @Override
     public void unblock() {
         WherigoSaveFileHandler.get().saveFinished(); // Ends a running SAVE
+        notifyListeners(NotifyType.SAVED);
     }
 
     /**

@@ -3149,6 +3149,8 @@
 
     <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
+    <string name="wherigo_confirm_exit">Exit</string>
+    <string name="wherigo_confirm_save_exit">Autosave &amp; Exit</string>
     <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
