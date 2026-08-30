@@ -38,6 +38,7 @@ public class UnifiedMapType implements Parcelable {
     public SearchResult searchResult = null;
     public String title = null;
     public int fromList = 0;
+    public int fromNamedFilter = -1;
     public int waypointId = 0;
     public GeocacheFilterContext filterContext = new GeocacheFilterContext(LIVE);
     public boolean followMyLocation = false;
@@ -85,14 +86,15 @@ public class UnifiedMapType implements Parcelable {
 
     /** show and scale to list content */
     public UnifiedMapType(final int fromList) {
-        this(fromList, null);
+        this(fromList, -1, null);
     }
 
     /** show and scale to list content with filter applied */
-    public UnifiedMapType(final int fromList, final GeocacheFilterContext filterContext) {
+    public UnifiedMapType(final int fromList, final int fromNamedFilter, final GeocacheFilterContext filterContext) {
         type = UnifiedMapTypeType.UMTT_List;
         this.filterContext = filterContext != null ? filterContext : new GeocacheFilterContext(OFFLINE);
         this.fromList = fromList;
+        this.fromNamedFilter = fromNamedFilter;
     }
 
     /** show and scale to search result */
@@ -158,6 +160,7 @@ public class UnifiedMapType implements Parcelable {
         searchResult = in.readParcelable(SearchResult.class.getClassLoader());
         title = in.readString();
         fromList = in.readInt();
+        fromNamedFilter = in.readInt();
         filterContext = in.readParcelable(GeocacheFilterContext.class.getClassLoader());
         followMyLocation = (in.readInt() > 0); // readBoolean available from SDK 29 on
         waypointId = in.readInt();
@@ -178,6 +181,7 @@ public class UnifiedMapType implements Parcelable {
         dest.writeParcelable(searchResult, 0);
         dest.writeString(title);
         dest.writeInt(fromList);
+        dest.writeInt(fromNamedFilter);
         dest.writeParcelable(filterContext, 0);
         dest.writeInt(followMyLocation ? 1 : 0);
         dest.writeInt(waypointId);

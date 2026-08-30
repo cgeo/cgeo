@@ -160,7 +160,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     private boolean onMapLongClicked() {
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
-            DefaultMap.startActivityList(this, selectedListId, null);
+            DefaultMap.startActivityList(this, selectedListId, -1, null);
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;

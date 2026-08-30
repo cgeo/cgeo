@@ -1579,9 +1579,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
         if (listId == 0) {
-            DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+            DefaultMap.startActivitySearch(this, searchToUse, title, listId, namedFilterId);
         } else {
-            DefaultMap.startActivityList(this, listId, currentCacheFilterContext);
+            DefaultMap.startActivityList(this, listId, namedFilterId, currentCacheFilterContext);
         }
         ActivityMixin.overrideTransitionToFade(this);
     }
