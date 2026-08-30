@@ -90,6 +90,11 @@
         android:title="@string/caches_store_offline_map"
         app:showAsAction="ifRoom|withText"/>
     <item
+        android:id="@+id/menu_export_calendar"
+        android:icon="@drawable/ic_menu_calendar"
+        android:title="@string/menu_export_events_to_calendar"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/menu_map_rotation"
         android:icon="@drawable/compass_rose_mini"
         android:title="@string/map_rotation"

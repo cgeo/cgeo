@@ -180,4 +180,28 @@ public final class CalendarUtils {
     public static String getUserTimeZoneString() {
         return new SimpleDateFormat("z", Locale.US).format(new Date());
     }
+
+    /**
+     * returns a relative time string (today, past, =1d, +2d, +1w, +1m etc.)
+     */
+    public static String getRelativeTime(final long timestamp) {
+        final int diff = daysSince(timestamp);
+        if (diff > 0) {
+            return "past";
+        }
+        if (diff == 0) {
+            return "today";
+        }
+        if (diff == -1) {
+            return "+1d";
+        }
+        final int absDiff = Math.abs(diff);
+        if (absDiff < 7) {
+            return "+" + absDiff + "d";
+        }
+        if (absDiff < 30) {
+            return "+" + (absDiff / 7) + "w";
+        }
+        return "+" + (absDiff / 30) + "m";
+    }
 }

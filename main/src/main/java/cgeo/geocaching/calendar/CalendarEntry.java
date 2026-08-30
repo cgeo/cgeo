@@ -40,6 +40,8 @@ class CalendarEntry {
     @NonNull
     private final String name;
     @NonNull
+    private final String geocode;
+    @NonNull
     private final String coords;
     private final int startTimeMinutes;
     private final int endTimeMinutes;
@@ -52,6 +54,7 @@ class CalendarEntry {
                 StringUtils.defaultString(cache.getUrl()),
                 StringUtils.defaultString(cache.getPersonalNote()),
                 cache.getName(),
+                cache.getGeocode(),
                 cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                 cache.getEventStartTimeInMinutes(),
                 cache.getEventEndTimeInMinutes()
@@ -59,7 +62,7 @@ class CalendarEntry {
     }
 
     private CalendarEntry(@NonNull final String shortDesc, @NonNull final String longDesc, @NonNull final Date hiddenDate, @NonNull final String url,
-                          @NonNull final String personalNote, @NonNull final String name, @NonNull final String coords,
+                          @NonNull final String personalNote, @NonNull final String name, @NonNull final String geocode, @NonNull final String coords,
                           final int startTimeMinutes, final int endTimeMinutes) {
         this.shortDesc = shortDesc;
         this.longDesc = longDesc;
@@ -67,6 +70,7 @@ class CalendarEntry {
         this.url = url;
         this.personalNote = personalNote;
         this.name = name;
+        this.geocode = geocode;
         this.coords = coords;
         this.startTimeMinutes = startTimeMinutes;
         this.endTimeMinutes = endTimeMinutes;
@@ -80,6 +84,16 @@ class CalendarEntry {
     private long getStartOfDay() {
         final LocalDate localDate = hiddenDate.toInstant().atZone(localZone).toLocalDate();
         final Instant midnight = localDate.atTime(LocalTime.MIDNIGHT).atZone(localZone).toInstant();
+        return midnight.toEpochMilli();
+    }
+
+    /**
+     * @return {@code Date} based on hidden date in UTC. Time is set to 00:00:00 UTC.
+     */
+    @NonNull
+    private long getStartOfUtcDay() {
+        final LocalDate localDate = hiddenDate.toInstant().atZone(localZone).toLocalDate();
+        final Instant midnight = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
         return midnight.toEpochMilli();
     }
 
@@ -149,5 +163,38 @@ class CalendarEntry {
             ViewUtils.showToast(context, R.string.event_fail);
             Log.e("addEntryToCalendar", e);
         }
+    }
+
+    @NonNull
+    android.content.ContentValues getContentValues(final long calendarId) {
+        final android.content.ContentValues values = new android.content.ContentValues();
+        values.put(CalendarContract.Events.CALENDAR_ID, calendarId);
+        values.put(CalendarContract.Events.TITLE, geocode + " " + TextUtils.stripHtml(name));
+        values.put(CalendarContract.Events.DESCRIPTION, parseDescription());
+        if (StringUtils.isNotEmpty(coords)) {
+            values.put(CalendarContract.Events.EVENT_LOCATION, coords);
+        }
+        values.put(CalendarContract.Events.HAS_ALARM, 0);
+        values.put(CalendarContract.Events.STATUS, CalendarContract.Events.STATUS_CONFIRMED);
+        values.put(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+
+        if (startTimeMinutes >= 0) {
+            final long eventTime = getStartOfDay();
+            values.put(CalendarContract.Events.DTSTART, eventTime + startTimeMinutes * 60000L);
+            if (endTimeMinutes >= 0) {
+                values.put(CalendarContract.Events.DTEND, eventTime + endTimeMinutes * 60000L);
+            } else {
+                values.put(CalendarContract.Events.DTEND, eventTime + (startTimeMinutes + 60) * 60000L); // default 1h
+            }
+            values.put(CalendarContract.Events.EVENT_TIMEZONE, localZone.getId());
+        } else {
+            final long eventTime = getStartOfUtcDay();
+            values.put(CalendarContract.Events.DTSTART, eventTime);
+            values.put(CalendarContract.Events.DTEND, eventTime + 86400000L);
+            values.put(CalendarContract.Events.ALL_DAY, 1);
+            values.put(CalendarContract.Events.EVENT_TIMEZONE, "UTC");
+        }
+        values.put(CalendarContract.Events.EVENT_END_TIMEZONE, values.getAsString(CalendarContract.Events.EVENT_TIMEZONE));
+        return values;
     }
 }

@@ -9,6 +9,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
+import cgeo.geocaching.calendar.CalendarExport;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.FilterUtils;
@@ -35,6 +36,8 @@ import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -49,6 +52,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
@@ -67,6 +71,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
@@ -167,6 +172,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private final int[] inFollowMyLocation = { 0 };
 
     private RouteTrackUtils routeTrackUtils = null;
+    private final PermissionAction<List<String>> exportToCalendarAction = PermissionAction.register(this, PermissionContext.CALENDAR, geocodes -> CalendarExport.exportToCalendar(this, DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB)));
     private ElevationChart elevationChartUtils = null;
     private String lastElevationChartRoute = null; // null=none, empty=individual route, other=track
 
@@ -1049,6 +1055,33 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     mapFragment.getViewport().filter(caches));
             new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
+        } else if (id == R.id.menu_export_calendar) {
+            final List<Geocache> events = viewModel.caches.readWithResult(caches -> {
+                final List<Geocache> filtered = new ArrayList<>();
+                final Viewport viewport = mapFragment.getViewportNonNull();
+                for (Geocache cache : caches) {
+                    if (cache.isEventCache() && !CalendarUtils.isPastEvent(cache) && viewport.contains(cache)) {
+                        filtered.add(cache);
+                    }
+                }
+                return filtered;
+            });
+
+            if (events.isEmpty()) {
+                ActivityMixin.showToast(this, R.string.export_events_no_events);
+            } else {
+                final SimpleDialog.ItemSelectModel<Geocache> model = new SimpleDialog.ItemSelectModel<>();
+                model.setItems(events)
+                        .setDisplayMapper(cache -> {
+                            final String relativeTime = cache.getHiddenDate() == null ? "" : "(" + CalendarUtils.getRelativeTime(cache.getHiddenDate().getTime()) + ") ";
+                            return TextParam.text(relativeTime + cache.getGeocode() + ": " + cache.getName());
+                        })
+                        .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
+                        .setSelectedItems(events);
+
+                SimpleDialog.of(this).setTitle(R.string.export_events_title)
+                        .selectMultiple(model, caches -> exportToCalendarAction.launch(new ArrayList<>(Geocache.getGeocodes(caches))));
+            }
         } else if (id == R.id.menu_hint) {
             boolean hintIsAvailable = false;
             final Geocache targetCache = getCurrentTargetCache();
