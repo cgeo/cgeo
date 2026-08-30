@@ -95,6 +95,9 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         if (media != null) {
             binding.media.setMedia(media);
         }
+        binding.media.setMediaMetadata(
+                LocalizationUtils.getString(R.string.wherigo_player) + " " + WherigoGame.get().getCartridgeName(),
+                Engine.removeHtml(message));
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? VISIBLE : GONE);
         if (WherigoGame.get().isDebugModeForCartridge()) {
             //noinspection SetTextI18n (debug info only)
