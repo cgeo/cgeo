@@ -105,7 +105,7 @@ public class FilterUtils {
     }
 
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
-    public static void openDialogSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
+    public static void openDialogSelectGeocacheFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
         final GeocacheFilter currentFilter = filterContext == null ? null : filterContext.get();
         final boolean isFilterActive = currentFilter != null && currentFilter.isFiltering();
         final GeocacheFilter previousFilter = filterContext == null ? null : filterContext.getPreviousFilter();
