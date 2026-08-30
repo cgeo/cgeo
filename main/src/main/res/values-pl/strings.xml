@@ -1178,7 +1178,7 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.\nNiekompatybilne z wariantem VTM UnifiedMap.</string>
+    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
     <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
     <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
@@ -1771,6 +1771,8 @@
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Uśrednianie moich współrzędnych… (%s)</string>
+    <string name="averaging_paused">wstrzymano</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrytek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów nawigacji z %1$s</string>
@@ -2847,8 +2849,8 @@
     <string name="wherigo_download_message">Kartridż z CGUID \"%s\" nie jest dostępny na Twoim urządzeniu. Czy chcesz go pobrać?</string>
     <string name="wherigo_download_successful_title">Pobrano pomyślnie</string>
     <string name="wherigo_download_failed_title">Pobieranie nie powiodło się</string>
-    <string name="wherigo_download_failed_message">Pobieranie wkładu z CGUID \"%1$s\" nie powiodło się: %2$s</string>
-    <string name="wherigo_manual_download_title">Ręczne pobieranie wkładu</string>
+    <string name="wherigo_download_failed_message">Pobieranie kartridża z CGUID \"%1$s\" nie powiodło się: %2$s</string>
+    <string name="wherigo_manual_download_title">Ręczne pobieranie kartridża</string>
     <string name="wherigo_manual_download_cguid_label">Tutaj wprowadź CGUID</string>
     <string name="wherigo_download_delete_leftover_toast">Wherigo: usuwanie pozostałego pliku</string>
     <string name="wherigo_download_progress_login">Logowanie…</string>
@@ -2896,6 +2898,7 @@
     <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
     <string name="pause">Wstrzymaj</string>
     <string name="resume">Wznów</string>
+    <string name="rename">Zmień nazwę</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
