@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="25dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_default" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:checkedButton="@id/radio_local_only"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radio_local_only"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoint_set_as_cache_coords" />
+        <RadioButton
+            android:id="@+id/radio_also_online"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoint_save_and_modify_on_website" />
+    </RadioGroup>
+
+</LinearLayout>
