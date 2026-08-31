@@ -1260,7 +1260,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                CacheInfoBoxes.updateCacheListsAndMatchingFilters(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, null);
+                CacheInfoBoxes.updateCacheListsAndMatchingFilters(CacheDetailActivity.this.findViewById(R.id.cache_offlinebox),
+                        cache, CacheDetailActivity.this);
             }
         }.execute();
     }

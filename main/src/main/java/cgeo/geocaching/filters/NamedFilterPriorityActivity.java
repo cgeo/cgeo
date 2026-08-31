@@ -8,7 +8,7 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.LocalizationUtils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,8 +34,8 @@ public class NamedFilterPriorityActivity extends AbstractActionBarActivity {
     private ActivityNamedFilterBinding binding;
     private FilterPriorityAdapter filterAdapter;
 
-    public static void startActivity(@NonNull final Activity activity) {
-        activity.startActivity(new Intent(activity, NamedFilterPriorityActivity.class));
+    public static void startActivity(@NonNull final Context context) {
+        context.startActivity(new Intent(context, NamedFilterPriorityActivity.class));
     }
 
     protected static final class FilterPriorityViewHolder extends AbstractRecyclerViewHolder {
