@@ -1,8 +1,8 @@
 package cgeo.geocaching.filters.core;
 
-import java.util.function.Function;
+import androidx.annotation.Nullable;
 
-import javax.annotation.Nullable;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,5 +39,4 @@ public final class UserDisplayableStringUtils {
         }
         return sb.toString();
     }
-
 }

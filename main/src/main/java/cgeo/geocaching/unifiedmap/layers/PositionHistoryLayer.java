@@ -14,12 +14,11 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-
-import javax.annotation.Nullable;
 
 public class PositionHistoryLayer {
 
@@ -99,5 +98,4 @@ public class PositionHistoryLayer {
             pathStored = false;
         }
     }
-
 }

@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
@@ -105,7 +106,7 @@ public class ElevationChart {
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
-                public void onValueSelected(final EntryFloat e, final Highlight h) {
+                public void onValueSelected(@NonNull final EntryFloat e, @NonNull final Highlight h) {
                     final Data data = (Data) e.getData();
                     if (data != null) {
                         final Geopoint center = data.point;
