@@ -23,6 +23,7 @@ import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.SpannableStringBuilder;
@@ -198,20 +199,30 @@ public class CacheInfoBoxes {
             builder.append(listsBuilder);
         }
 
-        final View marker = view.findViewById(R.id.marker_button);
-        if (marker != null) {
-            final boolean enableMarkerButton = cacheDetailActivity != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
-            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
-            if (enableMarkerButton) {
-                FilterUtils.registerFilterActivateDeactivateButton(cacheDetailActivity, marker);
-            }
-        }
-        appendMatchingNamedFilters(builder, cache, cacheDetailActivity);
-
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
         offlineLists.setText(builder);
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
         offlineLists.setVisibility(builder.length() > 0 ? View.VISIBLE : View.GONE);
+
+        final View marker = view.findViewById(R.id.marker_button);
+        if (marker != null) {
+            final Context context = view.getContext();
+            final boolean enableMarkerButton = context != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
+            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
+            if (enableMarkerButton) {
+                FilterUtils.registerFilterActivateDeactivateButton(context, marker);
+            }
+        }
+
+        final SpannableStringBuilder markerBuilder = new SpannableStringBuilder();
+        appendMatchingNamedFilters(markerBuilder, cache, cacheDetailActivity);
+
+        final TextView matchingMarkers = view.findViewById(R.id.marker_text);
+        if (matchingMarkers != null) {
+            matchingMarkers.setText(markerBuilder);
+            matchingMarkers.setMovementMethod(LinkMovementMethod.getInstance());
+            matchingMarkers.setVisibility(markerBuilder.length() > 0 ? View.VISIBLE : View.GONE);
+        }
     }
 
     /**

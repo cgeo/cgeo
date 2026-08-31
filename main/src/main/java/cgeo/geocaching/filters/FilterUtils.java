@@ -74,7 +74,7 @@ public class FilterUtils {
     }
 
     /** opens a dialog to activate/deactivate named filter markers */
-    public static void openDialogActivateMarkers(final Activity context) {
+    public static void openDialogActivateMarkers(final Context context) {
         final List<NamedFilter> filters = NamedFilter.getAllWithIcons();
 
         if (filters.isEmpty()) {
@@ -107,11 +107,11 @@ public class FilterUtils {
             .selectMultiple(model, NamedFilter::activateMarker);
     }
 
-    public static void registerFilterActivateDeactivateButton(final Activity activity, final View button) {
+    public static void registerFilterActivateDeactivateButton(final Context context, final View button) {
         if (button instanceof MaterialButton) {
             ((MaterialButton) button).setIconResource(Settings.isConditionalCacheMarkersEnabled() ? R.drawable.ic_menu_marker : R.drawable.ic_menu_marker_off);
         }
-        button.setOnClickListener(v -> openDialogActivateMarkers(activity));
+        button.setOnClickListener(v -> openDialogActivateMarkers(context));
         button.setOnLongClickListener(v -> {
             final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
             Settings.setConditionalCacheMarkersEnabled(newState);
