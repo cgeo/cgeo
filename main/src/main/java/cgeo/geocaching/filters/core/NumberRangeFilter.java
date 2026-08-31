@@ -5,6 +5,8 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,12 +16,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-import javax.annotation.Nullable;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
-
 
 public class NumberRangeFilter<T extends Number & Comparable<T>> {
 
@@ -110,7 +109,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         setMinMaxRange(foundMinUnlimited ? null : min, foundMaxUnlimited ? null : max);
     }
 
-
     public void setConfig(final List<String> config) {
         if (config == null || config.size() < 2) {
             return;
@@ -180,7 +178,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
             if (hasSpecial) {
                 sqlBuilder.closeWhere();
             }
-
         }
     }
 
@@ -202,7 +199,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public void setJsonConfig(final JsonNode node) {
-
         if (node != null) {
             minRangeValue = floatToValue(JsonUtils.getFloat(node, "min", null));
             maxRangeValue = floatToValue(JsonUtils.getFloat(node, "max", null));
@@ -215,7 +211,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return value == null ? null : this.numberConverter.call(value);
     }
 
-
     public ObjectNode getJsonConfig() {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setFloat(node, "min", minRangeValue);
@@ -226,6 +221,4 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         }
         return node;
     }
-
-
 }
