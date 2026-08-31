@@ -17,8 +17,8 @@
 - Fix: Nedladdare av rutor stoppas under vissa förhållanden (OpenStreetMap endast onlinekartor)
 - Nytt: Villkorade cachemarkörer
 - Nytt: Visa navigeringstips (pil + avstånd)
-- Change: Reduce memory requirements of map activity
-- Fix: Google Map resets position to N0 / W0 on mapping a cache list
+- Förändring: Minskat minneskraven för kartaktivitet
+- Fix: Google Map återställer positionen till N0 / W0 vid kartläggning av en cachelista
 
 **Äldre kartor**
 
@@ -58,8 +58,8 @@
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
 - New: Sending log is done in background
-- Fix: Inventory hidden on logging under certain conditions
-- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Inventarier dolda vid loggning under vissa förhållanden
+- Nytt: Medelvärde av koordinater för att skapa vägpunkter/sätta koordinater för användardefinierade cacher
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
