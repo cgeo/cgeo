@@ -224,26 +224,30 @@ class DocumentContentAccessor extends AbstractContentAccessor {
      * retrieves a FileInformation object from the current cursor row retrieved by using {@link #queryDir(Uri, String[], Func1)} columns
      */
     private static ContentStorage.FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
-        final int documentIdColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID);
-        final String documentId = documentIdColumn < 0 ? "" : c.getString(documentIdColumn);
-
         final int nameColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME);
-        final String name = nameColumn < 0 ? "" : c.getString(nameColumn);
+        final String name = c.getString(nameColumn);
 
         final int mimeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE);
-        final String mimeType = mimeColumn < 0 ? "" : c.getString(mimeColumn);
+        final String mimeType = c.getString(mimeColumn);
 
         final int lastModColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED);
-        final long lastMod = lastModColumn < 0 ? -1 : c.getLong(lastModColumn);
+        final long lastMod = c.getLong(lastModColumn);
 
         final int sizeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_SIZE);
-        final long size = sizeColumn < 0 ? -1 : c.getLong(sizeColumn);
+        final long size = c.getLong(sizeColumn);
 
         final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
-        final Uri uri = docUri != null ? docUri :
-                (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
+        final Uri uri;
+        if (docUri == null && parentDirUri != null) {
+            final int documentIdColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID);
+            final String documentId = c.getString(documentIdColumn);
+            uri = DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId);
+        } else {
+            uri = docUri;
+        }
 
-        return new ContentStorage.FileInformation(name, uri, parentFolder, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
+        final Folder dirLocation = isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null;
+        return new ContentStorage.FileInformation(name, uri, parentFolder, isDir, dirLocation, mimeType, size, lastMod);
     }
 
     @Override
