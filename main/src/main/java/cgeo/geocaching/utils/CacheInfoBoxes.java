@@ -239,7 +239,7 @@ public class CacheInfoBoxes {
 
         final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY, -1);
         final List<NamedFilter> activeFilters = matches.left;
         final List<NamedFilter> passiveFilters = matches.right;
         if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {

@@ -357,6 +357,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public void setActualCoordinates(@NonNull final Geopoint coords) {
+        if (Geopoint.areCloseToEachOther(this.coords, coords)) {
+            return;
+        }
         this.coords = coords;
         checkUpdateGlobalGPS(false);
 

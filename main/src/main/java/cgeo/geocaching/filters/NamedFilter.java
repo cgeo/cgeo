@@ -384,11 +384,12 @@ public class NamedFilter {
      * Returns an empty pair if {@code cache} is null.
      */
     @NonNull
-    public static synchronized ImmutablePair<List<NamedFilter>, List<NamedFilter>> getFiltersMatchingCache(@Nullable final Geocache cache, final boolean onlyActive) {
+    public static synchronized ImmutablePair<List<NamedFilter>, List<NamedFilter>> getFiltersMatchingCache(@Nullable final Geocache cache, final boolean onlyActive, final int maxResults) {
         if (cache == null) {
             return new ImmutablePair<>(Collections.emptyList(), Collections.emptyList());
         }
         ensureCache();
+        int count = 0;
         final List<NamedFilter> active = new ArrayList<>();
         final List<NamedFilter> passive = !onlyActive ? new ArrayList<>() : Collections.emptyList();
         for (final NamedFilter nf : namedFiltersSortedByPrioAndName) {
@@ -402,6 +403,10 @@ public class NamedFilter {
                 } else {
                     passive.add(nf);
                 }
+                count++;
+                if (maxResults > 0 && count >= maxResults) {
+                    break;
+                }
             }
         }
         return new ImmutablePair<>(active, passive);
@@ -409,11 +414,11 @@ public class NamedFilter {
 
     /**
      * Returns the marker ids (emoji code-points) of active matching filters for the given cache.
-     * Uses the first list from {@link #getFiltersMatchingCache(Geocache)}.
+     * Uses the active list from {@link #getFiltersMatchingCache(Geocache, boolean, int)}.
      */
     @NonNull
-    public static List<String> getMarkersForCache(@Nullable final Geocache cache) {
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> pair = getFiltersMatchingCache(cache, true);
+    public static List<String> getMarkersForCache(@Nullable final Geocache cache, final int maxResults) {
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> pair = getFiltersMatchingCache(cache, true, maxResults);
         final List<String> result = new ArrayList<>();
         for (final NamedFilter nf : pair.left) {
             if (StringUtils.isNotBlank(nf.markerId)) {
