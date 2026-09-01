@@ -73,6 +73,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -927,4 +929,45 @@ public class ViewUtils {
             }
         });
     }
+
+    public static void debugDumpDrawable(final String  name, final Drawable drawable) {
+        if (drawable == null) {
+            return;
+        }
+
+        try {
+            final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            debugDumpBitmap(name, bitmap);
+        } catch (final Exception e) {
+            Log.e("DEBUG image dump (bitmap) failed for file " + name, e);
+        }
+    }
+
+    public static void debugDumpBitmap(final String  name, final Bitmap bitmap) {
+        if (bitmap == null) {
+            return;
+        }
+        try {
+            final File dir = CgeoApplication.getInstance().getExternalFilesDir("debug-dumpimages");
+            if (dir == null) {
+                return;
+            }
+            if (!dir.exists() && !dir.mkdirs()) {
+                Log.e("DEBUG image dump: could not create dir " + dir.getAbsolutePath());
+                return;
+            }
+            final File file = new File(dir, name + ".png");
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            }
+            Log.iForce("DEBUG image dump: wrote " + file.getAbsolutePath());
+        } catch (final Exception e) {
+            Log.e("DEBUG image dump failed for file " + name, e);
+        }
+    }
+
+
 }
