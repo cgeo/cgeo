@@ -1092,6 +1092,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         mapFragment.getViewport().filter(vmCaches));
                 CacheListActivity.startActivityMap(this, new SearchResult(caches));
             }
+        } else if (id == R.id.menu_grayscale) {
+            Settings.setMapGrayscale(!Settings.getMapGrayscale());
+            item.setChecked(Settings.getMapGrayscale());
+            changeMapSource(mapFragment.currentTileProvider);
         } else if (id == R.id.menu_hillshading) {
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());

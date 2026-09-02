@@ -9,6 +9,13 @@
     <group android:id="@+id/menu_group_offlinemaps">
         <item
             android:orderInCategory="90"
+            android:id="@+id/menu_grayscale"
+            android:title="@string/map_grayscale"
+            android:icon="@drawable/ic_menu_mapmode"
+            android:checkable="true"
+            android:visible="false"/>
+        <item
+            android:orderInCategory="90"
             android:id="@+id/menu_hillshading"
             android:title="@string/settings_hillshading_enable"
             android:icon="@drawable/ic_menu_hills"

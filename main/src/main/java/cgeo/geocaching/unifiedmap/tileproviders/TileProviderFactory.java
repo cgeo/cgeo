@@ -74,6 +74,10 @@ public class TileProviderFactory {
         final AbstractTileProvider ctp = Settings.getTileProvider();
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
+        // grayscaling hooks into the VTM render theme and its bitmap tile decoding, so it is
+        // only offered while a VTM map source is in use
+        parentMenu.findItem(R.id.menu_grayscale).setCheckable(true).setChecked(Settings.getMapGrayscale())
+                .setVisible(ctp instanceof AbstractMapsforgeVTMTileProvider);
         parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && ctp.supportsHillshading());
         parentMenu.findItem(R.id.menu_backgroundmap).setCheckable(true).setChecked(Settings.getMapBackgroundMapLayer()).setVisible(ctp.supportsBackgroundMaps());
         parentMenu.findItem(R.id.menu_download_backgroundmap).setVisible(ctp.supportsBackgroundMaps);

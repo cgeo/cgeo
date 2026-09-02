@@ -2639,6 +2639,14 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
+    public static boolean getMapGrayscale() {
+        return getBoolean(R.string.pref_mapGrayscale, false);
+    }
+
+    public static void setMapGrayscale(final boolean value) {
+        putBoolean(R.string.pref_mapGrayscale, value);
+    }
+
     public static boolean getMapShadingShowLayer() {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
