@@ -243,8 +243,9 @@ public class CacheInfoBoxes {
         final List<NamedFilter> activeFilters = matches.left;
         final List<NamedFilter> passiveFilters = matches.right;
         if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {
-            filtersBuilder.append("-");
+            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_empty));
         } else {
+            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
             for (final NamedFilter filter : activeFilters) {
                 appendNamedFilter(filtersBuilder, filter, !Settings.isConditionalCacheMarkersEnabled(), cacheDetailActivity);
             }
@@ -252,11 +253,7 @@ public class CacheInfoBoxes {
                 appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
             }
         }
-        filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
 
-        if (builder.length() > 0) {
-            builder.append("\n");
-        }
         builder.append(filtersBuilder);
     }
 

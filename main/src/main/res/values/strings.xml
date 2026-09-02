@@ -2765,6 +2765,8 @@
 
     <string name="list_list_headline">Lists:</string>
     <string name="filters_list_headline">Filters:</string>
+    <string name="filters_list_empty">No matching filters</string>
+
     <plurals name="extract_waypoints_result">
         <item quantity="zero">%d waypoints extracted</item>
         <item quantity="one">%d waypoint extracted</item>
