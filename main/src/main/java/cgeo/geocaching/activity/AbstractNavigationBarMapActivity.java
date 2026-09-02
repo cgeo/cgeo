@@ -222,6 +222,19 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         clearSheetInfo();
         final FragmentManager fm = getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
+        // Drop the layout listener of the sheet being removed. It is held in a field of this
+        // activity and closes over the sheet's view, so without this the view stays reachable
+        // until the next sheet installs a new listener. Unregistering has to happen while the
+        // view is still attached, as a detached view hands out a different ViewTreeObserver.
+        synchronized (layoutListeners) {
+            if (layoutListeners[0] != null) {
+                final View listenerView = f1 == null ? null : f1.getView();
+                if (listenerView != null) {
+                    listenerView.getViewTreeObserver().removeOnGlobalLayoutListener(layoutListeners[0]);
+                }
+                layoutListeners[0] = null;
+            }
+        }
         if (f1 != null) {
             try {
                 fm.beginTransaction().remove(f1).commitNowAllowingStateLoss();
