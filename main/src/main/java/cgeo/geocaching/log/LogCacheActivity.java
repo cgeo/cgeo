@@ -436,7 +436,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     public void setType(final LogType type) {
-        logType.set(type);
+        final List<LogType> availableLogTypes = logType.getValues();
+        if (availableLogTypes.contains(type)) {
+            logType.set(type);
+        } else if (availableLogTypes.contains(LogType.NOTE)) {
+            logType.set(LogType.NOTE);
+        } else {
+            logType.set(availableLogTypes.get(0));
+        }
         refreshGui();
     }
 
@@ -710,6 +717,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void setLogTypeValues(final Collection<LogType> logTypes) {
+        final LogType currentLogType = logType.get();
         if (this.originalLogEntry != null && !logTypes.contains(this.originalLogEntry.logType)) {
             //log type of original entry must ALWAYS be available for selection
             final List<LogType> rLogTypes = new ArrayList<>();
@@ -719,6 +727,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         } else {
             this.logType.setValues(logTypes);
         }
+
+        // keep current log type if still available,
+        // otherwise set to NOTE or first available log type
+        setType(currentLogType);
     }
 
     @Override
