@@ -259,6 +259,13 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 b.setState(BottomSheetBehavior.STATE_HIDDEN); // close correctly as it will otherwise conflict with up-swipe behaviour implementation
             }
 
+            // The framework keeps the match_parent children of a FrameLayout in a list that is
+            // only rebuilt while measuring. Hiding the container stops it from ever measuring
+            // again, so the view of the sheet just removed would stay referenced from there
+            // until another sheet is opened. Measuring once while it is empty drops it.
+            v.measure(View.MeasureSpec.makeMeasureSpec(v.getWidth(), View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(v.getHeight(), View.MeasureSpec.EXACTLY));
+
             v.setVisibility(View.GONE);
             return true;
         }
