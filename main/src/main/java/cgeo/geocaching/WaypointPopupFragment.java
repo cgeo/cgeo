@@ -151,6 +151,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
             binding.edit.setOnClickListener(arg0 -> EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId()));
 
+            binding.editPersonalnote.setOnClickListener(arg0 -> {
+                CacheDetailActivity.startActivityForEditNote(getActivity(), geocode);
+                ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
+            });
+
             binding.moreDetails.setOnClickListener(arg0 -> {
                 CacheDetailActivity.startActivity(getActivity(), geocode);
                 ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
