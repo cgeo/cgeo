@@ -234,6 +234,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                 } catch (IndexOutOfBoundsException ignore) {
                     // ignored
                 }
+                if (layer instanceof TileLayer) {
+                    // dispose the loader threads, they keep a back reference to the layer
+                    ((TileLayer) layer).onDetach();
+                }
             }
             layers.clear();
         }
