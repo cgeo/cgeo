@@ -1938,6 +1938,7 @@
     <string name="html_style_default">Default</string>
     <string name="html_style_default_no_contrast_fix">Default w/o contrast fix</string>
     <string name="html_style_monochrome">Monochrome</string>
+    <string name="html_style_webview">WebView</string>
     <string name="html_style_source_formatted">HTML Source Formatted</string>
     <string name="html_style_source">HTML Source</string>
 
