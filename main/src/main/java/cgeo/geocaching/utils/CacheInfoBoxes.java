@@ -245,13 +245,13 @@ public class CacheInfoBoxes {
         if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {
             filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_empty));
         } else {
-            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
             for (final NamedFilter filter : activeFilters) {
                 appendNamedFilter(filtersBuilder, filter, !Settings.isConditionalCacheMarkersEnabled(), cacheDetailActivity);
             }
             for (final NamedFilter filter : passiveFilters) {
                 appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
             }
+            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
         }
 
         builder.append(filtersBuilder);
