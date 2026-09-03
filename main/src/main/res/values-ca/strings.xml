@@ -2462,6 +2462,7 @@
     <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
     <string name="filters_list_headline">Filtres:</string>
+    <string name="filters_list_empty">No hi ha filtres coincidents</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
         <item quantity="other">%d punts de ruta extrets</item>
