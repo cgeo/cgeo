@@ -338,7 +338,7 @@ public final class StoredList extends AbstractList {
                 if (activity == null) {
                     return;
                 }
-                final StoredList existing = DataStore.getLists().stream().filter(list -> list.title.equals(newListName)).findFirst().orElse(null);
+                final StoredList existing = DataStore.getLists().stream().filter(list -> list.title.equals(listName)).findFirst().orElse(null);
                 if (existing != null) {
                     SimpleDialog.of(activity).setTitle(R.string.list_already_exists_title)
                             .setMessage(R.string.list_already_exists_message, listName)
