@@ -2,9 +2,13 @@
 buildscript {
     repositories {
         google()
+        maven { url 'https://storage.googleapis.com/r8-releases/raw' }
     }
     dependencies {
         // these dependencies are used by gradle plugins, not by our projects
+
+        // R8 engine override to support Kotlin 2.3.0 metadata
+        classpath 'com.android.tools:r8:9.4.17'
 
         // Android gradle plugin
         classpath 'com.android.tools.build:gradle:8.13.2'
