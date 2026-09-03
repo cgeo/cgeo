@@ -2211,6 +2211,7 @@
     <string name="geo_search_label">Search caches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
     <string name="search_bar_hint_settings">Search settings</string>
+    <string name="search_index_updated">Search database updated</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_address">Address</string>
     <string name="search_geo">Geocode</string>

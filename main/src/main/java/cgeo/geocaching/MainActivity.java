@@ -512,6 +512,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             cLog.add("perm");
 
             init();
+
+            DataStore.migrateNormalizedColumnsIfNeeded(this);
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
