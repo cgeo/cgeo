@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
@@ -29,13 +30,17 @@ public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
 
 
     @Override
-    public void addChild(final IGeocacheFilter child) {
+    public void addChild(@NonNull final IGeocacheFilter child) {
         children.add(child);
     }
 
     @Override
     public List<IGeocacheFilter> getChildren() {
         return children;
+    }
+
+    protected void setChildren(final Collection<? extends IGeocacheFilter> children) {
+        this.children.addAll(children);
     }
 
     @Override

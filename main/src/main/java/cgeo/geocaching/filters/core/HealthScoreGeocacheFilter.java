@@ -7,9 +7,19 @@ import cgeo.geocaching.utils.JsonUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class HealthScoreGeocacheFilter extends NumberRangeGeocacheFilter<Integer> {
+
+    public static HealthScoreGeocacheFilter create(final Integer min, final Integer max) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.HEALTH_SCORE, min, max);
+    }
+
+    public static HealthScoreGeocacheFilter create(final Collection<Integer> values, final Integer minUnlimitedValue, final Integer maxUnlimitedValue) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.HEALTH_SCORE, values, minUnlimitedValue, maxUnlimitedValue);
+    }
 
     private static final String CONFIG_KEY_INCLUDE_UNSCORED = "includeUnscored";
 
