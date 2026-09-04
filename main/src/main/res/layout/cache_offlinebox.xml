@@ -1,50 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cache_offlinebox"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="9dp" />
 
     <LinearLayout
-        android:id="@+id/frame_texts"
+        android:id="@+id/cache_offlinebox_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/frame_buttons"
-        android:orientation="vertical">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/offline_text"
-            tools:text="@string/cache_offline_not_ready"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/frame_texts"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="6dip"
-            android:layout_marginRight="51dip"
-            android:paddingRight="3dip"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/textSize_detailsSecondary"
-            android:textColor="@color/colorText" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/offline_lists"
+            <TextView
+                android:id="@+id/offline_text"
+                tools:text="@string/cache_offline_not_ready"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginRight="51dip"
+                android:paddingRight="3dip"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/offline_lists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:paddingRight="3dip"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                tools:text="list 1, list 2"
+                android:textColor="@color/colorText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/frame_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dip"
-            android:paddingRight="3dip"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/textSize_detailsSecondary"
-            tools:text="list 1, list 2"
-            android:textColor="@color/colorText" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/frame_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentRight="true">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/offline_edit"
@@ -77,32 +88,5 @@
             android:tooltipText="@string/cache_offline_store" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/frame_marker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/frame_buttons"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/marker_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="6dip"
-            android:paddingRight="3dip"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/textSize_detailsSecondary"
-            android:textColor="@color/colorText"
-            tools:text="Filters: marker 1" />
-
-        <Button
-            android:id="@+id/marker_button"
-            style="@style/button_icon"
-            app:icon="@drawable/ic_menu_marker"
-            android:layout_marginLeft="0dp"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:tooltipText="@string/named_filter_markers" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
