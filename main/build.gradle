@@ -506,7 +506,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.8.0'
 
     // Support Library core (used for eg. HtmlCompat)
-    implementation 'androidx.core:core:1.18.0'
+    implementation 'androidx.core:core:1.19.0'
 
     // Local broadcast manager
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
