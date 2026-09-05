@@ -1,8 +1,10 @@
 This update includes the following fixes and changes since last beta release:
 
 - Related to new filter / marker system
+  - List markers no longer showing up on map ([#18513](https://github.com/cgeo/cgeo/issues/18513))
   - Changing marker priorities only applied on restart ([#18520](https://github.com/cgeo/cgeo/issues/18520))
   - Disabling markers globally did not affect cache details ([#18545](https://github.com/cgeo/cgeo/issues/18545))
+  - Make listing of disabled markers in cache details configurable ([#18500](https://github.com/cgeo/cgeo/issues/18500))
   - Renaming filters not possible ([#18540](https://github.com/cgeo/cgeo/issues/18540))
   - Deleting stored filters not possible ([#18517](https://github.com/cgeo/cgeo/issues/18517))
   - Stored filters always marked as modified ([#18519](https://github.com/cgeo/cgeo/issues/18519))
