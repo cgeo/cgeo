@@ -1,20 +1,3 @@
-### Notas gerais de lançamento
-
-**Exibição de ponta a ponta**
-
-Devido às políticas da Play Store, actualizámos o nível da API Android desta versão do c:geo e alterámos algumas das rotinas de disposição do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
-
-**Mapas antigos**
-
-Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalmente as implementações antigas dos nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
-- Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
-- Janela pendente de agrupamento para o Google Maps
-- Ocultar fontes de mapa de que não precisa
-- Gráfico de altitude para rotas e percursos
-- Alternar entre listas directamente do mapa
-- "Modo de condução" para mapas baseados no OpenStreetMap
-- Toque longo no percurso / rota individual para mais opções
-
 ### Mapa
 - Novo: Optimização de rota armazena dados calculados
 - Novo: Os pontos adicionais do destino definido permanecem visíveis se o modo em tempo real for ligado
@@ -36,6 +19,17 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Novo: Mostrar dicas de navegação (seta + distância)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Mapas antigos**
+
+Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalmente as implementações antigas dos nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
+- Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
+- Janela pendente de agrupamento para o Google Maps
+- Ocultar fontes de mapa de que não precisa
+- Gráfico de altitude para rotas e percursos
+- Alternar entre listas directamente do mapa
+- "Modo de condução" para mapas baseados no OpenStreetMap
+- Toque longo no percurso / rota individual para mais opções
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -104,3 +98,7 @@ Conforme anunciado nos lançamentos de 2025.07.17 e 2025.12.01, removemos finalm
 - Correcção: "Usar unidades imperiais" não era inicializado correctamente em instalações novas
 - Alteração: O módulo de tradução offline de código aberto "Bergamot" substitui o tradutor proprietário "Google ML Kit"
 - Alteração: Novo selector de emoji
+
+**Exibição de ponta a ponta**
+
+Devido às políticas da Play Store, actualizámos o nível da API Android desta versão do c:geo e alterámos algumas das rotinas de disposição do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)

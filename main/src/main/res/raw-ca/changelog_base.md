@@ -1,20 +1,3 @@
-### Notes generals de la versió
-
-**De punta a punta**
-
-A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
-
-**Mapes antics**
-
-Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
-- Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
-- Popup de clúster per a Google Maps
-- Amaga les fonts de mapes que no necessites
-- Carta de cotes de rutes i tracks
-- Canvia entre llistes directament des del mapa
-- "Mode de conducció" per a mapes basats en OpenStreetMap
-- Toqueu llargament el track / ruta individual per veure més opcions
-
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
 - Nou: activar el mode en directe manté visibles els punts de referència de l'objectiu establert actualment
@@ -35,7 +18,18 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: Marcadors de catxé condicionals
 - Nou: Mostra la pista de navegació (fletxa + distància)
 - Canvi: Reduir els requisits de memòria de l'activitat del mapa
-- Fix: Google Map resets position to N0 / W0 on mapping a cache list
+- Correcció: Google Maps restableix la posició a N0 / W0 en assignar una llista de catxés
+
+**Mapes antics**
+
+Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
+- Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
+- Popup de clúster per a Google Maps
+- Amaga les fonts de mapes que no necessites
+- Carta de cotes de rutes i tracks
+- Canvia entre llistes directament des del mapa
+- "Mode de conducció" per a mapes basats en OpenStreetMap
+- Toqueu llargament el track / ruta individual per veure més opcions
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -104,3 +98,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
 - Canvi: El mòdul de traducció fora de línia de codi obert de Bergamot substitueix el traductor de codi tancat de Google ML Kit
 - Canvi: Nou selector d'emojis
+
+**De punta a punta**
+
+A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)

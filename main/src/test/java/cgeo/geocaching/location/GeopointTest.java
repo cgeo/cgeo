@@ -62,6 +62,30 @@ public class GeopointTest {
     }
 
     @Test
+    public void testIsCloseTo() {
+        final Geopoint gp1 = new Geopoint(48.2, 2.31);
+
+        // identical point
+        assertThat(gp1.isCloseTo(gp1)).isTrue();
+        assertThat(gp1.isCloseTo(new Geopoint(48.2, 2.31))).isTrue();
+
+        // null is never close
+        assertThat(gp1.isCloseTo(null)).isFalse();
+
+        // a tiny offset (a few E6 units, well below 1m) should be considered close
+        final Geopoint gpNear = Geopoint.forE6(gp1.getLatitudeE6() + 3, gp1.getLongitudeE6() + 3);
+        assertThat(gp1.isCloseTo(gpNear)).isTrue();
+
+        // a clearly bigger offset (tens of meters) should not be considered close
+        final Geopoint gpFar = Geopoint.forE6(gp1.getLatitudeE6() + 1000, gp1.getLongitudeE6() + 1000);
+        assertThat(gp1.isCloseTo(gpFar)).isFalse();
+
+        // custom tolerance
+        assertThat(gp1.isCloseTo(gpFar, 200.0)).isTrue();
+        assertThat(gp1.isCloseTo(gpFar, 1.0)).isFalse();
+    }
+
+    @Test
     public void testEqualsFormatted() {
         final Geopoint gp1 = new Geopoint(48.559984, 2.713871);
         final Geopoint gp2 = new Geopoint(48.559981, 2.713873);

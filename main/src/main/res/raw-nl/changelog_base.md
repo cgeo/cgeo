@@ -1,20 +1,3 @@
-### General release notes
-
-**Edge to Edge**
-
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
-
-**Legacy Maps**
-
-As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
-- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
-- Cluster popup voor Google Maps
-- Verberg kaartbronnen die je niet nodig hebt
-- Hoogtegrafiek voor routes en tracks
-- Schakel tussen lijsten direct van kaart
-- "Rijden modus" voor OpenStreetMap gebaseerde kaarten
-- Long-tap on track / individual route for further options
-
 ### Kaart
 - Nieuw: Route optimalisatie caches berekende data
 - Nieuw: Inschakelen van live modus houdt waypoints zichtbaar van huidig ingesteld doel
@@ -36,6 +19,17 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Legacy Maps**
+
+As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
+- Cluster popup voor Google Maps
+- Verberg kaartbronnen die je niet nodig hebt
+- Hoogtegrafiek voor routes en tracks
+- Schakel tussen lijsten direct van kaart
+- "Rijden modus" voor OpenStreetMap gebaseerde kaarten
+- Long-tap on track / individual route for further options
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
@@ -104,3 +98,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
 - Change: New emoji selector
+
+**Edge to Edge**
+
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)

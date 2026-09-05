@@ -222,6 +222,19 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         clearSheetInfo();
         final FragmentManager fm = getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
+        // Drop the layout listener of the sheet being removed. It is held in a field of this
+        // activity and closes over the sheet's view, so without this the view stays reachable
+        // until the next sheet installs a new listener. Unregistering has to happen while the
+        // view is still attached, as a detached view hands out a different ViewTreeObserver.
+        synchronized (layoutListeners) {
+            if (layoutListeners[0] != null) {
+                final View listenerView = f1 == null ? null : f1.getView();
+                if (listenerView != null) {
+                    listenerView.getViewTreeObserver().removeOnGlobalLayoutListener(layoutListeners[0]);
+                }
+                layoutListeners[0] = null;
+            }
+        }
         if (f1 != null) {
             try {
                 fm.beginTransaction().remove(f1).commitNowAllowingStateLoss();
@@ -245,6 +258,13 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(v);
                 b.setState(BottomSheetBehavior.STATE_HIDDEN); // close correctly as it will otherwise conflict with up-swipe behaviour implementation
             }
+
+            // The framework keeps the match_parent children of a FrameLayout in a list that is
+            // only rebuilt while measuring. Hiding the container stops it from ever measuring
+            // again, so the view of the sheet just removed would stay referenced from there
+            // until another sheet is opened. Measuring once while it is empty drops it.
+            v.measure(View.MeasureSpec.makeMeasureSpec(v.getWidth(), View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(v.getHeight(), View.MeasureSpec.EXACTLY));
 
             v.setVisibility(View.GONE);
             return true;

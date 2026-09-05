@@ -30,6 +30,7 @@ import static cgeo.geocaching.ui.ViewUtils.showToast;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -222,20 +223,30 @@ public class CacheInfoBoxes {
             builder.append(listsBuilder);
         }
 
-        final View marker = view.findViewById(R.id.marker_button);
-        if (marker != null) {
-            final boolean enableMarkerButton = cacheDetailActivity != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
-            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
-            if (enableMarkerButton) {
-                marker.setOnClickListener(v -> FilterUtils.openDialogActivateMarkers(cacheDetailActivity));
-            }
-        }
-        appendMatchingNamedFilters(builder, cache, cacheDetailActivity);
-
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
         offlineLists.setText(builder);
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
         offlineLists.setVisibility(builder.length() > 0 ? View.VISIBLE : View.GONE);
+
+        final View marker = view.findViewById(R.id.marker_button);
+        if (marker != null) {
+            final Context context = view.getContext();
+            final boolean enableMarkerButton = context != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
+            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
+            if (enableMarkerButton) {
+                FilterUtils.registerFilterActivateDeactivateButton(context, marker);
+            }
+        }
+
+        final SpannableStringBuilder markerBuilder = new SpannableStringBuilder();
+        appendMatchingNamedFilters(markerBuilder, cache, cacheDetailActivity);
+
+        final TextView matchingMarkers = view.findViewById(R.id.marker_text);
+        if (matchingMarkers != null) {
+            matchingMarkers.setText(markerBuilder);
+            matchingMarkers.setMovementMethod(LinkMovementMethod.getInstance());
+            matchingMarkers.setVisibility(markerBuilder.length() > 0 ? View.VISIBLE : View.GONE);
+        }
     }
 
     /**
@@ -250,25 +261,23 @@ public class CacheInfoBoxes {
             return;
         }
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY);
+        final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
+
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> matches = NamedFilter.getFiltersMatchingCache(cache, mode == Settings.NamedFilterDisplayMode.ACTIVE_ONLY, -1);
         final List<NamedFilter> activeFilters = matches.left;
         final List<NamedFilter> passiveFilters = matches.right;
         if (activeFilters.isEmpty() && passiveFilters.isEmpty()) {
-            return;
+            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_empty));
+        } else {
+            for (final NamedFilter filter : activeFilters) {
+                appendNamedFilter(filtersBuilder, filter, !Settings.isConditionalCacheMarkersEnabled(), cacheDetailActivity);
+            }
+            for (final NamedFilter filter : passiveFilters) {
+                appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
+            }
+            filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
         }
 
-        final SpannableStringBuilder filtersBuilder = new SpannableStringBuilder();
-        for (final NamedFilter filter : activeFilters) {
-            appendNamedFilter(filtersBuilder, filter, false, cacheDetailActivity);
-        }
-        for (final NamedFilter filter : passiveFilters) {
-            appendNamedFilter(filtersBuilder, filter, true, cacheDetailActivity);
-        }
-        filtersBuilder.insert(0, LocalizationUtils.getString(R.string.filters_list_headline) + " ");
-
-        if (builder.length() > 0) {
-            builder.append("\n");
-        }
         builder.append(filtersBuilder);
     }
 

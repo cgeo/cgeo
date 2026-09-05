@@ -217,31 +217,37 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
         //using dir.listFiles() is FAR too slow. Thus we have to create an explicit query
 
-        return queryDir(dir, new String[]{
-                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                DocumentsContract.Document.COLUMN_MIME_TYPE,
-                DocumentsContract.Document.COLUMN_LAST_MODIFIED,
-                DocumentsContract.Document.COLUMN_SIZE,
-
-        }, c -> fileInfoFromCursor(c, null, dir, folder));
+        return queryDir(dir, FILE_INFO_COLUMNS, c -> fileInfoFromCursor(c, null, dir, folder));
     }
 
     /**
      * retrieves a FileInformation object from the current cursor row retrieved by using {@link #queryDir(Uri, String[], Func1)} columns
      */
     private static ContentStorage.FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
-        final String documentId = c.getString(0);
-        final String name = c.getString(1);
-        final String mimeType = c.getString(2);
-        final long lastMod = c.getLong(3);
-        final long size = c.getLong(4);
+        final int nameColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME);
+        final String name = c.getString(nameColumn);
+
+        final int mimeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE);
+        final String mimeType = c.getString(mimeColumn);
+
+        final int lastModColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED);
+        final long lastMod = c.getLong(lastModColumn);
+
+        final int sizeColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_SIZE);
+        final long size = c.getLong(sizeColumn);
 
         final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
-        final Uri uri = docUri != null ? docUri :
-                (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
+        final Uri uri;
+        if (docUri == null && parentDirUri != null) {
+            final int documentIdColumn = c.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID);
+            final String documentId = c.getString(documentIdColumn);
+            uri = DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId);
+        } else {
+            uri = docUri;
+        }
 
-        return new ContentStorage.FileInformation(name, uri, parentFolder, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
+        final Folder dirLocation = isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null;
+        return new ContentStorage.FileInformation(name, uri, parentFolder, isDir, dirLocation, mimeType, size, lastMod);
     }
 
     @Override

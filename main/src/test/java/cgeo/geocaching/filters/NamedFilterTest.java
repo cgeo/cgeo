@@ -176,7 +176,7 @@ public class NamedFilterTest {
 
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 0);
         assertThat(result.getLeft()).containsExactly(activeNf);
         assertThat(result.getRight()).containsExactly(passiveNf);
     }
@@ -192,7 +192,7 @@ public class NamedFilterTest {
         NamedFilter.storeAll(Collections.singletonList(
                 new NamedFilter("NoMatch", gf, EMOJI_SMILEY, true, 0).setId(1)));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 0);
         assertThat(result.getLeft()).isEmpty();
         assertThat(result.getRight()).isEmpty();
     }
@@ -206,7 +206,7 @@ public class NamedFilterTest {
         final NamedFilter passiveNf = new NamedFilter("AllPassive", null, EMOJI_HEART, false, 0).setId(2);
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 0);
         assertThat(result.getLeft()).containsExactly(activeNf);
         assertThat(result.getRight()).containsExactly(passiveNf);
     }
@@ -214,10 +214,90 @@ public class NamedFilterTest {
     @Test
     public void testGetFiltersMatchingCacheNullCacheReturnsEmptyPair() {
         NamedFilter.addOrReplace("Test", null, EmojiUtils.NO_EMOJI);
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(null, false);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(null, false, 0);
         assertThat(result.getLeft()).isEmpty();
         assertThat(result.getRight()).isEmpty();
     }
+
+    @Test
+    public void testGetFiltersMatchingCacheMaxResultsLimitsCombinedCount() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        // all same priority -> sorted alphabetically: A1, A2 (active), P1, P2 (passive)
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter a2 = new NamedFilter("A2", gf, EMOJI_SMILEY, true, 0).setId(2);
+        final NamedFilter p1 = new NamedFilter("P1", gf, EMOJI_HEART, false, 0).setId(3);
+        final NamedFilter p2 = new NamedFilter("P2", gf, EMOJI_HEART, false, 0).setId(4);
+        NamedFilter.storeAll(Arrays.asList(a1, a2, p1, p2));
+
+        // maxResults counts across active+passive combined, in priority/name order
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 3);
+        assertThat(result.getLeft()).containsExactly(a1, a2);
+        assertThat(result.getRight()).containsExactly(p1);
+    }
+
+    @Test
+    public void testGetFiltersMatchingCacheMaxResultsZeroMeansUnlimited() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter p1 = new NamedFilter("P1", gf, EMOJI_HEART, false, 0).setId(2);
+        NamedFilter.storeAll(Arrays.asList(a1, p1));
+
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 0);
+        assertThat(result.getLeft()).containsExactly(a1);
+        assertThat(result.getRight()).containsExactly(p1);
+    }
+
+    @Test
+    public void testGetFiltersMatchingCacheMaxResultsNegativeMeansUnlimited() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter p1 = new NamedFilter("P1", gf, EMOJI_HEART, false, 0).setId(2);
+        NamedFilter.storeAll(Arrays.asList(a1, p1));
+
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, -1);
+        assertThat(result.getLeft()).containsExactly(a1);
+        assertThat(result.getRight()).containsExactly(p1);
+    }
+
+    @Test
+    public void testGetFiltersMatchingCacheMaxResultsWithOnlyActive() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter a2 = new NamedFilter("A2", gf, EMOJI_SMILEY, true, 0).setId(2);
+        final NamedFilter a3 = new NamedFilter("A3", gf, EMOJI_SMILEY, true, 0).setId(3);
+        final NamedFilter p1 = new NamedFilter("P1", gf, EMOJI_HEART, false, 0).setId(4);
+        NamedFilter.storeAll(Arrays.asList(a1, a2, a3, p1));
+
+        // onlyActive=true skips passive filters entirely, so maxResults only limits the active ones
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, true, 2);
+        assertThat(result.getLeft()).containsExactly(a1, a2);
+        assertThat(result.getRight()).isEmpty();
+    }
+
 
     @Test
     public void testGetMarkersForCacheUsesActiveFromPair() {
@@ -232,8 +312,43 @@ public class NamedFilterTest {
         final NamedFilter passiveNf = new NamedFilter("P", gf, EMOJI_HEART, false, 0).setId(2);
         NamedFilter.storeAll(Arrays.asList(activeNf, passiveNf));
 
-        final List<String> markers = NamedFilter.getMarkersForCache(cache);
+        final List<String> markers = NamedFilter.getMarkersForCache(cache, 0);
         assertThat(markers).containsExactly(EMOJI_SMILEY);
+    }
+
+    @Test
+    public void testGetMarkersForCacheMaxResultsLimitsMarkers() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter a2 = new NamedFilter("A2", gf, EMOJI_HEART, true, 0).setId(2);
+        final NamedFilter a3 = new NamedFilter("A3", gf, EMOJI_SMILEY, true, 0).setId(3);
+        NamedFilter.storeAll(Arrays.asList(a1, a2, a3));
+
+        final List<String> markers = NamedFilter.getMarkersForCache(cache, 2);
+        assertThat(markers).containsExactly(EMOJI_SMILEY, EMOJI_HEART);
+    }
+
+    @Test
+    public void testGetMarkersForCacheMaxResultsZeroReturnsAll() {
+        final Geocache cache = new Geocache();
+        cache.setType(CacheType.TRADITIONAL);
+
+        final TypeGeocacheFilter tf = new TypeGeocacheFilter();
+        tf.setValues(Collections.singletonList(CacheType.TRADITIONAL));
+        final GeocacheFilter gf = GeocacheFilter.create(false, false, tf);
+
+        final NamedFilter a1 = new NamedFilter("A1", gf, EMOJI_SMILEY, true, 0).setId(1);
+        final NamedFilter a2 = new NamedFilter("A2", gf, EMOJI_HEART, true, 0).setId(2);
+        NamedFilter.storeAll(Arrays.asList(a1, a2));
+
+        final List<String> markers = NamedFilter.getMarkersForCache(cache, 0);
+        assertThat(markers).containsExactly(EMOJI_SMILEY, EMOJI_HEART);
     }
 
     @Test
@@ -276,7 +391,7 @@ public class NamedFilterTest {
 
         // This should not throw or hang
         final Geocache cache = new Geocache();
-        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false);
+        final ImmutablePair<List<NamedFilter>, List<NamedFilter>> result = NamedFilter.getFiltersMatchingCache(cache, false, 0);
         // No specific assertion about result content — just verify no infinite loop
         assertThat(result).isNotNull();
     }
