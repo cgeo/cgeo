@@ -1,8 +1,20 @@
 This update includes the following fixes and changes since last beta release:
 
-- Prevent map crash, hopefully fixing "live map not loading caches" ([#18400](https://github.com/cgeo/cgeo/issues/18400))
-- Adjust trackables detection, hopefully fixing "only 20 trackables listed while logging" ([#18394](https://github.com/cgeo/cgeo/issues/18394))
-- Avoid resetting GM to N0/W0 on mapping list ([#18502](https://github.com/cgeo/cgeo/issues/18502))
-- Updates to new dynamic markers feature ([#18430](https://github.com/cgeo/cgeo/issues/18430))
-- Prevent crash of Audio Manager in Wherigos ([#18485](https://github.com/cgeo/cgeo/issues/18485))
-- Averaging coordinates in coordinate input/edit dialog ([#9398](https://github.com/cgeo/cgeo/issues/9398))
+- Related to new filter / marker system
+  - Changing marker priorities only applied on restart ([#18520](https://github.com/cgeo/cgeo/issues/18520))
+  - Disabling markers globally did not affect cache details ([#18545](https://github.com/cgeo/cgeo/issues/18545))
+  - Renaming filters not possible ([#18540](https://github.com/cgeo/cgeo/issues/18540))
+  - Deleting stored filters not possible ([#18517](https://github.com/cgeo/cgeo/issues/18517))
+  - Stored filters always marked as modified ([#18519](https://github.com/cgeo/cgeo/issues/18519))
+  - "Show as list" did not retain map filter ([#18537](https://github.com/cgeo/cgeo/issues/18537))
+  - (and more)
+- Other changes
+  - File naming issues on importing pocket queries ([#18531](https://github.com/cgeo/cgeo/issues/18531))
+  - Crash in variables handling ([#18452](https://github.com/cgeo/cgeo/issues/18452))
+  - Cache list refreshing on non-changing coordinates ([#18520](https://github.com/cgeo/cgeo/issues/18520))
+  - Some memory leak on VTM map ([#18557](https://github.com/cgeo/cgeo/issues/18557))
+  - Some memory leak with cache/waypoint popup ([#18556](https://github.com/cgeo/cgeo/issues/18556))
+  - Query parameters lost for user-defined tilesources on VTM ([#18521](https://github.com/cgeo/cgeo/issues/18521))
+  - Wrong file name on GPX import via Dropbox ([#18504](https://github.com/cgeo/cgeo/issues/18504))
+  - No autosave on exiting Wherigo ([#17752](https://github.com/cgeo/cgeo/issues/17752))
+  - Elevation chart infobox cut off ([#18535](https://github.com/cgeo/cgeo/issues/18535))
