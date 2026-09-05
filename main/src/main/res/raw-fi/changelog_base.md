@@ -1,20 +1,3 @@
-### Yleiset julkaisumerkinnät
-
-**Reunasta reunaan**
-
-Play-kaupan käytäntöjen vuoksi olemme päivittäneet Android API -tasoa tällä c:geo-kohteiden versiolla + olemme muuttaneet joitakin näytön asettelun rutiineja. Tästä voi ilmeentyä ei-toivottuja sivuvaikutuksia, etenkin uusimmilla Android-versioilla. Jos sinulla on ongelmia tämän c:geo-version kanssa, ilmoitathan siitä joko [GitHubiin](https://github.com/cgeo/cgeo) tai sähköpostitse osoitteeseen [support@cgeo.org](mailto:support@cgeo.org)
-
-**Vanhat kartat**
-
-Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poistanut karttojemme vanhat toteutukset. Uusi UnifiedMap tulee käyttöön automaattisesti ja sinun ei pitäisi huomata eroja, paitsi muutamia uusia ominaisuuksia, joihin sisältyy
-- Kartan kierto OpenStreetMapsiin perustuville karttoille (online + offline)
-- Ponnahdusikkuna Google Mapsille
-- Piilota kartan lähteet, joita et tarvitse
-- Korkeuskaavio reittejä ja jälkiä varten
-- Vaihda listojen välillä suoraan kartalta
-- "Ajotila" OpenStreetMap pohjaisille karttoille
-- Pitkä napautus polulla / yksittäisellä reitillä lisävalintoja varten
-
 ### Kartta
 - New: Route optimization caches calculated data
 - New: Enabling live mode keeps waypoints of currently set target visible
@@ -36,6 +19,17 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Vanhat kartat**
+
+Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poistanut karttojemme vanhat toteutukset. Uusi UnifiedMap tulee käyttöön automaattisesti ja sinun ei pitäisi huomata eroja, paitsi muutamia uusia ominaisuuksia, joihin sisältyy
+- Kartan kierto OpenStreetMapsiin perustuville karttoille (online + offline)
+- Ponnahdusikkuna Google Mapsille
+- Piilota kartan lähteet, joita et tarvitse
+- Korkeuskaavio reittejä ja jälkiä varten
+- Vaihda listojen välillä suoraan kartalta
+- "Ajotila" OpenStreetMap pohjaisille karttoille
+- Pitkä napautus polulla / yksittäisellä reitillä lisävalintoja varten
 
 ### Kätkön tiedot
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -104,3 +98,7 @@ Niin kuin julkaisuissa 2025.07.17 ja 2025.12.01 ilmoitettiin, olemme viimein poi
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
 - Change: New emoji selector
+
+**Reunasta reunaan**
+
+Play-kaupan käytäntöjen vuoksi olemme päivittäneet Android API -tasoa tällä c:geo-kohteiden versiolla + olemme muuttaneet joitakin näytön asettelun rutiineja. Tästä voi ilmeentyä ei-toivottuja sivuvaikutuksia, etenkin uusimmilla Android-versioilla. Jos sinulla on ongelmia tämän c:geo-version kanssa, ilmoitathan siitä joko [GitHubiin](https://github.com/cgeo/cgeo) tai sähköpostitse osoitteeseen [support@cgeo.org](mailto:support@cgeo.org)

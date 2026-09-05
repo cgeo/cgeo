@@ -1165,7 +1165,7 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els vessants s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes topogràfics en relleu afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/s\'aclariran per generar un efecte 3D.\nLes dades d\'ombrejat es poden descarregar des del menú addicional dels mapes.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
@@ -1289,6 +1289,10 @@
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_appearance_general">Aparença general</string>
     <string name="init_cachedetail_behaviour">Comportament</string>
+    <string name="init_named_filter_display_mode">Filtres amb nom als detalls del catxé</string>
+    <string name="named_filter_display_mode_none">No mostrar</string>
+    <string name="named_filter_display_mode_active_only">Només si el marcador està actiu</string>
+    <string name="named_filter_display_mode_all">Mostra tots els filtres coincidents</string>
     <string name="init_cachedetail_note">Nota de catxé personal</string>
     <string name="init_maplines_title">Personalització dels colors del mapa</string>
     <string name="init_map_other">Altres</string>
@@ -1736,7 +1740,8 @@
     <string name="cc_hint_seconds">segons</string>
     <string name="cc_hint_fraction">fracció</string>
     <string name="hash_symbol">#</string>
-    <string name="averaging_my_coordinates">Fent la mitjana de les meves coordenades…</string>
+    <string name="averaging_my_coordinates2">Fent la mitjana de les meves coordenades… (%s)</string>
+    <string name="averaging_paused">en pausa</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
@@ -2456,6 +2461,8 @@
     <string name="live_map_status_partial">Resultats parcials (apropa per reduir el nombre de catxés per carregar): %s</string>
     <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
+    <string name="filters_list_headline">Filtres:</string>
+    <string name="filters_list_empty">No hi ha filtres coincidents</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
         <item quantity="other">%d punts de ruta extrets</item>
@@ -2793,6 +2800,8 @@
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
+    <string name="wherigo_confirm_exit">Sortir</string>
+    <string name="wherigo_confirm_save_exit">Desa automàticament &amp; surt</string>
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
@@ -2828,6 +2837,7 @@
     <string name="copy" tools:ignore="PrivateResource">Còpia</string>
     <string name="pause">Pausa</string>
     <string name="resume">Reprendre</string>
+    <string name="rename">Canvia el nom</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>

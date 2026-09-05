@@ -1,20 +1,3 @@
-### Ogólne informacje o wydaniu
-
-**Od krawędzi do krawędzi**
-
-Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
-
-**Starsze mapy**
-
-Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
-- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
-- Wyskakujące okienko klastra dla Google Maps
-- Ukrywanie źródeł map, których nie potrzebujesz
-- Wykres wysokości tras i ścieżek
-- Przełączanie pomiędzy listami bezpośrednio z mapy
-- „Tryb jazdy” dla map opartych na OpenStreetMap
-- Długie dotknięcie na śladzie / indywidualnej trasa daje dostęp do dalszych opcji
-
 ### Mapa
 - Nowość: Optymalizacja trasy buforuje obliczone dane
 - Nowość: Włączenie trybu na żywo utrzymuje punkty orientacyjne aktualnie ustawionego celu
@@ -36,6 +19,17 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Pokaż wskazówkę nawigacji (strzałka + odległość)
 - Zmiana: Zmniejszenie wymagania pamięci dla aktywności mapy
 - Naprawiono: Mapa Google resetuje pozycję do N0 / W0 na mapowaniu listy skrytek
+
+**Starsze mapy**
+
+Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
+- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
+- Wyskakujące okienko klastra dla Google Maps
+- Ukrywanie źródeł map, których nie potrzebujesz
+- Wykres wysokości tras i ścieżek
+- Przełączanie pomiędzy listami bezpośrednio z mapy
+- „Tryb jazdy” dla map opartych na OpenStreetMap
+- Długie dotknięcie na śladzie / indywidualnej trasa daje dostęp do dalszych opcji
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -104,3 +98,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
 - Zmiana: Moduł tłumaczenia offline Bergamot (open source) zastępuje Google ML Kit (closed-source)
 - Zmiana: Nowy selektor emoji
+
+**Od krawędzi do krawędzi**
+
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)

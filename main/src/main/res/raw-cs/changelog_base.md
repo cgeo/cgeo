@@ -1,20 +1,3 @@
-### Obecné poznámky k verzi
-
-**Edge to Edge**
-
-V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Android, na kterou se zaměřuje tato verze aplikace c:geo, a změnili jsme některé rutiny rozložení obrazovky. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
-
-**Starší mapy**
-
-Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstranili starší implementace našich map. Budete automaticky převedeni na naši novou službu Sjednocená mapa a kromě několika nových funkcí, z nichž některé jsou
-- Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
-- Vyskakovací okno pro Google mapy
-- Skrytí nepotřebných zdrojů map
-- Graf nadmořské výšky pro trasy a stopy
-- Přepínání mezi seznamy přímo z mapy
-- "Řidičský režim" pro mapy založené na OpenStreetMap
-- Dlouhým klepnutím na trasu / individuální trasu zobrazíte další možnosti
-
 ### Mapa
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
 - Novinka: Zapnutí živého režimu udržuje viditelné trasové body aktuálně nastaveného cíle
@@ -36,6 +19,17 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - New: Show navigation hint (arrow + distance)
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
+
+**Starší mapy**
+
+Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstranili starší implementace našich map. Budete automaticky převedeni na naši novou službu Sjednocená mapa a kromě několika nových funkcí, z nichž některé jsou
+- Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
+- Vyskakovací okno pro Google mapy
+- Skrytí nepotřebných zdrojů map
+- Graf nadmořské výšky pro trasy a stopy
+- Přepínání mezi seznamy přímo z mapy
+- "Řidičský režim" pro mapy založené na OpenStreetMap
+- Dlouhým klepnutím na trasu / individuální trasu zobrazíte další možnosti
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -104,3 +98,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - Oprava: Volba „Použít imperiální jednotky“ se při nové instalaci nenastavila správně
 - Change: Bergamot open source offline translation module replacing closed-source Google ML Kit translator
 - Change: New emoji selector
+
+**Edge to Edge**
+
+V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Android, na kterou se zaměřuje tato verze aplikace c:geo, a změnili jsme některé rutiny rozložení obrazovky. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)

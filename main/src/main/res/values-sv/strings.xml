@@ -336,6 +336,7 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed_geocode">Misslyckades skicka logg för %s.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
+    <string name="info_log_delete_failed_simple_reason">Kontrollera om du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan är borttagen.</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
     <string name="info_log_type_changed">Typen av logg har ändrats!</string>
@@ -1146,7 +1147,6 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
-    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.\nInte kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
     <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
