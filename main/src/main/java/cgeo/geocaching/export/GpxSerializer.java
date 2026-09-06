@@ -70,11 +70,22 @@ public final class GpxSerializer {
     private int countExported;
     private ProgressListener progressListener;
     private final XmlSerializer gpx = new KXmlSerializer();
-
+    private final DecimalFormat df;
+    
     protected interface ProgressListener {
 
         void publishProgress(int countExported);
 
+    }
+
+    public GpxSerializer() {
+        // Define the DecimalFormat for corrected output (DDD.DDDDDD format)
+        final DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance();
+        dfs.setDecimalSeparator('.');
+
+        df = new DecimalFormat("#.######", dfs);
+        df.setMinimumFractionDigits(1);
+        df.setMaximumFractionDigits(6);
     }
 
     public void writeGPX(@NonNull final List<String> allGeocodesIn, final Writer writer, final ProgressListener progressListener) throws IOException {
@@ -83,6 +94,21 @@ public final class GpxSerializer {
 
         this.progressListener = progressListener;
         gpx.setOutput(writer);
+        writeStartDocument();
+
+        // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
+        // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
+        while (!allGeocodes.isEmpty()) {
+            final List<String> batch = allGeocodes.subList(0, Math.min(CACHES_PER_BATCH, allGeocodes.size()));
+            exportBatch(batch);
+            batch.clear();
+        }
+
+        writeEndDocument();
+
+    }
+
+    private void writeStartDocument() throws IOException {
         gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
         gpx.startDocument(StandardCharsets.UTF_8.name(), true);
@@ -97,60 +123,51 @@ public final class GpxSerializer {
         gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
         gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA + " " + NS_GROUNDSPEAK + " " + GROUNDSPEAK_SCHEMA + " " + NS_GSAK + " " + GSAK_SCHEMA);
 
-        // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
-        // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
-        while (!allGeocodes.isEmpty()) {
-            final List<String> batch = allGeocodes.subList(0, Math.min(CACHES_PER_BATCH, allGeocodes.size()));
-            exportBatch(gpx, batch);
-            batch.clear();
-        }
+    }
 
+    private void writeEndDocument() throws IOException {
         gpx.endTag(NS_GPX, "gpx");
         gpx.endDocument();
     }
 
-    private void exportBatch(final XmlSerializer gpx, @NonNull final Collection<String> geocodesOfBatch) throws IOException {
-        final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
+    public void writeCaches(@NonNull final List<Geocache> caches, final Writer writer) throws IOException {
+        gpx.setOutput(writer);
 
-        // Define the DecimalFormat for corrected output (DDD.DDDDDD format)
-        final DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance();
-        dfs.setDecimalSeparator('.');
-        final DecimalFormat df = new DecimalFormat("#.######", dfs);
-        df.setMinimumFractionDigits(1);
-        df.setMaximumFractionDigits(6);
-
+        writeStartDocument();
         for (final Geocache cache : caches) {
-            if (cache == null) {
-                continue;
-            }
+            writeCache(cache);
+        }
+        writeEndDocument();
+    }
 
-            final boolean isInternal = InternalConnector.getInstance().canHandle(cache.getGeocode());
-            final Geopoint coords = cache.getCoords();
-            if (coords == null && !isInternal) {
-                // Export would be invalid without coordinates.
-                continue;
-            }
-            gpx.startTag(NS_GPX, "wpt");
-            gpx.attribute("", "lat", df.format(coords == null ? 0 : coords.getLatitude()));
-            gpx.attribute("", "lon", df.format(coords == null ? 0 : coords.getLongitude()));
+    public void writeCache(@NonNull final Geocache cache) throws IOException {
+        final boolean isInternal = InternalConnector.getInstance().canHandle(cache.getGeocode());
+        final Geopoint coords = cache.getCoords();
+        if (coords == null && !isInternal) {
+            // Export would be invalid without coordinates.
+            return;
+        }
+        gpx.startTag(NS_GPX, "wpt");
+        gpx.attribute("", "lat", df.format(coords == null ? 0 : coords.getLatitude()));
+        gpx.attribute("", "lon", df.format(coords == null ? 0 : coords.getLongitude()));
 
-            final Date hiddenDate = cache.getHiddenDate();
-            if (hiddenDate != null) {
-                XmlUtils.simpleText(gpx, NS_GPX, "time", dateFormatZ.format(hiddenDate));
-            }
+        final Date hiddenDate = cache.getHiddenDate();
+        if (hiddenDate != null) {
+            XmlUtils.simpleText(gpx, NS_GPX, "time", dateFormatZ.format(hiddenDate));
+        }
 
-            XmlUtils.multipleTexts(gpx, NS_GPX, "name", cache.getGeocode(), "desc", cache.getName(), "url", cache.getUrl(), "urlname", cache.getName(), "sym", cache.isFound() && Settings.getIncludeFoundStatus() ? "Geocache Found" : "Geocache", "type", "Geocache|" + cache.getType().pattern);
+        XmlUtils.multipleTexts(gpx, NS_GPX, "name", cache.getGeocode(), "desc", cache.getName(), "url", cache.getUrl(), "urlname", cache.getName(), "sym", cache.isFound() && Settings.getIncludeFoundStatus() ? "Geocache Found" : "Geocache", "type", "Geocache|" + cache.getType().pattern);
 
-            gpx.startTag(NS_GROUNDSPEAK, "cache");
-            gpx.attribute("", "id", cache.getCacheId());
-            gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
-            gpx.attribute("", "archived", cache.isArchived() ? "True" : "False");
+        gpx.startTag(NS_GROUNDSPEAK, "cache");
+        gpx.attribute("", "id", cache.getCacheId());
+        gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
+        gpx.attribute("", "archived", cache.isArchived() ? "True" : "False");
 
-            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "name", cache.getName(), "placed_by", cache.getOwnerDisplayName(), "owner", cache.getOwnerUserId(), "type", cache.getType().pattern, "container", cache.getSize().id);
+        XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "name", cache.getName(), "placed_by", cache.getOwnerDisplayName(), "owner", cache.getOwnerUserId(), "type", cache.getType().pattern, "container", cache.getSize().id);
 
-            writeAttributes(cache);
+        writeAttributes(cache);
 
-            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "difficulty", integerIfPossible(cache.getDifficulty()), "terrain", integerIfPossible(cache.getTerrain()), "country", getCountry(cache), "state", getState(cache));
+        XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "difficulty", integerIfPossible(cache.getDifficulty()), "terrain", integerIfPossible(cache.getTerrain()), "country", getCountry(cache), "state", getState(cache));
 
             gpx.startTag(NS_GROUNDSPEAK, "short_description");
             gpx.attribute("", "html", TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
@@ -162,30 +179,38 @@ public final class GpxSerializer {
             gpx.text(cache.getDescription());
             gpx.endTag(NS_GROUNDSPEAK, "long_description");
 
-            XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
+        XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
 
-            if (Settings.getIncludeLogs()) {
-                writeLogs(cache);
-            }
-            if (Settings.getIncludeTravelBugs()) {
-                writeTravelBugs(cache);
-            }
+        if (Settings.getIncludeLogs()) {
+            writeLogs(cache);
+        }
+        if (Settings.getIncludeTravelBugs()) {
+            writeTravelBugs(cache);
+        }
 
-            gpx.endTag(NS_GROUNDSPEAK, "cache");
+        gpx.endTag(NS_GROUNDSPEAK, "cache");
 
-            writeGsakExtensions(cache);
-            writeCGeoExtensions(cache);
+        writeGsakExtensions(cache);
+        writeCGeoExtensions(cache);
 
-            gpx.endTag(NS_GPX, "wpt");
+        gpx.endTag(NS_GPX, "wpt");
 
-            writeWaypoints(cache);
+        writeWaypoints(cache);
 
-            countExported++;
-            if (progressListener != null) {
-                progressListener.publishProgress(countExported);
-            }
+        countExported++;
+        if (progressListener != null) {
+            progressListener.publishProgress(countExported);
         }
     }
+
+    private void exportBatch(@NonNull final Collection<String> geocodesOfBatch) throws IOException {
+        final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
+
+        for (final Geocache cache : caches) {
+            writeCache(cache);
+        }
+    }
+
 
     private void writeGsakExtensions(@NonNull final Geocache cache) throws IOException {
         gpx.startTag(NS_GSAK, "wptExtension");
