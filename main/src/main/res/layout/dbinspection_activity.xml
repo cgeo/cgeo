@@ -1,70 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!-- grid container, grid will overwrite icon & menu -->
+    <FrameLayout
+        android:id="@+id/grid_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/control_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:visibility="gone">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/tableSpinner"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:dropDownWidth="wrap_content"
-            android:layout_alignParentLeft="true" />
-
-        <ImageView
-            android:id="@+id/tableButtonSearch"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/prevPage"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:layout_toRightOf="@id/tableSpinner"
-            android:src="@drawable/ic_menu_search" />
+            android:contentDescription="@string/previous"
+            android:tooltipText="@string/previous"
+            android:text="@string/previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_selectTable"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/dbi_select_table"
+            android:tooltipText="@string/dbi_select_table"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:minWidth="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:visibility="gone"
+            app:icon="@drawable/grid_ic_table"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_configColumns"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/dbi_config_columns"
+            android:tooltipText="@string/dbi_config_columns"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:minWidth="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:icon="@drawable/grid_ic_reorder"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_search"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/search"
+            android:tooltipText="@string/search"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:minWidth="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:icon="@drawable/grid_ic_search"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
         <TextView
-            android:id="@+id/searchTerm"
+            android:id="@+id/pageNumOfNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextPage"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tableButtonSearch" />
+            android:contentDescription="@string/next"
+            android:tooltipText="@string/next"
+            android:text="@string/next" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@id/searchTerm"
-            android:gravity="right"
-            android:layout_alignParentRight="true">
-
-            <ImageView
-                android:id="@+id/tableButtonBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:src="@drawable/arrow_back" />
-            <ImageView
-                android:id="@+id/tableButtonForward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:src="@drawable/arrow_forward" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <net.movingbits.datatables.Datatable
-        android:id="@+id/tableData"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal|vertical"
-        android:background="#C0000000"/>
+    </LinearLayout>
 
 </LinearLayout>
