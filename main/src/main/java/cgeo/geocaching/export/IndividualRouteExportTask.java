@@ -13,10 +13,10 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
-import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Xml;
 
 import androidx.annotation.Nullable;
 
@@ -54,7 +54,7 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
         if (uri == null) {
             return null;
         }
-        final XmlSerializer gpx = new KXmlSerializer();
+        final XmlSerializer gpx = Xml.newSerializer();
         Writer writer = null;
         try {
             final OutputStream os = ContentStorage.get().openForWrite(uri);

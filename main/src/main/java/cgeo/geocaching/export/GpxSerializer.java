@@ -12,11 +12,10 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
-import cgeo.org.kxml2.io.KXmlSerializer;
+import android.util.Xml;
 
 import androidx.annotation.NonNull;
 
@@ -69,9 +68,8 @@ public final class GpxSerializer {
      */
     private int countExported;
     private ProgressListener progressListener;
-    private final XmlSerializer gpx = new KXmlSerializer();
+    private final XmlSerializer gpx = Xml.newSerializer();
     private final DecimalFormat df;
-    
     protected interface ProgressListener {
 
         void publishProgress(int countExported);
@@ -171,12 +169,12 @@ public final class GpxSerializer {
 
             gpx.startTag(NS_GROUNDSPEAK, "short_description");
             gpx.attribute("", "html", TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
-            gpx.text(cache.getShortDescription());
+            XmlUtils.writeText(gpx, cache.getShortDescription());
             gpx.endTag(NS_GROUNDSPEAK, "short_description");
 
             gpx.startTag(NS_GROUNDSPEAK, "long_description");
             gpx.attribute("", "html", TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
-            gpx.text(cache.getDescription());
+            XmlUtils.writeText(gpx, cache.getDescription());
             gpx.endTag(NS_GROUNDSPEAK, "long_description");
 
         XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
@@ -394,17 +392,12 @@ public final class GpxSerializer {
 
             gpx.startTag(NS_GROUNDSPEAK, "finder");
             gpx.attribute("", "id", "");
-            gpx.text(log.author);
+            XmlUtils.writeText(gpx, log.author);
             gpx.endTag(NS_GROUNDSPEAK, "finder");
 
             gpx.startTag(NS_GROUNDSPEAK, "text");
             gpx.attribute("", "encoded", "False");
-            try {
-                gpx.text(log.log);
-            } catch (final IllegalArgumentException e) {
-                Log.e("GpxSerializer.writeLogs: cannot write log " + log.id + " for cache " + cache.getGeocode(), e);
-                gpx.text(" [end of log omitted due to an invalid character]");
-            }
+            XmlUtils.writeText(gpx, log.log);
             gpx.endTag(NS_GROUNDSPEAK, "text");
 
             gpx.endTag(NS_GROUNDSPEAK, "log");

@@ -12,10 +12,10 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
-import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Xml;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryEl
             }
             try {
                 writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-                final XmlSerializer gpx = new KXmlSerializer();
+                final XmlSerializer gpx = Xml.newSerializer();
 
                 int countExported = 0;
                 gpx.setOutput(writer);

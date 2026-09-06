@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils.xml;
 
-import cgeo.org.kxml2.io.KXmlSerializer;
+import android.util.Xml;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -20,7 +20,7 @@ public class XmlUtilsTest {
     @Before
     public void setUp() throws Exception {
         stringWriter = new StringWriter();
-        xml = new KXmlSerializer();
+        xml = Xml.newSerializer();
         xml.setOutput(stringWriter);
         xml.startDocument(StandardCharsets.UTF_8.name(), null);
     }
@@ -54,7 +54,7 @@ public class XmlUtilsTest {
     public void testEmojiPassesThrough() throws Exception {
         // 🦆 DUCK emoji (U+1F986) — the original bug report
         final String name = "\uD83E\uDD86Alles f\u00FCr den Cache\uD83E\uDD86 Lab Bonus";
-        final String htmlName = "<name>\uD83EAlles für den Cache\uD83E Lab Bonus</name>";
+        final String htmlName = "<name>&#129414;Alles für den Cache&#129414; Lab Bonus</name>";
         XmlUtils.simpleText(xml, "", "name", name);
         assertXmlEquals(htmlName);
     }

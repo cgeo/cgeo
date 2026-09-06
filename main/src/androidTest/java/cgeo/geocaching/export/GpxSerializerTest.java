@@ -63,14 +63,13 @@ public class GpxSerializerTest {
                 TextUtils.normalize("\u0001"),
                 TextUtils.normalize("\u0002"),
                 TextUtils.normalize("\u0003"),
+                TextUtils.normalize(" single surrogates: \uD83C-  valid"),
+                TextUtils.normalize(" single surrogates: \uD83C - \uDF0D valid"));
+        assertThat(gpxOutput).contains(
                 TextUtils.normalize("\uD83E\uDD86"),
                 TextUtils.normalize("\uD83D\uDE80"),
                 TextUtils.normalize("&#128640;"),
-                TextUtils.normalize(" single surrogates: \uD83C - \uDF0D valid"),
                 TextUtils.normalize(" valid surrogates: \uD83E\uDD86 - \uD83D\uDE80 end"));
-        assertThat(gpxOutput).contains(
-                TextUtils.normalize(" single surrogates: \uD83C-  valid"),
-                TextUtils.normalize(" valid surrogates: \uD83E - \uD83D end"));
     }
 
     @Test
@@ -87,7 +86,7 @@ public class GpxSerializerTest {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.singletonList("GC901CB"), writer, null);
         final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
-        assertThat(gpxOutput).doesNotContain(TextUtils.normalize("\uD83C\uDD83"));
+        assertThat(gpxOutput).contains(TextUtils.normalize("\uD83C\uDD83"));
         assertThat(gpxOutput).doesNotContain(
                 TextUtils.normalize("\uD835\uDC9F"),
                 TextUtils.normalize("\uD835\uDC52"),
