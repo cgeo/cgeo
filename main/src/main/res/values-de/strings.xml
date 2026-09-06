@@ -2463,6 +2463,7 @@
     <string name="live_map_status_normal">Lade Daten ohne Probleme: %s</string>
     <string name="list_list_headline">Listen:</string>
     <string name="filters_list_headline">Filter:</string>
+    <string name="filters_list_empty">Keine pasenden Filter</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
         <item quantity="other">%d Wegpunkte extrahiert</item>
@@ -2800,6 +2801,8 @@
     <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
     <string name="wherigo_confirm_stop_running_game_message">Ein Spiel läuft derzeit für \"%s\". Möchtest du dieses Spiel beenden?</string>
+    <string name="wherigo_confirm_exit">Verlassen</string>
+    <string name="wherigo_confirm_save_exit">Speichern &amp; verlassen</string>
     <string name="wherigo_confirm_delete_cartridge_title">Wherigo-Cartridge löschen</string>
     <string name="wherigo_confirm_delete_cartridge_message">Willst du wirklich Cartridge \"%1$s\" inklusive %2$s Spielständen löschen?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Wherigo Speicherstand löschen</string>
