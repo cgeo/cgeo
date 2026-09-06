@@ -1,8 +1,42 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 /*
- * Develocity Gradle plugin for build scan, see https://docs.gradle.com/develocity/gradle-plugin/current/
+ * Develocity Gradle plugin for build scan, see https://docs.gradle.org/develocity/gradle-plugin/current/
  */
 plugins {
     id 'com.gradle.develocity' version '4.5.0'
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        google()
+        maven {
+            url = 'https://jitpack.io'
+        }
+        maven {
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        ivy {
+            url = 'https://github.com/cgeo/offline-translator/releases/download'
+            patternLayout {
+                artifact '[revision]/[artifact].[ext]'
+            }
+            metadataSources {
+                it.artifact()
+            }
+            content {
+                includeModule('cgeo', 'bergamot-sys')
+            }
+        }
+    }
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.
