@@ -687,4 +687,15 @@ public class GPXParserTest  {
         assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591 2")).count()).isEqualTo(1);
         assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591-1")).count()).isEqualTo(1);
     }
+
+    @Test
+    public void testIgnoreInvalidChars() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.cache_invalid_chars);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        assertThat(cache.getName()).isEqualTo("Alles für den Cache Lab Bonus");
+        assertThat(cache.getDescription()).isEqualTo("<p>\u00A0Alles für den Cache *Lab Bonus*<p>");
+        assertThat(cache.getShortDescription()).isEqualTo("InvalidDescription: V‹¥IR‡U½S©");
+    }
 }

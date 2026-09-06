@@ -37,11 +37,6 @@ public class XmlUtilsTest {
         assertXmlEquals("<n0:tag xmlns:n0=\"prefix\">text</n0:tag>");
     }
 
-    private void assertXmlEquals(final String expected) throws IOException {
-        xml.endDocument();
-        xml.flush();
-        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
-    }
 
     @Test
     public void testMultipleTexts() throws Exception {
@@ -55,4 +50,18 @@ public class XmlUtilsTest {
         assertXmlEquals("<tag>Vom Gasthaus zur Pyramide\u0020aus Glas\u0009</tag>");
     }
 
+    @Test
+    public void testEmojiPassesThrough() throws Exception {
+        // 🦆 DUCK emoji (U+1F986) — the original bug report
+        final String name = "\uD83E\uDD86Alles f\u00FCr den Cache\uD83E\uDD86 Lab Bonus";
+        final String htmlName = "<name>\uD83EAlles für den Cache\uD83E Lab Bonus</name>";
+        XmlUtils.simpleText(xml, "", "name", name);
+        assertXmlEquals(htmlName);
+    }
+
+    private void assertXmlEquals(final String expected) throws IOException {
+        xml.endDocument();
+        xml.flush();
+        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
+    }
 }

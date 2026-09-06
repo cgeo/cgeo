@@ -10,6 +10,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +35,7 @@ public class GpxSerializerTest {
     public void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.emptyList(), writer, null);
-        assertThat(removeWhitespaces(writer.getBuffer().toString())).isEqualTo(removeWhitespaces("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
+        assertThat(TextUtils.replaceWhitespace(writer.getBuffer().toString())).isEqualTo(TextUtils.replaceWhitespace("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?> " +
                 "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
                 "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +
                 "http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
@@ -44,9 +45,54 @@ public class GpxSerializerTest {
                 "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />"));
     }
 
-    private static String removeWhitespaces(final String txt) {
-        return txt.replaceAll("\\s", "");
+    @Test
+    public void testWriteGPXWithInvalidChars() throws Exception {
+        final Geocache cache = CgeoTestUtils.createTestCache("ZZTEST");
+        cache.setName("Cache with invalid chars and surrogates");
+        cache.setDescription("Invalid: \u0001 - \u0002 - \u0003"
+                + " single surrogates: \uD83C - \uDF0D"
+                + " valid surrogates: \uD83E\uDD86 - \uD83D\uDE80"
+                + " end");
 
+        final StringWriter writer = new StringWriter();
+        final GpxSerializer gpxSerializer = new GpxSerializer();
+        gpxSerializer.writeCaches(Collections.singletonList(cache), writer);
+        final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
+        assertThat(gpxOutput).contains("Cache with invalid chars and surrogates");
+        assertThat(gpxOutput).doesNotContain(
+                TextUtils.normalize("\u0001"),
+                TextUtils.normalize("\u0002"),
+                TextUtils.normalize("\u0003"),
+                TextUtils.normalize("\uD83E\uDD86"),
+                TextUtils.normalize("\uD83D\uDE80"),
+                TextUtils.normalize("&#128640;"),
+                TextUtils.normalize(" single surrogates: \uD83C - \uDF0D valid"),
+                TextUtils.normalize(" valid surrogates: \uD83E\uDD86 - \uD83D\uDE80 end"));
+        assertThat(gpxOutput).contains(
+                TextUtils.normalize(" single surrogates: \uD83C-  valid"),
+                TextUtils.normalize(" valid surrogates: \uD83E - \uD83D end"));
+    }
+
+    @Test
+    public void testEncodingRoundtrip_GC901CB() throws IOException, ParserException {
+        final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc901cb_gpx100);
+        assertThat(cache).isNotNull();
+        assertThat(cache.getName()).contains(TextUtils.normalize("\uD83C\uDD83"));
+        assertThat(cache.getDescription()).doesNotContain(
+                TextUtils.normalize("\uD835\uDC9F"),
+                TextUtils.normalize("\uD835\uDC52"),
+                TextUtils.normalize("\uD835\uDCB6"),
+                TextUtils.normalize("\uD835\uDCC7"));
+
+        final StringWriter writer = new StringWriter();
+        new GpxSerializer().writeGPX(Collections.singletonList("GC901CB"), writer, null);
+        final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
+        assertThat(gpxOutput).doesNotContain(TextUtils.normalize("\uD83C\uDD83"));
+        assertThat(gpxOutput).doesNotContain(
+                TextUtils.normalize("\uD835\uDC9F"),
+                TextUtils.normalize("\uD835\uDC52"),
+                TextUtils.normalize("\uD835\uDCB6"),
+                TextUtils.normalize("\uD835\uDCC7"));
     }
 
     @Test
