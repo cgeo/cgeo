@@ -22,7 +22,7 @@ android {
     }
 
     lint {
-        targetSdk 35
+        targetSdk = 36
 
         // generally we accept lint errors when building
         abortOnError = false
@@ -32,7 +32,7 @@ android {
     }
 
     testOptions {
-        targetSdk 35
+        targetSdk = 36
     }
 
     dependencies {

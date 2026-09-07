@@ -61,6 +61,11 @@
         android:enableOnBackInvokedCallback="false"
         >
 
+        <!-- Opt out of Device form factors behaviour change for Android 16 -->
+        <property
+            android:name="android.window.PROPERTY_DEVICE_FORM_FACTOR_DISPLAY_SIZE_ENABLED"
+            android:value="false" />
+
         <!-- Samsung Multi-Window support -->
         <uses-library
             android:name="com.sec.android.app.multiwindow"
