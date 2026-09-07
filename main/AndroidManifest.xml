@@ -60,8 +60,10 @@
         android:preserveLegacyExternalStorage="true"
         android:enableOnBackInvokedCallback="false"
     >
-        <!-- opt out for Android 16 new resize function -->
-        <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        <!-- Opt out of Device form factors behaviour change for Android 16 -->
+        <property
+            android:name="android.window.PROPERTY_DEVICE_FORM_FACTOR_DISPLAY_SIZE_ENABLED"
+            android:value="false" />
 
         <!-- Samsung Multi-Window support -->
         <uses-library
