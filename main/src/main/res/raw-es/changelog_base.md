@@ -2,12 +2,12 @@
 -
 
 ### Detalles del caché
-- New: Toggle stored-on-device date between relative and exact
-- Fix: Stacked progress dialogs when deleting multiple logs
-- New: "Edit personal note" button in waypoint popup
+- Nuevo: Cambia entre fecha almacenada en el dispositivo relativa y exacta
+- Corregido: Diálogos sobrepuestos al borrar múltiples logs
+- Nuevo: Botón para "Editar nota personal" en la ventana de waypoint
 
 ### Ejecutador de Wherigos
 -
 
 ### General
-- Fix: Multiple pending download dialogs on main screen
+- Corregido: Múltiples diálogos pendientes de descarga en la pantalla principal
