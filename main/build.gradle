@@ -803,7 +803,7 @@ tasks.register('copyDefaultPreferencesToAndroid') {
             // Loop until sys.boot_completed returns '1'
             boolean booted = false
             int attempts = 0
-            int maxAttempts = 12 // 1 minute timeout max
+            int maxAttempts = 36 // 3 minutes timeout max
             while (!booted && attempts < maxAttempts) {
                 ByteArrayOutputStream stdout = new ByteArrayOutputStream()
                 injected.execOperations.exec {
