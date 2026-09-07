@@ -789,6 +789,40 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 print(e.message)
             }
         }
+
+        doLast {
+            println "Verifying emulator state for AGP 9 unit testing..."
+            // Resolve ADB path at execution time
+            String adb = adbExecutableProvider.get().asFile.absolutePath
+            // Wait for standard ADB connection socket
+            injected.execOperations.exec {
+                executable = adb
+                args = ['wait-for-device']
+                ignoreExitValue = true
+            }
+            // Loop until sys.boot_completed returns '1'
+            boolean booted = false
+            int attempts = 0
+            int maxAttempts = 12 // 1 minute timeout max
+            while (!booted && attempts < maxAttempts) {
+                ByteArrayOutputStream stdout = new ByteArrayOutputStream()
+                injected.execOperations.exec {
+                    executable = adb
+                    args = ['shell', 'getprop', 'sys.boot_completed']
+                    standardOutput = stdout
+                    ignoreExitValue = true
+                }
+                String result = stdout.toString().trim()
+                if (result == "1") {
+                    booted = true
+                    println "Emulator property loop is stable and ready."
+                } else {
+                    attempts++
+                    println "Properties not fully initialized yet (Attempt $attempts/$maxAttempts). Waiting 5 seconds..."
+                    sleep(5000)
+                }
+            }
+        }
     }
 }
 
