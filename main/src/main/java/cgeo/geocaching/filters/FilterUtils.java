@@ -124,7 +124,7 @@ public class FilterUtils {
     }
 
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
-    public static void openDialogSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
+    public static void openDialogSelectGeocacheFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
         final GeocacheFilter currentFilter = filterContext == null ? null : filterContext.get();
         final boolean isFilterActive = currentFilter != null && currentFilter.isFiltering();
         final GeocacheFilter previousFilter = filterContext == null ? null : filterContext.getPreviousFilter();
@@ -163,6 +163,24 @@ public class FilterUtils {
                     onFilterSelected.accept(newFilter);
                 }
             });
+    }
+
+    /**
+     * opens dialog to select multi @NamedFilter among named filters.
+     */
+    public static void openDialogMultiSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final Consumer<Set<NamedFilter>> onFiltersSelected, final Set<NamedFilter> exceptFilters) {
+        final List<NamedFilter> namedFilters = NamedFilter.getAll().stream()
+                .filter(f -> !exceptFilters.contains(f)).collect(Collectors.toList());
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(namedFilters);
+        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
+
+        SimpleDialog.ofContext(context)
+                .setTitle(title != null ? title : TextParam.id(R.string.named_filter_select_title))
+                .selectMultiple(model, selectedNamedFilter -> {
+                    if (onFiltersSelected != null) {
+                        onFiltersSelected.accept(selectedNamedFilter);
+                    }
+                });
     }
 
     /** Returns the sorted list of unique parent group names extracted from all existing named filters. */

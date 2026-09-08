@@ -130,14 +130,16 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                     .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
 
             SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
-                    .selectMultiple(model, s -> {
-                        visibleValues.addAll(s);
-                        for (T value : s) {
-                            getValueCheckbox(value).right.setChecked(true);
-                        }
-                        relayout();
-                    });
+                    .selectMultiple(model, this::addItems);
         };
+    }
+
+    protected void addItems(final Set<T> values) {
+        visibleValues.addAll(values);
+        for (T value : values) {
+            getValueCheckbox(value).right.setChecked(true);
+        }
+        relayout();
     }
 
     private View createAddItemButton(final ViewGroup vg) {
