@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.xml;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,33 +17,29 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
- * Reprents the content of an XML Node and it's children. Sort of a poor-mans DOM model.
+ * Represents the content of an XML Node and its children. Sort of a poor-mans DOM model.
  * <br>
- * Instances of this class are optimized for fast random access to child nodes by their (local) name.
- * Although lists (=many children of same node with same common name) are also supported, order
- * of tags from original document is not preserved.
+ * Instances of this class are optimized for fast random access to child nodes by their local name.
+ * Lists (=many child nodes with same local name) are supported. Note that tags with same local name but different namespace are also stored in list.
+ * Order of tags from original document is not preserved.
  */
 public class XmlNode {
 
     public static final String ATTRIBUTE_PRAEFIX = "@";
 
-    private final String name;
+    private final String localName;
     private final String namespace;
 
     private String value;
     private Map<String, Object> childrenMap;
 
-    public XmlNode(final String name) {
-        this(name, null);
-    }
-
     public XmlNode(final String name, final String namespace) {
-        this.name = name;
+        this.localName = XmlUtils.getLocalName(name);
         this.namespace = namespace;
     }
 
-    public String getName() {
-        return name;
+    public String getLocalName() {
+        return localName;
     }
 
     public String getNamespace() {
@@ -49,36 +47,47 @@ public class XmlNode {
     }
 
     @SuppressWarnings("unchecked")
-    public void add(final XmlNode child) {
+    public void addChild(final XmlNode child) {
 
         if (childrenMap == null) {
             childrenMap = new HashMap<>();
         }
-        final Object currentValue = childrenMap.get(child.name);
+        final Object currentValue = childrenMap.get(child.localName);
         if (currentValue instanceof XmlNode) {
             final List<XmlNode> list = new ArrayList<>();
             list.add((XmlNode) currentValue);
             list.add(child);
-            childrenMap.put(child.name, list);
+            childrenMap.put(child.localName, list);
         } else if (currentValue instanceof List) {
             ((List<XmlNode>) currentValue).add(child);
         } else {
-            childrenMap.put(child.name, child);
+            childrenMap.put(child.localName, child);
         }
     }
 
-    public void remove(final String name) {
+    public void removeChild(final String name) {
         if (childrenMap != null) {
             childrenMap.remove(name);
         }
     }
 
-    public boolean has(final String name) {
+    public boolean hasChild(final String name) {
         return childrenMap != null && childrenMap.containsKey(name);
     }
 
+    public int countChildren(final String name) {
+        final Object value = childrenMap == null ? null : childrenMap.get(name);
+        if (value == null) {
+            return 0;
+        }
+        if (value instanceof List) {
+            return ((List<?>) value).size();
+        }
+        return 1;
+    }
+
     @SuppressWarnings("unchecked")
-    public List<XmlNode> getAsList(final String name) {
+    public List<XmlNode> getChildrenAsList(final String name) {
         final Object value = childrenMap == null ? null : childrenMap.get(name);
         if (value == null) {
             return null;
@@ -90,7 +99,7 @@ public class XmlNode {
     }
 
     @SuppressWarnings("unchecked")
-    public XmlNode get(final String name) {
+    public XmlNode getChild(final String name) {
         final Object value = childrenMap == null ? null : childrenMap.get(name);
         if (value == null) {
             return null;
@@ -100,6 +109,12 @@ public class XmlNode {
             return list.isEmpty() ? null : list.get(0);
         }
         return (XmlNode) value;
+    }
+
+    @Nullable
+    public String getChildValue(final String name) {
+        final XmlNode child = getChild(name);
+        return child == null ? null : child.getValue();
     }
 
     /** Sets the textual value of this node */
@@ -117,6 +132,9 @@ public class XmlNode {
 
     @SuppressWarnings("unchecked")
     public void forEach(final Consumer<XmlNode> action) {
+        if (childrenMap == null) {
+            return;
+        }
         for (Map.Entry<String, Object> entry : childrenMap.entrySet()) {
             if (entry.getValue() instanceof List) {
                 ((List<XmlNode>) entry.getValue()).forEach(action);
@@ -129,7 +147,7 @@ public class XmlNode {
     @NonNull
     @Override
     public String toString() {
-        return (namespace == null ? "" : namespace + ":") + name +
+        return (namespace == null ? "" : namespace + ":") + localName +
             (value == null ? "" : ":'" + value + "'") +
             (childrenMap == null ? "" : "[" + childrenMap.values() + "]");
     }
@@ -147,7 +165,7 @@ public class XmlNode {
         for (int i = 0; i < parser.getAttributeCount(); i++) {
             final XmlNode attNode = new XmlNode(ATTRIBUTE_PRAEFIX + parser.getAttributeName(i), parser.getAttributeNamespace(i));
             attNode.setValue(parser.getAttributeValue(i));
-            node.add(attNode);
+            node.addChild(attNode);
         }
 
         while (true) {
@@ -155,7 +173,7 @@ public class XmlNode {
                 case XmlPullParser.END_TAG:
                     return node;
                 case XmlPullParser.START_TAG:
-                    node.add(scanNode(parser));
+                    node.addChild(scanNode(parser));
                     break;
                 case XmlPullParser.TEXT:
                     node.setValue(parser.getText());
@@ -164,6 +182,23 @@ public class XmlNode {
                     throw new XmlPullParserException("Unexpected element tyoe: " + parser.getEventType());
             }
         }
+    }
+
+    @Nullable
+    public static XmlNode getChild(@Nullable final XmlNode node, @Nullable final String name, @Nullable final Set<String> namespaces) {
+        if (node == null) {
+            return null;
+        }
+        if (node.countChildren(name) <= 1 || namespaces == null) {
+            return node.getChild(name);
+        }
+        final List<XmlNode> children = node.getChildrenAsList(name);
+        for (XmlNode child : children) {
+            if (namespaces.contains(child.getNamespace())) {
+                return child;
+            }
+        }
+        return children.get(0);
     }
 
 }

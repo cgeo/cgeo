@@ -187,7 +187,8 @@ android {
             setRoot("src/test/java")
             manifest.srcFile 'src/test/AndroidManifest.xml'
             java.srcDir 'src/test/java'
-            resources.srcDirs = ['src/test/res']
+            // include src/androidTest/res/raw for unit tests to access gpx sample files without duplicating them.
+            resources.srcDirs = ['src/test/res', 'src/androidTest/res/raw']
             res.srcDirs = ['src/test/res']
         }
         // device/emulator based instrumentation tests in source set "androidTest"

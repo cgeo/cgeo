@@ -20,6 +20,14 @@ public final class XmlUtils {
         // Do not instantiate
     }
 
+    public static String getLocalName(final String name) {
+        if (name == null) {
+            return null;
+        }
+        final int lastColon = name.lastIndexOf(':');
+        return lastColon < 0 ? name : name.substring(lastColon + 1);
+    }
+
     /**
      * Insert an attribute-less tag with enclosed text in a XML serializer output.
      *
@@ -51,10 +59,10 @@ public final class XmlUtils {
     }
 
     public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware) throws XmlPullParserException {
-        return createParser(input, namespaceAware, "UTF-8");
+        return createParser(input, namespaceAware, false, "UTF-8");
     }
 
-    public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware, final String inputEncoding) throws XmlPullParserException {
+    public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware, final boolean relaxed, final String inputEncoding) throws XmlPullParserException {
         if (XPP_FACTORY == null) {
             throw new XmlPullParserException("XmlUtils: can't create XML Parser, no factory available");
         }
@@ -62,6 +70,7 @@ public final class XmlUtils {
         synchronized (XPP_FACTORY) {
             final XmlPullParser parser = XPP_FACTORY.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, namespaceAware);
+            parser.setFeature("http://xmlpull.org/v1/doc/features.html#relaxed", relaxed);
             parser.setInput(input, inputEncoding);
             return parser;
         }
