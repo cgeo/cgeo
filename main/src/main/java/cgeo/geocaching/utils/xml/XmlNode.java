@@ -21,7 +21,7 @@ import org.xmlpull.v1.XmlPullParserException;
  * <br>
  * Instances of this class are optimized for fast random access to child nodes by their local name.
  * Lists (=many child nodes with same local name) are supported. Note that tags with same local name but different namespace are also stored in list.
- * Order of tags from original document is not preserved.
+ * Child insertion order is available separately from the local-name index.
  */
 public class XmlNode {
 
@@ -32,6 +32,7 @@ public class XmlNode {
 
     private String value;
     private Map<String, Object> childrenMap;
+    private List<XmlNode> orderedChildren;
 
     public XmlNode(final String name, final String namespace) {
         this.localName = XmlUtils.getLocalName(name);
@@ -51,7 +52,9 @@ public class XmlNode {
 
         if (childrenMap == null) {
             childrenMap = new HashMap<>();
+            orderedChildren = new ArrayList<>();
         }
+        orderedChildren.add(child);
         final Object currentValue = childrenMap.get(child.localName);
         if (currentValue instanceof XmlNode) {
             final List<XmlNode> list = new ArrayList<>();
@@ -68,7 +71,13 @@ public class XmlNode {
     public void removeChild(final String name) {
         if (childrenMap != null) {
             childrenMap.remove(name);
+            orderedChildren.removeIf(child -> child.localName.equals(name));
         }
+    }
+
+    /** All children (including attribute nodes) in insertion order. */
+    public List<XmlNode> getChildrenInOrder() {
+        return orderedChildren == null ? Collections.emptyList() : Collections.unmodifiableList(orderedChildren);
     }
 
     public boolean hasChild(final String name) {

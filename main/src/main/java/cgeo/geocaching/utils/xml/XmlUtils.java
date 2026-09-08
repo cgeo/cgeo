@@ -1,12 +1,17 @@
 package cgeo.geocaching.utils.xml;
 
+import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.input.BOMInputStream;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -59,10 +64,37 @@ public final class XmlUtils {
     }
 
     public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware) throws XmlPullParserException {
-        return createParser(input, namespaceAware, false, "UTF-8");
+        return createParser(input, null, namespaceAware, false);
     }
 
-    public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware, final boolean relaxed, final String inputEncoding) throws XmlPullParserException {
+    public static XmlPullParser createParser(@NonNull final InputStream input, final String inputEncoding, final boolean namespaceAware, final boolean relaxed) throws XmlPullParserException {
+        final XmlPullParser parser = createParser(namespaceAware, relaxed);
+        setInput(parser, input, inputEncoding == null ? StandardCharsets.UTF_8.name() : inputEncoding);
+        return parser;
+    }
+
+    /** Creates a parser directly on a reader, e.g. to filter XML characters before parsing. */
+    public static XmlPullParser createParser(@NonNull final Reader input, final boolean namespaceAware) throws XmlPullParserException {
+        final XmlPullParser parser = createParser(namespaceAware, false);
+        setInput(parser, input);
+        return parser;
+    }
+
+    public static void setInput(final XmlPullParser parser, final InputStream input, final String inputEncoding) throws XmlPullParserException {
+        try {
+            final BOMInputStream bomIn = BOMInputStream.builder().setInputStream(input).get();
+            setInput(parser, new InputStreamReader(bomIn, inputEncoding));
+        } catch (IOException e) {
+            throw new XmlPullParserException("Error setting input for parser", parser, e);
+        }
+    }
+
+    public static void setInput(final XmlPullParser parser, final Reader input) throws XmlPullParserException {
+        final Reader reader = new InvalidXMLCharacterFilterReader(input);
+        parser.setInput(reader);
+    }
+
+    public static XmlPullParser createParser(final boolean namespaceAware, final boolean relaxed) throws XmlPullParserException {
         if (XPP_FACTORY == null) {
             throw new XmlPullParserException("XmlUtils: can't create XML Parser, no factory available");
         }
@@ -71,7 +103,6 @@ public final class XmlUtils {
             final XmlPullParser parser = XPP_FACTORY.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, namespaceAware);
             parser.setFeature("http://xmlpull.org/v1/doc/features.html#relaxed", relaxed);
-            parser.setInput(input, inputEncoding);
             return parser;
         }
     }

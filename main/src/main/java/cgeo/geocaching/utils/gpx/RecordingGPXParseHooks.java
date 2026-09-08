@@ -18,145 +18,87 @@ import java.util.List;
  */
 public class RecordingGPXParseHooks implements IGPXParseHooks {
 
-    /** kind of a single, top-level (or route-/track-embedded) recorded item; see {@link #getItems()} */
+    /** kind of a single, top-level (or route-/track-embedded) recorded item; see {@link #getGlobalItems()} */
     public enum ItemKind { GEOCACHE, WAYPOINT, NAMED_COORDINATE, COORDINATE }
 
     /** a single recorded geocache/waypoint/(named) coordinate, in the order it was encountered */
-    public static final class RecordedItem {
-        private final ItemKind kind;
-        private final ICoordinate coordinate;
-        private final String parentGeocode;
-        private final List<LogEntry> logs;
+    public static final class Item {
+        public final ItemKind kind;
+        public final ICoordinate coordinate;
+        public final String parentGeocode;
+        public final List<LogEntry> logs;
 
-        RecordedItem(final ItemKind kind, final ICoordinate coordinate, final String parentGeocode) {
-            this(kind, coordinate, parentGeocode, null);
-        }
-
-        RecordedItem(final ItemKind kind, final ICoordinate coordinate, final String parentGeocode, final List<LogEntry> logs) {
-            this.kind = kind;
+        Item(final ICoordinate coordinate, final String parentGeocode, final List<LogEntry> logs) {
+            this.kind = calculateKind(coordinate);
             this.coordinate = coordinate;
             this.parentGeocode = parentGeocode;
             this.logs = logs;
         }
 
-        public ItemKind getKind() {
-            return kind;
+        private ItemKind calculateKind(final ICoordinate coordinate) {
+            if (coordinate instanceof Geocache) {
+                return ItemKind.GEOCACHE;
+            } else if (coordinate instanceof Waypoint) {
+                return ItemKind.WAYPOINT;
+            } else if (coordinate instanceof NamedGeoCoordinate) {
+                return ItemKind.NAMED_COORDINATE;
+            } else {
+                return ItemKind.COORDINATE;
+            }
         }
 
-        public ICoordinate getCoordinate() {
-            return coordinate;
-        }
-
-        /** only set for {@link ItemKind#WAYPOINT}; the best-effort resolved parent geocode, may be {@code null} */
-        @Nullable
-        public String getParentGeocode() {
-            return parentGeocode;
-        }
-
-        /** only set for {@link ItemKind#GEOCACHE}; the geocache's logs, {@code null} if none were found */
-        @Nullable
-        public List<LogEntry> getLogs() {
-            return logs;
-        }
     }
 
     /** a single recorded route ({@code <rte>}) */
-    public static final class RecordedRoute {
-        private final String name;
-        private final int pointCount;
-        private final List<ICoordinate> points;
+    public static final class NamedCoordinateList {
+        public final String name;
+        public final int pointCount;
+        public final List<ICoordinate> points;
 
-        RecordedRoute(final String name, final int pointCount, final List<ICoordinate> points) {
+        NamedCoordinateList(final String name, final int pointCount, final List<ICoordinate> points) {
             this.name = name;
             this.pointCount = pointCount;
             this.points = points;
-        }
-
-        @Nullable
-        public String getName() {
-            return name;
-        }
-
-        /** authoritative count of valid points, see {@link IGPXParseHooks#onRouteEnd}; may exceed {@link #getPoints()}'s size under {@link GPXParser.WptParseMode#SKIP} */
-        public int getPointCount() {
-            return pointCount;
-        }
-
-        /** points actually reported via hooks while this route was being parsed; empty under {@link GPXParser.WptParseMode#SKIP} */
-        public List<ICoordinate> getPoints() {
-            return points;
-        }
-    }
-
-    /** a single recorded track segment ({@code <trkseg>}) */
-    public static final class RecordedTrackSegment {
-        private final String name;
-        private final int pointCount;
-        private final List<ICoordinate> points;
-
-        RecordedTrackSegment(final String name, final int pointCount, final List<ICoordinate> points) {
-            this.name = name;
-            this.pointCount = pointCount;
-            this.points = points;
-        }
-
-        @Nullable
-        public String getName() {
-            return name;
-        }
-
-        public int getPointCount() {
-            return pointCount;
-        }
-
-        public List<ICoordinate> getPoints() {
-            return points;
         }
     }
 
     /** a single recorded track ({@code <trk>}), made up of its recorded segments */
-    public static final class RecordedTrack {
-        private final String name;
-        private final int segmentCount;
-        private final int totalPointCount;
-        private final List<RecordedTrackSegment> segments;
+    public static final class Track {
+        public final String name;
+        public final int segmentCount;
+        public final int totalPointCount;
+        public final List<NamedCoordinateList> segments;
 
-        RecordedTrack(final String name, final int segmentCount, final int totalPointCount, final List<RecordedTrackSegment> segments) {
+        Track(final String name, final int segmentCount, final int totalPointCount, final List<NamedCoordinateList> segments) {
             this.name = name;
             this.segmentCount = segmentCount;
             this.totalPointCount = totalPointCount;
             this.segments = segments;
         }
 
-        @Nullable
-        public String getName() {
-            return name;
-        }
-
-        public List<RecordedTrackSegment> getSegments() {
-            return segments;
-        }
-
-        public int getSegmentCount() {
-            return segmentCount;
-        }
-
-        public int getTotalPointCount() {
-            return totalPointCount;
-        }
     }
 
     private String gpxCreatorOrName;
-    private final List<RecordedItem> items = new ArrayList<>();
-    private final List<RecordedRoute> routes = new ArrayList<>();
-    private final List<RecordedTrack> tracks = new ArrayList<>();
+    private final List<Item> globalItems = new ArrayList<>();
+    private final List<NamedCoordinateList> routes = new ArrayList<>();
+    private final List<Track> tracks = new ArrayList<>();
 
     /** points recorded so far for the currently-open route; non-null only between onRouteStart and onRouteEnd */
     private List<ICoordinate> currentRoutePoints;
     /** points recorded so far for the currently-open track segment; non-null only between onTrackSegmentStart and onTrackSegmentEnd */
     private List<ICoordinate> currentSegmentPoints;
     /** segments recorded so far for the currently-open track; non-null only between onTrackStart and onTrackEnd */
-    private List<RecordedTrackSegment> currentTrackSegments;
+    private List<NamedCoordinateList> currentTrackSegments;
+
+    private GPXParser.ParseMode parseModeGlobal;
+    private GPXParser.ParseMode parseModeRoutes;
+    private GPXParser.ParseMode parseModeTracks;
+
+    public void setModes(final GPXParser.ParseMode global, final GPXParser.ParseMode routes, final GPXParser.ParseMode tracks) {
+        this.parseModeGlobal = global;
+        this.parseModeRoutes = routes;
+        this.parseModeTracks = tracks;
+    }
 
     @Nullable
     public String getGpxCreatorOrName() {
@@ -164,23 +106,23 @@ public class RecordingGPXParseHooks implements IGPXParseHooks {
     }
 
     /** all top-level (and route-/track-embedded) geocaches/waypoints/coordinates, in document order */
-    public List<RecordedItem> getItems() {
-        return items;
+    public List<Item> getGlobalItems() {
+        return globalItems;
     }
 
-    public List<RecordedRoute> getRoutes() {
+    public List<NamedCoordinateList> getRoutes() {
         return routes;
     }
 
-    public List<RecordedTrack> getTracks() {
+    public List<Track> getTracks() {
         return tracks;
     }
 
     public List<Geocache> getGeocaches() {
         final List<Geocache> result = new ArrayList<>();
-        for (final RecordedItem item : items) {
-            if (item.getKind() == ItemKind.GEOCACHE && item.getCoordinate() instanceof Geocache) {
-                result.add((Geocache) item.getCoordinate());
+        for (final Item item : globalItems) {
+            if (item.coordinate instanceof Geocache) {
+                result.add((Geocache) item.coordinate);
             }
         }
         return result;
@@ -188,87 +130,95 @@ public class RecordingGPXParseHooks implements IGPXParseHooks {
 
     public List<Waypoint> getWaypoints() {
         final List<Waypoint> result = new ArrayList<>();
-        for (final RecordedItem item : items) {
-            if (item.getKind() == ItemKind.WAYPOINT && item.getCoordinate() instanceof Waypoint) {
-                result.add((Waypoint) item.getCoordinate());
+        for (final Item item : globalItems) {
+            if (item.coordinate instanceof Waypoint) {
+                result.add((Waypoint) item.coordinate);
             }
         }
         return result;
     }
 
     /** records {@code item} globally, and additionally into the currently-open route's/segment's point list, if any */
-    private void record(final RecordedItem item) {
-        items.add(item);
+    private void record(final Item item) {
+        globalItems.add(item);
         if (currentRoutePoints != null) {
-            currentRoutePoints.add(item.getCoordinate());
+            currentRoutePoints.add(item.coordinate);
         }
         if (currentSegmentPoints != null) {
-            currentSegmentPoints.add(item.getCoordinate());
+            currentSegmentPoints.add(item.coordinate);
         }
     }
 
     @Override
-    public void onInit(@Nullable final String gpxCreatorOrName) {
+    public GPXParser.ParseMode onInit(@Nullable final String gpxCreatorOrName) {
         this.gpxCreatorOrName = gpxCreatorOrName;
+        return parseModeGlobal;
     }
 
     @Override
-    public void onGeocache(@NonNull final Geocache geocache, @Nullable final List<LogEntry> logs) {
-        record(new RecordedItem(ItemKind.GEOCACHE, geocache, null, logs));
+    public GPXParser.ParseMode onGeocache(@NonNull final Geocache geocache, @Nullable final List<LogEntry> logs) {
+        record(new Item(geocache, null, logs));
+        return null;
     }
 
     @Override
-    public void onWaypoint(@NonNull final Waypoint waypoint, @Nullable final String parentGeocode) {
-        record(new RecordedItem(ItemKind.WAYPOINT, waypoint, parentGeocode));
+    public GPXParser.ParseMode onWaypoint(@NonNull final Waypoint waypoint, @Nullable final String parentGeocode) {
+        record(new Item(waypoint, parentGeocode, null));
+        return null;
     }
 
     @Override
-    public void onCoordinate(final ICoordinate coordinate) {
-        record(new RecordedItem(ItemKind.COORDINATE, coordinate, null));
+    public GPXParser.ParseMode onCoordinate(final ICoordinate coordinate) {
+        record(new Item(coordinate, null, null));
+        return null;
     }
 
     @Override
-    public void onNamedCoordinate(final NamedGeoCoordinate coordinate) {
-        record(new RecordedItem(ItemKind.NAMED_COORDINATE, coordinate, null));
+    public GPXParser.ParseMode onNamedCoordinate(final NamedGeoCoordinate coordinate) {
+        record(new Item(coordinate, null, null));
+        return null;
     }
 
     @Nullable
     @Override
-    public GPXParser.WptParseMode onRouteStart() {
+    public GPXParser.ParseMode onRouteStart() {
         currentRoutePoints = new ArrayList<>();
-        return null; // defer to GPXParser's configured default route mode
+        return parseModeRoutes; // defer to GPXParser's configured default route mode
     }
 
     @Override
-    public void onRouteEnd(@Nullable final String name, final int pointCount) {
-        routes.add(new RecordedRoute(name, pointCount, currentRoutePoints));
+    public GPXParser.ParseMode onRouteEnd(@Nullable final String name, final int pointCount) {
+        routes.add(new NamedCoordinateList(name, pointCount, currentRoutePoints));
         currentRoutePoints = null;
+        return parseModeGlobal;
     }
 
     @Nullable
     @Override
-    public GPXParser.WptParseMode onTrackStart() {
+    public GPXParser.ParseMode onTrackStart() {
         currentTrackSegments = new ArrayList<>();
-        return null; // defer to GPXParser's configured default track mode
+        return parseModeTracks; // defer to GPXParser's configured default track mode
     }
 
     @Nullable
     @Override
-    public GPXParser.WptParseMode onTrackSegmentStart() {
+    public GPXParser.ParseMode onTrackSegmentStart() {
         currentSegmentPoints = new ArrayList<>();
         return null; // defer to the mode in effect for the enclosing track
     }
 
     @Override
-    public void onTrackSegmentEnd(@Nullable final String name, final int pointCount) {
-        currentTrackSegments.add(new RecordedTrackSegment(name, pointCount, currentSegmentPoints));
+    public GPXParser.ParseMode onTrackSegmentEnd(@Nullable final String name, final int pointCount) {
+        currentTrackSegments.add(new NamedCoordinateList(name, pointCount, currentSegmentPoints));
         currentSegmentPoints = null;
+        return null;
     }
 
     @Override
-    public void onTrackEnd(@Nullable final String name, final int segmentCount, final int totalPointCount) {
-        tracks.add(new RecordedTrack(name, segmentCount, totalPointCount, currentTrackSegments));
+    public GPXParser.ParseMode onTrackEnd(@Nullable final String name, final int segmentCount, final int totalPointCount) {
+        tracks.add(new Track(name, segmentCount, totalPointCount, currentTrackSegments));
         currentTrackSegments = null;
+        return parseModeGlobal;
     }
 }
 

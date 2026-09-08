@@ -20,7 +20,7 @@ public class XmlNodeTest {
     private List<XmlNode> parseTestXml(final String resourceName, final boolean namespaceAware, final boolean relaxed, final Predicate<XmlPullParser> nodeMarker) throws XmlPullParserException, IOException {
         final InputStream is = XmlNodeTest.class.getResourceAsStream(resourceName);
         Objects.requireNonNull(is);
-        final XmlPullParser xpp = XmlUtils.createParser(is, namespaceAware, relaxed, "UTF-8");
+        final XmlPullParser xpp = XmlUtils.createParser(is, null, namespaceAware, relaxed);
         final List<XmlNode> nodes = new ArrayList<>();
         while (xpp.next() != XmlPullParser.END_DOCUMENT) {
             if (xpp.getEventType() == START_TAG && nodeMarker.test(xpp)) {
@@ -41,6 +41,25 @@ public class XmlNodeTest {
         final List<XmlNode> nodes = parseTestXml("/xml/gc3t1xg_gsak_110.gpx", namespaceAware, false, xpp -> xpp.getName().equals("wpt"));
         assertThat(nodes).hasSize(1);
         return nodes.get(0);
+    }
+
+    @Test
+    public void testOrderedChildrenFollowInsertionAndRemoval() {
+        final XmlNode node = new XmlNode("parent", "");
+        final XmlNode first = new XmlNode("first", "");
+        final XmlNode second = new XmlNode("second", "");
+        final XmlNode repeated = new XmlNode("first", "");
+        assertThat(node.getChildrenInOrder()).isEmpty();
+        node.addChild(first);
+        node.addChild(second);
+        node.addChild(repeated);
+        assertThat(node.getChildrenInOrder()).containsExactly(first, second, repeated);
+        assertThat(node.getChildrenAsList("first")).containsExactly(first, repeated);
+        node.removeChild("first");
+        assertThat(node.getChildrenInOrder()).containsExactly(second);
+        assertThat(node.hasChild("first")).isFalse();
+        node.addChild(first);
+        assertThat(node.getChildrenInOrder()).containsExactly(second, first);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package cgeo.geocaching.utils.gpx;
 
-import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.tc.TerraCachingLogType;
 import cgeo.geocaching.connector.tc.TerraCachingType;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -14,6 +16,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.NamedGeoCoordinate;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.xml.XmlNode;
@@ -24,7 +27,7 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +37,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -61,7 +66,10 @@ import org.xmlpull.v1.XmlPullParserException;
  */
 public class GPXParser {
 
-    private static final Pattern PATTERN_GEOCODE = Pattern.compile("[0-9A-Z]{5,}");
+    // Keep GUID-like Adventure Lab codes intact; provider recognition is delegated to ConnectorFactory.
+    private static final Pattern PATTERN_GEOCODE = Pattern.compile("(?<![\\p{L}\\p{N}_-])[A-Z0-9][A-Z0-9_-]*(?![\\p{L}\\p{N}_-])", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile("[?&]wp=([^&#]+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_URL_GUID = Pattern.compile("[?&]guid=([0-9a-f-]+)", Pattern.CASE_INSENSITIVE);
 
     //Namespaces of extensions
     private static final Set<String> GROUNDSPEAK_NS = Set.of(
@@ -91,10 +99,7 @@ public class GPXParser {
             "http://www.TerraCaching.com/GPX/1/0"
     );
 
-    private WptParseMode geocacheWptParseMode = WptParseMode.FULL;
-    private WptParseMode waypointWptParseMode = WptParseMode.FULL;
-    private WptParseMode defaultRouteWptParseMode = WptParseMode.FULL;
-    private WptParseMode defaultTrackWptParseMode = WptParseMode.FULL;
+    private ParseMode mode = ParseMode.FULL;
 
     /** parse-session-scoped index: (lower-cased, trimmed) cache name/title -&gt; geocode */
     private final Map<String, String> nameToGeocodeIndex = new HashMap<>();
@@ -107,36 +112,28 @@ public class GPXParser {
      * child waypoint of that cache, not a new cache itself, until end of file (there is no reset marker).
      */
     private boolean terraChildWaypoint;
+    private String scriptUrl;
 
     private IGPXParseHooks hooks;
 
     /** Controls how wptTypes are parsed. */
-    public enum WptParseMode {
-        /** Parse/collect the complete information. */
+    public enum ParseMode {
+        /** Parse/collect complete information. */
         FULL,
-        /** only basic data is parsed per wptType (name + coordinate) */
+        /** Parse only basic data per wptType (name + coordinate) */
         COORDINATES_ONLY,
         /** Do not collect wptType data.*/
-        SKIP
+        SKIP,
+        /** Flag to use to abort parsing completely */
+        ABORT
     }
 
-    public GPXParser setGeocacheParseMode(final WptParseMode mode) {
-        this.geocacheWptParseMode = mode == null ? WptParseMode.FULL : mode;
-        return this;
+    private static class AbortException extends RuntimeException {
+
     }
 
-    public GPXParser setWaypointParseMode(final WptParseMode mode) {
-        this.waypointWptParseMode = mode == null ? WptParseMode.FULL : mode;
-        return this;
-    }
-
-    public GPXParser setDefaultRouteParseMode(final WptParseMode mode) {
-        this.defaultRouteWptParseMode = mode == null ? WptParseMode.FULL : mode;
-        return this;
-    }
-
-    public GPXParser setDefaultTrackParseMode(final WptParseMode mode) {
-        this.defaultTrackWptParseMode = mode == null ? WptParseMode.FULL : mode;
+    public GPXParser setParseMode(final ParseMode mode) {
+        this.mode = mode == null ? ParseMode.FULL : mode;
         return this;
     }
 
@@ -144,47 +141,65 @@ public class GPXParser {
     public GPXParser reset() {
         nameToGeocodeIndex.clear();
         terraChildWaypoint = false;
+        scriptUrl = null;
         return this;
     }
 
     /** Parses the given stream as GPX, notifying {@code hooks} about business elements found. */
     public void parse(@NonNull final InputStream stream, @NonNull final IGPXParseHooks hooks) throws IOException, XmlPullParserException {
-        parse(XmlUtils.createParser(stream, false), hooks);
+        final XmlPullParser parser = XmlUtils.createParser(stream, true);
+        parse(parser, hooks);
     }
 
     /**
      * Parses the given, already-positioned-or-fresh pull parser as GPX, notifying {@code hooks} about business
      * elements found. The parser is driven forward (single, forward-only pass). May be called
      * repeatedly on the same instance to parse several related GPX documents as one logical unit
+     * @return if true, then parsing completed. If false then parsing was aborted by hooks.
      */
-    public void parse(@NonNull final XmlPullParser parser, @NonNull final IGPXParseHooks hooks) throws IOException, XmlPullParserException {
+    public boolean parse(@NonNull final XmlPullParser parser, @NonNull final IGPXParseHooks hooks) throws IOException, XmlPullParserException {
         this.hooks = hooks;
         this.terraChildWaypoint = false;
+        this.scriptUrl = null;
 
-        int event = parser.getEventType();
-        while (event != XmlPullParser.END_DOCUMENT) {
-            if (event == XmlPullParser.START_TAG && "gpx".equals(localName(parser.getName()))) {
-                handleGpx(parser);
-                return;
+        try {
+            int event = parser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+                if (event == XmlPullParser.START_TAG && "gpx".equals(localName(parser.getName()))) {
+                    handleGpx(parser);
+                    return true;
+                }
+                event = parser.next();
             }
-            event = parser.next();
+            return true;
+        } catch (AbortException ae) {
+            return false;
         }
     }
 
     private void handleGpx(final XmlPullParser parser) throws IOException, XmlPullParserException {
         final String creator = attr(parser, "creator");
-        hooks.onInit(creator);
+        scriptUrl = creator;
+        adjustParsemode(hooks.onInit(creator));
 
         int event = parser.next();
         while (!(event == XmlPullParser.END_TAG && "gpx".equals(localName(parser.getName())))) {
             if (event == XmlPullParser.START_TAG) {
                 final String name = localName(parser.getName());
                 if ("wpt".equals(name)) {
-                    handleTopLevelWpt(parser);
+                    dispatchWptType(parser);
                 } else if ("rte".equals(name)) {
                     handleRoute(parser);
                 } else if ("trk".equals(name)) {
                     handleTrack(parser);
+                } else if ("url".equals(name) || "creator".equals(name)) {
+                    scriptUrl = readText(parser);
+                } else if ("metadata".equals(name)) {
+                    final XmlNode metadata = XmlNode.scanNode(parser);
+                    final String url = readLinkUrl(metadata.getChild("link"));
+                    if (StringUtils.isNotBlank(url)) {
+                        scriptUrl = url;
+                    }
                 } else {
                     skipSubtree(parser);
                 }
@@ -193,19 +208,12 @@ public class GPXParser {
         }
     }
 
-    private void handleTopLevelWpt(final XmlPullParser parser) throws IOException, XmlPullParserException {
-        // note: can't cheaply pre-filter by lat/lon here (unlike route/track points) - a geocache-classified
-        // entry without valid coordinates may still be reportable, see the ZZ (c:geo "cache without known
-        // coordinates") exception: https://github.com/cgeo/cgeo/issues/9305
-        dispatchWptType(parser);
-    }
-
     // ---------------------------------------------------------------------------------------------------
     // routes
     // ---------------------------------------------------------------------------------------------------
 
     private void handleRoute(final XmlPullParser parser) throws IOException, XmlPullParserException {
-        final WptParseMode mode = orDefault(hooks.onRouteStart(), defaultRouteWptParseMode);
+        adjustParsemode(hooks.onRouteStart());
         String routeName = null;
         int pointCount = 0;
 
@@ -216,16 +224,15 @@ public class GPXParser {
                 if ("name".equals(name)) {
                     routeName = readText(parser);
                 } else if ("rtept".equals(name)) {
-                    if (handleRouteOrTrackPoint(parser, mode)) {
-                        pointCount++;
-                    }
+                    dispatchWptType(parser);
+                    pointCount++;
                 } else {
                     skipSubtree(parser);
                 }
             }
             event = parser.next();
         }
-        hooks.onRouteEnd(routeName, pointCount);
+        adjustParsemode(hooks.onRouteEnd(routeName, pointCount));
     }
 
     // ---------------------------------------------------------------------------------------------------
@@ -233,7 +240,7 @@ public class GPXParser {
     // ---------------------------------------------------------------------------------------------------
 
     private void handleTrack(final XmlPullParser parser) throws IOException, XmlPullParserException {
-        final WptParseMode trackMode = orDefault(hooks.onTrackStart(), defaultTrackWptParseMode);
+        adjustParsemode(hooks.onTrackStart());
         String trackName = null;
         int segmentCount = 0;
         int totalPointCount = 0;
@@ -245,7 +252,7 @@ public class GPXParser {
                 if ("name".equals(name)) {
                     trackName = readText(parser);
                 } else if ("trkseg".equals(name)) {
-                    totalPointCount += handleTrackSegment(parser, trackMode);
+                    totalPointCount += handleTrackSegment(parser);
                     segmentCount++;
                 } else {
                     skipSubtree(parser);
@@ -253,12 +260,12 @@ public class GPXParser {
             }
             event = parser.next();
         }
-        hooks.onTrackEnd(trackName, segmentCount, totalPointCount);
+        adjustParsemode(hooks.onTrackEnd(trackName, segmentCount, totalPointCount));
     }
 
-    /** @return number of valid points found in this segment */
-    private int handleTrackSegment(final XmlPullParser parser, final WptParseMode trackMode) throws IOException, XmlPullParserException {
-        final WptParseMode mode = orDefault(hooks.onTrackSegmentStart(), trackMode);
+    /** @return number of point entries found in this segment, including entries without coordinates */
+    private int handleTrackSegment(final XmlPullParser parser) throws IOException, XmlPullParserException {
+        adjustParsemode(hooks.onTrackSegmentStart());
         String segmentName = null;
         int pointCount = 0;
 
@@ -269,51 +276,37 @@ public class GPXParser {
                 if ("name".equals(name)) {
                     segmentName = readText(parser);
                 } else if ("trkpt".equals(name)) {
-                    if (handleRouteOrTrackPoint(parser, mode)) {
-                        pointCount++;
-                    }
+                    dispatchWptType(parser);
+                    pointCount++;
                 } else {
                     skipSubtree(parser);
                 }
             }
             event = parser.next();
         }
-        hooks.onTrackSegmentEnd(segmentName, pointCount);
+        adjustParsemode(hooks.onTrackSegmentEnd(segmentName, pointCount));
         return pointCount;
     }
 
     /**
-     * Handles a single {@code rtept}/{@code trkpt} according to the given (already-resolved) {@link WptParseMode}.
+     * Handles a single {@code rtept}/{@code trkpt} according to the given (already-resolved) {@link ParseMode}.
      * Fires the appropriate hook(s) for the point, if any.
-     *
-     * @return {@code true} if the point had valid lat/lon and therefore counts towards the enclosing
-     * route's/segment's point count; {@code false} otherwise
      */
-    private boolean handleRouteOrTrackPoint(final XmlPullParser parser, final WptParseMode mode) throws IOException, XmlPullParserException {
-        if (mode == WptParseMode.SKIP) {
-            // cheap: only check lat/lon (attributes on the start tag) for counting purposes
-            final boolean valid = xmlNodeReadLatLon(parser) != null;
+    private void dispatchWptType(final XmlPullParser parser) throws IOException, XmlPullParserException {
+        if (this.mode == ParseMode.SKIP) {
             skipSubtree(parser);
-            return valid;
+        } else if (this.mode == ParseMode.COORDINATES_ONLY) {
+            dispatchWptTypeCoordinateOnly(parser);
+        } else {
+            dispatchWptTypeFull(parser);
         }
-        if (mode == WptParseMode.COORDINATES_ONLY) {
-            return dispatchCoordinateOnly(parser);
-        }
-        // FULL: full classification, same as for a top-level wpt; cannot cheaply pre-filter by lat/lon
-        // here either, for the same reason as handleTopLevelWpt (ZZ exception)
-        return dispatchWptType(parser);
     }
 
     /**
      * lightweight, non-buffering read of a wpt/rtept/trkpt when only coordinates are wanted (ParseMode.COORDINATES_ONLY)
-     * @return {@code true} if the point had valid lat/lon, {@code false} if it was ignored entirely
      */
-    private boolean dispatchCoordinateOnly(final XmlPullParser parser) throws IOException, XmlPullParserException {
-        final Geopoint coords = xmlNodeReadLatLon(parser);
-        if (coords == null) {
-            skipSubtree(parser);
-            return false;
-        }
+    private void dispatchWptTypeCoordinateOnly(final XmlPullParser parser) throws IOException, XmlPullParserException {
+        final Geopoint coords = toGeopoint(attr(parser, "lat"), attr(parser, "lon"), true);
 
         String name = null;
         Float elevation = null;
@@ -333,7 +326,7 @@ public class GPXParser {
         }
 
         if (StringUtils.isBlank(name) && elevation == null) {
-            hooks.onCoordinate(coords);
+            adjustParsemode(hooks.onCoordinate(coords));
         } else {
             final NamedGeoCoordinate named = new NamedGeoCoordinate();
             named.setCoords(coords);
@@ -343,20 +336,18 @@ public class GPXParser {
             if (StringUtils.isNotBlank(name)) {
                 named.setName(name.trim());
             }
-            hooks.onNamedCoordinate(named);
+            adjustParsemode(hooks.onNamedCoordinate(named));
         }
-        return true;
     }
 
     /**
-     * Full scan of a wpt/rtept/trkpt subtree, classifying it as geocache / waypoint / named coordinate / plain coordinate and firing the appropriate hook.
-     * @return {@code true} if the element had valid lat/lon and was processed; {@code false} otherwise
+     * FULL scan of a wpt/rtept/trkpt subtree, classifying it as geocache / waypoint / named coordinate / plain coordinate and firing the appropriate hook.
      */
-    private boolean dispatchWptType(final XmlPullParser parser) throws XmlPullParserException, IOException {
+    private void dispatchWptTypeFull(final XmlPullParser parser) throws XmlPullParserException, IOException {
         final XmlNode wptNode = XmlNode.scanNode(parser);
         final Geopoint coords = xmlNodeReadLatLon(wptNode);
 
-        final String rawName = wptNode.getChildValue("name");
+        final String rawName = normalizeName(wptNode.getChildValue("name"));
         final String desc = wptNode.getChildValue("desc");
         final String cmt = wptNode.getChildValue("cmt");
         final String symRaw = wptNode.getChildValue("sym");
@@ -378,28 +369,16 @@ public class GPXParser {
         final boolean wasTerraChildWaypoint = this.terraChildWaypoint;
         final boolean isTerraChildWaypointMarker = "GC_WayPoint1".equals(StringUtils.trim(desc));
 
+        final XmlNode base = extensionsBase(wptNode);
         final boolean isGeocache = Strings.CI.contains(type, "geocache")
                 || Strings.CI.contains(sym, "geocache")
                 || Strings.CI.contains(sym, "waymark")
-                || (Strings.CI.contains(sym, "terracache") && !wasTerraChildWaypoint);
+                || (!wasTerraChildWaypoint && (Strings.CI.contains(sym, "terracache")
+                    || base.hasChild("cache") || base.hasChild("terracache")));
         final boolean isWaypoint = !isGeocache && (Strings.CI.contains(type, "waypoint") || wasTerraChildWaypoint);
 
         if (isTerraChildWaypointMarker) {
             this.terraChildWaypoint = true;
-        }
-
-        if (coords == null) {
-            // no valid coordinates -> ignore entirely, as if this wptType didn't exist...
-            if (!isGeocache || geocacheWptParseMode != WptParseMode.FULL) {
-                return false;
-            }
-            final String geocode = resolveGeocode(rawName, desc, cmt);
-            // ...EXCEPT: the ZZ-case with no coordinates (see https://github.com/cgeo/cgeo/issues/9305)
-            if (geocode == null || !InternalConnector.getInstance().canHandle(geocode)) {
-                return false;
-            }
-            dispatchGeocache(wptNode, null, rawName, desc, cmt);
-            return true;
         }
 
         if (isGeocache) {
@@ -408,16 +387,16 @@ public class GPXParser {
             dispatchWaypoint(wptNode, coords, rawName, sym, subtype, wasTerraChildWaypoint);
         } else {
             // fallback: named or plain coordinate
-            dispatchFallbackCoordinate(coords, rawName, wptNode);
+            dispatchFallbackCoordinate(rawName, wptNode);
         }
-        return true;
     }
 
     /** Fires {@link IGPXParseHooks#onCoordinate}/{@link IGPXParseHooks#onNamedCoordinate} as appropriate. */
-    private void dispatchFallbackCoordinate(final Geopoint coords, final String rawName, final XmlNode wptNode) {
+    private void dispatchFallbackCoordinate(final String rawName, final XmlNode wptNode) {
+        final Geopoint coords = toGeopoint(xmlNodeAttrValue(wptNode, "lat", null), xmlNodeAttrValue(wptNode, "lon", null), true);
         final Float elevation = parseFloatSafe(wptNode.getChildValue("ele"));
         if (StringUtils.isBlank(rawName) && elevation == null) {
-            hooks.onCoordinate(coords);
+            adjustParsemode(hooks.onCoordinate(coords));
             return;
         }
         final NamedGeoCoordinate named = new NamedGeoCoordinate();
@@ -428,27 +407,20 @@ public class GPXParser {
         if (StringUtils.isNotBlank(rawName)) {
             named.setName(rawName.trim());
         }
-        hooks.onNamedCoordinate(named);
+        adjustParsemode(hooks.onNamedCoordinate(named));
     }
 
     /**
      * A {@code wptType} classified as a geocache.
      *
-     * @param coords may be {@code null} (only possible via the ZZ exception)
+     * @param coords may be {@code null} when the GPX has no valid coordinate pair
      */
     private void dispatchGeocache(final XmlNode wptNode, @Nullable final Geopoint coords, final String rawName,
                                    final String desc, final String cmt) {
-        if (geocacheWptParseMode == WptParseMode.SKIP) {
-            return;
-        }
-        if (geocacheWptParseMode == WptParseMode.COORDINATES_ONLY) {
-            dispatchFallbackCoordinate(coords, rawName, wptNode);
-            return;
-        }
 
         final Geocache cache = createCache();
         cache.setCoords(coords);
-        final String geocode = resolveGeocode(rawName, desc, cmt);
+        final String geocode = resolveGeocode(wptNode, rawName, desc, cmt);
         cache.setGeocode(geocode == null ? "" : geocode);
         if (StringUtils.isNotBlank(rawName)) {
             cache.setName(rawName.trim());
@@ -464,14 +436,34 @@ public class GPXParser {
         if (hidden != null) {
             cache.setHidden(hidden);
         }
+        final String symbol = wptNode.getChildValue("sym");
+        if (Strings.CI.contains(symbol, "geocache") && Strings.CI.contains(symbol, "found")) {
+            cache.setFound(true);
+            cache.setDNF(false);
+        }
+        final String url = readWaypointUrl(wptNode);
+        final String guid = matchUrl(PATTERN_URL_GUID, url);
+        if (guid != null) {
+            cache.setGuid(guid);
+        }
 
         final List<LogEntry> logs = parseGeocacheExtensions(wptNode, cache);
+        final String urlName = StringUtils.defaultIfBlank(wptNode.getChildValue("urlname"), xmlNodeChildText(wptNode.getChild("link"), "text", null));
+        if (Strings.CI.startsWith(cache.getGeocode(), "WM") && cache.getName().equalsIgnoreCase(cache.getGeocode()) && StringUtils.isNotBlank(urlName)) {
+            cache.setName(urlName.trim());
+        }
+        if ("GC_WayPoint1".equals(cache.getShortDescription())) {
+            cache.setShortDescription("");
+        }
+        if (ConnectorFactory.getConnector(cache.getGeocode()) instanceof GCConnector) {
+            cache.setCacheId(Long.toString(GCUtils.gcCodeToGcId(cache.getGeocode())));
+        }
 
         if (StringUtils.isNotBlank(cache.getGeocode()) && StringUtils.isNotBlank(cache.getName())) {
             nameToGeocodeIndex.put(cache.getName().trim().toLowerCase(Locale.US), cache.getGeocode());
         }
 
-        hooks.onGeocache(cache, logs);
+        adjustParsemode(hooks.onGeocache(cache, logs));
     }
 
     /**
@@ -479,8 +471,11 @@ public class GPXParser {
      * name, then in {@code desc}, then in {@code cmt}, then (as last resort) the trimmed name verbatim.
      */
     @Nullable
-    private static String resolveGeocode(final String rawName, final String desc, final String cmt) {
+    private static String resolveGeocode(final XmlNode wptNode, final String rawName, final String desc, final String cmt) {
         String geocode = findGeoCode(rawName);
+        if (geocode == null) {
+            geocode = matchUrl(PATTERN_URL_GEOCODE, readWaypointUrl(wptNode));
+        }
         if (geocode == null) {
             geocode = findGeoCode(desc);
         }
@@ -493,32 +488,71 @@ public class GPXParser {
         return geocode;
     }
 
+    private String normalizeName(final String name) {
+        final String trimmed = StringUtils.trim(name);
+        return Strings.CI.contains(scriptUrl, "extremcaching") && Strings.CI.startsWith(trimmed, "GCEC") ? trimmed.substring(2) : trimmed;
+    }
+
+    @Nullable
+    private static String readLinkUrl(@Nullable final XmlNode link) {
+        return StringUtils.defaultIfBlank(xmlNodeAttrValue(link, "href", null), xmlNodeChildText(link, "href", null));
+    }
+
+    @Nullable
+    private static String readWaypointUrl(final XmlNode node) {
+        return StringUtils.defaultIfBlank(node.getChildValue("url"), readLinkUrl(node.getChild("link")));
+    }
+
+    @Nullable
+    private static String matchUrl(final Pattern pattern, @Nullable final String url) {
+        if (url == null) {
+            return null;
+        }
+        final Matcher matcher = pattern.matcher(url);
+        return matcher.find() ? matcher.group(1) : null;
+    }
+
     /** handles a {@code wptType} classified as a waypoint. */
-    private void dispatchWaypoint(final XmlNode wptNode, final Geopoint coords, final String rawName,
+    private void dispatchWaypoint(final XmlNode wptNode, @Nullable final Geopoint coords, final String rawName,
                                    final String sym, final String subtype, final boolean isTerraChildWaypoint) {
-        if (waypointWptParseMode == WptParseMode.SKIP) {
-            return;
-        }
-        if (waypointWptParseMode == WptParseMode.COORDINATES_ONLY) {
-            dispatchFallbackCoordinate(coords, rawName, wptNode);
-            return;
-        }
 
         final String parentGeocodeCandidate = resolveParentGeocode(wptNode, rawName, isTerraChildWaypoint);
 
-        final Waypoint waypoint = new Waypoint(StringUtils.trim(rawName), WaypointType.fromGPXString(sym == null ? "" : sym, subtype), false);
+        final String description = wptNode.getChildValue("desc");
+        final String name = "GC_WayPoint1".equals(StringUtils.trim(description)) ? ""
+                : validate(StringUtils.defaultIfBlank(description, StringUtils.trimToEmpty(rawName)));
+        final XmlNode base = extensionsBase(wptNode);
+        final Waypoint waypoint = new Waypoint(name, WaypointType.fromGPXString(sym == null ? "" : sym, subtype), parseWaypointUserDefined(base));
         waypoint.setId(Waypoint.NEW_ID);
         waypoint.setCoords(coords);
+        waypoint.setLookup("---"); // GPX has no lookup code
         if (parentGeocodeCandidate != null) {
             waypoint.setGeocode(parentGeocodeCandidate);
         }
 
+        parseCgeoExtension(base, waypoint);
+        if (!waypoint.isUserDefined() && coords == null) {
+            waypoint.setOriginalCoordsEmpty(true);
+        }
+        waypoint.setPrefix(resolveWaypointPrefix(rawName, parentGeocodeCandidate, waypoint.isUserDefined()));
+
         final String note = wptNode.getChildValue("cmt");
         if (StringUtils.isNotBlank(note)) {
-            waypoint.setNote(validate(note));
+            new WaypointUserNoteCombiner(waypoint).updateNoteAndUserNote(validate(note));
         }
 
-        hooks.onWaypoint(waypoint, parentGeocodeCandidate);
+        adjustParsemode(hooks.onWaypoint(waypoint, parentGeocodeCandidate));
+    }
+
+    private static String resolveWaypointPrefix(final String rawName, @Nullable final String parentGeocode, final boolean userDefined) {
+        String prefix = StringUtils.trimToEmpty(rawName);
+        if (userDefined) {
+            if (StringUtils.length(parentGeocode) > 2 && Strings.CI.endsWith(prefix, parentGeocode.substring(2))) {
+                prefix = prefix.substring(0, prefix.length() - parentGeocode.length() + 2);
+            }
+            prefix = Strings.CI.removeStart(prefix, Waypoint.PREFIX_OWN + "-");
+        }
+        return ConnectorFactory.getConnector(parentGeocode).getWaypointPrefix(prefix);
     }
 
     /**
@@ -527,10 +561,10 @@ public class GPXParser {
     @Nullable
     private String resolveParentGeocode(final XmlNode wptNode, final String rawName, final boolean isTerraChildWaypoint) {
         final XmlNode extensions = extensionsBase(wptNode);
-        final XmlNode gsakExt = extensions == null ? null : extensions.getChild("wptExtension");
-        final String gsakParent = gsakExt == null ? null : gsakExt.getChildValue("Parent");
+        final XmlNode gsakExt = xmlNodeChild(extensions, "wptExtension", GSAK_NS);
+        final String gsakParent = xmlNodeChildText(gsakExt, "Parent", GSAK_NS);
         if (StringUtils.isNotBlank(gsakParent)) {
-            return gsakParent.trim();
+            return nameToGeocodeIndex.getOrDefault(gsakParent.trim().toLowerCase(Locale.US), gsakParent.trim());
         }
 
         final String trimmedName = StringUtils.trim(rawName);
@@ -543,6 +577,9 @@ public class GPXParser {
         }
 
         if (trimmedName.length() > 2) {
+            if (Strings.CI.contains(scriptUrl, "extremcaching")) {
+                return trimmedName.substring(2);
+            }
             return "GC" + trimmedName.substring(2).toUpperCase(Locale.US);
         }
 
@@ -559,12 +596,26 @@ public class GPXParser {
         if (base == null) {
             return null;
         }
-        final List<LogEntry> groundspeakLogs = parseGroundspeakExtension(base, cache);
+        parseGroundspeakExtension(base, cache);
         parseGsakExtension(base, cache);
-        final List<LogEntry> terraLogs = parseTerraCachingExtension(base, cache);
+        parseTerraCachingExtension(base, cache);
         parseCgeoExtension(base, cache);
         parseOpenCachingExtension(base, cache);
-        return groundspeakLogs != null ? groundspeakLogs : terraLogs;
+        final List<LogEntry> logs = new ArrayList<>();
+        for (final XmlNode child : base.getChildrenInOrder()) {
+            final List<LogEntry> sourceLogs;
+            if ("cache".equals(child.getLocalName())) {
+                sourceLogs = parseGroundspeakLogs(child, ConnectorFactory.getConnector(cache.getGeocode()) instanceof GCConnector);
+            } else if ("terracache".equals(child.getLocalName())) {
+                sourceLogs = parseTerraCachingLogs(child);
+            } else {
+                continue;
+            }
+            if (sourceLogs != null) {
+                logs.addAll(sourceLogs);
+            }
+        }
+        return logs.isEmpty() ? null : logs;
     }
 
     /**
@@ -573,11 +624,10 @@ public class GPXParser {
      * {@code http://www.groundspeak.com/cache/1/1}, PQ 1.0.1 {@code http://www.groundspeak.com/cache/1/0/1},
      * PQ 1.0 {@code http://www.groundspeak.com/cache/1/0}. Element {@code <cache>}.
      */
-    @Nullable
-    private List<LogEntry> parseGroundspeakExtension(final XmlNode base, final Geocache cache) {
+    private void parseGroundspeakExtension(final XmlNode base, final Geocache cache) {
         final XmlNode gcCache = xmlNodeChild(base, "cache", GROUNDSPEAK_NS);
         if (gcCache == null) {
-            return null;
+            return;
         }
         final String id = xmlNodeAttrValue(gcCache, "id", GROUNDSPEAK_NS);
         if (StringUtils.isNotBlank(id)) {
@@ -647,7 +697,6 @@ public class GPXParser {
 
         parseGroundspeakAttributes(gcCache, cache);
         parseGroundspeakTravelbugs(gcCache, cache);
-        return parseGroundspeakLogs(gcCache);
     }
 
     /**
@@ -655,7 +704,7 @@ public class GPXParser {
      * {@link #parseGroundspeakExtension}.
      */
     @Nullable
-    private List<LogEntry> parseGroundspeakLogs(final XmlNode gcCache) {
+    private List<LogEntry> parseGroundspeakLogs(final XmlNode gcCache, final boolean gcConnector) {
         final XmlNode logsNode = xmlNodeChild(gcCache, "logs", GROUNDSPEAK_NS);
         if (logsNode == null) {
             return null;
@@ -671,6 +720,9 @@ public class GPXParser {
             if (idText != null) {
                 try {
                     builder.setId(Integer.parseInt(idText.trim()));
+                    if (gcConnector) {
+                        builder.setServiceLogId(GCUtils.logIdToLogCode(builder.getId()));
+                    }
                 } catch (final NumberFormatException ignored) {
                     // ignore malformed id
                 }
@@ -691,7 +743,10 @@ public class GPXParser {
             if (text != null) {
                 builder.setLog(validate(text));
             }
-            result.add(builder.build());
+            final LogEntry log = builder.build();
+            if (log.logType != LogType.UNKNOWN) {
+                result.add(log);
+            }
         }
         return result.isEmpty() ? null : result;
     }
@@ -811,6 +866,30 @@ public class GPXParser {
         if (StringUtils.isBlank(cache.getPersonalNote()) && userDataNote.length() > 0) {
             cache.setPersonalNote(userDataNote.toString().trim(), true);
         }
+        final Geopoint originalCoords = toGeopoint(xmlNodeChildText(gsak, "LatBeforeCorrect", GSAK_NS), xmlNodeChildText(gsak, "LonBeforeCorrect", GSAK_NS), false);
+        if (originalCoords != null) {
+            final Waypoint original = new Waypoint(WaypointType.ORIGINAL.gpx, WaypointType.ORIGINAL, false);
+            original.setGeocode(cache.getGeocode());
+            original.setCoords(originalCoords);
+            cache.setWaypoints(Collections.singletonList(original));
+            cache.setUserModifiedCoords(true);
+        }
+    }
+
+    private static boolean parseWaypointUserDefined(final XmlNode base) {
+        boolean userDefined = false;
+        for (final XmlNode child : base.getChildrenInOrder()) {
+            if ("userdefined".equals(child.getLocalName())) {
+                userDefined = Boolean.parseBoolean(StringUtils.trim(child.getValue()));
+            } else if ("wptExtension".equals(child.getLocalName())) {
+                for (final XmlNode field : child.getChildrenInOrder()) {
+                    if ("Child_ByGSAK".equals(field.getLocalName())) {
+                        userDefined |= Boolean.parseBoolean(StringUtils.trim(field.getValue()));
+                    }
+                }
+            }
+        }
+        return userDefined;
     }
 
     private static void appendUserData(final StringBuilder buffer, final String userData) {
@@ -820,11 +899,10 @@ public class GPXParser {
     }
 
     /** TerraCaching extension. */
-    @Nullable
-    private List<LogEntry> parseTerraCachingExtension(final XmlNode base, final Geocache cache) {
+    private void parseTerraCachingExtension(final XmlNode base, final Geocache cache) {
         final XmlNode terraCache = xmlNodeChild(base, "terracache", TERRA_NS);
         if (terraCache == null) {
-            return null;
+            return;
         }
         final String name = xmlNodeChildText(terraCache, "name", TERRA_NS);
         if (StringUtils.isNotBlank(name)) {
@@ -858,7 +936,6 @@ public class GPXParser {
         if (hint != null) {
             cache.setHint(HtmlUtils.extractText(hint));
         }
-        return parseTerraCachingLogs(terraCache);
     }
 
     /** TerraCaching logs ({@code <terracache><logs><log>...}). */
@@ -899,7 +976,10 @@ public class GPXParser {
             if (text != null) {
                 builder.setLog(trimHtml(validate(text)));
             }
-            result.add(builder.build());
+            final LogEntry log = builder.build();
+            if (log.logType != LogType.UNKNOWN) {
+                result.add(log);
+            }
         }
         return result.isEmpty() ? null : result;
     }
@@ -912,6 +992,17 @@ public class GPXParser {
         }
     }
 
+    /** c:geo waypoint fields are siblings of cacheExtension, not children of it. */
+    private void parseCgeoExtension(final XmlNode base, final Waypoint waypoint) {
+        for (final XmlNode child : base.getChildrenInOrder()) {
+            if ("visited".equals(child.getLocalName())) {
+                waypoint.setVisited(Boolean.parseBoolean(StringUtils.trim(child.getValue())));
+            } else if ("originalCoordsEmpty".equals(child.getLocalName())) {
+                waypoint.setOriginalCoordsEmpty(Boolean.parseBoolean(StringUtils.trim(child.getValue())));
+            }
+        }
+    }
+
     /**
      * Opencaching extension. Schema/namespace: {@code https://github.com/opencaching/gpx-extension-v1}. Element
      * {@code <cache>}.
@@ -920,6 +1011,14 @@ public class GPXParser {
         final XmlNode ocCache = xmlNodeChild(base, "cache", OPENCACHING_NS);
         if (ocCache == null) {
             return;
+        }
+        final String requiresPassword = xmlNodeChildText(ocCache, "requires_password", OPENCACHING_NS);
+        if (requiresPassword != null) {
+            cache.setLogPasswordRequired(Boolean.parseBoolean(requiresPassword.trim()));
+        }
+        final String otherCode = xmlNodeChildText(ocCache, "other_code", OPENCACHING_NS);
+        if (StringUtils.isNotBlank(otherCode)) {
+            cache.setDescription(Geocache.getAlternativeListingText(otherCode.trim()) + cache.getDescription());
         }
         final String size = xmlNodeChildText(ocCache, "size", OPENCACHING_NS);
         if (StringUtils.isNotBlank(size)) {
@@ -958,11 +1057,10 @@ public class GPXParser {
         if (input == null) {
             return null;
         }
-        final String trimmed = input.trim();
-        final java.util.regex.Matcher matcher = PATTERN_GEOCODE.matcher(trimmed);
-        if (matcher.find()) {
-            final String geocode = matcher.group();
-            if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
+        final Matcher matcher = PATTERN_GEOCODE.matcher(input);
+        while (matcher.find()) {
+            final String geocode = matcher.group().toUpperCase(Locale.US);
+            if (ConnectorFactory.getConnector(geocode) != ConnectorFactory.UNKNOWN_CONNECTOR) {
                 return geocode;
             }
         }
@@ -973,7 +1071,7 @@ public class GPXParser {
     // date parsing: tolerant of the handful of date formats found in real-world GPX files
     // ---------------------------------------------------------------------------------------------------
 
-    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
+    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d+");
 
     @Nullable
     private static Date parseDate(final String input) {
@@ -983,17 +1081,19 @@ public class GPXParser {
         String body = input.trim();
         body = PATTERN_MILLISECONDS.matcher(body).replaceFirst("");
         final String[] patterns = {
-            "yyyy-MM-dd'T'HH:mm:ss'Z'",
-            "yyyy-MM-dd'T'HH:mm:ssZ",
+            "yyyy-MM-dd'T'HH:mm:ssXXX",
+            "yyyy-MM-dd'T'HH:mm:ssXX",
             "yyyy-MM-dd'T'HH:mm:ss",
             "yyyy-MM-dd",
         };
         for (final String pattern : patterns) {
-            try {
-                final SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
-                return format.parse(body);
-            } catch (final ParseException ignored) {
-                // try next pattern
+            final SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
+            format.setLenient(false);
+            format.setTimeZone(TimeZone.getDefault());
+            final ParsePosition position = new ParsePosition(0);
+            final Date parsed = format.parse(body, position);
+            if (parsed != null && position.getIndex() == body.length()) {
+                return parsed;
             }
         }
         return null;
@@ -1033,7 +1133,8 @@ public class GPXParser {
     @Nullable
     private static String xmlNodeChildText(final XmlNode node, final String name, final Set<String> namespaces) {
         final XmlNode c = xmlNodeChild(node, name, namespaces);
-        return c == null ? null : c.getValue();
+        // A present, empty element must be able to clear an earlier fallback value.
+        return c == null ? null : StringUtils.defaultString(c.getValue());
     }
 
     /** Like {@link #xmlNodeChild}, but returns ALL matching children (namespace-tolerant, by local name), not just the first. */
@@ -1051,26 +1152,27 @@ public class GPXParser {
     private static Geopoint xmlNodeReadLatLon(final XmlNode node) {
         final String lat = xmlNodeAttrValue(node, "lat", null);
         final String lon = xmlNodeAttrValue(node, "lon", null);
-        return toGeopoint(lat, lon);
+        return toGeopoint(lat, lon, false);
     }
 
     @Nullable
-    private static Geopoint xmlNodeReadLatLon(final XmlPullParser parser) {
-        return toGeopoint(attr(parser, "lat"), attr(parser, "lon"));
+    private static Geopoint toGeopoint(final String lat, final String lon, final boolean zeroFill) {
+        final Double latitude = parseCoordinate(lat, 90);
+        final Double longitude = parseCoordinate(lon, 180);
+        if (!zeroFill && (latitude == null || longitude == null || (latitude == 0 && longitude == 0))) {
+            return null;
+        }
+        return new Geopoint(latitude == null ? 0 : latitude, longitude == null ? 0 : longitude);
     }
 
     @Nullable
-    private static Geopoint toGeopoint(final String lat, final String lon) {
-        if (StringUtils.isBlank(lat) || StringUtils.isBlank(lon)) {
+    private static Double parseCoordinate(final String value, final int limit) {
+        if (StringUtils.isBlank(value)) {
             return null;
         }
         try {
-            final double latD = Double.parseDouble(lat);
-            final double lonD = Double.parseDouble(lon);
-            if (latD == 0 && lonD == 0) {
-                return null;
-            }
-            return new Geopoint(latD, lonD);
+            final double coordinate = Double.parseDouble(value.trim());
+            return Double.isFinite(coordinate) && Math.abs(coordinate) <= limit ? coordinate : null;
         } catch (final NumberFormatException e) {
             return null;
         }
@@ -1091,8 +1193,14 @@ public class GPXParser {
         return XmlUtils.getLocalName(raw);
     }
 
-    private static WptParseMode orDefault(final WptParseMode candidate, final WptParseMode fallback) {
-        return candidate == null ? fallback : candidate;
+    private ParseMode adjustParsemode(final ParseMode candidate) {
+        if (candidate != null) {
+            this.mode = candidate;
+        }
+        if (this.mode == ParseMode.ABORT) {
+            throw new AbortException();
+        }
+        return this.mode;
     }
 
     /** Reads the text content of the element the parser is currently positioned at (a {@code START_TAG}). */
@@ -1128,16 +1236,3 @@ public class GPXParser {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

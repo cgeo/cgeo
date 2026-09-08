@@ -59,11 +59,18 @@ public class GPXParserTest {
     }
 
     private static RecordingGPXParseHooks parse(final String resourceName) throws IOException, XmlPullParserException {
-        return parse(resourceName, new GPXParser());
+        return parse(resourceName, new RecordingGPXParseHooks());
+    }
+
+    private static RecordingGPXParseHooks parse(final String resourceName, final RecordingGPXParseHooks hooks) throws IOException, XmlPullParserException {
+        return parse(resourceName, new GPXParser(), hooks);
     }
 
     private static RecordingGPXParseHooks parse(final String resourceName, final GPXParser parser) throws IOException, XmlPullParserException {
-        final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
+        return parse(resourceName, parser, new RecordingGPXParseHooks());
+    }
+
+        private static RecordingGPXParseHooks parse(final String resourceName, final GPXParser parser, final RecordingGPXParseHooks hooks) throws IOException, XmlPullParserException {
         try (InputStream is = openResource(resourceName)) {
             parser.parse(is, hooks);
         }
@@ -93,7 +100,7 @@ public class GPXParserTest {
         assertThat(cache.isOnWatchlist()).isFalse();
         assertThat(cache.getAttributes()).isNotEmpty();
 
-        final List<LogEntry> logs = hooks.getItems().get(0).getLogs();
+        final List<LogEntry> logs = hooks.getGlobalItems().get(0).logs;
         assertThat(logs).hasSize(5);
         assertThat(logs.get(0).author).isEqualTo("pheenyx");
         assertThat(logs.get(0).logType).isEqualTo(LogType.FOUND_IT);
@@ -116,7 +123,7 @@ public class GPXParserTest {
         assertThat(cache.getOwnerDisplayName()).isEqualTo("vptsz");
         assertThat(cache.getLocation()).isEqualTo("Baden-Württemberg, Germany");
 
-        final List<LogEntry> logs = hooks.getItems().get(0).getLogs();
+        final List<LogEntry> logs = hooks.getGlobalItems().get(0).logs;
         assertThat(logs).hasSize(6);
         assertThat(logs.get(0).author).isEqualTo("hanslinde");
         assertThat(logs).allMatch(log -> log.logType == LogType.FOUND_IT);
@@ -130,16 +137,19 @@ public class GPXParserTest {
         assertThat(hooks.getGeocaches()).isEmpty();
 
         final Waypoint parking = hooks.getWaypoints().get(0);
-        assertThat(parking.getName()).isEqualTo("0031J2H");
+        assertThat(parking.getName()).isEqualTo("Parkplatz");
+        assertThat(parking.getPrefix()).isEqualTo("00");
+        assertThat(parking.getLookup()).isEqualTo("---");
         assertThat(parking.getCoords()).isEqualTo(new Geopoint(49.317517, 8.545083));
         assertThat(parking.getGeocode()).isEqualTo("GC31J2H");
 
         final Waypoint stage = hooks.getWaypoints().get(1);
-        assertThat(stage.getName()).isEqualTo("S131J2H");
+        assertThat(stage.getName()).isEqualTo("Station 1");
+        assertThat(stage.getPrefix()).isEqualTo("S1");
         assertThat(stage.getGeocode()).isEqualTo("GC31J2H");
 
         // order preserved (document order)
-        assertThat(hooks.getItems()).extracting(RecordingGPXParseHooks.RecordedItem::getKind)
+        assertThat(hooks.getGlobalItems()).extracting(i -> i.kind)
             .containsExactly(RecordingGPXParseHooks.ItemKind.WAYPOINT, RecordingGPXParseHooks.ItemKind.WAYPOINT);
     }
 
@@ -149,13 +159,13 @@ public class GPXParserTest {
 
         // the file name ("train in two parts") reflects that it contains two separate <trk> elements
         assertThat(hooks.getTracks()).hasSize(2);
-        final int totalPointCount = hooks.getTracks().stream().mapToInt(RecordingGPXParseHooks.RecordedTrack::getTotalPointCount).sum();
+        final int totalPointCount = hooks.getTracks().stream().mapToInt(i -> i.totalPointCount).sum();
         assertThat(totalPointCount).isEqualTo(648);
 
-        final RecordingGPXParseHooks.RecordedTrack firstTrack = hooks.getTracks().get(0);
-        final List<ICoordinate> firstSegmentPoints = firstTrack.getSegments().get(0).getPoints();
+        final RecordingGPXParseHooks.Track firstTrack = hooks.getTracks().get(0);
+        final List<ICoordinate> firstSegmentPoints = firstTrack.segments.get(0).points;
         assertThat(firstSegmentPoints).isNotEmpty();
-        assertThat(firstTrack.getSegments().get(0).getPointCount()).isEqualTo(firstSegmentPoints.size());
+        assertThat(firstTrack.segments.get(0).pointCount).isEqualTo(firstSegmentPoints.size());
         final ICoordinate first = firstSegmentPoints.get(0);
         assertThat(first).isInstanceOf(NamedGeoCoordinate.class);
         assertThat(first.getCoords()).isEqualTo(new Geopoint(47.464799880981445, 11.045894622802734));
@@ -163,21 +173,22 @@ public class GPXParserTest {
 
         // every track point is also visible via the global, chronological items list (no classification
         // applies to plain track points without sym/type, so they all end up as (named) coordinates)
-        assertThat(hooks.getItems()).hasSize(648);
+        assertThat(hooks.getGlobalItems()).hasSize(648);
     }
 
     @Test
     public void testParseTrackFileCoordinatesOnly() throws Exception {
-        final GPXParser parser = new GPXParser().setDefaultTrackParseMode(GPXParser.WptParseMode.COORDINATES_ONLY);
-        final RecordingGPXParseHooks hooks = parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser);
+        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY);
+        final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
+        parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser, hooks);
 
         assertThat(hooks.getTracks()).hasSize(2);
-        final int totalPointCount = hooks.getTracks().stream().mapToInt(RecordingGPXParseHooks.RecordedTrack::getTotalPointCount).sum();
+        final int totalPointCount = hooks.getTracks().stream().mapToInt(i -> i.totalPointCount).sum();
         assertThat(totalPointCount).isEqualTo(648);
         // COORDINATES_ONLY still reports each point via onCoordinate/onNamedCoordinate (just without ever
         // attempting geocache/waypoint classification) - callers can build their own point list from this
-        assertThat(hooks.getItems()).hasSize(648);
-        final ICoordinate first = hooks.getTracks().get(0).getSegments().get(0).getPoints().get(0);
+        assertThat(hooks.getGlobalItems()).hasSize(648);
+        final ICoordinate first = hooks.getTracks().get(0).segments.get(0).points.get(0);
         assertThat(first.getCoords()).isEqualTo(new Geopoint(47.464799880981445, 11.045894622802734));
         // no geocache/waypoint classification whatsoever happens in COORDINATES_ONLY mode
         assertThat(hooks.getGeocaches()).isEmpty();
@@ -186,67 +197,71 @@ public class GPXParserTest {
 
     @Test
     public void testTrackWithSkipModeStillReportsAccurateCounts() throws Exception {
-        final GPXParser parser = new GPXParser().setDefaultTrackParseMode(GPXParser.WptParseMode.SKIP);
-        final RecordingGPXParseHooks hooks = parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser);
+        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.SKIP);
+        final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
+        hooks.setModes(GPXParser.ParseMode.FULL, GPXParser.ParseMode.SKIP, GPXParser.ParseMode.SKIP);
+        parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser, hooks);
 
         assertThat(hooks.getTracks()).hasSize(2);
-        final int totalPointCount = hooks.getTracks().stream().mapToInt(RecordingGPXParseHooks.RecordedTrack::getTotalPointCount).sum();
+        final int totalPointCount = hooks.getTracks().stream().mapToInt(i -> i.totalPointCount).sum();
         assertThat(totalPointCount).isEqualTo(648);
         // SKIP never fires any per-point hook at all, so nothing is recorded beyond the counts themselves
-        assertThat(hooks.getItems()).isEmpty();
-        for (final RecordingGPXParseHooks.RecordedTrack track : hooks.getTracks()) {
-            for (final RecordingGPXParseHooks.RecordedTrackSegment segment : track.getSegments()) {
-                assertThat(segment.getPoints()).isEmpty();
-                assertThat(segment.getPointCount()).isGreaterThan(0);
+        assertThat(hooks.getGlobalItems()).isEmpty();
+        for (final RecordingGPXParseHooks.Track track : hooks.getTracks()) {
+            for (final RecordingGPXParseHooks.NamedCoordinateList segment : track.segments) {
+                assertThat(segment.points).isEmpty();
+                assertThat(segment.pointCount).isGreaterThan(0);
             }
         }
     }
 
     @Test
     public void testGeocacheSkipModeNeverFiresHook() throws Exception {
-        final GPXParser parser = new GPXParser().setGeocacheParseMode(GPXParser.WptParseMode.SKIP);
+        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.SKIP);
         final RecordingGPXParseHooks hooks = parse("/xml/gc3t1xg_gsak_110.gpx", parser);
 
         // requirement: SKIP means the hook is never called at all - not even with a placeholder
-        assertThat(hooks.getItems()).isEmpty();
+        assertThat(hooks.getGlobalItems()).isEmpty();
         assertThat(hooks.getGeocaches()).isEmpty();
     }
 
     @Test
     public void testGeocacheCoordinatesOnlyModeReportedAsNamedCoordinate() throws Exception {
-        final GPXParser parser = new GPXParser().setGeocacheParseMode(GPXParser.WptParseMode.COORDINATES_ONLY);
+        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY);
         final RecordingGPXParseHooks hooks = parse("/xml/gc3t1xg_gsak_110.gpx", parser);
 
         // requirement: COORDINATES_ONLY means it is never reported as a Geocache, only as a (named) coordinate
         assertThat(hooks.getGeocaches()).isEmpty();
-        assertThat(hooks.getItems()).hasSize(1);
-        final RecordingGPXParseHooks.RecordedItem item = hooks.getItems().get(0);
-        assertThat(item.getKind()).isEqualTo(RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);
-        assertThat(item.getCoordinate().getCoords()).isEqualTo(new Geopoint(50.10745, 8.6587));
+        assertThat(hooks.getGlobalItems()).hasSize(1);
+        final RecordingGPXParseHooks.Item item = hooks.getGlobalItems().get(0);
+        assertThat(item.kind).isEqualTo(RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);
+        assertThat(item.coordinate.getCoords()).isEqualTo(new Geopoint(50.10745, 8.6587));
         // COORDINATES_ONLY never reads extensions, so the name is the wpt's own <name> ("GC3T1XG"), not the
         // groundspeak:name ("Abus") which lives inside <extensions>
-        assertThat(((NamedGeoCoordinate) item.getCoordinate()).getName()).isEqualTo("GC3T1XG");
+        assertThat(((NamedGeoCoordinate) item.coordinate).getName()).isEqualTo("GC3T1XG");
     }
 
     @Test
     public void testWaypointSkipAndCoordinatesOnlyModes() throws Exception {
-        final RecordingGPXParseHooks skipHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setWaypointParseMode(GPXParser.WptParseMode.SKIP));
-        assertThat(skipHooks.getItems()).isEmpty();
+        final RecordingGPXParseHooks skipHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(GPXParser.ParseMode.SKIP));
+        assertThat(skipHooks.getGlobalItems()).isEmpty();
 
-        final RecordingGPXParseHooks coordHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setWaypointParseMode(GPXParser.WptParseMode.COORDINATES_ONLY));
+        final RecordingGPXParseHooks coordHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY));
         assertThat(coordHooks.getWaypoints()).isEmpty();
-        assertThat(coordHooks.getItems()).hasSize(2);
-        assertThat(coordHooks.getItems()).allMatch(item -> item.getKind() == RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);
+        assertThat(coordHooks.getGlobalItems()).hasSize(2);
+        assertThat(coordHooks.getGlobalItems()).allMatch(item -> item.kind == RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);
     }
 
     @Test
-    public void testInvalidLatLonIsSkippedSilently() throws Exception {
+    public void testWaypointWithoutCoordinatesIsRetained() throws Exception {
         final RecordingGPXParseHooks hooks = parse("/gc31j2h_wpts_empty_coord.gpx");
 
-        // one valid wpt (0031J2H) and one with lat="0" lon="0" (invalid, treated as if it didn't exist)
-        assertThat(hooks.getItems()).hasSize(1);
-        assertThat(hooks.getWaypoints()).hasSize(1);
-        assertThat(hooks.getWaypoints().get(0).getName()).isEqualTo("0031J2H");
+        assertThat(hooks.getWaypoints()).hasSize(2);
+        final Waypoint stage = hooks.getWaypoints().get(1);
+        assertThat(stage.getName()).isEqualTo("Station 1");
+        assertThat(stage.getCoords()).isNull();
+        assertThat(stage.isUserDefined()).isFalse();
+        assertThat(stage.isOriginalCoordsEmpty()).isTrue();
     }
 
     @Test
@@ -287,10 +302,11 @@ public class GPXParserTest {
         for (final Waypoint waypoint : hooks.getWaypoints()) {
             assertThat(waypoint.getGeocode()).isEqualTo("TC99UN");
         }
-        assertThat(hooks.getWaypoints().get(0).getName()).isEqualTo("TC99UN1");
+        assertThat(hooks.getWaypoints().get(0).getName()).isEqualTo("Stage Two");
+        assertThat(hooks.getWaypoints().get(0).getPrefix()).isEqualTo("TC99UN1");
 
         // order preserved: geocache first, then its 4 child waypoints
-        assertThat(hooks.getItems()).extracting(RecordingGPXParseHooks.RecordedItem::getKind)
+        assertThat(hooks.getGlobalItems()).extracting(item -> item.kind)
             .containsExactly(
                 RecordingGPXParseHooks.ItemKind.GEOCACHE,
                 RecordingGPXParseHooks.ItemKind.WAYPOINT,
@@ -339,15 +355,15 @@ public class GPXParserTest {
 
     private static void assertParsesWithContent(final String resourceName) throws Exception {
         final RecordingGPXParseHooks hooks = parse(resourceName);
-        final int totalItems = hooks.getItems().size()
+        final int totalItems = hooks.getGlobalItems().size()
             + hooks.getRoutes().size()
             + hooks.getTracks().size();
         assertThat(totalItems)
             .withFailMessage("Expected at least one geocache/waypoint/coordinate/route/track in %s", resourceName)
             .isGreaterThan(0);
 
-        for (final RecordingGPXParseHooks.RecordedItem item : hooks.getItems()) {
-            assertThat(item.getCoordinate()).withFailMessage("null coordinate in %s", resourceName).isNotNull();
+        for (final RecordingGPXParseHooks.Item item : hooks.getGlobalItems()) {
+            assertThat(item.coordinate).withFailMessage("null coordinate in %s", resourceName).isNotNull();
         }
     }
 }

@@ -15,52 +15,55 @@ import java.util.List;
 public interface IGPXParseHooks {
 
     /** Called once, right after the root {@code <gpx>} element (and its {@code creator} attribute, if any) was read. */
-    void onInit(@Nullable String gpxCreatorOrName);
+    GPXParser.ParseMode onInit(@Nullable String gpxCreatorOrName);
 
     /**
-     * Called only when {@code geocacheParseMode} is {@link GPXParser.WptParseMode#FULL}
+     * Called only when {@code geocacheParseMode} is {@link GPXParser.ParseMode#FULL}
      * @param logs the geocache's logs, in document order; {@code null} if no log tag was found
      */
-    void onGeocache(@NonNull Geocache geocache, @Nullable List<LogEntry> logs);
+    GPXParser.ParseMode onGeocache(@NonNull Geocache geocache, @Nullable List<LogEntry> logs);
 
     /**
-     * Called only when {@code waypointParseMode} is {@link GPXParser.WptParseMode#FULL}
+     * Called only when {@code waypointParseMode} is {@link GPXParser.ParseMode#FULL}
+     * Coordinates may be {@code null}, e.g. for an unsolved stage. Extension flags, prefix and
+     * listing/user notes are populated before this callback. Attaching the waypoint to its parent
+     * (and marking that parent's coordinates as user-modified for an ORIGINAL waypoint) is the caller's responsibility.
      * @param parentGeocode best-effort resolved parent geocode (see D1/D6); may be {@code null}
      */
-    void onWaypoint(@NonNull Waypoint waypoint, @Nullable String parentGeocode);
+    GPXParser.ParseMode onWaypoint(@NonNull Waypoint waypoint, @Nullable String parentGeocode);
 
-    /** Bare coordinate: only lat/lon, nothing else usable. */
-    void onCoordinate(ICoordinate coordinate);
+    /** Bare coordinate; missing or invalid latitude/longitude components are replaced with zero. */
+    GPXParser.ParseMode onCoordinate(ICoordinate coordinate);
 
-    /** Has a name and/or elevation and/or geocode, but wasn't classified as geocache/waypoint. */
-    void onNamedCoordinate(NamedGeoCoordinate coordinate);
+    /** Named coordinate; missing or invalid latitude/longitude components are replaced with zero. */
+    GPXParser.ParseMode onNamedCoordinate(NamedGeoCoordinate coordinate);
 
-    /** @return the {@link GPXParser.WptParseMode} to use for this specific route (null for default) */
+    /** @return the {@link GPXParser.ParseMode} to use for this specific route (null for default) */
     @Nullable
-    GPXParser.WptParseMode onRouteStart();
+    GPXParser.ParseMode onRouteStart();
 
     /**
      * @param name       the route's {@code <name>}, if any; may be {@code null}
-     * @param pointCount number of {@code <rtept>} children with valid lat/lon
+     * @param pointCount number of {@code <rtept>} children, including entries with missing/invalid coordinates and skipped entries
      */
-    void onRouteEnd(@Nullable String name, int pointCount);
+    GPXParser.ParseMode onRouteEnd(@Nullable String name, int pointCount);
 
-    /** @return the {@link GPXParser.WptParseMode} to use for this specific track; (null for default) */
+    /** @return the {@link GPXParser.ParseMode} to use for this specific track; (null for default) */
     @Nullable
-    GPXParser.WptParseMode onTrackStart();
+    GPXParser.ParseMode onTrackStart();
 
-    /** @return the {@link GPXParser.WptParseMode} to use for this specific track segment; (null for default) */
+    /** @return the {@link GPXParser.ParseMode} to use for this specific track segment; (null for default) */
     @Nullable
-    GPXParser.WptParseMode onTrackSegmentStart();
+    GPXParser.ParseMode onTrackSegmentStart();
 
     /**
      * @param name       the track segment's {@code <name>}, if any; may be {@code null}
-     * @param pointCount number of {@code <trkpt>} children with valid lat/lon
+     * @param pointCount number of {@code <trkpt>} children, including entries with missing/invalid coordinates and skipped entries
      */
-    void onTrackSegmentEnd(@Nullable String name, int pointCount);
+    GPXParser.ParseMode onTrackSegmentEnd(@Nullable String name, int pointCount);
 
     /**@param name the track's {@code <name>}, if any; may be {@code null} */
-    void onTrackEnd(@Nullable String name, int segmentCount, int totalPointCount);
+    GPXParser.ParseMode onTrackEnd(@Nullable String name, int segmentCount, int totalPointCount);
 }
 
 

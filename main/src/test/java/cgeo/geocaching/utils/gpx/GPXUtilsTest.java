@@ -26,7 +26,8 @@ public class GPXUtilsTest {
 
         assertThat(hooks.getWaypoints()).hasSize(1);
         final Waypoint waypoint = hooks.getWaypoints().get(0);
-        assertThat(waypoint.getName()).isEqualTo("0031J2H");
+        assertThat(waypoint.getName()).isEqualTo("Parkplatz");
+        assertThat(waypoint.getPrefix()).isEqualTo("00");
         assertThat(waypoint.getGeocode()).isEqualTo("GC31J2H");
     }
 
@@ -37,7 +38,7 @@ public class GPXUtilsTest {
         try (InputStream is = GPXParserTest.openResource("/pq_error.zip")) {
             assertThat(GPXUtils.parseZip(is, parser, hooks)).isEqualTo(0);
         }
-        assertThat(hooks.getItems()).isEmpty();
+        assertThat(hooks.getGlobalItems()).isEmpty();
     }
 
     @Test
@@ -47,7 +48,7 @@ public class GPXUtilsTest {
         try (InputStream is = GPXParserTest.openResource("/pq_entities.zip")) {
             assertThat(GPXUtils.parseZip(is, parser, hooks)).isEqualTo(1);
         }
-        assertThat(hooks.getItems()).isNotEmpty();
+        assertThat(hooks.getGlobalItems()).isNotEmpty();
     }
 
     @Test
@@ -57,7 +58,7 @@ public class GPXUtilsTest {
         try (InputStream is = GPXParserTest.openResource("/pq_cp437.zip")) {
             assertThat(GPXUtils.parseZip(is, parser, hooks, "cp437")).isEqualTo(1);
         }
-        assertThat(hooks.getItems()).isNotEmpty();
+        assertThat(hooks.getGlobalItems()).isNotEmpty();
     }
 
     @Test
@@ -73,7 +74,7 @@ public class GPXUtilsTest {
         try (InputStream is = GPXParserTest.openResource("/pq_entities.zip")) {
             assertThat(GPXUtils.parseZip(is, parser, secondHooks)).isEqualTo(1);
         }
-        assertThat(secondHooks.getItems()).isNotEmpty();
+        assertThat(secondHooks.getGlobalItems()).isNotEmpty();
     }
 }
 
