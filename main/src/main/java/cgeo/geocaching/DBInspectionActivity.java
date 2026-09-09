@@ -61,7 +61,11 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
 
         databaseGrid = new DatabaseGrid()
                 .setDatabase(DataStore.getDatabase(true))
-                .onTablesLoaded(tables -> binding.activityContent.post(() -> showTableSelection(tables)))
+                .onTablesLoaded(tables -> binding.activityContent.post(() -> {
+                    if (databaseGrid != null && !databaseGrid.hasCurrentTable()) {
+                        showTableSelection(tables);
+                    }
+                }))
                 .onConfigurationChanged(json -> {
                     Settings.putStringDirect(databaseConfigKey(), json);
                     highlightButton(binding.buttonConfigColumns, grid().hasHiddenColumns());
@@ -72,9 +76,11 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
                 .adjustableFixedBoundary(true)
                 .onCellLongClick(this::showCell)
                 .onSortChanged(order -> showHint(addSortIndicator(order)));
+        databaseGrid.readState(savedInstanceState);
         gridView = new GridView(this);
         gridView.setGrid(databaseGrid);
         binding.gridContainer.addView(gridView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        gridView.readState(savedInstanceState);
         configureUI();
     }
 
@@ -203,6 +209,9 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
 
     @Override
     protected void onDestroy() {
+        if (databaseGrid != null) {
+            databaseGrid.close();
+        }
         DataStore.releaseDatabase(true);
         super.onDestroy();
     }
@@ -210,6 +219,7 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-//        outState.putParcelable(BUNDLE_TOOLKIT, toolkit);
+        grid().addState(outState);
+        gridView.addState(outState);
     }
 }

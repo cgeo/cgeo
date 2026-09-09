@@ -35,6 +35,7 @@ android {
     compileSdk = 36
 
     compileOptions {
+        // support new Java language features on older devices
         coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -366,7 +367,7 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
 
     // DB inspection (new library)
-    implementation 'com.github.moving-bits:grid:12e7675c6e'
+    implementation 'com.github.moving-bits:grid:-SNAPSHOT'
 
     // Jackson XML processing
     String jacksonVersion = '2.21.6'
