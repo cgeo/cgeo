@@ -2,14 +2,10 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
@@ -17,8 +13,8 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.StringUtils;
 
 
 public class NumberRangeFilter<T extends Number & Comparable<T>> {
@@ -26,8 +22,10 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     private T minRangeValue;
     private T maxRangeValue;
 
-    private T specialNumber;
-    private Boolean includeSpecialNumber;
+    private final Set<T> specialNumberInclude = new HashSet<>();
+    private final Set<T> specialNumberExclude = new HashSet<>();
+
+    private boolean includeNull = false;
 
     private final Func1<String, T> numberParser;
     private final Func1<Float, T> numberConverter;
@@ -38,8 +36,18 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public boolean isInRange(final T value) {
-        if (includeSpecialNumber != null && specialNumber != null && isEqualValue(value, specialNumber)) {
-            return includeSpecialNumber;
+        if (value == null) {
+            return includeNull;
+        }
+        for (T special : specialNumberInclude) {
+            if (isEqualValue(value, special)) {
+                return true;
+            }
+        }
+        for (T special : specialNumberExclude) {
+            if (isEqualValue(value, special)) {
+                return false;
+            }
         }
 
         if (minRangeValue != null && minRangeValue.compareTo(value) > 0) {
@@ -61,16 +69,31 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return maxRangeValue;
     }
 
-    public void setSpecialNumber(final T specialNumber) {
-        this.specialNumber = specialNumber;
+    public void setSpecialNumbers(final Collection<T> include, final Collection<T> exclude) {
+        this.specialNumberInclude.clear();
+        if (include != null) {
+            this.specialNumberInclude.addAll(include);
+        }
+        this.specialNumberExclude.clear();
+        if (exclude != null) {
+            this.specialNumberExclude.addAll(exclude);
+        }
     }
 
-    public Boolean getIncludeSpecialNumber() {
-        return includeSpecialNumber;
+    public Set<T> getSpecialNumberInclude() {
+        return specialNumberInclude;
     }
 
-    public void setIncludeSpecialNumber(final Boolean includeSpecialNumber) {
-        this.includeSpecialNumber = includeSpecialNumber;
+    public Set<T> getSpecialNumberExclude() {
+        return specialNumberExclude;
+    }
+
+    public void setIncludeNull(final boolean includeNull) {
+        this.includeNull = includeNull;
+    }
+
+    public boolean getIncludeNull() {
+        return includeNull;
     }
 
     public Collection<T> getValuesInRange(final T[] values) {
@@ -110,58 +133,31 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         setMinMaxRange(foundMinUnlimited ? null : min, foundMaxUnlimited ? null : max);
     }
 
-
-    public void setConfig(final List<String> config) {
-        if (config == null || config.size() < 2) {
-            return;
-        }
-
-        minRangeValue = parseString(config.get(0));
-        maxRangeValue = parseString(config.get(1));
-        specialNumber = config.size() >= 3 ? parseString(config.get(2)) : null;
-        includeSpecialNumber = config.size() >= 4 ? Boolean.valueOf(config.get(3)) : null;
-    }
-
-    public List<String> getConfig() {
-        final List<String> config = new ArrayList<>(Arrays.asList(
-                minRangeValue == null ? "-" : String.valueOf(minRangeValue),
-                maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
-        if (specialNumber != null && includeSpecialNumber != null) {
-            config.add(String.valueOf(specialNumber));
-            config.add(Boolean.toString(includeSpecialNumber));
-        }
-        return config;
-    }
-
-    private T parseString(final String text) {
-        if (StringUtils.isBlank(text) || "-".equals(text)) {
-            return null;
-        }
-        try {
-            return this.numberParser.call(text);
-        } catch (Exception e) {
-            Log.w("Problem parsing '" + text + "' as a number", e);
-            return null;
-        }
-    }
-
     public boolean isFilled() {
-        return minRangeValue != null || maxRangeValue != null || (specialNumber != null && includeSpecialNumber != null);
+        return minRangeValue != null || maxRangeValue != null || includeNull || !specialNumberInclude.isEmpty() || !specialNumberExclude.isEmpty();
     }
 
     public void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression, final Func1<T, T> valueConverter) {
-        final boolean hasSpecial = specialNumber != null && includeSpecialNumber != null;
+        final boolean hasSpecial = !specialNumberInclude.isEmpty() || !specialNumberExclude.isEmpty();
         final boolean hasMinMax = minRangeValue != null || maxRangeValue != null;
 
-        if (valueExpression == null || (!hasSpecial && !hasMinMax)) {
+        if (valueExpression == null || (!hasSpecial && !hasMinMax && !includeNull)) {
             sqlBuilder.addWhereAlwaysInclude();
         } else {
-            if (hasSpecial) {
-                sqlBuilder.openWhere(includeSpecialNumber ? SqlBuilder.WhereType.OR : SqlBuilder.WhereType.AND);
-                final T sn = valueConverter == null ? specialNumber : valueConverter.call(specialNumber);
-                if (includeSpecialNumber) {
+            if (includeNull || !specialNumberInclude.isEmpty()) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
+                if (includeNull) {
+                    sqlBuilder.addWhere(valueExpression + " IS NULL");
+                }
+                for (T specialNumber : specialNumberInclude) {
+                    final T sn = valueConverter == null ? specialNumber : valueConverter.call(specialNumber);
                     sqlBuilder.addWhere(valueExpression + " = " + sn);
-                } else {
+                }
+            }
+            if (!specialNumberExclude.isEmpty()) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
+                for (T specialNumber : specialNumberExclude) {
+                    final T sn = valueConverter == null ? specialNumber : valueConverter.call(specialNumber);
                     sqlBuilder.addWhere(valueExpression + " <> " + sn);
                 }
             }
@@ -177,7 +173,10 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
             }
             sqlBuilder.closeWhere();
 
-            if (hasSpecial) {
+            if (!specialNumberExclude.isEmpty()) {
+                sqlBuilder.closeWhere();
+            }
+            if (includeNull || !specialNumberInclude.isEmpty()) {
                 sqlBuilder.closeWhere();
             }
 
@@ -206,9 +205,32 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         if (node != null) {
             minRangeValue = floatToValue(JsonUtils.getFloat(node, "min", null));
             maxRangeValue = floatToValue(JsonUtils.getFloat(node, "max", null));
-            specialNumber = floatToValue(JsonUtils.getFloat(node, "special", null));
-            includeSpecialNumber = JsonUtils.getBoolean(node, "includeSpecial", false);
+            includeNull = JsonUtils.getBoolean(node, "includeNull", false);
+            final Set<T> specialNumberInclude = getArrayNode(node, "specialInclude");
+            final Set<T> specialNumberExclude = getArrayNode(node, "specialExclude");
+
+            //legacy
+            final T legacySpecialNumber = floatToValue(JsonUtils.getFloat(node, "special", null));
+            final Boolean includeSpecialNumber = JsonUtils.getBoolean(node, "includeSpecial", false);
+            if (legacySpecialNumber != null && includeSpecialNumber != null) {
+                (includeSpecialNumber ? specialNumberInclude : specialNumberExclude).add(legacySpecialNumber);
+            }
+            setSpecialNumbers(specialNumberInclude, specialNumberExclude);
         }
+    }
+
+    private Set<T> getArrayNode(final JsonNode node, final String key) {
+        final Set<T> result = new HashSet<>();
+        final JsonNode arrayNode = JsonUtils.get(node, key);
+        if (arrayNode instanceof ArrayNode) {
+            for (JsonNode specialNumberNode : arrayNode) {
+                final Float specialNumberFloat = JsonUtils.toFloat(specialNumberNode, null);
+                if (specialNumberFloat != null) {
+                    result.add(floatToValue(specialNumberFloat));
+                }
+            }
+        }
+        return result;
     }
 
     private T floatToValue(final Float value) {
@@ -220,10 +242,17 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setFloat(node, "min", minRangeValue);
         JsonUtils.setFloat(node, "max", maxRangeValue);
-        if (specialNumber != null && includeSpecialNumber != null) {
-            JsonUtils.setFloat(node, "special", specialNumber);
-            JsonUtils.setBoolean(node, "includeSpecial", includeSpecialNumber);
+        JsonUtils.setBoolean(node, "includeNull", includeNull);
+        final ArrayNode specialNumberExcludeNode = JsonUtils.createArrayNode();
+        for (T specialNumber : specialNumberExclude) {
+            specialNumberExcludeNode.add(JsonUtils.fromFloat(specialNumber));
         }
+        JsonUtils.set(node, "specialExclude", specialNumberExcludeNode);
+        final ArrayNode specialNumberIncludeNode = JsonUtils.createArrayNode();
+        for (T specialNumber : specialNumberInclude) {
+            specialNumberIncludeNode.add(JsonUtils.fromFloat(specialNumber));
+        }
+        JsonUtils.set(node, "specialInclude", specialNumberIncludeNode);
         return node;
     }
 
