@@ -105,7 +105,7 @@ final class GPXFullWptParser {
     ICoordinate parse(@NonNull final XmlNode wptNode, @Nullable final String scriptUrl) {
         parsedLogs = null;
         parsedParentGeocode = null;
-        final Geopoint coords = GPXUtils.gpxNodeReadLatLon(wptNode);
+        final Geopoint coords = GPXUtils.gpxGeopoint(wptNode);
 
         final String rawName = normalizeName(wptNode.getChildValue("name"), scriptUrl);
         final String desc = wptNode.getChildValue("desc");
@@ -129,12 +129,11 @@ final class GPXFullWptParser {
         final boolean wasTerraChildWaypoint = this.terraChildWaypoint;
         final boolean isTerraChildWaypointMarker = "GC_WayPoint1".equals(StringUtils.trim(desc));
 
-        final XmlNode base = GPXUtils.extensionsBase(wptNode);
         final boolean isGeocache = Strings.CI.contains(type, "geocache")
                 || Strings.CI.contains(sym, "geocache")
                 || Strings.CI.contains(sym, "waymark")
                 || (!wasTerraChildWaypoint && (Strings.CI.contains(sym, "terracache")
-                    || base.hasChild("cache") || base.hasChild("terracache")));
+                || GPXUtils.gpxChild(wptNode, "cache", null) != null || GPXUtils.gpxChild(wptNode, "terracache", null) != null));
         final boolean isWaypoint = !isGeocache && (Strings.CI.contains(type, "waypoint") || wasTerraChildWaypoint);
 
         if (isTerraChildWaypointMarker) {
@@ -153,8 +152,8 @@ final class GPXFullWptParser {
 
     /** Parses an entry without geocache or waypoint classification. */
     private static ICoordinate parseFallbackCoordinate(final String rawName, final XmlNode wptNode) {
-        final Geopoint coords = XmlUtils.parseGeopoint(GPXUtils.gpxNodeAttrValue(wptNode, "lat", null), GPXUtils.gpxNodeAttrValue(wptNode, "lon", null), true);
-        final Float elevation = GPXUtils.gpxNodeChildFloat(wptNode, "ele", null, null);
+        final Geopoint coords = XmlUtils.parseGeopoint(GPXUtils.gpxAttrValue(wptNode, "lat", null), GPXUtils.gpxAttrValue(wptNode, "lon", null), true);
+        final Float elevation = GPXUtils.gpxChildFloat(wptNode, "ele", null, null);
         if (StringUtils.isBlank(rawName) && elevation == null) {
             return coords;
         }
@@ -190,7 +189,7 @@ final class GPXFullWptParser {
         if (StringUtils.isNotBlank(cmt)) {
             cache.setDescription(XmlUtils.validate(cmt));
         }
-        final Date hidden = GPXUtils.gpxNodeChildDate(wptNode, "time", null, null);
+        final Date hidden = GPXUtils.gpxChildDate(wptNode, "time", null, null);
         if (hidden != null) {
             cache.setHidden(hidden);
         }
@@ -206,7 +205,7 @@ final class GPXFullWptParser {
         }
 
         parsedLogs = parseGeocacheExtensions(wptNode, cache);
-        final String urlName = StringUtils.defaultIfBlank(wptNode.getChildValue("urlname"), GPXUtils.gpxNodeChildText(wptNode.getChild("link"), "text", null));
+        final String urlName = StringUtils.defaultIfBlank(wptNode.getChildValue("urlname"), GPXUtils.gpxChildText(wptNode.getChild("link"), "text", null));
         if (Strings.CI.startsWith(cache.getGeocode(), "WM") && cache.getName().equalsIgnoreCase(cache.getGeocode()) && StringUtils.isNotBlank(urlName)) {
             cache.setName(urlName.trim());
         }
@@ -269,7 +268,7 @@ final class GPXFullWptParser {
         final String description = wptNode.getChildValue("desc");
         final String name = "GC_WayPoint1".equals(StringUtils.trim(description)) ? ""
                 : XmlUtils.validate(StringUtils.defaultIfBlank(description, StringUtils.trimToEmpty(rawName)));
-        final XmlNode base = GPXUtils.extensionsBase(wptNode);
+        //final XmlNode base = GPXUtils.extensionsBase(wptNode);
         final Waypoint waypoint = new Waypoint(name, WaypointType.fromGPXString(sym == null ? "" : sym, subtype), false);
         waypoint.setId(Waypoint.NEW_ID);
         waypoint.setCoords(coords);
@@ -279,7 +278,7 @@ final class GPXFullWptParser {
         }
 
         for (IGPXExtension extension : gpxExtensions) {
-            extension.enrichWaypoint(base, waypoint);
+            extension.enrichWaypoint(wptNode, waypoint);
         }
 
         if (!waypoint.isUserDefined() && coords == null) {
@@ -312,9 +311,8 @@ final class GPXFullWptParser {
      */
     @Nullable
     private String resolveParentGeocode(final XmlNode wptNode, final String rawName, final boolean isTerraChildWaypoint, final String scriptUrl) {
-        final XmlNode extensions = GPXUtils.extensionsBase(wptNode);
-        final XmlNode gsakExt = GPXUtils.gpxNodeChild(extensions, "wptExtension", GSAKGPXExtension.GSAK_NS);
-        final String gsakParent = GPXUtils.gpxNodeChildText(gsakExt, "Parent", GSAKGPXExtension.GSAK_NS);
+        final XmlNode gsakExt = GPXUtils.gpxChild(wptNode, "wptExtension", GSAKGPXExtension.GSAK_NS);
+        final String gsakParent = GPXUtils.gpxChildText(gsakExt, "Parent", GSAKGPXExtension.GSAK_NS);
         if (StringUtils.isNotBlank(gsakParent)) {
             return nameToGeocodeIndex.getOrDefault(gsakParent.trim().toLowerCase(Locale.US), gsakParent.trim());
         }
@@ -344,17 +342,13 @@ final class GPXFullWptParser {
 
     @Nullable
     private List<LogEntry> parseGeocacheExtensions(final XmlNode wptNode, final Geocache cache) {
-        final XmlNode base = GPXUtils.extensionsBase(wptNode);
-        if (base == null) {
-            return null;
-        }
         for (final IGPXExtension extension : gpxExtensions) {
-            extension.enrichGeocache(base, cache);
+            extension.enrichGeocache(wptNode, cache);
         }
 
         final List<LogEntry> logs = new ArrayList<>();
         for (IGPXExtension extension : gpxExtensions) {
-            final List<LogEntry> candidate = extension.extractLogs(base, cache);
+            final List<LogEntry> candidate = extension.extractLogs(wptNode, cache);
             if (candidate != null) {
                 logs.addAll(candidate);
             }

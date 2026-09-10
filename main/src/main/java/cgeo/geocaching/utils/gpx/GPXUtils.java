@@ -36,6 +36,9 @@ public final class GPXUtils {
     private static final String GPX_EXTENSION = ".gpx";
     private static final String DEFAULT_ENTRY_NAME_ENCODING = "UTF-8";
 
+    private static final Set<String> GPX_EXTENDED_NODES = Set.of("wpt", "rtept", "trkpt");
+    private static final String GPX_EXTENSIONS_NODENAME = "extensions";
+
     private GPXUtils() {
         // utility class
     }
@@ -105,7 +108,7 @@ public final class GPXUtils {
 
     @Nullable
     public static String readLinkUrl(@Nullable final XmlNode link) {
-        return StringUtils.defaultIfBlank(gpxNodeAttrValue(link, "href", null), gpxNodeChildText(link, "href", null));
+        return StringUtils.defaultIfBlank(gpxAttrValue(link, "href", null), gpxChildText(link, "href", null));
     }
 
     @Nullable
@@ -127,65 +130,90 @@ public final class GPXUtils {
      */
     @Nullable
     public static XmlNode extensionsBase(final XmlNode wptNode) {
-        final XmlNode extensions = gpxNodeChild(wptNode, "extensions", null);
-        return extensions != null ? extensions : wptNode;
+        return wptNode;
+        //final XmlNode extensions = gpxChild(wptNode, "extensions", null);
+        //return extensions != null ? extensions : wptNode;
     }
 
     @Nullable
-    public static XmlNode gpxNodeChild(final XmlNode node, final String name, final Set<String> namespaces) {
-        return node == null ? null : node.getChild(name, namespaces, true);
+    public static XmlNode gpxChild(final XmlNode node, final String name, final Set<String> namespaces) {
+        if (node == null) {
+            return null;
+        }
+        if (GPX_EXTENDED_NODES.contains(node.getLocalName())) {
+            final XmlNode extensions = node.getChild(GPX_EXTENSIONS_NODENAME, null, true);
+            if (extensions != null) {
+                final XmlNode extResult = extensions.getChild(name, namespaces, true);
+                if (extResult != null) {
+                    return extResult;
+                }
+            }
+        }
+        return node.getChild(name, namespaces, true);
     }
 
     @Nullable
-    public static String gpxNodeChildText(final XmlNode node, final String name, final Set<String> namespaces) {
-        final XmlNode c = gpxNodeChild(node, name, namespaces);
+    public static String gpxChildText(final XmlNode node, final String name, final Set<String> namespaces) {
+        final XmlNode c = gpxChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null ? null : StringUtils.defaultString(c.getValue());
     }
 
     @Nullable
-    public static Date gpxNodeChildDate(final XmlNode node, final String name, final Set<String> namespaces, final Date defaultValue) {
-        final XmlNode c = gpxNodeChild(node, name, namespaces);
+    public static Date gpxChildDate(final XmlNode node, final String name, final Set<String> namespaces, final Date defaultValue) {
+        final XmlNode c = gpxChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null ? null : XmlUtils.toDate(c.getValue(), defaultValue);
     }
 
     @Nullable
-    public static Float gpxNodeChildFloat(final XmlNode node, final String name, final Set<String> namespaces, final Float defaultValue) {
-        final XmlNode c = gpxNodeChild(node, name, namespaces);
+    public static Float gpxChildFloat(final XmlNode node, final String name, final Set<String> namespaces, final Float defaultValue) {
+        final XmlNode c = gpxChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null ? null : XmlUtils.toFloat(c.getValue(), defaultValue);
     }
 
     @Nullable
-    public static Integer gpxNodeChildInt(final XmlNode node, final String name, final Set<String> namespaces, final Integer defaultValue) {
-        final XmlNode c = gpxNodeChild(node, name, namespaces);
+    public static Integer gpxChildInt(final XmlNode node, final String name, final Set<String> namespaces, final Integer defaultValue) {
+        final XmlNode c = gpxChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null ? null : XmlUtils.toInteger(c.getValue(), defaultValue);
     }
 
     @Nullable
-    public static Boolean gpxNodeChildBoolean(final XmlNode node, final String name, final Set<String> namespaces, final Boolean defaultValue) {
-        final XmlNode c = gpxNodeChild(node, name, namespaces);
+    public static Boolean gpxChildBoolean(final XmlNode node, final String name, final Set<String> namespaces, final Boolean defaultValue) {
+        final XmlNode c = gpxChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null || c.getValue() == null ? null : XmlUtils.toBoolean(c.getValue(), defaultValue);
     }
 
-    /** Like {@link #gpxNodeChild}, but returns ALL matching children (namespace-tolerant, by local name), not just the first. */
+    /** Like {@link #gpxChild}, but returns ALL matching children (namespace-tolerant, by local name), not just the first. */
     @Nullable
-    public static List<XmlNode> gpxNodeChildren(final XmlNode node, final String name) {
-        return node == null ? null : node.getChildrenAsList(name);
+    public static List<XmlNode> gpxChildren(final XmlNode node, final String name, final Set<String> namespaces) {
+        if (node == null) {
+            return null;
+        }
+        if (GPX_EXTENDED_NODES.contains(node.getLocalName())) {
+            final XmlNode extensions = node.getChild(GPX_EXTENSIONS_NODENAME, namespaces, true);
+            if (extensions != null) {
+                final List<XmlNode> extResult = extensions.getChildrenAsList(name, namespaces, true);
+                if (extResult != null) {
+                    return extResult;
+                }
+            }
+        }
+        return node.getChildrenAsList(name, namespaces, true);
     }
 
     @Nullable
-    public static String gpxNodeAttrValue(final XmlNode node, final String attributeName, final Set<String> namespaces) {
-        return gpxNodeChildText(node, XmlNode.ATTRIBUTE_PRAEFIX + attributeName, namespaces);
+    public static String gpxAttrValue(final XmlNode node, final String attributeName, final Set<String> namespaces) {
+        return gpxChildText(node, XmlNode.ATTRIBUTE_PRAEFIX + attributeName, namespaces);
     }
 
     @Nullable
-    public static Geopoint gpxNodeReadLatLon(final XmlNode node) {
-        final String lat = gpxNodeAttrValue(node, "lat", null);
-        final String lon = gpxNodeAttrValue(node, "lon", null);
+    public static Geopoint gpxGeopoint(final XmlNode node) {
+        final String lat = gpxAttrValue(node, "lat", null);
+        final String lon = gpxAttrValue(node, "lon", null);
         return XmlUtils.parseGeopoint(lat, lon, false);
     }
 

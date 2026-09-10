@@ -18,7 +18,7 @@ public class CgeoGPXExtension implements IGPXExtension {
 
     @Override
     public void enrichGeocache(final XmlNode wptNode, final Geocache cache) {
-        final String assignedEmojiText = GPXUtils.gpxNodeChildText(GPXUtils.gpxNodeChild(wptNode, "cacheExtension", CGEO_NS), "assignedEmoji", CGEO_NS);
+        final String assignedEmojiText = GPXUtils.gpxChildText(GPXUtils.gpxChild(wptNode, "cacheExtension", CGEO_NS), "assignedEmoji", CGEO_NS);
         if (StringUtils.isNotBlank(assignedEmojiText)) {
             cache.setAssignedEmoji(EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmojiText));
         }
@@ -26,15 +26,15 @@ public class CgeoGPXExtension implements IGPXExtension {
 
     @Override
     public void enrichWaypoint(final XmlNode wptNode, final Waypoint waypoint) {
-        final Boolean visited = GPXUtils.gpxNodeChildBoolean(wptNode, "visited", CGEO_NS, null);
+        final Boolean visited = GPXUtils.gpxChildBoolean(wptNode, "visited", CGEO_NS, null);
         if (visited != null) {
             waypoint.setVisited(visited);
         }
-        final Boolean originalCoordsEmpty = GPXUtils.gpxNodeChildBoolean(wptNode, "originalCoordsEmpty", CGEO_NS, null);
+        final Boolean originalCoordsEmpty = GPXUtils.gpxChildBoolean(wptNode, "originalCoordsEmpty", CGEO_NS, null);
         if (originalCoordsEmpty != null) {
             waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         }
-        final Boolean userdefined = GPXUtils.gpxNodeChildBoolean(wptNode, "userdefined", CGEO_NS, Boolean.FALSE);
+        final Boolean userdefined = GPXUtils.gpxChildBoolean(wptNode, "userdefined", CGEO_NS, Boolean.FALSE);
         if (userdefined != null && userdefined) {
             waypoint.setUserDefined();
         }

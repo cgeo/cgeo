@@ -17,19 +17,19 @@ public class OpenCachingGPXExtension implements IGPXExtension {
 
     @Override
     public void enrichGeocache(final XmlNode wptNode, final Geocache cache) {
-        final XmlNode ocCache = GPXUtils.gpxNodeChild(wptNode, "cache", OPENCACHING_NS);
+        final XmlNode ocCache = GPXUtils.gpxChild(wptNode, "cache", OPENCACHING_NS);
         if (ocCache == null) {
             return;
         }
-        final Boolean requiresPassword = GPXUtils.gpxNodeChildBoolean(ocCache, "requires_password", OPENCACHING_NS, null);
+        final Boolean requiresPassword = GPXUtils.gpxChildBoolean(ocCache, "requires_password", OPENCACHING_NS, null);
         if (requiresPassword != null) {
             cache.setLogPasswordRequired(requiresPassword);
         }
-        final String otherCode = GPXUtils.gpxNodeChildText(ocCache, "other_code", OPENCACHING_NS);
+        final String otherCode = GPXUtils.gpxChildText(ocCache, "other_code", OPENCACHING_NS);
         if (StringUtils.isNotBlank(otherCode)) {
             cache.setDescription(Geocache.getAlternativeListingText(otherCode.trim()) + cache.getDescription());
         }
-        final String size = GPXUtils.gpxNodeChildText(ocCache, "size", OPENCACHING_NS);
+        final String size = GPXUtils.gpxChildText(ocCache, "size", OPENCACHING_NS);
         if (StringUtils.isNotBlank(size)) {
             final CacheSize cacheSize = CacheSize.getById(size);
             if (cacheSize != CacheSize.UNKNOWN) {
