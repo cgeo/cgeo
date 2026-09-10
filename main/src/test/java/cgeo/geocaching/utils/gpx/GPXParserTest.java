@@ -283,7 +283,7 @@ public class GPXParserTest {
     }
 
     // -----------------------------------------------------------------------------------------------------
-    // TerraCaching "GC_WayPoint1" sticky-marker classification (see terraChildWaypoint field doc on GPXParser)
+    // TerraCaching "GC_WayPoint1" sticky-marker classification (see terraChildWaypoint field doc on GPXFullWptParser)
     // -----------------------------------------------------------------------------------------------------
 
     @Test

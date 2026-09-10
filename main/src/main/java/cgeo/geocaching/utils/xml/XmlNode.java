@@ -194,16 +194,16 @@ public class XmlNode {
     }
 
     @Nullable
-    public static XmlNode getChild(@Nullable final XmlNode node, @Nullable final String name, @Nullable final Set<String> namespaces) {
+    public static XmlNode getChild(@Nullable final XmlNode node, @Nullable final String name, @Nullable final Set<String> preferredNamespace) {
         if (node == null) {
             return null;
         }
-        if (node.countChildren(name) <= 1 || namespaces == null) {
+        if (node.countChildren(name) <= 1 || preferredNamespace == null) {
             return node.getChild(name);
         }
         final List<XmlNode> children = node.getChildrenAsList(name);
         for (XmlNode child : children) {
-            if (namespaces.contains(child.getNamespace())) {
+            if (preferredNamespace.contains(child.getNamespace())) {
                 return child;
             }
         }
