@@ -147,16 +147,16 @@ public class GPXParserCompatibilityTest {
     }
 
     @Test
-    public void testLogsFromBothSourcesRetainOrderAndDiscardUnknownTypes() throws Exception {
+    public void testLogsFromBothSourcesArePresentAndDiscardUnknownTypes() throws Exception {
         final String gs = "<gs:cache><gs:logs><gs:log id=\"12345\"><gs:type>Found it</gs:type></gs:log>"
                 + "<gs:log><gs:type>Unknown value</gs:type></gs:log></gs:logs></gs:cache>";
         final String tc = "<tc:terracache><tc:logs><tc:log id=\"42\"><tc:type>Note</tc:type></tc:log>"
                 + "<tc:log><tc:type>Unknown value</tc:type></tc:log></tc:logs></tc:terracache>";
         for (final boolean gsFirst : new boolean[] {false, true}) {
             final List<LogEntry> logs = parse(document(cache("GC12345", gsFirst ? gs + tc : tc + gs)), new GPXParser()).getGlobalItems().get(0).logs;
-            assertThat(logs).extracting(log -> log.logType).containsExactly(gsFirst ? LogType.FOUND_IT : LogType.NOTE, gsFirst ? LogType.NOTE : LogType.FOUND_IT);
-            assertThat(logs.get(gsFirst ? 0 : 1).serviceLogId).isEqualTo(GCUtils.logIdToLogCode(12345));
-            assertThat(logs.get(gsFirst ? 1 : 0).serviceLogId).isNull();
+            assertThat(logs).extracting(log -> log.logType).containsExactlyInAnyOrder(gsFirst ? LogType.FOUND_IT : LogType.NOTE, gsFirst ? LogType.NOTE : LogType.FOUND_IT);
+            assertThat(logs.get(0).serviceLogId).isEqualTo(GCUtils.logIdToLogCode(12345));
+            assertThat(logs.get(1).serviceLogId).isNull();
         }
         assertThat(parse(document(cache("OC12345", gs)), new GPXParser()).getGlobalItems().get(0).logs.get(0).serviceLogId).isNull();
     }

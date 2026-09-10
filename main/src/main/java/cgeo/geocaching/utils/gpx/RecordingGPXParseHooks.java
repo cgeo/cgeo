@@ -90,11 +90,11 @@ public class RecordingGPXParseHooks implements IGPXParseHooks {
     /** segments recorded so far for the currently-open track; non-null only between onTrackStart and onTrackEnd */
     private List<NamedCoordinateList> currentTrackSegments;
 
-    private GPXParser.ParseMode parseModeGlobal;
-    private GPXParser.ParseMode parseModeRoutes;
-    private GPXParser.ParseMode parseModeTracks;
+    private ParseMode parseModeGlobal;
+    private ParseMode parseModeRoutes;
+    private ParseMode parseModeTracks;
 
-    public void setModes(final GPXParser.ParseMode global, final GPXParser.ParseMode routes, final GPXParser.ParseMode tracks) {
+    public void setModes(final ParseMode global, final ParseMode routes, final ParseMode tracks) {
         this.parseModeGlobal = global;
         this.parseModeRoutes = routes;
         this.parseModeTracks = tracks;
@@ -150,44 +150,44 @@ public class RecordingGPXParseHooks implements IGPXParseHooks {
     }
 
     @Override
-    public GPXParser.ParseMode onInit(@Nullable final String gpxCreatorOrName) {
+    public ParseMode onInit(@Nullable final String gpxCreatorOrName) {
         this.gpxCreatorOrName = gpxCreatorOrName;
         return parseModeGlobal;
     }
 
     @Override
-    public GPXParser.ParseMode onGeocache(@NonNull final Geocache geocache, @Nullable final List<LogEntry> logs) {
+    public ParseMode onGeocache(@NonNull final Geocache geocache, @Nullable final List<LogEntry> logs) {
         record(new Item(geocache, null, logs));
         return null;
     }
 
     @Override
-    public GPXParser.ParseMode onWaypoint(@NonNull final Waypoint waypoint, @Nullable final String parentGeocode) {
+    public ParseMode onWaypoint(@NonNull final Waypoint waypoint, @Nullable final String parentGeocode) {
         record(new Item(waypoint, parentGeocode, null));
         return null;
     }
 
     @Override
-    public GPXParser.ParseMode onCoordinate(final ICoordinate coordinate) {
+    public ParseMode onCoordinate(final ICoordinate coordinate) {
         record(new Item(coordinate, null, null));
         return null;
     }
 
     @Override
-    public GPXParser.ParseMode onNamedCoordinate(final NamedGeoCoordinate coordinate) {
+    public ParseMode onNamedCoordinate(final NamedGeoCoordinate coordinate) {
         record(new Item(coordinate, null, null));
         return null;
     }
 
     @Nullable
     @Override
-    public GPXParser.ParseMode onRouteStart() {
+    public ParseMode onRouteStart() {
         currentRoutePoints = new ArrayList<>();
         return parseModeRoutes; // defer to GPXParser's configured default route mode
     }
 
     @Override
-    public GPXParser.ParseMode onRouteEnd(@Nullable final String name, final int pointCount) {
+    public ParseMode onRouteEnd(@Nullable final String name, final int pointCount) {
         routes.add(new NamedCoordinateList(name, pointCount, currentRoutePoints));
         currentRoutePoints = null;
         return parseModeGlobal;
@@ -195,27 +195,27 @@ public class RecordingGPXParseHooks implements IGPXParseHooks {
 
     @Nullable
     @Override
-    public GPXParser.ParseMode onTrackStart() {
+    public ParseMode onTrackStart() {
         currentTrackSegments = new ArrayList<>();
         return parseModeTracks; // defer to GPXParser's configured default track mode
     }
 
     @Nullable
     @Override
-    public GPXParser.ParseMode onTrackSegmentStart() {
+    public ParseMode onTrackSegmentStart() {
         currentSegmentPoints = new ArrayList<>();
         return null; // defer to the mode in effect for the enclosing track
     }
 
     @Override
-    public GPXParser.ParseMode onTrackSegmentEnd(@Nullable final String name, final int pointCount) {
+    public ParseMode onTrackSegmentEnd(@Nullable final String name, final int pointCount) {
         currentTrackSegments.add(new NamedCoordinateList(name, pointCount, currentSegmentPoints));
         currentSegmentPoints = null;
         return null;
     }
 
     @Override
-    public GPXParser.ParseMode onTrackEnd(@Nullable final String name, final int segmentCount, final int totalPointCount) {
+    public ParseMode onTrackEnd(@Nullable final String name, final int segmentCount, final int totalPointCount) {
         tracks.add(new Track(name, segmentCount, totalPointCount, currentTrackSegments));
         currentTrackSegments = null;
         return parseModeGlobal;

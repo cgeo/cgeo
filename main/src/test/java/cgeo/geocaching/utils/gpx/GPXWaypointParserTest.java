@@ -132,9 +132,9 @@ public class GPXWaypointParserTest {
     public void testWaypointsWithoutCoordinatesRespectParseModes() throws Exception {
         final String xml = document(true, waypoint(true, "lat=\"0\" lon=\"0\"", "AA12345", "", "")
                 + waypoint(true, "lat=\"48\" lon=\"9\"", "BB12345", "", ""));
-        final RecordingGPXParseHooks skipped = parse(xml, new GPXParser().setParseMode(GPXParser.ParseMode.SKIP), false);
+        final RecordingGPXParseHooks skipped = parse(xml, new GPXParser().setParseMode(ParseMode.SKIP), false);
         assertThat(skipped.getGlobalItems()).isEmpty();
-        final RecordingGPXParseHooks coordinates = parse(xml, new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY), false);
+        final RecordingGPXParseHooks coordinates = parse(xml, new GPXParser().setParseMode(ParseMode.COORDINATES_ONLY), false);
         assertThat(coordinates.getWaypoints()).isEmpty();
         assertThat(coordinates.getGlobalItems()).hasSize(2);
         assertThat(coordinates.getGlobalItems().get(0).coordinate.getCoords()).isNotNull();

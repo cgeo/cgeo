@@ -27,7 +27,7 @@ public class GPXParserCoordinatesTest {
         return GPXParserCompatibilityTest.document(body);
     }
 
-    private static GPXParser parser(final GPXParser.ParseMode mode) {
+    private static GPXParser parser(final ParseMode mode) {
         return new GPXParser().setParseMode(mode);
     }
 
@@ -43,13 +43,13 @@ public class GPXParserCoordinatesTest {
     private static void assertCoordinates(final String attributes, final Geopoint genericCoords, final Geopoint cacheCoords) throws Exception {
         for (final String tag : POINT_TAGS) {
             for (int kind = 0; kind < FIELDS.length; kind++) {
-                for (final GPXParser.ParseMode mode : new GPXParser.ParseMode[] {GPXParser.ParseMode.FULL, GPXParser.ParseMode.COORDINATES_ONLY}) {
+                for (final ParseMode mode : new ParseMode[] {ParseMode.FULL, ParseMode.COORDINATES_ONLY}) {
                     final RecordingGPXParseHooks hooks = GPXParserCompatibilityTest.parse(pointDocument(tag, attributes, FIELDS[kind]), parser(mode));
                     assertThat(hooks.getGlobalItems()).as("%s %s %s %s", tag, kind, mode, attributes).hasSize(1);
                     final RecordingGPXParseHooks.Item item = hooks.getGlobalItems().get(0);
-                    final boolean fullEntity = mode == GPXParser.ParseMode.FULL && kind >= 2;
+                    final boolean fullEntity = mode == ParseMode.FULL && kind >= 2;
                     assertThat(item.coordinate.getCoords()).isEqualTo(fullEntity ? cacheCoords : genericCoords);
-                    assertThat(item.kind).isEqualTo(mode == GPXParser.ParseMode.FULL ? KINDS[kind]
+                    assertThat(item.kind).isEqualTo(mode == ParseMode.FULL ? KINDS[kind]
                             : kind == 0 ? RecordingGPXParseHooks.ItemKind.COORDINATE : RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);
                     if (kind == 1) {
                         assertThat(item.coordinate.getElevation()).isEqualTo(123f);
@@ -92,9 +92,9 @@ public class GPXParserCoordinatesTest {
         for (final String tag : POINT_TAGS) {
             for (int kind = 0; kind < FIELDS.length; kind++) {
                 final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-                hooks.setModes(GPXParser.ParseMode.COORDINATES_ONLY, GPXParser.ParseMode.SKIP, GPXParser.ParseMode.SKIP);
+                hooks.setModes(ParseMode.COORDINATES_ONLY, ParseMode.SKIP, ParseMode.SKIP);
                 final String document = pointDocument(tag, "", FIELDS[kind]);
-                GPXParserCompatibilityTest.parse(document, parser(GPXParser.ParseMode.SKIP), hooks);
+                GPXParserCompatibilityTest.parse(document, parser(ParseMode.SKIP), hooks);
                 // Cache/waypoint SKIP modes doesn't suppress generic top-level coordinates.
                 assertThat(hooks.getGlobalItems()).hasSize("wpt".equals(tag) ? 1 : 0);
                 assertCounts(hooks, tag);

@@ -229,4 +229,11 @@ public final class XmlUtils {
             }
         }
     }
+
+    public static String validate(final String input) {
+        if ("nil".equalsIgnoreCase(input)) {
+            return "";
+        }
+        return input.trim();
+    }
 }

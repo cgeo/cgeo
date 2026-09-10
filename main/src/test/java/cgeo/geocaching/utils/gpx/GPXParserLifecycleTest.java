@@ -4,7 +4,6 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.NamedGeoCoordinate;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.gpx.GPXParser.ParseMode;
 import cgeo.geocaching.utils.xml.XmlUtils;
 
 import java.io.ByteArrayInputStream;

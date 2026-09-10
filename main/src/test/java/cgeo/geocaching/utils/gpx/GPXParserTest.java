@@ -178,7 +178,7 @@ public class GPXParserTest {
 
     @Test
     public void testParseTrackFileCoordinatesOnly() throws Exception {
-        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY);
+        final GPXParser parser = new GPXParser().setParseMode(ParseMode.COORDINATES_ONLY);
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
         parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser, hooks);
 
@@ -197,9 +197,9 @@ public class GPXParserTest {
 
     @Test
     public void testTrackWithSkipModeStillReportsAccurateCounts() throws Exception {
-        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.SKIP);
+        final GPXParser parser = new GPXParser().setParseMode(ParseMode.SKIP);
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-        hooks.setModes(GPXParser.ParseMode.FULL, GPXParser.ParseMode.SKIP, GPXParser.ParseMode.SKIP);
+        hooks.setModes(ParseMode.FULL, ParseMode.SKIP, ParseMode.SKIP);
         parse("/xml/ZUG.IN.ZWEI.TEILEN.gpx", parser, hooks);
 
         assertThat(hooks.getTracks()).hasSize(2);
@@ -217,7 +217,7 @@ public class GPXParserTest {
 
     @Test
     public void testGeocacheSkipModeNeverFiresHook() throws Exception {
-        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.SKIP);
+        final GPXParser parser = new GPXParser().setParseMode(ParseMode.SKIP);
         final RecordingGPXParseHooks hooks = parse("/xml/gc3t1xg_gsak_110.gpx", parser);
 
         // requirement: SKIP means the hook is never called at all - not even with a placeholder
@@ -227,7 +227,7 @@ public class GPXParserTest {
 
     @Test
     public void testGeocacheCoordinatesOnlyModeReportedAsNamedCoordinate() throws Exception {
-        final GPXParser parser = new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY);
+        final GPXParser parser = new GPXParser().setParseMode(ParseMode.COORDINATES_ONLY);
         final RecordingGPXParseHooks hooks = parse("/xml/gc3t1xg_gsak_110.gpx", parser);
 
         // requirement: COORDINATES_ONLY means it is never reported as a Geocache, only as a (named) coordinate
@@ -243,10 +243,10 @@ public class GPXParserTest {
 
     @Test
     public void testWaypointSkipAndCoordinatesOnlyModes() throws Exception {
-        final RecordingGPXParseHooks skipHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(GPXParser.ParseMode.SKIP));
+        final RecordingGPXParseHooks skipHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(ParseMode.SKIP));
         assertThat(skipHooks.getGlobalItems()).isEmpty();
 
-        final RecordingGPXParseHooks coordHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(GPXParser.ParseMode.COORDINATES_ONLY));
+        final RecordingGPXParseHooks coordHooks = parse("/gc31j2h_wpts.gpx", new GPXParser().setParseMode(ParseMode.COORDINATES_ONLY));
         assertThat(coordHooks.getWaypoints()).isEmpty();
         assertThat(coordHooks.getGlobalItems()).hasSize(2);
         assertThat(coordHooks.getGlobalItems()).allMatch(item -> item.kind == RecordingGPXParseHooks.ItemKind.NAMED_COORDINATE);

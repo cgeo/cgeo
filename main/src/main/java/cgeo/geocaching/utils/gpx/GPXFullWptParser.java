@@ -3,23 +3,14 @@ package cgeo.geocaching.utils.gpx;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCUtils;
-import cgeo.geocaching.connector.tc.TerraCachingLogType;
-import cgeo.geocaching.connector.tc.TerraCachingType;
-import cgeo.geocaching.enumerations.CacheAttribute;
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.NamedGeoCoordinate;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
-import cgeo.geocaching.utils.EmojiUtilsLegacyMigration;
-import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.xml.XmlNode;
 import cgeo.geocaching.utils.xml.XmlUtils;
 
@@ -48,20 +39,14 @@ final class GPXFullWptParser {
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile("[?&]wp=([^&#]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GUID = Pattern.compile("[?&]guid=([0-9a-f-]+)", Pattern.CASE_INSENSITIVE);
 
-    //Namespaces of extensions
-    private static final Set<String> GROUNDSPEAK_NS = Set.of(
-        "http://www.groundspeak.com/cache/1/1", // PQ 1.1
-        "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
-        "http://www.groundspeak.com/cache/1/0" // PQ 1.0
-    );
 
-    private static final Set<String> GSAK_NS = Set.of(
-        "http://www.gsak.net/xmlv1/1",
-        "http://www.gsak.net/xmlv1/2",
-        "http://www.gsak.net/xmlv1/3",
-        "http://www.gsak.net/xmlv1/4",
-        "http://www.gsak.net/xmlv1/5",
-        "http://www.gsak.net/xmlv1/6"
+    //Extensions
+    private final List<IGPXExtension> gpxExtensions = List.of(
+        new GroundspeakGPXExtension(),
+        new GSAKGPXExtension(),
+        new TerraCachingGPXExtension(),
+        new CgeoGPXExtension(),
+        new OpenCachingGPXExtension()
     );
 
     private static final Set<String> CGEO_NS = Set.of(
@@ -70,10 +55,6 @@ final class GPXFullWptParser {
 
     private static final Set<String> OPENCACHING_NS = Set.of(
         "https://github.com/opencaching/gpx-extension-v1"
-    );
-
-    private static final Set<String> TERRA_NS = Set.of(
-            "http://www.TerraCaching.com/GPX/1/0"
     );
 
     /** parse-session-scoped index: (lower-cased, trimmed) cache name/title -&gt; geocode */
@@ -204,10 +185,10 @@ final class GPXFullWptParser {
             cache.setName(rawName.trim());
         }
         if (StringUtils.isNotBlank(desc)) {
-            cache.setShortDescription(validate(desc));
+            cache.setShortDescription(XmlUtils.validate(desc));
         }
         if (StringUtils.isNotBlank(cmt)) {
-            cache.setDescription(validate(cmt));
+            cache.setDescription(XmlUtils.validate(cmt));
         }
         final String timeText = wptNode.getChildValue("time");
         final Date hidden = XmlUtils.parseDate(timeText);
@@ -288,7 +269,7 @@ final class GPXFullWptParser {
 
         final String description = wptNode.getChildValue("desc");
         final String name = "GC_WayPoint1".equals(StringUtils.trim(description)) ? ""
-                : validate(StringUtils.defaultIfBlank(description, StringUtils.trimToEmpty(rawName)));
+                : XmlUtils.validate(StringUtils.defaultIfBlank(description, StringUtils.trimToEmpty(rawName)));
         final XmlNode base = GPXUtils.extensionsBase(wptNode);
         final Waypoint waypoint = new Waypoint(name, WaypointType.fromGPXString(sym == null ? "" : sym, subtype), parseWaypointUserDefined(base));
         waypoint.setId(Waypoint.NEW_ID);
@@ -298,7 +279,10 @@ final class GPXFullWptParser {
             waypoint.setGeocode(parentGeocodeCandidate);
         }
 
-        parseCgeoExtension(base, waypoint);
+        for (IGPXExtension extension : gpxExtensions) {
+            extension.enrichWaypoint(base, waypoint);
+        }
+
         if (!waypoint.isUserDefined() && coords == null) {
             waypoint.setOriginalCoordsEmpty(true);
         }
@@ -306,7 +290,7 @@ final class GPXFullWptParser {
 
         final String note = wptNode.getChildValue("cmt");
         if (StringUtils.isNotBlank(note)) {
-            new WaypointUserNoteCombiner(waypoint).updateNoteAndUserNote(validate(note));
+            new WaypointUserNoteCombiner(waypoint).updateNoteAndUserNote(XmlUtils.validate(note));
         }
 
         parsedParentGeocode = parentGeocodeCandidate;
@@ -330,8 +314,8 @@ final class GPXFullWptParser {
     @Nullable
     private String resolveParentGeocode(final XmlNode wptNode, final String rawName, final boolean isTerraChildWaypoint, final String scriptUrl) {
         final XmlNode extensions = GPXUtils.extensionsBase(wptNode);
-        final XmlNode gsakExt = GPXUtils.gpxNodeChild(extensions, "wptExtension", GSAK_NS);
-        final String gsakParent = GPXUtils.gpxNodeChildText(gsakExt, "Parent", GSAK_NS);
+        final XmlNode gsakExt = GPXUtils.gpxNodeChild(extensions, "wptExtension", GSAKGPXExtension.GSAK_NS);
+        final String gsakParent = GPXUtils.gpxNodeChildText(gsakExt, "Parent", GSAKGPXExtension.GSAK_NS);
         if (StringUtils.isNotBlank(gsakParent)) {
             return nameToGeocodeIndex.getOrDefault(gsakParent.trim().toLowerCase(Locale.US), gsakParent.trim());
         }
@@ -365,285 +349,22 @@ final class GPXFullWptParser {
         if (base == null) {
             return null;
         }
-        parseGroundspeakExtension(base, cache);
-        parseGsakExtension(base, cache);
-        parseTerraCachingExtension(base, cache);
-        parseCgeoExtension(base, cache);
-        parseOpenCachingExtension(base, cache);
+        for (final IGPXExtension extension : gpxExtensions) {
+            extension.enrichGeocache(base, cache);
+        }
+
         final List<LogEntry> logs = new ArrayList<>();
-        for (final XmlNode child : base.getChildrenInOrder()) {
-            final List<LogEntry> sourceLogs;
-            if ("cache".equals(child.getLocalName())) {
-                sourceLogs = parseGroundspeakLogs(child, ConnectorFactory.getConnector(cache.getGeocode()) instanceof GCConnector);
-            } else if ("terracache".equals(child.getLocalName())) {
-                sourceLogs = parseTerraCachingLogs(child);
-            } else {
-                continue;
-            }
-            if (sourceLogs != null) {
-                logs.addAll(sourceLogs);
+        for (IGPXExtension extension : gpxExtensions) {
+            final List<LogEntry> candidate = extension.extractLogs(base, cache);
+            if (candidate != null) {
+                logs.addAll(candidate);
             }
         }
         return logs.isEmpty() ? null : logs;
     }
 
-    /**
-     * Groundspeak cache extension, used by geocaching.com pocket queries and most third-party tools (GSAK, ...).
-     * Schema/namespace (any of 3 historic versions, unified here by local name only): PQ 1.1
-     * {@code http://www.groundspeak.com/cache/1/1}, PQ 1.0.1 {@code http://www.groundspeak.com/cache/1/0/1},
-     * PQ 1.0 {@code http://www.groundspeak.com/cache/1/0}. Element {@code <cache>}.
-     */
-    private void parseGroundspeakExtension(final XmlNode base, final Geocache cache) {
-        final XmlNode gcCache = GPXUtils.gpxNodeChild(base, "cache", GROUNDSPEAK_NS);
-        if (gcCache == null) {
-            return;
-        }
-        final String id = GPXUtils.gpxNodeAttrValue(gcCache, "id", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(id)) {
-            cache.setCacheId(id);
-        }
-        final String archived = GPXUtils.gpxNodeAttrValue(gcCache, "archived", GROUNDSPEAK_NS);
-        if (archived != null) {
-            cache.setArchived("true".equalsIgnoreCase(archived));
-        }
-        final String available = GPXUtils.gpxNodeAttrValue(gcCache, "available", GROUNDSPEAK_NS);
-        if (available != null) {
-            cache.setDisabled(!"true".equalsIgnoreCase(available));
-        }
 
-        final String name = GPXUtils.gpxNodeChildText(gcCache, "name", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(name)) {
-            cache.setName(validate(name));
-        }
-        final String owner = GPXUtils.gpxNodeChildText(gcCache, "owner", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(owner)) {
-            cache.setOwnerUserId(validate(owner));
-        }
-        final String placedBy = GPXUtils.gpxNodeChildText(gcCache, "placed_by", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(placedBy)) {
-            cache.setOwnerDisplayName(validate(placedBy));
-        }
-        final String gcType = GPXUtils.gpxNodeChildText(gcCache, "type", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(gcType)) {
-            String body = validate(gcType);
-            if (body.startsWith("Geocache|")) {
-                body = StringUtils.substringAfter(body, "Geocache|").trim();
-            }
-            cache.setType(CacheType.getByPattern(body));
-        }
-        final String container = GPXUtils.gpxNodeChildText(gcCache, "container", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(container)) {
-            cache.setSize(CacheSize.getById(validate(container)));
-        }
-        final Float difficulty = XmlUtils.parseFloat(GPXUtils.gpxNodeChildText(gcCache, "difficulty", GROUNDSPEAK_NS));
-        if (difficulty != null) {
-            cache.setDifficulty(difficulty);
-        }
-        final Float terrain = XmlUtils.parseFloat(GPXUtils.gpxNodeChildText(gcCache, "terrain", GROUNDSPEAK_NS));
-        if (terrain != null) {
-            cache.setTerrain(terrain);
-        }
-        final String country = GPXUtils.gpxNodeChildText(gcCache, "country", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(country)) {
-            cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(country) : cache.getLocation() + ", " + country.trim());
-        }
-        final String state = GPXUtils.gpxNodeChildText(gcCache, "state", GROUNDSPEAK_NS);
-        if (StringUtils.isNotBlank(state) && StringUtils.isNotEmpty(state.trim())) {
-            cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(state) : state.trim() + ", " + cache.getLocation());
-        }
-        final String hints = GPXUtils.gpxNodeChildText(gcCache, "encoded_hints", GROUNDSPEAK_NS);
-        if (hints != null) {
-            cache.setHint(validate(hints));
-        }
-        final String shortDesc = GPXUtils.gpxNodeChildText(gcCache, "short_description", GROUNDSPEAK_NS);
-        if (shortDesc != null) {
-            cache.setShortDescription(validate(shortDesc));
-        }
-        final String longDesc = GPXUtils.gpxNodeChildText(gcCache, "long_description", GROUNDSPEAK_NS);
-        if (longDesc != null) {
-            cache.setDescription(validate(longDesc));
-        }
 
-        parseGroundspeakAttributes(gcCache, cache);
-        parseGroundspeakTravelbugs(gcCache, cache);
-    }
-
-    /**
-     * Groundspeak logs ({@code <groundspeak:logs><groundspeak:log>...}). Same schema/namespace as
-     * {@link #parseGroundspeakExtension}.
-     */
-    @Nullable
-    private List<LogEntry> parseGroundspeakLogs(final XmlNode gcCache, final boolean gcConnector) {
-        final XmlNode logsNode = GPXUtils.gpxNodeChild(gcCache, "logs", GROUNDSPEAK_NS);
-        if (logsNode == null) {
-            return null;
-        }
-        final List<XmlNode> logNodes = GPXUtils.gpxNodeChildren(logsNode, "log");
-        if (logNodes == null) {
-            return null;
-        }
-        final List<LogEntry> result = new ArrayList<>();
-        for (final XmlNode logNode : logNodes) {
-            final LogEntry.Builder builder = new LogEntry.Builder();
-            final String idText = GPXUtils.gpxNodeAttrValue(logNode, "id", GROUNDSPEAK_NS);
-            if (idText != null) {
-                try {
-                    builder.setId(Integer.parseInt(idText.trim()));
-                    if (gcConnector) {
-                        builder.setServiceLogId(GCUtils.logIdToLogCode(builder.getId()));
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // ignore malformed id
-                }
-            }
-            final Date date = XmlUtils.parseDate(GPXUtils.gpxNodeChildText(logNode, "date", GROUNDSPEAK_NS));
-            if (date != null) {
-                builder.setDate(date.getTime());
-            }
-            final String typeText = GPXUtils.gpxNodeChildText(logNode, "type", GROUNDSPEAK_NS);
-            if (typeText != null) {
-                builder.setLogType(LogType.getByType(validate(typeText)));
-            }
-            final String finder = GPXUtils.gpxNodeChildText(logNode, "finder", GROUNDSPEAK_NS);
-            if (finder != null) {
-                builder.setAuthor(validate(finder));
-            }
-            final String text = GPXUtils.gpxNodeChildText(logNode, "text", GROUNDSPEAK_NS);
-            if (text != null) {
-                builder.setLog(validate(text));
-            }
-            final LogEntry log = builder.build();
-            if (log.logType != LogType.UNKNOWN) {
-                result.add(log);
-            }
-        }
-        return result.isEmpty() ? null : result;
-    }
-
-    private void parseGroundspeakAttributes(final XmlNode gcCache, final Geocache cache) {
-        final XmlNode attributes = GPXUtils.gpxNodeChild(gcCache, "attributes", GROUNDSPEAK_NS);
-        if (attributes == null) {
-            return;
-        }
-        final List<XmlNode> attributeNodes = GPXUtils.gpxNodeChildren(attributes, "attribute");
-        if (attributeNodes == null) {
-            return;
-        }
-        final List<String> result = new ArrayList<>();
-        for (final XmlNode attributeNode : attributeNodes) {
-            final String idText = GPXUtils.gpxNodeAttrValue(attributeNode, "id", GROUNDSPEAK_NS);
-            final String incText = GPXUtils.gpxNodeAttrValue(attributeNode, "inc", GROUNDSPEAK_NS);
-            if (idText == null || incText == null) {
-                continue;
-            }
-            try {
-                final int attributeId = Integer.parseInt(idText.trim());
-                final boolean active = Integer.parseInt(incText.trim()) != 0;
-                final CacheAttribute attribute = CacheAttribute.getById(attributeId);
-                if (attribute != null) {
-                    result.add(attribute.getValue(active));
-                }
-            } catch (final NumberFormatException ignored) {
-                // ignore malformed attribute entries
-            }
-        }
-        cache.setAttributes(result);
-    }
-
-    private void parseGroundspeakTravelbugs(final XmlNode gcCache, final Geocache cache) {
-        final XmlNode travelbugs = GPXUtils.gpxNodeChild(gcCache, "travelbugs", GROUNDSPEAK_NS);
-        if (travelbugs == null) {
-            return;
-        }
-        final List<XmlNode> tbNodes = GPXUtils.gpxNodeChildren(travelbugs, "travelbug");
-        if (tbNodes == null) {
-            return;
-        }
-        for (final XmlNode tbNode : tbNodes) {
-            final Trackable trackable = new Trackable();
-            final String ref = GPXUtils.gpxNodeAttrValue(tbNode, "ref", GROUNDSPEAK_NS);
-            if (ref != null) {
-                trackable.setGeocode(ref);
-            }
-            final String tbName = GPXUtils.gpxNodeChildText(tbNode, "name", GROUNDSPEAK_NS);
-            if (tbName != null) {
-                trackable.setName(validate(tbName));
-            }
-            if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
-                cache.addInventoryItem(trackable);
-            }
-        }
-    }
-
-    /**
-     * GSAK ("Geocaching Swiss Army Knife") wptExtension. Schema/namespace (6 historic versions, unified here by
-     * local name only): {@code http://www.gsak.net/xmlv1/1} through {@code /6}. Element {@code <wptExtension>}.
-     */
-    private void parseGsakExtension(final XmlNode base, final Geocache cache) {
-        final XmlNode gsak = GPXUtils.gpxNodeChild(base, "wptExtension", GSAK_NS);
-        if (gsak == null) {
-            return;
-        }
-        final String watch = GPXUtils.gpxNodeChildText(gsak, "Watch", GSAK_NS);
-        if (watch != null) {
-            cache.setOnWatchlist(Boolean.parseBoolean(watch.trim()));
-        }
-        final String favPoints = GPXUtils.gpxNodeChildText(gsak, "FavPoints", GSAK_NS);
-        if (favPoints != null) {
-            try {
-                cache.setFavoritePoints(Integer.parseInt(favPoints.trim()));
-            } catch (final NumberFormatException ignored) {
-                // ignore malformed favorite points
-            }
-        }
-        final String gcNote = GPXUtils.gpxNodeChildText(gsak, "GcNote", GSAK_NS);
-        if (StringUtils.isNotBlank(gcNote)) {
-            cache.setPersonalNote(StringUtils.trim(gcNote), true);
-        }
-        final String isPremium = GPXUtils.gpxNodeChildText(gsak, "IsPremium", GSAK_NS);
-        if (isPremium != null) {
-            cache.setPremiumMembersOnly(Boolean.parseBoolean(isPremium.trim()));
-        }
-        final String code = GPXUtils.gpxNodeChildText(gsak, "Code", GSAK_NS);
-        if (StringUtils.isNotBlank(code)) {
-            cache.setGeocode(StringUtils.trim(code));
-        }
-        final String dnf = GPXUtils.gpxNodeChildText(gsak, "DNF", GSAK_NS);
-        if (dnf != null && !cache.isFound()) {
-            cache.setDNF(Boolean.parseBoolean(dnf.trim()));
-        }
-        final String dnfDate = GPXUtils.gpxNodeChildText(gsak, "DNFDate", GSAK_NS);
-        if (dnfDate != null && cache.getVisitedDate() == 0) {
-            final Date parsed = XmlUtils.parseDate(dnfDate);
-            if (parsed != null) {
-                cache.setVisitedDate(parsed.getTime());
-            }
-        }
-        final String userFound = GPXUtils.gpxNodeChildText(gsak, "UserFound", GSAK_NS);
-        if (userFound != null && cache.getVisitedDate() == 0) {
-            final Date parsed = XmlUtils.parseDate(userFound);
-            if (parsed != null) {
-                cache.setVisitedDate(parsed.getTime());
-            }
-        }
-
-        final StringBuilder userDataNote = new StringBuilder();
-        appendUserData(userDataNote, GPXUtils.gpxNodeChildText(gsak, "UserData", GSAK_NS));
-        for (int i = 2; i <= 4; i++) {
-            appendUserData(userDataNote, GPXUtils.gpxNodeChildText(gsak, "User" + i, GSAK_NS));
-        }
-        if (StringUtils.isBlank(cache.getPersonalNote()) && userDataNote.length() > 0) {
-            cache.setPersonalNote(userDataNote.toString().trim(), true);
-        }
-        final Geopoint originalCoords = XmlUtils.parseGeopoint(GPXUtils.gpxNodeChildText(gsak, "LatBeforeCorrect", GSAK_NS), GPXUtils.gpxNodeChildText(gsak, "LonBeforeCorrect", GSAK_NS), false);
-        if (originalCoords != null) {
-            final Waypoint original = new Waypoint(WaypointType.ORIGINAL.gpx, WaypointType.ORIGINAL, false);
-            original.setGeocode(cache.getGeocode());
-            original.setCoords(originalCoords);
-            cache.setWaypoints(Collections.singletonList(original));
-            cache.setUserModifiedCoords(true);
-        }
-    }
 
     private static boolean parseWaypointUserDefined(final XmlNode base) {
         boolean userDefined = false;
@@ -661,147 +382,6 @@ final class GPXFullWptParser {
         return userDefined;
     }
 
-    private static void appendUserData(final StringBuilder buffer, final String userData) {
-        if (StringUtils.isNotBlank(userData)) {
-            buffer.append(' ').append(userData);
-        }
-    }
-
-    /** TerraCaching extension. */
-    private void parseTerraCachingExtension(final XmlNode base, final Geocache cache) {
-        final XmlNode terraCache = GPXUtils.gpxNodeChild(base, "terracache", TERRA_NS);
-        if (terraCache == null) {
-            return;
-        }
-        final String name = GPXUtils.gpxNodeChildText(terraCache, "name", TERRA_NS);
-        if (StringUtils.isNotBlank(name)) {
-            cache.setName(StringUtils.trim(name));
-        }
-        final String owner = GPXUtils.gpxNodeChildText(terraCache, "owner", TERRA_NS);
-        if (StringUtils.isNotBlank(owner)) {
-            cache.setOwnerDisplayName(validate(owner));
-        }
-        final String style = GPXUtils.gpxNodeChildText(terraCache, "style", TERRA_NS);
-        if (StringUtils.isNotBlank(style)) {
-            cache.setType(TerraCachingType.getCacheType(style));
-        }
-        final String size = GPXUtils.gpxNodeChildText(terraCache, "size", TERRA_NS);
-        if (StringUtils.isNotBlank(size)) {
-            cache.setSize(CacheSize.getById(size));
-        }
-        final String country = GPXUtils.gpxNodeChildText(terraCache, "country", TERRA_NS);
-        if (StringUtils.isNotBlank(country)) {
-            cache.setLocation(StringUtils.trim(country));
-        }
-        final String state = GPXUtils.gpxNodeChildText(terraCache, "state", TERRA_NS);
-        if (StringUtils.isNotBlank(state) && StringUtils.isNotEmpty(state.trim())) {
-            cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(state) : state.trim() + ", " + cache.getLocation());
-        }
-        final String description = GPXUtils.gpxNodeChildText(terraCache, "description", TERRA_NS);
-        if (description != null) {
-            cache.setDescription(trimHtml(description));
-        }
-        final String hint = GPXUtils.gpxNodeChildText(terraCache, "hint", TERRA_NS);
-        if (hint != null) {
-            cache.setHint(HtmlUtils.extractText(hint));
-        }
-    }
-
-    /** TerraCaching logs ({@code <terracache><logs><log>...}). */
-    @Nullable
-    private List<LogEntry> parseTerraCachingLogs(final XmlNode terraCache) {
-        final XmlNode logsNode = GPXUtils.gpxNodeChild(terraCache, "logs", TERRA_NS);
-        if (logsNode == null) {
-            return null;
-        }
-        final List<XmlNode> logNodes = GPXUtils.gpxNodeChildren(logsNode, "log");
-        if (logNodes == null) {
-            return null;
-        }
-        final List<LogEntry> result = new ArrayList<>();
-        for (final XmlNode logNode : logNodes) {
-            final LogEntry.Builder builder = new LogEntry.Builder();
-            final String idText = GPXUtils.gpxNodeAttrValue(logNode, "id", TERRA_NS);
-            if (idText != null) {
-                try {
-                    builder.setId(Integer.parseInt(idText.trim()));
-                } catch (final NumberFormatException ignored) {
-                    // ignore malformed id
-                }
-            }
-            final Date date = XmlUtils.parseDate(GPXUtils.gpxNodeChildText(logNode, "date", TERRA_NS));
-            if (date != null) {
-                builder.setDate(date.getTime());
-            }
-            final String typeText = GPXUtils.gpxNodeChildText(logNode, "type", TERRA_NS);
-            if (typeText != null) {
-                builder.setLogType(TerraCachingLogType.getLogType(validate(typeText)));
-            }
-            final String finder = GPXUtils.gpxNodeChildText(logNode, "user", TERRA_NS);
-            if (finder != null) {
-                builder.setAuthor(validate(finder));
-            }
-            final String text = GPXUtils.gpxNodeChildText(logNode, "entry", TERRA_NS);
-            if (text != null) {
-                builder.setLog(trimHtml(validate(text)));
-            }
-            final LogEntry log = builder.build();
-            if (log.logType != LogType.UNKNOWN) {
-                result.add(log);
-            }
-        }
-        return result.isEmpty() ? null : result;
-    }
-
-    /** c:geo's own extension */
-    private void parseCgeoExtension(final XmlNode base, final Geocache cache) {
-        final String assignedEmojiText = GPXUtils.gpxNodeChildText(GPXUtils.gpxNodeChild(base, "cacheExtension", CGEO_NS), "assignedEmoji", CGEO_NS);
-        if (StringUtils.isNotBlank(assignedEmojiText)) {
-            cache.setAssignedEmoji(EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmojiText));
-        }
-    }
-
-    /** c:geo waypoint fields are siblings of cacheExtension, not children of it. */
-    private void parseCgeoExtension(final XmlNode base, final Waypoint waypoint) {
-        for (final XmlNode child : base.getChildrenInOrder()) {
-            if ("visited".equals(child.getLocalName())) {
-                waypoint.setVisited(Boolean.parseBoolean(StringUtils.trim(child.getValue())));
-            } else if ("originalCoordsEmpty".equals(child.getLocalName())) {
-                waypoint.setOriginalCoordsEmpty(Boolean.parseBoolean(StringUtils.trim(child.getValue())));
-            }
-        }
-    }
-
-    /**
-     * Opencaching extension. Schema/namespace: {@code https://github.com/opencaching/gpx-extension-v1}. Element
-     * {@code <cache>}.
-     */
-    private void parseOpenCachingExtension(final XmlNode base, final Geocache cache) {
-        final XmlNode ocCache = GPXUtils.gpxNodeChild(base, "cache", OPENCACHING_NS);
-        if (ocCache == null) {
-            return;
-        }
-        final String requiresPassword = GPXUtils.gpxNodeChildText(ocCache, "requires_password", OPENCACHING_NS);
-        if (requiresPassword != null) {
-            cache.setLogPasswordRequired(Boolean.parseBoolean(requiresPassword.trim()));
-        }
-        final String otherCode = GPXUtils.gpxNodeChildText(ocCache, "other_code", OPENCACHING_NS);
-        if (StringUtils.isNotBlank(otherCode)) {
-            cache.setDescription(Geocache.getAlternativeListingText(otherCode.trim()) + cache.getDescription());
-        }
-        final String size = GPXUtils.gpxNodeChildText(ocCache, "size", OPENCACHING_NS);
-        if (StringUtils.isNotBlank(size)) {
-            final CacheSize cacheSize = CacheSize.getById(size);
-            if (cacheSize != CacheSize.UNKNOWN) {
-                cache.setSize(cacheSize);
-            }
-        }
-    }
-
-    private static String trimHtml(final String html) {
-        return StringUtils.trim(Strings.CS.removeEnd(Strings.CS.removeStart(html, "<br>"), "<br>"));
-    }
-
     private static Geocache createCache() {
         final Geocache newCache = new Geocache();
         // explicitly set all properties which could otherwise lead to lazy database access on first read
@@ -812,13 +392,6 @@ final class GPXFullWptParser {
         newCache.setAttributes(Collections.emptyList());
         newCache.setWaypoints(Collections.emptyList());
         return newCache;
-    }
-
-    private static String validate(final String input) {
-        if ("nil".equalsIgnoreCase(input)) {
-            return "";
-        }
-        return input.trim();
     }
 
     @Nullable
