@@ -74,11 +74,14 @@ public class TileProviderFactory {
         final AbstractTileProvider ctp = Settings.getTileProvider();
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
-        // grayscaling hooks into a render theme, and on VTM additionally into its bitmap tile
-        // decoding. That covers every VTM source, but on Mapsforge only the offline ones - its
-        // raster tiles are decoded inside the shared AndroidGraphicFactory, out of reach.
+        // grayscaling hooks into a render theme - on VTM additionally into its bitmap tile decoding,
+        // on Google into the map style. That covers every VTM source, but on Mapsforge only the
+        // offline ones (its raster tiles are decoded inside the shared AndroidGraphicFactory, out of
+        // reach) and on Google only those that are styled at all, which is the plain map.
         parentMenu.findItem(R.id.menu_grayscale).setCheckable(true).setChecked(Settings.getMapGrayscale())
-                .setVisible(ctp instanceof AbstractMapsforgeVTMTileProvider || ctp instanceof AbstractMapsforgeOfflineTileProvider);
+                .setVisible(ctp instanceof AbstractMapsforgeVTMTileProvider
+                        || ctp instanceof AbstractMapsforgeOfflineTileProvider
+                        || (ctp instanceof AbstractGoogleTileProvider && ctp.supportsThemes()));
         parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && ctp.supportsHillshading());
         parentMenu.findItem(R.id.menu_backgroundmap).setCheckable(true).setChecked(Settings.getMapBackgroundMapLayer()).setVisible(ctp.supportsBackgroundMaps());
         parentMenu.findItem(R.id.menu_download_backgroundmap).setVisible(ctp.supportsBackgroundMaps);
