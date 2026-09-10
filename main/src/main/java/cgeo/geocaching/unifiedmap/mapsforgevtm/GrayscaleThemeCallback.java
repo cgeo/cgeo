@@ -1,6 +1,6 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
-import android.graphics.Color;
+import cgeo.geocaching.utils.ColorUtils;
 
 import org.oscim.theme.ThemeCallbackAdapter;
 import org.oscim.theme.styles.RenderStyle;
@@ -15,18 +15,11 @@ public class GrayscaleThemeCallback extends ThemeCallbackAdapter {
 
     @Override
     public int getColor(final RenderStyle style, final int color) {
-        return toGray(color);
+        return ColorUtils.toGrayscale(color);
     }
 
     @Override
     public int getColor(final String[] keys, final String[] values, final int color) {
-        return toGray(color);
-    }
-
-    /** keeps the alpha channel and replaces the colour with its perceived brightness */
-    public static int toGray(final int color) {
-        final int gray = (int) Math.round(
-                0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color));
-        return Color.argb(Color.alpha(color), gray, gray, gray);
+        return ColorUtils.toGrayscale(color);
     }
 }

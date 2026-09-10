@@ -90,4 +90,18 @@ public class ColorUtils {
     public static int setAlpha(final int color, final int alpha) {
         return ((alpha & 0xFF) << 24) + (color & 0xFFFFFF);
     }
+
+    /**
+     * Replaces a colour with its perceived brightness, keeping the alpha channel.
+     * <p>
+     * Uses the BT.601 weights rather than the W3 luminance above: those are meant for contrast
+     * ratios and would darken the result, while these are what a saturation-zero colour matrix
+     * applies, so vector and raster maps end up looking the same.
+     */
+    @ColorInt
+    public static int toGrayscale(@ColorInt final int color) {
+        final int gray = (int) Math.round(
+                0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color));
+        return Color.argb(Color.alpha(color), gray, gray, gray);
+    }
 }

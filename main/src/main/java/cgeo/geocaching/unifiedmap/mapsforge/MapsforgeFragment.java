@@ -80,6 +80,9 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         Parameters.PARENT_TILES_RENDERING = Parameters.ParentTilesRendering.SPEED;
 
         mMapView = requireView().findViewById(R.id.mapViewMapsforge);
+        // the render theme reads its colours through this callback, so it has to be in place
+        // before any theme is parsed - which happens once the tile layer is added below
+        mMapView.getModel().displayModel.setThemeCallback(Settings.getMapGrayscale() ? new GrayscaleThemeCallback() : null);
         setMapRotation(Settings.getMapRotation());
         mapAttribution = requireView().findViewById(R.id.map_attribution);
 
