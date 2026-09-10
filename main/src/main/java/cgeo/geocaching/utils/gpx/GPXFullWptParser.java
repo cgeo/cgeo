@@ -154,7 +154,7 @@ final class GPXFullWptParser {
     /** Parses an entry without geocache or waypoint classification. */
     private static ICoordinate parseFallbackCoordinate(final String rawName, final XmlNode wptNode) {
         final Geopoint coords = XmlUtils.parseGeopoint(GPXUtils.gpxNodeAttrValue(wptNode, "lat", null), GPXUtils.gpxNodeAttrValue(wptNode, "lon", null), true);
-        final Float elevation = XmlUtils.parseFloat(wptNode.getChildValue("ele"));
+        final Float elevation = GPXUtils.gpxNodeChildFloat(wptNode, "ele", null, null);
         if (StringUtils.isBlank(rawName) && elevation == null) {
             return coords;
         }
@@ -190,8 +190,7 @@ final class GPXFullWptParser {
         if (StringUtils.isNotBlank(cmt)) {
             cache.setDescription(XmlUtils.validate(cmt));
         }
-        final String timeText = wptNode.getChildValue("time");
-        final Date hidden = XmlUtils.parseDate(timeText);
+        final Date hidden = GPXUtils.gpxNodeChildDate(wptNode, "time", null, null);
         if (hidden != null) {
             cache.setHidden(hidden);
         }

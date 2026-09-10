@@ -83,15 +83,11 @@ public class TerraCachingGPXExtension implements IGPXExtension {
         final List<LogEntry> result = new ArrayList<>();
         for (final XmlNode logNode : logNodes) {
             final LogEntry.Builder builder = new LogEntry.Builder();
-            final String idText = GPXUtils.gpxNodeAttrValue(logNode, "id", TERRA_NS);
+            final Integer idText = XmlUtils.toInteger(GPXUtils.gpxNodeAttrValue(logNode, "id", TERRA_NS), null);
             if (idText != null) {
-                try {
-                    builder.setId(Integer.parseInt(idText.trim()));
-                } catch (final NumberFormatException ignored) {
-                    // ignore malformed id
-                }
+                builder.setId(idText);
             }
-            final Date date = XmlUtils.parseDate(GPXUtils.gpxNodeChildText(logNode, "date", TERRA_NS));
+            final Date date = GPXUtils.gpxNodeChildDate(logNode, "date", TERRA_NS, null);
             if (date != null) {
                 builder.setDate(date.getTime());
             }

@@ -251,7 +251,7 @@ public class GPXParser {
                 if ("name".equals(childName)) {
                     name = XmlUtils.parseText(parser);
                 } else if ("ele".equals(childName)) {
-                    elevation = XmlUtils.parseFloat(XmlUtils.parseText(parser));
+                    elevation = XmlUtils.toFloat(XmlUtils.parseText(parser), null);
                 } else {
                     XmlUtils.skipSubtree(parser);
                 }

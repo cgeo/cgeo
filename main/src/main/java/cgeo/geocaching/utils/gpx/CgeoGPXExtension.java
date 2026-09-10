@@ -26,16 +26,16 @@ public class CgeoGPXExtension implements IGPXExtension {
 
     @Override
     public void enrichWaypoint(final XmlNode wptNode, final Waypoint waypoint) {
-        final String visited = GPXUtils.gpxNodeChildText(wptNode, "visited", CGEO_NS);
+        final Boolean visited = GPXUtils.gpxNodeChildBoolean(wptNode, "visited", CGEO_NS, null);
         if (visited != null) {
-            waypoint.setVisited(Boolean.parseBoolean(StringUtils.trim(visited)));
+            waypoint.setVisited(visited);
         }
-        final String originalCoordsEmpty = GPXUtils.gpxNodeChildText(wptNode, "originalCoordsEmpty", CGEO_NS);
+        final Boolean originalCoordsEmpty = GPXUtils.gpxNodeChildBoolean(wptNode, "originalCoordsEmpty", CGEO_NS, null);
         if (originalCoordsEmpty != null) {
-            waypoint.setOriginalCoordsEmpty(Boolean.parseBoolean(StringUtils.trim(originalCoordsEmpty)));
+            waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         }
-        final String userdefined = GPXUtils.gpxNodeChildText(wptNode, "userdefined", CGEO_NS);
-        if (Boolean.parseBoolean(StringUtils.trim(userdefined))) {
+        final Boolean userdefined = GPXUtils.gpxNodeChildBoolean(wptNode, "userdefined", CGEO_NS, Boolean.FALSE);
+        if (userdefined != null && userdefined) {
             waypoint.setUserDefined();
         }
     }

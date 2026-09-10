@@ -16,11 +16,10 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
- * Represents the content of an XML Node and its children. Sort of a poor-mans DOM model.
+ * Represents the content of an XML Node and its children.
  * <br>
  * Instances of this class are optimized for fast random access to child nodes by their local name.
  * Lists (=many child nodes with same local name) are supported. Note that tags with same local name but different namespace are also stored in list.
- * Child insertion order is available separately from the local-name index.
  */
 public class XmlNode {
 
@@ -31,10 +30,12 @@ public class XmlNode {
 
     private String value;
     private Map<String, Object> childrenMap;
+    private final int tagIdx;
 
-    public XmlNode(final String name, final String namespace) {
+    private XmlNode(final String name, final String namespace, final int tagIdx) {
         this.localName = XmlUtils.getLocalName(name);
-        this.namespace = namespace;
+        this.namespace = StringUtils.isBlank(namespace) ? null : namespace.trim();
+        this.tagIdx = tagIdx;
     }
 
     public String getLocalName() {
@@ -43,6 +44,10 @@ public class XmlNode {
 
     public String getNamespace() {
         return namespace;
+    }
+
+    public int getTagIdx() {
+        return tagIdx;
     }
 
     @SuppressWarnings("unchecked")
@@ -65,43 +70,57 @@ public class XmlNode {
     }
 
     public boolean hasChild(final String name) {
-        return childrenMap != null && childrenMap.containsKey(name);
+        return hasChild(name, null, true);
     }
 
-    public int countChildren(final String name) {
-        final Object value = childrenMap == null ? null : childrenMap.get(name);
-        if (value == null) {
-            return 0;
+    public boolean hasChild(final String name, final Set<String> namespaces, final boolean allowNullNamespace) {
+        if (childrenMap == null || !childrenMap.containsKey(name)) {
+            return false;
         }
-        if (value instanceof List) {
-            return ((List<?>) value).size();
-        }
-        return 1;
+        return getChild(name, namespaces, allowNullNamespace) != null;
     }
 
-    @SuppressWarnings("unchecked")
     public List<XmlNode> getChildrenAsList(final String name) {
-        final Object value = childrenMap == null ? null : childrenMap.get(name);
-        if (value == null) {
-            return null;
-        }
-        if (value instanceof List) {
-            return (List<XmlNode>) value;
-        }
-        return Collections.singletonList((XmlNode) value);
+        return getChildrenAsList(name, null, true);
     }
 
     @SuppressWarnings("unchecked")
-    public XmlNode getChild(final String name) {
+    public List<XmlNode> getChildrenAsList(final String name, final Set<String> namespaces, final boolean allowNullNamespace) {
         final Object value = childrenMap == null ? null : childrenMap.get(name);
         if (value == null) {
             return null;
         }
-        if (value instanceof List) {
-            final List<XmlNode> list = (List<XmlNode>) value;
-            return list.isEmpty() ? null : list.get(0);
+        if (value instanceof XmlNode) {
+            return namespaceMatches((XmlNode) value, namespaces, allowNullNamespace) ? Collections.singletonList((XmlNode) value) : null;
         }
-        return (XmlNode) value;
+        final List<XmlNode> children = (List<XmlNode>) value;
+        if (namespaces == null) {
+            return children;
+        }
+
+        final boolean allValid = children.stream().allMatch(child -> namespaceMatches(child, namespaces, allowNullNamespace));
+        return allValid ? (List<XmlNode>) value : ((List<XmlNode>) value).stream().filter(child -> namespaceMatches(child, namespaces, allowNullNamespace)).toList();
+    }
+
+    public XmlNode getChild(final String name) {
+        return getChild(name, null, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    public XmlNode getChild(final String name, final Set<String> namespaces, final boolean allowNullNamespace) {
+        final Object value = childrenMap == null ? null : childrenMap.get(name);
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof XmlNode) {
+            return namespaceMatches((XmlNode) value, namespaces, allowNullNamespace) ? (XmlNode) value : null;
+        }
+        for (XmlNode child : (List<XmlNode>) value) {
+            if (namespaceMatches(child, namespaces, allowNullNamespace)) {
+                return child;
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -110,9 +129,13 @@ public class XmlNode {
         return child == null ? null : child.getValue();
     }
 
+    private static boolean namespaceMatches(@NonNull final XmlNode node, final Set<String> namespaces, final boolean allowNullNamespace) {
+        return namespaces == null || (node.namespace == null ? allowNullNamespace : namespaces.contains(node.namespace));
+    }
+
     /** Sets the textual value of this node */
-    public void setValue(final String value) {
-        if (value == null || StringUtils.isBlank(value)) {
+    private void setValue(final String value) {
+        if (value == null || StringUtils.isBlank(value) || "nil".equals(value)) {
             this.value = null;
         } else {
             this.value = value;
@@ -137,12 +160,16 @@ public class XmlNode {
      * When this method returns, pull parser will be placed on the corresponding END_TAG element.
      */
     public static XmlNode scanNode(final XmlPullParser parser) throws XmlPullParserException, IOException {
-        if (parser.getEventType() != XmlPullParser.START_TAG) {
+        return scanNode(parser, new int[] { 0 });
+    }
+
+    private static XmlNode scanNode(final XmlPullParser parser, final int[] tagIdx) throws XmlPullParserException, IOException {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new XmlPullParserException("Not a start tag: " + parser);
         }
-        final XmlNode node = new XmlNode(parser.getName(), parser.getNamespace());
+        final XmlNode node = new XmlNode(parser.getName(), parser.getNamespace(), tagIdx[0]);
         for (int i = 0; i < parser.getAttributeCount(); i++) {
-            final XmlNode attNode = new XmlNode(ATTRIBUTE_PRAEFIX + parser.getAttributeName(i), parser.getAttributeNamespace(i));
+            final XmlNode attNode = new XmlNode(ATTRIBUTE_PRAEFIX + parser.getAttributeName(i), parser.getAttributeNamespace(i), -1);
             attNode.setValue(parser.getAttributeValue(i));
             node.addChild(attNode);
         }
@@ -152,32 +179,16 @@ public class XmlNode {
                 case XmlPullParser.END_TAG:
                     return node;
                 case XmlPullParser.START_TAG:
-                    node.addChild(scanNode(parser));
+                    tagIdx[0]++;
+                    node.addChild(scanNode(parser, tagIdx));
                     break;
                 case XmlPullParser.TEXT:
                     node.setValue(parser.getText());
                     break;
                 default:
-                    throw new XmlPullParserException("Unexpected element tyoe: " + parser.getEventType());
+                    throw new XmlPullParserException("Unexpected element type: " + parser.getEventType());
             }
         }
-    }
-
-    @Nullable
-    public static XmlNode getChild(@Nullable final XmlNode node, @Nullable final String name, @Nullable final Set<String> preferredNamespace) {
-        if (node == null) {
-            return null;
-        }
-        if (node.countChildren(name) <= 1 || preferredNamespace == null) {
-            return node.getChild(name);
-        }
-        final List<XmlNode> children = node.getChildrenAsList(name);
-        for (XmlNode child : children) {
-            if (preferredNamespace.contains(child.getNamespace())) {
-                return child;
-            }
-        }
-        return children.get(0);
     }
 
 }

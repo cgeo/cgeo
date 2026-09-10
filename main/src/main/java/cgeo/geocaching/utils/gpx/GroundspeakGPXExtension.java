@@ -80,11 +80,11 @@ public class GroundspeakGPXExtension implements IGPXExtension {
         if (StringUtils.isNotBlank(container)) {
             cache.setSize(CacheSize.getById(XmlUtils.validate(container)));
         }
-        final Float difficulty = XmlUtils.parseFloat(GPXUtils.gpxNodeChildText(gcCache, "difficulty", GROUNDSPEAK_NS));
+        final Float difficulty = GPXUtils.gpxNodeChildFloat(gcCache, "difficulty", GROUNDSPEAK_NS, null);
         if (difficulty != null) {
             cache.setDifficulty(difficulty);
         }
-        final Float terrain = XmlUtils.parseFloat(GPXUtils.gpxNodeChildText(gcCache, "terrain", GROUNDSPEAK_NS));
+        final Float terrain = GPXUtils.gpxNodeChildFloat(gcCache, "terrain", GROUNDSPEAK_NS, null);
         if (terrain != null) {
             cache.setTerrain(terrain);
         }
@@ -143,7 +143,7 @@ public class GroundspeakGPXExtension implements IGPXExtension {
                     // ignore malformed id
                 }
             }
-            final Date date = XmlUtils.parseDate(GPXUtils.gpxNodeChildText(logNode, "date", GROUNDSPEAK_NS));
+            final Date date = GPXUtils.gpxNodeChildDate(logNode, "date", GROUNDSPEAK_NS, null);
             if (date != null) {
                 builder.setDate(date.getTime());
             }

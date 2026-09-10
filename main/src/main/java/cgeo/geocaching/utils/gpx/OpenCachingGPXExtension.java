@@ -21,9 +21,9 @@ public class OpenCachingGPXExtension implements IGPXExtension {
         if (ocCache == null) {
             return;
         }
-        final String requiresPassword = GPXUtils.gpxNodeChildText(ocCache, "requires_password", OPENCACHING_NS);
+        final Boolean requiresPassword = GPXUtils.gpxNodeChildBoolean(ocCache, "requires_password", OPENCACHING_NS, null);
         if (requiresPassword != null) {
-            cache.setLogPasswordRequired(Boolean.parseBoolean(requiresPassword.trim()));
+            cache.setLogPasswordRequired(requiresPassword);
         }
         final String otherCode = GPXUtils.gpxNodeChildText(ocCache, "other_code", OPENCACHING_NS);
         if (StringUtils.isNotBlank(otherCode)) {

@@ -31,9 +31,9 @@ public class GSAKGPXExtension implements IGPXExtension {
         if (gsak == null) {
             return;
         }
-        final String watch = GPXUtils.gpxNodeChildText(gsak, "Watch", GSAK_NS);
+        final Boolean watch = GPXUtils.gpxNodeChildBoolean(gsak, "Watch", GSAK_NS, null);
         if (watch != null) {
-            cache.setOnWatchlist(Boolean.parseBoolean(watch.trim()));
+            cache.setOnWatchlist(watch);
         }
         final String favPoints = GPXUtils.gpxNodeChildText(gsak, "FavPoints", GSAK_NS);
         if (favPoints != null) {
@@ -59,19 +59,13 @@ public class GSAKGPXExtension implements IGPXExtension {
         if (dnf != null && !cache.isFound()) {
             cache.setDNF(Boolean.parseBoolean(dnf.trim()));
         }
-        final String dnfDate = GPXUtils.gpxNodeChildText(gsak, "DNFDate", GSAK_NS);
+        final Date dnfDate = GPXUtils.gpxNodeChildDate(gsak, "DNFDate", GSAK_NS, null);
         if (dnfDate != null && cache.getVisitedDate() == 0) {
-            final Date parsed = XmlUtils.parseDate(dnfDate);
-            if (parsed != null) {
-                cache.setVisitedDate(parsed.getTime());
-            }
+            cache.setVisitedDate(dnfDate.getTime());
         }
-        final String userFound = GPXUtils.gpxNodeChildText(gsak, "UserFound", GSAK_NS);
+        final Date userFound = GPXUtils.gpxNodeChildDate(gsak, "UserFound", GSAK_NS, null);
         if (userFound != null && cache.getVisitedDate() == 0) {
-            final Date parsed = XmlUtils.parseDate(userFound);
-            if (parsed != null) {
-                cache.setVisitedDate(parsed.getTime());
-            }
+            cache.setVisitedDate(userFound.getTime());
         }
 
         final StringBuilder userDataNote = new StringBuilder();

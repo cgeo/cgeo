@@ -66,7 +66,7 @@ public class XmlNodeTest {
     @Test
     public void testParseNamespaceAware() throws Exception {
         final XmlNode cgeoNode1 = parseExampleXml(false).get(0);
-        assertThat(cgeoNode1.getChild("status").getNamespace()).isEqualTo("");
+        assertThat(cgeoNode1.getChild("status").getNamespace()).isNull();
         assertThat(cgeoNode1.getChild("status").getValue()).isEqualTo("green");
         final XmlNode cgeoNode2 = parseExampleXml(true).get(0);
         assertThat(cgeoNode2.getChild("status").getNamespace()).isEqualTo("http://cgeo.org/test");
@@ -99,7 +99,7 @@ public class XmlNodeTest {
 
         //without namespaces
         final XmlNode cgeoNode = parseTestXml("/xml/example_invalid.xml", false, true, xpp -> xpp.getName().equals("website")).get(0);
-        assertThat(cgeoNode.getChild("status").getNamespace()).isEqualTo("");
+        assertThat(cgeoNode.getChild("status").getNamespace()).isNull();
         assertThat(cgeoNode.getChild("status").getValue()).isEqualTo("green");
         assertThat(cgeoNode.getChild("status2").getValue()).isEqualTo("red");
         assertThat(cgeoNode.getChild("test").getValue()).isEqualTo("test");
@@ -110,7 +110,7 @@ public class XmlNodeTest {
         assertThat(cgeoNode1.getChild("status").getValue()).isEqualTo("green");
         assertThat(cgeoNode1.getChild("status2").getValue()).isEqualTo("red");
         assertThat(cgeoNode1.getChild("test").getValue()).isEqualTo("test");
-        assertThat(cgeoNode1.getChild("test").getNamespace()).isEqualTo(""); // undeclared namespace is empty
+        assertThat(cgeoNode1.getChild("test").getNamespace()).isNull(); // undeclared namespace is empty
         assertThat(cgeoNode1.getChild("unclosed").getValue()).startsWith("notclosed");
 
     }

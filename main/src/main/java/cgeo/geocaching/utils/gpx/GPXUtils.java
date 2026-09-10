@@ -12,6 +12,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,7 +133,7 @@ public final class GPXUtils {
 
     @Nullable
     public static XmlNode gpxNodeChild(final XmlNode node, final String name, final Set<String> namespaces) {
-        return XmlNode.getChild(node, name, namespaces);
+        return node == null ? null : node.getChild(name, namespaces, true);
     }
 
     @Nullable
@@ -140,6 +141,34 @@ public final class GPXUtils {
         final XmlNode c = gpxNodeChild(node, name, namespaces);
         // A present, empty element must be able to clear an earlier fallback value.
         return c == null ? null : StringUtils.defaultString(c.getValue());
+    }
+
+    @Nullable
+    public static Date gpxNodeChildDate(final XmlNode node, final String name, final Set<String> namespaces, final Date defaultValue) {
+        final XmlNode c = gpxNodeChild(node, name, namespaces);
+        // A present, empty element must be able to clear an earlier fallback value.
+        return c == null ? null : XmlUtils.toDate(c.getValue(), defaultValue);
+    }
+
+    @Nullable
+    public static Float gpxNodeChildFloat(final XmlNode node, final String name, final Set<String> namespaces, final Float defaultValue) {
+        final XmlNode c = gpxNodeChild(node, name, namespaces);
+        // A present, empty element must be able to clear an earlier fallback value.
+        return c == null ? null : XmlUtils.toFloat(c.getValue(), defaultValue);
+    }
+
+    @Nullable
+    public static Integer gpxNodeChildInt(final XmlNode node, final String name, final Set<String> namespaces, final Integer defaultValue) {
+        final XmlNode c = gpxNodeChild(node, name, namespaces);
+        // A present, empty element must be able to clear an earlier fallback value.
+        return c == null ? null : XmlUtils.toInteger(c.getValue(), defaultValue);
+    }
+
+    @Nullable
+    public static Boolean gpxNodeChildBoolean(final XmlNode node, final String name, final Set<String> namespaces, final Boolean defaultValue) {
+        final XmlNode c = gpxNodeChild(node, name, namespaces);
+        // A present, empty element must be able to clear an earlier fallback value.
+        return c == null || c.getValue() == null ? null : XmlUtils.toBoolean(c.getValue(), defaultValue);
     }
 
     /** Like {@link #gpxNodeChild}, but returns ALL matching children (namespace-tolerant, by local name), not just the first. */

@@ -128,9 +128,9 @@ public final class XmlUtils {
     }
 
     @Nullable
-    public static Date parseDate(final String input) {
+    public static Date toDate(final String input, final Date defaultValue) {
         if (StringUtils.isBlank(input)) {
-            return null;
+            return defaultValue;
         }
         String body = input.trim();
         body = PATTERN_MILLISECONDS.matcher(body).replaceFirst("");
@@ -150,18 +150,42 @@ public final class XmlUtils {
                 return parsed;
             }
         }
-        return null;
+        return defaultValue;
     }
 
     @Nullable
-    public static Float parseFloat(final String input) {
+    public static Float toFloat(final String input, final Float defaultValue) {
         if (StringUtils.isBlank(input)) {
-            return null;
+            return defaultValue;
         }
         try {
             return Float.parseFloat(input.trim());
         } catch (final NumberFormatException e) {
-            return null;
+            return defaultValue;
+        }
+    }
+
+    @Nullable
+    public static Integer toInteger(final String input, final Integer defaultValue) {
+        if (StringUtils.isBlank(input)) {
+            return defaultValue;
+        }
+        try {
+            return Integer.parseInt(input.trim());
+        } catch (final NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Nullable
+    public static Boolean toBoolean(final String input, final Boolean defaultValue) {
+        if (StringUtils.isBlank(input)) {
+            return defaultValue;
+        }
+        try {
+            return Boolean.parseBoolean(input.trim());
+        } catch (final NumberFormatException e) {
+            return defaultValue;
         }
     }
 
