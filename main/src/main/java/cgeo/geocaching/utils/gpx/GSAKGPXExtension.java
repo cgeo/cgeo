@@ -92,6 +92,18 @@ public class GSAKGPXExtension implements IGPXExtension {
         }
     }
 
+    @Override
+    public void enrichWaypoint(final XmlNode wptNode, final Waypoint waypoint) {
+        final XmlNode gsak = GPXUtils.gpxNodeChild(wptNode, "wptExtension", GSAK_NS);
+        if (gsak == null) {
+            return;
+        }
+        final String userdefined = GPXUtils.gpxNodeChildText(gsak, "Child_ByGSAK", GSAK_NS);
+        if (Boolean.parseBoolean(StringUtils.trim(userdefined))) {
+            waypoint.setUserDefined();
+        }
+    }
+
     private static void appendUserData(final StringBuilder buffer, final String userData) {
         if (StringUtils.isNotBlank(userData)) {
             buffer.append(' ').append(userData);

@@ -223,17 +223,16 @@ public class GPXParserCompatibilityTest {
     }
 
     @Test
-    public void testConflictingUserDefinedFlagsFollowDocumentOrder() throws Exception {
+    public void testConflictingUserDefinedFlagsTrueWins() throws Exception {
         final String gs = "<gsak:wptExtension><gsak:Child_ByGSAK>true</gsak:Child_ByGSAK></gsak:wptExtension>";
         final String cgeo = "<cgeo:userdefined>false</cgeo:userdefined>";
         for (final boolean gsFirst : new boolean[] {false, true}) {
             final String point = "<wpt><name>AA12345</name><type>Waypoint|Reference Point</type><cmt>Note</cmt><extensions>"
                     + (gsFirst ? gs + cgeo : cgeo + gs) + "</extensions></wpt>";
             final Waypoint parsed = parse(document(point), new GPXParser()).getWaypoints().get(0);
-            assertThat(parsed.isUserDefined()).isEqualTo(!gsFirst);
-            assertThat(parsed.getNote()).isEqualTo(gsFirst ? "Note" : "");
-            assertThat(parsed.getUserNote()).isEqualTo(gsFirst ? "" : "Note");
-            assertThat(parsed.isOriginalCoordsEmpty()).isEqualTo(gsFirst);
+            assertThat(parsed.isUserDefined()).isEqualTo(true);
+            assertThat(parsed.getNote()).isEqualTo("");
+            assertThat(parsed.getUserNote()).isEqualTo("Note");
         }
     }
 

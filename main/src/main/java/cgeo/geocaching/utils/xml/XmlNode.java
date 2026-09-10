@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParser;
@@ -32,7 +31,6 @@ public class XmlNode {
 
     private String value;
     private Map<String, Object> childrenMap;
-    private List<XmlNode> orderedChildren;
 
     public XmlNode(final String name, final String namespace) {
         this.localName = XmlUtils.getLocalName(name);
@@ -48,13 +46,11 @@ public class XmlNode {
     }
 
     @SuppressWarnings("unchecked")
-    public void addChild(final XmlNode child) {
+    private void addChild(final XmlNode child) {
 
         if (childrenMap == null) {
             childrenMap = new HashMap<>();
-            orderedChildren = new ArrayList<>();
         }
-        orderedChildren.add(child);
         final Object currentValue = childrenMap.get(child.localName);
         if (currentValue instanceof XmlNode) {
             final List<XmlNode> list = new ArrayList<>();
@@ -66,18 +62,6 @@ public class XmlNode {
         } else {
             childrenMap.put(child.localName, child);
         }
-    }
-
-    public void removeChild(final String name) {
-        if (childrenMap != null) {
-            childrenMap.remove(name);
-            orderedChildren.removeIf(child -> child.localName.equals(name));
-        }
-    }
-
-    /** All children (including attribute nodes) in insertion order. */
-    public List<XmlNode> getChildrenInOrder() {
-        return orderedChildren == null ? Collections.emptyList() : Collections.unmodifiableList(orderedChildren);
     }
 
     public boolean hasChild(final String name) {
@@ -137,20 +121,6 @@ public class XmlNode {
 
     public String getValue() {
         return value;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void forEach(final Consumer<XmlNode> action) {
-        if (childrenMap == null) {
-            return;
-        }
-        for (Map.Entry<String, Object> entry : childrenMap.entrySet()) {
-            if (entry.getValue() instanceof List) {
-                ((List<XmlNode>) entry.getValue()).forEach(action);
-            } else {
-                action.accept((XmlNode) entry.getValue());
-            }
-        }
     }
 
     @NonNull

@@ -271,7 +271,7 @@ final class GPXFullWptParser {
         final String name = "GC_WayPoint1".equals(StringUtils.trim(description)) ? ""
                 : XmlUtils.validate(StringUtils.defaultIfBlank(description, StringUtils.trimToEmpty(rawName)));
         final XmlNode base = GPXUtils.extensionsBase(wptNode);
-        final Waypoint waypoint = new Waypoint(name, WaypointType.fromGPXString(sym == null ? "" : sym, subtype), parseWaypointUserDefined(base));
+        final Waypoint waypoint = new Waypoint(name, WaypointType.fromGPXString(sym == null ? "" : sym, subtype), false);
         waypoint.setId(Waypoint.NEW_ID);
         waypoint.setCoords(coords);
         waypoint.setLookup("---"); // GPX has no lookup code
@@ -361,25 +361,6 @@ final class GPXFullWptParser {
             }
         }
         return logs.isEmpty() ? null : logs;
-    }
-
-
-
-
-    private static boolean parseWaypointUserDefined(final XmlNode base) {
-        boolean userDefined = false;
-        for (final XmlNode child : base.getChildrenInOrder()) {
-            if ("userdefined".equals(child.getLocalName())) {
-                userDefined = Boolean.parseBoolean(StringUtils.trim(child.getValue()));
-            } else if ("wptExtension".equals(child.getLocalName())) {
-                for (final XmlNode field : child.getChildrenInOrder()) {
-                    if ("Child_ByGSAK".equals(field.getLocalName())) {
-                        userDefined |= Boolean.parseBoolean(StringUtils.trim(field.getValue()));
-                    }
-                }
-            }
-        }
-        return userDefined;
     }
 
     private static Geocache createCache() {

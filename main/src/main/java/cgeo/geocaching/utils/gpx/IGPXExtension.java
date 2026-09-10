@@ -9,15 +9,15 @@ import java.util.List;
 
 public interface IGPXExtension {
 
-    default void enrichGeocache(XmlNode wptNode, Geocache cache) {
+    default void enrichGeocache(final XmlNode wptNode, final Geocache cache) {
         //do nothing
     }
 
-    default void enrichWaypoint(XmlNode wptNode, Waypoint waypoint) {
+    default void enrichWaypoint(final XmlNode wptNode, final Waypoint waypoint) {
         //do nothing
     }
 
-    default List<LogEntry> extractLogs(XmlNode wptNode, Geocache cache) {
+    default List<LogEntry> extractLogs(final XmlNode wptNode, final Geocache cache) {
         return null;
     }
 }

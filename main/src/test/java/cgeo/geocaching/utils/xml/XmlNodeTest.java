@@ -44,25 +44,6 @@ public class XmlNodeTest {
     }
 
     @Test
-    public void testOrderedChildrenFollowInsertionAndRemoval() {
-        final XmlNode node = new XmlNode("parent", "");
-        final XmlNode first = new XmlNode("first", "");
-        final XmlNode second = new XmlNode("second", "");
-        final XmlNode repeated = new XmlNode("first", "");
-        assertThat(node.getChildrenInOrder()).isEmpty();
-        node.addChild(first);
-        node.addChild(second);
-        node.addChild(repeated);
-        assertThat(node.getChildrenInOrder()).containsExactly(first, second, repeated);
-        assertThat(node.getChildrenAsList("first")).containsExactly(first, repeated);
-        node.removeChild("first");
-        assertThat(node.getChildrenInOrder()).containsExactly(second);
-        assertThat(node.hasChild("first")).isFalse();
-        node.addChild(first);
-        assertThat(node.getChildrenInOrder()).containsExactly(second, first);
-    }
-
-    @Test
     public void testParseComplexAttribute() throws Exception {
         final XmlNode cgeoNode = parseExampleXml(false).get(0);
         assertThat(cgeoNode.getLocalName()).isEqualTo("website");
@@ -90,23 +71,6 @@ public class XmlNodeTest {
         final XmlNode cgeoNode2 = parseExampleXml(true).get(0);
         assertThat(cgeoNode2.getChild("status").getNamespace()).isEqualTo("http://cgeo.org/test");
         assertThat(cgeoNode2.getChild("status").getValue()).isEqualTo("green");
-    }
-
-    @Test
-    public void testIterate() throws Exception {
-        final XmlNode cgeoNode1 = parseExampleXml(true).get(0);
-        final List<String> list = new ArrayList<>();
-        cgeoNode1.forEach(child -> list.add(child.getLocalName()));
-        assertThat(list).containsExactlyInAnyOrder("@url", "name", "category", "category", "address", "status");
-    }
-
-    @Test
-    public void testMoveExtensions() throws Exception {
-        final XmlNode gpxNode = parseGpxXml(true);
-        assertThat(gpxNode.getChild("extensions").getChild("wptExtension").getChild("SmartName").getValue()).isEqualTo("Abus");
-        gpxNode.getChild("extensions").forEach(gpxNode::addChild);
-        gpxNode.removeChild("extensions");
-        assertThat(gpxNode.getChild("wptExtension").getChild("SmartName").getValue()).isEqualTo("Abus");
     }
 
     @Test
