@@ -204,12 +204,14 @@ public class CacheInfoBoxes {
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
         offlineLists.setVisibility(builder.length() > 0 ? View.VISIBLE : View.GONE);
 
-        final View marker = view.findViewById(R.id.marker_button);
-        if (marker != null) {
+        final View markerBox = view.findViewById(R.id.namedfilter_box);
+        if (markerBox != null) {
             final Context context = view.getContext();
             final boolean enableMarkerButton = context != null && Settings.getNamedFilterDisplayMode() != Settings.NamedFilterDisplayMode.NONE;
-            marker.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
-            if (enableMarkerButton) {
+            markerBox.setVisibility(enableMarkerButton ? View.VISIBLE : View.GONE);
+            
+            final View marker = view.findViewById(R.id.marker_button);
+            if (marker != null && enableMarkerButton) {
                 FilterUtils.registerFilterActivateDeactivateButton(context, marker);
             }
         }
