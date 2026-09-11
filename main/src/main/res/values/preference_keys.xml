@@ -211,7 +211,13 @@
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
     <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <!-- superseded by pref_userDefinedTileProviders, kept so the single provider of older
+         versions can be migrated and so those versions keep working after a downgrade -->
+    <string translatable="false" name="old_pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <string translatable="false" name="pref_userDefinedTileProviders">userDefinedTileProviders</string>
+
+    <!-- category user-defined tile providers -->
+    <string translatable="false" name="preference_category_userdefined_tileproviders">fakekey_category_userdefined_tileproviders</string>
     <string translatable="false" name="pref_tileOverlays">tileOverlays</string>
     <string translatable="false" name="preference_category_map_tileoverlays">fakekey_category_map_tileoverlays</string>
     <string translatable="false" name="pref_tileOverlaysEnabled">tileOverlaysEnabled</string>

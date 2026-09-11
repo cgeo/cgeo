@@ -1010,6 +1010,11 @@
     <string name="settings_hide_tileproviders_summary">Exclude one or more map sources from map source selection</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap variants</string>
     <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
+    <string name="settings_userDefinedTileProviders">User-defined tile providers</string>
+    <string name="settings_userDefinedTileProviders_summary">Tile servers to use as the map itself, in addition to the ones c:geo comes with</string>
+    <string name="settings_userDefinedTileProvider_addnew">Add a new tile provider</string>
+    <string name="settings_userDefinedTileProvider_edit">Edit tile provider</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Do you really want to remove this tile provider?</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_tileOverlays">User-defined overlays</string>
     <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example sea marks or hiking routes</string>
