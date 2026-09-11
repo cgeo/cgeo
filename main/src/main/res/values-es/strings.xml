@@ -566,6 +566,8 @@
     <string name="list_dialog_create_title">Nueva lista</string>
     <string name="list_dialog_create">Crear</string>
     <string name="list_dialog_create_err">c:geo no ha podido crear la lista</string>
+    <string name="list_already_exists_title">Esa lista ya existe</string>
+    <string name="list_already_exists_message">Ya existe una lista llamada \'%s\'. ¿Quieres usar la lista existente?</string>
     <string name="list_dialog_remove_title">Borrar lista</string>
     <string name="list_dialog_remove_description">¿Quieres borrar la lista actual? Todos los cachés de la lista serán movidos a \"Guardados\".</string>
     <string name="list_dialog_remove_nowempty">La lista está vacía. ¿Quieres borrarla?</string>
@@ -585,6 +587,7 @@
     <string name="cache_filter_option_inverse">Filtro Inverso</string>
     <string name="cache_filter_option_include_inconclusive">Incluye coincidencias no concluyentes</string>
     <string name="cache_filter_option_include_inconclusive_info">Se incluye la caché en el resultado cuando un filtro necesita información sobre la caché que no está disponible.</string>
+    <string name="cache_filter_add_button">Añadir criterio de filtro</string>
     <string name="cache_filter_hint_on_empty_filter_list">Pulse en \'Añadir criterios de filtro\' para añadir un filtro</string>
     <string name="cache_filter_name">Nombre del caché</string>
     <string name="cache_filter_type">Tipo de caché</string>
@@ -754,15 +757,29 @@
         <item>&gt;1 mes</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Administrar filtro</string>
     <string name="named_filter_select_title">Seleccionar filtro</string>
     <string name="named_filter_empty_hint">No hay filtros configurados. Pulsa + para añadir uno.</string>
+    <string name="named_filter_fill_with_named">Cargar filtro</string>
+    <string name="named_filter_save_as">Guardar filtro</string>
+    <string name="named_filter_delete">Eliminar filtro</string>
+    <string name="named_filter_storage_delete_message">¿Estás seguro de que quieres borrar el filtro \'%s\'?</string>
     <string name="named_filter_name_exists_title">El nombre ya existe</string>
     <string name="named_filter_name_exists_message">Ya existe un filtro llamado \'%s\'. ¿Sobrescribir?</string>
     <string name="named_filter_config_exists_title">Filtro ya guardado</string>
     <string name="named_filter_config_exists_message">Esta configuración de filtro ya está guardada como \'%s\'. ¿Guardar de nuevo con un nuevo nombre?</string>
+    <string name="named_filter_markers">Marcadores</string>
     <string name="named_filter_markers_enabled">Marcadores activados</string>
     <string name="named_filter_markers_disabled">Marcadores desactivados</string>
+    <string name="named_filter_manage">Administrar</string>
+    <string name="named_filter_no_icons_message">No existen filtros guardados con el icono asignado. Guarda uno para usarlo como marcador.</string>
+    <string name="named_filter_reorder">Prioridad</string>
+    <string name="named_filter_activity_title">Prioridad de marcador</string>
+    <string name="named_filter_enable_markers">Seleccionar marcadores</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Principal</string>
+    <string name="dialog_parent_select">Seleccionar principal</string>
+    <string name="dialog_parent_new">Crear nuevo principal</string>
     <string name="dialog_name">Nombre</string>
     <!-- about -->
     <string name="about_version">Versión</string>
@@ -1147,6 +1164,7 @@
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
     <string name="settings_info_themes">c:geo soporta temas personalizados para mapas sin conexión. Estos pueden ser usados para cambiar el estilo de color del mapa (p. ej. tener un mapa de vista nocturna) o para resaltar ciertos objetos, como rutas de ciclismo o líneas de altura dentro del mapa.\n\nTrabajar con temas de mapa no comprimidos puede disminuir el rendimiento del visor de mapas. En este caso, la carpeta del tema puede sincronizarse opcionalmente con una carpeta local privada para un acceso más rápido (a costa de algún espacio de almacenamiento).</string>
     <string name="settings_info_hillshading_title">Información sobre el sombreado de relieve</string>
+    <string name="settings_info_hillshading">Sombreado de relives es una técnica para crear mapas de relieve topográfico añadiendo un efecto de iluminación al mapa para indicar cambios en la elevación. Las pendientes serán oscuras/iluminadas para generar un efecto 3D.\nLos datos del sombreado de relieve se pueden descargar desde el menú de mapas.</string>
     <string name="settings_hillshading_enable">Sombreado de relieve</string>
     <string name="init_hillshading_hq">Sombreado de relieve de alta calidad</string>
     <string name="init_summary_hillshading_hq">Sombreado de relieve más detallado pero ~50%% más lento renderizando al alejar el zoom</string>
@@ -1270,6 +1288,10 @@
     <string name="feature_voting">Votando por cachés</string>
     <string name="init_appearance_general">Apariencia general</string>
     <string name="init_cachedetail_behaviour">Comportamiento</string>
+    <string name="init_named_filter_display_mode">Filtros con nombre en detalles del caché</string>
+    <string name="named_filter_display_mode_none">No mostrar</string>
+    <string name="named_filter_display_mode_active_only">Sólo si el marcador está activo</string>
+    <string name="named_filter_display_mode_all">Mostrar todos los filtros coincidentes</string>
     <string name="init_cachedetail_note">Nota Personal del Caché</string>
     <string name="init_maplines_title">Personalización de los colores del mapa</string>
     <string name="init_map_other">Otro</string>
@@ -1717,6 +1739,8 @@
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">fracción</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Calculando mis coordenadas promedio… (%s)</string>
+    <string name="averaging_paused">pausado</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Cargando cachés desde %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Cargando waypoints desde %1$s</string>
@@ -2436,6 +2460,8 @@ Nombre de archivo:%2$s</string>
     <string name="live_map_status_partial">Resultados parciales (acerque el zoom para reducir el número de cachés a cargar): %s</string>
     <string name="live_map_status_normal">Cargando datos sin problema: %s</string>
     <string name="list_list_headline">Listas:</string>
+    <string name="filters_list_headline">Filtros:</string>
+    <string name="filters_list_empty">Sin filtros coincidentes</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint extraído</item>
         <item quantity="other">%d waypoints extraídos</item>
@@ -2773,6 +2799,8 @@ Nombre de archivo:%2$s</string>
     <string name="wherigo_error_toast">El ejecutador de Wherigo informó de un error. Abra el diálogo de errores para más detalles.</string>
     <string name="wherigo_confirm_stop_running_game_title">Dejar de ejecutar la partida de Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Una partida se está ejecutando para \"%s\". ¿Quiere detener esta partida?</string>
+    <string name="wherigo_confirm_exit">Salir</string>
+    <string name="wherigo_confirm_save_exit">Autoguardar &amp; Salir</string>
     <string name="wherigo_confirm_delete_cartridge_title">Eliminar Cartucho de Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">¿Está seguro de que quiere eliminar el cartucho \"%1$s\" incluyendo %2$s partidas guardadas?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Eliminar la Partida Guardada del Wherigo</string>
@@ -2808,6 +2836,7 @@ Nombre de archivo:%2$s</string>
     <string name="copy" tools:ignore="PrivateResource">Copiar</string>
     <string name="pause">Pausar</string>
     <string name="resume">Reanudar</string>
+    <string name="rename">Renombrar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar todo</string>
     <string name="multiselect_selectvisible">Seleccionar visibles</string>
