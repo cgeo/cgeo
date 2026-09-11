@@ -77,7 +77,7 @@ public class GpxSerializerTest {
         final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc901cb_gpx100);
         assertThat(cache).isNotNull();
         assertThat(cache.getName()).contains(TextUtils.normalize("\uD83C\uDD83"));
-        assertThat(cache.getDescription()).doesNotContain(
+        assertThat(cache.getDescription()).contains(
                 TextUtils.normalize("\uD835\uDC9F"),
                 TextUtils.normalize("\uD835\uDC52"),
                 TextUtils.normalize("\uD835\uDCB6"),
@@ -87,7 +87,7 @@ public class GpxSerializerTest {
         new GpxSerializer().writeGPX(Collections.singletonList("GC901CB"), writer, null);
         final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
         assertThat(gpxOutput).contains(TextUtils.normalize("\uD83C\uDD83"));
-        assertThat(gpxOutput).doesNotContain(
+        assertThat(gpxOutput).contains(
                 TextUtils.normalize("\uD835\uDC9F"),
                 TextUtils.normalize("\uD835\uDC52"),
                 TextUtils.normalize("\uD835\uDCB6"),
