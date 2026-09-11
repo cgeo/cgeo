@@ -11,6 +11,7 @@ import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -30,6 +31,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,9 +42,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
 
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
+    private final List<TileOverlay> overlays = new ArrayList<>();
     private final GoogleMapController mapController = new GoogleMapController();
     private GestureDetector gestureDetector;
 
@@ -171,8 +178,30 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         final boolean needsUpdate = super.setTileSource(newSource, force);
         if (needsUpdate) {
             ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+            addTileOverlays();
         }
         return needsUpdate;
+    }
+
+    /**
+     * (Re-)creates the user-defined tile overlays. Existing ones are removed first, as this is
+     * called on every tile source change and they must not stack up.
+     */
+    private void addTileOverlays() {
+        removeTileOverlays();
+        for (TileOverlayOptions options : TileOverlayLayerHelper.getTileLayersGoogle()) {
+            final TileOverlay overlay = mMap.addTileOverlay(options);
+            if (overlay != null) {
+                overlays.add(overlay);
+            }
+        }
+    }
+
+    private void removeTileOverlays() {
+        for (TileOverlay overlay : overlays) {
+            overlay.remove();
+        }
+        overlays.clear();
     }
 
 

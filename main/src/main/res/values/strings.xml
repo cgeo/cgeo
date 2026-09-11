@@ -1011,6 +1011,24 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMap variants</string>
     <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
+    <string name="settings_tileOverlays">User-defined overlays</string>
+    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example sea marks or hiking routes</string>
+    <string name="settings_tileOverlays_add">Add overlay</string>
+    <string name="settings_tileOverlays_edit">Edit overlay</string>
+    <string name="settings_tileOverlays_url_hint">Enter the full Uri including the {X}, {Y} and {Z} placeholders. Tiles must be transparent where they carry no data. Make sure you have checked and comply to the provider\'s usage conditions.</string>
+    <string name="settings_tileOverlays_delete">Delete overlay</string>
+    <string name="settings_tileOverlays_delete_confirm">Delete overlay \"%1$s\"?</string>
+
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Name</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Please enter a http(s) Uri containing {X}, {Y} and {Z}</string>
+    <string name="settings_tileUrl_test">Test</string>
+    <string name="settings_tileUrl_testing">Checking\u2026</string>
+    <string name="settings_tileUrl_testok">A tile was received</string>
+    <string name="settings_tileUrl_testfailed_title">No tile received</string>
+    <string name="settings_tileUrl_testfailed">Could not load a tile from this server (%1$s). The Uri may be wrong, or the server may be temporarily unavailable.</string>
+    <string name="settings_tileUrl_copied">Copied, ready to be shared</string>
     <string name="settings_title_data_dir">Geocache data folder</string>
     <string name="settings_title_data_dir_usage">Geocache data folder (%1$s used)</string>
     <string name="calculate_dataDir_title">Geocache data usage</string>

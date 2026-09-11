@@ -6,6 +6,9 @@
         android:id="@+id/menu_group_map_sources"
         android:checkableBehavior="single" >
     </group>
+    <!-- user-defined tile overlays, filled at runtime; not single-choice, several can be active -->
+    <group android:id="@+id/menu_group_tile_overlays" >
+    </group>
     <group android:id="@+id/menu_group_offlinemaps">
         <item
             android:orderInCategory="90"

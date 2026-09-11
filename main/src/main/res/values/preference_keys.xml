@@ -212,6 +212,9 @@
     <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <string translatable="false" name="pref_tileOverlays">tileOverlays</string>
+    <string translatable="false" name="preference_category_map_tileoverlays">fakekey_category_map_tileoverlays</string>
+    <string translatable="false" name="pref_tileOverlaysEnabled">tileOverlaysEnabled</string>
 
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>

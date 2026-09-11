@@ -64,6 +64,8 @@ import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayMenuHelper;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlays;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.ActionBarUtils;
@@ -1079,6 +1081,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 menu.inflate(R.menu.map_mapview);
                 DownloaderUtils.addManageOfflineDataMenu(this, menu.getMenu().findItem(R.id.menu_manage_offline_data));
                 TileProviderFactory.addMapviewMenuItems(this, menu);
+                TileOverlayMenuHelper.addMenuItems(menu.getMenu());
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.setForceShowIcon(true);
                 menu.show();
@@ -1099,6 +1102,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_backgroundmap) {
             Settings.setMapBackgroundMapLayer(!Settings.getMapBackgroundMapLayer());
             item.setChecked(Settings.getMapBackgroundMapLayer());
+            changeMapSource(mapFragment.currentTileProvider);
+        } else if (TileOverlayMenuHelper.getOverlayKey(id) != null) {
+            // checked before the dynamic block below, so that an overlay can never be shadowed by a map source or language id
+            final String overlayKey = TileOverlayMenuHelper.getOverlayKey(id);
+            final boolean enabled = !TileOverlays.isEnabled(overlayKey);
+            TileOverlays.setEnabled(overlayKey, enabled);
+            item.setChecked(enabled);
             changeMapSource(mapFragment.currentTileProvider);
         } else { // dynamic submenus: Map language, Map source
             final String language = TileProviderFactory.getLanguage(id);
