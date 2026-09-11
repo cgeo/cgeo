@@ -3,8 +3,6 @@ package cgeo.geocaching.utils.gpx;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
-import java.io.InputStream;
-
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,9 +12,7 @@ public class GPXUtilsTest {
     public void testParseZipWithSeparateCacheAndWaypointFiles() throws Exception {
         final GPXParser parser = new GPXParser();
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq7545915.zip")) {
-            assertThat(GPXUtils.parseZip(is, parser, hooks)).isEqualTo(2);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq7545915.zip"), parser, hooks, null)).isEqualTo(2);
 
         // "7545915-wpts.gpx" sorts alphabetically BEFORE "7545915.gpx" - proves the two-pass ordering works
         assertThat(hooks.getGeocaches()).hasSize(1);
@@ -35,9 +31,7 @@ public class GPXUtilsTest {
     public void testParseZipWithNoGpxEntriesReturnsZeroWithoutThrowing() throws Exception {
         final GPXParser parser = new GPXParser();
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq_error.zip")) {
-            assertThat(GPXUtils.parseZip(is, parser, hooks)).isEqualTo(0);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq_error.zip"), parser, hooks, null)).isEqualTo(0);
         assertThat(hooks.getGlobalItems()).isEmpty();
     }
 
@@ -45,9 +39,7 @@ public class GPXUtilsTest {
     public void testParseZipWithEntityEncodedFilename() throws Exception {
         final GPXParser parser = new GPXParser();
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq_entities.zip")) {
-            assertThat(GPXUtils.parseZip(is, parser, hooks)).isEqualTo(1);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq_entities.zip"), parser, hooks, null)).isEqualTo(1);
         assertThat(hooks.getGlobalItems()).isNotEmpty();
     }
 
@@ -55,9 +47,7 @@ public class GPXUtilsTest {
     public void testParseZipWithCp437EncodedFilename() throws Exception {
         final GPXParser parser = new GPXParser();
         final RecordingGPXParseHooks hooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq_cp437.zip")) {
-            assertThat(GPXUtils.parseZip(is, parser, hooks, "cp437")).isEqualTo(1);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq_cp437.zip"), parser, hooks, "cp437")).isEqualTo(1);
         assertThat(hooks.getGlobalItems()).isNotEmpty();
     }
 
@@ -65,15 +55,11 @@ public class GPXUtilsTest {
     public void testResetAllowsReuseOfParserAcrossUnrelatedZips() throws Exception {
         final GPXParser parser = new GPXParser();
         final RecordingGPXParseHooks firstHooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq7545915.zip")) {
-            GPXUtils.parseZip(is, parser, firstHooks);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq7545915.zip"), parser, firstHooks, null)).isEqualTo(2);
         parser.reset();
 
         final RecordingGPXParseHooks secondHooks = new RecordingGPXParseHooks();
-        try (InputStream is = GPXParserTest.openResource("/pq_entities.zip")) {
-            assertThat(GPXUtils.parseZip(is, parser, secondHooks)).isEqualTo(1);
-        }
+        assertThat(GPXUtils.parseZip(() -> GPXParserTest.openResource("/pq_entities.zip"), parser, secondHooks, null)).isEqualTo(1);
         assertThat(secondHooks.getGlobalItems()).isNotEmpty();
     }
 }
