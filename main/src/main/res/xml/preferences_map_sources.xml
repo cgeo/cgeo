@@ -35,6 +35,13 @@
             android:summary="@string/settings_userDefinedTileProviderUri"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+    <cgeo.geocaching.settings.PreferenceCategory
+        android:key="@string/preference_category_map_tileoverlays"
+        android:title="@string/settings_tileOverlays"
+        android:summary="@string/settings_tileOverlays_summary"
+        app:iconSpaceReserved="false">
+        <!-- Filled dynamically -->
+    </cgeo.geocaching.settings.PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_title_offline_maps"
         app:iconSpaceReserved="false">

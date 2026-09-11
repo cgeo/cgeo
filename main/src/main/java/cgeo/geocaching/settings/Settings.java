@@ -1347,6 +1347,32 @@ public class Settings {
         return getString(R.string.pref_userDefinedTileProviderUri, null);
     }
 
+    /** json array holding the configured tile overlays, see cgeo.geocaching.unifiedmap.overlays.TileOverlays */
+    @Nullable
+    public static String getTileOverlaysConfig() {
+        return getString(R.string.pref_tileOverlays, null);
+    }
+
+    public static void setTileOverlaysConfig(@Nullable final String config) {
+        putString(R.string.pref_tileOverlays, config);
+    }
+
+    /** keys of the tile overlays currently switched on in the map view */
+    public static Set<String> getTileOverlaysEnabled() {
+        final Set<String> empty = Collections.emptySet();
+        if (sharedPrefs == null) {
+            return empty;
+        }
+        return sharedPrefs.getStringSet(getKey(R.string.pref_tileOverlaysEnabled), empty);
+    }
+
+    public static void setTileOverlaysEnabled(final Set<String> keys) {
+        if (sharedPrefs == null) {
+            return;
+        }
+        sharedPrefs.edit().putStringSet(getKey(R.string.pref_tileOverlaysEnabled), keys).apply();
+    }
+
     public static void setMapLanguage(@Nullable final String language) {
         putString(R.string.pref_mapLanguage, StringUtils.isBlank(language) ? "" : language);
     }

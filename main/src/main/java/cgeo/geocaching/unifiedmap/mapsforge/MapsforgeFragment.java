@@ -12,6 +12,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOnlineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -33,7 +34,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.graphics.Canvas;
@@ -50,6 +55,7 @@ import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.layer.download.TileDownloadLayer;
 import org.mapsforge.map.model.Model;
 import org.mapsforge.map.model.common.Observer;
 import org.mapsforge.map.view.InputListener;
@@ -63,6 +69,8 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     private View mapAttribution;
     private boolean doReapplyTheme = false;
     private MapEventsReceiver mapEventsReceiver = null;
+    private final List<TileDownloadLayer> overlayLayers = new ArrayList<>();
+    private final Map<String, TileCache> overlayCaches = new HashMap<>();
 
     public MapsforgeFragment() {
         super(R.layout.unifiedmap_mapsforge_fragment);
@@ -138,6 +146,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
                 mMapView.getLayerManager().getLayers().add(backgroundMap);
             }
         }
+        addTileOverlays();
 
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(v -> displayMapAttribution());
@@ -197,11 +206,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
             ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mMapView);
         }
+        addTileOverlays();
     }
 
     @Override
     public void onPause() {
         // mMapView.onPause();
+        removeTileOverlays();
         if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
             ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mMapView);
         }
@@ -210,9 +221,42 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         mMapView.getModel().mapViewPosition.removeObserver(this);
     }
 
+    /**
+     * (Re-)creates the layers for the enabled tile overlays. Existing ones are removed first, as
+     * this is called both on tile source changes and on resume and layers must not stack up.
+     */
+    private void addTileOverlays() {
+        removeTileOverlays();
+        for (TileDownloadLayer overlay : TileOverlayLayerHelper.getTileLayersMapsforge(requireContext(), mMapView, overlayCaches)) {
+            // appended, so that overlays end up above the base map, which is inserted at index 0
+            mMapView.getLayerManager().getLayers().add(overlay);
+            overlay.onResume();
+            overlayLayers.add(overlay);
+        }
+    }
+
+    /** Tear down the overlay layers but keep their caches, mirroring AbstractMapsforgeTileProvider.removeTileLayer */
+    private void removeTileOverlays() {
+        for (TileDownloadLayer overlay : overlayLayers) {
+            overlay.onPause();
+            mMapView.getLayerManager().getLayers().remove(overlay);
+            overlay.onDestroy(); // without this the layer's JobQueue keeps holding mapViewPosition
+        }
+        overlayLayers.clear();
+    }
+
+    private void destroyTileOverlayCaches() {
+        for (TileCache cache : overlayCaches.values()) {
+            cache.destroy();
+        }
+        overlayCaches.clear();
+    }
+
     @Override
     public void onDestroyView() {
 //        themeHelper.disposeTheme();
+        removeTileOverlays();
+        destroyTileOverlayCaches();
         mapEventsReceiver = null;
         mMapView.destroyAll();
         super.onDestroyView();
