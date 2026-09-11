@@ -5,6 +5,7 @@ import cgeo.geocaching.DBInspectionActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -91,6 +92,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.location.Location;
 import android.net.Uri;
+import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -269,7 +271,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 111;
+    private static final int dbVersion = 112;
     public static final int customListIdOffset = 10;
 
     /**
@@ -316,7 +318,8 @@ public class DataStore {
             108, // add health_score column to cg_caches
             109,  // add favorite column to cg_logs
             110,  // migrate markers/emojis datatype from int to string
-            111  // correct a problem in name filter migration: reference by id instead of name
+            111, // correct a problem in name filter migration: reference by id instead of name
+            112  // add diacritic-normalized shadow columns to cg_caches/cg_trackables (nullable, re-runnable)
             ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -332,6 +335,9 @@ public class DataStore {
     @NonNull public static final String dbFieldCaches_inventoryunknown = "inventoryunknown";
     @NonNull public static final String dbFieldCaches_onWatchList = "onWatchList";
     @NonNull public static final String dbFieldCaches_coordsChanged = "coordsChanged";
+    @NonNull public static final String dbFieldCaches_nameNormalized = "name_normalized";
+    @NonNull public static final String dbFieldCaches_ownerNormalized = "owner_normalized";
+    @NonNull public static final String dbFieldTrackables_titleNormalized = "title_normalized";
     @NonNull public static final String dbTableLists = "cg_lists";
     @NonNull public static final String dbTableCachesLists = "cg_caches_lists";
     @NonNull public static final String dbFieldCachesLists_list_id = "list_id";
@@ -431,7 +437,9 @@ public class DataStore {
             + "emojiString TEXT,"
             + "alcMode INTEGER DEFAULT 0,"
             + "tier TEXT,"
-            + "health_score INTEGER"
+            + "health_score INTEGER,"
+            + dbFieldCaches_nameNormalized + " TEXT,"
+            + dbFieldCaches_ownerNormalized + " TEXT"
             + "); ";
     private static final String dbCreateLists = "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -576,7 +584,8 @@ public class DataStore {
             + "geocode TEXT, "
             + "log_date LONG, "
             + "log_type INTEGER, "
-            + "log_guid TEXT "
+            + "log_guid TEXT, "
+            + dbFieldTrackables_titleNormalized + " TEXT "
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = "CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
@@ -2069,6 +2078,17 @@ public class DataStore {
                         }
                     }
 
+                    // add diacritic-normalized shadow columns for the search bar (#16206); filled lazily by a background task
+                    if (oldVersion < 112) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, dbFieldCaches_nameNormalized + " TEXT");
+                            createColumnIfNotExists(db, dbTableCaches, dbFieldCaches_ownerNormalized + " TEXT");
+                            createColumnIfNotExists(db, dbTableTrackables, dbFieldTrackables_titleNormalized + " TEXT");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 112);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2714,7 +2734,8 @@ public class DataStore {
             values.put("type", cache.getType().id);
             values.put("name", cache.getName());
             values.put("owner", cache.getOwnerDisplayName());
-            values.put("owner_real", cache.getOwnerUserId());
+            values.put(dbFieldCaches_nameNormalized, TextUtils.foldDiacritics(cache.getName()));
+            values.put(dbFieldCaches_ownerNormalized, TextUtils.foldDiacritics(cache.getOwnerDisplayName()));            values.put("owner_real", cache.getOwnerUserId());
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate == null) {
                 values.put("hidden", 0);
@@ -3197,6 +3218,7 @@ public class DataStore {
                 values.put("tbcode", tbCode);
                 values.put("guid", trackable.getGuid());
                 values.put("title", trackable.getName());
+                values.put(dbFieldTrackables_titleNormalized, TextUtils.foldDiacritics(trackable.getName()));
                 values.put("owner", trackable.getOwner());
                 final Date releasedDate = trackable.getReleased();
                 if (releasedDate != null) {
@@ -4643,6 +4665,123 @@ public class DataStore {
         });
     }
 
+    private static volatile boolean diacriticsMigrationChecked = false;
+
+    private static final int NORMALIZE_MIGRATION_CHUNK_SIZE = 2000;
+    private static final long NORMALIZE_MIGRATION_MIN_DELAY_MS = 20L;
+    private static final long NORMALIZE_MIGRATION_MAX_DELAY_MS = 500L;
+    private static final double NORMALIZE_MIGRATION_DUTY_CYCLE = 0.33;
+
+    /**
+     * Lazily fills the diacritic-normalized shadow columns (#16206) for rows carried over from an older
+     * database version. Runs once per process, in the background, in throttled chunks, and shows a toast
+     * once it has actually migrated something.
+     */
+    public static void migrateNormalizedColumnsIfNeeded(final Context context) {
+        final Context appContext = context.getApplicationContext();
+        withAccessLock(() -> {
+            if (diacriticsMigrationChecked) {
+                return;
+            }
+            diacriticsMigrationChecked = true;
+            Schedulers.io().scheduleDirect(() -> runNormalizedColumnsMigration(appContext));
+        });
+    }
+
+    private static void runNormalizedColumnsMigration(final Context context) {
+        try {
+            boolean migratedAny = false;
+            migratedAny |= migrateNormalizedTable(context, dbTableCaches, "geocode",
+                    new String[]{"name", "owner"}, new String[]{dbFieldCaches_nameNormalized, dbFieldCaches_ownerNormalized});
+            migratedAny |= migrateNormalizedTable(context, dbTableTrackables, "tbcode",
+                    new String[]{"title"}, new String[]{dbFieldTrackables_titleNormalized});
+            if (migratedAny) {
+                Log.iForce("[DB] search-index normalization migration finished");
+                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.search_index_updated));
+            }
+        } catch (final Exception e) {
+            Log.w("DataStore.runNormalizedColumnsMigration", e);
+        }
+    }
+
+    private static boolean migrateNormalizedTable(final Context context, final String table, final String idColumn,
+                                                  final String[] sourceColumns, final String[] targetColumns) {
+        boolean migratedAny = false;
+        final String[] queryColumns = new String[sourceColumns.length + 1];
+        queryColumns[0] = idColumn;
+        System.arraycopy(sourceColumns, 0, queryColumns, 1, sourceColumns.length);
+        final String selection = targetColumns[0] + " IS NULL";
+
+        final StringBuilder setClause = new StringBuilder();
+        for (int i = 0; i < targetColumns.length; i++) {
+            setClause.append(i == 0 ? "" : ", ").append(targetColumns[i]).append(" = ?");
+        }
+        final String updateSql = "UPDATE " + table + " SET " + setClause + " WHERE " + idColumn + " = ?";
+
+        while (true) {
+            final long start = System.currentTimeMillis();
+
+            // read the raw chunk (short read lock), then fold OUTSIDE any lock
+            final List<String[]> foldedRows = new ArrayList<>();
+            final Cursor cursor = database.query(table, queryColumns, selection, null, null, null, null,
+                    String.valueOf(NORMALIZE_MIGRATION_CHUNK_SIZE));
+            try {
+                while (cursor.moveToNext()) {
+                    final String[] row = new String[targetColumns.length + 1];
+                    for (int i = 0; i < sourceColumns.length; i++) {
+                        row[i] = TextUtils.foldDiacritics(cursor.getString(i + 1));
+                    }
+                    row[targetColumns.length] = cursor.getString(0);
+                    foldedRows.add(row);
+                }
+            } finally {
+                cursor.close();
+            }
+            if (foldedRows.isEmpty()) {
+                break;
+            }
+
+            // write the whole chunk in one transaction with a single reused compiled statement (minimal write-lock hold)
+            final SQLiteStatement statement = database.compileStatement(updateSql);
+            database.beginTransaction();
+            try {
+                for (final String[] row : foldedRows) {
+                    statement.clearBindings();
+                    for (int i = 0; i < row.length; i++) {
+                        if (row[i] == null) {
+                            statement.bindNull(i + 1);
+                        } else {
+                            statement.bindString(i + 1, row[i]);
+                        }
+                    }
+                    statement.executeUpdateDelete();
+                }
+                database.setTransactionSuccessful();
+            } finally {
+                database.endTransaction();
+                statement.close();
+            }
+            migratedAny = true;
+
+            sleepBetweenMigrationChunks(context, System.currentTimeMillis() - start);
+        }
+        return migratedAny;
+    }
+
+    private static void sleepBetweenMigrationChunks(final Context context, final long chunkWorkMillis) {
+        long delay = Math.round(chunkWorkMillis * (1.0 / NORMALIZE_MIGRATION_DUTY_CYCLE - 1.0));
+        final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        if (pm != null && pm.isPowerSaveMode()) {
+            delay = NORMALIZE_MIGRATION_MAX_DELAY_MS;
+        }
+        delay = Math.max(NORMALIZE_MIGRATION_MIN_DELAY_MS, Math.min(NORMALIZE_MIGRATION_MAX_DELAY_MS, delay));
+        try {
+            Thread.sleep(delay);
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     private static void deleteOrphanedRecords() {
         Log.d("Database clean: removing non-existing lists");
         database.delete(dbTableCachesLists, "list_id <> " + StoredList.STANDARD_LIST_ID + " AND list_id NOT IN (SELECT _id + " + customListIdOffset + " FROM " + dbTableLists + ")", null);
@@ -5718,8 +5857,9 @@ public class DataStore {
             final GeocacheSearchSuggestionCursor resultCursor = new GeocacheSearchSuggestionCursor();
             try {
                 final String selectionArg = getSuggestionArgument(searchTerm);
-                findCaches(resultCursor, selectionArg);
-                findTrackables(resultCursor, selectionArg);
+                final String normalizedArg = getSuggestionArgument(TextUtils.foldDiacritics(searchTerm));
+                findCaches(resultCursor, selectionArg, normalizedArg);
+                findTrackables(resultCursor, selectionArg, normalizedArg);
             } catch (final Exception e) {
                 Log.e("DataStore.loadBatchOfStoredGeocodes", e);
             }
@@ -5727,12 +5867,16 @@ public class DataStore {
         });
     }
 
-    private static void findCaches(final GeocacheSearchSuggestionCursor resultCursor, final String selectionArg) {
+    private static void findCaches(final GeocacheSearchSuggestionCursor resultCursor, final String selectionArg, final String normalizedArg) {
         final Cursor cursor = database.query(
                 dbTableCaches,
                 new String[]{"geocode", "name", "type"},
-                "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ? OR owner LIKE ?)",
-                new String[]{selectionArg, selectionArg, selectionArg},
+                "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ?"
+                        + " OR " + dbFieldCaches_nameNormalized + " LIKE ? OR " + dbFieldCaches_ownerNormalized + " LIKE ?"
+                        // fall back to the raw columns for rows not yet processed by the background normalization migration
+                        + " OR (" + dbFieldCaches_nameNormalized + " IS NULL AND name LIKE ?)"
+                        + " OR (" + dbFieldCaches_ownerNormalized + " IS NULL AND owner LIKE ?))",
+                new String[]{selectionArg, normalizedArg, normalizedArg, selectionArg, selectionArg},
                 null,
                 null,
                 "name");
@@ -5750,12 +5894,15 @@ public class DataStore {
         return "%" + StringUtils.trim(input) + "%";
     }
 
-    private static void findTrackables(final MatrixCursor resultCursor, final String selectionArg) {
+    private static void findTrackables(final MatrixCursor resultCursor, final String selectionArg, final String normalizedArg) {
         final Cursor cursor = database.query(
                 dbTableTrackables,
                 new String[]{"tbcode", "title"},
-                "tbcode IS NOT NULL AND tbcode != '' AND (tbcode LIKE ? OR title LIKE ?)",
-                new String[]{selectionArg, selectionArg},
+                "tbcode IS NOT NULL AND tbcode != '' AND (tbcode LIKE ?"
+                        + " OR " + dbFieldTrackables_titleNormalized + " LIKE ?"
+                        // fall back to the raw column for rows not yet processed by the background normalization migration
+                        + " OR (" + dbFieldTrackables_titleNormalized + " IS NULL AND title LIKE ?))",
+                new String[]{selectionArg, normalizedArg, selectionArg},
                 null,
                 null,
                 "title");

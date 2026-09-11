@@ -21,6 +21,7 @@ import androidx.core.text.HtmlCompat;
 
 import java.nio.charset.StandardCharsets;
 import java.text.Collator;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,6 +54,8 @@ public final class TextUtils {
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
 
     private static final Pattern PATTERN_REMOVE_SPECIAL = Pattern.compile("[^a-z0-9]");
+
+    private static final Pattern PATTERN_COMBINING_MARKS = Pattern.compile("\\p{M}+");
 
     private static final Pattern PATTERN_CONTAINS_HTML = Pattern.compile(
             "<(/\\s*)?[a-zA-Z]+\\s*([a-zA-Z]+\\s*=\\s*['\"][^'\"]*['\"]\\s*)*(/\\s*)?>|&#?[a-zA-Z0-9]{1,10};");
@@ -536,6 +539,34 @@ public final class TextUtils {
             return null;
         }
         return PATTERN_REMOVE_SPECIAL.matcher(value.toLowerCase(Locale.US)).replaceAll("");
+    }
+
+    /**
+     * Folds a string to a lower-case, diacritic-insensitive form for search collation:
+     * atomic letters without canonical decomposition are mapped to their base letter(s),
+     * then combining marks (accents) are stripped after NFD decomposition.
+     * Example: {@code la duş} and {@code straße} become {@code la dus} and {@code strasse}.
+     */
+    @Nullable
+    public static String foldDiacritics(@Nullable final String value) {
+        if (value == null) {
+            return null;
+        }
+        final String mapped = value.toLowerCase(Locale.ROOT)
+                .replace("ß", "ss").replace("ø", "o").replace("æ", "ae").replace("œ", "oe")
+                .replace("ł", "l").replace("đ", "d").replace("ð", "d").replace("þ", "th")
+                .replace("ħ", "h").replace("ŧ", "t").replace("ŋ", "n").replace("ĸ", "k")
+                .replace("ſ", "s").replace("ı", "i");
+        final String decomposed = Normalizer.normalize(mapped, Normalizer.Form.NFD);
+        return PATTERN_COMBINING_MARKS.matcher(decomposed).replaceAll("");
+    }
+
+    /** {@code true} if the diacritic-folded {@code haystack} contains the diacritic-folded {@code needle}. */
+    public static boolean containsIgnoreCaseAndDiacritics(@Nullable final String haystack, @Nullable final String needle) {
+        if (haystack == null || needle == null) {
+            return false;
+        }
+        return StringUtils.contains(foldDiacritics(haystack), foldDiacritics(needle));
     }
 
 
