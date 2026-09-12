@@ -629,6 +629,7 @@
     <string name="settings_title_map_style">Στυλ χάρτη</string>
     <string name="settings_hide_tileproviders_title">Απόκρυψη Πηγών Χάρτη</string>
     <string name="settings_hide_tileproviders_summary">Εξαίρεση μιας ή περισσότερων πηγών χάρτη από την επιλογή πηγής χάρτη</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Χρήση δεδομένων της κρύπτης</string>
     <string name="settings_title_data_dir_usage">Κατάλογος δεδομένων κρύπτης (%1$s χρησιμοποιείται)</string>
     <string name="calculate_dataDir_title">Χρήση δεδομένων της κρύπτης</string>
