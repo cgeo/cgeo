@@ -650,6 +650,7 @@
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
     <string name="settings_title_map_style">Harita stili</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Geocache veri klasörü</string>
     <string name="settings_title_data_dir_usage">Geocache veri klasörü (%1$s kullanılmış)</string>
     <string name="calculate_dataDir_title">Geocache veri kullanımı</string>
