@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils.xml;
 
-import cgeo.org.kxml2.io.KXmlSerializer;
+import android.util.Xml;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -20,7 +20,7 @@ public class XmlUtilsTest {
     @Before
     public void setUp() throws Exception {
         stringWriter = new StringWriter();
-        xml = new KXmlSerializer();
+        xml = Xml.newSerializer();
         xml.setOutput(stringWriter);
         xml.startDocument(StandardCharsets.UTF_8.name(), null);
     }
@@ -37,11 +37,6 @@ public class XmlUtilsTest {
         assertXmlEquals("<n0:tag xmlns:n0=\"prefix\">text</n0:tag>");
     }
 
-    private void assertXmlEquals(final String expected) throws IOException {
-        xml.endDocument();
-        xml.flush();
-        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
-    }
 
     @Test
     public void testMultipleTexts() throws Exception {
@@ -55,4 +50,18 @@ public class XmlUtilsTest {
         assertXmlEquals("<tag>Vom Gasthaus zur Pyramide\u0020aus Glas\u0009</tag>");
     }
 
+    @Test
+    public void testEmojiPassesThrough() throws Exception {
+        // 🦆 DUCK emoji (U+1F986) — the original bug report
+        final String name = "\uD83E\uDD86Alles f\u00FCr den Cache\uD83E\uDD86 Lab Bonus";
+        final String htmlName = "<name>&#129414;Alles für den Cache&#129414; Lab Bonus</name>";
+        XmlUtils.simpleText(xml, "", "name", name);
+        assertXmlEquals(htmlName);
+    }
+
+    private void assertXmlEquals(final String expected) throws IOException {
+        xml.endDocument();
+        xml.flush();
+        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
+    }
 }

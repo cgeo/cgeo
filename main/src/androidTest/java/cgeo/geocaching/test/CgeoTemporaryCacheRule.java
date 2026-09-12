@@ -51,8 +51,7 @@ public class CgeoTemporaryCacheRule implements TestRule {
     }
 
     private void createCache() {
-        this.cache = CgeoTestUtils.createTestCache();
-        this.cache.setGeocode("TEST" + cacheIdSupplier.incrementAndGet());
+        this.cache = CgeoTestUtils.createTestCache("TEST" + cacheIdSupplier.incrementAndGet());
         if (modifier != null) {
             modifier.accept(this.cache);
         }

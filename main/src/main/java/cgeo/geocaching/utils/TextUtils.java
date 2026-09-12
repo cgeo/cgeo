@@ -39,6 +39,7 @@ import java.util.zip.CRC32;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -566,6 +567,10 @@ public final class TextUtils {
             }
         }
         return defaultEnum;
+    }
+
+    public static String normalize(final @Nullable String s) {
+        return s == null ? null : StringEscapeUtils.unescapeXml(s);
     }
 
     private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {
