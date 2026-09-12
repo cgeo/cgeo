@@ -1,5 +1,7 @@
 ### UnifiedMap
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Detalles del caché
 - Nuevo: Cambia entre fecha almacenada en el dispositivo relativa y exacta
