@@ -34,10 +34,8 @@ android {
     compileSdk = 36
 
     compileOptions {
-        // https://developer.android.com/studio/write/java8-support
-        // enable Java 8 APIs like Streams on older Android versions
+        // support new Java language features on older devices
         coreLibraryDesugaringEnabled = true
-        // use modern Java 17 language features in Android
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
