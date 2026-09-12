@@ -586,6 +586,7 @@
     <string name="settings_title_waypoints">Rutepunkter</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_map_behavior">Kortbetjening</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Mappe til geocache-data</string>
     <string name="settings_title_data_dir_usage">Geocache datamappe (%1$s brugt)</string>
     <string name="calculate_dataDir_title">Geocache dataforbrug</string>
