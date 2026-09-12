@@ -373,6 +373,7 @@
     <string name="settings_title_waypoints">шляхові точки</string>
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Використання даних схованки</string>
     <string name="calculate_dataDir">Обчислення використання даних схованки</string>
     <string name="settings_data_dir_item">%1$s (%2$s вільно)</string>
