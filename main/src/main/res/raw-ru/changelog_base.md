@@ -1,5 +1,7 @@
 ### Карта
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Детали тайника
 - New: Toggle stored-on-device date between relative and exact
