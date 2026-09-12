@@ -128,6 +128,11 @@
                 android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
+                android:id="@+id/menu_post_offline_logs"
+                android:title="@string/caches_post_offlinelogs"
+                android:enabled="true"
+                app:showAsAction="never|withText"/>
+            <item
                 android:id="@+id/menu_show_attributes"
                 android:icon="@drawable/ic_menu_overview"
                 android:title="@string/caches_show_attributes_all"
