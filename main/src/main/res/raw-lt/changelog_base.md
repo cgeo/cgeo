@@ -1,5 +1,7 @@
 ### Žemėlapis
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Slėptuvės detalės
 - New: Toggle stored-on-device date between relative and exact
