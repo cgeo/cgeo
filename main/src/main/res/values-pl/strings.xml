@@ -902,6 +902,10 @@
     <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Nazwa</string>
+    <string name="settings_tileUrl_test">Testuj</string>
+    <string name="settings_tileUrl_testing">Sprawdzanie\u2026</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
