@@ -833,6 +833,7 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
