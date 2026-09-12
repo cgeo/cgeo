@@ -3273,14 +3273,34 @@
 
     <!-- db inspection -->
     <string name="view_database">View database</string>
-    <string name="dbi_select_title">(Select table)</string>
-    <string name="dbi_columnproperties_title">Column properties</string>
-    <string name="dbi_columnproperties_message">Field: %1$s\nType: %2$s\nStorage: %3$s</string>
-    <string name="dbi_edit_title">Edit "%1$s" of row %2$d"</string>
+    <string name="dbi_config_columns">Configure columns</string>
     <string name="dbi_edit_ok">Field updated</string>
     <string name="dbi_edit_error">Error while updating field</string>
-    <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
-    <string name="dbi_search_title">Search for</string>
-    <string name="dbi_search_columnSelection">Restrict to</string>
+    <string name="dbi_sort_reset">Sorting reset</string>
+    <string name="dbi_sorted_by">Sorted by %1$s</string>
+    <string name="dbi_no_tables">No tables in this database</string>
+    <string name="dbi_select_table">Select table</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s at #%2$d is read/only</string>
+    <string name="dbi_edit_title">Edit "%1$s" at #%2$d"</string>
+    <string name="dbi_delete_row_title">Delete row</string>
+    <string name="dbi_delete_row_question">Delete the row #%1$d (%2$s) for good?</string>
+    <string name="dbi_delete_success">Row deleted: %1$s</string>
+    <string name="dbi_sql_editor">SQL Editor</string>
+    <string name="dbi_sqleditor_load_snippet">Stored statements</string>
+    <string name="dbi_sqleditor_snippet_saved">Statement stored</string>
+    <string name="dbi_sqleditor_no_snippets">No statement stored yet</string>
+    <string name="dbi_sqleditor_warning">SQL Editor is an experimental feature. Data loss may occur. Use at your own risk!</string>
 
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">SearchX</string>
+    <string name="grid_search_reset">Reset</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Value</string>
+    <string name="grid_operator_starts_with">begins with</string>
+    <string name="grid_operator_not_starts_with">begins not with</string>
+    <string name="grid_operator_ends_with">ends with</string>
+    <string name="grid_operator_not_ends_with">ends not with</string>
+    <string name="grid_operator_contains">contains</string>
+    <string name="grid_operator_not_contains">does not contain</string>
 </resources>

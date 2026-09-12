@@ -34,7 +34,8 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         GOTO_DEPRECATION_NOTICE(R.string.goto_targets_deprecation_title, R.string.goto_targets_deprecation_notice, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
         WHERIGO_PLAYER_SHORTCUTS(R.string.wherigo_otm_shortcuts_title, R.string.wherigo_otm_shortcuts_message, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
         DELETE_CACHES_USER_DATA_WARNING(R.string.command_delete_caches_progress, R.string.caches_warning_delete_all_caches, DefaultBehavior.SHOW_ALWAYS, 0, 0),
-        REMOVE_CACHES_FROM_LIST_WARNING(R.string.command_remove_caches_from_list_progress, R.string.caches_warning_remove_caches_from_single_list, DefaultBehavior.SHOW_ALWAYS, 0, 0);
+        REMOVE_CACHES_FROM_LIST_WARNING(R.string.command_remove_caches_from_list_progress, R.string.caches_warning_remove_caches_from_single_list, DefaultBehavior.SHOW_ALWAYS, 0, 0),
+        SQLEDITOR_WARNING(R.string.dbi_sql_editor, R.string.dbi_sqleditor_warning, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.warning);
 
 
         public final Integer messageTitle;

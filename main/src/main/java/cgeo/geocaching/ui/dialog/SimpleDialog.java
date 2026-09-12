@@ -16,10 +16,12 @@ import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -452,6 +454,10 @@ public class SimpleDialog {
             dialog.setOnCancelListener(dialogInterface -> negative.run());
         }
         dialog.show();
+        if (dialog.getWindow() != null) {
+            // enable selecting message text (setting textIsSelectable is not sufficient in AlertDialog)
+            ((TextView) dialog.getWindow().findViewById(R.id.dialog_message)).setMovementMethod(LinkMovementMethod.getInstance());
+        }
         finalizeCommons(dialog, which -> {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:

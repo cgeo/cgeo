@@ -580,7 +580,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
             // check for notifications permission on migration (API 33+ only)
             if (InstallWizardActivity.needsNotificationsPermission()) {
-                Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)));
+                Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)), false);
             }
 
             // Cleanup for removed ML Kit offline translation
