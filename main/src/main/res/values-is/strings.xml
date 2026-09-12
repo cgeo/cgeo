@@ -251,6 +251,7 @@
     <string name="settings_title_cachedetails">Upplýsingar kassa</string>
     <string name="settings_title_map_data">Kortaupplýsingar</string>
     <string name="settings_title_map_content">Innihald korts</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
     <string name="settings_title_system">Kerfi</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
