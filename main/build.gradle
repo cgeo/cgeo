@@ -766,22 +766,32 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'getprop', 'ro.build.version.release']
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
             }
             // we might not actually have permission to copy the preferences on actual devices, let's continue running the app then
