@@ -888,7 +888,29 @@
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders">Proveïdors de tessel·les definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders_summary">Servidors de tessel·les per utilitzar com a mapa, a més dels que inclou c:geo</string>
+    <string name="settings_userDefinedTileProvider_addnew">Afegeix un nou proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_edit">Edita el proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Vols eliminar realment aquest proveïdor de tessel·les?</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
+    <string name="settings_tileOverlays">Superposicions definides per l\'usuari</string>
+    <string name="settings_tileOverlays_summary">Servidors dels quals es dibuixen les tessel·les damunt del mapa, per exemple, marques marítimes o rutes de senderisme</string>
+    <string name="settings_tileOverlays_add">Afegeix una superposició</string>
+    <string name="settings_tileOverlays_edit">Edita la superposició</string>
+    <string name="settings_tileOverlays_url_hint">Introduïu l\'URI complet, incloent-hi els marcadors de posició {X}, {Y} i {Z}. Les tessel·les han de ser transparents allà on no continguin dades. Assegureu-vos d\'haver consultat i de complir les condicions d\'ús del proveïdor.</string>
+    <string name="settings_tileOverlays_delete">Suprimeix la superposició</string>
+    <string name="settings_tileOverlays_delete_confirm">Voleu suprimir la superposició «%1$s»?</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Nom</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Introduïu una URI http(s) que contingui {X}, {Y} i {Z}</string>
+    <string name="settings_tileUrl_test">Prova</string>
+    <string name="settings_tileUrl_testing">S\'està comprovant\u2026</string>
+    <string name="settings_tileUrl_testok">Es va rebre una tessel·la</string>
+    <string name="settings_tileUrl_testfailed_title">No s\'ha rebut cap tessel·la</string>
+    <string name="settings_tileUrl_testfailed">No s\'ha pogut carregar una tessel·la des d\'aquest servidor (%1$s). És possible que l\'URI sigui incorrecte o que el servidor no estigui disponible temporalment.</string>
+    <string name="settings_tileUrl_copied">Copiat, a punt per compartir-se</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -1321,6 +1343,7 @@
     <string name="map_source_google_terrain">Google: Terreny</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_nomap">Sense mapa</string>
+    <string name="map_grayscale">Mapa d\'escala de grisos</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
