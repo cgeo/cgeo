@@ -36,7 +36,6 @@ android {
     compileOptions {
         // support new Java language features on older devices
         coreLibraryDesugaringEnabled = true
-        // use modern Java 17 language features in Android
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
