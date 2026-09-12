@@ -1,5 +1,7 @@
 ### Mapa
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Szczegóły skrytki
 - Nowość: Przełącz datę zapisaną na urządzeniu między względną i dokładną
