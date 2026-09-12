@@ -778,6 +778,7 @@
     <string name="settings_title_map_style">Kartstil</string>
     <string name="settings_hide_tileproviders_title">Skjul kartkilder</string>
     <string name="settings_unifiedMapVariants_title">Varianter av UnifiedMap</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Mappe for geocache-data</string>
     <string name="settings_title_data_dir_usage">Mappen for geocache-data (%1$s brukt)</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
