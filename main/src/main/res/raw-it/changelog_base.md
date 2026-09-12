@@ -1,5 +1,7 @@
 ### Mappa
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Dettagli del cache
 - New: Toggle stored-on-device date between relative and exact
