@@ -577,6 +577,7 @@
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地圖特性</string>
     <string name="settings_title_map_style">地圖風格</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">地理藏寶目錄</string>
     <string name="settings_title_data_dir_usage">地理藏寶目錄(已使用%1$s)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
