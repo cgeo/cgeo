@@ -63,11 +63,8 @@ public class GeocacheFilterTestUtils {
         final String geocode = "GCFILTERTEST" + DB_CACHE_INDEX.addAndGet(1);
         cache.setGeocode(geocode);
 
-        final AndGeocacheFilter filterConfig = new AndGeocacheFilter();
-        filterConfig.addChild(filter);
-        final GeocodeGeocacheFilter geocodeFilter = new GeocodeGeocacheFilter();
-        geocodeFilter.getStringFilter().setTextValue(geocode);
-        filterConfig.addChild(geocodeFilter);
+        final GeocodeGeocacheFilter geocodeFilter = GeocodeGeocacheFilter.create(geocode);
+        final AndGeocacheFilter filterConfig = AndGeocacheFilter.create(filter, geocodeFilter);
 
         final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
         final SearchResult sr;

@@ -5,6 +5,9 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.LocalizationUtils;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.apache.commons.lang3.EnumUtils;
 
 public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, CacheType> {
@@ -17,6 +20,14 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         addDisplayValues(CacheType.COMMUN_CELEBRATION, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
                 CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
         addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
+    }
+
+    public static TypeGeocacheFilter create(final Collection<CacheType> types) {
+        return ValueGroupGeocacheFilter.create(GeocacheFilterType.TYPE, types);
+    }
+
+    public static TypeGeocacheFilter create(final CacheType... types) {
+        return create(List.of(types));
     }
 
     @Override

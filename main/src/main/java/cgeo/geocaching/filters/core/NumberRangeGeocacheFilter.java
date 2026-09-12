@@ -14,6 +14,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>> extends BaseGeocacheFilter {
 
+    public static <N extends Number & Comparable<N>, F extends NumberRangeGeocacheFilter<N>> F create(final GeocacheFilterType type, final N min, final N max) {
+        final F filter = type.create();
+        filter.setMinMaxRange(min, max);
+        return filter;
+    }
+
+    public static <N extends Number & Comparable<N>, F extends NumberRangeGeocacheFilter<N>> F create(final GeocacheFilterType type, final Collection<N> values, final N minUnlimitedValue, final N maxUnlimitedValue) {
+        final F filter = type.create();
+        filter.setRangeFromValues(values, minUnlimitedValue, maxUnlimitedValue);
+        return filter;
+    }
+
     private final NumberRangeFilter<T> numberRangeFilter;
 
     public NumberRangeGeocacheFilter(final Func1<String, T> numberParser, final Func1<Float, T> numberConverter) {

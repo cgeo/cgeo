@@ -26,6 +26,13 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     private boolean inverse = false;
     private final StringFilter logTextFilter = new StringFilter();
 
+    public static LogEntryGeocacheFilter create(final String logText, final String foundByUser) {
+        final LogEntryGeocacheFilter filter = GeocacheFilterType.LOG_ENTRY.create();
+        filter.setLogText(logText);
+        filter.setFoundByUser(foundByUser);
+        return filter;
+    }
+
     public boolean isInverse() {
         return inverse;
     }

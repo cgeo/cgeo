@@ -12,6 +12,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ViewportGeocacheFilter extends BaseGeocacheFilter {
 
+    public static ViewportGeocacheFilter create(final Viewport viewport) {
+        final ViewportGeocacheFilter viewportFilter = GeocacheFilterType.VIEWPORT.create();
+        viewportFilter.setViewport(viewport);
+        return viewportFilter;
+    }
+
     private Viewport viewport;
 
     public ViewportGeocacheFilter setViewport(final Viewport viewport) {

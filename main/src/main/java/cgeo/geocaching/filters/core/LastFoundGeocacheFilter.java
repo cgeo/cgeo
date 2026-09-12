@@ -12,6 +12,10 @@ import java.util.Date;
 
 public class LastFoundGeocacheFilter extends DateRangeGeocacheFilter {
 
+    public static LastFoundGeocacheFilter create(final Date min, final Date max) {
+        return DateRangeGeocacheFilter.create(GeocacheFilterType.LAST_FOUND, min, max);
+    }
+
     @Override
     protected Date getDate(final Geocache cache) {
         return cache.getLastFound();

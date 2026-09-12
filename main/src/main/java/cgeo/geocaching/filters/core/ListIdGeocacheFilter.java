@@ -15,6 +15,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 /** filters for any one listid. Supports Storedlist as well as Psuedolist */
 public class ListIdGeocacheFilter extends BaseGeocacheFilter {
 
+    public static ListIdGeocacheFilter create(final int listId) {
+        final ListIdGeocacheFilter listFilter = GeocacheFilterType.LIST_ID.create();
+        listFilter.setListId(listId);
+        return listFilter;
+    }
+
     private int listId;
 
     public ListIdGeocacheFilter setListId(final int listId) {

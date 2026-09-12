@@ -11,10 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
+
+    public static FavoritesGeocacheFilter create(final Float min, final Float max) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.FAVORITES, min, max);
+    }
+
+    public static FavoritesGeocacheFilter create(final Collection<Float> values, final Float minUnlimitedValue, final Float maxUnlimitedValue) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.FAVORITES, values, minUnlimitedValue, maxUnlimitedValue);
+    }
 
     private static final String CONFIG_KEY_PERCENTAGE = "percentage";
 

@@ -3,7 +3,18 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.models.Geocache;
 
+import java.util.Collection;
+import java.util.List;
+
 public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize, CacheSize> {
+
+    public static SizeGeocacheFilter create(final Collection<CacheSize> sizes) {
+        return ValueGroupGeocacheFilter.create(GeocacheFilterType.SIZE, sizes);
+    }
+
+    public static SizeGeocacheFilter create(final CacheSize... sizes) {
+        return create(List.of(sizes));
+    }
 
 
     @Override

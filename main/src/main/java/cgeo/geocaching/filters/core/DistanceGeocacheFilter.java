@@ -12,6 +12,8 @@ import cgeo.geocaching.utils.JsonUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
@@ -21,6 +23,14 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     private Geopoint coordinate;
     private boolean useCurrentPosition;
+
+    public static DistanceGeocacheFilter create(final Float min, final Float max) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.DISTANCE, min, max);
+    }
+
+    public static DistanceGeocacheFilter create(final Collection<Float> values, final Float minUnlimitedValue, final Float maxUnlimitedValue) {
+        return NumberRangeGeocacheFilter.create(GeocacheFilterType.DISTANCE, values, minUnlimitedValue, maxUnlimitedValue);
+    }
 
     public DistanceGeocacheFilter() {
         super(Float::valueOf, f -> f);

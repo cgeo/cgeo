@@ -47,29 +47,6 @@ public class GeocacheFilterTest {
         };
     }
 
-    private static AndGeocacheFilter and(final IGeocacheFilter... children) {
-        final AndGeocacheFilter and = new AndGeocacheFilter();
-        for (final IGeocacheFilter c : children) {
-            and.addChild(c);
-        }
-        return and;
-    }
-
-    private static OrGeocacheFilter or(final IGeocacheFilter... children) {
-        final OrGeocacheFilter or = new OrGeocacheFilter();
-        for (final IGeocacheFilter c : children) {
-            or.addChild(c);
-        }
-        return or;
-    }
-
-    private static NotGeocacheFilter not(final IGeocacheFilter... children) {
-        final NotGeocacheFilter not = new NotGeocacheFilter();
-        for (final IGeocacheFilter c : children) {
-            not.addChild(c);
-        }
-        return not;
-    }
 
     // =====================================================================
     // Existing tests
@@ -140,21 +117,21 @@ public class GeocacheFilterTest {
 
     @Test
     public void andSimplifyEmptyAndReturnsSelf() {
-        final AndGeocacheFilter andFilter = and();
+        final AndGeocacheFilter andFilter = AndGeocacheFilter.create();
         assertThat(andFilter.simplify(f -> null)).isSameAs(andFilter);
     }
 
     @Test
     public void andSimplifySingleChildReturnsChild() {
         final IGeocacheFilter a = leaf("A");
-        assertThat(and(a).simplify(f -> null)).isSameAs(a);
+        assertThat(AndGeocacheFilter.create(a).simplify(f -> null)).isSameAs(a);
     }
 
     @Test
     public void andSimplifyTwoChildrenReturnsAndWithBoth() {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
-        final IGeocacheFilter result = and(a, b).simplify(f -> null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(a, b).simplify(f -> null);
         assertThat(result).isInstanceOf(AndGeocacheFilter.class);
         assertThat(result).isNotInstanceOf(NotGeocacheFilter.class);
         assertThat(((AndGeocacheFilter) result).getChildren()).containsExactly(a, b);
@@ -164,27 +141,27 @@ public class GeocacheFilterTest {
     public void andSimplifyAlwaysTrueChildFirstAbsorbed() {
         final IGeocacheFilter a = leaf("A");
         // ALWAYS_TRUE must be absorbed; remaining single child returned directly
-        final IGeocacheFilter result = and(ConstantGeocacheFilter.ALWAYS_TRUE, a).simplify(f -> null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_TRUE, a).simplify(f -> null);
         assertThat(result).isSameAs(a);
     }
 
     @Test
     public void andSimplifyAlwaysTrueChildLastAbsorbed() {
         final IGeocacheFilter a = leaf("A");
-        final IGeocacheFilter result = and(a, ConstantGeocacheFilter.ALWAYS_TRUE).simplify(f -> null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(a, ConstantGeocacheFilter.ALWAYS_TRUE).simplify(f -> null);
         assertThat(result).isSameAs(a);
     }
 
     @Test
     public void andSimplifyAlwaysFalseChildShortCircuitsToAlwaysFalse() {
         final IGeocacheFilter a = leaf("A");
-        assertThat(and(ConstantGeocacheFilter.ALWAYS_FALSE, a).simplify(f -> null))
+        assertThat(AndGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_FALSE, a).simplify(f -> null))
                 .isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
     @Test
     public void andSimplifyAllAlwaysTrueReturnsAlwaysTrue() {
-        final IGeocacheFilter result = and(
+        final IGeocacheFilter result = AndGeocacheFilter.create(
                 ConstantGeocacheFilter.ALWAYS_TRUE,
                 ConstantGeocacheFilter.ALWAYS_TRUE).simplify(f -> null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
@@ -195,7 +172,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         // criterion marks a as always-true → absorbed; b remains
-        final IGeocacheFilter result = and(a, b).simplify(f -> f == a ? Boolean.TRUE : null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(a, b).simplify(f -> f == a ? Boolean.TRUE : null);
         assertThat(result).isSameAs(b);
     }
 
@@ -203,7 +180,7 @@ public class GeocacheFilterTest {
     public void andSimplifyCriterionMarkChildFalseReturnsAlwaysFalse() {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
-        final IGeocacheFilter result = and(a, b).simplify(f -> f == a ? Boolean.FALSE : null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(a, b).simplify(f -> f == a ? Boolean.FALSE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
@@ -212,7 +189,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         final IGeocacheFilter c = leaf("C");
-        final IGeocacheFilter result = and(and(a, b), c).simplify(f -> null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(AndGeocacheFilter.create(a, b), c).simplify(f -> null);
         assertThat(result).isInstanceOf(AndGeocacheFilter.class);
         assertThat(result).isNotInstanceOf(NotGeocacheFilter.class);
         assertThat(((AndGeocacheFilter) result).getChildren()).containsExactlyInAnyOrder(a, b, c);
@@ -222,7 +199,7 @@ public class GeocacheFilterTest {
     public void andSimplifyNotChildNotFlattenedIntoAnd() {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
-        final IGeocacheFilter result = and(not(a), b).simplify(f -> null);
+        final IGeocacheFilter result = AndGeocacheFilter.create(NotGeocacheFilter.create(a), b).simplify(f -> null);
         assertThat(result).isInstanceOf(AndGeocacheFilter.class);
         assertThat(result).isNotInstanceOf(NotGeocacheFilter.class);
         // NOT must NOT be unpacked into the parent AND; two children remain
@@ -234,14 +211,14 @@ public class GeocacheFilterTest {
 
     @Test
     public void andSimplifyCriterionOnAndItselfReturnsAlwaysTrue() {
-        final AndGeocacheFilter andFilter = and(leaf("A"), leaf("B"));
+        final AndGeocacheFilter andFilter = AndGeocacheFilter.create(leaf("A"), leaf("B"));
         final IGeocacheFilter result = andFilter.simplify(f -> f == andFilter ? Boolean.TRUE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
     @Test
     public void andSimplifyCriterionOnAndItselfReturnsAlwaysFalse() {
-        final AndGeocacheFilter andFilter = and(leaf("A"), leaf("B"));
+        final AndGeocacheFilter andFilter = AndGeocacheFilter.create(leaf("A"), leaf("B"));
         final IGeocacheFilter result = andFilter.simplify(f -> f == andFilter ? Boolean.FALSE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
@@ -252,21 +229,21 @@ public class GeocacheFilterTest {
 
     @Test
     public void orSimplifyEmptyOrReturnsSelf() {
-        final OrGeocacheFilter orFilter = or();
+        final OrGeocacheFilter orFilter = OrGeocacheFilter.create();
         assertThat(orFilter.simplify(f -> null)).isSameAs(orFilter);
     }
 
     @Test
     public void orSimplifySingleChildReturnsChild() {
         final IGeocacheFilter a = leaf("A");
-        assertThat(or(a).simplify(f -> null)).isSameAs(a);
+        assertThat(OrGeocacheFilter.create(a).simplify(f -> null)).isSameAs(a);
     }
 
     @Test
     public void orSimplifyTwoChildrenReturnsOrWithBoth() {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
-        final IGeocacheFilter result = or(a, b).simplify(f -> null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(a, b).simplify(f -> null);
         assertThat(result).isInstanceOf(OrGeocacheFilter.class);
         assertThat(((OrGeocacheFilter) result).getChildren()).containsExactly(a, b);
     }
@@ -274,27 +251,27 @@ public class GeocacheFilterTest {
     @Test
     public void orSimplifyAlwaysFalseChildFirstAbsorbed() {
         final IGeocacheFilter a = leaf("A");
-        final IGeocacheFilter result = or(ConstantGeocacheFilter.ALWAYS_FALSE, a).simplify(f -> null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_FALSE, a).simplify(f -> null);
         assertThat(result).isSameAs(a);
     }
 
     @Test
     public void orSimplifyAlwaysFalseChildLastAbsorbed() {
         final IGeocacheFilter a = leaf("A");
-        final IGeocacheFilter result = or(a, ConstantGeocacheFilter.ALWAYS_FALSE).simplify(f -> null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(a, ConstantGeocacheFilter.ALWAYS_FALSE).simplify(f -> null);
         assertThat(result).isSameAs(a);
     }
 
     @Test
     public void orSimplifyAlwaysTrueChildShortCircuitsToAlwaysTrue() {
         final IGeocacheFilter a = leaf("A");
-        assertThat(or(ConstantGeocacheFilter.ALWAYS_TRUE, a).simplify(f -> null))
+        assertThat(OrGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_TRUE, a).simplify(f -> null))
                 .isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
     @Test
     public void orSimplifyAllAlwaysFalseReturnsAlwaysFalse() {
-        final IGeocacheFilter result = or(
+        final IGeocacheFilter result = OrGeocacheFilter.create(
                 ConstantGeocacheFilter.ALWAYS_FALSE,
                 ConstantGeocacheFilter.ALWAYS_FALSE).simplify(f -> null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
@@ -305,7 +282,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         // criterion marks a as always-false → absorbed; b remains
-        final IGeocacheFilter result = or(a, b).simplify(f -> f == a ? Boolean.FALSE : null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(a, b).simplify(f -> f == a ? Boolean.FALSE : null);
         assertThat(result).isSameAs(b);
     }
 
@@ -313,7 +290,7 @@ public class GeocacheFilterTest {
     public void orSimplifyCriterionMarkChildTrueReturnsAlwaysTrue() {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
-        final IGeocacheFilter result = or(a, b).simplify(f -> f == a ? Boolean.TRUE : null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(a, b).simplify(f -> f == a ? Boolean.TRUE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
@@ -322,21 +299,21 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         final IGeocacheFilter c = leaf("C");
-        final IGeocacheFilter result = or(or(a, b), c).simplify(f -> null);
+        final IGeocacheFilter result = OrGeocacheFilter.create(OrGeocacheFilter.create(a, b), c).simplify(f -> null);
         assertThat(result).isInstanceOf(OrGeocacheFilter.class);
         assertThat(((OrGeocacheFilter) result).getChildren()).containsExactlyInAnyOrder(a, b, c);
     }
 
     @Test
     public void orSimplifyCriterionOnOrItselfReturnsAlwaysFalse() {
-        final OrGeocacheFilter orFilter = or(leaf("A"), leaf("B"));
+        final OrGeocacheFilter orFilter = OrGeocacheFilter.create(leaf("A"), leaf("B"));
         final IGeocacheFilter result = orFilter.simplify(f -> f == orFilter ? Boolean.FALSE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
     @Test
     public void orSimplifyCriterionOnOrItselfReturnsAlwaysTrue() {
-        final OrGeocacheFilter orFilter = or(leaf("A"), leaf("B"));
+        final OrGeocacheFilter orFilter = OrGeocacheFilter.create(leaf("A"), leaf("B"));
         final IGeocacheFilter result = orFilter.simplify(f -> f == orFilter ? Boolean.TRUE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
@@ -348,7 +325,7 @@ public class GeocacheFilterTest {
     @Test
     public void notSimplifySingleChildStaysNot() {
         final IGeocacheFilter a = leaf("A");
-        final IGeocacheFilter result = not(a).simplify(f -> null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(a).simplify(f -> null);
         assertThat(result).isInstanceOf(NotGeocacheFilter.class);
         assertThat(((NotGeocacheFilter) result).getChildren()).containsExactly(a);
     }
@@ -357,7 +334,7 @@ public class GeocacheFilterTest {
     public void notSimplifyDoubleNotSingleInnerChildUnwrapsToChild() {
         final IGeocacheFilter a = leaf("A");
         // NOT(NOT(A)) → A
-        assertThat(not(not(a)).simplify(f -> null)).isSameAs(a);
+        assertThat(NotGeocacheFilter.create(NotGeocacheFilter.create(a)).simplify(f -> null)).isSameAs(a);
     }
 
     @Test
@@ -365,7 +342,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         // NOT(NOT(A, B)) → AND(A, B)  (plain AND, not NOT)
-        final IGeocacheFilter result = not(not(a, b)).simplify(f -> null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(NotGeocacheFilter.create(a, b)).simplify(f -> null);
         assertThat(result).isInstanceOf(AndGeocacheFilter.class);
         assertThat(result).isNotInstanceOf(NotGeocacheFilter.class);
         assertThat(((AndGeocacheFilter) result).getChildren()).containsExactly(a, b);
@@ -374,27 +351,27 @@ public class GeocacheFilterTest {
     @Test
     public void notSimplifyAlwaysFalseChildReturnsAlwaysTrue() {
         // NOT(false) → true
-        assertThat(not(ConstantGeocacheFilter.ALWAYS_FALSE).simplify(f -> null))
+        assertThat(NotGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_FALSE).simplify(f -> null))
                 .isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
     @Test
     public void notSimplifyAlwaysTrueChildReturnsAlwaysFalse() {
         // NOT(true) → false
-        assertThat(not(ConstantGeocacheFilter.ALWAYS_TRUE).simplify(f -> null))
+        assertThat(NotGeocacheFilter.create(ConstantGeocacheFilter.ALWAYS_TRUE).simplify(f -> null))
                 .isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
     @Test
     public void notSimplifyCriterionOnNotItselfReturnsAlwaysTrue() {
-        final NotGeocacheFilter notFilter = not(leaf("A"));
+        final NotGeocacheFilter notFilter = NotGeocacheFilter.create(leaf("A"));
         final IGeocacheFilter result = notFilter.simplify(f -> f == notFilter ? Boolean.TRUE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
     @Test
     public void notSimplifyCriterionOnNotItselfReturnsAlwaysFalse() {
-        final NotGeocacheFilter notFilter = not(leaf("A"));
+        final NotGeocacheFilter notFilter = NotGeocacheFilter.create(leaf("A"));
         final IGeocacheFilter result = notFilter.simplify(f -> f == notFilter ? Boolean.FALSE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
@@ -404,7 +381,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         // NOT(AND(A, B)) → NOT(A, B)  — the inner AND is flattened into NOT's own children
-        final IGeocacheFilter result = not(and(a, b)).simplify(f -> null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(AndGeocacheFilter.create(a, b)).simplify(f -> null);
         assertThat(result).isInstanceOf(NotGeocacheFilter.class);
         assertThat(((NotGeocacheFilter) result).getChildren()).containsExactly(a, b);
     }
@@ -413,7 +390,7 @@ public class GeocacheFilterTest {
     public void notSimplifyCriterionMarkChildFalseReturnsAlwaysTrue() {
         final IGeocacheFilter a = leaf("A");
         // NOT( ALWAYS_FALSE ) → ALWAYS_TRUE
-        final IGeocacheFilter result = not(a).simplify(f -> f == a ? Boolean.FALSE : null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(a).simplify(f -> f == a ? Boolean.FALSE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_TRUE);
     }
 
@@ -421,7 +398,7 @@ public class GeocacheFilterTest {
     public void notSimplifyCriterionMarkChildTrueReturnsAlwaysFalse() {
         final IGeocacheFilter a = leaf("A");
         // NOT( ALWAYS_TRUE ) → ALWAYS_FALSE
-        final IGeocacheFilter result = not(a).simplify(f -> f == a ? Boolean.TRUE : null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(a).simplify(f -> f == a ? Boolean.TRUE : null);
         assertThat(result).isSameAs(ConstantGeocacheFilter.ALWAYS_FALSE);
     }
 
@@ -430,7 +407,7 @@ public class GeocacheFilterTest {
         final IGeocacheFilter a = leaf("A");
         final IGeocacheFilter b = leaf("B");
         // OR is NOT an AND subtype → must NOT be merged into NOT's children
-        final IGeocacheFilter result = not(or(a, b)).simplify(f -> null);
+        final IGeocacheFilter result = NotGeocacheFilter.create(OrGeocacheFilter.create(a, b)).simplify(f -> null);
         assertThat(result).isInstanceOf(NotGeocacheFilter.class);
         final List<IGeocacheFilter> children = ((NotGeocacheFilter) result).getChildren();
         assertThat(children).hasSize(1);

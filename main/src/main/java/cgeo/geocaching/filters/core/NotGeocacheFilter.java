@@ -9,6 +9,16 @@ import java.util.List;
 
 public class NotGeocacheFilter extends AndGeocacheFilter {
 
+    public static NotGeocacheFilter create(final List<? extends IGeocacheFilter> children) {
+        final NotGeocacheFilter notFilter = new NotGeocacheFilter();
+        notFilter.setChildren(children);
+        return notFilter;
+    }
+
+    public static NotGeocacheFilter create(final IGeocacheFilter... children) {
+        return NotGeocacheFilter.create(List.of(children));
+    }
+
     @Override
     public String getId() {
         return "NOT";
@@ -39,14 +49,12 @@ public class NotGeocacheFilter extends AndGeocacheFilter {
             if (simplifiedChildren.get(0).getChildren().size() == 1) {
                 return simplifiedChildren.get(0).getChildren().get(0);
             } else {
-                final AndGeocacheFilter innerAnd = new AndGeocacheFilter();
-                innerAnd.getChildren().addAll(simplifiedChildren.get(0).getChildren());
-                return innerAnd;
+                return AndGeocacheFilter.create(simplifiedChildren.get(0).getChildren());
             }
         }
 
         //else: optimize inner-and
-        final NotGeocacheFilter result = new NotGeocacheFilter();
+        final NotGeocacheFilter result = NotGeocacheFilter.create();
         for (IGeocacheFilter child : simplifiedChildren) {
             if (child == ConstantGeocacheFilter.ALWAYS_FALSE) {
                 return ConstantGeocacheFilter.ALWAYS_TRUE;

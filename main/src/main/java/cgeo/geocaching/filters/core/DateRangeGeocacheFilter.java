@@ -13,6 +13,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
 
+    @SuppressWarnings("unchecked")
+    public static <F extends DateRangeGeocacheFilter> F create(final GeocacheFilterType type, final Date min, final Date max) {
+        final F filter = type.create();
+        filter.setMinMaxDate(min, max);
+        return filter;
+    }
+
     private final DateFilter dateFilter = new DateFilter();
 
     protected abstract Date getDate(Geocache cache);

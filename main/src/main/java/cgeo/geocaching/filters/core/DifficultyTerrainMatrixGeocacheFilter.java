@@ -8,8 +8,10 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +27,17 @@ public class DifficultyTerrainMatrixGeocacheFilter extends BaseGeocacheFilter {
     private final Set<String> difficultyTerrainCombis = new HashSet<>();
 
     private boolean includeCachesWoDt = true;
+
+    /**
+     * Creates a filter with given D/T combinations
+     */
+    public static DifficultyTerrainMatrixGeocacheFilter create(final Collection<Pair<Float, Float>> difficultyTerrainCombis) {
+        final DifficultyTerrainMatrixGeocacheFilter filter = GeocacheFilterType.DIFFICULTY_TERRAIN_MATRIX.create();
+        for (Pair<Float, Float> combi : difficultyTerrainCombis) {
+            filter.addDtCombi(combi.first, combi.second);
+        }
+        return filter;
+    }
 
     public void clearDtCombis() {
         difficultyTerrainCombis.clear();
