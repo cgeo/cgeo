@@ -869,6 +869,7 @@
     <string name="settings_unifiedMapVariants_title">Variantes de UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Fournisseur de tuiles défini par l\'utilisateur</string>
     <string name="settings_userDefinedTileProviderUri">Entrez l\'Uri complète (sans slash à la fin) du fournisseur de tuiles, ou entrez l\'Uri complète avec des paramètres (dont {X}, {Y} et {Z}). Assurez-vous que vous avez vérifié et respecté leurs conditions d\'utilisation.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Dossier de données des Geocaches</string>
     <string name="settings_title_data_dir_usage">Dossier de stockage des géocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
