@@ -6,15 +6,13 @@ android {
     namespace = 'com.mapwithme.maps.api'
     compileSdk = 36
 
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 35
     }
 
     sourceSets.main {
@@ -24,11 +22,17 @@ android {
     }
 
     lint {
+        targetSdk = 36
+
         // generally we accept lint errors when building
         abortOnError = false
 
         // abort release builds in case of FATAL errors
         checkReleaseBuilds = true
+    }
+
+    testOptions {
+        targetSdk = 36
     }
 
     dependencies {

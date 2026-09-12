@@ -9,7 +9,6 @@ import static org.gradle.api.provider.ValueSourceParameters.None
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
 
-
 plugins {
     // Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
     id 'com.android.application'
@@ -103,7 +102,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -166,7 +165,7 @@ android {
         }
 
         // proguard rules
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
     }
 
     testBuildType = "debug" //the default BuildType
@@ -230,7 +229,7 @@ android {
         checkDependencies = true
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += [
                     // you can double click an APK file in Android Studio 2.2+ to see what's in there
@@ -265,12 +264,14 @@ android {
             ]
 
             // vtm-themes
-            pickFirsts.add("assets/symbols/**")
-            pickFirsts.add("assets/patterns/**")
+            pickFirsts += [
+                    "assets/symbols/**",
+                    "assets/patterns/**"
+            ]
         }
     }
 
-    flavorDimensions.add("javaCompilerTime") // all flavours must be assigned a dimension
+    flavorDimensions += ["javaCompilerTime"] // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
@@ -288,10 +289,6 @@ android {
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
-
-    // tests rely on JUnit-based classes
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
 }
 
 ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
@@ -443,8 +440,11 @@ dependencies {
 
     implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
-    configurations.configureEach {
-        exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
+    configurations.configureEach { config ->
+        // exclude duplicate XmlPullParser class from APK, but keep it for lint tools
+        if (!config.name.toLowerCase().contains("lint")) {
+            exclude group: 'net.sf.kxml', module: 'kxml2'
+        }
     }
 
     // used by mapsforge
@@ -482,12 +482,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
-    // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
-    constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0") {
-            because 'align all versions of kotlin transitive dependencies'
-        }
-    }
 
     // Support Library Lifecycle Helpers
     String lifecycleVersion = '2.10.0'
@@ -769,22 +763,32 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'getprop', 'ro.build.version.release']
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
             }
             // we might not actually have permission to copy the preferences on actual devices, let's continue running the app then
