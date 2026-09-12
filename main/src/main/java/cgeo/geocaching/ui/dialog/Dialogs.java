@@ -164,26 +164,28 @@ public final class Dialogs {
     }
 
     /**
-     * Message dialog which is shown max one time each c:geo session, until "don't shown again" is checked.
+     * Message dialog which is shown max one time each c:geo session, until "don't show again" is checked.
      * Please define your dialog name/message strings at OneTimeDialogs.DialogType.
+     * If "don't show again" is selected for this dialog, but @param runAnyway is set, runOnOk will be executed directly
      * @param runOnOk gets started on closing the dialog with "ok".
      * Dialog can be cancelled even when "don't ask me again" checkbox is set
      */
-    public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType, @NonNull final Runnable runOnOk) {
-
+    public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType, @NonNull final Runnable runOnOk, final boolean runAnyway) {
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
             final String moreInfoURL = dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null;
 
             internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), moreInfoURL, dialogType,
                     true, runOnOk, false, null, null);
+        } else if (runAnyway) {
+            runOnOk.run();
         }
     }
 
 
     /**
-     * OK (+ cancel) dialog which is shown, until "don't shown again" is checked. Title, text, icon and runAfterwards can be set.
-     * If "don't shown again" is selected for this dialog, runAfterwards will be executed directly.
+     * OK (+ cancel) dialog which is shown, until "don't show again" is checked. Title, text, icon and runAfterwards can be set.
+     * If "don't show again" is selected for this dialog, runAfterwards will be executed directly.
      *
      * @param dialogType used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */

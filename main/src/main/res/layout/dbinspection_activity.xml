@@ -37,52 +37,32 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_selectTable"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/SqlButton"
             android:contentDescription="@string/dbi_select_table"
             android:tooltipText="@string/dbi_select_table"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:minWidth="48dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
             android:visibility="gone"
-            app:icon="@drawable/grid_ic_table"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp" />
+            app:icon="@drawable/grid_ic_table"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_sqlEditor"
+            style="@style/SqlButton"
+            android:contentDescription="@string/dbi_sql_editor"
+            android:visibility="gone"
+            app:icon="@drawable/grid_ic_sql"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_configColumns"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/SqlButton"
             android:contentDescription="@string/dbi_config_columns"
             android:tooltipText="@string/dbi_config_columns"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:minWidth="48dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            app:icon="@drawable/grid_ic_reorder"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp" />
+            app:icon="@drawable/grid_ic_reorder"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_search"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/SqlButton"
             android:contentDescription="@string/search"
             android:tooltipText="@string/search"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:minWidth="48dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            app:icon="@drawable/grid_ic_search"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp" />
+            app:icon="@drawable/grid_ic_search"/>
 
         <TextView
             android:id="@+id/pageNumOfNum"
@@ -94,9 +74,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextPage"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/SqlButton"
             android:contentDescription="@string/next"
             android:tooltipText="@string/next"
             android:text="@string/next" />

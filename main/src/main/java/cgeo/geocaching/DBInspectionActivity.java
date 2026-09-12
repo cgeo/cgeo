@@ -4,10 +4,13 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.databinding.DbinspectionActivityBinding;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -20,27 +23,39 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.MaterialColors;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.movingbits.grid.CellRef;
 import com.movingbits.grid.ColumnType;
 import com.movingbits.grid.DatabaseGrid;
 import com.movingbits.grid.Grid;
 import com.movingbits.grid.GridColumn;
 import com.movingbits.grid.GridView;
+import com.movingbits.grid.OnRowActionListener;
 import com.movingbits.grid.SortCriterion;
 import com.movingbits.grid.SortDirection;
+import com.movingbits.grid.SqlGrid;
+import com.movingbits.grid.SqlSnippetTarget;
+import com.movingbits.grid.SqlStatement;
+import org.apache.commons.lang3.Strings;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class DBInspectionActivity extends AbstractActionBarActivity  {
 
     private static final int ROWS_PER_PAGE = 10;
-    private static final String CONFIG_PREFIX = "dbinspection";
+
+    // config settings
+    private static final String CONFIG_PREFIX = "sql";
+    private static final String CONFIG_SNIPPET = CONFIG_PREFIX + ".snippets";
+    private static final String CONFIG_TABLE_PREFIX = CONFIG_PREFIX + ".table.";
+    private static final int MAX_SNIPPETS = 5;
 
     private GridView gridView;
-    /** Set while the database demo is running; {@code null} otherwise. */
     private DatabaseGrid databaseGrid;
     private ColorStateList buttoncolorDefault;
     private int accentColor;
@@ -59,7 +74,10 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-        databaseGrid = new DatabaseGrid()
+        databaseGrid = new SqlGrid()
+                .onSnippetSave(this::storeSnippet)
+                .onSnippetLoad(this::chooseSnippet)
+                .onEditorClosed(executed -> setTitle(databaseGrid.hasCurrentTable() ? LocalizationUtils.getString(R.string.view_database) + ": " + databaseGrid.getCurrentTable() : LocalizationUtils.getString(R.string.dbi_sql_editor)))
                 .setDatabase(DataStore.getDatabase(true))
                 .onTablesLoaded(tables -> binding.activityContent.post(() -> {
                     if (databaseGrid != null && !databaseGrid.hasCurrentTable()) {
@@ -74,6 +92,13 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
                 .rowsPerPage(ROWS_PER_PAGE)
                 .alternatingRowColors(true)
                 .adjustableFixedBoundary(true)
+                .onRowAction(this::askDeleteRow)
+                .onRowActionPerformed((type, key, success) -> {
+                    Log.e("SQL Action: type=" + type + " on " + keyText(key) + ": " + success);
+                    if (success) {
+                        showHint(LocalizationUtils.getString(R.string.dbi_delete_success, keyText(key)));
+                    }
+                })
                 .onCellLongClick(this::showCell)
                 .onSortChanged(order -> showHint(addSortIndicator(order)));
         databaseGrid.readState(savedInstanceState);
@@ -92,11 +117,9 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
             showHint(LocalizationUtils.getString(R.string.dbi_no_tables));
             return;
         }
-        final String[] names = tables.toArray(new String[0]);
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dbi_select_table)
-                .setItems(names, (dialog, which) -> selectTable(names[which]))
-                .show();
+        final SimpleDialog.ItemSelectModel<String> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(tables).setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+        SimpleDialog.of(this).setTitle(R.string.dbi_select_table).selectSingle(model, this::selectTable);
     }
 
     /** select table, initialize configuration with table-specific config key */
@@ -114,7 +137,39 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
 
     /** each table has an individual config key */
     private String databaseConfigKey() {
-        return CONFIG_PREFIX + "." + (databaseGrid == null ? "" : databaseGrid.getCurrentTable());
+        return CONFIG_TABLE_PREFIX + (databaseGrid == null ? "_" : databaseGrid.getCurrentTable());
+    }
+
+    // ------------------------------------------------------------ row action
+
+    /** confirmation dialog for delete row */
+    private void askDeleteRow(final int number, final int type, final Map<String, String> key, final Map<String, String> columns) {
+        if (type != OnRowActionListener.DELETE || databaseGrid == null || key.isEmpty()) {
+            return;
+        }
+        SimpleDialog.of(this)
+                .setTitle(R.string.dbi_delete_row_title)
+                .setMessage(TextParam.text(LocalizationUtils.getString(R.string.dbi_delete_row_question, number, keyText(key)) + "\n\n" + columnsText(columns)))
+                .setPositiveButton(TextParam.id(R.string.delete))
+                .confirm(() -> databaseGrid.performRowAction(type, key));
+    }
+
+    /** The rest of the row, one field per line, for the question. */
+    private static String columnsText(final Map<String, String> columns) {
+        final StringBuilder text = new StringBuilder();
+        for (Map.Entry<String, String> field : columns.entrySet()) {
+            text.append(text.length() == 0 ? "" : "\n").append(field.getKey()).append(": ").append(field.getValue());
+        }
+        return text.toString();
+    }
+
+    /** The primary key as one line, for the hint and the log. */
+    private static String keyText(final Map<String, String> key) {
+        final StringBuilder text = new StringBuilder();
+        for (Map.Entry<String, String> field : key.entrySet()) {
+            text.append(text.length() == 0 ? "" : ", ").append(field.getKey()).append("=").append(field.getValue());
+        }
+        return text.toString();
     }
 
     // ---------------------------------------------------------- cell dialogs
@@ -144,6 +199,65 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
             gridView.refresh();
         }
     }
+
+    // -------------------------------------------------------------- snippets
+
+    /** keep last MAX_SNIPPETS in preferences */
+    private void storeSnippet(final String statement) {
+        final List<String> stored = storedSnippets();
+        // The same statement twice would only take a place away from another one.
+        stored.remove(statement);
+        stored.add(0, statement);
+        while (stored.size() > MAX_SNIPPETS) {
+            stored.remove(stored.size() - 1);
+        }
+        final JSONArray array = new JSONArray();
+        for (String snippet : stored) {
+            array.put(snippet);
+        }
+        Settings.putStringDirect(CONFIG_SNIPPET, array.toString());
+        showHint(LocalizationUtils.getString(R.string.dbi_sqleditor_snippet_saved));
+    }
+
+    /** select a snippet and update editor */
+    private void chooseSnippet(final SqlSnippetTarget editor) {
+        final List<String> stored = storedSnippets();
+        if (stored.isEmpty()) {
+            showHint(LocalizationUtils.getString(R.string.dbi_sqleditor_no_snippets));
+            return;
+        }
+
+
+        final SimpleDialog.ItemSelectModel<String> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(stored).setDisplayMapper((which) -> {
+            for (String snippet : stored) {
+                if (Strings.CI.equals(snippet, which)) {
+                    return TextParam.text(SqlStatement.parse(snippet).render().sql());
+                }
+            }
+            return TextParam.text("?");
+        }).setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+        SimpleDialog.of(this).setTitle(R.string.dbi_sqleditor_load_snippet).setNeutralButton(TextParam.id(R.string.cancel)).selectSingle(model, editor::load);
+    }
+
+    /** get stored snippets from preferences, most recent one first. */
+    private List<String> storedSnippets() {
+        final List<String> stored = new ArrayList<>();
+        try {
+            final JSONArray array = new JSONArray(Settings.getStringDirect(CONFIG_SNIPPET, ""));
+            for (int i = 0; i < array.length(); i++) {
+                final String snippet = array.optString(i, "");
+                if (!snippet.isEmpty()) {
+                    stored.add(snippet);
+                }
+            }
+        } catch (JSONException ignore) {
+            // Nothing has been stored yet, or not in a form that can be read.
+        }
+        return stored;
+    }
+
+    // -------------------------------------------------------------- other
 
     /** get current configuration */
     private Grid grid() {
@@ -183,9 +297,11 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
         binding.buttonConfigColumns.setOnClickListener(v -> gridView.showColumnSettings());
         binding.buttonSearch.setOnClickListener(v -> gridView.showSearch());
 
-        // The table selection only exists when there are tables to choose from.
+        // The table selection and SQLEditor button only exist when there are tables to choose from.
         binding.buttonSelectTable.setVisibility(databaseGrid == null ? View.GONE : View.VISIBLE);
         binding.buttonSelectTable.setOnClickListener(v -> showTableSelection(databaseGrid.getTables()));
+        binding.buttonSqlEditor.setVisibility(databaseGrid == null ? View.GONE : View.VISIBLE);
+        binding.buttonSqlEditor.setOnClickListener(v -> showSqlEditor());
 
         // The ordinary color comes from the theme; highlighting uses the accent color.
         buttoncolorDefault = binding.buttonConfigColumns.getIconTint();
@@ -198,6 +314,13 @@ public class DBInspectionActivity extends AbstractActionBarActivity  {
             binding.prevPage.setEnabled(page > 0);
             binding.nextPage.setEnabled(page + 1 < numPages);
         });
+    }
+
+    private void showSqlEditor() {
+        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.SQLEDITOR_WARNING, () -> {
+            setTitle(LocalizationUtils.getString(R.string.dbi_sql_editor));
+            gridView.showSqlEditor();
+        }, true);
     }
 
     /** highlights button */
