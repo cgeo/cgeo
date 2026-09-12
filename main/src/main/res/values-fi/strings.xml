@@ -851,6 +851,7 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMapin vaihtoehdot</string>
     <string name="settings_userDefinedTileProvider">Käyttäjän määrittämä palojen tarjoaja</string>
     <string name="settings_userDefinedTileProviderUri">Syötä koko Uri (ilman kauttaviivaa lopussa) laattatoimittajalle tai anna koko Uri parametreilla (mukaan lukien {X}, {Y} ja {Z}). Varmista, että olet tarkistanut käyttöehdot ja noudatat niitä.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Kätködatan sisältävä kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
     <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
