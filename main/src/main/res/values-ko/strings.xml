@@ -742,6 +742,7 @@
     <string name="settings_hide_tileproviders_title">지도 소스 숨기기</string>
     <string name="settings_hide_tileproviders_summary">지도 소스 선택에서 하나 이상의 지도 소스 제외</string>
     <string name="settings_userDefinedTileProvider">사용자 정의 타일 공급자</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">지오캐시 데이터 폴더</string>
     <string name="settings_title_data_dir_usage">지오캐시 데이터 폴더 (%1$s 사용)</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
