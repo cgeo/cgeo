@@ -314,6 +314,7 @@
     <string name="settings_summary_logging">הגדר חתימה וקבע אפשרויות כתיבת לוג.</string>
     <string name="settings_title_map_data">נתוני מפה</string>
     <string name="settings_title_map_content">תוכן מפה</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
