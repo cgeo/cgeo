@@ -1,5 +1,7 @@
 ### Karte
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Cache-Details
 - Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut
