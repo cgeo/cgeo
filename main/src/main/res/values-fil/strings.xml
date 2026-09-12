@@ -301,6 +301,7 @@
     <string name="settings_summary_logging">Magkumpigura ng iyong pirma at itakda ang mga opsyon sa pagla-log.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
     <string name="calculate_dataDir">Pagkalkula ng mga datos na nagamit sa Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
