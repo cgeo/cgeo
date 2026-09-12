@@ -1,5 +1,7 @@
 ### Mapa
--
+- Novetat: Opció d'escala de grisos
+- Novetat: Superposicions de tessel·les definides per l'usuari
+- Novetat: Compatibilitat amb múltiples proveïdors de tessel·les definits per l'usuari.
 
 ### Detalls del catxé
 - Nou: alterna la data emmagatzemada al dispositiu entre relativa i exacta
