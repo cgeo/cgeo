@@ -594,6 +594,7 @@
     <string name="settings_title_waypoints">Dodatne točke</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
