@@ -1,5 +1,7 @@
 ### Kartta
--
+- New: Grayscale option
+- New: User-defined tile overlays
+- New: Support multiple user-defined tile providers
 
 ### Kätkön tiedot
 - New: Toggle stored-on-device date between relative and exact
