@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
+
 import android.util.Xml;
 
 import androidx.annotation.NonNull;

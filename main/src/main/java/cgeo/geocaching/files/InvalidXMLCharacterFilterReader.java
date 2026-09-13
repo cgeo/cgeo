@@ -35,17 +35,22 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
         if (read == -1) {
             return -1;
         }
+
         // target position
         int pos = off - 1;
 
         int entityStart = -1;
-        for (int readPos = off; readPos < off + read; readPos++) {
+        int readPos = off;
+        while (readPos < off + read) {
             boolean useChar = true;
+            int charCount = 1;
+
             switch (cbuf[readPos]) {
                 case '&':
                     pos++;
                     entityStart = readPos;
                     break;
+
                 case ';':
                     pos++;
                     if (entityStart >= 0) {
@@ -60,7 +65,7 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                                 } else {
                                     value = Integer.parseInt(numberString);
                                 }
-                                if (!isValidXMLChar((char) value)) {
+                                if (!XmlUtils.isValidXmlCodePoint(value)) {
                                     pos -= entityLength;
                                     useChar = false;
                                 }
@@ -68,22 +73,32 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                         }
                     }
                     break;
+
                 default:
-                    if (isValidXMLChar(cbuf[readPos])) {
-                        pos++;
+                    final int codePoint = Character.codePointAt(cbuf, readPos, off + read);
+                    charCount = Character.charCount(codePoint);
+
+                    if (XmlUtils.isValidXmlCodePoint(codePoint)) {
+                        for (int i = 0; i < charCount; i++) {
+                            pos++;
+                            if (pos < readPos + i) {
+                                cbuf[pos] = cbuf[readPos + i];
+                            }
+                        }
                     } else {
+                        readPos += charCount;
                         continue;
                     }
             }
+
             // copy, and skip unwanted characters
             if (pos < readPos && useChar) {
                 cbuf[pos] = cbuf[readPos];
             }
-        }
-        return pos - off + 1;
-    }
 
-    private static boolean isValidXMLChar(final char c) {
-        return XmlUtils.isValidXmlChar(c);
+            readPos += charCount;
+        }
+
+        return pos - off + 1;
     }
 }

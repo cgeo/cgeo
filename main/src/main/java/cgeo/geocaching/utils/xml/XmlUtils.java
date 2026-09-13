@@ -20,10 +20,13 @@ public final class XmlUtils {
         // Do not instantiate
     }
 
-    public static boolean isValidXmlChar(final char c) {
-        return c == 0x9 || c == 0xA || c == 0xD
-                || (c >= 0x20 && c <= 0xD7FF)
-                || (c >= 0xE000 && c <= 0xFFFD);
+    public static boolean isValidXmlCodePoint(final int codePoint) {
+        return codePoint == 0x9
+                || codePoint == 0xA
+                || codePoint == 0xD
+                || (codePoint >= 0x20 && codePoint <= 0xD7FF)
+                || (codePoint >= 0xE000 && codePoint <= 0xFFFD)
+                || (codePoint >= 0x10000 && codePoint <= 0x10FFFF);
     }
 
     /**
@@ -110,37 +113,54 @@ public final class XmlUtils {
         if (text == null) {
             return;
         }
+
         final StringBuilder chunk = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
+
+        int i = 0;
+        while (i < text.length()) {
             final char c = text.charAt(i);
+
             if (Character.isHighSurrogate(c)) {
                 if (i + 1 < text.length() && Character.isLowSurrogate(text.charAt(i + 1))) {
-                    // Valid surrogate pair: flush accumulated chunk, then emit numeric char ref
+                    // Valid surrogate pair
                     if (chunk.length() > 0) {
                         serializer.text(chunk.toString());
                         chunk.setLength(0);
                     }
+
                     final int codePoint = Character.toCodePoint(c, text.charAt(i + 1));
-                    serializer.entityRef("#" + codePoint);
-                    i++; // skip the low surrogate
+                    if (isValidXmlCodePoint(codePoint)) {
+                        serializer.entityRef("#" + codePoint);
+                    } else {
+                        reportInvalidCharacter(codePoint);
+                    }
+
+                    i += 2; // consumed both surrogates
+                } else {
+                    // Lone high surrogate — skip
+                    reportInvalidCharacter(c);
+                    i++;
                 }
-                // else: lone high surrogate — skip
             } else if (Character.isLowSurrogate(c)) {
                 // Lone low surrogate — skip
-            } else if (isValidXmlChar(c)) {
+                reportInvalidCharacter(c);
+                i++;
+            } else if (isValidXmlCodePoint(c)) {
                 chunk.append(c);
+                i++;
             } else {
                 reportInvalidCharacter(c);
+                i++;
             }
-            // else: invalid XML 1.0 character — skip
         }
+
         if (chunk.length() > 0) {
             serializer.text(chunk.toString());
         }
     }
 
-    private static void reportInvalidCharacter(char ch) {
-        Log.w("Skipping illegal character (" + Integer.toHexString((int) ch) + ")");
+    private static void reportInvalidCharacter(final int ch) {
+        Log.w("Skipping illegal character (" + Integer.toHexString(ch) + ")");
     }
 
 }

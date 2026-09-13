@@ -32,7 +32,7 @@ public class InvalidXMLCharacterFilterReaderTest {
     @Test
     public void testSurrogatePairPassesThrough() throws IOException {
         final String emojis = "\uD83E\uDD86\uD83D\uDE80\uD83C\uDF0D";
-        assertThat(filter("before" + emojis + "after")).isEqualTo("beforeafter");
+        assertThat(filter("before" + emojis + "after")).isEqualTo("before" + emojis + "after");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class InvalidXMLCharacterFilterReaderTest {
     public void testSupplementaryCharacterReferencePassesThrough() throws IOException {
         // U+1F986 = 🦆
         assertThat(filter("before&#x1F986;&#129414;after\uD83E\uDD86"))
-                .isEqualTo("before&#x1F986;&#129414;after");
+                .isEqualTo("before&#x1F986;&#129414;after\uD83E\uDD86");
     }
 
     @Test
