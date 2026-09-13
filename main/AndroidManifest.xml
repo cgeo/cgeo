@@ -974,6 +974,7 @@
             android:name=".service.CacheDownloaderService"
             android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
+        <receiver android:name=".service.StopBatchServiceReceiver"/>
 
         <!-- Background log poster -->
         <service
