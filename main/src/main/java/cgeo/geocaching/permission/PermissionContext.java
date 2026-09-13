@@ -23,6 +23,7 @@ public enum PermissionContext {
 
     LOCATION(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, R.string.permission_location_explanation, R.string.permission_location_explanation_title),
     SEARCH_USER_IN_CONTACTS(new String[]{Manifest.permission.READ_CONTACTS}, R.string.permission_contacts_read_explanation, R.string.permission_contacts_read_explanation_title),
+    CALENDAR(new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR}, R.string.permission_calendar_explanation, R.string.permission_calendar_explanation_title),
     LEGACY_WRITE_EXTERNAL_STORAGE(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, R.string.permission_legacy_write_external_storage_explanation, R.string.permission_legacy_write_external_storage_explanation_title),
     @RequiresApi(33) // notifications permission will only be requested on API 33+ devices (see InstallWizardActivity)
     NOTIFICATIONS(new String[]{Manifest.permission.POST_NOTIFICATIONS}, R.string.permission_post_notifications_explanation, R.string.permission_post_notifications_explanation_title);
