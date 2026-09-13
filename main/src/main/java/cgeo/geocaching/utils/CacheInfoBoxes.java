@@ -150,9 +150,10 @@ public class CacheInfoBoxes {
     }
 
 
-    public static void updateAttributes(final Geocache cache, final TextView attributesText, final GridView attributesGrid, final Activity activity) {
+    public static void updateAttributes(final Geocache cache, final View attributesView, final GridView attributesGrid, final Activity activity) {
         final List<String> attributes = cache.getAttributes();
         if (!CacheAttribute.hasRecognizedAttributeIcon(attributes)) {
+            attributesView.setVisibility(View.GONE);
             attributesGrid.setVisibility(View.GONE);
             return;
         }
@@ -181,12 +182,15 @@ public class CacheInfoBoxes {
             }
         }
 
+        final TextView attributesText = attributesView.findViewById(R.id.attributes_text);
         attributesGrid.setAdapter(new AttributesGridAdapter(activity, orderedAttributeNames, () -> toggleAttributesView(attributesText, attributesGrid)));
         attributesGrid.setVisibility(View.VISIBLE);
 
-        attributesText.setText(HtmlCompat.fromHtml(attributesTextBuilder.toString(), 0));
-        attributesText.setVisibility(View.GONE);
-        attributesText.setOnClickListener(v -> toggleAttributesView(attributesText, attributesGrid));
+        if (attributesText != null) {
+            attributesText.setText(HtmlCompat.fromHtml(attributesTextBuilder.toString(), 0));
+            attributesText.setVisibility(View.GONE);
+            attributesText.setOnClickListener(v -> toggleAttributesView(attributesText, attributesGrid));
+        }
     }
 
     private static void toggleAttributesView(final TextView attributesText, final GridView attributesGrid) {

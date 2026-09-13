@@ -1422,7 +1422,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addLatestLogs(cache);
 
             // cache attributes
-            CacheInfoBoxes.updateAttributes(cache, binding.attributesText, binding.attributesGrid, activity);
+            CacheInfoBoxes.updateAttributes(cache, binding.attributesBox, binding.attributesGrid, activity);
 
             // list and matching filters
             CacheInfoBoxes.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(),
@@ -1936,6 +1936,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             };
             binding.hint.setOnClickListener(listener);
             binding.hintBox.setOnClickListener(listener);
+            if (!Settings.getHintAsRot13()) {
+                final String hintPlain = binding.hint.getText().toString();
+                translator.translate(hintPlain, translated -> binding.hint.setText(translated), e -> binding.hint.setText(hintPlain));
+            }
         }
 
         /** Resets the hint text to the original cache value, re-applying rot13 if configured. */
