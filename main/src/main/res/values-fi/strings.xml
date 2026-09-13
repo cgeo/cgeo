@@ -2812,13 +2812,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Näytä tietokanta</string>
-    <string name="dbi_select_title">(Valitse taulukko)</string>
-    <string name="dbi_columnproperties_title">Sarakkeen ominaisuudet</string>
-    <string name="dbi_columnproperties_message">Kenttä: %1$s\nTyyppi: %2$s\nTallennus: %3$s</string>
-    <string name="dbi_edit_title">Muokkaa \"%1$s\" rivillä %2$d\"</string>
     <string name="dbi_edit_ok">Kenttä päivitetty</string>
     <string name="dbi_edit_error">Virhe päivitettäessä kenttää</string>
-    <string name="dbi_edit_error_pkfield">"%s\" on osa ensisijaista avainta, ei voida muokata"</string>
-    <string name="dbi_search_title">Hae</string>
-    <string name="dbi_search_columnSelection">Rajoita</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
