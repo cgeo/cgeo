@@ -2360,4 +2360,5 @@
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Foretrukket bildestørrelse</string>
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
