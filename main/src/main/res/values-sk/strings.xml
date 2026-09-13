@@ -2860,13 +2860,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100 px</string>
     <!-- db inspection -->
     <string name="view_database">Zobraziť databázu</string>
-    <string name="dbi_select_title">(Vyberte tabuľku)</string>
-    <string name="dbi_columnproperties_title">Vlastnosti stĺpca</string>
-    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nUloženie: %3$s</string>
-    <string name="dbi_edit_title">Úprava \"%1$s\" riadku %2$d\"</string>
     <string name="dbi_edit_ok">Pole aktualizované</string>
     <string name="dbi_edit_error">Chyba počas aktualizácie poľa</string>
-    <string name="dbi_edit_error_pkfield">"%s\" je časť primárneho kľúča, nemožno upraviť"</string>
-    <string name="dbi_search_title">Hľadať</string>
-    <string name="dbi_search_columnSelection">Obmedziť na</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
