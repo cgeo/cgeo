@@ -2845,13 +2845,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Voir la base de données</string>
-    <string name="dbi_select_title">(Sélectionnez la table)</string>
-    <string name="dbi_columnproperties_title">Propriétés de la colonne</string>
-    <string name="dbi_columnproperties_message">Champ : %1$s\nType : %2$s\nStockage : %3$s</string>
-    <string name="dbi_edit_title">Modifier \"%1$s\" de la ligne %2$d\"</string>
     <string name="dbi_edit_ok">Champ mis à jour</string>
     <string name="dbi_edit_error">Erreur lors de la mise à jour du champ</string>
-    <string name="dbi_edit_error_pkfield">"%s\" fait partie de la clé primaire, ne peut pas être modifié"</string>
-    <string name="dbi_search_title">Rechercher</string>
-    <string name="dbi_search_columnSelection">Restreindre à</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
