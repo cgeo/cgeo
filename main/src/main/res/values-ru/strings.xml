@@ -2916,13 +2916,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Просмотр БД</string>
-    <string name="dbi_select_title">(Выберите таблицу)</string>
-    <string name="dbi_columnproperties_title">Свойства столбца</string>
-    <string name="dbi_columnproperties_message">Поле: %1$s\nТип: %2$s\nХранилище: %3$s</string>
-    <string name="dbi_edit_title">Изменить\"%1$s\" строки %2$d\"</string>
     <string name="dbi_edit_ok">Поле обновлено</string>
     <string name="dbi_edit_error">Ошибка при обновлении поля</string>
-    <string name="dbi_edit_error_pkfield">"%s\" является частью первичного ключа, не подлежит редактированию"</string>
-    <string name="dbi_search_title">Искать</string>
-    <string name="dbi_search_columnSelection">Ограничить</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
