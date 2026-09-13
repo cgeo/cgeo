@@ -1023,4 +1023,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
