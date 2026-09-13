@@ -1996,4 +1996,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
