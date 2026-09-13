@@ -1422,7 +1422,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addLatestLogs(cache);
 
             // cache attributes
-            CacheInfoBoxes.updateAttributes(cache, binding.attributesText, binding.attributesGrid, activity);
+            CacheInfoBoxes.updateAttributes(cache, binding.attributesBox, binding.attributesGrid, activity);
 
             // list and matching filters
             CacheInfoBoxes.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(),
