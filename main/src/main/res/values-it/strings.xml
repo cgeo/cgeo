@@ -2798,13 +2798,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Visualizza database</string>
-    <string name="dbi_select_title">(Seleziona tabella)</string>
-    <string name="dbi_columnproperties_title">Proprietà colonna</string>
-    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nArchiviazione: %3$s</string>
-    <string name="dbi_edit_title">Modifica \"%1$s\" della riga %2$d\"</string>
     <string name="dbi_edit_ok">Campo aggiornato</string>
     <string name="dbi_edit_error">Errore durante l\'aggiornamento del campo</string>
-    <string name="dbi_edit_error_pkfield">"%s\" fa parte della chiave primaria, non può essere modificato"</string>
-    <string name="dbi_search_title">Cerca per</string>
-    <string name="dbi_search_columnSelection">Limita a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
