@@ -1936,6 +1936,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             };
             binding.hint.setOnClickListener(listener);
             binding.hintBox.setOnClickListener(listener);
+            if (!Settings.getHintAsRot13()) {
+                final String hintPlain = binding.hint.getText().toString();
+                translator.translate(hintPlain, translated -> binding.hint.setText(translated), e -> binding.hint.setText(hintPlain));
+            }
         }
 
         /** Resets the hint text to the original cache value, re-applying rot13 if configured. */
