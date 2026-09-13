@@ -30,7 +30,7 @@ public enum CacheAttribute {
     SCUBA(CacheAttributeCategory.CAT_TOOLS, 5, 55, "scuba", R.drawable.attribute_scuba, R.string.attribute_scuba_yes, 0),
     KIDS(CacheAttributeCategory.CAT_LOCATION, 6, 71, "kids", R.drawable.attribute_kids, R.string.attribute_kids_yes, R.string.attribute_kids_no),
     ONEHOUR(CacheAttributeCategory.CAT_DURATION, 7, -1, "onehour", R.drawable.attribute_onehour, R.string.attribute_onehour_yes, R.string.attribute_onehour_no),
-    SCENIC(CacheAttributeCategory.CAT_SURROUNDINGS, 8, -1, "scenic", R.drawable.attribute_scenic, R.string.attribute_scenic_yes, R.string.attribute_scenic_no),
+    SCENIC(CacheAttributeCategory.CAT_SURROUNDINGS, 8, 100, "scenic", R.drawable.attribute_scenic, R.string.attribute_scenic_yes, R.string.attribute_scenic_no),
     HIKING(CacheAttributeCategory.CAT_LOCATION, 9, 21, "hiking", R.drawable.attribute_hiking, R.string.attribute_hiking_yes, R.string.attribute_hiking_no),
     CLIMBING(CacheAttributeCategory.CAT_LOCATION, 10, -1, "climbing", R.drawable.attribute_climbing, R.string.attribute_climbing_yes, R.string.attribute_climbing_no),
     WADING(CacheAttributeCategory.CAT_TOOLS, 11, -1, "wading", R.drawable.attribute_wading, R.string.attribute_wading_yes, 0),
@@ -149,7 +149,10 @@ public enum CacheAttribute {
     VIDEO_SURVEIL(CacheAttributeCategory.CAT_SURROUNDINGS, -1, 80, "video_surveil", R.drawable.attribute_video_surveil, R.string.attribute_video_surveil_yes, R.string.attribute_video_surveil_no),
     TRACKABLES(CacheAttributeCategory.CAT_TYPE, -1, 81, "trackables", R.drawable.attribute_trackables, R.string.attribute_trackables_yes, R.string.attribute_trackables_no),
     HISTORIC(CacheAttributeCategory.CAT_SURROUNDINGS, -1, 87, "historic", R.drawable.attribute_historic, R.string.attribute_historic_yes, R.string.attribute_historic_no),
-    BLIND_PEOPLE(CacheAttributeCategory.CAT_LOCATION, -1, 89, "blind_people", R.drawable.attribute_blind_people, R.string.attribute_blind_people_yes, R.string.attribute_blind_people_no);
+    BLIND_PEOPLE(CacheAttributeCategory.CAT_LOCATION, -1, 89, "blind_people", R.drawable.attribute_blind_people, R.string.attribute_blind_people_yes, R.string.attribute_blind_people_no),
+    DETAIL(CacheAttributeCategory.CAT_SURROUNDINGS, -1, 98, "detail", R.drawable.attribute_detail, R.string.attribute_architecture_detail, -1),
+    NATURAL_MONUMENT(CacheAttributeCategory.CAT_SURROUNDINGS, -1, 99, "natural_monument", R.drawable.attribute_natural_monument, R.string.attribute_natural_monument, -1),
+    STREET_ART(CacheAttributeCategory.CAT_SURROUNDINGS, -1, 101, "street_art", R.drawable.attribute_street_art, R.string.attribute_street_art, -1);
 
     @NonNull
     private static final String INTERNAL_YES = "_yes";
