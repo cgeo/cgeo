@@ -73,7 +73,7 @@ public class GpxSerializerTest {
     }
 
     @Test
-    public void testEncodingRoundtrip_GC901CB() throws IOException, ParserException {
+    public void testEncodingRoundtripGC901CB() throws IOException, ParserException {
         final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc901cb_gpx100);
         assertThat(cache).isNotNull();
         assertThat(cache.getName()).contains(TextUtils.normalize("\uD83C\uDD83"));
