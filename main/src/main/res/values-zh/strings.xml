@@ -2812,13 +2812,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">查看数据库</string>
-    <string name="dbi_select_title">(选择表)</string>
-    <string name="dbi_columnproperties_title">列属性</string>
-    <string name="dbi_columnproperties_message">字段：%1$s\n类型：%2$s\n存储：%3$s</string>
-    <string name="dbi_edit_title">编辑第 %2$d 行的 \"%1$s\"</string>
     <string name="dbi_edit_ok">字段已更新</string>
     <string name="dbi_edit_error">更新字段时出错</string>
-    <string name="dbi_edit_error_pkfield">"%s\" 是主键的一部分，无法编辑"</string>
-    <string name="dbi_search_title">搜索</string>
-    <string name="dbi_search_columnSelection">限制于</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
