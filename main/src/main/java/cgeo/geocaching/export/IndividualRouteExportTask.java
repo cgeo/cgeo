@@ -114,6 +114,8 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
             }
             gpx.endTag(NS_GPX, exportAsTrack ? "trk" : "rte");
             gpx.endTag(NS_GPX, "gpx");
+            gpx.endDocument();
+            gpx.flush();
         } catch (final IOException e) {
             Log.w("Could not write route to uri '" + uri + "'", e);
             // delete partial GPX file on error

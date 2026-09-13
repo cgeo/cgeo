@@ -105,6 +105,8 @@ public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryEl
                 gpx.endTag(NS_GPX, "trkseg");
                 gpx.endTag(NS_GPX, "trk");
                 gpx.endTag(NS_GPX, "gpx");
+                gpx.endDocument();
+                gpx.flush();
             } catch (final IOException e) {
                 // delete partial GPX file on error
                 Log.e("IOException on trail export: " + e.getMessage());

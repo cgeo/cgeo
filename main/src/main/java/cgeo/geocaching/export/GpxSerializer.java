@@ -127,6 +127,7 @@ public final class GpxSerializer {
     private void writeEndDocument() throws IOException {
         gpx.endTag(NS_GPX, "gpx");
         gpx.endDocument();
+        gpx.flush();
     }
 
     public void writeCaches(@NonNull final List<Geocache> caches, final Writer writer) throws IOException {
