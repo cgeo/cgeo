@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -21,12 +23,17 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     public void setSpecialNumber(final T specialNumber, final Boolean include) {
-        numberRangeFilter.setSpecialNumber(specialNumber);
-        numberRangeFilter.setIncludeSpecialNumber(include);
+        final Set<T> includeSet = Boolean.TRUE.equals(include) && specialNumber != null ? Collections.singleton(specialNumber) : Collections.emptySet();
+        final Set<T> excludeSet = Boolean.FALSE.equals(include) && specialNumber != null ? Collections.singleton(specialNumber) : Collections.emptySet();
+        numberRangeFilter.setSpecialNumbers(includeSet, excludeSet);
     }
 
-    public Boolean getIncludeSpecialNumber() {
-        return numberRangeFilter.getIncludeSpecialNumber();
+    public boolean getIncludeSpecialNumber() {
+        return !numberRangeFilter.getSpecialNumberInclude().isEmpty();
+    }
+
+    public void setIncludeNull(final Boolean includeNull) {
+        numberRangeFilter.setIncludeNull(includeNull);
     }
 
     protected abstract T getValue(Geocache cache);
@@ -51,7 +58,7 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         return isInRange(gcValue);
     }
 
-    private boolean isInRange(final T value) {
+    protected boolean isInRange(final T value) {
         return numberRangeFilter.isInRange(value);
     }
 

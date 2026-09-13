@@ -2,6 +2,7 @@ package cgeo.geocaching.filters;
 
 import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.HealthScoreGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -58,10 +59,42 @@ public class NumberRangeGeocacheFilterTest {
             f.setSpecialNumber(5f, false);
             f.setMinMaxRange(1f, 6f);
         }, false);
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void includeNull() {
+        //null and not null
+        assertSingleHealth(c -> c.setHealthScore(null), f -> f.setIncludeNull(true), true);
+        assertSingleHealth(c -> c.setHealthScore(null), f -> f.setIncludeNull(false), false);
+        assertSingleHealth(c -> c.setHealthScore(10), f -> f.setIncludeNull(true), true);
+        assertSingleHealth(c -> c.setHealthScore(10), f -> f.setIncludeNull(false), true);
+
+        //combine with special filter
+        assertSingleHealth(c -> c.setHealthScore(Geocache.HEALTH_SCORE_UNKNOWN), f -> {
+            f.setIncludeNull(true);
+            f.setSpecialNumber(Geocache.HEALTH_SCORE_UNKNOWN, true);
+        }, true);
+        assertSingleHealth(c -> c.setHealthScore(Geocache.HEALTH_SCORE_UNKNOWN), f -> {
+            f.setIncludeNull(false);
+            f.setSpecialNumber(Geocache.HEALTH_SCORE_UNKNOWN, true);
+        }, true);
+        assertSingleHealth(c -> c.setHealthScore(Geocache.HEALTH_SCORE_UNKNOWN), f -> {
+            f.setIncludeNull(true);
+            f.setSpecialNumber(Geocache.HEALTH_SCORE_UNKNOWN, false);
+        }, false);
+        assertSingleHealth(c -> c.setHealthScore(Geocache.HEALTH_SCORE_UNKNOWN), f -> {
+            f.setIncludeNull(false);
+            f.setSpecialNumber(Geocache.HEALTH_SCORE_UNKNOWN, false);
+        }, false);
 
     }
 
     private void assertSingle(final Action1<Geocache> cacheSetter, final Action1<DifficultyGeocacheFilter> filterSetter, final Boolean expectedResult) {
         GeocacheFilterTestUtils.testSingle(GeocacheFilterType.DIFFICULTY, cacheSetter, filterSetter, expectedResult);
+    }
+
+    private void assertSingleHealth(final Action1<Geocache> cacheSetter, final Action1<HealthScoreGeocacheFilter> filterSetter, final Boolean expectedResult) {
+        GeocacheFilterTestUtils.testSingle(GeocacheFilterType.HEALTH_SCORE, cacheSetter, filterSetter, expectedResult);
     }
 }

@@ -1201,7 +1201,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public boolean showSavedFilterList() {
-        FilterUtils.openDialogSelectNamedFilter(this,
+        FilterUtils.openDialogSelectGeocacheFilter(this,
                 TextParam.id(R.string.cache_filter_storage_select_title),
                 viewModel.mapType.filterContext,
                 selectedFilter -> {

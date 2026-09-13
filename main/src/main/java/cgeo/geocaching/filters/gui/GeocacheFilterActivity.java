@@ -169,7 +169,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void initializeNamedFilterButtons() {
         // Add Named Filter criterion button
-        final Runnable showListSelection = () -> FilterUtils.openDialogSelectNamedFilter(
+        final Runnable showListSelection = () -> FilterUtils.openDialogSelectGeocacheFilter(
                 this, TextParam.id(R.string.named_filter_fill_with_named), null,
                 selected -> {
                     originalFilterConfig = selected == null ? null : selected.toConfig();

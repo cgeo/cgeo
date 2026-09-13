@@ -957,7 +957,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        FilterUtils.openDialogSelectNamedFilter(this,
+        FilterUtils.openDialogSelectGeocacheFilter(this,
             TextParam.id(R.string.cache_filter_storage_select_title),
             currentCacheFilterContext,
             selectedFilter -> {

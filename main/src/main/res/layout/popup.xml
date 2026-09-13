@@ -46,11 +46,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-            <RelativeLayout style="@style/separator_horizontal_layout">
-                <View style="@style/separator_horizontal" />
-            </RelativeLayout>
-
             <include layout="@layout/cache_offlinebox" />
+
+            <include layout="@layout/cache_namedfilterbox" />
 
             <RelativeLayout
                 android:id="@+id/offline_hint_separator"
