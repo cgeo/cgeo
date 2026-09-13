@@ -2882,13 +2882,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Datenbank anzeigen</string>
-    <string name="dbi_select_title">(Tabelle auswählen)</string>
-    <string name="dbi_columnproperties_title">Spalteneigenschaften</string>
-    <string name="dbi_columnproperties_message">Feld: %1$s\nTyp: %2$s\nSpeicher: %3$s</string>
-    <string name="dbi_edit_title">Bearbeite \"%1$s\" der Zeile %2$d\"</string>
     <string name="dbi_edit_ok">Feld aktualisiert</string>
     <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
-    <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
-    <string name="dbi_search_title">Suche nach</string>
-    <string name="dbi_search_columnSelection">Beschränken auf</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
