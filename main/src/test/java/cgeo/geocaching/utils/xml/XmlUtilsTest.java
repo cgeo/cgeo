@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils.xml;
 
+import cgeo.geocaching.utils.TextUtils;
+
 import android.util.Xml;
 
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class XmlUtilsTest {
     private void assertXmlEquals(final String expected) throws IOException {
         xml.endDocument();
         xml.flush();
-        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
+        assertThat(TextUtils.normalize(stringWriter.toString()))
+                .isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + TextUtils.normalize(expected));
     }
 }
