@@ -158,7 +158,7 @@ public class CacheInfoBoxes {
             }
         }
 
-        TextView attributesText = attributesView.findViewById(R.id.attributes_text);
+        final TextView attributesText = attributesView.findViewById(R.id.attributes_text);
         attributesGrid.setAdapter(new AttributesGridAdapter(activity, orderedAttributeNames, () -> toggleAttributesView(attributesText, attributesGrid)));
         attributesGrid.setVisibility(View.VISIBLE);
 
