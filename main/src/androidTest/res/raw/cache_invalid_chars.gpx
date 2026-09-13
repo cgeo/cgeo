@@ -9,7 +9,7 @@
     <sym>Geocache</sym>
     <type>Geocache|Unknown Cache</type>
     <groundspeak:cache id="10373872" available="True" archived="False">
-      <groundspeak:name>🦆Alles für den Cache🦆 Lab Bonus</groundspeak:name>
+      <groundspeak:name>🦆Alles für den&#x15; Cache🦆 Lab Bonus</groundspeak:name>
       <groundspeak:placed_by>LuCaMa03</groundspeak:placed_by>
       <groundspeak:owner>LuCaMa03</groundspeak:owner>
       <groundspeak:type>Unknown Cache</groundspeak:type>
@@ -33,7 +33,7 @@
       <groundspeak:country>Germany</groundspeak:country>
       <groundspeak:state>Nordrhein-Westfalen</groundspeak:state>
       <groundspeak:short_description html="False">Invalid&#xB;Description: V‹¥IR‡U½S©&#x15;</groundspeak:short_description>
-      <groundspeak:long_description html="True">&lt;p&gt; 🦆Alles für den Cache🦆 *Lab Bonus*&lt;p&gt;</groundspeak:long_description>
+      <groundspeak:long_description html="True">&#xB;&lt;p&gt; 🦆Alles für den Cache🦆 *Lab Bonus*&lt;p&gt;</groundspeak:long_description>
       <groundspeak:encoded_hints></groundspeak:encoded_hints>
     </groundspeak:cache>
     <gsak:wptExtension>

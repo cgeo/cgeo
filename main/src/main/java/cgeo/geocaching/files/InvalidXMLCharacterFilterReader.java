@@ -79,21 +79,21 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                     charCount = Character.charCount(codePoint);
 
                     if (XmlUtils.isValidXmlCodePoint(codePoint)) {
-                        for (int i = 0; i < charCount; i++) {
-                            pos++;
-                            if (pos < readPos + i) {
-                                cbuf[pos] = cbuf[readPos + i];
-                            }
-                        }
+                        pos += charCount;
                     } else {
-                        readPos += charCount;
-                        continue;
+                        useChar = false;
                     }
+                    break;
             }
 
-            // copy, and skip unwanted characters
-            if (pos < readPos && useChar) {
-                cbuf[pos] = cbuf[readPos];
+            // copy (charCount Zeichen) bzw. verwerfen
+            if (useChar) {
+                final int start = pos - charCount + 1;
+                if (start < readPos) {
+                    for (int i = 0; i < charCount; i++) {
+                        cbuf[start + i] = cbuf[readPos + i];
+                    }
+                }
             }
 
             readPos += charCount;

@@ -24,7 +24,7 @@ public class XmlUtilsTest {
         stringWriter = new StringWriter();
         xml = Xml.newSerializer();
         xml.setOutput(stringWriter);
-        xml.startDocument(StandardCharsets.UTF_8.name(), null);
+        xml.startDocument(StandardCharsets.UTF_8.name(), true);
     }
 
     @Test
@@ -65,6 +65,6 @@ public class XmlUtilsTest {
         xml.endDocument();
         xml.flush();
         assertThat(TextUtils.normalize(stringWriter.toString()))
-                .isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + TextUtils.normalize(expected));
+                .isEqualTo("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" + TextUtils.normalize(expected));
     }
 }

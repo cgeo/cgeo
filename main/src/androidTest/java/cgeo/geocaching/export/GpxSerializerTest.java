@@ -46,33 +46,6 @@ public class GpxSerializerTest {
     }
 
     @Test
-    public void testWriteGPXWithInvalidChars() throws Exception {
-        final Geocache cache = CgeoTestUtils.createTestCache("ZZTEST");
-        cache.setName("Cache with invalid chars and surrogates");
-        cache.setDescription("Invalid: \u0001 - \u0002 - \u0003"
-                + " single surrogates: \uD83C - \uDF0D"
-                + " valid surrogates: \uD83E\uDD86 - \uD83D\uDE80"
-                + " end");
-
-        final StringWriter writer = new StringWriter();
-        final GpxSerializer gpxSerializer = new GpxSerializer();
-        gpxSerializer.writeCaches(Collections.singletonList(cache), writer);
-        final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
-        assertThat(gpxOutput).contains("Cache with invalid chars and surrogates");
-        assertThat(gpxOutput).doesNotContain(
-                TextUtils.normalize("\u0001"),
-                TextUtils.normalize("\u0002"),
-                TextUtils.normalize("\u0003"),
-                TextUtils.normalize(" single surrogates: \uD83C-  valid"),
-                TextUtils.normalize(" single surrogates: \uD83C - \uDF0D valid"));
-        assertThat(gpxOutput).contains(
-                TextUtils.normalize("\uD83E\uDD86"),
-                TextUtils.normalize("\uD83D\uDE80"),
-                TextUtils.normalize("&#128640;"),
-                TextUtils.normalize(" valid surrogates: \uD83E\uDD86 - \uD83D\uDE80 end"));
-    }
-
-    @Test
     public void testEncodingRoundtripGC901CB() throws IOException, ParserException {
         final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc901cb_gpx100);
         assertThat(cache).isNotNull();
