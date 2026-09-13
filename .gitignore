@@ -52,4 +52,7 @@ captures/
 # ignore Claude internal files
 .claude/
 
+# allow for temp local filees
+temp/
+
 main/usage.txt

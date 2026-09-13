@@ -19,6 +19,10 @@ public class NamedGeoCoordinate implements INamedGeoCoordinate, Parcelable {
     private String name;
     private String geocode;
 
+    public NamedGeoCoordinate() {
+        this.geocode = "";
+    }
+
     protected NamedGeoCoordinate(final Parcel in) {
         coords = in.readParcelable(Geopoint.class.getClassLoader());
         elevation = in.readFloat();

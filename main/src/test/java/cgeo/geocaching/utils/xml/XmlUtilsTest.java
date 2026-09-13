@@ -3,11 +3,13 @@ package cgeo.geocaching.utils.xml;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,6 +43,18 @@ public class XmlUtilsTest {
         xml.endDocument();
         xml.flush();
         assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
+    }
+
+    @Test
+    public void testReaderParserPreservesBeginningAndNamespaces() throws Exception {
+        final XmlPullParser parser = XmlUtils.createParser(new StringReader("<root xmlns=\"urn:test\"><child>text</child></root>"), true);
+        assertThat(parser.nextTag()).isEqualTo(XmlPullParser.START_TAG);
+        assertThat(parser.getName()).isEqualTo("root");
+        assertThat(parser.getNamespace()).isEqualTo("urn:test");
+        assertThat(parser.nextTag()).isEqualTo(XmlPullParser.START_TAG);
+        assertThat(parser.nextText()).isEqualTo("text");
+        assertThat(parser.nextTag()).isEqualTo(XmlPullParser.END_TAG);
+        assertThat(parser.getName()).isEqualTo("root");
     }
 
     @Test

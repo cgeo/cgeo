@@ -1,6 +1,5 @@
 package cgeo.geocaching.files.unifiedgpxparser;
 
-import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -14,12 +13,8 @@ import cgeo.geocaching.utils.xml.XmlUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,13 +66,8 @@ public final class UnifiedGPXParser {
 
     @NonNull
     public static Result parse(@NonNull final InputStream stream) throws IOException, ParserException {
-        final Reader reader = new InvalidXMLCharacterFilterReader(
-                new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)));
         try {
             final XmlPullParser parser = XmlUtils.createParser(stream, true);
-            // XmlUtils.createParser sets the stream as input; replace it with our filtered reader
-            // so that invalid XML chars are stripped (same behaviour as the SAX-based parsers).
-            parser.setInput(reader);
 
             final Result result = new Result();
             findAndParseGpxRoot(parser, result);

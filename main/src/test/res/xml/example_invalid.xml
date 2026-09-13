@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<websites xmlns:test="http://cgeo.org/test" xmlns:testduplicate="http://cgeo.org/test">
+    <website url="https://cgeo.org">
+        <name>cgeo</name>
+        <test:status>green</test:status>
+        <testduplicate:status2>red</testduplicate:status2>
+        <nondeclared:test>test</nondeclared:test>
+        <unclosed>notclosed
+    </website>
+</websites>
