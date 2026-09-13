@@ -2774,13 +2774,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Bekijk database</string>
-    <string name="dbi_select_title">(Selecteer tabel)</string>
-    <string name="dbi_columnproperties_title">Kolom-eigenschappen</string>
-    <string name="dbi_columnproperties_message">Veld: %1$s\nType: %2$s\nOpslag: %3$s</string>
-    <string name="dbi_edit_title">Bewerk \"%1$s\" van rij %2$d\"</string>
     <string name="dbi_edit_ok">Veld bijgewerkt</string>
     <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
-    <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
-    <string name="dbi_search_title">Zoek naar</string>
-    <string name="dbi_search_columnSelection">Beperken tot</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
