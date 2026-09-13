@@ -531,6 +531,20 @@
     <string name="caches_watch_selected">Add selected to watch list</string>
     <string name="caches_unwatch_selected">Remove selected from watch list</string>
     <string name="watchlist_background_started">Watchlist update started in background</string>
+    <string name="watchlist_add_background_title">Adding to watchlist</string>
+    <string name="watchlist_add_background_canceled" tools:ignore="PluralsCandidate">Adding to watchlist canceled: %1$d/%2$d done</string>
+    <string name="watchlist_add_background_failed" tools:ignore="PluralsCandidate">Adding to watchlist failed: %1$d/%2$d done</string>
+    <plurals name="watchlist_add_background_result">
+        <item quantity="one">%d cache added to watchlist</item>
+        <item quantity="other">%d caches added to watchlist</item>
+    </plurals>
+    <string name="watchlist_remove_background_title">Removing from watchlist</string>
+    <string name="watchlist_remove_background_canceled" tools:ignore="PluralsCandidate">Removing from watchlist canceled: %1$d/%2$d done</string>
+    <string name="watchlist_remove_background_failed" tools:ignore="PluralsCandidate">Removing from watchlist failed: %1$d/%2$d done</string>
+    <plurals name="watchlist_remove_background_result">
+        <item quantity="one">%d cache removed from watchlist</item>
+        <item quantity="other">%d caches removed from watchlist</item>
+    </plurals>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -2361,6 +2375,8 @@
     <string name="export_confirm_message">To Path: %1$s\nFile Name: %2$s</string>
     <string name="export_persnotes">Upload personal notes</string>
     <string name="export_persnotes_uploading">Uploading personal note %1$d</string>
+    <string name="export_persnotes_background_canceled" tools:ignore="PluralsCandidate">Upload canceled: %1$d/%2$d notes uploaded</string>
+    <string name="export_persnotes_background_failed" tools:ignore="PluralsCandidate">Upload failed: %1$d/%2$d notes uploaded</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="zero">Uploaded %1$d notes successfully</item>
         <item quantity="one">Uploaded %1$d note successfully</item>
@@ -2374,6 +2390,12 @@
     <string name="export_modifiedcoords_success">Upload successful</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Upload finished: %1$d failed / %2$d ok</string>
     <string name="export_modifiedcoords_error">Upload failed</string>
+    <string name="export_modifiedcoords_background_canceled" tools:ignore="PluralsCandidate">Upload canceled: %1$d/%2$d done</string>
+    <string name="export_modifiedcoords_background_failed" tools:ignore="PluralsCandidate">Upload failed: %1$d/%2$d done</string>
+    <plurals name="export_modifiedcoords_background_result">
+        <item quantity="one">%d coordinate uploaded</item>
+        <item quantity="other">%d coordinates uploaded</item>
+    </plurals>
     <string name="filename_without_extension">Filename (without extension)</string>
 
     <!-- GC attributes -->

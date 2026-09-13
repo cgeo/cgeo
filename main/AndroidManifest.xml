@@ -973,6 +973,19 @@
         <service
             android:name=".service.CacheDownloaderService"
             android:foregroundServiceType="dataSync"/>
+        <!-- Generic batch geocache services -->
+        <service
+            android:name=".service.WatchCachesBatchService"
+            android:foregroundServiceType="dataSync"/>
+        <service
+            android:name=".service.UnwatchCachesBatchService"
+            android:foregroundServiceType="dataSync"/>
+        <service
+            android:name=".service.UploadCoordinatesBatchService"
+            android:foregroundServiceType="dataSync"/>
+        <service
+            android:name=".service.PersonalNoteUploadService"
+            android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopBatchServiceReceiver"/>
 
         <!-- Background log poster -->

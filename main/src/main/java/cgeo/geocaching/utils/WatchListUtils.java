@@ -1,14 +1,11 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.service.UnwatchCachesBatchService;
+import cgeo.geocaching.service.WatchCachesBatchService;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class WatchListUtils {
@@ -17,27 +14,11 @@ public final class WatchListUtils {
     }
 
     public static void unwatchAll(final Context context, final List<Geocache> caches) {
-        updateHandler(context, caches, false);
+        UnwatchCachesBatchService.start(context, caches);
     }
 
     public static void watchAll(final Context context, final List<Geocache> caches) {
-        updateHandler(context, caches, true);
-    }
-
-    private static void updateHandler(final Context context, final List<Geocache> caches, final boolean actionIsWatch) {
-        ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.watchlist_background_started));
-        AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-            final List<String> failedCaches = new ArrayList<>();
-            for (final Geocache cache : caches) {
-                if (cache.supportsWatchList()) {
-                    final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
-                    if (!(actionIsWatch ? connector.addToWatchlist(cache) : connector.removeFromWatchlist(cache))) {
-                        failedCaches.add(cache.getGeocode());
-                    }
-                }
-            }
-            ActivityMixin.showToast(context, failedCaches.isEmpty() ? LocalizationUtils.getString(actionIsWatch ? R.string.cachedetails_progress_watch : R.string.cachedetails_progress_unwatch) : LocalizationUtils.getString(R.string.err_watchlist_failed_geocodes, String.join(",", failedCaches)));
-        });
+        WatchCachesBatchService.start(context, caches);
     }
 
     public static boolean anySupportsWatchlist(final List<Geocache> caches) {
