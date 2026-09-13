@@ -2883,13 +2883,7 @@ Nombre de archivo:%2$s</string>
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Ver base de datos</string>
-    <string name="dbi_select_title">(Seleccionar tabla)</string>
-    <string name="dbi_columnproperties_title">Propiedades de la columna</string>
-    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nAlmacenamiento: %3$s</string>
-    <string name="dbi_edit_title">Editar \"%1$s\" de la fila %2$d\"</string>
     <string name="dbi_edit_ok">Columna actualizada</string>
     <string name="dbi_edit_error">Error al actualizar el campo</string>
-    <string name="dbi_edit_error_pkfield">"%s\" es parte de la clave primaria, no se puede editar"</string>
-    <string name="dbi_search_title">Buscar por</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
