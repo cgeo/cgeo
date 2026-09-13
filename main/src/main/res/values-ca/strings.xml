@@ -2906,13 +2906,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
-    <string name="dbi_select_title">(Selecciona la taula)</string>
-    <string name="dbi_columnproperties_title">Propietats de la columna</string>
-    <string name="dbi_columnproperties_message">Camp: %1$s\nTipus: %2$s\nEmmagatzematge: %3$s</string>
-    <string name="dbi_edit_title">Edita \"%1$s\" de la fila %2$d</string>
     <string name="dbi_edit_ok">Camp actualitzat</string>
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
-    <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
-    <string name="dbi_search_title">Buscar per</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
