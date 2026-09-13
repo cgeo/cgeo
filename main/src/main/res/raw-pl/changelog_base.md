@@ -1,7 +1,7 @@
 ### Mapa
-- New: Grayscale option
-- New: User-defined tile overlays
-- New: Support multiple user-defined tile providers
+- Nowość: Opcja skali szarości
+- Nowość: Nakładki kafelkowe zdefiniowane przez użytkownika
+- Nowość: Wsparcie dla dostawców kafelków zdefiniowanych przez użytkownika
 
 ### Szczegóły skrytki
 - Nowość: Przełącz datę zapisaną na urządzeniu między względną i dokładną
