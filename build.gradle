@@ -4,7 +4,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:9.4.0'
+        classpath 'com.android.tools.build:gradle:9.3.2'
 
         // un-mocking of portable Android classes
         classpath 'com.github.bjoernq:unmockplugin:0.11.0'
