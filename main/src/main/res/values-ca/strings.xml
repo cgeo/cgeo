@@ -2906,7 +2906,33 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
+    <string name="dbi_config_columns">Configura les columnes</string>
     <string name="dbi_edit_ok">Camp actualitzat</string>
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
+    <string name="dbi_sort_reset">Restabliment de l\'ordenació</string>
+    <string name="dbi_sorted_by">Ordenat per %1$s</string>
+    <string name="dbi_no_tables">No hi ha taules en aquesta base de dades</string>
+    <string name="dbi_select_table">Selecciona la taula</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s a #%2$d és de lectura/només</string>
+    <string name="dbi_edit_title">Edita «%1$s» a #%2$d</string>
+    <string name="dbi_delete_row_title">Suprimeix la fila</string>
+    <string name="dbi_delete_row_question">Vols eliminar definitivament la fila #%1$d (%2$s)?</string>
+    <string name="dbi_delete_success">Fila suprimida: %1$s</string>
+    <string name="dbi_sql_editor">Editor SQL</string>
+    <string name="dbi_sqleditor_load_snippet">Sentències emmagatzemades</string>
+    <string name="dbi_sqleditor_snippet_saved">Senténcia emmagatzemada</string>
+    <string name="dbi_sqleditor_no_snippets">Encara no s\'ha emmagatzemat cap senténcia</string>
+    <string name="dbi_sqleditor_warning">L\'editor SQL és una funcionalitat experimental. Es pot produir pèrdua de dades. Utilitzeu-lo sota la vostra pròpia responsabilitat!</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">CercaX</string>
+    <string name="grid_search_reset">Restablir</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Valor</string>
+    <string name="grid_operator_starts_with">comença amb</string>
+    <string name="grid_operator_not_starts_with">no comença amb</string>
+    <string name="grid_operator_ends_with">acaba amb</string>
+    <string name="grid_operator_not_ends_with">no acaba amb</string>
+    <string name="grid_operator_contains">conté</string>
+    <string name="grid_operator_not_contains">no conté</string>
 </resources>
