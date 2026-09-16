@@ -11,6 +11,8 @@ public class CacheMarker {
     private final int hashCode;
     protected final Drawable drawable;
     protected final Bitmap bitmap;
+    private volatile Object backendBitmap;
+    private volatile Runnable backendBitmapReleaser;
 
     public CacheMarker(final int hashCode, final Drawable drawable) {
         this(hashCode, -1, drawable);
@@ -37,6 +39,31 @@ public class CacheMarker {
 
     public int getHashCode() {
         return hashCode;
+    }
+
+    /** Opaque handle to a backend-specific cached copy of this marker's bitmap (e.g. Mapsforge). */
+    public Object getBackendBitmap() {
+        return backendBitmap;
+    }
+
+    /**
+     * Attach a backend-specific cached copy of this marker's bitmap.
+     * {@code releaser} is invoked exactly once when this CacheMarker is evicted from the overlay cache,
+     * giving the backend the opportunity to release its reference count or free other resources.
+     */
+    public void setBackendBitmap(final Object bitmap, final Runnable releaser) {
+        this.backendBitmap = bitmap;
+        this.backendBitmapReleaser = releaser;
+    }
+
+    /** Called by MapMarkerUtils when this marker is evicted. Releases the backend bitmap if attached. */
+    public void recycle() {
+        final Runnable r = backendBitmapReleaser;
+        if (r != null) {
+            backendBitmapReleaser = null;
+            backendBitmap = null;
+            r.run();
+        }
     }
 
     @Override
