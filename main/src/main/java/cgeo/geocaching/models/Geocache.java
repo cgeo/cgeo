@@ -211,6 +211,10 @@ public class Geocache implements INamedGeoCoordinate {
     private Boolean hasLogOffline = null;
     private OfflineLogEntry offlineLog = null;
 
+    private boolean markerHashDirty = true;
+    private int cachedMarkerHashCode = 0;
+    private boolean cachedIsDownloadPending = false;
+
     private final EventTimesInMin eventTimesInMin = new EventTimesInMin();
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -591,6 +595,7 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setHasLogOffline(final boolean hasLogOffline) {
         this.hasLogOffline = hasLogOffline;
+        markMarkerHashDirty();
     }
 
     public void logOffline(@NonNull final Activity fromActivity, @NonNull final LogType logType, @NonNull final ReportProblemType reportProblem) {
@@ -636,7 +641,7 @@ public class Geocache implements INamedGeoCoordinate {
         final Resources res = fromActivity.getResources();
         if (status) {
             DataStore.saveVisitDate(geocode, logEntry.date);
-            hasLogOffline = Boolean.TRUE;
+            setHasLogOffline(true);
             if (Settings.removeFromRouteOnLog()) {
                 DataStore.removeFirstMatchingIdFromIndividualRoute(fromActivity, geocode);
             }
@@ -1145,6 +1150,7 @@ public class Geocache implements INamedGeoCoordinate {
         if (lists != null) {
             this.lists.addAll(lists);
         }
+        markMarkerHashDirty();
     }
 
     public boolean isDetailed() {
@@ -1194,6 +1200,7 @@ public class Geocache implements INamedGeoCoordinate {
             Log.w("Geocache: setting non-null-coordinates to null for cache´" + geocode + " (was: " + coords + ")");
         }
         this.coords = coords;
+        markMarkerHashDirty();
     }
 
     public void setShortDescription(final String shortdesc) {
@@ -1507,10 +1514,12 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setAssignedEmoji(@Nullable final String assignedEmoji) {
         this.assignedEmoji = assignedEmoji;
+        markMarkerHashDirty();
     }
 
     public void setOwnerUserId(final String ownerUserId) {
         this.ownerUserId = ownerUserId;
+        markMarkerHashDirty();
     }
 
     public void setHint(final String hint) {
@@ -1523,10 +1532,12 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setDifficulty(final float difficulty) {
         this.difficulty = difficulty;
+        markMarkerHashDirty();
     }
 
     public void setTerrain(final float terrain) {
         this.terrain = terrain;
+        markMarkerHashDirty();
     }
 
     public void setLocation(final String location) {
@@ -1540,22 +1551,27 @@ public class Geocache implements INamedGeoCoordinate {
     public void setPersonalNote(final String personalNote, final boolean isFromProvider) {
         this.personalNote.setNote(personalNote);
         this.personalNote.setFromProvider(isFromProvider);
+        markMarkerHashDirty();
     }
 
     public void setDisabled(final boolean disabled) {
         this.disabled = disabled;
+        markMarkerHashDirty();
     }
 
     public void setArchived(final boolean archived) {
         this.archived = archived;
+        markMarkerHashDirty();
     }
 
     public void setFound(final boolean found) {
         this.found = found;
+        markMarkerHashDirty();
     }
 
     public void setDNF(final boolean didNotFound) {
         this.didNotFound = didNotFound;
+        markMarkerHashDirty();
     }
 
     public void setAttributes(final List<String> attributes) {
@@ -1602,6 +1618,7 @@ public class Geocache implements INamedGeoCoordinate {
         }
         this.cacheType = cacheType;
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
+        markMarkerHashDirty();
     }
 
     public boolean hasDifficulty() {
@@ -1694,6 +1711,7 @@ public class Geocache implements INamedGeoCoordinate {
     // Only for loading
     public void setFinalDefined(final boolean finalDefined) {
         this.finalDefined = finalDefined;
+        markMarkerHashDirty();
     }
 
     /**
@@ -1701,6 +1719,7 @@ public class Geocache implements INamedGeoCoordinate {
      */
     private void resetFinalDefined() {
         finalDefined = getFirstMatchingWaypoint(Waypoint::isFinalWithCoords) != null;
+        markMarkerHashDirty();
     }
 
     public boolean hasUserModifiedCoords() {
@@ -1714,6 +1733,29 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setUserModifiedCoords(final boolean coordsChanged) {
         userModifiedCoords = coordsChanged;
+        markMarkerHashDirty();
+    }
+
+    public boolean isMarkerHashDirty() {
+        return markerHashDirty;
+    }
+
+    public int getCachedMarkerHashCode() {
+        return cachedMarkerHashCode;
+    }
+
+    public boolean getCachedIsDownloadPending() {
+        return cachedIsDownloadPending;
+    }
+
+    public void markMarkerHashDirty() {
+        markerHashDirty = true;
+    }
+
+    public void setCachedMarkerHash(final int hashCode, final boolean isDownloadPending) {
+        this.cachedMarkerHashCode = hashCode;
+        this.cachedIsDownloadPending = isDownloadPending;
+        this.markerHashDirty = false;
     }
 
     public void resetUserModifiedCoords(final Waypoint waypoint) {

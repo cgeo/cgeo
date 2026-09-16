@@ -118,14 +118,15 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final boolean applyScaling) {
-        final ArrayList<String> assignedMarkers = getAssignedMarkers(cache);
         final boolean isDownloadPending = CacheDownloaderService.isDownloadPending(cache);
         final boolean isMapMode = cacheListType == null && applyScaling;
 
+        ArrayList<String> assignedMarkers = null;
         final int hashcode;
         if (isMapMode && !cache.isMarkerHashDirty() && cache.getCachedIsDownloadPending() == isDownloadPending) {
             hashcode = cache.getCachedMarkerHashCode();
         } else {
+            assignedMarkers = getAssignedMarkers(cache);
             hashcode = HashCode.start()
                     .append(cache.getAssignedEmoji())
                     .append(cache.getType().id)
@@ -155,11 +156,13 @@ public final class MapMarkerUtils {
             }
         }
 
-
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             final int id = ID_GIVER.addAndGet(1);
             if (marker == null) {
+                if (assignedMarkers == null) {
+                    assignedMarkers = getAssignedMarkers(cache);
+                }
                 final Drawable dr = createCacheMarker(hashcode, id, res, cache, cacheListType, assignedMarkers, applyScaling);
                 marker = new CacheMarker(hashcode, id, dr);
                 overlaysCache.put(hashcode, marker);
@@ -725,8 +728,12 @@ public final class MapMarkerUtils {
 
         //list markers
         readLists();
+<<<<<<< HEAD
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {
+=======
+        for (final Integer list : cache.getLists()) {
+>>>>>>> 7227524885 (fixup! Cache marker hash on Geocache with dirty flag)
             final String markerId = list2marker.get(list);
             if (markerId != null) {
                 result.add(markerId);
