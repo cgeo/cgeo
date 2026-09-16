@@ -1,12 +1,14 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
@@ -33,6 +35,7 @@ public class GeoItemsLayer {
 
     private Map<String, String> lastDisplayedGeocaches = new HashMap<>();
     private Map<String, String> lastDisplayedWaypoints = new HashMap<>();
+    private final Map<String, Geopoint> lastDisplayedGeopoints = new HashMap<>();
     private final CollectionDiff<String, String, String> lastDisplayedCacheStars = new CollectionDiff<>(k -> k);
     private boolean lastForceCompactIconMode = false;
 
@@ -50,19 +53,36 @@ public class GeoItemsLayer {
             final Map<String, String> currentlyDisplayedGeocaches = new HashMap<>();
 
             final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode();
-            if (lastForceCompactIconMode != forceCompactIconMode) {
+            final boolean compactIconModeChanged = lastForceCompactIconMode != forceCompactIconMode;
+            if (compactIconModeChanged) {
                 lastForceCompactIconMode = forceCompactIconMode;
                 viewModel.waypoints.notifyDataChanged();
             }
 
             for (Geocache cache : caches) {
-                final CacheMarker cm = forceCompactIconMode ? MapMarkerUtils.getCacheDotMarker(activity.getResources(), cache) : MapMarkerUtils.getCacheMarker(activity.getResources(), cache, null, true);
+                final String geocode = cache.getGeocode();
+                final String lastKey = lastDisplayedGeocaches.get(geocode);
+
+                // Fast path: skip getCacheMarker entirely when nothing has changed
+                if (!compactIconModeChanged && lastKey != null && !cache.isMarkerHashDirty()
+                        && (forceCompactIconMode || cache.getCachedIsDownloadPending() == CacheDownloaderService.isDownloadPending(cache))) {
+                    final Geopoint lastGeopoint = lastDisplayedGeopoints.get(geocode);
+                    if (lastGeopoint != null && lastGeopoint.equals(cache.getCoords())) {
+                        currentlyDisplayedGeocaches.put(geocode, lastKey);
+                        continue;
+                    }
+                }
+
+                // Slow path: compute marker and update if changed
+                final CacheMarker cm = forceCompactIconMode
+                        ? MapMarkerUtils.getCacheDotMarker(activity.getResources(), cache)
+                        : MapMarkerUtils.getCacheMarker(activity.getResources(), cache, null, true);
                 final String contentKey = getKeyFor(cache, cm);
-                currentlyDisplayedGeocaches.put(cache.getGeocode(), contentKey);
+                currentlyDisplayedGeocaches.put(geocode, contentKey);
+                lastDisplayedGeopoints.put(geocode, cache.getCoords());
 
-                if (!lastDisplayedGeocaches.containsKey(cache.getGeocode()) || !lastDisplayedGeocaches.get(cache.getGeocode()).equals(contentKey)) {
-
-                    layer.put(UnifiedMapViewModel.CACHE_KEY_PREFIX + cache.getGeocode(), GeoPrimitive.createMarker(cache.getCoords(),
+                if (!contentKey.equals(lastKey)) {
+                    layer.put(UnifiedMapViewModel.CACHE_KEY_PREFIX + geocode, GeoPrimitive.createMarker(cache.getCoords(),
                         GeoIcon.builder()
                             .setBitmap(cm.getBitmap())
                             .setHotspot(forceCompactIconMode ? GeoIcon.Hotspot.CENTER : GeoIcon.Hotspot.BOTTOM_CENTER)
@@ -75,8 +95,9 @@ public class GeoItemsLayer {
                 lastDisplayedGeocaches.remove(geocode);
             }
 
-            for (String geocode : lastDisplayedGeocaches.keySet()) {
-                layer.remove(UnifiedMapViewModel.CACHE_KEY_PREFIX + geocode);
+            for (String removedGeocode : lastDisplayedGeocaches.keySet()) {
+                layer.remove(UnifiedMapViewModel.CACHE_KEY_PREFIX + removedGeocode);
+                lastDisplayedGeopoints.remove(removedGeocode);
             }
 
             lastDisplayedGeocaches = currentlyDisplayedGeocaches;
