@@ -34,6 +34,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Pair;
+
 import android.util.SparseArray;
 import android.view.Gravity;
 
@@ -51,7 +52,6 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
 
@@ -114,30 +114,41 @@ public final class MapMarkerUtils {
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final boolean applyScaling) {
         final ArrayList<String> assignedMarkers = getAssignedMarkers(cache);
-        final int hashcode = new HashCodeBuilder()
-                .append(cache.getAssignedEmoji())
-                .append(cache.getType().id)
-                .append(cache.isDisabled())
-                .append(cache.isArchived())
-                .append(cache.getMapMarkerId())
-                .append(cache.isOwner())
-                .append(cache.isFound())
-                .append(cache.isDNF())
-                .append(cache.hasWillAttendForFutureEvent())
-                .append(cache.hasUserModifiedCoords())
-                .append(cache.hasFinalDefined())
-                .append(cache.getPersonalNote())
-                .append(cache.hasLogOffline())
-                .append(cache.getLists().isEmpty())
-                .append(cache.getOfflineLogType())
-                .append(showPin(cacheListType))
-                .append(showFloppyOverlay(cacheListType))
-                .append(assignedMarkers)
-                .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
-                .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
-                .append(CacheDownloaderService.isDownloadPending(cache))
-                .append(applyScaling)
-                .toHashCode();
+        final boolean isDownloadPending = CacheDownloaderService.isDownloadPending(cache);
+        final boolean isMapMode = cacheListType == null && applyScaling;
+
+        final int hashcode;
+        if (isMapMode && !cache.isMarkerHashDirty() && cache.getCachedIsDownloadPending() == isDownloadPending) {
+            hashcode = cache.getCachedMarkerHashCode();
+        } else {
+            hashcode = HashCode.start()
+                    .append(cache.getAssignedEmoji())
+                    .append(cache.getType().id)
+                    .append(cache.isDisabled())
+                    .append(cache.isArchived())
+                    .append(cache.getMapMarkerId())
+                    .append(cache.isOwner())
+                    .append(cache.isFound())
+                    .append(cache.isDNF())
+                    .append(cache.hasWillAttendForFutureEvent())
+                    .append(cache.hasUserModifiedCoords())
+                    .append(cache.hasFinalDefined())
+                    .append(cache.getPersonalNote() == null)
+                    .append(cache.hasLogOffline())
+                    .append(cache.getLists().isEmpty())
+                    .append(cache.getOfflineLogType())
+                    .append(showPin(cacheListType))
+                    .append(showFloppyOverlay(cacheListType))
+                    .append(assignedMarkers)
+                    .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : 0f)
+                    .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : 0f)
+                    .append(isDownloadPending)
+                    .append(applyScaling)
+                    .toHashCode();
+            if (isMapMode) {
+                cache.setCachedMarkerHash(hashcode, isDownloadPending);
+            }
+        }
 
 
         synchronized (overlaysCache) {
@@ -260,20 +271,19 @@ public final class MapMarkerUtils {
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
-
-        final HashCodeBuilder hcb = new HashCodeBuilder()
+        final Geocache cache = waypoint.getParentGeocache();
+        final HashCode.Builder hcb = HashCode.start()
                 .append(waypoint.isVisited())
                 .append(id)
                 .append(waypoint.getMapMarkerId())
                 .append(showPin)
                 .append(applyScaling);
-        final Geocache cache = waypoint.getParentGeocache();
         if (null != cache) {
             hcb.append(getAssignedMarkers(cache))
                     .append(getMarkerIdIfLogged(cache))
                     .append(cache.isDisabled())
                     .append(cache.isArchived())
-                    .append(cache.isLinearAlc() ? waypoint.getPrefix() : false)
+                    .append(cache.isLinearAlc() ? waypoint.getPrefix() : null)
                     .append(cache.getAssignedEmoji())
                     .append(cache.getType())
                     .append(cache.isFound());
@@ -369,7 +379,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
-        final int hashcode = new HashCodeBuilder()
+        final int hashcode = HashCode.start()
                 .append(cache.getType().typeColor)
                 .append(cache.getMapDotMarkerId())
                 .append(cache.isFound())
@@ -478,7 +488,7 @@ public final class MapMarkerUtils {
                 cacheIsArchived = cache.isArchived();
             }
         }
-        final int hashcode = new HashCodeBuilder()
+        final int hashcode = HashCode.start()
                 .append(waypoint.getMapDotMarkerId())
                 .append(waypoint.getWaypointType())
                 .append(cacheIsDisabled)
@@ -550,7 +560,7 @@ public final class MapMarkerUtils {
      * @return Layered Drawable
      */
     public static Drawable getWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
-        final int hashcode = new HashCodeBuilder().append(waypoint.markerId).toHashCode();
+        final int hashcode = HashCode.start().append(waypoint.markerId).toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -725,7 +735,11 @@ public final class MapMarkerUtils {
     }
 
     private static Drawable getDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
-        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).append(supportsRating).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
+        final int hashcode = HashCode.start()
+                .append(difficulty + "" + terrain) // string concat avoids -1*-1 == 1*1 collision
+                .append(applyScaling)
+                .append(supportsRating)
+                .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -867,7 +881,7 @@ public final class MapMarkerUtils {
      * @return Layered Drawable
      */
     public static Drawable getTypeMarker(final Resources res, @NonNull final Geocache cache, final boolean withBorder, final boolean applyScaling, final boolean forCache) {
-        final int hashcode = new HashCodeBuilder()
+        final int hashcode = HashCode.start()
                 .append("typeMarker")
                 .append(cache.getType().id)
                 .append(cache.isDisabled())
