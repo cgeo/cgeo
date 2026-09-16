@@ -887,8 +887,29 @@
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap-varianter</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
+    <string name="settings_userDefinedTileProviders">Användardefinierad leverantör av panel</string>
+    <string name="settings_userDefinedTileProviders_summary">Rut-servrar att använda som kartan själv, förutom de c:geo kommer med</string>
+    <string name="settings_userDefinedTileProvider_addnew">Lägg till en ny leverantör av rutor</string>
+    <string name="settings_userDefinedTileProvider_edit">Redigera leverantör av rutor</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Vill du verkligen ta bort denna rut-leverantör?</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
+    <string name="settings_tileOverlays">Användardefinierade överlägg</string>
+    <string name="settings_tileOverlays_summary">Rutservrar, vars rutor är ritade ovanpå kartan, till exempel sjömärken eller vandringsleder</string>
+    <string name="settings_tileOverlays_add">Lägg till överlägg</string>
+    <string name="settings_tileOverlays_edit">Redigera överlägg</string>
+    <string name="settings_tileOverlays_url_hint">Ange hela Uri inklusive {X}, {Y} och {Z} platshållare. Plattorna måste vara transparenta där de inte har några uppgifter. Se till att du har kontrollerat och följer leverantörens användningsvillkor.</string>
+    <string name="settings_tileOverlays_delete">Ta bort överlägg</string>
+    <string name="settings_tileOverlays_delete_confirm">Ta bort överlägg \"%1$s\"?</string>
     <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Namn</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Ange en http(s) Uri som innehåller {X}, {Y} och {Z}</string>
+    <string name="settings_tileUrl_test">Testa</string>
+    <string name="settings_tileUrl_testing">Kontrollerar\u2026</string>
+    <string name="settings_tileUrl_testok">En bricka togs emot</string>
+    <string name="settings_tileUrl_testfailed_title">Ingen ruta mottagen</string>
+    <string name="settings_tileUrl_testfailed">Kunde inte ladda en ruta från denna server (%1$s). Uri kan vara fel eller så kan servern vara tillfälligt otillgänglig.</string>
+    <string name="settings_tileUrl_copied">Kopierad, redo att delas</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -1321,6 +1342,7 @@
     <string name="map_source_google_terrain">Google: Terräng</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_nomap">Ingen karta</string>
+    <string name="map_grayscale">Gråskale-karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
