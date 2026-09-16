@@ -10,6 +10,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +35,7 @@ public class GpxSerializerTest {
     public void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.emptyList(), writer, null);
-        assertThat(removeWhitespaces(writer.getBuffer().toString())).isEqualTo(removeWhitespaces("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
+        assertThat(TextUtils.replaceWhitespace(writer.getBuffer().toString())).isEqualTo(TextUtils.replaceWhitespace("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?> " +
                 "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
                 "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +
                 "http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
@@ -44,9 +45,26 @@ public class GpxSerializerTest {
                 "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />"));
     }
 
-    private static String removeWhitespaces(final String txt) {
-        return txt.replaceAll("\\s", "");
+    @Test
+    public void testEncodingRoundtripGC901CB() throws IOException, ParserException {
+        final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc901cb_gpx100);
+        assertThat(cache).isNotNull();
+        assertThat(TextUtils.normalize(cache.getName())).contains(TextUtils.normalize("\uD83C\uDD83"));
+        assertThat(TextUtils.normalize(cache.getDescription())).contains(
+                TextUtils.normalize("\uD835\uDC9F"),
+                TextUtils.normalize("\uD835\uDC52"),
+                TextUtils.normalize("\uD835\uDCB6"),
+                TextUtils.normalize("\uD835\uDCC7"));
 
+        final StringWriter writer = new StringWriter();
+        new GpxSerializer().writeGPX(Collections.singletonList("GC901CB"), writer, null);
+        final String gpxOutput = TextUtils.normalize(writer.getBuffer().toString());
+        assertThat(gpxOutput).contains(TextUtils.normalize("\uD83C\uDD83"));
+        assertThat(gpxOutput).contains(
+                TextUtils.normalize("\uD835\uDC9F"),
+                TextUtils.normalize("\uD835\uDC52"),
+                TextUtils.normalize("\uD835\uDCB6"),
+                TextUtils.normalize("\uD835\uDCC7"));
     }
 
     @Test
