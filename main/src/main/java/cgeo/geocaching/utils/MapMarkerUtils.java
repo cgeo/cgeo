@@ -34,8 +34,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Pair;
-
-import android.util.SparseArray;
 import android.view.Gravity;
 
 import androidx.annotation.NonNull;
@@ -45,6 +43,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -68,7 +67,13 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     // the following vars depend on cache/wp scaling factor and need to be part of resetCache()
-    private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
+    private static final LinkedHashMap<Integer, CacheMarker> overlaysCache = new LinkedHashMap<Integer, CacheMarker>(256, 0.75f, true) {
+        private static final long serialVersionUID = 1L;
+        @Override
+        protected boolean removeEldestEntry(final Map.Entry<Integer, CacheMarker> eldest) {
+            return size() > 2000;
+        }
+    };
     private static final Map<String, EmojiUtils.EmojiPaint> emojiPaintMap = new HashMap<>();
     private static float scalingFactorCacheIcons;
     private static float scalingFactorWpIcons;
