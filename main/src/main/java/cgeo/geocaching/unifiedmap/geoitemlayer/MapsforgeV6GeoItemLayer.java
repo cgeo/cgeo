@@ -2,6 +2,8 @@ package cgeo.geocaching.unifiedmap.geoitemlayer;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.CacheMarker;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
@@ -118,6 +120,7 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
         // the markers created from these bitmaps have been destroyed above, so releasing our own
         // reference now actually frees them
         markerBitmaps.release();
+        MapMarkerUtils.releaseMapsforgeMarkerBitmaps();
         this.mapView = null;
     }
 
@@ -205,15 +208,37 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
     }
 
     /**
-     * Gets the Mapsforge representation of the given bitmap, creating it on first use.
+     * Gets the Mapsforge representation of the given bitmap, creating it on first use per CacheMarker lifetime.
      * The returned bitmap carries one additional reference for the marker it is about to be handed to.
+     *
+     * For bitmaps that originate from MapMarkerUtils.overlaysCache the Mapsforge copy is stored directly
+     * on the CacheMarker object and lives as long as the CacheMarker does, eliminating repeated
+     * convertToBitmap() calls when the 256-entry MarkerBitmapCache would otherwise evict a still-live entry.
+     * For all other bitmaps (navigation markers, route overlays, etc.) the original LRU fallback is used.
      */
     private org.mapsforge.core.graphics.Bitmap getMarkerBitmap(final Bitmap bitmap) {
+        final CacheMarker cacheMarker = MapMarkerUtils.getCacheMarkerForBitmap(bitmap);
+        if (cacheMarker != null) {
+            synchronized (cacheMarker) {
+                org.mapsforge.core.graphics.Bitmap mfBitmap =
+                        (org.mapsforge.core.graphics.Bitmap) cacheMarker.getBackendBitmap();
+                if (mfBitmap == null) {
+                    // do NOT wrap the source bitmap directly: it is owned by MapMarkerUtils' marker cache
+                    // and would be recycled by Mapsforge once the last marker using it is destroyed
+                    mfBitmap = AndroidGraphicFactory.convertToBitmap(
+                            new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap));
+                    final org.mapsforge.core.graphics.Bitmap finalMfBitmap = mfBitmap;
+                    cacheMarker.setBackendBitmap(mfBitmap, finalMfBitmap::decrementRefCount);
+                }
+                mfBitmap.incrementRefCount();
+                return mfBitmap;
+            }
+        }
+        // Fallback: LRU for bitmaps not managed by MapMarkerUtils (nav markers, route overlays, etc.)
         org.mapsforge.core.graphics.Bitmap markerBitmap = markerBitmaps.get(bitmap);
         if (markerBitmap == null) {
-            // do NOT wrap the source bitmap directly: it is owned by MapMarkerUtils' marker cache and would
-            // be recycled by Mapsforge once the last marker using it is destroyed
-            markerBitmap = AndroidGraphicFactory.convertToBitmap(new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap));
+            markerBitmap = AndroidGraphicFactory.convertToBitmap(
+                    new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap));
             markerBitmaps.put(bitmap, markerBitmap);
         }
         markerBitmap.incrementRefCount();
