@@ -30,6 +30,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -200,12 +201,25 @@ public class CacheDownloaderService extends AbstractGeocacheBatchService {
 
         Log.d("Download task started");
 
-        // run downloads in parallel on the shared refresh thread pool
-        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
-        geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            processGeocodeWithTracking(geocode);
-            emitter.onComplete();
-        }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
+        // Drain all pending geocodes in parallel, looping to pick up any that were added
+        // while a previous parallel batch was in flight (same merged-batch semantics as
+        // the sequential base-class loop).
+        final BatchState state = getCurrentState();
+        while (!state.shouldStop) {
+            final List<String> batch;
+            synchronized (state.pending) {
+                if (state.pending.isEmpty()) {
+                    break;
+                }
+                batch = new ArrayList<>(state.pending);
+            }
+            Observable.fromIterable(batch)
+                    .flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                        processGeocodeWithTracking(geocode);
+                        emitter.onComplete();
+                    }).subscribeOn(AndroidRxUtils.refreshScheduler))
+                    .blockingSubscribe();
+        }
 
         Log.d("Download task completed");
     }

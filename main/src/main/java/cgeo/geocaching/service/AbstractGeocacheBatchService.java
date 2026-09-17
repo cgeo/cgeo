@@ -17,11 +17,9 @@ import androidx.annotation.StringRes;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,7 +42,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class AbstractGeocacheBatchService extends AbstractForegroundIntentService {
 
-    protected static final String EXTRA_GEOCODES = "geocodes";
     static final String EXTRA_SERVICE_CLASS = "serviceClass";
 
     private static final ConcurrentHashMap<String, BatchState> BATCH_STATES = new ConcurrentHashMap<>();
@@ -61,6 +58,10 @@ public abstract class AbstractGeocacheBatchService extends AbstractForegroundInt
     /**
      * Enqueue geocodes for batch processing and start (or re-trigger) the service.
      * Geocodes already in the queue are ignored.
+     *
+     * If the service is already running its processing loop will pick up the new geocodes
+     * automatically (they land in the shared pending set before the intent is dispatched),
+     * so the second intent's onHandleIntent simply finds nothing left to do and exits.
      */
     protected static <T extends AbstractGeocacheBatchService> void addGeocodes(
             final Context context, final Class<T> serviceClass, final Collection<String> geocodes) {
@@ -68,10 +69,7 @@ public abstract class AbstractGeocacheBatchService extends AbstractForegroundInt
             return;
         }
         getOrCreateState(serviceClass).pending.addAll(geocodes);
-
-        final Intent intent = new Intent(context, serviceClass);
-        intent.putStringArrayListExtra(EXTRA_GEOCODES, new ArrayList<>(geocodes));
-        ContextCompat.startForegroundService(context, intent);
+        ContextCompat.startForegroundService(context, new Intent(context, serviceClass));
     }
 
     /** Returns true if the geocode is queued or currently being processed by the given service. */
@@ -138,18 +136,27 @@ public abstract class AbstractGeocacheBatchService extends AbstractForegroundInt
                 .addAction(R.drawable.ic_menu_cancel, LocalizationUtils.getString(android.R.string.cancel), cancelPendingIntent);
     }
 
+    /**
+     * Drains the shared pending queue sequentially until empty or stopped.
+     *
+     * Because geocodes are added to the pending set *before* the triggering intent is
+     * dispatched, a running loop will often absorb a second batch on its own. The intent
+     * fired by that second addGeocodes call then triggers this method again, which simply
+     * finds nothing left and returns — one notification, continuously updated total.
+     */
     @Override
     protected void onHandleIntent(@Nullable final Intent intent) {
         if (intent == null) {
             return;
         }
-        final List<String> geocodes = intent.getStringArrayListExtra(EXTRA_GEOCODES);
-        if (geocodes == null) {
-            return;
-        }
-        for (final String geocode : geocodes) {
-            if (getOrCreateState(getClass()).shouldStop) {
-                break;
+        final BatchState state = getOrCreateState(getClass());
+        while (!state.shouldStop) {
+            final String geocode;
+            synchronized (state.pending) {
+                if (state.pending.isEmpty()) {
+                    break;
+                }
+                geocode = state.pending.iterator().next();
             }
             processGeocodeWithTracking(geocode);
         }
