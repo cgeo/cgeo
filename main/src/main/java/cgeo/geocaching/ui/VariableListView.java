@@ -234,7 +234,7 @@ public class VariableListView extends LinearLayout {
             this.visibleVariables.addAll(newVars);
 
             this.currentFocusKeep = true;
-            this.setFilter(d -> this.visibleVariables.contains(d.getVar()), true);
+            this.setFilter(d -> d != null && this.visibleVariables.contains(d.getVar()), true);
             //recyclerview processes notifications not immediately but instead puts actions on ui thread
             //-> put setting back currentFocusKeep on ui thread as well so it is done after this update
             this.recyclerView.post(() -> this.currentFocusKeep = false);
@@ -260,7 +260,7 @@ public class VariableListView extends LinearLayout {
             }
             this.visibleVariables.clear();
             this.visibleVariables.addAll(newVisibleVariables);
-            this.setFilter(d -> this.visibleVariables.contains(d.getVar()), true);
+            this.setFilter(d -> d != null && this.visibleVariables.contains(d.getVar()), true);
             filterEnabled = true;
         }
 
@@ -276,7 +276,7 @@ public class VariableListView extends LinearLayout {
             //disable filter
             this.filterEnabled = Settings.getHideCompletedVariables();
             this.visibleVariables.clear();
-            this.setFilter(d -> filterEnabled ? !isVariableComplete(d.getVar()) : true, true);
+            this.setFilter(d -> !filterEnabled || (d != null && !isVariableComplete(d.getVar())), true);
         }
 
         private boolean isVariableComplete(final String var) {
