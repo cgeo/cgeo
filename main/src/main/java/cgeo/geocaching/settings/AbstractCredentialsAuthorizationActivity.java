@@ -101,7 +101,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 LocalizationUtils.getString(R.string.init_login_popup), getAuthDialogWait(), true);
         loginDialog.setCancelable(false);
 
-        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
+        destroyDisposables(AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
             loginDialog.dismiss();
             setCredentials(credentials);
             if (statusCode == StatusCode.NO_ERROR) {
@@ -118,7 +118,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 binding.check.setOnClickListener(new CheckListener());
                 binding.check.setEnabled(true);
             }
-        });
+        }));
     }
 
     private class CheckListener implements View.OnClickListener {
