@@ -3293,7 +3293,7 @@
     <string name="dbi_sqleditor_warning">SQL Editor is an experimental feature. Data loss may occur. Use at your own risk!</string>
 
     <!-- db inspection, overriding values of "grid" to support translation -->
-    <string name="grid_search_title">SearchX</string>
+    <string name="grid_search_title">Search</string>
     <string name="grid_search_reset">Reset</string>
     <string name="grid_search_global">Global</string>
     <string name="grid_search_value">Value</string>

@@ -338,7 +338,7 @@ dependencies {
     // from cgeo/offline-translator's GitHub Release. Resolved via the ivy
     // repository declared in the root build.gradle. Replaces the formerly
     // checked-in jniLibs/*.so and dev/davidv/bergamot/*.java.
-    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.2@aar'
+    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.3@aar'
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.6.0'
@@ -482,7 +482,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
-
     // Support Library Lifecycle Helpers
     String lifecycleVersion = '2.10.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
@@ -553,15 +552,15 @@ dependencies {
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.4'
+    implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.1'
 
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.32'
 
+    // search screen
     implementation 'androidx.cardview:cardview:1.0.0'
-
 }
 
 // define objects for files/folders outside tasks

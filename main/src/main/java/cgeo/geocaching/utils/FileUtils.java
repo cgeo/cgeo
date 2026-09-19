@@ -428,15 +428,21 @@ public final class FileUtils {
     }
 
     public static String getChangelogMaster(final Context context) {
-        return getRawResourceAsString(context, R.raw.changelog_base);
+        return getChangelog(context, R.raw.changelog_base);
     }
 
     public static String getChangelogRelease(final Context context) {
-        return getRawResourceAsString(context, R.raw.changelog_bugfix);
+        return getChangelog(context, R.raw.changelog_bugfix);
     }
 
     public static String getChangelogBetaUpdate(final Context context) {
-        return getRawResourceAsString(context, R.raw.changelog_betaupdate);
+        return getChangelog(context, R.raw.changelog_betaupdate);
+    }
+
+    /** loads changelog string resource and replaces "(#12345)" with Markup-formatted URL to GitHub issue #12345 */
+    private static String getChangelog(final Context context, final @RawRes int changeLogRes) {
+        final String changelog = getRawResourceAsString(context, changeLogRes);
+        return changelog.replaceAll("\\(#([1-9][0-9]{2,4})\\)", "([#$1](https://github.com/cgeo/cgeo/issues/$1))");
     }
 
     @NonNull

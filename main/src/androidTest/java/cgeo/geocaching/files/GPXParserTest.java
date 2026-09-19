@@ -21,6 +21,7 @@ import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.RawRes;
 
@@ -686,5 +687,16 @@ public class GPXParserTest  {
         assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591 1")).count()).isEqualTo(1);
         assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591 2")).count()).isEqualTo(1);
         assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591-1")).count()).isEqualTo(1);
+    }
+
+    @Test
+    public void testIgnoreInvalidChars() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.cache_invalid_chars);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        assertThat(TextUtils.normalize(cache.getName())).isEqualTo(TextUtils.normalize("\uD83E\uDD86Alles für den Cache\uD83E\uDD86 Lab Bonus"));
+        assertThat(TextUtils.normalize(cache.getShortDescription())).isEqualTo(TextUtils.normalize("InvalidDescription: V‹¥IR‡U½S©"));
+        assertThat(TextUtils.normalize(cache.getDescription())).isEqualTo(TextUtils.normalize("<p>\u00A0\uD83E\uDD86Alles für den Cache\uD83E\uDD86 *Lab Bonus*<p>"));
     }
 }
