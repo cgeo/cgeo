@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CollectionStream;
@@ -124,10 +123,10 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
     @Override
     public int[] add(final GeoPrimitive item) {
 
-        final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle()));
-        strokePaint.setStrokeWidth(ViewUtils.dpToPixelFloat(GeoStyle.getStrokeWidth(item.getStyle())));
+        final Paint strokePaint = createPaint(item.getStyle().getStrokeColor());
+        strokePaint.setStrokeWidth(ViewUtils.dpToPixelFloat(item.getStyle().getStrokeWidth()));
         strokePaint.setStyle(Style.STROKE);
-        final Paint fillPaint = createPaint(GeoStyle.getFillColor(item.getStyle()));
+        final Paint fillPaint = createPaint(item.getStyle().getFillColor());
         fillPaint.setStyle(Style.FILL);
         final Layer goLayer;
         switch (item.getType()) {

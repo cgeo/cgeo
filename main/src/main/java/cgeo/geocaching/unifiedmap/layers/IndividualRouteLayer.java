@@ -24,10 +24,7 @@ public class IndividualRouteLayer {
 
     private final Bitmap marker = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.marker_routepoint, null));
 
-    private final GeoStyle lineStyle = GeoStyle.builder()
-            .setStrokeColor(MapLineUtils.getRouteColor())
-            .setStrokeWidth(MapLineUtils.getRouteLineWidth(true))
-            .build();
+    private final GeoStyle lineStyle = GeoStyle.solid(MapLineUtils.getRouteColor(), MapLineUtils.getRouteLineWidth(true));
 
     public IndividualRouteLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);

@@ -31,12 +31,10 @@ public class TracksLayer {
                 final float defaultWidth = track.getTrackfile().getWidth() / widthFactor;
                 final int defaultStrokeColor = track.getTrackfile().getColor();
                 final int defaultFillColor = Color.argb(32, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
-                final GeoStyle defaultStyle = GeoStyle.builder()
-                        .setFillColor(defaultFillColor)
-                        .setStrokeColor(defaultStrokeColor)
-                        .setStrokeWidth(defaultWidth).build();
+                final GeoStyle defaultStyle = GeoStyle.fixed(defaultStrokeColor, defaultFillColor, defaultWidth);
+                track.getRoute().getItem().recalculateDynamicStyles(null, defaultStyle);
 
-                layer.put(TRACK_KEY_PREFIX + key, track.getRoute().getItem().applyDefaultStyle(defaultStyle));
+                layer.putForce(TRACK_KEY_PREFIX + key, track.getRoute().getItem());
              }
         })));
 

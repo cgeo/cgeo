@@ -6,7 +6,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
@@ -185,11 +184,11 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     @Override
     public Pair<Drawable, MarkerInterface> add(final GeoPrimitive item) {
 
-        final int fillColor = GeoStyle.getFillColor(item.getStyle());
-        final float rawStrokeWidth = GeoStyle.getStrokeWidth(item.getStyle()) / 1.5f;
+        final int fillColor = item.getStyle().getFillColor();
+        final float rawStrokeWidth = item.getStyle().getStrokeWidth() / 1.5f;
         final Style style = Style.builder()
                 .strokeWidth(ViewUtils.dpToPixelFloat(rawStrokeWidth))
-                .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
+                .strokeColor(item.getStyle().getStrokeColor())
                 .fillAlpha(1f) // GeoJsonUtils.colorFromJson() already calculates the color using fill and fill-opacity, don't apply it again
                 .fillColor(fillColor)
                 .transparent(true) ////See #15029. Following parameter prevents rendering of "darker edges" for overlapping semi-transparent route parts
