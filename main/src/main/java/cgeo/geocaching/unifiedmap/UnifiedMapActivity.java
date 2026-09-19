@@ -1581,6 +1581,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onDestroy() {
+        if (navigationTargetLayer != null) {
+            navigationTargetLayer.destroy();
+        }
         if (tileProvider != null) {
             tileProvider.onDestroy();
         }
