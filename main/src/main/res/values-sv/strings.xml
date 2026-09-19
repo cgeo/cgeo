@@ -566,6 +566,8 @@
     <string name="list_dialog_create_title">Ny lista</string>
     <string name="list_dialog_create">Skapa</string>
     <string name="list_dialog_create_err">c:geo misslyckades med att skapa den nya listan</string>
+    <string name="list_already_exists_title">Listan existerar redan</string>
+    <string name="list_already_exists_message">En lista med namnet \'%s\' finns redan. Använd den befintliga listan?</string>
     <string name="list_dialog_remove_title">Ta bort lista</string>
     <string name="list_dialog_remove_description">Vill du ta bort den här listan? Alla cacher som finns i listan kommer att flyttas till \"Sparade\".</string>
     <string name="list_dialog_remove_nowempty">Listan är tom. Vill du ta bort den aktuella listan?</string>
@@ -585,6 +587,7 @@
     <string name="cache_filter_option_inverse">Omvänd filter</string>
     <string name="cache_filter_option_include_inconclusive">Inkludera slutgiltiga träffar</string>
     <string name="cache_filter_option_include_inconclusive_info">Om cachen ska inkluderas i resultatet när ett filter behöver information om cachen som inte är tillgänglig.</string>
+    <string name="cache_filter_add_button">Lägg till filterkriterie</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tryck på \'Lägg till filterkriterie\' ovan för att lägga till ett filter</string>
     <string name="cache_filter_name">Cachens namn</string>
     <string name="cache_filter_type">Cachetyp</string>
@@ -754,15 +757,29 @@
         <item>&gt;1m</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Hantera filter</string>
     <string name="named_filter_select_title">Välj filter</string>
     <string name="named_filter_empty_hint">Inga filter konfigurerade. Tryck på + för att lägga till ett.</string>
+    <string name="named_filter_fill_with_named">Ladda filter</string>
+    <string name="named_filter_save_as">Spara filter</string>
+    <string name="named_filter_delete">Ta bort filter</string>
+    <string name="named_filter_storage_delete_message">Vill du verkligen ta bort filtret \'%s\'?</string>
     <string name="named_filter_name_exists_title">Namnet finns redan</string>
     <string name="named_filter_name_exists_message">Ett filter som heter \'%s\' finns redan. Skriv över?</string>
     <string name="named_filter_config_exists_title">Filtret har redan sparats</string>
     <string name="named_filter_config_exists_message">Denna filterkonfiguration är redan sparad som \'%s\'. Spara igen med ett nytt namn?</string>
+    <string name="named_filter_markers">Markörer</string>
     <string name="named_filter_markers_enabled">Markörer aktiverade</string>
     <string name="named_filter_markers_disabled">Markörer inaktiverade</string>
+    <string name="named_filter_manage">Hantera</string>
+    <string name="named_filter_no_icons_message">Inga sparade filter med tilldelad ikon finns. Spara ett för att använda det som markör.</string>
+    <string name="named_filter_reorder">Prioritet</string>
+    <string name="named_filter_activity_title">Markör-prioritet</string>
+    <string name="named_filter_enable_markers">Välj markörer</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Överordnade</string>
+    <string name="dialog_parent_select">Välj överordnad</string>
+    <string name="dialog_parent_new">Skapa ny överordnad</string>
     <string name="dialog_name">Namn</string>
     <!-- about -->
     <string name="about_version">Version</string>
@@ -1147,6 +1164,7 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
+    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusnas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
     <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
@@ -1270,6 +1288,10 @@
     <string name="feature_voting">Rösta på cacher</string>
     <string name="init_appearance_general">Allmänt utseende</string>
     <string name="init_cachedetail_behaviour">Beteende</string>
+    <string name="init_named_filter_display_mode">Namngivna filter i cache-detaljer</string>
+    <string name="named_filter_display_mode_none">Visa inte</string>
+    <string name="named_filter_display_mode_active_only">Endast om markören är aktiv</string>
+    <string name="named_filter_display_mode_all">Visa alla matchande filter</string>
     <string name="init_cachedetail_note">Personlig cacheanteckning</string>
     <string name="init_maplines_title">Anpassning av kartfärger</string>
     <string name="init_map_other">Annat</string>
@@ -1717,6 +1739,8 @@
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">bråk</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Medelvärdesbildar mina koordinater… (%s)</string>
+    <string name="averaging_paused">pausad</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laddar cacher från %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laddar punkter från %1$s</string>
@@ -2435,6 +2459,8 @@
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
     <string name="live_map_status_normal">Laddar data utan problem: %s</string>
     <string name="list_list_headline">Listor:</string>
+    <string name="filters_list_headline">Filter:</string>
+    <string name="filters_list_empty">Inga matchande filter</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
         <item quantity="other">%d punkter har extraherats</item>
@@ -2772,6 +2798,8 @@
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_stop_running_game_title">Sluta köra Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">Ett spel körs för närvarande för \"%s\". Vill du stoppa detta spel?</string>
+    <string name="wherigo_confirm_exit">Avsluta</string>
+    <string name="wherigo_confirm_save_exit">Spara automatiskt &amp; Avsluta</string>
     <string name="wherigo_confirm_delete_cartridge_title">Ta bort Wherigo patron</string>
     <string name="wherigo_confirm_delete_cartridge_message">Vill du verkligen ta bort patronen \"%1$s\" inklusive %2$s sparade partier?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
@@ -2807,6 +2835,7 @@
     <string name="copy" tools:ignore="PrivateResource">Kopiera</string>
     <string name="pause">Paus</string>
     <string name="resume">Återuppta</string>
+    <string name="rename">Ändra namn</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>

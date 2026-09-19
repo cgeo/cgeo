@@ -17,8 +17,8 @@
 - Corregido: El descargador de teselas ya no para bajo ciertas condiciones (OpenStreetMap mapas online)
 - Nuevo: Marcadores de cachés condicionales
 - Nuevo: Mostrar pista de navegación (flecha + distancia)
-- Change: Reduce memory requirements of map activity
-- Fix: Google Map resets position to N0 / W0 on mapping a cache list
+- Cambio: Reduce los requerimientos de memoria de la actividad del mapa
+- Corregido: El mapa de google restablece la posición a N0 / W0 al mapear una lista de cachés
 
 **Mapas antiguos**
 
@@ -57,16 +57,16 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Cambio: Almacena el caché antes de añadir la imagen del usuario
 - Corregido: Fallo en las imágenes que cargan directamente incrustadas en la descripción
 - Nuevo: Muestra tus propios favoritos en la vista del registro (Geocaching.com + registros sin conexión)
-- New: Sending log is done in background
-- Fix: Inventory hidden on logging under certain conditions
-- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Nuevo: El envío del registro se realiza en segundo plano
+- Corregido: El inventario estaba oculto al registrar bajo ciertas condiciones
+- Nuevo: Promedio de coordenadas al crear coordenadas de waypoint / crear para cachés definidos por el usuario
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
 - Nuevo: Manejo de botones mejorado
 - Nuevo: Estado del autoguardado
 - Nuevo: Opción de crear un acceso directo al ejecutador de wherigos en la pantalla principal del teléfono
-- Fix: Missing/wrong media files lead to error
+- Corregido: archivos perdidos/incorrectos generaban un error
 
 ### General
 - Nuevo: Opción de compartir después de registrar un caché

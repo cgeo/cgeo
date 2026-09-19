@@ -48,8 +48,6 @@
 
             <include layout="@layout/cache_offlinebox" />
 
-            <include layout="@layout/cache_namedfilterbox" />
-
             <RelativeLayout
                 android:id="@+id/offline_hint_separator"
                 style="@style/separator_horizontal_layout"
