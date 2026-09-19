@@ -52,7 +52,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
                     Log.w("AddressList: Problem retrieving address data from AndroidGeocoder", throwable);
                     return OsmNominatumGeocoder.getFromLocationName(keyword);
                 });
-        AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
+        destroyDisposables(AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
             waitDialog.dismiss();
             addresses.addAll(foundAddresses);
             adapter.notifyItemRangeInserted(0, foundAddresses.size());
@@ -60,7 +60,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
             finish();
             Log.w("AddressList: Problem retrieving address data", throwable);
             showToast(LocalizationUtils.getString(R.string.err_unknown_address));
-        });
+        }));
     }
 
     @Override

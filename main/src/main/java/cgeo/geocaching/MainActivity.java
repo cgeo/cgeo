@@ -622,13 +622,13 @@ public class MainActivity extends AbstractNavigationBarActivity {
     }
 
     public void updateCacheCounter() {
-        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
+        resumeDisposables.add(AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
             final TextView counter = findViewById(R.id.offline_counter);
             counter.setVisibility(countOfflineCaches > 0 ? View.VISIBLE : View.GONE);
             if (countOfflineCaches > 0) {
                 counter.setText(LocalizationUtils.getPlural(R.plurals.caches_stored_offline, countOfflineCaches));
             }
-        }, throwable -> Log.e("Unable to add cache count", throwable));
+        }, throwable -> Log.e("Unable to add cache count", throwable)));
     }
 
     @Override

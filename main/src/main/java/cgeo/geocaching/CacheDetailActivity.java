@@ -395,7 +395,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
-            AndroidRxUtils.bindActivity(this,
+            createDisposables.add(AndroidRxUtils.bindActivity(this,
                     // Obtain the active connectors and load trackables in parallel.
                     Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
                         processedBrands.add(trackableConnector.getBrand());
@@ -408,7 +408,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     // Update the UI if any trackables were found.
                     notifyDataSetChanged();
                 }
-            });
+            }));
         }
 
         // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
