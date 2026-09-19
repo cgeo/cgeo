@@ -1,7 +1,7 @@
 ### Karte
-- New: Grayscale option
-- New: User-defined tile overlays
-- New: Support multiple user-defined tile providers
+- Neu: Graustufenoption
+- Neu: Benutzerdefinierte Karten-Overlays
+- Neu: Unterstützt mehrere benutzerdefinierte Kartenanbieter
 
 ### Cache-Details
 - Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut
