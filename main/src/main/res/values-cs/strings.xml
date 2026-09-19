@@ -151,8 +151,8 @@
     <string name="log_posting_log">Odesílání logu…</string>
     <string name="log_posting_problemreport">Odesílání zprávy o problémech s logem…</string>
     <string name="log_posting_deletelog">Smazat log…</string>
-    <string name="log_posting_image_create">Obrázek %1$s/%2$s: odeslání dat…</string>
-    <string name="log_posting_image_edit">Obrázek %1$s/%2$s: změna dat…</string>
+    <string name="log_posting_image_create">Snímek %1$s/%2$s: odeslání dat…</string>
+    <string name="log_posting_image_edit">Snímek %1$s/%2$s: změna dat…</string>
     <string name="log_posting_image_delete">Mazání obrázku %1$s/%2$s…</string>
     <string name="log_posting_save_internal">Uložit nový stav logu…</string>
     <string name="log_posting_vote">Přidává se hlas kešce…</string>
@@ -180,9 +180,9 @@
     <string name="log_today">Dnes</string>
     <string name="log_yesterday">Včera</string>
     <string name="log_smilies">Smajlíci</string>
-    <string name="log_image">Obrázek</string>
+    <string name="log_image">Snímek</string>
     <string name="log_images">Obrázky</string>
-    <string name="log_edit_image">Upravit obrázek</string>
+    <string name="log_edit_image">Upravit snímek</string>
     <string name="log_image_caption">Titulek</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Měřítko</string>
@@ -216,7 +216,7 @@
     <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
     <string name="log_image_info_scaled">zmenšen</string>
     <string name="log_image_info_notscaled">nezmenšen</string>
-    <string name="log_image_titleprefix">Obrázek</string>
+    <string name="log_image_titleprefix">Snímek</string>
     <string name="log_delete_confirm">Opravdu chcete smazat log typu \'%1$s\' od autora \'%2$s\' s datem logu \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Opravdu chcete odstranit uložený offline log typu \'%1$s\' s datem zápisu \'%2$s\'?</string>
     <string name="log_share_prefix_found">Našel jsem %1$s (%2$s):\n\n</string>
@@ -267,7 +267,7 @@
     <string name="err_detail_cache">c:geo nemůže zobrazit požadovanou kešku. Jedná se skutečně o kešku?</string>
     <string name="err_detail_cache_find">c:geo nemůže najít kešku</string>
     <string name="err_detail_cache_find_some">c:geo nemůže najít tuto kešku.</string>
-    <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto kešku.</string>
+    <string name="err_detail_no_spoiler">c:geo nenašlo žádný snímek pro tuto kešku.</string>
     <string name="err_detail_still_working">Stále probíhá zpracování jiné úlohy.</string>
     <string name="err_detail_premium_log_found">Tato keška je dostupná pouze pro prémiové členy geocaching.com. Informace o kešce proto nelze zobrazit.\n\nPokud jste však již tuto kešku nalezli, můžete ji zalogovat zde.</string>
     <string name="err_watchlist_failed">Změna tvého Watchlistu selhala.</string>
@@ -299,7 +299,7 @@
     <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce kešky.</string>
     <string name="err_log_post_failed_ec">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na GeoKrety.org.</string>
-    <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce kešky.</string>
+    <string name="err_logimage_post_failed">Zdá se, že snímek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce kešky.</string>
     <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
     <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
     <string name="err_parse_lat_lon">c:geo nemůže dopočítat zeměpisnou šířku nebo délku.</string>
@@ -1183,8 +1183,8 @@
     <string name="init_offlinelogs_homescreen">Zobrazit offline logy</string>
     <string name="init_log_image_default_prefix_title">Výchozí název obrázků v logu</string>
     <string name="init_summary_offlinelogs_homescreen">Pokud máte logy, které ještě nebyly odeslány, zobrazí se na vaší domovské obrazovce počitadlo offline logů (např. \"+1\").</string>
-    <string name="init_loaddirectionimg">V případě potřeby stahovat směrový obrázek (pouze Běžní členové)</string>
-    <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Běžní členové)</string>
+    <string name="init_loaddirectionimg">V případě potřeby stahovat směrový snímek (pouze Běžní členové)</string>
+    <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový snímek (pouze Běžní členové)</string>
     <string name="init_default_navigation_tool">Výchozí navigace</string>
     <string name="init_secondary_navigation_tool">Sekundární navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
@@ -1641,7 +1641,7 @@
     <string name="cache_clear_history">Vymazat historii</string>
     <string name="cache_remove_from_history">Odstranit z historie</string>
     <string name="cache_license">Licence</string>
-    <string name="cache_image">Obrázek</string>
+    <string name="cache_image">Snímek</string>
     <string name="cache_image_information_unavailable">Informace o obrázku nejsou k dispozici</string>
     <string name="cache_image_open">Otevřít</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
@@ -1652,7 +1652,7 @@
     <string name="cache_image_rename">Přejmenovat</string>
     <string name="cache_image_delete">Odstranit</string>
     <string name="cache_image_title_camera_prefix">Fotografie</string>
-    <string name="cache_image_background">Obrázek na pozadí popisu kešky</string>
+    <string name="cache_image_background">Snímek na pozadí popisu kešky</string>
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
@@ -1897,7 +1897,7 @@
     <string name="imageview_notitle">Bez názvu</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
-    <string name="imageview_error">Obrázek nelze načíst</string>
+    <string name="imageview_error">Snímek nelze načíst</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentář</string>
     <!-- map -->
@@ -1999,7 +1999,7 @@
     <string name="trackable_refresh">Aktualizovat</string>
     <string name="trackable_goal">Cíl</string>
     <string name="trackable_details">Detaily</string>
-    <string name="trackable_image">Obrázek</string>
+    <string name="trackable_image">Snímek</string>
     <string name="trackable_code">Kód trasovatelného předmětu</string>
     <string name="trackable_name">Název</string>
     <string name="trackable_brand">Značka</string>
