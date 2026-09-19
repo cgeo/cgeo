@@ -40,7 +40,7 @@ public class GPXTrackOrRouteImporter {
                 final IGeoItemSupplier value = doInBackground(context, uri);
                 success.set(null != value && value.hasData());
                 if (success.get()) {
-                    AndroidSchedulers.mainThread().createWorker().schedule(() -> {
+                    AndroidSchedulers.mainThread().scheduleDirect(() -> {
                         try {
                             callback.updateRoute(value);
                         } catch (final Throwable t) {

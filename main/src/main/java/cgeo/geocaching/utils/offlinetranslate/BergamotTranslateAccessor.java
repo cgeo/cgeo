@@ -128,7 +128,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         // NativeLib runs initializeService() from its own constructor; no
         // explicit call is needed (the method is not public in the AAR).
         // Run on IO thread — the scan touches the file system
-        Schedulers.io().createWorker().schedule(this::scanAvailableModels);
+        Schedulers.io().scheduleDirect(this::scanAvailableModels);
     }
 
     @Override
@@ -188,7 +188,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             runCallback(onSuccess);
             return;
         }
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             try {
                 downloadPairFiles(language, PIVOT_LANGUAGE);   // lang → en
                 downloadPairFiles(PIVOT_LANGUAGE, language);   // en  → lang
@@ -207,7 +207,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public void deleteLanguage(final String language, final Runnable onSuccess, final Consumer<Exception> onError) {
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             if (!PIVOT_LANGUAGE.equals(language)) {
                 deleteDir(getPairDir(language, PIVOT_LANGUAGE));
                 deleteDir(getPairDir(PIVOT_LANGUAGE, language));
@@ -229,7 +229,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             runCallback(() -> onSuccess.accept(null));
             return;
         }
-        Schedulers.computation().createWorker().schedule(() -> {
+        Schedulers.computation().scheduleDirect(() -> {
             try {
                 final DetectionResult result = langDetect.detectLanguage(source, null);
                 // Always return the top-ranked language, even if isReliable=false.
@@ -261,7 +261,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     @Override
     public void getTranslatorWithDownload(final String sourceLanguage, final String targetLanguage,
             final Consumer<ITranslatorImpl> onSuccess, final Consumer<Exception> onError) {
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             try {
                 if (!PIVOT_LANGUAGE.equals(sourceLanguage)) {
                     ensureOrDownload(sourceLanguage);
@@ -294,7 +294,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
             @Override
             public void translate(final String source, final Consumer<String> onSuccess, final Consumer<Exception> onError) {
-                NATIVE_SCHEDULER.createWorker().schedule(() -> {
+                NATIVE_SCHEDULER.scheduleDirect(() -> {
                     try {
                         final String[] result;
                         // skip translation if src == target
@@ -727,7 +727,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private void runCallback(final Runnable r) {
         final Scheduler s = callbackScheduler != null ? callbackScheduler : AndroidSchedulers.mainThread();
-        s.createWorker().schedule(r);
+        s.scheduleDirect(r);
     }
 
     /** Wraps any Throwable as an Exception suitable for error-consumer callbacks. */
