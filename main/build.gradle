@@ -484,9 +484,9 @@ dependencies {
 
     // avoid duplicate classes
     configurations.configureEach {
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib:2.2.10'
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.10'
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.10'
+        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib:2.4.20'
+        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.4.20'
+        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.4.20'
     }
 
     // Support Library Lifecycle Helpers
