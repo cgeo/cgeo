@@ -102,12 +102,8 @@ public class WherigoLayer {
             }
         }
 
-        return builder.setStyle(GeoStyle.builder()
-            .setStrokeColor(color)
-            .setFillColor(Color.argb(128, Color.red(color), Color.green(color), Color.blue(color)))
-            .setStrokeWidth(5f)
-            .build()
-        ).setIcon(GeoIcon.builder().setText(zone.name).build()).build();
+        return builder.setStyle(GeoStyle.transparentFill(color, 128, 5f))
+            .setIcon(GeoIcon.builder().setText(zone.name).build()).build();
     }
 
 

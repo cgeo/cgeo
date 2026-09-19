@@ -1,18 +1,38 @@
 package cgeo.geocaching.models.geoitem;
 
+import cgeo.geocaching.filters.NamedFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.formulas.Formula;
+import cgeo.geocaching.utils.formulas.FormulaException;
+import cgeo.geocaching.utils.formulas.Value;
+import cgeo.geocaching.utils.functions.Action1;
 
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 public final class GeoItemUtils {
 
     private static final int MIN_DP_TOUCH_WIDTH = 30; // 30dp ~ 4.7mm
 
+    public static final Map<String, BiFunction<Integer, Integer, Boolean>> RULE_OPERATORS = Map.of(
+                    ">",  (a, b) -> a > b,
+                    ">=", (a, b) -> a >= b,
+                    "<",  (a, b) -> a < b,
+                    "<=", (a, b) -> a <= b,
+                    "==", Integer::equals,
+                    "!=", (a, b) -> !a.equals(b)
+            );
     private GeoItemUtils() {
         //no instance
     }
@@ -169,6 +189,64 @@ public final class GeoItemUtils {
     public static boolean inside(final int[] pt, final int left, final int top, final int right, final int bottom) {
         return (pt[0] >= Math.min(left, right) && pt[0] <= Math.max(left, right) &&
                 pt[1] >= Math.min(top, bottom) && pt[1] <= Math.max(top, bottom));
+    }
+
+    public static boolean matchesCondition(final GeoItem item, final String condition) {
+        if (condition == null || condition.isEmpty() || item == null) {
+            return true;
+        }
+        try {
+            final int p = Settings.getCompactIconMode();
+            final Formula f = Formula.compile(condition);
+            return f.evaluate(x -> switch (x.toLowerCase(Locale.ROOT)) {
+                case "p" -> Value.of(p);
+                case "i" -> Value.of(item);
+                default -> null;
+            }).getAsBoolean();
+        } catch (final FormulaException fe) {
+            Log.w("Couldn't parse formula " + condition, fe);
+            return false;
+        }
+    }
+
+    public static void foreach(final GeoItem item, final Action1<GeoItem> action) {
+        if (item == null || action == null) {
+            return;
+        }
+        action.call(item);
+        if (item instanceof GeoGroup) {
+            for (GeoItem child : ((GeoGroup) item).getItems()) {
+                foreach(child, action);
+            }
+        }
+    }
+
+    public static int countGeocachesInArea(final GeoItem item, final String filterName, final int limit) {
+        if (item == null) {
+            return 0;
+        }
+        final ToScreenProjector projector = coord -> new int[]{coord.getLatitudeE6(), coord.getLongitudeE6()};
+
+        //try to find named filter
+        final NamedFilter nf = filterName == null ? null : NamedFilter.getFirstByName(filterName);
+        final GeocacheFilter filter = nf == null  ? null : nf.getFilter();
+
+        //call DB
+        final int limitToUse = limit > 0 && limit < 1000 ? limit : 10;
+        final List<Geopoint> coords = DataStore.loadCacheCoordinates(filter, item.getViewport(), limitToUse);
+
+        //count points inside
+        final int[] count = new int[]{ 0 };
+        for (Geopoint coord : coords) {
+            foreach(item, i -> {
+                if (i instanceof GeoPrimitive && i.getType().equals(GeoItem.GeoType.POLYGON)) {
+                    if (touchesPolygon(((GeoPrimitive) i).getPoints(), coord, 0, true, projector)) {
+                        count[0]++;
+                    }
+                }
+            });
+        }
+        return count[0];
     }
 
     private static int[][] projectList(final Collection<Geopoint> coll, final ToScreenProjector projector) {
