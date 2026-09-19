@@ -68,19 +68,6 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         this.zLevel = Math.max(-1, zLevel);
     }
 
-    /** This constructor is specifically for creating objects with applied default style */
-    private GeoPrimitive(final GeoPrimitive source, final GeoStyle defaultStyle) {
-        this.type = source.type;
-        this.points = source.points;
-        this.holes = source.holes;
-        this.icon = source.icon;
-        this.radius = source.radius;
-        this.zLevel = source.zLevel;
-
-        this.style = GeoStyle.applyAsDefault(source.style, defaultStyle);
-    }
-
-
     @NonNull
     @Override
     public GeoItem.GeoType getType() {
@@ -106,9 +93,9 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         return radius;
     }
 
-    @Nullable
+    @NonNull
     public GeoStyle getStyle() {
-        return style;
+        return style != null ? style : GeoStyle.SYSTEM_DEFAULT;
     }
 
     public int getZLevel() {
@@ -141,20 +128,15 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             return false;
         }
 
-        switch (getType()) {
-            case GROUP:
-                return false;
-            case MARKER:
-                return getCenter() != null && getCenter().isValid();
-            case CIRCLE:
-                return getCenter() != null && getCenter().isValid() && getRadius() > 0;
-            case POLYGON:
+        return switch (getType()) {
+            case GROUP -> false;
+            case MARKER -> getCenter() != null && getCenter().isValid();
+            case CIRCLE -> getCenter() != null && getCenter().isValid() && getRadius() > 0;
+            case POLYGON ->
                 //a valid polygon needs 4 points (with start/end being the same point)
-                return getPoints().size() >= 4;
-            case POLYLINE:
-            default:
-                return getPoints().size() >= 2;
-        }
+                getPoints().size() >= 4;
+            default -> getPoints().size() >= 2;
+        };
     }
 
     @Override
@@ -163,8 +145,8 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             return false;
         }
 
-        final float lineWidthDp = GeoStyle.getStrokeWidth(getStyle());
-        final boolean isFilled = GeoStyle.getAlpha(GeoStyle.getFillColor(getStyle())) > 0;
+        final float lineWidthDp = getStyle().getStrokeWidth();
+        final boolean isFilled = getStyle().getFillColor() < 0;
         switch (getType()) {
             case POLYLINE:
                 if (GeoItemUtils.touchesMultiLine(getPoints(), tapped, lineWidthDp, projector)) {
@@ -219,12 +201,10 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     }
 
     @Override
-    public GeoPrimitive applyDefaultStyle(final GeoStyle style) {
-        if (style == null || Objects.equals(getStyle(), style)) {
-            return this;
+    public void recalculateDynamicStyles(final GeoStyle parentStyle, final GeoStyle mainStyle) {
+        if (style != null) {
+            style.recalculateDynamic(this, parentStyle, mainStyle);
         }
-
-        return new GeoPrimitive(this, style);
     }
 
     public static GeoPrimitive createPoint(final Geopoint p, final GeoStyle style) {
@@ -251,10 +231,9 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     @Override
     public boolean equals(final Object o) {
-        if (!(o instanceof GeoPrimitive)) {
+        if (!(o instanceof GeoPrimitive other)) {
             return false;
         }
-        final GeoPrimitive other = (GeoPrimitive) o;
         return
             Objects.equals(type, other.type) &&
             Objects.equals(points, other.points) &&

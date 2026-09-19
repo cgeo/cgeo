@@ -31,10 +31,7 @@ public class NavigationTargetLayer {
     public static final String KEY_TARGET_PATH = "TARGETPATH";
     private static final Scheduler ROUTE_UPDATE_SCHEDULER = AndroidRxUtils.singleThreadPool(); // serialize requests
 
-    private final GeoStyle lineStyle = GeoStyle.builder()
-            .setStrokeColor(MapLineUtils.getDirectionColor())
-            .setStrokeWidth(MapLineUtils.getDirectionLineWidth(true))
-            .build();
+    private final GeoStyle lineStyle = GeoStyle.solid(MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
 
     final UnifiedMapViewModel viewModel;
     private final UnifiedTargetAndDistancesHandler mapDistanceDrawer;
