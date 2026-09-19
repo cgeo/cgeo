@@ -39,6 +39,7 @@ public class MessageCenterUtils {
 
     private static long lastMCTime = 0L;
     private static int lastCount = 0;
+    private static Disposable mcPoll = null;
 
     private MessageCenterUtils() {
         // utility class
@@ -46,6 +47,9 @@ public class MessageCenterUtils {
 
     /** configures polling of message center - to be called by CGeoApplication */
     public static void configureMessageCenterPolling() {
+        // a poller from an earlier call would keep running unreachable, nothing could ever stop it again
+        stopMessageCenterPolling();
+
         final Observable<JsonNode> pollingObservable = Observable.interval(10, 300, TimeUnit.SECONDS)
                 .flatMap(tick -> {
                     if (Settings.getBoolean(R.string.pref_pollMessageCenter, false)) {
@@ -56,7 +60,7 @@ public class MessageCenterUtils {
                     }
                 });
 
-        final Disposable mcpoll = pollingObservable
+        mcPoll = pollingObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.single())
                 .subscribe(data -> {
@@ -70,6 +74,14 @@ public class MessageCenterUtils {
                         notifyIfMessagesPending();
                     }
                 }, throwable -> Log.e("Error occurred while polling message center: " + throwable.getMessage()));
+    }
+
+    /** stops polling of message center, if it is currently running */
+    public static void stopMessageCenterPolling() {
+        if (mcPoll != null) {
+            mcPoll.dispose();
+            mcPoll = null;
+        }
     }
 
     public static void notifyIfMessagesPending() {
