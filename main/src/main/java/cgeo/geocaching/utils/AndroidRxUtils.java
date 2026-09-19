@@ -72,10 +72,10 @@ public class AndroidRxUtils {
     }
 
     public static <T> void andThenOnUi(final Scheduler scheduler, final Callable<T> background, final Consumer<T> foreground) {
-        scheduler.createWorker().schedule(() -> {
+        scheduler.scheduleDirect(() -> {
             try {
                 final T value = background.call();
-                AndroidSchedulers.mainThread().createWorker().schedule(() -> {
+                AndroidSchedulers.mainThread().scheduleDirect(() -> {
                     try {
                         foreground.accept(value);
                     } catch (final Throwable t) {
@@ -89,18 +89,18 @@ public class AndroidRxUtils {
     }
 
     public static void runOnUi(final Runnable action) {
-        AndroidSchedulers.mainThread().createWorker().schedule(action);
+        AndroidSchedulers.mainThread().scheduleDirect(action);
     }
 
     public static Disposable andThenOnUi(final Scheduler scheduler, final Runnable background, final Runnable foreground) {
-        return scheduler.createWorker().schedule(() -> {
+        return scheduler.scheduleDirect(() -> {
             background.run();
-            AndroidSchedulers.mainThread().createWorker().schedule(foreground);
+            AndroidSchedulers.mainThread().scheduleDirect(foreground);
         });
     }
 
     public static Disposable runPeriodically(final Scheduler scheduler, final Runnable runnable, final long initialDelayInMs, final long periodInMs) {
-        return scheduler.createWorker().schedulePeriodically(runnable, initialDelayInMs, periodInMs, TimeUnit.MILLISECONDS);
+        return scheduler.schedulePeriodicallyDirect(runnable, initialDelayInMs, periodInMs, TimeUnit.MILLISECONDS);
     }
 
     public static <T> Observable<T> bindActivity(final Activity activity, final Observable<T> source) {
