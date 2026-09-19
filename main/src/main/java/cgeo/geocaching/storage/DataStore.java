@@ -5,6 +5,7 @@ import cgeo.geocaching.DBInspectionActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -73,7 +74,6 @@ import static cgeo.geocaching.list.StoredList.UserInterface.GROUP_SEPARATOR;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -1096,9 +1096,9 @@ public class DataStore {
      * Move the database to/from external cgdata in a new thread,
      * showing a progress window
      */
-    public static void moveDatabase(final Activity fromActivity) {
+    public static void moveDatabase(final AbstractActivity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, LocalizationUtils.getString(R.string.init_dbmove_dbmove), LocalizationUtils.getString(R.string.init_dbmove_running), true, false);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
+        fromActivity.destroyDisposables(AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             if (!LocalStorage.isExternalStorageAvailable()) {
                 Log.w("Database was not moved: external memory not available");
                 return Observable.just(false);
@@ -1127,7 +1127,7 @@ public class DataStore {
             dialog.dismiss();
             final String message = success ? LocalizationUtils.getString(R.string.init_dbmove_success) : LocalizationUtils.getString(R.string.init_dbmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_dbmove_dbmove).setMessage(TextParam.text(message)).show();
-        });
+        }));
     }
 
     @NonNull
