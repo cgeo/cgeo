@@ -2925,7 +2925,6 @@
     <string name="dbi_sqleditor_no_snippets">Encara no s\'ha emmagatzemat cap senténcia</string>
     <string name="dbi_sqleditor_warning">L\'editor SQL és una funcionalitat experimental. Es pot produir pèrdua de dades. Utilitzeu-lo sota la vostra pròpia responsabilitat!</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
-    <string name="grid_search_title">CercaX</string>
     <string name="grid_search_reset">Restablir</string>
     <string name="grid_search_global">Global</string>
     <string name="grid_search_value">Valor</string>
