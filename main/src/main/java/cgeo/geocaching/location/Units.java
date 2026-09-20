@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class Units {
 
@@ -13,18 +14,23 @@ public class Units {
         // utility class
     }
 
-    public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
+    public static ImmutableTriple<Double, String, Float> scaleDistanceWithFactor(final double distanceKilometers) {
         if (Settings.useImperialUnits()) {
             final double distanceMiles = distanceKilometers / IConversion.MILES_TO_KILOMETER;
             if (Math.abs(distanceMiles) >= 0.1) {
-                return new ImmutablePair<>(distanceMiles, "mi");
+                return new ImmutableTriple<>(distanceMiles, "mi", IConversion.MILES_TO_KILOMETER);
             }
-            return new ImmutablePair<>(distanceMiles * 5280, "ft");
+            return new ImmutableTriple<>(distanceMiles * 5280, "ft", IConversion.MILES_TO_KILOMETER / 5280);
         } else if (Math.abs(distanceKilometers) >= 1) {
-            return new ImmutablePair<>(distanceKilometers, "km");
+            return new ImmutableTriple<>(distanceKilometers, "km", 1f);
         } else {
-            return new ImmutablePair<>(distanceKilometers * 1000, "m");
+            return new ImmutableTriple<>(distanceKilometers * 1000, "m", 1f / 1000);
         }
+    }
+
+    public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
+        final ImmutableTriple<Double, String, Float> value = scaleDistanceWithFactor(distanceKilometers);
+        return new ImmutablePair<>(value.left, value.middle);
     }
 
     /** formats given elevation in meters or feet, no fractions, no kilometers/miles */
