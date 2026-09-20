@@ -80,6 +80,8 @@ public class RouteTrackUtils {
     private View popup = null;
     private Tracks tracks = null;
     private BottomSheetDialog dialog = null;
+    /** elevation chart action belonging to the currently open popup - kept here as the track list gets rebuilt from several places */
+    private Action2<Route, Boolean> popupShowElevationChart = null;
 
     private final Runnable reloadIndividualRoute;
     private final Runnable clearIndividualRoute;
@@ -121,7 +123,7 @@ public class RouteTrackUtils {
                         final String key = tracks.add(activity, uri, updateTrack);
                         tracks.setRoute(key, route);
                         updateTrack.updateRoute(key, route, tracks.getColor(key), tracks.getWidth(key));
-                        updateDialogTracks(popup, tracks, null);
+                        updateDialogTracks(popup, tracks);
                     }
                 });
             }
@@ -137,10 +139,14 @@ public class RouteTrackUtils {
      */
     public void showPopup(final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget, @Nullable final Action2<Route, Boolean> showElevationChart) {
         popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
+        popupShowElevationChart = showElevationChart;
         updateDialogIndividualRoute(popup, individualRoute, setTarget, showElevationChart);
-        updateDialogTracks(popup, tracks, showElevationChart);
+        updateDialogTracks(popup, tracks);
         dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
-        dialog.setOnDismissListener(dialog1 -> popup = null);
+        dialog.setOnDismissListener(dialog1 -> {
+            popup = null;
+            popupShowElevationChart = null;
+        });
         dialog.show();
     }
 
@@ -151,18 +157,26 @@ public class RouteTrackUtils {
     public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action2<Route, Boolean> handleLongTapOnRoutesOrTracks, final Route route, final Runnable onDelete) {
         final SimplePopupMenu menu = SimplePopupMenu.of(activity).setMenuContent(R.menu.map_routetrack_context).setPosition(new Point(tapX, tapY), 0);
         menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, handleLongTapOnRoutesOrTracks != null, route, true));
-        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route, onDelete));
+        menu.setOnItemClickListener(item -> handleContextMenuClick(item, null, handleLongTapOnRoutesOrTracks, route, onDelete)); // popup closes on click, so no menu to update
         menu.show();
     }
 
     public static void configureContextMenu(final Menu menu, final boolean showElevationChart, final IGeoItemSupplier route, final boolean hidePerDefault) {
+        configureContextMenu(menu, showElevationChart, route, hidePerDefault, route != null, route != null && route.isHidden());
+    }
+
+    /**
+     * variant to be used for tracks, which may not be loaded into memory (as their display is switched off) - route is null for those
+     *
+     * @param itemExists whether there is an item behind this menu at all (true for a track which is not loaded into memory)
+     * @param isHidden   current visibility state of that item
+     */
+    public static void configureContextMenu(final Menu menu, final boolean showElevationChart, @Nullable final IGeoItemSupplier route, final boolean hidePerDefault, final boolean itemExists, final boolean isHidden) {
         MenuUtils.enableIconsInOverflowMenu(menu);
 
         final boolean isIndividualRoute = isIndividualRoute(route);
         final boolean isNavigationTargetRoute = isNavigationTargetRoute(route);
-        final MenuItem elevationChart = menu.findItem(R.id.menu_showElevationChart);
-        configureMenuItem(elevationChart, showElevationChart, null);
-        elevationChart.setEnabled(route instanceof Route);
+        configureMenuItem(menu.findItem(R.id.menu_showElevationChart), showElevationChart, null);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute && !isNavigationTargetRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute && !isNavigationTargetRoute, null);
@@ -170,13 +184,26 @@ public class RouteTrackUtils {
         configureMenuItem(menu.findItem(R.id.menu_optimize), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_refresh), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_invert_order), isIndividualRoute, null);
-        configureMenuItem(menu.findItem(R.id.menu_visibility), route != null && !isNavigationTargetRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_visibility), itemExists && !isNavigationTargetRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_delete), !isNavigationTargetRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_clear_target), isNavigationTargetRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.indivroute_export_route), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_export_track), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_load), isIndividualRoute, null);
-        configureVisibility(menu.findItem(R.id.menu_visibility), route != null && route.isHidden());
+        configureVisibility(menu.findItem(R.id.menu_visibility), isHidden);
+        configureDataDependentMenuItems(menu, route);
+    }
+
+    /**
+     * enables/disables those menu items which need the item's data to be loaded into memory,
+     * which is not the case for a track whose display is switched off
+     */
+    private static void configureDataDependentMenuItems(@Nullable final Menu menu, @Nullable final IGeoItemSupplier route) {
+        if (menu == null) {
+            return;
+        }
+        MenuUtils.setEnabledWithIcon(menu.findItem(R.id.menu_showElevationChart), route instanceof Route);
+        MenuUtils.setEnabledWithIcon(menu.findItem(R.id.menu_center), route != null);
     }
 
     @SuppressLint("AlwaysShowAction")
@@ -192,7 +219,24 @@ public class RouteTrackUtils {
         item.setTitle(LocalizationUtils.getString(isHidden ? R.string.make_visible : R.string.hide));
     }
 
-    public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
+    /** returns the key of the track supplying the given route, or null if that route does not belong to a track */
+    @Nullable
+    public String getTrackKey(@Nullable final IGeoItemSupplier route) {
+        return tracks == null ? null : tracks.findKey(route);
+    }
+
+    public boolean handleContextMenuClick(final MenuItem item, @Nullable final Menu menu, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
+        return handleContextMenuClick(item, menu, showElevationChart, getTrackKey(route), route, onDelete);
+    }
+
+    /**
+     * variant to be used for tracks, which may not be loaded into memory (as their display is switched off), so they need
+     * to be identified by their key. The given route is ignored for those, as it may have been released in the meantime.
+     *
+     * @param menu menu the clicked item belongs to, used to update the enabled state of its items - may be null for menus closing on click
+     */
+    public boolean handleContextMenuClick(final MenuItem item, @Nullable final Menu menu, final Action2<Route, Boolean> showElevationChart, @Nullable final String trackKey, @Nullable final IGeoItemSupplier givenRoute, @Nullable final Runnable onDelete) {
+        final IGeoItemSupplier route = trackKey == null ? givenRoute : tracks.getRoute(trackKey);
         final int id = item.getItemId();
         if (id == R.id.menu_showElevationChart && showElevationChart != null && route instanceof Route) {
             if (dialog != null) {
@@ -208,30 +252,37 @@ public class RouteTrackUtils {
             final ArrayList<RouteItem> newRouteItems = new ArrayList<>(((IndividualRoute) route).getRouteItems());
             Collections.reverse(newRouteItems);
             storeAndReloadIndividualRoute(newRouteItems);
-        } else if (id == R.id.menu_color && !isIndividualRoute(route)) {
-            tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
-        } else if (id == R.id.menu_rename) {
-            tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
+        } else if (id == R.id.menu_color && trackKey != null) {
+            setTrackColor(activity, tracks, trackKey, item, updateTrack);
+        } else if (id == R.id.menu_rename && trackKey != null) {
+            SimpleDialog.ofContext(dialog.getContext())
                     .setTitle(TextParam.text(LocalizationUtils.getString(R.string.routes_tracks_change_name)))
-                    .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(trackKey)), newName -> {
                         if (StringUtils.isNotBlank(newName)) {
-                            tracks.setDisplayname(key, newName);
-                            updateDialogTracks(popup, tracks, null);
+                            tracks.setDisplayname(trackKey, newName);
+                            updateDialogTracks(popup, tracks);
                         }
-                    }));
+                    });
         } else if (id == R.id.menu_visibility) {
-            final boolean willBeHidden = !route.isHidden();
-            route.setHidden(willBeHidden);
-            if (isIndividualRoute(route)) {
-                reloadIndividualRoute.run();
+            final boolean willBeHidden = trackKey != null ? !tracks.isHidden(trackKey) : !route.isHidden();
+            if (trackKey != null) {
+                tracks.hide(trackKey, willBeHidden);
+                if (willBeHidden) {
+                    // remove from map and release the parsed data from memory
+                    updateTrack.updateRoute(trackKey, null, tracks.getColor(trackKey), tracks.getWidth(trackKey));
+                    configureDataDependentMenuItems(menu, null);
+                } else {
+                    // while being hidden the track was not kept in memory, so load & parse it now
+                    reloadTrack(tracks.getTrackfile(trackKey), updateTrack, () -> configureDataDependentMenuItems(menu, tracks.getRoute(trackKey)));
+                }
             } else {
-                tracks.find(route, (key, routeForThisKey) -> {
-                    updateTrack.updateRoute(key, route, tracks.getColor(key), tracks.getWidth(key));
-                    tracks.hide(key, willBeHidden);
-                });
+                route.setHidden(willBeHidden);
+                if (isIndividualRoute(route)) {
+                    reloadIndividualRoute.run();
+                }
             }
             configureVisibility(item, willBeHidden);
-        } else if (id == R.id.menu_center) {
+        } else if (id == R.id.menu_center && route != null) {
             if (route instanceof Route) {
                 ((Route) route).setCenter(centerOnPosition);
             } else {
@@ -246,14 +297,14 @@ public class RouteTrackUtils {
                         onDelete.run();
                     }
                 });
-            } else {
-                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(LocalizationUtils.getString(R.string.map_clear_track_confirm, tracks.getDisplayname(key)))).confirm(() -> {
-                    tracks.remove(key);
-                    updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
+            } else if (trackKey != null) {
+                SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(LocalizationUtils.getString(R.string.map_clear_track_confirm, tracks.getDisplayname(trackKey)))).confirm(() -> {
+                    tracks.remove(trackKey);
+                    updateTrack.updateRoute(trackKey, null, tracks.getColor(trackKey), tracks.getWidth(trackKey));
                     if (onDelete != null) {
                         onDelete.run();
                     }
-                }));
+                });
             }
         } else if (id == R.id.menu_clear_target) {
             if (onDelete != null) {
@@ -322,7 +373,7 @@ public class RouteTrackUtils {
             if (tb.getMenu() == null || tb.getMenu().size() == 0) {
                 tb.inflateMenu(R.menu.map_routetrack_context);
             }
-            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, individualRoute, () -> updateDialogIndividualRoute(dialog, individualRoute, setTarget, showElevationChart)));
+            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, tb.getMenu(), showElevationChart, individualRoute, () -> updateDialogIndividualRoute(dialog, individualRoute, setTarget, showElevationChart)));
             final Menu menu = tb.getMenu();
             configureContextMenu(menu, true, individualRoute, false);
 
@@ -336,7 +387,7 @@ public class RouteTrackUtils {
         updateDialogClearTargets(dialog, individualRoute, setTarget, showElevationChart);
     }
 
-    private void updateDialogTracks(final View dialog, final Tracks tracks, final Action2<Route, Boolean> showElevationChart) {
+    private void updateDialogTracks(final View dialog, final Tracks tracks) {
         if (dialog == null) {
             return;
         }
@@ -344,11 +395,13 @@ public class RouteTrackUtils {
         tracklist.removeAllViews();
         dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> csah.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
-        tracks.traverse((key, geoData) -> {
+        // traverse all tracks, including those currently not loaded into memory (as their display is switched off)
+        tracks.traverseAll((key, geoData) -> {
             final Toolbar tb = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null).findViewById(R.id.routes_track_item);
             tb.inflateMenu(R.menu.map_routetrack_context);
-            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, geoData, () -> updateDialogTracks(dialog, tracks, showElevationChart)));
-            configureContextMenu(tb.getMenu(), true, geoData, false);
+            // the route is deliberately not passed on: it is resolved from the key on click, as it may have been released from memory in the meantime
+            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, tb.getMenu(), popupShowElevationChart, key, null, () -> updateDialogTracks(dialog, tracks)));
+            configureContextMenu(tb.getMenu(), true, geoData, false, true, tracks.isHidden(key));
 
             final TextView displayName = tb.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
@@ -397,17 +450,29 @@ public class RouteTrackUtils {
         return route != null && (!(route instanceof Route) || ((Route) route).getNumSegments() > 0);
     }
 
-    public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
+    public void reloadTrack(@Nullable final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
+        reloadTrack(trackfile, updateTrack, null);
+    }
+
+    /** @param onFinished run after loading has finished (successfully or not) */
+    public void reloadTrack(@Nullable final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack, @Nullable final Runnable onFinished) {
+        if (trackfile == null) {
+            return;
+        }
         final Uri uri = Trackfiles.getUriFromKey(trackfile.getKey());
         Log.d("[RouteTrackDebug] Start reloading track from trackfile " + trackfile.getFilename());
         GPXTrackOrRouteImporter.doImport(activity, uri, trackfile.getDisplayname(), (route) -> {
             if (route != null) {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " finished, updating map");
                 route.setHidden(trackfile.isHidden());
-                updateDialogTracks(popup, tracks, null);
+                // publish the route first, so that the dialog is rebuilt with the track being known as loaded
                 updateTrack.updateRoute(trackfile.getKey(), route, trackfile.getColor(), trackfile.getWidth());
+                updateDialogTracks(popup, tracks);
             } else {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " returned null");
+            }
+            if (onFinished != null) {
+                onFinished.run();
             }
         });
     }
@@ -419,8 +484,10 @@ public class RouteTrackUtils {
     public void updateRouteTrackButtonVisibility(final View button, final IndividualRoute route, final Tracks tracks) {
         final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route) || isTargetSet.call());
         if (tracks != null) {
-            tracks.traverse((key, r) -> {
-                if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
+            // tracks currently not loaded into memory (r == null) need to be counted as well,
+            // otherwise the user would have no way to switch their display on again
+            tracks.traverseAll((key, r) -> {
+                if (!someTrackAvailable.get() && (r == null || isRouteNonEmpty(r))) {
                     someTrackAvailable.set(true);
                 }
             });
