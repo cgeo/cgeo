@@ -869,8 +869,14 @@ abstract class GPXParser extends FileParser {
             cgeoEmptyCoords.setEndTextElementListener(originalCoordsEmpty -> wptEmptyCoordinates = Boolean.parseBoolean(originalCoordsEmpty.trim()));
 
             final Element cgeo = cacheParent.getChild(cgeoNamespace, "cacheExtension");
-            final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmoji");
-            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmoji));
+            // new emoji entry (Unicode character as text, may be empty)
+            final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmojiText");
+            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = assignedEmoji);
+            // legacy emoji migration (single codepoint, integer value, 0 when not assigned)
+            if (StringUtils.isBlank(cacheAssignedEmoji)) {
+                final Element cgeoAssignedEmoji2 = cgeo.getChild(cgeoNamespace, "assignedEmoji");
+                cgeoAssignedEmoji2.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = EmojiUtilsLegacyMigration.parseGpxAssignedEmoji(assignedEmoji));
+            }
         }
     }
 
