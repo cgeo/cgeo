@@ -49,10 +49,15 @@ public class Tracks {
 
     public Tracks(final RouteTrackUtils routeTrackUtils, final UpdateTrack updateTrack) {
         getListOfTrackfilesInBackground(() -> {
-            for (Track track : data) {
-                routeTrackUtils.reloadTrack(track.trackfile, updateTrack);
-            }
             routeTrackUtils.setTracks(this);
+            for (Track track : data) {
+                // load & parse a track file only if it is set to be displayed - hidden ones get loaded on demand when being made visible again
+                if (track.trackfile.isHidden()) {
+                    AndroidRxUtils.runOnUi(() -> updateTrack.updateRoute(track.trackfile.getKey(), null, track.trackfile.getColor(), track.trackfile.getWidth()));
+                } else {
+                    routeTrackUtils.reloadTrack(track.trackfile, updateTrack);
+                }
+            }
         });
     }
 
@@ -97,12 +102,34 @@ public class Tracks {
         }
     }
 
-    public void find(final IGeoItemSupplier route, final Action2<String, IGeoItemSupplier> action) {
+    /** traverses all tracks, including those which currently are not loaded into memory (route == null) */
+    public void traverseAll(final Action2<String, IGeoItemSupplier> action) {
+        for (Track track : data) {
+            action.call(track.trackfile.getKey(), track.route);
+        }
+    }
+
+    /** returns the key of the track supplying the given route, or null if that route does not belong to a track */
+    @Nullable
+    public String findKey(@Nullable final IGeoItemSupplier route) {
+        if (route == null) {
+            return null;
+        }
         for (Track track : data) {
             if (track.route != null && track.route.equals(route)) {
-                action.call(track.trackfile.getKey(), track.route);
+                return track.trackfile.getKey();
             }
         }
+        return null;
+    }
+
+    public boolean isHidden(@NonNull final String key) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                return track.trackfile.isHidden();
+            }
+        }
+        return false;
     }
 
     public String add(final Activity activity, final Uri uri, final UpdateTrack updateTrack) {
