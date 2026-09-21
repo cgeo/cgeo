@@ -173,7 +173,7 @@ public final class StoredList extends AbstractList {
                     model
                         .setScrollAnchor(selected.get())
                         .setSelectedItems(Collections.singleton(selected.get()))
-                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
+                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
                 }
             }
             configureListDisplay(model, null);
