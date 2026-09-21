@@ -136,7 +136,7 @@ public class GeoStyle implements Parcelable {
         int result = strokeColor;
         result = 31 * result + fillColor;
         result = 31 * result + Float.hashCode(strokeWidth);
-        result = 31 * result + styleRules.hashCode();
+        result = 31 * result + (null == styleRules ? 1 : styleRules.hashCode());
         return result;
     }
 
