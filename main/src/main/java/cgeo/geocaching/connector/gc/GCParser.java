@@ -1990,6 +1990,7 @@ public final class GCParser {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
+                "__RequestVerificationToken", parseRequestVerificationToken(page),
                 "ctl00$ContentBody$btnYes", "Yes. Ignore it.");
 
         GCLogin.putViewstates(params, viewstates);
