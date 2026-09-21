@@ -100,12 +100,12 @@ public class CacheListActionBarChooser {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.getCustomView().setOnClickListener(v -> new StoredList.UserInterface(context).promptForListSelection(R.string.list_title, selectedListId -> {
-                if (selectedListId != listId || namedFilterId >= 0) {
+                if (selectedListId != listId || namedFilterId > 0) {
                     this.onSelectAction.call(selectedListId);
                     this.listId = selectedListId;
                     refreshActionBarTitle();
                 }
-            }, false, Collections.singleton(PseudoList.NEW_LIST.id), namedFilterId >= 0 ? -1 : listId, null));
+            }, false, Collections.singleton(PseudoList.NEW_LIST.id), namedFilterId > 0 ? -1 : listId, null));
         }
 
         final TextView titleTv = resultView.findViewById(android.R.id.text1);
