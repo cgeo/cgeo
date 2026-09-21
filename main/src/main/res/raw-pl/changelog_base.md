@@ -1,15 +1,15 @@
 ### Mapa
-- Nowość: Opcja skali szarości
-- Nowość: Nakładki kafelkowe zdefiniowane przez użytkownika
-- Nowość: Wsparcie dla dostawców kafelków zdefiniowanych przez użytkownika
+- New: Grayscale option (#18588)
+- New: User-defined tile overlays (#18587)
+- New: Support multiple user-defined tile providers (#18586)
 
 ### Szczegóły skrytki
-- Nowość: Przełącz datę zapisaną na urządzeniu między względną i dokładną
-- Naprawiono: Nakładające się okna dialogowe przy usuwaniu wielu wpisów
-- Nowość: Przycisk „Edytuj osobistą notatkę” w wyskakującym okienku punktu nawigacji
+- New: Toggle stored-on-device date between relative and exact (#18393)
+- Fix: Stacked progress dialogs when deleting multiple logs (#18279)
+- New: "Edit personal note" button in waypoint popup (#18559)
 
 ### Odtwarzacz Wherigo
 -
 
 ### Ogólne
-- Naprawiono: Wiele oczekujących okien pobierania na głównym ekranie
+- Fix: Multiple pending download dialogs on main screen (#18363)
