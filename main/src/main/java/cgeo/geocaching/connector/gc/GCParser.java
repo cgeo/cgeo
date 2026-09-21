@@ -570,7 +570,7 @@ public final class GCParser {
 
                 final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
 
-                for (int j = 1; j < wpItems.length; j += 2) {
+                for (int j = 0; j < wpItems.length; j++) {
                     final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
                     assert wp != null;
                     if (wp.length < 7) {
@@ -601,8 +601,8 @@ public final class GCParser {
                         waypoint.setOriginalCoordsEmpty(true);
                     }
 
-                    if (j + 1 < wpItems.length) {
-                        final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j + 1], "<td");
+                    if (++j < wpItems.length) {
+                        final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
                         assert wpNote != null;
                         if (wpNote.length < 4) {
                             Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
