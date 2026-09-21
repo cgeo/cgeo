@@ -1084,14 +1084,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 menu.show();
             }
         } else if (id == R.id.menu_as_list) {
-            if (viewModel.mapType.type == UMTT_List) {
-                Settings.setLastDisplayedList(viewModel.mapType.fromList);
-                CacheListActivity.startActivityOffline(this, NamedFilter.getById(viewModel.mapType.fromNamedFilter));
-            } else {
-                final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
-                        mapFragment.getViewport().filter(vmCaches));
-                CacheListActivity.startActivityMap(this, new SearchResult(caches));
-            }
+            final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
+                    mapFragment.getViewport().filter(vmCaches));
+            CacheListActivity.startActivityMap(this, new SearchResult(caches));
         } else if (id == R.id.menu_hillshading) {
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
