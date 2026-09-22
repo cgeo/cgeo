@@ -542,7 +542,7 @@ public final class GCParser {
         } catch (final Geopoint.GeopointException ignored) {
         }
 
-        int wpBegin = page.indexOf("id=\"ctl00_ContentBody_Waypoints\">");
+        int wpBegin = page.indexOf("id=\"ctl00_ContentBody_Waypoints\"");
         if (wpBegin != -1) { // parse waypoints
             if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
@@ -551,13 +551,8 @@ public final class GCParser {
 
             String wpList = page.substring(wpBegin);
 
-            int wpEnd = wpList.indexOf("</p>");
-            if (wpEnd > -1 && wpEnd <= wpList.length()) {
-                wpList = wpList.substring(0, wpEnd);
-            }
-
             if (!wpList.contains("No additional waypoints to display.")) {
-                wpEnd = wpList.indexOf("</table>");
+                int wpEnd = wpList.indexOf("</table>");
                 if (wpEnd > -1) {
                     wpList = wpList.substring(0, wpEnd);
                 }
