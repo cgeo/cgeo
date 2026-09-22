@@ -542,81 +542,12 @@ public final class GCParser {
         } catch (final Geopoint.GeopointException ignored) {
         }
 
-        int wpBegin = page.indexOf("id=\"ctl00_ContentBody_Waypoints\"");
-        if (wpBegin != -1) { // parse waypoints
+        if (page.contains(GCConstants.WPT_SECTION_START)) { // parse waypoints
             if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
             }
             DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
-
-            String wpList = page.substring(wpBegin);
-
-            if (!wpList.contains("No additional waypoints to display.")) {
-                int wpEnd = wpList.indexOf("</table>");
-                if (wpEnd > -1) {
-                    wpList = wpList.substring(0, wpEnd);
-                }
-
-                wpBegin = wpList.indexOf("<tbody>");
-                wpEnd = wpList.indexOf("</tbody>");
-                if (wpBegin >= 0 && wpEnd >= 0 && wpEnd <= wpList.length()) {
-                    wpList = wpList.substring(wpBegin + 7, wpEnd);
-                }
-
-                final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
-
-                for (int j = 0; j < wpItems.length; j++) {
-                    final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
-                    assert wp != null;
-                    if (wp.length < 7) {
-                        Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
-                        continue;
-                    }
-
-                    // waypoint name
-                    // res is null during the unit tests
-                    final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
-
-                    // waypoint type
-                    final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
-
-                    final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
-
-                    // waypoint prefix
-                    waypoint.setPrefix(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
-
-                    // waypoint lookup
-                    waypoint.setLookup(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
-
-                    // waypoint latitude and longitude
-                    latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
-                    if (!Strings.CS.startsWith(latlon, "???")) {
-                        waypoint.setCoords(new Geopoint(latlon));
-                    } else {
-                        waypoint.setOriginalCoordsEmpty(true);
-                    }
-
-                    if (++j < wpItems.length) {
-                        final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
-                        assert wpNote != null;
-                        if (wpNote.length < 4) {
-                            Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
-                            continue;
-                        }
-
-                        // waypoint note, cleanup via Jsoup
-                        final String noteText = TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote());
-                        if (StringUtils.isNotBlank(noteText)) {
-                            final Document document = Jsoup.parse(noteText);
-                            waypoint.setNote(document.outerHtml());
-                        } else {
-                            waypoint.setNote(StringUtils.EMPTY);
-                        }
-                    }
-
-                    cache.addOrChangeWaypoint(waypoint, false);
-                }
-            }
+            parseWaypoints(cache, page);
         }
 
         // last check for necessary cache conditions
@@ -626,6 +557,88 @@ public final class GCParser {
 
         cache.setDetailedUpdatedNow();
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
+    }
+
+    @SuppressWarnings("ModifiedControlVariable")
+    public static void parseWaypoints(final Geocache cache, final String html) {
+        int wpBegin = html.indexOf(GCConstants.WPT_SECTION_START);
+        String wpList = html.substring(wpBegin);
+
+        if (wpList.contains("No additional waypoints to display.")) {
+            return;
+        }
+        int wpEnd = wpList.indexOf("</table>");
+        if (wpEnd > -1) {
+            wpList = wpList.substring(0, wpEnd);
+        }
+
+        wpBegin = wpList.indexOf("<tbody>");
+        wpEnd = wpList.indexOf("</tbody>");
+        if (wpBegin >= 0 && wpEnd >= 0) {
+            wpList = wpList.substring(wpBegin + 7, wpEnd);
+        }
+
+        final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
+
+        // Each waypoint is 2 rows in a table: 1. type, coordinates, ... 2. description
+        // Table starts with header rows, skip those by looking for a line that matches our pattern
+        for (int j = 0; j < wpItems.length; j++) {
+            // parse first row
+            final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+            assert wp != null;
+            if (wp.length < 7) {
+                Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
+                continue;
+            }
+
+            // waypoint name
+            // res is null during the unit tests
+            final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
+
+            // waypoint type
+            final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
+
+            final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
+
+            // waypoint prefix
+            waypoint.setPrefix(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
+
+            // waypoint lookup
+            waypoint.setLookup(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
+
+            // waypoint latitude and longitude
+            final String latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
+            if (!Strings.CS.startsWith(latlon, "???")) {
+                waypoint.setCoords(new Geopoint(latlon));
+            } else {
+                waypoint.setOriginalCoordsEmpty(true);
+            }
+
+            // parse second row
+            j++;
+            if (j >= wpItems.length) {
+                cache.addOrChangeWaypoint(waypoint, false);
+                return;
+            }
+
+            final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+            assert wpNote != null;
+            if (wpNote.length < 4) {
+                Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
+                continue;
+            }
+
+            // waypoint note, cleanup via Jsoup
+            final String noteText = TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote());
+            if (StringUtils.isNotBlank(noteText)) {
+                final Document document = Jsoup.parse(noteText);
+                waypoint.setNote(document.outerHtml());
+            } else {
+                waypoint.setNote(StringUtils.EMPTY);
+            }
+
+            cache.addOrChangeWaypoint(waypoint, false);
+        }
     }
 
     public static List<Image> parseSpoiler(final String html) {
