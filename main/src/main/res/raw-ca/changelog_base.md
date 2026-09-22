@@ -1,15 +1,15 @@
 ### Mapa
-- New: Grayscale option (#18588)
-- New: User-defined tile overlays (#18587)
-- New: Support multiple user-defined tile providers (#18586)
+- Novetat: Opció d'escala de grisos (#18588)
+- Novetat: Superposicions de tessel·les definides per l'usuari (#18587)
+- Novetat: Suport per a múltiples proveïdors de tessel·les definits per l'usuari (#18586)
 
 ### Detalls del catxé
-- New: Toggle stored-on-device date between relative and exact (#18393)
-- Fix: Stacked progress dialogs when deleting multiple logs (#18279)
-- New: "Edit personal note" button in waypoint popup (#18559)
+- Novetat: Alterna la data emmagatzemada al dispositiu entre relativa i exacta (#18393)
+- Correcció: Diàlegs de progrés superposats en eliminar diversos registres (#18279)
+- Novetat: Botó «Edita la nota personal» a la finestra emergent del punt de referència (#18559)
 
 ### Wherigo Player
 -
 
 ### General
-- Fix: Multiple pending download dialogs on main screen (#18363)
+- Correcció: Múltiples quadres de diàleg de descàrrega pendents a la pantalla principal (#18363)
