@@ -475,9 +475,6 @@ dependencies {
     // Support Library Design
     implementation 'com.google.android.material:material:1.14.0'
 
-    // ProcessPhoenix, reliable process restart
-    // implementation 'com.jakewharton:process-phoenix:2.0.0'
-
     // RxJava
     implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
@@ -546,17 +543,15 @@ dependencies {
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
-    //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
-    //See https://github.com/guardian/toolargetool
+    // TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
+    // See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
     implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.1'
 
-    // For Wherigos: GIF support
-    // ani gif support
-    // minSdk=17 from version 1.2.16
+    // For Wherigos: (ani) GIF support
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.32'
 
     // search screen
