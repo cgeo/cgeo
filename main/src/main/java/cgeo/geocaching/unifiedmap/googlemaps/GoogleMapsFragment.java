@@ -133,7 +133,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnCameraMoveStartedListener(reason -> {
             mapIsCurrentlyMoving = true;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-            scaleDrawer.drawScale(lastBounds);
+            scaleDrawer.drawScale(mMap, lastBounds);
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
             }
@@ -145,7 +145,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-            scaleDrawer.drawScale(lastBounds);
+            scaleDrawer.drawScale(mMap, lastBounds);
         });
 
         initLayers();
