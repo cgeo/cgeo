@@ -163,6 +163,7 @@ public final class GCConstants {
 
     // Patterns for waypoints
 
+    static final String WPT_SECTION_START = "id=\"ctl00_ContentBody_Waypoints\"";
     static final Pattern PATTERN_WPTYPE = Pattern.compile("\\/WptTypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_WPPREFIXORLOOKUPORLATLON = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>");
     static final Pattern PATTERN_WPNAME = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>");
