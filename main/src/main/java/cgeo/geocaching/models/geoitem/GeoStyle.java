@@ -128,7 +128,13 @@ public class GeoStyle implements Parcelable {
             return false;
         }
         final GeoStyle geoStyle = (GeoStyle) o;
-        return strokeColor == geoStyle.strokeColor && fillColor == geoStyle.fillColor && Float.compare(geoStyle.strokeWidth, strokeWidth) == 0 && styleRules.equals(geoStyle.styleRules);
+        final boolean styleRulesMatch;
+        if (null != styleRules) {
+            styleRulesMatch = styleRules.equals(geoStyle.styleRules);
+        } else {
+            styleRulesMatch = (null == geoStyle.styleRules);
+        }
+        return strokeColor == geoStyle.strokeColor && fillColor == geoStyle.fillColor && Float.compare(geoStyle.strokeWidth, strokeWidth) == 0 && styleRulesMatch;
     }
 
     @Override
