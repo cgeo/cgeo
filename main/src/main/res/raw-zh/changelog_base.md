@@ -60,6 +60,7 @@
 - 新增：发送记录现在在后台完成
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo 播放器
 - 新增：Wherigo 离线翻译
