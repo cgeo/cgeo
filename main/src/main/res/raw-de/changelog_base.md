@@ -1,15 +1,15 @@
 ### Karte
-- New: Grayscale option (#18588)
-- New: User-defined tile overlays (#18587)
-- New: Support multiple user-defined tile providers (#18586)
+- Neu: Graustufenoption (#18588)
+- Neu: Benutzerdefinierte Karten-Overlays (#18587)
+- Neu: Unterstützt mehrere benutzerdefinierte Kartenanbieter (#18586)
 
 ### Cache-Details
-- New: Toggle stored-on-device date between relative and exact (#18393)
-- Fix: Stacked progress dialogs when deleting multiple logs (#18279)
-- New: "Edit personal note" button in waypoint popup (#18559)
+- Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut (#18393)
+- Korrektur: Überlappende Dialoge beim Löschen mehrerer Logs (#18279)
+- Neu: "Persönliche Notiz bearbeiten"-Button im Wegpunkt-Popup (#18559)
 
 ### Wherigo Player
 -
 
 ### Allgemein
-- Fix: Multiple pending download dialogs on main screen (#18363)
+- Korrektur: Mehrfachmeldung ausstehender Downloads auf Hauptbildschirm (#18363)
