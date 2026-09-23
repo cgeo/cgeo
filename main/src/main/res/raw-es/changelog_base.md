@@ -60,6 +60,7 @@ Como se anunció con las actualizaciones del 2025.07.17 y 2025.12.01, finalmente
 - Nuevo: El envío del registro se realiza en segundo plano
 - Corregido: El inventario estaba oculto al registrar bajo ciertas condiciones
 - Nuevo: Promedio de coordenadas al crear coordenadas de waypoint / crear para cachés definidos por el usuario
+- Fix: Description not loaded (website change)
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos

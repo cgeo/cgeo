@@ -60,6 +60,7 @@ Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie sta
 - Nowość: Wysyłanie wpisu jest wykonywane w tle
 - Naprawiono: W niektórych sytuacjach inwentarz był ukryty podczas dodawania wpisu
 - Nowość: Uśrednianie współrzędnych przy tworzeniu punktu trasy / ustawieniu współrzędnych dla skrytek zdefiniowanych przez użytkownika
+- Fix: Description not loaded (website change)
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo

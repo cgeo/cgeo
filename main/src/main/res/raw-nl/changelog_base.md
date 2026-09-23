@@ -60,6 +60,7 @@ As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed th
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
