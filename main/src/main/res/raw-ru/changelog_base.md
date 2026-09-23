@@ -60,6 +60,7 @@
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo player
 - Новое: Оффлайн перевод для Wherigo
