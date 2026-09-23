@@ -2923,6 +2923,7 @@
     <string name="dbi_sqleditor_no_snippets">Noch keine Abfrage gespeichert</string>
     <string name="dbi_sqleditor_warning">Der SQL-Editor ist eine experimentelle Funktion. Datenverlust kann auftreten. Verwendung auf eigene Gefahr!</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Suche</string>
     <string name="grid_search_reset">Zurücksetzen</string>
     <string name="grid_search_global">Global</string>
     <string name="grid_search_value">Wert</string>
