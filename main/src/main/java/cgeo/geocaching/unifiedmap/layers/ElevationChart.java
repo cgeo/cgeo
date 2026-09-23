@@ -134,7 +134,9 @@ public class ElevationChart {
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.map_routetrack_context);
             RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true);
-            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, onDelete));
+            // the track key needs to be resolved now: if the track gets hidden, its route is released from memory and can no longer be mapped to its key
+            final String trackKey = routeTrackUtils.getTrackKey(route);
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, toolbar.getMenu(), null, trackKey, route, onDelete));
             MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu());
         }
 
