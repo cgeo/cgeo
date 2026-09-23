@@ -2991,6 +2991,7 @@
     <string name="dbi_sqleditor_no_snippets">Nie zapisano jeszcze instrukcji</string>
     <string name="dbi_sqleditor_warning">Edytor SQL jest funkcją eksperymentalną. Może wystąpić utrata danych. Używaj na własne ryzyko!</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Szukaj</string>
     <string name="grid_search_reset">Resetuj</string>
     <string name="grid_search_global">Globalnie</string>
     <string name="grid_search_value">Wartość</string>
