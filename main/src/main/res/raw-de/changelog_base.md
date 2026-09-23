@@ -60,6 +60,7 @@ Wie mit Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir die alten Im
 - Neu: Das Senden eines Cachelogs erfolgt im Hintergrund
 - Korrektur: Trackables unter bestimmten Bedingungen nicht sichtbar beim Loggen
 - Neu: Positionsmittelung beim Erstellen von Wegpunkten / Festlegen von Koordinaten für benutzerdefinierte Caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
