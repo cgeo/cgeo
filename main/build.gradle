@@ -9,7 +9,6 @@ import static org.gradle.api.provider.ValueSourceParameters.None
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
 
-
 plugins {
     // Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
     id 'com.android.application'
@@ -105,7 +104,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -168,7 +167,7 @@ android {
         }
 
         // proguard rules
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
     }
 
     testBuildType = "debug" //the default BuildType
@@ -232,7 +231,7 @@ android {
         checkDependencies = true
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += [
                     // you can double click an APK file in Android Studio 2.2+ to see what's in there
@@ -267,12 +266,14 @@ android {
             ]
 
             // vtm-themes
-            pickFirsts.add("assets/symbols/**")
-            pickFirsts.add("assets/patterns/**")
+            pickFirsts += [
+                    "assets/symbols/**",
+                    "assets/patterns/**"
+            ]
         }
     }
 
-    flavorDimensions.add("javaCompilerTime") // all flavours must be assigned a dimension
+    flavorDimensions += ["javaCompilerTime"] // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
@@ -290,10 +291,6 @@ android {
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
-
-    // tests rely on JUnit-based classes
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
 }
 
 ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
@@ -445,8 +442,11 @@ dependencies {
 
     implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
-    configurations.configureEach {
-        exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
+    configurations.configureEach { config ->
+        // exclude duplicate XmlPullParser class from APK, but keep it for lint tools
+        if (!config.name.toLowerCase().contains("lint")) {
+            exclude group: 'net.sf.kxml', module: 'kxml2'
+        }
     }
 
     // used by mapsforge
@@ -477,19 +477,9 @@ dependencies {
     // Support Library Design
     implementation 'com.google.android.material:material:1.14.0'
 
-    // ProcessPhoenix, reliable process restart
-    // implementation 'com.jakewharton:process-phoenix:2.0.0'
-
     // RxJava
     implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
-
-    // avoid duplicate classes
-    configurations.configureEach {
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib:2.2.10'
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.10'
-        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.10'
-    }
 
     // Support Library Lifecycle Helpers
     String lifecycleVersion = '2.10.0'
@@ -555,21 +545,19 @@ dependencies {
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
-    //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
-    //See https://github.com/guardian/toolargetool
+    // TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
+    // See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
     implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.1'
 
-    // For Wherigos: GIF support
-    // ani gif support
-    // minSdk=17 from version 1.2.16
+    // For Wherigos: (ani) GIF support
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.32'
 
+    // search screen
     implementation 'androidx.cardview:cardview:1.0.0'
-
 }
 
 // define objects for files/folders outside tasks
@@ -771,14 +759,20 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
