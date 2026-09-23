@@ -60,6 +60,7 @@
 - New: Sending log is done in background
 - Fix: Inventarier dolda vid loggning under vissa förhållanden
 - Nytt: Medelvärde av koordinater för att skapa vägpunkter/sätta koordinater för användardefinierade cacher
+- Fix: Description not loaded (website change)
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos
