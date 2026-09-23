@@ -75,10 +75,7 @@ public class NavigationTargetLayer {
 
     public void triggerRepaint() {
         // drop scheduled but not yet started updates, their result would be superseded by this newer position
-        if (pendingUpdate != null) {
-            pendingUpdate.dispose();
-            pendingUpdate = null;
-        }
+        cancelPendingUpdate();
 
         final UnifiedMapViewModel.Target target = viewModel.target.getValue();
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
@@ -91,6 +88,21 @@ public class NavigationTargetLayer {
         final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
         final Routing.TurnInstruction turnInstruction = new Routing.TurnInstruction();
         pendingUpdate = AndroidRxUtils.andThenOnUi(ROUTE_UPDATE_SCHEDULER, () -> viewModel.navigationTargetRoute.getValue().update(currentGp, target.geopoint, turnInstruction), () -> repaint(turnInstruction));
+    }
+
+    /**
+     * To be called when the map is destroyed. A routing update scheduled on {@link #ROUTE_UPDATE_SCHEDULER} would
+     * otherwise outlive the activity and repaint into the layer and distance drawer of a dead map.
+     */
+    public void destroy() {
+        cancelPendingUpdate();
+    }
+
+    private void cancelPendingUpdate() {
+        if (pendingUpdate != null) {
+            pendingUpdate.dispose();
+            pendingUpdate = null;
+        }
     }
 
     private void repaint(final Routing.TurnInstruction turnInstruction) {

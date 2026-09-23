@@ -263,6 +263,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        createDisposables.clear();
+        super.onDestroy();
+    }
+
     private void init() {
         updateForNewType();
 

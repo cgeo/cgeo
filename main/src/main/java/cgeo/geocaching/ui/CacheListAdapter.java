@@ -40,6 +40,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 
 import java.lang.ref.WeakReference;
@@ -55,6 +56,7 @@ import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -108,10 +110,22 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         private CacheListType cacheListType;
         public Geocache cache = null;
         private final CacheslistItemBinding binding;
+        private Disposable directionImage = null;
 
         public ViewHolder(final View view) {
             super(view);
             binding = CacheslistItemBinding.bind(view);
+        }
+
+        /**
+         * Registers the direction image fetch running for this row, cancelling the one from its previous binding.
+         * Rows are recycled while scrolling, so without this every single binding would leak a subscription.
+         */
+        private void setDirectionImageFetch(@Nullable final Disposable fetch) {
+            if (directionImage != null) {
+                directionImage.dispose();
+            }
+            directionImage = fetch;
         }
     }
 
@@ -477,6 +491,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // only show the direction if this is enabled in the settings
         if (isLiveList) {
+            // whatever was fetched for the cache shown here before must not paint into this row any more
+            holder.setDirectionImageFetch(null);
             if (cache.getCoords() != null) {
                 holder.binding.direction.setVisibility(View.VISIBLE);
                 holder.binding.dirimg.setVisibility(View.GONE);
@@ -493,12 +509,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
                 holder.binding.dirimg.setVisibility(View.INVISIBLE);
                 holder.binding.direction.setVisibility(View.GONE);
-                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(bitmapDrawable -> {
+                holder.setDirectionImageFetch(DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(bitmapDrawable -> {
                     if (cache == holder.cache) {
                         holder.binding.dirimg.setImageDrawable(bitmapDrawable);
                         holder.binding.dirimg.setVisibility(View.VISIBLE);
                     }
-                });
+                }));
             } else {
                 holder.binding.dirimg.setVisibility(View.GONE);
                 holder.binding.direction.setVisibility(View.GONE);

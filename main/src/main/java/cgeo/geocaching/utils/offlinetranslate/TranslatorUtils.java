@@ -65,7 +65,7 @@ public class TranslatorUtils {
     }
 
     public static void runOnWorker(final Runnable run) {
-        WORKER_SINGLE.createWorker().schedule(run);
+        WORKER_SINGLE.scheduleDirect(run);
     }
 
     /** translates texts with special handling in cases it is normal text or contains HTML */

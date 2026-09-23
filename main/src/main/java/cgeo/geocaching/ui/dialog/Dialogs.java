@@ -14,7 +14,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
@@ -38,8 +37,6 @@ import java.util.Objects;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
@@ -130,8 +127,8 @@ public final class Dialogs {
         final AlertDialog dialog = builder.create();
 
         if (dialogType.iconResId > 0) {
-            final Observable<Drawable> iconObservable = Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), dialogType.iconResId, context.getTheme())));
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
+            // the drawable is already at hand here, no need to route it through an observable
+            dialog.setIcon(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), dialogType.iconResId, context.getTheme())));
         }
         dialog.show();
 

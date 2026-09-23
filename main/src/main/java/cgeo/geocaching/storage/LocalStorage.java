@@ -364,7 +364,7 @@ public final class LocalStorage {
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
         progress.show(fromActivity, LocalizationUtils.getString(R.string.init_datadirmove_datadirmove), LocalizationUtils.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
+        fromActivity.destroyDisposables(AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
             final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
             Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
@@ -388,7 +388,7 @@ public final class LocalStorage {
             progress.dismiss();
             final String message = success ? LocalizationUtils.getString(R.string.init_datadirmove_success) : LocalizationUtils.getString(R.string.init_datadirmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_datadirmove_datadirmove).setMessage(TextParam.text(message)).show();
-        });
+        }));
     }
 
     public static int getCurrentVersion() {
