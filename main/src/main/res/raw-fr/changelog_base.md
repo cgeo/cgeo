@@ -60,6 +60,7 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo Player
 - Nouveau : Traduction hors ligne pour les caches Wherigo
