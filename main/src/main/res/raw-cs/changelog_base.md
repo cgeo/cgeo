@@ -60,6 +60,7 @@ Jak bylo oznámeno ve verzích ze 17.07.2025 a 01.12.2025, konečně jsme odstra
 - New: Sending log is done in background
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
