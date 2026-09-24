@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.widget.ImageView;
 
@@ -38,16 +39,26 @@ public class ScaleDrawer {
         if (scaleView == null || this.lastBounds == lastBounds) {
             return;
         }
+        if (scaleView.getWidth() <= 0 || scaleView.getHeight() <= 0) {
+            return;
+        }
         this.lastBounds = lastBounds;
-        final double centerLat = (lastBounds.southwest.latitude + lastBounds.northeast.latitude) / 2;
-        final ImmutableTriple<Double, String, Float> scaled = Units.scaleDistanceWithFactor(new Geopoint(centerLat, lastBounds.southwest.longitude).distanceTo(new Geopoint(centerLat, lastBounds.northeast.longitude)) * SCALE_WIDTH_FACTOR);
-        final double scale = (scaled.left < 10 ? Math.floor(scaled.left) : Math.pow(10, Math.floor(Math.log10(scaled.left))));
-        final double distanceRound = scale * Math.floor(scaled.left / scale);
 
-        final Geopoint p1 = new Geopoint(centerLat, (lastBounds.southwest.longitude + lastBounds.northeast.longitude) / 2);
-        final Geopoint p2 = p1.project(90d, distanceRound * scaled.right); // projection takes km
+        // measure the distance covered by the maximum scale length horizontally on screen, starting at the map center
+        // (using screen coordinates keeps this independent of map rotation, tilt and antimeridian crossing)
         final Projection projection = mMap.getProjection();
-        final int pixels = Math.abs(projection.toScreenLocation(new LatLng(p2.getLatitude(), p2.getLongitude())).x - projection.toScreenLocation(new LatLng(p1.getLatitude(), p1.getLongitude())).x);
+        final int maxPixels = (int) (scaleView.getWidth() * SCALE_WIDTH_FACTOR);
+        final LatLng center = mMap.getCameraPosition().target;
+        final Point centerOnScreen = projection.toScreenLocation(center);
+        final LatLng right = projection.fromScreenLocation(new Point(centerOnScreen.x + maxPixels, centerOnScreen.y));
+        final double maxDistance = new Geopoint(center.latitude, center.longitude).distanceTo(new Geopoint(right.latitude, right.longitude));
+        if (maxDistance <= 0 || Double.isNaN(maxDistance)) {
+            return;
+        }
+
+        final ImmutableTriple<Double, String, Float> scaled = Units.scaleDistanceWithFactor(maxDistance);
+        final double distanceRound = roundToNiceValue(scaled.left);
+        final int pixels = (int) Math.round(maxPixels * distanceRound / scaled.left);
 
 
         if (paint == null) {
@@ -87,6 +98,20 @@ public class ScaleDrawer {
         canvas.drawText(scaled.middle, pixels + 10 + space, bottom - 10 * pixelDensity, paint);
 
         scaleView.setImageBitmap(bitmap);
+    }
+
+    /**
+     * rounds the given value down to a "nice" value:
+     * 1..9 in steps of 1, 10..95 in steps of 5, 100..950 in steps of 50 and so on
+     * (values below 1 in steps of 0.1, 0.01, ...)
+     */
+    static double roundToNiceValue(final double value) {
+        if (value <= 0) {
+            return 0;
+        }
+        final double magnitude = Math.pow(10, Math.floor(Math.log10(value)));
+        final double step = magnitude < 10 ? magnitude : magnitude / 2;
+        return step * Math.floor(value / step + 1e-9); // epsilon compensates floating point errors (e.g. 0.3 / 0.1 = 2.999...)
     }
 
     public void setNeedsInvertedColors(final boolean needsInvertedColors) {
