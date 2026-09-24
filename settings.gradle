@@ -11,6 +11,9 @@ pluginManagement {
  */
 plugins {
     id 'com.gradle.develocity' version '4.5.1'
+
+    // check the dependencyUpdates
+    id 'io.github.ben-manes.versions.settings' version '0.64.0'
 }
 
 dependencyResolutionManagement {
