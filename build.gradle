@@ -15,8 +15,7 @@ plugins {
     // IDEA tasks for the project, see https://docs.gradle.org/current/userguide/idea_plugin.html
     id 'idea'
 
-    // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.54.0'
+    // helper for io.github.ben-manes.versions.settings plugin
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
@@ -61,7 +60,7 @@ tasks.register('cgeoHelp') {
         println '    gradlew dependencies main:dependencies'
         println ''
         println 'check gradle dependencies for updates:'
-        println '    gradlew dependencyUpdates --no-parallel'
+        println '    gradlew dependencyUpdates'
         println ''
         println 'Use "gradlew tasks" for more available tasks.'
         println ''
