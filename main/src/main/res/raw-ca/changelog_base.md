@@ -60,7 +60,7 @@ Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eli
 - Nou: L'enviament del registre es fa en segon pla
 - Correcció: Inventari ocult en el registre sota certes condicions
 - Nou: Mitjana de coordenades en crear punts de referència / establir coordenades per a catxés definits per l'usuari
-- Fix: Description not loaded (website change)
+- Correcció: La descripció no es carregava (canvi al lloc web)
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
