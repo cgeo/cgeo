@@ -1,15 +1,15 @@
 ### Karta
-- New: Grayscale option (#18588)
-- New: User-defined tile overlays (#18587)
-- New: Support multiple user-defined tile providers (#18586)
+- Nytt: Gråskalealternativ (#18588)
+- Nytt: Användardefinierade rutöverlägg (#18587)
+- Nytt: Stöd flera användardefinierade rutleverantörer (#18586)
 
 ### Cachedetaljer
-- New: Toggle stored-on-device date between relative and exact (#18393)
-- Fix: Stacked progress dialogs when deleting multiple logs (#18279)
-- New: "Edit personal note" button in waypoint popup (#18559)
+- Nytt: Växla lagrad-på-enhetens-datum mellan relativ och exakt (#18393)
+- Fix: Staplade status-dialogrutor när flera loggar tas bort (#18279)
+- Nytt: knappen "Redigera personlig anteckning" i vägpunkt-popup (#18559)
 
 ### Wherigo-spelare
 -
 
 ### Allmänt
-- Fix: Multiple pending download dialogs on main screen (#18363)
+- Fix: Flera väntande hämtningsdialoger på huvudskärmen (#18363)
