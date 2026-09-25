@@ -1,12 +1,16 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -90,24 +94,37 @@ public final class LoggingUI {
     }
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
+        // For OC caches, the static log-type list is a superset — the OKAPI server is the source of
+        // truth. If we haven't fetched submittable logtypes yet, do so before opening the menu so
+        // that entries the server won't accept (e.g. OWNER_MAINTENANCE on OC.de) don't show up.
+        if (cache.getSubmittableLogTypes() == null && ConnectorFactory.getConnector(cache) instanceof OCApiConnector) {
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+                try {
+                    cache.getLoggingManager().getLogContextInfo(null);
+                } catch (final Exception e) {
+                    Log.d("LoggingUI.showOfflineMenu: prefetch of submittable logtypes failed: " + e);
+                }
+                AndroidRxUtils.runOnUi(() -> doShowOfflineMenu(cache, activity, listener));
+            });
+            return;
+        }
+        doShowOfflineMenu(cache, activity, listener);
+    }
+
+    private static void doShowOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
         final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
         final LogType currentLogType = currentLog == null ? null : currentLog.logType;
 
-        final List<LogType> logTypes = cache.getPossibleLogTypes();
-        // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
-        if (GCConnector.getInstance().canHandle(cache.getGeocode()) && !cache.isOwner()) {
-            logTypes.add(LogType.NEEDS_MAINTENANCE);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
-        }
+        final List<LogType> offlineLogTypes = cache.getPossibleOfflineLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
-        for (final LogType logType : logTypes) {
+        for (final LogType logType : offlineLogTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
         if (cache.hasLogOffline()) {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
         }
         list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));
-        if (!Settings.getLogTemplates().isEmpty() && logTypes.contains(LogType.FOUND_IT)) {
+        if (!Settings.getLogTemplates().isEmpty() && offlineLogTypes.contains(LogType.FOUND_IT)) {
             list.add(1, new LogTypeEntry(null, SpecialLogType.TEMPLATES, false));
         }
 
@@ -133,20 +150,14 @@ public final class LoggingUI {
                         break;
                 }
             } else {
-                final ReportProblemType reportProblem;
+                final List<LogType> onlineLogTypes = cache.getPossibleLogTypes();
+                final ILoggingManager loggingManager = cache.getLoggingManager();
+                final ReportProblemType reportProblem = loggingManager.getDefaultReportProblemType(logTypeEntry.logType);
                 final LogType logType;
-                switch (logTypeEntry.logType) {
-                    case NEEDS_MAINTENANCE:
-                        logType = LogType.NOTE;
-                        reportProblem = ReportProblemType.OTHER;
-                        break;
-                    case NEEDS_ARCHIVE:
-                        logType = LogType.NOTE;
-                        reportProblem = ReportProblemType.ARCHIVE;
-                        break;
-                    default:
-                        logType = logTypeEntry.logType;
-                        reportProblem = ReportProblemType.NO_PROBLEM;
+                if (!onlineLogTypes.contains(logTypeEntry.logType)) {
+                    logType = LogType.NOTE;
+                } else {
+                    logType = logTypeEntry.logType;
                 }
                 cache.logOffline(activity, logType, reportProblem);
             }

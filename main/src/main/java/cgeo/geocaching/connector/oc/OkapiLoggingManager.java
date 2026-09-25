@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
@@ -14,8 +15,10 @@ import cgeo.geocaching.models.Trackable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +56,21 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
             info.setError();
         }
         info.setAvailableFavoritePoints(getConnector().getRemainingFavoritePoints());
+
+        // Restrict the static client-side list to what the OKAPI server actually accepts for this
+        // cache and user. On error (e.g. offline) leave the list empty so the static list is kept.
+        final EnumSet<LogType> serverTypes = OkapiClient.getSubmittableLogTypes(getConnector(), getCache());
+        if (serverTypes != null) {
+            // stash on the cache so synchronous callers (e.g. LoggingUI quick menu) can filter too
+            getCache().setSubmittableLogTypes(serverTypes);
+            final List<LogType> filtered = new ArrayList<>();
+            for (final LogType lt : getCache().getPossibleLogTypes()) {
+                if (serverTypes.contains(lt)) {
+                    filtered.add(lt);
+                }
+            }
+            info.setAvailableLogTypes(filtered);
+        }
         return info;
     }
     @Override
