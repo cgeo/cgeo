@@ -1,3 +1,3 @@
 ##
-- Fix: geocaching.com Ignore List handling
-- Fix: Several memory leaks
+- Correcció: gestió de la llista d'ignorats de geocaching.com
+- Correcció: Diverses fuites de memòria
