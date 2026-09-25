@@ -17,41 +17,34 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.functions.Function;
 
-public class CacheDownloaderService extends AbstractForegroundIntentService {
+public class CacheDownloaderService extends AbstractGeocacheBatchService {
     static {
         logTag = "CacheDownloaderService";
     }
 
-    private static final String EXTRA_GEOCODES = "extra_geocodes";
-
-    private static volatile boolean shouldStop = false;
     private static final Map<String, DownloadTaskProperties> downloadQuery = new HashMap<>();
-
-    final AtomicInteger cachesDownloaded = new AtomicInteger();
 
     public static boolean isDownloadPending(final String geocode) {
         return downloadQuery.containsKey(geocode);
@@ -157,9 +150,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
         Log.d("DOWNLOAD: " + newGeocodes);
 
-        final Intent intent = new Intent(context, CacheDownloaderService.class);
-        intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
-        ContextCompat.startForegroundService(context, intent);
+        addGeocodes(context, CacheDownloaderService.class, newGeocodes);
         ViewUtils.showToast(context, R.string.download_started);
 
         if (onStartCallback != null) {
@@ -168,19 +159,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     public static void requestStopService() {
-        shouldStop = true;
-    }
-
-    @Override
-    public NotificationCompat.Builder createInitialNotification() {
-        shouldStop = false;
-        final PendingIntent actionCancelIntent = PendingIntent.getBroadcast(this, 0,
-                new Intent(this, StopCacheDownloadServiceReceiver.class),
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-
-        return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
-                .setProgress(100, 0, true)
-                .addAction(R.drawable.ic_menu_cancel, LocalizationUtils.getString(android.R.string.cancel), actionCancelIntent);
+        requestStop(CacheDownloaderService.class);
     }
 
     @Override
@@ -189,93 +168,115 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     @Override
+    protected int getTitle() {
+        return R.string.caches_store_background_title;
+    }
+
+    @Override
+    protected NotificationChannels getCompletionNotificationChannel() {
+        return NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION;
+    }
+
+    @Override
+    protected String getCompletedText(final int processedCount) {
+        if (processedCount == 1) {
+            return null; // see #15881 — suppress notification for a single download
+        }
+        return LocalizationUtils.getPlural(R.plurals.caches_store_background_result, processedCount, processedCount);
+    }
+
+    @Override
+    @NonNull
+    protected String getInterruptedText(final boolean wasCanceled, final int processedCount, final int totalCount) {
+        return LocalizationUtils.getString(
+                wasCanceled ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
+                processedCount, totalCount);
+    }
+
+    @Override
     protected void onHandleIntent(final @Nullable Intent intent) {
         if (intent == null) {
             return;
         }
 
-        // schedule download on multiple threads...
-
         Log.d("Download task started");
 
-        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
-        geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            handleDownload(geocode);
-            emitter.onComplete();
-        }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
+        // Drain all pending geocodes in parallel, looping to pick up any that were added
+        // while a previous parallel batch was in flight (same merged-batch semantics as
+        // the sequential base-class loop).
+        final BatchState state = getCurrentState();
+        while (!state.shouldStop) {
+            final List<String> batch;
+            synchronized (state.pending) {
+                if (state.pending.isEmpty()) {
+                    break;
+                }
+                batch = new ArrayList<>(state.pending);
+            }
+            Observable.fromIterable(batch)
+                    .flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                        processGeocodeWithTracking(geocode);
+                        emitter.onComplete();
+                    }).subscribeOn(AndroidRxUtils.refreshScheduler))
+                    .blockingSubscribe();
+        }
 
         Log.d("Download task completed");
     }
 
-    private void handleDownload(final String geocode) {
-        try {
-            if (shouldStop) {
-                Log.i("download canceled");
-                return;
-            }
-
-            Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " started");
-
-            final DownloadTaskProperties properties;
-            synchronized (downloadQuery) {
-                properties = downloadQuery.put(geocode, null); // set the properties to null, to point out that the download is currently ongoing
-
-            }
-            if (properties == null) {
-                throw new IllegalStateException("The cache is not present in the download query");
-            }
-
-            // update foreground service notification
-            notification.setProgress(downloadQuery.size() + cachesDownloaded.get(), cachesDownloaded.get(), false);
-            notification.setContentText(cachesDownloaded.get() + "/" + (downloadQuery.size() + cachesDownloaded.get()));
-            updateForegroundNotification();
-
-            // merge current lists and additional lists
-            final Set<Integer> combinedListIds = new HashSet<>(properties.listIds);
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            if (cache != null && !cache.getLists().isEmpty()) {
-                if (properties.keepExistingLists) {
-                    combinedListIds.clear();
-                }
-                combinedListIds.addAll(cache.getLists());
-            }
-
-            // download...
-            if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
-                // send a broadcast so that foreground activities know that they might need to update their content
-                GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
-                // check whether the download properties are still null,
-                // otherwise there is a new download task...
-                synchronized (downloadQuery) {
-                    if (downloadQuery.get(geocode) == null) {
-                        downloadQuery.remove(geocode);
-                    }
-                }
-                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed");
-                cachesDownloaded.incrementAndGet();
-            } else {
-                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " failed");
-            }
-        } catch (Exception ex) {
-            Log.e("exception while background download", ex);
+    @Override
+    protected boolean processGeocode(final String geocode) {
+        if (getCurrentState().shouldStop) {
+            Log.i("download canceled");
+            return false;
         }
+
+        Log.d("Download " + geocode + " started");
+
+        final DownloadTaskProperties properties;
+        synchronized (downloadQuery) {
+            properties = downloadQuery.put(geocode, null); // null marks the entry as "in progress"
+        }
+        if (properties == null) {
+            throw new IllegalStateException("The cache is not present in the download query");
+        }
+
+        // merge current lists and additional lists
+        final Set<Integer> combinedListIds = new HashSet<>(properties.listIds);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache != null && !cache.getLists().isEmpty()) {
+            if (properties.keepExistingLists) {
+                combinedListIds.clear();
+            }
+            combinedListIds.addAll(cache.getLists());
+        }
+
+        if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
+            // notify foreground activities that they may need to update their content
+            GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
+            synchronized (downloadQuery) {
+                if (downloadQuery.get(geocode) == null) {
+                    // value still null → not re-queued during download, safe to remove
+                    downloadQuery.remove(geocode);
+                }
+            }
+            Log.d("Download " + geocode + " completed");
+            return true;
+        }
+
+        Log.d("Download " + geocode + " failed");
+        synchronized (downloadQuery) {
+            if (downloadQuery.get(geocode) == null) {
+                downloadQuery.remove(geocode);
+            }
+        }
+        return false;
     }
 
     @Override
     public void onDestroy() {
-        if (!downloadQuery.isEmpty()) {
-            showEndNotification(LocalizationUtils.getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
-                    cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
-        } else if (cachesDownloaded.get() != 1) { // see #15881
-            showEndNotification(LocalizationUtils.getPlural(R.plurals.caches_store_background_result, cachesDownloaded.get()));
-        }
         downloadQuery.clear();
         super.onDestroy();
-    }
-
-    private void showEndNotification(final String text) {
-        Notifications.send(this, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true));
     }
 
     private static class DownloadTaskProperties {
