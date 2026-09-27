@@ -95,6 +95,11 @@ public class GeoStyle implements Parcelable {
         return dynamic(SYSTEM_DEFAULT.strokeColor, SYSTEM_DEFAULT.fillColor, SYSTEM_DEFAULT.strokeWidth, styleRules);
     }
 
+
+    public static GeoStyle dynamic() {
+        return dynamic(null);
+    }
+
     public static GeoStyle dynamic(final int strokeColor, final int fillColor, final float strokeWidth, final List<GeoStyleRule> styleRules) {
         return new GeoStyle(strokeColor, fillColor, strokeWidth, styleRules == null ? Collections.emptyList() : new ArrayList<>(styleRules));
     }

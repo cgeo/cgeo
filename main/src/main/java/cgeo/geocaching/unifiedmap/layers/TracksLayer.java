@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.maps.Tracks;
+import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -32,9 +33,9 @@ public class TracksLayer {
                 final int defaultStrokeColor = track.getTrackfile().getColor();
                 final int defaultFillColor = Color.argb(32, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
                 final GeoStyle defaultStyle = GeoStyle.fixed(defaultStrokeColor, defaultFillColor, defaultWidth);
-                track.getRoute().getItem().recalculateDynamicStyles(null, defaultStyle);
-
-                layer.putForce(TRACK_KEY_PREFIX + key, track.getRoute().getItem());
+                final GeoItem item = track.getRoute().getItem();
+                item.recalculateDynamicStyles(null, defaultStyle);
+                layer.putForce(TRACK_KEY_PREFIX + key, item);
              }
         })));
 
