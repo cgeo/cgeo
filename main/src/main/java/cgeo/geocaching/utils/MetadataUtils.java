@@ -41,11 +41,11 @@ public final class MetadataUtils {
     }
 
     /**
-     * Tries to read metadata from given stream, assuming it is an image data stream
+     * Tries to read metadata from a given stream, assuming it is an image data stream
      *
      * @param description describes the stream. Used for logging in case of errors
      * @param imageStream image data stream
-     * @param closeAfter  if true, stream is closed after read
+     * @param closeAfter  if true, the stream is closed after read
      * @return Metadata read, or null if metadata could not be read
      */
     public static Metadata readImageMetadata(final String description, final InputStream imageStream, final boolean closeAfter) {
@@ -54,9 +54,7 @@ public final class MetadataUtils {
             return null;
         }
         try {
-            final Metadata data = ImageMetadataReader.readMetadata(imageStream);
-            //throw new RuntimeException("test");
-            return data;
+            return ImageMetadataReader.readMetadata(imageStream);
         } catch (IOException | ImageProcessingException | RuntimeException ie) {
             Log.w("[MetadataUtils] Problem reading metadata from " + description, ie);
         } finally {
@@ -70,7 +68,7 @@ public final class MetadataUtils {
     public static Geopoint getFirstGeopoint(final Metadata metadata) {
         return safeProcess("geopoint", metadata, null, () -> {
             final Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
-            if (gpsDirectories == null) {
+            if (gpsDirectories.isEmpty()) {
                 return null;
             }
 
@@ -81,6 +79,7 @@ public final class MetadataUtils {
                     return new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
                 }
             }
+
             return null;
         });
     }
@@ -155,6 +154,4 @@ public final class MetadataUtils {
             return defaultValue;
         }
     }
-
-
 }
