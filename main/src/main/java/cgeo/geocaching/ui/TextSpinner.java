@@ -55,7 +55,6 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     private boolean fireOnChangeOnly;
 
     private T selectedItem;
-    private T previousSelectedItem;
 
     private Spinner spinner;
 
@@ -301,14 +300,16 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         if (!this.valuesToPosition.containsKey(value)) {
             return;
         }
-        if (force || !Objects.equals(previousSelectedItem, value)) {
+
+        final boolean changed = !Objects.equals(selectedItem, value);
+        if (force || changed) {
             this.selectedItem = value;
             repaintDisplay();
         }
-        if (this.changeListener != null && (!this.fireOnChangeOnly || !Objects.equals(previousSelectedItem, value))) {
+        
+        if (this.changeListener != null && (!this.fireOnChangeOnly || changed)) {
             this.changeListener.call(selectedItem);
         }
-        this.previousSelectedItem = this.selectedItem;
     }
 
     private void repaintDisplay() {
