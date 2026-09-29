@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.UserClickListener;
@@ -32,6 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.android.material.chip.Chip;
@@ -46,10 +48,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     public CacheLogsViewCreator(final boolean allLogs) {
         this.allLogs = allLogs;
-    }
-
-    public CacheLogsViewCreator() {
-        this.allLogs = false;
     }
 
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
@@ -109,14 +107,29 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         return logs;
     }
 
+    private Settings.FriendLogTypeEnum getFriendLogType(final Chip chip) {
+        if (chip == binding.chipOwn) {
+            return Settings.FriendLogTypeEnum.Own;
+        } else if (chip == binding.chipOwner) {
+            return Settings.FriendLogTypeEnum.Owner;
+        } else {
+            return Settings.FriendLogTypeEnum.Friends;
+        }
+    }
+
     @Override
     protected void addHeaderView() {
         if (binding != null) {
             addLogCountsHeader();
             addEmptyLogsHeader();
 
+            final Set<Settings.FriendLogTypeEnum> lastSelectedFriendLogTypes = Settings.getLastSelectedFriendLogTypes();
             for (int i = 0; i < binding.filterChips.getChildCount(); i++) {
-                ((Chip) binding.filterChips.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
+                final Chip chip = (Chip) binding.filterChips.getChildAt(i);
+                final Settings.FriendLogTypeEnum friendLogType = getFriendLogType(chip);
+                chip.setChecked(lastSelectedFriendLogTypes.contains(friendLogType));
+                chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    Settings.setLastSelectedFriendLogType(friendLogType, isChecked);
                     setContent();
                 });
             }
