@@ -777,6 +777,7 @@
     <string name="named_filter_markers_enabled">Маркеры включены</string>
     <string name="named_filter_markers_disabled">Маркеры отключены</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_name">Название</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -885,6 +886,8 @@
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
     <string name="settings_userDefinedTileProviderUri">Введите полный URI-адрес (без косой черты) поставщика плиток карт или введите полный URI-адрес с параметрами (включая {X}, {Y} и {Z}). Убедитесь, что вы проверили условия использования этих карт и соблюдаете их.</string>
     <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Название</string>
+    <string name="settings_tileUrl_test">Проверка</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -2872,6 +2875,9 @@
     <string name="delete">Удалить</string>
     <string name="play">Играть</string>
     <string name="copy" tools:ignore="PrivateResource">Копировать</string>
+    <string name="pause">Пауза</string>
+    <string name="resume">Продолжить</string>
+    <string name="rename">Переименовать</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
     <string name="multiselect_selectvisible">Выбрать видимое</string>
@@ -2916,7 +2922,14 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Просмотр БД</string>
+    <string name="dbi_config_columns">Настроить столбцы</string>
     <string name="dbi_edit_ok">Поле обновлено</string>
     <string name="dbi_edit_error">Ошибка при обновлении поля</string>
+    <string name="dbi_select_table">Выберите таблицу</string>
+    <string name="dbi_sql_editor">SQL редактор</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Поиск</string>
+    <string name="grid_search_reset">Сброс</string>
+    <string name="grid_search_global">Общие</string>
+    <string name="grid_search_value">Значение</string>
 </resources>
