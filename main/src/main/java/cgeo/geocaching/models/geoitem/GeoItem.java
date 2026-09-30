@@ -31,8 +31,10 @@ public interface GeoItem extends Parcelable {
 
     boolean isValid();
 
-    /** creates a new GeoItem where the given style is applied as default style */
-    GeoItem applyDefaultStyle(GeoStyle style);
+    GeoStyle getStyle();
+
+    /** recalculates dynamic styles */
+    void recalculateDynamicStyles(GeoStyle parentStyle, GeoStyle mainStyle);
 
     boolean touches(@NonNull Geopoint tapped, @Nullable ToScreenProjector toScreenCoordFunc);
 

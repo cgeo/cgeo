@@ -79,6 +79,7 @@ import com.caverock.androidsvg.SVG;
 import com.igreenwood.loupe.Loupe;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.EnumUtils;
@@ -601,13 +602,22 @@ public final class ImageUtils {
 
         private Drawable drawable;
         protected final WeakReference<TextView> viewRef;
+        private final Disposable fetch;
 
         @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             viewRef = new WeakReference<>(view);
             drawable = null;
             setBounds(0, 0, 0, 0);
-            drawableObservable.subscribe(this);
+            fetch = drawableObservable.subscribe(this);
+        }
+
+        /**
+         * The image fetch feeding this container. The creator has to keep it, otherwise the fetch cannot be
+         * cancelled and keeps this container alive until it finishes on its own.
+         */
+        public Disposable getFetch() {
+            return fetch;
         }
 
         @Override

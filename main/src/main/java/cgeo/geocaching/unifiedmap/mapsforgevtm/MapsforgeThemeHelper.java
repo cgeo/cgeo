@@ -45,6 +45,7 @@ import org.oscim.map.Map;
 import org.oscim.theme.ExternalRenderTheme;
 import org.oscim.theme.IRenderTheme;
 import org.oscim.theme.ThemeFile;
+import org.oscim.theme.ThemeLoader;
 import org.oscim.theme.XmlRenderThemeMenuCallback;
 import org.oscim.theme.XmlRenderThemeStyleLayer;
 import org.oscim.theme.XmlRenderThemeStyleMenu;
@@ -138,7 +139,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 org.mapsforge.map.rendertheme.rule.RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
                 */
-                mTheme = map.setTheme(xmlRenderTheme);
+                mTheme = setThemeHonouringGrayscale(map, xmlRenderTheme);
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
@@ -158,7 +159,22 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private void applyDefaultTheme(final Map map, final AbstractTileProvider tileProvider) {
         if (tileProvider.supportsThemes()) {
-            mTheme = map.setTheme(VtmThemes.getDefaultVariant());
+            mTheme = setThemeHonouringGrayscale(map, VtmThemes.getDefaultVariant());
+        }
+    }
+
+    /** applies a theme, greying every colour it defines when the map is set to grayscale */
+    private static IRenderTheme setThemeHonouringGrayscale(final Map map, final ThemeFile themeFile) {
+        if (!Settings.getMapGrayscale()) {
+            return map.setTheme(themeFile);
+        }
+        try {
+            final IRenderTheme theme = ThemeLoader.load(themeFile, new GrayscaleThemeCallback());
+            map.setTheme(theme);
+            return theme;
+        } catch (final IRenderTheme.ThemeException e) {
+            Log.w("Could not apply grayscale to the render theme", e);
+            return map.setTheme(themeFile);
         }
     }
 

@@ -9,7 +9,6 @@ import static org.gradle.api.provider.ValueSourceParameters.None
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
 
-
 plugins {
     // Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
     id 'com.android.application'
@@ -39,13 +38,13 @@ android {
         // enable Java 8 APIs like Streams on older Android versions
         coreLibraryDesugaringEnabled = true
         // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
 
         versionName = versionNameFromDate()
         versionCode = versionCodeFromDate(0)
@@ -105,7 +104,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -168,7 +167,7 @@ android {
         }
 
         // proguard rules
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
     }
 
     testBuildType = "debug" //the default BuildType
@@ -232,7 +231,7 @@ android {
         checkDependencies = true
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += [
                     // you can double click an APK file in Android Studio 2.2+ to see what's in there
@@ -267,12 +266,14 @@ android {
             ]
 
             // vtm-themes
-            pickFirsts.add("assets/symbols/**")
-            pickFirsts.add("assets/patterns/**")
+            pickFirsts += [
+                    "assets/symbols/**",
+                    "assets/patterns/**"
+            ]
         }
     }
 
-    flavorDimensions.add("javaCompilerTime") // all flavours must be assigned a dimension
+    flavorDimensions += ["javaCompilerTime"] // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
@@ -290,10 +291,6 @@ android {
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
-
-    // tests rely on JUnit-based classes
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
 }
 
 ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
@@ -343,7 +340,7 @@ dependencies {
     // from cgeo/offline-translator's GitHub Release. Resolved via the ivy
     // repository declared in the root build.gradle. Replaces the formerly
     // checked-in jniLibs/*.so and dev/davidv/bergamot/*.java.
-    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.2@aar'
+    implementation 'cgeo:bergamot-sys:v0.2.6-cgeo.3@aar'
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.6.0'
@@ -368,9 +365,8 @@ dependencies {
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
 
-    // DB inspection
-    implementation 'com.github.moving-bits:datatables:v0.1.0'
-    implementation 'com.github.moving-bits:dbinspection:v0.1.2'
+    // DB inspection (new library)
+    implementation 'com.github.moving-bits:grid:7fccf69583'
 
     // Jackson XML processing
     String jacksonVersion = '2.21.6'
@@ -446,8 +442,11 @@ dependencies {
 
     implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
-    configurations.configureEach {
-        exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
+    configurations.configureEach { config ->
+        // exclude duplicate XmlPullParser class from APK, but keep it for lint tools
+        if (!config.name.toLowerCase().contains("lint")) {
+            exclude group: 'net.sf.kxml', module: 'kxml2'
+        }
     }
 
     // used by mapsforge
@@ -460,7 +459,7 @@ dependencies {
     implementation project(":organicmaps-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.20.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.21.0'
 
     String okhttpVersion = '5.4.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
@@ -478,19 +477,9 @@ dependencies {
     // Support Library Design
     implementation 'com.google.android.material:material:1.14.0'
 
-    // ProcessPhoenix, reliable process restart
-    // implementation 'com.jakewharton:process-phoenix:2.0.0'
-
     // RxJava
     implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
-
-    // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
-    constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0") {
-            because 'align all versions of kotlin transitive dependencies'
-        }
-    }
 
     // Support Library Lifecycle Helpers
     String lifecycleVersion = '2.10.0'
@@ -556,21 +545,19 @@ dependencies {
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
-    //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
-    //See https://github.com/guardian/toolargetool
+    // TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
+    // See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.4'
+    implementation 'com.github.AppDevNext.AndroidChart:chartLib:5.2.1'
 
-    // For Wherigos: GIF support
-    // ani gif support
-    // minSdk=17 from version 1.2.16
+    // For Wherigos: (ani) GIF support
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.32'
 
+    // search screen
     implementation 'androidx.cardview:cardview:1.0.0'
-
 }
 
 // define objects for files/folders outside tasks
@@ -772,14 +759,20 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
                     args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
+                    standardOutput = new ByteArrayOutputStream()
+                    errorOutput = new ByteArrayOutputStream()
                 }
                 injected.execOperations.exec {
                     executable = adb
@@ -822,7 +815,7 @@ checkstyle {
     // align checkstyle with codacy (https://github.com/codacy/codacy-checkstyle)
     // - assign the checkstyle version explicitly here
     // - and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
-    toolVersion = '10.26.1'
+    toolVersion = '12.3.1'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")

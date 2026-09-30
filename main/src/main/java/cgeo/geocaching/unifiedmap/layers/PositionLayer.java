@@ -31,12 +31,7 @@ public class PositionLayer {
     /** caches the rotated variants of the position marker, which would otherwise be recreated on every update */
     private final GeoIcon.BitmapProvider markerPositionProvider = new GeoIcon.RotatedBitmapProvider(markerPosition);
 
-    private final GeoStyle accuracyStyle = GeoStyle.builder()
-            .setStrokeWidth(1.0f)
-            .setStrokeColor(MapLineUtils.getAccuracyCircleColor())
-            .setFillColor(MapLineUtils.getAccuracyCircleFillColor())
-            .build();
-
+    private final GeoStyle accuracyStyle = GeoStyle.fixed(MapLineUtils.getAccuracyCircleColor(), MapLineUtils.getAccuracyCircleFillColor(), 1.0f);;
 
     public PositionLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);

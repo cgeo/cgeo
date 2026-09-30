@@ -704,7 +704,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.availableFavoritePoints = data.getAvailableFavoritePoints();
         }
 
-
+        
         refreshGui();
         showProgress(false);
     }
@@ -716,9 +716,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             rLogTypes.add(this.originalLogEntry.logType);
             rLogTypes.addAll(logTypes);
             this.logType.setValues(rLogTypes);
-        } else {
-            this.logType.setValues(logTypes);
+            return;
         }
+
+        // set NOTE as logType if the current one is not available anymore
+        // (e.g. due to a changed online log-status)
+        final LogType defaultLogType = LogType.NOTE;
+        final LogType currentLogType = this.logType.get();
+        if (currentLogType != null && !logTypes.contains(currentLogType)) {
+            if (!logTypes.contains(defaultLogType)) {
+                // NOTE log type must ALWAYS be available for selection
+                final List<LogType> rLogTypes = new ArrayList<>();
+                rLogTypes.add(defaultLogType);
+                rLogTypes.addAll(logTypes);
+                this.logType.setValues(rLogTypes);
+            }
+            this.logType.set(defaultLogType);
+            return;
+        }
+
+        this.logType.setValues(logTypes);
     }
 
     @Override

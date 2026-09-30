@@ -344,14 +344,14 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
     private static void setupIcon(final TrackableActivity activity, final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-        AndroidRxUtils.bindActivity(activity, imgGetter.fetchDrawable(url)).subscribe(image -> {
+        activity.createDisposables.add(AndroidRxUtils.bindActivity(activity, imgGetter.fetchDrawable(url)).subscribe(image -> {
             if (actionBar != null) {
                 final int height = actionBar.getHeight();
                 //noinspection SuspiciousNameCombination
                 image.setBounds(0, 0, height, height);
                 actionBar.setIcon(image);
             }
-        });
+        }));
     }
 
     private static void setupIcon(final ActionBar actionBar, @DrawableRes final int resId) {
@@ -634,7 +634,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
                 trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
 
-                AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
+                activity.createDisposables.add(AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable));
 
                 binding.image.removeAllViews();
                 binding.image.addView(trackableImage);

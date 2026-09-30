@@ -38,7 +38,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         isDbOnSdCard.setPersistent(false);
         isDbOnSdCard.setOnPreferenceClickListener(preference -> {
             final boolean oldValue = Settings.isDbOnSDCard();
-            DataStore.moveDatabase(getActivity());
+            DataStore.moveDatabase((SettingsActivity) getActivity());
             return oldValue != Settings.isDbOnSDCard();
         });
 

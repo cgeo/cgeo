@@ -127,17 +127,17 @@ public class GeoItemTestLayer {
         layer.put(TESTLAYER_KEY_PREFIX + "staticPolyline", polygonAround(staticPolylineCenter, 50, Color.RED));
 
         final Geopoint staticCircle = staticPolylineCenter.project(90, 50);
-        layer.put(TESTLAYER_KEY_PREFIX + "staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.builder().setStrokeColor(Color.DKGRAY).setFillColor(Color.YELLOW).build()));
+        layer.put(TESTLAYER_KEY_PREFIX + "staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.fixed(Color.DKGRAY, Color.YELLOW, 2f)));
 
         final Geopoint staticPolygon = staticCircle.project(90, 50);
         layer.put(TESTLAYER_KEY_PREFIX + "staticPolygonWithText", GeoPrimitive.createPolygon(geoGridPoints(
                 staticPolygon, 10, 0, 0, 3, 0, 3, 1, 2, 1, 2, 2, 3, 2, 3, 3, 1, 3, 0, 2
-        ), GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build())
+        ), GeoStyle.fixed(Color.YELLOW, Color.GREEN, 5f))
                 .buildUpon().setIcon(GeoIcon.builder().setText("This is my polygon").build()).build());
 
         final Geopoint staticPolWithHole = staticPolygon.project(90, 50);
         final GeoPrimitive pol = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON)
-                .setStyle(GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build())
+                .setStyle(GeoStyle.fixed(Color.YELLOW, Color.GREEN, 5f))
                 .addPoints(geoGridPoints(staticPolWithHole, 10, 0, 0, 7, 0, 7, 7, 0, 7))
                 .addHole(geoGridPoints(staticPolWithHole, 10, 1, 1, 1, 2, 2, 2, 2, 1))
                 .addHole(geoGridPoints(staticPolWithHole, 10, 4, 4, 4, 5, 5, 5, 5, 4))
@@ -145,9 +145,9 @@ public class GeoItemTestLayer {
         layer.put(TESTLAYER_KEY_PREFIX + "staticPolygonWithTwoHoles", pol);
 
         final Geopoint zLevelStuff = staticPolygon.project(180, 50);
-        final GeoPrimitive zGreen = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
-        final GeoPrimitive zYellow = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
-        final GeoPrimitive zRed = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
+        final GeoPrimitive zGreen = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.fixed(Color.BLUE, Color.GREEN, 5f));
+        final GeoPrimitive zYellow = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.fixed(Color.BLUE, Color.YELLOW, 5f));
+        final GeoPrimitive zRed = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.fixed(Color.BLUE, Color.RED, 5f));
 
         //order visible should be yellow, red, green
         layer.put(TESTLAYER_KEY_PREFIX + "zGreen-z0(most background)(placed-0)", zGreen.buildUpon().setZLevel(0).build());
@@ -160,7 +160,7 @@ public class GeoItemTestLayer {
             final int widthInDp = (i + 1) * 5;
             final Geopoint start = lineThickness.project(90, i * 10);
             final Geopoint end = start.project(180, 10);
-            final GeoStyle style = GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth((float) widthInDp).build();
+            final GeoStyle style = GeoStyle.solid(Color.BLUE, (float) widthInDp);
             layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-" + widthInDp,
                 GeoPrimitive.createPolyline(Arrays.asList(start, end), style).buildUpon().setIcon(GeoIcon.builder().setText(widthInDp + "dp").build()).build());
         }
@@ -168,10 +168,10 @@ public class GeoItemTestLayer {
         //button width: 38dp
         layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-oneButton",
             GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 20), lineThickness.project(180, 20).project(90, 50)),
-                GeoStyle.builder().setStrokeColor(Color.GREEN).setStrokeWidth(38f).build()));
+                GeoStyle.solid(Color.GREEN, 38f)));
         layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-twoButton",
             GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 25), lineThickness.project(180, 25).project(90, 50)),
-                GeoStyle.builder().setStrokeColor(Color.RED).setStrokeWidth(38f * 2).build()));
+                GeoStyle.solid(Color.RED, 38f * 2)));
 
 
 
@@ -200,7 +200,7 @@ public class GeoItemTestLayer {
                 start.project(90, distance),
                 start.project(90, distance).project(180, distance),
                 start.project(180, distance),
-                start).setStyle(GeoStyle.builder().setStrokeColor(color).build()).build();
+                start).setStyle(GeoStyle.solid(color, 2f)).build();
     }
 
     private static List<Geopoint> geoGridPoints(final Geopoint start, final float dist, final int ... coords) {
@@ -228,7 +228,7 @@ public class GeoItemTestLayer {
                 center.project((angle + 180) % 360, distance),
                 center.project((angle + 270) % 360, distance),
                 center.project(angle, distance)).build();
-        final GeoItem point = GeoPrimitive.createPoint(center.project(angle, distance), GeoStyle.builder().setStrokeColor(Color.GREEN).build());
+        final GeoItem point = GeoPrimitive.createPoint(center.project(angle, distance), GeoStyle.solid(Color.GREEN));
         final GeoItem group = GeoGroup.builder().addItems(point, poly).build();
 
         layer.put(TESTLAYER_KEY_PREFIX + "Quad", group);

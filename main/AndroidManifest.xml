@@ -58,6 +58,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:preserveLegacyExternalStorage="true"
+        android:enableOnBackInvokedCallback="false"
         >
 
         <!-- Samsung Multi-Window support -->

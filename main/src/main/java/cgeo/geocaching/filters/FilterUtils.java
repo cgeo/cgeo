@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
 
 public class FilterUtils {
@@ -73,15 +74,17 @@ public class FilterUtils {
     }
 
     /** opens a dialog to activate/deactivate named filter markers */
-    public static void openDialogActivateMarkers(final Activity context) {
+    public static void openDialogActivateMarkers(final Context context) {
         final List<NamedFilter> filters = NamedFilter.getAllWithIcons();
 
         if (filters.isEmpty()) {
-            SimpleDialog.ofContext(context)
-                .setMessage(R.string.named_filter_no_icons_message)
-                .setNeutralButton(TextParam.id(R.string.named_filter_manage_filter))
-                .setNeutralAction(() -> FilterUtils.onClickFilterMenu((FilteredActivity) context))
-                .show();
+            final SimpleDialog dialog = SimpleDialog.ofContext(context)
+                .setMessage(R.string.named_filter_no_icons_message);
+            if (context instanceof FilteredActivity) {
+                dialog.setNeutralButton(TextParam.id(R.string.named_filter_manage_filter))
+                   .setNeutralAction(() -> FilterUtils.onClickFilterMenu((FilteredActivity) context));
+            }
+            dialog.show();
             return;
         }
 
@@ -104,8 +107,24 @@ public class FilterUtils {
             .selectMultiple(model, NamedFilter::activateMarker);
     }
 
+    public static void registerFilterActivateDeactivateButton(final Context context, final View button) {
+        if (button instanceof MaterialButton) {
+            ((MaterialButton) button).setIconResource(Settings.isConditionalCacheMarkersEnabled() ? R.drawable.ic_menu_marker : R.drawable.ic_menu_marker_off);
+        }
+        button.setOnClickListener(v -> openDialogActivateMarkers(context));
+        button.setOnLongClickListener(v -> {
+            final boolean newState = !Settings.isConditionalCacheMarkersEnabled();
+            Settings.setConditionalCacheMarkersEnabled(newState);
+            if (button instanceof MaterialButton) {
+                ((MaterialButton) button).setIconResource(Settings.isConditionalCacheMarkersEnabled() ? R.drawable.ic_menu_marker : R.drawable.ic_menu_marker_off);
+            }
+            GeocacheChangedBroadcastReceiver.sendBroadcast(GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED);
+            return true;
+        });
+    }
+
     /** opens dialog to select a new filter among named filters. Includes options to clear and select previous (if GeocacheFilterContext is provided) */
-    public static void openDialogSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
+    public static void openDialogSelectGeocacheFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final GeocacheFilterContext filterContext, @Nullable final Consumer<GeocacheFilter> onFilterSelected) {
         final GeocacheFilter currentFilter = filterContext == null ? null : filterContext.get();
         final boolean isFilterActive = currentFilter != null && currentFilter.isFiltering();
         final GeocacheFilter previousFilter = filterContext == null ? null : filterContext.getPreviousFilter();
@@ -144,6 +163,24 @@ public class FilterUtils {
                     onFilterSelected.accept(newFilter);
                 }
             });
+    }
+
+    /**
+     * opens dialog to select multi @NamedFilter among named filters.
+     */
+    public static void openDialogMultiSelectNamedFilter(@NonNull final Context context, @Nullable final TextParam title, @Nullable final Consumer<Set<NamedFilter>> onFiltersSelected, final Set<NamedFilter> exceptFilters) {
+        final List<NamedFilter> namedFilters = NamedFilter.getAll().stream()
+                .filter(f -> !exceptFilters.contains(f)).collect(Collectors.toList());
+        final SimpleDialog.ItemSelectModel<NamedFilter> model = buildGroupedModel(namedFilters);
+        model.setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
+
+        SimpleDialog.ofContext(context)
+                .setTitle(title != null ? title : TextParam.id(R.string.named_filter_select_title))
+                .selectMultiple(model, selectedNamedFilter -> {
+                    if (onFiltersSelected != null) {
+                        onFiltersSelected.accept(selectedNamedFilter);
+                    }
+                });
     }
 
     /** Returns the sorted list of unique parent group names extracted from all existing named filters. */

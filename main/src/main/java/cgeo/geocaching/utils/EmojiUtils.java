@@ -3,7 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.EmojiPickerDialogBinding;
-import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.ui.ImageParam;
@@ -94,7 +93,7 @@ public class EmojiUtils {
     public static final String GREEN_CHECK_BOXED = "✅";
     public static final String DOUBLE_RED_EXCLAMATION_MARK = "‼";
 
-    private static final SparseArray<CacheMarker> emojiCache = new SparseArray<>();
+    private static final SparseArray<BitmapDrawable> emojiCache = new SparseArray<>();
 
     private static final Map<Integer, EmojiPaint> EMOJI_PAINT_CACHE_PER_SIZE = new HashMap<>();
 
@@ -475,14 +474,15 @@ public class EmojiUtils {
     }
 
     /**
-     * builds a drawable the size of a marker with a given emoji string
+     * builds a drawable the size of a marker with a given emoji string.
+     * Warning: calling this method is not backed up by any caching.
      *
      * @param paint - paint data structure for Emojis
      * @param emoji emoji String to display
      * @return drawable bitmap with the emoji on it
      */
     @NonNull
-    private static BitmapDrawable getEmojiDrawableHelper(final EmojiPaint paint, final String emoji) {
+    private static BitmapDrawable createEmojiDrawable(final EmojiPaint paint, final String emoji) {
         final Bitmap bm = Bitmap.createBitmap(paint.bitmapDimensions.first, paint.bitmapDimensions.second, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bm);
         final int singleCp = singleCodePoint(emoji);
@@ -498,7 +498,9 @@ public class EmojiUtils {
         lsLayout.draw(canvas);
         canvas.save();
         canvas.restore();
-        return new BitmapDrawable(paint.res, bm);
+        final BitmapDrawable bmd = new BitmapDrawable(paint.res, bm);
+        bmd.mutate();
+        return bmd;
     }
 
     public static String getFlagEmojiFromCountry(final String countryCode) {
@@ -529,12 +531,20 @@ public class EmojiUtils {
                 .toHashCode();
 
         synchronized (emojiCache) {
-            CacheMarker marker = emojiCache.get(hashcode);
+            BitmapDrawable marker = emojiCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, getEmojiDrawableHelper(paint, emoji));
+                marker = createEmojiDrawable(paint, emoji);
                 emojiCache.put(hashcode, marker);
             }
-            return (BitmapDrawable) marker.getDrawable();
+            // fix #18520: return a COPY of the drawable and make it mutable.
+            // --> this way bounds, alignment and other things can be set on drawable w/o affecting other places
+            if (marker.getConstantState() != null) {
+                marker = (BitmapDrawable) marker.getConstantState().newDrawable(CgeoApplication.getInstance().getResources()).mutate();
+            } else {
+                Log.w("EmojiUtils.getEmojiDrawable: marker.getConstantState() is null for emoji " + emoji);
+            }
+
+            return marker;
         }
     }
 
@@ -548,14 +558,6 @@ public class EmojiUtils {
     @NonNull
     public static BitmapDrawable getEmojiDrawable(final int wantedSize, final String emoji) {
         return getEmojiDrawable(paintForSize(wantedSize), emoji);
-    }
-
-    /**
-     * int-based bridge kept for built-in emoji constants (e.g. {@link #RED_FLAG}) used via {@code ImageParam.emoji(int)}
-     */
-    @NonNull
-    public static BitmapDrawable getEmojiDrawable(final int wantedSize, final int emoji) {
-        return getEmojiDrawable(wantedSize, new String(Character.toChars(emoji)));
     }
 
     private static EmojiPaint paintForSize(final int wantedSize) {
@@ -587,6 +589,17 @@ public class EmojiUtils {
             this.availableSize = availableSize;
             this.offsetTop = offsetTop;
             this.fontsize = fontsize;
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return "EmojiPaint{" +
+                    "bitmapDimensions=" + bitmapDimensions +
+                    ", availableSize=" + availableSize +
+                    ", offsetTop=" + offsetTop +
+                    ", fontsize=" + fontsize +
+                    '}';
         }
     }
 }

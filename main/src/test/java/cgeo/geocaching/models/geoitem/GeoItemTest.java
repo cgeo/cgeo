@@ -149,8 +149,8 @@ public class GeoItemTest {
     private static GeoPrimitive polylineGon(final boolean isPolygon, final Geopoint start, final int lineWidth, final boolean filled, final int ... points) {
 
         return GeoPrimitive.builder().setType(isPolygon ? POLYGON : POLYLINE)
-                .setStyle(GeoStyle.builder().setStrokeWidth((float) lineWidth).setFillColor(filled ? Color.BLACK : Color.TRANSPARENT).build())
-                .addPoints(geopointList(start, points)).build();
+            .setStyle(GeoStyle.fixed(Color.BLACK, filled ? Color.BLACK : Color.TRANSPARENT, lineWidth))
+            .addPoints(geopointList(start, points)).build();
     }
 
     private static List<Geopoint> geopointList(final Geopoint start, final int ... points) {
@@ -166,7 +166,7 @@ public class GeoItemTest {
 
     private static GeoPrimitive circle(final Geopoint gp, final float radius, final int lineWidth, final boolean filled) {
         return GeoPrimitive.builder().setType(CIRCLE).setRadius(radius).addPoints(gp)
-                .setStyle(GeoStyle.builder().setStrokeWidth((float) lineWidth).setFillColor(filled ? Color.BLACK : Color.TRANSPARENT).build()).build();
+            .setStyle(GeoStyle.fixed(Color.BLACK, filled ? Color.BLACK : Color.TRANSPARENT, lineWidth)).build();
 
     }
 

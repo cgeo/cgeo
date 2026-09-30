@@ -35,10 +35,7 @@ public class PositionHistoryLayer {
     final UnifiedMapViewModel viewModel;
 
 
-    private final GeoStyle lineStyle = GeoStyle.builder()
-            .setStrokeColor(MapLineUtils.getTrailColor())
-            .setStrokeWidth(MapLineUtils.getHistoryLineWidth(true))
-            .build();
+    private final GeoStyle lineStyle = GeoStyle.solid(MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth(true));
 
     public PositionHistoryLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         this.layer = layer;

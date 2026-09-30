@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -109,6 +111,7 @@ public class SimpleItemListView extends LinearLayout {
     private class ItemListViewHolder extends RecyclerView.ViewHolder {
 
         private final SimpleitemlistItemViewBinding binding;
+        private final Map<TextView, ColorStateList> originalTextColors = new HashMap<>();
 
         ItemListViewHolder(final SimpleitemlistItemViewBinding itemBinding) {
             super(itemBinding.getRoot());
@@ -155,6 +158,8 @@ public class SimpleItemListView extends LinearLayout {
                     }
                     binding.itemRadiobutton.setChecked(model.getSelectedItems().contains(data.value));
                     binding.itemCheckbox.setChecked(model.getSelectedItems().contains(data.value));
+                    applyHighlight(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_PLAIN
+                        && model.getSelectedItems().contains(data.value));
                     break;
             }
 
@@ -167,6 +172,21 @@ public class SimpleItemListView extends LinearLayout {
             binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.itemGroup.getGroup()) ? VISIBLE : GONE);
             binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.itemGroup.getGroup()) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
+        }
+
+        /**
+         * Highlights the item's text in accent color. Used to mark the currently selected item in choice modes
+         * where neither checkbox nor radiobutton indicates the selection.
+         */
+        private void applyHighlight(final boolean highlight) {
+            final ColorStateList accent = ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorAccent));
+            ViewUtils.walkViewTree(binding.itemViewAnchor, vi -> {
+                    final TextView tv = (TextView) vi;
+                    final ColorStateList original = originalTextColors.computeIfAbsent(tv, TextView::getTextColors);
+                    tv.setTextColor(highlight ? accent : original);
+                    return true;
+                },
+                view -> view instanceof TextView);
         }
 
         private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final ItemGroup<T, Object> itemGroup, final Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> viewMapper) {

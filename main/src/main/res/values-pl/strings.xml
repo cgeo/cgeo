@@ -1178,7 +1178,7 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.\nNiekompatybilne z wariantem VTM UnifiedMap.</string>
+    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
     <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
     <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
@@ -1302,6 +1302,10 @@
     <string name="feature_voting">Ocenianie skrytek</string>
     <string name="init_appearance_general">Ogólny wygląd</string>
     <string name="init_cachedetail_behaviour">Zachowanie</string>
+    <string name="init_named_filter_display_mode">Nazwane filtry w szczegółach skrytki</string>
+    <string name="named_filter_display_mode_none">Nie pokazuj</string>
+    <string name="named_filter_display_mode_active_only">Tylko jeśli znacznik jest aktywny</string>
+    <string name="named_filter_display_mode_all">Pokaż wszystkie pasujące filtry</string>
     <string name="init_cachedetail_note">Osobista notatka do skrytki</string>
     <string name="init_maplines_title">Dostosowanie kolorów mapy</string>
     <string name="init_map_other">Inne</string>
@@ -1767,7 +1771,8 @@
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
     <string name="hash_symbol">#</string>
-    <string name="averaging_my_coordinates">Uśrednianie moich współrzędnych…</string>
+    <string name="averaging_my_coordinates2">Uśrednianie moich współrzędnych… (%s)</string>
+    <string name="averaging_paused">wstrzymano</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrytek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów nawigacji z %1$s</string>
@@ -2514,6 +2519,8 @@
     <string name="live_map_status_partial">Częściowe wyniki (przybliż, aby zmniejszyć liczbę skrytek do wczytania): %s</string>
     <string name="live_map_status_normal">Wczytywanie danych bez problemów: %s</string>
     <string name="list_list_headline">Lista:</string>
+    <string name="filters_list_headline">Filtry:</string>
+    <string name="filters_list_empty">Brak pasujących filtrów</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
         <item quantity="few">%d punkty nawigacji zostały wyciągnięte</item>
@@ -2843,8 +2850,8 @@
     <string name="wherigo_download_message">Kartridż z CGUID \"%s\" nie jest dostępny na Twoim urządzeniu. Czy chcesz go pobrać?</string>
     <string name="wherigo_download_successful_title">Pobrano pomyślnie</string>
     <string name="wherigo_download_failed_title">Pobieranie nie powiodło się</string>
-    <string name="wherigo_download_failed_message">Pobieranie wkładu z CGUID \"%1$s\" nie powiodło się: %2$s</string>
-    <string name="wherigo_manual_download_title">Ręczne pobieranie wkładu</string>
+    <string name="wherigo_download_failed_message">Pobieranie kartridża z CGUID \"%1$s\" nie powiodło się: %2$s</string>
+    <string name="wherigo_manual_download_title">Ręczne pobieranie kartridża</string>
     <string name="wherigo_manual_download_cguid_label">Tutaj wprowadź CGUID</string>
     <string name="wherigo_download_delete_leftover_toast">Wherigo: usuwanie pozostałego pliku</string>
     <string name="wherigo_download_progress_login">Logowanie…</string>
@@ -2857,6 +2864,8 @@
     <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
+    <string name="wherigo_confirm_exit">Wyjście</string>
+    <string name="wherigo_confirm_save_exit">Automatycznie zapisz i Wyjdź</string>
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Czy na pewno chcesz usunąć kartridż \"%1$s\", w tym zapisane gry (%2$s)?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Usuń zapisany stan gry Wherigo</string>
@@ -2892,6 +2901,7 @@
     <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
     <string name="pause">Wstrzymaj</string>
     <string name="resume">Wznów</string>
+    <string name="rename">Zmień nazwę</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>

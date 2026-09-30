@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -79,7 +78,8 @@ public enum FormulaFunction {
             RangeFormulaUtils::getNeededVariablesForRange),
     AVERAGE(new String[]{"average", "avg"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_average, "Average", "'A-C';5", 1,
             RangeFormulaUtils.rangeListFunction(FormulaUtils::average),
-            RangeFormulaUtils::getNeededVariablesForRange);
+            RangeFormulaUtils::getNeededVariablesForRange),
+    GEOCACHES_IN_AREA(new String[]{"geocachesinarea" }, null, 0, "geocachesin", "", 1, FormulaUtils::geocachesInAreaFunction);
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
@@ -199,9 +199,10 @@ public enum FormulaFunction {
     }
 
     public static List<FormulaFunction> valuesAsUserDisplaySortedList() {
-        final List<FormulaFunction> list = new ArrayList<>(Arrays.asList(values()));
-        Collections.sort(list, (f1, f2) -> TextUtils.COLLATOR.compare(f1.getUserDisplayableString(), f2.getUserDisplayableString()));
-        return list;
+        return Arrays.stream(values())
+            .filter(f -> f != null && f.getGroup() != null)
+            .sorted((f1, f2) -> TextUtils.COLLATOR.compare(f1.getUserDisplayableString(), f2.getUserDisplayableString()))
+            .toList();
     }
 
     private static Function<ValueList, Object> singleValueNumericFunction(final Function<Value, Number> numericFunction) {

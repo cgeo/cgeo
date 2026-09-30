@@ -64,6 +64,8 @@ import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayMenuHelper;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlays;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.ActionBarUtils;
@@ -1079,19 +1081,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 menu.inflate(R.menu.map_mapview);
                 DownloaderUtils.addManageOfflineDataMenu(this, menu.getMenu().findItem(R.id.menu_manage_offline_data));
                 TileProviderFactory.addMapviewMenuItems(this, menu);
+                TileOverlayMenuHelper.addMenuItems(menu.getMenu());
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.setForceShowIcon(true);
                 menu.show();
             }
         } else if (id == R.id.menu_as_list) {
-            if (viewModel.mapType.type == UMTT_List) {
-                Settings.setLastDisplayedList(viewModel.mapType.fromList);
-                CacheListActivity.startActivityOffline(this, NamedFilter.getById(viewModel.mapType.fromNamedFilter));
-            } else {
-                final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
-                        mapFragment.getViewport().filter(vmCaches));
-                CacheListActivity.startActivityMap(this, new SearchResult(caches));
-            }
+            final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
+                    mapFragment.getViewport().filter(vmCaches));
+            CacheListActivity.startActivityMap(this, new SearchResult(caches));
+        } else if (id == R.id.menu_grayscale) {
+            Settings.setMapGrayscale(!Settings.getMapGrayscale());
+            item.setChecked(Settings.getMapGrayscale());
+            changeMapSource(mapFragment.currentTileProvider);
         } else if (id == R.id.menu_hillshading) {
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
@@ -1099,6 +1101,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_backgroundmap) {
             Settings.setMapBackgroundMapLayer(!Settings.getMapBackgroundMapLayer());
             item.setChecked(Settings.getMapBackgroundMapLayer());
+            changeMapSource(mapFragment.currentTileProvider);
+        } else if (TileOverlayMenuHelper.getOverlayKey(id) != null) {
+            // checked before the dynamic block below, so that an overlay can never be shadowed by a map source or language id
+            final String overlayKey = TileOverlayMenuHelper.getOverlayKey(id);
+            final boolean enabled = !TileOverlays.isEnabled(overlayKey);
+            TileOverlays.setEnabled(overlayKey, enabled);
+            item.setChecked(enabled);
             changeMapSource(mapFragment.currentTileProvider);
         } else { // dynamic submenus: Map language, Map source
             final String language = TileProviderFactory.getLanguage(id);
@@ -1187,7 +1196,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public boolean showSavedFilterList() {
-        FilterUtils.openDialogSelectNamedFilter(this,
+        FilterUtils.openDialogSelectGeocacheFilter(this,
                 TextParam.id(R.string.cache_filter_storage_select_title),
                 viewModel.mapType.filterContext,
                 selectedFilter -> {
@@ -1586,6 +1595,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onDestroy() {
+        if (navigationTargetLayer != null) {
+            navigationTargetLayer.destroy();
+        }
         if (tileProvider != null) {
             tileProvider.onDestroy();
         }

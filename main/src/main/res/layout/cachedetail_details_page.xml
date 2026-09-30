@@ -63,20 +63,12 @@
         </LinearLayout>
 
         <!-- Offline box -->
-
-        <View
-            style="@style/separator_horizontal"
-            android:layout_marginBottom="9dp"
-            android:layout_marginTop="9dp" />
-
         <include layout="@layout/cache_offlinebox" />
 
         <!-- Named filter box -->
-
         <include layout="@layout/cache_namedfilterbox" />
 
         <!-- Watchlist box -->
-
         <LinearLayout
             android:id="@+id/watchlist_box"
             android:layout_width="fill_parent"

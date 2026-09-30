@@ -395,7 +395,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
-            AndroidRxUtils.bindActivity(this,
+            createDisposables.add(AndroidRxUtils.bindActivity(this,
                     // Obtain the active connectors and load trackables in parallel.
                     Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
                         processedBrands.add(trackableConnector.getBrand());
@@ -408,7 +408,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     // Update the UI if any trackables were found.
                     notifyDataSetChanged();
                 }
-            });
+            }));
         }
 
         // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
@@ -1260,7 +1260,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                CacheInfoBoxes.updateCacheListsAndMatchingFilters(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, null);
+                CacheInfoBoxes.updateCacheListsAndMatchingFilters(CacheDetailActivity.this.findViewById(R.id.cache_offlinebox),
+                        cache, CacheDetailActivity.this);
             }
         }.execute();
     }
@@ -1290,8 +1291,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final DetailsViewCreator creator = creatorRef.get();
             if (creator != null) {
                 super.handleRegularMessage(message);
-                creator.updateWatchlistBox(activityWeakReference.get());
-                creator.updateFavPointBox(activityWeakReference.get());
+                creator.updateWatchlistBox();
+                creator.updateFavPointBox();
             }
         }
     }
@@ -1421,7 +1422,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addLatestLogs(cache);
 
             // cache attributes
-            CacheInfoBoxes.updateAttributes(cache, binding.attributesText, binding.attributesGrid, activity);
+            CacheInfoBoxes.updateAttributes(cache, binding.attributesBox, binding.attributesGrid, activity);
 
             // list and matching filters
             CacheInfoBoxes.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(),
@@ -1431,7 +1432,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // watchlist
             binding.addToWatchlist.setOnClickListener(new AddToWatchlistClickListener());
             binding.removeFromWatchlist.setOnClickListener(new RemoveFromWatchlistClickListener());
-            updateWatchlistBox(activity);
+            updateWatchlistBox();
 
             // internal WIG player, WhereYouGo, ChirpWolf, Adventure Lab
             CacheInfoBoxes.updateWherigoBox(cache, activity, binding.playInCgeo, binding.wherigoBox, binding.wherigoText);
@@ -1441,7 +1442,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // favorite points
             binding.addToFavpoint.setOnClickListener(new FavoriteAddClickListener());
             binding.removeFromFavpoint.setOnClickListener(new FavoriteRemoveClickListener());
-            updateFavPointBox(activity);
+            updateFavPointBox();
 
             // data license
             final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -1627,7 +1628,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Show/hide buttons, set text in watchlist box
          */
-        private void updateWatchlistBox(final CacheDetailActivity activity) {
+        private void updateWatchlistBox() {
             final boolean supportsWatchList = cache.supportsWatchList();
             binding.watchlistBox.setVisibility(supportsWatchList ? View.VISIBLE : View.GONE);
             if (!supportsWatchList) {
@@ -1666,42 +1667,30 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Show/hide buttons, set text in favorite line and box
          */
-        private void updateFavPointBox(final CacheDetailActivity activity) {
-            // Favorite counts
+        private void updateFavPointBox() {
             final int favCount = cache.getFavoritePoints();
-            if (favCount >= 0 && !cache.isEventCache()) {
+            if (favCount < 0 || cache.isEventCache()) {
+                favoriteLine.layout.setVisibility(View.GONE);
+            } else {
                 favoriteLine.layout.setVisibility(View.VISIBLE);
 
                 final int findsCount = cache.getFindsCount();
-                if (findsCount > 0) {
-                    favoriteLine.valueView.setText(LocalizationUtils.getPlainString(R.string.favorite_count_percent, favCount, Math.min((float) (favCount * 100) / findsCount, 100.0f)));
-                } else {
+                if (findsCount <= 0) {
                     favoriteLine.valueView.setText(LocalizationUtils.getPlainString(R.string.favorite_count, favCount));
+                } else {
+                    favoriteLine.valueView.setText(LocalizationUtils.getPlainString(R.string.favorite_count_percent, favCount, Math.min((float) (favCount * 100) / findsCount, 100.0f)));
                 }
-            } else {
-                favoriteLine.layout.setVisibility(View.GONE);
             }
 
-            final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
-            binding.favpointBox.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints) {
+            if (!cache.supportsFavoritePoints() || !cache.isFound()) {
+                binding.favpointBox.setVisibility(View.GONE);
                 return;
             }
 
-            // Add/remove to Favorites is only possible if the cache has been found
-            if (!cache.isFound()) {
-                return;
-            }
-
-            if (cache.isFavorite()) {
-                binding.addToFavpoint.setVisibility(View.GONE);
-                binding.removeFromFavpoint.setVisibility(View.VISIBLE);
-                binding.favpointText.setText(R.string.cache_favpoint_on);
-            } else {
-                binding.addToFavpoint.setVisibility(View.VISIBLE);
-                binding.removeFromFavpoint.setVisibility(View.GONE);
-                binding.favpointText.setText(R.string.cache_favpoint_not_on);
-            }
+            binding.favpointBox.setVisibility(View.VISIBLE);
+            binding.addToFavpoint.setVisibility(cache.isFavorite() ? View.GONE : View.VISIBLE);
+            binding.removeFromFavpoint.setVisibility(cache.isFavorite() ? View.VISIBLE : View.GONE);
+            binding.favpointText.setText(cache.isFavorite() ? R.string.cache_favpoint_on : R.string.cache_favpoint_not_on);
         }
     }
 
@@ -1935,6 +1924,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             };
             binding.hint.setOnClickListener(listener);
             binding.hintBox.setOnClickListener(listener);
+            if (!Settings.getHintAsRot13()) {
+                final String hintPlain = binding.hint.getText().toString();
+                translator.translate(hintPlain, translated -> binding.hint.setText(translated), e -> binding.hint.setText(hintPlain));
+            }
         }
 
         /** Resets the hint text to the original cache value, re-applying rot13 if configured. */

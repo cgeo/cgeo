@@ -1137,7 +1137,6 @@
     <string name="settings_info_themes_title">地图主题信息</string>
     <string name="settings_info_themes">c:geo支持离线地图的自定义主题。这些可以用来改变地图的颜色风格 (例如) 绘制夜视图或突出显示某些对象，如在地图中的循环路径或高度线。\n\n使用未压缩的地图主题可能会降低地图查看器打开性能。 在这种情况下，主题文件夹可选择与应用-私有本地文件夹同步以便更快地访问(花费一些存储空间)。</string>
     <string name="settings_info_hillshading_title">关于山体地形阴影的信息</string>
-    <string name="settings_info_hillshading">山影渲染是一种通过为地图添加光照效果来表现地形起伏的技术，通过加深/减淡坡度区域来生成三维效果。\n山影渲染数据可从地图溢出菜单下载。\n不兼容UnifiedMap VTM变体。</string>
     <string name="settings_hillshading_enable">地貌晕渲</string>
     <string name="init_hillshading_hq">高质量地貌晕渲</string>
     <string name="init_summary_hillshading_hq">更细致的地貌晕渲，但放大后的处理会慢50%</string>

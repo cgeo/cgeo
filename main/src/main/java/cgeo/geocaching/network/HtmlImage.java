@@ -210,7 +210,10 @@ public class HtmlImage implements Html.ImageGetter {
         BitmapDrawable result = null;
         final TextView textView = viewRef.get();
         if (textView != null) {
-            result = getContainerDrawable(textView, drawable);
+            final ContainerDrawable container = getContainerDrawable(textView, drawable);
+            // hand the fetch to the same container which aborts all other loads of this HtmlImage
+            disposable.add(container.getFetch());
+            result = container;
         } else {
             final Maybe<BitmapDrawable> lastElement = drawable.lastElement()
                     .timeout(5, TimeUnit.SECONDS).onErrorComplete();
@@ -223,7 +226,7 @@ public class HtmlImage implements Html.ImageGetter {
         return result;
     }
 
-    protected BitmapDrawable getContainerDrawable(final TextView textView, final Observable<BitmapDrawable> drawable) {
+    protected ContainerDrawable getContainerDrawable(final TextView textView, final Observable<BitmapDrawable> drawable) {
         return new ContainerDrawable(textView, drawable);
     }
 

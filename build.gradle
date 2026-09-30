@@ -1,16 +1,13 @@
 // first of all the buildscript block, then the plugins block
 buildscript {
-    repositories {
-        google()
-    }
     dependencies {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath 'com.android.tools.build:gradle:9.3.2'
 
         // un-mocking of portable Android classes
-        classpath 'com.github.bjoernq:unmockplugin:0.9.0'
+        classpath 'com.github.bjoernq:unmockplugin:0.11.0'
     }
 }
 
@@ -18,8 +15,7 @@ plugins {
     // IDEA tasks for the project, see https://docs.gradle.org/current/userguide/idea_plugin.html
     id 'idea'
 
-    // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.54.0'
+    // helper for io.github.ben-manes.versions.settings plugin
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
@@ -64,7 +60,7 @@ tasks.register('cgeoHelp') {
         println '    gradlew dependencies main:dependencies'
         println ''
         println 'check gradle dependencies for updates:'
-        println '    gradlew dependencyUpdates --no-parallel'
+        println '    gradlew dependencyUpdates'
         println ''
         println 'Use "gradlew tasks" for more available tasks.'
         println ''
@@ -98,35 +94,6 @@ allprojects {
  * common configuration for the Java projects
  */
 subprojects {
-    repositories {
-        mavenCentral()
-        // Android Support libraries are now in an online Maven repository
-        google()
-        // integrate as last one - for versions by commit ID
-        maven {
-            url = 'https://jitpack.io'
-        }
-        // Used for Mapsforge and VTM Snapshots
-        maven {
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        // Prebuilt Bergamot offline-translator native libraries, published as
-        // GitHub Release assets by cgeo/offline-translator (build-libs.yml).
-        // Scoped via content {} so it is consulted only for that one artifact.
-        ivy {
-            url = 'https://github.com/cgeo/offline-translator/releases/download'
-            patternLayout {
-                artifact '[revision]/[artifact].[ext]'
-            }
-            metadataSources {
-                artifact()
-            }
-            content {
-                includeModule('cgeo', 'bergamot-sys')
-            }
-        }
-    }
-
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
     tasks.withType(JavaCompile).configureEach {
         options.compilerArgs << "-Xlint:-processing"

@@ -2,6 +2,8 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoItemUtils;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -456,6 +458,13 @@ public class FormulaUtils {
             default:
                 return 0;
         }
+    }
+
+    public static Value geocachesInAreaFunction(final ValueList parameter) {
+        parameter.assertCheckCount(2, 3, false);
+        parameter.assertCheckType(0, v -> v.getRaw() instanceof GeoItem, "must be GeoItem", false);
+        final int limit = (int) parameter.get(2).getAsLong();
+        return Value.of(GeoItemUtils.countGeocachesInArea((GeoItem) parameter.get(0).getRaw(), parameter.getAsString(1, ""), limit));
     }
 
     /** Shows a function selection dialog, and upon user selection pastes the function into the formula field given by 'formulaView' */

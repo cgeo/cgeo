@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
 /** Displays location information */
@@ -51,10 +52,19 @@ public class LocationStatusView extends LinearLayout {
 
     private boolean showAddress = false;
 
+    /** currently running reverse geocoding lookup, superseded by every newer position */
+    private final CompositeDisposable addressLookup = new CompositeDisposable();
+
     @Override
     protected void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        addressLookup.clear();
+        super.onDetachedFromWindow();
     }
 
     public LocationStatusView(final Context context) {
@@ -127,9 +137,11 @@ public class LocationStatusView extends LinearLayout {
                         .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocation(currentCoords))
                         .map(LocationStatusView::formatAddress)
                         .onErrorResumeNext(throwable -> Single.just(currentCoords.toString()));
-                AndroidRxUtils.bindActivity(activity, address)
+                // a newer position supersedes a lookup which may still be running
+                addressLookup.clear();
+                addressLookup.add(AndroidRxUtils.bindActivity(activity, address)
                         .subscribeOn(AndroidRxUtils.networkScheduler)
-                        .subscribe(address12 -> binding.locationText.setText(address12 + averageHeight));
+                        .subscribe(address12 -> binding.locationText.setText(address12 + averageHeight)));
             }
         } else {
             binding.locationText.setText((currentCoords == null ? "" : currentCoords.toString()) + averageHeight);

@@ -181,7 +181,12 @@ public class GeocacheFilter implements Cloneable {
 
         final AndGeocacheFilter andFilter = new AndGeocacheFilter();
         for (IGeocacheFilter f : filters) {
-            andFilter.addChild(f);
+            if (f != null) {
+                andFilter.addChild(f);
+            }
+        }
+        if (andFilter.getChildren().isEmpty()) {
+            return this;
         }
         if (this.tree != null) {
             if (isAndFilter(this.tree)) {

@@ -107,7 +107,11 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     /** adds object to this Map */
     public void put(final K key, final V value) {
-        multiChange((putAction, removeAction) -> putAction.call(key, value));
+        put(key, value, false);
+    }
+
+    public void put(final K key, final V value, final boolean forcePut) {
+        multiChange((putAction, removeAction) -> putAction.call(key, value), forcePut);
     }
 
     /**
@@ -118,7 +122,12 @@ public class AsynchronousMapWrapper<K, V, C> {
      * * the second one takes a key and will REMOVE this key from the map when called
      */
     public void multiChange(final Action2<Action2<K, V>, Action1<K>> changeAction) {
-        requestChange(() -> changeAction.call(this::putSingle, this::removeSingle));
+        multiChange(changeAction, false);
+    }
+
+
+    public void multiChange(final Action2<Action2<K, V>, Action1<K>> changeAction, final boolean forcePut) {
+        requestChange(() -> changeAction.call((k, v) -> putSingle(k, v, forcePut), this::removeSingle));
     }
 
     public void add(final K key) {
@@ -232,12 +241,12 @@ public class AsynchronousMapWrapper<K, V, C> {
     }
 
     //CALL ONLY WITH ACQUIRED LOCK!
-    private void putSingle(final K key, final V value) {
+    private void putSingle(final K key, final V value, final boolean forcePut) {
         //make sure that any pending removal requests for this object are removed
         requestedToRemove.remove(key);
 
         //we need to add only if object is not already there
-        if (isChange(key, value)) {
+        if (forcePut || isChange(key, value)) {
             //only if there was no add request yet we need to add a command to process queue
             if (!requestedToAdd.containsKey(key)) {
                 mapChangeProcessQueue.add(new Pair<>(key, true));

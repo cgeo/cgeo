@@ -1,20 +1,3 @@
-### 常规版本说明
-
-**全屏显示 (Edge to Edge)**
-
-由于 Play 商店政策，我们更新了此版本 c:geo 适配的 Android API 级别，并更改了一些屏幕布局程序。 可能会带来一些未知的副作用，特别是在一些新的安卓版本上。 如果您在使用此版本的 c:geo 时遇到任何问题，请在 [GitHub](https://github.com/cgeo/cgeo) 上反馈，或发送电子邮件至 [support@cgeo.org](mailto:support@cgeo.org)
-
-**旧版地图**
-
-正如 2025.07.17 和 2025.12.01 版本中所宣布的，我们最终移除了地图的旧版实现。 您将自动切换到新的统一地图 (UnifiedMap)，除了以下一些新功能外，您应该不会感觉到差异：
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
-- 长按轨迹/个人路线以查看更多选项
-
 ### 地图
 - 新增：路线优化会缓存已计算的数据
 - 新增：启用实时模式时保持当前设定目标的航点可见
@@ -37,6 +20,17 @@
 - Change: Reduce memory requirements of map activity
 - Fix: Google Map resets position to N0 / W0 on mapping a cache list
 
+**旧版地图**
+
+正如 2025.07.17 和 2025.12.01 版本中所宣布的，我们最终移除了地图的旧版实现。您将自动切换到新的统一地图 (UnifiedMap)，除了以下一些新功能外，您应该不会感觉到差异：
+- Map rotation for OpenStreetMap based maps (online + offline)
+- Cluster popup for Google Maps
+- Hide map sources you don't need
+- Elevation chart for routes and tracks
+- Switch between lists directly from map
+- "Driving mode" for OpenStreetMap based maps
+- 长按轨迹/个人路线以查看更多选项
+
 ### 藏点详细信息
 - 新增：识别公式中的额外字符：–, ⋅, ×
 - 新增：刷新藏点时保留自己记录的时间戳
@@ -52,7 +46,7 @@
 - 新增：在航点列表中可视化显示计算坐标的溢出
 - 新增：航点列表菜单项，可将特定类型的航点标记为已访问
 - 新增：追踪物记录占位符 (藏点名称、藏点编号、用户)
-- 变更：移除了指向已过时的 WhereYouGo 播放器的链接。 内置 Wherigo 播放器现在是 Wherigo 的默认播放器。
+- 变更：移除了指向已过时的 WhereYouGo 播放器的链接。内置 Wherigo 播放器现在是 Wherigo 的默认播放器。
 - 修复：航点计算器引导模式中缺失快速切换开关的问题
 - 新增：支持范围的聚合函数：add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - 修复：Opencaching 平台 DNF 状态处理不正确的问题
@@ -66,6 +60,7 @@
 - 新增：发送记录现在在后台完成
 - Fix: Inventory hidden on logging under certain conditions
 - New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
+- Fix: Description not loaded (website change)
 
 ### Wherigo 播放器
 - 新增：Wherigo 离线翻译
@@ -104,3 +99,7 @@
 - 修复：新安装时“使用英制设置”未正确初始化的问题
 - 变更：使用 Bergamot 开源离线翻译模块替换闭源的 Google ML Kit 翻译器
 - 变更：新的表情符号选择器
+
+**全屏显示 (Edge to Edge)**
+
+由于 Play 商店政策，我们更新了此版本 c:geo 适配的 Android API 级别，并更改了一些屏幕布局程序。可能会带来一些未知的副作用，特别是在一些新的安卓版本上。如果您在使用此版本的 c:geo 时遇到任何问题，请在 [GitHub](https://github.com/cgeo/cgeo) 上反馈，或发送电子邮件至 [support@cgeo.org](mailto:support@cgeo.org)

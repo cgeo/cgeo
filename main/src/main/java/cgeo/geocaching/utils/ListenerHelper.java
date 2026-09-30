@@ -74,7 +74,7 @@ public class ListenerHelper<T> {
         lock.readLock().lock();
         try {
             for (Map.Entry<Integer, T> entry : listeners.entrySet()) {
-                schedulerUsed.createWorker().schedule(() -> {
+                schedulerUsed.scheduleDirect(() -> {
                     final boolean doRemove = action.test(entry.getValue());
                     if (doRemove) {
                         removeListener(entry.getKey());

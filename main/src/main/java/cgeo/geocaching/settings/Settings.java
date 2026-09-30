@@ -41,6 +41,7 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -1342,9 +1343,86 @@ public class Settings {
         return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
     }
 
+    /**
+     * User-defined tile providers, stored as a JSON list.
+     * Understands the legacy format as well, where the very same preference held a single, bare tile provider Uri.
+     */
+    /**
+     * The user-defined tile providers.
+     *
+     * <p>Falls back to the single provider of earlier versions while the new preference has not
+     * been written yet. Nothing is migrated eagerly and the old preference is never touched, so a
+     * version without this feature keeps working after a downgrade.</p>
+     */
+    @NonNull
+    public static List<PrefUserDefinedTileProvider> getUserDefinedTileProviders() {
+        final String value = StringUtils.trimToEmpty(getString(R.string.pref_userDefinedTileProviders, null));
+        // an empty *string*, not an empty list: a list that has been written is at least "[]", so
+        // this is only true while the preference has never been written. Emptying the list keeps
+        // it empty and does not bring the legacy provider back.
+        if (StringUtils.isEmpty(value)) {
+            final String legacyUri = StringUtils.trimToNull(getString(R.string.old_pref_userDefinedTileProviderUri, null));
+            return legacyUri == null ? new ArrayList<>() : new ArrayList<>(Collections.singletonList(
+                    // keeps LEGACY_KEY, so the derived tile provider id stays what it was and neither the
+                    // selected map source nor the list of hidden map sources needs rewriting
+                    new PrefUserDefinedTileProvider(PrefUserDefinedTileProvider.LEGACY_KEY, null, legacyUri)));
+        }
+        try {
+            return MAPPER.readValue(value, new TypeReference<List<PrefUserDefinedTileProvider>>() {
+            });
+        } catch (JsonProcessingException e) {
+            Log.e("Failure parsing user-defined tile providers: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Adds, updates or (if the given provider has no Uri) removes a user-defined tile provider.
+     */
+    public static void putUserDefinedTileProvider(final PrefUserDefinedTileProvider provider) {
+        final List<PrefUserDefinedTileProvider> providers = getUserDefinedTileProviders();
+        final int index = providers.indexOf(provider);
+        if (StringUtils.isBlank(provider.getUri())) {
+            if (index == -1) {
+                return;
+            }
+            providers.remove(index);
+        } else if (index == -1) {
+            providers.add(provider);
+        } else {
+            providers.set(index, provider);
+        }
+        try {
+            putString(R.string.pref_userDefinedTileProviders, MAPPER.writeValueAsString(providers));
+        } catch (JsonProcessingException e) {
+            Log.e("Failure writing user-defined tile providers: " + e.getMessage());
+        }
+    }
+
+    /** json array holding the configured tile overlays, see cgeo.geocaching.unifiedmap.overlays.TileOverlays */
     @Nullable
-    public static String getUserDefinedTileProviderUri() {
-        return getString(R.string.pref_userDefinedTileProviderUri, null);
+    public static String getTileOverlaysConfig() {
+        return getString(R.string.pref_tileOverlays, null);
+    }
+
+    public static void setTileOverlaysConfig(@Nullable final String config) {
+        putString(R.string.pref_tileOverlays, config);
+    }
+
+    /** keys of the tile overlays currently switched on in the map view */
+    public static Set<String> getTileOverlaysEnabled() {
+        final Set<String> empty = Collections.emptySet();
+        if (sharedPrefs == null) {
+            return empty;
+        }
+        return sharedPrefs.getStringSet(getKey(R.string.pref_tileOverlaysEnabled), empty);
+    }
+
+    public static void setTileOverlaysEnabled(final Set<String> keys) {
+        if (sharedPrefs == null) {
+            return;
+        }
+        sharedPrefs.edit().putStringSet(getKey(R.string.pref_tileOverlaysEnabled), keys).apply();
     }
 
     public static void setMapLanguage(@Nullable final String language) {
@@ -2637,6 +2715,14 @@ public class Settings {
 
     public static boolean getIconScaleEverywhere() {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
+    }
+
+    public static boolean getMapGrayscale() {
+        return getBoolean(R.string.pref_mapGrayscale, false);
+    }
+
+    public static void setMapGrayscale(final boolean value) {
+        putBoolean(R.string.pref_mapGrayscale, value);
     }
 
     public static boolean getMapShadingShowLayer() {

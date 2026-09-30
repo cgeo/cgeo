@@ -17,6 +17,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 
 import androidx.annotation.AnyRes;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.core.util.Consumer;
 import androidx.lifecycle.Lifecycle;
@@ -42,9 +43,9 @@ public final class CgeoTestUtils {
         //no instance of utils class
     }
 
-    public static Geocache createTestCache() {
+    public static Geocache createTestCache(@Nullable final String geocode) {
         final Geocache testCache = new Geocache();
-        testCache.setGeocode("TEST");
+        testCache.setGeocode(geocode == null ? "TEST" : geocode);
         testCache.setType(CacheType.TRADITIONAL);
         return testCache;
     }

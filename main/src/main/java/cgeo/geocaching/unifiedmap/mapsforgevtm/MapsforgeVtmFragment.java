@@ -13,6 +13,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.HillShadingLayerHelper;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -141,6 +142,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         if (Settings.getMapShadingShowLayer()) {
             addLayer(2, HillShadingLayerHelper.getBitmapTileLayer(getContext(), mMap));
         }
+        for (BitmapTileLayer overlay : TileOverlayLayerHelper.getTileLayersVTM(mMap)) {
+            addLayer(LayerHelper.ZINDEX_TILE_OVERLAY, overlay);
+        }
 
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(v -> displayMapAttribution());
@@ -233,6 +237,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                     mMapLayers.remove(layer);
                 } catch (IndexOutOfBoundsException ignore) {
                     // ignored
+                }
+                if (layer instanceof TileLayer) {
+                    // dispose the loader threads, they keep a back reference to the layer
+                    ((TileLayer) layer).onDetach();
                 }
             }
             layers.clear();

@@ -48,7 +48,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                     LocalizationUtils.getString(R.string.init_sendToCgeo_registering), true);
             progressDialog.setCancelable(false);
 
-            AndroidRxUtils.bindActivity(activity, Observable.defer(() -> {
+            activity.destroyDisposables(AndroidRxUtils.bindActivity(activity, Observable.defer(() -> {
                 final String nam = StringUtils.defaultString(deviceName);
                 final String cod = StringUtils.defaultString(deviceCode);
 
@@ -77,7 +77,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                     SimpleDialog.of(activity).setTitle(R.string.init_sendToCgeo)
                             .setMessage(R.string.init_sendToCgeo_register_fail).show();
                 }
-            });
+            }));
 
             return true;
         };
