@@ -20,6 +20,9 @@ import com.google.android.material.button.MaterialButton;
 
 public class MenuUtils {
 
+    /** alpha value used to dim the icon of a disabled menu item */
+    private static final int DISABLED_ICON_ALPHA = 128;
+
     private MenuUtils() {
         // utility class
     }
@@ -42,6 +45,22 @@ public class MenuUtils {
             return;
         }
         menuItem.setEnabled(enabled);
+    }
+
+    /**
+     * Sets enabled state for given menu item and dims its icon while disabled,
+     * so that the disabled state is visible for items shown as action button (without crashing on null item)
+     */
+    public static void setEnabledWithIcon(@Nullable final MenuItem menuItem, final boolean enabled) {
+        setEnabled(menuItem, enabled);
+        if (menuItem == null) {
+            return;
+        }
+        final Drawable icon = menuItem.getIcon();
+        if (icon != null) {
+            icon.mutate().setAlpha(enabled ? 255 : DISABLED_ICON_ALPHA);
+            menuItem.setIcon(icon);
+        }
     }
 
     public static void setVisible(final Menu menu, final int itemId, final boolean visible) {
