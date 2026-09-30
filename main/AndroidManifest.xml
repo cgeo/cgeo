@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="33" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -61,10 +61,16 @@
         android:enableOnBackInvokedCallback="false"
         >
 
+        <!-- Apache HTTP legacy client required for Google Play Services / Maps on Android 9+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <!-- Samsung Multi-Window support -->
         <uses-library
             android:name="com.sec.android.app.multiwindow"
             android:required="false" />
+
         <meta-data
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
