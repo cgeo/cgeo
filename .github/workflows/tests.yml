@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           # On push, use the push commit sha. On PR from cgeo/cgeo use the PR commit sha; on forks fall back to master
           ref: ${{ !github.event.pull_request && github.sha || github.event.pull_request && github.event.pull_request.head.repo.full_name == 'cgeo/cgeo' && github.event.pull_request.head.sha || 'master' }}
@@ -131,7 +131,7 @@ jobs:
       code-changed: ${{ steps.detect.outputs.has-code-changes }}
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -168,7 +168,7 @@ jobs:
     needs: check-secrets
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -253,7 +253,7 @@ jobs:
     needs: check-secrets
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -350,7 +350,7 @@ jobs:
         api-level: [26, 30, 34]
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
