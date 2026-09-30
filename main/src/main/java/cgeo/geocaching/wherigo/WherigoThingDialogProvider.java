@@ -105,6 +105,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         }
         //media
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
+        binding.media.setMediaMetadata(eventTable.name, eventTable.description);
 
         //title
         control.setTitle(eventTable.name);
