@@ -40,6 +40,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +62,13 @@ public class GCLogin extends AbstractLogin {
     private static final String LOGIN_URI = "https://www.geocaching.com/account/signin?returnUrl=%2Faccount%2Fsettings%2Fhomelocation";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
     private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    /**
+     * Lifetime given to the gc.com auth cookie taken from the manual-login WebView (the WebView does not
+     * expose the cookie's own expiry). gc.com decides the real lifetime; when the session has expired,
+     * the login check fails and the user is asked again.
+     */
+    private static final long MANUAL_LOGIN_COOKIE_LIFETIME_MS = 90L * 24 * 60 * 60 * 1000;
 
     private ServerParameters serverParameters = null;
     private String homeLocationPage = null;
@@ -172,9 +180,24 @@ public class GCLogin extends AbstractLogin {
     protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         final StatusCode status = loginInternal(retry, credentials);
         if (status != StatusCode.NO_ERROR) {
-            resetLoginStatus();
+            if (isDefinitiveLoginFailure(status)) {
+                // the server rejected us: the stored session is worthless, drop it
+                resetLoginStatus();
+            } else {
+                // could not even ask (offline, maintenance, captcha, unparsable page): the stored
+                // session cookie may well be valid — keep it, only the status is unknown. Dropping it
+                // here turned every hiccup into a forced manual login once gc.com added the captcha.
+                setActualLoginStatus(false);
+            }
         }
         return status;
+    }
+
+    /** Outcomes where gc.com actually rejected the credentials, as opposed to not being reachable. */
+    private static boolean isDefinitiveLoginFailure(final StatusCode status) {
+        return status == StatusCode.WRONG_LOGIN_DATA
+                || status == StatusCode.NO_LOGIN_INFO_STORED
+                || status == StatusCode.UNVALIDATED_ACCOUNT;
     }
 
     private void logLastLoginError(final String status, final boolean retry) {
@@ -653,9 +676,24 @@ public class GCLogin extends AbstractLogin {
                     return;
                 }
 
-                //insert cookie
+                //insert cookie. The WebView hands out "name=value" only, which parses to a
+                //non-persistent host-only cookie — it would never be written to the persisted cookie
+                //store and be gone with the process. Rebuild it as a persistent cookie for the whole
+                //domain so the manually obtained session survives app restarts.
                 resetLoginStatus();
-                cgeo.geocaching.network.Cookies.cookieJar.saveFromResponse(HttpUrl.get(url), gcAuthCookies);
+                final List<Cookie> persistentAuthCookies = new ArrayList<>();
+                for (final Cookie c : gcAuthCookies) {
+                    persistentAuthCookies.add(new Cookie.Builder()
+                            .name(c.name())
+                            .value(c.value())
+                            .domain("geocaching.com")
+                            .path("/")
+                            .secure()
+                            .httpOnly()
+                            .expiresAt(System.currentTimeMillis() + MANUAL_LOGIN_COOKIE_LIFETIME_MS)
+                            .build());
+                }
+                cgeo.geocaching.network.Cookies.cookieJar.saveFromResponse(HttpUrl.get(url), persistentAuthCookies);
 
                 dialog.dismiss();
                 //set to state "logging in..."
