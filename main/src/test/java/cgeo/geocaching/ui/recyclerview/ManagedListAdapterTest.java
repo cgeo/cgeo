@@ -51,6 +51,23 @@ public class ManagedListAdapterTest {
     }
 
     @Test
+    public void filterCheckNullException() {
+        final TestManagedListAdapter mla = new TestManagedListAdapter();
+
+        // Should not throw NullPointerException
+        mla.setFilter(s -> s != null && s.startsWith("g"), true);
+        mla.addItem(0, null);
+
+        try {
+            mla.setFilter(s -> s.startsWith("g"), true);
+            mla.addItem(0, null);
+        } catch (NullPointerException npe) {
+            // Should throw NullPointerException
+            assertThat(npe).isNotNull();
+        }
+    }
+
+    @Test
     public void filterAddRemove() {
         final TestManagedListAdapter mla = new TestManagedListAdapter();
         mla.setFilter(s -> s.startsWith("g"), true);

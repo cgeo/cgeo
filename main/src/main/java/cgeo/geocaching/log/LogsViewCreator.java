@@ -49,6 +49,7 @@ import org.apache.commons.text.StringEscapeUtils;
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
     /** per-log (temporary) translation status, keyed by log instance so each log toggles independently */
     private final Map<LogEntry, OfflineTranslateUtils.Status> translationStatusByLog = new IdentityHashMap<>();
+    private final Map<LogEntry, Boolean> expandedByLog = new IdentityHashMap<>();
 
     /** lazily created, reused for the lifetime of the activity to avoid stacking up progress dialogs on repeated log deletions */
     private LogActivityHelper logActivityHelper;
@@ -126,10 +127,23 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
         fillCountOrLocation(holder, log);
 
+        // collapse/expand listener, store state in map to avoid losing it when scrolling
+        holder.binding.log.setOnCollapseListener(v -> expandedByLog.put(log, true));
+
+        final boolean expanded = Boolean.TRUE.equals(expandedByLog.getOrDefault(log, Boolean.FALSE));
+        holder.binding.log.setExpanded(expanded);
+
         // log text, avoid parsing HTML if not necessary
         if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.binding.log.setText(TextUtils.trimSpanned(HtmlCompat.fromHtml(log.getDisplayText(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(getGeocode(), holder.binding.log), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
+            holder.binding.log.setText(
+                    TextUtils.trimSpanned(
+                            HtmlCompat.fromHtml(
+                                    log.getDisplayText(),
+                                    HtmlCompat.FROM_HTML_MODE_LEGACY,
+                                    new SmileyImage(getGeocode(), holder.binding.log),
+                                    unknownTagsHandler)),
+                    TextView.BufferType.SPANNABLE);
         } else {
             holder.binding.log.setText(log.log, TextView.BufferType.SPANNABLE);
         }
@@ -199,7 +213,13 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
             // expand/collapse
             if (holder.binding.log.isCollapsible()) {
-                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log, holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more, it -> holder.binding.log.setCollapse(!holder.binding.log.isCollapsed()));
+                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log,
+                        holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more,
+                        it -> {
+                            final boolean expand = holder.binding.log.isCollapsed();
+                            holder.binding.log.setCollapse(!expand);
+                            expandedByLog.put(log, expand);
+                        });
             }
 
             //Copy to clipboard
