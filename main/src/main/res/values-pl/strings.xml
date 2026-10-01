@@ -2036,6 +2036,7 @@
     <string name="geo_search_label">Szukaj skrytek w pobliżu</string>
     <string name="search_bar_hint">Szukaj skrytek/przedmiotów podróżnych</string>
     <string name="search_bar_hint_settings">Ustawienia wyszukiwania</string>
+    <string name="search_index_updated">Zaktualizowano bazę danych wyszukiwania</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_address">Adres</string>
     <string name="search_geo">Geokod</string>
