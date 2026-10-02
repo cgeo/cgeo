@@ -250,6 +250,9 @@ public final class WherigoUtils {
 
     public static CartridgeFile readCartridge(final Uri uri) throws IOException {
         final FileInputStream fis = (FileInputStream) ContentStorage.get().openForRead(uri);
+        if (fis == null) {
+            throw new IOException("Could not open uri for read: " + uri);
+        }
         return CartridgeFile.read(new WSeekableFile(fis.getChannel()), WherigoSaveFileHandler.get());
     }
 
