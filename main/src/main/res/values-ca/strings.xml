@@ -2003,6 +2003,7 @@
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_hint_settings">Configuració de cerca</string>
+    <string name="search_index_updated">Base de dades de cerca actualitzada</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_geo">Geocodi</string>
