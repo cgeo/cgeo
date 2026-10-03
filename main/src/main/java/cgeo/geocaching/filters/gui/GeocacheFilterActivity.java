@@ -377,6 +377,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 })
                 .setTextGroupMapper(GeocacheFilterType::getUserDisplayableGroup)
                 .setChangeListener(gcf -> {
+                    switchToAdvanced(false);
                     filterListAdapter.addItem(0, FilterViewHolderCreator.createFor(gcf, this));
                     binding.filterList.smoothScrollToPosition(0);
                     adjustFilterEmptyView();
@@ -552,7 +553,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         //this.binding.filterNamedFilterOptions.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxes.setVisibility(View.GONE);
         this.binding.filterPropsCheckboxesLine.setVisibility(View.GONE);
-        this.binding.filterAdditem.setVisibility(View.GONE);
+        this.binding.filterAdditem.setVisibility(View.VISIBLE);
 
         int startPos = 0;
         for (GeocacheFilterType type : BASIC_FILTER_TYPES) {
