@@ -3,6 +3,12 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## Experimental (Nightlies)
+
+### Cache details
+
+New WebView description style, rendering HTML directly without parsing
+
 ## 2026.09.23 Feature Release
 
 ### Map
