@@ -1951,6 +1951,8 @@
     <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
     <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="init_autozoom_consider_lastcenter">Restore map position on mapping a list</string>
+    <string name="init_mapOnLockScreen">Lock Screen</string>
+    <string name="init_summary_mapOnLockScreen">Show map on your device\'s lock screen. To unlock your device while map is being shown, use the back button/gesture.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">When a list of caches is mapped and map was previously left inside the list boundaries restore preview position, otherwise zoom to fit all caches.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">When a list of caches is mapped set map zoom and boundaries to fit all caches.</string>
     <string name="goto_targets_list">User-defined caches</string>

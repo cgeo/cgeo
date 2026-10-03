@@ -278,6 +278,8 @@
     <string translatable="false" name="pref_showRouteMenu">showRouteMenu</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
     <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
+    <string translatable="false" name="pref_autozoom_consider_lastcenter">list_viewport_calculation_consider_lastviewport</string>
+    <string translatable="false" name="pref_mapOnLockScreen">mapOnLockScreen</string>
 
     <!-- category proximity notfication -->
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
@@ -667,8 +669,9 @@
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
     <string translatable="false" name="pref_followMyLocation">followMyLocation</string>
-    <string translatable="false" name="pref_autozoom_consider_lastcenter">list_viewport_calculation_consider_lastviewport</string>
     <string translatable="false" name="pref_cachecache_size">cachecache_size</string>
+    
+    <!-- do not add preference keys here, if they have a UI representation - those belong into one of the sections above -->
 
 
     <!-- ============================================================================================================================================================================== -->

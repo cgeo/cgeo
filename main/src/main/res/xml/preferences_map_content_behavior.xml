@@ -115,6 +115,12 @@
             android:summary="@string/init_summary_autozoom_consider_lastcenter_on"
             android:title="@string/init_autozoom_consider_lastcenter"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_mapOnLockScreen"
+            android:summary="@string/init_summary_mapOnLockScreen"
+            android:title="@string/init_mapOnLockScreen"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

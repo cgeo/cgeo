@@ -108,6 +108,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -116,6 +117,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import static android.view.View.GONE;
@@ -331,6 +333,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }));
 
         refreshListChooser();
+
+        // make map available on lock screen
+        if (Settings.getBoolean(R.string.pref_mapOnLockScreen, false)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                setShowWhenLocked(true);
+            } else {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+            }
+        }
     }
 
     public AbstractMapFragment getMapFragment() {
