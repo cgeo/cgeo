@@ -344,21 +344,23 @@ public class RouteTrackUtils {
         tracklist.removeAllViews();
         dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> csah.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
-        tracks.traverse((key, geoData) -> {
-            final Toolbar tb = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null).findViewById(R.id.routes_track_item);
-            tb.inflateMenu(R.menu.map_routetrack_context);
-            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, geoData, () -> updateDialogTracks(dialog, tracks, showElevationChart)));
-            configureContextMenu(tb.getMenu(), true, geoData, false);
+        if (tracks != null) {
+            tracks.traverse((key, geoData) -> {
+                final Toolbar tb = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null).findViewById(R.id.routes_track_item);
+                tb.inflateMenu(R.menu.map_routetrack_context);
+                tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, geoData, () -> updateDialogTracks(dialog, tracks, showElevationChart)));
+                configureContextMenu(tb.getMenu(), true, geoData, false);
 
-            final TextView displayName = tb.findViewById(R.id.item_title);
-            displayName.setText(tracks.getDisplayname(key));
+                final TextView displayName = tb.findViewById(R.id.item_title);
+                displayName.setText(tracks.getDisplayname(key));
 
-            final MenuItem vColor = tb.getMenu().findItem(R.id.menu_color);
-            setColorIcon(vColor, tracks.getColor(key));
-            vColor.getActionView().setOnClickListener(view -> setTrackColor(activity, tracks, key, vColor, updateTrack));
+                final MenuItem vColor = tb.getMenu().findItem(R.id.menu_color);
+                setColorIcon(vColor, tracks.getColor(key));
+                vColor.getActionView().setOnClickListener(view -> setTrackColor(activity, tracks, key, vColor, updateTrack));
 
-            tracklist.addView(tb);
-        });
+                tracklist.addView(tb);
+            });
+        }
     }
 
     private static void setTrackColor(final Activity activity, final Tracks tracks, final String key, final MenuItem item, final Tracks.UpdateTrack updateTrack) {
