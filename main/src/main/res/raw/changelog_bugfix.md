@@ -5,3 +5,5 @@
 - Fix: Endless loop on selecting new format in "Calculate coordinate" (#18672)
 - Fix: Log text folding not working (#18653)
 - Fix: Crash in reading variables (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
