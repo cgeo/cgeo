@@ -5,3 +5,7 @@
 - Correcció: Bucle infinit en seleccionar un format nou a "Calcula la coordenada" (#18672)
 - Correcció: El plegat del text del registre no funciona (#18653)
 - Correcció: Fallada en la lectura de variables (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
+- Fix: Crash while trying to start Wherigo service (#18675)
+- Fix: Crash while using Google Maps (#18676)
