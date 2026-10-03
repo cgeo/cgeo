@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
@@ -109,7 +110,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                 }
             }
             if (event == Map.SCALE_EVENT || event == Map.POSITION_EVENT) {
-                ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getMapPosition().zoomLevel);
+                ActivityMixin.requireActivity(getActivity(), activity -> ((UnifiedMapActivity) activity).notifyZoomLevel(mMap.getMapPosition().zoomLevel));
             }
             lastEvent = event; // remember to detect scaling combined with panning
         };
