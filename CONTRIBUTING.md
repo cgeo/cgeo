@@ -39,7 +39,11 @@ You are welcome to use AI coding tools (Copilot, ChatGPT, Claude, etc.) when con
 ## Pull request checklist
 
 - [ ] An issue exists and you have commented on it (or you opened one)
+- [ ] Reference to the issue is added: (xxxxx being the number of the c:geo issue on GitHub)
+  - If you are fixing some GitHub issue: Add "Fix #xxxxx" to your commit message, either as prefix or postfix to the commit title, eg.: `Fix #12345: description` or `description (fix #12345)`
+  - If it is related to some GitHub issue, but not finally fixing it: Add "Rel. to #xxxxx" to your commit message
 - [ ] Your branch targets the correct base (`master` or `release`)
 - [ ] The build passes locally
-- [ ] Translation changes were made via Crowdin, not by editing XML directly
+- [ ] Do NOT include any translations - this will be done later on on CrowdIn
+- [ ] Do NOT include any changes to any of the `changelog_xxx.md` files - this will be done later by the c:geo team
 - [ ] AI assistance (if any) is disclosed in the PR description
