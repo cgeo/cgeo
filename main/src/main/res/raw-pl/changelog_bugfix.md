@@ -5,3 +5,7 @@
 - Naprawiono: Pętla bez końca przy wyborze nowego formatu w „Oblicz współrzędne” (#18672)
 - Naprawiono: Wyświetlanie skróconej wersji opisu skrytki nie zawsze działało (#18653)
 - Naprawiono: Awaria podczas odczytywania zmiennych (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
+- Fix: Crash while trying to start Wherigo service (#18675)
+- Fix: Crash while using Google Maps (#18676)
