@@ -5,7 +5,8 @@
 package cgeo.geocaching.wherigo.openwig;
 
 import java.io.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
@@ -13,13 +14,13 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
 public class Cartridge extends EventTable {
-    public Vector zones = new Vector();
-    public Vector timers = new Vector();
+    public ArrayList zones = new ArrayList();
+    public ArrayList timers = new ArrayList();
 
-    public Vector things = new Vector();
-    public Vector universalActions = new Vector();
+    public ArrayList things = new ArrayList();
+    public ArrayList universalActions = new ArrayList();
 
-    public Vector tasks = new Vector();
+    public ArrayList tasks = new ArrayList();
 
     public LuaTable allZObjects = new LuaTableImpl();
 
@@ -44,18 +45,18 @@ public class Cartridge extends EventTable {
 
     public void walk (ZonePoint zp) {
         for (int i = 0; i < zones.size(); i++) {
-            Zone z = (Zone)zones.elementAt(i);
+            Zone z = (Zone)zones.get(i);
             z.walk(zp);
         }
     }
 
     public void tick () {
         for (int i = 0; i < zones.size(); i++) {
-            Zone z = (Zone)zones.elementAt(i);
+            Zone z = (Zone)zones.get(i);
             z.tick();
         }
         for (int i = 0; i < timers.size(); i++) {
-            Timer t = (Timer)timers.elementAt(i);
+            Timer t = (Timer)timers.get(i);
             t.updateRemaining();
         }
 
@@ -64,7 +65,7 @@ public class Cartridge extends EventTable {
     public int visibleZones () {
         int count = 0;
         for (int i = 0; i < zones.size(); i++) {
-            Zone z = (Zone)zones.elementAt(i);
+            Zone z = (Zone)zones.get(i);
             if (z.isVisible()) count++;
         }
         return count;
@@ -73,7 +74,7 @@ public class Cartridge extends EventTable {
     public int visibleThings () {
         int count = 0;
         for (int i = 0; i < zones.size(); i++) {
-            Zone z = (Zone)zones.elementAt(i);
+            Zone z = (Zone)zones.get(i);
             count += z.visibleThings();
         }
         return count;
@@ -82,7 +83,7 @@ public class Cartridge extends EventTable {
     public LuaTable currentThings () {
         LuaTable ret = new LuaTableImpl();
         for (int i = 0; i < zones.size(); i++) {
-            Zone z = (Zone)zones.elementAt(i);
+            Zone z = (Zone)zones.get(i);
             z.collectThings(ret);
         }
         return ret;
@@ -91,7 +92,7 @@ public class Cartridge extends EventTable {
     public int visibleUniversalActions () {
         int count = 0;
         for (int i = 0; i < universalActions.size(); i++) {
-            Action a = (Action)universalActions.elementAt(i);
+            Action a = (Action)universalActions.get(i);
             if (a.isEnabled() && a.getActor().visibleToPlayer()) count++;
         }
         return count;
@@ -100,7 +101,7 @@ public class Cartridge extends EventTable {
     public int visibleTasks () {
         int count = 0;
         for (int i = 0; i < tasks.size(); i++) {
-            Task a = (Task)tasks.elementAt(i);
+            Task a = (Task)tasks.get(i);
             if (a.isVisible()) count++;
         }
         return count;
@@ -112,10 +113,10 @@ public class Cartridge extends EventTable {
     }
 
     private void sortObject (Object o) {
-        if (o instanceof Task) tasks.addElement(o);
-        else if (o instanceof Zone) zones.addElement(o);
-        else if (o instanceof Timer) timers.addElement(o);
-        else if (o instanceof Thing) things.addElement(o);
+        if (o instanceof Task) tasks.add(o);
+        else if (o instanceof Zone) zones.add(o);
+        else if (o instanceof Timer) timers.add(o);
+        else if (o instanceof Thing) things.add(o);
     }
 
     public void deserialize (DataInputStream in)

@@ -491,7 +491,7 @@ public class LuaState {
                                     nStrings++;
                                 }
                                 if (nStrings > 0) {
-                                    StringBuffer concatBuffer = new StringBuffer();
+                                    StringBuilder concatBuffer = new StringBuilder();
 
                                     int firstString = last - nStrings + 1;
                                     while (firstString <= last) {
@@ -1364,7 +1364,7 @@ public class LuaState {
     }
 
     public static Double toDouble(double d) {
-        return new Double(d);
+        return Double.valueOf(d);
     }
 
     public static Double toDouble(long d) {

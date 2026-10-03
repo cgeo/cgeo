@@ -274,8 +274,8 @@ public class Engine implements Runnable {
         String button1 = null, button2 = null;
         LuaTable buttons = (LuaTable)message.rawget("Buttons");
         if (buttons != null) {
-            button1 = (String)buttons.rawget(new Double(1));
-            button2 = (String)buttons.rawget(new Double(2));
+            button1 = (String)buttons.rawget(Double.valueOf(1));
+            button2 = (String)buttons.rawget(Double.valueOf(2));
         }
         LuaClosure callback = (LuaClosure)message.rawget("Callback");
         ui.pushDialog(texts, media, button1, button2, callback);
@@ -354,7 +354,7 @@ public class Engine implements Runnable {
         }
     }
 
-    private static void replace (String source, String pattern, String replace, StringBuffer builder) {
+    private static void replace (String source, String pattern, String replace, StringBuilder builder) {
         int pos = 0;
         int pl = pattern.length();
         builder.delete(0, builder.length());
@@ -373,7 +373,7 @@ public class Engine implements Runnable {
      */
     public static String removeHtml (String s) {
         if (s == null) return "";
-        StringBuffer sb = new StringBuffer(s.length());
+        StringBuilder sb = new StringBuilder(s.length());
         replace(s, "<BR>", "\n", sb);
         replace(sb.toString(), "&nbsp;", " ", sb);
         replace(sb.toString(), "&lt;", "<", sb);
