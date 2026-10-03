@@ -212,6 +212,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         binding.inventory.setAdapter(inventoryAdapter);
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache == null) {
+            showToast(getString(R.string.err_detail_cache_find_some));
+            finish();
+            return;
+        }
         invalidateOptionsMenuCompatible();
         setLogTypeValues(cache.getPossibleLogTypes());
         cacheVotingBar.initialize(cache, binding.getRoot(), null);
