@@ -124,11 +124,14 @@ public class SpeechService extends Service implements OnInitListener {
         wakeLock.acquire(60 * 60 * 1000);
         Log.w("SpeechService - WakeLock acquired");
 
-
-        startForeground(ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE, Notifications
-                .createNotification(this, FOREGROUND_SERVICE_NOTIFICATION, R.string.tts_service)
-                .setContentText(LocalizationUtils.getString(R.string.tts_running))
-                .build());
+        try {
+            startForeground(ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE, Notifications
+                    .createNotification(this, FOREGROUND_SERVICE_NOTIFICATION, R.string.tts_service)
+                    .setContentText(LocalizationUtils.getString(R.string.tts_running))
+                    .build());
+        } catch (IllegalStateException | SecurityException e) {
+            Log.e("SpeechService: Exception on starting as foreground service", e);
+        }
     }
 
     @Override
