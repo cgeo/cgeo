@@ -231,7 +231,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nafn</string>
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>
@@ -252,6 +251,7 @@
     <string name="settings_title_cachedetails">Upplýsingar kassa</string>
     <string name="settings_title_map_data">Kortaupplýsingar</string>
     <string name="settings_title_map_content">Innihald korts</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
     <string name="settings_title_system">Kerfi</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
@@ -412,7 +412,6 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
-    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -669,4 +668,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
