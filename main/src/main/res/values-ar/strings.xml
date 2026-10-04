@@ -284,7 +284,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">الاسم</string>
     <!-- about -->
     <string name="about_version">الإصدار</string>
     <string name="about_changelog">سجل التغييرات</string>
@@ -312,6 +311,7 @@
     <string name="settings_summary_logging">تهيئة توقيعك و ظبط خيارات تسجيل الزيارات.</string>
     <string name="settings_title_map_data">بيانات الخريطة</string>
     <string name="settings_title_map_content">محتوى الخريطة</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">استخدام بيانات العلبة المخبئة</string>
     <string name="calculate_dataDir">حساب مساحة استخدام بيانات العلبة المخبئة</string>
     <string name="settings_data_dir_item">%1$s (مجاناً %2$s)</string>
@@ -565,7 +565,6 @@
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
-    <string name="cache_status_attended">تم حضورها</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
     <string name="cache_status_archived">تم أرشفته</string>
@@ -1026,4 +1025,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
