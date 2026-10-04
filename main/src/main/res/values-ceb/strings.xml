@@ -270,7 +270,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Pangalan</string>
     <!-- about -->
     <string name="about_version">Ang bersyon</string>
     <string name="about_system">Ang Sistema</string>
@@ -295,6 +294,7 @@
     <string name="settings_summary_logging">I-kompigyur ang imong pirma ug itakda ang mga kapilian sa pag-log.</string>
     <string name="settings_title_map_data">Datos sa mapa</string>
     <string name="settings_title_map_content">Ang kontento sa mapa</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Ang ginamit na data sa geocache</string>
     <string name="calculate_dataDir">Pagkalkula sa ginamit nga data disk sa Geocache</string>
     <string name="confirm_data_dir_move">Ang pagpabalhin sa data sa geocache kay maggamit ug taas kaayo na oras, naka-depende sa device nimo ug sa kung pila ang data.</string>
@@ -542,7 +542,6 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_status_attended">Nitambong</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_status_archived">Ge-arkibo</string>
@@ -1024,4 +1023,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
