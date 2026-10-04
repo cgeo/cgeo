@@ -277,7 +277,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nama</string>
     <!-- about -->
     <string name="about_version">Versi</string>
     <string name="about_changelog">Perubahan</string>
@@ -305,6 +304,7 @@
     <string name="settings_summary_logging">Mengkonfigurasi tanda tangan anda dan mengatur pembukuan pilihan.</string>
     <string name="settings_title_map_data">Data Peta</string>
     <string name="settings_title_map_content">Konten Peta</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Pemakaian data Geocache</string>
     <string name="calculate_dataDir">Menghitung geocache penggunaan data disk</string>
     <string name="settings_data_dir_item">%1$s (%2$s gratis)</string>
@@ -565,7 +565,6 @@
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
-    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -1048,4 +1047,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
