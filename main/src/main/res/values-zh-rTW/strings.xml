@@ -522,7 +522,6 @@
     <string name="cache_filter_log_entry_logtext">日誌文字</string>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">应用名</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日誌</string>
@@ -578,6 +577,7 @@
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地圖特性</string>
     <string name="settings_title_map_style">地圖風格</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">地理藏寶目錄</string>
     <string name="settings_title_data_dir_usage">地理藏寶目錄(已使用%1$s)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
@@ -1637,4 +1637,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
