@@ -578,6 +578,8 @@
     <string name="list_dialog_create_title">Новый список</string>
     <string name="list_dialog_create">Создать</string>
     <string name="list_dialog_create_err">c:geo не удалось создать новый список</string>
+    <string name="list_already_exists_title">Список уже существует</string>
+    <string name="list_already_exists_message">Список с именем \'%s\' уже существует. Использовать существующий список?</string>
     <string name="list_dialog_remove_title">Удалить список</string>
     <string name="list_dialog_remove_description">Удалить текущий список? Все тайники из этого списка будут перемещены в «Сохранённые».</string>
     <string name="list_dialog_remove_nowempty">Список пуст. Вы хотите удалить текущий список?</string>
@@ -597,6 +599,7 @@
     <string name="cache_filter_option_inverse">Инвертировать фильтр</string>
     <string name="cache_filter_option_include_inconclusive">Включать неточные совпадения</string>
     <string name="cache_filter_option_include_inconclusive_info">Включать ли тайник в результат, если фильтру нужна недоступная информация.</string>
+    <string name="cache_filter_add_button">Добавить критерий фильтра</string>
     <string name="cache_filter_hint_on_empty_filter_list">Нажмите «Добавить критерий», чтобы добавить условие фильтрации</string>
     <string name="cache_filter_name">Имя тайника</string>
     <string name="cache_filter_type">Тип тайника</string>
@@ -768,15 +771,29 @@
         <item>&gt;1м</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Управление фильтром</string>
     <string name="named_filter_select_title">Выберите фильтр</string>
     <string name="named_filter_empty_hint">Фильтры не настроены. Чтобы добавить нажмите +.</string>
+    <string name="named_filter_fill_with_named">Загрузить фильтр</string>
+    <string name="named_filter_save_as">Сохранить фильтр</string>
+    <string name="named_filter_delete">Удалить фильтр</string>
+    <string name="named_filter_storage_delete_message">Вы действительно хотите удалить фильтр \'%s\'?</string>
     <string name="named_filter_name_exists_title">Такое имя уже существует</string>
     <string name="named_filter_name_exists_message">Фильтр с именем \'%s\' уже существует. Перезаписать?</string>
     <string name="named_filter_config_exists_title">Фильтр уже сохранен</string>
     <string name="named_filter_config_exists_message">Эта конфигурация фильтра уже сохранена как \"%s\". Сохранить ее снова с новым именем?</string>
+    <string name="named_filter_markers">Маркеры</string>
     <string name="named_filter_markers_enabled">Маркеры включены</string>
     <string name="named_filter_markers_disabled">Маркеры отключены</string>
+    <string name="named_filter_manage">Управление</string>
+    <string name="named_filter_no_icons_message">Не найдено сохраненных фильтров с назначенным значком. Сохраните один из них, чтобы использовать в качестве маркера.</string>
+    <string name="named_filter_reorder">Приоритет</string>
+    <string name="named_filter_activity_title">Приоритет маркера</string>
+    <string name="named_filter_enable_markers">Выбрать маркеры</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Исходный элемент</string>
+    <string name="dialog_parent_select">Выбрать исходный элемент</string>
+    <string name="dialog_parent_new">Создать новый исходный элемент</string>
     <string name="dialog_name">Название</string>
     <!-- about -->
     <string name="about_version">Версия</string>
@@ -1162,6 +1179,7 @@
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo поддерживает пользовательские темы для офлайн-карт. Они могут быть использованы для изменения цветового стиля карты (например, тёмный режим) или для выделения некоторых объектов, таких как велодорожки или линии уровней высот.\n\nРабота с несжатыми темами карт может снизить производительность открытия карты. В этом случае пользовательская папка темы может быть синхронизирована с локальной папкой приложения для ускорения доступа (ценой некоторого увеличения расхода внутренней памяти).</string>
     <string name="settings_info_hillshading_title">Информация о затенении высот</string>
+    <string name="settings_info_hillshading">Затенение рельефа — это метод создания топографических карт с помощью добавления эффекта освещения для обозначения перепадов высот. Склоны затемняются или осветляются для создания 3D-эффекта.\nДанные для затенения рельефа можно загрузить из меню в картах.</string>
     <string name="settings_hillshading_enable">Затенение высот</string>
     <string name="init_hillshading_hq">Высококачественное затенение высот</string>
     <string name="init_summary_hillshading_hq">Более детальное наложение теней высот, но на ~50% медленнее отрисовывается при уменьшении масштаба</string>
@@ -1285,6 +1303,10 @@
     <string name="feature_voting">Оценка тайников</string>
     <string name="init_appearance_general">Общий вид</string>
     <string name="init_cachedetail_behaviour">Действие</string>
+    <string name="init_named_filter_display_mode">Именованные фильтры в сведениях о тайнике</string>
+    <string name="named_filter_display_mode_none">Не показывать</string>
+    <string name="named_filter_display_mode_active_only">Только если маркер активен</string>
+    <string name="named_filter_display_mode_all">Показать все подходящие фильтры</string>
     <string name="init_cachedetail_note">Личная заметка</string>
     <string name="init_maplines_title">Настройка цветов карты</string>
     <string name="init_map_other">Прочее</string>
@@ -1750,6 +1772,8 @@
     <string name="cc_hint_seconds">секунды</string>
     <string name="cc_hint_fraction">дробь</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Усредняю мои координаты… (%s)</string>
+    <string name="averaging_paused">приостановлено</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Загрузка тайников из %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Загрузка файла точек из %1$s</string>
@@ -2496,6 +2520,8 @@
     <string name="live_map_status_partial">Частичный результат (увеличьте масштаб, чтобы уменьшить количество загружаемых тайников): %s</string>
     <string name="live_map_status_normal">Загрузка данных без проблем: %s</string>
     <string name="list_list_headline">Списки:</string>
+    <string name="filters_list_headline">Фильтры:</string>
+    <string name="filters_list_empty">Нет подходящих фильтров</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d точка извлечена</item>
         <item quantity="few">%d точки извлечены</item>
@@ -2839,6 +2865,8 @@
     <string name="wherigo_error_toast">Движок Wherigo сообщил об ошибке. Откройте диалоговое окно с ошибкой для получения подробной информации.</string>
     <string name="wherigo_confirm_stop_running_game_title">Остановка Игры Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">В данный момент игра запущена для \"%s\". Вы хотите остановить эту игру?</string>
+    <string name="wherigo_confirm_exit">Выход</string>
+    <string name="wherigo_confirm_save_exit">Автосохранение и Выход</string>
     <string name="wherigo_confirm_delete_cartridge_title">Удалить Картридж Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Вы действительно хотите удалить картридж \"%1$s\", включая %2$s сохраненные игры?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Удалить сохраненную игру Wherigo</string>
@@ -2874,6 +2902,7 @@
     <string name="copy" tools:ignore="PrivateResource">Копировать</string>
     <string name="pause">Пауза</string>
     <string name="resume">Продолжить</string>
+    <string name="rename">Переименовать</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
     <string name="multiselect_selectvisible">Выбрать видимое</string>

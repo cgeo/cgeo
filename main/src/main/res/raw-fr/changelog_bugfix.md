@@ -1,1 +1,11 @@
 ##
+- Correction : la gestion des listes ignorées ne fonctionne pas (#16950)
+- Correction : Plusieurs fuites mémoire (#18615)
+- Correction : Taille incorrecte de l'échelle sur Google Maps (#18646)
+- Correction : Boucle sans fin en sélectionnant un nouveau format dans "Coordonnées de calcul" (#18672)
+- Corriger : Le texte du log ne fonctionne pas (#18653)
+- Correction : Crash dans la lecture des variables (#18667)
+- Correction : Crash pendant le log (#18679)
+- Correction : Crash en essayant de lire la cartouche Wherigo (#18681)
+- Correction : Crash en essayant de démarrer le service Wherigo (#18675)
+- Correction : Crash lors de l'utilisation de Google Maps (#18676)

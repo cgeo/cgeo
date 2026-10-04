@@ -1,1 +1,11 @@
 ##
+- Corregir: la lista de ignorados de geocaching.com no funciona (#16950)
+- Corregir: Varias fugas de memoria (#18615)
+- Corregir: Tamaño incorrecto de escala en Google Maps (#18646)
+- Corregir: Bucle sin fin al seleccionar un nuevo formato en "Coordenada de cálculo" (#18672)
+- Fix: Log text folding not working (#18653)
+- Fix: Crash in reading variables (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
+- Fix: Crash while trying to start Wherigo service (#18675)
+- Fix: Crash while using Google Maps (#18676)

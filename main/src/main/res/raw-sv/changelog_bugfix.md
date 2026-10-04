@@ -1,1 +1,11 @@
 ##
+- Fix: geocaching.com Ignorera Listans hantering fungerar inte (#16950)
+- Fix: Flera minnesläckor (#18615)
+- Fix: Fel storlek på skalan på Google Maps (#18646)
+- Fix: Oändlig loop vid val av nytt format i "Beräkna koordinat" (#18672)
+- Fix: Loggtext-vikning fungerar inte (#18653)
+- Fix: Krasch i läsvariabler (#18667)
+- Fix: Kraschar vid loggning (#18679)
+- Fix: Kraschar vid läsning av Wherigo-kassetter (#18681)
+- Fix: Kraschar vid start av Wherigo-kassetter (#18675)
+- Fix: Krasch vid användning av Google Maps (#18676)
