@@ -579,7 +579,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Ad</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -651,6 +650,7 @@
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
     <string name="settings_title_map_style">Harita stili</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Geocache veri klasörü</string>
     <string name="settings_title_data_dir_usage">Geocache veri klasörü (%1$s kullanılmış)</string>
     <string name="calculate_dataDir_title">Geocache veri kullanımı</string>
@@ -2093,4 +2093,5 @@
     <string name="mcpolling_title">Mesaj merkezi</string>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

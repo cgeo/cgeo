@@ -758,7 +758,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Název</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -866,6 +865,7 @@
     <string name="settings_unifiedMapVariants_title">Varianty Sjednocené mapy</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
     <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -1603,7 +1603,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Účastnil se</string>
+    <string name="cache_status_attended">Zúčastnil jsem se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -2806,7 +2806,7 @@
     <string name="wherigo_download_accept_eula">Přihlaste se prosím na www.wherigo.com a přijměte nejprve jejich podmínky</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
-    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge [zde](%2$s)</string>
+    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Momentálně je spuštěná hra pro \"%s\". Chcete tuto hru zastavit?</string>
@@ -2843,8 +2843,6 @@
     <string name="delete">Odstranit</string>
     <string name="play">Hrát</string>
     <string name="copy" tools:ignore="PrivateResource">Kopírovat</string>
-    <string name="pause">Pozastavit</string>
-    <string name="resume">Pokračovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
@@ -2889,13 +2887,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Zobrazit databázi</string>
-    <string name="dbi_select_title">(Vyber tabulku)</string>
-    <string name="dbi_columnproperties_title">Vlastnosti sloupce</string>
-    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nÚložiště: %3$s</string>
-    <string name="dbi_edit_title">Upravit „%1$s“ řádku „%2$d“</string>
     <string name="dbi_edit_ok">Pole aktualizováno</string>
     <string name="dbi_edit_error">Chyba při aktualizaci pole</string>
-    <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
-    <string name="dbi_search_title">Hledat</string>
-    <string name="dbi_search_columnSelection">Omezit na</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

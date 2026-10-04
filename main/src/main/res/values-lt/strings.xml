@@ -670,7 +670,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Pavadinimas</string>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -772,6 +771,7 @@
     <string name="settings_hide_tileproviders_summary">Išskirkite vieną ar daugiau žemėlapio šaltinių iš žemėlapio šaltinio pasirinkimo</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap variantai</string>
     <string name="settings_userDefinedTileProvider">Vartotojo nustatytas plytelių teikėjas</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Slėptuvių duomenų aplankas</string>
     <string name="settings_title_data_dir_usage">Slėptuvių duomenų aplankas (%1$s naudojama)</string>
     <string name="calculate_dataDir_title">Slėptuvių duomenų naudojimas</string>
@@ -2580,12 +2580,7 @@
     <string name="settings_gc_imagesize_title">Pageidaujamas vaizdo dydis</string>
     <!-- db inspection -->
     <string name="view_database">Peržiūrėti duomenų bazę</string>
-    <string name="dbi_select_title">(Pasirinkite lentelę)</string>
-    <string name="dbi_columnproperties_title">Stulpelių savybės</string>
-    <string name="dbi_columnproperties_message">Laukas: %1$s\nTipas: %2$s\nSaugykla: %3$s</string>
-    <string name="dbi_edit_title">Redaguoti „%1$s“ eilutės %2$d“</string>
     <string name="dbi_edit_ok">Laukelis atnaujintas</string>
     <string name="dbi_edit_error">Klaida atnaujinant lauką</string>
-    <string name="dbi_edit_error_pkfield">"%s yra pirminio rakto dalis, jo negalima redaguoti"</string>
-    <string name="dbi_search_title">Ieškoti</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

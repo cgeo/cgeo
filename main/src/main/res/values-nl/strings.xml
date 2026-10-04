@@ -731,7 +731,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Naam</string>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -834,6 +833,7 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -1544,7 +1544,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1880,7 +1880,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2430,7 +2430,7 @@
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
     <string name="map_manual_target_route_name">Huidige navigatie</string>
-    <string name="map_clear_manual_targets">Routeringsdoel wissen</string>
+    <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2588,7 +2588,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (alleen VTM, herstart nodig)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
@@ -2732,8 +2732,6 @@
     <string name="delete">Verwijderen</string>
     <string name="play">Spelen</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiëren</string>
-    <string name="pause">Pauzeren</string>
-    <string name="resume">Hervatten</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
@@ -2776,13 +2774,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Bekijk database</string>
-    <string name="dbi_select_title">(Selecteer tabel)</string>
-    <string name="dbi_columnproperties_title">Kolom-eigenschappen</string>
-    <string name="dbi_columnproperties_message">Veld: %1$s\nType: %2$s\nOpslag: %3$s</string>
-    <string name="dbi_edit_title">Bewerk \"%1$s\" van rij %2$d\"</string>
     <string name="dbi_edit_ok">Veld bijgewerkt</string>
     <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
-    <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
-    <string name="dbi_search_title">Zoek naar</string>
-    <string name="dbi_search_columnSelection">Beperken tot</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

@@ -753,7 +753,6 @@
     <string name="named_filter_markers_enabled">标记已启用</string>
     <string name="named_filter_markers_disabled">标记已禁用</string>
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">应用名</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>
@@ -861,6 +860,7 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMap变体</string>
     <string name="settings_userDefinedTileProvider">用户自定义地图图块源</string>
     <string name="settings_userDefinedTileProviderUri">请向地图瓦片提供商输入完整的URI（不带尾随斜杠），或输入带参数的完整URI（包括{X}、{Y}和{Z}）。请确保您已勾选并遵守其使用条款。</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">藏点数据文件夹</string>
     <string name="settings_title_data_dir_usage">藏点数据文件夹 (%1$s 已使用)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
@@ -1939,7 +1939,7 @@
     <string name="search_kw_disabled_hint">由于您是BASIC会员，该功能已被禁用</string>
     <string name="search_hbu">藏宝者</string>
     <string name="search_finder">发现者：</string>
-    <string name="search_filter">筛选器</string>
+    <string name="search_filter">过滤器</string>
     <string name="search_filter_info_message" formatted="false">**按过滤器搜索**会使用提供的过滤器在所有活跃的在线服务 (如 geocaching.com) 上搜索藏点。然而，这些服务的搜索能力通常比 c:geo 的过滤功能更有限。\n\n- 所有服务仅支持 AND 过滤器 (不支持 OR 过滤器和过滤器反转)。\n- 所有服务都支持**藏点类型**或**藏点规格**等基础过滤器。更复杂的过滤器通常不受支持或存在限制，例如**收藏点**或**隐藏日期**。\n- 各服务支持的过滤器详细列表可以在[此处](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)找到。\n\n在线服务不支持的过滤器将由 c:geo 应用于接收到的结果上。</string>
     <string name="search_tb">追踪物</string>
     <string name="most_recent">最近</string>
@@ -2770,7 +2770,7 @@
     <string name="play">播放</string>
     <string name="copy" tools:ignore="PrivateResource">复制</string>
     <string name="pause">暂停</string>
-    <string name="resume">恢复</string>
+    <string name="resume">继续</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">全选</string>
     <string name="multiselect_selectvisible">选择可见项</string>
@@ -2812,13 +2812,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">查看数据库</string>
-    <string name="dbi_select_title">(选择表)</string>
-    <string name="dbi_columnproperties_title">列属性</string>
-    <string name="dbi_columnproperties_message">字段：%1$s\n类型：%2$s\n存储：%3$s</string>
-    <string name="dbi_edit_title">编辑第 %2$d 行的 \"%1$s\"</string>
     <string name="dbi_edit_ok">字段已更新</string>
     <string name="dbi_edit_error">更新字段时出错</string>
-    <string name="dbi_edit_error_pkfield">"%s\" 是主键的一部分，无法编辑"</string>
-    <string name="dbi_search_title">搜索</string>
-    <string name="dbi_search_columnSelection">限制于</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

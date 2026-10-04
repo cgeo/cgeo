@@ -733,7 +733,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nome</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -841,6 +840,7 @@
     <string name="settings_unifiedMapVariants_title">Varianti di UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Provider tile definito dall\'utente</string>
     <string name="settings_userDefinedTileProviderUri">Inserisci l\'Uri completo (senza barra finale) del provider dei tile o inserisci Uri completo con parametri (inclusi {X}, {Y} e {Z}). Assicurati di aver controllato e rispettare le loro condizioni di utilizzo.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -2454,7 +2454,7 @@
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
     <string name="map_manual_target_route_name">Navigazione corrente</string>
-    <string name="map_clear_manual_targets">Cancella la destinazione del percorso</string>
+    <string name="map_clear_manual_targets">Cancella obiettivo di routing</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
@@ -2756,8 +2756,6 @@
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
     <string name="copy" tools:ignore="PrivateResource">Copia</string>
-    <string name="pause">Pausa</string>
-    <string name="resume">Riprendi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>
@@ -2800,13 +2798,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Visualizza database</string>
-    <string name="dbi_select_title">(Seleziona tabella)</string>
-    <string name="dbi_columnproperties_title">Proprietà colonna</string>
-    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nArchiviazione: %3$s</string>
-    <string name="dbi_edit_title">Modifica \"%1$s\" della riga %2$d\"</string>
     <string name="dbi_edit_ok">Campo aggiornato</string>
     <string name="dbi_edit_error">Errore durante l\'aggiornamento del campo</string>
-    <string name="dbi_edit_error_pkfield">"%s\" fa parte della chiave primaria, non può essere modificato"</string>
-    <string name="dbi_search_title">Cerca per</string>
-    <string name="dbi_search_columnSelection">Limita a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

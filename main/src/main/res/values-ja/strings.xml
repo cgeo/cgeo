@@ -508,7 +508,6 @@
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">キャッシュ名</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -571,6 +570,7 @@
     <string name="settings_title_map_content">地図の表示</string>
     <string name="settings_title_map_behavior">地図の動作</string>
     <string name="settings_title_map_style">地図スタイル</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">ジオキャッシュ データフォルダ</string>
     <string name="settings_title_data_dir_usage">ジオキャッシュ データフォルダ (%1$s 使用)</string>
     <string name="calculate_dataDir_title">ジオキャッシュ データ使用量</string>
@@ -1996,4 +1996,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

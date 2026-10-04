@@ -328,7 +328,6 @@
     <string name="cache_filter_checkboxlist_add_all_items">Adaugă toate elementele</string>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nume</string>
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
@@ -357,6 +356,7 @@
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
     <string name="calculate_dataDir">Se determină spaţiul de stocare utilizat de geocutii</string>
     <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
@@ -624,7 +624,6 @@
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
-    <string name="cache_status_attended">A participat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_status_archived">Arhivată</string>
@@ -1126,4 +1125,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

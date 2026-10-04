@@ -744,7 +744,6 @@
     </string-array>
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nimi</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -852,6 +851,7 @@
     <string name="settings_unifiedMapVariants_title">UnifiedMapin vaihtoehdot</string>
     <string name="settings_userDefinedTileProvider">Käyttäjän määrittämä palojen tarjoaja</string>
     <string name="settings_userDefinedTileProviderUri">Syötä koko Uri (ilman kauttaviivaa lopussa) laattatoimittajalle tai anna koko Uri parametreilla (mukaan lukien {X}, {Y} ja {Z}). Varmista, että olet tarkistanut käyttöehdot ja noudatat niitä.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Kätködatan sisältävä kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
     <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
@@ -2770,8 +2770,6 @@
     <string name="delete">Poista</string>
     <string name="play">Toista</string>
     <string name="copy" tools:ignore="PrivateResource">Kopioi</string>
-    <string name="pause">Keskeytä</string>
-    <string name="resume">Jatka</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Valitse kaikki</string>
     <string name="multiselect_selectvisible">Valitse näkyvät</string>
@@ -2814,13 +2812,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Näytä tietokanta</string>
-    <string name="dbi_select_title">(Valitse taulukko)</string>
-    <string name="dbi_columnproperties_title">Sarakkeen ominaisuudet</string>
-    <string name="dbi_columnproperties_message">Kenttä: %1$s\nTyyppi: %2$s\nTallennus: %3$s</string>
-    <string name="dbi_edit_title">Muokkaa \"%1$s\" rivillä %2$d\"</string>
     <string name="dbi_edit_ok">Kenttä päivitetty</string>
     <string name="dbi_edit_error">Virhe päivitettäessä kenttää</string>
-    <string name="dbi_edit_error_pkfield">"%s\" on osa ensisijaista avainta, ei voida muokata"</string>
-    <string name="dbi_search_title">Hae</string>
-    <string name="dbi_search_columnSelection">Rajoita</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

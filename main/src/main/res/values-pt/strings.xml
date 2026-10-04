@@ -762,7 +762,6 @@
     <string name="named_filter_markers_enabled">Marcadores permitidos</string>
     <string name="named_filter_markers_disabled">Marcadores não permitidos</string>
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Nome</string>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -870,6 +869,7 @@
     <string name="settings_unifiedMapVariants_title">Variantes do Mapa Unificado</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
     <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -1793,7 +1793,7 @@
     <string name="projection_type_none">Sem projecção</string>
     <string name="projection_type_bearing">Azimute</string>
     <string name="projection_type_bearing_info">Azimute %1$s%3$s, %2$s°</string>
-    <string name="projection_type_bearing_hint_angle">Azimute em º (graus)</string>
+    <string name="projection_type_bearing_hint_angle">Azimute em º</string>
     <string name="projection_type_bearing_hint_distance">Distância</string>
     <string name="projection_type_offset">Desvio</string>
     <string name="projection_type_offset_info">Desvio lat %1$s mm, lon %2$s mm</string>
@@ -1822,7 +1822,7 @@
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
     <string name="calccoord_convert_to_plain_error">A fórmula não resulta em coordenadas válidas. \nA conversão para coordenadas simples irá repor o ponto adicional para coordenadas vazias.</string>
     <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
-    <string name="calccoord_remove_spaces">Remover espaços</string>
+    <string name="calccoord_remove_spaces">Remover Espaços</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substituir \'x\' por \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Colar da área de transferência</string>
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
@@ -1939,7 +1939,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1958,7 +1958,7 @@
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
     <string name="search_finder">Encontrada por</string>
-    <string name="search_filter">Filtrar</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="most_recent">Mais recentes</string>
@@ -2804,8 +2804,6 @@
     <string name="delete">Eliminar</string>
     <string name="play">Jogar</string>
     <string name="copy" tools:ignore="PrivateResource">Copiar</string>
-    <string name="pause">Pausar</string>
-    <string name="resume">Retomar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Selecionar Tudo</string>
     <string name="multiselect_selectvisible">Selecionar Visíveis</string>
@@ -2848,13 +2846,7 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Ver a base de dados</string>
-    <string name="dbi_select_title">(Selecionar tabela)</string>
-    <string name="dbi_columnproperties_title">Propriedades da coluna</string>
-    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nArmazenamento: %3$s</string>
-    <string name="dbi_edit_title">Editar \"%1$s\" da linha %2$d\"</string>
     <string name="dbi_edit_ok">Campo actualizado</string>
     <string name="dbi_edit_error">Erro ao actualizar o campo</string>
-    <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
-    <string name="dbi_search_title">Pesquisar por</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

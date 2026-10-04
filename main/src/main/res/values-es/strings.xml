@@ -888,6 +888,7 @@
     <string name="settings_unifiedMapVariants_title">Variantes UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveedor de teselas definido por el usuario</string>
     <string name="settings_userDefinedTileProviderUri">Introduzca la Uri completa (sin barra a la derecha) para el proveedor de teselas, o introduzca el Uri completo con parámetros (incluyendo {X}, {Y} y {Z}). Asegúrese de haber comprobado y cumplir con sus condiciones de uso.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_data_dir">Carpeta de datos Geocache</string>
     <string name="settings_title_data_dir_usage">Carpeta de datos Geocache (%1$s usado)</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
@@ -1677,6 +1678,9 @@
     <string name="cachedetails_progress_unfavorite">Eliminado de favoritos</string>
     <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartuchos Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consulta el listing del caché para obtener más información sobre los cartuchos.</string>
+    <string name="cache_wherigo_no_cartridge_fetch">Buscando cartucho Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_title">No se encontró ningún cartucho Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_message">Consulta el listing del caché para obtener información sobre como obtener el cartucho.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - no descargado</string>
     <string name="cache_wherigo_start">Descargar y reproducir este Wherigo usando el reproductor interno de c:geo</string>
     <string name="cache_wherigo_credentials">Para poder jugar este Wherigo usando el lector interno de c:geo necesita autorización del servicio de geocaching.com primero. Pulse en el botón de la derecha para ir a la configuración.</string>
@@ -2879,13 +2883,7 @@ Nombre de archivo:%2$s</string>
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Ver base de datos</string>
-    <string name="dbi_select_title">(Seleccionar tabla)</string>
-    <string name="dbi_columnproperties_title">Propiedades de la columna</string>
-    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nAlmacenamiento: %3$s</string>
-    <string name="dbi_edit_title">Editar \"%1$s\" de la fila %2$d\"</string>
     <string name="dbi_edit_ok">Columna actualizada</string>
     <string name="dbi_edit_error">Error al actualizar el campo</string>
-    <string name="dbi_edit_error_pkfield">"%s\" es parte de la clave primaria, no se puede editar"</string>
-    <string name="dbi_search_title">Buscar por</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
