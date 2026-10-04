@@ -17,8 +17,8 @@
 - Correction : Arrêt du téléchargeur de tuiles dans certaines conditions (cartes en ligne OpenStreetMap uniquement)
 - Nouveau : marqueurs de cache conditionnels
 - New: Show navigation hint (arrow + distance)
-- Change: Reduce memory requirements of map activity
-- Fix: Google Map resets position to N0 / W0 on mapping a cache list
+- Changement: Réduire les besoins en mémoire de l'activité de la carte
+- Correction : Google Map réinitialise la position à N0 / W0 lors du mapping d'une liste de caches
 
 **Anciennes cartes**
 
@@ -57,17 +57,17 @@ Comme annoncé avec les versions 2025.07.17 et 2025.12.01, nous avons finalement
 - Changement: Stocker le cache avant d'ajouter une image utilisateur
 - Correction : Crash lors du chargement des images intégrées directement dans le texte de la liste
 - Nouveau : Afficher ses propres favoris dans la vue des logs (Geocaching.com + logs hors-ligne)
-- New: Sending log is done in background
-- Fix: Inventory hidden on logging under certain conditions
-- New: Averaging of coordinates on creating waypoint / setting coordinates for user-defined caches
-- Fix: Description not loaded (website change)
+- Nouveau : L'envoi du log se fait en arrière-plan
+- Correction : Inventaire masqué lors de la journalisation sous certaines conditions
+- Nouveau : Moyenne des coordonnées lors de la création de waypoint / de cache définie par l'utilisateur
+- Correction : La description n'a pas été chargée (changement du site)
 
 ### Wherigo Player
 - Nouveau : Traduction hors ligne pour les caches Wherigo
 - Nouveau : Amélioration de la gestion des boutons
 - Nouveau : Enregistrement automatique du statut
 - Nouveau : Possibilité de créer un raccourci vers Wherigo sur l'écran d'accueil de votre mobile
-- Fix: Missing/wrong media files lead to error
+- Correction : Les fichiers multimédias manquants/incorrects mènent à une erreur
 
 ### Général
 - Nouveau : Option de partage après avoir logué une cache
