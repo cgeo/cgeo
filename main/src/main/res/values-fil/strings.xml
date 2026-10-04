@@ -274,7 +274,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Pangalan</string>
     <!-- about -->
     <string name="about_version">Ang Bersyon</string>
     <string name="about_changelog">Baguhin ang log</string>
@@ -302,6 +301,7 @@
     <string name="settings_summary_logging">Magkumpigura ng iyong pirma at itakda ang mga opsyon sa pagla-log.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
     <string name="calculate_dataDir">Pagkalkula ng mga datos na nagamit sa Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
@@ -569,7 +569,6 @@
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
     <string name="cache_status_archived">Ang naka-archive</string>
@@ -1056,4 +1055,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
