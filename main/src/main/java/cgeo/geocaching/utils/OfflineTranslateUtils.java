@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.google.android.material.button.MaterialButton;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.TextNode;
@@ -135,9 +136,21 @@ public class OfflineTranslateUtils {
         });
     }
 
-    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<SpannableStringBuilder> consumer, final Consumer<Exception> errorConsumer) {
+    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, @NonNull final Consumer<SpannableStringBuilder> consumer, final Consumer<Exception> errorConsumer) {
+        // safeguards
+        if (StringUtils.isBlank(text) || status == null) {
+            consumer.accept(new SpannableStringBuilder(StringUtils.isBlank(text) ? "" : text));
+            return;
+        }
+        if (translator == null) {
+            consumer.accept(new SpannableStringBuilder(text)); // returns untranslated text
+            status.updateProgress();
+            return;
+        }
+
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
+        elements.removeIf(node -> node == null || StringUtils.isBlank(node.text())); // remove empty nodes
         final AtomicInteger remaining = new AtomicInteger(elements.size());
         if (remaining.get() == 0) {
             consumer.accept(new SpannableStringBuilder(""));
