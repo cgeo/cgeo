@@ -888,7 +888,29 @@
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders">Proveïdors de tessel·les definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders_summary">Servidors de tessel·les per utilitzar com a mapa, a més dels que inclou c:geo</string>
+    <string name="settings_userDefinedTileProvider_addnew">Afegeix un nou proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_edit">Edita el proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Vols eliminar realment aquest proveïdor de tessel·les?</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
+    <string name="settings_tileOverlays">Superposicions definides per l\'usuari</string>
+    <string name="settings_tileOverlays_summary">Servidors dels quals es dibuixen les tessel·les damunt del mapa, per exemple, marques marítimes o rutes de senderisme</string>
+    <string name="settings_tileOverlays_add">Afegeix una superposició</string>
+    <string name="settings_tileOverlays_edit">Edita la superposició</string>
+    <string name="settings_tileOverlays_url_hint">Introduïu l\'URI complet, incloent-hi els marcadors de posició {X}, {Y} i {Z}. Les tessel·les han de ser transparents allà on no continguin dades. Assegureu-vos d\'haver consultat i de complir les condicions d\'ús del proveïdor.</string>
+    <string name="settings_tileOverlays_delete">Suprimeix la superposició</string>
+    <string name="settings_tileOverlays_delete_confirm">Voleu suprimir la superposició «%1$s»?</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Nom</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Introduïu una URI http(s) que contingui {X}, {Y} i {Z}</string>
+    <string name="settings_tileUrl_test">Prova</string>
+    <string name="settings_tileUrl_testing">S\'està comprovant\u2026</string>
+    <string name="settings_tileUrl_testok">Es va rebre una tessel·la</string>
+    <string name="settings_tileUrl_testfailed_title">No s\'ha rebut cap tessel·la</string>
+    <string name="settings_tileUrl_testfailed">No s\'ha pogut carregar una tessel·la des d\'aquest servidor (%1$s). És possible que l\'URI sigui incorrecte o que el servidor no estigui disponible temporalment.</string>
+    <string name="settings_tileUrl_copied">Copiat, a punt per compartir-se</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -1321,6 +1343,7 @@
     <string name="map_source_google_terrain">Google: Terreny</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_nomap">Sense mapa</string>
+    <string name="map_grayscale">Mapa d\'escala de grisos</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
@@ -1482,7 +1505,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Rastrejables</string>
+    <string name="cache_inventory">Traçable</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
@@ -1615,7 +1638,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">Vaig assistir</string>
+    <string name="cache_status_attended">He assistit</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1678,6 +1701,9 @@
     <string name="cachedetails_progress_unfavorite">S\'ha esborrat de preferits</string>
     <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartutxos Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consulteu la llista de catxés per obtenir més informació sobre els cartutxos.</string>
+    <string name="cache_wherigo_no_cartridge_fetch">Buscant cartutxos Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_title">No s\'ha trobat cap cartutx Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_message">Consulteu la pàgina del catxé per obtenir informació sobre com recuperar el cartutx.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - no descarregat</string>
     <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
     <string name="cache_wherigo_credentials">Per poder jugar a aquest Wherigo amb el reproductor intern de c:geo, primer heu d\'autoritzar el servei geocaching.com. Toqueu el botó de la dreta per anar a la configuració.</string>
@@ -1854,7 +1880,7 @@
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
-    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
+    <string name="calccoord_generate_error_novarwithrange">Cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
@@ -1965,7 +1991,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
+    <string name="google_maps_option_group_theme">Opcions del Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
@@ -1977,6 +2003,7 @@
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_hint_settings">Configuració de cerca</string>
+    <string name="search_index_updated">Base de dades de cerca actualitzada</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_geo">Geocodi</string>
@@ -2836,7 +2863,7 @@
     <string name="play">Juga</string>
     <string name="copy" tools:ignore="PrivateResource">Còpia</string>
     <string name="pause">Pausa</string>
-    <string name="resume">Reprendre</string>
+    <string name="resume">Continua</string>
     <string name="rename">Canvia el nom</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
@@ -2880,13 +2907,33 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
-    <string name="dbi_select_title">(Selecciona la taula)</string>
-    <string name="dbi_columnproperties_title">Propietats de la columna</string>
-    <string name="dbi_columnproperties_message">Camp: %1$s\nTipus: %2$s\nEmmagatzematge: %3$s</string>
-    <string name="dbi_edit_title">Edita \"%1$s\" de la fila %2$d</string>
+    <string name="dbi_config_columns">Configura les columnes</string>
     <string name="dbi_edit_ok">Camp actualitzat</string>
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
-    <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
-    <string name="dbi_search_title">Buscar per</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
+    <string name="dbi_sort_reset">Restabliment de l\'ordenació</string>
+    <string name="dbi_sorted_by">Ordenat per %1$s</string>
+    <string name="dbi_no_tables">No hi ha taules en aquesta base de dades</string>
+    <string name="dbi_select_table">Selecciona la taula</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s a #%2$d és de lectura/només</string>
+    <string name="dbi_edit_title">Edita «%1$s» a #%2$d</string>
+    <string name="dbi_delete_row_title">Suprimeix la fila</string>
+    <string name="dbi_delete_row_question">Vols eliminar definitivament la fila #%1$d (%2$s)?</string>
+    <string name="dbi_delete_success">Fila suprimida: %1$s</string>
+    <string name="dbi_sql_editor">Editor SQL</string>
+    <string name="dbi_sqleditor_load_snippet">Sentències emmagatzemades</string>
+    <string name="dbi_sqleditor_snippet_saved">Senténcia emmagatzemada</string>
+    <string name="dbi_sqleditor_no_snippets">Encara no s\'ha emmagatzemat cap senténcia</string>
+    <string name="dbi_sqleditor_warning">L\'editor SQL és una funcionalitat experimental. Es pot produir pèrdua de dades. Utilitzeu-lo sota la vostra pròpia responsabilitat!</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Cerca</string>
+    <string name="grid_search_reset">Restablir</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Valor</string>
+    <string name="grid_operator_starts_with">comença amb</string>
+    <string name="grid_operator_not_starts_with">no comença amb</string>
+    <string name="grid_operator_ends_with">acaba amb</string>
+    <string name="grid_operator_not_ends_with">no acaba amb</string>
+    <string name="grid_operator_contains">conté</string>
+    <string name="grid_operator_not_contains">no conté</string>
 </resources>
