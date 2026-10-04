@@ -326,7 +326,6 @@
     <!-- caches lists filter -->
     <!-- named filter activity -->
     <!-- dialog to create element with parent -->
-    <string name="dialog_name">Numm</string>
     <!-- about -->
     <string name="about_version">Versioun</string>
     <string name="about_changelog">Ännerungshiwäiser</string>
@@ -374,6 +373,7 @@
     <string name="settings_title_waypoints">Weepunkte</string>
     <string name="settings_title_map_content">Kaarteninhalt</string>
     <string name="settings_title_map_behavior">Kaartenverhalen</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Geocahce Datebenotzung</string>
     <string name="calculate_dataDir">Geocache Date-Späicherplaatz berechnen</string>
     <string name="settings_data_dir_item">%1$s (%2$s fräi)</string>
@@ -485,7 +485,6 @@
     <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
-    <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
     <!-- coordinate input dialog -->
     <!-- gpx -->
@@ -577,4 +576,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
