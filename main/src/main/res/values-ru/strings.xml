@@ -902,6 +902,9 @@
     <string name="settings_unifiedMapVariants_title">Варианты ЕдинойКарты</string>
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
     <string name="settings_userDefinedTileProviderUri">Введите полный URI-адрес (без косой черты) поставщика плиток карт или введите полный URI-адрес с параметрами (включая {X}, {Y} и {Z}). Убедитесь, что вы проверили условия использования этих карт и соблюдаете их.</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Название</string>
+    <string name="settings_tileUrl_test">Проверка</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -2591,7 +2594,7 @@
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
     <string name="map_disable_autotarget_individual_route">\"Установить начало маршрута как цель\" отключено</string>
     <string name="map_manual_target_route_name">Текущая навигация</string>
-    <string name="map_clear_manual_targets">Сбросить цель навигации</string>
+    <string name="map_clear_manual_targets">Очистить цель навигации</string>
     <string name="map_manual_targets_cleared">Ручные цели очищены</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
@@ -2754,7 +2757,7 @@
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="hillshading_info">Оффлайн затенение высот</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
-    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования для офлайн-карт (только для VTM, требуется перезагрузка)</string>
+    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования оффлайн карт (только для VTM, требуется перезапуск)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>
@@ -2947,13 +2950,14 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Просмотр БД</string>
-    <string name="dbi_select_title">(Выберите таблицу)</string>
-    <string name="dbi_columnproperties_title">Свойства столбца</string>
-    <string name="dbi_columnproperties_message">Поле: %1$s\nТип: %2$s\nХранилище: %3$s</string>
-    <string name="dbi_edit_title">Изменить\"%1$s\" строки %2$d\"</string>
+    <string name="dbi_config_columns">Настроить столбцы</string>
     <string name="dbi_edit_ok">Поле обновлено</string>
     <string name="dbi_edit_error">Ошибка при обновлении поля</string>
-    <string name="dbi_edit_error_pkfield">"%s\" является частью первичного ключа, не подлежит редактированию"</string>
-    <string name="dbi_search_title">Искать</string>
-    <string name="dbi_search_columnSelection">Ограничить</string>
+    <string name="dbi_select_table">Выберите таблицу</string>
+    <string name="dbi_sql_editor">SQL редактор</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Поиск</string>
+    <string name="grid_search_reset">Сброс</string>
+    <string name="grid_search_global">Общие</string>
+    <string name="grid_search_value">Значение</string>
 </resources>
