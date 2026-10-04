@@ -887,7 +887,29 @@
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap-varianter</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
+    <string name="settings_userDefinedTileProviders">Användardefinierad leverantör av panel</string>
+    <string name="settings_userDefinedTileProviders_summary">Rut-servrar att använda som kartan själv, förutom de c:geo kommer med</string>
+    <string name="settings_userDefinedTileProvider_addnew">Lägg till en ny leverantör av rutor</string>
+    <string name="settings_userDefinedTileProvider_edit">Redigera leverantör av rutor</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Vill du verkligen ta bort denna rut-leverantör?</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
+    <string name="settings_tileOverlays">Användardefinierade överlägg</string>
+    <string name="settings_tileOverlays_summary">Rutservrar, vars rutor är ritade ovanpå kartan, till exempel sjömärken eller vandringsleder</string>
+    <string name="settings_tileOverlays_add">Lägg till överlägg</string>
+    <string name="settings_tileOverlays_edit">Redigera överlägg</string>
+    <string name="settings_tileOverlays_url_hint">Ange hela Uri inklusive {X}, {Y} och {Z} platshållare. Plattorna måste vara transparenta där de inte har några uppgifter. Se till att du har kontrollerat och följer leverantörens användningsvillkor.</string>
+    <string name="settings_tileOverlays_delete">Ta bort överlägg</string>
+    <string name="settings_tileOverlays_delete_confirm">Ta bort överlägg \"%1$s\"?</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Namn</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Ange en http(s) Uri som innehåller {X}, {Y} och {Z}</string>
+    <string name="settings_tileUrl_test">Testa</string>
+    <string name="settings_tileUrl_testing">Kontrollerar\u2026</string>
+    <string name="settings_tileUrl_testok">En bricka togs emot</string>
+    <string name="settings_tileUrl_testfailed_title">Ingen ruta mottagen</string>
+    <string name="settings_tileUrl_testfailed">Kunde inte ladda en ruta från denna server (%1$s). Uri kan vara fel eller så kan servern vara tillfälligt otillgänglig.</string>
+    <string name="settings_tileUrl_copied">Kopierad, redo att delas</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -1320,6 +1342,7 @@
     <string name="map_source_google_terrain">Google: Terräng</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_nomap">Ingen karta</string>
+    <string name="map_grayscale">Gråskale-karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
@@ -1481,7 +1504,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Trackables</string>
+    <string name="cache_inventory">Spårbara objekt</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
@@ -1677,6 +1700,9 @@
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
     <string name="cache_multiple_wherigo_cartridges_title">Flera Wherigo-patroner</string>
     <string name="cache_multiple_wherigo_cartridges_message">Rådfråga cachelistan för mer information om patronerna.</string>
+    <string name="cache_wherigo_no_cartridge_fetch">Letar efter Wherigo-kassett</string>
+    <string name="cache_wherigo_no_cartridge_title">Ingen Wherigo-kassett hittades</string>
+    <string name="cache_wherigo_no_cartridge_message">Rådfråga cachelistan för mer information om kassetterna.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
@@ -1976,6 +2002,7 @@
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
     <string name="search_bar_hint_settings">Sökinställningar</string>
+    <string name="search_index_updated">Sök-databasen uppdaterad</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_address">Adress</string>
     <string name="search_geo">Geocode</string>
@@ -1983,7 +2010,7 @@
     <string name="search_kw_disabled_hint">Inaktiverad eftersom det inte stöds av geocaching.com för BASIC-medlemmar</string>
     <string name="search_hbu">Gömd av</string>
     <string name="search_finder">Hittad av</string>
-    <string name="search_filter">Filtrera</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
     <string name="most_recent">Senaste</string>
@@ -2794,7 +2821,7 @@
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
-    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta författaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_stop_running_game_title">Sluta köra Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">Ett spel körs för närvarande för \"%s\". Vill du stoppa detta spel?</string>
@@ -2833,7 +2860,7 @@
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
     <string name="copy" tools:ignore="PrivateResource">Kopiera</string>
-    <string name="pause">Paus</string>
+    <string name="pause">Pausa</string>
     <string name="resume">Återuppta</string>
     <string name="rename">Ändra namn</string>
     <!-- Multi-Selections -->
@@ -2878,13 +2905,33 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Visa databas</string>
-    <string name="dbi_select_title">(Välj tabell)</string>
-    <string name="dbi_columnproperties_title">Kolumn-egenskaper</string>
-    <string name="dbi_columnproperties_message">Fält: %1$s\nTyp: %2$s\nLagring: %3$s</string>
-    <string name="dbi_edit_title">Redigera \"%1$s\" av rad %2$d\"</string>
+    <string name="dbi_config_columns">Konfigurera kolumner</string>
     <string name="dbi_edit_ok">Fält uppdaterat</string>
     <string name="dbi_edit_error">Fel vid uppdatering av fält</string>
-    <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
-    <string name="dbi_search_title">Sök efter</string>
-    <string name="dbi_search_columnSelection">Begränsa till</string>
+    <string name="dbi_sort_reset">Sortera återställning</string>
+    <string name="dbi_sorted_by">Sorterad på %1$s</string>
+    <string name="dbi_no_tables">Inga tabeller i denna databas</string>
+    <string name="dbi_select_table">Välj tabell</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s vid #%2$d är skrivskyddad</string>
+    <string name="dbi_edit_title">Redigera \"%1$s\" vid #%2$d\"</string>
+    <string name="dbi_delete_row_title">Ta bort rad</string>
+    <string name="dbi_delete_row_question">Ta bort raden #%1$d (%2$s) för gott?</string>
+    <string name="dbi_delete_success">Rad raderad: %1$s</string>
+    <string name="dbi_sql_editor">SQL-redigerare</string>
+    <string name="dbi_sqleditor_load_snippet">Lagrade satser</string>
+    <string name="dbi_sqleditor_snippet_saved">Sats sparad</string>
+    <string name="dbi_sqleditor_no_snippets">Ingen sats sparad ännu</string>
+    <string name="dbi_sqleditor_warning">SQL-redigerare är en experimentell funktion. Dataförlust kan förekomma. Använd på egen risk!</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Sök</string>
+    <string name="grid_search_reset">Återställ</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Värde</string>
+    <string name="grid_operator_starts_with">börjar med</string>
+    <string name="grid_operator_not_starts_with">börjar inte med</string>
+    <string name="grid_operator_ends_with">slutar med</string>
+    <string name="grid_operator_not_ends_with">slutar inte med</string>
+    <string name="grid_operator_contains">innehåller</string>
+    <string name="grid_operator_not_contains">innehåller inte</string>
 </resources>
