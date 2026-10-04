@@ -57,10 +57,10 @@
 - Ändra: Lagra cache innan du lägger till användarbild
 - Fix: Krasch vid inläsning av bilder inbäddade direkt i text-listning
 - Nyhet: Visa egna favoriter i loggvy (Geocaching.com + offline-loggar)
-- New: Sending log is done in background
+- Nytt: Att skicka loggen är klart i bakgrunden
 - Fix: Inventarier dolda vid loggning under vissa förhållanden
 - Nytt: Medelvärde av koordinater för att skapa vägpunkter/sätta koordinater för användardefinierade cacher
-- Fix: Description not loaded (website change)
+- Fix: Beskrivning inte laddad (ändring av webbplatsen)
 
 ### Wherigo-spelare
 - Nyhet: Offline-översättning för Wherigos

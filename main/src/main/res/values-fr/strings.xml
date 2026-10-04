@@ -336,6 +336,7 @@
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
     <string name="info_log_post_failed_geocode">L\'envoi du log pour %s a échoué.</string>
     <string name="info_log_delete_failed">La suppression du log a échoué.</string>
+    <string name="info_log_delete_failed_simple_reason">Vérifiez que vous êtes correctement connecté, que vous avez une connexion internet valide et que le log n\'est pas déjà supprimé.</string>
     <string name="info_log_cleared">La visite a été effacée.</string>
     <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
     <string name="info_log_type_changed">Le type de visite a été modifié !</string>
@@ -565,6 +566,8 @@
     <string name="list_dialog_create_title">Nouvelle liste</string>
     <string name="list_dialog_create">Créer</string>
     <string name="list_dialog_create_err">c:geo n\'a pas pu créer la liste</string>
+    <string name="list_already_exists_title">La liste existe déjà</string>
+    <string name="list_already_exists_message">Une liste nommée \'%s\' existe déjà. Utiliser la liste existante ?</string>
     <string name="list_dialog_remove_title">Supprimer la liste</string>
     <string name="list_dialog_remove_description">Voulez-vous supprimer la liste courante ? Toutes les caches restantes seront déplacées dans \"Enregistrées\".</string>
     <string name="list_dialog_remove_nowempty">La liste est vide. Voulez vous la supprimer ?</string>
@@ -584,6 +587,7 @@
     <string name="cache_filter_option_inverse">Inverser filtre</string>
     <string name="cache_filter_option_include_inconclusive">Inclure les résultats non concluants</string>
     <string name="cache_filter_option_include_inconclusive_info">S\'il faut inclure les caches dans le résultat lorsqu\'un filtre a besoin d\'informations sur les caches qui ne sont pas disponibles.</string>
+    <string name="cache_filter_add_button">Ajouter des critères de filtre</string>
     <string name="cache_filter_hint_on_empty_filter_list">Appuyez sur “Ajouter des critères” pour modifier le filtre</string>
     <string name="cache_filter_name">Nom de la cache</string>
     <string name="cache_filter_type">Type de cache</string>
@@ -753,15 +757,29 @@
         <item>&gt;1mois</item>
     </string-array>
     <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Gérer le filtre</string>
     <string name="named_filter_select_title">Sélectionner un filtre</string>
     <string name="named_filter_empty_hint">Aucun filtre configuré. Appuyez sur + pour en ajouter un.</string>
+    <string name="named_filter_fill_with_named">Charger le filtre</string>
+    <string name="named_filter_save_as">Enregistrer le filtre</string>
+    <string name="named_filter_delete">Supprimer le filtre</string>
+    <string name="named_filter_storage_delete_message">Voulez-vous vraiment supprimer le filtre «%s»?</string>
     <string name="named_filter_name_exists_title">Le nom existe déjà</string>
     <string name="named_filter_name_exists_message">Un filtre nommé \'%s\' existe déjà. Écraser ?</string>
     <string name="named_filter_config_exists_title">Filtre déjà enregistré</string>
     <string name="named_filter_config_exists_message">Cette configuration de filtre est déjà enregistrée en tant que «%s». Enregistrer à nouveau avec un nouveau nom?</string>
+    <string name="named_filter_markers">Marqueurs</string>
     <string name="named_filter_markers_enabled">Marqueurs activés</string>
     <string name="named_filter_markers_disabled">Marqueurs désactivés</string>
+    <string name="named_filter_manage">Gérer</string>
+    <string name="named_filter_no_icons_message">Aucun filtre stocké avec l\'icône assignée existe. Enregistrez-en un pour l\'utiliser comme marqueur.</string>
+    <string name="named_filter_reorder">Priorité</string>
+    <string name="named_filter_activity_title">Priorité du marqueur</string>
+    <string name="named_filter_enable_markers">Sélectionner les marqueurs</string>
     <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Parent</string>
+    <string name="dialog_parent_select">Sélectionner le parent</string>
+    <string name="dialog_parent_new">Créer un nouveau parent</string>
     <string name="dialog_name">Nom</string>
     <!-- about -->
     <string name="about_version">Version</string>
@@ -1146,6 +1164,7 @@
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
     <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
+    <string name="settings_info_hillshading">Hillshading est une technique permettant de créer des cartes topographiques de relief en ajoutant un effet d\'éclairage à la carte pour indiquer les changements d\'altitude. Les pentes seront assombries / éclairées pour générer un effet 3D.\nLes données de Hillshading peuvent être téléchargées à partir du menu de débordement de cartes.</string>
     <string name="settings_hillshading_enable">Ombrage du relief</string>
     <string name="init_hillshading_hq">Ombrage de haute qualité</string>
     <string name="init_summary_hillshading_hq">Surcouche d\'ombrage du relief plus détaillée, mais ~50%% rendu plus lent lors du zoom arrière</string>
@@ -1269,6 +1288,10 @@
     <string name="feature_voting">Évaluer les caches</string>
     <string name="init_appearance_general">Apparence générale</string>
     <string name="init_cachedetail_behaviour">Comportement</string>
+    <string name="init_named_filter_display_mode">Filtres nommés dans les détails de la cache</string>
+    <string name="named_filter_display_mode_none">Ne pas afficher</string>
+    <string name="named_filter_display_mode_active_only">Seulement si le marqueur est actif</string>
+    <string name="named_filter_display_mode_all">Afficher tous les filtres correspondants</string>
     <string name="init_cachedetail_note">Note de cache personnelle</string>
     <string name="init_maplines_title">Personnalisation des couleurs de la carte</string>
     <string name="init_map_other">Autre</string>
@@ -1716,6 +1739,8 @@
     <string name="cc_hint_seconds">secondes</string>
     <string name="cc_hint_fraction">fraction</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Moyenne de mes coordonnées… (%s)</string>
+    <string name="averaging_paused">en pause</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points de passages depuis %1$s</string>
@@ -2433,6 +2458,8 @@
     <string name="live_map_status_partial">Résultats partiels (zoom avant pour réduire le nombre de caches à charger) : %s</string>
     <string name="live_map_status_normal">Chargement des données sans problème : %s</string>
     <string name="list_list_headline">Listes :</string>
+    <string name="filters_list_headline">Filtres:</string>
+    <string name="filters_list_empty">Aucun filtre correspondant</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d point de passage extrait</item>
         <item quantity="other">%d points de passage extraits</item>
@@ -2770,6 +2797,8 @@
     <string name="wherigo_error_toast">Le moteur Wherigo a signalé une erreur. Ouvrez la boîte de dialogue des bogues pour plus de détails.</string>
     <string name="wherigo_confirm_stop_running_game_title">Arrêter l\'exécution de la cartouche Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Une partie est en cours d\'exécution pour \"%s\". Voulez-vous arrêter cette partie?</string>
+    <string name="wherigo_confirm_exit">Quitter</string>
+    <string name="wherigo_confirm_save_exit">Sauvegarde automatique &amp; Quitter</string>
     <string name="wherigo_confirm_delete_cartridge_title">Supprimer la cartouche Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Voulez-vous vraiment supprimer la cartouche «%1$s» incluant la sauvegarde des jeux %2$s?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Supprimer la sauvegarde de Wherigo</string>
@@ -2805,6 +2834,7 @@
     <string name="copy" tools:ignore="PrivateResource">Copier</string>
     <string name="pause">Mettre en pause</string>
     <string name="resume">Reprendre</string>
+    <string name="rename">Renommer</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Tout sélectionner</string>
     <string name="multiselect_selectvisible">Sélectionner les éléments visibles</string>
