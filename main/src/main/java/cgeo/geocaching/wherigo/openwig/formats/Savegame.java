@@ -87,7 +87,7 @@ public class Savegame {
     }
 
     protected void resetObjectStore () {
-        objectStore = new HashMap(256);
+        objectStore = new HashMap<>(256);
         // XXX why did i choose to use LuaTable over HashMap?
         currentId = 0;
         level = 0;
@@ -120,11 +120,11 @@ public class Savegame {
         }
     }
 
-    private HashMap objectStore;
+    private HashMap<Object, Object> objectStore;
     private int currentId;
 
-    private HashMap idToJavafuncMap = new HashMap(128);
-    private HashMap javafuncToIdMap = new HashMap(128);
+    private HashMap<Integer, JavaFunction> idToJavafuncMap = new HashMap<>(128);
+    private HashMap<JavaFunction, Integer> javafuncToIdMap = new HashMap<>(128);
     private int currentJavafunc = 0;
 
     public void buildJavafuncMap (LuaTable environment) {
@@ -166,13 +166,13 @@ public class Savegame {
     }
 
     private int findJavafuncId (JavaFunction javafunc) {
-        Integer id = (Integer)javafuncToIdMap.get(javafunc);
+        Integer id = javafuncToIdMap.get(javafunc);
         if (id != null) return id.intValue();
         else throw new IllegalStateException("javafunc not found in map!");
     }
 
     private JavaFunction findJavafuncObject (int id) {
-        JavaFunction jf = (JavaFunction)idToJavafuncMap.get(Integer.valueOf(id));
+        JavaFunction jf = idToJavafuncMap.get(Integer.valueOf(id));
         return jf;
     }
 

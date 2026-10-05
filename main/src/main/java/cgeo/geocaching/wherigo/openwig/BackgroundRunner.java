@@ -37,7 +37,7 @@ public class BackgroundRunner extends Thread {
         return instance;
     }
 
-    private ArrayList queue = new ArrayList();
+    private ArrayList<Runnable> queue = new ArrayList<>();
     private boolean end = false;
     private Runnable queueProcessedListener = null;
 
@@ -55,7 +55,7 @@ public class BackgroundRunner extends Thread {
             events = false;
             while (!queue.isEmpty()) {
                 events = true;
-                Runnable c = (Runnable)queue.get(0);
+                Runnable c = queue.get(0);
                 queue.remove(0);
                 try {
                     c.run();

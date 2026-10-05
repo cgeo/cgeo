@@ -17,7 +17,7 @@ public class Action extends EventTable {
     private boolean enabled;
 
     private Thing actor = null;
-    private ArrayList targets = new ArrayList();
+    private ArrayList<Thing> targets = new ArrayList<>();
     private boolean universal;
 
     public String text;
@@ -39,7 +39,7 @@ public class Action extends EventTable {
         if (!hasParameter()) return;
         if (isReciprocal()) {
             for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing)targets.get(j);
+                Thing t = targets.get(j);
                 if (!t.actions.contains(this))
                     t.actions.add(this);
             }
@@ -53,7 +53,7 @@ public class Action extends EventTable {
         if (!hasParameter()) return;
         if (isReciprocal()) {
             for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing)targets.get(j);
+                Thing t = targets.get(j);
                 t.actions.remove(this);
             }
         }
@@ -131,7 +131,7 @@ public class Action extends EventTable {
         return targets.contains(t) || isUniversal();
     }
 
-    public ArrayList getTargets () {
+    public ArrayList<Thing> getTargets () {
         return targets;
     }
 

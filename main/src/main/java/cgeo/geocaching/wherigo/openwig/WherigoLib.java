@@ -73,7 +73,7 @@ public class WherigoLib implements JavaFunction {
         names[GETVALUE] = "GetValue";
     }
 
-    public static final HashMap env = new HashMap(); /* Wherigo's Env table */
+    public static final HashMap<String, Object> env = new HashMap<>(); /* Wherigo's Env table */
     public static final String DEVICE_ID = "DeviceID";
     public static final String PLATFORM = "Platform";
     static {
@@ -171,9 +171,9 @@ public class WherigoLib implements JavaFunction {
         loaded.rawset("Wherigo", wig);
 
         LuaTable envtable = new LuaTableImpl(); /* Wherigo's Env table */
-        Iterator e = env.keySet().iterator();
+        Iterator<String> e = env.keySet().iterator();
         while (e.hasNext()) {
-            String key = (String)e.next();
+            String key = e.next();
             envtable.rawset(key, env.get(key));
         }
         envtable.rawset("Device", Engine.instance.gwcfile.device);

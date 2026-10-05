@@ -19,7 +19,7 @@ public class Thing extends Container {
 
     protected String luaTostring () { return character ? "a ZCharacter instance" : "a ZItem instance"; }
 
-    public ArrayList actions = new ArrayList();
+    public ArrayList<Action> actions = new ArrayList<>();
 
     public Thing () {
         // for serialization
@@ -44,7 +44,7 @@ public class Thing extends Container {
         if ("Commands".equals(key)) {
             // clear out existing actions
             for (int i = 0; i < actions.size(); i++) {
-                Action a = (Action)actions.get(i);
+                Action a = actions.get(i);
                 a.dissociateFromTargets();
             }
             actions.clear();
@@ -67,7 +67,7 @@ public class Thing extends Container {
     public int visibleActions() {
         int count = 0;
         for (int i = 0; i < actions.size(); i++) {
-            Action c = (Action)actions.get(i);
+            Action c = actions.get(i);
             if (!c.isEnabled()) continue;
             if (c.getActor() == this || c.getActor().visibleToPlayer()) count++;
         }
