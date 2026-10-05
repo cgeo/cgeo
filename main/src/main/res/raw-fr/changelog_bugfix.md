@@ -9,3 +9,7 @@
 - Correction : Crash en essayant de lire la cartouche Wherigo (#18681)
 - Correction : Crash en essayant de démarrer le service Wherigo (#18675)
 - Correction : Crash lors de l'utilisation de Google Maps (#18676)
+- Fix: Crash in tracks quick settings (#18666)
+- Fix: Crash in offline translation (#18678)
+- Fix: Crash on map rotation (#18680)
+- Fix: Crash on VTM map (#18691)
