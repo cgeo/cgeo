@@ -2,6 +2,7 @@
 - Neu: Graustufenoption (#18588)
 - Neu: Benutzerdefinierte Karten-Overlays (#18587)
 - Neu: Unterstützt mehrere benutzerdefinierte Kartenanbieter (#18586)
+- Neu: Karte optional auf dem Sperrbildschirm anzeigen (#18383)
 
 ### Cache-Details
 - Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut (#18393)

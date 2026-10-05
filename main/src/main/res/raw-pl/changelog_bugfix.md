@@ -9,3 +9,7 @@
 - Naprawiono: Awaria podczas próby przeczytania wkładu Wherigo (#18681)
 - Naprawiono: Awaria podczas próby uruchomienai wkładu Wherigo (#18675)
 - Naprawiono: Awaria podczas korzystania z map Google (#18676)
+- Fix: Crash in tracks quick settings (#18666)
+- Fix: Crash in offline translation (#18678)
+- Fix: Crash on map rotation (#18680)
+- Fix: Crash on VTM map (#18691)

@@ -1748,6 +1748,8 @@
     <string name="init_ActionbarAutohide">Amaga la barra d\'eines al toc</string>
     <string name="init_summary_ActionbarAutohide">Toqueu l\'espai lliure del mapa per ocultar/mostrar la barra d\'eines</string>
     <string name="init_autozoom_consider_lastcenter">Restaura la posició del mapa en mapejar una llista</string>
+    <string name="init_mapOnLockScreen">Bloqueja la pantalla</string>
+    <string name="init_summary_mapOnLockScreen">Mostra el mapa el bloqueig de pantalla del dispositiu. Per desbloquejar el dispositiu mentre es mostra el mapa, utilitza el botó o el gest de retrocés.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">Quan es mapeja una llista de catxés i el mapa s\'ha deixat prèviament dins dels límits de la llista, restaureu la posició de vista prèvia, en cas contrari, feu zoom per adaptar-se a tots els catxés.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Quan es mapeja una llista de catxés, configureu el zoom i els límits del mapa perquè s\'adaptin a tots els catxés.</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>

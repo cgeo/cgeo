@@ -1747,6 +1747,8 @@
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="init_autozoom_consider_lastcenter">Kartenposition bei Anzeige einer Liste wiederherstellen</string>
+    <string name="init_mapOnLockScreen">Sperrbildschirm</string>
+    <string name="init_summary_mapOnLockScreen">Zeigt die Karte auf dem Sperrbildschirm deines Gerätes. Um das Gerät zu entsperren während die Karte anzeigt wird, nutze die Zurück-Schaltfläche/Geste.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">Bei Anzeige einer Liste auf der Karte: Verändere Zoom nur, wenn nicht alle Caches in den zuletzt verwendeten Kartenausschnitt passen.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Wenn eine Liste von Caches auf der Karte angezeigt wird, setze Zoom und Ausschnitt so, dass alle Caches gezeigt werden.</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>

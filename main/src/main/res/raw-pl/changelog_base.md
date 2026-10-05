@@ -2,6 +2,7 @@
 - Nowość: Opcja skali szarości (#18588)
 - Nowość: Nakładki kafelkowe zdefiniowane przez użytkownika (#18587)
 - Nowość: Wsparcie dla dostawców kafelków zdefiniowanych przez użytkownika (#18586)
+- New: Optionally show map on lock screen (#18383)
 
 ### Szczegóły skrytki
 - Nowość: Przełącz datę zapisaną na urządzeniu między względną i dokładną (#18393)

@@ -2,6 +2,7 @@
 - New: Grayscale option (#18588)
 - New: User-defined tile overlays (#18587)
 - New: Support multiple user-defined tile providers (#18586)
+- New: Optionally show map on lock screen (#18383)
 
 ### Slėptuvės detalės
 - New: Toggle stored-on-device date between relative and exact (#18393)
