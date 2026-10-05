@@ -31,7 +31,7 @@ public class Action extends EventTable {
         this.table = table; // XXX deep copy needed?
         Object o = null;
         while ((o = table.next(o)) != null) {
-            if (o instanceof String) setItem((String)o, table.rawget(o));
+            if (o instanceof String str) setItem(str, table.rawget(o));
         }
     }
 

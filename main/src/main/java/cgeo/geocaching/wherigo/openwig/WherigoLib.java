@@ -251,12 +251,12 @@ public class WherigoLib implements JavaFunction {
         Cartridge c = null;
         if (param instanceof Cartridge) {
             c = (Cartridge)param;
-        } else if (param instanceof LuaTable) {
-            LuaTable lt = (LuaTable)param;
+        } else if (param instanceof LuaTable lt) {
+            
             c = (Cartridge)lt.rawget("Cartridge");
             what.setTable((LuaTable)param);
-            if (what instanceof Container) {
-                Container cont = (Container)what;
+            if (what instanceof Container cont) {
+                
                 Container target = (Container)lt.rawget("Container");
                 if (target != null)
                     cont.moveTo(target);
@@ -394,8 +394,8 @@ public class WherigoLib implements JavaFunction {
         if (nArguments < 1) return 0;
         Object arg = callFrame.get(0);
         String text;
-        if (arg instanceof LuaTable) {
-            LuaTable lt = (LuaTable)arg;
+        if (arg instanceof LuaTable lt) {
+            
             text = (String)lt.rawget("Text");
         } else {
             text = arg.toString();

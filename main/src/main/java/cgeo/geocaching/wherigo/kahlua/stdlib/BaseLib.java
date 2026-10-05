@@ -256,8 +256,8 @@ public final class BaseLib implements JavaFunction {
         Object res = null;
         if (o == null || o instanceof JavaFunction) {
             res = callFrame.thread.environment;
-        } else if (o instanceof LuaClosure) {
-            LuaClosure closure = (LuaClosure) o;
+        } else if (o instanceof LuaClosure closure) {
+            
             res = closure.env;
         } else {
             Double d = rawTonumber(o);
@@ -373,8 +373,8 @@ public final class BaseLib implements JavaFunction {
     private static int select(LuaCallFrame callFrame, int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
         Object arg1 = callFrame.get(0);
-        if (arg1 instanceof String) {
-            if (((String) arg1).startsWith("#")) {
+        if (arg1 instanceof String str) {
+            if (str.startsWith("#")) {
                 callFrame.push(LuaState.toDouble(nArguments - 1));
                 return 1;
             }
@@ -587,8 +587,8 @@ public final class BaseLib implements JavaFunction {
         if (o == null) {
             return TYPE_NIL;
         }
-        if (o instanceof String) {
-            return (String) o;
+        if (o instanceof String str) {
+            return str;
         }
         if (o instanceof Double) {
             return rawTostring(o);
@@ -699,8 +699,8 @@ public final class BaseLib implements JavaFunction {
     }
 
     public static String rawTostring(Object o) {
-        if (o instanceof String) {
-            return (String) o;
+        if (o instanceof String str) {
+            return str;
         }
         if (o instanceof Double) {
             return numberToString((Double) o);
@@ -712,8 +712,8 @@ public final class BaseLib implements JavaFunction {
         if (o instanceof Double) {
             return (Double) o;
         }
-        if (o instanceof String) {
-            return tonumber((String) o);
+        if (o instanceof String str) {
+            return tonumber(str);
         }
         return null;
     }

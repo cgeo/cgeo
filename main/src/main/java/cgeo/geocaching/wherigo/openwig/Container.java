@@ -81,8 +81,8 @@ public class Container extends EventTable {
     public boolean visibleToPlayer () {
         if (!isVisible()) return false;
         if (container == Engine.instance.player) return true;
-        if (container instanceof Zone) {
-            Zone z = (Zone)container;
+        if (container instanceof Zone z) {
+            
             return z.showThings();
         }
         return false;

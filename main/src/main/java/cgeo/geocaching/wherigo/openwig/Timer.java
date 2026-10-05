@@ -79,8 +79,7 @@ public class Timer extends EventTable {
     }
 
     protected void setItem (String key, Object value) {
-        if ("Type".equals(key) && value instanceof String) {
-            String v = (String)value;
+        if ("Type".equals(key) && value instanceof String v) {
             int t = type;
             if ("Countdown".equals(v)) {
                 t = COUNTDOWN;

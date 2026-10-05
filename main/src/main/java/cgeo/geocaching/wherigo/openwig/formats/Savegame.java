@@ -218,20 +218,20 @@ public class Savegame {
         if (obj == null) {
             if (debug) debug("nil");
             out.writeByte(LUA_NIL);
-        } else if (obj instanceof String) {
+        } else if (obj instanceof String str) {
             out.writeByte(LUA_STRING);
             if (debug) debug("\""+obj.toString()+"\"");
-            out.writeUTF((String)obj);
-        } else if (obj instanceof Boolean) {
+            out.writeUTF(str);
+        } else if (obj instanceof Boolean b) {
             if (debug) debug(obj.toString());
             out.writeByte(LUA_BOOLEAN);
-            out.writeBoolean(((Boolean)obj).booleanValue());
-        } else if (obj instanceof Double) {
+            out.writeBoolean(b.booleanValue());
+        } else if (obj instanceof Double d) {
             out.writeByte(LUA_DOUBLE);
             if (debug) debug(obj.toString());
-            out.writeDouble(((Double)obj).doubleValue());
-        } else if (obj instanceof JavaFunction) {
-            int i = findJavafuncId((JavaFunction)obj);
+            out.writeDouble(d.doubleValue());
+        } else if (obj instanceof JavaFunction func) {
+            int i = findJavafuncId(func);
             if (debug) debug("javafunc("+i+")-"+obj.toString());
             out.writeByte(LUA_JAVAFUNC);
             out.writeInt(i);
