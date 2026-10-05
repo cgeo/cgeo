@@ -376,6 +376,18 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                         binding.clipboardGeocode.setOnClickListener(v -> findByGeocodeFn(clipboardGeocode));
                     }, 0);
                 }
+            } else if (title == R.string.search_tb) {
+                binding.suggestionList.setAdapter(new SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction, suggestionIcon, historyFunction, deleteFunction));
+                final String clipboardTrackable = getTrackableFromClipboard();
+                if (null != clipboardTrackable) {
+                    binding.suggestionList.postDelayed(() -> {
+                        binding.clipboardGeocode.setVisibility(View.VISIBLE);
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.text)).setText(clipboardTrackable);
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.info)).setText(R.string.from_clipboard);
+                        ((ImageView) binding.clipboardGeocode.findViewById(R.id.icon)).setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.search_clipboard));
+                        binding.clipboardGeocode.setOnClickListener(v -> findTrackableFn(clipboardTrackable));
+                    }, 0);
+                }
             } else if (title == R.string.search_kw) {
                 binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction));
                 binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
@@ -489,7 +501,15 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                 .addOnClickListener(() -> GeocacheFilterActivity.selectFilter(this, new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE), null, false))
                 .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
-        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
+        final CardView trackableCard = addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
+        trackableCard.setOnLongClickListener(v -> {
+            final String trackableCode = getTrackableFromClipboard();
+            if (null != trackableCode) {
+                findTrackableFn(trackableCode);
+                return true;
+            }
+            return false;
+        });
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
                 .addOnClickListener(this::findOwnFn);
@@ -512,6 +532,36 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Try to interpret the clipboard content as trackable code, either directly (e.g. "TB1234" or a 6-character tracking code)
+     * or as a trackable URL
+     *
+     * @return the trackable code (upper case), or {@code null} if the clipboard doesn't contain one
+     */
+    @Nullable
+    private String getTrackableFromClipboard() {
+        final String clipboardText = StringUtils.trim(ClipboardUtils.getText());
+        if (StringUtils.isEmpty(clipboardText)) {
+            return null;
+        }
+
+        String trackableCode = null;
+        // pure trackable code, but ignore geocodes (e.g. "GC1234" would also match the tracking code pattern)
+        if (!StringUtils.containsWhitespace(clipboardText) && ConnectorFactory.getTrackableConnector(clipboardText).getBrand() != TrackableBrand.UNKNOWN
+                && !(ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode)) {
+            trackableCode = clipboardText;
+        }
+        // trackable URL
+        if (StringUtils.isEmpty(trackableCode)) {
+            trackableCode = ConnectorFactory.getTrackableFromURL(clipboardText);
+        }
+        // trackable tracking code URL
+        if (StringUtils.isEmpty(trackableCode)) {
+            trackableCode = ConnectorFactory.getTrackableTrackingCodeFromURL(clipboardText).trackingCode;
+        }
+        return StringUtils.isEmpty(trackableCode) ? null : trackableCode.toUpperCase(Locale.US);
     }
 
     private void onClickCoordinates() {
