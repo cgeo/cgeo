@@ -9,3 +9,7 @@
 - - Korrektur: Absturz beim Versuche Wherigo-Cartridges zu lesen (#18681)
 - - Korrektur: Absturz beim Versuch den Wherigo-Dienst zu starten (#18675)
 - - Korrektur: Absturz bei Nutzung von Google Maps (#18676)
+- Korrektur: Absturz in den Schnelleinstellungen zu Tracks (#18666)
+- Korrektur: Absturz bei Offline-Übersetzung (#18678)
+- Korrektur: Absturz bei Drehung der Karte (#18680)
+- Korrektur: Absturz auf der VTM-Karte (#18691)
