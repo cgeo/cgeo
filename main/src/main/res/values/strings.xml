@@ -732,6 +732,8 @@
     <string name="cache_filter_checkboxlist_add_all_items">Add all items</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Add items</string>
 
+    <string name="cache_filter_cache_icon">Custom cache icon</string>
+
     <string name="cache_filter_favorites_absolute">Absolute</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
 

@@ -69,6 +69,9 @@ public class FilterViewHolderCreator {
             case OFFLINE_LOG:
                 result = new StringFilterViewHolder<>();
                 break;
+            case CACHE_ICON:
+                result = new CacheIconFilterViewHolder();
+                break;
             case INVENTORY_COUNT:
                 result = new NumberCountFilterViewHolder<>(0, 100);
                 break;
