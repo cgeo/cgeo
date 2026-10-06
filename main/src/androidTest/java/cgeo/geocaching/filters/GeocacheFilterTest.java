@@ -239,6 +239,7 @@ public class GeocacheFilterTest {
             case LIST_ID:
             case VIEWPORT:
             case HEALTH_SCORE:
+            case CACHE_ICON:
                 // nothing to do
                 break;
             default:
