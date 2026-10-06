@@ -484,6 +484,9 @@ public class SimpleItemListView extends LinearLayout {
         if (group == null) {
             return true;
         }
+        if (!StringUtils.isBlank(model.getFilterTerm())) {
+            return true;
+        }
         return !model.getGroupingOptions().getReducedGroups().contains(group);
     }
 
