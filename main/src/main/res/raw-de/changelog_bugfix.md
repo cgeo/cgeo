@@ -1,7 +1,7 @@
 ##
 - Korrektur: Behandlung der geocaching.com Ignorierliste funktionierte nicht (#16950)
 - Korrektur: Einige Speicherlecks (#18615)
-- Korrektur: Falsche Größe der Maßstabsanzeuge bei Google Maps (#18646)
+- Korrektur: Falsche Größe der Maßstabsanzeige bei Google Maps (#18646)
 - Korrektur: Endlosschleife bei der Auswahl eines neuen Formats in "Koordinaten berechnen" (#18672)
 - Korrektur: Einklappen von Logtext funktionierte nicht (#18653)
 - Korrektur: Absturz beim Generieren von Variablen (#18667)
