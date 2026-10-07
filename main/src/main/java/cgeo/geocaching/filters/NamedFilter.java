@@ -350,11 +350,16 @@ public class NamedFilter {
 
     /** Replaces an existing filter with the same name (case-insensitive), or adds a new one if none exists. */
     public static synchronized NamedFilter addOrReplace(final String name, final GeocacheFilter filter, @Nullable final String markerId) {
-        final NamedFilter newFilter = new NamedFilter(name, filter);
-        newFilter.setMarkerId(markerId);
         final List<NamedFilter> newList = getAllDeepCopy();
-        newList.removeIf(nf -> nf.getName().equalsIgnoreCase(name));
-        newList.add(newFilter);
+        final NamedFilter existingFilter = newList.stream().filter(nf -> nf.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+        if (existingFilter != null) {
+            existingFilter.setFilter(filter);
+            existingFilter.setMarkerId(markerId);
+        } else {
+            final NamedFilter newFilter = new NamedFilter(name, filter);
+            newFilter.setMarkerId(markerId);
+            newList.add(newFilter);
+        }
         storeAll(newList);
         return namedFilters.values().stream().filter(nf -> nf.getName().equalsIgnoreCase(name)).findFirst().get();
     }
