@@ -158,7 +158,7 @@ public class SimpleItemListView extends LinearLayout {
                     }
                     binding.itemRadiobutton.setChecked(model.getSelectedItems().contains(data.value));
                     binding.itemCheckbox.setChecked(model.getSelectedItems().contains(data.value));
-                    applyHighlight(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_PLAIN
+                    applyHighlight(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_HIGHLIGHT
                         && model.getSelectedItems().contains(data.value));
                     break;
             }
