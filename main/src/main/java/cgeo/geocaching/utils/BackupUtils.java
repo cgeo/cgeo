@@ -548,7 +548,7 @@ public class BackupUtils {
     private void backupInternal(final Runnable runAfterwards, final boolean autobackup) {
         final Folder backupDir = getNewBackupFolder(System.currentTimeMillis(), autobackup);
         if (backupDir == null) {
-            ViewUtils.showToast(activityContext, R.string.init_backup_folder_exists_error);
+            SimpleDialog.of(activityContext).setTitle(R.string.status_not_ok).setMessage(R.string.init_backup_folder_exists_error).show();
             return;
         }
 
