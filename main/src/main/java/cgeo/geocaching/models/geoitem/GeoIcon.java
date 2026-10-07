@@ -42,12 +42,12 @@ public class GeoIcon implements Parcelable {
         Bitmap getBitmap();
 
         /** Gets the rotated bitmap. This bitmap is actually used for the marker */
-        default Bitmap getRotatedBitmap(float angleInDegree) {
+        default Bitmap getRotatedBitmap(final float angleInDegree) {
             return ImageUtils.rotateBitmap(getBitmap(), angleInDegree);
         }
 
         /** Gets the dimensions (width + height) in pixels of the rotated bitmap. used to calculated touching */
-        default Pair<Integer, Integer> getRotatedBitmapDimensions(float angleInDegree) {
+        default Pair<Integer, Integer> getRotatedBitmapDimensions(final float angleInDegree) {
             final Bitmap bm = getRotatedBitmap(angleInDegree);
             return bm == null ? null : new Pair<>(bm.getWidth(), bm.getHeight());
         }

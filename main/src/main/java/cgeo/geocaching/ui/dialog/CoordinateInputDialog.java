@@ -689,7 +689,7 @@ public class CoordinateInputDialog {
     public interface CoordinateUpdate {
         void updateCoordinates(Geopoint gp);
 
-        default void updateCoordinates(CoordinateInputData coordinateInputData) {
+        default void updateCoordinates(final CoordinateInputData coordinateInputData) {
             updateCoordinates(coordinateInputData.getGeopoint());
         }
     }

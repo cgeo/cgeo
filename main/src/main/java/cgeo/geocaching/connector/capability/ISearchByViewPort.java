@@ -13,7 +13,7 @@ public interface ISearchByViewPort extends IConnector {
     SearchResult searchByViewport(@NonNull Viewport viewport);
 
     @NonNull
-    default SearchResult searchByViewport(@NonNull Viewport viewport, @Nullable GeocacheFilter filter) {
+    default SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
         return searchByViewport(viewport);
     }
 
