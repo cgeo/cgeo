@@ -72,6 +72,7 @@ import androidx.annotation.WorkerThread;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -751,6 +752,32 @@ final class OkapiClient {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Whether the OKAPI installation accepts field notes (services/draftlogs/upload_fieldnotes).
+     * Older installations don't report has_draft_logs at all.
+     */
+    @WorkerThread
+    public static boolean hasDraftLogs(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector).hasDraftLogs;
+    }
+
+    /**
+     * Uploads field notes, which the site stores as draft logs. The content is sent as
+     * base64-encoded UTF-8, so the encoding is unambiguous.
+     */
+    @WorkerThread
+    public static boolean uploadFieldNotes(@NonNull final OCApiConnector connector, @NonNull final String fieldNotes) {
+        final String encoded = Base64.encodeToString(fieldNotes.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
+        final JSONResult result = postRequest(connector, OkapiService.SERVICE_UPLOAD_FIELD_NOTES, new Parameters("field_notes", encoded));
+
+        if (!result.isSuccess) {
+            Log.e("OkapiClient.uploadFieldNotes: " + result.data);
+            return false;
+        }
+        Log.i("OkapiClient.uploadFieldNotes: " + result.data.path("processed_records").asInt() + " of " + result.data.path("total_records").asInt() + " field notes stored as draft logs");
+        return result.data.path("success").asBoolean(false);
     }
 
     /**
@@ -1512,6 +1539,8 @@ final class OkapiClient {
         Long imageMaxUploadSize;
         @JsonProperty("image_rcmd_max_pixels")
         Long imageRcmdMaxPixels;
+        @JsonProperty("has_draft_logs")
+        boolean hasDraftLogs;
 
         @Override
         @NonNull
@@ -1528,6 +1557,7 @@ final class OkapiClient {
                     ", mobileRegistrationUrl='" + mobileRegistrationUrl + '\'' +
                     ", imageMaxUploadSize=" + imageMaxUploadSize +
                     ", imageRcmdMaxPixels=" + imageRcmdMaxPixels +
+                    ", hasDraftLogs=" + hasDraftLogs +
                     '}';
         }
     }

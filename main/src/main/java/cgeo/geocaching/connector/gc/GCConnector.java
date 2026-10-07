@@ -23,6 +23,7 @@ import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.export.FieldNotes;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -559,7 +560,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean uploadFieldNotes(@NonNull final File exportFile) {
+    public boolean uploadFieldNotes(@NonNull final File exportFile, @NonNull final FieldNotes fieldNotes) {
         if (!GCLogin.getInstance().isActualLoginStatus()) {
             // no need to upload (possibly large file) if we're not logged in
             final StatusCode loginState = GCLogin.getInstance().login();

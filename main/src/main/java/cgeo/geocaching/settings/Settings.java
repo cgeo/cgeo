@@ -2134,6 +2134,14 @@ public class Settings {
         return getBoolean(R.string.pref_fieldNoteExportOnlyNew, false);
     }
 
+    public static void setFieldNoteExportUploadOtherSites(final boolean upload) {
+        putBoolean(R.string.pref_fieldNoteExportUploadOtherSites, upload);
+    }
+
+    public static boolean getFieldNoteExportUploadOtherSites() {
+        return getBoolean(R.string.pref_fieldNoteExportUploadOtherSites, true);
+    }
+
     /**
      * Remember the stata of the "hide visited waypoints"-checkbox in the waypoints overview dialog
      */
