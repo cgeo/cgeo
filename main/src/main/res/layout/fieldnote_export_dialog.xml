@@ -16,14 +16,7 @@
     <CheckBox
         android:id="@+id/upload"
         style="@style/checkbox_full"
-        android:text="@string/export_fieldnotes_upload" />
-
-    <!-- one checkbox per further site which accepts field notes (filled in code) -->
-    <LinearLayout
-        android:id="@+id/upload_other_sites"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:text="@string/export_fieldnotes_upload_websites" />
 
     <CheckBox
         android:id="@+id/onlynew"

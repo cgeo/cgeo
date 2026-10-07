@@ -2354,9 +2354,8 @@
     <string name="export_fieldnotes">Export field notes</string>
     <string name="fieldnotes">field notes</string>
     <string name="export_fieldnotes_info">Field Notes will be exported to /sdcard/field-notes with the current date and time as their file name.</string>
-    <string name="export_fieldnotes_upload">Upload to geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploading…</string>
-    <string name="export_fieldnotes_upload_to">Upload to %s</string>
+    <string name="export_fieldnotes_upload_websites">Upload to websites</string>
     <string name="export_fieldnotes_upload_to_success">Upload to %s successful</string>
     <string name="export_fieldnotes_onlynew">Only since last export</string>
     <string name="export_fieldnotes_creating">Creating Field Notes…</string>
