@@ -9,7 +9,7 @@ public interface IWherigoDialogProvider {
 
     /** return TRUE if a currentl visible provider can "take over" what the given provider is shown. In that case
      * no new dialog is created, just a refresh event is triggered */
-    default boolean canRefresh(IWherigoDialogProvider otherDialog) {
+    default boolean canRefresh(final IWherigoDialogProvider otherDialog) {
         return false;
     }
 

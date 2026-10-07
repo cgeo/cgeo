@@ -10,7 +10,7 @@ public interface UrlToIdParser extends Func1<String, Optional<String>> {
     Optional<String> tryExtractFromIntentUrl(@Nullable String intentUrl);
 
     @Override
-    default Optional<String> call(String intentUrl) {
+    default Optional<String> call(final String intentUrl) {
         return tryExtractFromIntentUrl(intentUrl);
     }
 }
