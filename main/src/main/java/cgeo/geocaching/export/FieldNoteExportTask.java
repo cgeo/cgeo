@@ -2,8 +2,6 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
@@ -23,9 +21,12 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
-    private final boolean upload;
+    private final List<FieldNotesCapability> uploadTargets;
+    private final List<String> uploadedTo = new ArrayList<>();
     private final boolean onlyNew;
     private Uri exportUri;
     private final String filename;
@@ -38,12 +39,12 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
      * Instantiates and configures the task for exporting field notes.
      *
      * @param activity optional: Show a progress bar and toasts
-     * @param upload   Upload the Field Note to geocaching.com
+     * @param uploadTargets connectors to upload the field notes to (may be empty)
      * @param onlyNew  Upload/export only new logs since last export
      */
-    FieldNoteExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew, final String title, final String filename, final String name) {
+    FieldNoteExportTask(@Nullable final Activity activity, final List<FieldNotesCapability> uploadTargets, final boolean onlyNew, final String title, final String filename, final String name) {
         super(activity, title, LocalizationUtils.getString(R.string.export_fieldnotes_creating), true);
-        this.upload = upload;
+        this.uploadTargets = uploadTargets;
         this.onlyNew = onlyNew;
         this.filename = filename;
         this.name = name;
@@ -63,19 +64,21 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
             return false;
         }
         fieldNotesCount = fieldNotes.size();
-        // upload same file to multiple connectors, if they support the upload
-        return uploadFieldNotes();
+        // upload to the selected connectors; each one picks its own records
+        return uploadFieldNotes(fieldNotes);
     }
 
-    private Boolean uploadFieldNotes() {
+    private Boolean uploadFieldNotes(final FieldNotes fieldNotes) {
         boolean uploadResult = true;
-        if (upload) {
+        if (!uploadTargets.isEmpty()) {
             publishProgress(STATUS_UPLOAD);
             final File tempFile = ContentStorage.get().writeUriToTempFile(exportUri, filename);
             if (tempFile != null) {
-                for (final IConnector connector : ConnectorFactory.getConnectors()) {
-                    if (connector instanceof FieldNotesCapability) {
-                        uploadResult &= ((FieldNotesCapability) connector).uploadFieldNotes(tempFile);
+                for (final FieldNotesCapability connector : uploadTargets) {
+                    if (connector.uploadFieldNotes(tempFile, fieldNotes)) {
+                        uploadedTo.add(connector.getName());
+                    } else {
+                        uploadResult = false;
                     }
                 }
                 if (!tempFile.delete()) {
@@ -114,8 +117,8 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
 
                 ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, name + " " + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
 
-                if (upload) {
-                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_success));
+                for (final String site : uploadedTo) {
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_to_success, site));
                 }
             } else {
                 ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));

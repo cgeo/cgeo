@@ -18,9 +18,13 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,30 +35,68 @@ import org.apache.commons.lang3.StringUtils;
  * <pre>
  * GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"
  * </pre>
+ *
+ * The export file holds the notes of all platforms with the geocaching.com log type names.
+ * Other platforms get their own content via {@link #getContent(Predicate, Function)}.
  */
-class FieldNotes {
+public class FieldNotes {
 
     private static final SynchronizedDateFormat FIELD_NOTE_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
 
-    private int size = 0;
-    private final StringBuilder buffer = new StringBuilder();
+    private static final class Entry {
+        final String geocode;
+        final long date;
+        final LogType logType;
+        final String text;
+
+        Entry(final String geocode, final long date, final LogType logType, final String text) {
+            this.geocode = geocode;
+            this.date = date;
+            this.logType = logType;
+            this.text = text;
+        }
+    }
+
+    private final List<Entry> entries = new ArrayList<>();
 
     void add(final Geocache cache, final LogEntry log) {
-        size++;
-        buffer.append(cache.getGeocode())
-                .append(',')
-                .append(FIELD_NOTE_DATE_FORMAT.format(new Date(log.date)))
-                .append(',')
-                .append(StringUtils.capitalize(log.logType.type))
-                .append(",\"")
-                .append(StringUtils.replaceChars(LogUtils.trimForPublishing(log.log), '"', '\''))
-                .append("\"\n");
+        entries.add(new Entry(cache.getGeocode(), log.date, log.logType, StringUtils.replaceChars(LogUtils.trimForPublishing(log.log), '"', '\'')));
         if (log.reportProblem.logType != LogType.UNKNOWN) {
             add(cache, new LogEntry.Builder().setLog(LocalizationUtils.getString(log.reportProblem.textId)).setLogType(log.reportProblem.logType).setDate(log.date).build());
         }
     }
 
+    /**
+     * Content of the export file: all notes, with the geocaching.com log type names.
+     */
     public String getContent() {
+        return buildContent(geocode -> true, logType -> StringUtils.capitalize(logType.type), false);
+    }
+
+    /**
+     * Content for one platform: only the notes whose geocode matches the filter, with the
+     * platform's name for each log type. Notes whose log type has no name on the platform are left out.
+     */
+    public String getContent(final Predicate<String> geocodeFilter, final Function<LogType, String> logTypeName) {
+        return buildContent(geocodeFilter, logTypeName, true);
+    }
+
+    private String buildContent(final Predicate<String> geocodeFilter, final Function<LogType, String> logTypeName, final boolean skipUnnamedTypes) {
+        final StringBuilder buffer = new StringBuilder();
+        for (final Entry entry : entries) {
+            final String typeName = logTypeName.apply(entry.logType);
+            if (!geocodeFilter.test(entry.geocode) || (skipUnnamedTypes && StringUtils.isBlank(typeName))) {
+                continue;
+            }
+            buffer.append(entry.geocode)
+                    .append(',')
+                    .append(FIELD_NOTE_DATE_FORMAT.format(new Date(entry.date)))
+                    .append(',')
+                    .append(typeName)
+                    .append(",\"")
+                    .append(entry.text)
+                    .append("\"\n");
+        }
         return buffer.toString();
     }
 
@@ -93,7 +135,7 @@ class FieldNotes {
     }
 
     public int size() {
-        return size;
+        return entries.size();
     }
 
 }

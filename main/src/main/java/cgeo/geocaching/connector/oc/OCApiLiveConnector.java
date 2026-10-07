@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -13,6 +14,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
+import cgeo.geocaching.export.FieldNotes;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
@@ -30,14 +32,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
 
+import java.io.File;
 import java.util.EnumSet;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability, IFavoriteCapability, IVotingCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability, IFavoriteCapability, IVotingCapability, FieldNotesCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -46,6 +50,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     private final int tokenPublicPrefKeyId;
     private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED, UNKNOWN_FINDS);
+    /** whether the installation reports has_draft_logs (accepts field notes), checked on login */
+    private volatile boolean draftLogsAvailable = false;
 
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch, @StringRes final int prefKey) {
@@ -148,6 +154,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     public boolean login() {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
+            draftLogsAvailable = userInfo.getStatus() == UserInfoStatus.SUCCESSFUL && OkapiClient.hasDraftLogs(this);
         } else {
             userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_SUPPORTED, UNKNOWN_FINDS);
         }
@@ -224,6 +231,25 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
         return OkapiClient.uploadPersonalNotes(this, cache);
+    }
+
+    @Override
+    public boolean canUploadFieldNotes() {
+        return draftLogsAvailable && supportsPersonalization() && isActive();
+    }
+
+    /**
+     * The export file mixes all platforms and uses the geocaching.com log type names.
+     * Send only this site's caches, with the site's log type names.
+     */
+    @WorkerThread
+    @Override
+    public boolean uploadFieldNotes(@NonNull final File exportFile, @NonNull final FieldNotes fieldNotes) {
+        final String content = fieldNotes.getContent(this::canHandle, logType -> logType.ocType);
+        if (StringUtils.isEmpty(content)) {
+            return true; // nothing for this site
+        }
+        return OkapiClient.uploadFieldNotes(this, content);
     }
 
     @Override
