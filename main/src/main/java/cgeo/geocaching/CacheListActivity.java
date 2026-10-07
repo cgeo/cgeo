@@ -675,8 +675,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_export_gpx, R.string.export_gpx, R.string.export_gpx, checkedCount);
             setMenuItemLabel(menu, R.id.menu_export_fieldnotes, R.string.export_fieldnotes, R.string.export_fieldnotes, checkedCount);
             setMenuItemLabel(menu, R.id.menu_export_persnotes, R.string.export_persnotes, R.string.export_persnotes, checkedCount);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, isGcConnectorActive, !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, isGcConnectorActive, !isEmpty);
+            final boolean canUploadCoords = ConnectorFactory.anyActiveConnectorSupportsOwnCoordinates();
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, canUploadCoords, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, canUploadCoords, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_allcoords, R.string.caches_upload_allcoords, R.string.caches_upload_allcoords, checkedCount);
 
             ToggleItemType.NAMED_FILTERS.toggleMenuItem(menu.findItem(R.id.menu_marker), Settings.isConditionalCacheMarkersEnabled());
