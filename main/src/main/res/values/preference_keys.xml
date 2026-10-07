@@ -610,6 +610,8 @@
     <string translatable="false" name="pref_unifiedMapVariants">unifiedMapVariants</string>
     <string translatable="false" name="pref_autorenameDownloads">autorenameDownloads</string>
     <string translatable="false" name="pref_elevationChartExpanded">elevationChartExpanded</string>
+    <string translatable="false" name="pref_map_cache_limit">map_cache_limit</string>
+
 
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
@@ -670,7 +672,7 @@
     <string translatable="false" name="pref_home_location">home_location</string>
     <string translatable="false" name="pref_followMyLocation">followMyLocation</string>
     <string translatable="false" name="pref_cachecache_size">cachecache_size</string>
-    
+
     <!-- do not add preference keys here, if they have a UI representation - those belong into one of the sections above -->
 
 

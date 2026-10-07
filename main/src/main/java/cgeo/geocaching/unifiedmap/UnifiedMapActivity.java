@@ -139,6 +139,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -612,7 +613,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         liveMapStatus.setOnClickListener(v -> showLiveStatusDialog());
 
         // hide status if we are live
-        if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+        if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue()) && !status.handoffPartial) {
             spinner.setVisibility(View.GONE);
             liveMapStatus.setVisibility(View.GONE);
             return;
@@ -682,7 +683,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final String errorMsg = errors.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_error, errors);
         final String partialMsg = partials.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_partial, partials);
         final String normalMsg = normals.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_normal, normals);
-        final String msgWithMarkup = TextUtils.join(Arrays.asList(errorMsg, partialMsg, normalMsg), s -> s, "\n\n").toString();
+        final String mapLimitMsg = status.handoffPartial ? LocalizationUtils.getString(R.string.live_map_status_map_limit) : null;
+        final String msgWithMarkup = TextUtils.join(Arrays.asList(errorMsg, partialMsg, normalMsg, mapLimitMsg), s -> s, "\n\n").toString();
         final CharSequence msg = TextParam.text(msgWithMarkup).setMarkdown(true).getText(null);
 
         SimpleDialog.ofContext(this).setMessage(TextParam.text(msg)).show();
@@ -740,6 +742,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.write(true, Set::clear);
         final Set<Geocache> geocaches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
         CommonUtils.filterCollection(geocaches, cache -> cache != null && cache.getCoords() != null);
+        final int mapCacheLimit = Settings.getMapCacheLimit();
+        final boolean handoffPartial = mapCacheLimit > 0 && geocaches.size() > mapCacheLimit;
+        if (handoffPartial) {
+            viewModel.liveLoadStatus.postValue(new LiveMapGeocacheLoader.LiveDataState(LiveMapGeocacheLoader.LoadState.STOPPED, null, null, true));
+            final Set<Geocache> limitedCaches = geocaches.stream().limit(mapCacheLimit).collect(Collectors.toSet());
+            geocaches.clear();
+            geocaches.addAll(limitedCaches);
+        }
         if (!geocaches.isEmpty()) {
             viewModel.caches.write(true, caches -> { // use post to make it background capable
                 caches.addAll(geocaches);
