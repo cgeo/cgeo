@@ -105,6 +105,8 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private final Set<String> availableLanguages = new HashSet<>();
     private final Object availableLock = new Object();
+    private final Object availableScanLock = new Object();
+    private volatile boolean availableScanComplete;
 
     /** Directions already present in the native model cache. Only touched on {@link #NATIVE_SCHEDULER} */
     private final Set<String> loadedDirections = new HashSet<>();
@@ -127,8 +129,6 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         this.langDetect = new LangDetect();
         // NativeLib runs initializeService() from its own constructor; no
         // explicit call is needed (the method is not public in the AAR).
-        // Run on IO thread — the scan touches the file system
-        Schedulers.io().scheduleDirect(this::scanAvailableModels);
     }
 
     @Override
@@ -167,11 +167,22 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public void getAvailableLanguages(final Consumer<Set<String>> onSuccess, final Consumer<Exception> onError) {
-        final Set<String> copy;
-        synchronized (availableLock) {
-            copy = new HashSet<>(availableLanguages);
-        }
-        runCallback(() -> onSuccess.accept(copy));
+        // wait for on-device file scan to complete before returning results
+        Schedulers.io().scheduleDirect(() -> {
+            if (!availableScanComplete) {
+                synchronized (availableScanLock) {
+                    if (!availableScanComplete) {
+                        scanAvailableModels();
+                        availableScanComplete = true;
+                    }
+                }
+            }
+            final Set<String> copy;
+            synchronized (availableLock) {
+                copy = new HashSet<>(availableLanguages);
+            }
+            runCallback(() -> onSuccess.accept(copy));
+        });
     }
 
     @Override
