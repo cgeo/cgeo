@@ -29,8 +29,6 @@ import androidx.lifecycle.ViewModel;
 import java.util.Set;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
-    public static final int MAX_CACHES = 5000;
-
     public static final String CACHE_KEY_PREFIX = "CACHE_";
     public static final String CACHE_STAR_KEY_PREFIX = "CACHE_STAR_";
     public static final String WAYPOINT_KEY_PREFIX = "WP_";
@@ -60,12 +58,12 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     //Viewport will be refreshed ONLY if the map was not moved for 500ms. Only valid viewports are used.
     public final MutableLiveData<Viewport> viewportIdle = new MutableLiveData<>(Viewport.EMPTY);
 
-    public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));
+    public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(Settings.getMapCacheLimit()));
     public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
     public final MutableLiveData<LiveMapGeocacheLoader.LiveDataState> liveLoadStatus = new MutableLiveData<>(new LiveMapGeocacheLoader.LiveDataState(LiveMapGeocacheLoader.LoadState.STOPPED, null, null));
     public final LiveMapDataHandler liveMapHandler = new LiveMapDataHandler(this);
 
-    public final CollectionLiveData<String, Set<String>> cachesWithStarDrawn = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));
+    public final CollectionLiveData<String, Set<String>> cachesWithStarDrawn = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(Settings.getMapCacheLimit()));
 
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden
@@ -77,7 +75,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
     public final MutableLiveData<Float> zoomLevel = new MutableLiveData<>();
     public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
-    public final MutableLiveData<Boolean> transientIsConditionalMarkersEnabled = new MutableLiveData<>(false);
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);

@@ -44,13 +44,19 @@ public class LiveMapGeocacheLoader {
         public final Viewport cachedViewport;
         public final Map<String, ConnectorState> connectorStates;
         public final Set<String> connectorInError;
+        public final boolean handoffPartial;
 
         LiveDataState(final LoadState state, final Viewport cachedViewport, final Map<String, ConnectorState> connectorStates) {
+            this(state, cachedViewport, connectorStates, false);
+        }
+
+        public LiveDataState(final LoadState state, final Viewport cachedViewport, final Map<String, ConnectorState> connectorStates, final boolean handoffPartial) {
             this.loadState = state;
             this.cachedViewport = cachedViewport;
             this.connectorStates = Collections.unmodifiableMap(connectorStates == null ? Collections.emptyMap() : connectorStates);
             this.connectorInError = this.connectorStates.entrySet().stream()
                 .filter(e -> e.getValue().isError()).map(Map.Entry::getKey).collect(Collectors.toSet());
+            this.handoffPartial = handoffPartial;
         }
 
         public boolean isError() {
@@ -58,7 +64,7 @@ public class LiveMapGeocacheLoader {
         }
 
         public boolean isPartial(final Viewport viewport) {
-            return this.cachedViewport != null && !cachedViewport.includes(viewport);
+            return handoffPartial || this.cachedViewport != null && !cachedViewport.includes(viewport);
         }
 
         @NonNull

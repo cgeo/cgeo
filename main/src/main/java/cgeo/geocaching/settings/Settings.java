@@ -2577,6 +2577,11 @@ public class Settings {
         }
     }
 
+    public static int getMapCacheLimit() {
+        final int limit = getInt(R.string.pref_map_cache_limit, 5000);
+        return limit > 0 ? limit : Integer.MAX_VALUE;
+    }
+
     public static int getListInitialLoadLimit() {
         return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
     }
