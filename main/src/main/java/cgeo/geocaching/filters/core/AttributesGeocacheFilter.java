@@ -135,7 +135,10 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
             return (inverse ? "!" : "") + LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, attributes.size());
         }
 
-        return (inverse ? "!" : "") + attributes.keySet().iterator().next();
+        final String attributeValue = attributes.keySet().iterator().next();
+        final CacheAttribute attribute = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeValue));
+        final String displayValue = attribute == null  ? attributeValue : attribute.getL10n(CacheAttribute.isEnabled(attributeValue));
+        return (inverse ? "!" : "") + displayValue;
     }
 
     @Nullable
