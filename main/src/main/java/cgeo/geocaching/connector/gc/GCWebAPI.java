@@ -117,6 +117,7 @@ public class GCWebAPI {
         private final Set<CacheType> cacheTypes = new HashSet<>();
         private final Set<CacheSize> cacheSizes = new HashSet<>();
         private final Map<CacheAttribute, Boolean> cacheAttributes = new HashMap<>();
+        private final Map<CacheAttribute, Boolean> cacheExcludeAttributes = new HashMap<>();
 
         private String hiddenBy = null;
         private final List<String> notFoundBy = new ArrayList<>();
@@ -186,6 +187,10 @@ public class GCWebAPI {
          */
         public WebApiSearch addCacheAttributes(final Map<CacheAttribute, Boolean> attributes) {
             cacheAttributes.putAll(attributes);
+            return this;
+        }
+        public WebApiSearch addCacheExcludeAttributes(final Map<CacheAttribute, Boolean> attributes) {
+            cacheExcludeAttributes.putAll(attributes);
             return this;
         }
 
@@ -444,6 +449,13 @@ public class GCWebAPI {
 
             if (!this.cacheAttributes.isEmpty()) {
                 params.put("att", CollectionStream.of(this.cacheAttributes.entrySet())
+                        .filter(entry -> entry.getKey().gcid >= 0)
+                        .map(entry -> entry.getKey().gcid + (Boolean.FALSE.equals(entry.getValue()) ? ":2" : ""))
+                        .toJoinedString(","));
+            }
+
+            if (!this.cacheExcludeAttributes.isEmpty()) {
+                params.put("natt", CollectionStream.of(this.cacheExcludeAttributes.entrySet())
                         .filter(entry -> entry.getKey().gcid >= 0)
                         .map(entry -> entry.getKey().gcid + (Boolean.FALSE.equals(entry.getValue()) ? ":2" : ""))
                         .toJoinedString(","));

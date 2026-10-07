@@ -143,14 +143,16 @@ public class GCMap {
                 break;
             case ATTRIBUTES:
                 final AttributesGeocacheFilter attFilter = (AttributesGeocacheFilter) basicFilter;
-                if (!attFilter.isInverse()) {
                     final Map<CacheAttribute, Boolean> apiAttributes = new java.util.HashMap<>();
                     for (Map.Entry<CacheAttribute, Boolean> entry : attFilter.getAttributes().entrySet()) {
                         if (entry.getKey().gcid >= 0 && entry.getKey().gcid < 100) {
                             apiAttributes.put(entry.getKey(), entry.getValue());
                         }
                     }
+                if (!attFilter.isInverse()) {
                     search.addCacheAttributes(apiAttributes);
+                } else {
+                    search.addCacheExcludeAttributes(apiAttributes);
                 }
                 break;
             case SIZE:
