@@ -1,8 +1,8 @@
 package cgeo.geocaching.network;
 
-import org.junit.Test;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
+import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CookiesTest {
