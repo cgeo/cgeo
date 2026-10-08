@@ -1,16 +1,16 @@
 ### UnifiedMap
-- New: Grayscale option (#18588)
-- New: User-defined tile overlays (#18587)
-- New: Support multiple user-defined tile providers (#18586)
-- New: Optionally show map on lock screen (#18383)
+- Nuevo: Opción de escala de grises (#18588)
+- Nuevo: Superposición de teselas definidas por el usuario (#18587)
+- Nuevo: Soporte a múltiples proveedores de teselas definidos por el usuario (#18586)
+- Nuevo: Mostrar mapa opcionalmente en la pantalla de bloqueo (#18383)
 
 ### Detalles del caché
-- New: Toggle stored-on-device date between relative and exact (#18393)
-- Fix: Stacked progress dialogs when deleting multiple logs (#18279)
-- New: "Edit personal note" button in waypoint popup (#18559)
+- Nuevo: Alterna la fecha almacenada en el dispositivo entre relativa y exacta (#18393)
+- Corregido: Diálogos de progreso sobrepuestos al borrar múltiples registros (#18279)
+- Nuevo: Botón para "Editar nota personal" en la ventana del waypoint (#18559)
 
 ### Ejecutador de Wherigos
 -
 
 ### General
-- Fix: Multiple pending download dialogs on main screen (#18363)
+- Corregido: Múltiples diálogos de descarga pendientes en la pantalla principal (#18363)
