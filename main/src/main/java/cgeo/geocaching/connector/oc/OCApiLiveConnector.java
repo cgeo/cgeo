@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.export.FieldNotes;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
@@ -35,6 +34,8 @@ import androidx.annotation.StringRes;
 import androidx.annotation.WorkerThread;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.EnumSet;
 import java.util.Locale;
 
@@ -239,17 +240,18 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     }
 
     /**
-     * The export file mixes all platforms and uses the geocaching.com log type names.
-     * Send only this site's caches, with the site's log type names.
+     * Upload the export file as it is (hybrid, all platforms, as for geocaching.com).
+     * OKAPI detects the encoding, maps the log type names and ignores the records of other platforms.
      */
     @WorkerThread
     @Override
-    public boolean uploadFieldNotes(@NonNull final File exportFile, @NonNull final FieldNotes fieldNotes) {
-        final String content = fieldNotes.getContent(this::canHandle, logType -> logType.ocType);
-        if (StringUtils.isEmpty(content)) {
-            return true; // nothing for this site
+    public boolean uploadFieldNotes(@NonNull final File exportFile) {
+        try {
+            return OkapiClient.uploadFieldNotes(this, Files.readAllBytes(exportFile.toPath()));
+        } catch (final IOException e) {
+            Log.e("OCApiLiveConnector.uploadFieldNotes: cannot read " + exportFile, e);
+            return false;
         }
-        return OkapiClient.uploadFieldNotes(this, content);
     }
 
     @Override

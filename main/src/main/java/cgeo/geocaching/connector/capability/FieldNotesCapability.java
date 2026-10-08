@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.export.FieldNotes;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -21,17 +20,11 @@ public interface FieldNotesCapability extends IConnector {
     }
 
     /**
-     * Upload field notes. All upload targets receive the same, hybrid field notes (all platforms):
-     * <ul>
-     * <li>{@code exportFile}: the export file, written once by the export (not by the connector).
-     * For connectors which upload the file itself; the site ignores records of other platforms.</li>
-     * <li>{@code fieldNotes}: the same notes as an object. For connectors which upload through an
-     * API; they take their own records with their own log type names from it.</li>
-     * </ul>
-     * A connector uses whichever of the two fits its site. Never split the field notes per platform.
+     * Upload the export file as it is: the one hybrid field notes file with the records of all
+     * platforms. Do not split or filter it; the site ignores the records of other platforms itself.
      *
      * return {@code true} if uploaded successfully
      */
     @WorkerThread
-    boolean uploadFieldNotes(@NonNull File exportFile, @NonNull FieldNotes fieldNotes);
+    boolean uploadFieldNotes(@NonNull File exportFile);
 }
