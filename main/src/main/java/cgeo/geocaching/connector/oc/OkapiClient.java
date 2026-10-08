@@ -72,7 +72,6 @@ import androidx.annotation.WorkerThread;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -764,12 +763,12 @@ final class OkapiClient {
     }
 
     /**
-     * Uploads field notes, which the site stores as draft logs. The content is sent as
-     * base64-encoded UTF-8, so the encoding is unambiguous.
+     * Uploads the field notes file, which the site stores as draft logs. The file is sent as it is
+     * (base64-encoded bytes); OKAPI detects its encoding.
      */
     @WorkerThread
-    public static boolean uploadFieldNotes(@NonNull final OCApiConnector connector, @NonNull final String fieldNotes) {
-        final String encoded = Base64.encodeToString(fieldNotes.getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
+    public static boolean uploadFieldNotes(@NonNull final OCApiConnector connector, @NonNull final byte[] fieldNotesFile) {
+        final String encoded = Base64.encodeToString(fieldNotesFile, Base64.NO_WRAP);
         final JSONResult result = postRequest(connector, OkapiService.SERVICE_UPLOAD_FIELD_NOTES, new Parameters("field_notes", encoded));
 
         if (!result.isSuccess) {

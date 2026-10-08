@@ -64,18 +64,18 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
             return false;
         }
         fieldNotesCount = fieldNotes.size();
-        // upload to the selected connectors; each one picks its own records
-        return uploadFieldNotes(fieldNotes);
+        // upload the same (hybrid) file to all selected connectors
+        return uploadFieldNotes();
     }
 
-    private Boolean uploadFieldNotes(final FieldNotes fieldNotes) {
+    private Boolean uploadFieldNotes() {
         boolean uploadResult = true;
         if (!uploadTargets.isEmpty()) {
             publishProgress(STATUS_UPLOAD);
             final File tempFile = ContentStorage.get().writeUriToTempFile(exportUri, filename);
             if (tempFile != null) {
                 for (final FieldNotesCapability connector : uploadTargets) {
-                    if (connector.uploadFieldNotes(tempFile, fieldNotes)) {
+                    if (connector.uploadFieldNotes(tempFile)) {
                         uploadedTo.add(connector.getName());
                     } else {
                         uploadResult = false;
