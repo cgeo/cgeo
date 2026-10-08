@@ -36,8 +36,17 @@ import org.apache.commons.lang3.StringUtils;
  * GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"
  * </pre>
  *
- * The export file holds the notes of all platforms with the geocaching.com log type names.
- * Other platforms get their own content via {@link #getContent(Predicate, Function)}.
+ * There is exactly ONE field notes object per export, and it is hybrid: it holds the offline logs
+ * of all platforms (GC, OC, ...) at once. Never split it into separate objects or files per platform.
+ * <ul>
+ * <li>The export file is written once from this object, in the field notes format (geocaching.com
+ * log type names) with the records of all platforms. It is shared with other apps and imported on
+ * websites, and those consumers handle records of several platforms; a per-platform split would
+ * break them.</li>
+ * <li>Every upload target receives this same object and takes what concerns it: a connector which
+ * uploads the file sends it as it is (the site ignores foreign records), a connector which uploads
+ * through an API picks its own records via {@link #getContent(Predicate, Function)}.</li>
+ * </ul>
  */
 public class FieldNotes {
 
