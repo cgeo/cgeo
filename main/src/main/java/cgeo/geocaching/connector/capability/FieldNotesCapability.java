@@ -21,9 +21,14 @@ public interface FieldNotesCapability extends IConnector {
     }
 
     /**
-     * Upload field notes. The export file holds the notes of all platforms with the geocaching.com
-     * log type names; connectors which need another selection or other log type names build their
-     * own content from {@code fieldNotes}.
+     * Upload field notes. All upload targets receive the same, hybrid field notes (all platforms):
+     * <ul>
+     * <li>{@code exportFile}: the export file, written once by the export (not by the connector).
+     * For connectors which upload the file itself; the site ignores records of other platforms.</li>
+     * <li>{@code fieldNotes}: the same notes as an object. For connectors which upload through an
+     * API; they take their own records with their own log type names from it.</li>
+     * </ul>
+     * A connector uses whichever of the two fits its site. Never split the field notes per platform.
      *
      * return {@code true} if uploaded successfully
      */
