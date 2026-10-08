@@ -887,8 +887,29 @@
     <string name="settings_hide_tileproviders_summary">Excluir una o más fuentes de mapas de la selección de fuentes del mapa</string>
     <string name="settings_unifiedMapVariants_title">Variantes UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveedor de teselas definido por el usuario</string>
+    <string name="settings_userDefinedTileProviders">Proveedores de teselas definidos por el usuario</string>
+    <string name="settings_userDefinedTileProviders_summary">Servidores de teselas a usar como mapa en sí, además de los nativos de c:geo</string>
+    <string name="settings_userDefinedTileProvider_addnew">Añadir un nuevo proveedor de teselas</string>
+    <string name="settings_userDefinedTileProvider_edit">Editar proveedor de teselas</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">¿Realmente desea eliminar este proveedor de teselas?</string>
     <string name="settings_userDefinedTileProviderUri">Introduzca la Uri completa (sin barra a la derecha) para el proveedor de teselas, o introduzca el Uri completo con parámetros (incluyendo {X}, {Y} y {Z}). Asegúrese de haber comprobado y cumplir con sus condiciones de uso.</string>
+    <string name="settings_tileOverlays">Superposiciones definidas por el usuario</string>
+    <string name="settings_tileOverlays_summary">Servidores de teselas cuyas teselas están dibujadas sobre el mapa, por ejemplo marcas de mar o rutas de senderismo</string>
+    <string name="settings_tileOverlays_add">Añadir superposición</string>
+    <string name="settings_tileOverlays_edit">Editar superposición</string>
+    <string name="settings_tileOverlays_url_hint">Introduzca la Uri completa, incluyendo los marcadores de posición {X}, {Y} y {Z}. Las teselas deben ser transparentes cuando no llevan datos. Asegúrese de haber comprobado y cumplido con las condiciones de uso del proveedor.</string>
+    <string name="settings_tileOverlays_delete">Eliminar superposición</string>
+    <string name="settings_tileOverlays_delete_confirm">¿Eliminar superposición \"%1$s\"?</string>
     <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Nombre</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Por favor, introduzca el http(s) Uri que contenga {X}, {Y} y {Z}</string>
+    <string name="settings_tileUrl_test">Test</string>
+    <string name="settings_tileUrl_testing">Comprobando\u2026</string>
+    <string name="settings_tileUrl_testok">Se recibió una tesela</string>
+    <string name="settings_tileUrl_testfailed_title">No se recibieron teselas</string>
+    <string name="settings_tileUrl_testfailed">No se pudo cargar una tesela desde este servidor (%1$s). La Uri podría ser errónea, o el servidor podría no estar disponible temporalmente.</string>
+    <string name="settings_tileUrl_copied">Copiado, listo para ser compartido</string>
     <string name="settings_title_data_dir">Carpeta de datos Geocache</string>
     <string name="settings_title_data_dir_usage">Carpeta de datos Geocache (%1$s usado)</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
@@ -1321,6 +1342,7 @@
     <string name="map_source_google_terrain">Google: Terreno</string>
     <string name="map_source_osm_offline_combined">Combinado (sin conexión)</string>
     <string name="map_source_nomap">Sin mapa</string>
+    <string name="map_grayscale">Mapa con escala de grises</string>
     <string name="map_source_attribution_dialog_title">Atribuciones del mapa</string>
     <string name="init_sendToCgeo">Enviar a c:geo</string>
     <string name="settings_info_send2cgeo_title">Sobre send2cgeo</string>
@@ -1725,6 +1747,8 @@
     <string name="init_ActionbarAutohide">Ocultar barra de herramientas al tocar</string>
     <string name="init_summary_ActionbarAutohide">Pulsa en el espacio libre del mapa para ocultar/mostrar la barra de herramientas</string>
     <string name="init_autozoom_consider_lastcenter">Restaurar posición del mapa al mapear una lista</string>
+    <string name="init_mapOnLockScreen">Pantalla de bloqueo</string>
+    <string name="init_summary_mapOnLockScreen">Mostrar mapa en la pantalla de bloqueo del dispositivo. Para desbloquear el dispositivo mientras se muestra el mapa, utilice el botón/gesto trasero.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">Cuando se mapea una lista de cachés y el mapa se dejó previamente dentro de los límites de la lista, se restaurará la posición de previsualización, de lo contrario se hará zoom para que se adapte a todos los cachés.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Cuando una lista de cachés se mapea, asigna el zoom del mapa y límites para que se adapten a todos los cachés.</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
@@ -1980,6 +2004,7 @@
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
     <string name="search_bar_hint_settings">Configuración de búsqueda</string>
+    <string name="search_index_updated">Base de datos de búsqueda actualizada</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_address">Dirección</string>
     <string name="search_geo">Geocode</string>
@@ -2883,7 +2908,10 @@ Nombre de archivo:%2$s</string>
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Ver base de datos</string>
+    <string name="dbi_config_columns">Configurar columnas</string>
     <string name="dbi_edit_ok">Columna actualizada</string>
     <string name="dbi_edit_error">Error al actualizar el campo</string>
+    <string name="dbi_sort_reset">Resetear orden</string>
+    <string name="dbi_sorted_by">Ordenado por %1$s</string>
     <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>
