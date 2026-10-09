@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -142,7 +143,7 @@ public class OkapiClientTest {
     }
 
     @Test
-    @Ignore("This tests needs a working OC account on the CI AVD")
+    @Ignore("This test needs a working OC account on the CI AVD")
     public void testUploadPersonalNote() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
@@ -185,5 +186,20 @@ public class OkapiClientTest {
             cache.setPersonalNote(oldPersonalNote);
             OkapiClient.uploadPersonalNotes(ocConnector, cache);
         }
+    }
+
+    @Test
+    @Ignore("This test needs a working OC account on the CI AVD")
+    public void testGetOwnerLogTypes() {
+        final OCApiLiveConnector ocConnector = getConnectorOCDE();
+        assertThat(ocConnector.login()).as("Login to OC connector").isTrue();
+        final String ownerUserName = ocConnector.getUserName();
+        assertThat(ownerUserName).as("Valid user name").isNotEmpty();
+
+        final Geocache ocCache = new Geocache();
+        ocCache.setGeocode("OC1234");
+        ocCache.setType(CacheType.TRADITIONAL);
+        ocCache.setOwnerDisplayName(ownerUserName);
+        assertThat(ocCache.getPossibleLogTypes()).as("Owner log types").contains(LogType.OWNER_MAINTENANCE);
     }
 }
