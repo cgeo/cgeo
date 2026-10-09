@@ -52,7 +52,7 @@ public class Container extends EventTable {
         String cn = c == null ? "(nowhere)" : c.name;
         Engine.log("MOVE: "+name+" to "+cn, Engine.LOG_CALL);
         if (container != null) TableLib.removeItem(container.inventory, this);
-        // location.things.removeElement(this);
+        // location.things.remove(this);
         if (c != null) {
             TableLib.rawappend(c.inventory, this);
             if (c == Engine.instance.player) setPosition(null);
@@ -81,8 +81,8 @@ public class Container extends EventTable {
     public boolean visibleToPlayer () {
         if (!isVisible()) return false;
         if (container == Engine.instance.player) return true;
-        if (container instanceof Zone) {
-            Zone z = (Zone)container;
+        if (container instanceof Zone z) {
+            
             return z.showThings();
         }
         return false;

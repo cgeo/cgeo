@@ -450,11 +450,11 @@ public class LuaState {
 
                     Object o = callFrame.get(b);
                     Object res;
-                    if (o instanceof LuaTable) {
-                        LuaTable t = (LuaTable) o;
+                    if (o instanceof LuaTable t) {
+                        
                         res = toDouble(t.len());
-                    } else if (o instanceof String) {
-                        String s = (String) o;
+                    } else if (o instanceof String s) {
+                        
                         res = toDouble(s.length());
                     } else {
                         Object f = getMetaOp(o, "__len");
@@ -491,7 +491,7 @@ public class LuaState {
                                     nStrings++;
                                 }
                                 if (nStrings > 0) {
-                                    StringBuffer concatBuffer = new StringBuffer();
+                                    StringBuilder concatBuffer = new StringBuilder();
 
                                     int firstString = last - nStrings + 1;
                                     while (firstString <= last) {
@@ -1211,8 +1211,8 @@ public class LuaState {
         Object curObj = table;
         for (int i = LuaState.MAX_INDEX_RECURSION; i > 0; i--) {
             Object metaOp;
-            if (curObj instanceof LuaTable) {
-                LuaTable t = (LuaTable) curObj;
+            if (curObj instanceof LuaTable t) {
+                
 
                 if (t.rawget(key) != null) {
                     t.rawset(key, value);
@@ -1245,8 +1245,8 @@ public class LuaState {
 
     public void setmetatable(Object o, LuaTable metatable) {
         BaseLib.luaAssert(o != null, "Can't set metatable for nil");
-        if (o instanceof LuaTable) {
-            LuaTable t = (LuaTable) o;
+        if (o instanceof LuaTable t) {
+            
             t.setMetatable(metatable);
         } else {
             userdataMetatables.rawset(o, metatable);
@@ -1258,8 +1258,8 @@ public class LuaState {
             return null;
         }
         LuaTable metatable;
-        if (o instanceof LuaTable) {
-            LuaTable t = (LuaTable) o;
+        if (o instanceof LuaTable t) {
+            
             metatable = t.getMetatable();
         } else {
             metatable = (LuaTable) userdataMetatables.rawget(o);
@@ -1330,8 +1330,8 @@ public class LuaState {
             currentCallFrame.closeUpvalues(0);
         }
         thread.cleanCallFrames(currentCallFrame);
-        if (errorMessage instanceof String) {
-            errorMessage = ((String) errorMessage);
+        if (errorMessage instanceof String str) {
+            errorMessage = str;
         }
         thread.setTop(oldBase + 4);
         thread.objectStack[oldBase] = Boolean.FALSE;
@@ -1351,9 +1351,8 @@ public class LuaState {
         if (a == null || b == null) {
             return a == b;
         }
-        if (a instanceof Double && b instanceof Double) {
-            Double ad = (Double) a;
-            Double bd = (Double) b;
+        if (a instanceof Double ad && b instanceof Double bd) {
+            
             return ad.doubleValue() == bd.doubleValue();
         }
         return a == b;
@@ -1364,7 +1363,7 @@ public class LuaState {
     }
 
     public static Double toDouble(double d) {
-        return new Double(d);
+        return Double.valueOf(d);
     }
 
     public static Double toDouble(long d) {

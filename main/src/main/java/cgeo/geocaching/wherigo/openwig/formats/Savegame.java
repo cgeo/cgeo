@@ -5,7 +5,8 @@
 package cgeo.geocaching.wherigo.openwig.formats;
 
 import java.io.*;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
@@ -86,8 +87,8 @@ public class Savegame {
     }
 
     protected void resetObjectStore () {
-        objectStore = new Hashtable(256);
-        // XXX why did i choose to use LuaTable over Hashtable?
+        objectStore = new HashMap<>(256);
+        // XXX why did i choose to use LuaTable over HashMap?
         currentId = 0;
         level = 0;
     }
@@ -119,11 +120,11 @@ public class Savegame {
         }
     }
 
-    private Hashtable objectStore;
+    private HashMap<Object, Object> objectStore;
     private int currentId;
 
-    private Hashtable idToJavafuncMap = new Hashtable(128);
-    private Hashtable javafuncToIdMap = new Hashtable(128);
+    private HashMap<Integer, JavaFunction> idToJavafuncMap = new HashMap<>(128);
+    private HashMap<JavaFunction, Integer> javafuncToIdMap = new HashMap<>(128);
     private int currentJavafunc = 0;
 
     public void buildJavafuncMap (LuaTable environment) {
@@ -159,19 +160,19 @@ public class Savegame {
     private static final byte LUATABLE_END  = 0x11;
 
     public void addJavafunc (JavaFunction javafunc) {
-        Integer id = new Integer(currentJavafunc++);
+        Integer id = Integer.valueOf(currentJavafunc++);
         idToJavafuncMap.put(id, javafunc);
         javafuncToIdMap.put(javafunc, id);
     }
 
     private int findJavafuncId (JavaFunction javafunc) {
-        Integer id = (Integer)javafuncToIdMap.get(javafunc);
+        Integer id = javafuncToIdMap.get(javafunc);
         if (id != null) return id.intValue();
         else throw new IllegalStateException("javafunc not found in map!");
     }
 
     private JavaFunction findJavafuncObject (int id) {
-        JavaFunction jf = (JavaFunction)idToJavafuncMap.get(new Integer(id));
+        JavaFunction jf = idToJavafuncMap.get(Integer.valueOf(id));
         return jf;
     }
 
@@ -187,7 +188,7 @@ public class Savegame {
              if (debug) debug("reference "+i.intValue()+" ("+obj.toString()+")");
             out.writeInt(i.intValue());
         } else {
-            i = new Integer(currentId++);
+            i = Integer.valueOf(currentId++);
             objectStore.put(obj, i);
             if (debug) debug("(ref"+i.intValue()+")");
             if (obj instanceof Serializable) {
@@ -217,20 +218,20 @@ public class Savegame {
         if (obj == null) {
             if (debug) debug("nil");
             out.writeByte(LUA_NIL);
-        } else if (obj instanceof String) {
+        } else if (obj instanceof String str) {
             out.writeByte(LUA_STRING);
             if (debug) debug("\""+obj.toString()+"\"");
-            out.writeUTF((String)obj);
-        } else if (obj instanceof Boolean) {
+            out.writeUTF(str);
+        } else if (obj instanceof Boolean b) {
             if (debug) debug(obj.toString());
             out.writeByte(LUA_BOOLEAN);
-            out.writeBoolean(((Boolean)obj).booleanValue());
-        } else if (obj instanceof Double) {
+            out.writeBoolean(b.booleanValue());
+        } else if (obj instanceof Double d) {
             out.writeByte(LUA_DOUBLE);
             if (debug) debug(obj.toString());
-            out.writeDouble(((Double)obj).doubleValue());
-        } else if (obj instanceof JavaFunction) {
-            int i = findJavafuncId((JavaFunction)obj);
+            out.writeDouble(d.doubleValue());
+        } else if (obj instanceof JavaFunction func) {
+            int i = findJavafuncId(func);
             if (debug) debug("javafunc("+i+")-"+obj.toString());
             out.writeByte(LUA_JAVAFUNC);
             out.writeInt(i);
@@ -287,7 +288,7 @@ public class Savegame {
     }
 
     private void restCache (Object o) {
-        Integer i = new Integer(currentId++);
+        Integer i = Integer.valueOf(currentId++);
         objectStore.put(i, o);
         if (debug) debug("(ref"+i.intValue()+")");
     }
@@ -329,7 +330,7 @@ public class Savegame {
                 }
                 return s;
             case LUA_REFERENCE:
-                Integer what = new Integer(in.readInt());
+                Integer what = Integer.valueOf(in.readInt());
                 if (debug) debug("reference "+what.intValue());
                 Object result = objectStore.get(what);
                 if (result == null) {
