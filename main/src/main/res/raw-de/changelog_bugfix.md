@@ -13,3 +13,6 @@
 - Korrektur: Absturz bei Offline-Übersetzung (#18678)
 - Korrektur: Absturz bei Drehung der Karte (#18680)
 - Korrektur: Absturz auf der VTM-Karte (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member
