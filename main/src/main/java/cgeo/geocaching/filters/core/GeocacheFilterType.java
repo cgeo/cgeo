@@ -12,6 +12,7 @@ import org.apache.commons.text.WordUtils;
 public enum GeocacheFilterType {
 
     NAME("name", R.string.cache_filter_name, R.string.cache_filtergroup_basic, NameGeocacheFilter::new),
+    CACHE_ICON("cache_icon", R.string.cache_filter_cache_icon, R.string.cache_filtergroup_userspecific, CacheIconGeocacheFilter::new),
     OWNER("owner", R.string.cache_filter_owner, R.string.cache_filtergroup_basic, OwnerGeocacheFilter::new),
     DESCRIPTION("description", R.string.cache_filter_description, R.string.cache_filtergroup_basic, DescriptionGeocacheFilter::new),
     TYPE("type", R.string.cache_filter_type, R.string.cache_filtergroup_basic, TypeGeocacheFilter::new),
