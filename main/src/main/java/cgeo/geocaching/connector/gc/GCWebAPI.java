@@ -32,9 +32,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -114,7 +116,8 @@ public class GCWebAPI {
 
         private final Set<CacheType> cacheTypes = new HashSet<>();
         private final Set<CacheSize> cacheSizes = new HashSet<>();
-        private final Set<CacheAttribute> cacheAttributes = new HashSet<>();
+        private final Map<CacheAttribute, Boolean> cacheAttributes = new HashMap<>();
+        private final Map<CacheAttribute, Boolean> cacheExcludeAttributes = new HashMap<>();
 
         private String hiddenBy = null;
         private final List<String> notFoundBy = new ArrayList<>();
@@ -180,16 +183,19 @@ public class GCWebAPI {
         }
 
         /**
-         * filters for given cache attriutes. Only positive attributes can be filtered, no exclude possible
-         * TODO does not work with V1, only works with V2!
+         * filters for given cache attributes. The boolean value indicates whether the attribute is present.
          */
-        public WebApiSearch addCacheAttributes(final CacheAttribute... ca) {
-            cacheAttributes.addAll(Arrays.asList(ca));
+        public WebApiSearch addCacheAttributes(final Map<CacheAttribute, Boolean> attributes) {
+            cacheAttributes.putAll(attributes);
+            return this;
+        }
+        public WebApiSearch addCacheExcludeAttributes(final Map<CacheAttribute, Boolean> attributes) {
+            cacheExcludeAttributes.putAll(attributes);
             return this;
         }
 
         public Set<CacheAttribute> getCacheAttributes() {
-            return this.cacheAttributes;
+            return this.cacheAttributes.keySet();
         }
 
         /**
@@ -442,7 +448,17 @@ public class GCWebAPI {
             }
 
             if (!this.cacheAttributes.isEmpty()) {
-                params.put("att", CollectionStream.of(this.cacheAttributes).map(ct -> ct.gcid).toJoinedString(","));
+                params.put("att", CollectionStream.of(this.cacheAttributes.entrySet())
+                        .filter(entry -> entry.getKey().gcid >= 0)
+                        .map(entry -> entry.getKey().gcid + (Boolean.FALSE.equals(entry.getValue()) ? ":2" : ""))
+                        .toJoinedString(","));
+            }
+
+            if (!this.cacheExcludeAttributes.isEmpty()) {
+                params.put("natt", CollectionStream.of(this.cacheExcludeAttributes.entrySet())
+                        .filter(entry -> entry.getKey().gcid >= 0)
+                        .map(entry -> entry.getKey().gcid + (Boolean.FALSE.equals(entry.getValue()) ? ":2" : ""))
+                        .toJoinedString(","));
             }
 
             //Hide owned/hide found caches, only works for premium members

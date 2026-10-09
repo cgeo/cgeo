@@ -25,7 +25,6 @@ import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.GeocacheSort;
-import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 
@@ -144,13 +143,16 @@ public class GCMap {
                 break;
             case ATTRIBUTES:
                 final AttributesGeocacheFilter attFilter = (AttributesGeocacheFilter) basicFilter;
+                    final Map<CacheAttribute, Boolean> apiAttributes = new java.util.HashMap<>();
+                    for (Map.Entry<CacheAttribute, Boolean> entry : attFilter.getAttributes().entrySet()) {
+                        if (entry.getKey().gcid >= 0 && entry.getKey().gcid < 100) {
+                            apiAttributes.put(entry.getKey(), entry.getValue());
+                        }
+                    }
                 if (!attFilter.isInverse()) {
-                    search.addCacheAttributes(
-                        CollectionStream.of(attFilter.getAttributes().entrySet())
-                        .filter(e -> Boolean.TRUE.equals(e.getValue()))
-                        .filter(e -> e.getKey().gcid >= 0 && e.getKey().gcid < 100)
-                        .map(Map.Entry::getKey)
-                        .toArray(CacheAttribute.class));
+                    search.addCacheAttributes(apiAttributes);
+                } else {
+                    search.addCacheExcludeAttributes(apiAttributes);
                 }
                 break;
             case SIZE:
