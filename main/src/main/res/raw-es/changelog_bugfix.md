@@ -1,8 +1,8 @@
 ##
-- Corregir: la lista de ignorados de geocaching.com no funciona (#16950)
-- Corregir: Varias fugas de memoria (#18615)
-- Corregir: Tamaño incorrecto de escala en Google Maps (#18646)
-- Corregir: Bucle sin fin al seleccionar un nuevo formato en "Coordenada de cálculo" (#18672)
+- Fix: geocaching.com Ignore List handling not working (#16950)
+- Fix: Several memory leaks (#18615)
+- Fix: Wrong size of scale on Google Maps (#18646)
+- Fix: Endless loop on selecting new format in "Calculate coordinate" (#18672)
 - Fix: Log text folding not working (#18653)
 - Fix: Crash in reading variables (#18667)
 - Corregido: Error durante el registro (#18679)
@@ -13,3 +13,6 @@
 - Corregido: Error al traducir sin conexión (#18678)
 - Corregido: Error en la rotación del mapa (#18680)
 - Corregido: Error en el mapa VTM (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member
