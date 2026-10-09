@@ -128,6 +128,7 @@ final class OkapiClient {
     private static final String WPT_DESCRIPTION = "description";
     private static final String WPT_TYPE = "type";
     private static final String WPT_NAME = "name";
+    private static final String WPT_TYPE_USER_COORDS = "user-coords";
     private static final String CACHE_IS_WATCHED = "is_watched";
     private static final String CACHE_IS_RECOMMENDED = "is_recommended";
     private static final String CACHE_WPTS = "alt_wpts";
@@ -161,6 +162,7 @@ final class OkapiClient {
     private static final String CACHE_CODE = "code";
     private static final String CACHE_REQ_PASSWORD = "req_passwd";
     private static final String CACHE_MY_NOTES = "my_notes";
+    private static final String CACHE_MY_COORDS = "my_coords";
     private static final String CACHE_TRACKABLES_COUNT = "trackables_count";
     private static final String CACHE_TRACKABLES = "trackables";
     private static final String CACHE_USER_PROFILE = "profile_url";
@@ -754,6 +756,36 @@ final class OkapiClient {
     }
 
     /**
+     * Whether the OKAPI installation lets users store their own coordinates
+     * (services/caches/save_user_coords and the my_coords field). Older installations
+     * don't report has_user_coords at all.
+     */
+    @WorkerThread
+    public static boolean hasUserCoords(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector).hasUserCoords;
+    }
+
+    /**
+     * Saves the user's corrected coordinates of a cache on the website, or removes them if coords is null.
+     */
+    @WorkerThread
+    public static boolean uploadUserCoords(@NonNull final OCApiConnector connector, @NonNull final Geocache cache, @Nullable final Geopoint coords) {
+        Log.d("Uploading user coordinates for opencaching");
+
+        final String userCoords = coords == null ? StringUtils.EMPTY
+                : GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, coords) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, coords);
+        final Parameters params = new Parameters("cache_code", cache.getGeocode(), "user_coords", userCoords);
+        final JSONResult result = postRequest(connector, OkapiService.SERVICE_SAVE_USER_COORDS, params);
+
+        if (!result.isSuccess) {
+            Log.e("OkapiClient.uploadUserCoords: " + result.data);
+            return false;
+        }
+        // the response reports the coordinates as stored now (null if removed)
+        return result.data.path("success").asBoolean(false) && result.data.hasNonNull(CACHE_MY_COORDS) == (coords != null);
+    }
+
+    /**
      * returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right)
      */
     @NonNull
@@ -839,7 +871,12 @@ final class OkapiClient {
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
 
-            cache.mergeWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), true);
+            final ArrayNode wptsJson = (ArrayNode) response.path(CACHE_WPTS);
+            cache.mergeWaypoints(parseWaypoints(wptsJson), true);
+            // fallback for installations without the my_coords field (see parseCoreCache)
+            if (!cache.hasUserModifiedCoords()) {
+                applyUserCoords(cache, parseUserCoords(wptsJson));
+            }
 
             cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)), EnumSet.of(TrackableBrand.GEOKRETY));
 
@@ -929,6 +966,9 @@ final class OkapiClient {
         //set basic properties which are constant / not used for OC platforms
         cache.setPremiumMembersOnly(false);
         cache.setUserModifiedCoords(false);
+        if (response.hasNonNull(CACHE_MY_COORDS)) {
+            applyUserCoords(cache, parseCoords(response.get(CACHE_MY_COORDS).asText()));
+        }
 
         cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)));
 
@@ -999,6 +1039,9 @@ final class OkapiClient {
         List<Waypoint> result = null;
         final Geopoint pt0 = new Geopoint(0, 0);
         for (final JsonNode wptResponse : wptsJson) {
+            if (WPT_TYPE_USER_COORDS.equals(wptResponse.path(WPT_TYPE).asText())) {
+                continue; // handled by parseUserCoords
+            }
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get(WPT_NAME).asText(),
                         parseWptType(wptResponse.get(WPT_TYPE).asText()),
@@ -1020,6 +1063,34 @@ final class OkapiClient {
             }
         }
         return result;
+    }
+
+    /**
+     * Corrected coordinates of the user are handled like on GC: the cache gets the corrected
+     * coordinates, the listing coordinates go to an ORIGINAL waypoint.
+     */
+    private static void applyUserCoords(@NonNull final Geocache cache, @Nullable final Geopoint userCoords) {
+        if (userCoords != null && !userCoords.equals(new Geopoint(0, 0))) {
+            cache.createOriginalWaypoint(cache.getCoords());
+            cache.setCoords(userCoords);
+        }
+    }
+
+    /**
+     * Returns the user's corrected coordinates from the alt_wpts of a cache, or null if there are none.
+     */
+    @Nullable
+    static Geopoint parseUserCoords(final ArrayNode wptsJson) {
+        final Geopoint pt0 = new Geopoint(0, 0);
+        for (final JsonNode wptResponse : wptsJson) {
+            if (WPT_TYPE_USER_COORDS.equals(wptResponse.path(WPT_TYPE).asText())) {
+                final Geopoint pt = parseCoords(wptResponse.path(WPT_LOCATION).asText());
+                if (pt != null && !pt.equals(pt0)) {
+                    return pt;
+                }
+            }
+        }
+        return null;
     }
 
     @NonNull
@@ -1256,6 +1327,10 @@ final class OkapiClient {
             if (connector.getApiSupport() == ApiSupport.current) {
                 res.append(SEPARATOR).append(SERVICE_CACHE_CORE_CURRENT_L3_FIELDS);
             }
+            // only installations with has_user_coords know this field
+            if (connector.supportsOwnCoordinates()) {
+                res.append(SEPARATOR).append(CACHE_MY_COORDS);
+            }
         }
 
         return res.toString();
@@ -1270,6 +1345,9 @@ final class OkapiClient {
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS);
             res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
+            if (connector.supportsOwnCoordinates()) {
+                res.append(SEPARATOR).append(CACHE_MY_COORDS);
+            }
         }
         if (connector.getApiSupport() == ApiSupport.current) {
             res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
@@ -1512,6 +1590,8 @@ final class OkapiClient {
         Long imageMaxUploadSize;
         @JsonProperty("image_rcmd_max_pixels")
         Long imageRcmdMaxPixels;
+        @JsonProperty("has_user_coords")
+        boolean hasUserCoords;
 
         @Override
         @NonNull
@@ -1528,6 +1608,7 @@ final class OkapiClient {
                     ", mobileRegistrationUrl='" + mobileRegistrationUrl + '\'' +
                     ", imageMaxUploadSize=" + imageMaxUploadSize +
                     ", imageRcmdMaxPixels=" + imageRcmdMaxPixels +
+                    ", hasUserCoords=" + hasUserCoords +
                     '}';
         }
     }
