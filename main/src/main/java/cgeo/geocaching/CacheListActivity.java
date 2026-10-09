@@ -15,6 +15,7 @@ import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.PersonalNoteStoreArtefactCommand;
 import cgeo.geocaching.command.RecalculateHealthScoreCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
@@ -657,6 +658,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setEnabled(menu, R.id.menu_set_final_wp_as_corrected_coords, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_set_final_wp_as_corrected_coords, R.string.caches_set_final_wp_as_corrected_coords_selected, R.string.caches_set_final_wp_as_corrected_coords_all, checkedCount);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_recalculate_health_score, R.string.caches_recalculate_health_score_selected, R.string.caches_recalculate_health_score_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_personal_note_store_artefacts, true, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_personal_note_store_artefacts, R.string.caches_personal_note_store_artefacts_selected, R.string.caches_personal_note_store_artefacts_all, checkedCount);
+            MenuUtils.setVisible(menu, R.id.menu_create_internal_cache, !isSelectMode);
 
             // Manage Lists submenu
             MenuUtils.setVisibleEnabled(menu, R.id.menu_lists, isOffline, !isSelectMode);
@@ -917,6 +922,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_recalculate_health_score) {
             new RecalculateHealthScoreCommand(this, adapter.getCheckedOrAllCaches()).execute();
+        } else if (menuItem == R.id.menu_personal_note_store_artefacts) {
+            new PersonalNoteStoreArtefactCommand(this, adapter.getCheckedOrAllCaches(), () -> refreshCurrentList()).execute();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_watch_all) {

@@ -73,13 +73,32 @@ public class CacheArtefactParser {
     //parsed Variables
     private final Map<String, String> variables = new HashMap<>();
 
+    public static class CacheArtefactParserArtefact {
+        CacheArtefactParserArtefact(final List<Waypoint> waypoints, final CacheVariableList variables) {
+            this.waypoints = waypoints;
+            this.variables = variables;
+        }
+
+        public List<Waypoint> waypoints;
+        public CacheVariableList variables;
+    }
+
+    public static CacheArtefactParserArtefact getArtefactToStore(final Geocache cache) {
+        final List<Waypoint> userModifiedWaypoints = cache.getWaypoints().stream().filter(Waypoint::isUserModified).toList();
+        final CacheVariableList variablesList = cache.getVariables();
+        if (!userModifiedWaypoints.isEmpty() || !variablesList.isEmpty()) {
+            return new CacheArtefactParserArtefact(userModifiedWaypoints, variablesList);
+        }
+        return null;
+    }
+
     /**
      * Detect coordinates in the given text and converts them to user-defined waypoints.
      * Works by rule of thumb.
      *
      * @param namePrefix Prefix of the name of the waypoint
      */
-    public CacheArtefactParser(final Geocache cache, @NonNull final String namePrefix) {
+    public CacheArtefactParser(final Geocache cache, @Nullable final String namePrefix) {
         this.namePrefix = namePrefix;
         this.cache = cache;
     }
@@ -194,6 +213,10 @@ public class CacheArtefactParser {
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) //splitting would not help readability
     private Waypoint parseSingleWaypoint(final GeopointWrapper match, final int counter) {
+        if (namePrefix == null) {
+            return null;
+        }
+
         final Geopoint point = match.getGeopoint();
         final int start = match.getStart();
         final int end = match.getEnd();
