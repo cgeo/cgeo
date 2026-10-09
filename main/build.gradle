@@ -825,9 +825,9 @@ tasks.register('checkstyle', Checkstyle) {
     group = 'verification'
     description = 'Check code standard'
 
-    source = 'src/main/java'
-    source = 'src/test/java'
-    source = 'src/androidTest/java'
+    source 'src/main/java'
+    source 'src/test/java'
+    source 'src/androidTest/java'
     include '**/*.java'
 
     classpath = files()
