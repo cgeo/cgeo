@@ -159,10 +159,10 @@ public class ElevationChart {
         float lastElevation = 0f;
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
-            if (elevation == null) {
-                return;
-            }
-            final Iterator<Float> it = elevation.iterator();
+            // The first point of an individual route has no preceding leg, so its segment
+            // may not have elevation data. The next segment's routed points include this
+            // starting point and its elevation. Keep processing later segments.
+            final Iterator<Float> it = elevation == null ? new ArrayList<Float>().iterator() : elevation.iterator();
             for (Geopoint point : segment.getPoints()) {
                 if (lastPoint != null) {
                     distance += lastPoint.distanceTo(point);
