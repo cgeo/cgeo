@@ -271,7 +271,7 @@
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
-    <string name="err_watchlist_failed_geocodes">使用藏点编号（GC码）：%s 改变关注列表失败</string>
+    <string name="err_watchlist_failed_geocodes">更改关注列表时，以下藏点失败：%s</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
     <string name="err_auth_process">授权失败。</string>
@@ -281,7 +281,7 @@
     <string name="err_load_descr_failed">c:geo无法加载描述信息。</string>
     <string name="err_location_unknown">c:geo 不知道藏点的位置。</string>
     <string name="err_missing_device_name">请在注册前输入设备名称。</string>
-    <string name="err_favorite_failed">更改收藏状态失败。</string>
+    <string name="err_favorite_failed">更改喜爱状态失败。</string>
     <string name="err_select_logimage_failed">选择日志的图像失败。</string>
     <string name="err_acquire_image_failed">获取图片失败。</string>
     <string name="err_acquire_image_unsupported_format">图像格式必须是 JPEG/JPG、PNG 或 GIF 的格式</string>
@@ -406,7 +406,7 @@
     <string name="menu_update_mapdata">更新地图数据</string>
     <string name="menu_delete_offline_data">删除离线数据</string>
     <string name="menu_history">历史</string>
-    <string name="menu_search_clipboard">从剪贴板加载藏点编号（GC码）</string>
+    <string name="menu_search_clipboard">从剪贴板加载藏点编号</string>
     <string name="menu_history_longstring">查找历史</string>
     <string name="menu_lists_pocket_queries">口袋查询</string>
     <string name="menu_lists_bookmarklists">书签列表</string>
@@ -417,7 +417,7 @@
     <string name="advanced_search_button">搜索</string>
     <string name="stored_caches_button">已存储</string>
     <string name="any_button">转到</string>
-    <string name="unknown_scan">在扫描结果中找不到任何藏点编号（GC码）。</string>
+    <string name="unknown_scan">在扫描结果中找不到任何藏点。</string>
     <!-- caches -->
     <string name="caches_no_cache">这里没有藏点</string>
     <string name="caches_more_caches">加载更多藏点</string>
@@ -452,9 +452,9 @@
     <string name="caches_sort_terrain">地形</string>
     <string name="caches_sort_size">大小</string>
     <string name="caches_sort_favorites">已被标记为喜爱</string>
-    <string name="caches_sort_favorites_ratio">收藏 [%]</string>
+    <string name="caches_sort_favorites_ratio">喜爱 [%]</string>
     <string name="caches_sort_name">应用名</string>
-    <string name="caches_sort_geocode">藏点编号（GC码）</string>
+    <string name="caches_sort_geocode">藏点编号</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
     <string name="caches_sort_inventory">可追踪物计数</string>
@@ -495,7 +495,7 @@
     <string name="caches_upload_allcoords">上传所有藏点的坐标</string>
     <string name="caches_upload_allcoords_dialogtitle">警告 - 正在上传所有坐标</string>
     <string name="caches_upload_allcoords_warning">这将用 c:geo 中当前的列表坐标覆盖您的列表中所有的 (或者选定的) 藏点的现有坐标！ 这只适用于特殊情况，例如：当您导入一个包含校正坐标的 GPX 文件作为列表坐标时。 此操作无法撤消，您应当只在知道自己在做什么的情况下使用它。 在正常情况下，您可能宁愿在同一菜单中使用 \"上传修改过的坐标\"功能。</string>
-    <string name="caches_share_geocodes">分享藏点编号（GC码）s清单</string>
+    <string name="caches_share_geocodes">分享藏点清单</string>
     <string name="caches_refresh_selected">刷新选中项</string>
     <string name="caches_refresh_all">刷新全部</string>
     <string name="caches_move_selected">移动选中的</string>
@@ -954,8 +954,8 @@
     <string name="init_signature_template_size">尺寸</string>
     <string name="init_signature_template_type">类型</string>
     <string name="init_signature_template_location">位置</string>
-    <string name="init_signature_template_geocode">藏点编号（GC码）</string>
-    <string name="init_signature_template_tblocation_geocache_code">追踪物 - 藏点编号（GC码）</string>
+    <string name="init_signature_template_geocode">藏点编号</string>
+    <string name="init_signature_template_tblocation_geocache_code">追踪物 - 藏点编号</string>
     <string name="init_signature_template_tblocation_geocache_name">追踪物 - 藏点名称</string>
     <string name="init_signature_template_tblocation_user">追踪物 - 用户</string>
     <string name="init_summary_bettercacher">从 BetterCacher.org 载入藏点等级和类别</string>
@@ -1046,7 +1046,7 @@
     <string name="init_title_collapse_log_limit">日志行限制</string>
     <string name="init_summary_collapse_log_limit">日志显示的最大行数。更多的行将被折叠。 </string>
     <!-- names for CacheListInfoItem -->
-    <string name="cacheListInfoItem_Geocode">藏点编号（GC码）</string>
+    <string name="cacheListInfoItem_Geocode">藏点编号</string>
     <string name="cacheListInfoItem_Difficulty">难度</string>
     <string name="cacheListInfoItem_Terrain">海拔</string>
     <string name="cacheListInfoItem_MemberState">高级用户状态</string>
@@ -1253,7 +1253,7 @@
     <string name="feature_search_keyword">按关键字搜索</string>
     <string name="feature_search_live_map">实时地图</string>
     <string name="feature_search_center">按位置搜索</string>
-    <string name="feature_search_geocode">通过藏点编号（GC码）搜索</string>
+    <string name="feature_search_geocode">通过藏点编号搜索</string>
     <string name="feature_search_owner">按所有者搜索</string>
     <string name="feature_search_finder">按寻找者搜索</string>
     <string name="feature_favorite">添加藏点到收藏夹</string>
@@ -1580,7 +1580,7 @@
     <string name="cache_status_disabled">已禁用</string>
     <string name="cache_status_active">在线</string>
     <string name="cache_status_premium">仅限 Premium 会员</string>
-    <string name="cache_geocode">藏点编号（GC码）</string>
+    <string name="cache_geocode">藏点编号</string>
     <string name="cache_name">名字</string>
     <string name="cache_name_set">设置藏点名字</string>
     <string name="cache_name_updated">藏点名字已更新</string>
@@ -1598,9 +1598,9 @@
     <string name="cache_rating">评分</string>
     <string name="cache_own_rating">您的评分</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
-    <string name="cache_favorite">收藏</string>
+    <string name="cache_favorite">喜爱数</string>
     <string name="cache_owner">宝主</string>
-    <string name="cache_hidden">隐藏</string>
+    <string name="cache_hidden">藏匿日期</string>
     <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">日期</string>
     <string name="cache_location">地点</string>
@@ -1934,7 +1934,7 @@
     <string name="search_bar_hint_settings">搜索设置</string>
     <string name="search_coordinates">坐标</string>
     <string name="search_address">地址</string>
-    <string name="search_geo">藏点编号（GC码）</string>
+    <string name="search_geo">藏点编号</string>
     <string name="search_kw">关键词</string>
     <string name="search_kw_disabled_hint">由于您是BASIC会员，该功能已被禁用</string>
     <string name="search_hbu">藏宝者</string>
@@ -2359,8 +2359,8 @@
     <string name="init_summary_geokrety">启用来自 GeoKrety.org 的追踪物</string>
     <string name="init_geokrety_description">授权 c:geo 使用 GeoKrety.org 以记录 GeoKrety 追踪物。</string>
     <string name="init_geokrety_userid">用户 ID：%s</string>
-    <string name="trackable_title_log_without_geocode">未设置藏点编号（GC码）</string>
-    <string name="trackable_log_without_geocode">你将要发送一个没有藏点编号（GC码）的日志。我们鼓励你设置一个。你想现在添加吗？</string>
+    <string name="trackable_title_log_without_geocode">未设置藏点编号</string>
+    <string name="trackable_log_without_geocode">你将要发送一个没有藏点编号的日志。我们鼓励你设置一个。你想现在添加吗？</string>
     <string name="do_not_ask_me_again">不再询问</string>
     <string name="geokrety_parsing_failed">解析 GeoKrety 响应失败。</string>
     <string name="command_remove_caches_from_list_progress">正在移除藏点</string>
