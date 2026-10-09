@@ -14,3 +14,4 @@
 
 ### Allmänt
 - Fix: Flera väntande hämtningsdialoger på huvudskärmen (#18363)
+- New: Do not discard valid authorization cookies (#18664)
