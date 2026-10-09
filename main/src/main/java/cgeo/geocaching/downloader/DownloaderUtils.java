@@ -489,7 +489,7 @@ public class DownloaderUtils {
                 .setButtonSelectionIsMandatory(false)
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                 .setItems(offlineItems)
-                .setDisplayMapper((item, itemGroup) -> TextParam.text(item.right), (item, itemGroup) -> String.valueOf(item.left), null)
+                .setDisplayMapper((item, itemGroup) -> TextParam.text(item.right), (item, itemGroup) -> String.valueOf(item.right), null)
                 .activateGrouping(item -> LocalizationUtils.getString(Download.DownloadType.getFromId(item.left).getTypeNameResId()))
                 .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
                 .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()))
