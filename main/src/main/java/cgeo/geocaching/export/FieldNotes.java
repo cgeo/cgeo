@@ -31,6 +31,12 @@ import org.apache.commons.lang3.StringUtils;
  * <pre>
  * GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"
  * </pre>
+ *
+ * The columns (cache code, date, log type, text) have a fixed meaning and order; the log type uses
+ * the geocaching.com names. There is exactly ONE field notes file per export, and it is hybrid: it
+ * holds the offline logs of all platforms (GC, OC, ...). Never split or filter it per platform:
+ * every site receives this same file and ignores the records of other platforms itself, and apps
+ * the file is shared with may process the records of several platforms.
  */
 class FieldNotes {
 
