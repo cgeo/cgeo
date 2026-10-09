@@ -14,3 +14,4 @@
 
 ### General
 - Correcció: Múltiples quadres de diàleg de descàrrega pendents a la pantalla principal (#18363)
+- New: Do not discard valid authorization cookies (#18664)
