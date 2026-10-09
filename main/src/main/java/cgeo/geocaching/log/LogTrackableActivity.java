@@ -478,6 +478,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     private void onPostExecuteInternal(final LogResult status) {
         if (status.isOk()) {
             showToast(LocalizationUtils.getString(R.string.info_log_posted));
+            // signal success so that the calling TrackableActivity refreshes its data (status, spotted, logs)
+            setResult(RESULT_OK);
             finish();
         } else {
             showToast(status.getErrorString());
