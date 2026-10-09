@@ -13,3 +13,6 @@
 - Corregido: Error al traducir sin conexión (#18678)
 - Corregido: Error en la rotación del mapa (#18680)
 - Corregido: Error en el mapa VTM (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member
