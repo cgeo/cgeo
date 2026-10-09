@@ -447,6 +447,14 @@ public class SimpleDialog {
     }
 
     private void showInternal(@Nullable final Runnable positive, @Nullable final Runnable negative, @Nullable final Runnable neutral) {
+        // safety check if activity is still running to avoid BadTokenException errors, see #18703
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return; // must not try to show dialog in this case
+            }
+        }
+
         final AlertDialog dialog = constructCommons().first;
         if (negative != null) {
             dialog.setOnCancelListener(dialogInterface -> negative.run());
