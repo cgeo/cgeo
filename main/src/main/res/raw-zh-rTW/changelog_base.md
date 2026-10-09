@@ -14,3 +14,4 @@
 
 ### 一般
 - Fix: Multiple pending download dialogs on main screen (#18363)
+- New: Do not discard valid authorization cookies (#18664)
