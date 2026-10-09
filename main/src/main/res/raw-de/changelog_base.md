@@ -14,3 +14,4 @@
 
 ### Allgemein
 - Korrektur: Mehrfachmeldung ausstehender Downloads auf Hauptbildschirm (#18363)
+- New: Do not discard valid authorization cookies (#18664)
