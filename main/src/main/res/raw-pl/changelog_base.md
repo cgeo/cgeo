@@ -14,3 +14,4 @@
 
 ### Ogólne
 - Naprawiono: Wiele oczekujących okien pobierania na głównym ekranie (#18363)
+- New: Do not discard valid authorization cookies (#18664)
