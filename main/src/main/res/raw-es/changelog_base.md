@@ -14,3 +14,4 @@
 
 ### General
 - Corregido: Múltiples diálogos de descarga pendientes en la pantalla principal (#18363)
+- New: Do not discard valid authorization cookies (#18664)
