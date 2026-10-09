@@ -13,3 +13,6 @@
 - Correcció: Fallada en la traducció fora de línia (#18678)
 - Correcció: Fallada en la rotació de mapes (#18680)
 - Correcció: Fallada al mapa VTM (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member
