@@ -14,3 +14,4 @@
 
 ### Général
 - Correction : Plusieurs fenêtres de dialogue de téléchargement en attente sur l'écran principal (#18363)
+- New: Do not discard valid authorization cookies (#18664)
