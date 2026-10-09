@@ -13,3 +13,6 @@
 - Fix: Crash in offline translation (#18678)
 - Fix: Crash on map rotation (#18680)
 - Fix: Crash on VTM map (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member
