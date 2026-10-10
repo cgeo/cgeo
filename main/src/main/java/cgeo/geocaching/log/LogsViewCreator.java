@@ -4,6 +4,7 @@ import cgeo.geocaching.ImageGalleryActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
+import cgeo.geocaching.databinding.LogsItemBinding;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
@@ -11,7 +12,6 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
-import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -31,12 +31,13 @@ import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -60,6 +61,41 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         return LogsPageBinding.inflate(inflater, container, false);
     }
 
+    class LogEntryAdapter extends RecyclerView.Adapter<LogViewHolder> {
+
+        private final List<LogEntry> data;
+
+        LogEntryAdapter(final List<LogEntry> data) {
+            this.data = data;
+        }
+
+        @NonNull
+        @Override
+        public LogViewHolder onCreateViewHolder(final @NonNull ViewGroup parent, final int viewType) {
+            return new LogViewHolder(LogsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(final @NonNull LogViewHolder holder, final int position) {
+            final LogEntry log = data.get(position);
+            fillViewHolder(holder, log);
+        }
+
+        @Override
+        public int getItemCount() {
+            return data != null ? data.size() : 0;
+        }
+
+        public void addHeaderView() {
+
+        }
+
+        public void removeHeaderView() {
+
+        }
+
+    }
+
     @Override
     public void setContent() {
         if (!isValid()) {
@@ -68,32 +104,12 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         binding.getRoot().setVisibility(View.VISIBLE);
 
         addHeaderView();
-        binding.logsItems.setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, getLogs()) {
-
-            @Override
-            @NonNull
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                View rowView = convertView;
-                if (rowView == null) {
-                    rowView = getActivity().getLayoutInflater().inflate(R.layout.logs_item, parent, false);
-                }
-                LogViewHolder holder = (LogViewHolder) rowView.getTag();
-                if (holder == null) {
-                    holder = new LogViewHolder(rowView);
-                }
-                holder.setPosition(position);
-
-                final LogEntry log = getItem(position);
-                if (log != null) {
-                    fillViewHolder(convertView, holder, log);
-                }
-                return rowView;
-            }
-        });
-        binding.logsItems.setOnScrollListener(new FastScrollListener(binding.logsItems));
+        binding.logsItems.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.logsItems.setAdapter(new LogEntryAdapter(getLogs()));
+        // @todo binding.logsItems.setOnScrollListener(new FastScrollListener(binding.logsItems));
     }
 
-    protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
+    protected void fillViewHolder(final @NonNull LogViewHolder holder, final LogEntry log) {
         if (log.date > 0) {
             holder.binding.added.setText(Formatter.formatShortDateVerbally(log.date));
             holder.binding.added.setVisibility(View.VISIBLE);
@@ -229,7 +245,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();
                         holder.binding.logTranslateHint.setVisibility(View.GONE);
-                        fillViewHolder(null, holder, log);
+                        fillViewHolder(holder, log);
                     } else {
                         final String logText = HtmlUtils.extractText(log.log);
                         translationStatus.startTranslation(1, null, null);
@@ -242,7 +258,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                                     holder.binding.logTranslateButton.setOnClickListener(v1 -> {
                                         translationStatus.setNotTranslated();
                                         holder.binding.logTranslateHint.setVisibility(View.GONE);
-                                        fillViewHolder(null, holder, log);
+                                        fillViewHolder(holder, log);
                                     });
                                     holder.binding.logTranslateHint.setVisibility(View.VISIBLE);
                                 }, e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
