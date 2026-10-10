@@ -15,4 +15,4 @@
 - Correcció: Fallada al mapa VTM (#18691)
 
 ##
-- Fix: Crash on opening a PM cache as basic member
+- Correcció: Error en obrir un catxé de PM com a membre bàsic
