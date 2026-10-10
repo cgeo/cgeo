@@ -13,3 +13,6 @@
 - Correcció: Fallada en la traducció fora de línia (#18678)
 - Correcció: Fallada en la rotació de mapes (#18680)
 - Correcció: Fallada al mapa VTM (#18691)
+
+##
+- Correcció: Error en obrir un catxé de PM com a membre bàsic
