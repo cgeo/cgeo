@@ -82,6 +82,6 @@
             app:flow_horizontalStyle="packed"
             app:flow_horizontalBias="0"
             app:flow_horizontalGap="5dip"
-            app:constraint_referenced_ids="value,stars,addition,linearlayout" />
+            app:constraint_referenced_ids="stars,value,addition,linearlayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
