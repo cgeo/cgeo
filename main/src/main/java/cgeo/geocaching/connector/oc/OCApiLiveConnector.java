@@ -243,12 +243,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @Override
     public boolean addToIgnorelist(@NonNull final Geocache cache) {
-        final boolean ignored = OkapiClient.setIgnored(cache, this);
-
-        if (ignored) {
-            DataStore.saveChangedCache(cache);
-        }
-        return ignored;
+        return OkapiClient.setIgnored(cache, this);
     }
 
     @Override
