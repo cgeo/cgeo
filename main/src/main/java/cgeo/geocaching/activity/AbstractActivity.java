@@ -1,11 +1,13 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ActionBarUtils;
@@ -42,6 +44,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -305,6 +308,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                         .selectMultiple(model, set -> {
                             final int added = cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
                             if (added > 0) {
+                                DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
                                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
                             }
                         });
