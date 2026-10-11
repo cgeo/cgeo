@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTemporaryCacheRule;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.NotForIntegrationTests;
@@ -15,6 +16,7 @@ import cgeo.geocaching.test.NotForIntegrationTests;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.SystemClock;
 
 import androidx.core.content.ContextCompat;
 import androidx.test.core.app.ApplicationProvider;
@@ -22,6 +24,7 @@ import androidx.test.espresso.ViewInteraction;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -157,6 +160,41 @@ public class WaypointActivityTest {
             onView(withId(R.id.projection_type)).check(matches(withChild(withText(ProjectionType.NO_PROJECTION.getL10n()))));
 
         });
+    }
+
+    @Test
+    public void editWaypointKeepsGeofence() {
+        final Waypoint waypoint = createWaypoint();
+        waypoint.setGeofence(100f);
+        tradi.getCache().addOrChangeWaypoint(waypoint, true);
+
+        final String changedName = "Changed waypoint";
+        CgeoTestUtils.executeForActivity(EditWaypointActivity.class, intent -> {
+            waypointForCache(intent, tradi.getCache());
+            intent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypoint.getId());
+        }, scenario -> {
+            onView(withId(R.id.name)).check(matches(withText(waypoint.getName())));
+            onView(withId(R.id.name)).perform(replaceText(changedName));
+            onView(withId(R.id.menu_item_save)).perform(click());
+        });
+
+        final Waypoint storedWaypoint = waitForStoredWaypointName(waypoint.getId(), changedName);
+        assertThat(storedWaypoint).isNotNull();
+        assertThat(storedWaypoint.getName()).isEqualTo(changedName);
+        assertThat(storedWaypoint.getGeofence()).isEqualTo(100);
+    }
+
+    private static Waypoint waitForStoredWaypointName(final int waypointId, final String expectedName) {
+        final long timeout = SystemClock.elapsedRealtime() + 5000;
+        Waypoint waypoint;
+        do {
+            waypoint = DataStore.loadWaypoint(waypointId);
+            if (waypoint != null && expectedName.equals(waypoint.getName())) {
+                return waypoint;
+            }
+            SystemClock.sleep(50);
+        } while (SystemClock.elapsedRealtime() < timeout);
+        return null;
     }
 
     private static void waypointForCache(final Intent intent, final Geocache cache) {
