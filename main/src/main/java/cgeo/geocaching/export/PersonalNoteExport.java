@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.service.PersonalNoteUploadService;
 
 import android.app.Activity;
 
@@ -21,8 +22,9 @@ public class PersonalNoteExport extends AbstractExport {
 
     @Override
     public void export(@NonNull final List<Geocache> cachesList, @Nullable final Activity activity) {
-        final Geocache[] caches = cachesList.toArray(new Geocache[0]);
-        new PersonalNoteExportTask(activity, getProgressTitle()).execute(caches);
+        if (activity != null) {
+            PersonalNoteUploadService.start(activity, cachesList);
+        }
     }
 
 }
