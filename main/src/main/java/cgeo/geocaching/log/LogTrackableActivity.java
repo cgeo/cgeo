@@ -476,12 +476,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     }
 
     private void onPostExecuteInternal(final LogResult status) {
+        setResult(getResultCodeForPost(status));
         if (status.isOk()) {
             showToast(LocalizationUtils.getString(R.string.info_log_posted));
             finish();
         } else {
             showToast(status.getErrorString());
         }
+    }
+
+    static int getResultCodeForPost(final LogResult status) {
+        return status.isOk() ? RESULT_OK : RESULT_CANCELED;
     }
 
     @Override
