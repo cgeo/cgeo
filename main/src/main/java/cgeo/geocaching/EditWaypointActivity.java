@@ -670,6 +670,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.userNoteText = ViewUtils.getEditableText(binding.userNote.getText()).trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
+        currentState.geofence = waypoint == null ? 0 : waypoint.getGeofence();
         currentState.calcStateJson = calcStateString;
 
         return currentState;
@@ -753,6 +754,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setNote(currentState.noteText);
         waypoint.setUserNote(currentState.userNoteText);
         waypoint.setVisited(currentState.visited);
+        waypoint.setGeofence((float) currentState.geofence);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
@@ -808,6 +810,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public String noteText;
         public String userNoteText;
         public boolean visited;
+        public int geofence;
         public String calcStateJson;
         public ProjectionType projectionType;
         public DistanceUnit projectionUnits;

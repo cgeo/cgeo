@@ -52,6 +52,18 @@ public class WaypointTest {
 
 
     @Test
+    public void testGeofenceUnsetAndZero() {
+        final Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);
+        assertThat(waypoint.getGeofence()).isZero();
+
+        waypoint.setGeofence(null);
+        assertThat(waypoint.getGeofence()).isZero();
+
+        waypoint.setGeofence(0f);
+        assertThat(waypoint.getGeofence()).isZero();
+    }
+
+    @Test
     public void testMerge() {
         final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, false);
         local.setPrefix("S1");
