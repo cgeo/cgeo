@@ -1882,8 +1882,6 @@
     <string name="projection_type_bearing_hint_distance">Odległość</string>
     <string name="projection_type_offset">Przesunięcie</string>
     <string name="projection_type_offset_info">Przesunięcie szer. %1$s mm, dł. %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w mikrominutach</string>
-    <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
     <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
     <string name="variables_titletext_short">Wartości i obliczenia</string>
@@ -2982,7 +2980,6 @@
     <string name="dbi_select_table">Wybierz tabelę</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s w #%2$d jest tylko do odczytu</string>
-    <string name="dbi_edit_title">Edytuj \"%1$s\" w #%2$d\"</string>
     <string name="dbi_delete_row_title">Usuń wiersz</string>
     <string name="dbi_delete_row_question">Usunąć wiersz #%1$d (%2$s) na stałe?</string>
     <string name="dbi_delete_success">Wiersz usunięty: %1$s</string>
