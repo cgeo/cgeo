@@ -220,6 +220,8 @@ public class GeoPointParserTest {
     @Test
     public void testUTM() {
         GeopointParser.parse("54S E 293848 N 3915114");
+        assertGeopointEquals(new Geopoint(1.3d, 103.8d), GeopointParser.parse("48N E 366494 N 143721"), 2e-3f);
+        assertGeopointEquals(new Geopoint(3.15785d, 101.71165d), GeopointParser.parse("47N E 801396 N 349434"), 2e-3f);
     }
 
     @Test

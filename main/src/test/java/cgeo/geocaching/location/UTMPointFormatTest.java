@@ -79,6 +79,30 @@ public class UTMPointFormatTest {
         assertThat(utm.getNorthing()).isEqualTo(3915114, offset(1.1d));
     }
 
+    @Test
+    public void testParseSingaporeUTMStringRoundTrip() {
+        assertEquatorialRoundTrip("48N E 366494 N 143721", 1.3d, 103.8d);
+    }
+
+    @Test
+    public void testParseKualaLumpurUTMStringRoundTrip() {
+        assertEquatorialRoundTrip("47N E 801396 N 349434", 3.15785d, 101.71165d);
+    }
+
+    @Test(expected = UTMPoint.ParseException.class)
+    public void testParseUTMStringRejectsSmallNorthingOutsideEquatorialBand() {
+        new UTMPoint("48P E 366494 N 143721");
+    }
+
+    private static void assertEquatorialRoundTrip(final String utmString, final double latitude, final double longitude) {
+        final UTMPoint parsed = new UTMPoint(utmString);
+        final Geopoint geopoint = parsed.toLatLong();
+
+        assertThat(geopoint.getLatitude()).isEqualTo(latitude, offset(1e-5d));
+        assertThat(geopoint.getLongitude()).isEqualTo(longitude, offset(1e-5d));
+        assertThat(UTMPoint.latLong2UTM(geopoint).toString()).isEqualTo(utmString);
+    }
+
     @SuppressWarnings({"unused"})
     @Test(expected = UTMPoint.ParseException.class)
     public void testParseUTMStringWithException() {

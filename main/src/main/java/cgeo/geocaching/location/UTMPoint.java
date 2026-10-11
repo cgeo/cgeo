@@ -71,7 +71,7 @@ public class UTMPoint {
                 if (easting < 160000) {
                     throw new ParseException("Easting too small for UTM format in String '" + utmString + "'");
                 }
-                if (northing < 650000 && "ABNZ".indexOf(zoneNumber) == -1) {
+                if (northing < 650000 && "ABNZ".indexOf(zoneLetter) == -1) {
                     throw new ParseException("Northing too small for UTM zone in String '" + utmString + "'");
                 }
             } else {
