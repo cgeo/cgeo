@@ -1848,8 +1848,6 @@
     <string name="projection_type_bearing_hint_distance">Avstånd</string>
     <string name="projection_type_offset">Förskjutning</string>
     <string name="projection_type_offset_info">Förskjutning lat %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Latitud-förskjutning i mikro-minuter</string>
-    <string name="projection_type_offset_hint_longitude">Longitud-förskjutning i mikro-minuter</string>
     <!-- Variables -->
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_titletext_short">Värden och beräkningar</string>
@@ -2914,7 +2912,6 @@
     <string name="dbi_select_table">Välj tabell</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s vid #%2$d är skrivskyddad</string>
-    <string name="dbi_edit_title">Redigera \"%1$s\" vid #%2$d\"</string>
     <string name="dbi_delete_row_title">Ta bort rad</string>
     <string name="dbi_delete_row_question">Ta bort raden #%1$d (%2$s) för gott?</string>
     <string name="dbi_delete_success">Rad raderad: %1$s</string>
