@@ -24,3 +24,5 @@
 - Fix: Crash with "BadTokenException" after long running tasks (#18703)
 - Fix: "Prepend to route" breaks elevation chart (#18727)
 - Fix: Trackable not updated in status/spotted after logging (#17730)
+- Fix: Error while initiating backup is cut off (#18223)
+- Fix: Search broken in "Delete offline data" dialog (#18594)
