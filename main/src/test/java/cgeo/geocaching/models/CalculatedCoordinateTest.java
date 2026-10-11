@@ -25,6 +25,14 @@ public class CalculatedCoordinateTest {
     }
 
     @Test
+    public void negativeDegreePartsWithoutHemisphere() {
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("{CC|-49°30'30\"|-123°30'}");
+        final Geopoint gp = cc.calculateGeopoint(null);
+        assertThat(gp.getLatitude()).isEqualTo(-49d - 30d / 60 - 30d / 3600, offset(1e-6));
+        assertThat(gp.getLongitude()).isEqualTo(-123.5d, offset(1e-6));
+    }
+
+    @Test
     public void createFromConfig() {
         assertThat(CalculatedCoordinate.createFromConfig("{CC|N48 12.A45|E13 8.67B}").getType()).isEqualTo(PLAIN);
         assertThat(CalculatedCoordinate.createFromConfig("{CC|N48 12.A45|E13 8.67B|p}").getType()).isEqualTo(PLAIN);

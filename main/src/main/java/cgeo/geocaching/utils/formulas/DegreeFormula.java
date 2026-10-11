@@ -193,22 +193,25 @@ public class DegreeFormula {
     }
 
     private DegreeFormulaNode createDegreePartNode(final int foundType, final Formula f, final Formula fAfterDigit) {
+        // Formula evaluation normalizes negative zero to zero. Preserve an explicitly entered "-0"
+        // so it can still determine the direction of degree-minute and degree-minute-second coordinates.
+        final boolean preserveNegativeZero = foundType == 0 && f.getExpression().matches("\\s*[-—]\\s*0+\\s*");
         return (vm, v, css, da) -> {
             final Pair<Double, Boolean> value;
             switch (foundType) {
                 case 0:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                            d -> da && d >= (signum != 0 ? 0 : (lonCoord ? -180 : -90)) && d <= (lonCoord ? 180 : 90), 0);
+                            d -> da && d >= (signum != 0 ? 0 : (lonCoord ? -180 : -90)) && d <= (lonCoord ? 180 : 90), 0, preserveNegativeZero);
                     add(css, "°");
                     break;
                 case 1:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                            d -> da && d >= 0 && d < 60, 3);
+                            d -> da && d >= 0 && d < 60, 3, false);
                     add(css, "'");
                     break;
                 case 2:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                            d -> da && d >= 0 && d < 60, 3);
+                            d -> da && d >= 0 && d < 60, 3, false);
                     add(css, "\"");
                     break;
                 default:
@@ -304,9 +307,18 @@ public class DegreeFormula {
         Double result = 0d;
         boolean hasWarning = false;
         boolean digitsAllowed = true;
+        boolean negativeWithoutHemisphere = false;
         for (DegreeFormulaNode o : nodes) {
             final ImmutableTriple<Double, Boolean, Boolean> res = o.apply(varMap, result, css, digitsAllowed);
-            result = (result == null || res == null || res.left == null) ? null : result + res.left;
+            // Without a hemisphere, the degree sign applies to all following coordinate parts.
+            if (result == null || res == null || res.left == null) {
+                result = null;
+            } else if (signum == 0 && (negativeWithoutHemisphere || Double.compare(res.left, 0d) < 0)) {
+                negativeWithoutHemisphere = true;
+                result = -(Math.abs(result) + Math.abs(res.left));
+            } else {
+                result += res.left;
+            }
             hasWarning |= (res != null && res.middle);
             if (res != null && res.right) {
                 digitsAllowed = false;
@@ -318,10 +330,11 @@ public class DegreeFormula {
     @Nullable
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Function<String, Value> varMap, final Predicate<Double> checker, final int precision) {
+    private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Function<String, Value> varMap, final Predicate<Double> checker, final int precision, final boolean preserveNegativeZero) {
         final boolean hasDigits = fAfterDigit != null;
         final Value v = evaluateSingleFormula(f, varMap);
         final Value vAfter = !hasDigits ? null : evaluateSingleFormula(fAfterDigit, varMap);
+        final boolean explicitNegativeZero = preserveNegativeZero && v != null && v.isNumericZero();
 
         //check for diverse error situations
         if (v == null || !v.isDouble() ||
@@ -344,7 +357,7 @@ public class DegreeFormula {
         }
 
         if (hasDigits) {
-            final String digits = v.getAsString();
+            final String digits = (explicitNegativeZero ? "-" : "") + v.getAsString();
             final Pair<CharSequence, Boolean> digitsAfter = padDigits(vAfter.getAsString(), precision);
             try {
                 final double result = Double.parseDouble(digits + "." + digitsAfter.first);
@@ -361,11 +374,13 @@ public class DegreeFormula {
             }
         }
 
-        if (checker.test(v.getAsDouble())) {
-            add(css, v.getAsString());
-            return new Pair<>(v.getAsDouble(), false);
+        final double numericValue = explicitNegativeZero ? -0.0d : v.getAsDouble();
+        final String displayValue = (explicitNegativeZero ? "-" : "") + v.getAsString();
+        if (checker.test(numericValue)) {
+            add(css, displayValue);
+            return new Pair<>(numericValue, false);
         }
-        addError(css, v.getAsString());
+        addError(css, displayValue);
         return null;
     }
 
