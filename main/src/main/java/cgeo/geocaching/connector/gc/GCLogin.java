@@ -607,8 +607,9 @@ public class GCLogin extends AbstractLogin {
     @WorkerThread
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params, @Nullable final Boolean removeWhitespace) {
         try {
+            final boolean effectiveRemoveWhitespace = getEffectiveRemoveWhitespace(uri, removeWhitespace);
             final Response response = Network.getRequest(uri, params).blockingGet();
-            final String data = Network.getResponseData(response, removeWhitespace == null ? canRemoveWhitespace(uri) : removeWhitespace);
+            final String data = Network.getResponseData(response, effectiveRemoveWhitespace);
 
             // A page not found will not be found if the user logs in either
             if (response.code() == 404 || getLoginStatus(data)) {
@@ -616,7 +617,7 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (login() == StatusCode.NO_ERROR) {
-                return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+                return Network.getResponseData(Network.getRequest(uri, params), effectiveRemoveWhitespace);
             }
 
             Log.w("Working as guest.");
@@ -625,6 +626,11 @@ public class GCLogin extends AbstractLogin {
             Log.e("Exception in GCLogin.getRequestLogged", e);
             return null;
         }
+    }
+
+    @VisibleForTesting
+    static boolean getEffectiveRemoveWhitespace(@NonNull final String uri, @Nullable final Boolean removeWhitespace) {
+        return removeWhitespace == null ? canRemoveWhitespace(uri) : removeWhitespace;
     }
 
     /**
