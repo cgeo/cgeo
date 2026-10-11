@@ -70,8 +70,32 @@ public class GCLogin extends AbstractLogin {
      */
     private static final long MANUAL_LOGIN_COOKIE_LIFETIME_MS = 90L * 24 * 60 * 60 * 1000;
 
-    private ServerParameters serverParameters = null;
-    private String homeLocationPage = null;
+    @VisibleForTesting
+    static final class ManualLoginState {
+        ServerParameters serverParameters;
+        String homeLocationPage;
+
+        void reset() {
+            serverParameters = null;
+            homeLocationPage = null;
+        }
+
+        GCMemberState applyServerParameters(@Nullable final ServerParameters params) {
+            if (params == null || params.userInfo == null || StringUtils.isBlank(params.userInfo.userType)) {
+                serverParameters = null;
+                return GCMemberState.UNKNOWN;
+            }
+            serverParameters = params;
+            return GCMemberState.fromString(params.userInfo.userType);
+        }
+
+        GCMemberState resetAndApply(@Nullable final ServerParameters params) {
+            reset();
+            return applyServerParameters(params);
+        }
+    }
+
+    private final ManualLoginState manualLoginState = new ManualLoginState();
 
     private static class StatusException extends RuntimeException {
         private static final long serialVersionUID = -597420116705938433L;
@@ -338,7 +362,7 @@ public class GCLogin extends AbstractLogin {
 
         final Response response = Network.postRequest(LOGIN_URI, params).blockingGet();
         final String loginPageResponse = getResponseBodyOrStatus(response);
-        homeLocationPage = loginPageResponse;
+        manualLoginState.homeLocationPage = loginPageResponse;
         return loginPageResponse;
     }
 
@@ -418,10 +442,10 @@ public class GCLogin extends AbstractLogin {
      * @return the home location, or IOException
      */
     String retrieveHomeLocation() {
-        if (homeLocationPage == null || !homeLocationPage.contains("homeLocation")) {
-            homeLocationPage = getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/account/settings/homelocation").blockingGet());
+        if (manualLoginState.homeLocationPage == null || !manualLoginState.homeLocationPage.contains("homeLocation")) {
+            manualLoginState.homeLocationPage = getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/account/settings/homelocation").blockingGet());
         }
-        final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, homeLocationPage);
+        final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, manualLoginState.homeLocationPage);
         if (match.find()) {
             return match.group(1) + " " + match.group(2);
         }
@@ -438,8 +462,8 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     public ServerParameters getServerParameters() {
-        if (serverParameters != null) {
-            return serverParameters;
+        if (manualLoginState.serverParameters != null) {
+            return manualLoginState.serverParameters;
         }
         return parseServerParams(getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet()));
     }
@@ -447,25 +471,25 @@ public class GCLogin extends AbstractLogin {
     private ServerParameters parseServerParams(final String javascriptBody) {
         try {
             final String jsonBody = javascriptBody.subSequence(javascriptBody.indexOf('{'), javascriptBody.lastIndexOf(';')).toString();
-            serverParameters = MAPPER.readValue(jsonBody, ServerParameters.class);
+            final ServerParameters parsedServerParameters = MAPPER.readValue(jsonBody, ServerParameters.class);
+            final GCMemberState memberState = manualLoginState.applyServerParameters(parsedServerParameters);
 
-            if (StringUtils.isNotBlank(serverParameters.userInfo.dateFormat)) {
-                Log.d("Setting GCCustomDate to " + serverParameters.userInfo.dateFormat);
-                Settings.setGcCustomDate(serverParameters.userInfo.dateFormat);
+            if (StringUtils.isNotBlank(parsedServerParameters.userInfo.dateFormat)) {
+                Log.d("Setting GCCustomDate to " + parsedServerParameters.userInfo.dateFormat);
+                Settings.setGcCustomDate(parsedServerParameters.userInfo.dateFormat);
             }
 
-            final GCMemberState memberState = GCMemberState.fromString(serverParameters.userInfo.userType);
             Log.d("Setting member status to " + memberState);
             Settings.setGCMemberStatus(memberState);
 
-            if (StringUtils.isNotBlank(serverParameters.userInfo.avatarUrl)) {
-                final String avatarUrl = serverParameters.userInfo.avatarUrl.replace("/avatar/", "/user/large/");
+            if (StringUtils.isNotBlank(parsedServerParameters.userInfo.avatarUrl)) {
+                final String avatarUrl = parsedServerParameters.userInfo.avatarUrl.replace("/avatar/", "/user/large/");
                 Log.d("Setting avatar to " + avatarUrl);
                 AvatarUtils.changeAvatar(GCConnector.getInstance(), avatarUrl);
             }
 
             // check for race condition while logging in
-            if (StringUtils.isBlank(serverParameters.userInfo.userType)) {
+            if (memberState == GCMemberState.UNKNOWN) {
                 resetServerParameters(); // not yet logged in, thus try to read again on next call
             }
         } catch (final IOException e) {
@@ -473,11 +497,16 @@ public class GCLogin extends AbstractLogin {
             Log.e("Error loading serverparameters", e);
             return null;
         }
-        return serverParameters;
+        return manualLoginState.serverParameters;
     }
 
     public void resetServerParameters() {
-        serverParameters = null;
+        manualLoginState.serverParameters = null;
+    }
+
+    private void resetManualLoginState() {
+        resetLoginStatus();
+        Settings.setGCMemberStatus(manualLoginState.resetAndApply(null));
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
@@ -680,7 +709,7 @@ public class GCLogin extends AbstractLogin {
                 //non-persistent host-only cookie — it would never be written to the persisted cookie
                 //store and be gone with the process. Rebuild it as a persistent cookie for the whole
                 //domain so the manually obtained session survives app restarts.
-                resetLoginStatus();
+                resetManualLoginState();
                 final List<Cookie> persistentAuthCookies = new ArrayList<>();
                 for (final Cookie c : gcAuthCookies) {
                     persistentAuthCookies.add(new Cookie.Builder()
