@@ -30,6 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -159,10 +160,10 @@ public class ElevationChart {
         float lastElevation = 0f;
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
-            if (elevation == null) {
-                return;
-            }
-            final Iterator<Float> it = elevation.iterator();
+            // The first point of an individual route has no preceding leg, so its segment
+            // may not have elevation data. The next segment's routed points include this
+            // starting point and its elevation. Keep processing later segments.
+            final Iterator<Float> it = elevation == null ? Collections.emptyIterator() : elevation.iterator();
             for (Geopoint point : segment.getPoints()) {
                 if (lastPoint != null) {
                     distance += lastPoint.distanceTo(point);

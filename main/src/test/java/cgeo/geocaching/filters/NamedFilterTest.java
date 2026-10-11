@@ -61,6 +61,22 @@ public class NamedFilterTest {
         assertThat(NamedFilter.getAll().get(2).toConfig()).isEqualTo(n3.toConfig());
     }
 
+
+    @Test
+    public void testAddOrReplaceExistingFilter() {
+        final NamedFilter originalFilter = NamedFilter.addOrReplace("Test", GeocacheFilter.createEmpty(), EmojiUtils.NO_EMOJI);
+
+        final int originalId = 10;
+        originalFilter.setId(originalId);
+
+        final NamedFilter updatedFilter = NamedFilter.addOrReplace("Test", GeocacheFilter.createEmpty(), EmojiUtils.RED_FLAG);
+        final NamedFilter newFilter = NamedFilter.addOrReplace("Test new", GeocacheFilter.createEmpty(), EmojiUtils.RED_FLAG);
+
+        assertThat(originalFilter.getId()).isEqualTo(originalId);
+        assertThat(updatedFilter.getId()).isEqualTo(originalId);
+        assertThat(newFilter.getId()).isNotEqualTo(originalId);
+    }
+
     @Test
     public void testGetAllReturnsUnmodifiableList() {
         NamedFilter.addOrReplace("Test", null, EmojiUtils.NO_EMOJI);

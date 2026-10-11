@@ -68,7 +68,7 @@ public class SimpleItemListModel<T> {
 
 
     /** Supported display modes for choosing items from a list */
-    public enum ChoiceMode { SINGLE_PLAIN, SINGLE_RADIO, MULTI_CHECKBOX }
+    public enum ChoiceMode { SINGLE_PLAIN, SINGLE_HIGHLIGHT, SINGLE_RADIO, MULTI_CHECKBOX }
 
     /** Types of model changes for which events are fired */
     public enum ChangeType { COMPLETE, SELECTION, FILTER, GROUP_HEADER }
