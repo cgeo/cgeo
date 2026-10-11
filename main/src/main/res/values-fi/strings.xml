@@ -1772,8 +1772,6 @@
     <string name="projection_type_bearing_hint_distance">Etäisyys</string>
     <string name="projection_type_offset">Etäisyys</string>
     <string name="projection_type_offset_info">Etäisyys %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Leveysaste mikro-minuutissa</string>
-    <string name="projection_type_offset_hint_longitude">Pituusaste mikro-minuutissa</string>
     <!-- Variables -->
     <string name="variables_titletext">Käytä tätä sivua kirjataksesi alas arvot ja tehdäksesi tarvittavat laskelmat tälle kätkölle.</string>
     <string name="variables_titletext_short">Arvot ja laskelmat</string>
