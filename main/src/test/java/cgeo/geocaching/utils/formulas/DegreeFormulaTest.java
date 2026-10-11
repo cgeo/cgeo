@@ -59,6 +59,33 @@ public class DegreeFormulaTest {
     }
 
     @Test
+    public void parseNegativeDegreePartsWithoutHemisphere() {
+        assertParse("-49°30'", null, -49d - 30d / 60, "-49°30'");
+        assertParse("-49°30'30\"", null, -49d - 30d / 60 - 30d / 3600, "-49°30'30\"");
+        assertParse("-0°30'", null, -0.5d, "-0°30'");
+        assertParse("-0°0'30\"", null, -30d / 3600, "-0°0'30\"");
+
+        // Decimal degrees must keep their sign, while hemisphere-based coordinates retain their behavior.
+        assertParse("-0.5°", null, -0.5d, "-0.5°");
+        assertParse("-49.5°", null, -49.5d, "-49.5°");
+        assertParse("S49°30'30\"", null, -49d - 30d / 60 - 30d / 3600, "S49°30'30\"");
+        assertThat(DegreeFormula.compile("-123°30'", true).evaluateToDouble(null)).isEqualTo(-123.5d);
+        assertThat(DegreeFormula.compile("-0°30'", true).evaluateToDouble(null)).isEqualTo(-0.5d);
+        assertThat(DegreeFormula.compile("W123°30'", true).evaluateToDouble(null)).isEqualTo(-123.5d);
+    }
+
+    @Test
+    public void parseNegativeDegreeVariableWithDegreeParts() {
+        final DegreeFormula latitude = DegreeFormula.compile("A°30'30\"", false);
+        assertThat(latitude.evaluateToDouble(v -> Value.of(-49))).isEqualTo(-49d - 30d / 60 - 30d / 3600);
+        assertThat(latitude.evaluateToDouble(v -> Value.of(49))).isEqualTo(49d + 30d / 60 + 30d / 3600);
+
+        final DegreeFormula longitude = DegreeFormula.compile("A°30'", true);
+        assertThat(longitude.evaluateToDouble(v -> Value.of(-123))).isEqualTo(-123.5d);
+        assertThat(longitude.evaluateToDouble(v -> Value.of(123))).isEqualTo(123.5d);
+    }
+
+    @Test
     public void parseDegree() {
         assertParse("-A/100", s -> Value.of(40d), -0.4d, "-0.4°");
         assertParse("A/100", s -> Value.of(40d), 0.4d, "0.4°");
