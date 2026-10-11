@@ -1860,8 +1860,6 @@
     <string name="projection_type_bearing_hint_distance">Расстояние</string>
     <string name="projection_type_offset">Смещение</string>
     <string name="projection_type_offset_info">Смещение. широта %1$s микроминут (mm), долгота %2$s микроминут</string>
-    <string name="projection_type_offset_hint_latitude">Смещение широты в микроминутах</string>
-    <string name="projection_type_offset_hint_longitude">Смещение долготы в микроминутах</string>
     <!-- Variables -->
     <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_titletext_short">Значения и расчеты</string>
