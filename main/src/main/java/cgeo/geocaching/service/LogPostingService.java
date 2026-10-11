@@ -144,10 +144,12 @@ public class LogPostingService extends AbstractForegroundIntentService {
 
             if (result.isOk()) {
                 ViewUtils.showToast(this, LocalizationUtils.getString(R.string.info_log_post_success, geocode));
-                // offline log is created on exiting the log activity, so we need to clear it here in case of success
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                cache.clearOfflineLog(null);
-                cache.notifyChange();
+                clearOfflineLogAfterSuccess(job.isEdit, () -> {
+                    // The offline log is created on exiting the create activity, so clear it after a successful upload.
+                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                    cache.clearOfflineLog(null);
+                    cache.notifyChange();
+                });
             } else {
                 final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;
                 showErrorNotification(geocode, result.getErrorString(), entryToEdit);
@@ -162,6 +164,12 @@ public class LogPostingService extends AbstractForegroundIntentService {
     // -----------------------------------------------------------------------
     // Helpers
     // -----------------------------------------------------------------------
+
+    static void clearOfflineLogAfterSuccess(final boolean isEdit, final Runnable clearOfflineLog) {
+        if (!isEdit) {
+            clearOfflineLog.run();
+        }
+    }
 
     private void showErrorNotification(final String geocode, final String errorMessage, @Nullable final LogEntry entryToEdit) {
         final String title = LocalizationUtils.getString(R.string.info_log_post_failed_geocode, geocode);
