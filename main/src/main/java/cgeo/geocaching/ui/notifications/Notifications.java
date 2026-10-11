@@ -32,6 +32,11 @@ public class Notifications {
     public static final int ID_WHERIGO_SERVICE_NOTIFICATION_ID = 114;
     public static final int ID_WHERIGO_NEW_DIALOG_ID = 115;
 
+    public static final int ID_FOREGROUND_NOTIFICATION_WATCH_CACHES = 116;
+    public static final int ID_FOREGROUND_NOTIFICATION_UNWATCH_CACHES = 117;
+    public static final int ID_FOREGROUND_NOTIFICATION_UPLOAD_COORDS = 118;
+    public static final int ID_FOREGROUND_NOTIFICATION_UPLOAD_PERSNOTES = 119;
+
     public static final int ID_LOG_CREATE_NOTIFICATION = 120;
     public static final int ID_LOG_EDIT_NOTIFICATION = 121;
     public static final int ID_LOG_POST_ERROR_NOTIFICATION = 122;

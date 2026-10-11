@@ -363,7 +363,7 @@ public final class GCParser {
         cache.setOnWatchlist(TextUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
         // latitude and longitude. Can only be retrieved if user is logged in
-        String latlon = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
+        final String latlon = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
         if (StringUtils.isNotEmpty(latlon)) {
             try {
                 cache.setCoords(new Geopoint(latlon));

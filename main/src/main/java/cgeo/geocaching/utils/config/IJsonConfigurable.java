@@ -12,7 +12,7 @@ public interface IJsonConfigurable<T extends IJsonConfigurable<T>> {
 
     String getId();
 
-    default void addChild(T child) {
+    default void addChild(final T child) {
         //do nothing
     }
 

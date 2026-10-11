@@ -34,7 +34,7 @@ public interface IProviderGeoItemLayer<C> {
     void remove(GeoPrimitive item, C context);
 
     /** Optional method to handle replacements of one object with another. */
-    default C replace(GeoPrimitive oldItem, C oldContext, GeoPrimitive newItem) {
+    default C replace(final GeoPrimitive oldItem, final C oldContext, final GeoPrimitive newItem) {
         remove(oldItem, oldContext);
         return add(newItem);
     }

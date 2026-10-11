@@ -13,3 +13,14 @@
 - Fix: Crash in offline translation (#18678)
 - Fix: Crash on map rotation (#18680)
 - Fix: Crash on VTM map (#18691)
+
+##
+- Fix: Crash on opening a PM cache as basic member (#18737)
+- Fix: Bizarre scrolling issue in log list on Android 17 (#18657)
+- Fix: Wrong language download prompts on resuming activity (#18544)
+- Fix: Random items highlighted in selection dialog with no active items (#18724)
+- Fix: Toggling found-filter via map quick settings repeatedly adds endless "status" filters (#18701)
+- Fix: Updating filter looses marker setting and gets lost as sub filter within a filter (#18711)
+- Fix: Crash with "BadTokenException" after long running tasks (#18703)
+- Fix: "Prepend to route" breaks elevation chart (#18727)
+- Fix: Trackable not updated in status/spotted after logging (#17730)

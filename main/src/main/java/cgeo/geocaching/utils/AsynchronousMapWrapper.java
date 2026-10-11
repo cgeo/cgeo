@@ -66,18 +66,18 @@ public class AsynchronousMapWrapper<K, V, C> {
     //Executor of commands.
     public interface IMapChangeExecutor<K, V, C> {
         C add(K key, V value);
-        default C replace(K key, V oldValue, C oldContext, V newValue) {
+        default C replace(final K key, final V oldValue, final C oldContext, final V newValue) {
             remove(key, oldValue, oldContext);
             return add(key, newValue);
         }
         void remove(K key, V value, C context);
-        default void runCommandChain(Runnable runnable) {
+        default void runCommandChain(final Runnable runnable) {
             runnable.run();
         }
-        default void runMapChanges(Runnable runnable) {
+        default void runMapChanges(final Runnable runnable) {
             runnable.run();
         }
-        default boolean continueMapChangeExecutions(long startTime, int queueLength) {
+        default boolean continueMapChangeExecutions(final long startTime, final int queueLength) {
             return true;
         }
 
