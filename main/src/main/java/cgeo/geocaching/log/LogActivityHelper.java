@@ -78,6 +78,11 @@ public class LogActivityHelper {
         LogPostingService.startCreate(activity, cache, logEntry, inventory);
     }
 
+    /** resume an incomplete log creation without reposting confirmed steps */
+    public void resumeCreateLog(final Geocache cache, final CreateLogPostState state) {
+        LogPostingService.startResumeCreate(activity, cache, state.postId);
+    }
+
     /** edit a log on the geocaching platform */
     public void editLog(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry) {
         if (!LogUtils.canEditLog(cache, newEntry)) {

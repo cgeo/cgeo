@@ -57,6 +57,7 @@ public class ImageListFragment extends Fragment {
 
     private ImageListAdapter imageList;
     private ImageActivityHelper imageHelper;
+    private boolean editable = true;
 
     //following info is used to restrict image selections and for display
     private String geocode;
@@ -76,6 +77,7 @@ public class ImageListFragment extends Fragment {
     public void init(final String contextCode, final Long maxImageUploadSize) {
         this.geocode = contextCode;
         this.maxImageUploadSize = maxImageUploadSize;
+        this.editable = true;
 
         if (geocode != null) {
             final Folder ownImageFolder = ImageUtils.getSpoilerImageFolder(geocode);
@@ -149,6 +151,19 @@ public class ImageListFragment extends Fragment {
      */
     public List<Image> getImages() {
         return imageList.getItems();
+    }
+
+    public void setEditable(final boolean editable) {
+        this.editable = editable;
+        if (binding != null) {
+            binding.imageBox.setEnabled(editable);
+            binding.imageAddMulti.setVisibility(editable ? View.VISIBLE : View.GONE);
+            binding.imageAddCamera.setVisibility(editable ? View.VISIBLE : View.GONE);
+            binding.imageAddOwn.setVisibility(editable && ownImageFolderUri != null ? View.VISIBLE : View.GONE);
+        }
+        if (imageList != null) {
+            imageList.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -251,6 +266,8 @@ public class ImageListFragment extends Fragment {
             holder.binding.imageTitle.setText(getImageTitle(image, position));
             holder.binding.imageDescription.setText(image.getDescription());
             holder.binding.imageDescription.setVisibility(StringUtils.isNotBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
+            holder.binding.imageDelete.setVisibility(editable ? View.VISIBLE : View.GONE);
+            holder.binding.imageDrag.setVisibility(editable ? View.VISIBLE : View.GONE);
 
             holder.binding.imageThumbnail.setImagePreload(image);
             if (image.isImageOrUnknownUri()) {
@@ -298,8 +315,16 @@ public class ImageListFragment extends Fragment {
         public ImageViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagelist_item, parent, false);
             final ImageViewHolder viewHolder = new ImageViewHolder(view);
-            viewHolder.itemView.setOnClickListener(view1 -> addOrEditImage(viewHolder.getAdapterPosition()));
-            viewHolder.binding.imageDelete.setOnClickListener(v -> removeItem(viewHolder.getAdapterPosition()));
+            viewHolder.itemView.setOnClickListener(view1 -> {
+                if (editable) {
+                    addOrEditImage(viewHolder.getAdapterPosition());
+                }
+            });
+            viewHolder.binding.imageDelete.setOnClickListener(v -> {
+                if (editable) {
+                    removeItem(viewHolder.getAdapterPosition());
+                }
+            });
             registerStartDrag(viewHolder, viewHolder.binding.imageDrag);
             return viewHolder;
         }

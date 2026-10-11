@@ -169,6 +169,16 @@
     <string name="log_posting_save_internal">Save new log state…</string>
     <string name="log_posting_vote">Posting cache vote…</string>
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
+    <string name="log_resume_incomplete_title">Incomplete log upload</string>
+    <string name="log_resume_incomplete_message">The main log was already posted, but one or more follow-up steps did not finish. Continue the saved upload without posting the main log again?</string>
+    <string name="log_resume_main_uncertain_message">c:geo did not receive the result of the main log request. The log may already exist on the website. Check the cache page before finishing this saved upload.</string>
+    <string name="log_resume_uncertain_message">A previous request may already have reached the website, but c:geo did not receive its result. Check the cache page first. To avoid a duplicate, c:geo will not send this request again automatically.</string>
+    <string name="log_resume_select_message">More than one incomplete upload exists for this cache. Select the upload you want to review.</string>
+    <string name="log_resume_unreadable">Unreadable saved upload</string>
+    <string name="log_resume_unreadable_message">c:geo found an incomplete upload, but its saved progress cannot be read. Nothing will be sent automatically. Check the cache page before deciding whether to stop retrying.</string>
+    <string name="log_resume_save_failed">c:geo could not save the upload state. The saved upload was kept and no new request was sent.</string>
+    <string name="log_resume_later">Later</string>
+    <string name="log_resume_finish">Keep online content and stop retrying</string>
     <string name="log_clear">Clear</string>
     <string name="log_templates">Found it: Log template…</string>
     <string name="log_post_not_possible">Download of data in progress…\nPlease try again in a few seconds or check your internet connection.</string>

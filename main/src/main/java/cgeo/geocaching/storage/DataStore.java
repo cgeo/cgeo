@@ -177,7 +177,8 @@ public class DataStore {
         DBEXTENSION_POCKETQUERY_HISTORY(6),
         DBEXTENSION_TRACKFILES(7),
         DBEXTENSION_LAST_TRACKABLE_ACTION(8),
-        DBEXTENSION_EMOJISTRINGLRU(9);
+        DBEXTENSION_EMOJISTRINGLRU(9),
+        DBEXTENSION_CREATE_LOG_POST(10);
 
         public final int id;
         private static final EnumValueMapper<Integer, DBExtensionType> mapper = new EnumValueMapper<>();
@@ -789,7 +790,7 @@ public class DataStore {
             return withAccessLock(() -> {
                 try {
                     final long id = db.insert(dbTableExtension, null, toValues(type, key, long1, long2, long3, long4, string1, string2, string3, string4));
-                    return new DBExtension(id, key, long1, long2, long3, long4, string1, string2, string3, string4);
+                    return id < 0 ? null : new DBExtension(id, key, long1, long2, long3, long4, string1, string2, string3, string4);
                 } catch (final Exception e) {
                     Log.e("DBExtension.add failed", e);
                 }
@@ -849,10 +850,11 @@ public class DataStore {
                 try {
                     removeAll(database, type, key);
                     final DBExtension result = add(database, type, key, long1, long2, long3, long4, string1, string2, string3, string4);
-                    if (result != null) {
+                    if (result != null && result.getId() >= 0) {
                         database.setTransactionSuccessful();
+                        return result;
                     }
-                    return result;
+                    return null;
                 } finally {
                     database.endTransaction();
                 }
