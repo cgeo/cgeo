@@ -54,26 +54,39 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public Boolean filter(final Geocache cache) {
 
-        //Check against result of online search
+        // Check against result of online search. This metadata only confirms the author criterion;
+        // log text still has to be checked against locally available logs.
+        boolean onlineAuthorCriterionMatch = false;
         final SearchCacheData scd = cache.getSearchData();
         if (scd != null && foundByFilter.isFilled()) {
             final Set<String> checkSet = inverse ? scd.getNotFoundBy() : scd.getFoundBy();
             for (String check : checkSet) {
                 if (foundByFilter.matches(check)) {
-                    return true;
+                    if (!logTextFilter.isFilled()) {
+                        return true;
+                    }
+                    onlineAuthorCriterionMatch = true;
+                    break;
                 }
             }
         }
 
         // Check against offline stored log data
         final List<LogEntry> logEntries = cache.getLogs();
-        if (logEntries.isEmpty() && !cache.inDatabase()) {
-            return inverse ? true : null; //if inverse=true then this might be a gc.com search
-        }
         for (LogEntry logEntry : logEntries) {
             if (foundByFilter.matches(logEntry.author) && logTextFilter.matches(logEntry.log)) {
                 return !inverse;
             }
+        }
+
+        // Online search metadata carries no log text, and notFoundBy does not exclude DNF or note logs
+        // by the same author. It therefore cannot decide the combined criterion without a local match.
+        if (onlineAuthorCriterionMatch) {
+            return null;
+        }
+        if (logEntries.isEmpty() && !cache.inDatabase()) {
+            // Keep supporting inverse author-only searches from connectors without explicit search metadata.
+            return inverse && !logTextFilter.isFilled() ? true : null;
         }
         return inverse;
     }

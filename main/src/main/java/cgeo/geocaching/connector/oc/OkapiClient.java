@@ -382,11 +382,11 @@ final class OkapiClient {
             fillSearchParameterCenter(valueMap, params, null, null);
         }
 
-        String finder = null;
+        LogEntryGeocacheFilter finderFilter = null;
 
         for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible(connector)) {
             if (baseFilter instanceof LogEntryGeocacheFilter) {
-                finder = ((LogEntryGeocacheFilter) baseFilter).getFoundByUser();
+                finderFilter = (LogEntryGeocacheFilter) baseFilter;
             }
             fillForBasicFilter(baseFilter, params, valueMap, connector);
         }
@@ -401,13 +401,26 @@ final class OkapiClient {
         result.setToContext(connector, b -> b.putString(SEARCH_CONTEXT_FILTER, filter.toConfig()));
         result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
 
-        if (finder != null) {
-            final SearchCacheData scd = new SearchCacheData();
-            scd.addFoundBy(finder);
-            result.setCacheData(scd);
+        final SearchCacheData searchCacheData = createFinderSearchCacheData(finderFilter);
+        if (searchCacheData != null) {
+            result.setCacheData(searchCacheData);
         }
         return result;
 
+    }
+
+    @Nullable
+    static SearchCacheData createFinderSearchCacheData(@Nullable final LogEntryGeocacheFilter finderFilter) {
+        if (finderFilter == null || StringUtils.isBlank(finderFilter.getFoundByUser())) {
+            return null;
+        }
+        final SearchCacheData searchCacheData = new SearchCacheData();
+        if (finderFilter.isInverse()) {
+            searchCacheData.addNotFoundBy(finderFilter.getFoundByUser());
+        } else {
+            searchCacheData.addFoundBy(finderFilter.getFoundByUser());
+        }
+        return searchCacheData;
     }
 
     private static void fillForBasicFilter(final BaseGeocacheFilter basicFilter, final Parameters params, final Map<String, String> valueMap, @NonNull final OCApiConnector connector) {
