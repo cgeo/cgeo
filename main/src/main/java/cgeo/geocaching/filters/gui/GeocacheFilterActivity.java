@@ -541,6 +541,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         adjustFilterEmptyView();
         // Refresh window insets to ensure proper padding after view visibility changes
         refreshActivityContentInsets();
+
+        if (removeNonFiltering && filterListAdapter.getItems().isEmpty()) {
+            binding.filterAdditem.performClick();
+        }
     }
 
     private void switchToBasic() {
