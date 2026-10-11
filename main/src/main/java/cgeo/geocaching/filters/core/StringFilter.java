@@ -137,7 +137,7 @@ public class StringFilter {
             case ENDS_WITH:
                 return matchGcValue.endsWith(matchTextValue);
             case PATTERN:
-                return Pattern.compile(matchTextValue.replace('?', '.').replaceAll("\\*", ".*")).matcher(matchGcValue).matches();
+                return Pattern.compile(toRegexPattern(matchTextValue), Pattern.DOTALL).matcher(matchGcValue).matches();
             default:
                 //can never happen
                 return true;
@@ -186,7 +186,17 @@ public class StringFilter {
         final StringBuilder sb = new StringBuilder();
 
         if (!StringUtils.isBlank(this.textValue)) {
-            String matchTextValue = SqlBuilder.escape(this.matchCase ? this.textValue : StringUtils.lowerCase(this.textValue), true);
+            final String rawMatchTextValue = this.matchCase ? this.textValue : StringUtils.lowerCase(this.textValue);
+            if (this.filterType == StringFilterType.PATTERN) {
+                // SQLite LIKE is case-insensitive for ASCII even without LOWER(). GLOB is case-sensitive and has the
+                // same '*'/'?' wildcard semantics as the user-facing filter. Escape '[' to keep character groups from
+                // becoming a third wildcard syntax.
+                final String matchColumnExpression = this.matchCase ? columnExpression :
+                        "LOWER(" + columnExpression + ")";
+                return matchColumnExpression + " GLOB '" + toSqlGlobPattern(rawMatchTextValue) + "'";
+            }
+
+            String matchTextValue = SqlBuilder.escape(rawMatchTextValue, true);
             if (!this.matchCase) {
                 sb.append("LOWER(");
             }
@@ -209,14 +219,46 @@ public class StringFilter {
                 case ENDS_WITH:
                     matchTextValue = "%" + matchTextValue;
                     break;
-                case PATTERN:
                 default:
-                    matchTextValue = matchTextValue.replace('*', '%').replace('?', '_');
                     break;
             }
             sb.append(SqlBuilder.createLikeExpression(matchTextValue));
         }
         return sb.toString();
+    }
+
+    private static String toRegexPattern(final String wildcardPattern) {
+        final StringBuilder regex = new StringBuilder();
+        int literalStart = 0;
+        for (int i = 0; i < wildcardPattern.length(); i++) {
+            final char c = wildcardPattern.charAt(i);
+            if (c == '*' || c == '?') {
+                if (literalStart < i) {
+                    regex.append(Pattern.quote(wildcardPattern.substring(literalStart, i)));
+                }
+                regex.append(c == '*' ? ".*" : ".");
+                literalStart = i + 1;
+            }
+        }
+        if (literalStart < wildcardPattern.length()) {
+            regex.append(Pattern.quote(wildcardPattern.substring(literalStart)));
+        }
+        return regex.toString();
+    }
+
+    private static String toSqlGlobPattern(final String wildcardPattern) {
+        final StringBuilder glob = new StringBuilder();
+        for (int i = 0; i < wildcardPattern.length(); i++) {
+            final char c = wildcardPattern.charAt(i);
+            if (c == '[') {
+                glob.append("[[]");
+            } else if (c == '\'') {
+                glob.append("''");
+            } else {
+                glob.append(c);
+            }
+        }
+        return glob.toString();
     }
 
     protected String getUserDisplayableConfig() {

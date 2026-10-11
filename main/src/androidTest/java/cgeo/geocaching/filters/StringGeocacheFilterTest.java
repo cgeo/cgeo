@@ -53,14 +53,38 @@ public class StringGeocacheFilterTest {
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void pattern() {
-        testSingle(c -> c.setName("Testname"), f -> {
-            f.getStringFilter().setTextValue("Test");
+        testPattern("Testname", "Test", false, false);
+        testPattern("Testname", "T?st*", false, true);
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void patternTreatsRegexAndSqlMetacharactersLiterally() {
+        final String literal = "[]().+^$|\\_%'";
+        testPattern(literal, literal, false, true);
+        testPattern("[x]().+^$|\\_%'", literal, false, false);
+        testPattern("cacheXname", "cache.name", false, false);
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void patternWildcardsAndCaseAreEquivalentInLogicAndDb() {
+        final String pattern = "prefix?[]().+^$|\\*_%'suffix";
+        testPattern("PREFIXx[]().+^$|\\middle_%'SUFFIX", pattern, false, true);
+        testPattern("prefix[]().+^$|\\middle_%'suffix", pattern, false, false);
+
+        testPattern("a[bc]x", "A[BC]?", false, true);
+        testPattern("a[bc]x", "A[BC]?", true, false);
+        testPattern("A[BC]x", "A[BC]?", true, true);
+        testPattern("a\nb\nc", "a?b*c", true, true);
+    }
+
+    private void testPattern(final String value, final String pattern, final boolean matchCase, final boolean expectedResult) {
+        testSingle(c -> c.setName(value), f -> {
+            f.getStringFilter().setTextValue(pattern);
             f.getStringFilter().setFilterType(StringFilter.StringFilterType.PATTERN);
-        }, false);
-        testSingle(c -> c.setName("Testname"), f -> {
-            f.getStringFilter().setTextValue("T?st*");
-            f.getStringFilter().setFilterType(StringFilter.StringFilterType.PATTERN);
-        }, true);
+            f.getStringFilter().setMatchCase(matchCase);
+        }, expectedResult);
     }
 
     private void testSingle(final Action1<Geocache> cacheSetter, final Action1<StringGeocacheFilter> filterSetter, final Boolean expectedResult) {
