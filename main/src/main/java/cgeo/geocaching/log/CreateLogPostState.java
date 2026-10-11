@@ -90,6 +90,8 @@ public final class CreateLogPostState {
     public String logText;
     public String password;
     public String reportProblemCode;
+    public String imageTitlePrefix;
+    public int imageScale;
     public boolean favorite;
     public float rating;
 
@@ -131,6 +133,8 @@ public final class CreateLogPostState {
         state.logText = logEntry.log;
         state.password = logEntry.password;
         state.reportProblemCode = logEntry.reportProblem.code;
+        state.imageTitlePrefix = logEntry.imageTitlePraefix;
+        state.imageScale = logEntry.imageScale;
         state.favorite = logEntry.favorite;
         state.rating = logEntry.rating;
         state.separateProblemRequired = separateProblemRequired;
@@ -178,6 +182,8 @@ public final class CreateLogPostState {
                 .setLog(StringUtils.defaultString(logText))
                 .setPassword(password)
                 .setReportProblem(ReportProblemType.findByCode(reportProblemCode))
+                .setImageTitlePraefix(imageTitlePrefix)
+                .setImageScale(imageScale)
                 .setFavorite(favorite)
                 .setRating(rating);
         for (ImageState image : images) {
@@ -268,7 +274,10 @@ public final class CreateLogPostState {
                 || !StringUtils.equals(logText, logEntry.log)
                 || !StringUtils.equals(password, logEntry.password)
                 || !StringUtils.equals(reportProblemCode, logEntry.reportProblem.code)
+                || !StringUtils.equals(imageTitlePrefix, logEntry.imageTitlePraefix)
+                || imageScale != logEntry.imageScale
                 || favorite != logEntry.favorite || Float.compare(rating, logEntry.rating) != 0
+                || !matchesInventoryActions(logEntry.inventoryActions)
                 || images.size() != logEntry.logImages.size()) {
             return false;
         }
@@ -283,6 +292,19 @@ public final class CreateLogPostState {
             }
         }
         return true;
+    }
+
+    private boolean matchesInventoryActions(final Map<String, LogTypeTrackable> actions) {
+        for (TrackableState trackable : trackables) {
+            final LogTypeTrackable expected = LogTypeTrackable.getById(trackable.actionId);
+            final LogTypeTrackable actual = actions.getOrDefault(trackable.geocode, LogTypeTrackable.DO_NOTHING);
+            if (expected != actual) {
+                return false;
+            }
+        }
+        return actions.entrySet().stream()
+                .filter(entry -> entry.getValue() != null && entry.getValue() != LogTypeTrackable.DO_NOTHING)
+                .allMatch(entry -> trackables.stream().anyMatch(trackable -> trackable.geocode.equals(entry.getKey())));
     }
 
     @NonNull
@@ -316,6 +338,8 @@ public final class CreateLogPostState {
             state.logText = JsonUtils.getText(root, "logText", "");
             state.password = JsonUtils.getText(root, "password", null);
             state.reportProblemCode = JsonUtils.getText(root, "reportProblemCode", ReportProblemType.NO_PROBLEM.code);
+            state.imageTitlePrefix = JsonUtils.getText(root, "imageTitlePrefix", "");
+            state.imageScale = JsonUtils.getInt(root, "imageScale", -1);
             state.favorite = JsonUtils.getBoolean(root, "favorite", false);
             state.rating = JsonUtils.getFloat(root, "rating", 0f);
             state.separateProblemRequired = JsonUtils.getBoolean(root, "separateProblemRequired", false);
@@ -368,11 +392,18 @@ public final class CreateLogPostState {
                     || LogType.getById(state.logTypeId) == LogType.UNKNOWN
                     || state.images.stream().map(image -> image.position).distinct().count() != state.images.size()
                     || state.trackables.stream().anyMatch(trackable -> StringUtils.isBlank(trackable.geocode))
-                    || (state.mainStatus == StepStatus.CONFIRMED && StringUtils.isBlank(state.mainServiceLogId))
-                    || (state.problemStatus == StepStatus.CONFIRMED && StringUtils.isBlank(state.problemServiceLogId))
+                    || state.mainStatus == StepStatus.SKIPPED
+                    || state.problemStatus == StepStatus.SKIPPED && state.separateProblemRequired
+                    || state.images.stream().anyMatch(image -> image.status == StepStatus.SKIPPED)
+                    || state.mainStatus == StepStatus.CONFIRMED && StringUtils.isBlank(state.mainServiceLogId)
+                    || state.mainStatus != StepStatus.CONFIRMED && StringUtils.isNotBlank(state.mainServiceLogId)
+                    || state.problemStatus == StepStatus.CONFIRMED && StringUtils.isBlank(state.problemServiceLogId)
+                    || state.problemStatus != StepStatus.CONFIRMED && StringUtils.isNotBlank(state.problemServiceLogId)
                     || state.images.stream().anyMatch(image -> StringUtils.isBlank(image.uploadTitle)
                             || !StringUtils.equals(image.clientId, image.calculateClientId())
-                            || image.status == StepStatus.CONFIRMED && StringUtils.isBlank(image.remoteUri))
+                            || image.status == StepStatus.CONFIRMED && StringUtils.isBlank(image.remoteUri)
+                            || image.status != StepStatus.CONFIRMED
+                                    && (StringUtils.isNotBlank(image.remoteUri) || StringUtils.isNotBlank(image.serviceImageId)))
                     || !StringUtils.equals(state.fingerprint, state.calculateFingerprint())) {
                 return null;
             }
@@ -427,6 +458,8 @@ public final class CreateLogPostState {
         snapshot.put("logText", StringUtils.defaultString(logText));
         putNullable(snapshot, "password", password);
         snapshot.put("reportProblemCode", StringUtils.defaultString(reportProblemCode));
+        snapshot.put("imageTitlePrefix", StringUtils.defaultString(imageTitlePrefix));
+        snapshot.put("imageScale", imageScale);
         snapshot.put("favorite", favorite);
         snapshot.put("rating", rating);
         snapshot.put("separateProblemRequired", separateProblemRequired);

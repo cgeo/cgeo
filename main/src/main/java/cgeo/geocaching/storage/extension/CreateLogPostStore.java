@@ -57,10 +57,27 @@ public final class CreateLogPostStore extends DataStore.DBExtension {
         // utility class
     }
 
-    public static boolean save(@NonNull final CreateLogPostState state) {
+    public static boolean create(@NonNull final CreateLogPostState state) {
         state.updatedAt = System.currentTimeMillis();
-        return replaceAll(TYPE, state.postId, state.updatedAt, 0, 0, 0,
+        return add(TYPE, state.postId, state.updatedAt, 0, 0, 0,
                 state.toJson(), state.geocode, "", "") != null;
+    }
+
+    public static boolean save(@NonNull final CreateLogPostState state) {
+        final LoadResult current = loadResult(state.postId);
+        if (current.status != LoadStatus.VALID || current.state == null
+                || current.state.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE
+                || current.state.updatedAt != state.updatedAt) {
+            return false;
+        }
+        final long expectedUpdatedAt = state.updatedAt;
+        state.updatedAt = Math.max(System.currentTimeMillis(), expectedUpdatedAt + 1);
+        final boolean saved = replaceAllIfLong1(TYPE, state.postId, expectedUpdatedAt,
+                state.updatedAt, 0, 0, 0, state.toJson(), state.geocode, "", "") != null;
+        if (!saved) {
+            state.updatedAt = expectedUpdatedAt;
+        }
+        return saved;
     }
 
     @NonNull
@@ -116,7 +133,7 @@ public final class CreateLogPostStore extends DataStore.DBExtension {
         return result;
     }
 
-    public static void remove(@NonNull final String postId) {
-        removeAll(TYPE, postId);
+    public static boolean remove(@NonNull final String postId) {
+        return removeAll(TYPE, postId);
     }
 }

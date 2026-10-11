@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -143,143 +144,123 @@ public final class LogUtils {
         return StringUtils.trimToEmpty(log);
     }
 
-    @WorkerThread
-    @SuppressWarnings("PMD.NPathComplexity") // multi-step state is kept explicit for safe resumption
-    public static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
+    @Nullable
+    public static CreateLogPostState prepareCreateLogPost(final Geocache cache,
+            final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
         final boolean separateProblemRequired = logEntry.reportProblem != ReportProblemType.NO_PROBLEM
                 && !loggingManager.canLogReportType(logEntry.reportProblem);
-        final String problemText = separateProblemRequired ? LocalizationUtils.getString(logEntry.reportProblem.textId) : "";
+        final String problemText = separateProblemRequired
+                ? LocalizationUtils.getString(logEntry.reportProblem.textId) : "";
         final CreateLogPostState state = CreateLogPostState.create(cache.getGeocode(), logEntry, inventory,
                 separateProblemRequired, problemText);
-        if (!CreateLogPostStore.save(state)) {
-            return LogResult.error(StatusCode.LOG_POST_ERROR,
-                    "Could not save log upload before sending. Nothing was posted.", null);
-        }
-        return createLogTaskLogic(cache, state.postId, progress);
+        return CreateLogPostStore.create(state) ? state : null;
     }
 
     /** Resume a persisted create attempt by id. State is always reloaded from storage. */
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity")
     public static LogResult createLogTaskLogic(final Geocache cache, final String postId, final Consumer<String> progress) {
-        final CreateLogPostStore.LoadResult loaded = CreateLogPostStore.loadResult(postId);
-        if (loaded.status == CreateLogPostStore.LoadStatus.NOT_FOUND) {
-            return LogResult.error(StatusCode.LOG_POST_ERROR, "This saved log upload no longer exists", null);
-        }
-        if (loaded.status == CreateLogPostStore.LoadStatus.CORRUPT || loaded.state == null) {
-            return LogResult.error(StatusCode.LOG_POST_ERROR,
-                    "The saved log upload cannot be read. It was not sent again.", null);
-        }
-        final CreateLogPostState state = loaded.state;
         try (ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), postId)) {
             try {
-                if (!StringUtils.equalsIgnoreCase(cache.getGeocode(), state.geocode)) {
+                final CreateLogPostStore.LoadResult loaded = CreateLogPostStore.loadResult(postId);
+                if (loaded.status == CreateLogPostStore.LoadStatus.NOT_FOUND) {
+                    return LogResult.error(StatusCode.LOG_POST_ERROR, "This saved log upload no longer exists", null);
+                }
+                if (loaded.status == CreateLogPostStore.LoadStatus.CORRUPT || loaded.state == null) {
+                    return LogResult.error(StatusCode.LOG_POST_ERROR,
+                            "The saved log upload cannot be read. It was not sent again.", null);
+                }
+                final CreateLogPostState initialState = loaded.state;
+                if (!StringUtils.equalsIgnoreCase(cache.getGeocode(), initialState.geocode)) {
                     return LogResult.error(StatusCode.LOG_POST_ERROR, "The saved log belongs to another cache", null);
                 }
-                if (state.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE) {
+                if (initialState.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE) {
                     return LogResult.error(StatusCode.LOG_POST_ERROR, "The saved log is no longer active", null);
-                }
-                if (hasUncertainRemoteStep(state)) {
-                    return LogResult.error(StatusCode.LOG_POST_ERROR,
-                            "A previous request may already have reached the website. Check the website before continuing.", null);
                 }
 
                 final ILoggingManager loggingManager = cache.getLoggingManager();
                 final IConnector cacheConnector = loggingManager.getConnector();
-                final OfflineLogEntry logEntry = state.toOfflineLogEntry();
-                final Map<String, Trackable> inventory = state.toInventory();
+                final List<CreateLogPostStepRunner.Step<CreateLogPostState>> remoteSteps = new ArrayList<>();
+                final LogResult[] actionFailure = new LogResult[1];
 
-                if (state.mainStatus == CreateLogPostState.StepStatus.PENDING) {
-                    progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
-                    state.mainStatus = CreateLogPostState.StepStatus.IN_FLIGHT;
-                    if (!CreateLogPostStore.save(state)) {
-                        return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save upload progress", null);
-                    }
-                    final LogResult result = loggingManager.createLog(logEntry.buildUponOfflineLogEntry()
-                            .setLog(trimForPublishing(logEntry.log)).build(), inventory);
-                    if (!result.isOk()) {
-                        if (isDefinitiveFailure(result)) {
-                            state.mainStatus = CreateLogPostState.StepStatus.PENDING;
-                            if (!CreateLogPostStore.save(state)) {
-                                state.mainStatus = CreateLogPostState.StepStatus.IN_FLIGHT;
-                            }
-                        }
-                        return result;
-                    }
-                    state.mainServiceLogId = result.getServiceLogId();
-                    state.mainStatus = CreateLogPostState.StepStatus.CONFIRMED;
-                    if (!CreateLogPostStore.save(state)) {
-                        state.mainStatus = CreateLogPostState.StepStatus.IN_FLIGHT;
-                        return LogResult.error(StatusCode.LOG_POST_ERROR,
-                                "The log was posted but its confirmation could not be saved. It will not be sent again.", null);
-                    }
+                remoteSteps.add(new CreateLogPostStepRunner.Step<>(
+                        state -> toRunnerStatus(state.mainStatus),
+                        (state, status) -> state.mainStatus = fromRunnerStatus(status),
+                        state -> {
+                            progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
+                            final OfflineLogEntry entry = state.toOfflineLogEntry();
+                            final LogResult result = loggingManager.createLog(entry.buildUponOfflineLogEntry()
+                                    .setLog(trimForPublishing(entry.log)).build(), state.toInventory());
+                            actionFailure[0] = result;
+                            return outcome(result);
+                        }, state -> {
+                            state.mainServiceLogId = actionFailure[0].getServiceLogId();
+                            actionFailure[0] = null;
+                        }));
+                remoteSteps.add(new CreateLogPostStepRunner.Step<>(
+                        state -> toRunnerStatus(state.problemStatus),
+                        (state, status) -> state.problemStatus = fromRunnerStatus(status),
+                        state -> {
+                            progress.accept(LocalizationUtils.getString(R.string.log_posting_problemreport));
+                            final OfflineLogEntry problemLog = new OfflineLogEntry.Builder()
+                                    .setLogType(LogType.getById(state.problemLogTypeId)).setDate(state.logDate)
+                                    .setLog(state.problemLogText).setPassword(state.password).build();
+                            final LogResult result = loggingManager.createLog(problemLog, null);
+                            actionFailure[0] = result;
+                            return outcome(result);
+                        }, state -> {
+                            state.problemServiceLogId = actionFailure[0].getServiceLogId();
+                            actionFailure[0] = null;
+                        }));
+                for (int index = 0; index < initialState.images.size(); index++) {
+                    final int imageIndex = index;
+                    final ImageResult[] imageResult = new ImageResult[1];
+                    remoteSteps.add(new CreateLogPostStepRunner.Step<>(
+                            state -> toRunnerStatus(state.images.get(imageIndex).status),
+                            (state, status) -> state.images.get(imageIndex).status = fromRunnerStatus(status),
+                            state -> {
+                                final CreateLogPostState.ImageState image = state.images.get(imageIndex);
+                                progress.accept(LocalizationUtils.getString(R.string.log_posting_image_create,
+                                        String.valueOf(image.position + 1), String.valueOf(state.images.size())));
+                                final Image localImage = new Image.Builder().setUrl(Uri.parse(image.localUri))
+                                        .setTitle(image.uploadTitle).setDescription(image.description)
+                                        .setTargetScale(image.targetScale).build();
+                                imageResult[0] = uploadNewImage(loggingManager, state.mainServiceLogId,
+                                        localImage, image.position, state.images.size());
+                                actionFailure[0] = imageResult[0].isOk() ? null
+                                        : LogResult.error(imageResult[0].getStatusCode(), imageResult[0].getPostServerMessage(), null);
+                                return outcome(imageResult[0]);
+                            }, state -> {
+                                final CreateLogPostState.ImageState image = state.images.get(imageIndex);
+                                image.serviceImageId = imageResult[0].getServiceImageId();
+                                image.remoteUri = imageResult[0].getImageUri();
+                                imageResult[0] = null;
+                                actionFailure[0] = null;
+                            }));
                 }
 
-                if (state.problemStatus == CreateLogPostState.StepStatus.PENDING) {
-                    progress.accept(LocalizationUtils.getString(R.string.log_posting_problemreport));
-                    state.problemStatus = CreateLogPostState.StepStatus.IN_FLIGHT;
-                    if (!CreateLogPostStore.save(state)) {
-                        return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save upload progress", null);
-                    }
-                    final OfflineLogEntry problemLog = new OfflineLogEntry.Builder()
-                            .setLogType(LogType.getById(state.problemLogTypeId)).setDate(state.logDate)
-                            .setLog(state.problemLogText).setPassword(state.password).build();
-                    final LogResult result = loggingManager.createLog(problemLog, null);
-                    if (!result.isOk()) {
-                        if (isDefinitiveFailure(result)) {
-                            state.problemStatus = CreateLogPostState.StepStatus.PENDING;
-                            CreateLogPostStore.save(state);
-                        }
-                        return result;
-                    }
-                    state.problemServiceLogId = result.getServiceLogId();
-                    state.problemStatus = CreateLogPostState.StepStatus.CONFIRMED;
-                    if (!CreateLogPostStore.save(state)) {
-                        state.problemStatus = CreateLogPostState.StepStatus.IN_FLIGHT;
-                        return LogResult.error(StatusCode.LOG_POST_ERROR,
-                                "The problem report was posted but its confirmation could not be saved. It will not be sent again.", null);
-                    }
+                final CreateLogPostWorkflow.RunResult<CreateLogPostState> remoteResult =
+                        CreateLogPostWorkflow.runLoaded(postId,
+                                id -> loadCreatePostState(id, cache.getGeocode()),
+                                CreateLogPostStore::save, remoteSteps);
+                if (remoteResult.result != CreateLogPostWorkflow.Result.COMPLETE) {
+                    return workflowFailure(remoteResult.result, actionFailure[0],
+                            "A previous request may already have reached the website. Check the website before continuing.");
                 }
-
-                for (CreateLogPostState.ImageState image : state.images) {
-                    if (image.status != CreateLogPostState.StepStatus.PENDING) {
-                        continue;
-                    }
-                    progress.accept(LocalizationUtils.getString(R.string.log_posting_image_create,
-                            String.valueOf(image.position + 1), String.valueOf(state.images.size())));
-                    image.status = CreateLogPostState.StepStatus.IN_FLIGHT;
-                    if (!CreateLogPostStore.save(state)) {
-                        return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save upload progress", null);
-                    }
-                    final Image localImage = new Image.Builder().setUrl(Uri.parse(image.localUri))
-                            .setTitle(image.uploadTitle).setDescription(image.description)
-                            .setTargetScale(image.targetScale).build();
-                    final ImageResult result = uploadNewImage(loggingManager, state.mainServiceLogId,
-                            localImage, image.position, state.images.size());
-                    if (!result.isOk()) {
-                        if (isDefinitiveFailure(result)) {
-                            image.status = CreateLogPostState.StepStatus.PENDING;
-                            CreateLogPostStore.save(state);
-                        }
-                        return LogResult.error(result.getStatusCode(), result.getPostServerMessage(), null);
-                    }
-                    image.serviceImageId = result.getServiceImageId();
-                    image.remoteUri = result.getImageUri();
-                    image.status = CreateLogPostState.StepStatus.CONFIRMED;
-                    if (!CreateLogPostStore.save(state)) {
-                        image.status = CreateLogPostState.StepStatus.IN_FLIGHT;
-                        return LogResult.error(StatusCode.LOG_POST_ERROR,
-                                "The image was uploaded but its confirmation could not be saved. It will not be sent again.", null);
-                    }
+                final CreateLogPostState state = remoteResult.state;
+                if (!state.isRemoteComplete()) {
+                    return LogResult.error(StatusCode.LOG_POST_ERROR,
+                            "Required remote log steps are incomplete. Nothing else was saved as complete.", null);
                 }
-
-                if (state.remoteCompletedAt == 0 && state.isRemoteComplete()) {
+                if (state.remoteCompletedAt == 0) {
                     state.remoteCompletedAt = System.currentTimeMillis();
                     if (!CreateLogPostStore.save(state)) {
                         return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save upload progress", null);
                     }
                 }
+                final OfflineLogEntry logEntry = state.toOfflineLogEntry();
+                final Map<String, Trackable> inventory = state.toInventory();
                 final LogResult tailResult = finishCreateLocally(cache, state, loggingManager,
                         cacheConnector, logEntry, inventory, progress);
                 if (!tailResult.isOk()) {
@@ -289,7 +270,9 @@ public final class LogUtils {
                 if (!CreateLogPostStore.save(state)) {
                     return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save completion state", null);
                 }
-                CreateLogPostStore.remove(postId);
+                if (!CreateLogPostStore.remove(postId)) {
+                    Log.w("The completed create-log recovery state could not be removed");
+                }
                 cache.notifyChange();
                 return LogResult.ok(state.mainServiceLogId);
             } catch (final RuntimeException e) {
@@ -302,6 +285,35 @@ public final class LogUtils {
         }
     }
 
+    static boolean saveConfirmedCreateLogs(final Geocache cache, final CreateLogPostState state) {
+        if (!state.isMainLogConfirmed()) {
+            return false;
+        }
+        final IConnector connector = cache.getLoggingManager().getConnector();
+        final List<LogEntry> logs = new ArrayList<>(cache.getLogs());
+        removeCreateLogDuplicates(logs, state.mainServiceLogId, state.problemServiceLogId);
+        logs.add(0, applyCommonsToOwnLog(state.toOfflineLogEntry().buildUpon(), connector)
+                .setServiceLogId(state.mainServiceLogId).setLogImages(state.getConfirmedImages()).build());
+        if (state.problemStatus == CreateLogPostState.StepStatus.CONFIRMED) {
+            logs.add(0, applyCommonsToOwnLog(new LogEntry.Builder()
+                    .setLogType(LogType.getById(state.problemLogTypeId)).setDate(state.logDate)
+                    .setLog(state.problemLogText), connector)
+                    .setServiceLogId(state.problemServiceLogId).build());
+        }
+        DataStore.saveLogs(cache.getGeocode(), logs, true);
+        final List<LogEntry> saved = DataStore.loadLogs(cache.getGeocode());
+        return saved.stream().anyMatch(log -> StringUtils.equals(state.mainServiceLogId, log.serviceLogId))
+                && (state.problemStatus != CreateLogPostState.StepStatus.CONFIRMED
+                        || saved.stream().anyMatch(log -> StringUtils.equals(state.problemServiceLogId, log.serviceLogId)));
+    }
+
+    static void removeCreateLogDuplicates(final List<LogEntry> logs, final String mainServiceLogId,
+            @Nullable final String problemServiceLogId) {
+        final boolean hasProblemId = StringUtils.isNotBlank(problemServiceLogId);
+        logs.removeIf(existing -> StringUtils.equals(mainServiceLogId, existing.serviceLogId)
+                || hasProblemId && StringUtils.equals(problemServiceLogId, existing.serviceLogId));
+    }
+
     private static LogResult finishCreateLocally(final Geocache cache, final CreateLogPostState state,
             final ILoggingManager loggingManager, final IConnector cacheConnector,
             final OfflineLogEntry logEntry, final Map<String, Trackable> inventory,
@@ -309,48 +321,44 @@ public final class LogUtils {
         progress.accept(LocalizationUtils.getString(R.string.log_posting_save_internal));
         final LogEntry adaptedMain = applyCommonsToOwnLog(logEntry.buildUpon(), cacheConnector)
                 .setServiceLogId(state.mainServiceLogId).setLogImages(state.getConfirmedImages()).build();
-        if (!runLocalStep(state, () -> state.localLogsStatus, status -> state.localLogsStatus = status, () -> {
-            changeLogsInDatabase(cache, logs -> {
-                logs.removeIf(existing -> StringUtils.equals(state.mainServiceLogId, existing.serviceLogId)
-                        || StringUtils.equals(state.problemServiceLogId, existing.serviceLogId));
-                logs.add(0, adaptedMain);
-                if (state.problemStatus == CreateLogPostState.StepStatus.CONFIRMED) {
-                    logs.add(0, applyCommonsToOwnLog(new LogEntry.Builder()
-                            .setLogType(LogType.getById(state.problemLogTypeId)).setDate(state.logDate)
-                            .setLog(state.problemLogText), cacheConnector)
-                            .setServiceLogId(state.problemServiceLogId).build());
-                }
-            });
-            return true;
-        })) {
+        if (!runLocalStep(state, () -> state.localLogsStatus, status -> state.localLogsStatus = status,
+                () -> saveConfirmedCreateLogs(cache, state))) {
             return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save local log state", null);
         }
-        if (!runLocalStep(state, () -> state.cacheStateStatus, status -> state.cacheStateStatus = status, () -> {
-            final boolean wasFound = cache.isFound();
-            adaptCacheCommonsIdempotently(cache, adaptedMain);
-            if (adaptedMain.logType.isFoundLog() && !wasFound && loggingManager.getConnector() instanceof ILogin) {
-                ((ILogin) loggingManager.getConnector()).increaseCachesFound(1);
-            }
-            DataStore.saveChangedCache(cache);
-            return true;
-        })) {
+        if (!runLocalStep(state, () -> state.cacheStateStatus, status -> state.cacheStateStatus = status,
+                () -> persistLocalCacheState(cache, loggingManager, adaptedMain))) {
             return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not update local cache state", null);
         }
         if (!runLocalStep(state, () -> state.favoriteStateStatus, status -> state.favoriteStateStatus = status, () -> {
-            if (loggingManager.supportsLogWithFavorite() && logEntry.favorite && !cache.isFavorite()) {
-                cache.setFavorite(true);
-                cache.setFavoritePoints(cache.getFavoritePoints() + 1);
-                DataStore.saveChangedCache(cache);
+            if (!loggingManager.supportsLogWithFavorite() || !logEntry.favorite) {
+                return true;
             }
-            return true;
+            final Geocache persisted = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+            if (persisted == null) {
+                return false;
+            }
+            if (persisted.isFavorite()) {
+                cache.setFavorite(true);
+                cache.setFavoritePoints(persisted.getFavoritePoints());
+                return true;
+            }
+            cache.setFavorite(true);
+            final int targetFavoritePoints = persisted.getFavoritePoints() + 1;
+            cache.setFavoritePoints(targetFavoritePoints);
+            DataStore.saveChangedCache(cache);
+            final Geocache saved = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+            return saved != null && saved.isFavorite()
+                    && saved.getFavoritePoints() == targetFavoritePoints;
         })) {
             return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not update favorite state", null);
         }
         if (!runLocalStep(state, () -> state.trackableStateStatus, status -> state.trackableStateStatus = status, () -> {
             if (loggingManager.supportsLogWithTrackables()) {
+                boolean saved = true;
                 for (Map.Entry<String, LogTypeTrackable> entry : logEntry.inventoryActions.entrySet()) {
-                    LastTrackableAction.setAction(entry.getKey(), entry.getValue());
+                    saved &= LastTrackableAction.setAction(entry.getKey(), entry.getValue());
                 }
+                return saved;
             }
             return true;
         })) {
@@ -372,11 +380,14 @@ public final class LogUtils {
             return LogResult.error(StatusCode.LOG_POST_ERROR,
                     "A trackable request has an unknown result. Check the website before retrying.", null);
         }
+        final DataStore.ConditionalDeleteResult draftDeleteResult = clearOfflineDraftIfUnchanged(cache, state);
+        if (draftDeleteResult == DataStore.ConditionalDeleteResult.FAILED) {
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not clear the posted offline draft", null);
+        }
         if (!runLocalStep(state, () -> state.localImageCleanupStatus,
                 status -> state.localImageCleanupStatus = status, () -> cleanupLocalImages(state))) {
-            Log.w("Some uploaded log image files could not be removed; cleanup will be retried later");
+            Log.w("Some uploaded log image files could not be removed");
         }
-        clearOfflineDraftIfUnchanged(cache, state);
         return LogResult.ok(state.mainServiceLogId);
     }
 
@@ -388,6 +399,64 @@ public final class LogUtils {
             return true;
         }
         return state.images.stream().anyMatch(image -> image.status == CreateLogPostState.StepStatus.IN_FLIGHT);
+    }
+
+    private static CreateLogPostStepRunner.Status toRunnerStatus(final CreateLogPostState.StepStatus status) {
+        return CreateLogPostStepRunner.Status.valueOf(status.name());
+    }
+
+    private static CreateLogPostState.StepStatus fromRunnerStatus(final CreateLogPostStepRunner.Status status) {
+        return CreateLogPostState.StepStatus.valueOf(status.name());
+    }
+
+    private static CreateLogPostWorkflow.LoadResult<CreateLogPostState> loadCreatePostState(
+            final String postId, final String expectedGeocode) {
+        final CreateLogPostStore.LoadResult loaded = CreateLogPostStore.loadResult(postId);
+        switch (loaded.status) {
+            case VALID:
+                if (loaded.state == null
+                        || loaded.state.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE
+                        || !StringUtils.equalsIgnoreCase(expectedGeocode, loaded.state.geocode)
+                        || !StringUtils.equals(postId, loaded.state.postId)) {
+                    return new CreateLogPostWorkflow.LoadResult<>(CreateLogPostWorkflow.LoadStatus.NOT_FOUND, null);
+                }
+                return new CreateLogPostWorkflow.LoadResult<>(CreateLogPostWorkflow.LoadStatus.VALID, loaded.state);
+            case CORRUPT:
+                return new CreateLogPostWorkflow.LoadResult<>(CreateLogPostWorkflow.LoadStatus.CORRUPT, null);
+            case NOT_FOUND:
+            default:
+                return new CreateLogPostWorkflow.LoadResult<>(CreateLogPostWorkflow.LoadStatus.NOT_FOUND, null);
+        }
+    }
+
+    private static CreateLogPostStepRunner.ActionOutcome outcome(final StatusResult result) {
+        if (result.isOk()) {
+            return CreateLogPostStepRunner.ActionOutcome.SUCCESS;
+        }
+        return isDefinitiveFailure(result) ? CreateLogPostStepRunner.ActionOutcome.DEFINITIVE_FAILURE
+                : CreateLogPostStepRunner.ActionOutcome.UNKNOWN;
+    }
+
+    private static LogResult workflowFailure(final CreateLogPostWorkflow.Result result,
+            @Nullable final LogResult actionFailure, final String uncertainMessage) {
+        switch (result) {
+            case STEP_FAILED:
+                return actionFailure == null
+                        ? LogResult.error(StatusCode.LOG_POST_ERROR, "A log upload step failed", null) : actionFailure;
+            case STORAGE_FAILED:
+                return LogResult.error(StatusCode.LOG_POST_ERROR, "Could not save upload progress", null);
+            case UNCERTAIN:
+                return actionFailure != null && !isDefinitiveFailure(actionFailure) ? actionFailure
+                        : LogResult.error(StatusCode.LOG_POST_ERROR, uncertainMessage, null);
+            case NOT_FOUND:
+                return LogResult.error(StatusCode.LOG_POST_ERROR, "This saved log upload no longer exists", null);
+            case CORRUPT:
+                return LogResult.error(StatusCode.LOG_POST_ERROR,
+                        "The saved log upload cannot be read. It was not sent again.", null);
+            case COMPLETE:
+            default:
+                return null;
+        }
     }
 
     private interface StatusGetter {
@@ -414,58 +483,48 @@ public final class LogUtils {
 
     private static boolean runLocalStep(final CreateLogPostState state, final StatusGetter getter,
             final StatusSetter setter, final Supplier<Boolean> action) {
-        if (getter.get() == CreateLogPostState.StepStatus.CONFIRMED
-                || getter.get() == CreateLogPostState.StepStatus.SKIPPED) {
-            return true;
-        }
-        if (getter.get() == CreateLogPostState.StepStatus.IN_FLIGHT) {
-            setter.set(CreateLogPostState.StepStatus.PENDING);
-            if (!CreateLogPostStore.save(state)) {
-                setter.set(CreateLogPostState.StepStatus.IN_FLIGHT);
-                return false;
-            }
-        }
-        setter.set(CreateLogPostState.StepStatus.IN_FLIGHT);
-        if (!CreateLogPostStore.save(state)) {
-            setter.set(CreateLogPostState.StepStatus.PENDING);
-            return false;
-        }
-        if (!action.get()) {
-            setter.set(CreateLogPostState.StepStatus.PENDING);
-            CreateLogPostStore.save(state);
-            return false;
-        }
-        setter.set(CreateLogPostState.StepStatus.CONFIRMED);
-        if (!CreateLogPostStore.save(state)) {
-            setter.set(CreateLogPostState.StepStatus.IN_FLIGHT);
-            return false;
-        }
-        return true;
+        final CreateLogPostStepRunner.Result result = CreateLogPostStepRunner.run(state,
+                CreateLogPostStore::save,
+                new CreateLogPostStepRunner.Step<>(ignored -> toRunnerStatus(getter.get()),
+                        (ignored, status) -> setter.set(fromRunnerStatus(status)),
+                        ignored -> action.get() ? CreateLogPostStepRunner.ActionOutcome.SUCCESS
+                                : CreateLogPostStepRunner.ActionOutcome.DEFINITIVE_FAILURE,
+                        ignored -> { }, true));
+        return result == CreateLogPostStepRunner.Result.CONFIRMED
+                || result == CreateLogPostStepRunner.Result.ALREADY_COMPLETE;
     }
 
     private static boolean runOptionalRemoteStep(final CreateLogPostState state, final StatusGetter getter,
             final StatusSetter setter, final Supplier<Boolean> action) {
-        if (getter.get() == CreateLogPostState.StepStatus.CONFIRMED
-                || getter.get() == CreateLogPostState.StepStatus.SKIPPED) {
-            return true;
+        final CreateLogPostStepRunner.Result result = CreateLogPostStepRunner.run(state,
+                CreateLogPostStore::save,
+                new CreateLogPostStepRunner.Step<>(ignored -> toRunnerStatus(getter.get()),
+                        (ignored, status) -> setter.set(fromRunnerStatus(status)),
+                        ignored -> action.get() ? CreateLogPostStepRunner.ActionOutcome.SUCCESS
+                                : CreateLogPostStepRunner.ActionOutcome.UNKNOWN));
+        return result == CreateLogPostStepRunner.Result.CONFIRMED
+                || result == CreateLogPostStepRunner.Result.ALREADY_COMPLETE;
+    }
+
+    static boolean localCacheStateMatches(final Geocache expected, @Nullable final Geocache actual) {
+        return actual != null && actual.isFound() == expected.isFound()
+                && actual.isDNF() == expected.isDNF()
+                && actual.isArchived() == expected.isArchived()
+                && actual.isDisabled() == expected.isDisabled()
+                && actual.getVisitedDate() == expected.getVisitedDate()
+                && actual.getAttributes().equals(expected.getAttributes());
+    }
+
+    private static boolean persistLocalCacheState(final Geocache cache,
+            final ILoggingManager loggingManager, final LogEntry adaptedMain) {
+        final boolean wasFound = cache.isFound();
+        adaptCacheCommonsIdempotently(cache, adaptedMain);
+        if (adaptedMain.logType.isFoundLog() && !wasFound && loggingManager.getConnector() instanceof ILogin) {
+            ((ILogin) loggingManager.getConnector()).increaseCachesFound(1);
         }
-        if (getter.get() == CreateLogPostState.StepStatus.IN_FLIGHT) {
-            return false;
-        }
-        setter.set(CreateLogPostState.StepStatus.IN_FLIGHT);
-        if (!CreateLogPostStore.save(state)) {
-            setter.set(CreateLogPostState.StepStatus.PENDING);
-            return false;
-        }
-        if (!action.get()) {
-            return false;
-        }
-        setter.set(CreateLogPostState.StepStatus.CONFIRMED);
-        if (!CreateLogPostStore.save(state)) {
-            setter.set(CreateLogPostState.StepStatus.IN_FLIGHT);
-            return false;
-        }
-        return true;
+        DataStore.saveChangedCache(cache);
+        return localCacheStateMatches(cache,
+                DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
     private static void adaptCacheCommonsIdempotently(final Geocache cache, final LogEntry newEntry) {
@@ -502,13 +561,24 @@ public final class LogUtils {
         }
     }
 
+    static List<Uri> findLocalImagesSafeToDelete(final CreateLogPostState completed,
+            @Nullable final OfflineLogEntry currentDraft, final List<CreateLogPostState> activeStates) {
+        return completed.images.stream()
+                .filter(image -> image.status == CreateLogPostState.StepStatus.CONFIRMED)
+                .map(image -> Uri.parse(image.localUri))
+                .filter(uri -> currentDraft == null || currentDraft.logImages.stream()
+                        .noneMatch(image -> uri.equals(image.getUri())))
+                .filter(uri -> activeStates.stream().noneMatch(state -> state.images.stream()
+                        .anyMatch(image -> uri.toString().equals(image.localUri))))
+                .toList();
+    }
+
     private static boolean cleanupLocalImages(final CreateLogPostState state) {
+        final OfflineLogEntry currentDraft = DataStore.loadLogOffline(state.geocode);
+        final List<CreateLogPostState> activeStates = CreateLogPostStore.loadActiveForGeocode(state.geocode).stream()
+                .filter(active -> !active.postId.equals(state.postId)).toList();
         boolean complete = true;
-        for (CreateLogPostState.ImageState image : state.images) {
-            if (image.status != CreateLogPostState.StepStatus.CONFIRMED) {
-                continue;
-            }
-            final Uri uri = Uri.parse(image.localUri);
+        for (Uri uri : findLocalImagesSafeToDelete(state, currentDraft, activeStates)) {
             if (ContentStorage.get().getFileInfo(uri) != null && !ImageUtils.deleteImage(uri)) {
                 complete = false;
             }
@@ -516,11 +586,14 @@ public final class LogUtils {
         return complete;
     }
 
-    private static void clearOfflineDraftIfUnchanged(final Geocache cache, final CreateLogPostState state) {
-        final OfflineLogEntry currentDraft = DataStore.loadLogOffline(cache.getGeocode());
-        if (state.matchesDraft(currentDraft)) {
-            cache.clearOfflineLog(null);
+    static DataStore.ConditionalDeleteResult clearOfflineDraftIfUnchanged(final Geocache cache,
+            final CreateLogPostState state) {
+        final DataStore.ConditionalDeleteResult result = DataStore.clearLogOfflineIfMatches(
+                cache.getGeocode(), state::matchesDraft);
+        if (result == DataStore.ConditionalDeleteResult.DELETED) {
+            cache.setOfflineLog(null);
         }
+        return result;
     }
 
     private static boolean isDefinitiveFailure(final StatusResult result) {
@@ -543,7 +616,7 @@ public final class LogUtils {
         }
     }
 
-    private static LogEntry.Builder applyCommonsToOwnLog(final LogEntry.Builder logBuilder, final IConnector cacheConnector) {
+    static LogEntry.Builder applyCommonsToOwnLog(final LogEntry.Builder logBuilder, final IConnector cacheConnector) {
         logBuilder.setFriend(true);
         // login credentials may vary from actual username
         // Get correct author name from connector (if applicable)

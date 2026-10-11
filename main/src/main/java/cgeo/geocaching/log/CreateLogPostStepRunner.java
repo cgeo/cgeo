@@ -50,18 +50,25 @@ public final class CreateLogPostStepRunner {
         private final BiConsumer<S, Status> statusSetter;
         private final Action<S> action;
         private final Consumer<S> onConfirmed;
+        private final boolean retryInFlight;
 
         public Step(final Function<S, Status> statusGetter, final BiConsumer<S, Status> statusSetter,
                 final Action<S> action) {
-            this(statusGetter, statusSetter, action, ignored -> { });
+            this(statusGetter, statusSetter, action, ignored -> { }, false);
         }
 
         public Step(final Function<S, Status> statusGetter, final BiConsumer<S, Status> statusSetter,
                 final Action<S> action, final Consumer<S> onConfirmed) {
+            this(statusGetter, statusSetter, action, onConfirmed, false);
+        }
+
+        public Step(final Function<S, Status> statusGetter, final BiConsumer<S, Status> statusSetter,
+                final Action<S> action, final Consumer<S> onConfirmed, final boolean retryInFlight) {
             this.statusGetter = statusGetter;
             this.statusSetter = statusSetter;
             this.action = action;
             this.onConfirmed = onConfirmed;
+            this.retryInFlight = retryInFlight;
         }
     }
 
@@ -70,7 +77,7 @@ public final class CreateLogPostStepRunner {
     }
 
     public static <S> Result run(final S state, final Persister<S> persister, final Step<S> step) {
-        return run(state, persister, step, false);
+        return run(state, persister, step, step.retryInFlight);
     }
 
     /**

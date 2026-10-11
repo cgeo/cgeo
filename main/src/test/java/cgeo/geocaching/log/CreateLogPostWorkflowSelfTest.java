@@ -21,10 +21,12 @@ public final class CreateLogPostWorkflowSelfTest {
         initialSaveFailureDoesNotRunAction();
         confirmationSaveFailurePreventsRetry();
         staleWorkflowDoesNotRecreateRemovedState();
+        reloadedFinishedWorkflowDoesNotWrite();
         definitiveFailureReturnsToPending();
         localIdempotentInFlightCanResume();
+        localActionFailureIsNotConfirmed();
         multipleStepsResumeOnlyPendingStep();
-        System.out.println("CreateLogPostWorkflowSelfTest: PASS (6 scenarios)");
+        System.out.println("CreateLogPostWorkflowSelfTest: PASS (8 scenarios)");
     }
 
     private static void initialSaveFailureDoesNotRunAction() {
@@ -76,6 +78,23 @@ public final class CreateLogPostWorkflowSelfTest {
         check(uploads.get() == 0, "stale page uploaded an image");
     }
 
+    private static void reloadedFinishedWorkflowDoesNotWrite() {
+        final State finished = new State();
+        final AtomicInteger writes = new AtomicInteger();
+        final List<CreateLogPostStepRunner.Step<State>> steps = new ArrayList<>();
+        steps.add(step(s -> s.main, (s, status) -> s.main = status, s -> {
+            writes.incrementAndGet();
+            return CreateLogPostStepRunner.ActionOutcome.SUCCESS;
+        }, ignored -> { }));
+
+        final CreateLogPostWorkflow.RunResult<State> result = CreateLogPostWorkflow.runLoaded("task",
+                ignored -> new CreateLogPostWorkflow.LoadResult<>(CreateLogPostWorkflow.LoadStatus.NOT_FOUND, null),
+                ignored -> true, steps);
+
+        check(result.result == CreateLogPostWorkflow.Result.NOT_FOUND, "finished reload was accepted");
+        check(writes.get() == 0, "finished reload executed a remote action");
+    }
+
     private static void definitiveFailureReturnsToPending() {
         final State state = new State();
         final CreateLogPostStepRunner.Result result = CreateLogPostStepRunner.run(state, ignored -> true,
@@ -96,6 +115,19 @@ public final class CreateLogPostWorkflowSelfTest {
                 }, ignored -> { }), true);
         check(result == CreateLogPostStepRunner.Result.CONFIRMED, "local IN_FLIGHT step did not resume");
         check(actions.get() == 1, "local action did not run exactly once on resume");
+    }
+
+    private static void localActionFailureIsNotConfirmed() {
+        final State state = new State();
+        final CreateLogPostStepRunner.Step<State> localStep = new CreateLogPostStepRunner.Step<>(
+                s -> s.main, (s, status) -> s.main = status,
+                ignored -> CreateLogPostStepRunner.ActionOutcome.DEFINITIVE_FAILURE,
+                ignored -> { }, true);
+
+        final CreateLogPostStepRunner.Result result = CreateLogPostStepRunner.run(state, ignored -> true, localStep);
+
+        check(result == CreateLogPostStepRunner.Result.ACTION_FAILED, "local failure was not reported");
+        check(state.main == CreateLogPostStepRunner.Status.PENDING, "failed local action was confirmed");
     }
 
     private static void multipleStepsResumeOnlyPendingStep() {

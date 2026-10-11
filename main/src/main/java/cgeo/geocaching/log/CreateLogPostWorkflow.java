@@ -9,7 +9,7 @@ import java.util.List;
  * Each invocation reloads the task by id. A stale page therefore cannot recreate a completed or
  * abandoned task after another page removed it.
  */
-public final class CreateLogPostWorkflow<S> {
+public final class CreateLogPostWorkflow {
 
     public enum LoadStatus {
         VALID,
@@ -24,6 +24,16 @@ public final class CreateLogPostWorkflow<S> {
         STORAGE_FAILED,
         NOT_FOUND,
         CORRUPT
+    }
+
+    public static final class RunResult<S> {
+        public final Result result;
+        public final S state;
+
+        private RunResult(final Result result, final S state) {
+            this.result = result;
+            this.state = state;
+        }
     }
 
     public static final class LoadResult<S> {
@@ -53,12 +63,22 @@ public final class CreateLogPostWorkflow<S> {
     public static <S> Result run(final String taskId, final Loader<S> loader,
             final CreateLogPostStepRunner.Persister<S> persister,
             final List<CreateLogPostStepRunner.Step<S>> steps, final Remover remover) {
+        final RunResult<S> result = runLoaded(taskId, loader, persister, steps);
+        if (result.result == Result.COMPLETE) {
+            remover.remove(taskId);
+        }
+        return result.result;
+    }
+
+    public static <S> RunResult<S> runLoaded(final String taskId, final Loader<S> loader,
+            final CreateLogPostStepRunner.Persister<S> persister,
+            final List<CreateLogPostStepRunner.Step<S>> steps) {
         final LoadResult<S> loaded = loader.load(taskId);
         if (loaded.status == LoadStatus.NOT_FOUND) {
-            return Result.NOT_FOUND;
+            return new RunResult<>(Result.NOT_FOUND, null);
         }
         if (loaded.status == LoadStatus.CORRUPT || loaded.state == null) {
-            return Result.CORRUPT;
+            return new RunResult<>(Result.CORRUPT, null);
         }
         final S state = loaded.state;
         for (CreateLogPostStepRunner.Step<S> step : new ArrayList<>(steps)) {
@@ -68,16 +88,16 @@ public final class CreateLogPostWorkflow<S> {
                 case ALREADY_COMPLETE:
                     break;
                 case ACTION_FAILED:
-                    return Result.STEP_FAILED;
+                    return new RunResult<>(Result.STEP_FAILED, state);
                 case STORAGE_FAILED:
                 case CONFIRMATION_STORAGE_FAILED:
-                    return Result.STORAGE_FAILED;
+                    return new RunResult<>(Result.STORAGE_FAILED, state);
                 case UNCERTAIN:
                 default:
-                    return Result.UNCERTAIN;
+                    return new RunResult<>(Result.UNCERTAIN, state);
             }
         }
-        remover.remove(taskId);
-        return Result.COMPLETE;
+        return new RunResult<>(Result.COMPLETE, state);
     }
+
 }

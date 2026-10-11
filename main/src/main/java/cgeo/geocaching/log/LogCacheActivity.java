@@ -19,6 +19,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
@@ -65,7 +66,6 @@ import androidx.loader.content.Loader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -369,9 +369,43 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
     }
 
+    static final class EndedPostUiDecision {
+        final boolean clearTaskReference;
+        final boolean resetPage;
+
+        EndedPostUiDecision(final boolean clearTaskReference, final boolean resetPage) {
+            this.clearTaskReference = clearTaskReference;
+            this.resetPage = resetPage;
+        }
+    }
+
+    static EndedPostUiDecision endedPostUiDecision(final CreateLogPostState state,
+            @Nullable final String requestedPostId, @Nullable final CreateLogPostState activeState,
+            final OfflineLogEntry visibleEntry) {
+        final boolean clearReference = StringUtils.equals(requestedPostId, state.postId)
+                || activeState != null && StringUtils.equals(activeState.postId, state.postId);
+        return new EndedPostUiDecision(clearReference, state.matchesDraft(visibleEntry));
+    }
+
+    private void finishEndedCreatePostState(final CreateLogPostState state) {
+        final EndedPostUiDecision decision = endedPostUiDecision(
+                state, requestedCreatePostId, createPostState, getEntryFromView());
+        if (decision.clearTaskReference) {
+            createPostState = null;
+            requestedCreatePostId = null;
+            setCreatePostFieldsEnabled(true);
+            invalidateOptionsMenuCompatible();
+        }
+        if (decision.resetPage) {
+            resetValues();
+            lastSavedState = getEntryFromView();
+        }
+    }
+
     private void abandonCreatePostState(final CreateLogPostState state) {
         final CreateLogPostStore.LoadResult loaded = CreateLogPostStore.loadResult(state.postId);
         if (loaded.status == CreateLogPostStore.LoadStatus.NOT_FOUND) {
+            finishEndedCreatePostState(state);
             return;
         }
         final CreateLogPostState current = loaded.state;
@@ -379,49 +413,33 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             showCorruptLogPostDialog(state.postId);
             return;
         }
-        saveConfirmedRemoteLogs(current);
-        final OfflineLogEntry draft = DataStore.loadLogOffline(cache.getGeocode());
-        final boolean draftMatches = current.matchesDraft(draft);
-        clearOfflineDraftIfUnchanged(current);
-        if (draftMatches && current.localImageCleanupStatus != CreateLogPostState.StepStatus.CONFIRMED) {
-            ImageUtils.deleteOfflineLogImagesFor(cache.getGeocode(), Collections.emptyList());
+        if (current.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE) {
+            finishEndedCreatePostState(state);
+            CreateLogPostStore.remove(current.postId);
+            return;
+        }
+        if (!LogUtils.saveConfirmedCreateLogs(cache, current) && current.isMainLogConfirmed()) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+            return;
+        }
+        final DataStore.ConditionalDeleteResult draftResult = DataStore.clearLogOfflineIfMatches(
+                cache.getGeocode(), current::matchesDraft);
+        if (draftResult == DataStore.ConditionalDeleteResult.FAILED) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+            return;
+        }
+        if (draftResult == DataStore.ConditionalDeleteResult.DELETED) {
+            cache.setOfflineLog(null);
         }
         current.completionStatus = CreateLogPostState.CompletionStatus.ABANDONED;
         if (!CreateLogPostStore.save(current)) {
             SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
             return;
         }
-        CreateLogPostStore.remove(current.postId);
-        if (createPostState != null && current.postId.equals(createPostState.postId)) {
-            createPostState = null;
-            resetValues();
-            lastSavedState = getEntryFromView();
-            setCreatePostFieldsEnabled(true);
-            invalidateOptionsMenuCompatible();
-        }
-    }
-
-    private void saveConfirmedRemoteLogs(final CreateLogPostState state) {
-        if (!state.isMainLogConfirmed()) {
-            return;
-        }
-        final List<LogEntry> logs = new ArrayList<>(cache.getLogs());
-        logs.removeIf(existing -> StringUtils.equals(state.mainServiceLogId, existing.serviceLogId)
-                || StringUtils.equals(state.problemServiceLogId, existing.serviceLogId));
-        logs.add(0, state.toOfflineLogEntry().buildUpon().setServiceLogId(state.mainServiceLogId)
-                .setLogImages(state.getConfirmedImages()).build());
-        if (state.problemStatus == CreateLogPostState.StepStatus.CONFIRMED) {
-            logs.add(0, new LogEntry.Builder().setLogType(LogType.getById(state.problemLogTypeId))
-                    .setDate(state.logDate).setLog(state.problemLogText)
-                    .setServiceLogId(state.problemServiceLogId).build());
-        }
-        DataStore.saveLogs(cache.getGeocode(), logs, true);
-    }
-
-    private void clearOfflineDraftIfUnchanged(final CreateLogPostState state) {
-        final OfflineLogEntry draft = DataStore.loadLogOffline(cache.getGeocode());
-        if (state.matchesDraft(draft)) {
-            cache.clearOfflineLog(null);
+        final boolean removed = CreateLogPostStore.remove(current.postId);
+        finishEndedCreatePostState(state);
+        if (!removed) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
         }
     }
 
@@ -671,7 +689,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.storeLogOffline(LogCacheActivity.this, logEntry);
                         ccLog.add("log=%s", logEntry.log);
-                        imageListFragment.adjustImagePersistentState();
+                        if (!hasAnyActiveCreatePost()) {
+                            imageListFragment.adjustImagePersistentState();
+                        }
                         inventoryAdapter.saveActions();
                     }
                 });
@@ -737,7 +757,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                             candidate.state.problemLogText)
                             && candidate.state.mainStatus == CreateLogPostState.StepStatus.PENDING
                             && !candidate.state.hasUncertainStep()) {
-                        CreateLogPostStore.remove(candidate.postId);
+                        createPostState = candidate.state;
+                        sendLogInternal();
+                        return;
                     } else {
                         discoverIncompleteLogPosts();
                         return;
@@ -769,6 +791,76 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
     }
 
+    static boolean entryMatchesStoredDraft(final OfflineLogEntry expected, final OfflineLogEntry actual) {
+        if (expected.logType != actual.logType || expected.date != actual.date
+                || !StringUtils.equals(expected.log, actual.log)
+                || !StringUtils.equals(expected.password, actual.password)
+                || expected.reportProblem != actual.reportProblem
+                || expected.favorite != actual.favorite || Float.compare(expected.rating, actual.rating) != 0
+                || !StringUtils.equals(expected.imageTitlePraefix, actual.imageTitlePraefix)
+                || expected.imageScale != actual.imageScale
+                || !expected.inventoryActions.equals(actual.inventoryActions)
+                || expected.logImages.size() != actual.logImages.size()) {
+            return false;
+        }
+        for (int index = 0; index < expected.logImages.size(); index++) {
+            final cgeo.geocaching.models.Image left = expected.logImages.get(index);
+            final cgeo.geocaching.models.Image right = actual.logImages.get(index);
+            if (!left.getUri().equals(right.getUri()) || !StringUtils.equals(left.getTitle(), right.getTitle())
+                    || !StringUtils.equals(left.getDescription(), right.getDescription())
+                    || left.targetScale != right.targetScale) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static boolean hasPersistentOfflineList(@Nullable final java.util.Set<Integer> listIds) {
+        return listIds != null && !listIds.isEmpty()
+                && (listIds.size() > 1 || !listIds.contains(StoredList.TEMPORARY_LIST.id));
+    }
+
+    private boolean prepareOfflineLogForPosting(final OfflineLogEntry entry) {
+        final java.util.Set<Integer> storedListsBefore = DataStore.loadLists(cache.getGeocode());
+        if (!hasPersistentOfflineList(storedListsBefore)) {
+            cache.getLists().remove(StoredList.TEMPORARY_LIST.id);
+            cache.getLists().add(StoredList.STANDARD_LIST_ID);
+            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+            final java.util.Set<Integer> storedLists = DataStore.loadLists(cache.getGeocode());
+            if (!hasPersistentOfflineList(storedLists)) {
+                return false;
+            }
+        }
+        if (!DataStore.saveLogOffline(cache.getGeocode(), entry)) {
+            return false;
+        }
+        DataStore.saveVisitDate(cache.getGeocode(), entry.date);
+        cache.setVisitedDate(Math.max(cache.getVisitedDate(), entry.date));
+        cache.setOfflineLog(entry);
+        if (Settings.removeFromRouteOnLog()) {
+            DataStore.removeFirstMatchingIdFromIndividualRoute(this, cache.getGeocode());
+        }
+        inventoryAdapter.saveActions();
+        cache.notifyChange();
+        final OfflineLogEntry stored = DataStore.loadLogOffline(cache.getGeocode());
+        final Geocache storedCache = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+        return stored != null && entryMatchesStoredDraft(entry, stored)
+                && storedCache != null && storedCache.getVisitedDate() == entry.date;
+    }
+
+    private boolean hasAnyActiveCreatePost() {
+        return !CreateLogPostStore.loadCandidatesForGeocode(geocode).isEmpty();
+    }
+
+    private boolean hasConflictingCreatePost(final CreateLogPostState intended) {
+        for (CreateLogPostStore.Candidate candidate : CreateLogPostStore.loadCandidatesForGeocode(geocode)) {
+            if (candidate.state == null || !StringUtils.equals(candidate.postId, intended.postId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void sendLogInternal() {
         if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
             return;
@@ -783,15 +875,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 .build();
             pendingPost = () -> logActivityHelper.editLog(cache, this.originalLogEntry, newEntry);
         } else if (createPostState != null) {
+            if (hasConflictingCreatePost(createPostState)) {
+                discoverIncompleteLogPosts();
+                return;
+            }
             pendingPost = () -> logActivityHelper.resumeCreateLog(cache, createPostState);
         } else {
+            if (hasAnyActiveCreatePost()) {
+                discoverIncompleteLogPosts();
+                return;
+            }
             final OfflineLogEntry entry = getEntryFromView();
-            if (!DataStore.saveLogOffline(cache.getGeocode(), entry)) {
+            if (!prepareOfflineLogForPosting(entry)) {
                 SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
                 return;
             }
             final Map<String, Trackable> inv = inventoryAdapter.getInventory();
-            pendingPost = () -> logActivityHelper.createLog(cache, entry, inv);
+            final CreateLogPostState prepared = LogUtils.prepareCreateLogPost(cache, entry, inv);
+            if (prepared == null) {
+                SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+                return;
+            }
+            createPostState = prepared;
+            requestedCreatePostId = prepared.postId;
+            pendingPost = () -> logActivityHelper.resumeCreateLog(cache, prepared);
         }
         showShortToast(LocalizationUtils.getString(R.string.info_log_posting_background));
         finish(SaveMode.SENDING);

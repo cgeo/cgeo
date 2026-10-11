@@ -5,15 +5,11 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.log.CreateLogPostState;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogUtils;
-import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.extension.CreateLogPostStore;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
@@ -27,8 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LogPostingService extends AbstractForegroundIntentService {
@@ -38,6 +32,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
     }
 
     private static final String EXTRA_GEOCODE = "extra_geocode";
+    private static final String EXTRA_CREATE_POST_ID = "extra_create_post_id";
 
     static final ConcurrentHashMap<String, PostingJob> PENDING_JOBS = new ConcurrentHashMap<>();
 
@@ -49,30 +44,16 @@ public class LogPostingService extends AbstractForegroundIntentService {
         final Geocache cache;
         final boolean isEdit;
 
-        // CREATE fields
-        final OfflineLogEntry logEntry;
-        final Map<String, Trackable> inventory;
+        // CREATE field
         final String createPostId;
 
         // EDIT fields
         final LogEntry oldEntry;
         final LogEntry newEntry;
 
-        private PostingJob(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
-            this.cache = cache;
-            this.isEdit = false;
-            this.logEntry = logEntry;
-            this.inventory = inventory;
-            this.createPostId = null;
-            this.oldEntry = null;
-            this.newEntry = null;
-        }
-
         private PostingJob(final Geocache cache, final String createPostId) {
             this.cache = cache;
             this.isEdit = false;
-            this.logEntry = null;
-            this.inventory = null;
             this.createPostId = createPostId;
             this.oldEntry = null;
             this.newEntry = null;
@@ -81,8 +62,6 @@ public class LogPostingService extends AbstractForegroundIntentService {
         private PostingJob(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry) {
             this.cache = cache;
             this.isEdit = true;
-            this.logEntry = null;
-            this.inventory = null;
             this.createPostId = null;
             this.oldEntry = oldEntry;
             this.newEntry = newEntry;
@@ -93,23 +72,20 @@ public class LogPostingService extends AbstractForegroundIntentService {
     // Static factory methods
     // -----------------------------------------------------------------------
 
-    public static void startCreate(final Context context, final Geocache cache,
-            final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
-        final String geocode = cache.getGeocode();
-        PENDING_JOBS.put(geocode, new PostingJob(cache, logEntry, inventory));
-        startService(context, geocode);
-    }
-
     public static void startResumeCreate(final Context context, final Geocache cache,
             final String createPostId) {
         final String geocode = cache.getGeocode();
         PENDING_JOBS.put(geocode, new PostingJob(cache, createPostId));
-        startService(context, geocode);
+        startService(context, geocode, createPostId);
     }
 
-    private static void startService(final Context context, final String geocode) {
+    private static void startService(final Context context, final String geocode,
+            @Nullable final String createPostId) {
         final Intent intent = new Intent(context, LogPostingService.class);
         intent.putExtra(EXTRA_GEOCODE, geocode);
+        if (createPostId != null) {
+            intent.putExtra(EXTRA_CREATE_POST_ID, createPostId);
+        }
         ContextCompat.startForegroundService(context, intent);
     }
 
@@ -150,9 +126,14 @@ public class LogPostingService extends AbstractForegroundIntentService {
             return;
         }
 
-        final PostingJob job = PENDING_JOBS.remove(geocode);
+        PostingJob job = PENDING_JOBS.remove(geocode);
         if (job == null) {
-            return;
+            final String createPostId = intent.getStringExtra(EXTRA_CREATE_POST_ID);
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (createPostId == null || cache == null) {
+                return;
+            }
+            job = new PostingJob(cache, createPostId);
         }
 
         // Progress consumer updates the foreground notification
@@ -161,14 +142,13 @@ public class LogPostingService extends AbstractForegroundIntentService {
             updateForegroundNotification();
         };
 
+        final PostingJob selectedJob = job;
         try {
             final LogResult result;
-            if (job.isEdit) {
-                result = LogUtils.editLogTaskLogic(job.cache, job.oldEntry, job.newEntry, progressConsumer);
-            } else if (job.createPostId != null) {
-                result = LogUtils.createLogTaskLogic(job.cache, job.createPostId, progressConsumer);
+            if (selectedJob.isEdit) {
+                result = LogUtils.editLogTaskLogic(selectedJob.cache, selectedJob.oldEntry, selectedJob.newEntry, progressConsumer);
             } else {
-                result = LogUtils.createLogTaskLogic(job.cache, job.logEntry, job.inventory, progressConsumer);
+                result = LogUtils.createLogTaskLogic(selectedJob.cache, selectedJob.createPostId, progressConsumer);
             }
 
             if (result.isOk()) {
@@ -177,20 +157,20 @@ public class LogPostingService extends AbstractForegroundIntentService {
                 // already protect changed drafts inside LogUtils before reaching this branch.
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
-                    if (job.isEdit) {
+                    if (selectedJob.isEdit) {
                         cache.clearOfflineLog(null);
                     }
                     cache.notifyChange();
                 }
             } else {
-                final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;
-                final String createPostId = getCreatePostId(job);
+                final LogEntry entryToEdit = selectedJob.isEdit ? selectedJob.oldEntry : null;
+                final String createPostId = getCreatePostId(selectedJob);
                 showErrorNotification(geocode, result.getErrorString(), entryToEdit, createPostId);
             }
         } catch (final Exception e) {
-            final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;
+            final LogEntry entryToEdit = selectedJob.isEdit ? selectedJob.oldEntry : null;
             final String msg = e.getMessage() != null ? e.getMessage() : e.getClass().getSimpleName();
-            final String createPostId = getCreatePostId(job);
+            final String createPostId = getCreatePostId(selectedJob);
             showErrorNotification(geocode, msg, entryToEdit, createPostId);
         }
     }
@@ -204,12 +184,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
         if (job.isEdit) {
             return null;
         }
-        final List<CreateLogPostState> states = CreateLogPostStore.loadActiveForGeocode(job.cache.getGeocode());
-        if (job.createPostId != null) {
-            return CreateLogPostStore.loadResult(job.createPostId).status == CreateLogPostStore.LoadStatus.NOT_FOUND
-                    ? null : job.createPostId;
-        }
-        return states.isEmpty() ? null : states.get(0).postId;
+        return job.createPostId;
     }
 
     private void showErrorNotification(final String geocode, final String errorMessage,

@@ -5,7 +5,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.service.LogPostingService;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -16,7 +15,6 @@ import cgeo.geocaching.utils.workertask.WorkerTask;
 
 import androidx.activity.ComponentActivity;
 
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -71,11 +69,6 @@ public class LogActivityHelper {
     /** call this method when the parent activity finishes. It cleans up resources */
     public void finish() {
         logDeleteTask.finish();
-    }
-
-    /** create a log on the geocaching platform */
-    public void createLog(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
-        LogPostingService.startCreate(activity, cache, logEntry, inventory);
     }
 
     /** resume an incomplete log creation without reposting confirmed steps */

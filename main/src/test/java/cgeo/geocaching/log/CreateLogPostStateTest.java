@@ -15,6 +15,8 @@ public class CreateLogPostStateTest {
                 .setDate(123456789L)
                 .setLog(" test log ")
                 .setReportProblem(ReportProblemType.OTHER)
+                .setImageTitlePraefix("prefix")
+                .setImageScale(1200)
                 .setFavorite(true)
                 .setRating(4f)
                 .addLogImage(new Image.Builder()
@@ -109,6 +111,21 @@ public class CreateLogPostStateTest {
     }
 
     @Test
+    public void illegalSkippedRequiredStepsAreRejected() {
+        final CreateLogPostState mainSkipped = CreateLogPostState.create("GC123", createEntry(), null, false, null);
+        mainSkipped.mainStatus = CreateLogPostState.StepStatus.SKIPPED;
+        assertThat(CreateLogPostState.fromJson(mainSkipped.toJson())).isNull();
+
+        final CreateLogPostState imageSkipped = CreateLogPostState.create("GC123", createEntry(), null, false, null);
+        imageSkipped.images.get(0).status = CreateLogPostState.StepStatus.SKIPPED;
+        assertThat(CreateLogPostState.fromJson(imageSkipped.toJson())).isNull();
+
+        final CreateLogPostState problemSkipped = CreateLogPostState.create("GC123", createEntry(), null, true, "problem");
+        problemSkipped.problemStatus = CreateLogPostState.StepStatus.SKIPPED;
+        assertThat(CreateLogPostState.fromJson(problemSkipped.toJson())).isNull();
+    }
+
+    @Test
     public void missingOrUnknownProgressStateIsRejected() {
         final CreateLogPostState state = CreateLogPostState.create("GC123", createEntry(), null, false, null);
         final String json = state.toJson();
@@ -118,6 +135,24 @@ public class CreateLogPostStateTest {
                 "\"mainStatus\":\"INVALID\""))).isNull();
         assertThat(CreateLogPostState.fromJson(json.replace("\"completionStatus\":\"ACTIVE\"",
                 "\"completionStatus\":\"INVALID\""))).isNull();
+    }
+
+    @Test
+    public void matchingDraftRejectsTrackableAndImageSettingChanges() {
+        final OfflineLogEntry entry = createEntry().buildUponOfflineLogEntry()
+                .addInventoryAction("TB1", LogTypeTrackable.VISITED).build();
+        final java.util.Map<String, cgeo.geocaching.models.Trackable> inventory = new java.util.HashMap<>();
+        final cgeo.geocaching.models.Trackable trackable = new cgeo.geocaching.models.Trackable();
+        trackable.setGeocode("TB1");
+        inventory.put("TB1", trackable);
+        final CreateLogPostState state = CreateLogPostState.create("GC123", entry, inventory, true, "problem");
+
+        assertThat(state.matchesDraft(entry)).isTrue();
+        assertThat(state.matchesDraft(entry.buildUponOfflineLogEntry()
+                .addInventoryAction("TB1", LogTypeTrackable.DROPPED_OFF).build())).isFalse();
+        assertThat(state.matchesDraft(entry.buildUponOfflineLogEntry()
+                .setImageTitlePraefix("changed").build())).isFalse();
+        assertThat(state.matchesDraft(entry.buildUponOfflineLogEntry().setImageScale(640).build())).isFalse();
     }
 
     @Test
