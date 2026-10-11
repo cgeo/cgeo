@@ -1850,8 +1850,6 @@
     <string name="projection_type_bearing_hint_distance">Distancia</string>
     <string name="projection_type_offset">Desvío</string>
     <string name="projection_type_offset_info">Desplazar lat %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Desvío de la latitud en Micro-Minutos</string>
-    <string name="projection_type_offset_hint_longitude">Desvío de la longitud en Micro-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_titletext_short">Valores y cálculos</string>
