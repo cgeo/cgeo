@@ -1833,8 +1833,6 @@
     <string name="projection_type_bearing_hint_distance">距离</string>
     <string name="projection_type_offset">偏移量</string>
     <string name="projection_type_offset_info">偏移量（千分之一分）：纬度 %1$s，经度 %2$s</string>
-    <string name="projection_type_offset_hint_latitude">纬度偏移（千分之一分）</string>
-    <string name="projection_type_offset_hint_longitude">经度偏移（千分之一分）</string>
     <!-- Variables -->
     <string name="variables_titletext">在此页面记录数值，并进行寻找此藏点所需的计算。</string>
     <string name="variables_titletext_short">数值与计算</string>
@@ -2882,7 +2880,6 @@
     <string name="dbi_select_table">选择表</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s（第 %2$d 行）为只读</string>
-    <string name="dbi_edit_title">编辑“%1$s”（第 %2$d 行）</string>
     <string name="dbi_delete_row_title">删除行</string>
     <string name="dbi_delete_row_question">确定要永久删除第 %1$d 行（%2$s）吗？</string>
     <string name="dbi_delete_success">行已删除：%1$s</string>
