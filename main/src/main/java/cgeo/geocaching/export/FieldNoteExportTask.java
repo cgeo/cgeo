@@ -27,6 +27,7 @@ import java.util.List;
 class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     private final List<FieldNotesCapability> uploadTargets;
     private final List<String> uploadedTo = new ArrayList<>();
+    private final List<String> uploadFailedTo = new ArrayList<>();
     private final boolean onlyNew;
     private Uri exportUri;
     private final String filename;
@@ -64,29 +65,30 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
             return false;
         }
         fieldNotesCount = fieldNotes.size();
-        // upload the same (hybrid) file to all selected connectors
-        return uploadFieldNotes();
+        // upload the same (hybrid) file to all selected connectors; the export itself has succeeded
+        // at this point, the result of each upload is reported per site
+        uploadFieldNotes();
+        return true;
     }
 
-    private Boolean uploadFieldNotes() {
-        boolean uploadResult = true;
-        if (!uploadTargets.isEmpty()) {
-            publishProgress(STATUS_UPLOAD);
-            final File tempFile = ContentStorage.get().writeUriToTempFile(exportUri, filename);
-            if (tempFile != null) {
-                for (final FieldNotesCapability connector : uploadTargets) {
-                    if (connector.uploadFieldNotes(tempFile)) {
-                        uploadedTo.add(connector.getName());
-                    } else {
-                        uploadResult = false;
-                    }
-                }
-                if (!tempFile.delete()) {
-                    Log.i("Temp file could not be deleted: " + tempFile);
-                }
+    private void uploadFieldNotes() {
+        if (uploadTargets.isEmpty()) {
+            return;
+        }
+        publishProgress(STATUS_UPLOAD);
+        final File tempFile = ContentStorage.get().writeUriToTempFile(exportUri, filename);
+        for (final FieldNotesCapability connector : uploadTargets) {
+            // a site rejects e.g. a file without any record of its own platform; that must not
+            // turn the uploads to the other sites into a failure
+            if (tempFile != null && connector.uploadFieldNotes(tempFile)) {
+                uploadedTo.add(connector.getName());
+            } else {
+                uploadFailedTo.add(connector.getName());
             }
         }
-        return uploadResult;
+        if (tempFile != null && !tempFile.delete()) {
+            Log.i("Temp file could not be deleted: " + tempFile);
+        }
     }
 
     @Nullable
@@ -119,6 +121,9 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
 
                 for (final String site : uploadedTo) {
                     ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_to_success, site));
+                }
+                for (final String site : uploadFailedTo) {
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_to_failed, site));
                 }
             } else {
                 ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
