@@ -79,7 +79,7 @@ public class LogActivityHelper {
     }
 
     /** edit a log on the geocaching platform */
-    public void editLog(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry) {
+    public void editLog(final Geocache cache, final LogEntry oldEntry, final OfflineLogEntry newEntry) {
         if (!LogUtils.canEditLog(cache, newEntry)) {
             //should never happen (would be a programming error), thus not translating message
             ActivityMixin.showToast(activity, "Can't edit log");

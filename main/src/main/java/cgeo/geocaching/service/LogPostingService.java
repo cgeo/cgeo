@@ -52,7 +52,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
 
         // EDIT fields
         final LogEntry oldEntry;
-        final LogEntry newEntry;
+        final OfflineLogEntry newEntry;
 
         private PostingJob(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
             this.cache = cache;
@@ -63,7 +63,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
             this.newEntry = null;
         }
 
-        private PostingJob(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry) {
+        private PostingJob(final Geocache cache, final LogEntry oldEntry, final OfflineLogEntry newEntry) {
             this.cache = cache;
             this.isEdit = true;
             this.logEntry = null;
@@ -87,7 +87,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
     }
 
     public static void startEdit(final Context context, final Geocache cache,
-            final LogEntry oldEntry, final LogEntry newEntry) {
+            final LogEntry oldEntry, final OfflineLogEntry newEntry) {
         final String geocode = cache.getGeocode();
         PENDING_JOBS.put(geocode, new PostingJob(cache, oldEntry, newEntry));
         final Intent intent = new Intent(context, LogPostingService.class);
@@ -149,13 +149,11 @@ public class LogPostingService extends AbstractForegroundIntentService {
                 cache.clearOfflineLog(null);
                 cache.notifyChange();
             } else {
-                final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;
-                showErrorNotification(geocode, result.getErrorString(), entryToEdit);
+                showErrorNotification(geocode, result.getErrorString(), job);
             }
         } catch (final Exception e) {
-            final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;
             final String msg = e.getMessage() != null ? e.getMessage() : e.getClass().getSimpleName();
-            showErrorNotification(geocode, msg, entryToEdit);
+            showErrorNotification(geocode, msg, job);
         }
     }
 
@@ -163,25 +161,37 @@ public class LogPostingService extends AbstractForegroundIntentService {
     // Helpers
     // -----------------------------------------------------------------------
 
-    private void showErrorNotification(final String geocode, final String errorMessage, @Nullable final LogEntry entryToEdit) {
+    private void showErrorNotification(final String geocode, final String errorMessage, final PostingJob job) {
         final String title = LocalizationUtils.getString(R.string.info_log_post_failed_geocode, geocode);
         ViewUtils.showToast(this, title);
         // Use a dedicated ID separate from the foreground notification ID so the error
         // notification persists after the service (and its foreground notification) stops.
-        final PendingIntent retryIntent = buildRetryIntent(geocode, entryToEdit);
+        final LogEntry originalEntry = job.isEdit ? job.oldEntry : null;
+        final OfflineLogEntry editedEntry = job.isEdit ? job.newEntry : null;
+        final PendingIntent retryIntent = buildRetryIntent(geocode, originalEntry, editedEntry);
         Notifications.send(this, Notifications.ID_LOG_POST_ERROR_NOTIFICATION,
                 Notifications.createTextContentNotification(this, NotificationChannels.LOG_RESULT_NOTIFICATION, title, errorMessage)
                         .setAutoCancel(true)
                         .setContentIntent(retryIntent));
     }
 
-    private static PendingIntent buildRetryIntent(final String geocode, @Nullable final LogEntry entryToEdit) {
-        final Intent intent = new Intent(CgeoApplication.getInstance(), LogCacheActivity.class)
+    static Intent buildRetryActivityIntent(final Context context, final String geocode,
+            @Nullable final LogEntry originalEntry, @Nullable final OfflineLogEntry editedEntry) {
+        final Intent intent = new Intent(context, LogCacheActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, geocode)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        if (entryToEdit != null) {
-            intent.putExtra(Intents.EXTRA_LOGENTRY, entryToEdit);
+        if (originalEntry != null) {
+            intent.putExtra(Intents.EXTRA_LOGENTRY, originalEntry);
         }
+        if (editedEntry != null) {
+            intent.putExtra(Intents.EXTRA_LOGENTRY_EDITED, editedEntry);
+        }
+        return intent;
+    }
+
+    private static PendingIntent buildRetryIntent(final String geocode, @Nullable final LogEntry originalEntry,
+            @Nullable final OfflineLogEntry editedEntry) {
+        final Intent intent = buildRetryActivityIntent(CgeoApplication.getInstance(), geocode, originalEntry, editedEntry);
         return PendingIntent.getActivity(
                 CgeoApplication.getInstance(),
                 geocode.hashCode(),

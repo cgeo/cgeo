@@ -113,6 +113,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private LogEditMode logEditMode = LogEditMode.CREATE_NEW;
     private LogEntry originalLogEntry = null;
+    private OfflineLogEntry failedEditedLogEntry = null;
 
     private boolean readyToPost = false;
     private Runnable pendingPost = null; // set by sendLogInternal(), consumed by onStop()
@@ -200,6 +201,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             this.originalLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
+            this.failedEditedLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY_EDITED);
             if (this.originalLogEntry != null) {
                 logEditMode = LogEditMode.EDIT_EXISTING;
             }
@@ -287,16 +289,19 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         Dialogs.moveCursorToEnd(binding.log);
     }
 
-    private OfflineLogEntry restorePreviousLogEntry(final Bundle savedInstanceState) {
-        OfflineLogEntry entry = null;
-        if (savedInstanceState != null) {
-            entry = savedInstanceState.getParcelable(SAVED_STATE_LOGENTRY);
+    @Nullable
+    static OfflineLogEntry selectRestoredLogEntry(@Nullable final OfflineLogEntry savedEntry, @Nullable final OfflineLogEntry failedEditEntry,
+            @Nullable final OfflineLogEntry offlineEntry, final boolean editExisting) {
+        if (savedEntry != null) {
+            return savedEntry;
         }
-        if (entry == null && this.logEditMode == LogEditMode.CREATE_NEW) {
-            entry = DataStore.loadLogOffline(geocode);
-        }
+        return editExisting ? failedEditEntry : offlineEntry;
+    }
 
-        return entry;
+    private OfflineLogEntry restorePreviousLogEntry(final Bundle savedInstanceState) {
+        final OfflineLogEntry savedEntry = savedInstanceState == null ? null : savedInstanceState.getParcelable(SAVED_STATE_LOGENTRY);
+        final OfflineLogEntry offlineEntry = logEditMode == LogEditMode.CREATE_NEW ? DataStore.loadLogOffline(geocode) : null;
+        return selectRestoredLogEntry(savedEntry, failedEditedLogEntry, offlineEntry, logEditMode == LogEditMode.EDIT_EXISTING);
     }
 
     private void fillViewFromEntry(final LogEntry logEntry) {
@@ -580,7 +585,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         // service until onStop() so that saveLog()'s async storeLogOffline is always
         // scheduled before the background post begins.
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
-            final LogEntry newEntry = getEntryFromView()
+            final OfflineLogEntry newEntry = getEntryFromView()
                 .buildUponOfflineLogEntry()
                 .setServiceLogId(this.originalLogEntry.serviceLogId)
                 .build();
