@@ -1797,8 +1797,6 @@
     <string name="projection_type_bearing_hint_distance">Vzdialenosť</string>
     <string name="projection_type_offset">Posun</string>
     <string name="projection_type_offset_info">Posun šírka %1$s mm, dĺžka %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Posun zemepisnej šírky v mikrominútach</string>
-    <string name="projection_type_offset_hint_longitude">Posun zemepisnej dĺžky v mikrominútach</string>
     <!-- Variables -->
     <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
     <string name="variables_titletext_short">Hodnoty a výpočty</string>
