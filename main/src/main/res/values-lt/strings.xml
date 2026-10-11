@@ -1634,8 +1634,6 @@
     <string name="projection_type_bearing_hint_distance">Atstumas</string>
     <string name="projection_type_offset">Poslinkis</string>
     <string name="projection_type_offset_info">Poslinkis platuma %1$s mm, ilguma %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Platumos poslinkis mikro minutėmis</string>
-    <string name="projection_type_offset_hint_longitude">Ilgumos poslinkis mikro minutėmis</string>
     <!-- Variables -->
     <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
