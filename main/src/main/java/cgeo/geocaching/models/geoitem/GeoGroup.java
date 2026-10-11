@@ -16,25 +16,37 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** Represents a group of drawable GeoItem such as a point, polyline, polygon or enclosed groups */
 public class GeoGroup implements GeoItem, Parcelable {
 
+    private static final AtomicInteger ID_GIVER = new AtomicInteger();
+
     //immutable
     @NonNull private final List<GeoItem> items;
+    @Nullable private final GeoStyle style;
+    private final int id;
 
     //lazy-calculated
     private Viewport viewport;
     private boolean viewportTried = false;
 
-    private GeoGroup(@NonNull final List<GeoItem> items) {
+    private GeoGroup(@NonNull final List<GeoItem> items, final GeoStyle style) {
         this.items = Collections.unmodifiableList(items);
+        this.style = style;
+        this.id = ID_GIVER.incrementAndGet();
     }
 
     @NonNull
     @Override
     public GeoType getType() {
         return GeoType.GROUP;
+    }
+
+    @Override
+    public GeoStyle getStyle() {
+        return style;
     }
 
     @NonNull
@@ -67,7 +79,7 @@ public class GeoGroup implements GeoItem, Parcelable {
     }
 
     public Builder buildUpon() {
-        return builder().addItems(getItems());
+        return builder().addItems(getItems()).setStyle(getStyle());
     }
 
 
@@ -112,12 +124,13 @@ public class GeoGroup implements GeoItem, Parcelable {
     }
 
     @Override
-    public GeoItem applyDefaultStyle(final GeoStyle style) {
-        final GeoGroup.Builder builder = new GeoGroup.Builder();
-        for (GeoItem item : items) {
-            builder.addItems(item.applyDefaultStyle(style));
+    public void recalculateDynamicStyles(final GeoStyle parentStyle, final GeoStyle mainStyle) {
+        if (this.style != null) {
+            this.style.recalculateDynamic(this, parentStyle, mainStyle);
         }
-        return builder.build();
+        for (GeoItem item : items) {
+            item.recalculateDynamicStyles(this.style != null ? this.style : parentStyle, mainStyle);
+        }
     }
 
 
@@ -125,30 +138,29 @@ public class GeoGroup implements GeoItem, Parcelable {
 
     @Override
     public boolean equals(final Object o) {
-        if (!(o instanceof GeoGroup)) {
+        if (!(o instanceof GeoGroup other)) {
             return false;
         }
-        final GeoGroup other = (GeoGroup) o;
         return
-            Objects.equals(items, other.items);
+            Objects.equals(id, other.id) && Objects.equals(items, other.items) && Objects.equals(style, other.style);
     }
 
     @Override
     public int hashCode() {
-        return items.hashCode();
+        return Objects.hash(id, items, style);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return getType() + "[" + getItems() + "]";
+        return getType() + "[" + getItems() + "] style=" + getStyle();
     }
 
     //implements Builder
 
     public static class Builder {
         private final List<GeoItem> items = new ArrayList<>();
-
+        private GeoStyle style;
 
         private Builder() {
             // no free instantiation
@@ -163,8 +175,13 @@ public class GeoGroup implements GeoItem, Parcelable {
             return addItems(Arrays.asList(items));
         }
 
+        public Builder setStyle(final GeoStyle style) {
+            this.style = style;
+            return this;
+        }
+
         public GeoGroup build() {
-            return new GeoGroup(items);
+            return new GeoGroup(items, style);
         }
 
     }
@@ -176,6 +193,8 @@ public class GeoGroup implements GeoItem, Parcelable {
         final List<GeoItem> itemsReadWrite = new ArrayList<>();
         in.readList(itemsReadWrite, GeoItem.class.getClassLoader());
         items = Collections.unmodifiableList(itemsReadWrite);
+        style = in.readParcelable(GeoStyle.class.getClassLoader());
+        id = in.readInt();
     }
 
     public static final Creator<GeoGroup> CREATOR = new Creator<GeoGroup>() {
@@ -198,6 +217,8 @@ public class GeoGroup implements GeoItem, Parcelable {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeList(items);
+        dest.writeParcelable(style, flags);
+        dest.writeInt(id);
     }
 
 

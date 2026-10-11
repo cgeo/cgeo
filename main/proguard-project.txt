@@ -38,6 +38,10 @@
 
 # Apache commons ----------------------------------------------------------------------------------
 
+# Apache HTTP legacy client
+-dontwarn org.apache.http.**
+-keep class org.apache.http.** { *; }
+
 # apache.commons.collections has some bean related collections, which are undefined in Android
 -dontwarn java.beans.*
 # ignore reflection warnings
@@ -167,10 +171,3 @@
 
 # keep classes of metadata libaray (this lib heavily uses reflection)
 -keep class com.drew.** { *; }
-
-# Whitelist MPAndroidChart
-# Preserve all public classes and methods
--keep class com.github.mikephil.charting.** { *; }
--keep public class com.github.mikephil.charting.animation.* {
-    public protected *;
-}

@@ -14,7 +14,7 @@ import java.util.Set;
 import static java.util.Collections.singleton;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewportTest {
 

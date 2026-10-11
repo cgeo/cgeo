@@ -145,6 +145,15 @@ public final class OfflineLogEntry extends LogEntry {
          * Build an immutable {@link OfflineLogEntry} Object.
          */
 
+        // Offline logs hold the user's own not-yet-published text (incl. their signature), so store it
+        // verbatim instead of stripping wrapping HTML and leading/trailing whitespace (#6631).
+        @NonNull
+        @Override
+        public T setLog(@NonNull final String message) {
+            this.log = message;
+            return self();
+        }
+
         public T setImageTitlePraefix(final String imageTitlePraefix) {
             this.imageTitlePraefix = imageTitlePraefix;
             return self();

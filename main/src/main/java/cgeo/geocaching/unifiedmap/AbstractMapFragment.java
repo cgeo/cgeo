@@ -1,10 +1,12 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -230,30 +232,37 @@ public abstract class AbstractMapFragment extends Fragment {
     public abstract void setBearing(float bearing);
 
     public void repaintRotationIndicator(final float bearing) {
-        if (getActivity() == null) {
+        final Activity activity = getActivity();
+        if (!ActivityMixin.isActivityValid(activity) || !isAdded()) {
             return;
         }
-        final ImageView compassrose = getActivity().findViewById(R.id.map_compassrose);
-        if (compassrose == null) { // can be null after screen rotation
-            return;
-        }
-        compassrose.setRotation(AngleUtils.normalize(360f - bearing));
-        compassrose.setOnClickListener(v -> {
-            final boolean isRotated = getCurrentBearing() != 0f;
-            setBearing(0.0f);
-            repaintRotationIndicator(0.0f);
-            if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                Dialogs.advancedOneTimeMessage(getActivity(), MAP_AUTOROTATION_DISABLE, LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageTitle), LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageText), true, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
+        activity.runOnUiThread(() -> {
+            final ImageView compassrose = activity.findViewById(R.id.map_compassrose);
+            if (compassrose == null) { // can be null after screen rotation
+                return;
             }
-        });
-        compassrose.setOnLongClickListener(v -> {
-            final UnifiedMapActivity activity = (UnifiedMapActivity) getActivity();
-            activity.findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
-            MapSettingsUtils.showRotationMenu(activity, newRotationMode -> {
-                activity.setMapRotation(newRotationMode);
-                activity.findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
+            compassrose.setRotation(AngleUtils.normalize(360f - bearing));
+            compassrose.setOnClickListener(v -> {
+                final boolean isRotated = getCurrentBearing() != 0f;
+                setBearing(0.0f);
+                repaintRotationIndicator(0.0f);
+                if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
+                    Dialogs.advancedOneTimeMessage(getActivity(), MAP_AUTOROTATION_DISABLE, LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageTitle), LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageText), true, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
+                }
             });
-            return true;
+            compassrose.setOnLongClickListener(v -> {
+                final UnifiedMapActivity activity2 = (UnifiedMapActivity) getActivity();
+                if (!ActivityMixin.isActivityValid(activity2) || !isAdded()) {
+                    return true;
+                }
+                ViewUtils.setVisibility(activity2.findViewById(R.id.container_rotationmenu), View.VISIBLE);
+                MapSettingsUtils.showRotationMenu(activity2, newRotationMode -> {
+                    activity2.setMapRotation(newRotationMode);
+                    ViewUtils.setVisibility(activity2.findViewById(R.id.container_rotationmenu), View.GONE);
+                    activity2.findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
+                });
+                return true;
+            });
         });
     }
 

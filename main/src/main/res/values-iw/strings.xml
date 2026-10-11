@@ -195,9 +195,6 @@
     <string name="err_read_pocket_query_list">שגיאה בקריאת רשימת Pocket Query.</string>
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
-    <string name="info_log_post_failed">פירסום הלוג נכשל.</string>
-    <string name="info_log_post_retry">נסה שנית</string>
-    <string name="info_log_post_save">שמור באופן לא מקוון</string>
     <string name="info_log_cleared">הלוג נוקה.</string>
     <string name="info_waypoint_coordinates_cleared">קואורדינטות נמחקו.</string>
     <string name="info_log_type_changed">סוג הלוג השתנה!</string>
@@ -292,6 +289,8 @@
     <string name="list_dialog_rename">שנה שם</string>
     <string name="list_not_available">הרשימה לא זמינה יותר. עובר לרשימה הסטנדרטית</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">גירסה</string>
     <string name="about_changelog">יומן שינויים</string>
@@ -315,6 +314,7 @@
     <string name="settings_summary_logging">הגדר חתימה וקבע אפשרויות כתיבת לוג.</string>
     <string name="settings_title_map_data">נתוני מפה</string>
     <string name="settings_title_map_content">תוכן מפה</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
@@ -461,5 +461,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

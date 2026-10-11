@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -16,6 +17,7 @@ import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.CacheCache;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.FolderUtils;
@@ -45,8 +47,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -164,16 +166,19 @@ public final class SystemInformation {
     }
 
     private static void appendMemoryInfo(@NonNull final Context context, @NonNull final StringBuilder body) {
-        body.append("\n- Memory: ");
+        final Integer own = EnvironmentUtils.getOwnMemoryFootprint(context);
+        body.append("\n- Memory: ").append("c:geo:").append(own == null ? "?" : Formatter.formatBytes(1024L * own));
         final ActivityManager.MemoryInfo memoryInfo = EnvironmentUtils.getMemoryInfo(context);
         if (memoryInfo == null) {
             body.append("null");
         } else {
-            body.append(" Available:").append(Formatter.formatBytes(memoryInfo.availMem))
+            body.append(", Available:").append(Formatter.formatBytes(memoryInfo.availMem))
                 .append(", Total:").append(Formatter.formatBytes(memoryInfo.totalMem))
                 .append(", Threshold: ").append(Formatter.formatBytes(memoryInfo.threshold))
                 .append(", low:").append(memoryInfo.lowMemory);
         }
+        final NumberFormat intFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+        body.append(", CacheCache: ").append(intFormat.format(DataStore.getActualCacheCacheSize())).append("/").append(intFormat.format(CacheCache.MAX_CACHED_CACHES));
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
@@ -200,9 +205,9 @@ public final class SystemInformation {
             final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
-        final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
-        if (!storedFilters.isEmpty()) {
-            body.append("\n- ").append("Additional stored filters: ").append(storedFilters.size());
+        final int storedFilterCount = NamedFilter.getAll().size();
+        if (storedFilterCount > 0) {
+            body.append("\n- ").append("Named filters: ").append(storedFilterCount);
         }
     }
 

@@ -350,14 +350,13 @@
     <string name="err_read_bookmark_list">Error reading bookmark lists.</string>
     <string name="err_bookmark_list_overfull">Too many caches</string>
     <string name="err_bookmark_list_overfull_description">Bookmark lists can only store up to 1000 caches, you\'re attempting to add more than that to the list.\n\nDo you want to proceed and add only as many caches as the list can hold?</string>
+    <string name="info_log_posting_background">Log is being posted…</string>
+    <string name="info_log_post_success">Log for %s successfully sent</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
-    <string name="info_log_post_failed">Posting log failed.</string>
+    <string name="info_log_post_failed_geocode">Posting log for %s failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
-    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
-    <string name="info_log_post_retry">Retry</string>
-    <string name="info_log_post_save">Save offline</string>
+    <string name="info_log_delete_failed_simple_reason">Check if you are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
     <string name="info_log_cleared">Log was cleared.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
@@ -397,9 +396,8 @@
     <string name="translator_model_download_success">Translation model for %s downloaded</string>
     <string name="translator_model_download_error">Failed to download translation model %1$s: %2$s</string>
     <string name="translator_model">Translation model</string>
-    <string name="translator_tooltip">Offline translate with Google</string>
+    <string name="translator_tooltip">Offline translate</string>
     <string name="translator_language_select">Select source language</string>
-    <string name="translator_language_target_select">Select target language</string>
     <string name="translator_language_unsupported">Language (%s) not supported for translation. Tap to select source language.</string>
     <string name="translator_language_unknown">Unable to identify language. Tap to select source language.</string>
     <string name="translator_language_detected">Translate from "%s". Tap to select source language.</string>
@@ -407,7 +405,6 @@
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
     <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
-    <string name="translator_attributed_to">Translated by %s</string>
     <string name="crash_activity_title">Oops! c:geo crashed!</string>
     <string name="crash_activity_report">report problem</string>
 
@@ -485,6 +482,7 @@
         <item quantity="many">%d caches downloaded</item>
         <item quantity="other">%d caches downloaded</item>
     </plurals>
+    <string name="caches_store_background_skipped">Skipped offline caches: %d</string>
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
@@ -575,6 +573,7 @@
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_recalculate_health_score">Recalculate cache health scores</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
@@ -608,7 +607,7 @@
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
-    <string name="list_menu_rename_list_prefix">Rename list prefix</string>
+    <string name="list_menu_rename_parent_lists">Rename parent lists</string>
     <string name="rename_from">Rename from</string>
     <string name="rename_to">Rename to</string>
     <string name="list_menu_import">Import</string>
@@ -620,6 +619,8 @@
     <string name="list_dialog_create_title">New list</string>
     <string name="list_dialog_create">Create</string>
     <string name="list_dialog_create_err">c:geo failed to create the new list</string>
+    <string name="list_already_exists_title">List already exists</string>
+    <string name="list_already_exists_message">A list named \'%s\' already exists. Use the existing list?</string>
     <string name="list_dialog_remove_title">Remove list</string>
     <string name="list_dialog_remove_description">Do you want to remove the current list? All caches remaining in the list will be moved to \"Stored\".</string>
     <string name="list_dialog_remove_nowempty">List is empty. Do you want to remove the current list?</string>
@@ -628,8 +629,6 @@
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
     <string name="list_not_available">List no longer available, switching to standard list</string>
-    <string name="list_parent_list">Parent list</string>
-    <string name="list_create_parent">&lt;Create new parent list&gt;</string>
     <string name="list_name">List name</string>
     <string name="list_confirm_rename">Renaming from \"%1$s\" to \"%2$s\"\n%3$s\nThis action cannot be undone!</string>
     <string name="list_confirm_no_hierarchy">\nNo \":\" found - all matching lists will be transformed to top-level lists\n</string>
@@ -639,11 +638,11 @@
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Switch to Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Changing to \'Basic\' mode will result in loss of filter settings. Do you want to continue?</string>
 
-    <string name="cache_filter_add_button">Add filter criteria</string>
     <string name="cache_filter_option_and_or">Use OR instead of AND</string>
     <string name="cache_filter_option_inverse">Inverse Filter</string>
     <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
     <string name="cache_filter_option_include_inconclusive_info">Whether to include cache in result when a filter needs info on cache which is not available.</string>
+    <string name="cache_filter_add_button">Add filter criteria</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tap \'Add filter criteria\' above to add a filter</string>
 
     <string name="cache_filter_name">Cache Name</string>
@@ -675,7 +674,9 @@
     <string name="cache_filter_stored_since">Last details update</string>
     <string name="cache_filter_category">BC Category</string>
     <string name="cache_filter_tier">BC Tier</string>
-    <string name="cache_filter_named_filter">Named Filter</string>
+    <string name="cache_filter_health_score">Cache health score</string>
+    <string name="cache_filter_health_score_include_unscored">Include caches with no scoreable logs</string>
+    <string name="cache_filter_named_filter">Filter</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
@@ -707,17 +708,7 @@
 
     <string name="cache_filter_storage_delete_button">Delete</string>
     <string name="cache_filter_storage_clear_button">Clear</string>
-    <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
     <string name="cache_filter_storage_select_title">Select filter</string>
-    <string name="cache_filter_storage_delete_title">Delete filter</string>
-    <string name="cache_filter_storage_delete_message">Do you really want to delete this filter config?</string>
-    <string name="cache_filter_storage_select_clear_title">Select filter or clear current filter</string>
-    <string name="cache_filter_storage_clear_title">Clear current filter</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">No filter are stored yet.</string>
-    <string name="cache_filter_storage_save_title">Save filter with name</string>
-    <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
-    <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
-    <string name="cache_filter_storage_clear_message">Do you want to clear the current filter?</string>
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Search Text</string>
@@ -879,12 +870,33 @@
         <item>&gt;1m</item>
     </string-array>
 
-    <!-- conditional cache markers -->
-    <string name="conditional_marker_activity_title">Conditional markers</string>
-    <string name="conditional_marker_add_rule">Add rule</string>
-    <string name="conditional_marker_empty_hint">No rules configured. Tap + to add one.</string>
-    <string name="conditional_marker_nofilter_label">(no filter — marks all caches)</string>
+    <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Manage Filter</string>
+    <string name="named_filter_select_title">Select filter</string>
+    <string name="named_filter_empty_hint">No filters configured. Tap + to add one.</string>
+    <string name="named_filter_fill_with_named">Load filter</string>
+    <string name="named_filter_save_as">Save filter</string>
+    <string name="named_filter_delete">Delete filter</string>
+    <string name="named_filter_storage_delete_message">Do you really want to delete the filter \'%s\'?</string>
+    <string name="named_filter_name_exists_title">Name already exists</string>
+    <string name="named_filter_name_exists_message">A filter named \'%s\' already exists. Overwrite?</string>
+    <string name="named_filter_config_exists_title">Filter already saved</string>
+    <string name="named_filter_config_exists_message">This filter configuration is already saved as \'%s\'. Save again with a new name?</string>
 
+    <string name="named_filter_markers">Markers</string>
+    <string name="named_filter_markers_enabled">Markers enabled</string>
+    <string name="named_filter_markers_disabled">Markers disabled</string>
+    <string name="named_filter_manage">Manage</string>
+    <string name="named_filter_no_icons_message">No stored filters with assigned icon exist. Save one to use it as marker.</string>
+    <string name="named_filter_reorder">Priority</string>
+    <string name="named_filter_activity_title">Marker priority</string>
+    <string name="named_filter_enable_markers">Select markers</string>
+
+    <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Parent</string>
+    <string name="dialog_parent_select">Select Parent</string>
+    <string name="dialog_parent_new">Create new parent</string>
+    <string name="dialog_name">Name</string>
 
     <!-- about -->
     <string name="about_version">Version</string>
@@ -998,7 +1010,30 @@
     <string name="settings_hide_tileproviders_summary">Exclude one or more map sources from map source selection</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap variants</string>
     <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
+    <string name="settings_userDefinedTileProviders">User-defined tile providers</string>
+    <string name="settings_userDefinedTileProviders_summary">Tile servers to use as the map itself, in addition to the ones c:geo comes with</string>
+    <string name="settings_userDefinedTileProvider_addnew">Add a new tile provider</string>
+    <string name="settings_userDefinedTileProvider_edit">Edit tile provider</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Do you really want to remove this tile provider?</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
+    <string name="settings_tileOverlays">User-defined overlays</string>
+    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example sea marks or hiking routes</string>
+    <string name="settings_tileOverlays_add">Add overlay</string>
+    <string name="settings_tileOverlays_edit">Edit overlay</string>
+    <string name="settings_tileOverlays_url_hint">Enter the full Uri including the {X}, {Y} and {Z} placeholders. Tiles must be transparent where they carry no data. Make sure you have checked and comply to the provider\'s usage conditions.</string>
+    <string name="settings_tileOverlays_delete">Delete overlay</string>
+    <string name="settings_tileOverlays_delete_confirm">Delete overlay \"%1$s\"?</string>
+
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Name</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Please enter a http(s) Uri containing {X}, {Y} and {Z}</string>
+    <string name="settings_tileUrl_test">Test</string>
+    <string name="settings_tileUrl_testing">Checking\u2026</string>
+    <string name="settings_tileUrl_testok">A tile was received</string>
+    <string name="settings_tileUrl_testfailed_title">No tile received</string>
+    <string name="settings_tileUrl_testfailed">Could not load a tile from this server (%1$s). The Uri may be wrong, or the server may be temporarily unavailable.</string>
+    <string name="settings_tileUrl_copied">Copied, ready to be shared</string>
     <string name="settings_title_data_dir">Geocache data folder</string>
     <string name="settings_title_data_dir_usage">Geocache data folder (%1$s used)</string>
     <string name="calculate_dataDir_title">Geocache data usage</string>
@@ -1038,7 +1073,7 @@
     <string name="settings_lc_description">Include Adventure Lab caches on the map.\n\n(Available to \"Geocaching.com\" premium members only. Requires an activated \"Geocaching.com\" service.)\n\nChanging this setting requires a restart.</string>
     <string name="settings_lc_found_state_title">Manual found state</string>
     <string name="settings_lc_found_state_handling">If checked, do not automatically obtain the true found state for Adventure Lab caches, instead, provide controls for the user to manually set the found state</string>
-    <string name="lc_default_description">This is a geocaching.com Adventure Lab Cache. Adventures can only be played with the Groundspeak Adventure Lab App. Tap on the Adventure Lab icon on the \"Details\" page to open/install the Adventure Lab App for this adventure from there.\nIf you don\'t want to see Adenture Lab caches on your map and search, you can deactivate using the \"settings\" menu - Services - Geocaching.com Adventure Lab</string>
+    <string name="lc_default_description">This is a geocaching.com Adventure Lab Cache. Adventures can only be played with the Groundspeak Adventure Lab App. Tap on the Adventure Lab icon on the \"Details\" page to open/install the Adventure Lab App for this adventure from there.\nIf you don\'t want to see Adventure Lab caches on your map and search, you can deactivate using the \"settings\" menu - Services - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
     <string name="init_summary_oc_pl">Load caches from opencaching.pl</string>
@@ -1143,8 +1178,6 @@
     <string name="init_summary_bigSmileysOnMap">If enabled, symbols like the \'found smiley\' or the \'corrected coordinates\' marker will be shown enlarged on the map instead of the cache type icon.</string>
     <string name="init_dtMarkerOnCacheIcon">D/T rating on cache icons</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Show an marker for the Difficulty (left) and Terrain (right) ratings on cache markers in upper-right corner ("stored" marker is moved to middle).</string>
-    <string name="init_conditionalCacheMarkers">Conditional cache markers</string>
-    <string name="init_summary_conditionalCacheMarkers">Define marker symbols to be drawn on cache icons based on filter conditions</string>
     <string name="init_showElevation">Show Elevation</string>
     <string name="init_summary_showElevation">Show elevation info for current position, taken from routing data or GNSS (if available)</string>
     <string name="init_elevation_notAvailable">"No elevation data available"</string>
@@ -1291,7 +1324,7 @@
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
     <string name="settings_info_hillshading_title">Info on Hillshading</string>
-    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nHillshading data can be downloaded from maps overflow menu.\nNot compatible with UnifiedMap VTM variant.</string>
+    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nHillshading data can be downloaded from maps overflow menu.</string>
     <string name="settings_hillshading_enable">Hillshading</string>
     <string name="init_hillshading_hq">High quality hillshading</string>
     <string name="init_summary_hillshading_hq">More detailed hillshading overlay but ~50%% slower rendering when zoomed out</string>
@@ -1416,6 +1449,10 @@
     <string name="feature_voting">Voting for caches</string>
     <string name="init_appearance_general">General appearance</string>
     <string name="init_cachedetail_behaviour">Behaviour</string>
+    <string name="init_named_filter_display_mode">Named filters in cache details</string>
+    <string name="named_filter_display_mode_none">Do not show</string>
+    <string name="named_filter_display_mode_active_only">Only if marker is active</string>
+    <string name="named_filter_display_mode_all">Show all matching filters</string>
     <string name="init_cachedetail_note">Personal Cache Note</string>
     <string name="init_maplines_title">Map colors customization</string>
     <string name="init_map_other">Other</string>
@@ -1446,6 +1483,7 @@
     <string name="map_source_google_terrain">Google: Terrain</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_nomap">No map</string>
+    <string name="map_grayscale">Grayscale map</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
@@ -1667,6 +1705,7 @@
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_set_coordinates">Set coordinates</string>
     <string name="cache_personal_note">Personal note</string>
+    <string name="cache_personal_note_edit_pn">Edit personal note</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
     <string name="cache_personal_note_edit">Edit</string>
@@ -1860,6 +1899,9 @@
 
     <string name="cache_multiple_wherigo_cartridges_title">Multiple Wherigo cartridges</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consult cache listing for further information about the cartridges.</string>
+    <string name="cache_wherigo_no_cartridge_fetch">Looking for Wherigo cartridge</string>
+    <string name="cache_wherigo_no_cartridge_title">No Wherigo cartridge found</string>
+    <string name="cache_wherigo_no_cartridge_message">Consult cache listing for information about retrieving the cartridge.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - not downloaded</string>
     <string name="cache_wherigo_start">Download and play this Wherigo using c:geo\'s internal player</string>
     <string name="cache_wherigo_credentials">In order to play this Wherigo using c:geo\'s internal player you need to authorize against geocaching.com service first. Tap on the button on the right to go to configuration.</string>
@@ -1909,6 +1951,8 @@
     <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
     <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="init_autozoom_consider_lastcenter">Restore map position on mapping a list</string>
+    <string name="init_mapOnLockScreen">Lock Screen</string>
+    <string name="init_summary_mapOnLockScreen">Show map on your device\'s lock screen. To unlock your device while map is being shown, use the back button/gesture.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">When a list of caches is mapped and map was previously left inside the list boundaries restore preview position, otherwise zoom to fit all caches.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">When a list of caches is mapped set map zoom and boundaries to fit all caches.</string>
     <string name="goto_targets_list">User-defined caches</string>
@@ -1929,6 +1973,8 @@
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Averaging my coordinates… (%s)</string>
+    <string name="averaging_paused">paused</string>
 
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
@@ -2191,6 +2237,7 @@
     <string name="geo_search_label">Search caches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
     <string name="search_bar_hint_settings">Search settings</string>
+    <string name="search_index_updated">Search database updated</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_address">Address</string>
     <string name="search_geo">Geocode</string>
@@ -2735,6 +2782,10 @@
         <item quantity="many">Set %d cache icons</item>
         <item quantity="other">Set %d cache icons</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Recalculating cache health scores…</string>
+    <string name="command_recalculate_health_score_result">Cache health scores recalculated: %d</string>
+    <string name="log_health_score_explanation_title">Cache health Score</string>
+    <string name="log_health_score_explanation">The cache health score is calculated from at most last %1$s log entries or until one of the following log types is found:  \n%2$s  \n\nIt is calculated as:  \n`(sum of weights of good logs) / (sum of weights of good and bad logs)`\n\n**Good Logs** are:  \n%3$s  \n\n**Bad logs** are:  \n%4$s  \n\nLogs are weighted by their age (newer logs have higher weight).</string>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
     <string name="live_map_status_http429">Please slow down, too many requests to %s</string>
@@ -2743,6 +2794,9 @@
     <string name="live_map_status_normal">Loading data without problems: %s</string>
 
     <string name="list_list_headline">Lists:</string>
+    <string name="filters_list_headline">Filters:</string>
+    <string name="filters_list_empty">No matching filters</string>
+
     <plurals name="extract_waypoints_result">
         <item quantity="zero">%d waypoints extracted</item>
         <item quantity="one">%d waypoint extracted</item>
@@ -2787,7 +2841,7 @@
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->
-    <string name="number_input_title">Set value</string>
+    <string name="number_input_title_short">Set value</string>
     <string name="number_input_range">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
@@ -2802,6 +2856,8 @@
     <string name="notification_channel_downloader_description">result notifications for downloads (e.g. offline maps)</string>
     <string name="notification_channel_cache_download_name">cache downloader</string>
     <string name="notification_channel_cache_download_description">result notifications for caches background downloads</string>
+    <string name="notification_channel_log_name">log posting</string>
+    <string name="notification_channel_log_description">progress and error notifications for posting cache logs</string>
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->
@@ -3125,6 +3181,8 @@
 
     <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
+    <string name="wherigo_confirm_exit">Exit</string>
+    <string name="wherigo_confirm_save_exit">Autosave &amp; Exit</string>
     <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
@@ -3164,6 +3222,9 @@
     <string name="delete">Delete</string>
     <string name="play">Play</string>
     <string name="copy" tools:ignore="PrivateResource">Copy</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="rename">Rename</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
@@ -3215,24 +3276,34 @@
 
     <!-- db inspection -->
     <string name="view_database">View database</string>
-    <string name="dbi_select_title">(Select table)</string>
-    <string name="dbi_columnproperties_title">Column properties</string>
-    <string name="dbi_columnproperties_message">Field: %1$s\nType: %2$s\nStorage: %3$s</string>
-    <string name="dbi_edit_title">Edit "%1$s" of row %2$d"</string>
+    <string name="dbi_config_columns">Configure columns</string>
     <string name="dbi_edit_ok">Field updated</string>
     <string name="dbi_edit_error">Error while updating field</string>
-    <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
-    <string name="dbi_search_title">Search for</string>
-    <string name="dbi_search_columnSelection">Restrict to</string>
+    <string name="dbi_sort_reset">Sorting reset</string>
+    <string name="dbi_sorted_by">Sorted by %1$s</string>
+    <string name="dbi_no_tables">No tables in this database</string>
+    <string name="dbi_select_table">Select table</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s at #%2$d is read/only</string>
+    <string name="dbi_edit_title">Edit "%1$s" at #%2$d"</string>
+    <string name="dbi_delete_row_title">Delete row</string>
+    <string name="dbi_delete_row_question">Delete the row #%1$d (%2$s) for good?</string>
+    <string name="dbi_delete_success">Row deleted: %1$s</string>
+    <string name="dbi_sql_editor">SQL Editor</string>
+    <string name="dbi_sqleditor_load_snippet">Stored statements</string>
+    <string name="dbi_sqleditor_snippet_saved">Statement stored</string>
+    <string name="dbi_sqleditor_no_snippets">No statement stored yet</string>
+    <string name="dbi_sqleditor_warning">SQL Editor is an experimental feature. Data loss may occur. Use at your own risk!</string>
 
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Recently used</string>
-    <string name="emoji_category_symbols">Symbols</string>
-    <string name="emoji_category_dots">Dots</string>
-    <string name="emoji_category_places">Places</string>
-    <string name="emoji_category_food">Food &amp; Beverage</string>
-    <string name="emoji_category_activity">Activity</string>
-    <string name="emoji_category_people">People</string>
-    <string name="emoji_category_numbers">Numbers</string>
-
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Search</string>
+    <string name="grid_search_reset">Reset</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Value</string>
+    <string name="grid_operator_starts_with">begins with</string>
+    <string name="grid_operator_not_starts_with">begins not with</string>
+    <string name="grid_operator_ends_with">ends with</string>
+    <string name="grid_operator_not_ends_with">ends not with</string>
+    <string name="grid_operator_contains">contains</string>
+    <string name="grid_operator_not_contains">does not contain</string>
 </resources>

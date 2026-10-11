@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.models.Trackable;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TravelBugConnectorTest {
 

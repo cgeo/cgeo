@@ -26,12 +26,4 @@ public interface ITranslateAccessor {
 
     void getTranslatorWithDownload(String sourceLanguage, String targetLanguage, Consumer<ITranslatorImpl> onSuccess, Consumer<Exception> onError);
 
-    /**
-     * Returns the display name of this translator backend, or null if no attribution label should be shown.
-     * Example: "Bergamot", "ML Kit"
-     */
-    default String getTranslatorName() {
-        return null;
-    }
-
 }

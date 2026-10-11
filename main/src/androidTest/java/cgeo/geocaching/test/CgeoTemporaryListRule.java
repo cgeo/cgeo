@@ -8,7 +8,7 @@ import cgeo.geocaching.storage.DataStore;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /** Sets up a (temporary) cache list in Cgeo for testing purposes */
 public class CgeoTemporaryListRule implements TestRule {

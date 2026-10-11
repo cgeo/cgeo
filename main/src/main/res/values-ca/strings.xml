@@ -234,10 +234,12 @@
     <string name="translate_external_label">Tradueix amb %s</string>
     <string name="translate_external_variant_app">Applicació</string>
     <string name="translate_external_variant_web">Lloc web</string>
+    <string name="translate_external_variant_unavailable">No disponible</string>
     <string name="translate_external_none">&lt;Cap&gt;</string>
     <string name="translate_external_app">Aplicació externa</string>
     <string name="translate_external_google">Google Translate</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Traductor fora de línia DavidV</string>
     <string name="translate_length_warning">La traducció a través del lloc web pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -329,14 +331,13 @@
     <string name="err_read_bookmark_list">S\'ha produït un error en llegir les llistes de marcadors.</string>
     <string name="err_bookmark_list_overfull">Massa catxés</string>
     <string name="err_bookmark_list_overfull_description">Les llistes de marcadors només poden emmagatzemar fins a 1000 catxés; esteu intentant afegir-ne més a la llista.\n\nVoleu continuar i afegir només tants catxés com pugui contenir la llista?</string>
+    <string name="info_log_posting_background">S\'està publicant el registre…</string>
+    <string name="info_log_post_success">El registre de %s s\'ha enviat correctament</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
-    <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
+    <string name="info_log_post_failed_geocode">Ha fallat la publicació del registre de %s.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
-    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
-    <string name="info_log_post_retry">Anterior</string>
-    <string name="info_log_post_save">Guarda-ho  fora de línia</string>
+    <string name="info_log_delete_failed_simple_reason">Comproveu si heu iniciat la sessió correctament, si teniu una connexió a Internet vàlida i que el registre no s\'hagi suprimit ja.</string>
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
     <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
     <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
@@ -374,9 +375,8 @@
     <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
     <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
     <string name="translator_model">Model de traducció</string>
-    <string name="translator_tooltip">Traducció fora de línia amb Google</string>
+    <string name="translator_tooltip">Traducció fora de línia</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
-    <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_language_unknown">No s\'ha pogut identificar l\'idioma. Toca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_language_detected">Tradueix de \"%s\". Toca per seleccionar l\'idioma d\'origen.</string>
@@ -447,6 +447,7 @@
         <item quantity="one">S\'ha descarregat %d catxécatxé</item>
         <item quantity="other">S\'ha descarregat %d catxés</item>
     </plurals>
+    <string name="caches_store_background_skipped">Catxés fora de línia omesos: %d</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
@@ -517,6 +518,14 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
     <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
+    <string name="caches_warning_delete_user_data_others">Suprimeix altres</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">El catxé %1$d/%2$d conté dades d\'usuari. Les dades d\'usuari es perdran en suprimir el catxé.</item>
+        <item quantity="other">Els catxés %1$d/%2$d tenen dades d\'usuari. Les dades d\'usuari es perdran en suprimir els catxés.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Aquesta acció eliminarà tots els catxés (%d) del dispositiu.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Elimina altres</string>
+    <string name="caches_warning_remove_caches_from_single_list">Els catxés %1$d/%2$d només són en aquesta llista. Si elimineu aquests catxés de la llista, s\'eliminaran del dispositiu.</string>
     <string name="caches_show_attributes_all">Mostra la visió general d\'atributs per a tots els catxés</string>
     <string name="caches_show_attributes_selected">Mostra la visió general d\'atributs per els catxés seleccionats</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
@@ -525,6 +534,7 @@
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
+    <string name="caches_recalculate_health_score">Recalcula les puntuacions de l\'estat del catxé</string>
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
@@ -545,7 +555,7 @@
     <string name="list_menu_create">Crea una llista nova</string>
     <string name="list_menu_drop">Esborra la llista actual</string>
     <string name="list_menu_rename">Reanomena la llista actual</string>
-    <string name="list_menu_rename_list_prefix">Canvia el nom del prefix de la llista</string>
+    <string name="list_menu_rename_parent_lists">Canviar el nom de les llistes principals</string>
     <string name="rename_from">Canvia el nom de</string>
     <string name="rename_to">Canvia el nom a</string>
     <string name="list_menu_import">Importa</string>
@@ -557,6 +567,8 @@
     <string name="list_dialog_create_title">Llista nova</string>
     <string name="list_dialog_create">Crea</string>
     <string name="list_dialog_create_err">El c:geo no ha pogut crear la nova llista</string>
+    <string name="list_already_exists_title">La llista ja existeix</string>
+    <string name="list_already_exists_message">Ja existeix una llista anomenada \'%s\'. Voleu utilitzar la llista existent?</string>
     <string name="list_dialog_remove_title">Elimina la llista</string>
     <string name="list_dialog_remove_description">Voleu eliminar la llista actual? Tots els catxés de la llista es desplaçaran a \"Desats\".</string>
     <string name="list_dialog_remove_nowempty">La llista és buida. Voleu eliminar-la?</string>
@@ -565,8 +577,6 @@
     <string name="list_dialog_rename_title">Canvia el nom de la llista</string>
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
-    <string name="list_parent_list">Llista parental</string>
-    <string name="list_create_parent">&lt;Crea una nova llista principal&gt;</string>
     <string name="list_name">Nom de la llista</string>
     <string name="list_confirm_rename">S\'està canviant el nom de \"%1$s\" a \"%2$s\"\n%3$s\n Aquesta acció no es pot desfer!</string>
     <string name="list_confirm_no_hierarchy">\nNo s\'ha trobat cap \":\" totes les llistes coincidents es transformaran en llistes de nivell superior\n</string>
@@ -574,11 +584,11 @@
     <string name="cache_filter_mode_advanced">Avançat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Canvieu a Bàsic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Canviar al mode \"Bàsic\" provocarà la pèrdua de la configuració del filtre. Vols continuar?</string>
-    <string name="cache_filter_add_button">Afegiu criteris de filtre</string>
     <string name="cache_filter_option_and_or">Utilitzeu OR en lloc de AND</string>
     <string name="cache_filter_option_inverse">Filtre invers</string>
     <string name="cache_filter_option_include_inconclusive">Incloure coincidències poc concloents</string>
     <string name="cache_filter_option_include_inconclusive_info">S’inclou el catxé al resultat quan un filtre necessita informació sobre el catxé que no està disponible.</string>
+    <string name="cache_filter_add_button">Afegeix criteris de filtre</string>
     <string name="cache_filter_hint_on_empty_filter_list">Toqueu a sobre \"Afegeix criteris de filtre\" per afegir un filtre</string>
     <string name="cache_filter_name">Nom del Catxé</string>
     <string name="cache_filter_type">Tipus de Catxé</string>
@@ -609,7 +619,9 @@
     <string name="cache_filter_stored_since">Última actualització de detalls</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">Nivell BC</string>
-    <string name="cache_filter_named_filter">Filtre amb nom</string>
+    <string name="cache_filter_health_score">Puntuació de l\'estat del catxé</string>
+    <string name="cache_filter_health_score_include_unscored">Inclou els catxés sense registres puntuables</string>
+    <string name="cache_filter_named_filter">Filtre</string>
     <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
@@ -630,17 +642,7 @@
     </plurals>
     <string name="cache_filter_storage_delete_button">Esborra</string>
     <string name="cache_filter_storage_clear_button">Esborra</string>
-    <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
     <string name="cache_filter_storage_select_title">Seleccioneu Filtre</string>
-    <string name="cache_filter_storage_delete_title">Esborrar el filtre</string>
-    <string name="cache_filter_storage_delete_message">Confirmes que vols suprimir aquesta configuració del filtre?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccioneu el filtre o esborreu el filtre actual</string>
-    <string name="cache_filter_storage_clear_title">Esborra el filtre actual</string>
-    <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
-    <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
-    <string name="cache_filter_storage_save_confirm_title">Desa la sobreescriptura del filtre</string>
-    <string name="cache_filter_storage_save_confirm_message">Ja existeix un filtre amb el nom \'%s\' i una configuració diferent. Voleu sobreescriure\'l?</string>
-    <string name="cache_filter_storage_clear_message">Voleu esborrar el filtre actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Cerca de Text</string>
     <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
@@ -755,6 +757,31 @@
         <item>1m</item>
         <item>&gt;1m</item>
     </string-array>
+    <!-- named filter activity -->
+    <string name="named_filter_manage_filter">Gestiona el filtre</string>
+    <string name="named_filter_select_title">Selecciona el filtre</string>
+    <string name="named_filter_empty_hint">No hi ha filtres configurats. Toca + per afegir-ne un.</string>
+    <string name="named_filter_fill_with_named">Carrega el filtre</string>
+    <string name="named_filter_save_as">Desa el filtre</string>
+    <string name="named_filter_delete">Suprimeix el filtre</string>
+    <string name="named_filter_storage_delete_message">De veritat voleu suprimir el filtre \'%s\'?</string>
+    <string name="named_filter_name_exists_title">El nom ja existeix</string>
+    <string name="named_filter_name_exists_message">Ja existeix un filtre anomenat \'%s\'. Voleu sobreescriure-ho?</string>
+    <string name="named_filter_config_exists_title">El filtre ja s\'ha desat</string>
+    <string name="named_filter_config_exists_message">Aquesta configuració de filtre ja està desada com a \'%s\'. Voleu tornar-la a desar amb un nom nou?</string>
+    <string name="named_filter_markers">Marcadors</string>
+    <string name="named_filter_markers_enabled">Marcadors activats</string>
+    <string name="named_filter_markers_disabled">Marcadors desactivats</string>
+    <string name="named_filter_manage">Gestiona</string>
+    <string name="named_filter_no_icons_message">No hi ha filtres emmagatzemats amb una icona assignada. Desa\'n un per utilitzar-lo com a marcador.</string>
+    <string name="named_filter_reorder">Prioritat</string>
+    <string name="named_filter_activity_title">Prioritat del marcador</string>
+    <string name="named_filter_enable_markers">Selecciona marcadors</string>
+    <!-- dialog to create element with parent -->
+    <string name="dialog_parent">Progenitor</string>
+    <string name="dialog_parent_select">Selecciona el Progenitor</string>
+    <string name="dialog_parent_new">Crea un nou progenitor</string>
+    <string name="dialog_name">Nom</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -861,7 +888,29 @@
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders">Proveïdors de tessel·les definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviders_summary">Servidors de tessel·les per utilitzar com a mapa, a més dels que inclou c:geo</string>
+    <string name="settings_userDefinedTileProvider_addnew">Afegeix un nou proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_edit">Edita el proveïdor de tessel·les</string>
+    <string name="settings_userDefinedTileProvider_remove_confirm">Vols eliminar realment aquest proveïdor de tessel·les?</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
+    <string name="settings_tileOverlays">Superposicions definides per l\'usuari</string>
+    <string name="settings_tileOverlays_summary">Servidors dels quals es dibuixen les tessel·les damunt del mapa, per exemple, marques marítimes o rutes de senderisme</string>
+    <string name="settings_tileOverlays_add">Afegeix una superposició</string>
+    <string name="settings_tileOverlays_edit">Edita la superposició</string>
+    <string name="settings_tileOverlays_url_hint">Introduïu l\'URI complet, incloent-hi els marcadors de posició {X}, {Y} i {Z}. Les tessel·les han de ser transparents allà on no continguin dades. Assegureu-vos d\'haver consultat i de complir les condicions d\'ús del proveïdor.</string>
+    <string name="settings_tileOverlays_delete">Suprimeix la superposició</string>
+    <string name="settings_tileOverlays_delete_confirm">Voleu suprimir la superposició «%1$s»?</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
+    <string name="settings_tileUrl_name">Nom</string>
+    <string name="settings_tileUrl_uri">Uri</string>
+    <string name="settings_tileUrl_invalid">Introduïu una URI http(s) que contingui {X}, {Y} i {Z}</string>
+    <string name="settings_tileUrl_test">Prova</string>
+    <string name="settings_tileUrl_testing">S\'està comprovant\u2026</string>
+    <string name="settings_tileUrl_testok">Es va rebre una tessel·la</string>
+    <string name="settings_tileUrl_testfailed_title">No s\'ha rebut cap tessel·la</string>
+    <string name="settings_tileUrl_testfailed">No s\'ha pogut carregar una tessel·la des d\'aquest servidor (%1$s). És possible que l\'URI sigui incorrecte o que el servidor no estigui disponible temporalment.</string>
+    <string name="settings_tileUrl_copied">Copiat, a punt per compartir-se</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -896,7 +945,7 @@
     <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
     <string name="settings_lc_found_state_title">Estat trobat manualment</string>
     <string name="settings_lc_found_state_handling">Si està marcat, no obteniu automàticament l\'estat trobat veritable per a les catxés d\'Adventure Lab, sinó que proporcioneu controls perquè l\'usuari estableixi manualment l\'estat trobat</string>
-    <string name="lc_default_description">Es tracta d’un Adventure Lab catxé de geocaching.com. Les aventures només es poden jugar amb l’aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab de la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure les Adventure Lab al vostre mapa i fer cerques, podeu desactivar-les mitjançant el menu \"Configuració\"- Serveis - Geocaching.com Adventure Lab</string>
+    <string name="lc_default_description">Aquest és un catxé de l\'Adventure Lab de geocaching.com. Les aventures només es poden jugar amb l\'aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab a la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure els catxés d\'Adventure Lab al vostre mapa i cerca, podeu desactivar-les mitjançant el menú \"configuració\" - Serveis - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="init_summary_oc_pl">Carregar catxés des de opencaching.pl</string>
@@ -1138,7 +1187,7 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes topogràfics en relleu afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/s\'aclariran per generar un efecte 3D.\nLes dades d\'ombrejat es poden descarregar des del menú addicional dels mapes.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
@@ -1262,6 +1311,10 @@
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_appearance_general">Aparença general</string>
     <string name="init_cachedetail_behaviour">Comportament</string>
+    <string name="init_named_filter_display_mode">Filtres amb nom als detalls del catxé</string>
+    <string name="named_filter_display_mode_none">No mostrar</string>
+    <string name="named_filter_display_mode_active_only">Només si el marcador està actiu</string>
+    <string name="named_filter_display_mode_all">Mostra tots els filtres coincidents</string>
     <string name="init_cachedetail_note">Nota de catxé personal</string>
     <string name="init_maplines_title">Personalització dels colors del mapa</string>
     <string name="init_map_other">Altres</string>
@@ -1290,6 +1343,7 @@
     <string name="map_source_google_terrain">Google: Terreny</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_nomap">Sense mapa</string>
+    <string name="map_grayscale">Mapa d\'escala de grisos</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
@@ -1455,6 +1509,7 @@
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
+    <string name="cache_personal_note_edit_pn">Edita la nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
     <string name="cache_menu_allowWaypointExtraction">Permetre punts de ruta de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
@@ -1578,7 +1633,6 @@
     <string name="menu_collapse_log">Redueix el registre</string>
     <string name="cache_log_menu_delete">Suprimeix el registre</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
-    <string name="cache_log_delete_reason">Motiu (màx. %d caràcters)</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
@@ -1647,6 +1701,9 @@
     <string name="cachedetails_progress_unfavorite">S\'ha esborrat de preferits</string>
     <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartutxos Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Consulteu la llista de catxés per obtenir més informació sobre els cartutxos.</string>
+    <string name="cache_wherigo_no_cartridge_fetch">Buscant cartutxos Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_title">No s\'ha trobat cap cartutx Wherigo</string>
+    <string name="cache_wherigo_no_cartridge_message">Consulteu la pàgina del catxé per obtenir informació sobre com recuperar el cartutx.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - no descarregat</string>
     <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
     <string name="cache_wherigo_credentials">Per poder jugar a aquest Wherigo amb el reproductor intern de c:geo, primer heu d\'autoritzar el servei geocaching.com. Toqueu el botó de la dreta per anar a la configuració.</string>
@@ -1709,6 +1766,8 @@
     <string name="cc_hint_seconds">segons</string>
     <string name="cc_hint_fraction">fracció</string>
     <string name="hash_symbol">#</string>
+    <string name="averaging_my_coordinates2">Fent la mitjana de les meves coordenades… (%s)</string>
+    <string name="averaging_paused">en pausa</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
@@ -1739,6 +1798,7 @@
     <string name="waypoint_coordinates">Coordenades</string>
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
     <string name="waypoint_calculated_coordinates_global">Calcula la coordenada</string>
+    <string name="waypoint_select_from_map">Selecciona del mapa</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_my_coordinates_accuracy">Les meves coordenades (±%s)</string>
@@ -1812,6 +1872,7 @@
     <string name="calccoord_select_variable">Selecciona una variable</string>
     <string name="calccoord_new_variable">**%s** *(Nou)*</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_convert_to_plain_error">La fórmula no s\'avalua en coordenades vàlides.\nLa conversió a coordenades planes restablirà el punt de referència a coordenades buides.</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina espais</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
@@ -1942,6 +2003,7 @@
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_hint_settings">Configuració de cerca</string>
+    <string name="search_index_updated">Base de dades de cerca actualitzada</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_geo">Geocodi</string>
@@ -2380,6 +2442,11 @@
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
     <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
     <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Eliminació dels catxés</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">S\'ha eliminat el catxé %d</item>
+        <item quantity="other">S\'ha eliminat els catxés %d</item>
+    </plurals>
     <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d catxé mogut</item>
@@ -2411,12 +2478,18 @@
         <item quantity="one">Definiu %d icona del catxé</item>
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
+    <string name="command_recalculate_health_score_progress">Recalculant les puntuacions d\'estat del catxé…</string>
+    <string name="command_recalculate_health_score_result">Puntuacions d\'estat del catxé recalculades: %d</string>
+    <string name="log_health_score_explanation_title">Puntuació de l\'estat del catxé</string>
+    <string name="log_health_score_explanation">La puntuació de l\'estat del catxé es calcula a partir de com a màxim les últimes %1$s entrades de registre o fins que es trobi un dels següents tipus de registre: \n%2$s \n\nEs calcula com a: \n`(suma dels pesos dels registres bons) / (suma dels pesos dels registres bons i dolents)`\n\n**Els registres bons** són: \n%3$s \n\n**Els registres dolents** són: \n%4$s \n\nEls registres es ponderen per la seva antiguitat (els registres més nous tenen un pes més alt).</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
     <string name="live_map_status_http429">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
     <string name="live_map_status_error">Error en carregar les dades del mapa: %s</string>
     <string name="live_map_status_partial">Resultats parcials (apropa per reduir el nombre de catxés per carregar): %s</string>
     <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
+    <string name="filters_list_headline">Filtres:</string>
+    <string name="filters_list_empty">No hi ha filtres coincidents</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
         <item quantity="other">%d punts de ruta extrets</item>
@@ -2451,7 +2524,7 @@
     <string name="preference_colorpicker_show_width">amplada: %d</string>
     <string name="reset_to_default">Per defecte</string>
     <!-- number input -->
-    <string name="number_input_title">Estableix el valor</string>
+    <string name="number_input_title_short">Estableix el valor</string>
     <string name="number_input_range">Introduïu un valor entre %1$s i %2$s</string>
     <string name="number_input_err_boundarymin">El valor introduït és massa petit: restableix el valor mínim</string>
     <string name="number_input_err_boundarymax">El valor introduït és massa gran: restableix el valor màxim</string>
@@ -2465,6 +2538,8 @@
     <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
     <string name="notification_channel_cache_download_name">descàrrega de catxé</string>
     <string name="notification_channel_cache_download_description">notificacions de resultats per a les baixades de fons de catxés</string>
+    <string name="notification_channel_log_name">publicació de registre</string>
+    <string name="notification_channel_log_description">notificacions de progrés i errors per a la publicació de registres de catxés</string>
     <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
@@ -2619,7 +2694,7 @@
     <string name="check_hillshading_found">Dades d\'ombrejat ja presents</string>
     <string name="check_hillshading_missing">S\'han trobat dades d\'ombrejats que falten:</string>
     <string name="check_hillshading_unsupported">Avís: les dades d\'ombrejats no estan disponibles almenys en part per a la regió seleccionada</string>
-    <string name="check_hillshading_tiles_menu">Comproveu si falten dades d\'ombrejat</string>
+    <string name="check_hillshading_tiles_menu">Comprova si falten dades d\'elevació</string>
     <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
     <string name="updates_check">Revisió de les actualitzacions</string>
@@ -2752,6 +2827,8 @@
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
+    <string name="wherigo_confirm_exit">Sortir</string>
+    <string name="wherigo_confirm_save_exit">Desa automàticament &amp; surt</string>
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
@@ -2785,6 +2862,9 @@
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
     <string name="copy" tools:ignore="PrivateResource">Còpia</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Continua</string>
+    <string name="rename">Canvia el nom</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>
@@ -2827,22 +2907,33 @@
     <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
-    <string name="dbi_select_title">(Selecciona la taula)</string>
-    <string name="dbi_columnproperties_title">Propietats de la columna</string>
-    <string name="dbi_columnproperties_message">Camp: %1$s\nTipus: %2$s\nEmmagatzematge: %3$s</string>
-    <string name="dbi_edit_title">Edita \"%1$s\" de la fila %2$d</string>
+    <string name="dbi_config_columns">Configura les columnes</string>
     <string name="dbi_edit_ok">Camp actualitzat</string>
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
-    <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
-    <string name="dbi_search_title">Buscar per</string>
-    <string name="dbi_search_columnSelection">Restringir a</string>
-    <!-- emoji categories -->
-    <string name="emoji_category_recent">Usat recentment</string>
-    <string name="emoji_category_symbols">Símbols</string>
-    <string name="emoji_category_dots">Punts</string>
-    <string name="emoji_category_places">Llocs</string>
-    <string name="emoji_category_food">Menjar &amp; Beguda</string>
-    <string name="emoji_category_activity">Activitat</string>
-    <string name="emoji_category_people">Gent</string>
-    <string name="emoji_category_numbers">Nombres</string>
+    <string name="dbi_sort_reset">Restabliment de l\'ordenació</string>
+    <string name="dbi_sorted_by">Ordenat per %1$s</string>
+    <string name="dbi_no_tables">No hi ha taules en aquesta base de dades</string>
+    <string name="dbi_select_table">Selecciona la taula</string>
+    <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
+    <string name="dbi_read_only">%1$s a #%2$d és de lectura/només</string>
+    <string name="dbi_edit_title">Edita «%1$s» a #%2$d</string>
+    <string name="dbi_delete_row_title">Suprimeix la fila</string>
+    <string name="dbi_delete_row_question">Vols eliminar definitivament la fila #%1$d (%2$s)?</string>
+    <string name="dbi_delete_success">Fila suprimida: %1$s</string>
+    <string name="dbi_sql_editor">Editor SQL</string>
+    <string name="dbi_sqleditor_load_snippet">Sentències emmagatzemades</string>
+    <string name="dbi_sqleditor_snippet_saved">Senténcia emmagatzemada</string>
+    <string name="dbi_sqleditor_no_snippets">Encara no s\'ha emmagatzemat cap senténcia</string>
+    <string name="dbi_sqleditor_warning">L\'editor SQL és una funcionalitat experimental. Es pot produir pèrdua de dades. Utilitzeu-lo sota la vostra pròpia responsabilitat!</string>
+    <!-- db inspection, overriding values of "grid" to support translation -->
+    <string name="grid_search_title">Cerca</string>
+    <string name="grid_search_reset">Restablir</string>
+    <string name="grid_search_global">Global</string>
+    <string name="grid_search_value">Valor</string>
+    <string name="grid_operator_starts_with">comença amb</string>
+    <string name="grid_operator_not_starts_with">no comença amb</string>
+    <string name="grid_operator_ends_with">acaba amb</string>
+    <string name="grid_operator_not_ends_with">no acaba amb</string>
+    <string name="grid_operator_contains">conté</string>
+    <string name="grid_operator_not_contains">no conté</string>
 </resources>

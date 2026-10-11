@@ -35,6 +35,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
 /** Provides methods to handle all aspects of creating, editing and deleting Log entries for GC.com (both caches and trackables) */
@@ -226,22 +229,26 @@ public class GCLogAPI {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }
 
-        //2,) Fill Log Entry object and post it
-        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, inventory);
+        //2.) Build batch request body: {"0":{"referenceCode":"GCxxx","body":{...}}}
+        final TrpcRequestBody requestBody = new TrpcRequestBody(geocode).with("body", buildLogBodyNode(logEntry, inventory));
 
-        try (GCWebLogResponse response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
+        //3.) POST to new batch endpoint
+        final TrpcResponseBody response = TrpcResponseBody.of(websiteReq().uri("/api/live/v1/trpc/web.logs.createGeocacheLog")
+                .uriParams("batch", "1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(logEntryRequest)
-                .requestJson(GCWebLogResponse.class).blockingGet()) {
+                .bodyJson(requestBody.build())
+                .requestJsonNode().blockingGet());
 
-            if (response.logReferenceCode == null) {
-                return generateLogError("CreateLog: Problem with server, request JSON=[" + HttpRequest.getJsonBody(logEntryRequest) +
-                        "], response=[" + response + "]");
-            }
+        //Response: [{"result":{"data":{"logReferenceCode":"GLxxx",...}}}]
+        final String logReferenceCode = response.getText("logReferenceCode");
 
-            return LogResult.ok(response.logReferenceCode);
+        if (logReferenceCode == null) {
+            return generateLogError("CreateLog: Problem with server, request JSON=[" + requestBody +
+                    "], response=[" + response + "]");
         }
+
+        return LogResult.ok(logReferenceCode);
     }
 
     public static LogResult editLog(final String geocode, final LogEntry logEntry) {
@@ -252,35 +259,35 @@ public class GCLogAPI {
 
         final String logId = logEntry.serviceLogId;
 
-        //https://www.geocaching.com/live/geocache/GCxyz/log/GLabc/edit
         //1.) Call log edit page and get a valid CSRF Token
         final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }
 
-        //2,) Fill Log Entry object and PUT it
-        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, null);
+        //2.) Build batch request body: {"0":{"referenceCode":"GLxxx","body":{...}}}
+        final TrpcRequestBody requestBody = new TrpcRequestBody(logId).with("body", buildLogBodyNode(logEntry, null));
 
-        try (GCWebLogResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/" + logId)
-            .method(HttpRequest.Method.PUT)
-            .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-            .bodyJson(logEntryRequest)
-            .requestJson(GCWebLogResponse.class).blockingGet()) {
+        //3.) POST to new batch endpoint
+        final TrpcResponseBody response =  TrpcResponseBody.of(websiteReq().uri("/api/live/v1/trpc/web.logs.updateGeocacheLog")
+                .uriParams("batch", "1")
+                .method(HttpRequest.Method.POST)
+                .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+                .bodyJson(requestBody.build())
+                .requestJsonNode().blockingGet());
 
-            if (response.logReferenceCode == null) {
-                return generateLogError("EditLog: problem with server, request JSON=[" + HttpRequest.getJsonBody(logEntryRequest) +
-                    "], response=[" + response + "]");
-            }
+        final String logReferenceCode = response.getText("logReferenceCode");
 
-            return LogResult.ok(response.logReferenceCode);
+        if (logReferenceCode == null) {
+            return generateLogError("EditLog: problem with server, request JSON=[" + requestBody +
+                "], response=[" + response + "]");
         }
+
+        return LogResult.ok(logReferenceCode);
 
     }
 
     public static LogResult deleteLog(final String logId, final String reasonText) {
-
-        //{"reasonText":"Deleting test log"}
 
         //1.) Call log view page and get a valid CSRF Token
         final String csrfToken = getCsrfToken();
@@ -292,23 +299,25 @@ public class GCLogAPI {
         if (StringUtils.isBlank(reason)) {
             reason = LocalizationUtils.getString(R.string.cache_log_delete_reason_default);
         }
-        final GCWebLogDelete deleteBody = new GCWebLogDelete();
-        deleteBody.reasonText = reason;
 
-        //2,) Send a DELETE Request (which is actually a POST)
-        try (HttpResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/delete/" + logId)
+        //2.) Build batch request body: {"0":{"referenceCode":"GLxxx","reasonText":"..."}}
+        final TrpcRequestBody requestBody = new TrpcRequestBody(logId).with("reasonText", reason);
+
+        //3.) POST to new batch endpoint
+        try (HttpResponse response = websiteReq().uri("/api/live/v1/trpc/web.logs.deleteGeocacheLog")
+            .uriParams("batch", "1")
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-            .bodyJson(reasonText == null ? null : deleteBody)
+            .bodyJson(requestBody.build())
             .request().blockingGet()) {
 
+            // Use status code for checking success
             if (!response.isSuccessful()) {
                 return generateLogError("DeleteLog: Problem deleting, response is: " + response);
             }
 
             return LogResult.ok(logId);
         }
-
     }
 
     @WorkerThread
@@ -368,11 +377,15 @@ public class GCLogAPI {
         }
 
         //2,) Send a DELETE Request (which is a POST)
-        try (HttpResponse response = websiteReq().uri("/api/live/v1/images/delete/" + logId + "/" + getGuidFrom(logImageId))
+        // the payload is not a "normal" trpc one, uses refCode instead of referenceCode. example request: {"0":{"refCode":"GL1GRJXXX","guid":"3908d144-065a-4270-9512-xxxxx"}}
+        try (HttpResponse response = websiteReq().uri("/api/live/v1/trpc/web.images.delete")
+            .uriParams("batch", "1")
             .method(HttpRequest.Method.POST)
+            .bodyJson("{\"0\":{\"refCode\":\"" + logId + "\",\"guid\":\"" + getGuidFrom(logImageId) + "\"}}")
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
             .request().blockingGet()) {
 
+            // Use status code for checking success
             if (!response.isSuccessful()) {
                 return generateImageLogError("Problem pasting log, response is: " + response);
             }
@@ -418,18 +431,24 @@ public class GCLogAPI {
             }
         }
 
-        //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
-        try (GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
+        final TrpcRequestBody requestBody = new TrpcRequestBody(trackableLog.geocode).with("body", JsonUtils.mapper.valueToTree(logEntry));
+
+        //URL: https://www.geocaching.com/api/live/v1/trpc/web.logs.createTrackableLog?batch=1
+        final TrpcResponseBody response = TrpcResponseBody.of(websiteReq().uri("/api/live/v1/trpc/web.logs.createTrackableLog")
+                .uriParams("batch", "1")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-                .bodyJson(logEntry)
-                .requestJson(GCWebTrackableLogResponse.class).blockingGet()) {
-            if (response.logReferenceCode == null) {
-                return generateLogError("Problem pasting trackable log, response is: " + response + ", request was:" + HttpRequest.safeGetJsonBody(logEntry));
-            }
+                .bodyJson(requestBody.build())
+                .requestJsonNode().blockingGet());
 
-            return LogResult.ok(response.logReferenceCode);
+        //Response: [{"result":{"data":{"logReferenceCode":"TLxxx",...}}}]
+        final String logReferenceCode = response.getText("logReferenceCode");
+        if (logReferenceCode == null) {
+            return generateLogError("Problem pasting trackable log, request JSON=[" + requestBody +
+                    "], response=[" + response + "]");
         }
+
+        return LogResult.ok(logReferenceCode);
 
 
     }
@@ -443,7 +462,9 @@ public class GCLogAPI {
         }
 
         //2,) Send a DELETE Request (which is actually a POST)
-        try (HttpResponse response = websiteReq().uri("/api/live/v1/logs/trackableLog/delete/" + logId)
+        try (HttpResponse response = websiteReq().uri("/api/live/v1/trpc/web.logs.deleteTrackableLog")
+            .uriParams("batch", "1")
+            .bodyJson(new TrpcRequestBody(logId).with("reasonText", "").build())
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
             .request().blockingGet()) {
@@ -469,28 +490,54 @@ public class GCLogAPI {
         return tokenizeLogImageId(logImageId)[1];
     }
 
-    private static GCWebLogRequest createLogRequest(final LogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
+    private static ObjectNode buildLogBodyNode(final LogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
 
         final OfflineLogEntry offlineLogEntry = logEntry instanceof OfflineLogEntry ? (OfflineLogEntry) logEntry : null;
 
-        final GCWebLogRequest logEntryRequest = new GCWebLogRequest();
-        logEntryRequest.images = CollectionStream.of(logEntry.logImages).filter(img -> img.serviceImageId != null).map(img -> getGuidFrom(img.serviceImageId)).toArray(String.class);
-        logEntryRequest.logDate = new Date(logEntry.date);
-        logEntryRequest.logType = logEntry.logType.id;
-        logEntryRequest.logText = logEntry.log;
-        logEntryRequest.trackables = offlineLogEntry == null ? new GCWebLogTrackable[0] : CollectionStream.of(offlineLogEntry.inventoryActions.entrySet())
-            .filter(a ->
-                inventory != null && inventory.containsKey(a.getKey()) && inventory.get(a.getKey()).getBrand() == TrackableBrand.TRAVELBUG)
-            .map(entry -> {
-                final GCWebLogTrackable tLog = new GCWebLogTrackable();
-                tLog.trackableCode = entry.getKey();
-                tLog.trackableLogTypeId = entry.getValue().gcApiId;
-                return tLog;
-        }).toArray(GCWebLogTrackable.class);
-        logEntryRequest.usedFavoritePoint = !Settings.isGCPremiumMember() ? null :
-                (offlineLogEntry != null && offlineLogEntry.favorite); //not used by web page, but seems to work
+        final ObjectNode body = JsonUtils.createObjectNode();
 
-        return logEntryRequest;
+        // images - always an array, can be empty
+        final ArrayNode imagesNode = JsonUtils.createArrayNode();
+        for (final String guid : CollectionStream.of(logEntry.logImages)
+                .filter(img -> img.serviceImageId != null)
+                .map(img -> getGuidFrom(img.serviceImageId))
+                .toList()) {
+            imagesNode.add(guid);
+        }
+        body.set("images", imagesNode);
+
+        // logDate
+        body.set("logDate", JsonUtils.fromDate(new Date(logEntry.date)));
+
+        // logText
+        body.put("logText", logEntry.log);
+
+        // logType
+        body.put("logType", logEntry.logType.id);
+
+        // trackables - always an array, can be empty
+        final ArrayNode trackablesNode = JsonUtils.createArrayNode();
+        if (offlineLogEntry != null && inventory != null) {
+            for (final Map.Entry<String, LogTypeTrackable> entry : CollectionStream.of(offlineLogEntry.inventoryActions.entrySet())
+                    .filter(a -> inventory.containsKey(a.getKey()) && inventory.get(a.getKey()).getBrand() == TrackableBrand.TRAVELBUG)
+                    .toList()) {
+                final ObjectNode tb = JsonUtils.createObjectNode();
+                tb.put("trackableCode", entry.getKey());
+                tb.put("trackableLogTypeId", entry.getValue().gcApiId);
+                trackablesNode.add(tb);
+            }
+        }
+        body.set("trackables", trackablesNode);
+
+        // geocacheReferenceCode - empty for cache logs
+        body.put("geocacheReferenceCode", "");
+
+        // usedFavoritePoint - only included for premium members
+        if (Settings.isGCPremiumMember()) {
+            body.put("usedFavoritePoint", offlineLogEntry != null && offlineLogEntry.favorite);
+        }
+
+        return body;
     }
 
     private static ImageResult putChangeImageData(final String logId, final String logImageId, final String csrfToken, final String name, final String description) {
@@ -548,5 +595,64 @@ public class GCLogAPI {
                 .requestJson(GCWebLogCsrfRequest.class)
                 .blockingGet();
         return StringUtils.isBlank(csrfResponse.csrfToken) ? null : csrfResponse.csrfToken;
+    }
+
+    // Helper classes for building and parsing JSONs for the TRPC batch endpoints
+    static class TrpcResponseBody {
+        private final JsonNode data;
+        private final boolean ok;
+
+        static TrpcResponseBody of(final JsonNode response) {
+            final JsonNode first = response != null && response.isArray() && !response.isEmpty() ? response.get(0) : null;
+            final JsonNode result = JsonUtils.get(first, "result");
+            return new TrpcResponseBody(result != null, JsonUtils.get(result, "data"));
+        }
+
+        private TrpcResponseBody(final boolean ok, final JsonNode data) {
+            this.ok = ok;
+            this.data = data;
+        }
+
+        public boolean isOk() {
+            return ok;
+        }
+
+        public String getText(final String field) {
+            return JsonUtils.getText(data, field, null);
+        }
+
+        @Override
+        public String toString() {
+            return JsonUtils.nodeToString(data);
+        }
+    }
+
+    static class TrpcRequestBody {
+        private final ObjectNode root;
+        private final ObjectNode entry;
+
+        TrpcRequestBody(final String referenceCode) {
+            entry = JsonUtils.createObjectNode().put("referenceCode", referenceCode);
+            root = JsonUtils.createObjectNode().set("0", entry);
+        }
+
+        TrpcRequestBody with(final String key, final String value) {
+            entry.put(key, value);
+            return this;
+        }
+
+        TrpcRequestBody with(final String key, final JsonNode value) {
+            entry.set(key, value);
+            return this;
+        }
+
+        ObjectNode build() {
+            return root;
+        }
+
+        @Override
+        public String toString() {
+            return JsonUtils.nodeToString(root);
+        }
     }
 }

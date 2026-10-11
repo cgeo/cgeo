@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.Strings;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DownloaderTest {
 
@@ -66,9 +66,9 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Portugal");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 261M as of 2023-03-15
+        final String sizeInfoString = d.getSizeInfo(); // 261M as of 2023-03-15, 365M as of 2026-09-20
         final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
-        assertThat(sizeInfoInt).isBetween(250, 350);
+        assertThat(sizeInfoInt).isBetween(300, 450);
     }
 
     @Test

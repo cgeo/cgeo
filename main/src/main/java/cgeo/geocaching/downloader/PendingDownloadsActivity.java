@@ -1,7 +1,7 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SplashActivity;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -59,7 +59,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             super.onBackPressed();
         } else {
             // if launched from outside c:geo
-            startActivity(new Intent(this, SplashActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }

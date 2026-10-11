@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleDisposableTest {
 
@@ -15,7 +15,7 @@ public class SimpleDisposableTest {
     public void testDispose() {
         final boolean[] called = {false};
         final SimpleDisposable disposable = new SimpleDisposable(() -> called[0] = true);
-        
+
         assertThat(disposable.isDisposed()).isFalse();
         disposable.dispose();
         assertThat(disposable.isDisposed()).isTrue();
@@ -26,11 +26,11 @@ public class SimpleDisposableTest {
     public void testDisposeMultipleTimes() {
         final int[] callCount = {0};
         final SimpleDisposable disposable = new SimpleDisposable(() -> callCount[0]++);
-        
+
         disposable.dispose();
         disposable.dispose();
         disposable.dispose();
-        
+
         assertThat(disposable.isDisposed()).isTrue();
         assertThat(callCount[0]).isEqualTo(1);
     }
@@ -53,7 +53,7 @@ public class SimpleDisposableTest {
     public void testDisposeExecutesRunnable() {
         final StringBuilder result = new StringBuilder();
         final SimpleDisposable disposable = new SimpleDisposable(() -> result.append("disposed"));
-        
+
         assertThat(result.toString()).isEmpty();
         disposable.dispose();
         assertThat(result.toString()).isEqualTo("disposed");

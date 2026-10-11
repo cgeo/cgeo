@@ -15,6 +15,7 @@ import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.RecalculateHealthScoreCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -31,6 +32,8 @@ import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.filters.FilterUtils;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -89,7 +92,6 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -160,6 +162,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_TYPE_PARAMETERS = "currentTypeParameters";
     private static final String STATE_LIST_ID = "currentListId";
     private static final String STATE_MARKER_ID = "currentMarkerId";
+    private static final String STATE_NAMED_FILTER_ID = "currentNamedFilterId";
     private static final String STATE_PREVENTASKFORDELETION = "preventAskForDeletion";
     private static final String STATE_CONTENT_STORAGE_ACTIVITY_HELPER = "contentStorageActivityHelper";
     private static final String STATE_OFFLINELISTLOADLIMIT_ID = "offlineListLoadLimit";
@@ -175,7 +178,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private boolean checkForEmtpyList = true;
 
     private final CacheListActionBarChooser actionBarChooser =
-        new CacheListActionBarChooser(this, this::getSupportActionBar, this::switchListById);
+        new CacheListActionBarChooser(this, this::getSupportActionBar, this::switchListByIdFromActionBar);
     private CacheListAdapter adapter = null;
     private View listFooter = null;
     private TextView listFooterLine1 = null;
@@ -184,9 +187,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private String title = "";
     private final AtomicInteger detailProgress = new AtomicInteger(0);
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
-    private int markerId = EmojiUtils.NO_EMOJI;
+    @Nullable private String markerId = EmojiUtils.NO_EMOJI;
+    private int namedFilterId = 0;
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
+    private Menu toolbarMenu;
 
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
@@ -397,7 +402,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             typeParameters.clear();
             typeParameters.putAll(savedInstanceState.getBundle(STATE_TYPE_PARAMETERS));
             listId = savedInstanceState.getInt(STATE_LIST_ID);
-            markerId = savedInstanceState.getInt(STATE_MARKER_ID);
+            markerId = savedInstanceState.getString(STATE_MARKER_ID);
+            namedFilterId = savedInstanceState.getInt(STATE_NAMED_FILTER_ID);
             preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
             checkForEmtpyList = savedInstanceState.getBoolean(STATE_CHECKFOREMPTYLIST);
@@ -409,12 +415,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (currentCacheFilterContext == null) {
                 currentCacheFilterContext = new GeocacheFilterContext(type.filterContextType);
             }
+            namedFilterId = extras == null ? 0 : extras.getInt(Intents.EXTRA_NAMED_FILTER, 0);
             checkForEmtpyList = true;
         }
 
         initAdapter();
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(findViewById(R.id.filter_bar), this);
         updateFilterBar();
 
         restartCacheLoader(false, null);
@@ -433,6 +440,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
+                if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                    refreshCurrentList();
+                    return;
+                }
                 if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
                     final Geocache geocache = DataStore.loadCache(geocode, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));
                     if (geocache != null) {
@@ -460,7 +471,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putBundle(STATE_TYPE_PARAMETERS, typeParameters);
         savedInstanceState.putInt(STATE_LIST_ID, listId);
-        savedInstanceState.putInt(STATE_MARKER_ID, markerId);
+        savedInstanceState.putString(STATE_MARKER_ID, markerId);
+        savedInstanceState.putInt(STATE_NAMED_FILTER_ID, namedFilterId);
         savedInstanceState.putBoolean(STATE_PREVENTASKFORDELETION, preventAskForDeletion);
         savedInstanceState.putInt(STATE_OFFLINELISTLOADLIMIT_ID, offlineListLoadLimit);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
@@ -469,7 +481,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshActionBarTitle() {
         if (type.canSwitch) {
-            actionBarChooser.setList(listId, adapter.getCount(), resultIsOfflineAndLimited());
+            actionBarChooser.setList(listId, namedFilterId, adapter.getCount(), resultIsOfflineAndLimited());
         }
     }
 
@@ -503,6 +515,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onResume() {
         super.onResume();
+        setAppIconAsUpIndicator(true);
 
         // save current position
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
@@ -544,7 +557,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
-        FilterUtils.initializeFilterMenu(this, this);
+        FilterUtils.initializeFilterMenu(this, R.id.menu_filter, R.id.menu_marker, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
@@ -623,6 +636,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all, checkedCount);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_other_lists, isOffline && listId != PseudoList.ALL_LIST.id, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_remove_from_other_lists, R.string.caches_remove_from_other_lists_selected, R.string.caches_remove_from_other_lists_all, checkedCount);
 
             //MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, true, !isEmpty);
@@ -638,16 +653,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_set_cache_icon, R.string.caches_set_cache_icon_selected, R.string.caches_set_cache_icon_all, checkedCount);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_other_lists, isOffline && listId != PseudoList.ALL_LIST.id, !isEmpty);
-            setMenuItemLabel(menu, R.id.menu_remove_from_other_lists, R.string.caches_remove_from_other_lists_selected, R.string.caches_remove_from_other_lists_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_recalculate_health_score, true, !isEmpty);
 
             // Manage Lists submenu
             MenuUtils.setVisibleEnabled(menu, R.id.menu_lists, isOffline, !isSelectMode);
             MenuUtils.setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
-            MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            MenuUtils.setVisible(menu, R.id.menu_rename_parent_lists, !hierarchies.isEmpty());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_set_askfordeletion, isNonDefaultList, preventAskForDeletion);
 
             // Import submenu
@@ -663,6 +678,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, isGcConnectorActive, !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, isGcConnectorActive, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_allcoords, R.string.caches_upload_allcoords, R.string.caches_upload_allcoords, checkedCount);
+
+            ToggleItemType.NAMED_FILTERS.toggleMenuItem(menu.findItem(R.id.menu_marker), Settings.isConditionalCacheMarkersEnabled());
 
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
@@ -713,7 +730,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private void setListMarker(final int newListMarker) {
+    private void setListMarker(final String newListMarker) {
         DataStore.setListEmoji(listId, newListMarker);
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
@@ -728,15 +745,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         invalidateOptionsMenuCompatible();
     }
 
-    private void setCacheIcons(final int newCacheIcon) {
-        if (newCacheIcon == 0) {
-            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm(() -> setCacheIconsHelper(0));
+    private void setCacheIcons(final String newCacheIcon) {
+        if (!StringUtils.isNotBlank(newCacheIcon)) {
+            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm(() -> setCacheIconsHelper(EmojiUtils.NO_EMOJI));
         } else {
             setCacheIconsHelper(newCacheIcon);
         }
     }
 
-    private void setCacheIconsHelper(final int newCacheIcon) {
+    private void setCacheIconsHelper(final String newCacheIcon) {
         new SetCacheIconCommand(this, adapter.getCheckedOrAllCaches(), newCacheIcon) {
             @Override
             protected void onFinished() {
@@ -749,7 +766,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
-        if (menuItem == R.id.menu_show_on_map) {
+        if (menuItem == android.R.id.home) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (menuItem == R.id.menu_show_on_map) {
             goMap();
         } else if (menuItem == R.id.menu_switch_select_mode) {
             adapter.switchSelectMode();
@@ -787,8 +806,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_rename_list) {
             renameList();
-        } else if (menuItem == R.id.menu_rename_list_prefix) {
-            new StoredList.UserInterface(this).promptForListPrefixRename(() -> {
+        } else if (menuItem == R.id.menu_rename_parent_lists) {
+            new StoredList.UserInterface(this).promptForParentListRename(listId, () -> {
                 refreshCurrentList();
                 invalidateOptionsMenuCompatible();
             });
@@ -800,9 +819,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_select_next100) {
             adapter.selectNextCaches(100);
         } else if (menuItem == R.id.menu_filter) {
-            showFilterMenu();
+            FilterUtils.onClickFilterMenu(this);
         } else if (menuItem == R.id.menu_sort) {
             openSortDialog();
+        } else if (menuItem == R.id.menu_marker) {
+            showNamedFilterActivateDeactivate();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -853,6 +874,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             }.execute();
             invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_recalculate_health_score) {
+            new RecalculateHealthScoreCommand(this, adapter.getCheckedOrAllCaches()).execute();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_watch_all) {
@@ -860,9 +883,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_unwatch_all) {
             WatchListUtils.unwatchAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
-            EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
+            EmojiUtils.selectEmojiPopup(this, markerId, false, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, -1, null, this::setCacheIcons);
+            EmojiUtils.selectEmojiPopup(this, null, true, null, this::setCacheIcons);
         } else if (menuItem == R.id.menu_set_askfordeletion) {
             setPreventAskForDeletion(false);
         } else {
@@ -934,7 +957,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public boolean showSavedFilterList() {
-        return FilterUtils.openFilterList(this, currentCacheFilterContext);
+        FilterUtils.openDialogSelectGeocacheFilter(this,
+            TextParam.id(R.string.cache_filter_storage_select_title),
+            currentCacheFilterContext,
+            selectedFilter -> {
+                refreshWithFilter(currentCacheFilterContext.get());
+            });
+        return true;
+    }
+
+    @Override
+    public boolean showNamedFilterActivateDeactivate() {
+        FilterUtils.openDialogActivateMarkers(this);
+        return true;
     }
 
     @Override
@@ -1420,6 +1455,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return this::switchListById;
     }
 
+    private void switchListByIdFromActionBar(final int id) {
+        namedFilterId = 0; //clear
+        switchListById(id);
+    }
+
     private void switchListById(final int id) {
         switchListById(id, AfterLoadAction.NO_ACTION);
     }
@@ -1452,7 +1492,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final StoredList list = DataStore.getList(id);
                 listId = list.id;
                 title = list.title;
-                markerId = list.markerId;
+                markerId = list.emojiMarker;
                 preventAskForDeletion = list.preventAskForDeletion;
             }
             type = CacheListType.OFFLINE;
@@ -1539,9 +1579,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
         if (listId == 0) {
-            DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+            DefaultMap.startActivitySearch(this, searchToUse, title, listId, namedFilterId);
         } else {
-            DefaultMap.startActivityList(this, listId, currentCacheFilterContext);
+            DefaultMap.startActivityList(this, listId, namedFilterId, currentCacheFilterContext);
         }
         ActivityMixin.overrideTransitionToFade(this);
     }
@@ -1562,14 +1602,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         lph.setLastListPosition();
     }
 
-    public static Intent getActivityOfflineIntent(final Context context) {
+    public static Intent getActivityOfflineIntent(final Context context, final NamedFilter namedFilter) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.OFFLINE);
+        if (namedFilter != null) {
+            cachesIntent.putExtra(Intents.EXTRA_NAMED_FILTER, namedFilter.getId());
+        }
         return cachesIntent;
     }
 
-    public static void startActivityOffline(final Context context) {
-        context.startActivity(getActivityOfflineIntent(context));
+    public static void startActivityOffline(final Context context, final NamedFilter namedFilter) {
+        context.startActivity(getActivityOfflineIntent(context, namedFilter));
     }
 
     public static void startActivityOwner(final Context context, final String userName) {
@@ -1589,9 +1632,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityFilter(final Context context) {
+    public static void startActivityFilter(final Context context, @Nullable final GeocacheFilterContext filterContext) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
+        if (filterContext != null) {
+            cachesIntent.putExtra(Intents.EXTRA_FILTER_CONTEXT, filterContext);
+        }
         context.startActivity(cachesIntent);
     }
 
@@ -1621,21 +1667,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getActiveFilterName(), getActiveFilterSavedDifferently());
+        FilterUtils.updateFilterBar(this, getActiveFilterName());
     }
 
     @Nullable
     private String getActiveFilterName() {
         if (currentCacheFilterContext.get().isFiltering()) {
             return currentCacheFilterContext.get().toUserDisplayableString();
-        }
-        return null;
-    }
-
-    @Nullable
-    private Boolean getActiveFilterSavedDifferently() {
-        if (currentCacheFilterContext.get().isFiltering()) {
-            return currentCacheFilterContext.get().isSavedDifferently();
         }
         return null;
     }
@@ -1779,11 +1817,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                         listId = list.id;
                         title = list.title;
-                        markerId = list.markerId;
+                        markerId = list.emojiMarker;
                         preventAskForDeletion = list.preventAskForDeletion;
                     }
 
-                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, listId, namedFilterId, currentCacheFilterContext.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);
 
                     break;
                 case HISTORY:
@@ -1801,7 +1839,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         connectorAddFilter.setValues(Collections.singletonList(connector));
                         offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
                     }
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, -1, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
                     break;
                 case NEAREST:
                     title = LocalizationUtils.getString(R.string.caches_nearby);

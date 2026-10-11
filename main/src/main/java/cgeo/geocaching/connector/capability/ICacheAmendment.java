@@ -22,7 +22,7 @@ public interface ICacheAmendment extends IConnector {
 
 
     /** returns true if the cache data amended by the given connector would be relevant for the given filter */
-    default boolean relevantForFilter(@NonNull GeocacheFilter filter) {
+    default boolean relevantForFilter(@NonNull final GeocacheFilter filter) {
         return true;
     }
 
@@ -32,7 +32,7 @@ public interface ICacheAmendment extends IConnector {
      * optimize amendment
      */
     @WorkerThread
-    default void amendCachesForViewport(@NonNull SearchResult searchResult, @NonNull Viewport viewport) {
+    default void amendCachesForViewport(@NonNull final SearchResult searchResult, @NonNull final Viewport viewport) {
         amendCaches(searchResult);
     }
 }

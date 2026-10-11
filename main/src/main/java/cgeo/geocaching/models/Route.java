@@ -6,6 +6,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 
 import android.os.Parcel;
@@ -105,14 +106,14 @@ public class Route implements IGeoItemSupplier, Parcelable {
         synchronized (segments) {
             for (RouteSegment rs : segments) {
                 if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
-                    result.addItems(GeoPrimitive.createPolyline(points, null));
+                    result.addItems(GeoPrimitive.createPolyline(points, GeoStyle.dynamic()));
                     points.clear();
                 }
                 points.addAll(rs.getPoints());
             }
         }
         if (!points.isEmpty()) {
-            result.addItems(GeoPrimitive.createPolyline(points, null));
+            result.addItems(GeoPrimitive.createPolyline(points, GeoStyle.dynamic()));
         }
 
         return result.build();
@@ -187,7 +188,7 @@ public class Route implements IGeoItemSupplier, Parcelable {
                     // calculate route for segment between current point and its predecessor
                     if (pos > 0) {
                         final ArrayList<Float> elevation = new ArrayList<>();
-                        final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
+                        final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation, null);
                         for (final Geopoint geopoint : temp) {
                             segment.addPoint(geopoint);
                         }

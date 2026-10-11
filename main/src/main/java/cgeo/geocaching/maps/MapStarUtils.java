@@ -53,7 +53,7 @@ public final class MapStarUtils {
             return null;
         }
 
-        final GeoStyle style = GeoStyle.builder().setStrokeColor(Color.RED).setStrokeWidth(2f).build();
+        final GeoStyle style = GeoStyle.solid(Color.RED, 2f);
 
         final List<GeoPrimitive> lines = new ArrayList<>();
         for (Waypoint w : cache.getWaypoints()) {

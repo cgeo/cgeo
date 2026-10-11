@@ -273,6 +273,50 @@ public final class Geopoint implements ICoordinate, Parcelable {
     }
 
     /**
+     * Upper bound (worst case, WGS84) for the distance in meters represented by a difference of 1 in the
+     * E6 (microdegree) representation of either latitude or longitude. The real-world value is at most
+     * ~111.7m per degree (polar meridian), i.e. ~0.1117m per microdegree; rounded up slightly for safety.
+     */
+    private static final double MAX_METERS_PER_E6_DEGREE = 0.112;
+
+    /**
+     * Cheap, approximate check whether this Geopoint and <tt>other</tt> are at most <tt>toleranceMeters</tt> apart.
+     * <p>
+     * Method does not account for shrinking of longitude-degree-length towards the poles. The check is
+     * conservative: it never reports two points as "close" when they are actually farther apart than
+     * <tt>toleranceMeters</tt>. It may (rarely, at high latitudes, for a purely east-west offset) report
+     * "not close" for points that are in fact within tolerance. For a precise result, use {@link #distanceTo(ICoordinate)}.
+     *
+     * @param other           the other Geopoint, or <tt>null</tt>
+     * @param toleranceMeters maximum allowed distance in meters
+     * @return <tt>true</tt> if both points are (approximately, worst-case) within <tt>toleranceMeters</tt> of each other
+     */
+    public boolean isCloseTo(@Nullable final Geopoint other, final double toleranceMeters) {
+        if (other == null) {
+            return false;
+        }
+        if (this == other) {
+            return true;
+        }
+        final double toleranceE6 = toleranceMeters / MAX_METERS_PER_E6_DEGREE;
+        return Math.abs((double) latitudeE6 - other.latitudeE6) <= toleranceE6
+                && Math.abs((double) longitudeE6 - other.longitudeE6) <= toleranceE6;
+    }
+
+    /** convenience variant with tolerance of 1 meter */
+    public boolean isCloseTo(@Nullable final Geopoint other) {
+        return isCloseTo(other, 1.0);
+    }
+
+    public static boolean areCloseToEachOther(@Nullable final Geopoint p1, @Nullable final Geopoint p2, final double toleranceMeters) {
+        return p1 == null ? p2 == null : p1.isCloseTo(p2, toleranceMeters);
+    }
+
+    public static boolean areCloseToEachOther(@Nullable final Geopoint p1, @Nullable final Geopoint p2) {
+        return areCloseToEachOther(p1, p2, 1.0);
+    }
+
+    /**
      * Returns formatted coordinates.
      *
      * @param format the desired format

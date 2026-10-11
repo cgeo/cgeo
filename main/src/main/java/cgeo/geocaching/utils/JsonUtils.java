@@ -14,7 +14,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Stack;
 import java.util.TimeZone;
+import java.util.function.Predicate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,6 +56,24 @@ public class JsonUtils {
     /** converts a json string to a JsonNode. Fails quietly. */
     public static JsonNode stringToNode(final String jsonString) {
         return stringToNode(jsonString, true);
+    }
+
+    /** iterates over all child nodes. Abort parsing children by returning "false" in action */
+    public static void forEach(final JsonNode node, final Predicate<JsonNode> action) {
+        if (node == null || action == null) {
+            return;
+        }
+        final Stack<JsonNode> stack = new Stack<>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            final JsonNode current = stack.pop();
+
+            if (action.test(current)) {
+                //iterate over all children too
+                current.forEach(stack::push);
+            }
+        }
     }
 
     public static <T> T readValueFailSilently(final String json, @NonNull final Class<T> clazz, final T defaultValue) {

@@ -10,8 +10,7 @@ import cgeo.geocaching.sorting.GeocacheSort;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
-
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
 

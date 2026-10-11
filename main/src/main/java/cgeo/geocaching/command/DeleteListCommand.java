@@ -20,7 +20,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     private final int listId;
     private Set<String> geocodes;
     private String listName;
-    private int markerId;
+    @Nullable private String markerId;
     private boolean preventAskForDeletion;
 
     protected DeleteListCommand(@NonNull final Activity context, final int listId) {
@@ -35,7 +35,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
         // remember list details, as we have to create a new list eventually
         final StoredList list = DataStore.getList(listId);
         listName = list.getTitle();
-        markerId = list.markerId;
+        markerId = list.emojiMarker;
         preventAskForDeletion = list.preventAskForDeletion;
         DataStore.removeList(listId);
     }

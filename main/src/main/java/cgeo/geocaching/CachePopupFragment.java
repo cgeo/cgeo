@@ -18,7 +18,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CacheUtils;
+import cgeo.geocaching.utils.CacheInfoBoxes;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -26,9 +26,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.wherigo.WherigoActivity;
-import cgeo.geocaching.wherigo.WherigoUtils;
-import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -48,7 +45,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -143,7 +139,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             toolbar.setLongClickable(true);
             toolbar.setOnClickListener(v -> {
                 if (cache.isOffline()) {
-                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
+                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), false, cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
                         toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
@@ -169,33 +165,22 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
             });
 
-            // Wherigo
-            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
-            if (!wherigoGuis.isEmpty()) {
-                binding.sendToWherigo.setVisibility(View.VISIBLE);
-                binding.sendToWherigo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(requireActivity(), wherigoGuis, guid ->
-                        WherigoActivity.startForGuid(requireActivity(), guid, cache.getGeocode(), true)));
-            } else {
-                binding.sendToWherigo.setVisibility(View.GONE);
-            }
-
-            // ALC
-            if (CacheUtils.isLabAdventure(cache)) {
-                binding.sendToAlc.setVisibility(View.VISIBLE);
-                CacheUtils.setLabLink(requireActivity(), binding.sendToAlc, cache.getUrl());
-            } else {
-                binding.sendToAlc.setVisibility(View.GONE);
-            }
+            // internal WIG player, WhereYouGo, ChirpWolf, Adventure Lab
+            CacheInfoBoxes.updateWherigoBox(cache, requireActivity(), binding.playInCgeo, null, null);
+            CacheInfoBoxes.updateChirpWolfBox(cache, requireActivity(), binding.sendToChirp, null, null);
+            CacheInfoBoxes.updateALCBox(cache, requireActivity(), binding.sendToAlc, null, null);
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-
-            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, null);
+            updateViewInfoBox();
 
             updateStoreRefreshButtons(true);
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
                 @Override
                 protected void onReceive(final Context context, final String geocode) {
+                    if (GeocacheChangedBroadcastReceiver.NAMED_FILTER_CHANGED.equals(geocode)) {
+                        init();
+                        return;
+                    }
                     if (Strings.CS.equals(geocode, CachePopupFragment.this.geocode)) {
                         init();
                     }
@@ -238,25 +223,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), listIds);
-            updateViewInfoAfterStore();
+            updateViewInfoBox();
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
             progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_offline_save_title), LocalizationUtils.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
                 activity.invalidateOptionsMenu();
-                updateViewInfoAfterStore();
+                updateViewInfoBox();
             });
         }
     }
 
-    private void updateViewInfoAfterStore() {
+    private void updateViewInfoBox() {
         final View view = getView();
         if (view != null) {
-            CacheDetailActivity.updateOfflineBox(view, cache,
+            CacheInfoBoxes.updateOfflineBox(view, cache,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(view, cache, null);
+            CacheInfoBoxes.updateCacheListsAndMatchingFilters(view, cache, null);
         }
     }
 

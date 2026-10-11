@@ -1,6 +1,7 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
 
 import android.graphics.Bitmap;
@@ -30,7 +31,7 @@ public class SmileyImage extends HtmlImage {
     }
 
     @Override
-    protected BitmapDrawable getContainerDrawable(final TextView view, final Observable<BitmapDrawable> drawable) {
+    protected ContainerDrawable getContainerDrawable(final TextView view, final Observable<BitmapDrawable> drawable) {
         return new LineHeightContainerDrawable(view, drawable);
     }
 

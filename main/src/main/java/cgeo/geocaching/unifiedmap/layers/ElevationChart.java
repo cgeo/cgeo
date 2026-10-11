@@ -12,7 +12,6 @@ import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -24,29 +23,28 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import javax.annotation.Nullable;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import info.appdev.charting.charts.LineChart;
+import info.appdev.charting.components.Legend;
+import info.appdev.charting.components.MarkerView;
+import info.appdev.charting.components.XAxis;
+import info.appdev.charting.components.YAxis;
+import info.appdev.charting.data.EntryFloat;
+import info.appdev.charting.data.LineData;
+import info.appdev.charting.data.LineDataSet;
+import info.appdev.charting.highlight.Highlight;
+import info.appdev.charting.listener.OnChartValueSelectedListener;
 
 public class ElevationChart {
 
@@ -56,13 +54,13 @@ public class ElevationChart {
     private final Resources res;
     private final GeoItemLayer<String> geoItemLayer;
     final Toolbar toolbar;
-    private final List<Entry> entries = new ArrayList<>();
+    private final List<EntryFloat> entries = new ArrayList<>();
     private float offset = 0f;
     private Geopoint lastShownPosition = null;
     private boolean expanded = Settings.getBoolean(R.string.pref_elevationChartExpanded, false);
     private final MarkerView mv;
 
-    private static class Data {
+    static class Data {
         Geopoint point;
         int upRemaining;
         int downRemaining;
@@ -82,7 +80,8 @@ public class ElevationChart {
         this.geoItemLayer = geoItemLayer;
         toolbar = activity.findViewById(R.id.toolbar);
         res = activity.getResources();
-        mv = new MarkerView(activity, R.layout.elevationchart_infobox);
+        mv = new ElevationChartMarkerView(activity, R.layout.elevationchart_infobox);
+        mv.setChartView(chart);
     }
 
     public void removeElevationChart() {
@@ -108,7 +107,7 @@ public class ElevationChart {
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
-                public void onValueSelected(final Entry e, final Highlight h) {
+                public void onValueSelected(@NonNull final EntryFloat e, @NonNull final Highlight h) {
                     final Data data = (Data) e.getData();
                     if (data != null) {
                         final Geopoint center = data.point;
@@ -118,7 +117,6 @@ public class ElevationChart {
                             geoItemLayer.put(ELEVATIONCHART_MARKER, marker);
                         }
                     }
-                    updateInfoBox(e);
                 }
 
                 @Override
@@ -162,10 +160,10 @@ public class ElevationChart {
         float lastElevation = 0f;
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
-            if (elevation == null) {
-                return;
-            }
-            final Iterator<Float> it = elevation.iterator();
+            // The first point of an individual route has no preceding leg, so its segment
+            // may not have elevation data. The next segment's routed points include this
+            // starting point and its elevation. Keep processing later segments.
+            final Iterator<Float> it = elevation == null ? Collections.emptyIterator() : elevation.iterator();
             for (Geopoint point : segment.getPoints()) {
                 if (lastPoint != null) {
                     distance += lastPoint.distanceTo(point);
@@ -173,7 +171,7 @@ public class ElevationChart {
                 lastPoint = point;
                 final float elev = it.hasNext() ? it.next() : Float.NaN;
                 if (!Float.isNaN(elev)) {
-                    entries.add(new Entry(distance, elev, new Data(
+                    entries.add(new EntryFloat(distance, elev, new Data(
                             point,
                             lastElevation < elev ? (int) (100f * (elev - lastElevation)) : 0, // relative up from last point
                             lastElevation > elev ? (int) (100F * (lastElevation - elev)) : 0, // relative down from last point
@@ -185,13 +183,13 @@ public class ElevationChart {
         }
 
         // prepare data for infobox
-        final ListIterator<Entry> listIterator = entries.listIterator(entries.size());
+        final ListIterator<EntryFloat> listIterator = entries.listIterator(entries.size());
         if (listIterator.hasPrevious()) {
             Data nextData = (Data) listIterator.previous().getData();
             if (nextData != null) {
                 final int totalDistance = (int) (100000f * distance);
                 while (listIterator.hasPrevious()) {
-                    final Entry current = listIterator.previous();
+                    final EntryFloat current = listIterator.previous();
                     final Data currentData = (Data) current.getData();
                     assert currentData != null;
                     currentData.upRemaining += nextData.upRemaining;
@@ -208,8 +206,8 @@ public class ElevationChart {
     private void formatChart(final Resources res) {
         chart.setData(null);
         if (!entries.isEmpty()) {
-            final LineDataSet dataSet = new LineDataSet(entries, "");
-            dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+            final LineDataSet<EntryFloat> dataSet = new LineDataSet(entries, "");
+            dataSet.setLineMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);
             dataSet.setColor(color);
@@ -226,8 +224,8 @@ public class ElevationChart {
 
             // initialize infobox
             chart.setMarker(mv);
-            chart.highlightValue(0, 0);
-            chart.setHighlightPerTapEnabled(false);
+            chart.highlightValue(null, false);
+            chart.setHighlightPerTap(false);
         }
 
         chart.setExtraOffsets(0, -30, 0, 10);
@@ -254,18 +252,6 @@ public class ElevationChart {
         yAxis2.setEnabled(false);
     }
 
-    private void updateInfoBox(@Nullable final Entry entry) {
-        final RelativeLayout info = mv.findViewById(R.id.elevation_infobox);
-        if (info == null || entry == null) {
-            return;
-        }
-        final Data data = (Data) entry.getData();
-        ViewUtils.setText(mv.findViewById(R.id.elevationText), Units.formatElevation(entry.getY()));
-        ViewUtils.setText(mv.findViewById(R.id.distanceText), data == null ? "" : Units.getDistanceFromMeters(data.distanceRemaining / 100f));
-        ViewUtils.setText(mv.findViewById(R.id.upText), data == null ? "" : Units.formatElevation(data.upRemaining / 100f));
-        ViewUtils.setText(mv.findViewById(R.id.downText), data == null ? "" : Units.formatElevation(data.downRemaining / 100f));
-    }
-
     /** find position on track closest to given coords (max 100m) and highlight it */
     public void showPositionOnTrack(final Geopoint coords) {
         // calculate new position on track only if minimum distance reached
@@ -277,7 +263,7 @@ public class ElevationChart {
         float minDistance = 0.1f;
         int x = -1;
         int index = 0;
-        for (Entry entry : entries) {
+        for (EntryFloat entry : entries) {
             final float distance = ((Data) entry.getData()).point.distanceTo(coords);
             if (distance < minDistance) {
                 x = index;
@@ -287,13 +273,16 @@ public class ElevationChart {
         }
         // display hairpin line for found position + adapt x axis labelling
         offset = x < 0 ? 0f : entries.get(x).getX();
-        chart.highlightValue(offset, x < 0 ? -1 : 0);
+        chart.highlightValue(offset, Float.NaN, x < 0 ? -1 : 0, true);
         chart.invalidate();
     }
 
     /** hides chart and map marker */
     private void closeChart(final GeoItemLayer<String> geoItemLayer) {
         chartBlock.setVisibility(View.GONE);
+        if (chart != null) {
+            chart.setOnChartValueSelectedListener(null);
+        }
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
         LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
     }

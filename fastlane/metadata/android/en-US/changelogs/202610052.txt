@@ -1,0 +1,3 @@
+<p>2026.10.05 Bugfix Release</p>
+
+<p>Fixes several crashes and other annoyances</p>

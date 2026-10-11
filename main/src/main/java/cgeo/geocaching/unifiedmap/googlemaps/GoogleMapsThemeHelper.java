@@ -240,9 +240,13 @@ class GoogleMapsThemeHelper {
                 style = addStyler(style, option, true);
             }
         }
-        //5. apply map style constructed above to Google Map
+        //5. drain the colour from whatever the steps above produced, if the map is set to grayscale
+        if (Settings.getMapGrayscale()) {
+            style = addGrayscaleStyler(style);
+        }
+        //6. apply map style constructed above to Google Map
         map.setMapStyle(style == null ? null : new MapStyleOptions(JsonUtils.nodeToString(style)));
-        //6. adjust scaleDrawer as needed
+        //7. adjust scaleDrawer as needed
         if (scaleDrawer != null) {
             scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
         }
@@ -272,6 +276,32 @@ class GoogleMapsThemeHelper {
      *     ]
      *   }
      */
+    /**
+     * Appends a styler that takes all colour out of the map, whatever the theme before it asked for.
+     * Carries no featureType, so it applies to everything the style covers. Markers, routes and the
+     * tile overlays are not part of the map style and keep their colours.
+     * <p>
+     * Creates JSON like following example:
+     * {
+     *     "stylers": [
+     *       {
+     *         "saturation": -100
+     *       }
+     *     ]
+     *   }
+     */
+    private static ArrayNode addGrayscaleStyler(final ArrayNode inputNode) {
+        final ArrayNode node = inputNode == null ? JsonUtils.createArrayNode() : inputNode;
+        final ObjectNode saturationNode = JsonUtils.createObjectNode();
+        JsonUtils.setInt(saturationNode, "saturation", -100);
+        final ArrayNode stylers = JsonUtils.createArrayNode();
+        stylers.add(saturationNode);
+        final ObjectNode grayscaleNode = JsonUtils.createObjectNode();
+        JsonUtils.set(grayscaleNode, "stylers", stylers);
+        node.add(grayscaleNode);
+        return node;
+    }
+
     private static JsonNode createVisibilityOnStylerForFeatureType(@Nullable final String featureType, final boolean on) {
         final ObjectNode node = JsonUtils.createObjectNode();
         if (featureType != null) {

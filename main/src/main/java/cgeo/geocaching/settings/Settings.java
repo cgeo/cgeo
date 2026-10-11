@@ -24,7 +24,6 @@ import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableComparator;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
-import cgeo.geocaching.models.ConditionalCacheMarker;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.network.HtmlImage;
@@ -33,6 +32,7 @@ import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.storage.CacheCache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -41,9 +41,9 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
@@ -81,9 +81,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -198,6 +196,29 @@ public class Settings {
 
         public String getPreferenceValue(final @NonNull Context context) {
             return context.getString(preferenceValue);
+        }
+    }
+
+    /**
+     * Controls which {@link cgeo.geocaching.filters.NamedFilter}s matching the currently displayed cache
+     * are shown in the cache details view.
+     */
+    public enum NamedFilterDisplayMode {
+        /** Do not show any matching named filters. */
+        NONE(R.string.named_filter_display_mode_none),
+        /** Only show matching named filters whose marker is currently active. */
+        ACTIVE_ONLY(R.string.named_filter_display_mode_active_only),
+        /** Show all matching named filters, active and inactive. */
+        ALL(R.string.named_filter_display_mode_all);
+
+        private final @StringRes int displayNameResId;
+
+        NamedFilterDisplayMode(final @StringRes int displayNameResId) {
+            this.displayNameResId = displayNameResId;
+        }
+
+        public String getDisplayName() {
+            return LocalizationUtils.getString(displayNameResId);
         }
     }
 
@@ -1122,6 +1143,13 @@ public class Settings {
         return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
     }
 
+    @NonNull
+    public static NamedFilterDisplayMode getNamedFilterDisplayMode() {
+        return EnumUtils.getEnum(NamedFilterDisplayMode.class,
+                getString(R.string.pref_named_filter_display_mode, NamedFilterDisplayMode.ACTIVE_ONLY.name()),
+                NamedFilterDisplayMode.ACTIVE_ONLY);
+    }
+
     public static boolean isTrackableAutoVisit() {
         return getBoolean(R.string.pref_trackautovisit, false);
     }
@@ -1315,9 +1343,86 @@ public class Settings {
         return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
     }
 
+    /**
+     * User-defined tile providers, stored as a JSON list.
+     * Understands the legacy format as well, where the very same preference held a single, bare tile provider Uri.
+     */
+    /**
+     * The user-defined tile providers.
+     *
+     * <p>Falls back to the single provider of earlier versions while the new preference has not
+     * been written yet. Nothing is migrated eagerly and the old preference is never touched, so a
+     * version without this feature keeps working after a downgrade.</p>
+     */
+    @NonNull
+    public static List<PrefUserDefinedTileProvider> getUserDefinedTileProviders() {
+        final String value = StringUtils.trimToEmpty(getString(R.string.pref_userDefinedTileProviders, null));
+        // an empty *string*, not an empty list: a list that has been written is at least "[]", so
+        // this is only true while the preference has never been written. Emptying the list keeps
+        // it empty and does not bring the legacy provider back.
+        if (StringUtils.isEmpty(value)) {
+            final String legacyUri = StringUtils.trimToNull(getString(R.string.old_pref_userDefinedTileProviderUri, null));
+            return legacyUri == null ? new ArrayList<>() : new ArrayList<>(Collections.singletonList(
+                    // keeps LEGACY_KEY, so the derived tile provider id stays what it was and neither the
+                    // selected map source nor the list of hidden map sources needs rewriting
+                    new PrefUserDefinedTileProvider(PrefUserDefinedTileProvider.LEGACY_KEY, null, legacyUri)));
+        }
+        try {
+            return MAPPER.readValue(value, new TypeReference<List<PrefUserDefinedTileProvider>>() {
+            });
+        } catch (JsonProcessingException e) {
+            Log.e("Failure parsing user-defined tile providers: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Adds, updates or (if the given provider has no Uri) removes a user-defined tile provider.
+     */
+    public static void putUserDefinedTileProvider(final PrefUserDefinedTileProvider provider) {
+        final List<PrefUserDefinedTileProvider> providers = getUserDefinedTileProviders();
+        final int index = providers.indexOf(provider);
+        if (StringUtils.isBlank(provider.getUri())) {
+            if (index == -1) {
+                return;
+            }
+            providers.remove(index);
+        } else if (index == -1) {
+            providers.add(provider);
+        } else {
+            providers.set(index, provider);
+        }
+        try {
+            putString(R.string.pref_userDefinedTileProviders, MAPPER.writeValueAsString(providers));
+        } catch (JsonProcessingException e) {
+            Log.e("Failure writing user-defined tile providers: " + e.getMessage());
+        }
+    }
+
+    /** json array holding the configured tile overlays, see cgeo.geocaching.unifiedmap.overlays.TileOverlays */
     @Nullable
-    public static String getUserDefinedTileProviderUri() {
-        return getString(R.string.pref_userDefinedTileProviderUri, null);
+    public static String getTileOverlaysConfig() {
+        return getString(R.string.pref_tileOverlays, null);
+    }
+
+    public static void setTileOverlaysConfig(@Nullable final String config) {
+        putString(R.string.pref_tileOverlays, config);
+    }
+
+    /** keys of the tile overlays currently switched on in the map view */
+    public static Set<String> getTileOverlaysEnabled() {
+        final Set<String> empty = Collections.emptySet();
+        if (sharedPrefs == null) {
+            return empty;
+        }
+        return sharedPrefs.getStringSet(getKey(R.string.pref_tileOverlaysEnabled), empty);
+    }
+
+    public static void setTileOverlaysEnabled(final Set<String> keys) {
+        if (sharedPrefs == null) {
+            return;
+        }
+        sharedPrefs.edit().putStringSet(getKey(R.string.pref_tileOverlaysEnabled), keys).apply();
     }
 
     public static void setMapLanguage(@Nullable final String language) {
@@ -1534,6 +1639,14 @@ public class Settings {
 
     public static void setBrouterAutoTileDownloads(final boolean value) {
         putBoolean(R.string.pref_brouterAutoTileDownloads, value);
+    }
+
+    public static boolean getDownloadAllowMeteredNetwork() {
+        return getBoolean(R.string.pref_downloadAllowMeteredNetwork, false);
+    }
+
+    public static void setDownloadAllowMeteredNetwork(final boolean value) {
+        putBoolean(R.string.pref_downloadAllowMeteredNetwork, value);
     }
 
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
@@ -2381,6 +2494,14 @@ public class Settings {
         }
     }
 
+    public static boolean isConditionalCacheMarkersEnabled() {
+        return getBoolean(R.string.pref_conditionalCacheMarkersEnabled, true);
+    }
+
+    public static void setConditionalCacheMarkersEnabled(final boolean enabled) {
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, enabled);
+    }
+
     /**
      * checks whether legacy folder needs to be migrated
      * (legacy value is set and not yet migrated)
@@ -2474,7 +2595,8 @@ public class Settings {
                 LocalizationUtils.getPlainString(R.string.pref_ocro_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocro_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocro_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocro_token_public),
                 LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_public),
                 LocalizationUtils.getPlainString(R.string.pref_su_tokensecret), LocalizationUtils.getPlainString(R.string.pref_su_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_public),
-                LocalizationUtils.getPlainString(R.string.pref_fakekey_geokrety_authorization)
+                LocalizationUtils.getPlainString(R.string.pref_fakekey_geokrety_authorization),
+                LocalizationUtils.getPlainString(R.string.pref_cookiejar)
         );
         return sensitiveKeys;
     }
@@ -2535,48 +2657,12 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
-    // In-memory cache for conditional cache markers — volatile for thread visibility
-    private static final List<ConditionalCacheMarker> conditionalCacheMarkersCache = new ArrayList<>();
-    private static boolean conditionalCacheMarkersCacheInitialized = false;
-
     /**
-     * Returns the current list of ConditionalCacheMarker rules.
-     * Uses an in-memory cache to avoid repeated JSON parsing.
-     * Returns an empty mutable list if nothing is configured.
+     * Clears the conditional cache markers SharedPreferences keys (called during DB migration).
      */
-    @NonNull
-    public static List<ConditionalCacheMarker> getConditionalCacheMarkers() {
-        synchronized (conditionalCacheMarkersCache) {
-            if (conditionalCacheMarkersCacheInitialized) {
-                return conditionalCacheMarkersCache;
-            }
-            final String json = getString(R.string.pref_conditionalCacheMarkers, "[]");
-            final JsonNode root = JsonUtils.stringToNode(json);
-            conditionalCacheMarkersCache.clear();
-            if (root != null && root.isArray()) {
-                for (final JsonNode child : root) {
-                    conditionalCacheMarkersCache.add(cgeo.geocaching.models.ConditionalCacheMarker.fromJson(child));
-                }
-            }
-            conditionalCacheMarkersCacheInitialized = true;
-            return conditionalCacheMarkersCache;
-        }
-    }
-
-    /**
-     * Persists the list of ConditionalCacheMarker rules and updates the in-memory cache.
-     */
-    public static void setConditionalCacheMarkers(@NonNull final List<ConditionalCacheMarker> markers) {
-        synchronized (conditionalCacheMarkersCache) {
-            conditionalCacheMarkersCache.clear();
-            conditionalCacheMarkersCache.addAll(markers);
-            conditionalCacheMarkersCacheInitialized = true;
-            final ArrayNode array = JsonUtils.createArrayNode();
-            for (final ConditionalCacheMarker marker : markers) {
-                array.add(marker.toJson());
-            }
-            putString(R.string.pref_conditionalCacheMarkers, JsonUtils.nodeToString(array));
-        }
+    public static void clearConditionalCacheMarkersPrefs() {
+        putString(R.string.pref_conditionalCacheMarkers, "[]");
+        putBoolean(R.string.pref_conditionalCacheMarkersEnabled, false);
     }
 
     public static int getAttributeFilterSources() {
@@ -2631,6 +2717,14 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
+    public static boolean getMapGrayscale() {
+        return getBoolean(R.string.pref_mapGrayscale, false);
+    }
+
+    public static void setMapGrayscale(final boolean value) {
+        putBoolean(R.string.pref_mapGrayscale, value);
+    }
+
     public static boolean getMapShadingShowLayer() {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
@@ -2661,12 +2755,6 @@ public class Settings {
 
     public static boolean removeFromRouteOnLog() {
         return getBoolean(R.string.pref_removeFromRouteOnLog, false);
-    }
-
-    public static boolean checkAndSetLegacyFilterConfigMigrated() {
-        final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
-        putBoolean(R.string.pref_legacy_filter_config_migrated, true);
-        return isMigrated;
     }
 
     public static void setLastUsedDate(final Calendar date) {
@@ -2719,7 +2807,6 @@ public class Settings {
         return rawLanguage;
     }
 
-
     public static @NonNull Set<String> getLanguagesToNotTranslate() {
         final Set<String> lngs = new HashSet<>();
         if (sharedPrefs == null) {
@@ -2732,5 +2819,9 @@ public class Settings {
             lngs.add(targetLng.getCode());
         }
         return lngs;
+    }
+
+    public static int getCacheCacheSize() {
+        return getInt(R.string.pref_cachecache_size, CacheCache.DEFAULT_CACHED_CACHES);
     }
 }

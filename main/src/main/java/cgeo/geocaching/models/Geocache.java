@@ -46,10 +46,12 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
@@ -127,9 +129,13 @@ public class Geocache implements INamedGeoCoordinate {
     private String ownerDisplayName = "";
     private String ownerGuid = "";
     private String ownerUserId = "";
-    private int assignedEmoji = 0;
+    @Nullable private String assignedEmoji = EmojiUtils.NO_EMOJI;
     private int alcMode = 0;
     private Tier tier;
+    /** Sentinel: health score was attempted but could not be computed (no scoreable logs found). */
+    public static final int HEALTH_SCORE_UNKNOWN = -1;
+    @Nullable
+    private Integer healthScore; // null = not calculated; HEALTH_SCORE_UNKNOWN(-1) = calculated but n/a; 0-100 = score
 
     @Nullable
     private Date hidden = null;
@@ -368,6 +374,9 @@ public class Geocache implements INamedGeoCoordinate {
         if (tier == null || Tier.NONE == tier) {
             tier = other.tier;
         }
+        if (healthScore == null) {
+            healthScore = other.healthScore;
+        }
         if (categories.isEmpty()) {
             setCategories(other.getCategories());
         }
@@ -414,7 +423,7 @@ public class Geocache implements INamedGeoCoordinate {
             preventWaypointsFromNote = other.preventWaypointsFromNote;
         }
 
-        if (assignedEmoji == 0) {
+        if (!StringUtils.isNotBlank(assignedEmoji)) {
             assignedEmoji = other.assignedEmoji;
         }
 
@@ -626,7 +635,6 @@ public class Geocache implements INamedGeoCoordinate {
 
         final Resources res = fromActivity.getResources();
         if (status) {
-            ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.info_log_saved));
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
             if (Settings.removeFromRouteOnLog()) {
@@ -634,6 +642,9 @@ public class Geocache implements INamedGeoCoordinate {
             }
             offlineLog = logEntry;
             notifyChange(fromActivity);
+            if (!fromActivity.isFinishing()) {
+                ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.info_log_saved));
+            }
         } else {
             ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.err_log_post_failed));
         }
@@ -1339,7 +1350,6 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setAlcMode(final int alcMode) {
-        Log.d("_AL setAlcMode: " + alcMode);
         this.alcMode = alcMode;
     }
 
@@ -1354,6 +1364,23 @@ public class Geocache implements INamedGeoCoordinate {
 
     public Tier getTier() {
         return this.tier;
+    }
+
+    @Nullable
+    public Integer getHealthScore() {
+        return healthScore;
+    }
+
+    public void setHealthScore(@Nullable final Integer healthScore) {
+        this.healthScore = healthScore;
+    }
+
+    /**
+     * Recalculates and stores the health score from the cache's current log list and
+     * detailedUpdate timestamp. Does NOT trigger a database save.
+     */
+    public void updateHealthScore() {
+        healthScore = CacheUtils.calculateHealthScore(getLogs(), detailedUpdate);
     }
 
     /**
@@ -1478,7 +1505,7 @@ public class Geocache implements INamedGeoCoordinate {
         this.ownerGuid = ownerGuid;
     }
 
-    public void setAssignedEmoji(final int assignedEmoji) {
+    public void setAssignedEmoji(@Nullable final String assignedEmoji) {
         this.assignedEmoji = assignedEmoji;
     }
 
@@ -2515,7 +2542,8 @@ public class Geocache implements INamedGeoCoordinate {
         return isGotoHistoryUDC() ? Waypoint.WAYPOINT_ID_COMPARATOR : Waypoint.WAYPOINT_COMPARATOR;
     }
 
-    public int getAssignedEmoji() {
+    @Nullable
+    public String getAssignedEmoji() {
         return assignedEmoji;
     }
 

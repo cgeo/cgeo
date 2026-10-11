@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.Objects;
 
 import com.google.android.material.button.MaterialButton;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Encapsulates an image object to be set to an ImageView.
@@ -35,7 +36,8 @@ public class ImageParam {
 
     @DrawableRes
     private final int drawableId;
-    private final int emojiSymbol;
+    @Nullable
+    private final String emoji;
     private final int emojiSizeInDp;
     private final Drawable drawable;
     private boolean nullifyTintList = false;
@@ -48,30 +50,30 @@ public class ImageParam {
      * create from drawable resource id
      */
     public static ImageParam id(@DrawableRes final int drawableId) {
-        return new ImageParam(drawableId, -1, -1, null);
+        return new ImageParam(drawableId, null, -1, null);
     }
 
     /**
-     * create from emoji code
+     * create from emoji string (as returned by the emoji picker / stored as cache or list marker)
      */
-    public static ImageParam emoji(final int emojiSymbol) {
-        return emoji(emojiSymbol, DEFAULT_EMOJI_SIZE_DP);
+    public static ImageParam emoji(@Nullable final String emojiStr) {
+        return emoji(emojiStr, DEFAULT_EMOJI_SIZE_DP);
     }
 
-    public static ImageParam emoji(final int emojiSymbol, final int emojiSizeInDp) {
-        return new ImageParam(-1, emojiSymbol, Math.max(2, emojiSizeInDp) , null);
+    public static ImageParam emoji(@Nullable final String emojiStr, final int emojiSizeInDp) {
+        return new ImageParam(-1, emojiStr, Math.max(2, emojiSizeInDp), null);
     }
 
     /**
      * create from emoji code
      */
     public static ImageParam drawable(final Drawable drawable) {
-        return new ImageParam(-1, -1, -1,  drawable);
+        return new ImageParam(-1, null, -1,  drawable);
     }
 
-    private ImageParam(@DrawableRes final int drawableId, final int emojiSymbol, final int emojiSizeInDp, @Nullable final Drawable drawable) {
+    private ImageParam(@DrawableRes final int drawableId, @Nullable final String emoji, final int emojiSizeInDp, @Nullable final Drawable drawable) {
         this.drawableId = drawableId;
-        this.emojiSymbol = emojiSymbol;
+        this.emoji = emoji;
         this.emojiSizeInDp = emojiSizeInDp;
         this.drawable = drawable;
     }
@@ -93,8 +95,8 @@ public class ImageParam {
             view.setImageDrawable(this.drawable);
         } else if (this.drawableId > 0) {
             view.setImageResource(this.drawableId);
-        } else if (this.emojiSymbol > 0) {
-            view.setImageDrawable(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(view), this.emojiSymbol));
+        } else if (StringUtils.isNotBlank(this.emoji)) {
+            view.setImageDrawable(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(view), this.emoji));
         }
     }
 
@@ -111,8 +113,8 @@ public class ImageParam {
             btn.setIcon(this.drawable);
         } else if (this.drawableId > 0) {
             btn.setIconResource(this.drawableId);
-        } else if (this.emojiSymbol > 0) {
-            btn.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(btn), this.emojiSymbol));
+        } else if (StringUtils.isNotBlank(this.emoji)) {
+            btn.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(btn), this.emoji));
         }
     }
 
@@ -136,8 +138,8 @@ public class ImageParam {
         Drawable result = null;
         if (this.drawableId > 0) {
             result = Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme())).mutate();
-        } else if (this.emojiSymbol > 0) {
-            result = EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(null), this.emojiSymbol);
+        } else if (StringUtils.isNotBlank(this.emoji)) {
+            result = EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(null), this.emoji);
         }
         if (result != null) {
             return result;

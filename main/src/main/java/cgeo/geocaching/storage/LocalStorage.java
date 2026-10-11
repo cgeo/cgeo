@@ -364,7 +364,7 @@ public final class LocalStorage {
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
         progress.show(fromActivity, LocalizationUtils.getString(R.string.init_datadirmove_datadirmove), LocalizationUtils.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
+        fromActivity.destroyDisposables(AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
             final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
             Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
@@ -388,7 +388,7 @@ public final class LocalStorage {
             progress.dismiss();
             final String message = success ? LocalizationUtils.getString(R.string.init_datadirmove_success) : LocalizationUtils.getString(R.string.init_datadirmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_datadirmove_datadirmove).setMessage(TextParam.text(message)).show();
-        });
+        }));
     }
 
     public static int getCurrentVersion() {
@@ -515,6 +515,27 @@ public final class LocalStorage {
             Settings.setLocalStorageVersion(result);
         }
 
+    }
+
+    /**
+     cleans remainders of ML Kit offline translation:
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.translate.models/ had subfolders with the actual models
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.InstallationId
+     /data/data/cgeo.geocaching/no_backup/com.google.mlkit.RemoteConfig
+     /data/data/cgeo.geocaching/shared_prefs/com.google.mlkit.internal.xml
+     */
+    public static void cleanupMLKitfiles() {
+        final File baseFolder = CgeoApplication.getInstance().getNoBackupFilesDir();
+        if (baseFolder != null) {
+            final File folder = new File(baseFolder, "com.google.mlkit.translate.models");
+            if (folder.exists()) {
+                FileUtils.deleteDirectory(folder);
+                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.InstallationId"));
+                FileUtils.deleteIgnoringFailure(new File(baseFolder, "com.google.mlkit.RemoteConfig"));
+                FileUtils.deleteIgnoringFailure(new File(new File(CgeoApplication.getInstance().getDataDir(), "shared_prefs"), "com.google.mlkit.internal.xml"));
+                Log.e("ML Kit cleanup finished");
+            }
+        }
     }
 
 }

@@ -81,6 +81,6 @@ public class NoopTranslateAccessor implements ITranslateAccessor {
 
     private void runOnScheduler(final Runnable run) {
         final Scheduler schedulerToUse = scheduler != null ? scheduler : AndroidRxUtils.mainThreadScheduler;
-        schedulerToUse.createWorker().schedule(run);
+        schedulerToUse.scheduleDirect(run);
     }
 }

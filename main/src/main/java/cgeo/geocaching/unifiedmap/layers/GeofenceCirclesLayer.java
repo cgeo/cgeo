@@ -28,11 +28,8 @@ public class GeofenceCirclesLayer {
                     final int geofenceInMeters = waypoint.getGeofence();
                     if (geofenceInMeters > 0) {
                         geoGroup.addItems(
-                                GeoPrimitive.createCircle(waypoint.getCoords(), geofenceInMeters / 1000f, GeoStyle.builder()
-                                        .setStrokeWidth(2.0f)
-                                        .setStrokeColor(MapLineUtils.getGeofenceColor())
-                                        .setFillColor(MapLineUtils.getGeofenceFillColor())
-                                        .build()
+                                GeoPrimitive.createCircle(waypoint.getCoords(), geofenceInMeters / 1000f,
+                                        GeoStyle.fixed(MapLineUtils.getGeofenceColor(), MapLineUtils.getGeofenceFillColor(), 2f)
                                 ).buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
                     }
                 }

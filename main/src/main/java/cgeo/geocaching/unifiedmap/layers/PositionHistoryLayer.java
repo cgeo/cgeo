@@ -14,12 +14,11 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-
-import javax.annotation.Nullable;
 
 public class PositionHistoryLayer {
 
@@ -36,10 +35,7 @@ public class PositionHistoryLayer {
     final UnifiedMapViewModel viewModel;
 
 
-    private final GeoStyle lineStyle = GeoStyle.builder()
-            .setStrokeColor(MapLineUtils.getTrailColor())
-            .setStrokeWidth(MapLineUtils.getHistoryLineWidth(true))
-            .build();
+    private final GeoStyle lineStyle = GeoStyle.solid(MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth(true));
 
     public PositionHistoryLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         this.layer = layer;
@@ -99,5 +95,4 @@ public class PositionHistoryLayer {
             pathStored = false;
         }
     }
-
 }

@@ -11,7 +11,7 @@ import locus.api.objects.geocaching.GeocachingAttribute;
 import locus.api.objects.geocaching.GeocachingData;
 import locus.api.objects.geocaching.GeocachingWaypoint;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AbstractLocusAppTest {
 
@@ -19,7 +19,7 @@ public class AbstractLocusAppTest {
     // should detect new CacheSize
     public void testToLocusTypeCount() {
 
-        assertEquals(23, CacheType.values().length);
+        assertThat(CacheType.values()).hasSize(23);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class AbstractLocusAppTest {
 
         for (int i = 0; i < testCgeoTypes.size(); i++) {
             final long loSize = AbstractLocusApp.toLocusType(testCgeoTypes.get(i));
-            assertEquals(testLoTypes.get(i).longValue(), loSize);
+            assertThat(loSize).isEqualTo(testLoTypes.get(i).longValue());
         }
     }
 
@@ -45,7 +45,7 @@ public class AbstractLocusAppTest {
     // should detect new CacheSize
     public void testToLocusSizeCount() {
 
-        assertEquals(10, CacheSize.values().length);
+        assertThat(CacheSize.values()).hasSize(10);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class AbstractLocusAppTest {
 
         for (int i = 0; i < testCgeoSizes.size(); i++) {
             final long loSize = AbstractLocusApp.toLocusSize(testCgeoSizes.get(i));
-            assertEquals(testLoSizes.get(i).longValue(), loSize);
+            assertThat(loSize).isEqualTo(testLoSizes.get(i).longValue());
         }
     }
 
@@ -70,7 +70,7 @@ public class AbstractLocusAppTest {
     // should detect new WaypointType
     public void testToLocusWaypointCount() {
 
-        assertEquals(9, WaypointType.values().length);
+        assertThat(WaypointType.values()).hasSize(9);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AbstractLocusAppTest {
 
         for (int i = 0; i < testCgeoWpts.size(); i++) {
             final String loWaypoint = AbstractLocusApp.toLocusWaypoint(testCgeoWpts.get(i));
-            assertEquals(testLoWapts.get(i), loWaypoint);
+            assertThat(loWaypoint).isEqualTo(testLoWapts.get(i));
         }
     }
 
@@ -109,10 +109,10 @@ public class AbstractLocusAppTest {
         final ArrayList<GeocachingAttribute> gaTests = AbstractLocusApp.toLocusAttributes(testAttributesKeys);
         final ArrayList<Integer> testAttributesValues = new ArrayList<>(testAttributes.values());
 
-        assertEquals(testAttributes.size(), gaTests.size());
+        assertThat(gaTests.size()).isEqualTo(testAttributes.size());
 
         for (int i = 0; i < gaTests.size(); i++) {
-            assertEquals(testAttributesValues.get(i).longValue(), gaTests.get(i).getId());
+            assertThat(gaTests.get(i).getId()).isEqualTo(testAttributesValues.get(i).longValue());
         }
     }
 
@@ -129,6 +129,6 @@ public class AbstractLocusAppTest {
 
         final ArrayList<GeocachingAttribute> gaTests = AbstractLocusApp.toLocusAttributes(testAttributes);
 
-        assertEquals(0, gaTests.size());
+        assertThat(gaTests).isEmpty();
     }
 }

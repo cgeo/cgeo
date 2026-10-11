@@ -18,7 +18,7 @@ import android.util.Pair;
 import java.util.EnumSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 /**
@@ -42,7 +42,7 @@ public class GeocacheFilterTestUtils {
     }
 
     public static boolean testSingleLogic(final Geocache cache, final IGeocacheFilter filter, final Boolean expectedResult) {
-        assertThat(filter.filter(cache)).as("LOGIC: Wrong test result for filter: " + filter.getConfig() + "/cache: " + cache).isEqualTo(expectedResult);
+        assertThat(filter.filter(cache)).as("LOGIC: Wrong test result for filter: " + filter.getJsonConfig() + "/cache: " + cache).isEqualTo(expectedResult);
         return true;
     }
 
@@ -69,7 +69,7 @@ public class GeocacheFilterTestUtils {
         geocodeFilter.getStringFilter().setTextValue(geocode);
         filterConfig.addChild(geocodeFilter);
 
-        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
+        final GeocacheFilter gcFilter = GeocacheFilter.create(false, false, filterConfig);
         final SearchResult sr;
         try {
             DataStore.storeIntoDatabase(cache);
@@ -82,7 +82,7 @@ public class GeocacheFilterTestUtils {
 
         final SqlBuilder sqlBuilder = new SqlBuilder("cache-table", new String[]{"*"});
         filter.addToSql(sqlBuilder);
-        final String descr = "DB: Wrong test result for filter: " + filter.getConfig() + "/cache: " + cache + "/SQL: " + sqlBuilder.toString();
+        final String descr = "DB: Wrong test result for filter: " + filter.getJsonConfig() + "/cache: " + cache + "/SQL: " + sqlBuilder.toString();
 
         if (sr.getCount() > 1) {
             fail("DB: very wrong result, cnt=" + sr.getCount() + " for '" + descr + "'");

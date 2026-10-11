@@ -188,9 +188,6 @@
     <string name="err_read_pocket_query_list">Nagproblema sa pagbasa ng pakete sa listahan ng query.</string>
     <string name="info_log_posted">ang c:geo ay matagumpay na isinumite ang log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na na-save ang log.</string>
-    <string name="info_log_post_failed">Nabigo ang pagpapapost ng log.</string>
-    <string name="info_log_post_retry">Subukan muli</string>
-    <string name="info_log_post_save">I-save ng offline</string>
     <string name="info_log_cleared">Nabura na ang mga log.</string>
     <string name="info_waypoint_coordinates_cleared">Ang pagka-koordinado ay malinaw.</string>
     <string name="info_log_type_changed">Ang uri ng log ay nabago na!</string>
@@ -284,6 +281,8 @@
     <string name="list_dialog_rename">Pangalanang muli</string>
     <string name="list_not_available">Ang listahan ay hindi na maaaring magtagal, lumipat sa mataas na pamantayang listahan</string>
     <!-- caches lists filter -->
+    <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Ang bersiyon</string>
     <string name="about_changelog">Ang pagpalit sa log</string>
@@ -311,6 +310,7 @@
     <string name="settings_summary_logging">I-kunpigura ang iyong pirma at itakda ang mga opsyon ng pag-log.</string>
     <string name="settings_title_map_data">Ang datos ng mapa</string>
     <string name="settings_title_map_content">Nilalaman ng mapa</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Ang nagamit na datos ng Geocache</string>
     <string name="calculate_dataDir">Ang pagkalkula sa datos geocache ang nagamit sa disk</string>
     <string name="confirm_data_dir_move">Ang paglipat sa geocache ay maaaring mahabang panahon, ito ay umaasa sa iyong aparatu at sa halaga ng datos.</string>
@@ -1061,5 +1061,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

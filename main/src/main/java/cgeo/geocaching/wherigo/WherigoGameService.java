@@ -55,10 +55,10 @@ public class WherigoGameService extends Service {
                     .setPriority(NotificationCompat.PRIORITY_LOW)
                     .setSilent(true)
                     .setOngoing(true).build());
-        } catch (IllegalStateException re) {
+        } catch (IllegalStateException | SecurityException re) {
             // See #17487.
             // ForegroundServiceStartNotAllowedException extends IllegalStateException and can't be used before SDK level 31
-            Log.e("WherigoGameService: IllegalStateException on starting as foreground service", re);
+            Log.e("WherigoGameService: Exception on starting as foreground service", re);
         }
     }
 

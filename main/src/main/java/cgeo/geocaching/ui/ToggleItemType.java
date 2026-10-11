@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MenuUtils;
 
 import android.view.MenuItem;
 
@@ -25,7 +26,9 @@ public enum ToggleItemType {
     TOGGLE_SPEECH(R.drawable.ic_menu_text_to_speech_on, R.drawable.ic_menu_text_to_speech_off,
             R.string.cache_menu_speechDeactivate, R.string.cache_menu_speechActivate, R.string.talking_enabled, R.string.talking_disabled),
     WAYPOINTS_FROM_NOTE(-1, -1, R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote,
-            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote);
+            R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote),
+    NAMED_FILTERS(R.drawable.ic_menu_marker, R.drawable.ic_menu_marker_off,
+            R.string.named_filter_markers, R.string.named_filter_markers, R.string.named_filter_markers_enabled, R.string.named_filter_markers_disabled);
 
     @DrawableRes
     private final int drawableActiveId;
@@ -58,6 +61,7 @@ public enum ToggleItemType {
             }
             if (-1 != drawableActiveId && -1 != drawableInactiveId) {
                 menuItem.setIcon(active ? drawableActiveId : drawableInactiveId);
+                MenuUtils.tintMenuIcon(menuItem);
             }
             if (-1 != hintActiveId && -1 != hintInactiveId) {
                 menuItem.setTooltipText(LocalizationUtils.getString(active ? hintActiveId : hintInactiveId));

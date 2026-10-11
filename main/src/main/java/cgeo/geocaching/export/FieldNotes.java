@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
@@ -46,7 +47,7 @@ class FieldNotes {
                 .append(',')
                 .append(StringUtils.capitalize(log.logType.type))
                 .append(",\"")
-                .append(StringUtils.replaceChars(log.log, '"', '\''))
+                .append(StringUtils.replaceChars(LogUtils.trimForPublishing(log.log), '"', '\''))
                 .append("\"\n");
         if (log.reportProblem.logType != LogType.UNKNOWN) {
             add(cache, new LogEntry.Builder().setLog(LocalizationUtils.getString(log.reportProblem.textId)).setLogType(log.reportProblem.logType).setDate(log.date).build());

@@ -27,25 +27,29 @@ import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
@@ -76,7 +80,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.graphics.Insets;
@@ -263,9 +266,16 @@ public class MainActivity extends AbstractNavigationBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
-            // don't call the super implementation with the layout argument, as that would set the wrong theme
+            // don't call the super implementation with the layout argument, as that would set the wrong theme;
+            // overrides SplashScreenTheme set in AndroidManifest.xml
             setTheme(Settings.isWallpaper() ? R.style.cgeo_withWallpaper : R.style.cgeo);
             super.onCreate(savedInstanceState);
+
+            // Splash-time routing: on a fresh launch, decide whether the installation wizard or a non-home start screen
+            // should run instead of MainActivity. Skip on activity recreation (savedInstanceState != null).
+            if (savedInstanceState == null && handleLauncherRouting()) {
+                return;
+            }
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
 
@@ -302,14 +312,70 @@ public class MainActivity extends AbstractNavigationBarActivity {
             binding.locationStatus.setPermissionRequestCallback(() -> this.askLocationPermissionAction.launch(null));
 
             configureMessageCenterPolling();
-
-            LegacyFilterConfig.checkAndMigrate();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
-            binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreate"));
+            binding.getRoot().post(() -> Log.d(CgeoApplication.elapsedMsSinceStartup() + "[Ctxlog]" + "Post after MainActivity.onCreate"));
         }
 
+    }
+    /**
+     * Routes the launcher intent to the installation wizard or to the user-configured start screen.
+     * Returns whether another activity was started and this MainActivity instance should not continue to inflate its UI.
+     */
+    private boolean handleLauncherRouting() {
+        final boolean firstInstall = Settings.getLastChangelogChecksum() == 0;
+        final boolean firstCall = (getIntent() != null) && (getIntent().getAction() != null); // app start (true) or "back to home screen" (false)
+        final boolean folderMigrationNeeded = InstallWizardActivity.needsFolderMigration();
+
+        // new install, base folder missing or folder migration needed => run installation wizard
+        if (firstInstall || !ContentStorageActivityHelper.baseFolderIsSet() || folderMigrationNeeded) {
+            final Intent intent = new Intent(this, InstallWizardActivity.class);
+            intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? InstallWizardActivity.WizardMode.WIZARDMODE_DEFAULT.id : InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id);
+            return handleLauncherRoutingHelper(intent);
+        }
+
+        // otherwise regular startup
+        final Intent intent = Settings.getStartscreenIntent(this);
+        final boolean stayInMainActivity = !firstCall || (intent.getComponent() != null && MainActivity.class.getName().equals(intent.getComponent().getClassName()));
+        if (!stayInMainActivity) {
+            intent.putExtras(getIntent());
+            return handleLauncherRoutingHelper(intent);
+        }
+        return handleLauncherRoutingHelper(null);
+    }
+
+    private boolean handleLauncherRoutingHelper(final Intent intent) {
+        if (intent != null) {
+            startActivity(intent);
+        }
+        OneTimeDialogs.nextStatus();
+        checkChangedInstall();
+        if (intent != null) {
+            finish();
+            return true;
+        }
+        return false;
+    }
+
+    private void checkChangedInstall() {
+        try {
+            final long lastChecksum = Settings.getLastChangelogChecksum();
+            final long checksum = TextUtils.checksum((BranchDetectionHelper.isReleaseCandidate() ? FileUtils.getChangelogBetaUpdate(this) : "") + FileUtils.getChangelogMaster(this) + FileUtils.getChangelogRelease(this));
+            Settings.setLastChangelogChecksum(checksum);
+
+            if (lastChecksum == 0) {
+                // initialize oneTimeMessages after fresh install
+                OneTimeDialogs.initializeOnFreshInstall();
+                // initialize useInternalRouting setting depending on whether BRouter app is installed or not
+                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
+            } else if (lastChecksum != checksum) {
+                // show change log page after update
+                AboutActivity.showChangeLog(this);
+            }
+        } catch (final Exception ex) {
+            Log.e("Error checking/showing changelog!", ex);
+        }
     }
 
     @Override
@@ -405,9 +471,10 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             if (colStatus >= 0) {
                                 final int status = c.getInt(colStatus);
                                 if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                                    // show only a single dialog, no matter how many downloads are blocked/failed; PendingDownloadsActivity lists them all
                                     SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm(() -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
                                     Settings.setPendingDownloadsLastCheck(false);
-                                    break;
+                                    return;
                                 }
                             }
                         }
@@ -445,6 +512,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             cLog.add("perm");
 
             init();
+
+            DataStore.migrateNormalizedColumnsIfNeeded(this);
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
@@ -556,13 +625,13 @@ public class MainActivity extends AbstractNavigationBarActivity {
     }
 
     public void updateCacheCounter() {
-        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
+        resumeDisposables.add(AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
             final TextView counter = findViewById(R.id.offline_counter);
             counter.setVisibility(countOfflineCaches > 0 ? View.VISIBLE : View.GONE);
             if (countOfflineCaches > 0) {
                 counter.setText(LocalizationUtils.getPlural(R.plurals.caches_stored_offline, countOfflineCaches));
             }
-        }, throwable -> Log.e("Unable to add cache count", throwable));
+        }, throwable -> Log.e("Unable to add cache count", throwable)));
     }
 
     @Override
@@ -623,14 +692,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     @Override
     public void updateSelectedBottomNavItemId() {
         super.updateSelectedBottomNavItemId();
-
-        // Always show c:geo logo for this activity
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher_rounded_noborder);
-            actionBar.setHomeActionContentDescription(R.string.about);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setAppIconAsUpIndicator(false);
     }
 
     /**

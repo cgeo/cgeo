@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +10,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
 
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -75,7 +74,7 @@ public class ListenerHelper<T> {
         lock.readLock().lock();
         try {
             for (Map.Entry<Integer, T> entry : listeners.entrySet()) {
-                schedulerUsed.createWorker().schedule(() -> {
+                schedulerUsed.scheduleDirect(() -> {
                     final boolean doRemove = action.test(entry.getValue());
                     if (doRemove) {
                         removeListener(entry.getKey());
@@ -94,6 +93,15 @@ public class ListenerHelper<T> {
             listeners.clear();
         } finally {
             lock.writeLock().unlock();
+        }
+    }
+
+    public int size() {
+        lock.readLock().lock();
+        try {
+            return listeners.size();
+        } finally {
+            lock.readLock().unlock();
         }
     }
 

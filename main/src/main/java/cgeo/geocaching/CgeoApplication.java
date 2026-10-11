@@ -4,12 +4,13 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CgeoUncaughtExceptionHandler;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TransactionSizeLogger;
-import cgeo.geocaching.utils.buildconfig.BuildConfigHooks;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.annotation.SuppressLint;
@@ -21,19 +22,26 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.reactivex.rxjava3.exceptions.UndeliverableException;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import org.oscim.backend.CanvasAdapter;
 
 public class CgeoApplication extends Application {
@@ -46,6 +54,17 @@ public class CgeoApplication extends Application {
 
     private final LifecycleInfo lifecycleInfo;
 
+    // STARTUP instrumentation: captured when the Application class is loaded by the
+    // Android process — i.e. the earliest moment we can observe in user code.
+    public static final long startupNanos = System.nanoTime();
+
+    public static long elapsedStartupMs() {
+        return (System.nanoTime() - startupNanos) / 1_000_000L;
+    }
+
+    public static String elapsedMsSinceStartup() {
+        return "[▷" + elapsedStartupMs() + "ms]";
+    }
     private static class LifecycleInfo implements ActivityLifecycleCallbacks {
 
         private Activity currentForegroundActivity = null;
@@ -130,45 +149,97 @@ public class CgeoApplication extends Application {
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
             super.onCreate();
 
+            // distinguish between c:geo main process and subprocesses (eg: brouter_service), that don't need full initialization
+            final boolean isMainProcess = ProcessUtils.isMainProcess(this);
+
             TransactionSizeLogger.get().setRequested();
 
             // error handlers
             CgeoUncaughtExceptionHandler.installUncaughtExceptionHandler(this);
+            setupRxJavaErrorHandler();
 
             Settings.setAppThemeAutomatically(this);
 
-            initApplicationLocale();
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
+                fixUserManagerMemoryLeak();
+            }
 
-            // initialize cgeo notification channels
-            NotificationChannels.createNotificationChannels(this);
+            if (isMainProcess) {
+                initApplicationLocale();
 
-            // ensure initialization of lists
-            DataStore.getLists();
+                // initialize cgeo notification channels
+                NotificationChannels.createNotificationChannels(this);
 
-            // Restore cookies
-            Cookies.restoreCookies();
+                // ensure initialization of lists
+                DataStore.getLists();
 
-            // dump hash key to log, if requested
-            // Log.e("app hashkey: " + getApplicationHashkey(this));
+                // Restore cookies
+                Cookies.restoreCookies();
 
-            MessageCenterUtils.configureMessageCenterPolling();
+                // dump hash key to log, if requested
+                // Log.e("app hashkey: " + getApplicationHashkey(this));
+
+                MessageCenterUtils.configureMessageCenterPolling();
+            }
 
             LooperLogger.startLogging(Looper.getMainLooper());
 
-            applyVTMScales();
+            if (isMainProcess) {
+                applyVTMScales();
 
-            //initialize TranslationModelManager
-            TranslationModelManager.get().initialize();
+                //initialize TranslationModelManager
+                TranslationModelManager.get().initialize();
 
-            //specific hooks
-            BuildConfigHooks.get().initializeApp();
+                // building list of tileproviders is costly, it includes file system reads
+                // + validity check for offline map files, thus preload list in background
+                AndroidRxUtils.computationScheduler.scheduleDirect(Settings::getTileProvider);
+            }
         }
+    }
+
+    private void setupRxJavaErrorHandler() {
+        RxJavaPlugins.setErrorHandler(throwable -> {
+            Throwable cause = throwable;
+
+            // Unwraps the exception if it is wrapped in an UndeliverableException
+            if (throwable instanceof UndeliverableException) {
+                cause = throwable.getCause();
+            }
+
+            // Handle specific known cases
+            if (cause instanceof IOException || cause instanceof InterruptedException || cause instanceof java.util.concurrent.RejectedExecutionException) {
+                // Fine: network/file disruption, some blocking code was cancelled, or Scheduler/ThreadPool was shut down before the stream finished
+            } else if (cause instanceof NullPointerException || cause instanceof IllegalArgumentException || cause instanceof IllegalStateException) {
+                // That's likely a bug in the application or in RxJava
+                Objects.requireNonNull(Thread.currentThread().getUncaughtExceptionHandler()).uncaughtException(Thread.currentThread(), cause);
+            } else {
+                // Log remaining unknown errors
+                Log.e("RxJava Global Error: " + (cause == null ? "(unknown cause)" : cause.getMessage()));
+            }
+        });
     }
 
     private void applyVTMScales() {
         CanvasAdapter.userScale = Settings.getInt(R.string.pref_vtmUserScale, 100) / 100.0f;
         CanvasAdapter.textScale = Settings.getInt(R.string.pref_vtmTextScale, 100) / 100f;
         CanvasAdapter.symbolScale = Settings.getInt(R.string.pref_vtmSymbolScale, 100) / 100f;
+    }
+
+    /**
+     * <a href="https://code.google.com/p/android/issues/detail?id=173789">...</a>
+     * introduced with JELLY_BEAN_MR2 / fixed in October 2016
+     */
+    private void fixUserManagerMemoryLeak() {
+        try {
+            // invoke UserManager.get() via reflection
+            final Method m = UserManager.class.getMethod("get", Context.class);
+            m.setAccessible(true);
+            m.invoke(null, this);
+        } catch (final Throwable e) {
+            if (BuildConfig.DEBUG) {
+                throw new IllegalStateException("Cannot fix UserManager memory leak", e);
+            }
+        }
     }
 
     @Override

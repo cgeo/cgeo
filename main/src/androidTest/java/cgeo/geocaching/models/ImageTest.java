@@ -8,7 +8,7 @@ import android.os.Parcel;
 import java.io.File;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * ImageTest unit tests

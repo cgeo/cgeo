@@ -1,6 +1,8 @@
 package cgeo.geocaching.filters.core;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
+
+import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,7 +16,13 @@ public final class UserDisplayableStringUtils {
     }
 
     static String getUserDisplayableConfig(final @Nullable String minValue, final @Nullable String maxValue) {
+        return getUserDisplayableConfig(minValue, maxValue, null);
+    }
+
+    static <T> String getUserDisplayableConfig(final @Nullable T min, final @Nullable T max, final @Nullable Function<T, String> converter) {
         final StringBuilder sb = new StringBuilder();
+        final String minValue = converter == null ? (min == null ? null : min.toString()) : converter.apply(min);
+        final String maxValue = converter == null ? (max == null ? null : max.toString()) : converter.apply(max);
         if (StringUtils.isEmpty(minValue) && StringUtils.isEmpty(maxValue)) {
             sb.append("*");
         } else if (StringUtils.isNotEmpty(minValue) && StringUtils.isNotEmpty(maxValue)) {

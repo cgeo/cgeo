@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
@@ -14,13 +13,7 @@ import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.AlignmentSpan;
-import android.text.style.DynamicDrawableSpan;
-import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -28,7 +21,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.google.android.material.button.MaterialButton;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.TextNode;
@@ -143,9 +136,21 @@ public class OfflineTranslateUtils {
         });
     }
 
-    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<SpannableStringBuilder> consumer, final Consumer<Exception> errorConsumer) {
+    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, @NonNull final Consumer<SpannableStringBuilder> consumer, final Consumer<Exception> errorConsumer) {
+        // safeguards
+        if (StringUtils.isBlank(text) || status == null) {
+            consumer.accept(new SpannableStringBuilder(StringUtils.isBlank(text) ? "" : text));
+            return;
+        }
+        if (translator == null) {
+            consumer.accept(new SpannableStringBuilder(text)); // returns untranslated text
+            status.updateProgress();
+            return;
+        }
+
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
+        elements.removeIf(node -> node == null || StringUtils.isBlank(node.text())); // remove empty nodes
         final AtomicInteger remaining = new AtomicInteger(elements.size());
         if (remaining.get() == 0) {
             consumer.accept(new SpannableStringBuilder(""));

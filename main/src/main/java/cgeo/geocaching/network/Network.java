@@ -213,6 +213,14 @@ public final class Network {
         return RxOkHttpUtils.request(OK_HTTP_CLIENT, request);
     }
 
+    @NonNull
+    public static Single<Response> deleteJsonRequest(final String uri, final Parameters headers, final ObjectNode json) {
+        final Builder request = new Request.Builder().url(uri).delete(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                json.toString()));
+        addHeaders(request, headers, null);
+        return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+    }
+
     /**
      * POST HTTP request with Json POST DATA
      *

@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -47,16 +48,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
 
+    public static final int FAILING_MARKER = -1834520755;
+    public static final int TRIGGERING_MARKER = -1890745585;
+    public static final AtomicInteger ID_GIVER = new AtomicInteger(1);
+
     private static final String CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND = "cacheWaypointHighlighterBackground";
     private static final String CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM = "cacheWaypointHighlighterGeoitem";
 
-    private static final Map<Integer, Integer> list2marker = new TreeMap<>();
+    private static final int MAX_MARKERS = 2;
+
+    private static final Map<Integer, String> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
 
     // the following vars depend on cache/wp scaling factor and need to be part of resetCache()
@@ -105,7 +113,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final boolean applyScaling) {
-        final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
+        final ArrayList<String> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
                 .append(cache.getAssignedEmoji())
                 .append(cache.getType().id)
@@ -131,10 +139,13 @@ public final class MapMarkerUtils {
                 .append(applyScaling)
                 .toHashCode();
 
+
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
+            final int id = ID_GIVER.addAndGet(1);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createCacheMarker(res, cache, cacheListType, assignedMarkers, applyScaling));
+                final Drawable dr = createCacheMarker(hashcode, id, res, cache, cacheListType, assignedMarkers, applyScaling);
+                marker = new CacheMarker(hashcode, id, dr);
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -152,17 +163,19 @@ public final class MapMarkerUtils {
     @NonNull
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers, final boolean applyScaling) {
-        final int useEmoji = cache.getAssignedEmoji();
+    private static LayerDrawable createCacheMarker(final int hash, final int id, final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<String> assignedMarkers, final boolean applyScaling) {
+        final String useEmoji = cache.getAssignedEmoji();
 
         // marker shape
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null), getCacheScalingFactor(applyScaling));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
+        //checkStep(hash,id,  "1");
         if (showPin(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getCacheScalingFactor(applyScaling)));
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
+        //checkStep(hash, id, "2");
         // marker foreground
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
 
@@ -170,7 +183,7 @@ public final class MapMarkerUtils {
         if (showBigSmileys(cacheListType) && !mainIconIsTypeIcon(cache, cacheListType)) {
             // log icon in bigSmiley mode
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, getCacheScalingFactor(applyScaling), true));
-        } else if (cache.getAssignedEmoji() != 0) {
+        } else if (StringUtils.isNotBlank(cache.getAssignedEmoji())) {
             // custom icon
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "mainIconForCache", applyScaling), Gravity.CENTER));
         } else {
@@ -184,6 +197,7 @@ public final class MapMarkerUtils {
             // main icon (type icon / custom cache icon)
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, getCacheScalingFactor(applyScaling)));
         }
+        //checkStep(hash, id, "3");
 
         // overlays
         // center: archived
@@ -209,10 +223,10 @@ public final class MapMarkerUtils {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT, getCacheScalingFactor(applyScaling)));
-            } else if (cache.getAssignedEmoji() != 0) {
+            } else if (StringUtils.isNotBlank(cache.getAssignedEmoji())) {
                 insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, true), Gravity.TOP | Gravity.LEFT));
             }
-        } else if (!mainIconIsTypeIcon(cache, cacheListType) || cache.getAssignedEmoji() != 0) {
+        } else if (!mainIconIsTypeIcon(cache, cacheListType) || StringUtils.isNotBlank(cache.getAssignedEmoji())) {
             insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, true), Gravity.TOP | Gravity.LEFT));
         }
 
@@ -226,10 +240,12 @@ public final class MapMarkerUtils {
         if (cache.getPersonalNote() != null) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT, getCacheScalingFactor(applyScaling)));
         }
-        // center-left/center-right: list markers
-        addListMarkers(res, insetsBuilder, assignedMarkers, true, applyScaling);
+        //checkStep(hash, id, "4");
 
-        return buildLayerDrawable(insetsBuilder, 12, 13);
+        // center-left/center-right: list markers
+        addListMarkers(hash, id, res, insetsBuilder, assignedMarkers, true, applyScaling);
+
+        return buildLayerDrawable(hash, id, insetsBuilder, 12, 13);
     }
 
     /**
@@ -327,12 +343,12 @@ public final class MapMarkerUtils {
             final Integer logMarker = getMarkerIdIfLogged(cache);
             if (forMap && logMarker != null) {
                 insetsBuilder.withInset(new InsetBuilder(logMarker, Gravity.TOP | Gravity.LEFT));
-            } else if (forMap && cache.getAssignedEmoji() != 0) {
+            } else if (forMap && StringUtils.isNotBlank(cache.getAssignedEmoji())) {
                 insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, cache.getAssignedEmoji(), applyScaling), Gravity.TOP | Gravity.LEFT));
             } else if (forMap) {
                 insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, false), Gravity.TOP | Gravity.LEFT));
             }
-            addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
+            addListMarkers(0, 0, res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
         }
         final LayerDrawable ld = buildLayerDrawable(insetsBuilder, 8, 8);
         if ((waypoint.isVisited() || (cache != null && cache.isFound())) && Settings.getVisitedWaypointsSemiTransparent()) {
@@ -566,10 +582,14 @@ public final class MapMarkerUtils {
     }
 
     private static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
+        return buildLayerDrawable(0, 0, insetsBuilder, layersInitialCapacity, insetsInitialCapacity);
+    }
+
+    private static LayerDrawable buildLayerDrawable(final int hash, final int id, final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
+
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final List<Drawable> layers = new ArrayList<>(layersInitialCapacity);
         final List<int[]> insets = new ArrayList<>(insetsInitialCapacity);
-
         insetsBuilder.build(layers, insets);
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[0]));
 
@@ -631,7 +651,7 @@ public final class MapMarkerUtils {
     /**
      * adds list markers to drawable given by insetsBuilder
      */
-    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
+    private static void addListMarkers(final int hash, final int id, final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<String> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
         if (!assignedMarkers.isEmpty()) {
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(0), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
@@ -665,8 +685,8 @@ public final class MapMarkerUtils {
             list2marker.clear();
             final List<StoredList> lists = DataStore.getLists();
             for (final StoredList temp : lists) {
-                if (temp.markerId != EmojiUtils.NO_EMOJI) {
-                    list2marker.put(temp.id, temp.markerId);
+                if (StringUtils.isNotBlank(temp.emojiMarker)) {
+                    list2marker.put(temp.id, temp.emojiMarker);
                 }
             }
             listsRead = true;
@@ -677,21 +697,30 @@ public final class MapMarkerUtils {
         listsRead = false;
     }
 
-    private static ArrayList<Integer> getAssignedMarkers(final Geocache cache) {
-        readLists();
+    private static ArrayList<String> getAssignedMarkers(final Geocache cache) {
+        final ArrayList<String> result = new ArrayList<>();
 
-        final ArrayList<Integer> result = new ArrayList<>();
-
-        // Conditional cache markers are prepended so they appear first
-        result.addAll(cgeo.geocaching.models.ConditionalCacheMarker.getMarkersForCache(cache));
-
-        final Set<Integer> lists = cache.getLists();
-        for (final Integer list : lists) {
-            final Integer markerId = list2marker.get(list);
-            if (markerId != null) {
-                result.add(markerId);
+        //filter markers
+        if (Settings.isConditionalCacheMarkersEnabled()) {
+            result.addAll(NamedFilter.getMarkersForCache(cache, MAX_MARKERS));
+            if (result.size() >= MAX_MARKERS) {
+                return result;
             }
         }
+
+        //list markers
+        readLists();
+        final Set<Integer> lists = cache.getLists();
+        for (final Integer list : lists) {
+            final String markerId = list2marker.get(list);
+            if (markerId != null) {
+                result.add(markerId);
+                if (result.size() >= MAX_MARKERS) {
+                    break;
+                }
+            }
+        }
+
         return result;
     }
 
@@ -746,6 +775,9 @@ public final class MapMarkerUtils {
     private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final float scaling) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
+        if (StringUtils.containsNone(ratingLetter, 'd', 't') || r < 5) {
+            return new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_notavailable, null), scaling);
+        }
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
     }
 
@@ -760,7 +792,7 @@ public final class MapMarkerUtils {
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_stagenum_" + counter, "drawable", packageName), null), scaling);
     }
 
-    private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {
+    private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final String emoji, final String wantedSize, final boolean applyScaling) {
         final EmojiUtils.EmojiPaint paint;
         if (emojiPaintMap.containsKey(wantedSize + applyScaling)) {
             paint = emojiPaintMap.get(wantedSize + applyScaling);
@@ -817,7 +849,7 @@ public final class MapMarkerUtils {
         return mainMarkerId == cache.getType().iconId;
     }
 
-    private static Drawable getEmojiMarker(final Resources res, final int emoji, final boolean applyScaling) {
+    private static Drawable getEmojiMarker(final Resources res, final String emoji, final boolean applyScaling) {
         final Drawable markerBg = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getWaypointScalingFactor(applyScaling));
         final InsetsBuilder markerBuilder = new InsetsBuilder(res, true);
         markerBuilder.withInset(new InsetBuilder(markerBg));
@@ -924,5 +956,4 @@ public final class MapMarkerUtils {
         nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM);
         nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND);
     }
-
 }

@@ -34,6 +34,10 @@
             android:title="@string/init_live_compass_in_navigation_action"
             android:summary="@string/init_summary_live_compass_in_navigation_action"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:key="@string/pref_named_filter_display_mode"
+            android:title="@string/init_named_filter_display_mode"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

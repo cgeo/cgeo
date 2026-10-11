@@ -3,7 +3,6 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,19 +53,6 @@ public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
         terrainGeocacheFilter.addToSql(sqlBuilder);
     }
 
-    @Override
-    public void setConfig(final LegacyFilterConfig config) {
-        setToFilterConfig(difficultyGeocacheFilter, CONFIG_KEY_DIFFICULTY, config);
-        setToFilterConfig(terrainGeocacheFilter, CONFIG_KEY_TERRAIN, config);
-    }
-
-    @Override
-    public LegacyFilterConfig getConfig() {
-        final LegacyFilterConfig config = new LegacyFilterConfig();
-        addFromFilterConfig(difficultyGeocacheFilter, CONFIG_KEY_DIFFICULTY, config);
-        addFromFilterConfig(terrainGeocacheFilter, CONFIG_KEY_TERRAIN, config);
-        return config;
-    }
 
     @Nullable
     @Override
@@ -94,11 +80,4 @@ public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
         return difficultyGeocacheFilter.getUserDisplayableConfig() + " / " + terrainGeocacheFilter.getUserDisplayableConfig();
     }
 
-    private static void addFromFilterConfig(final NumberRangeGeocacheFilter<?> filter, final String key, @NonNull final LegacyFilterConfig config) {
-        config.put(key, filter.getConfig().getDefaultList());
-    }
-
-    private static void setToFilterConfig(final NumberRangeGeocacheFilter<?> filter, final String key, @NonNull final LegacyFilterConfig config) {
-        filter.setConfig(config.getSubConfig(key));
-    }
 }

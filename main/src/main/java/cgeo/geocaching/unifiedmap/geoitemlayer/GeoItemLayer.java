@@ -267,7 +267,7 @@ public class GeoItemLayer<K> {
         this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter(logPraefix, providerLayer));
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (entry.getValue().second) {
-                putToMap(entry.getKey(), entry.getValue().first, null);
+                putToMap(entry.getKey(), entry.getValue().first, null, false);
             }
         }
     }
@@ -277,11 +277,20 @@ public class GeoItemLayer<K> {
         put(key, item, true);
     }
 
+    /** Puts a new GeoItem onto the layer. If an object for same key already exists, it is replaced. Re-draws the object even if value was not changed */
+    public synchronized void putForce(final K key, final GeoItem item) {
+        put(key, item, true, true);
+    }
+
     /**
      * Puts a new GeoItem onto the layer. If an object for same key already exists, it is replaced.
      * If "show" is false, the item is added to the layer but not (yet) shown.
      */
     public synchronized void put(final K key, final GeoItem item, final boolean show) {
+        put(key, item, show, false);
+    }
+
+    private synchronized void put(final K key, final GeoItem item, final boolean show, final boolean forcePut) {
 
         if (!GeoItem.isValid(item)) {
             Log.d("GeoItemLayer: adding invalid item: " + key + ": " + item);
@@ -297,7 +306,7 @@ public class GeoItemLayer<K> {
 
         //draw new item on map if necessary
         if (show) {
-            putToMap(key, item, previousItem == null ? null : previousItem.first);
+            putToMap(key, item, previousItem == null ? null : previousItem.first, forcePut);
         }
     }
 
@@ -349,7 +358,7 @@ public class GeoItemLayer<K> {
         }
     }
 
-    private void putToMap(final K key, final GeoItem item, final GeoItem oldItem) {
+    private void putToMap(final K key, final GeoItem item, final GeoItem oldItem, final boolean forcePut) {
 
         if (item == null && oldItem == null) {
             throw new IllegalArgumentException("Progamming bug: either item or oldItem must be non-null for: " + key);
@@ -370,29 +379,29 @@ public class GeoItemLayer<K> {
 
         if (itemIsPrimitive && (oldItem == null || oldItemIsPrimitive)) {
             //->insert or replace one GeoPrimitive with another
-            mapWriter.put(key, (GeoPrimitive) item);
+            mapWriter.put(key, (GeoPrimitive) item, forcePut);
         } else if (item == null && oldItemIsPrimitive) {
             //->remove a GeoPrimitive
             mapWriter.remove(key);
         } else if (!itemIsPrimitive && !oldItemIsPrimitive) {
             //->insert or replace a GeoGroup with another, or remove a GeoGroup
-            replaceGroupInMap(key, oldItem, item);
+            replaceGroupInMap(key, oldItem, item, forcePut);
         } else if (itemIsPrimitive) {
             //->replace a GeoGroup with a GeoPrimitive
-            replaceGroupInMap(key, oldItem, null);
-            mapWriter.put(key, (GeoPrimitive) item);
+            replaceGroupInMap(key, oldItem, null, forcePut);
+            mapWriter.put(key, (GeoPrimitive) item, forcePut);
         } else {
             //->replace a GeoPrimitive with a GeoGroup
             mapWriter.remove(key);
-            replaceGroupInMap(key, null, item);
+            replaceGroupInMap(key, null, item, forcePut);
         }
     }
 
     private void removeFromMap(final K key, final GeoItem oldItem) {
-        putToMap(key, null, oldItem);
+        putToMap(key, null, oldItem, false);
     }
 
-    private void replaceGroupInMap(final K key, @Nullable final GeoItem oldItem, @Nullable final GeoItem newItem) {
+    private void replaceGroupInMap(final K key, @Nullable final GeoItem oldItem, @Nullable final GeoItem newItem, final boolean forcePut) {
 
         mapWriter.multiChange((putAction, removeAction) -> {
             final Map<Integer, GeoPrimitive> toRemove = LOCAL_MAP.get();
@@ -413,7 +422,7 @@ public class GeoItemLayer<K> {
             }
             toPut.clear();
             toRemove.clear();
-        });
+        }, forcePut);
     }
 
     private static void fillMapFromGroup(@Nullable final GeoItem item, final Map<Integer, GeoPrimitive> map) {
@@ -436,7 +445,7 @@ public class GeoItemLayer<K> {
         final Pair<GeoItem, Boolean> value = itemMap.get(key);
         if (value != null && !value.second) {
             itemMap.put(key, new Pair<>(value.first, true));
-            putToMap(key, value.first, null);
+            putToMap(key, value.first, null, false);
         }
     }
 
@@ -463,7 +472,7 @@ public class GeoItemLayer<K> {
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (!entry.getValue().second) {
                 entry.setValue(new Pair<>(entry.getValue().first, true));
-                putToMap(entry.getKey(), entry.getValue().first, null);
+                putToMap(entry.getKey(), entry.getValue().first, null, false);
             }
         }
     }

@@ -230,9 +230,6 @@
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
-    <string name="info_log_post_failed">Publicarea însemnării a eşuat.</string>
-    <string name="info_log_post_retry">Încearcă din nou</string>
-    <string name="info_log_post_save">Salvează local</string>
     <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>
     <string name="info_waypoint_coordinates_cleared">Coordonate anulate.</string>
     <string name="info_log_type_changed">Tipul însemnării a fost schimbat!</string>
@@ -328,8 +325,9 @@
     <!-- caches lists filter -->
     <string name="cache_filter_difficulty_terrain">Dificultate / Teren</string>
     <string name="cache_filter_storage_select_title">Selectare filtru</string>
-    <string name="cache_filter_storage_select_clear_title">Selectaţi filtrul sau ştergeţi filtrul curent</string>
     <string name="cache_filter_checkboxlist_add_all_items">Adaugă toate elementele</string>
+    <!-- named filter activity -->
+    <!-- dialog to create element with parent -->
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
@@ -358,6 +356,7 @@
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
+    <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
     <string name="calculate_dataDir">Se determină spaţiul de stocare utilizat de geocutii</string>
     <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
@@ -497,7 +496,6 @@
     <!-- proximity notification -->
     <!-- map sources -->
     <string name="map_source_google_map">Google: hartă</string>
-    <string name="map_source_osm_offline">Cutie salvată</string>
     <string name="settings_info_send2cgeo_title">Info despre send2cgeo</string>
     <string name="init_sendToCgeo_name">Numele dispozitivului tău</string>
     <string name="init_sendToCgeo_register">Cere Înregistrare</string>
@@ -1127,5 +1125,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
-    <!-- emoji categories -->
+    <!-- db inspection, overriding values of "grid" to support translation -->
 </resources>

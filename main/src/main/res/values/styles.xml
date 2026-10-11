@@ -69,12 +69,6 @@
 
     <!-- actionbar -->
 
-    <style name="actionBarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
-        <item name="titleTextStyle">@style/action_bar_title</item>
-        <item name="android:textColorPrimary">@color/colorTextActionBar</item>
-        <item name="android:subtitleTextStyle">@style/action_bar_subtitle</item>
-    </style>
-
     <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
         <item name="android:textColor">@color/colorTextActionBar</item>
@@ -248,6 +242,18 @@
      <style name="IconButtonThemeOverlay">
         <!-- For filled buttons, your theme's colorPrimary provides the default background color of the component -->
         <item name="colorPrimary">@color/colorText</item>
+    </style>
+
+    <style name="SqlButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
     </style>
 
     <style name="shapeRoundedCorner" parent="">

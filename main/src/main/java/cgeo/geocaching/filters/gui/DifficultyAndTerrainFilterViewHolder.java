@@ -44,7 +44,7 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
     public void setViewFromFilter(@NonNull final DifficultyAndTerrainGeocacheFilter filter) {
         if (diffView != null) {
             diffView.setViewFromFilter(filter.difficultyGeocacheFilter);
-            includeCheckbox.right.setChecked(Boolean.TRUE.equals(filter.difficultyGeocacheFilter.getIncludeSpecialNumber()));
+            includeCheckbox.right.setChecked(filter.difficultyGeocacheFilter.getIncludeSpecialNumber());
         }
         if (terrainView != null) {
             terrainView.setViewFromFilter(filter.terrainGeocacheFilter);

@@ -34,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,6 +43,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -54,6 +56,22 @@ public final class LogUtils {
         //no instance
     }
 
+    public static final Comparator<LogEntry> LOG_ENTRY_DATE_COMPARATOR = (a, b) -> {
+        return Long.compare(getDaysSinceEpochZoneCorrected(b.date), getDaysSinceEpochZoneCorrected(a.date));
+    };
+
+    /**
+     * Gets timezone-corrected days passed since Unix epoch for given time
+     */
+    public static long getDaysSinceEpochZoneCorrected(final long date) {
+        final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+
+        // move time
+        final long localMillis = date + offsetMillis;
+
+        // get days since epoch
+        return localMillis / 86_400_000L;
+    }
 
     /** get title for a log image in the list */
     public static String getLogImageTitle(final Image image, final int imagePos, final int imageCount) {
@@ -113,9 +131,15 @@ public final class LogUtils {
         LogCacheActivity.startForEdit(activity, cache.getGeocode(), entry);
     }
 
+    // Offline log drafts are stored verbatim; trim leading/trailing whitespace only here, right before a log is uploaded or exported (#6631).
+    @NonNull
+    public static String trimForPublishing(@Nullable final String log) {
+        return StringUtils.trimToEmpty(log);
+    }
+
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
-    static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
+    public static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
 
 
         try (ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), logEntry)) {
@@ -123,9 +147,10 @@ public final class LogUtils {
                 final ILoggingManager loggingManager = cache.getLoggingManager();
                 final IConnector cacheConnector = loggingManager.getConnector();
 
-                //Upload new log entry
+                //Upload new log entry (trim the log only now, right before publishing; the offline draft stays verbatim - #6631)
                 progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
-                final LogResult logResult = loggingManager.createLog(logEntry, inventory);
+                final OfflineLogEntry logEntryToUpload = logEntry.buildUponOfflineLogEntry().setLog(trimForPublishing(logEntry.log)).build();
+                final LogResult logResult = loggingManager.createLog(logEntryToUpload, inventory);
                 if (!logResult.isOk()) {
                     return logResult;
                 }
@@ -199,6 +224,7 @@ public final class LogUtils {
                 postGenericInventoryLogs(cache, logEntry, inventory.values(), progress);
 
                 cache.notifyChange();
+
                 return logResult;
 
             } catch (final RuntimeException e) {
@@ -272,7 +298,7 @@ public final class LogUtils {
 
 
     @WorkerThread
-    static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
+    public static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
         final IConnector cacheConnector = loggingManager.getConnector();
 

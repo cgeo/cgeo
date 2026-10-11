@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- widget layout for a preference row that can be copied to the clipboard and deleted -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/copyview"
+        style="@style/button_icon" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/deleteview"
+        style="@style/button_icon" />
+
+</LinearLayout>

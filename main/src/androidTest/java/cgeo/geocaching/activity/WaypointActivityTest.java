@@ -32,7 +32,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import org.junit.Rule;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.not;

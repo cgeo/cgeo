@@ -18,6 +18,13 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction"/>
     <item
+        android:id="@+id/menu_item_reset"
+        android:icon="@drawable/ic_menu_reset"
+        android:title="@string/cache_filter_storage_clear_button"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction"/>
+    <item
         android:id="@+id/menu_item_delete"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_filter_storage_delete_button"

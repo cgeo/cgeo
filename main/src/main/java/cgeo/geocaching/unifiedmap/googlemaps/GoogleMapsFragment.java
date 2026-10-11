@@ -11,6 +11,7 @@ import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
+import cgeo.geocaching.unifiedmap.overlays.TileOverlayLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -28,6 +29,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,9 +42,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
 
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
+    private final List<TileOverlay> overlays = new ArrayList<>();
     private final GoogleMapController mapController = new GoogleMapController();
     private GestureDetector gestureDetector;
 
@@ -47,6 +55,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private LatLngBounds lastBounds = null;
 
     private boolean mapIsCurrentlyMoving;
+    private boolean mapIsInAnimation = false; // to suppress bearing updates temporarily
 
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
@@ -73,12 +82,16 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             }
         });
 
-        // add map fragment
-        final SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.mapViewGM, mapFragment)
-                .commit();
+        // add map fragment (hosted in the child FragmentManager so its container R.id.mapViewGM is resolved
+        // within this fragment's own view, and it is restored correctly after config change, see #18415)
+        final FragmentManager fm = getChildFragmentManager();
+        SupportMapFragment mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.mapViewGM);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            fm.beginTransaction()
+                    .add(R.id.mapViewGM, mapFragment)
+                    .commit();
+        }
 
         // start map
         mapFragment.getMapAsync(this);
@@ -120,7 +133,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnCameraMoveStartedListener(reason -> {
             mapIsCurrentlyMoving = true;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-            scaleDrawer.drawScale(lastBounds);
+            scaleDrawer.drawScale(mMap, lastBounds);
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
             }
@@ -132,7 +145,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-            scaleDrawer.drawScale(lastBounds);
+            scaleDrawer.drawScale(mMap, lastBounds);
         });
 
         initLayers();
@@ -165,8 +178,30 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         final boolean needsUpdate = super.setTileSource(newSource, force);
         if (needsUpdate) {
             ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+            addTileOverlays();
         }
         return needsUpdate;
+    }
+
+    /**
+     * (Re-)creates the user-defined tile overlays. Existing ones are removed first, as this is
+     * called on every tile source change and they must not stack up.
+     */
+    private void addTileOverlays() {
+        removeTileOverlays();
+        for (TileOverlayOptions options : TileOverlayLayerHelper.getTileLayersGoogle()) {
+            final TileOverlay overlay = mMap.addTileOverlay(options);
+            if (overlay != null) {
+                overlays.add(overlay);
+            }
+        }
+    }
+
+    private void removeTileOverlays() {
+        for (TileOverlay overlay : overlays) {
+            overlay.remove();
+        }
+        overlays.clear();
     }
 
 
@@ -219,7 +254,19 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(
                     new LatLng(bounds.bottomLeft.getLatitude(), bounds.bottomLeft.getLongitude()),
                     new LatLng(bounds.topRight.getLatitude(), bounds.topRight.getLongitude())), 50);
-            mMap.animateCamera(cu);
+            // block bearing updates while zooming
+            mapIsInAnimation = true;
+            mMap.animateCamera(cu, new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    mapIsInAnimation = false;
+                }
+
+                @Override
+                public void onCancel() {
+                    mapIsInAnimation = false;
+                }
+            });
         }
     }
 
@@ -258,7 +305,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setBearing(final float bearing) {
-        if (mMap != null) {
+        if (mMap != null && !mapIsInAnimation) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
         }
     }

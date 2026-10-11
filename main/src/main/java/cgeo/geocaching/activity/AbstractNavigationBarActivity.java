@@ -151,7 +151,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                 startActivity(CacheListActivity.getHistoryIntent(this));
             } else {
                 Settings.setLastDisplayedList(selectedListId);
-                startActivity(CacheListActivity.getActivityOfflineIntent(this));
+                startActivity(CacheListActivity.getActivityOfflineIntent(this, null));
             }
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
@@ -160,7 +160,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     private boolean onMapLongClicked() {
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
-            DefaultMap.startActivityList(this, selectedListId, null);
+            DefaultMap.startActivityList(this, selectedListId, -1, null);
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
@@ -241,7 +241,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
-        Log.e("insets.top=" + insets.top + ", left=" + insets.left + ", right=" + insets.right + ", bottom=" + insets.bottom + ", ab=" + getResources().getDimension(R.dimen.actionbar_height));
         if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
             //-> navbar is NOT shown, we have to handle all insets (including bottom)
             return insets;
@@ -358,7 +357,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         if (id == MENU_MAP) {
             return DefaultMap.getLiveMapIntent(fromActivity);
         } else if (id == MENU_LIST) {
-            return CacheListActivity.getActivityOfflineIntent(fromActivity);
+            return CacheListActivity.getActivityOfflineIntent(fromActivity, null);
         } else if (id == MENU_SEARCH) {
             return new Intent(fromActivity, SearchActivity.class);
         } else if (id == MENU_CUSTOM) {
@@ -581,14 +580,16 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
             // check for notifications permission on migration (API 33+ only)
             if (InstallWizardActivity.needsNotificationsPermission()) {
-                Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)));
+                Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)), false);
             }
 
+            // Cleanup for removed ML Kit offline translation
+            LocalStorage.cleanupMLKitfiles();
         }
     }
 
     private void checkRestore() {
-        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+        if (DataStore.isNewlyCreatedDatabase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
             restoreMessageShown = true;
             Dialogs.newBuilder(this)
                     .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))

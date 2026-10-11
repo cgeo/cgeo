@@ -12,7 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class JsonUtilsTest {
 
@@ -98,6 +98,23 @@ public class JsonUtilsTest {
         final String jsonDateString = JsonUtils.stringToNode(json).get("logDate").textValue();
 
         assertThat(jsonDateString).isEqualTo(sdfDateString);
+    }
 
+    @Test
+    public void forEach() {
+        final JsonNode node = JsonUtils.stringToNode(TEST_JSON, false);
+
+        final StringBuilder sb = new StringBuilder();
+        JsonUtils.forEach(node, (key) -> {
+            if (key.isArray()) {
+                //don't scan arrays
+                return false;
+            }
+            if (key.isTextual()) {
+                sb.append(key.asText());
+            }
+            return true;
+        });
+        assertThat(sb.toString()).isEqualTo("green");
     }
 }

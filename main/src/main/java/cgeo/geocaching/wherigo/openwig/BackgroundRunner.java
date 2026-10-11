@@ -85,4 +85,8 @@ public class BackgroundRunner extends Thread {
         end = true;
         notify();
     }
+
+    public int queueSize () {
+        return queue.size();
+    }
 }

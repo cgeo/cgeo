@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import java.util.Date;
 
 import org.apache.commons.lang3.Strings;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class Compare {
 

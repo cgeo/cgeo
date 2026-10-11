@@ -14,7 +14,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.Strings;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class FormatterTest  {
@@ -121,6 +121,19 @@ public class FormatterTest  {
 
     private static void assertFormatStoredAgo(final long agoInMillis, final String expected) {
         assertThat(Formatter.formatStoredAgo(System.currentTimeMillis() - agoInMillis)).isEqualTo(expected);
+    }
+
+    @Test
+    public void testFormatStoredExact() {
+        // skip test on non english device
+        if (!Strings.CS.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+            return;
+        }
+        // unknown timestamp -> only the "Stored " prefix, no date
+        assertThat(Formatter.formatStoredExact(0)).isEqualTo("Stored ");
+        // known timestamp -> "Stored " prefix plus the exact date (device format, incl. year)
+        final long now = System.currentTimeMillis();
+        assertThat(Formatter.formatStoredExact(now)).isEqualTo("Stored " + Formatter.formatFullDate(now));
     }
 
 }

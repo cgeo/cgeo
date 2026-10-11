@@ -1,123 +1,15 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
-
-- Fix: Crash in cache infosheet
-- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
-
-##
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
-
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
-
-##
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
-
-##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
-
-##
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
-
-##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
-
-##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
-
-##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
-
-##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
-
-##
-- Corregido: Pistas de caché sin cifrar (cambio del sitio web)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Solucionado: VTM UnifiedMap: Alternar edificios 3D no funciona para mapas combinados
-- Corregido: Traducción sin conexión: Listado de idiomas detectado a veces como --
-
-##
-- Corregido: Detención de la aplicación en el módulo de traducción
-- Corregido: Fallo en la detección de inicio de sesión (cambio del sitio web)
-- Corregido: Aplicación detenida al recuperar el cartucho de Wherigo
-- Corregido: "Cargar más" no respetaba los filtros sin conexión
-
-##
-- Corregido: Inventario de TB(s) no cargado mientras se registra un caché
-
-##
-- Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
-- Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Corregir: la lista de ignorados de geocaching.com no funciona (#16950)
+- Corregir: Varias fugas de memoria (#18615)
+- Corregir: Tamaño incorrecto de escala en Google Maps (#18646)
+- Corregir: Bucle sin fin al seleccionar un nuevo formato en "Coordenada de cálculo" (#18672)
+- Fix: Log text folding not working (#18653)
+- Fix: Crash in reading variables (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
+- Fix: Crash while trying to start Wherigo service (#18675)
+- Fix: Crash while using Google Maps (#18676)
+- Fix: Crash in tracks quick settings (#18666)
+- Fix: Crash in offline translation (#18678)
+- Fix: Crash on map rotation (#18680)
+- Fix: Crash on VTM map (#18691)

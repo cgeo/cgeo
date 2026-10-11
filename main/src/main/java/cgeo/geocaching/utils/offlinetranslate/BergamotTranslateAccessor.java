@@ -2,6 +2,7 @@ package cgeo.geocaching.utils.offlinetranslate;
 
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -39,6 +41,12 @@ import org.json.JSONObject;
  * from Mozilla's production model registry and cached in the app's private storage.
  * Each non-English language requires two pair downloads: lang→en and en→lang
  * (needed for pivot translation through English).
+ *
+ * Two rules protect the app from the native library, which aborts the whole process on any
+ * internal error (a native abort cannot be caught in Java):
+ * a direction is only ever handed to the native library once all of its files are completely
+ * downloaded (see {@link #COMPLETE_MARKER}), and every call into the native library runs on
+ * {@link #NATIVE_SCHEDULER}, because the native model cache is not thread safe.
  */
 public class BergamotTranslateAccessor implements ITranslateAccessor {
 
@@ -50,6 +58,16 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     private static final String MODEL_REGISTRY_URL = MODEL_BUCKET_URL + "db/models.json";
 
     private static final String PIVOT_LANGUAGE = "en";
+
+    /** Written into a direction's directory once all of its files are completely downloaded */
+    private static final String COMPLETE_MARKER = ".complete";
+
+    /**
+     * All calls into the native library are serialized onto this single thread: the native model
+     * cache is not thread safe. Translations are serialized inside the native library anyway,
+     * so this costs no throughput.
+     */
+    private static final Scheduler NATIVE_SCHEDULER = AndroidRxUtils.singleThreadPool();
 
     // All language codes with Release-status models in both directions in Mozilla's registry.
     // Verified against https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json
@@ -87,6 +105,16 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private final Set<String> availableLanguages = new HashSet<>();
     private final Object availableLock = new Object();
+    private final Object availableScanLock = new Object();
+    private volatile boolean availableScanComplete;
+
+    /** Directions already present in the native model cache. Only touched on {@link #NATIVE_SCHEDULER} */
+    private final Set<String> loadedDirections = new HashSet<>();
+
+    // Serializes downloads. downloadLanguage() and getTranslatorWithDownload() are independent
+    // entry points which can ask for the same language at the same time, and they would otherwise
+    // write the same files concurrently.
+    private final Object downloadLock = new Object();
 
     // models.json cached for the session (fetched once, then reused)
     private String cachedRegistryJson = null;
@@ -101,13 +129,6 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         this.langDetect = new LangDetect();
         // NativeLib runs initializeService() from its own constructor; no
         // explicit call is needed (the method is not public in the AAR).
-        // Run on IO thread — loading 30MB models per pair is too heavy for main thread
-        Schedulers.io().createWorker().schedule(this::scanAvailableModels);
-    }
-
-    @Override
-    public String getTranslatorName() {
-        return "Bergamot";
     }
 
     @Override
@@ -121,14 +142,14 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             return null;
         }
         // Map Traditional Chinese variants (zh-Hant, zh-TW, zh-HK, zh-MO) to our "zh-hant" code
-        final String lower = tag.toLowerCase();
+        final String lower = tag.toLowerCase(Locale.ROOT);
         if (lower.startsWith("zh-")) {
             final String sub = lower.substring(3);
             if ("hant".equals(sub) || "tw".equals(sub) || "hk".equals(sub) || "mo".equals(sub)) {
                 return "zh-hant";
             }
         }
-        return tag.contains("-") ? tag.split("-")[0].toLowerCase() : lower;
+        return tag.contains("-") ? tag.split("-")[0].toLowerCase(Locale.ROOT) : lower;
     }
 
     /**
@@ -146,11 +167,22 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public void getAvailableLanguages(final Consumer<Set<String>> onSuccess, final Consumer<Exception> onError) {
-        final Set<String> copy;
-        synchronized (availableLock) {
-            copy = new HashSet<>(availableLanguages);
-        }
-        runCallback(() -> onSuccess.accept(copy));
+        // wait for on-device file scan to complete before returning results
+        Schedulers.io().scheduleDirect(() -> {
+            if (!availableScanComplete) {
+                synchronized (availableScanLock) {
+                    if (!availableScanComplete) {
+                        scanAvailableModels();
+                        availableScanComplete = true;
+                    }
+                }
+            }
+            final Set<String> copy;
+            synchronized (availableLock) {
+                copy = new HashSet<>(availableLanguages);
+            }
+            runCallback(() -> onSuccess.accept(copy));
+        });
     }
 
     @Override
@@ -167,19 +199,17 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             runCallback(onSuccess);
             return;
         }
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             try {
                 downloadPairFiles(language, PIVOT_LANGUAGE);   // lang → en
                 downloadPairFiles(PIVOT_LANGUAGE, language);   // en  → lang
-                loadPairIntoNative(language);
                 synchronized (availableLock) {
                     availableLanguages.add(language);
                     availableLanguages.add(PIVOT_LANGUAGE);
                 }
                 runCallback(onSuccess);
             } catch (final Throwable e) {
-                // Catch Throwable (not just Exception) so that native-library Errors
-                // (e.g. UnsatisfiedLinkError) are handled and don't crash the process.
+                // Catch Throwable (not just Exception) so that nothing escapes uncaught into RxJava
                 Log.e(TAG + ": Error downloading models for " + language, e);
                 runCallback(() -> onError.accept(asException(e)));
             }
@@ -188,7 +218,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public void deleteLanguage(final String language, final Runnable onSuccess, final Consumer<Exception> onError) {
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             if (!PIVOT_LANGUAGE.equals(language)) {
                 deleteDir(getPairDir(language, PIVOT_LANGUAGE));
                 deleteDir(getPairDir(PIVOT_LANGUAGE, language));
@@ -210,7 +240,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             runCallback(() -> onSuccess.accept(null));
             return;
         }
-        Schedulers.computation().createWorker().schedule(() -> {
+        Schedulers.computation().scheduleDirect(() -> {
             try {
                 final DetectionResult result = langDetect.detectLanguage(source, null);
                 // Always return the top-ranked language, even if isReliable=false.
@@ -231,10 +261,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     @Override
     public ITranslatorImpl getTranslator(final String sourceLanguage, final String targetLanguage) {
         if (!PIVOT_LANGUAGE.equals(sourceLanguage)) {
-            ensureModelLoaded(sourceLanguage);
+            ensureLanguageAvailable(sourceLanguage);
         }
         if (!PIVOT_LANGUAGE.equals(targetLanguage)) {
-            ensureModelLoaded(targetLanguage);
+            ensureLanguageAvailable(targetLanguage);
         }
         return createTranslatorImpl(sourceLanguage, targetLanguage);
     }
@@ -242,7 +272,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     @Override
     public void getTranslatorWithDownload(final String sourceLanguage, final String targetLanguage,
             final Consumer<ITranslatorImpl> onSuccess, final Consumer<Exception> onError) {
-        Schedulers.io().createWorker().schedule(() -> {
+        Schedulers.io().scheduleDirect(() -> {
             try {
                 if (!PIVOT_LANGUAGE.equals(sourceLanguage)) {
                     ensureOrDownload(sourceLanguage);
@@ -252,7 +282,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 }
                 runCallback(() -> onSuccess.accept(createTranslatorImpl(sourceLanguage, targetLanguage)));
             } catch (final Throwable e) {
-                // Catch Throwable (not just Exception) so that native-library Errors are handled.
+                // Catch Throwable (not just Exception) so that nothing escapes uncaught into RxJava
                 runCallback(() -> onError.accept(asException(e)));
             }
         });
@@ -275,17 +305,24 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
             @Override
             public void translate(final String source, final Consumer<String> onSuccess, final Consumer<Exception> onError) {
-                Schedulers.computation().createWorker().schedule(() -> {
+                NATIVE_SCHEDULER.scheduleDirect(() -> {
                     try {
                         final String[] result;
-                        if (PIVOT_LANGUAGE.equals(sourceLang)) {
+                        // skip translation if src == target
+                        if (sourceLang.equals(targetLang)) {
+                            result = null;
+                        } else if (PIVOT_LANGUAGE.equals(sourceLang)) {
                             // en → target: direct
+                            loadDirection(PIVOT_LANGUAGE, targetLang);
                             result = nativeLib.translateMultiple(new String[]{source}, pairKey(PIVOT_LANGUAGE, targetLang));
                         } else if (PIVOT_LANGUAGE.equals(targetLang)) {
                             // source → en: direct
+                            loadDirection(sourceLang, PIVOT_LANGUAGE);
                             result = nativeLib.translateMultiple(new String[]{source}, pairKey(sourceLang, PIVOT_LANGUAGE));
                         } else {
                             // source → en → target: pivot via English
+                            loadDirection(sourceLang, PIVOT_LANGUAGE);
+                            loadDirection(PIVOT_LANGUAGE, targetLang);
                             result = nativeLib.pivotMultiple(
                                 pairKey(sourceLang, PIVOT_LANGUAGE),
                                 pairKey(PIVOT_LANGUAGE, targetLang),
@@ -336,25 +373,21 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         );
     }
 
-    /** Scan previously downloaded models on startup and load them into the native service */
+    /** Scan the models present on device. They are loaded into the native service lazily, on first use */
     private void scanAvailableModels() {
         for (final String lang : SUPPORTED_LANGUAGES) {
             if (PIVOT_LANGUAGE.equals(lang)) {
                 continue;
             }
             if (isPairComplete(lang)) {
-                try {
-                    Log.i(TAG + ": Loading cached models for " + lang);
-                    loadPairIntoNative(lang);
-                    synchronized (availableLock) {
-                        availableLanguages.add(lang);
-                        availableLanguages.add(PIVOT_LANGUAGE);
-                    }
-                    Log.i(TAG + ": Models loaded for " + lang);
-                } catch (final Throwable e) {
-                    // Catch Throwable (not just Exception) so that native-library Errors
-                    // (e.g. from loadModelIntoCache) don't propagate uncaught through RxJava.
-                    Log.e(TAG + ": Could not reload cached models for " + lang, e);
+                synchronized (availableLock) {
+                    availableLanguages.add(lang);
+                    availableLanguages.add(PIVOT_LANGUAGE);
+                }
+            } else {
+                synchronized (downloadLock) {
+                    dropIfIncomplete(lang, PIVOT_LANGUAGE);
+                    dropIfIncomplete(PIVOT_LANGUAGE, lang);
                 }
             }
         }
@@ -363,12 +396,34 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         }
     }
 
+    /**
+     * Free the space of a direction which will never be loaded: leftovers of an aborted download,
+     * or files of a c:geo version which did not write the completion marker yet. A re-download
+     * would discard them anyway, and without this they would stay behind unusable and invisible.
+     */
+    private void dropIfIncomplete(final String from, final String to) {
+        final File dir = getPairDir(from, to);
+        if (dir.exists() && !isDirectionComplete(from, to)) {
+            Log.i(TAG + ": Discarding incomplete model files for " + pairKey(from, to));
+            deleteDir(dir);
+        }
+    }
+
     private boolean isPairComplete(final String lang) {
         return isDirectionComplete(lang, PIVOT_LANGUAGE) && isDirectionComplete(PIVOT_LANGUAGE, lang);
     }
 
+    /**
+     * A direction is complete only if it carries the marker file, which is written after its last
+     * file was downloaded. The marker alone would accept files which vanished after it was
+     * written, the file check alone would accept the truncated leftovers of an aborted download,
+     * and handing either to the native library aborts the whole app.
+     */
     private boolean isDirectionComplete(final String from, final String to) {
         final File dir = getPairDir(from, to);
+        if (!new File(dir, COMPLETE_MARKER).isFile()) {
+            return false;
+        }
         for (final String fileName : pairFileNames(from, to)) {
             if (!new File(dir, fileName).exists()) {
                 return false;
@@ -382,19 +437,30 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
      * URLs are resolved from Mozilla's model registry; files are served gzip-compressed.
      */
     private void downloadPairFiles(final String from, final String to) throws IOException {
-        if (isDirectionComplete(from, to)) {
-            return;
+        synchronized (downloadLock) {
+            if (isDirectionComplete(from, to)) {
+                return;
+            }
+            // Drop whatever is there: leftovers of an aborted download, or files of a c:geo version
+            // which did not yet write the marker and may therefore be truncated
+            final File dir = getPairDir(from, to);
+            deleteDir(dir);
+            if (!dir.isDirectory() && !dir.mkdirs()) {
+                throw new IOException("Could not create model directory " + dir);
+            }
+
+            final PairUrls urls = resolveModelUrls(from, to);
+            final String lc = from + to;
+
+            downloadFile(urls.modelUrl,    new File(dir, "model." + lc + ".intgemm.alphas.bin"));
+            downloadFile(urls.vocabSrcUrl, new File(dir, "vocab." + lc + ".src.spm"));
+            downloadFile(urls.vocabTrgUrl, new File(dir, "vocab." + lc + ".trg.spm"));
+            downloadFile(urls.lexUrl,      new File(dir, "lex.50.50." + lc + ".s2t.bin"));
+
+            if (!new File(dir, COMPLETE_MARKER).createNewFile()) {
+                throw new IOException("Could not mark direction " + lc + " as complete");
+            }
         }
-        final File dir = getPairDir(from, to);
-        dir.mkdirs();
-
-        final PairUrls urls = resolveModelUrls(from, to);
-        final String lc = from + to;
-
-        downloadFileIfMissing(urls.modelUrl,    new File(dir, "model." + lc + ".intgemm.alphas.bin"));
-        downloadFileIfMissing(urls.vocabSrcUrl, new File(dir, "vocab." + lc + ".src.spm"));
-        downloadFileIfMissing(urls.vocabTrgUrl, new File(dir, "vocab." + lc + ".trg.spm"));
-        downloadFileIfMissing(urls.lexUrl,      new File(dir, "lex.50.50." + lc + ".s2t.bin"));
     }
 
     /**
@@ -558,39 +624,52 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         }
     }
 
-    private void downloadFileIfMissing(final String url, final File dest) throws IOException {
-        if (dest.exists()) {
+    /**
+     * Download a single file, automatically decompressing if the URL ends in .gz.
+     * The data is written to a temporary file and only moved into place after the transfer
+     * finished, so a file under its final name is always a complete file.
+     */
+    private void downloadFile(final String fileUrl, final File dest) throws IOException {
+        Log.i(TAG + ": Downloading " + fileUrl + " -> " + dest.getName());
+        final File part = new File(dest.getParentFile(), dest.getName() + ".part");
+        try {
+            final InputStream raw = Network.getResponseStream(Network.getRequest(fileUrl));
+            if (raw == null) {
+                throw new IOException("Failed to download: " + dest.getName());
+            }
+            try (InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
+                 FileOutputStream out = new FileOutputStream(part)) {
+                final byte[] buf = new byte[65536];
+                int read;
+                while ((read = in.read(buf)) != -1) {
+                    out.write(buf, 0, read);
+                }
+            }
+            if (!part.renameTo(dest)) {
+                throw new IOException("Could not move " + part.getName() + " into place");
+            }
+        } finally {
+            part.delete(); // does nothing once the file was moved into place
+        }
+    }
+
+    /**
+     * Make a direction usable by the native library, unless it already is.
+     * Must only be called on {@link #NATIVE_SCHEDULER}.
+     */
+    private void loadDirection(final String from, final String to) {
+        final String key = pairKey(from, to);
+        if (loadedDirections.contains(key)) {
             return;
         }
-        Log.i(TAG + ": Downloading " + url + " -> " + dest.getName());
-        downloadFile(url, dest);
-    }
-
-    /** Download a single file, automatically decompressing if the URL ends in .gz */
-    private void downloadFile(final String fileUrl, final File dest) throws IOException {
-        final InputStream raw = Network.getResponseStream(Network.getRequest(fileUrl));
-        if (raw == null) {
-            throw new IOException("Failed to download: " + dest.getName());
+        // last gate before the native library: it aborts the app on a missing or truncated file
+        if (!isDirectionComplete(from, to)) {
+            throw new IllegalStateException("Model files not available for " + key);
         }
-        try (InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
-             FileOutputStream out = new FileOutputStream(dest)) {
-            final byte[] buf = new byte[65536];
-            int read;
-            while ((read = in.read(buf)) != -1) {
-                out.write(buf, 0, read);
-            }
-        }
-    }
-
-    private void loadPairIntoNative(final String language) throws IOException {
-        loadDirectionIntoNative(language, PIVOT_LANGUAGE);
-        loadDirectionIntoNative(PIVOT_LANGUAGE, language);
-    }
-
-    private void loadDirectionIntoNative(final String from, final String to) throws IOException {
-        final File dir = getPairDir(from, to);
-        final String config = buildModelConfig(from, to, dir);
-        nativeLib.loadModelIntoCache(config, pairKey(from, to));
+        Log.i(TAG + ": Loading model for " + key);
+        nativeLib.loadModelIntoCache(buildModelConfig(from, to, getPairDir(from, to)), key);
+        loadedDirections.add(key);
+        Log.i(TAG + ": Model loaded for " + key);
     }
 
     private String buildModelConfig(final String from, final String to, final File dir) {
@@ -621,7 +700,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             + "  - false\n";
     }
 
-    private void ensureModelLoaded(final String language) {
+    private void ensureLanguageAvailable(final String language) {
         synchronized (availableLock) {
             if (!availableLanguages.contains(language)) {
                 throw new IllegalStateException("Model not available for language: " + language);
@@ -637,7 +716,6 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         if (!available) {
             downloadPairFiles(language, PIVOT_LANGUAGE);
             downloadPairFiles(PIVOT_LANGUAGE, language);
-            loadPairIntoNative(language);
             synchronized (availableLock) {
                 availableLanguages.add(language);
                 availableLanguages.add(PIVOT_LANGUAGE);
@@ -660,7 +738,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private void runCallback(final Runnable r) {
         final Scheduler s = callbackScheduler != null ? callbackScheduler : AndroidSchedulers.mainThread();
-        s.createWorker().schedule(r);
+        s.scheduleDirect(r);
     }
 
     /** Wraps any Throwable as an Exception suitable for error-consumer callbacks. */

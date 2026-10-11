@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * LogEntry and OfflineLogEntry unit tests

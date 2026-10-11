@@ -270,6 +270,16 @@ public class Waypoint implements INamedGeoCoordinate {
         return parentCache;
     }
 
+    /**
+     * Pre-populates the parent geocache reference to avoid the per-waypoint lazy DB load in
+     * {@link #getParentGeocache()}. Only applied when the given cache matches this waypoint's geocode.
+     */
+    public void setParentGeocache(@Nullable final Geocache cache) {
+        if (cache != null && Strings.CS.equals(geocode, cache.getGeocode())) {
+            this.parentCache = cache;
+        }
+    }
+
     @NonNull
     public String getShortGeocode() {
         return generateShortGeocode(geocode);

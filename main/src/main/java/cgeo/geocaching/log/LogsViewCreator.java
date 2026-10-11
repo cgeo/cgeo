@@ -4,6 +4,7 @@ import cgeo.geocaching.ImageGalleryActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
+import cgeo.geocaching.databinding.LogsItemBinding;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
@@ -11,7 +12,6 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
-import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -27,28 +27,83 @@ import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
-    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
+    /** per-log (temporary) translation status, keyed by log instance so each log toggles independently */
+    private final Map<LogEntry, OfflineTranslateUtils.Status> translationStatusByLog = new IdentityHashMap<>();
+    private final Map<LogEntry, Boolean> expandedByLog = new IdentityHashMap<>();
+
+    /** lazily created, reused for the lifetime of the activity to avoid stacking up progress dialogs on repeated log deletions */
+    private LogActivityHelper logActivityHelper;
+
+    private OfflineTranslateUtils.Status getTranslationStatus(final LogEntry log) {
+        return translationStatusByLog.computeIfAbsent(log, l -> new OfflineTranslateUtils.Status());
+    }
+
+    private LogActivityHelper getLogActivityHelper(final AbstractActionBarActivity activity) {
+        if (logActivityHelper == null) {
+            logActivityHelper = new LogActivityHelper(activity);
+        }
+        return logActivityHelper;
+    }
 
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return LogsPageBinding.inflate(inflater, container, false);
+    }
+
+    class LogEntryAdapter extends RecyclerView.Adapter<LogViewHolder> {
+
+        private final List<LogEntry> data;
+
+        LogEntryAdapter(final List<LogEntry> data) {
+            this.data = data;
+        }
+
+        @NonNull
+        @Override
+        public LogViewHolder onCreateViewHolder(final @NonNull ViewGroup parent, final int viewType) {
+            return new LogViewHolder(LogsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(final @NonNull LogViewHolder holder, final int position) {
+            final LogEntry log = data.get(position);
+            fillViewHolder(holder, log);
+        }
+
+        @Override
+        public int getItemCount() {
+            return data != null ? data.size() : 0;
+        }
+
+        public void addHeaderView() {
+
+        }
+
+        public void removeHeaderView() {
+
+        }
+
     }
 
     @Override
@@ -59,32 +114,12 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         binding.getRoot().setVisibility(View.VISIBLE);
 
         addHeaderView();
-        binding.logsItems.setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, getLogs()) {
-
-            @Override
-            @NonNull
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                View rowView = convertView;
-                if (rowView == null) {
-                    rowView = getActivity().getLayoutInflater().inflate(R.layout.logs_item, parent, false);
-                }
-                LogViewHolder holder = (LogViewHolder) rowView.getTag();
-                if (holder == null) {
-                    holder = new LogViewHolder(rowView);
-                }
-                holder.setPosition(position);
-
-                final LogEntry log = getItem(position);
-                if (log != null) {
-                    fillViewHolder(convertView, holder, log);
-                }
-                return rowView;
-            }
-        });
-        binding.logsItems.setOnScrollListener(new FastScrollListener(binding.logsItems));
+        binding.logsItems.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.logsItems.setAdapter(new LogEntryAdapter(getLogs()));
+        // @todo binding.logsItems.setOnScrollListener(new FastScrollListener(binding.logsItems));
     }
 
-    protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
+    protected void fillViewHolder(final @NonNull LogViewHolder holder, final LogEntry log) {
         if (log.date > 0) {
             holder.binding.added.setText(Formatter.formatShortDateVerbally(log.date));
             holder.binding.added.setVisibility(View.VISIBLE);
@@ -93,17 +128,38 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         }
 
         holder.binding.type.setText(log.logType.getL10n());
-        holder.binding.type.setCompoundDrawablesWithIntrinsicBounds(log.logType.getLogOverlay(), 0, 0, 0);
+        final int logTypeMarker;
+        if (log.favorite && null == log.serviceLogId && LogType.FOUND_IT == log.logType) {
+            logTypeMarker = R.drawable.marker_found_fp_offline;
+        } else if (log.favorite && null != log.serviceLogId) {
+            logTypeMarker = R.drawable.marker_found_fp;
+        } else {
+            logTypeMarker = log.logType.getLogOverlay();
+        }
+        holder.binding.type.setCompoundDrawablesWithIntrinsicBounds(logTypeMarker, 0, 0, 0);
         holder.binding.type.setCompoundDrawablePadding(4);
 
         holder.binding.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
 
+        // collapse/expand listener, store state in map to avoid losing it when scrolling
+        holder.binding.log.setOnCollapseListener(v -> expandedByLog.put(log, true));
+
+        final boolean expanded = Boolean.TRUE.equals(expandedByLog.getOrDefault(log, Boolean.FALSE));
+        holder.binding.log.setExpanded(expanded);
+
         // log text, avoid parsing HTML if not necessary
         if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.binding.log.setText(TextUtils.trimSpanned(HtmlCompat.fromHtml(log.getDisplayText(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(getGeocode(), holder.binding.log), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
+            holder.binding.log.setText(
+                    TextUtils.trimSpanned(
+                            HtmlCompat.fromHtml(
+                                    log.getDisplayText(),
+                                    HtmlCompat.FROM_HTML_MODE_LEGACY,
+                                    new SmileyImage(getGeocode(), holder.binding.log),
+                                    unknownTagsHandler)),
+                    TextView.BufferType.SPANNABLE);
         } else {
             holder.binding.log.setText(log.log, TextView.BufferType.SPANNABLE);
         }
@@ -116,6 +172,8 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         } else {
             holder.binding.logImages.setVisibility(View.GONE);
         }
+
+        holder.binding.logTranslateHint.setVisibility(View.GONE);
 
         // colored marker
         final int marker = log.logType.markerId;
@@ -155,7 +213,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 if (LogUtils.canDeleteLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
-                        it -> new LogActivityHelper(activity)
+                        it -> getLogActivityHelper(activity)
                             .setLogResultConsumer((type, result) -> {
                                 if (!result.isOk()) {
                                     SimpleDialog.of(activity)
@@ -171,7 +229,13 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
             // expand/collapse
             if (holder.binding.log.isCollapsible()) {
-                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log, holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more, it -> holder.binding.log.setCollapse(!holder.binding.log.isCollapsed()));
+                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log,
+                        holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more,
+                        it -> {
+                            final boolean expand = holder.binding.log.isCollapsed();
+                            holder.binding.log.setCollapse(!expand);
+                            expandedByLog.put(log, expand);
+                        });
             }
 
             //Copy to clipboard
@@ -187,16 +251,27 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             }
             if (OfflineTranslateUtils.isTargetLanguageValid() && !TranslateAccessor.get().getSupportedLanguages().isEmpty()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
+                    final OfflineTranslateUtils.Status translationStatus = getTranslationStatus(log);
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();
-                        fillViewHolder(null, holder, log);
+                        holder.binding.logTranslateHint.setVisibility(View.GONE);
+                        fillViewHolder(holder, log);
                     } else {
                         final String logText = HtmlUtils.extractText(log.log);
                         translationStatus.startTranslation(1, null, null);
                         OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), translationStatus, logText,
                                 unsupportedLng -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
                                 downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
-                                translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, holder.binding.log::setText, e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
+                                translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, translated -> {
+                                    holder.binding.log.setText(translated);
+                                    holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))));
+                                    holder.binding.logTranslateButton.setOnClickListener(v1 -> {
+                                        translationStatus.setNotTranslated();
+                                        holder.binding.logTranslateHint.setVisibility(View.GONE);
+                                        fillViewHolder(holder, log);
+                                    });
+                                    holder.binding.logTranslateHint.setVisibility(View.VISIBLE);
+                                }, e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
                         }
                 });
             }

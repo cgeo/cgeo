@@ -250,6 +250,9 @@ public final class WherigoUtils {
 
     public static CartridgeFile readCartridge(final Uri uri) throws IOException {
         final FileInputStream fis = (FileInputStream) ContentStorage.get().openForRead(uri);
+        if (fis == null) {
+            throw new IOException("Could not open uri for read: " + uri);
+        }
         return CartridgeFile.read(new WSeekableFile(fis.getChannel()), WherigoSaveFileHandler.get());
     }
 
@@ -279,6 +282,30 @@ public final class WherigoUtils {
             seekableFile.close();
         } catch (Exception e) {
             Log.w("WHEERIGO: Couldn't access seekable file inside cartridge", e);
+        }
+    }
+
+    public static byte[] getFileSafe(final CartridgeFile cartridgeFile, final int oid) {
+        if (cartridgeFile == null) {
+            return null;
+        }
+        try {
+            return cartridgeFile.getFile(oid);
+        } catch (Exception e) {
+            Log.w("WHERIGO: Couldn't read file with oid " + oid + " from cartridge " + cartridgeFile.name, e);
+            return null;
+        }
+    }
+
+    public static byte[] getMediaFileSafe(final Media media) {
+        if (media == null) {
+            return null;
+        }
+        try {
+            return Engine.mediaFile(media);
+        } catch (Exception e) {
+            Log.w("WHERIGO: Couldn't read file from media " + media, e);
+            return null;
         }
     }
 
@@ -333,21 +360,37 @@ public final class WherigoUtils {
             return;
         }
 
-        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_stop_running_game_title))
-            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.get().getCartridgeName())).confirm(() -> {
-                if (runOnClosedGameOnly != null) {
+        final Runnable exitGame = () -> {
+            if (runOnClosedGameOnly != null) {
+                //ensure that action is performed after game is REALLY stopped! -> add a listener to OpenWIG END notification
+                final int[] listenerId = new int[1];
+                listenerId[0] = WherigoGame.get().addListener(notifyType -> {
+                    if (notifyType.equals(WherigoGame.NotifyType.END)) {
+                        runOnClosedGameOnly.run();
+                        WherigoGame.get().removeListener(listenerId[0]);
+                    }
+                });
+            }
+            WherigoGame.get().stopGame();
+        };
 
-                    //ensure that action is performed after game is REALLY stopped! -> add a listener to OpenWIG END notification
-                    final int[] listenerId = new int[1];
-                    listenerId[0] = WherigoGame.get().addListener(notifyType -> {
-                        if (notifyType.equals(WherigoGame.NotifyType.END)) {
-                            runOnClosedGameOnly.run();
-                            WherigoGame.get().removeListener(listenerId[0]);
-                        }
-                    });
+        final Runnable saveAndExitGame = () -> {
+            //save game and wait until it is done --> add a listener to SAVE notification --> THEN exit
+            final int[] listenerId = new int[1];
+            listenerId[0] = WherigoGame.get().addListener(notifyType -> {
+                if (notifyType.equals(WherigoGame.NotifyType.SAVED)) {
+                    exitGame.run();
+                    WherigoGame.get().removeListener(listenerId[0]);
                 }
-                WherigoGame.get().stopGame();
             });
+            WherigoGame.get().saveGame(null);
+        };
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_stop_running_game_title))
+            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.get().getCartridgeName()))
+            .setButtons(R.string.wherigo_confirm_exit, 0, R.string.wherigo_confirm_save_exit)
+            .setNeutralAction(saveAndExitGame)
+            .confirm(exitGame);
     }
 
     public static Comparator<EventTable> getThingsComparator() {
@@ -530,10 +573,10 @@ public final class WherigoUtils {
         if (et instanceof Task) {
             switch (((Task) et).state()) {
                 case Task.DONE:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
+                    name = TextUtils.concat(EmojiUtils.GREEN_CHECK_BOXED + " ", name);
                     break;
                 case Task.FAILED:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
+                    name = TextUtils.concat(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK + " ", name);
                     break;
                 default:
                     break;

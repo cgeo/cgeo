@@ -16,11 +16,14 @@ import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -427,7 +430,11 @@ public class SimpleDialog {
      * A confirm dialog always has at least a positive action and shows at least a positive and a negative button.
      * Provide up to two listeners to define actions for 'positive' and 'negative'.
      */
-    public void confirm(final Runnable positive, final Runnable negative) {
+    public void confirm(@NonNull final Runnable positive, @NonNull final Runnable negative) {
+        confirm(positive, negative, null, null);
+    }
+
+    public void confirm(final Runnable positive, final Runnable negative, @Nullable final Runnable neutral, @Nullable final TextParam neutralButtonText) {
         //"confirm" always needs at least "OK" and "cancel"
         if (positiveButton == null) {
             setPositiveButton(TextParam.id(R.string.ok));
@@ -435,15 +442,30 @@ public class SimpleDialog {
         if (negativeButton == null) {
             setNegativeButton(TextParam.id(R.string.cancel));
         }
-        showInternal(positive, negative);
+        if (neutral != null) {
+            setNeutralButton(neutralButtonText);
+        }
+        showInternal(positive, negative, neutral);
     }
 
-    private void showInternal(final Runnable positive, final Runnable negative) {
+    private void showInternal(@Nullable final Runnable positive, @Nullable final Runnable negative, @Nullable final Runnable neutral) {
+        // safety check if activity is still running to avoid BadTokenException errors, see #18703
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return; // must not try to show dialog in this case
+            }
+        }
+
         final AlertDialog dialog = constructCommons().first;
         if (negative != null) {
             dialog.setOnCancelListener(dialogInterface -> negative.run());
         }
         dialog.show();
+        if (dialog.getWindow() != null) {
+            // enable selecting message text (setting textIsSelectable is not sufficient in AlertDialog)
+            ((TextView) dialog.getWindow().findViewById(R.id.dialog_message)).setMovementMethod(LinkMovementMethod.getInstance());
+        }
         finalizeCommons(dialog, which -> {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
@@ -456,6 +478,13 @@ public class SimpleDialog {
                 case DialogInterface.BUTTON_NEGATIVE:
                     if (negative != null) {
                         negative.run();
+                        dialog.dismiss();
+                        return true;
+                    }
+                    break;
+                case DialogInterface.BUTTON_NEUTRAL:
+                    if (neutral != null) {
+                        neutral.run();
                         dialog.dismiss();
                         return true;
                     }
@@ -477,7 +506,7 @@ public class SimpleDialog {
      */
     public void show(final Runnable positive) {
         setNegativeButton(null);
-        showInternal(positive, null);
+        showInternal(positive, null, null);
     }
 
     public void show() {

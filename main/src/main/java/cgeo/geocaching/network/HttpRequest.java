@@ -17,6 +17,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
@@ -102,6 +103,21 @@ public class HttpRequest {
 
     public Single<HttpResponse> request() {
         return requestInternal(r -> r);
+    }
+
+    /** Sends request and returns response body parsed as JsonNode. Returns empty ObjectNode on parse failure. */
+    public Single<JsonNode> requestJsonNode() {
+        headers("Accept", "application/json, text/javascript, */*; q=0.01");
+        return requestInternal(r -> {
+            final String bodyString = r.getBodyString();
+            r.close();
+            try {
+                final JsonNode result = JsonUtils.stringToNode(bodyString, false);
+                return result != null ? result : JsonUtils.createObjectNode();
+            } catch (IllegalArgumentException jpe) {
+                throw new IllegalStateException(LOGPRAEFIX + "ERR: Couldn't create json from: '" + bodyString + "'", jpe);
+            }
+        });
     }
 
     public <T> Single<T> requestJson(final Class<T> clazz) {
@@ -297,11 +313,19 @@ public class HttpRequest {
         return this;
     }
 
-    /** Sets body to Json parsed from given object */
+    /** Sets body to Json from given object (serialized via Jackson) */
     public HttpRequest bodyJson(final Object jsonObject) {
         final String jsonString = getJsonBody(jsonObject);
         Log.d("HTTP-JSON: attempt to send: " + jsonString);
         this.requestBodySupplier = () -> RequestBody.create(jsonString, MEDIA_TYPE_APPLICATION_JSON);
+        return this;
+    }
+
+    /** Sets body to Json from a JsonNode */
+    public HttpRequest bodyJson(final JsonNode jsonNode) {
+        final String jsonString = JsonUtils.nodeToString(jsonNode);
+        Log.d("HTTP-JSON: attempt to send: " + jsonString);
+        this.requestBodySupplier = () -> RequestBody.create(jsonString != null ? jsonString : "null", MEDIA_TYPE_APPLICATION_JSON);
         return this;
     }
 

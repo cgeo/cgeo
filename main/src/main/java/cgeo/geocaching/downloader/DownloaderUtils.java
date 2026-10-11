@@ -175,10 +175,12 @@ public class DownloaderUtils {
         builder.setView(binding.getRoot());
         binding.downloadInfo1.setText(LocalizationUtils.getString(R.string.download_confirmation, StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + LocalizationUtils.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
         binding.downloadInfo2.setVisibility(View.GONE);
+        binding.allowMeteredNetwork.setChecked(Settings.getDownloadAllowMeteredNetwork());
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     final boolean allowMeteredNetwork = binding.allowMeteredNetwork.isChecked();
+                    Settings.setDownloadAllowMeteredNetwork(allowMeteredNetwork);
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
                         final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork, System.currentTimeMillis());
@@ -225,6 +227,7 @@ public class DownloaderUtils {
         builder.setView(binding.getRoot());
         binding.downloadInfo1.setText(confirmation);
         binding.downloadInfo2.setText(R.string.download_warning);
+        binding.allowMeteredNetwork.setChecked(Settings.getDownloadAllowMeteredNetwork());
 
         for (Download download : downloads) {
             final CheckBox cb = new CheckBox(new ContextThemeWrapper(activity, R.style.checkbox_full));
@@ -244,6 +247,7 @@ public class DownloaderUtils {
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     final boolean allowMeteredNetwork = binding.allowMeteredNetwork.isChecked();
+                    Settings.setDownloadAllowMeteredNetwork(allowMeteredNetwork);
 
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
@@ -488,7 +492,8 @@ public class DownloaderUtils {
                 .setDisplayMapper((item, itemGroup) -> TextParam.text(item.right), (item, itemGroup) -> String.valueOf(item.left), null)
                 .activateGrouping(item -> LocalizationUtils.getString(Download.DownloadType.getFromId(item.left).getTypeNameResId()))
                 .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
-                .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()));
+                .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()))
+                .setCollapseMode(SimpleItemListModel.GroupCollapseMode.FORCED_COLLAPSED);
 
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_items))
                 .setPositiveButton(TextParam.id(R.string.delete))

@@ -27,13 +27,14 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
+import android.text.method.ArrowKeyMovementMethod;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Pair;
@@ -64,6 +65,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
@@ -71,6 +73,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -153,6 +157,13 @@ public class ViewUtils {
         if (view != null) {
             view.setText(text);
         }
+    }
+
+    /**
+     * Sets text for given TextView (without crashing on null view)
+     */
+    public static void setText(final TextView view, final @StringRes int textId) {
+        TextParam.id(textId).applyTo(view);
     }
 
     public static void setMaxTextLength(@NonNull final EditText textField, @Nullable final TextInputLayout textLayout, final int maxLength) {
@@ -339,7 +350,7 @@ public class ViewUtils {
             binding.input.setMaxLines(maxLines);
             binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
             binding.input.setVerticalScrollBarEnabled(true);
-            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance());
+            binding.input.setMovementMethod(ArrowKeyMovementMethod.getInstance());
             binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
             binding.input.invalidate();
             Dialogs.moveCursorToEnd(binding.input);
@@ -908,5 +919,55 @@ public class ViewUtils {
 
         return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
     }
+
+    /** to be used in Activity.onCreateOptionsMenu to set a long click handler for menu items */
+    public static void registerLongClickHandlerForMenuItem(final Activity ctx, final int viewId, final Predicate<View> longClickHandler) {
+        new Handler().post(() -> {
+            final View view = ctx.findViewById(viewId);
+            if (view != null) {
+                view.setOnLongClickListener(v -> longClickHandler.test(v));
+            }
+        });
+    }
+
+    public static void debugDumpDrawable(final String  name, final Drawable drawable) {
+        if (drawable == null) {
+            return;
+        }
+
+        try {
+            final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            debugDumpBitmap(name, bitmap);
+        } catch (final Exception e) {
+            Log.e("DEBUG image dump (bitmap) failed for file " + name, e);
+        }
+    }
+
+    public static void debugDumpBitmap(final String  name, final Bitmap bitmap) {
+        if (bitmap == null) {
+            return;
+        }
+        try {
+            final File dir = CgeoApplication.getInstance().getExternalFilesDir("debug-dumpimages");
+            if (dir == null) {
+                return;
+            }
+            if (!dir.exists() && !dir.mkdirs()) {
+                Log.e("DEBUG image dump: could not create dir " + dir.getAbsolutePath());
+                return;
+            }
+            final File file = new File(dir, name + ".png");
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            }
+            Log.iForce("DEBUG image dump: wrote " + file.getAbsolutePath());
+        } catch (final Exception e) {
+            Log.e("DEBUG image dump failed for file " + name, e);
+        }
+    }
+
 
 }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ManagedListAdapterTest {
 
@@ -48,6 +48,23 @@ public class ManagedListAdapterTest {
         assertThat(mla.getItems().get(0)).isEqualTo("test");
         mla.removeItem(0);
         assertThat(mla.getItems()).isEmpty();
+    }
+
+    @Test
+    public void filterCheckNullException() {
+        final TestManagedListAdapter mla = new TestManagedListAdapter();
+
+        // Should not throw NullPointerException
+        mla.setFilter(s -> s != null && s.startsWith("g"), true);
+        mla.addItem(0, null);
+
+        try {
+            mla.setFilter(s -> s.startsWith("g"), true);
+            mla.addItem(0, null);
+        } catch (NullPointerException npe) {
+            // Should throw NullPointerException
+            assertThat(npe).isNotNull();
+        }
     }
 
     @Test

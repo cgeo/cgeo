@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,8 +21,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
 
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -66,7 +65,7 @@ public class TranslatorUtils {
     }
 
     public static void runOnWorker(final Runnable run) {
-        WORKER_SINGLE.createWorker().schedule(run);
+        WORKER_SINGLE.scheduleDirect(run);
     }
 
     /** translates texts with special handling in cases it is normal text or contains HTML */
@@ -149,5 +148,4 @@ public class TranslatorUtils {
             return lng1.compareTo(lng2);
         };
     }
-
 }

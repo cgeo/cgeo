@@ -172,7 +172,7 @@ public class ColorPickerUI {
             final int max = (int) Math.round(slider.getMax() * valueToShownValue);
 
             Dialogs.newBuilder(context)
-                    .setTitle(TextParam.id(R.string.number_input_title).toString())
+                    .setTitle(TextParam.id(R.string.number_input_title_short).toString())
                     .setMessage(TextParam.id(R.string.number_input_range, "" + min, "" + max).toString())
                     .setView(editText)
                     .setPositiveButton(android.R.string.ok, (dialog2, whichButton) -> {

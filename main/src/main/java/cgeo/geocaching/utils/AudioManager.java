@@ -56,7 +56,7 @@ public class AudioManager {
                     }
                 }
             }, 0, 500);
-            startPlayer(this.player, this.uri, this.mute, success -> {
+            final boolean started = startPlayer(this.player, this.uri, this.mute, success -> {
                 synchronized (mutex) {
                     if (songId.get() != thisSongId) {
                         //this is from another song and can be ignored
@@ -73,10 +73,12 @@ public class AudioManager {
                     }
                 }
             });
-            this.duration = player.getDuration();
-            this.timePassedBeforeLastStart = 0;
-            this.timeLastStartTimestamp = System.currentTimeMillis();
-            setState(State.PLAYING, false);
+            if (started) {
+                this.duration = getDuration(this.player);
+                this.timePassedBeforeLastStart = 0;
+                this.timeLastStartTimestamp = System.currentTimeMillis();
+                setState(State.PLAYING, false);
+            }
         });
     }
 
@@ -153,7 +155,7 @@ public class AudioManager {
                 } else {
                     if (player.isPlaying() && (state == State.COMPLETED || state == State.STOPPED)) {
                         //when we set "COMPLETED" status while player is still playing (when duration is reached)
-                        //then it can happen we come here and player is not paused. Thus we ensure this here
+                        //then it can happen we come here and player is not paused. Thus, we ensure this here
                         this.player.pause();
                     }
                     this.player.seekTo(0);
@@ -195,8 +197,23 @@ public class AudioManager {
 
     private static void setVolume(final MediaPlayer player, final boolean mute) {
         if (player != null) {
-            player.setVolume(mute ? 0 : 1f, mute ? 0 : 1f);
+            try {
+                player.setVolume(mute ? 0 : 1f, mute ? 0 : 1f);
+            } catch (Exception ex) {
+                Log.e(LOG_PRAEFIX + "error trying to set volume: " + mute, ex);
+            }
         }
+    }
+
+    private static int getDuration(final MediaPlayer player) {
+        if (player != null) {
+            try {
+                return player.getDuration();
+            } catch (Exception ex) {
+                Log.e(LOG_PRAEFIX + "error trying to get duration", ex);
+            }
+        }
+        return -1;
     }
 
     private void setState(final State state, final boolean force) {
@@ -225,7 +242,7 @@ public class AudioManager {
         });
     }
 
-    private static void startPlayer(final MediaPlayer player, final Uri uri, final boolean mute, final Consumer<Boolean> onStop) {
+    private static boolean startPlayer(final MediaPlayer player, final Uri uri, final boolean mute, final Consumer<Boolean> onStop) {
         final  Consumer<Boolean> realStop = (b) -> {
             if (onStop != null) {
                 try {
@@ -251,9 +268,11 @@ public class AudioManager {
             player.prepare();
             player.setOnCompletionListener(mp -> realStop.accept(true));
             player.start();
+            return true;
         } catch (Exception e) {
             Log.e(LOG_PRAEFIX + "error trying to play audio", e);
             realStop.accept(false);
+            return false;
         }
     }
 

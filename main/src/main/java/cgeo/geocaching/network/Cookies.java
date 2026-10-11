@@ -4,6 +4,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +39,9 @@ public final class Cookies {
     }
 
     public static class InMemoryCookieJar implements CookieJar {
+
+        /** Expiry given to legacy persisted entries (written without one) when restoring them. */
+        private static final long LEGACY_COOKIE_LIFETIME_MS = 365L * 24 * 60 * 60 * 1000;
 
         final HashMap<String, Cookie> allCookies = new HashMap<>();
 
@@ -102,20 +106,51 @@ public final class Cookies {
             dumpCookieStore();
         }
 
+        /**
+         * Restores the persisted cookies. Each restored cookie gets its expiry back (or, for entries
+         * written by the previous format that had none, a far-future one), because an OkHttp cookie
+         * built without {@code expiresAt} is NOT persistent — such cookies were silently dropped by the
+         * next {@link #dumpCookieStore()}, i.e. by the first cookie change after an app start, which
+         * lost the gc.com session cookie between app starts.
+         */
         private synchronized void restoreCookieStore() {
             final String oldCookies = Settings.getPersistentCookies();
             if (oldCookies != null) {
                 for (final String cookie : StringUtils.split(oldCookies, ';')) {
-                    final String[] split = StringUtils.split(cookie, "=", 3);
-                    if (split.length == 3) {
-                        try {
-                            addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
-                        } catch (final RuntimeException ignored) {
-                            // ignore
+                    try {
+                        final Cookie restored = parsePersistedCookie(cookie);
+                        if (restored != null) {
+                            addCookie(restored);
                         }
+                    } catch (final RuntimeException ignored) {
+                        // ignore
                     }
                 }
             }
+        }
+
+        /**
+         * Persisted formats: current {@code name=domain=expiresAt=value} (the value comes last because it
+         * may itself contain '='); legacy {@code name=value=domain} from versions that did not persist the
+         * expiry. Returns null for anything else.
+         */
+        @Nullable
+        static Cookie parsePersistedCookie(final String persisted) {
+            final String[] split = StringUtils.split(persisted, "=", 4);
+            if (split.length == 4) {
+                final long expiresAt;
+                try {
+                    expiresAt = Long.parseLong(split[2]);
+                } catch (final NumberFormatException ignored) {
+                    return null;
+                }
+                return new Builder().name(split[0]).domain(split[1]).expiresAt(expiresAt).value(split[3]).build();
+            }
+            if (split.length == 3) {
+                // legacy entry: keep it persistent, it was persistent when it got written
+                return new Builder().name(split[0]).value(split[1]).domain(split[2]).expiresAt(System.currentTimeMillis() + LEGACY_COOKIE_LIFETIME_MS).build();
+            }
+            return null;
         }
 
         private void dumpCookieStore() {
@@ -126,9 +161,11 @@ public final class Cookies {
                 }
                 persistentCookies.append(cookie.name());
                 persistentCookies.append('=');
-                persistentCookies.append(cookie.value());
-                persistentCookies.append('=');
                 persistentCookies.append(cookie.domain());
+                persistentCookies.append('=');
+                persistentCookies.append(cookie.expiresAt());
+                persistentCookies.append('=');
+                persistentCookies.append(cookie.value());
                 persistentCookies.append(';');
             }
             Settings.setPersistentCookies(persistentCookies.toString());

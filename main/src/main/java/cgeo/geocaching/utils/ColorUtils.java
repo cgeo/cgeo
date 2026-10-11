@@ -12,6 +12,10 @@ import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class ColorUtils {
+
+    public static final String COLOR_MAIN = "main";
+    public static final int COLOR_MAIN_VALUE = 24;
+
     private ColorUtils() {
         // utility class
     }
@@ -52,6 +56,22 @@ public class ColorUtils {
         return "R:" + Color.red(color) + ";G:" + Color.green(color) + ";B:" + Color.blue(color) + ";A:" + Color.alpha(color);
     }
 
+    public static int parseColor(final String colorString, final int defaultColor) {
+        return parseColor(colorString, defaultColor, false);
+    }
+
+    public static int parseColor(final String colorString, final int defaultColor, final boolean recognizeMainColor) {
+        if (recognizeMainColor && COLOR_MAIN.equalsIgnoreCase(colorString)) {
+            return COLOR_MAIN_VALUE;
+        }
+
+        try {
+            return Color.parseColor(colorString);
+        } catch (final IllegalArgumentException e) {
+            return defaultColor;
+        }
+    }
+
     @ColorInt
     public static int colorFromResource(@ColorRes final int colorRes) {
         return getThemedContext().getResources().getColor(colorRes);
@@ -87,7 +107,26 @@ public class ColorUtils {
 
     }
 
-    public static int setAlpha(final int color, final int alpha) {
+    public static int setAlpha(@ColorInt final int color, final int alpha) {
         return ((alpha & 0xFF) << 24) + (color & 0xFFFFFF);
+    }
+
+    public static int getAlpha(@ColorInt final int color) {
+        //copied from Android Color class
+        return color >>> 24;
+    }
+
+    /**
+     * Replaces a colour with its perceived brightness, keeping the alpha channel.
+     * <p>
+     * Uses the BT.601 weights rather than the W3 luminance above: those are meant for contrast
+     * ratios and would darken the result, while these are what a saturation-zero colour matrix
+     * applies, so vector and raster maps end up looking the same.
+     */
+    @ColorInt
+    public static int toGrayscale(@ColorInt final int color) {
+        final int gray = (int) Math.round(
+                0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color));
+        return Color.argb(Color.alpha(color), gray, gray, gray);
     }
 }

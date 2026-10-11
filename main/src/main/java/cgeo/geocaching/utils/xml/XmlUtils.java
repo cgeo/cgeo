@@ -20,6 +20,32 @@ public final class XmlUtils {
         // Do not instantiate
     }
 
+    public static boolean isValidXmlCodePoint(final int codePoint) {
+        return codePoint == 0x9
+                || codePoint == 0xA
+                || codePoint == 0xD
+                || (codePoint >= 0x20 && codePoint <= 0xD7FF)
+                || (codePoint >= 0xE000 && codePoint <= 0xFFFD)
+                || (codePoint >= 0x10000 && codePoint <= 0x10FFFF);
+    }
+
+    /**
+     * Write text content to an XML serializer, stripping XML-1.0-illegal characters and
+     * converting surrogate pairs (e.g. emoji) to numeric character references (e.g. {@code &#129414;})
+     * so that any {@link XmlSerializer} implementation can handle the output without throwing.
+     *
+     * @param serializer an XML serializer that is currently in text-content position
+     * @param text       the text to write, or {@code null} to write nothing
+     */
+    public static void writeText(final XmlSerializer serializer, final String text) throws IOException {
+        try {
+            writeContent(serializer, text);
+        } catch (final IOException e) {
+            Log.e("XmlUtils.writeText: cannot write text", e);
+            writeContent(serializer, " [end of text omitted due to an invalid character]");
+        }
+    }
+
     /**
      * Insert an attribute-less tag with enclosed text in a XML serializer output.
      *
@@ -31,7 +57,7 @@ public final class XmlUtils {
     public static void simpleText(final XmlSerializer serializer, final String prefix, final String tag, final String text) throws IOException {
         if (text != null) {
             serializer.startTag(prefix, tag);
-            serializer.text(text);
+            writeContent(serializer, text);
             serializer.endTag(prefix, tag);
         }
     }
@@ -75,4 +101,66 @@ public final class XmlUtils {
         }
         return null;
     }
+
+    /**
+     * Write text to the serializer chunk by chunk, converting surrogate pairs to numeric
+     * character references (&#CODEPOINT;) via {@link XmlSerializer#entityRef(String)} and
+     * stripping lone surrogates and other XML-1.0-illegal characters.
+     * This avoids passing raw surrogate chars to {@link XmlSerializer#text(String)}, which
+     * would throw on implementations like kxml2's KXmlSerializer.
+     */
+    private static void writeContent(final XmlSerializer serializer, final String text) throws IOException {
+        if (text == null) {
+            return;
+        }
+
+        final StringBuilder chunk = new StringBuilder();
+
+        int i = 0;
+        while (i < text.length()) {
+            final char c = text.charAt(i);
+
+            if (Character.isHighSurrogate(c)) {
+                if (i + 1 < text.length() && Character.isLowSurrogate(text.charAt(i + 1))) {
+                    // Valid surrogate pair
+                    if (chunk.length() > 0) {
+                        serializer.text(chunk.toString());
+                        chunk.setLength(0);
+                    }
+
+                    final int codePoint = Character.toCodePoint(c, text.charAt(i + 1));
+                    if (isValidXmlCodePoint(codePoint)) {
+                        serializer.entityRef("#" + codePoint);
+                    } else {
+                        reportInvalidCharacter(codePoint);
+                    }
+
+                    i += 2; // consumed both surrogates
+                } else {
+                    // Lone high surrogate — skip
+                    reportInvalidCharacter(c);
+                    i++;
+                }
+            } else if (Character.isLowSurrogate(c)) {
+                // Lone low surrogate — skip
+                reportInvalidCharacter(c);
+                i++;
+            } else if (isValidXmlCodePoint(c)) {
+                chunk.append(c);
+                i++;
+            } else {
+                reportInvalidCharacter(c);
+                i++;
+            }
+        }
+
+        if (chunk.length() > 0) {
+            serializer.text(chunk.toString());
+        }
+    }
+
+    private static void reportInvalidCharacter(final int ch) {
+        Log.w("Skipping illegal character (" + Integer.toHexString(ch) + ")");
+    }
+
 }

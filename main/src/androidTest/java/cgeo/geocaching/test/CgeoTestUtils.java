@@ -17,6 +17,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 
 import androidx.annotation.AnyRes;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.core.util.Consumer;
 import androidx.lifecycle.Lifecycle;
@@ -34,7 +35,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public final class CgeoTestUtils {
 
@@ -42,9 +43,9 @@ public final class CgeoTestUtils {
         //no instance of utils class
     }
 
-    public static Geocache createTestCache() {
+    public static Geocache createTestCache(@Nullable final String geocode) {
         final Geocache testCache = new Geocache();
-        testCache.setGeocode("TEST");
+        testCache.setGeocode(geocode == null ? "TEST" : geocode);
         testCache.setType(CacheType.TRADITIONAL);
         return testCache;
     }

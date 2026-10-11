@@ -5,7 +5,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.googlemaps.BitmapDescriptorCache;
@@ -13,7 +12,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import java.util.Collection;
@@ -43,6 +41,8 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
     private Resources resources;
     private int defaultZLevel;
 
+    private final BitmapDescriptorCache bitmapDescriptors = new BitmapDescriptorCache();
+
     public GoogleV2GeoItemLayer(final GoogleMap map, final Resources resources) {
         this.map = map;
         this.resources = resources;
@@ -70,6 +70,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             remove(v.first, v.second);
         }
 
+        bitmapDescriptors.clear();
         this.map = null;
         this.resources = null;
     }
@@ -82,9 +83,9 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
         }
 
         final int zLevel = item.getZLevel() >= 0 ? item.getZLevel() : Math.max(0, defaultZLevel);
-        final int strokeColor = GeoStyle.getStrokeColor(item.getStyle());
-        final int fillColor = GeoStyle.getFillColor(item.getStyle());
-        final float strokeWidth = ViewUtils.dpToPixelFloat(GeoStyle.getStrokeWidth(item.getStyle()));
+        final int strokeColor = item.getStyle().getStrokeColor();
+        final int fillColor = item.getStyle().getFillColor();
+        final float strokeWidth = ViewUtils.dpToPixelFloat(item.getStyle().getStrokeWidth());
 
         final Object context;
         switch (item.getType()) {
@@ -130,7 +131,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
         final GeoIcon icon = item.getIcon();
         if (icon != null && item.getCenter() != null && icon.getBitmap() != null) {
             marker = map.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorCache.toBitmapDescriptor(new BitmapDrawable(resources, icon.getBitmap())))
+                .icon(bitmapDescriptors.fromBitmap(icon.getBitmap()))
                 .rotation(icon.getRotation())
                 .flat(icon.isFlat())
                 .position(GP_CONVERTER.to(item.getCenter()))

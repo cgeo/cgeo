@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+
 public class CacheMarker {
 
     private final int hashCode;
@@ -11,6 +13,10 @@ public class CacheMarker {
     protected final Bitmap bitmap;
 
     public CacheMarker(final int hashCode, final Drawable drawable) {
+        this(hashCode, -1, drawable);
+    }
+
+    public CacheMarker(final int hashCode, final int id, final Drawable drawable) {
         this.hashCode = hashCode;
         this.drawable = drawable;
 
@@ -27,6 +33,10 @@ public class CacheMarker {
 
     public Bitmap getBitmap() {
         return bitmap;
+    }
+
+    public int getHashCode() {
+        return hashCode;
     }
 
     @Override
@@ -50,6 +60,15 @@ public class CacheMarker {
     @Override
     public int hashCode() {
         return hashCode == 0 ? drawable.hashCode() : hashCode;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "CacheMarker{" +
+                "hashCode=" + hashCode +
+                ", drawable=" + drawable +
+                '}';
     }
 }
 

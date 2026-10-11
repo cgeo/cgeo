@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableObserver;
 
 /** Helper class to retrieve image data and cache it in-memory. Handles local and remote image uris */
 public class ImageLoader {
@@ -64,19 +64,44 @@ public class ImageLoader {
             final HtmlImage imgGetter = new HtmlImage(this.htmlImageCode, true, false, false);
             imgGetter.setLoadMetadata(true);
 
-            final Disposable disposable = imgGetter.fetchDrawableWithMetadata(imageUrl).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(imgData -> {
-                        synchronized (imageCacheMutex) {
-                            imageCache.put(imageUrl, imgData);
-                            if (imageCacheListeners.containsKey(imageUrl)) {
-                                for (Action1<HtmlImage.ImageData> a : imageCacheListeners.get(imageUrl)) {
-                                    a.call(imgData);
-                                }
+            final DisposableObserver<HtmlImage.ImageData> observer = new DisposableObserver<HtmlImage.ImageData>() {
+                @Override
+                public void onNext(final HtmlImage.ImageData imgData) {
+                    synchronized (imageCacheMutex) {
+                        imageCache.put(imageUrl, imgData);
+                        if (imageCacheListeners.containsKey(imageUrl)) {
+                            for (Action1<HtmlImage.ImageData> a : imageCacheListeners.get(imageUrl)) {
+                                a.call(imgData);
                             }
-                            imageCacheListeners.remove(imageUrl);
                         }
-                    });
-            imageCacheDisposable.add(disposable);
+                        imageCacheListeners.remove(imageUrl);
+                    }
+                }
+
+                @Override
+                public void onError(final Throwable e) {
+                    Log.w("ImageLoader: could not load " + imageUrl, e);
+                    synchronized (imageCacheMutex) {
+                        // nothing will arrive for this url any more. Keeping the listeners would make
+                        // every later request for the same url register and then wait forever.
+                        imageCacheListeners.remove(imageUrl);
+                    }
+                    removeFromContainer();
+                }
+
+                @Override
+                public void onComplete() {
+                    removeFromContainer();
+                }
+
+                /** a terminated subscription has to leave the container, it would otherwise grow with every loaded image */
+                private void removeFromContainer() {
+                    imageCacheDisposable.delete(this);
+                }
+            };
+            // add before subscribing: the observer may terminate on the main thread while we are still here
+            imageCacheDisposable.add(observer);
+            imgGetter.fetchDrawableWithMetadata(imageUrl).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
         }
     }
 

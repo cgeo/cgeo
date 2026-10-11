@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -64,8 +65,14 @@
                 <Button
                     android:id="@+id/edit"
                     style="@style/button_small_popups"
-                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@id/edit_personalnote"
                     android:text="@string/waypoint_edit" />
+                <Button
+                    android:id="@+id/edit_personalnote"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    android:tooltipText="@string/cache_personal_note_edit_pn"
+                    app:icon="@drawable/ic_menu_note_edit" />
 
             </RelativeLayout>
 

@@ -42,15 +42,8 @@ public class Intents {
     public static final String EXTRA_FILTER_CONTEXT = "filter_context";
     public static final String EXTRA_MESSAGE_CENTER_COUNTER = "mccounter";
 
-    public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";
-    public static final String EXTRA_WPTPREFIX = PREFIX + "wptprefix";
-    public static final String EXTRA_MAPSTATE = PREFIX + "mapstate";
     public static final String EXTRA_TITLE = PREFIX + "title";
-    public static final String EXTRA_MAP_MODE = PREFIX + "mapMode";
-    public static final String EXTRA_LIVE_ENABLED = PREFIX + "liveEnabled";
-    public static final String EXTRA_STORED_ENABLED = PREFIX + "storedEnabled";
 
-    public static final String EXTRA_TARGET_INFO = PREFIX + "targetInfo";
     /**
      * list type to be used with the cache list activity. Be aware to use the String representation of the corresponding
      * enum.
@@ -63,6 +56,7 @@ public class Intents {
     public static final String EXTRA_USERNAME = PREFIX + "username";
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";
     public static final String EXTRA_POCKET_LIST = PREFIX + "pocket_list";
+    public static final String EXTRA_NAMED_FILTER = PREFIX + "named_filter";
 
     private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
     public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";

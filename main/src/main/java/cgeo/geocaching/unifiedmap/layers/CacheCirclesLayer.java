@@ -34,12 +34,8 @@ public class CacheCirclesLayer {
                 for (Geocache cache : caches) {
                     if (cache.applyDistanceRule()) {
                         geoGroup.addItems(
-                                GeoPrimitive.createCircle(cache.getCoords(), radius, GeoStyle.builder()
-                                        .setStrokeWidth(2.0f)
-                                        .setStrokeColor(MapLineUtils.getCircleColor())
-                                        .setFillColor(MapLineUtils.getCircleFillColor())
-                                        .build()
-                                ).buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
+                            GeoPrimitive.createCircle(cache.getCoords(), radius, GeoStyle.fixed(MapLineUtils.getCircleColor(), MapLineUtils.getCircleFillColor(), 2f))
+                                .buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
                     }
                 }
                 layer.put(KEY_CACHE_CIRCLES, geoGroup.build());
@@ -57,12 +53,8 @@ public class CacheCirclesLayer {
                     if (waypoint.applyDistanceRule()) {
 
                         geoGroup.addItems(
-                                GeoPrimitive.createCircle(waypoint.getCoords(), radius, GeoStyle.builder()
-                                        .setStrokeWidth(2.0f)
-                                        .setStrokeColor(MapLineUtils.getCircleColor())
-                                        .setFillColor(MapLineUtils.getCircleFillColor())
-                                        .build()
-                                ).buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
+                            GeoPrimitive.createCircle(waypoint.getCoords(), radius, GeoStyle.fixed(MapLineUtils.getCircleColor(), MapLineUtils.getCircleFillColor(), 2f))
+                                .buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
                     }
                 }
                 layer.put(KEY_WAYPOINT_CIRCLES, geoGroup.build());

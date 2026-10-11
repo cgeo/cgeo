@@ -1,7 +1,9 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.GrayscaleBitmapTileSource;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
@@ -76,12 +78,15 @@ class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTilePro
         final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
         final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
         httpBuilder.cache(cache);
-        final BitmapTileSource tileSource = BitmapTileSource.builder()
-                .url(mapUri.toString())
-                .tilePath(tilePath)
-                .zoomMax(zoomMax)
-                .zoomMin(zoomMin)
-                .build();
+        // raster tiles arrive rendered, so greying them means converting the decoded bitmap
+        final BitmapTileSource tileSource = Settings.getMapGrayscale()
+                ? new GrayscaleBitmapTileSource(mapUri.toString(), tilePath, zoomMin, zoomMax)
+                : BitmapTileSource.builder()
+                        .url(mapUri.toString())
+                        .tilePath(tilePath)
+                        .zoomMax(zoomMax)
+                        .zoomMin(zoomMin)
+                        .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
         tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "cgeo-android"));
         return new BitmapTileLayer(map, tileSource);

@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="33" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -58,12 +58,19 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:preserveLegacyExternalStorage="true"
+        android:enableOnBackInvokedCallback="false"
         >
+
+        <!-- Apache HTTP legacy client required for Google Play Services / Maps on Android 9+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <!-- Samsung Multi-Window support -->
         <uses-library
             android:name="com.sec.android.app.multiwindow"
             android:required="false" />
+
         <meta-data
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
@@ -98,9 +105,13 @@
             android:value="3.0" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:theme="@style/SplashScreenTheme"
-            android:exported="true" >
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustNothing">
+            <!-- 'adjustNothing' fixes the issue described in #11610 -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,15 +123,6 @@
             </intent-filter>
 
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/cgeo"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustNothing" >
-            <!-- 'adjustNothing' fixes the issue described in #11610 -->
-            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
         <activity android:name=".DBInspectionActivity"
             android:exported="false"
@@ -859,8 +861,8 @@
         </activity>
 
         <activity
-            android:name=".settings.ConditionalCacheMarkersActivity"
-            android:label="@string/conditional_marker_activity_title" >
+            android:name=".filters.NamedFilterPriorityActivity"
+            android:label="@string/named_filter_activity_title" >
         </activity>
 
         <activity
@@ -978,6 +980,11 @@
             android:name=".service.CacheDownloaderService"
             android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
+
+        <!-- Background log poster -->
+        <service
+            android:name=".service.LogPostingService"
+            android:foregroundServiceType="dataSync"/>
 
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>

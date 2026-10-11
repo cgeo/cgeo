@@ -248,9 +248,21 @@ public class LiveMapGeocacheLoader {
                 Log.iForce(LOGPRAEFIX + "END  " + logParams + ": cachedViewport:" + this.cachedResultAvailableViewport + ", state: " + stateData);
 
             } catch (Exception e) {
-                Log.e(LOGPRAEFIX + "UNEXPECTED ERROR" + logParams, e);
-                setState(LoadState.STOPPED, Collections.singletonMap("Overall",
-                    new ConnectorState("Overall", StatusCode.UNKNOWN_ERROR, null, 0, 0, 0, -1, "Exception: " + e.getMessage())));
+                if (isInterruptionException(e)) {
+                    //this happens regularly when the loader gets destroyed (e.g. activity/fragment teardown, screen rotation)
+                    //while an online request is still in progress
+                    Log.iForce(LOGPRAEFIX + "search interupted, will retry: " + logParams);
+                    //reset dirtytime so request is executed again (after PROCESS_DELAY grace period)
+                    synchronized (loader) {
+                        if (this.loader.dirtyTime < 0) {
+                            this.loader.dirtyTime = System.currentTimeMillis();
+                        }
+                    }
+                } else {
+                    Log.e(LOGPRAEFIX + "UNEXPECTED ERROR" + logParams, e);
+                    setState(LoadState.STOPPED, Collections.singletonMap("Overall",
+                        new ConnectorState("Overall", StatusCode.UNKNOWN_ERROR, null, 0, 0, 0, -1, "Exception: " + e.getMessage())));
+                }
             }
             //if we have just done an online request, ensure that there's a grace period for the next
             synchronized (loader) {
@@ -262,6 +274,22 @@ public class LiveMapGeocacheLoader {
 
         private void setState(final LoadState newState) {
             setState(newState, null);
+        }
+
+        /**
+         * Checks whether the given Exception (or one of its causes) indicates that the current thread was
+         * interrupted, e.g. because the {@link LiveMapGeocacheLoader} was destroyed while an online request
+         * was still running (see {@link #destroy()}). Such cases should not be treated as "real" errors.
+         */
+        private static boolean isInterruptionException(final Throwable t) {
+            Throwable cur = t;
+            while (cur != null) {
+                if (cur instanceof InterruptedException) {
+                    return true;
+                }
+                cur = cur.getCause();
+            }
+            return Thread.currentThread().isInterrupted();
         }
 
         private void setState(final LoadState newState, final Map<String, ConnectorState> connStates) {

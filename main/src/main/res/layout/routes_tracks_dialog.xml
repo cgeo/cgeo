@@ -3,15 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <!-- Individual routes -->
 
-    <Button
-        android:id="@+id/indivroute_load"
-        android:text="@string/map_load_individual_route"
-        style="@style/button_full"
-        android:visibility="gone"/>
+    <RelativeLayout
+        android:id="@+id/indivroute_block"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <TextView
+            android:id="@+id/indivroute_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/indivroute_load"
+            style="@style/flat_separator_horizontal_heading_text"
+            android:textSize="@dimen/textSize_detailsPrimary"
+            android:textColor="@color/colorText"
+            android:textFontWeight="400"
+            android:text="@string/individual_route" />
+
+        <Button
+            android:id="@+id/indivroute_load"
+            app:icon="@drawable/ic_menu_import"
+            android:tooltipText="@string/map_load_individual_route"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            style="@style/button_icon_accent" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/indivroute"
@@ -38,23 +59,44 @@
 
     <!-- GPX routes/tracks -->
 
+    <View
+        android:id="@+id/line"
+        style="@style/flat_separator_horizontal_heading_line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="54dp">
 
-        <cgeo.geocaching.ui.SectionHeader
+        <TextView
+            android:id="@+id/routes_tracks_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:maxLines="1"
+            style="@style/flat_separator_horizontal_heading_text"
+            android:text="@string/routes_tracks_menu" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/routes_tracks_header"
-            app:dividerAbove="true"
-            android:text="@string/routes_tracks_menu" />
+            android:layout_toRightOf="@id/routes_tracks_header"
+            android:layout_toLeftOf="@id/trackroute_load"
+            android:gravity="right"
+            android:layout_alignBaseline="@id/routes_tracks_header"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            android:textColor="@color/colorText"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:paddingRight="10dp"
+            tools:ignore="HardcodedText"
+            android:text="(GPX, GeoJSON, KML)" />
 
         <Button
             android:id="@+id/trackroute_load"
             app:icon="@drawable/ic_menu_import"
             android:tooltipText="@string/map_load_track"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             style="@style/button_icon_accent" />
     </RelativeLayout>
 

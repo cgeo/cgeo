@@ -43,18 +43,22 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
     private final int columnCount;
     private Set<T> alwaysVisibleItems = null;
+    private final boolean allIsNone;
 
     private List<LinearLayout> columns;
     private Map<T, Integer> statistics;
     private boolean statsAreComplete = false;
 
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
-        this(filterAccessor, 1, null);
-    }
-
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, final Set<T> alwaysVisibleItems) {
+    /**
+     *
+     * @param filterAccessor how to access and display the filter-specific configuration items
+     * @param colCount number of display columns
+     * @param alwaysVisibleItems if null then ALL values are visible. If emptySet() then only selected values are visible.
+     */
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount, @Nullable final Set<T> alwaysVisibleItems, final boolean allIsNone) {
         this.filterAccessor = filterAccessor;
         this.columnCount = colCount;
+        this.allIsNone = allIsNone;
         if (alwaysVisibleItems != null) {
             this.alwaysVisibleItems = new HashSet<>();
             this.alwaysVisibleItems.addAll(alwaysVisibleItems);
@@ -126,14 +130,16 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                     .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
 
             SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
-                    .selectMultiple(model, s -> {
-                        visibleValues.addAll(s);
-                        for (T value : s) {
-                            getValueCheckbox(value).right.setChecked(true);
-                        }
-                        relayout();
-                    });
+                    .selectMultiple(model, this::addItems);
         };
+    }
+
+    protected void addItems(final Set<T> values) {
+        visibleValues.addAll(values);
+        for (T value : values) {
+            getValueCheckbox(value).right.setChecked(true);
+        }
+        relayout();
     }
 
     private View createAddItemButton(final ViewGroup vg) {
@@ -202,12 +208,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             for (Geocache cache : FilterViewHolderCreator.getListInfoFilteredList()) {
                 final Set<T> cValues = filterAccessor.getCacheValues(filter, cache);
                 for (T cValue : cValues) {
-                    if (stats.containsKey(cValue)) {
-                        final Integer cnt = stats.get(cValue);
-                        stats.put(cValue, cnt == null ? 1 : cnt + 1);
-                    } else {
-                        stats.put(cValue, 1);
-                    }
+                    stats.compute(cValue, (k, cnt) -> cnt == null ? 1 : cnt + 1);
                 }
             }
         }
@@ -253,7 +254,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        if (getAllNoneSelected() == null) {
+        if (!allIsNone || !areAllSelected()) {
             for (T value : filterAccessor.getSelectableValuesAsArray()) {
                 if (this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked()) {
                     set.add(value);
@@ -264,20 +265,13 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return filter;
     }
 
-    private Boolean getAllNoneSelected() {
-        boolean foundNonSelected = false;
-        boolean foundSelected = false;
+    private boolean areAllSelected() {
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
             final boolean selected = this.visibleValues.contains(value) && getValueCheckbox(value).right.isChecked();
-            foundNonSelected |= !selected;
-            foundSelected |= selected;
+            if (!selected) {
+                return false;
+            }
         }
-        if (foundNonSelected && !foundSelected) {
-            return false;
-        }
-        if (!foundNonSelected && foundSelected) {
-            return true;
-        }
-        return null;
+        return true;
     }
 }

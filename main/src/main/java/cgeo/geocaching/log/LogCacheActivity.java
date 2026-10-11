@@ -88,7 +88,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         EDIT_EXISTING //edit an existing online log entry (as of now not storable offline)
     }
 
-    private enum SaveMode { NORMAL, FORCE, SKIP }
+    private enum SaveMode { NORMAL, FORCE, SKIP, SENDING }
 
     protected LogcacheActivityBinding binding;
 
@@ -115,6 +115,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private LogEntry originalLogEntry = null;
 
     private boolean readyToPost = false;
+    private Runnable pendingPost = null; // set by sendLogInternal(), consumed by onStop()
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -211,6 +212,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         binding.inventory.setAdapter(inventoryAdapter);
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache == null) {
+            showToast(getString(R.string.err_detail_cache_find_some));
+            finish();
+            return;
+        }
         invalidateOptionsMenuCompatible();
         setLogTypeValues(cache.getPossibleLogTypes());
         cacheVotingBar.initialize(cache, binding.getRoot(), null);
@@ -391,11 +397,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         finish(SaveMode.NORMAL);
     }
 
-    public void finish(final SaveMode saveMode) {
+    private void finish(final SaveMode saveMode) {
         saveLog(saveMode);
-        if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
-            Settings.setLastCacheLog(lastSavedState.log);
-        }
+
         logActivityHelper.finish();
         super.finish();
     }
@@ -418,6 +422,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     public void onStop() {
         saveLog();
+        if (pendingPost != null) {
+            final Runnable post = pendingPost;
+            pendingPost = null;
+            post.run();
+        }
         super.onStop();
     }
 
@@ -464,6 +473,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private void saveLog(final SaveMode saveMode) {
 
         if (logEditMode != LogEditMode.CREATE_NEW) {
+            return;
+        }
+
+        final String cacheLog = currentLogText();
+        if (StringUtils.isNotEmpty(cacheLog)) {
+            Settings.setLastCacheLog(cacheLog);
+        }
+
+        if (saveMode == SaveMode.SENDING) {
             return;
         }
 
@@ -558,15 +576,29 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
             return;
         }
+        // Capture view data now (before the activity tears down), but delay starting the
+        // service until onStop() so that saveLog()'s async storeLogOffline is always
+        // scheduled before the background post begins.
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
-            logActivityHelper.editLog(cache, this.originalLogEntry,
-                getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
+            final LogEntry newEntry = getEntryFromView()
+                .buildUponOfflineLogEntry()
+                .setServiceLogId(this.originalLogEntry.serviceLogId)
+                .build();
+            pendingPost = () -> logActivityHelper.editLog(cache, this.originalLogEntry, newEntry);
         } else {
-            logActivityHelper.createLog(cache, getEntryFromView(), inventoryAdapter.getInventory());
+            final OfflineLogEntry entry = getEntryFromView();
+            final Map<String, Trackable> inv = inventoryAdapter.getInventory();
+            pendingPost = () -> logActivityHelper.createLog(cache, entry, inv);
         }
+        showShortToast(LocalizationUtils.getString(R.string.info_log_posting_background));
+        finish(SaveMode.SENDING);
     }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
+        if (!statusResult.isOk()) {
+            // Activity already exiting (immediate-send path) or error (notification handles it).
+            return;
+        }
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.isOk()) {
 
@@ -615,14 +647,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (!LogCacheActivity.this.isFinishing()) {
-            SimpleDialog.of(LogCacheActivity.this)
-                    .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.id(R.string.info_log_post_failed_simple_reason))
-                    .setButtons(R.string.info_log_post_retry, R.string.cancel, logEditMode == LogEditMode.CREATE_NEW ? R.string.info_log_post_save : 0)
-                    .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
-                    .confirm(this::sendLogInternal);
         }
+        // On error the LogPostingService shows a tappable system notification.
     }
 
     @Override
@@ -683,7 +709,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.availableFavoritePoints = data.getAvailableFavoritePoints();
         }
 
-
+        
         refreshGui();
         showProgress(false);
     }
@@ -695,9 +721,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             rLogTypes.add(this.originalLogEntry.logType);
             rLogTypes.addAll(logTypes);
             this.logType.setValues(rLogTypes);
-        } else {
-            this.logType.setValues(logTypes);
+            return;
         }
+
+        // set NOTE as logType if the current one is not available anymore
+        // (e.g. due to a changed online log-status)
+        final LogType defaultLogType = LogType.NOTE;
+        final LogType currentLogType = this.logType.get();
+        if (currentLogType != null && !logTypes.contains(currentLogType)) {
+            if (!logTypes.contains(defaultLogType)) {
+                // NOTE log type must ALWAYS be available for selection
+                final List<LogType> rLogTypes = new ArrayList<>();
+                rLogTypes.add(defaultLogType);
+                rLogTypes.addAll(logTypes);
+                this.logType.setValues(rLogTypes);
+            }
+            this.logType.set(defaultLogType);
+            return;
+        }
+
+        this.logType.setValues(logTypes);
     }
 
     @Override

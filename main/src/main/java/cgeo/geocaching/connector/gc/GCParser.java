@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -362,7 +363,7 @@ public final class GCParser {
         cache.setOnWatchlist(TextUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
         // latitude and longitude. Can only be retrieved if user is logged in
-        String latlon = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
+        final String latlon = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
         if (StringUtils.isNotEmpty(latlon)) {
             try {
                 cache.setCoords(new Geopoint(latlon));
@@ -431,25 +432,29 @@ public final class GCParser {
         // cache attributes
         try {
             final List<String> attributes = new ArrayList<>();
-            final String attributesPre = TextUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
-            if (attributesPre != null) {
-                final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
+            final MatcherWrapper attributesList = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTES, page);
+            while (attributesList.find()) {
+                final String attributesPre = attributesList.group(1);
+                if (attributesPre != null) {
+                    attributes.clear(); // discard user-supplied attributes; last block is "the official one"
+                    final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
-                while (matcherAttributesInside.find()) {
-                    if (!matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-                        // by default, use the tooltip of the attribute
-                        String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
+                    while (matcherAttributesInside.find()) {
+                        if (!matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
+                            // by default, use the tooltip of the attribute
+                            String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
-                        // if the image name can be recognized, use the image name as attribute
-                        final String imageName = matcherAttributesInside.group(1).trim();
-                        if (StringUtils.isNotEmpty(imageName)) {
-                            final int start = imageName.lastIndexOf('/');
-                            final int end = imageName.lastIndexOf('.');
-                            if (start >= 0 && end >= 0) {
-                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
+                            // if the image name can be recognized, use the image name as attribute
+                            final String imageName = matcherAttributesInside.group(1).trim();
+                            if (StringUtils.isNotEmpty(imageName)) {
+                                final int start = imageName.lastIndexOf('/');
+                                final int end = imageName.lastIndexOf('.');
+                                if (start >= 0 && end >= 0) {
+                                    attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
+                                }
                             }
+                            attributes.add(attribute);
                         }
-                        attributes.add(attribute);
                     }
                 }
             }
@@ -537,84 +542,12 @@ public final class GCParser {
         } catch (final Geopoint.GeopointException ignored) {
         }
 
-        int wpBegin = page.indexOf("id=\"ctl00_ContentBody_Waypoints\">");
-        if (wpBegin != -1) { // parse waypoints
+        if (page.contains(GCConstants.WPT_SECTION_START)) { // parse waypoints
             if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
             }
             DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
-
-            String wpList = page.substring(wpBegin);
-
-            int wpEnd = wpList.indexOf("</p>");
-            if (wpEnd > -1 && wpEnd <= wpList.length()) {
-                wpList = wpList.substring(0, wpEnd);
-            }
-
-            if (!wpList.contains("No additional waypoints to display.")) {
-                wpEnd = wpList.indexOf("</table>");
-                wpList = wpList.substring(0, wpEnd);
-
-                wpBegin = wpList.indexOf("<tbody>");
-                wpEnd = wpList.indexOf("</tbody>");
-                if (wpBegin >= 0 && wpEnd >= 0 && wpEnd <= wpList.length()) {
-                    wpList = wpList.substring(wpBegin + 7, wpEnd);
-                }
-
-                final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
-
-                for (int j = 1; j < wpItems.length; j += 2) {
-                    final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
-                    assert wp != null;
-                    if (wp.length < 7) {
-                        Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
-                        continue;
-                    }
-
-                    // waypoint name
-                    // res is null during the unit tests
-                    final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
-
-                    // waypoint type
-                    final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
-
-                    final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
-
-                    // waypoint prefix
-                    waypoint.setPrefix(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
-
-                    // waypoint lookup
-                    waypoint.setLookup(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
-
-                    // waypoint latitude and longitude
-                    latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
-                    if (!Strings.CS.startsWith(latlon, "???")) {
-                        waypoint.setCoords(new Geopoint(latlon));
-                    } else {
-                        waypoint.setOriginalCoordsEmpty(true);
-                    }
-
-                    if (j + 1 < wpItems.length) {
-                        final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j + 1], "<td");
-                        assert wpNote != null;
-                        if (wpNote.length < 4) {
-                            Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
-                            continue;
-                        }
-
-                        // waypoint note, cleanup via Jsoup
-                        final String noteText = TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote());
-                        if (StringUtils.isNotBlank(noteText)) {
-                            final Document document = Jsoup.parse(noteText);
-                            waypoint.setNote(document.outerHtml());
-                        } else {
-                            waypoint.setNote(StringUtils.EMPTY);
-                        }
-                    }
-
-                    cache.addOrChangeWaypoint(waypoint, false);
-                }
-            }
+            parseWaypoints(cache, page);
         }
 
         // last check for necessary cache conditions
@@ -624,6 +557,88 @@ public final class GCParser {
 
         cache.setDetailedUpdatedNow();
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
+    }
+
+    @SuppressWarnings("ModifiedControlVariable")
+    public static void parseWaypoints(final Geocache cache, final String html) {
+        int wpBegin = html.indexOf(GCConstants.WPT_SECTION_START);
+        String wpList = html.substring(wpBegin);
+
+        if (wpList.contains("No additional waypoints to display.")) {
+            return;
+        }
+        int wpEnd = wpList.indexOf("</table>");
+        if (wpEnd > -1) {
+            wpList = wpList.substring(0, wpEnd);
+        }
+
+        wpBegin = wpList.indexOf("<tbody>");
+        wpEnd = wpList.indexOf("</tbody>");
+        if (wpBegin >= 0 && wpEnd >= 0) {
+            wpList = wpList.substring(wpBegin + 7, wpEnd);
+        }
+
+        final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
+
+        // Each waypoint is 2 rows in a table: 1. type, coordinates, ... 2. description
+        // Table starts with header rows, skip those by looking for a line that matches our pattern
+        for (int j = 0; j < wpItems.length; j++) {
+            // parse first row
+            final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+            assert wp != null;
+            if (wp.length < 7) {
+                Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
+                continue;
+            }
+
+            // waypoint name
+            // res is null during the unit tests
+            final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
+
+            // waypoint type
+            final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
+
+            final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
+
+            // waypoint prefix
+            waypoint.setPrefix(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
+
+            // waypoint lookup
+            waypoint.setLookup(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
+
+            // waypoint latitude and longitude
+            final String latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
+            if (!Strings.CS.startsWith(latlon, "???")) {
+                waypoint.setCoords(new Geopoint(latlon));
+            } else {
+                waypoint.setOriginalCoordsEmpty(true);
+            }
+
+            // parse second row
+            j++;
+            if (j >= wpItems.length) {
+                cache.addOrChangeWaypoint(waypoint, false);
+                return;
+            }
+
+            final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+            assert wpNote != null;
+            if (wpNote.length < 4) {
+                Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
+                continue;
+            }
+
+            // waypoint note, cleanup via Jsoup
+            final String noteText = TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote());
+            if (StringUtils.isNotBlank(noteText)) {
+                final Document document = Jsoup.parse(noteText);
+                waypoint.setNote(document.outerHtml());
+            } else {
+                waypoint.setNote(StringUtils.EMPTY);
+            }
+
+            cache.addOrChangeWaypoint(waypoint, false);
+        }
     }
 
     public static List<Image> parseSpoiler(final String html) {
@@ -1555,7 +1570,8 @@ public final class GCParser {
                             .setLogType(LogType.getByType(logType))
                             .setLog(logText)
                             .setFound(entry.path("GeocacheFindCount").asInt())
-                            .setFriend(markAsFriendsLog);
+                            .setFriend(markAsFriendsLog)
+                            .setFavorite(entry.path("FavoritePointUsed").asBoolean());
 
                     final ArrayNode images = (ArrayNode) entry.get("Images");
                     for (final JsonNode image : images) {
@@ -1754,6 +1770,8 @@ public final class GCParser {
         specialLogEntries.addAll(friendLogsBlocked);
         specialLogEntries.addAll(ownLogEntriesBlocked);
         specialLogEntries.addAll(ownerLogsBlocked);
+        final Set<String> seenServiceLogIds = new HashSet<>();
+        specialLogEntries.removeIf(e -> e.serviceLogId != null && !seenServiceLogIds.add(e.serviceLogId));
         if (!specialLogEntries.isEmpty()) {
             setFriendsLogs(specialLogEntries);
             mergeModifiedLogs(logsBlocked, specialLogEntries);
@@ -1855,7 +1873,8 @@ public final class GCParser {
             } else {
                 final int logIndex = mergedLogs.indexOf(modifiedLog);
                 if (logIndex >= 0) {
-                    mergedLogs.set(logIndex, logToMerge);
+                    // manually merge the favorite flag as that's only in the listing logs
+                    mergedLogs.set(logIndex, logToMerge.buildUpon().setFavorite(modifiedLog.favorite).build());
                 }
             }
         }
@@ -1905,55 +1924,62 @@ public final class GCParser {
 
     @NonNull
     static Single<Boolean> editModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
-        final String userToken = getUserToken(cache);
-        if (StringUtils.isEmpty(userToken)) {
+        final String token = getRequestVerificationToken(cache);
+        if (StringUtils.isEmpty(token)) {
             return Single.just(false);
         }
 
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        final ObjectNode dto = jo.putObject("dto").put("ut", userToken);
-        if (wpt != null) {
-            dto.putObject("data").put("lat", wpt.getLatitudeE6() / 1E6).put("lng", wpt.getLongitudeE6() / 1E6);
+        final Parameters headers = new Parameters("__requestverificationtoken", token);
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("cacheId", cache.getCacheId());
+
+        final Single<Response> response;
+        try {
+            if (wpt != null) {
+                jo.put("lat", wpt.getLatitudeE6() / 1E6).put("lng", wpt.getLongitudeE6() / 1E6);
+                response = Network.postJsonRequest("https://www.geocaching.com/seek/geocache.usercoordinate", headers, jo);
+            } else {
+                response = Network.deleteJsonRequest("https://www.geocaching.com/seek/geocache.usercoordinate", headers, jo);
+            }
+        } catch (final Exception e) {
+            Log.e("GCParser.editModifiedCoordinates - cannot modify coordinates", e);
+            return Single.just(false);
         }
 
-        final String uriSuffix = wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
-
-        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-
-        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
-            .toSingle(() -> {
-                Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
-                return true;
-            })
-            .onErrorReturn((throwable) -> {
-                Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords", throwable);
-                return false;
-            });
+        return Network.completeWithSuccess(response)
+                .toSingle(() -> {
+                    Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+                    return true;
+                })
+                .onErrorReturn((throwable) -> {
+                    Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords", throwable);
+                    return false;
+                });
     }
 
     @NonNull
     static Single<Boolean> uploadPersonalNote(@NonNull final Geocache cache) {
-        final String userToken = getUserToken(cache);
-        if (StringUtils.isEmpty(userToken)) {
+        final String token = getRequestVerificationToken(cache);
+        if (StringUtils.isEmpty(token)) {
             return Single.just(false);
         }
 
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        jo.putObject("dto").put("et", StringUtils.defaultString(cache.getPersonalNote())).put("ut", userToken);
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("cacheId", cache.getCacheId()).put("note", StringUtils.defaultString(cache.getPersonalNote()));
+        final Parameters headers = new Parameters("__requestverificationtoken", token);
 
-        final String uriSuffix = "SetUserCacheNote";
-
-        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-
-        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
-            .toSingle(() -> {
-                Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
-                return true;
-            })
-            .onErrorReturn((throwable) -> {
-                Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
-                return false;
-            });
+        try {
+            return Network.completeWithSuccess(Network.postJsonRequest("https://www.geocaching.com/seek/geocache.cachenote", headers, jo))
+                .toSingle(() -> {
+                    Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
+                    return true;
+                })
+                .onErrorReturn((throwable) -> {
+                    Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
+                    return false;
+                });
+        } catch (final Exception e) {
+            Log.e("GCParser.uploadPersonalNote - cannot upload personal note", e);
+            return Single.just(false);
+        }
     }
 
     @WorkerThread
@@ -1972,6 +1998,7 @@ public final class GCParser {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
+                "__RequestVerificationToken", parseRequestVerificationToken(page),
                 "ctl00$ContentBody$btnYes", "Yes. Ignore it.");
 
         GCLogin.putViewstates(params, viewstates);

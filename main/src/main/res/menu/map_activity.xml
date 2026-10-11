@@ -53,6 +53,13 @@
         android:visible="false"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/menu_marker"
+        android:icon="@drawable/ic_menu_marker"
+        android:showAsAction="ifRoom"
+        android:title="@string/named_filter_markers"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
         android:title="@string/cache_hint"

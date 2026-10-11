@@ -380,7 +380,7 @@ public class WorkerTask<I, P, R>  {
 
     private void postToListener(final WorkerTaskEvent<I, P, R> event, final Consumer<WorkerTaskEvent<I, P, R>> listener) {
         if (event != null) {
-            this.observerScheduler.createWorker().schedule(() -> listener.accept(event));
+            this.observerScheduler.scheduleDirect(() -> listener.accept(event));
         }
     }
 

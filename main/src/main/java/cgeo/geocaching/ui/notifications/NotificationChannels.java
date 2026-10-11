@@ -15,7 +15,8 @@ public enum NotificationChannels {
     FOREGROUND_SERVICE_NOTIFICATION(R.string.notification_channel_foreground_name, R.string.notification_channel_foreground_description, NotificationManagerCompat.IMPORTANCE_LOW),
     DOWNLOADER_RESULT_NOTIFICATION(R.string.notification_channel_downloader_name, R.string.notification_channel_downloader_description, NotificationManagerCompat.IMPORTANCE_HIGH),
     CACHES_DOWNLOADED_NOTIFICATION(R.string.notification_channel_cache_download_name, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT),
-    WHERIGO_NOTIFICATION(R.string.wherigo, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT);
+    WHERIGO_NOTIFICATION(R.string.wherigo, R.string.notification_channel_cache_download_description, NotificationManagerCompat.IMPORTANCE_DEFAULT),
+    LOG_RESULT_NOTIFICATION(R.string.notification_channel_log_name, R.string.notification_channel_log_description, NotificationManagerCompat.IMPORTANCE_DEFAULT);
 
     public final int channelDisplayableTitle;
     public final int channelDisplayableDescription;

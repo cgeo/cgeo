@@ -12,17 +12,7 @@ public interface IJsonConfigurable<T extends IJsonConfigurable<T>> {
 
     String getId();
 
-    @Deprecated
-    default void setConfig(LegacyFilterConfig config) {
-        //empty on purpose
-    }
-
-    @Deprecated
-    default LegacyFilterConfig getConfig() {
-        return null;
-    }
-
-    default void addChild(T child) {
+    default void addChild(final T child) {
         //do nothing
     }
 

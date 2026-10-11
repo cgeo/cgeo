@@ -1,6 +1,8 @@
 package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.log.OfflineLogEntry;
@@ -279,7 +281,9 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
                     || cache.hasUserdefinedWaypoints()
                     || cache.hasUserModifiedCoords()
                     || !cache.getVariables().isEmpty()
-                    || cache.getWaypoints().stream().anyMatch(Waypoint::isUserModified);
+                    || cache.getWaypoints().stream().anyMatch(Waypoint::isUserModified)
+                    // internal caches are considered user data, as they are not available to other users
+                    || ConnectorFactory.getConnector(cache) instanceof InternalConnector;
         }
     }
 

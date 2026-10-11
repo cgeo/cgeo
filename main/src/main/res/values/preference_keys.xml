@@ -196,6 +196,7 @@
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
     <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>
     <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
+    <string translatable="false" name="pref_named_filter_display_mode">named_filter_display_mode</string>
 
     <string translatable="false" name="pref_saturation_offset_dark">saturation_offset_dark</string>
     <string translatable="false" name="pref_lightness_offset_dark">lightness_offset_dark</string>
@@ -210,7 +211,16 @@
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
     <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <!-- superseded by pref_userDefinedTileProviders, kept so the single provider of older
+         versions can be migrated and so those versions keep working after a downgrade -->
+    <string translatable="false" name="old_pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+    <string translatable="false" name="pref_userDefinedTileProviders">userDefinedTileProviders</string>
+
+    <!-- category user-defined tile providers -->
+    <string translatable="false" name="preference_category_userdefined_tileproviders">fakekey_category_userdefined_tileproviders</string>
+    <string translatable="false" name="pref_tileOverlays">tileOverlays</string>
+    <string translatable="false" name="preference_category_map_tileoverlays">fakekey_category_map_tileoverlays</string>
+    <string translatable="false" name="pref_tileOverlaysEnabled">tileOverlaysEnabled</string>
 
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
@@ -228,6 +238,7 @@
     <!-- category offline maps hillshading -->
     <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
     <string translatable="false" name="pref_maphillshading_show_layer">maphillshading_show_layer</string>
+    <string translatable="false" name="pref_mapGrayscale">mapGrayscale</string>
     <string translatable="false" name="pref_maphillshading_hq">maphillshading_hq</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
 
@@ -250,8 +261,8 @@
     <string translatable="false" name="pref_maptrail_maxdistance">maptrail_maxdistance</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
-    <string translatable="false" name="pref_fakekey_conditional_markers">fakekey_conditional_markers</string>
     <string translatable="false" name="pref_conditionalCacheMarkers">conditionalCacheMarkers</string>
+    <string translatable="false" name="pref_conditionalCacheMarkersEnabled">conditionalCacheMarkersEnabled</string>
     <string translatable="false" name="pref_showElevation">showElevation</string>
 
     <!-- category waypoints -->
@@ -267,6 +278,8 @@
     <string translatable="false" name="pref_showRouteMenu">showRouteMenu</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
     <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
+    <string translatable="false" name="pref_autozoom_consider_lastcenter">list_viewport_calculation_consider_lastviewport</string>
+    <string translatable="false" name="pref_mapOnLockScreen">mapOnLockScreen</string>
 
     <!-- category proximity notfication -->
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
@@ -303,6 +316,7 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
+    <string translatable="false" name="pref_downloadAllowMeteredNetwork">downloadAllowMeteredNetwork</string>
 
     <!-- category gpx -->
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
@@ -655,7 +669,9 @@
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
     <string translatable="false" name="pref_followMyLocation">followMyLocation</string>
-    <string translatable="false" name="pref_autozoom_consider_lastcenter">list_viewport_calculation_consider_lastviewport</string>
+    <string translatable="false" name="pref_cachecache_size">cachecache_size</string>
+    
+    <!-- do not add preference keys here, if they have a UI representation - those belong into one of the sections above -->
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -668,6 +684,5 @@
     <string translatable="false" name="old_pref_useLegacyMap">useLegacyMap</string>
     <string translatable="false" name="old_pref_mapsource">mapsource</string>
 
-    <string translatable="false" name="pref_legacy_filter_config_migrated">legacy_filter_config_migrated</string>
     <string translatable="false" name="pref_last_used_date">last_used_logdate</string>
 </resources>

@@ -1,71 +1,15 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
-
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
-- Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
-- Pop-up de cluster pour Google Maps
-- Cacher les sources de carte dont vous n'avez pas besoin
-- Graphique d'altitude pour les routes et les pistes
-- Basculer entre les listes directement depuis la carte
-- Mode "Conduite" pour les cartes basées sur OpenStreetMap
-- Long-tap on track / individual route for further options
-
 ### Carte
-- Nouveau: L'optimisation des itinéraires met en cache les données calculées
-- Nouveau : L'activation du mode live garde les waypoints de la cible actuellement définie visibles
-- Nouveau : Un appui long sur la ligne de navigation ouvre le graphique d'altitude (UnifiedMap)
-- Nouveau : Afficher les waypoints générés sur la carte
-- New: Download caches ordered by distance
-- Fix: Doubling of individual route items
-- New: Support for Motorider theme (VTM only)
-- New: NoMap tile provider (don't show map, just caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Nouveau : Option Niveaux de gris (#18588)
+- Nouveau : superpositions de tuiles définies par l'utilisateur (#18587)
+- Nouveau : prise en charge de multiples fournisseurs de tuiles définis par l'utilisateur (#18586)
 
 ### Détails de la cache
-- Nouveau : Détecter les caractères supplémentaires dans les formules : –,  , ×
-- Nouveau : Conserver l'horodatage de ses propres logs lors de l'actualisation d'une cache
-- Nouveau : Vue mini boussole facultative (voir paramètres => détails de la cache => Afficher la direction dans la vue détaillée de la cache)
-- Nouveau : Afficher les logs des propriétaires dans l'onglet "vous / amis"
-- Changement: l'onglet "Vous / amis" affiche le nombre de logs pour cet onglet au lieu de compteurs globaux
-- Changement : Amélioration de l'en-tête dans les onglets variables et waypoint
-- Correction : Deux éléments « supprimer le journal» affichés
-- Correction : c:geo plantait dans les détails de la cache lors de la rotation de l'écran
-- Changement : Mise en page plus compacte pour "ajouter un nouveau waypoint"
-- Nouveau: Possibilité de charger les images des caches de geocaching.com en taille "inchangée"
-- Nouveau : la vue des variables peut être filtrée
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
-- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Nouveau : Basculer la date stockée sur l'appareil entre la date relative et la date exacte (#18393)
+- Correction : Fenêtres de dialogue de progression empilées lors de la suppression de plusieurs logs (#18279)
+- Nouveau : bouton "Modifier la note personnelle" dans la popup de waypoint (#18559)
 
 ### Wherigo Player
-- Nouveau : Traduction hors ligne pour les caches Wherigo
-- Nouveau : Amélioration de la gestion des boutons
-- New: Status auto-save
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+-
 
 ### Général
-- Nouveau : Option de partage après avoir logué une cache
-- Changement : Ne pas afficher les options "besoin de maintenance" ou "a besoin d'être archivé" pour ses propres caches
-- Correction : La restauration d'une sauvegarde peut dupliquer les fichiers de suivi dans le stockage interne et les sauvegardes suivantes
-- Changement : Références supprimées à Twitter
-- Nouveau : Supprimer les fichiers de suivi orphelins lors du nettoyage et de la restauration de la sauvegarde
-- Nouveau: Avertissement en essayant d'ajouter trop de caches à une liste de favoris
-- Nouveau: Fonctions de surveillance des listes
-- New: Offer offline translation with Google Translate or DeepL apps (if installed)
-- New: Delete items from search history
-- Change: Remove GCVote (service discontinued)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
-- New: Preview bookmark lists
-- Change: Increase minimum required Android version to Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
-- New: Make remote URI clickable in pending downloads
-- Change: Use system-settings as default theme for new installations
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Correction : Plusieurs fenêtres de dialogue de téléchargement en attente sur l'écran principal (#18363)

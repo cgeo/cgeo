@@ -2,6 +2,7 @@ package cgeo.geocaching.service;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -31,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -126,20 +128,29 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     private static void downloadCachesInternal(final Activity context, final Collection<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
 
         final ArrayList<String> newGeocodes = new ArrayList<>();
+        int cachesSkipped = 0;
 
         for (String geocode : geocodes) {
-            final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, keepExistingLists, forceRedownload);
-            final boolean isNewGeocode;
-            synchronized (downloadQuery) {
-                isNewGeocode = downloadQuery.get(geocode) == null;
-                properties.merge(downloadQuery.get(geocode));
-                downloadQuery.put(geocode, properties);
-            }
-            if (isNewGeocode) {
-                newGeocodes.add(geocode);
+            // only enqueue online connectors
+            if (ConnectorFactory.getConnector(geocode).hasOnlineSource()) {
+                final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, keepExistingLists, forceRedownload);
+                final boolean isNewGeocode;
+                synchronized (downloadQuery) {
+                    isNewGeocode = downloadQuery.get(geocode) == null;
+                    properties.merge(downloadQuery.get(geocode));
+                    downloadQuery.put(geocode, properties);
+                }
+                if (isNewGeocode) {
+                    newGeocodes.add(geocode);
+                }
+            } else {
+                cachesSkipped++;
             }
         }
 
+        if (cachesSkipped > 0) {
+            ViewUtils.showShortToast(context, String.format(Locale.getDefault(), context.getString(R.string.caches_store_background_skipped), cachesSkipped));
+        }
         if (newGeocodes.isEmpty()) {
             return;
         }

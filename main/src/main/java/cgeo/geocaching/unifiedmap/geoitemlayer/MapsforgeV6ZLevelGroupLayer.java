@@ -2,7 +2,9 @@ package cgeo.geocaching.unifiedmap.geoitemlayer;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -62,6 +64,7 @@ public class MapsforgeV6ZLevelGroupLayer extends Layer {
         if (context == null || context.length < 2) {
             return;
         }
+        final List<Layer> removedLayers = new ArrayList<>(context.length);
         layerLock.lock();
         try {
             final int zLevel = context[0];
@@ -73,7 +76,10 @@ public class MapsforgeV6ZLevelGroupLayer extends Layer {
                 if (context[i] == 0) {
                     continue;
                 }
-                zLevelMap.remove(context[i]);
+                final Layer removed = zLevelMap.remove(context[i]);
+                if (removed != null) {
+                    removedLayers.add(removed);
+                }
             }
             if (zLevelMap.isEmpty()) {
                 this.layerItemMap.remove(zLevel);
@@ -81,8 +87,38 @@ public class MapsforgeV6ZLevelGroupLayer extends Layer {
         } finally {
             layerLock.unlock();
         }
+        // free resources held by the removed layers (esp. bitmaps of markers). Do this outside of our
+        // own lock so we never call foreign code while holding it
+        destroyLayers(removedLayers);
         if (redraw) {
             requestRedraw();
+        }
+    }
+
+    /** removes all layers from this group and frees the resources held by them */
+    @Override
+    public void onDestroy() {
+        final List<Layer> removedLayers = new ArrayList<>();
+        layerLock.lock();
+        try {
+            for (Map<Integer, Layer> zLevelMap : this.layerItemMap.values()) {
+                removedLayers.addAll(zLevelMap.values());
+            }
+            this.layerItemMap.clear();
+        } finally {
+            layerLock.unlock();
+        }
+        destroyLayers(removedLayers);
+        super.onDestroy();
+    }
+
+    /**
+     * Mapsforge layers hold resources which are only released on onDestroy(); for a Marker this is the
+     * reference to its bitmap. Removing a layer without destroying it therefore leaks that bitmap.
+     */
+    private static void destroyLayers(final Iterable<Layer> layers) {
+        for (Layer layer : layers) {
+            layer.onDestroy();
         }
     }
 

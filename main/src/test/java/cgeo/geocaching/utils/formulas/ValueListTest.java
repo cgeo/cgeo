@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils.formulas;
 
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValueListTest {
 
@@ -62,7 +62,7 @@ public class ValueListTest {
     public void testSize() {
         final ValueList emptyList = new ValueList();
         assertThat(emptyList.size()).isEqualTo(0);
-        
+
         final ValueList list = ValueList.ofPlain(1, 2, 3);
         assertThat(list.size()).isEqualTo(3);
     }
@@ -81,12 +81,12 @@ public class ValueListTest {
     @Test
     public void testAssertCheckCount() {
         final ValueList list = ValueList.ofPlain(1, 2, 3);
-        
+
         // Valid counts
         assertThat(list.assertCheckCount(3, 3, true)).isTrue();
         assertThat(list.assertCheckCount(1, 5, true)).isTrue();
         assertThat(list.assertCheckCount(3, -1, true)).isTrue(); // -1 means no max
-        
+
         // Invalid counts
         assertThat(list.assertCheckCount(4, 5, true)).isFalse();
         assertThat(list.assertCheckCount(1, 2, true)).isFalse();
@@ -95,7 +95,7 @@ public class ValueListTest {
     @Test
     public void testAssertCheckCountThrows() {
         final ValueList list = ValueList.ofPlain(1, 2, 3);
-        
+
         try {
             list.assertCheckCount(4, 5, false);
             assertThat(false).as("Should have thrown FormulaException").isTrue();
@@ -107,10 +107,10 @@ public class ValueListTest {
     @Test
     public void testAssertCheckType() {
         final ValueList list = ValueList.ofPlain(1, 2, "text");
-        
+
         // Check that first value is numeric
         assertThat(list.assertCheckType(0, Value::isNumeric, "numeric", true)).isTrue();
-        
+
         // Check that third value is numeric (should fail)
         assertThat(list.assertCheckType(2, Value::isNumeric, "numeric", true)).isFalse();
     }
@@ -118,7 +118,7 @@ public class ValueListTest {
     @Test
     public void testAssertCheckTypeThrows() {
         final ValueList list = ValueList.ofPlain("text");
-        
+
         try {
             list.assertCheckType(0, Value::isNumeric, "numeric", false);
             assertThat(false).as("Should have thrown FormulaException").isTrue();

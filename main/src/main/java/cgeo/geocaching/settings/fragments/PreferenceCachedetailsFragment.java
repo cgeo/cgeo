@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.NamedFilterDisplayMode;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 
@@ -41,6 +42,8 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         final MultiSelectListPreference noTranslateLngs = findPreference(getString(R.string.pref_translation_notranslate));
         noTranslateLngs.setEntries(languageNames);
         noTranslateLngs.setEntryValues(languageCodes);
+
+        configNamedFilterDisplayModePreference();
     }
 
     @Override
@@ -49,7 +52,27 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         requireActivity().setTitle(R.string.settings_title_cachedetails);
     }
 
+    private void configNamedFilterDisplayModePreference() {
+        final ListPreference namedFilterDisplayModePref = findPreference(getString(R.string.pref_named_filter_display_mode));
+        final NamedFilterDisplayMode[] modes = NamedFilterDisplayMode.values();
+        final String[] entries = new String[modes.length];
+        final String[] entryValues = new String[modes.length];
+        for (int i = 0; i < modes.length; i++) {
+            entries[i] = modes[i].getDisplayName();
+            entryValues[i] = modes[i].name();
+        }
+        namedFilterDisplayModePref.setEntries(entries);
+        namedFilterDisplayModePref.setEntryValues(entryValues);
+        namedFilterDisplayModePref.setValue(Settings.getNamedFilterDisplayMode().name());
+        namedFilterDisplayModePref.setSummary(Settings.getNamedFilterDisplayMode().getDisplayName());
+        namedFilterDisplayModePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(NamedFilterDisplayMode.valueOf(newValue.toString()).getDisplayName());
+            return true;
+        });
+    }
+
     private void setTranslateLanguageSummary(final ListPreference languagePref, final String newValue) {
+
         final Locale appLocale = Settings.getApplicationLocale();
 
         if (Strings.CS.equals(newValue, OfflineTranslateUtils.LANGUAGE_INVALID)) {

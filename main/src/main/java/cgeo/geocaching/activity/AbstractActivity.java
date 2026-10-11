@@ -23,8 +23,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
-
-import java.util.Locale;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -45,6 +43,7 @@ import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -52,6 +51,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
+    private final CompositeDisposable destroyDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
@@ -107,11 +107,27 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         this.resumeDisposable.addAll(resumeDisposable);
     }
 
+    /**
+     * Register disposables which are disposed once this activity is destroyed. Use this for work which has to
+     * survive a pause (a running login, a file move, ...) but must not outlive the activity. For everything which
+     * is only relevant while the activity is in the foreground use {@link #resumeDisposables(Disposable...)}.
+     */
+    public void destroyDisposables(final Disposable... destroyDisposable) {
+        this.destroyDisposable.addAll(destroyDisposable);
+    }
+
     @Override
     public void onPause() {
         Log.v(logToken + ".onPause");
         resumeDisposable.clear();
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(logToken + ".onDestroy()");
+        destroyDisposable.clear();
+        super.onDestroy();
     }
 
     protected static void disableSuggestions(final EditText edit) {

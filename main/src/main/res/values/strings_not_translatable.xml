@@ -83,28 +83,34 @@
     <string translatable="false" name="contributors_carnero">carnero</string>
     <string translatable="false" name="powered_by">carnero</string>
 
-    <!-- recent contributors, meaning: last 12 months (app.) -->
+    <!-- recent contributors, meaning: last 12 months (app.), in alphabetical order -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2025-03 to 2026-03 -->
+    <!-- currently listed: contributions 2025-08 to 2026-08 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
+    chrisdebian|https://github.com/chrisdebian|c|
+    cylorak|https://github.com/cylorak|c|
+    Dam297|https://github.com/Dam297|c|
     eddiemuc|https://github.com/eddiemuc|cds|
     fm-sys|https://github.com/fm-sys|cg|
-    kennygchen|https://github.com/kennygchen|c|
+    ianfhunter|https://github.com/ianfhunter|c|
+    IzzySoft|https://github.com/IzzySoft|c|
+    JakeDot|https://jakedot.net/|c|
     kumy|https://github.com/kumy|ci|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
-    moving-bits|https://github.com/moving-bits|cdgs|
+    moving-bits|https://github.com/moving-bits|cdgsi|
     mucek4||cip|
     murggel|https://github.com/murggel|cdgs|
-    okainov|https://github.com/okainov|c|
     ReggieDoodle|https://github.com/ReggieDoodle|c|
+    Robin-Reiche|https://github.com/Robin-Reiche|c|
     semantosoph|https://github.com/semantosoph|c|
+    utafrali|https://github.com/utafrali|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
-    <!-- past contributors, meaning: before last 12 months -->
+    <!-- past contributors, meaning: before last 12 months, in alphabetical order -->
     <!-- same format as contributors_recent string -->
     <string translatable="false" name="contributors_other">
     avogadogc|||
@@ -125,7 +131,6 @@
     geocachermgo|https://github.com/geocachermgo|t|
     HolgerJeromin|||
     Iiro Jäppinen||g|
-    jakedot|https://jakedot.net/|c|
     Jan Žatecký|https://www.jaytech.cz/|g|
     jgoestl|https://github.com/jgoestl|c|
     jirkavrba|https://github.com/jirkavrba|c|
@@ -133,6 +138,7 @@
     JoWi24|https://joachim-wilke.de/|c|
     k3b||c|
     Karsten Priegnitz|https://github.com/koem|cg|
+    kennygchen|https://github.com/kennygchen|c|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
     lazydays79||c|
     liroP|https://github.com/liroP|c|
@@ -148,6 +154,7 @@
     ncorreia||c|
     nmrsmn||c|
     NotWoods|https://github.com/NotWoods|c|
+    okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     osmpaws|https://github.com/osmpaws|c|
     Pavol Babinčák||c|
@@ -184,6 +191,7 @@
     - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/), © [cyclosm.org](https://www.cyclosm.org/) and  © [opentopomap.org](https://www.opentopomap.org/).\n
     - Map Downloader supports maps from [Mapsforge](https://github.com/mapsforge), [OpenAndroMaps](https://www.openandromaps.org), [Freizeitkarte](https://www.freizeitkarte-osm.de/), [Hylly](https://kartat.hylly.org/) and [OSM Paws](https://osm.paws.cz/).\n
     - Routing © 2024 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE)), based on BRouter version %2\n
+    - Offline translation using results from [Bergamot project](https://browser.mt/) via David Ventura\'s [offline-translator](https://github.com/DavidVentura/offline-translator) ([GPL-3.0 license](https://github.com/DavidVentura/offline-translator/?tab=GPL-3.0-1-ov-file#readme))\n
     </string>
 
     <!-- see comment for "components" -->
@@ -264,15 +272,7 @@
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
 
-    <!-- link data to WhereYouGo - must be according to WhereYouGo configuration in their AndroidManifest.xml -->
-    <string translatable="false" name="whereyougo_action_Mapsforge">"menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"</string>
-
-    <!-- WhereYouGo helper - must be the same values as in WhereYouGo -->
-    <string translatable="false" name="cgeo_queryMapFile_resultParam">mapfile</string>
-    <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
-
     <!-- play store ids -->
-    <string translatable="false" name="package_whereyougo">menion.android.whereyougo</string>
     <string translatable="false" name="package_chirpwolf">de.wolffire.chirpwolf</string>
     <string translatable="false" name="package_brouter">btools.routingapp</string>
     <string translatable="false" name="package_google_translate">com.google.android.apps.translate</string>
@@ -341,4 +341,7 @@
 
     <!-- default marker -->
     <string translatable="false" name="hyphen">-</string>
+
+    <!-- about: changelog -->
+    <string translatable="false" name="about_changelog_betaupdate">Beta release update</string>
 </resources>

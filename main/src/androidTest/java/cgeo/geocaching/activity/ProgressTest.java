@@ -6,12 +6,12 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Rule;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This test uses the about activity to avoid side effects like network and GPS being triggered by the main activity.
  */
-public class ProgressTest { 
+public class ProgressTest {
 
 
     @Rule

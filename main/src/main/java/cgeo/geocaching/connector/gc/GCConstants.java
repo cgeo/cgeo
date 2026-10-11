@@ -31,8 +31,8 @@ public final class GCConstants {
     // Patterns for parsing the result of a (detailed) search
 
     static final Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.DOTALL);
-    static final Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>\\s*</div>\\s*<(p|div) id=\"ctl00_ContentBody", Pattern.DOTALL);
-    static final Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>\\s*</div>", Pattern.DOTALL);
+    static final Pattern PATTERN_DESC = Pattern.compile("<span [^>]*id=\"ctl00_ContentBody_LongDescription\"[^>]*>(.*?)</span>\\s*</div>\\s*<(p|div) id=\"ctl00_ContentBody", Pattern.DOTALL);
+    static final Pattern PATTERN_SHORTDESC = Pattern.compile("<span [^>]*id=\"ctl00_ContentBody_ShortDescription\"[^>]*>(.*?)</span>\\s*</div>", Pattern.DOTALL);
     static final Pattern PATTERN_GEOCODE = Pattern.compile("class=\"CoordInfoCode\">" + GEOCODE_PATTERN + "</span>");
     static final Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
     static final Pattern PATTERN_SIZE = Pattern.compile("/icons/container/([a-z_]+)\\.");
@@ -163,6 +163,7 @@ public final class GCConstants {
 
     // Patterns for waypoints
 
+    static final String WPT_SECTION_START = "id=\"ctl00_ContentBody_Waypoints\"";
     static final Pattern PATTERN_WPTYPE = Pattern.compile("\\/WptTypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_WPPREFIXORLOOKUPORLATLON = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>");
     static final Pattern PATTERN_WPNAME = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>");
@@ -176,7 +177,7 @@ public final class GCConstants {
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
     static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
-    static final Pattern PATTERN_TOTAL_TRACKABLES = Pattern.compile("\"totalTrackables\":\"([\\d]+)\"");
+    static final Pattern PATTERN_TOTAL_TRACKABLES = Pattern.compile("\"totalTrackables\":\"?([\\d]+)\"?");
     static final Pattern PATTERN_LOGPAGE_TRACKABLES = Pattern.compile("\"trackables\":\\[(.+?\\})\\],[\"_sentry|\\},\"__N_SSP]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -193,12 +194,12 @@ public final class GCConstants {
      * Live Map since 14.02.2012
      */
     static final Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
-    static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
+    static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("\"?sessionToken\"?:['\"]([^'\"]+)");
 
     static final String STRING_PREMIUMONLY = "class=\"illustration lock-icon\"";
     static final Pattern PATTERN_PREMIUMONLY_CACHETYPE = Pattern.compile("/app/ui-icons/sprites/cache-types\\.svg#icon-([^\"\\-]+)-?([^\"]+)?");
     static final Pattern PATTERN_PREMIUMONLY_CACHENAME = Pattern.compile("<h1 class=\"heading-3\">(.+)</h1>");
-    static final Pattern PATTERN_PREMIUMONLY_GEOCODE = Pattern.compile("<li class=\"li__gccode\">([^<]+)");
+    static final Pattern PATTERN_PREMIUMONLY_GEOCODE = Pattern.compile("<span class=\"span__gccode\">\\s*([^<\\s]+)");
     static final Pattern PATTERN_PREMIUMONLY_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_lblDifficulty\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
     static final Pattern PATTERN_PREMIUMONLY_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_lblTerrain\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
     static final Pattern PATTERN_PREMIUMONLY_SIZE = Pattern.compile("<span id=\"ctl00_ContentBody_lblSize\"(?:.|\\s)*?<span>([^<]+)</span>");

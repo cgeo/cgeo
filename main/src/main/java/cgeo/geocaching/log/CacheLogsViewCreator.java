@@ -81,6 +81,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
             friendsLogs.removeAll(ownLogs);
             friendsLogs.removeAll(ownerLogs);
+            ownerLogs.removeAll(ownLogs);
 
             binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
             binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
@@ -161,7 +162,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }
-                binding.logsItems.addHeaderView(countview1, null, false);
+                binding.logsItems.addHeaderView(countview1);
             }
         }
     }
@@ -175,7 +176,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
             countview2.setText(allLogs ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
-            binding.logsItems.addHeaderView(countview2, null, false);
+            binding.logsItems.addHeaderView(countview2);
         }
     }
 
@@ -222,8 +223,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
-        super.fillViewHolder(convertView, holder, log);
+    protected void fillViewHolder(final @NonNull LogViewHolder holder, final LogEntry log) {
+        super.fillViewHolder(holder, log);
         if (isOfflineLog(log)) {
             holder.binding.author.setOnClickListener(new EditOfflineLogListener(getCache(), (CacheDetailActivity) getActivity()));
             holder.binding.logMark.setVisibility(View.VISIBLE);

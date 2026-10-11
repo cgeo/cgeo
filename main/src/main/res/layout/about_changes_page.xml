@@ -13,6 +13,12 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/changelog_betaupdate"
+            style="@style/about_changes"
+            android:paddingBottom="20dip"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/changelog_master"
             style="@style/about_changes"
             android:paddingBottom="20dip" />

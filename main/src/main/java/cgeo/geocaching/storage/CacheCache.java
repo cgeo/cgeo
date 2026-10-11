@@ -2,6 +2,7 @@ package cgeo.geocaching.storage;
 
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
@@ -19,11 +20,37 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class CacheCache {
 
-    private static final int MAX_CACHED_CACHES = 2000;
+    /** Absolute lower bound for the cache size, kept for memory constrained devices. */
+    private static final int MIN_CACHED_CACHES = 2000;
+    /** Absolute upper bound to avoid unbounded growth even on devices with very large heaps. */
+    private static final int MAX_CACHED_CACHES_LIMIT = 50000;
+    /** Default value */
+    public static final int DEFAULT_CACHED_CACHES = 2000;
+    /** Actual value in this session */
+    public static final int MAX_CACHED_CACHES = calculateMaxCachedCaches();
+
     private final LeastRecentlyUsedMap<String, Geocache> cachesCache;
 
     public CacheCache() {
         cachesCache = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_CACHES);
+    }
+
+    /**
+     * Derive the maximum number of caches to keep in memory from the available heap.
+     * <br>
+     * Take up a quarter of heap at max, assuming 8kB per geocache on average
+     */
+    private static int calculateMaxCachedCaches() {
+        final int cacheSize = Settings.getCacheCacheSize();
+        if (cacheSize == 0) {
+            // dynamic setting
+            final long fromHeap = (Runtime.getRuntime().maxMemory() / 4) / (8L * 1024);
+            final int result = (int) Math.max(MIN_CACHED_CACHES, Math.min(MAX_CACHED_CACHES_LIMIT, fromHeap));
+            Log.d("CacheCache: max cached caches = " + result + " (maxMemory=" + Runtime.getRuntime().maxMemory() + ")");
+            return result;
+        } else {
+            return Math.max(MIN_CACHED_CACHES, Math.min(MAX_CACHED_CACHES_LIMIT, cacheSize));
+        }
     }
 
     public synchronized void removeAllFromCache() {
@@ -93,6 +120,10 @@ public class CacheCache {
     @NonNull
     public synchronized String toString() {
         return StringUtils.join(cachesCache.keySet(), ' ');
+    }
+
+    public synchronized int getSize() {
+        return cachesCache.size();
     }
 
 }

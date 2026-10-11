@@ -1,9 +1,11 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -34,6 +36,7 @@ public class CacheListActionBarChooser {
     private final Supplier<ActionBar> actionBarSupplier;
     private final Action1<Integer> onSelectAction;
     private int listId = Integer.MIN_VALUE;
+    private int namedFilterId = Integer.MIN_VALUE;
     private int visibleCaches = 0;
     private boolean isLimited = false;
     private String title;
@@ -52,10 +55,11 @@ public class CacheListActionBarChooser {
     }
 
     /** Sets title to a stored list's data */
-    public void setList(final int listId, final int visibleCaches, final boolean isLimited) {
+    public void setList(final int listId, final int namedFilterId, final int visibleCaches, final boolean isLimited) {
         this.title = null;
         this.subtitle = null;
         this.listId = listId;
+        this.namedFilterId = namedFilterId;
         this.visibleCaches = visibleCaches;
         this.isLimited = isLimited;
         refreshActionBarTitle();
@@ -96,12 +100,12 @@ public class CacheListActionBarChooser {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.getCustomView().setOnClickListener(v -> new StoredList.UserInterface(context).promptForListSelection(R.string.list_title, selectedListId -> {
-                if (selectedListId != listId) {
+                if (selectedListId != listId || namedFilterId > 0) {
                     this.onSelectAction.call(selectedListId);
                     this.listId = selectedListId;
                     refreshActionBarTitle();
                 }
-            }, false, Collections.singleton(PseudoList.NEW_LIST.id), listId, null));
+            }, false, Collections.singleton(PseudoList.NEW_LIST.id), namedFilterId > 0 ? -1 : listId, null));
         }
 
         final TextView titleTv = resultView.findViewById(android.R.id.text1);
@@ -110,17 +114,22 @@ public class CacheListActionBarChooser {
         final AbstractList list = AbstractList.getListById(listId);
         if (list != null) {
             final ImageParam ip = StoredList.UserInterface.getImageForList(list, false);
-            if (ip.isReferencedById()) { // see #15883
+            final NamedFilter namedFilter = NamedFilter.getById(namedFilterId);
+            if (namedFilter != null) {
+                TextParam.text(namedFilter.getNameAndMarker()).applyTo(titleTv);
+            } else if (ip.isReferencedById()) { // see #15883
                 TextParam.text(list.getTitle()).setImage(ip).setImageTint(ColorUtils.colorFromResource(R.color.colorTextActionBar)).applyTo(titleTv);
             } else {
                 TextParam.text(list.getTitle()).setImage(ip).applyTo(titleTv);
             }
-            if (list.getNumberOfCaches() >= 0) {
-                subtitleTv.setVisibility(View.VISIBLE);
-                subtitleTv.setText(getCacheListSubtitle(list));
-            } else {
-                subtitleTv.setVisibility(View.GONE);
-            }
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> list.getNumberOfCaches() >= 0, (hasCaches) -> {
+                if (hasCaches) {
+                    subtitleTv.setVisibility(View.VISIBLE);
+                    subtitleTv.setText(getCacheListSubtitle(list));
+                } else {
+                    subtitleTv.setVisibility(View.GONE);
+                }
+            });
         } else if (this.title != null) {
             titleTv.setText(this.title);
             subtitleTv.setVisibility(View.VISIBLE);

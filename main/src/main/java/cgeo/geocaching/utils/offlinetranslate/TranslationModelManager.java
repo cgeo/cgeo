@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
@@ -21,17 +22,30 @@ public class TranslationModelManager {
 
     //SINGLETON
     private static final TranslationModelManager INSTANCE = new TranslationModelManager();
+    private static final AtomicBoolean INITIAL_REFRESH_TRIGGERED = new AtomicBoolean(false);
 
     private static final String LOGPRAEFIX = "[TranslationModelManager]: ";
+
+    /** rate at which models on the device are re-checked - only while a download is pending */
+    private static final long PENDING_REFRESH_RATE_MS = 6000;
 
     private final Object mutex = new Object();
     private final Set<String> supportedLanguages;
     private final Set<String> availableLanguages = new HashSet<>();
     private final Set<String> pendingLanguages = new HashSet<>();
 
+    /** periodic refresh, running exactly while {@link #pendingLanguages} is non-empty. Guarded by {@link #mutex} */
+    private Disposable pendingRefresh = null;
+
     private final ListenerHelper<Runnable> listeners = new ListenerHelper<>();
 
     public static TranslationModelManager get() {
+        if (!INITIAL_REFRESH_TRIGGERED.get() && INITIAL_REFRESH_TRIGGERED.compareAndSet(false, true)) {
+            // read what is already on the device, once. Deliberately not done from the constructor: that one runs
+            // from the static initializer above, so a task scheduled there would get hold of an instance which is
+            // not fully constructed yet.
+            AndroidRxUtils.computationScheduler.scheduleDirect(INSTANCE::refreshAvailableAndPending);
+        }
         return INSTANCE;
     }
 
@@ -39,13 +53,10 @@ public class TranslationModelManager {
         //retrieve supported Languages
         supportedLanguages = Collections.unmodifiableSet(TranslateAccessor.get().getSupportedLanguages());
         Log.iForce(LOGPRAEFIX + "Supported languages: " + supportedLanguages);
-
-        //trigger periodical retrieval of available languages and pending status adjustment
-        AndroidRxUtils.runPeriodically(AndroidRxUtils.computationScheduler, this::refreshAvailableAndPending, 0, 6000);
     }
 
     public void initialize() {
-        //empty on purpose. Calling it ensures that singleton instance is created
+        //empty on purpose. Calling it ensures that singleton instance is created and its models are read
     }
 
     private void refreshAvailableAndPending() {
@@ -59,8 +70,25 @@ public class TranslationModelManager {
                     callListeners();
                     Log.iForce(LOGPRAEFIX + "Available languages:" + availableLanguages + "/pending:" + pendingLanguages);
                 }
+                stopPendingRefreshIfDone();
             }
         }, error -> Log.e(LOGPRAEFIX + " could not retrieve available models", error));
+    }
+
+    /** starts the periodic refresh if it is not running yet. To be called while holding {@link #mutex} */
+    private void startPendingRefresh() {
+        if (pendingRefresh == null) {
+            pendingRefresh = AndroidRxUtils.runPeriodically(AndroidRxUtils.computationScheduler,
+                    this::refreshAvailableAndPending, PENDING_REFRESH_RATE_MS, PENDING_REFRESH_RATE_MS);
+        }
+    }
+
+    /** stops the periodic refresh once nothing is pending any more. To be called while holding {@link #mutex} */
+    private void stopPendingRefreshIfDone() {
+        if (pendingRefresh != null && pendingLanguages.isEmpty()) {
+            pendingRefresh.dispose();
+            pendingRefresh = null;
+        }
     }
 
     public Set<String> getSupportedLanguages() {
@@ -102,6 +130,7 @@ public class TranslationModelManager {
                 return;
             }
             pendingLanguages.add(language);
+            startPendingRefresh();
         }
         final String languageString = LocalizationUtils.getLocaleDisplayName(language, true, true);
         Log.iForce(LOGPRAEFIX + "Starting download for language " + language);
@@ -110,11 +139,20 @@ public class TranslationModelManager {
             ViewUtils.showToast(null, TextParam.id(R.string.translator_model_download_success, languageString), true);
             synchronized (mutex) {
                 availableLanguages.add(language);
+                pendingLanguages.remove(language);
+                stopPendingRefreshIfDone();
                 callListeners();
             }
         }, ex -> {
             Log.e(LOGPRAEFIX + "Download of language '" + language + "' failed", ex);
             ViewUtils.showToast(null, TextParam.id(R.string.translator_model_download_error, languageString, ex == null ? "-" : ex.getMessage()), true);
+            synchronized (mutex) {
+                // without this the language would stay pending forever: isAvailableOrPending() would keep
+                // reporting a download in progress, and the periodic refresh would never stop running
+                pendingLanguages.remove(language);
+                stopPendingRefreshIfDone();
+                callListeners();
+            }
         });
     }
 
