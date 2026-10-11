@@ -7,9 +7,10 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
-import cgeo.geocaching.filters.core.DateRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -39,6 +40,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -200,6 +202,37 @@ final class ALApi {
         }
     }
 
+    /**
+     * Convert a cache publication-date lower bound to the only date constraint supported by the
+     * AL API. Return {@code null} for all other date semantics or unsupported publication-date
+     * configurations.
+     */
+    @Nullable
+    static Integer getRecentlyPublishedDays(final List<BaseGeocacheFilter> filters, final Date now) {
+        HiddenGeocacheFilter publishDateFilter = null;
+        for (BaseGeocacheFilter filter : filters) {
+            if (filter instanceof HiddenGeocacheFilter && filter.getType() == GeocacheFilterType.HIDDEN) {
+                publishDateFilter = (HiddenGeocacheFilter) filter;
+                break;
+            }
+        }
+        if (publishDateFilter == null || publishDateFilter.getDateFilter().isIgnoreYear()) {
+            return null;
+        }
+
+        final Date minDate = publishDateFilter.getMinDate();
+        if (minDate == null || minDate.after(now)) {
+            return null;
+        }
+
+        final long difference = now.getTime() - minDate.getTime();
+        long days = TimeUnit.MILLISECONDS.toDays(difference);
+        if (TimeUnit.DAYS.toMillis(days) < difference) {
+            days++;
+        }
+        return days <= 0 ? null : (int) Math.min(days, Integer.MAX_VALUE);
+    }
+
     @NonNull
     public static Collection<Geocache> searchByFilter(@Nullable final GeocacheFilter pFilter, @Nullable final Viewport viewport, final IConnector connector, final int take) throws IOException {
         //for now we have to assume that ALConnector supports only SINGLE criteria search
@@ -230,14 +263,9 @@ final class ALApi {
             }
         }
 
-        //days since publish
-        final Integer daysSincePublish;
-        final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
-        if (dr != null) {
-            daysSincePublish = dr.getDaysSinceMinDate() == 0 ? null : dr.getDaysSinceMinDate();
-        } else {
-            daysSincePublish = null;
-        }
+        // The AL API can only narrow results by publication age. Other date filters (for example,
+        // last found or stored since) are applied locally and must not restrict the server query.
+        final Integer daysSincePublish = getRecentlyPublishedDays(filters, new Date());
 
         return search(searchCoords, radius, daysSincePublish, take);
     }
