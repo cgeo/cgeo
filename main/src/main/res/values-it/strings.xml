@@ -1763,8 +1763,6 @@
     <string name="projection_type_bearing_hint_distance">Distanza</string>
     <string name="projection_type_offset">Offset</string>
     <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Latitudine Offset in Micro-Minuti</string>
-    <string name="projection_type_offset_hint_longitude">Longitudine Offset in Micro-Minuti</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_titletext_short">Valori e calcoli</string>
