@@ -1848,8 +1848,6 @@
     <string name="projection_type_bearing_hint_distance">Distance</string>
     <string name="projection_type_offset">Décalage</string>
     <string name="projection_type_offset_info">Décalage %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Décalage de Latitude en Micro-Minutes</string>
-    <string name="projection_type_offset_hint_longitude">Décalage de longitude en Micro-Minutes</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_titletext_short">Valeurs et calculs</string>
@@ -2913,7 +2911,6 @@
     <string name="dbi_select_table">Sélectionnez une table</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s dans #%2$d est en lecture seule</string>
-    <string name="dbi_edit_title">Modifier «%1$s» à #%2$d»</string>
     <string name="dbi_delete_row_title">Supprimer la ligne</string>
     <string name="dbi_delete_row_question">Supprimer la ligne%1$d (%2$s) pour de bon ?</string>
     <string name="dbi_delete_success">Ligne supprimée: %1$s</string>
