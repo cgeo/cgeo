@@ -2090,8 +2090,8 @@
 
     <string name="projection_type_offset">Offset</string>
     <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Latitude Offset in Micro-Minutes</string>
-    <string name="projection_type_offset_hint_longitude">Longitude Offset in Micro-Minutes</string>
+    <string name="projection_type_offset_hint_latitude">Latitude Offset in Milli-Minutes</string>
+    <string name="projection_type_offset_hint_longitude">Longitude Offset in Milli-Minutes</string>
 
     <!-- Variables -->
     <string name="variables_titletext">Use this page to note down values and do calculations necessary for this cache.</string>
