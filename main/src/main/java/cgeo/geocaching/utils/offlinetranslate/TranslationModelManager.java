@@ -91,6 +91,14 @@ public class TranslationModelManager {
         }
     }
 
+    /**
+     * Re-reads which languages are available. Needed after a model was downloaded without
+     * {@link #downloadLanguage(String)}, e.g. by {@link ITranslateAccessor#getTranslatorWithDownload}.
+     */
+    public void refreshAvailableLanguages() {
+        refreshAvailableAndPending();
+    }
+
     public Set<String> getSupportedLanguages() {
         return supportedLanguages;
     }
