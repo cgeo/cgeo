@@ -782,12 +782,14 @@ public class GCWebAPI {
         try {
 
             final MapSearchResultSet mapSearchResultSet = search.execute();
-            result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
-            result.setPartialResult(con, search.getTake() > 0 && mapSearchResultSet.results.size() == search.getTake());
+            final List<MapSearchResult> pageResults = mapSearchResultSet.results == null ? Collections.emptyList() : mapSearchResultSet.results;
+            final boolean emptyPage = pageResults.isEmpty();
+            result.setLeftToFetch(con, emptyPage ? 0 : mapSearchResultSet.total - search.getTake() - search.getSkip());
+            result.setPartialResult(con, !emptyPage && search.getTake() > 0 && pageResults.size() == search.getTake());
             final List<Geocache> foundCaches = new ArrayList<>();
 
-            if (mapSearchResultSet.results != null) {
-                for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+            if (!emptyPage) {
+                for (final GCWebAPI.MapSearchResult r : pageResults) {
 
                     final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
 
