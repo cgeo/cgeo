@@ -495,6 +495,20 @@
     <string name="caches_watch_selected">Añadir los seleccionados a la lista de seguimiento</string>
     <string name="caches_unwatch_selected">Eliminar los seleccionados de la lista de seguimiento</string>
     <string name="watchlist_background_started">La actualización de la lista de seguimiento se inició en segundo plano</string>
+    <string name="watchlist_add_background_title">Añadiendo a la lista de seguimiento</string>
+    <string name="watchlist_add_background_canceled" tools:ignore="PluralsCandidate">Añadir a la lista de seguimiento cancelado: %1$d/%2$d hecho</string>
+    <string name="watchlist_add_background_failed" tools:ignore="PluralsCandidate">Añadir a la lista de seguimiento ha fallado: %1$d/%2$d hecho</string>
+    <plurals name="watchlist_add_background_result">
+        <item quantity="one">%d caché añadido a la lista de seguimiento</item>
+        <item quantity="other">%d cachés añadidos a la lista de seguimiento</item>
+    </plurals>
+    <string name="watchlist_remove_background_title">Eliminando de la lista de seguimiento</string>
+    <string name="watchlist_remove_background_canceled" tools:ignore="PluralsCandidate">Eliminar de la lista de seguimiento cancelado: %1$d/%2$d hecho</string>
+    <string name="watchlist_remove_background_failed" tools:ignore="PluralsCandidate">Eliminar de la lista de seguimiento ha fallado: %1$d/%2$d hecho</string>
+    <plurals name="watchlist_remove_background_result">
+        <item quantity="one">%d caché eliminado de la lista de seguimiento</item>
+        <item quantity="other">%d cachés eliminados de la lista de seguimiento</item>
+    </plurals>
     <string name="caches_upload_modifiedcoords">Subir coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">¿Quieres subir las coordenadas modificadas para todos los cachés (seleccionados) y sobreescribir las coordenadas existentes en el servidor? Esto no se puede deshacer.</string>
     <string name="caches_upload_allcoords">Subir coordenadas para todos los cachés</string>
@@ -530,6 +544,10 @@
     <string name="caches_set_cache_icon">Establecer icono del caché</string>
     <string name="caches_set_cache_icon_all">Establecer icono para todos los cachés</string>
     <string name="caches_set_cache_icon_selected">Establecer icono para los cachés seleccionados</string>
+    <string name="caches_set_final_wp_as_corrected_coords_all">Establecer finales como coordenadas</string>
+    <string name="caches_set_final_wp_as_corrected_coords_selected">Establecer finales como coordenadas (seleccionadas)</string>
+    <string name="caches_set_final_wp_as_corrected_coords_info">Aplicar el punto adicional final como coordenadas corregidas en %1$d caches.</string>
+    <string name="caches_set_final_wp_as_corrected_coords_none_found">No se encontraron cachés con waypoint final.</string>
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
@@ -1850,6 +1868,8 @@
     <string name="projection_type_bearing_hint_distance">Distancia</string>
     <string name="projection_type_offset">Desvío</string>
     <string name="projection_type_offset_info">Desplazar lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Desvío de la latitud en Mili-Minutos</string>
+    <string name="projection_type_offset_hint_longitude">Desvío de la longitud en Mili-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_titletext_short">Valores y cálculos</string>
@@ -2123,6 +2143,8 @@
 Nombre de archivo:%2$s</string>
     <string name="export_persnotes">Subir notas personales</string>
     <string name="export_persnotes_uploading">Subiendo nota personal %1$d</string>
+    <string name="export_persnotes_background_canceled" tools:ignore="PluralsCandidate">Subida cancelada: %1$d/%2$d notas subidas</string>
+    <string name="export_persnotes_background_failed" tools:ignore="PluralsCandidate">Subida fallida: %1$d/%2$d notas subidas</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Se ha subido una nota correctamente</item>
         <item quantity="other">Se han subido %1$d notas correctamente</item>
@@ -2132,6 +2154,12 @@ Nombre de archivo:%2$s</string>
     <string name="export_modifiedcoords_success">Subida exitosa</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Subida finalizada: %1$d falló / %2$d ok</string>
     <string name="export_modifiedcoords_error">Subida fallida</string>
+    <string name="export_modifiedcoords_background_canceled" tools:ignore="PluralsCandidate">Subida cancelada: %1$d/%2$d hecho</string>
+    <string name="export_modifiedcoords_background_failed" tools:ignore="PluralsCandidate">Subida fallida: %1$d/%2$d hecho</string>
+    <plurals name="export_modifiedcoords_background_result">
+        <item quantity="one">Coordenada %d subida</item>
+        <item quantity="other">Coordenadas %d subidas</item>
+    </plurals>
     <string name="filename_without_extension">Nombre de archivo (sin extensión)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Perros permitidos</string>
