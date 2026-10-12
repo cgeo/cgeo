@@ -472,7 +472,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW) {
+        // finish() can be called before initialization completes if the cache could not be loaded.
+        if (logEditMode != LogEditMode.CREATE_NEW || cache == null || lastSavedState == null) {
             return;
         }
 
