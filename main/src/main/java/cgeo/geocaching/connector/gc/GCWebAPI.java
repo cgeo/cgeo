@@ -23,6 +23,8 @@ import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.connector.gc.GCAuthAPI.apiProxyReq;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
 import java.text.DateFormat;
@@ -36,11 +38,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.IntFunction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.reactivex.rxjava3.core.Single;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -924,24 +928,41 @@ public class GCWebAPI {
         return trackableInventoryEntries;
     }
 
-    /*
-     * https://www.geocaching.com/api/proxy/web/v1/trackables/geocache/...
+    /**
+     * Retrieves the complete Travel Bug inventory of a cache.
+     *
+     * @return the complete inventory, including an empty list for a known empty inventory, or {@code null} if the response is incomplete or invalid
      */
+    @Nullable
     static List<TrackableInventoryEntry> getTrackablesOfCache(final String geocode) {
+        return collectTrackablesOfCache(skip -> apiProxyReq()
+                .uri("/web/v1/trackables/geocache/" + geocode + "?take=" + MAX_TAKE + "&skip=" + skip)
+                .requestJson(TrackableInventoryEntryList.class).blockingGet());
+    }
+
+    @Nullable
+    @VisibleForTesting
+    static List<TrackableInventoryEntry> collectTrackablesOfCache(@NonNull final IntFunction<TrackableInventoryEntryList> pageLoader) {
         final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
         int skip = 0;
         try {
             TrackableInventoryEntryList result;
             do {
-                result = apiProxyReq().uri("/web/v1/trackables/geocache/" + geocode + "?take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntryList.class).blockingGet();
+                result = pageLoader.apply(skip);
                 if (result == null || result.data == null) {
-                    break;
+                    return null;
+                }
+                for (final TrackableInventoryEntry entry : result.data) {
+                    if (entry == null || StringUtils.isBlank(entry.referenceCode)) {
+                        return null;
+                    }
                 }
                 trackableInventoryEntries.addAll(result.data);
                 skip += MAX_TAKE;
             } while (result.data.size() == MAX_TAKE);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.w("Problems getting trackables: " + e.getMessage());
+            return null;
         }
         return trackableInventoryEntries;
     }
