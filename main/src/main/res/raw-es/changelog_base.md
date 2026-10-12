@@ -3,21 +3,21 @@
 - Nuevo: Superposición de teselas definidas por el usuario (#18587)
 - Nuevo: Soporte a múltiples proveedores de teselas definidos por el usuario (#18586)
 - Nuevo: Mostrar mapa opcionalmente en la pantalla de bloqueo (#18383)
-- New: Warning if not all caches of a list can be displayed on the map (#18506)
+- Nuevo: Advertencia si no todos los cachés de una lista pueden mostrarse en el mapa (#18506)
 
 ### Detalles del caché
 - Nuevo: Alterna la fecha almacenada en el dispositivo entre relativa y exacta (#18393)
 - Corregido: Diálogos de progreso sobrepuestos al borrar múltiples registros (#18279)
 - Nuevo: Botón para "Editar nota personal" en la ventana del waypoint (#18559)
-- Fix: Broken colors under certain conditions (#17479)
+- Corregido: Colores rotos bajo ciertas condiciones (#17479)
 
 ### Ejecutador de Wherigos
 -
 
 ### General
 - Corregido: Múltiples diálogos de descarga pendientes en la pantalla principal (#18363)
-- New: Do not discard valid authorization cookies (#18664)
-- New: Set finals as corrected from cache list (#18335)
-- Change: Use Android's system notifications for feedback on background tasks (#18596)
-- Fix: Attributes filter infobar uses internal names (#18730)
-- New: Support additional attribute searches on geocaching.com (#18731)
+- Nuevo: No descartar cookies de autorización válidas (#18664)
+- Nuevo: Establecer finales corregidas desde una lista de cachés (#18335)
+- Cambio: Usar notificaciones del sistema de Android para retroalimentación en tareas en segundo plano (#18596)
+- Corregido: La barra de información con filtro de atributos utiliza nombres internos (#18730)
+- Nuevo: Soporte para búsquedas de atributos adicionales en geocaching.com (#18731)
