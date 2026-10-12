@@ -41,6 +41,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.core.text.HtmlCompat;
 
@@ -1714,7 +1715,12 @@ public final class GCParser {
 
         // retrieve trackables
         final List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
-        if (!cacheInventory.isEmpty()) {
+        updateCacheInventory(cache, cacheInventory);
+    }
+
+    @VisibleForTesting
+    static void updateCacheInventory(@NonNull final Geocache cache, @Nullable final List<GCWebAPI.TrackableInventoryEntry> cacheInventory) {
+        if (cacheInventory != null) {
             cache.mergeInventory(GCWebAPI.convertTrackableInventory(cacheInventory), EnumSet.of(TrackableBrand.TRAVELBUG));
         }
     }
