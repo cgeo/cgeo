@@ -2799,6 +2799,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private static final class RefreshCacheHandler extends ProgressBarDisposableHandler {
 
+        private final RefreshCacheStatus refreshStatus = new RefreshCacheStatus();
+
         RefreshCacheHandler(final CacheDetailActivity activity) {
             super(activity);
         }
@@ -2806,10 +2808,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @Override
         public void handleRegularMessage(final Message msg) {
             final CacheDetailActivity cacheDetailActivity = (CacheDetailActivity) activityRef.get();
-            if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
-                showToast((String) msg.obj);
+            if (msg.what == UPDATE_SHOW_STATUS_TOAST) {
+                refreshStatus.markFailed();
+                if (msg.obj instanceof String) {
+                    showToast((String) msg.obj);
+                }
             } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
-                dismissProgress(LocalizationUtils.getString(R.string.cachedetails_progress_refresh, cacheDetailActivity.geocode));
+                final String successText = LocalizationUtils.getString(R.string.cachedetails_progress_refresh, cacheDetailActivity.geocode);
+                dismissProgress(refreshStatus.getCompletionText(successText));
                 cacheDetailActivity.translationStatus.setNotTranslated();
                 notifyDataSetChanged(activityRef);
             }
