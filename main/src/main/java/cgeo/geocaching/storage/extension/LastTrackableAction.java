@@ -4,6 +4,7 @@ import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class LastTrackableAction extends DataStore.DBExtension {
@@ -30,6 +31,23 @@ public class LastTrackableAction extends DataStore.DBExtension {
             Log.d("get tb: key=" + tGeocode + " (not found)");
         }
         return null;
+    }
+
+    /**
+     * Returns the action to preselect for a new cache log.
+     * Dropping a trackable is a one-time action and must not become the default for another cache.
+     */
+    @NonNull
+    public static LogTypeTrackable getNextAction(final String tGeocode, final boolean autoVisit) {
+        return resolveNextAction(getLastAction(tGeocode), autoVisit);
+    }
+
+    @NonNull
+    static LogTypeTrackable resolveNextAction(@Nullable final LogTypeTrackable lastAction, final boolean autoVisit) {
+        if (lastAction == null || !lastAction.allowedForInventory || lastAction == LogTypeTrackable.DROPPED_OFF) {
+            return autoVisit ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING;
+        }
+        return lastAction;
     }
 
     public static void setAction(final String tGeocode, final LogTypeTrackable action) {
