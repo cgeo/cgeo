@@ -115,8 +115,9 @@ public class LogPostingServiceTest {
                 .build();
 
         final Intent intent = LogPostingService.buildRetryActivityIntent(context, "GC123", originalEntry, null);
+        final LogEntry restoredOriginal = intent.getParcelableExtra(Intents.EXTRA_LOGENTRY);
 
-        assertThat(intent.getParcelableExtra(Intents.EXTRA_LOGENTRY)).isEqualTo(originalEntry);
+        assertThat(restoredOriginal).isEqualTo(originalEntry);
         assertThat(intent.hasExtra(Intents.EXTRA_LOGENTRY_EDITED)).isFalse();
     }
 }
