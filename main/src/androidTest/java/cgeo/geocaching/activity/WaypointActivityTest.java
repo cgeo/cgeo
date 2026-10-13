@@ -4,6 +4,7 @@ import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
@@ -166,11 +167,17 @@ public class WaypointActivityTest {
     public void editWaypointKeepsGeofence() {
         final Waypoint waypoint = createWaypoint();
         waypoint.setGeofence(100f);
-        tradi.getCache().addOrChangeWaypoint(waypoint, true);
+        CgeoTestUtils.saveFreshCacheToDB(tradi.getCache());
+        assertThat(tradi.getCache().addOrChangeWaypoint(waypoint, true)).isTrue();
+        assertThat(waypoint.getId()).isGreaterThan(0);
+
+        final Geocache storedCache = DataStore.loadCache(waypoint.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+        assertThat(storedCache).isNotNull();
+        assertThat(storedCache.getGeocode()).isEqualTo(waypoint.getGeocode());
 
         final String changedName = "Changed waypoint";
         CgeoTestUtils.executeForActivity(EditWaypointActivity.class, intent -> {
-            waypointForCache(intent, tradi.getCache());
+            waypointForCache(intent, storedCache);
             intent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypoint.getId());
         }, scenario -> {
             onView(withId(R.id.name)).check(matches(withText(waypoint.getName())));
