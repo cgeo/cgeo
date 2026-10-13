@@ -496,6 +496,20 @@
     <string name="caches_watch_selected">Afegeix la selecció a la llista de seguiment</string>
     <string name="caches_unwatch_selected">Elimina la selecció de la llista de seguiment</string>
     <string name="watchlist_background_started">L\'actualització de la llista de seguiment s\'ha iniciat en segon pla</string>
+    <string name="watchlist_add_background_title">Afegint a la llista de seguiment</string>
+    <string name="watchlist_add_background_canceled" tools:ignore="PluralsCandidate">S\'ha cancel·lat l\'afegit a la llista de seguiment: %1$d/%2$d completat</string>
+    <string name="watchlist_add_background_failed" tools:ignore="PluralsCandidate">Ha fallat l\'afegit a la llista de seguiment: %1$d/%2$d completat</string>
+    <plurals name="watchlist_add_background_result">
+        <item quantity="one">%d element del catxé afegit a la llista de seguiment</item>
+        <item quantity="other">%d catxés afegits a la llista de seguiment</item>
+    </plurals>
+    <string name="watchlist_remove_background_title">Eliminació de la llista de seguiment</string>
+    <string name="watchlist_remove_background_canceled" tools:ignore="PluralsCandidate">Eliminació de la llista de seguiment cancel·lada: %1$d/%2$d feta</string>
+    <string name="watchlist_remove_background_failed" tools:ignore="PluralsCandidate">Ha fallat l\'eliminació de la llista de seguiment: %1$d/%2$d completat</string>
+    <plurals name="watchlist_remove_background_result">
+        <item quantity="one">%d element del catxé eliminat de la llista de seguiment</item>
+        <item quantity="other">S\'han eliminat %d catxés de la llista de seguiment</item>
+    </plurals>
     <string name="caches_upload_modifiedcoords">Coordenades modificades</string>
     <string name="caches_upload_modifiedcoords_warning">Vols modificar les coordenades de tots els catxés seleccionats i sobreescriure les existents al servidor? No podràs desfer-ho.</string>
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
@@ -531,6 +545,10 @@
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
     <string name="caches_set_cache_icon_all">Estableix la icona de catxé per a tots els catxés</string>
     <string name="caches_set_cache_icon_selected">Estableix la icona de catxé per els catxés seleccionats</string>
+    <string name="caches_set_final_wp_as_corrected_coords_all">Estableix els finals com a coordenades</string>
+    <string name="caches_set_final_wp_as_corrected_coords_selected">Estableix la posició final com a coordenades (seleccionades)</string>
+    <string name="caches_set_final_wp_as_corrected_coords_info">Aplica el punt de referència final com a coordenades corregides a %1$d catxé.</string>
+    <string name="caches_set_final_wp_as_corrected_coords_none_found">No s\'han trobat catxés amb punt de referència final.</string>
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
@@ -1851,6 +1869,8 @@
     <string name="projection_type_bearing_hint_distance">Distància</string>
     <string name="projection_type_offset">Desplaçament</string>
     <string name="projection_type_offset_info">Desplaçament lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Desplaçament de latitud en mil·liminuts</string>
+    <string name="projection_type_offset_hint_longitude">Desplaçament de Longitud en mil·liminuts</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_titletext_short">Valors i càlculs</string>
@@ -2123,6 +2143,8 @@
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
     <string name="export_persnotes">Carregueu notes personals</string>
     <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
+    <string name="export_persnotes_background_canceled" tools:ignore="PluralsCandidate">Càrrega cancel·lada: %1$d/%2$d notes carregades</string>
+    <string name="export_persnotes_background_failed" tools:ignore="PluralsCandidate">La càrrega ha fallat: s\'han carregat %1$d/%2$d notes</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">S\'ha pujat %1$d nota correctament</item>
         <item quantity="other">S\'han pujat %1$d notes correctament</item>
@@ -2132,6 +2154,12 @@
     <string name="export_modifiedcoords_success">S\'ha pujat amb èxit</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Pujada finalitzada: %1$d error / %2$d ok</string>
     <string name="export_modifiedcoords_error">Ha fallat la pujada</string>
+    <string name="export_modifiedcoords_background_canceled" tools:ignore="PluralsCandidate">Càrrega cancel·lada: %1$d/%2$d completat</string>
+    <string name="export_modifiedcoords_background_failed" tools:ignore="PluralsCandidate">La càrrega ha fallat: %1$d/%2$d completat</string>
+    <plurals name="export_modifiedcoords_background_result">
+        <item quantity="one">%d coordenada carregada</item>
+        <item quantity="other">%d coordenades carregades</item>
+    </plurals>
     <string name="filename_without_extension">Nom del fitxer (sense extensió)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
@@ -2486,6 +2514,7 @@
     <string name="live_map_status_http429">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
     <string name="live_map_status_error">Error en carregar les dades del mapa: %s</string>
     <string name="live_map_status_partial">Resultats parcials (apropa per reduir el nombre de catxés per carregar): %s</string>
+    <string name="live_map_status_map_limit">Alguns catxés de la llista s\'han omès perquè s\'ha assolit el límit de catxés de mapa configurat.</string>
     <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
     <string name="filters_list_headline">Filtres:</string>
@@ -2916,6 +2945,7 @@
     <string name="dbi_select_table">Selecciona la taula</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s a #%2$d és de lectura/només</string>
+    <string name="dbi_edit_title">Edita \"%1$s\" a #%2$d</string>
     <string name="dbi_delete_row_title">Suprimeix la fila</string>
     <string name="dbi_delete_row_question">Vols eliminar definitivament la fila #%1$d (%2$s)?</string>
     <string name="dbi_delete_success">Fila suprimida: %1$s</string>
