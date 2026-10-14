@@ -207,6 +207,7 @@
     <string name="stored_caches_button">Gitipigan</string>
     <string name="any_button">Adto sa</string>
     <string name="unknown_scan">Wala nakakita og mga geocode sa resulta sa skan.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Walay mga cache diri</string>
     <string name="caches_more_caches">Magpakita og dugang na mga cache</string>
