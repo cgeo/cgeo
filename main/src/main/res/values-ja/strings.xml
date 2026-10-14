@@ -307,6 +307,7 @@
     <string name="stored_caches_button">保存済み</string>
     <string name="any_button">移動</string>
     <string name="unknown_scan">GCコードが見つかりませんでした</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">キャッシュがありません</string>
     <string name="caches_more_caches">次のキャッシュ</string>
