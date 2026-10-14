@@ -261,6 +261,7 @@
     <string name="stored_caches_button">Stocate</string>
     <string name="any_button">Coordonate</string>
     <string name="unknown_scan">Nu a fost găsit nici un geocod în rezultatul scanării.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Nici o cutie</string>
     <string name="caches_more_caches">Încarcă mai multe cutii</string>
