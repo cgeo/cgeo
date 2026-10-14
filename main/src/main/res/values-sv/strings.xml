@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Sparade</string>
     <string name="any_button">Gå till</string>
     <string name="unknown_scan">Hittade inte någon geokod i scanningen.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Det finns ingen cache</string>
     <string name="caches_more_caches">Ladda fler cacher</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
-    <string name="caches_recalculate_health_score">Räkna om loggars hälsopoäng</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
     <string name="select_icon">Välj ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version stöder inte automatisk detektering av ikoner - vissa tecken kan saknas</string>
