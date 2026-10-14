@@ -229,6 +229,7 @@
     <string name="stored_caches_button">מאוחסן</string>
     <string name="any_button">לך ל-</string>
     <string name="unknown_scan">לא מצאנו geocodes בתוצאת הסריקה.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">אין כאן מטמונים</string>
     <string name="caches_more_caches">טען מטמונים נוספים</string>
