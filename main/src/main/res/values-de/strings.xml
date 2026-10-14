@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Gespeichert</string>
     <string name="any_button">Gehe zu</string>
     <string name="unknown_scan">Konnte keinen Geocode im Scan finden.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Kein Cache</string>
     <string name="caches_more_caches">Mehr Caches laden</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
-    <string name="caches_recalculate_health_score">Cache-Gesundheitswerte neu berechnen</string>
     <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
