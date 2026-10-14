@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Guardados</string>
     <string name="any_button">Ir a</string>
     <string name="unknown_scan">No se ha encontrado ningún geocódigo en la imagen.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Ningún caché</string>
     <string name="caches_more_caches">Cargar más cachés</string>
@@ -551,7 +552,6 @@
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
-    <string name="caches_recalculate_health_score">Recalcular puntuaciones de salud de los cachés</string>
     <string name="caches_askdeletion">Solicitar borrado si está vacío</string>
     <string name="select_icon">Seleccionar icono</string>
     <string name="onetime_missing_unicode_info">Tu versión de Android no es compatible con la detección automática de iconos - puede que falten algunos caracteres</string>
