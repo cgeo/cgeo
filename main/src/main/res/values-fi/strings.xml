@@ -415,6 +415,7 @@
     <string name="stored_caches_button">Tallennettu</string>
     <string name="any_button">Siirry</string>
     <string name="unknown_scan">Yhtään geokoodia ei löytynyt haussa.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Ei kätköjä</string>
     <string name="caches_more_caches">Lataa lisää kätköjä</string>
