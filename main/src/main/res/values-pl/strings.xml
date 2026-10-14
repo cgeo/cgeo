@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Zapisane</string>
     <string name="any_button">Idź do</string>
     <string name="unknown_scan">c:geo nie znalazł żadnego GC-kodu w wynikach skanowania.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Brak skrytek</string>
     <string name="caches_more_caches">Więcej skrytek</string>
@@ -539,7 +540,6 @@
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
-    <string name="caches_recalculate_health_score">Przelicz stan zdrowia skrytki</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
