@@ -416,6 +416,7 @@
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Přejít na</string>
     <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
     <string name="caches_more_caches">Načíst další kešky</string>
