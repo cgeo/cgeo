@@ -421,6 +421,7 @@
     <string name="stored_caches_button">已存储</string>
     <string name="any_button">转到</string>
     <string name="unknown_scan">在扫描结果中未找到任何藏点编号。</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">这里没有藏点</string>
     <string name="caches_more_caches">加载更多藏点</string>
@@ -530,7 +531,6 @@
     <string name="caches_reset_cache_icons_title">重置藏点图标</string>
     <string name="caches_make_list_unique">仅在当前列表中保留本列表的藏点</string>
     <string name="caches_set_listmarker">设置列表标记</string>
-    <string name="caches_recalculate_health_score">重新计算藏点健康评分</string>
     <string name="caches_askdeletion">列表为空时询问是否删除</string>
     <string name="select_icon">选择图标</string>
     <string name="onetime_missing_unicode_info">您的 Android 版本不支持自动检测哪些图标受支持，某些字符可能无法显示。</string>
