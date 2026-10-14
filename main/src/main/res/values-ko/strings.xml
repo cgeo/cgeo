@@ -355,6 +355,7 @@
     <string name="stored_caches_button">저장된 캐시</string>
     <string name="any_button">위치 이동</string>
     <string name="unknown_scan">스캔 결과에 지오코드가 없습니다.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">캐시가 없습니다.</string>
     <string name="caches_more_caches">더 많은 캐시 불러오기</string>
