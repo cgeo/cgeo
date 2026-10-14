@@ -21,3 +21,5 @@
 - Cambio: Usar notificaciones del sistema de Android para retroalimentación en tareas en segundo plano (#18596)
 - Corregido: La barra de información con filtro de atributos utiliza nombres internos (#18730)
 - Nuevo: Soporte para búsquedas de atributos adicionales en geocaching.com (#18731)
+- New: Batch operation for "store waypoints & variables in personal note" (#18783)
+- New: Support trackable code from clipboard in trackable search (#17101)
