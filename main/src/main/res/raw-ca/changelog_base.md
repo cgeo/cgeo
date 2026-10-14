@@ -21,3 +21,5 @@
 - Canvi: Utilitzar les notificacions del sistema Android per rebre informació sobre les tasques en segon pla (#18596)
 - Correcció: La barra d'informació del filtre d'atributs utilitza noms interns (#18730)
 - Novetat: Suport per a cerques d'atributs addicionals a geocaching.com (#18731)
+- New: Batch operation for "store waypoints & variables in personal note" (#18783)
+- New: Support trackable code from clipboard in trackable search (#17101)
