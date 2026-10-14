@@ -214,6 +214,7 @@
     <string name="stored_caches_button">Disimpan</string>
     <string name="any_button">Pergi ke</string>
     <string name="unknown_scan">Tidak menemukan geocode apapun dalam hasil pemindaian.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Tidak ada cache di sini</string>
     <string name="caches_more_caches">Memuat lebih banyak cache</string>
