@@ -21,3 +21,5 @@
 - Change: Use Android's system notifications for feedback on background tasks (#18596)
 - Fix: Attributes filter infobar uses internal names (#18730)
 - New: Support additional attribute searches on geocaching.com (#18731)
+- New: Batch operation for "store waypoints & variables in personal note" (#18783)
+- New: Support trackable code from clipboard in trackable search (#17101)
