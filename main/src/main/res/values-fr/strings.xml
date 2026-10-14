@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Enregistrées</string>
     <string name="any_button">Aller à</string>
     <string name="unknown_scan">Le scan ne contient aucun géocode.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Aucune cache</string>
     <string name="caches_more_caches">Rechercher d\'autres caches</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Réinitialiser l\'icône de la cache</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
     <string name="caches_set_listmarker">Définir le marqueur de liste</string>
-    <string name="caches_recalculate_health_score">Recalculer les scores de santé des caches</string>
     <string name="caches_askdeletion">Demande de suppression si vide</string>
     <string name="select_icon">Sélectionnez l\'icône</string>
     <string name="onetime_missing_unicode_info">Votre version d\'Android ne prend pas en charge la détection automatique des icônes - certains caractères peuvent manquer</string>
