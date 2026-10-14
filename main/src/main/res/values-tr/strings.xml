@@ -323,6 +323,7 @@
     <string name="stored_caches_button">Kaydedilmiş</string>
     <string name="any_button">Git</string>
     <string name="unknown_scan">Tarama sonucunda herhangi bir Geocode bulamadı.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Burada Geocache bulunmuyor</string>
     <string name="caches_more_caches">Daha fazla Geocache yükle</string>
