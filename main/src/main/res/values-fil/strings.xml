@@ -211,6 +211,7 @@
     <string name="stored_caches_button">Inimbak</string>
     <string name="any_button">Pumunta sa</string>
     <string name="unknown_scan">Sa resulta ng pag-iskan walang kahit anong nakitang mga geocode.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Dito ay walang mga cache</string>
     <string name="caches_more_caches">Mag-load pa ng maraming cache</string>
