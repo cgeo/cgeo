@@ -307,6 +307,7 @@
     <string name="stored_caches_button">Αποθηκευμένα</string>
     <string name="any_button">Πήγαινε σε</string>
     <string name="unknown_scan">Δεν βρήκα οποιονδήποτε γεωκωδικό κατά την σάρωση.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Καμία κρύπτη εδώ</string>
     <string name="caches_more_caches">Φόρτωση περισσότερων κρυπτών</string>
