@@ -221,6 +221,7 @@
     <string name="stored_caches_button">تم التخزين</string>
     <string name="any_button">اذهب إلى</string>
     <string name="unknown_scan">لم تجد أي كود للمخبآت في نتائج المسح.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">لا يوجد مخبآت هنا</string>
     <string name="caches_more_caches">تحميل المزيد من المخبآت</string>
