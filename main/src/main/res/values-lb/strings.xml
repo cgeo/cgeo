@@ -257,6 +257,7 @@
     <string name="stored_caches_button">Geséchert</string>
     <string name="any_button">Wiesselen op</string>
     <string name="unknown_scan">Keng Geocoden fonnt wärend dem Scan.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Kee Cache</string>
     <string name="caches_more_caches">Méi Cachen lueden</string>
