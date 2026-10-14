@@ -171,6 +171,7 @@
     <string name="advanced_search_button">Leit</string>
     <string name="stored_caches_button">Vistað</string>
     <string name="any_button">Fara til</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Engir kassar hér</string>
     <string name="caches_more_caches">Hlaða fleiri kössum</string>
