@@ -411,6 +411,7 @@
     <string name="stored_caches_button">Opgeslagen</string>
     <string name="any_button">Ga naar</string>
     <string name="unknown_scan">De gescande afbeelding bevat geen geocode.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Geen caches</string>
     <string name="caches_more_caches">Meer caches</string>
