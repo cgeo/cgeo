@@ -5534,6 +5534,38 @@ public class DataStore {
         });
     }
 
+    /**
+     * Stores personal notes given by Map<Geocode, newCachePersonalNote>.
+     * Missing entries are skipped.
+     */
+    public static void setCachePersonalNote(final Collection<Geocache> caches, final Map<String, String> personalNoteMap) {
+        if (caches.isEmpty()) {
+            return;
+        }
+        withAccessLock(() -> {
+
+            final SQLiteStatement add = PreparedStatement.SET_CACHE_PERSONAL_NOTE.getStatement();
+
+            database.beginTransaction();
+            try {
+                for (final Geocache cache : caches) {
+                    final String geocode = cache.getGeocode();
+                    final String newCachePersonalNote = personalNoteMap.get(geocode);
+                    if (newCachePersonalNote != null) {
+                        bindStringOrNull(add, 1, newCachePersonalNote);
+                        add.bindString(2, geocode);
+                        add.execute();
+
+                        cache.setPersonalNote(newCachePersonalNote);
+                    }
+                }
+                database.setTransactionSuccessful();
+            } finally {
+                database.endTransaction();
+            }
+        });
+    }
+
     private static void bindStringOrNull(final SQLiteStatement statement, final int index, @Nullable final String value) {
         if (value == null) {
             statement.bindNull(index);
@@ -5727,7 +5759,8 @@ public class DataStore {
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
         GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
-        SET_CACHE_ICON("UPDATE " + dbTableCaches + " SET emojiString = ? WHERE geocode = ?");
+        SET_CACHE_ICON("UPDATE " + dbTableCaches + " SET emojiString = ? WHERE geocode = ?"),
+        SET_CACHE_PERSONAL_NOTE("UPDATE " + dbTableCaches + " SET personal_note = ? WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 

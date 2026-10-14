@@ -448,6 +448,13 @@
     <string name="any_button">Go to</string>
     <string name="unknown_scan">Didn\'t find any geocodes in the scan result.</string>
 
+    <!-- Store waypoints -->
+    <string name="cache_menu_personal_note_artefacts">Store waypoints in personal note</string>
+    <string name="caches_personal_note_store_artefacts_all">Store waypoints in personal note for all caches</string>
+    <string name="caches_personal_note_store_artefacts_selected">Store waypoints in personal note for selected caches</string>
+    <string name="command_personal_note_store_artefact_progress">Storing waypoints in personal notes…</string>
+    <string name="command_personal_note_store_artefact_result">Personal notes updated: %1$d </string>
+
     <!-- caches -->
     <string name="caches_no_cache">No caches here</string>
     <string name="caches_more_caches">Load more caches</string>
@@ -591,7 +598,8 @@
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_recalculate_health_score">Recalculate cache health scores</string>
+    <string name="caches_recalculate_health_score_all">Recalculate cache health scores for all caches</string>
+    <string name="caches_recalculate_health_score_selected">Recalculate cache health scores for selected caches</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
