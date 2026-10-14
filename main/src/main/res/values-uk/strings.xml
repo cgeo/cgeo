@@ -257,6 +257,7 @@
     <string name="stored_caches_button">Збережений</string>
     <string name="any_button">Перейти До</string>
     <string name="unknown_scan">Не знайдено жодного геокоду в результаті сканування.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Тут немає кешів</string>
     <string name="caches_more_caches">Завантажити більше кешу</string>
