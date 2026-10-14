@@ -413,6 +413,7 @@
     <string name="stored_caches_button">Salvati</string>
     <string name="any_button">Vai a</string>
     <string name="unknown_scan">Nessun geocode trovato nello scan.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Non ci sono cache</string>
     <string name="caches_more_caches">Carica altri cache</string>
