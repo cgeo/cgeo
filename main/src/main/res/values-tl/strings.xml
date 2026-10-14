@@ -220,6 +220,7 @@
     <string name="stored_caches_button">Itago</string>
     <string name="any_button">Magpunta sa</string>
     <string name="unknown_scan">Hindi makita ang kahit anong gepcodes sa resulta ng scan.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Walang mga cache dito</string>
     <string name="caches_more_caches">Mag-load ng maraming mga cache</string>
