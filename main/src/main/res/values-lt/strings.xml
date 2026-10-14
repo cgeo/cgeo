@@ -364,6 +364,7 @@
     <string name="stored_caches_button">Išsaugota</string>
     <string name="any_button">Eiti į</string>
     <string name="unknown_scan">Nepavyko rasti geo kodo.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Slėptuvių čia nėra</string>
     <string name="caches_more_caches">Įkelti daugiau slėptuvių</string>
