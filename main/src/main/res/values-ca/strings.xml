@@ -423,6 +423,11 @@
     <string name="any_button">Vés a</string>
     <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
     <!-- Store waypoints -->
+    <string name="cache_menu_personal_note_artefacts">Desa els punts de referència en una nota personal</string>
+    <string name="caches_personal_note_store_artefacts_all">Desa els punts de referència en una nota personal per a tots els catxés</string>
+    <string name="caches_personal_note_store_artefacts_selected">Desa els punts de referència en una nota personal per als catxés seleccionats</string>
+    <string name="command_personal_note_store_artefact_progress">Emmagatzemar punts de referència en notes personals…</string>
+    <string name="command_personal_note_store_artefact_result">Notes personals actualitzades: %1$d </string>
     <!-- caches -->
     <string name="caches_no_cache">Aquí no hi ha catxés</string>
     <string name="caches_more_caches">Carrega més catxés</string>
@@ -553,6 +558,8 @@
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
+    <string name="caches_recalculate_health_score_all">Recalcular les puntuacions d\'estat del catxé per a tots els catxés</string>
+    <string name="caches_recalculate_health_score_selected">Recalcular les puntuacions d\'estat del catxé per als catxés seleccionats</string>
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
@@ -680,6 +687,7 @@
     <string name="cache_filter_checkboxlist_add_items">Afegiu més elements</string>
     <string name="cache_filter_checkboxlist_add_all_items">Afegiu tots els elements</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Afegeix elements</string>
+    <string name="cache_filter_cache_icon">Icona de catxé personalitzada</string>
     <string name="cache_filter_favorites_absolute">Complet</string>
     <string name="cache_filter_favorites_percentage">Percentatge</string>
     <string name="cache_filter_distance_coordinates">Coordenades</string>
