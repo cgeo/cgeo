@@ -83,7 +83,7 @@ public enum CacheAttribute {
     FUEL(CacheAttributeCategory.CAT_SURROUNDINGS, 58, -1, "fuel", R.drawable.attribute_fuel, R.string.attribute_fuel_yes, R.string.attribute_fuel_no),
     FOOD(CacheAttributeCategory.CAT_SURROUNDINGS, 59, -1, "food", R.drawable.attribute_food, R.string.attribute_food_yes, R.string.attribute_food_no),
     WIRELESSBEACON(CacheAttributeCategory.CAT_TOOLS, 60, 9, "wirelessbeacon", R.drawable.attribute_wirelessbeacon, R.string.attribute_wirelessbeacon_yes, 0),
-    PARTNERSHIP(CacheAttributeCategory.CAT_TYPE, 61, -1, "partnership", R.drawable.attribute_partnership, R.string.attribute_partnership_yes, R.string.attribute_partnership_no),
+    PARTNERSHIP(CacheAttributeCategory.CAT_TYPE, 61, 102, "partnership", R.drawable.attribute_partnership, R.string.attribute_partnership_yes, R.string.attribute_partnership_no),
     SEASONAL(CacheAttributeCategory.CAT_LOCATION, 62, 45, "seasonal", R.drawable.attribute_seasonal, R.string.attribute_seasonal_yes, R.string.attribute_seasonal_no),
     TOURISTOK(CacheAttributeCategory.CAT_SURROUNDINGS, 63, -1, "touristok", R.drawable.attribute_touristok, R.string.attribute_touristok_yes, R.string.attribute_touristok_no),
     TREECLIMBING(CacheAttributeCategory.CAT_TOOLS, 64, 88, "treeclimbing", R.drawable.attribute_treeclimbing, R.string.attribute_treeclimbing_yes, R.string.attribute_treeclimbing_no),
