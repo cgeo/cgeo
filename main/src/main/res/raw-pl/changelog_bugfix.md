@@ -7,7 +7,7 @@
 - Fix: Crash in reading variables (#18667)
 - Naprawa awarii: awaria podczas logowania (#18679)
 - Naprawiono: Awaria podczas próby przeczytania wkładu Wherigo (#18681)
-- Naprawiono: Awaria podczas próby uruchomienai wkładu Wherigo (#18675)
+- Naprawiono: Awaria podczas próby uruchomienia wkładu Wherigo (#18675)
 - Naprawiono: Awaria podczas korzystania z map Google (#18676)
 - Fix: Crash in tracks quick settings (#18666)
 - Fix: Crash in offline translation (#18678)
