@@ -563,7 +563,6 @@
     <string name="cache_menu_challenge_checker">Cari pemeriksa penolakan</string>
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
-    <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
     <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
