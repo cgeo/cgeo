@@ -1612,7 +1612,8 @@
     <string name="cache_log_menu_popup_title">Registre de %s</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
-    <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
+    <string name="ignore_confirm_message">Ignorar un catxé significa que aquest no tornarà a aparèixer mai més en carregar dades de geocaching.com. Només podreu tornar a veure el catxé si deixeu d\'ignorar-lo al lloc web. A més, s\'eliminaran totes les vostres dades locals relacionades amb aquest catxé.</string>
+    <string name="ignore_confirm_toast">El catxé %s s\'ignorarà a partir d\'ara.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_attended">Vaig assistir</string>
