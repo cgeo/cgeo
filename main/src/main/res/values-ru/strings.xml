@@ -1644,7 +1644,6 @@
     <string name="cache_log_menu_popup_title">Запись %s</string>
     <string name="cache_log_delete_reason_default">Запись была удалена с помощью c:geo</string>
     <string name="ignore_confirm_title">Внимание</string>
-    <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_attended">Участвовал</string>
