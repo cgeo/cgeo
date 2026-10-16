@@ -1565,7 +1565,6 @@
     <string name="cache_log_menu_popup_title">Loki %s</string>
     <string name="cache_log_delete_reason_default">Loki on poistettu c:geolla</string>
     <string name="ignore_confirm_title">Ole varovainen</string>
-    <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
     <string name="cache_status_attended">Osallistui</string>
