@@ -1595,7 +1595,6 @@
     <string name="cache_log_menu_popup_title">%s 的日志</string>
     <string name="cache_log_delete_reason_default">已使用 c:geo 删除日志</string>
     <string name="ignore_confirm_title">小心</string>
-    <string name="ignore_confirm_message">忽略藏点后，从 geocaching.com 加载数据时将不再显示该藏点。只有在该网站上取消忽略后，才能再次看到它。</string>
     <string name="cache_status">状态</string>
     <string name="cache_status_offline_log">保存的日志</string>
     <string name="cache_status_attended">已参加</string>
