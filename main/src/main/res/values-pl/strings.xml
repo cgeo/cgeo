@@ -422,6 +422,11 @@
     <string name="any_button">Idź do</string>
     <string name="unknown_scan">c:geo nie znalazł żadnego GC-kodu w wynikach skanowania.</string>
     <!-- Store waypoints -->
+    <string name="cache_menu_personal_note_artefacts">Zapisz punkty orientacji w notatce osobistej</string>
+    <string name="caches_personal_note_store_artefacts_all">Zapisz punkty nawigacji w notatkach osobistych dla wszystkich skrytek</string>
+    <string name="caches_personal_note_store_artefacts_selected">Zapisz punkty nawigacji w notatkach osobistych dla wybranych skrytek</string>
+    <string name="command_personal_note_store_artefact_progress">Zapisywanie punktów nawigacji w notatkach osobistych…</string>
+    <string name="command_personal_note_store_artefact_result">Zaktualizowano notatki osobiste: %1$d </string>
     <!-- caches -->
     <string name="caches_no_cache">Brak skrytek</string>
     <string name="caches_more_caches">Więcej skrytek</string>
@@ -537,9 +542,13 @@
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
     <string name="caches_set_cache_icon_all">Ustaw ikonę skrytki dla wszystkich skrytek</string>
     <string name="caches_set_cache_icon_selected">Ustaw ikonę skrytki dla wybranych skrytek</string>
+    <string name="caches_set_final_wp_as_corrected_coords_all">Ustaw finały jako współrzędne</string>
+    <string name="caches_set_final_wp_as_corrected_coords_info">Zastosuj punkt finału jako poprawione współrzędne dla %1$d skrytek.</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="caches_recalculate_health_score_all">Przelicz wyniki zdrowia dla wszystkich skrytek</string>
+    <string name="caches_recalculate_health_score_selected">Przelicz wyniki zdrowia dla wybranych skrytek</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
@@ -1060,7 +1069,7 @@
     <string name="init_useInternalRouting">Użyj wewnętrznego wyznaczania trasy</string>
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych nawigowania i innych funkcji</string>
     <string name="init_bigSmileysOnMap">Duże ikony</string>
-    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
+    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'poprawione współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
     <string name="init_showElevation">Pokaż wysokość</string>
