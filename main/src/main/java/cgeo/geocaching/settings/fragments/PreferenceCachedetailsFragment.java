@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.FriendLogTabOwnerMode;
 import cgeo.geocaching.settings.Settings.NamedFilterDisplayMode;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
@@ -44,6 +45,7 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         noTranslateLngs.setEntryValues(languageCodes);
 
         configNamedFilterDisplayModePreference();
+        configFriendLogTabOwnerModePreference();
     }
 
     @Override
@@ -67,6 +69,25 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         namedFilterDisplayModePref.setSummary(Settings.getNamedFilterDisplayMode().getDisplayName());
         namedFilterDisplayModePref.setOnPreferenceChangeListener((preference, newValue) -> {
             preference.setSummary(NamedFilterDisplayMode.valueOf(newValue.toString()).getDisplayName());
+            return true;
+        });
+    }
+
+    private void configFriendLogTabOwnerModePreference() {
+        final ListPreference friendLogTabOwnerModePref = findPreference(getString(R.string.pref_friend_log_tab_owner_mode));
+        final FriendLogTabOwnerMode[] modes = FriendLogTabOwnerMode.values();
+        final String[] entries = new String[modes.length];
+        final String[] entryValues = new String[modes.length];
+        for (int i = 0; i < modes.length; i++) {
+            entries[i] = modes[i].getDisplayName();
+            entryValues[i] = modes[i].name();
+        }
+        friendLogTabOwnerModePref.setEntries(entries);
+        friendLogTabOwnerModePref.setEntryValues(entryValues);
+        friendLogTabOwnerModePref.setValue(Settings.getFriendLogTabOwnerMode().name());
+        friendLogTabOwnerModePref.setSummary(Settings.getFriendLogTabOwnerMode().getDisplayName());
+        friendLogTabOwnerModePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(FriendLogTabOwnerMode.valueOf(newValue.toString()).getDisplayName());
             return true;
         });
     }

@@ -186,6 +186,7 @@
     <string translatable="false" name="preference_screen_cachedetails">preference_screen_cachedetails</string>
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
+    <string translatable="false" name="pref_friend_log_tab_owner_mode">friend_log_tab_owner_mode</string>
     <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
     <string translatable="false" name="pref_translation_language">translation_language</string>
     <string translatable="false" name="pref_translation_notranslate">translation_notranslate</string>

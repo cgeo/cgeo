@@ -222,6 +222,36 @@ public class Settings {
         }
     }
 
+
+    /**
+     * Controls how the logs of the cache-owner should be displayed
+     * in the log-tab of friends-log.
+     */
+    public enum FriendLogTabOwnerMode {
+        /**
+         * Do not load / show any owner logs.
+         */
+        NONE(R.string.friendlog_tab_owner_display_mode_none),
+        /**
+         * Hide owner logs and add possibility to show them.
+         */
+        HIDE(R.string.friendlog_tab_owner_display_mode_hide),
+        /**
+         * Show owner logs and add possibility to hide them.
+         */
+        SHOW(R.string.friendlog_tab_owner_display_mode_show);
+
+        private final @StringRes int displayNameResId;
+
+        FriendLogTabOwnerMode(final @StringRes int displayNameResId) {
+            this.displayNameResId = displayNameResId;
+        }
+
+        public String getDisplayName() {
+            return LocalizationUtils.getString(displayNameResId);
+        }
+    }
+
     public static class PrefLogTemplate {
         private final @NonNull String key;
         private final String title;
@@ -1148,6 +1178,13 @@ public class Settings {
         return EnumUtils.getEnum(NamedFilterDisplayMode.class,
                 getString(R.string.pref_named_filter_display_mode, NamedFilterDisplayMode.ACTIVE_ONLY.name()),
                 NamedFilterDisplayMode.ACTIVE_ONLY);
+    }
+
+    @NonNull
+    public static FriendLogTabOwnerMode getFriendLogTabOwnerMode() {
+        return EnumUtils.getEnum(FriendLogTabOwnerMode.class,
+                getString(R.string.pref_friend_log_tab_owner_mode, FriendLogTabOwnerMode.SHOW.name()),
+                FriendLogTabOwnerMode.SHOW);
     }
 
     public static boolean isTrackableAutoVisit() {
