@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.UserClickListener;
@@ -18,8 +19,10 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +47,9 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
+    // cached counts for title display
+    private int logsCount = 0;
+
     public CacheLogsViewCreator(final boolean allLogs) {
         this.allLogs = allLogs;
     }
@@ -60,6 +66,16 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
+    public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final LogsPageBinding binding = super.createView(inflater, container, savedInstanceState);
+        if (!allLogs) {
+            final Settings.FriendLogTabOwnerMode ownerLogsMode = Settings.getFriendLogTabOwnerMode();
+            binding.chipOwner.setChecked(ownerLogsMode == Settings.FriendLogTabOwnerMode.SHOW);
+        }
+        return binding;
+    }
+
+    @Override
     public long getPageId() {
         return allLogs ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
     }
@@ -67,6 +83,10 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private Geocache getCache() {
         final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
         return activity.getCache();
+    }
+
+    public int getLogsCount() {
+        return logsCount;
     }
 
     @Override
@@ -83,9 +103,17 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             friendsLogs.removeAll(ownerLogs);
             ownerLogs.removeAll(ownLogs);
 
+            final Settings.FriendLogTabOwnerMode ownerLogsMode = Settings.getFriendLogTabOwnerMode();
+            final boolean hideOwnerLogs = ownerLogsMode == Settings.FriendLogTabOwnerMode.NONE;
+            if (hideOwnerLogs) {
+                logs.removeAll(ownerLogs);
+            }
+            logsCount = logs.size();
+
+
             binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
             binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipOwner.setVisibility(ownerLogs.isEmpty() || hideOwnerLogs ? View.GONE : View.VISIBLE);
 
             if (!binding.chipOwn.isChecked()) {
                 logs.removeAll(ownLogs);

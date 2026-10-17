@@ -81,6 +81,11 @@
             android:summary="@string/init_summary_friends_and_own_logs_wanted"
             android:title="@string/init_friends_and_own_logs_wanted"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:key="@string/pref_friend_log_tab_owner_mode"
+            android:title="@string/init_friendlog_tab_owner_display_mode"
+            android:dependency="@string/pref_friendlogswanted"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_plainLogs"
