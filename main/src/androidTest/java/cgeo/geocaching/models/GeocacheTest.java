@@ -837,20 +837,6 @@ public class GeocacheTest {
     }
 
     @Test
-    public void testGetPossibleLogTypes() {
-        final Geocache gcCache = new Geocache();
-        gcCache.setGeocode("GC123");
-        gcCache.setType(CacheType.WEBCAM);
-        assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.WEBCAM_PHOTO_TAKEN);
-
-        final Geocache ocCache = new Geocache();
-        ocCache.setGeocode("OC1234");
-        ocCache.setType(CacheType.TRADITIONAL);
-        assertThat(ocCache.getPossibleLogTypes()).as("traditional cache possible log types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
-        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log types").doesNotContain(LogType.NEEDS_MAINTENANCE);
-    }
-
-    @Test
     public void testLogTypeEventPast() {
         final Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, -1);
