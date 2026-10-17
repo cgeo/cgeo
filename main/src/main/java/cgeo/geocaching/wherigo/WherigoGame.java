@@ -246,7 +246,7 @@ public class WherigoGame implements UI {
 
     @SuppressWarnings("unchecked")
     public List<Zone> getZones() {
-        return cartridge == null ? Collections.emptyList() : (List < Zone >) cartridge.zones;
+        return cartridge == null ? Collections.emptyList() : cartridge.zones;
     }
 
     public Zone getZone(final String name) {
@@ -260,12 +260,12 @@ public class WherigoGame implements UI {
 
     @SuppressWarnings("unchecked")
     public List<Thing> getThings() {
-        return cartridge == null ? Collections.emptyList() : (List<Thing>) cartridge.things;
+        return cartridge == null ? Collections.emptyList() : cartridge.things;
     }
 
     @SuppressWarnings("unchecked")
     public List<Task> getTasks() {
-        return cartridge == null ? Collections.emptyList() : (List<Task>) cartridge.tasks;
+        return cartridge == null ? Collections.emptyList() : cartridge.tasks;
     }
 
     public List<Thing> getInventory() {

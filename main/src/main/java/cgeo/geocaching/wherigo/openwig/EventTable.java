@@ -161,8 +161,8 @@ public class EventTable implements LuaTable, Serializable {
 
     public void rawset(Object key, Object value) {
         // TODO unify rawset/setItem
-        if (key instanceof String) {
-            setItem((String) key, value);
+        if (key instanceof String str) {
+            setItem(str, value);
         }
         table.rawset(key, value);
         Engine.log("PROP: " + toString() + "." + key + " is set to " + (value == null ? "nil" : value.toString()), Engine.LOG_PROP);
