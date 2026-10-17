@@ -32,13 +32,17 @@ public class LastTrackableAction extends DataStore.DBExtension {
         return null;
     }
 
-    public static void setAction(final String tGeocode, final LogTypeTrackable action) {
+    public static boolean setAction(final String tGeocode, final LogTypeTrackable action) {
         if (tGeocode == null) {
-            return;
+            return false;
         }
-        removeAll(type, tGeocode);
-        add(type, tGeocode, action.id, System.currentTimeMillis(), 0, 0, "", "", "", "");
+        final DBExtension result = replaceAll(type, tGeocode, action.id, System.currentTimeMillis(),
+                0, 0, "", "", "", "");
+        if (result == null) {
+            return false;
+        }
         Log.d("add tb: key=" + tGeocode + ", action=" + action);
+        return true;
     }
 
 }

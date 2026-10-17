@@ -19,11 +19,13 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.CreateLogPostStore;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
@@ -80,6 +82,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final String SAVED_STATE_FAVORITE = "cgeo.geocaching.saved_state_favorite";
+    private static final String SAVED_STATE_CREATE_POST_ID = "cgeo.geocaching.saved_state_create_post_id";
 
     private static final int MAX_GC_TRACKABLE_FOUNDS = 100; // maximum number of allowed trackables visiting per cache log for geocaching.com
 
@@ -113,6 +116,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private LogEditMode logEditMode = LogEditMode.CREATE_NEW;
     private LogEntry originalLogEntry = null;
+    private CreateLogPostState createPostState = null;
+    private String requestedCreatePostId = null;
 
     private boolean readyToPost = false;
     private Runnable pendingPost = null; // set by sendLogInternal(), consumed by onStop()
@@ -199,6 +204,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         logEditMode = LogEditMode.CREATE_NEW;
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            requestedCreatePostId = extras.getString(Intents.EXTRA_CREATE_LOG_POST_ID);
             this.originalLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
             if (this.originalLogEntry != null) {
                 logEditMode = LogEditMode.EDIT_EXISTING;
@@ -257,6 +263,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
             this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
+            this.requestedCreatePostId = savedInstanceState.getString(SAVED_STATE_CREATE_POST_ID);
+            if (StringUtils.isNotBlank(requestedCreatePostId)) {
+                this.createPostState = CreateLogPostStore.load(requestedCreatePostId);
+            }
             if (savedInstanceState.getInt(SAVED_STATE_FAVORITE) > 0) {
                 this.binding.favoriteCheck.setChecked(true);
             }
@@ -264,8 +274,186 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
         refreshGui();
 
+        if (createPostState != null) {
+            activateCreatePostState(createPostState);
+        } else if (logEditMode == LogEditMode.CREATE_NEW) {
+            discoverIncompleteLogPosts();
+        }
+
         requestKeyboardForLogging();
 
+    }
+
+    private void discoverIncompleteLogPosts() {
+        if (StringUtils.isNotBlank(requestedCreatePostId)) {
+            final CreateLogPostStore.LoadResult requested = CreateLogPostStore.loadResult(requestedCreatePostId);
+            if (requested.status == CreateLogPostStore.LoadStatus.CORRUPT
+                    && geocode.equalsIgnoreCase(requested.geocode)) {
+                showCorruptLogPostDialog(requestedCreatePostId);
+                return;
+            }
+            if (requested.state != null && geocode.equalsIgnoreCase(requested.state.geocode)) {
+                showIncompleteLogPostDialog(requested.state);
+                return;
+            }
+        }
+        final List<CreateLogPostStore.Candidate> candidates = CreateLogPostStore.loadCandidatesForGeocode(geocode);
+        if (candidates.isEmpty()) {
+            return;
+        }
+        if (candidates.size() == 1) {
+            showCandidate(candidates.get(0));
+            return;
+        }
+        final SimpleDialog.ItemSelectModel<CreateLogPostStore.Candidate> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(candidates);
+        model.setDisplayMapper(candidate -> TextParam.text(candidate.readable && candidate.state != null
+                ? candidate.state.getSummary() : LocalizationUtils.getString(R.string.log_resume_unreadable)));
+        SimpleDialog.of(this).setTitle(R.string.log_resume_incomplete_title)
+                .setMessage(R.string.log_resume_select_message)
+                .selectSingle(model, this::showCandidate);
+    }
+
+    private void showCandidate(final CreateLogPostStore.Candidate candidate) {
+        if (candidate.state == null) {
+            showCorruptLogPostDialog(candidate.postId);
+        } else {
+            showIncompleteLogPostDialog(candidate.state);
+        }
+    }
+
+    private void showCorruptLogPostDialog(final String postId) {
+        SimpleDialog.of(this).setTitle(R.string.log_resume_incomplete_title)
+                .setMessage(R.string.log_resume_unreadable_message)
+                .setButtons(0, R.string.log_resume_later, R.string.log_resume_finish)
+                .confirm(() -> { }, () -> { }, () -> CreateLogPostStore.remove(postId),
+                        TextParam.id(R.string.log_resume_finish));
+    }
+
+    private void showIncompleteLogPostDialog(final CreateLogPostState state) {
+        final int message;
+        if (state.mainStatus == CreateLogPostState.StepStatus.IN_FLIGHT) {
+            message = R.string.log_resume_main_uncertain_message;
+        } else if (state.hasUncertainStep()) {
+            message = R.string.log_resume_uncertain_message;
+        } else {
+            message = R.string.log_resume_incomplete_message;
+        }
+        SimpleDialog.of(this)
+                .setTitle(R.string.log_resume_incomplete_title)
+                .setMessage(message)
+                .setButtons(R.string.button_continue, R.string.log_resume_later, R.string.log_resume_finish)
+                .confirm(() -> activateCreatePostState(state), () -> { },
+                        () -> abandonCreatePostState(state), TextParam.id(R.string.log_resume_finish));
+    }
+
+    private void activateCreatePostState(final CreateLogPostState state) {
+        final CreateLogPostStore.LoadResult latest = CreateLogPostStore.loadResult(state.postId);
+        if (latest.state == null) {
+            if (latest.status == CreateLogPostStore.LoadStatus.CORRUPT) {
+                showCorruptLogPostDialog(state.postId);
+            }
+            return;
+        }
+        createPostState = latest.state;
+        requestedCreatePostId = latest.state.postId;
+        fillViewFromEntry(latest.state.toOfflineLogEntry());
+        setCreatePostFieldsEnabled(false);
+        invalidateOptionsMenuCompatible();
+        refreshGui();
+        if (latest.state.hasUncertainStep()) {
+            final int message = latest.state.mainStatus == CreateLogPostState.StepStatus.IN_FLIGHT
+                    ? R.string.log_resume_main_uncertain_message : R.string.log_resume_uncertain_message;
+            SimpleDialog.of(this).setTitle(R.string.log_resume_incomplete_title)
+                    .setMessage(message).show();
+        }
+    }
+
+    static final class EndedPostUiDecision {
+        final boolean clearTaskReference;
+        final boolean resetPage;
+
+        EndedPostUiDecision(final boolean clearTaskReference, final boolean resetPage) {
+            this.clearTaskReference = clearTaskReference;
+            this.resetPage = resetPage;
+        }
+    }
+
+    static EndedPostUiDecision endedPostUiDecision(final CreateLogPostState state,
+            @Nullable final String requestedPostId, @Nullable final CreateLogPostState activeState,
+            final OfflineLogEntry visibleEntry) {
+        final boolean clearReference = StringUtils.equals(requestedPostId, state.postId)
+                || activeState != null && StringUtils.equals(activeState.postId, state.postId);
+        return new EndedPostUiDecision(clearReference, state.matchesDraft(visibleEntry));
+    }
+
+    private void finishEndedCreatePostState(final CreateLogPostState state) {
+        final EndedPostUiDecision decision = endedPostUiDecision(
+                state, requestedCreatePostId, createPostState, getEntryFromView());
+        if (decision.clearTaskReference) {
+            createPostState = null;
+            requestedCreatePostId = null;
+            setCreatePostFieldsEnabled(true);
+            invalidateOptionsMenuCompatible();
+        }
+        if (decision.resetPage) {
+            resetValues();
+            lastSavedState = getEntryFromView();
+        }
+    }
+
+    private void abandonCreatePostState(final CreateLogPostState state) {
+        final CreateLogPostStore.LoadResult loaded = CreateLogPostStore.loadResult(state.postId);
+        if (loaded.status == CreateLogPostStore.LoadStatus.NOT_FOUND) {
+            finishEndedCreatePostState(state);
+            return;
+        }
+        final CreateLogPostState current = loaded.state;
+        if (current == null) {
+            showCorruptLogPostDialog(state.postId);
+            return;
+        }
+        if (current.completionStatus != CreateLogPostState.CompletionStatus.ACTIVE) {
+            finishEndedCreatePostState(state);
+            CreateLogPostStore.remove(current.postId);
+            return;
+        }
+        if (!LogUtils.saveConfirmedCreateLogs(cache, current) && current.isMainLogConfirmed()) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+            return;
+        }
+        final DataStore.ConditionalDeleteResult draftResult = DataStore.clearLogOfflineIfMatches(
+                cache.getGeocode(), current::matchesDraft);
+        if (draftResult == DataStore.ConditionalDeleteResult.FAILED) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+            return;
+        }
+        if (draftResult == DataStore.ConditionalDeleteResult.DELETED) {
+            cache.setOfflineLog(null);
+        }
+        current.completionStatus = CreateLogPostState.CompletionStatus.ABANDONED;
+        if (!CreateLogPostStore.save(current)) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+            return;
+        }
+        final boolean removed = CreateLogPostStore.remove(current.postId);
+        finishEndedCreatePostState(state);
+        if (!removed) {
+            SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+        }
+    }
+
+    private void setCreatePostFieldsEnabled(final boolean enabled) {
+        binding.log.setEnabled(enabled);
+        binding.type.setEnabled(enabled);
+        binding.date.setEnabled(enabled);
+        binding.reportProblem.setEnabled(enabled);
+        binding.favoriteCheck.setEnabled(enabled);
+        binding.logPassword.setEnabled(enabled);
+        binding.inventory.setEnabled(enabled);
+        binding.changebutton.setEnabled(enabled);
+        binding.gcvoteRating.setIsIndicator(!enabled);
+        imageListFragment.setEditable(enabled);
     }
 
     @Override
@@ -438,6 +626,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
         outState.putInt(SAVED_STATE_FAVORITE, this.binding.favoriteCheck.isChecked() ? 1 : 0);
+        outState.putString(SAVED_STATE_CREATE_POST_ID,
+                createPostState == null ? requestedCreatePostId : createPostState.postId);
     }
 
     public void setType(final LogType type) {
@@ -472,7 +662,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW) {
+        if (logEditMode != LogEditMode.CREATE_NEW || createPostState != null) {
             return;
         }
 
@@ -499,7 +689,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.storeLogOffline(LogCacheActivity.this, logEntry);
                         ccLog.add("log=%s", logEntry.log);
-                        imageListFragment.adjustImagePersistentState();
+                        if (!hasAnyActiveCreatePost()) {
+                            imageListFragment.adjustImagePersistentState();
+                        }
                         inventoryAdapter.saveActions();
                     }
                 });
@@ -555,6 +747,33 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
             return;
         }
+        if (createPostState == null && logEditMode == LogEditMode.CREATE_NEW) {
+            final List<CreateLogPostStore.Candidate> unfinished = CreateLogPostStore.loadCandidatesForGeocode(geocode);
+            if (!unfinished.isEmpty()) {
+                if (unfinished.size() == 1) {
+                    final CreateLogPostStore.Candidate candidate = unfinished.get(0);
+                    if (candidate.state != null && candidate.state.matches(getEntryFromView(),
+                            inventoryAdapter.getInventory(), candidate.state.separateProblemRequired,
+                            candidate.state.problemLogText)
+                            && candidate.state.mainStatus == CreateLogPostState.StepStatus.PENDING
+                            && !candidate.state.hasUncertainStep()) {
+                        createPostState = candidate.state;
+                        sendLogInternal();
+                        return;
+                    } else {
+                        discoverIncompleteLogPosts();
+                        return;
+                    }
+                } else {
+                    discoverIncompleteLogPosts();
+                    return;
+                }
+            }
+        }
+        if (createPostState != null) {
+            sendLogInternal();
+            return;
+        }
         if (CalendarUtils.isFuture(date.getCalendar())) {
             SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
@@ -572,6 +791,76 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
     }
 
+    static boolean entryMatchesStoredDraft(final OfflineLogEntry expected, final OfflineLogEntry actual) {
+        if (expected.logType != actual.logType || expected.date != actual.date
+                || !StringUtils.equals(expected.log, actual.log)
+                || !StringUtils.equals(expected.password, actual.password)
+                || expected.reportProblem != actual.reportProblem
+                || expected.favorite != actual.favorite || Float.compare(expected.rating, actual.rating) != 0
+                || !StringUtils.equals(expected.imageTitlePraefix, actual.imageTitlePraefix)
+                || expected.imageScale != actual.imageScale
+                || !expected.inventoryActions.equals(actual.inventoryActions)
+                || expected.logImages.size() != actual.logImages.size()) {
+            return false;
+        }
+        for (int index = 0; index < expected.logImages.size(); index++) {
+            final cgeo.geocaching.models.Image left = expected.logImages.get(index);
+            final cgeo.geocaching.models.Image right = actual.logImages.get(index);
+            if (!left.getUri().equals(right.getUri()) || !StringUtils.equals(left.getTitle(), right.getTitle())
+                    || !StringUtils.equals(left.getDescription(), right.getDescription())
+                    || left.targetScale != right.targetScale) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static boolean hasPersistentOfflineList(@Nullable final java.util.Set<Integer> listIds) {
+        return listIds != null && !listIds.isEmpty()
+                && (listIds.size() > 1 || !listIds.contains(StoredList.TEMPORARY_LIST.id));
+    }
+
+    private boolean prepareOfflineLogForPosting(final OfflineLogEntry entry) {
+        final java.util.Set<Integer> storedListsBefore = DataStore.loadLists(cache.getGeocode());
+        if (!hasPersistentOfflineList(storedListsBefore)) {
+            cache.getLists().remove(StoredList.TEMPORARY_LIST.id);
+            cache.getLists().add(StoredList.STANDARD_LIST_ID);
+            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+            final java.util.Set<Integer> storedLists = DataStore.loadLists(cache.getGeocode());
+            if (!hasPersistentOfflineList(storedLists)) {
+                return false;
+            }
+        }
+        if (!DataStore.saveLogOffline(cache.getGeocode(), entry)) {
+            return false;
+        }
+        DataStore.saveVisitDate(cache.getGeocode(), entry.date);
+        cache.setVisitedDate(Math.max(cache.getVisitedDate(), entry.date));
+        cache.setOfflineLog(entry);
+        if (Settings.removeFromRouteOnLog()) {
+            DataStore.removeFirstMatchingIdFromIndividualRoute(this, cache.getGeocode());
+        }
+        inventoryAdapter.saveActions();
+        cache.notifyChange();
+        final OfflineLogEntry stored = DataStore.loadLogOffline(cache.getGeocode());
+        final Geocache storedCache = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+        return stored != null && entryMatchesStoredDraft(entry, stored)
+                && storedCache != null && storedCache.getVisitedDate() == entry.date;
+    }
+
+    private boolean hasAnyActiveCreatePost() {
+        return !CreateLogPostStore.loadCandidatesForGeocode(geocode).isEmpty();
+    }
+
+    private boolean hasConflictingCreatePost(final CreateLogPostState intended) {
+        for (CreateLogPostStore.Candidate candidate : CreateLogPostStore.loadCandidatesForGeocode(geocode)) {
+            if (candidate.state == null || !StringUtils.equals(candidate.postId, intended.postId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void sendLogInternal() {
         if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
             return;
@@ -585,10 +874,31 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 .setServiceLogId(this.originalLogEntry.serviceLogId)
                 .build();
             pendingPost = () -> logActivityHelper.editLog(cache, this.originalLogEntry, newEntry);
+        } else if (createPostState != null) {
+            if (hasConflictingCreatePost(createPostState)) {
+                discoverIncompleteLogPosts();
+                return;
+            }
+            pendingPost = () -> logActivityHelper.resumeCreateLog(cache, createPostState);
         } else {
+            if (hasAnyActiveCreatePost()) {
+                discoverIncompleteLogPosts();
+                return;
+            }
             final OfflineLogEntry entry = getEntryFromView();
+            if (!prepareOfflineLogForPosting(entry)) {
+                SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+                return;
+            }
             final Map<String, Trackable> inv = inventoryAdapter.getInventory();
-            pendingPost = () -> logActivityHelper.createLog(cache, entry, inv);
+            final CreateLogPostState prepared = LogUtils.prepareCreateLogPost(cache, entry, inv);
+            if (prepared == null) {
+                SimpleDialog.of(this).setMessage(R.string.log_resume_save_failed).show();
+                return;
+            }
+            createPostState = prepared;
+            requestedCreatePostId = prepared.postId;
+            pendingPost = () -> logActivityHelper.resumeCreateLog(cache, prepared);
         }
         showShortToast(LocalizationUtils.getString(R.string.info_log_posting_background));
         finish(SaveMode.SENDING);
@@ -654,9 +964,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.save).setVisible(logEditMode == LogEditMode.CREATE_NEW);
-        menu.findItem(R.id.clear).setVisible(true);
-        menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
+        menu.findItem(R.id.save).setVisible(logEditMode == LogEditMode.CREATE_NEW && createPostState == null);
+        menu.findItem(R.id.clear).setVisible(createPostState == null);
+        menu.findItem(R.id.menu_templates).setVisible(createPostState == null);
+        menu.findItem(R.id.menu_smileys).setVisible(createPostState == null);
+        menu.findItem(R.id.menu_repeat_last).setVisible(createPostState == null);
+        menu.findItem(R.id.menu_send).setEnabled(createPostState == null || !createPostState.hasUncertainStep());
+        menu.findItem(R.id.menu_sort_trackables_by).setVisible(createPostState == null);
         switch (Settings.getTrackableComparator()) {
             case TRACKABLE_COMPARATOR_TRACKCODE:
                 menu.findItem(R.id.menu_sort_trackables_code).setChecked(true);

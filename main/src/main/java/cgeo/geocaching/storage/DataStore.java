@@ -177,7 +177,8 @@ public class DataStore {
         DBEXTENSION_POCKETQUERY_HISTORY(6),
         DBEXTENSION_TRACKFILES(7),
         DBEXTENSION_LAST_TRACKABLE_ACTION(8),
-        DBEXTENSION_EMOJISTRINGLRU(9);
+        DBEXTENSION_EMOJISTRINGLRU(9),
+        DBEXTENSION_CREATE_LOG_POST(10);
 
         public final int id;
         private static final EnumValueMapper<Integer, DBExtensionType> mapper = new EnumValueMapper<>();
@@ -789,7 +790,7 @@ public class DataStore {
             return withAccessLock(() -> {
                 try {
                     final long id = db.insert(dbTableExtension, null, toValues(type, key, long1, long2, long3, long4, string1, string2, string3, string4));
-                    return new DBExtension(id, key, long1, long2, long3, long4, string1, string2, string3, string4);
+                    return id < 0 ? null : new DBExtension(id, key, long1, long2, long3, long4, string1, string2, string3, string4);
                 } catch (final Exception e) {
                     Log.e("DBExtension.add failed", e);
                 }
@@ -815,22 +816,22 @@ public class DataStore {
         /**
          * removes all elements with this key from database
          */
-        public static void removeAll(final DBExtensionType type, final String key) {
-            withAccessLock(() -> {
+        public static boolean removeAll(final DBExtensionType type, final String key) {
+            return withAccessLock(() -> {
                 if (!init(false)) {
-                    return;
+                    return false;
                 }
-                removeAll(database, type, key);
+                return removeAll(database, type, key) > 0;
             });
         }
 
-        public static void removeAll(final SQLiteDatabase db, final DBExtensionType type, final String key) {
-            withAccessLock(() -> {
+        public static int removeAll(final SQLiteDatabase db, final DBExtensionType type, final String key) {
+            return withAccessLock(() -> {
                 checkState(type, key, true);
                 if (key == null) {
-                    db.delete(dbTableExtension, "_type = ? AND _key IS NULL", new String[]{String.valueOf(type.id)});
+                    return db.delete(dbTableExtension, "_type = ? AND _key IS NULL", new String[]{String.valueOf(type.id)});
                 } else {
-                    db.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{String.valueOf(type.id), key});
+                    return db.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{String.valueOf(type.id), key});
                 }
             });
         }
@@ -849,13 +850,31 @@ public class DataStore {
                 try {
                     removeAll(database, type, key);
                     final DBExtension result = add(database, type, key, long1, long2, long3, long4, string1, string2, string3, string4);
-                    if (result != null) {
+                    if (result != null && result.getId() >= 0) {
                         database.setTransactionSuccessful();
+                        return result;
                     }
-                    return result;
+                    return null;
                 } finally {
                     database.endTransaction();
                 }
+            });
+        }
+
+        protected static DBExtension replaceAllIfLong1(final DBExtensionType type, final String key,
+                final long expectedLong1, final long long1, final long long2, final long long3, final long long4,
+                final String string1, final String string2, final String string3, final String string4) {
+            return withAccessLock(() -> {
+                if (!init(false)) {
+                    return null;
+                }
+                checkState(type, key, false);
+                final ContentValues values = toValues(type, key, long1, long2, long3, long4,
+                        string1, string2, string3, string4);
+                final int updated = database.update(dbTableExtension, values,
+                        "_type = ? AND _key LIKE ? AND long1 = ?",
+                        new String[]{String.valueOf(type.id), key, String.valueOf(expectedLong1)});
+                return updated == 1 ? load(database, type, key) : null;
             });
         }
 
@@ -5027,6 +5046,17 @@ public class DataStore {
         return DBLogOfflineUtils.load(geocode);
     }
 
+    public enum ConditionalDeleteResult {
+        DELETED,
+        NOT_MATCHED,
+        FAILED
+    }
+
+    public static ConditionalDeleteResult clearLogOfflineIfMatches(final String geocode,
+            final java.util.function.Predicate<OfflineLogEntry> matcher) {
+        return DBLogOfflineUtils.removeIfMatches(geocode, matcher);
+    }
+
     public static boolean clearLogOffline(final String geocode) {
         return DBLogOfflineUtils.remove(geocode);
     }
@@ -6225,7 +6255,10 @@ public class DataStore {
                             cv.put("scale", img.targetScale);
                             return cv;
                         }).toList();
-                        updateRowset(database, dbTableLogsOfflineImages, images, "logoffline_id = " + offlineLogId, null);
+                        if (!updateRowset(database, dbTableLogsOfflineImages, images,
+                                "logoffline_id = " + offlineLogId, null)) {
+                            return false;
+                        }
                         cLog.add("images:%s", images.size());
 
                         //trackable entries
@@ -6236,7 +6269,10 @@ public class DataStore {
                             cv.put("actioncode", tr.getValue().id);
                             return cv;
                         }).toList();
-                        updateRowset(database, dbTableLogsOfflineTrackables, trackables, "logoffline_id = " + offlineLogId, null);
+                        if (!updateRowset(database, dbTableLogsOfflineTrackables, trackables,
+                                "logoffline_id = " + offlineLogId, null)) {
+                            return false;
+                        }
                         cLog.add("trackables:%s", trackables.size());
 
                         database.setTransactionSuccessful();
@@ -6248,13 +6284,15 @@ public class DataStore {
             }
         }
 
-        private static void updateRowset(final SQLiteDatabase db, final String table, final List<ContentValues> newRows, final String whereSelectExisting, final String[] whereArgs) {
-
-            //make it easy for now: delete and re-insert everything
+        private static boolean updateRowset(final SQLiteDatabase db, final String table,
+                final List<ContentValues> newRows, final String whereSelectExisting, final String[] whereArgs) {
             db.delete(table, whereSelectExisting, whereArgs);
             for (final ContentValues cv : newRows) {
-                db.insert(table, null, cv);
+                if (db.insert(table, null, cv) < 0) {
+                    return false;
+                }
             }
+            return true;
         }
 
         @Nullable
@@ -6330,6 +6368,35 @@ public class DataStore {
                 return Uri.EMPTY;
             }
             return ImageUtils.adjustOfflineLogImageUri(Uri.parse(imageUri));
+        }
+
+        public static ConditionalDeleteResult removeIfMatches(final String geocode,
+                final java.util.function.Predicate<OfflineLogEntry> matcher) {
+            if (StringUtils.isBlank(geocode) || matcher == null) {
+                return ConditionalDeleteResult.FAILED;
+            }
+            return withChangeLock(() -> {
+                init();
+                database.beginTransaction();
+                try {
+                    final OfflineLogEntry current = load(geocode);
+                    if (current == null || !matcher.test(current)) {
+                        database.setTransactionSuccessful();
+                        return ConditionalDeleteResult.NOT_MATCHED;
+                    }
+                    final int removed = remove("geocode = ?", new String[]{geocode});
+                    if (removed != 1) {
+                        return ConditionalDeleteResult.FAILED;
+                    }
+                    database.setTransactionSuccessful();
+                    return ConditionalDeleteResult.DELETED;
+                } catch (final RuntimeException e) {
+                    Log.e("DataStore.clearLogOfflineIfMatches", e);
+                    return ConditionalDeleteResult.FAILED;
+                } finally {
+                    database.endTransaction();
+                }
+            });
         }
 
         public static boolean remove(final String geocode) {

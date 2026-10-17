@@ -655,6 +655,11 @@ public class Geocache implements INamedGeoCoordinate {
      *
      * @return The Offline LogEntry
      */
+    public void setOfflineLog(@Nullable final OfflineLogEntry offlineLog) {
+        this.offlineLog = offlineLog;
+        this.hasLogOffline = offlineLog != null;
+    }
+
     @Nullable
     public OfflineLogEntry getOfflineLog() {
         if (!BooleanUtils.isFalse(hasLogOffline) && offlineLog == null) {
