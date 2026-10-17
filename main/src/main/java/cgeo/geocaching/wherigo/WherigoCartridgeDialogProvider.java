@@ -73,6 +73,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
+        binding.media.setMediaMetadata(cartridgeFile.name, cartridgeFile.description);
 
         //external translator
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
