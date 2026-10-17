@@ -154,6 +154,20 @@ public class Settings {
         }
     }
 
+    public enum FriendLogTypeEnum {
+        Own,
+        Friends,
+        Owner;
+
+        public static FriendLogTypeEnum fromInt(final int id) {
+            final FriendLogTypeEnum[] values = FriendLogTypeEnum.values();
+            if (id < 0 || id >= values.length) {
+                return Own;
+            }
+            return values[id];
+        }
+    }
+
     /**
      * Possible values of the Dark Mode Setting.
      * <p>
@@ -945,6 +959,34 @@ public class Settings {
             lastSelectedVisitedWaypointTypesAsString.add(wpType.id);
         }
         putStringList(R.string.pref_last_selected_visited_waypointtypes, lastSelectedVisitedWaypointTypesAsString);
+    }
+
+
+    public static Set<FriendLogTypeEnum> getLastSelectedFriendLogTypes() {
+        final Set<FriendLogTypeEnum> lastSelectedFriendLogTypes = new HashSet<>();
+        for (final String lastSelectedFriendLogTypesString : getStringList(R.string.pref_friendlogs_lastselected, StringUtils.EMPTY)) {
+            lastSelectedFriendLogTypes.add(FriendLogTypeEnum.fromInt(Integer.parseInt(lastSelectedFriendLogTypesString)));
+        }
+
+        if (lastSelectedFriendLogTypes.isEmpty()) {
+            lastSelectedFriendLogTypes.addAll(Arrays.asList(FriendLogTypeEnum.values()));
+        }
+        return lastSelectedFriendLogTypes;
+    }
+
+    public static void setLastSelectedFriendLogType(final FriendLogTypeEnum friendLogType, boolean isChecked) {
+        final Set<FriendLogTypeEnum> lastSelectedFriendLogTypes = getLastSelectedFriendLogTypes();
+        if (isChecked) {
+            lastSelectedFriendLogTypes.add(friendLogType);
+        } else {
+            lastSelectedFriendLogTypes.remove(friendLogType);
+        }
+
+        final Set<String> lastSelectedFriendLogTypesAsString = new HashSet<>();
+        for (final FriendLogTypeEnum logType : lastSelectedFriendLogTypes) {
+            lastSelectedFriendLogTypesAsString.add(String.valueOf(logType.ordinal()));
+        }
+        putStringList(R.string.pref_friendlogs_lastselected, lastSelectedFriendLogTypesAsString);
     }
 
     public static void setWebNameCode(final String name, final String code) {
