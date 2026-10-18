@@ -562,7 +562,6 @@
     <string name="cache_menu_challenge_checker">البحث عن مدقق المخبآت</string>
     <string name="cache_menu_ignore">تجاهل المخبئ</string>
     <string name="ignore_confirm_title">انتبه</string>
-    <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
     <string name="cache_status_attended">تم حضورها</string>

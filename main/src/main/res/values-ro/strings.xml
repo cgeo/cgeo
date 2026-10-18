@@ -621,7 +621,6 @@
     <string name="cache_menu_challenge_checker">Caută provocări</string>
     <string name="cache_menu_ignore">Ignoră geocutia</string>
     <string name="ignore_confirm_title">Atenţie</string>
-    <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_attended">A participat</string>
