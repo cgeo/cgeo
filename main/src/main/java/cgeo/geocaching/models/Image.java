@@ -221,7 +221,7 @@ public class Image implements Parcelable {
 
     private Image(@NonNull final Parcel in) {
         serviceImageId = in.readString();
-        uri = in.readParcelable(Uri.class.getClassLoader());
+        uri = java.util.Objects.requireNonNullElse(in.readParcelable(Uri.class.getClassLoader()), Uri.EMPTY);
         title = in.readString();
         description = in.readString();
         category = ImageCategory.values()[in.readInt()];
@@ -324,11 +324,12 @@ public class Image implements Parcelable {
      */
     @NonNull
     public String getPath() {
-        return isLocalFile() ? uri.getPath() : "";
+        return isLocalFile() ? StringUtils.defaultIfEmpty(uri.getPath(), "") : "";
     }
 
     public String getFileName() {
-        return isLocalFile() ? getFile().getName() : "";
+        final File localFile = getFile();
+        return localFile != null ? localFile.getName() : "";
     }
 
     /**
@@ -340,7 +341,7 @@ public class Image implements Parcelable {
     @Nullable
     public File getFile() {
         if (isLocalFile()) {
-            return new File(uri.getPath());
+            return new File(StringUtils.defaultIfEmpty(uri.getPath(), ""));
         }
         return null;
     }
