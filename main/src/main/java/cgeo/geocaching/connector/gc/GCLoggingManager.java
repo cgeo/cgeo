@@ -19,8 +19,6 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.text.Html;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -30,6 +28,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 
 class GCLoggingManager extends AbstractLoggingManager {
 
@@ -186,42 +190,134 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     @Override
     public String convertLogTextToEditableText(final String logText) {
-
         if (!TextUtils.containsHtml(logText)) {
             return logText;
         }
+        return htmlLogToEditableText(logText);
+    }
 
-        //Manual handling required:
-        //- italic: <em> and </em> -> *
-        //- bold: <strong> and </strong> -> **
-        //- link: <a href="link" ...>text</a> -> [text](link)
-        //- headers: <h1>, <h2>, <h3>
-        //- horizontal rule: <hr>
-        //- lists
+    /**
+     * Convert the HTML a log comes back as from geocaching.com into the editable markdown the user typed.
+     * geocaching.com renders logs with CommonMark, where a heading needs a space after the '#'. The HTML
+     * is walked as a jsoup DOM (robust against attributes, nesting and adjacency),
+     * and each heading is emitted on its own line in GC's documented
+     * "# text #" form with a blank line around it, so consecutive headings do not merge and the
+     * edit -> send -> edit round-trip stays idempotent. (#16147)
+     */
+    static String htmlLogToEditableText(final String html) {
+        final Document document = Jsoup.parseBodyFragment(html);
+        final StringBuilder markdown = new StringBuilder();
+        appendChildrenAsMarkdown(document.body(), markdown);
+        return markdown.toString()
+            .replaceAll("[ \\t]+\n", "\n") // no trailing whitespace on any line
+            .replaceAll("\n{3,}", "\n\n")  // collapse runs of blank lines
+            .trim();
+    }
 
-        //Handled by Html.fromHtml()
-        //- <p></p> -> carriage return with one line space
-        //- <br /> -> just carriage return
+    private static void appendChildrenAsMarkdown(final Node parent, final StringBuilder markdown) {
+        for (final Node child : parent.childNodes()) {
+            appendNodeAsMarkdown(child, markdown);
+        }
+    }
 
-        final String preLogText = logText
-            .replaceAll("<strong>", "**")
-            .replaceAll("</strong>", "**")
-            .replaceAll("<em>", "*")
-            .replaceAll("</em>", "*")
-            .replaceAll("<h1>", "# ")
-            .replaceAll("</h1>", " #")
-            .replaceAll("<h2>", "## ")
-            .replaceAll("</h2>", " ##")
-            .replaceAll("<h3>", "### ")
-            .replaceAll("</h3>", " ###")
-            .replaceAll("<hr>", "---")
-            .replaceAll("<hr />", "---")
-            .replaceAll("<ul>", "")
-            .replaceAll("<ol>", "")
-            .replaceAll("</li>", "")
-            .replaceAll("<li>", "* ")
-            .replaceAll("<a href=\"([^\"]+)\"[^>]*>([^<]+)</a>", "[$2]($1)");
-        return Html.fromHtml(preLogText).toString();
+    private static void appendNodeAsMarkdown(final Node node, final StringBuilder markdown) {
+        if (node instanceof TextNode) {
+            markdown.append(((TextNode) node).text());
+            return;
+        }
+        if (!(node instanceof Element)) {
+            return;
+        }
+        final Element element = (Element) node;
+        switch (element.normalName()) {
+            case "strong":
+            case "b":
+                appendInline(element, markdown, "**");
+                break;
+            case "em":
+            case "i":
+                appendInline(element, markdown, "*");
+                break;
+            case "a":
+                markdown.append('[');
+                appendChildrenAsMarkdown(element, markdown);
+                markdown.append("](").append(element.attr("href")).append(')');
+                break;
+            case "h1":
+                appendHeading(element, markdown, "#");
+                break;
+            case "h2":
+                appendHeading(element, markdown, "##");
+                break;
+            case "h3":
+                appendHeading(element, markdown, "###");
+                break;
+            case "hr":
+                markdown.append("\n\n---\n\n");
+                break;
+            case "br":
+                markdown.append('\n');
+                break;
+            case "blockquote":
+                appendBlockquote(element, markdown);
+                break;
+            case "p":
+                markdown.append("\n\n");
+                appendChildrenAsMarkdown(element, markdown);
+                markdown.append("\n\n");
+                break;
+            case "ul":
+                appendList(element, markdown, false);
+                break;
+            case "ol":
+                appendList(element, markdown, true);
+                break;
+            case "li":
+                markdown.append("\n* ");
+                appendChildrenAsMarkdown(element, markdown);
+                break;
+            default:
+                appendChildrenAsMarkdown(element, markdown);
+                break;
+        }
+    }
+
+    private static void appendInline(final Element element, final StringBuilder markdown, final String marker) {
+        markdown.append(marker);
+        appendChildrenAsMarkdown(element, markdown);
+        markdown.append(marker);
+    }
+
+    //each heading on its own line as "# text #" with a blank line around it, so GC keeps them separate (#16147)
+    private static void appendHeading(final Element element, final StringBuilder markdown, final String hashes) {
+        final StringBuilder inner = new StringBuilder();
+        appendChildrenAsMarkdown(element, inner);
+        markdown.append("\n\n").append(hashes).append(' ').append(inner.toString().trim()).append(' ').append(hashes).append("\n\n");
+    }
+
+    //blockquote back to CommonMark "> " lines (GC's editor "Quote" button), so the round-trip keeps the quote
+    private static void appendBlockquote(final Element element, final StringBuilder markdown) {
+        final StringBuilder inner = new StringBuilder();
+        appendChildrenAsMarkdown(element, inner);
+        final String quoted = inner.toString().trim()
+            .replaceAll("\n{2,}", "\n")   // no blank lines inside the quote
+            .replaceAll("(?m)^", "> ");   // prefix each line
+        markdown.append("\n\n").append(quoted).append("\n\n");
+    }
+
+    //ol keeps its "1." numbering (ul uses "* ") so the ordered-list round-trip stays idempotent
+    private static void appendList(final Element element, final StringBuilder markdown, final boolean ordered) {
+        markdown.append("\n\n");
+        int index = 1;
+        for (final Node child : element.childNodes()) {
+            if (child instanceof Element && "li".equals(((Element) child).normalName())) {
+                markdown.append(ordered ? index + ". " : "* ");
+                appendChildrenAsMarkdown(child, markdown);
+                markdown.append('\n');
+                index++;
+            }
+        }
+        markdown.append('\n');
     }
 
     @Override
