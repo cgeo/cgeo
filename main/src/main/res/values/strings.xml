@@ -2640,6 +2640,9 @@
     <string name="attribute_historic_no">No abandoned structure / No ruin</string>
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">No handicap: Blind</string>
+    <string name="attribute_architecture_detail">Architectural detail</string>
+    <string name="attribute_natural_monument">Natural Monument</string>
+    <string name="attribute_street_art">Street Art</string>
     <string name="attribute_unknown">Unknown attribute</string>
 
     <!-- cache attribute categories -->
