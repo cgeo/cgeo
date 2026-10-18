@@ -275,7 +275,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public float getCurrentBearing() {
-        return mMap.getCameraPosition().bearing;
+        return mMap != null ? mMap.getCameraPosition().bearing : 0f;
     }
 
     @Override
