@@ -94,8 +94,7 @@ public final class ImageUtils {
     public static final int MAX_IMG_DIMEN = 10000;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
-    // for opening into an external application.
-    private static final String[] NO_EXTERNAL = {"geocheck.org"};
+    private static final String[] IMG_IGNORE_SRC = { "geocheck.org", "geotjek.dk", "gc-apps.com", "certitudes.org" };
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
     private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)((\\?|#|$|\\)|])\\S*)?)");
@@ -470,7 +469,7 @@ public final class ImageUtils {
     public static List<Image> getImagesFromHtml(final BiConsumer<String, Image.Builder> modifier, final String... htmlText) {
         final List<Image> result = new ArrayList<>();
         forEachImageUrlInHtml(source -> {
-                if (canBeOpenedExternally(source)) {
+                if (!containsPattern(source, IMG_IGNORE_SRC)) {
                     final Image.Builder builder = new Image.Builder()
                             .setUrl(source, "https");
                     if (modifier != null) {
@@ -691,10 +690,6 @@ public final class ImageUtils {
             }
             return view;
         }
-    }
-
-    public static boolean canBeOpenedExternally(final String source) {
-        return !containsPattern(source, NO_EXTERNAL);
     }
 
     @NonNull
