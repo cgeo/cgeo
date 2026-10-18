@@ -211,7 +211,7 @@ public class RouteTrackUtils {
         } else if (id == R.id.menu_color && !isIndividualRoute(route)) {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
         } else if (id == R.id.menu_rename) {
-            tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
+            tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(activity)
                     .setTitle(TextParam.text(LocalizationUtils.getString(R.string.routes_tracks_change_name)))
                     .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
                         if (StringUtils.isNotBlank(newName)) {
