@@ -1038,7 +1038,7 @@
     <string name="init_useInternalRouting">Użyj wewnętrznego wyznaczania trasy</string>
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych nawigowania i innych funkcji</string>
     <string name="init_bigSmileysOnMap">Duże ikony</string>
-    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
+    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'poprawione współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
     <string name="init_showElevation">Pokaż wysokość</string>
