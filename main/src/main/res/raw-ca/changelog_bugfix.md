@@ -38,3 +38,6 @@
 - Correcció: El radi de la geofence no es manté en editar un punt de referència (#18759)
 - Correcció: Anàlisi incorrecta de coordenades UTM a prop de l'equador (#18757)
 - Correcció: El punt de referència no es desava en detectar correctament punts de referència a la descripció (#18750)
+- Fix: Handling of dropped trackables (#16203)
+- Fix: Handling when ignoring unsaved caches (#9445)
+
