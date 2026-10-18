@@ -991,7 +991,6 @@
     <string name="cache_menu_log_in_browser">Zapis v brskalniku</string>
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
-    <string name="ignore_confirm_message">Prezreti zaklad pomeni, da se ta zaklad ne bo več pojavil pri nalaganju podatkov iz geocaching.com. Zaklad si boste lahko znova ogledali le, če ga na spletnem mestu \"odprezrete\".</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>

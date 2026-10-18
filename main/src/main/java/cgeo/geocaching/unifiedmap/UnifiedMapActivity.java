@@ -565,6 +565,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         //add info from cache to viewmodel
         final Geocache changedCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (changedCache == null || changedCache.getCoords() == null) {
+            viewModel.caches.write(caches -> {
+                caches.removeIf(c -> c.getGeocode().equals(geocode));
+            });
             return;
         }
 

@@ -33,6 +33,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.sidesheet.SideSheetBehavior;
@@ -184,6 +186,15 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             b.addBottomSheetCallback(callback);
             if (swipeToOpenFragment != null) {
                 swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
+            } else {
+                // unregister when the sheet's fragment stops, otherwise hiding the sheet in onStop()
+                // triggers this callback afterwards, clearing the sheetInfo needed to restore the sheet
+                fragment.getLifecycle().addObserver(new DefaultLifecycleObserver() {
+                    @Override
+                    public void onStop(@NonNull final LifecycleOwner owner) {
+                        b.removeBottomSheetCallback(callback);
+                    }
+                });
             }
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);

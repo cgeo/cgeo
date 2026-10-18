@@ -180,7 +180,12 @@ public class OfflineTranslateUtils {
             return;
         }
 
-        TranslateAccessor.get().getTranslatorWithDownload(lng, targetLng, consumer, e -> {
+        TranslateAccessor.get().getTranslatorWithDownload(lng, targetLng, translator -> {
+            // the models may have been downloaded just now, past TranslationModelManager; without this it
+            // would keep reporting them as missing (and ask to download them again) until the app restarts
+            TranslationModelManager.get().refreshAvailableLanguages();
+            consumer.accept(translator);
+        }, e -> {
             Log.e("Failed to initialize translator", e);
             consumer.accept(null);
         });

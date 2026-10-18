@@ -31,7 +31,6 @@ import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -864,12 +863,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void ignoreCache() {
         SimpleDialog.of(this).setTitle(R.string.ignore_confirm_title).setMessage(R.string.ignore_confirm_message).confirm(() -> {
-            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).addToIgnorelist(cache));
-            // For consistency, remove also the local cache immediately from memory cache and database
-            if (cache.isOffline()) {
-                dropCache();
-                DataStore.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.DB));
-            }
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                    () -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).addToIgnorelist(cache),
+                    ok -> {
+                        if (Boolean.TRUE.equals(ok)) {
+                            // For consistency, remove also the local cache immediately from memory cache and database
+                            dropCache();
+                            DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+                            GeocacheChangedBroadcastReceiver.sendBroadcast(geocode);
+                            ViewUtils.showToast(this, R.string.ignore_confirm_toast, geocode);
+                        }
+                    });
         });
     }
 

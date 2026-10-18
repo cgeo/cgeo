@@ -1634,7 +1634,6 @@
     <string name="cache_log_menu_popup_title">Log de %s</string>
     <string name="cache_log_delete_reason_default">Le journal a été supprimé en utilisant c:geo</string>
     <string name="ignore_confirm_title">Soyez prudent</string>
-    <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
     <string name="cache_status">Statut</string>
     <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
     <string name="cache_status_attended">A participé</string>

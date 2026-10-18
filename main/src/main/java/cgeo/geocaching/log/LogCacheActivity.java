@@ -472,7 +472,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void saveLog(final SaveMode saveMode) {
 
-        if (logEditMode != LogEditMode.CREATE_NEW) {
+        // finish() can be called before initialization completes if the cache could not be loaded.
+        if (logEditMode != LogEditMode.CREATE_NEW || cache == null || lastSavedState == null) {
             return;
         }
 
@@ -874,10 +875,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 return result;
             }
 
-            LogTypeTrackable newAction = LastTrackableAction.getLastAction(key);
-            if (newAction == null || !newAction.allowedForInventory) {
-                newAction = Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING;
-            }
+            final LogTypeTrackable newAction = LastTrackableAction.getNextAction(key, Settings.isTrackableAutoVisit());
             actionLogs.put(key, newAction);
             return newAction;
 

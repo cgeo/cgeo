@@ -527,7 +527,7 @@ public class EmojiUtils {
                 .append(paint.bitmapDimensions.first)
                 .append(paint.availableSize)
                 .append(paint.fontsize)
-                .append(emoji)
+                .append(emoji.codePointAt(0))
                 .toHashCode();
 
         synchronized (emojiCache) {

@@ -727,7 +727,6 @@
     <string name="cache_menu_ignore">ігнорувати кеш</string>
     <string name="cache_log_menu_decrypt">Дешифр/Шифрувати</string>
     <string name="ignore_confirm_title">Будьте обережні</string>
-    <string name="ignore_confirm_message">Ігнорування кешу означає, що цей кеш ніколи не буде використовуватися знову під час завантаження даних із схованки. м.Ви зможете знову побачити кеш не ігноруючи його на сайті.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Зберегти у журнал</string>
     <string name="cache_status_found">Знайдено</string>
