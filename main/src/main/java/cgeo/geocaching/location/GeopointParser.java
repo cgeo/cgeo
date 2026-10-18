@@ -27,7 +27,7 @@ public class GeopointParser {
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("([-+]?\\d{1,3},\\d+), ([-+]?\\d{1,3},\\d+)");
 
-    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
+    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecTrailingSignParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
     private GeopointParser() {
         // utility class
@@ -382,6 +382,40 @@ public class GeopointParser {
     }
 
     /**
+     * Parser for DegDec format with trailing hemisphere: DD.DDDDDDD° X (e.g. mapy.cz "50.3481209N, 7.0445565E").
+     */
+    private static final class DegDecTrailingSignParser extends AbstractLatLonParser {
+        //                                        (       1       )        (  2  )
+        private static final String STRING_LAT = "(\\d++\\.\\d++)°?\\s*([NS])";
+
+        //                                        (       1       )        (   2  )
+        private static final String STRING_LON = "(\\d++\\.\\d++)°?\\s*([WEO])\\b";
+        private static final String STRING_SEPARATOR = "[,\\s]+";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DegDecTrailingSignParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        public Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            if (StringUtils.isBlank(group2)) {
+                return null;
+            }
+
+            return createCoordinate(group2, group1, "", "");
+        }
+    }
+
+    /**
      * Parser for DegDec format: DD.DDDDDDD°.
      */
     private static final class DegDecParser extends AbstractLatLonParser {
@@ -587,6 +621,7 @@ public class GeopointParser {
      * - X DD° MM.MMM
      * - X DD° MM SS
      * - DD.DDDDDDD
+     * - DD.DDDDDDD X (trailing hemisphere, e.g. mapy.cz)
      * - UTM
      * <br>
      * Both . and , are accepted, also variable count of spaces (also 0)
