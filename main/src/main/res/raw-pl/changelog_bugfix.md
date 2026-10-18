@@ -7,7 +7,7 @@
 - Fix: Crash in reading variables (#18667)
 - Naprawa awarii: awaria podczas logowania (#18679)
 - Naprawiono: Awaria podczas próby przeczytania wkładu Wherigo (#18681)
-- Naprawiono: Awaria podczas próby uruchomienai wkładu Wherigo (#18675)
+- Naprawiono: Awaria podczas próby uruchomienia wkładu Wherigo (#18675)
 - Naprawiono: Awaria podczas korzystania z map Google (#18676)
 - Fix: Crash in tracks quick settings (#18666)
 - Fix: Crash in offline translation (#18678)
@@ -38,3 +38,6 @@
 - Fix: Geofence radius not preserved on editing waypoint (#18759)
 - Fix: Wrong parsing of UTM coordinates near equator (#18757)
 - Fix: Waypoint not stored on successful scan for waypoints in description (#18750)
+- Fix: Handling of dropped trackables (#16203)
+- Fix: Handling when ignoring unsaved caches (#9445)
+
