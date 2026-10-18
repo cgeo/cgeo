@@ -6,7 +6,7 @@ import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.DateRangeSelector;
 import cgeo.geocaching.ui.ItemRangeSlider;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
-
+import java.util.Calendar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -29,11 +29,12 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
     private ButtonToggleGroup absoluteRelative;
     private ItemRangeSlider<Integer> relativeSlider;
     private CheckBox ignoreYearCheckbox;
+    private final boolean limitDatePickerRange;
 
     public DateRangeFilterViewHolder() {
-        this(false, null, null, null);
+        this(false, null, null, null,false);
     }
-    public DateRangeFilterViewHolder(final boolean allowRelativeSelection, final int[] values, final String[] labels, final String[] shortLabels) {
+    public DateRangeFilterViewHolder(final boolean allowRelativeSelection, final int[] values, final String[] labels, final String[] shortLabels,final boolean limitDatePickerRange) {
         this.allowRelativeSelection = allowRelativeSelection;
         this.relativeValues = ArrayUtils.toObject(values);
         if (this.relativeValues != null && this.relativeValues.length > 1) {
@@ -44,6 +45,8 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
 
         this.relativeLabels = labels;
         this.relativeShortLabels = shortLabels;
+        this.limitDatePickerRange=limitDatePickerRange;
+
     }
 
     @Override
@@ -60,11 +63,21 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
         mainLayout.addView(ignoreYearCheckbox, checkboxParams);
 
         dateRangeSelector = new DateRangeSelector(getActivity());
-        
+        if (limitDatePickerRange) {
+            final Calendar start = Calendar.getInstance();
+            start.clear();
+            start.set(2000, Calendar.MAY, 1);
+
+            final Calendar end = Calendar.getInstance();
+            end.add(Calendar.YEAR, 1);
+
+            dateRangeSelector.setDatePickerBounds(start.getTimeInMillis(), end.getTimeInMillis());
+        }
+
         final LinearLayout.LayoutParams dateRangeParams = new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mainLayout.addView(dateRangeSelector, dateRangeParams);
-        
+
         if (!allowRelativeSelection) {
             return mainLayout;
         }

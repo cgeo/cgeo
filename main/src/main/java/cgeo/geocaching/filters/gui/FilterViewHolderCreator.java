@@ -120,20 +120,20 @@ public class FilterViewHolderCreator {
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
                         LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d),
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
-                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short),true);
                 break;
             case EVENT_DATE:
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
                         LocalizationUtils.getIntArray(R.array.cache_filter_event_date_stored_values_d),
                         LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label),
-                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label_short));
+                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label_short),false);
                 break;
             case LAST_FOUND:
                 final int[] values = LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d);
                 result = new DateRangeFilterViewHolder<LastFoundGeocacheFilter>(true,
                         values,
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
-                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short),false);
                 break;
             case LOGS_COUNT:
                 result = new LogsCountFilterViewHolder();
@@ -162,7 +162,7 @@ public class FilterViewHolderCreator {
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
                         LocalizationUtils.getIntArray(R.array.cache_filter_stored_since_stored_values_d),
                         LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label),
-                        LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label_short));
+                        LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label_short),false);
                 break;
             case CATEGORY:
                 result = new CheckboxFilterViewHolder<>(

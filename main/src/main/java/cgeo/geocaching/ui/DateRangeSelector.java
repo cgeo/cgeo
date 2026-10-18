@@ -12,10 +12,14 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.CompositeDateValidator;
 
 public class DateRangeSelector extends LinearLayout {
 
@@ -81,6 +85,19 @@ public class DateRangeSelector extends LinearLayout {
         if (changeListener != null) {
             changeListener.call(new ImmutablePair<>(minDateEditor.getDate(), maxDateEditor.getDate()));
         }
+    }
+
+    public void setDatePickerBounds(final long startDate, final long endDate) {
+        final CalendarConstraints constraints = new CalendarConstraints.Builder()
+                .setStart(startDate)
+                .setEnd(endDate)
+                .setValidator(CompositeDateValidator.allOf(Arrays.asList(
+                        DateValidatorPointForward.from(startDate),
+                        DateValidatorPointBackward.before(endDate))))
+                .build();
+
+        minDateEditor.setDateConstraints(constraints);
+        maxDateEditor.setDateConstraints(constraints);
     }
 
     public void setMinMaxDate(final Date minDate, final Date maxDate) {

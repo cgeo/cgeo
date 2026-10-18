@@ -22,6 +22,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 /**
  * cgeo-specifc implementation for a date and time selector.
  * <br>
@@ -38,6 +41,9 @@ public class DateTimeEditor {
     private Calendar date;
     private final boolean[] dateUnset = new boolean[]{false};
     private Action1<Date> changeListener = null;
+
+    @Nullable
+    private CalendarConstraints dateConstraints;
 
     /**
      * Initializes the instance. Typically called in an activities 'onCreate' method.
@@ -109,6 +115,11 @@ public class DateTimeEditor {
         return this;
     }
 
+    public DateTimeEditor setDateConstraints(@Nullable final CalendarConstraints constraints) {
+        this.dateConstraints = constraints;
+        return this;
+    }
+
     private void triggerChange() {
         //GUI: make it visible
         this.dateButton.setText(dateUnset[0] ? LocalizationUtils.getString(R.string.datetime_nodateset_display) : Formatter.formatShortDateVerbally(this.date.getTime().getTime()));
@@ -137,10 +148,15 @@ public class DateTimeEditor {
 
         @Override
         public void onClick(final View arg0) {
-            final MaterialDatePicker<Long> dateDialog = MaterialDatePicker.Builder
+            final MaterialDatePicker.Builder<Long> pickerBuilder = MaterialDatePicker.Builder
                     .datePicker()
-                    .setSelection(date.getTimeInMillis() + TimeZone.getDefault().getRawOffset())
-                    .build();
+                    .setSelection(date.getTimeInMillis() + TimeZone.getDefault().getRawOffset());
+
+            if (dateConstraints != null) {
+                pickerBuilder.setCalendarConstraints(dateConstraints);
+            }
+
+            final MaterialDatePicker<Long> dateDialog = pickerBuilder.build();
             dateDialog.addOnPositiveButtonClickListener(timestamp -> {
                 if (resetButton != null) {
                     dateUnset[0] = false;
