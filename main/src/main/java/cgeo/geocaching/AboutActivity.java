@@ -37,14 +37,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
-import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -253,23 +250,35 @@ public class AboutActivity extends TabbedViewPagerActivity {
     }
 
     private static String prepareChangelogBugfix(final Activity activity) {
-        String changelog = FileUtils.getChangelogRelease(activity).trim();
-        final Matcher match = VERSION_PLACEHOLDER_PATTERN.matcher(changelog);
-
-        // need to replace bottom-up, therefore store matches in array and reverse
-        final ArrayList<Pair<Integer, Integer>> matches = new ArrayList<>();
-        while (match.find()) {
-            matches.add(new Pair<>(match.start(0), match.end(0)));
-        }
-        Collections.reverse(matches);
-
+        final String changelog = FileUtils.getChangelogRelease(activity).trim();
+        final StringBuilder changelogOut = new StringBuilder();
         int current = 0;
         final int max = BUGFIX_VERSION_NAME.length;
-        for (Pair<Integer, Integer> pos : matches) {
-            changelog = changelog.substring(0, pos.first) + "\r\n## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + LocalizationUtils.getString(R.string.about_changelog_bugfix_release) : LocalizationUtils.getString(R.string.about_changelog_next_release)) + "\r\n" + changelog.substring(pos.second);
-            current++;
+
+        // Match update info and version string + reverse order of blocks
+        // to display newest first, while changelog_bugfix.md is chronological
+        final Matcher match = VERSION_PLACEHOLDER_PATTERN.matcher(changelog);
+        if (match.find()) {
+            int start = match.end(0);
+            int end = -1;
+            while (match.find()) {
+                end = match.end(0);
+                changelogOut.insert(0, prepareBlock(current, max, changelog.substring(start, end)));
+                start = end;
+                current++;
+            }
+            if (start < changelog.length()) {
+                final String temp = changelog.substring(start);
+                if (!temp.isEmpty()) {
+                    changelogOut.insert(0, prepareBlock(current, max, temp));
+                }
+            }
         }
-        return changelog.trim();
+        return changelogOut.toString().trim();
+    }
+
+    private static String prepareBlock(final int current, final int max, final String info) {
+        return "## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + LocalizationUtils.getString(R.string.about_changelog_bugfix_release) : LocalizationUtils.getString(R.string.about_changelog_next_release)) + "\r\n" + info.trim() + "\r\n";
     }
 
     public static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {
