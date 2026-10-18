@@ -38,3 +38,6 @@
 - Fix: Geofence radius not preserved on editing waypoint (#18759)
 - Fix: Wrong parsing of UTM coordinates near equator (#18757)
 - Fix: Waypoint not stored on successful scan for waypoints in description (#18750)
+- Fix: Handling of dropped trackables (#16203)
+- Fix: Handling when ignoring unsaved caches (#9445)
+
