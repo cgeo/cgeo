@@ -406,7 +406,7 @@ public class Trackable implements IGeoObject {
     }
 
     public String getTrackingcode() {
-        return trackingcode;
+        return StringUtils.defaultIfEmpty(trackingcode, "");
     }
 
     public void setTrackingcode(final String trackingcode) {
