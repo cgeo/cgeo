@@ -10,6 +10,7 @@
 - Fix: Stacked progress dialogs when deleting multiple logs (#18279)
 - New: "Edit personal note" button in waypoint popup (#18559)
 - Fix: Broken colors under certain conditions (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Wherigo player
 -
