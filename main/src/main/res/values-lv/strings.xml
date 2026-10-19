@@ -701,7 +701,6 @@
     <string name="cache_menu_challenge_checker">Meklēt izaicinājuma (challenge cache) pārbaudītāju</string>
     <string name="cache_menu_ignore">Ignorēt slēpni</string>
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
-    <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
