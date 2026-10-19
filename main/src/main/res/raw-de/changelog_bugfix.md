@@ -41,3 +41,5 @@
 - Korrektur: Handhabung abgelegter Trackables (#16203)
 - Korrektur: Handhabung beim Ignorieren ungespeicherter Caches (#9445)
 
+##
+- Fix: "Scan for waypoint formulas" does not preserve order (#18749)
