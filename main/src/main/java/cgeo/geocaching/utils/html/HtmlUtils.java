@@ -44,6 +44,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 
 public final class HtmlUtils {
 
@@ -265,6 +268,130 @@ public final class HtmlUtils {
         final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(preparedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());
 
+    }
+
+    /**
+     * Convert HTML into the markdown dialect geocaching.com uses for logs (CommonMark with GC specifics).
+     * GC-flavoured, not plain CommonMark: a heading is written in GC's documented "# text #" form with the
+     * closing hashes, emitted as its own block with a blank line around it, so that consecutive headings do
+     * not merge and no heading line ends in whitespace (which would make gc.com re-parse it as a paragraph).
+     * The HTML is walked as a jsoup DOM, which is robust against attributes, nesting and adjacency, so the
+     * edit -&gt; send -&gt; edit round-trip stays idempotent. (#16147)
+     */
+    public static String htmlToGCMarkdown(final String html) {
+        final Document document = Jsoup.parseBodyFragment(html);
+        final StringBuilder markdown = new StringBuilder();
+        appendChildrenAsMarkdown(document.body(), markdown);
+        return markdown.toString()
+            .replaceAll("[ \\t]+\n", "\n") // no trailing whitespace on any line
+            .replaceAll("\n{3,}", "\n\n")  // collapse runs of blank lines
+            .trim();
+    }
+
+    private static void appendChildrenAsMarkdown(final Node parent, final StringBuilder markdown) {
+        for (final Node child : parent.childNodes()) {
+            appendNodeAsMarkdown(child, markdown);
+        }
+    }
+
+    private static void appendNodeAsMarkdown(final Node node, final StringBuilder markdown) {
+        if (node instanceof TextNode) {
+            markdown.append(((TextNode) node).text());
+            return;
+        }
+        if (!(node instanceof Element)) {
+            return;
+        }
+        final Element element = (Element) node;
+        switch (element.normalName()) {
+            case "strong":
+            case "b":
+                appendInline(element, markdown, "**");
+                break;
+            case "em":
+            case "i":
+                appendInline(element, markdown, "*");
+                break;
+            case "a":
+                markdown.append('[');
+                appendChildrenAsMarkdown(element, markdown);
+                markdown.append("](").append(element.attr("href")).append(')');
+                break;
+            case "h1":
+                appendHeading(element, markdown, "#");
+                break;
+            case "h2":
+                appendHeading(element, markdown, "##");
+                break;
+            case "h3":
+                appendHeading(element, markdown, "###");
+                break;
+            case "hr":
+                markdown.append("\n\n---\n\n");
+                break;
+            case "br":
+                markdown.append('\n');
+                break;
+            case "blockquote":
+                appendBlockquote(element, markdown);
+                break;
+            case "p":
+                markdown.append("\n\n");
+                appendChildrenAsMarkdown(element, markdown);
+                markdown.append("\n\n");
+                break;
+            case "ul":
+                appendList(element, markdown, false);
+                break;
+            case "ol":
+                appendList(element, markdown, true);
+                break;
+            case "li":
+                markdown.append("\n* ");
+                appendChildrenAsMarkdown(element, markdown);
+                break;
+            default:
+                appendChildrenAsMarkdown(element, markdown);
+                break;
+        }
+    }
+
+    private static void appendInline(final Element element, final StringBuilder markdown, final String marker) {
+        markdown.append(marker);
+        appendChildrenAsMarkdown(element, markdown);
+        markdown.append(marker);
+    }
+
+    //each heading on its own line as "# text #" with a blank line around it, so GC keeps them separate (#16147)
+    private static void appendHeading(final Element element, final StringBuilder markdown, final String hashes) {
+        final StringBuilder inner = new StringBuilder();
+        appendChildrenAsMarkdown(element, inner);
+        markdown.append("\n\n").append(hashes).append(' ').append(inner.toString().trim()).append(' ').append(hashes).append("\n\n");
+    }
+
+    //blockquote back to CommonMark "> " lines (GC's editor "Quote" button), so the round-trip keeps the quote
+    private static void appendBlockquote(final Element element, final StringBuilder markdown) {
+        final StringBuilder inner = new StringBuilder();
+        appendChildrenAsMarkdown(element, inner);
+        final String quoted = inner.toString().trim()
+            .replaceAll("\n{2,}", "\n")   // no blank lines inside the quote
+            .replaceAll("(?m)^", "> ");   // prefix each line
+        markdown.append("\n\n").append(quoted).append("\n\n");
+    }
+
+    //ol keeps its "1." numbering (ul uses "* ") so the ordered-list round-trip stays idempotent
+    private static void appendList(final Element element, final StringBuilder markdown, final boolean ordered) {
+        markdown.append("\n\n");
+        int index = 1;
+        for (final Node child : element.childNodes()) {
+            if (child instanceof Element && "li".equals(((Element) child).normalName())) {
+                markdown.append(ordered ? index + ". " : "* ");
+                appendChildrenAsMarkdown(child, markdown);
+                markdown.append('\n');
+                index++;
+            }
+        }
+        markdown.append('\n');
     }
 
     /** returns formatted HTML data (syntax-corrected as well as pretty-printed and colorized according to input parameters) */
