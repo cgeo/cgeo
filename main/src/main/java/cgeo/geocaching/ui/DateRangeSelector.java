@@ -13,14 +13,13 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.CompositeDateValidator;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
-
-import java.util.Arrays;
-import java.util.Date;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DateRangeSelector extends LinearLayout {
