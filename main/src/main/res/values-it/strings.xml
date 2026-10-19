@@ -1556,7 +1556,6 @@
     <string name="cache_log_menu_popup_title">Registro di %s</string>
     <string name="cache_log_delete_reason_default">Il log è stato eliminato usando c:geo</string>
     <string name="ignore_confirm_title">Stai attento</string>
-    <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
     <string name="cache_status_offline_log">Log salvato</string>
     <string name="cache_status_attended">Partecipato</string>
