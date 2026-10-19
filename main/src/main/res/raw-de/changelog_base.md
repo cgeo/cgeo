@@ -10,6 +10,7 @@
 - Korrektur: Überlappende Dialoge beim Löschen mehrerer Logs (#18279)
 - Neu: "Persönliche Notiz bearbeiten"-Button im Wegpunkt-Popup (#18559)
 - Korrektur: Farben unter bestimmten Bedingungen nicht lesbar (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Wherigo Player
 -
