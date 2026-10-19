@@ -10,6 +10,7 @@
 - Fix: Staplade status-dialogrutor när flera loggar tas bort (#18279)
 - Nytt: knappen "Redigera personlig anteckning" i vägpunkt-popup (#18559)
 - Fix: Broken colors under certain conditions (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Wherigo-spelare
 -
