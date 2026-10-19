@@ -6,13 +6,14 @@ import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.DateRangeSelector;
 import cgeo.geocaching.ui.ItemRangeSlider;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
-import java.util.Calendar;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -32,9 +33,9 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
     private final boolean limitDatePickerRange;
 
     public DateRangeFilterViewHolder() {
-        this(false, null, null, null,false);
+        this(false, null, null, null, false);
     }
-    public DateRangeFilterViewHolder(final boolean allowRelativeSelection, final int[] values, final String[] labels, final String[] shortLabels,final boolean limitDatePickerRange) {
+    public DateRangeFilterViewHolder(final boolean allowRelativeSelection, final int[] values, final String[] labels, final String[] shortLabels, final boolean limitDatePickerRange) {
         this.allowRelativeSelection = allowRelativeSelection;
         this.relativeValues = ArrayUtils.toObject(values);
         if (this.relativeValues != null && this.relativeValues.length > 1) {
@@ -45,7 +46,7 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
 
         this.relativeLabels = labels;
         this.relativeShortLabels = shortLabels;
-        this.limitDatePickerRange=limitDatePickerRange;
+        this.limitDatePickerRange = limitDatePickerRange;
 
     }
 
