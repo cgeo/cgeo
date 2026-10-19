@@ -1661,7 +1661,8 @@
     <string name="cache_log_menu_popup_title">Registre de %s</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
-    <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
+    <string name="ignore_confirm_message">Ignorar un catxé significa que aquest no tornarà a aparèixer mai més en carregar dades de geocaching.com. Només podreu tornar a veure el catxé si deixeu d\'ignorar-lo al lloc web. A més, s\'eliminaran totes les vostres dades locals relacionades amb aquest catxé.</string>
+    <string name="ignore_confirm_toast">El catxé %s s\'ignorarà a partir d\'ara.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_attended">He assistit</string>
@@ -2394,6 +2395,9 @@
     <string name="attribute_historic_no">No Estructura abandonada /  No Ruïna</string>
     <string name="attribute_blind_people_yes">Adequat a persones invidents</string>
     <string name="attribute_blind_people_no">No adequat a persones invidents</string>
+    <string name="attribute_architecture_detail">Detall arquitectònic</string>
+    <string name="attribute_natural_monument">Monument natural</string>
+    <string name="attribute_street_art">Art urbà</string>
     <string name="attribute_unknown">Atribut desconegut</string>
     <!-- cache attribute categories -->
     <string name="cat_status">Estat del catxé</string>
