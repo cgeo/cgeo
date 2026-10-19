@@ -1190,7 +1190,6 @@
     <string name="cache_log_menu_decrypt">Şifresini Çöz/Şifrele</string>
     <string name="cache_log_menu_popup_title">%s\'un kaydı</string>
     <string name="ignore_confirm_title">Dikkatli ol</string>
-    <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
     <string name="cache_status_attended">Katıldım</string>
