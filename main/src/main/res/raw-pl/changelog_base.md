@@ -10,6 +10,7 @@
 - Naprawiono: Nakładające się okna dialogowe przy usuwaniu wielu wpisów (#18279)
 - Nowość: Przycisk „Edytuj osobistą notatkę” w wyskakującym okienku punktu nawigacji (#18559)
 - Fix: Broken colors under certain conditions (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Odtwarzacz Wherigo
 -
