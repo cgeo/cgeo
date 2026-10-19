@@ -1586,7 +1586,6 @@
     <string name="cache_log_menu_popup_title">Logovať %s</string>
     <string name="cache_log_delete_reason_default">Log bol odstránený cez c:geo</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
-    <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Uložený log</string>
     <string name="cache_status_attended">Zúčastnil/a sa</string>
