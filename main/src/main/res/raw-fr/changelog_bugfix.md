@@ -41,3 +41,5 @@
 - Fix: Handling of dropped trackables (#16203)
 - Fix: Handling when ignoring unsaved caches (#9445)
 
+##
+- Fix: "Scan for waypoint formulas" does not preserve order (#18749)
