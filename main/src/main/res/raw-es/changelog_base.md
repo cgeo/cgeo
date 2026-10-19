@@ -10,6 +10,7 @@
 - Corregido: Diálogos de progreso sobrepuestos al borrar múltiples registros (#18279)
 - Nuevo: Botón para "Editar nota personal" en la ventana del waypoint (#18559)
 - Corregido: Colores rotos bajo ciertas condiciones (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Ejecutador de Wherigos
 -
