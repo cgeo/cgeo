@@ -1372,7 +1372,6 @@
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen ble slettet med c:geo</string>
     <string name="ignore_confirm_title">Vær forsiktig</string>
-    <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
     <string name="cache_status_attended">Deltok</string>
