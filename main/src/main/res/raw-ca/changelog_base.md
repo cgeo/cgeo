@@ -10,6 +10,7 @@
 - Correcció: Diàlegs de progrés superposats en eliminar diversos registres (#18279)
 - Novetat: Botó «Edita la nota personal» a la finestra emergent del punt de referència (#18559)
 - Correcció: Colors incorrectes en determinades condicions (#17479)
+- Nou: Nous atributs per a Opencaching (#18584)
 
 ### Wherigo Player
 -
