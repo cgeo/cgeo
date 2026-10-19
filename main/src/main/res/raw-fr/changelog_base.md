@@ -10,6 +10,7 @@
 - Correction : Fenêtres de dialogue de progression empilées lors de la suppression de plusieurs logs (#18279)
 - Nouveau : bouton "Modifier la note personnelle" dans la popup de waypoint (#18559)
 - Fix: Broken colors under certain conditions (#17479)
+- New: New attributes for Opencaching (#18584)
 
 ### Wherigo Player
 -
