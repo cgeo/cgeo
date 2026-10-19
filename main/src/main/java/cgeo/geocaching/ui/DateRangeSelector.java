@@ -18,10 +18,10 @@ import com.google.android.material.datepicker.CompositeDateValidator;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import java.util.Arrays;
 import java.util.Date;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DateRangeSelector extends LinearLayout {
 
