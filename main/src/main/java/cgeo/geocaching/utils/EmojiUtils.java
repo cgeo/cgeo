@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import static java.util.Map.entry;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -73,13 +74,21 @@ public class EmojiUtils {
     public static final int NUMBER_START = 0x30;
     public static final int NUMBER_END = 0x39;
 
-    // extra (non-emoji) unicode characters offered in addition to the bundled emoji set; they are surfaced through the
-    // picker's search field (matched by their Unicode name). Non-renderable codepoints are skipped automatically.
-    private static final int[] EXTRA_SEARCHABLE_CODEPOINTS = {
-        /* numbers */          NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
-        /* circled n. */       0x24ea, 0x2460, 0x2461, 0x2462, 0x2463, 0x2464, 0x2465, 0x2466, 0x2467, 0x2468, 0x2469, 0x246a, 0x246b, 0x246c, 0x246d, 0x246e, 0x246f, 0x2470, 0x2471, 0x2472, 0x2473,
-        /* parenthesized n. */ 0x2474, 0x2475, 0x2476, 0x2477, 0x2478, 0x2479, 0x247a, 0x247b, 0x247c,
-    };
+    // extra (non-emoji) unicode characters offered in addition to the bundled emoji set, mapped to additional search terms.
+    // Non-renderable characters are skipped automatically.
+    private static final Map<String, String> EXTRA_SEARCHABLE_CODEPOINTS = Map.ofEntries(
+            entry("0", "0"), entry("1", "1"), entry("2", "2"), entry("3", "3"), entry("4", "4"),
+            entry("5", "5"), entry("6", "6"), entry("7", "7"), entry("8", "8"), entry("9", "9"),
+            /* circled numbers */
+            entry("\u24ea", "0"), entry("\u2460", "1"), entry("\u2461", "2"), entry("\u2462", "3"), entry("\u2463", "4"),
+            entry("\u2464", "5"), entry("\u2465", "6"), entry("\u2466", "7"), entry("\u2467", "8"), entry("\u2468", "9"),
+            entry("\u2469", "10"), entry("\u246a", "11"), entry("\u246b", "12"), entry("\u246c", "13"), entry("\u246d", "14"),
+            entry("\u246e", "15"), entry("\u246f", "16"), entry("\u2470", "17"), entry("\u2471", "18"), entry("\u2472", "19"),
+            entry("\u2473", "20"),
+            /* parenthesized numbers */
+            entry("\u2474", "1"), entry("\u2475", "2"), entry("\u2476", "3"), entry("\u2477", "4"), entry("\u2478", "5"),
+            entry("\u2479", "6"), entry("\u247a", "7"), entry("\u247b", "8"), entry("\u247c", "9")
+    );
 
     // Select emoji variation for unicode characters, see https://emojipedia.org/variation-selector-16/
     private static final int VariationSelectorEmoji = 0xfe0f;
@@ -352,18 +361,25 @@ public class EmojiUtils {
             categories.recycle();
         }
         // additionally offer the extra (non-emoji) unicode characters; non-renderable ones are skipped
-        for (final int cp : EXTRA_SEARCHABLE_CODEPOINTS) {
-            addSearchEntry(index, seen, glyphCheck, new String(Character.toChars(cp)));
+        for (final Map.Entry<String, String> extra : EXTRA_SEARCHABLE_CODEPOINTS.entrySet()) {
+            addSearchEntry(index, seen, glyphCheck, extra.getKey(), extra.getValue());
         }
         return index;
     }
 
     // adds an emoji/char to the search index, skipping blanks, duplicates and codepoints with no renderable glyph
     private static void addSearchEntry(final List<EmojiSearchEntry> index, final Set<String> seen, final Paint glyphCheck, final String emoji) {
+        addSearchEntry(index, seen, glyphCheck, emoji, null);
+    }
+
+    private static void addSearchEntry(final List<EmojiSearchEntry> index, final Set<String> seen, final Paint glyphCheck, final String emoji, @Nullable final String alias) {
         if (emoji.isEmpty() || !seen.add(emoji) || !glyphCheck.hasGlyph(emoji)) {
             return;
         }
         index.add(new EmojiSearchEntry(emoji, unicodeNameOf(emoji)));
+        if (alias != null) {
+            index.add(new EmojiSearchEntry(emoji, alias));
+        }
     }
 
     // @return the concatenated, lowercased Unicode names of all codepoints in the given emoji (e.g. "grinning face")
