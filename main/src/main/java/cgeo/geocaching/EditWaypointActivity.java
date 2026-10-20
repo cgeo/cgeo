@@ -35,6 +35,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -110,6 +111,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String lookup = "---";
     private boolean own = true;
     private boolean originalCoordsEmpty = false;
+    @Nullable private String assignedEmoji;
 
     private Geopoint preprojectedCoords = null;
     private Geopoint currentCoords = null;
@@ -160,6 +162,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
                     activity.calcStateString = waypoint.getCalcStateConfig();
+                    activity.assignedEmoji = waypoint.getAssignedEmoji();
+                    activity.updateWaypointIconButton();
 
                     //projection
                     activity.projectionType.set(waypoint.getProjectionType());
@@ -252,6 +256,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         listener = new CoordDialogListener();
         binding.buttonLatLongitude.setOnClickListener(listener);
+        binding.setWaypointIcon.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(this, assignedEmoji, false, null, icon -> {
+            assignedEmoji = icon;
+            updateWaypointIconButton();
+        }));
 
         final List<String> wayPointTypes = new ArrayList<>();
         for (final WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
@@ -352,6 +360,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypointType.set(getDefaultWaypointType());
 
         binding.type.setVisibility(View.VISIBLE);
+    }
+
+    private void updateWaypointIconButton() {
+        final MaterialButton button = binding.setWaypointIcon;
+        button.setIcon(StringUtils.isNotBlank(assignedEmoji) ? ImageParam.emoji(assignedEmoji).getAsDrawable() : ViewUtils.getDrawable(waypoint.getWaypointType().dotMarkerId, true));
+        button.setIconTint(null);
     }
 
     private WaypointType getDefaultWaypointType() {
@@ -672,6 +686,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
         currentState.geofence = waypoint == null ? 0 : waypoint.getGeofence();
         currentState.calcStateJson = calcStateString;
+        currentState.assignedEmoji = assignedEmoji;
 
         return currentState;
     }
@@ -685,6 +700,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             || currentState.visited != waypoint.isVisited()
             || currentState.type != waypoint.getWaypointType()
             || !Strings.CS.equals(currentState.calcStateJson, waypoint.getCalcStateConfig())
+            || !Strings.CS.equals(currentState.assignedEmoji, waypoint.getAssignedEmoji())
             || !Geopoint.equalsFormatted(currentState.preprojectedCoords, waypoint.getPreprojectedCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
             || currentState.projectionType != waypoint.getProjectionType()
             || currentState.projectionUnits != waypoint.getProjectionDistanceUnit()
@@ -755,6 +771,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setUserNote(currentState.userNoteText);
         waypoint.setVisited(currentState.visited);
         waypoint.setGeofence((float) currentState.geofence);
+        waypoint.setAssignedEmoji(currentState.assignedEmoji);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
@@ -812,6 +829,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public boolean visited;
         public int geofence;
         public String calcStateJson;
+        public String assignedEmoji;
         public ProjectionType projectionType;
         public DistanceUnit projectionUnits;
         public String projectionFormula1;
