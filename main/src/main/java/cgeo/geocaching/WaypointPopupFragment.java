@@ -18,6 +18,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -100,8 +101,12 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(wpCode);
             setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
-
             toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            toolbar.setOnClickListener(arg0 -> EmojiUtils.selectEmojiPopup(requireContext(), waypoint.getAssignedEmoji(), false, null, icon -> {
+                waypoint.setAssignedEmoji(icon);
+                toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+                DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
+            }));
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
