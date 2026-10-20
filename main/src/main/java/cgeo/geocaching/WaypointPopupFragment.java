@@ -102,7 +102,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             toolbar.setTitle(wpCode);
             setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
             toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
-            toolbar.setOnClickListener(arg0 -> EmojiUtils.selectEmojiPopup(requireContext(), waypoint.getAssignedEmoji(), false, null, icon -> {
+            toolbar.setOnClickListener(arg0 -> EmojiUtils.selectEmojiPopup(requireContext(), waypoint.getAssignedEmoji(), false, EmojiUtils.getTintedWaypointIcon(getContext(), waypoint), icon -> {
                 waypoint.setAssignedEmoji(icon);
                 toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
                 DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
