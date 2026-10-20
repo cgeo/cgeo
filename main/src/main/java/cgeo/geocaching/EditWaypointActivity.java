@@ -256,7 +256,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         listener = new CoordDialogListener();
         binding.buttonLatLongitude.setOnClickListener(listener);
-        binding.setWaypointIcon.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(this, assignedEmoji, false, null, icon -> {
+        binding.setWaypointIcon.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(this, assignedEmoji, false, EmojiUtils.getTintedWaypointIcon(this, waypoint), icon -> {
             assignedEmoji = icon;
             updateWaypointIconButton();
         }));
@@ -364,7 +364,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private void updateWaypointIconButton() {
         final MaterialButton button = binding.setWaypointIcon;
-        button.setIcon(StringUtils.isNotBlank(assignedEmoji) ? ImageParam.emoji(assignedEmoji).getAsDrawable() : ViewUtils.getDrawable(waypoint.getWaypointType().dotMarkerId, true));
+        button.setIcon(StringUtils.isNotBlank(assignedEmoji) ? ImageParam.emoji(assignedEmoji).getAsDrawable() : EmojiUtils.getTintedWaypointIcon(this, waypoint));
         button.setIconTint(null);
     }
 

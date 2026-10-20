@@ -825,7 +825,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             SpeechService.toggleService(this, cache.getCoords());
             ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(item, SpeechService.isRunning());
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), false, cache, this::setCacheIcon);
+            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), false, EmojiUtils.getTintedCacheIcon(this, cache), icon -> setCacheIcon(icon, true));
         } else if (menuItem == R.id.menu_change_description_style) {
             changeDescriptionStyle();
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {

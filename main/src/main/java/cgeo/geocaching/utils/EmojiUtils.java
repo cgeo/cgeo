@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.EmojiPickerDialogBinding;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.ViewUtils;
@@ -18,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -119,10 +121,10 @@ public class EmojiUtils {
      *                     current value
      * @param showResetAllAction {@code true} forces display of "reset" and "close" buttons.
      *                    generic marker icon as preview and always offers the reset-to-default action
-     * @param cache        optional cache used to render the type marker as default/preview icon. If null then a generic marker is used
+     * @param resetIcon   optional icon to render the marker as default/preview icon. If null then a generic marker is used
      * @param onSelection callback receiving the selected emoji String, or the empty string when reset to default
      */
-    public static void selectEmojiPopup(final Context context, @Nullable final String currentValue, final boolean showResetAllAction, @Nullable final Geocache cache, final Action1<String> onSelection) {
+    public static void selectEmojiPopup(final Context context, @Nullable final String currentValue, final boolean showResetAllAction, @Nullable final Drawable resetIcon, final Action1<String> onSelection) {
 
         final Context themedContext = newContextThemeWrapper(context);
         final @NonNull EmojiPickerDialogBinding emojiPickerDialogBinding = EmojiPickerDialogBinding.inflate(LayoutInflater.from(themedContext));
@@ -208,13 +210,11 @@ public class EmojiUtils {
         // closing chevron matching the other bottom sheets
         pickerLayout.findViewById(R.id.emoji_picker_close).setOnClickListener(v -> dialog.dismiss());
 
-        final int wantedEmojiSizeInDp = 22;
-
         // right button: current value, click = close
         final MaterialButton dialogButtonRight = pickerLayout.findViewById(R.id.dialog_buttonRight);
-        if (StringUtils.isNotBlank(currentValue) || cache != null) {
+        if (StringUtils.isNotBlank(currentValue) || resetIcon != null) {
             dialogButtonRight.setVisibility(View.VISIBLE);
-            dialogButtonRight.setIcon(StringUtils.isNotBlank(currentValue) ? ImageParam.emoji(currentValue).getAsDrawable() : getTintedCacheIcon(context, cache));
+            dialogButtonRight.setIcon(StringUtils.isNotBlank(currentValue) ? ImageParam.emoji(currentValue).getAsDrawable() : resetIcon);
             dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
@@ -222,12 +222,12 @@ public class EmojiUtils {
         // left button: Reset to default
         final MaterialButton dialogButtonLeft = pickerLayout.findViewById(R.id.dialog_buttonLeft);
         if (showResetAllAction || StringUtils.isNotBlank(currentValue)) {
-            if (cache == null) {
+            if (resetIcon != null) {
+                dialogButtonLeft.setIcon(resetIcon);
+                dialogButtonLeft.setIconTint(null);
+            } else {
                 dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
                 MenuUtils.setButtonTint(dialogButtonLeft);
-            } else {
-                dialogButtonLeft.setIcon(getTintedCacheIcon(context, cache));
-                dialogButtonLeft.setIconTint(null);
             }
             dialogButtonLeft.setVisibility(View.VISIBLE);
             dialogButtonLeft.setOnClickListener(v -> {
@@ -240,8 +240,13 @@ public class EmojiUtils {
     }
 
     // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-    private static BitmapDrawable getTintedCacheIcon(final Context context, final Geocache cache) {
+    public static BitmapDrawable getTintedCacheIcon(final Context context, final Geocache cache) {
         return ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getTypeMarker(context.getResources(), cache)));
+    }
+
+    // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
+    public static BitmapDrawable getTintedWaypointIcon(final Context context, final Waypoint waypoint) {
+        return ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getWaypointTypeMarker(context.getResources(), waypoint.getWaypointType())));
     }
 
     @SuppressWarnings("DiscouragedApi")
