@@ -505,6 +505,24 @@
     <string name="caches_watch_selected">Dodaj wybrane do listy obserwowanych</string>
     <string name="caches_unwatch_selected">Usuń wybrane z listy obserwowanych</string>
     <string name="watchlist_background_started">Aktualizacja listy obserwowanych rozpoczęta w tle</string>
+    <string name="watchlist_add_background_title">Dodawanie do listy obserwowanych</string>
+    <string name="watchlist_add_background_canceled" tools:ignore="PluralsCandidate">Anulowano dodawanie do listy obserwowanych: %1$d/%2$d wykonano</string>
+    <string name="watchlist_add_background_failed" tools:ignore="PluralsCandidate">Nieudane dodawanie do listy obserwowanych: %1$d/%2$d wykonano</string>
+    <plurals name="watchlist_add_background_result">
+        <item quantity="one">%d skrytka dodana do listy obserwowanych</item>
+        <item quantity="few">%d skrytki dodane do listy obserwowanych</item>
+        <item quantity="many">%d skrytek dodanych do listy obserwowanych</item>
+        <item quantity="other">%d skrytek dodanych do listy obserwowanych</item>
+    </plurals>
+    <string name="watchlist_remove_background_title">Usuwanie z listy obserwowanych</string>
+    <string name="watchlist_remove_background_canceled" tools:ignore="PluralsCandidate">Anulowano usuwanie z listy obserwowanych: %1$d/%2$d wykonano</string>
+    <string name="watchlist_remove_background_failed" tools:ignore="PluralsCandidate">Nieudane usuwanie z listy obserwowanych: %1$d/%2$d wykonano</string>
+    <plurals name="watchlist_remove_background_result">
+        <item quantity="one">%d skrytka usunięta z listy obserwowanych</item>
+        <item quantity="few">%d skrytki usunięte z listy obserwowanych</item>
+        <item quantity="many">%d skrytek usuniętych z listy obserwowanych</item>
+        <item quantity="other">%d skrytek usuniętych z listy obserwowanych</item>
+    </plurals>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać zmodyfikowane współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
@@ -543,7 +561,9 @@
     <string name="caches_set_cache_icon_all">Ustaw ikonę skrytki dla wszystkich skrytek</string>
     <string name="caches_set_cache_icon_selected">Ustaw ikonę skrytki dla wybranych skrytek</string>
     <string name="caches_set_final_wp_as_corrected_coords_all">Ustaw finały jako współrzędne</string>
+    <string name="caches_set_final_wp_as_corrected_coords_selected">Ustaw finał jako współrzędne (wybrane)</string>
     <string name="caches_set_final_wp_as_corrected_coords_info">Zastosuj punkt finału jako poprawione współrzędne dla %1$d skrytek.</string>
+    <string name="caches_set_final_wp_as_corrected_coords_none_found">Nie znaleziono skrytek z finałowym punktem nawigacji.</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
@@ -684,6 +704,7 @@
     <string name="cache_filter_checkboxlist_add_items">Dodaj więcej elementów</string>
     <string name="cache_filter_checkboxlist_add_all_items">Dodaj wszystkie elementy</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Dodaj elementy</string>
+    <string name="cache_filter_cache_icon">Własna ikona skrytki</string>
     <string name="cache_filter_favorites_absolute">Bezwzględne</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
     <string name="cache_filter_distance_coordinates">Współrzędne</string>
@@ -1789,6 +1810,8 @@
     <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
     <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
     <string name="init_autozoom_consider_lastcenter">Przywróć pozycję mapy na mapowaniu listy</string>
+    <string name="init_mapOnLockScreen">Ekran blokady</string>
+    <string name="init_summary_mapOnLockScreen">Pokaż mapę na ekranie blokady urządzenia. Aby odblokować urządzenie podczas wyświetlania mapy, użyj przycisku/gestu wstecz.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">Gdy lista skrytek jest mapowana i mapa została poprzednio pozostawiona na liście, granice mapy zostaną przywrócone, w przeciwnym razie należy zmienić powiększenie, aby zmieścić wszystkie skrytki.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Gdy lista skrytek jest mapowana ustaw powiększenie i granice mapy, aby zmieścić wszystkie skrytki.</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
@@ -1892,6 +1915,8 @@
     <string name="projection_type_bearing_hint_distance">Odległość</string>
     <string name="projection_type_offset">Przesunięcie</string>
     <string name="projection_type_offset_info">Przesunięcie szer. %1$s mm, dł. %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w miliminutach</string>
+    <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w miliminutach</string>
     <!-- Variables -->
     <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
     <string name="variables_titletext_short">Wartości i obliczenia</string>
@@ -2164,6 +2189,8 @@
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
     <string name="export_persnotes">Prześlij osobiste notatki</string>
     <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
+    <string name="export_persnotes_background_canceled" tools:ignore="PluralsCandidate">Przesyłanie anulowane: %1$d/%2$d przesłanych notatek</string>
+    <string name="export_persnotes_background_failed" tools:ignore="PluralsCandidate">Przesyłanie nie powiodło się: %1$d/%2$d przesłanych notatek</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Wysłano pomyślnie notatkę</item>
         <item quantity="few">Wysłano pomyślnie %1$d notatki</item>
@@ -2175,6 +2202,14 @@
     <string name="export_modifiedcoords_success">Przesyłanie zakończone</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Przesyłanie zakończone: %1$d nieudane / %2$d ok</string>
     <string name="export_modifiedcoords_error">Przesyłanie nie powiodło się</string>
+    <string name="export_modifiedcoords_background_canceled" tools:ignore="PluralsCandidate">Przesyłanie anulowane: %1$d/%2$d wykonano</string>
+    <string name="export_modifiedcoords_background_failed" tools:ignore="PluralsCandidate">Przesyłanie nie powiodło się: %1$d/%2$d wykonano</string>
+    <plurals name="export_modifiedcoords_background_result">
+        <item quantity="one">%d przesłane współrzędne</item>
+        <item quantity="few">%d przesłane współrzędne</item>
+        <item quantity="many">%d przesłanych współrzędnych</item>
+        <item quantity="other">%d przesłanych współrzędnych</item>
+    </plurals>
     <string name="filename_without_extension">Nazwa pliku (bez rozszerzenia)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Psy dozwolone</string>
@@ -2400,6 +2435,9 @@
     <string name="attribute_historic_no">Brak opuszczonej budowli / Brak ruin</string>
     <string name="attribute_blind_people_yes">Odpowiedni dla osób niewidomych</string>
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
+    <string name="attribute_architecture_detail">Szczegóły architektoniczne</string>
+    <string name="attribute_natural_monument">Pomnik przyrody</string>
+    <string name="attribute_street_art">Sztuka uliczna</string>
     <string name="attribute_unknown">Nieznany atrybut</string>
     <!-- cache attribute categories -->
     <string name="cat_status">Status skrytki</string>
@@ -2552,6 +2590,7 @@
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
     <string name="live_map_status_partial">Częściowe wyniki (przybliż, aby zmniejszyć liczbę skrytek do wczytania): %s</string>
+    <string name="live_map_status_map_limit">Niektóre skrytki z listy zostały pominięte, ponieważ osiągnięto skonfigurowany limit skrytek na mapie.</string>
     <string name="live_map_status_normal">Wczytywanie danych bez problemów: %s</string>
     <string name="list_list_headline">Lista:</string>
     <string name="filters_list_headline">Filtry:</string>
@@ -2990,6 +3029,7 @@
     <string name="dbi_select_table">Wybierz tabelę</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s w #%2$d jest tylko do odczytu</string>
+    <string name="dbi_edit_title">Edytuj \"%1$s\" w #%2$d\"</string>
     <string name="dbi_delete_row_title">Usuń wiersz</string>
     <string name="dbi_delete_row_question">Usunąć wiersz #%1$d (%2$s) na stałe?</string>
     <string name="dbi_delete_success">Wiersz usunięty: %1$s</string>
