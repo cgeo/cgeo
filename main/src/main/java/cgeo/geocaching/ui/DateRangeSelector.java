@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.Date;
 
@@ -52,11 +53,12 @@ public class DateRangeSelector extends LinearLayout {
         final DateRangeSelectorViewBinding binding = DateRangeSelectorViewBinding.bind(view);
         this.setOrientation(VERTICAL);
 
-        minDateEditor.init(binding.dateFrom, null, binding.dateFromReset, ((FragmentActivity) getContext()).getSupportFragmentManager());
+        final FragmentManager fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
+        minDateEditor.init(binding.dateFrom, null, binding.dateFromReset, fm);
         minDateEditor
                 .setPreselectDate(new Date())
                 .setChangeListener(d -> onChange(d, true));
-        maxDateEditor.init(binding.dateTo, null, binding.dateToReset, ((FragmentActivity) getContext()).getSupportFragmentManager());
+        maxDateEditor.init(binding.dateTo, null, binding.dateToReset, fm);
         maxDateEditor
                 .setPreselectDate(new Date())
                 .setChangeListener(d -> onChange(d, false));

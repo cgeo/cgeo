@@ -115,9 +115,7 @@ public class CoordinateInputDialog {
         }
 
         if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
-            final AbstractActivity activity = (AbstractActivity) context;
-            final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
-            CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
+            CoordinatesCalculateGlobalDialog.show((AbstractActivity) context, callback, inputData);
             return;
         }
         new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData);
@@ -308,9 +306,6 @@ public class CoordinateInputDialog {
                 calculateCoordinates.setVisibility(View.VISIBLE);
 
                 calculateCoordinates.setOnClickListener(v -> {
-                    final AbstractActivity activity = (AbstractActivity) context;
-                    final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
-
                     final CalculatedCoordinate cc = new CalculatedCoordinate();
                     cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
 
@@ -320,9 +315,10 @@ public class CoordinateInputDialog {
                     cc.setLongitudePattern(patternsFromGui.second);
 
                     inputData.setCalculatedCoordinate(cc);
-                    CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
-                    geoDisposable.dispose();
-                    dialog.dismiss();
+                    if (CoordinatesCalculateGlobalDialog.show((AbstractActivity) context, callback, inputData)) {
+                        geoDisposable.dispose();
+                        dialog.dismiss();
+                    }
                 });
             } else {
                 calculateCoordinates.setVisibility(View.GONE);

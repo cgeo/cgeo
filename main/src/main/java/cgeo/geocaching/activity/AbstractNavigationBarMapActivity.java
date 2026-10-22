@@ -75,23 +75,24 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         }
         // Never start a fragment transaction when activity is gone or its instance state has already been saved,
         // commit would either be lost or be replayed later in an unsafe state. leading to crash (see #17483 / #17215).
-        if (isFinishing() || isDestroyed() || getSupportFragmentManager().isStateSaved()) {
+        final FragmentManager fm = ActivityMixin.getUsableFragmentManager(this);
+        if (fm == null) {
             return;
         }
         if (sheetInfo.waypointId <= 0) {
-            sheetConfigureFragment(CachePopupFragment.newInstance(sheetInfo.geocode), () -> CacheDetailActivity.startActivity(this, sheetInfo.geocode));
+            sheetConfigureFragment(fm, CachePopupFragment.newInstance(sheetInfo.geocode), () -> CacheDetailActivity.startActivity(this, sheetInfo.geocode));
         } else {
-            sheetConfigureFragment(WaypointPopupFragment.newInstance(sheetInfo.geocode, sheetInfo.waypointId), () -> CacheDetailActivity.startActivity(this, sheetInfo.geocode));
+            sheetConfigureFragment(fm, WaypointPopupFragment.newInstance(sheetInfo.geocode, sheetInfo.waypointId), () -> CacheDetailActivity.startActivity(this, sheetInfo.geocode));
         }
     }
 
-    private void sheetConfigureFragment(final Fragment fragment, final Runnable onUpSwipeAction) {
+    private void sheetConfigureFragment(final FragmentManager fm, final Fragment fragment, final Runnable onUpSwipeAction) {
         final FrameLayout fl = findViewById(R.id.detailsfragment);
         final ViewGroup.LayoutParams params = fl.getLayoutParams();
         final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
 
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        final FragmentTransaction ft = fm.beginTransaction();
         final SwipeToOpenFragment swipeToOpenFragment = isBottomSheet && fragment instanceof CachePopupFragment ? new SwipeToOpenFragment() : null;
         if (isBottomSheet && swipeToOpenFragment != null) {
             ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
