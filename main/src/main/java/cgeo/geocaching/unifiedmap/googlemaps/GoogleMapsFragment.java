@@ -260,13 +260,17 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void zoomInOut(final boolean zoomIn) {
-        mMap.animateCamera(zoomIn ? CameraUpdateFactory.zoomIn() : CameraUpdateFactory.zoomOut());
+        if (mMap != null) {
+            mMap.animateCamera(zoomIn ? CameraUpdateFactory.zoomIn() : CameraUpdateFactory.zoomOut());
+        }
     }
 
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+        if (mMap != null) {
+            mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+        }
     }
 
     @Override
