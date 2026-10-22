@@ -2855,7 +2855,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             cache.getVariables().saveState();
         }
         activity.ensureSaved();
-        final FragmentManager fm = activity.getSupportFragmentManager();
+        final FragmentManager fm = ActivityMixin.getUsableFragmentManager(activity);
+        if (fm == null) {
+            return;
+        }
         final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
         final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote(), (connector != null && connector.canAddPersonalNote(cache)));
         dialog.show(fm, "fragment_edit_note");

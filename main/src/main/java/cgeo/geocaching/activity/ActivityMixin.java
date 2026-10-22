@@ -25,6 +25,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -210,6 +212,19 @@ public final class ActivityMixin {
 
     public static boolean isActivityValid(final @Nullable WeakReference<? extends Activity> activityRef) {
         return activityRef != null && isActivityValid(activityRef.get());
+    }
+
+    /**
+     * Returns the fragment manager of the given activity, or null if it can't accept fragment transactions
+     * (activity finishing/destroyed, fragment manager destroyed or instance state already saved).
+     */
+    @Nullable
+    public static FragmentManager getUsableFragmentManager(final @Nullable FragmentActivity activity) {
+        if (!isActivityValid(activity)) {
+            return null;
+        }
+        final FragmentManager fm = activity.getSupportFragmentManager();
+        return fm.isDestroyed() || fm.isStateSaved() ? null : fm;
     }
 
     /**
