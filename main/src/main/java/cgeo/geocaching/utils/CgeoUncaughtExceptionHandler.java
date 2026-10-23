@@ -4,9 +4,8 @@ import cgeo.geocaching.CrashActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
+import android.net.Uri;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -38,11 +37,15 @@ public final class CgeoUncaughtExceptionHandler {
                     exx = exx.getCause();
                 }
                 if (exx.getClass().equals(OutOfMemoryError.class)) {
+                    // writing to the storage root needs a permission we no longer have (scoped
+                    // storage), so put the dump into the log files folder instead
                     try {
                         Log.w("OutOfMemory");
-                        android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
-                    } catch (final IOException e) {
-                        Log.w("Error writing dump", e);
+                        final Uri dumpFileUri = DebugUtils.writeMemoryDump();
+                        Log.w("Memory dump " + (dumpFileUri == null ? "could not be written" : "written to " + dumpFileUri));
+                    } catch (final Throwable t) {
+                        // best effort only, the app is going down anyway: never let the dump hide the original crash
+                        Log.w("Error writing dump", t);
                     }
                 }
             }
