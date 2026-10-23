@@ -18,8 +18,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-
-import android.text.Html;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -186,42 +185,10 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     @Override
     public String convertLogTextToEditableText(final String logText) {
-
         if (!TextUtils.containsHtml(logText)) {
             return logText;
         }
-
-        //Manual handling required:
-        //- italic: <em> and </em> -> *
-        //- bold: <strong> and </strong> -> **
-        //- link: <a href="link" ...>text</a> -> [text](link)
-        //- headers: <h1>, <h2>, <h3>
-        //- horizontal rule: <hr>
-        //- lists
-
-        //Handled by Html.fromHtml()
-        //- <p></p> -> carriage return with one line space
-        //- <br /> -> just carriage return
-
-        final String preLogText = logText
-            .replaceAll("<strong>", "**")
-            .replaceAll("</strong>", "**")
-            .replaceAll("<em>", "*")
-            .replaceAll("</em>", "*")
-            .replaceAll("<h1>", "# ")
-            .replaceAll("</h1>", " #")
-            .replaceAll("<h2>", "## ")
-            .replaceAll("</h2>", " ##")
-            .replaceAll("<h3>", "### ")
-            .replaceAll("</h3>", " ###")
-            .replaceAll("<hr>", "---")
-            .replaceAll("<hr />", "---")
-            .replaceAll("<ul>", "")
-            .replaceAll("<ol>", "")
-            .replaceAll("</li>", "")
-            .replaceAll("<li>", "* ")
-            .replaceAll("<a href=\"([^\"]+)\"[^>]*>([^<]+)</a>", "[$2]($1)");
-        return Html.fromHtml(preLogText).toString();
+        return HtmlUtils.htmlToGCMarkdown(logText);
     }
 
     @Override
