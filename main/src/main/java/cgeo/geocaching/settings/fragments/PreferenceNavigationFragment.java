@@ -74,19 +74,10 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
         final List<NavigationAppFactory.NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
 
-        final CharSequence[] entries = new CharSequence[apps.size()];
-        final CharSequence[] values = new CharSequence[apps.size()];
-        for (int i = 0; i < apps.size(); ++i) {
-            entries[i] = apps.get(i).toString();
-            values[i] = String.valueOf(apps.get(i).id);
-        }
-
         final ListPreference defaultNavigationTool = findPreference(getString(R.string.pref_defaultNavigationTool));
-        defaultNavigationTool.setEntries(entries);
-        defaultNavigationTool.setEntryValues(values);
+        PreferenceUtils.setEntries(defaultNavigationTool, apps, app -> String.valueOf(app.id), NavigationAppFactory.NavigationAppsEnum::toString);
         final ListPreference defaultNavigationTool2 = findPreference(getString(R.string.pref_defaultNavigationTool2));
-        defaultNavigationTool2.setEntries(entries);
-        defaultNavigationTool2.setEntryValues(values);
+        PreferenceUtils.setEntries(defaultNavigationTool2, apps, app -> String.valueOf(app.id), NavigationAppFactory.NavigationAppsEnum::toString);
     }
 
     private void initOfflineRoutingPreferences() {

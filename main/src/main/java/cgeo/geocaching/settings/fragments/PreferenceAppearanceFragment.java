@@ -23,9 +23,14 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
@@ -42,46 +47,39 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         });
 
         final ListPreference languagePref = findPreference(getString(R.string.pref_selected_language));
-        final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
-        final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
+        if (languagePref != null) {
+            PreferenceUtils.setEntries(languagePref,
+                    Collections.singletonList(Pair.of("", LocalizationUtils.getString(R.string.init_use_default_language))),
+                    Arrays.asList(BuildConfig.TRANSLATION_ARRAY), code -> code, code -> LocalizationUtils.getLocaleDisplayName(code, false, true));
+            languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                Settings.putUserLanguage(newValue.toString());
+                setLanguageSummary(languagePref, newValue.toString());
+                CgeoApplication.getInstance().initApplicationLocale();
+                requireActivity().recreate();
 
-        entries[0] = LocalizationUtils.getString(R.string.init_use_default_language);
-        entryValues[0] = "";
-        for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
-            entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
-            entries[1 + i ] = LocalizationUtils.getLocaleDisplayName(BuildConfig.TRANSLATION_ARRAY[i], false, true);
+                return true;
+            });
+
+            final String userLanguage = Settings.getUserLanguage();
+            if (languagePref.getValue() == null) {
+                languagePref.setValue(userLanguage);
+            }
+            setLanguageSummary(languagePref, userLanguage);
         }
-
-        languagePref.setEntries(entries);
-        languagePref.setEntryValues(entryValues);
-        languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Settings.putUserLanguage(newValue.toString());
-            setLanguageSummary(languagePref, newValue.toString());
-            CgeoApplication.getInstance().initApplicationLocale();
-            requireActivity().recreate();
-
-            return true;
-        });
-
-        final String userLanguage = Settings.getUserLanguage();
-        if (languagePref.getValue() == null) {
-            languagePref.setValue(userLanguage);
-        }
-        setLanguageSummary(languagePref, userLanguage);
-
 
         final ListPreference shortDateFormatPref = findPreference(getString(R.string.pref_short_date_format));
-        PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
-            setDateSummary((ListPreference) preference, newValue.toString());
-            return true;
-        });
+        if (shortDateFormatPref != null) {
+            PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
+                setDateSummary((ListPreference) preference, newValue.toString());
+                return true;
+            });
 
-        final String shortDateFormat = Settings.getShortDateFormat();
-        if (shortDateFormatPref.getValue() == null) {
-            shortDateFormatPref.setValue(shortDateFormat);
+            final String shortDateFormat = Settings.getShortDateFormat();
+            if (shortDateFormatPref.getValue() == null) {
+                shortDateFormatPref.setValue(shortDateFormat);
+            }
+            setDateSummary(shortDateFormatPref, shortDateFormat);
         }
-        setDateSummary(shortDateFormatPref, shortDateFormat);
-
         //external translator
         final ListPreference translatorExternalPref = findPreference(getString(R.string.pref_translator_external));
         PreferenceUtils.configEnumListPreference(translatorExternalPref, TranslationUtils.Translator.class, Settings.getTranslatorExternal());
@@ -123,27 +121,19 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
     private void configCustomBNitemPreference() {
         final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
-        final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
-        final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
-        int i = addCustomBNSelectionItem(0, LocalizationUtils.getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
+        final List<Pair<String, String>> cbniItems = new ArrayList<>();
+        cbniItems.add(Pair.of(String.valueOf(CUSTOMBNITEM_NEARBY), LocalizationUtils.getString(R.string.init_custombnitem_default)));
         for (InfoItem item : QuickLaunchItem.ITEMS) {
-            i = addCustomBNSelectionItem(i, LocalizationUtils.getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
+            cbniItems.add(Pair.of(String.valueOf(item.getId()), LocalizationUtils.getString(item.getTitleResId())));
         }
-        i = addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
-        addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
-        customBNitem.setEntries(cbniEntries);
-        customBNitem.setEntryValues(cbniValues);
-        setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
+        cbniItems.add(Pair.of(String.valueOf(CUSTOMBNITEM_NONE), LocalizationUtils.getString(R.string.init_custombnitem_none)));
+        cbniItems.add(Pair.of(String.valueOf(CUSTOMBNITEM_PLACEHOLDER), LocalizationUtils.getString(R.string.init_custombnitem_empty_placeholder)));
+        PreferenceUtils.setEntries(customBNitem, cbniItems, Pair::getLeft, Pair::getRight);
+        setCustomBNItemSummary(customBNitem, String.valueOf(customBNitem.getEntries()[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]));
         customBNitem.setOnPreferenceChangeListener((preference, newValue) -> {
-            setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(newValue.toString())]);
+            setCustomBNItemSummary(customBNitem, String.valueOf(customBNitem.getEntries()[customBNitem.findIndexOfValue(newValue.toString())]));
             return true;
         });
-    }
-
-    private int addCustomBNSelectionItem(final int nextFreeItem, final String entry, final String value, final String[] cbniEntries, final String[] cbniValues) {
-        cbniEntries[nextFreeItem] = entry;
-        cbniValues[nextFreeItem] = value;
-        return nextFreeItem + 1;
     }
 
     private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
