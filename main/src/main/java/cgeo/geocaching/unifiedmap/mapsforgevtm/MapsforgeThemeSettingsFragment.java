@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -93,28 +96,14 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         // build data structure for the ListPreference
         final Map<String, XmlRenderThemeStyleLayer> baseLayers = renderthemeOptions.getLayers();
 
-        int visibleStyles = 0;
+        final List<XmlRenderThemeStyleLayer> visibleLayers = new ArrayList<>();
         for (final XmlRenderThemeStyleLayer baseLayer : baseLayers.values()) {
             if (baseLayer.isVisible()) {
-                ++visibleStyles;
+                visibleLayers.add(baseLayer);
             }
         }
 
-        final CharSequence[] entries = new CharSequence[visibleStyles];
-        final CharSequence[] values = new CharSequence[visibleStyles];
-        int i = 0;
-        for (final XmlRenderThemeStyleLayer baseLayer : baseLayers.values()) {
-            if (baseLayer.isVisible()) {
-                // build up the entries in the list
-                entries[i] = baseLayer.getTitle(language);
-                values[i] = baseLayer.getId();
-                ++i;
-            }
-        }
-
-        baseLayerPreference.setEntries(entries);
-        baseLayerPreference.setEntryValues(values);
-        baseLayerPreference.setEnabled(true);
+        PreferenceUtils.setEntries(baseLayerPreference, visibleLayers, XmlRenderThemeStyleLayer::getId, layer -> layer.getTitle(language));        baseLayerPreference.setEnabled(true);
         baseLayerPreference.setPersistent(true);
         baseLayerPreference.setDefaultValue(renderthemeOptions.getDefaultValue());
         baseLayerPreference.setIconSpaceReserved(false);

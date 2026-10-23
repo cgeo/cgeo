@@ -2,14 +2,62 @@ package cgeo.geocaching.utils;
 
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class PreferenceUtils {
 
     private PreferenceUtils() {
         // utility class
+    }
+
+    /** fills entries and entry values of a list preference from the given items */
+    public static <T> void setEntries(final ListPreference preference, final Collection<? extends T> items,
+                                      final Function<? super T, String> valueMapper, final Function<? super T, String> labelMapper) {
+        setEntries(preference, Collections.emptyList(), items, valueMapper, labelMapper);
+    }
+
+    /** like {@link #setEntries(ListPreference, Collection, Function, Function)}, but with additional leading entries (pairs of value and label) */
+    public static <T> void setEntries(final ListPreference preference, final List<Pair<String, String>> leadingEntries, final Collection<? extends T> items,
+                                      final Function<? super T, String> valueMapper, final Function<? super T, String> labelMapper) {
+        fillEntries((entries, values) -> {
+            preference.setEntries(entries);
+            preference.setEntryValues(values);
+        }, leadingEntries, items, valueMapper, labelMapper);
+    }
+
+    /** fills entries and entry values of a multi select list preference from the given items */
+    public static <T> void setEntries(final MultiSelectListPreference preference, final Collection<? extends T> items,
+                                      final Function<? super T, String> valueMapper, final Function<? super T, String> labelMapper) {
+        fillEntries((entries, values) -> {
+            preference.setEntries(entries);
+            preference.setEntryValues(values);
+        }, Collections.emptyList(), items, valueMapper, labelMapper);
+    }
+
+    private static <T> void fillEntries(final BiConsumer<CharSequence[], CharSequence[]> target, final List<Pair<String, String>> leadingEntries,
+                                        final Collection<? extends T> items, final Function<? super T, String> valueMapper, final Function<? super T, String> labelMapper) {
+        final List<String> entries = new ArrayList<>();
+        final List<String> values = new ArrayList<>();
+        for (Pair<String, String> leading : leadingEntries) {
+            values.add(leading.getLeft());
+            entries.add(leading.getRight());
+        }
+        for (T item : items) {
+            values.add(valueMapper.apply(item));
+            entries.add(labelMapper.apply(item));
+        }
+        target.accept(entries.toArray(new CharSequence[0]), values.toArray(new CharSequence[0]));
     }
 
     /** fills entries (display names) and entry values (enum names) of a list preference */

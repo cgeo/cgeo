@@ -13,6 +13,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -44,18 +45,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
         // new unified map providers
-        final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
-        final String[] tpEntries = new String[tileproviders.size()];
-        final String[] tpValues = new String[tileproviders.size()];
-        int i = 0;
-        for (AbstractTileProvider tileProvider : tileproviders.values()) {
-            tpEntries[i] = tileProvider.getTileProviderName();
-            tpValues[i] = tileProvider.getId();
-            i++;
-        }
-        hideTileprovidersPref.setEntries(tpEntries);
-        hideTileprovidersPref.setEntryValues(tpValues);
-
+        PreferenceUtils.setEntries(hideTileprovidersPref, TileProviderFactory.getTileProviders().values(), AbstractTileProvider::getId, AbstractTileProvider::getTileProviderName);
         userDefinedTileProvidersCategory = findPreference(getString(R.string.preference_category_userdefined_tileproviders));
         recreateUserDefinedTileProviderPreferences();
 
@@ -82,17 +72,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
      * Fill the choice list for map sources.
      */
     private void initMapSourcePreference() {
-        final HashMap<String, AbstractTileProvider> tileProviders = TileProviderFactory.getTileProviders();
-        final CharSequence[] entriesUM = new CharSequence[tileProviders.size()];
-        final CharSequence[] valuesUM = new CharSequence[tileProviders.size()];
-        int idxUM = 0;
-        for (AbstractTileProvider tileProvider : tileProviders.values()) {
-            entriesUM[idxUM] = tileProvider.getTileProviderName();
-            valuesUM[idxUM] = tileProvider.getId();
-            idxUM++;
-        }
-        prefTileProvicers.setEntries(entriesUM);
-        prefTileProvicers.setEntryValues(valuesUM);
+        PreferenceUtils.setEntries(prefTileProvicers, TileProviderFactory.getTileProviders().values(), AbstractTileProvider::getId, AbstractTileProvider::getTileProviderName);
         prefTileProvicers.setOnPreferenceChangeListener((preference, newValue) -> {
             final String newTileProvider = (String) newValue;
 
