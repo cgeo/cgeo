@@ -794,7 +794,6 @@
     <string name="dialog_parent">Исходный элемент</string>
     <string name="dialog_parent_select">Выбрать исходный элемент</string>
     <string name="dialog_parent_new">Создать новый исходный элемент</string>
-    <string name="dialog_name">Название</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
