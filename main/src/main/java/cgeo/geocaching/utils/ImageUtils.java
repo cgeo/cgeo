@@ -24,7 +24,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -91,6 +90,8 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 public final class ImageUtils {
 
     private static final String OFFLINE_LOG_IMAGE_PREFIX = "cgeo-image-";
+
+    public static final int MAX_IMG_DIMEN = 10000;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
@@ -193,12 +194,9 @@ public final class ImageUtils {
         //special case: 1x1 images used for layouting
         final boolean isOneToOne = image.getHeight() == 1 && image.getWidth() == 1;
 
-        final Point displaySize = DisplayUtils.getDisplaySize();
-        final int maxWidth = displaySize.x - 25;
-        final int maxHeight = displaySize.y - 25;
         final int minWidth = isOneToOne ? 1 : ViewUtils.spToPixel(20);
         final int minHeight = isOneToOne ? 1 : ViewUtils.spToPixel(20);
-        return scaleBitmapTo(image, maxWidth, maxHeight, minWidth, minHeight);
+        return scaleBitmapTo(image, MAX_IMG_DIMEN, MAX_IMG_DIMEN, minWidth, minHeight);
     }
 
     /**
