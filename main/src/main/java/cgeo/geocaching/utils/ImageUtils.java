@@ -551,7 +551,7 @@ public final class ImageUtils {
         return imageUrl;
     }
 
-    public enum GCImageSize {
+    public enum GCImageSize implements DisplayNameEnum {
         UNCHANGED("", "", R.string.settings_gc_imagesize_entry_unchanged),
         ORIGINAL("", "", R.string.settings_gc_imagesize_entry_original),
         LARGE("_l", "large/", R.string.settings_gc_imagesize_entry_large),
@@ -579,6 +579,11 @@ public final class ImageUtils {
 
         public int getLabel() {
             return label;
+        }
+
+        @Override
+        public String getDisplayName() {
+            return LocalizationUtils.getString(label);
         }
     }
 

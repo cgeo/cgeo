@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
@@ -85,14 +84,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
         //external translator
         final ListPreference translatorExternalPref = findPreference(getString(R.string.pref_translator_external));
-        translatorExternalPref.setEntries(CollectionStream.of(TranslationUtils.Translator.values()).map(TranslationUtils.Translator::toUserDisplayableString).toArray(String.class));
-        translatorExternalPref.setEntryValues(CollectionStream.of(TranslationUtils.Translator.values()).map(Enum::name).toArray(String.class));
-        translatorExternalPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(TranslationUtils.Translator.valueOf(newValue.toString()).toUserDisplayableString());
-            return true;
-        });
-        translatorExternalPref.setValue(Settings.getTranslatorExternal().name());
-        translatorExternalPref.setSummary(Settings.getTranslatorExternal().toUserDisplayableString());
+        PreferenceUtils.configEnumListPreference(translatorExternalPref, TranslationUtils.Translator.class, Settings.getTranslatorExternal());
 
         setPrefClick(this, R.string.pref_quicklaunchitems, () -> QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems));
 
