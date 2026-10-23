@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings.FriendLogTabOwnerMode;
 import cgeo.geocaching.settings.Settings.NamedFilterDisplayMode;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 
@@ -56,40 +57,12 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
 
     private void configNamedFilterDisplayModePreference() {
         final ListPreference namedFilterDisplayModePref = findPreference(getString(R.string.pref_named_filter_display_mode));
-        final NamedFilterDisplayMode[] modes = NamedFilterDisplayMode.values();
-        final String[] entries = new String[modes.length];
-        final String[] entryValues = new String[modes.length];
-        for (int i = 0; i < modes.length; i++) {
-            entries[i] = modes[i].getDisplayName();
-            entryValues[i] = modes[i].name();
-        }
-        namedFilterDisplayModePref.setEntries(entries);
-        namedFilterDisplayModePref.setEntryValues(entryValues);
-        namedFilterDisplayModePref.setValue(Settings.getNamedFilterDisplayMode().name());
-        namedFilterDisplayModePref.setSummary(Settings.getNamedFilterDisplayMode().getDisplayName());
-        namedFilterDisplayModePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(NamedFilterDisplayMode.valueOf(newValue.toString()).getDisplayName());
-            return true;
-        });
+        PreferenceUtils.configEnumListPreference(namedFilterDisplayModePref, NamedFilterDisplayMode.class, Settings.getNamedFilterDisplayMode());
     }
 
     private void configFriendLogTabOwnerModePreference() {
         final ListPreference friendLogTabOwnerModePref = findPreference(getString(R.string.pref_friend_log_tab_owner_mode));
-        final FriendLogTabOwnerMode[] modes = FriendLogTabOwnerMode.values();
-        final String[] entries = new String[modes.length];
-        final String[] entryValues = new String[modes.length];
-        for (int i = 0; i < modes.length; i++) {
-            entries[i] = modes[i].getDisplayName();
-            entryValues[i] = modes[i].name();
-        }
-        friendLogTabOwnerModePref.setEntries(entries);
-        friendLogTabOwnerModePref.setEntryValues(entryValues);
-        friendLogTabOwnerModePref.setValue(Settings.getFriendLogTabOwnerMode().name());
-        friendLogTabOwnerModePref.setSummary(Settings.getFriendLogTabOwnerMode().getDisplayName());
-        friendLogTabOwnerModePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(FriendLogTabOwnerMode.valueOf(newValue.toString()).getDisplayName());
-            return true;
-        });
+        PreferenceUtils.configEnumListPreference(friendLogTabOwnerModePref, FriendLogTabOwnerMode.class, Settings.getFriendLogTabOwnerMode());
     }
 
     private void setTranslateLanguageSummary(final ListPreference languagePref, final String newValue) {

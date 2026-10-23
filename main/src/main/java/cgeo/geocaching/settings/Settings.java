@@ -43,6 +43,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.DisplayNameEnum;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -203,7 +204,7 @@ public class Settings {
      * Controls which {@link cgeo.geocaching.filters.NamedFilter}s matching the currently displayed cache
      * are shown in the cache details view.
      */
-    public enum NamedFilterDisplayMode {
+    public enum NamedFilterDisplayMode implements DisplayNameEnum {
         /** Do not show any matching named filters. */
         NONE(R.string.named_filter_display_mode_none),
         /** Only show matching named filters whose marker is currently active. */
@@ -217,6 +218,7 @@ public class Settings {
             this.displayNameResId = displayNameResId;
         }
 
+        @Override
         public String getDisplayName() {
             return LocalizationUtils.getString(displayNameResId);
         }
@@ -227,7 +229,7 @@ public class Settings {
      * Controls how the logs of the cache-owner should be displayed
      * in the log-tab of friends-log.
      */
-    public enum FriendLogTabOwnerMode {
+    public enum FriendLogTabOwnerMode implements DisplayNameEnum {
         /**
          * Do not load / show any owner logs.
          */
@@ -247,6 +249,7 @@ public class Settings {
             this.displayNameResId = displayNameResId;
         }
 
+        @Override
         public String getDisplayName() {
             return LocalizationUtils.getString(displayNameResId);
         }
