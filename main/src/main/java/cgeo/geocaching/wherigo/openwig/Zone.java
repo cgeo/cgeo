@@ -66,7 +66,7 @@ public class Zone extends Thing {
             int n = lt.len();
             points = new ZonePoint[n];
             for (int i = 1; i <= n; i++) {
-                ZonePoint zp = (ZonePoint) lt.rawget(new Double(i));
+                ZonePoint zp = (ZonePoint) lt.rawget(Double.valueOf(i));
                 points[i-1] = zp;
             }
             if (active) {
