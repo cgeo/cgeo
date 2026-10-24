@@ -93,8 +93,7 @@ public final class ImageUtils {
     private static final String OFFLINE_LOG_IMAGE_PREFIX = "cgeo-image-";
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
-    // for opening into an external application.
-    private static final String[] NO_EXTERNAL = {"geocheck.org"};
+    private static final String[] IMG_IGNORE_SRC = { "geocheck.org", "geotjek.dk", "gc-apps.com", "certitudes.org" };
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
     private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)((\\?|#|$|\\)|])\\S*)?)");
@@ -472,7 +471,7 @@ public final class ImageUtils {
     public static List<Image> getImagesFromHtml(final BiConsumer<String, Image.Builder> modifier, final String... htmlText) {
         final List<Image> result = new ArrayList<>();
         forEachImageUrlInHtml(source -> {
-                if (canBeOpenedExternally(source)) {
+                if (imgSourceIsIgnored(source)) {
                     final Image.Builder builder = new Image.Builder()
                             .setUrl(source, "https");
                     if (modifier != null) {
@@ -695,8 +694,8 @@ public final class ImageUtils {
         }
     }
 
-    public static boolean canBeOpenedExternally(final String source) {
-        return !containsPattern(source, NO_EXTERNAL);
+    public static boolean imgSourceIsIgnored(final String source) {
+        return !containsPattern(source, IMG_IGNORE_SRC);
     }
 
     @NonNull
