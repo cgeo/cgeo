@@ -36,6 +36,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
+import cgeo.geocaching.export.GpxExportTask;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -259,6 +260,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
+
+        GpxExportTask.attach(this);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
@@ -40,7 +39,7 @@ public class ExportTest {
     }
 
     @Test
-    public void testGpxExportSmilies() throws InterruptedException, ExecutionException, IOException {
+    public void testGpxExportSmilies() throws IOException {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
@@ -55,7 +54,7 @@ public class ExportTest {
     }
 
     @Test
-    public void testGpxExportUnknownConnector() throws InterruptedException, ExecutionException, IOException {
+    public void testGpxExportUnknownConnector() throws IOException {
         final Geocache cache = new Geocache();
         cache.setGeocode("ABC123");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
@@ -65,7 +64,7 @@ public class ExportTest {
         assertCanExport(cache);
     }
 
-    private static void assertCanExport(final Geocache cache) throws InterruptedException, ExecutionException, IOException {
+    private static void assertCanExport(final Geocache cache) throws IOException {
         // enforce storing in database, as GPX will not take information from cache
         cache.setDetailed(true);
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
@@ -98,14 +97,12 @@ public class ExportTest {
 
     private static class GpxExportTester extends GpxExport {
 
-        public Uri testExportSync(final List<Geocache> caches) throws InterruptedException, ExecutionException {
+        public Uri testExportSync(final List<Geocache> caches) {
             final ArrayList<String> geocodes = new ArrayList<>(caches.size());
             for (final Geocache cache : caches) {
                 geocodes.add(cache.getGeocode());
             }
-            final GpxExportTask task = new GpxExportTask(null, getProgressTitle(), "geocache.gpx", getName());
-            task.execute(geocodes.toArray(new String[0]));
-            return task.get();
+            return GpxExportTask.export(new GpxExportTask.Input(geocodes.toArray(new String[0]), "geocache.gpx", getName()), null);
         }
 
     }

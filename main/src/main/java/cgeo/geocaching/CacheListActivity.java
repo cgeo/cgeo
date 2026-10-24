@@ -31,6 +31,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.BatchUploadModifiedCoordinates;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
+import cgeo.geocaching.export.GpxExportTask;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filters.FilterUtils;
@@ -368,6 +369,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         super.onCreate(savedInstanceState);
 
         setTheme();
+
+        GpxExportTask.attach(this);
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
