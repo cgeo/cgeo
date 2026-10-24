@@ -19,8 +19,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import java.util.Arrays;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
@@ -53,8 +51,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         });
 
         final ListPreference imageSizePref = findPreference(getString(R.string.pref_gc_imagesize));
-        imageSizePref.setEntries(Arrays.stream(ImageUtils.GCImageSize.values()).map(is -> LocalizationUtils.getString(is.getLabel())).toArray(String[]::new));
-        imageSizePref.setEntryValues(Arrays.stream(ImageUtils.GCImageSize.values()).map(Enum::name).toArray(String[]::new));
+        PreferenceUtils.setEnumEntries(imageSizePref, ImageUtils.GCImageSize.class);
     }
 
     @Override

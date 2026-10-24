@@ -1167,6 +1167,10 @@
     <string name="init_summary_bettercacher">Load cache tier and categories from BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
+    <string name="init_friendlog_tab_owner_display_mode">Show owner logs in friend tab</string>
+    <string name="friendlog_tab_owner_display_mode_none">Do not load</string>
+    <string name="friendlog_tab_owner_display_mode_hide">Hide</string>
+    <string name="friendlog_tab_owner_display_mode_show">Show</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_address">Show Address</string>

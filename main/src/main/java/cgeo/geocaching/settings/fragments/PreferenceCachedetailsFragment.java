@@ -2,48 +2,32 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.FriendLogTabOwnerMode;
 import cgeo.geocaching.settings.Settings.NamedFilterDisplayMode;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_cachedetails, rootKey);
 
-        final CharSequence[] languageNames = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::toString).toArray(CharSequence[]::new);
-        final CharSequence[] languageCodes = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::getCode).toArray(CharSequence[]::new);
-
-        final ListPreference translateTargetLngPref = findPreference(getString(R.string.pref_translation_language));
-        translateTargetLngPref.setEntries(ArrayUtils.insert(0, languageNames, LocalizationUtils.getString(R.string.translator_preference_disable), LocalizationUtils.getString(R.string.translator_preference_application_language)));
-        translateTargetLngPref.setEntryValues(ArrayUtils.insert(0, languageCodes, OfflineTranslateUtils.LANGUAGE_INVALID, OfflineTranslateUtils.LANGUAGE_AUTOMATIC));
-        translateTargetLngPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            setTranslateLanguageSummary(translateTargetLngPref, newValue.toString());
-            return true;
-        });
-
-        setTranslateLanguageSummary(translateTargetLngPref, Settings.getTranslationTargetLanguageRaw().getCode());
-
-        final String rawCode = Settings.getTranslationTargetLanguageRaw().getCode();
-        if (translateTargetLngPref.getValue() == null) {
-            translateTargetLngPref.setValue(rawCode);
-        }
-
-        final MultiSelectListPreference noTranslateLngs = findPreference(getString(R.string.pref_translation_notranslate));
-        noTranslateLngs.setEntries(languageNames);
-        noTranslateLngs.setEntryValues(languageCodes);
-
+        configTranslationLanguagePreference();
         configNamedFilterDisplayModePreference();
+        configFriendLogTabOwnerModePreference();
     }
 
     @Override
@@ -54,21 +38,38 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
 
     private void configNamedFilterDisplayModePreference() {
         final ListPreference namedFilterDisplayModePref = findPreference(getString(R.string.pref_named_filter_display_mode));
-        final NamedFilterDisplayMode[] modes = NamedFilterDisplayMode.values();
-        final String[] entries = new String[modes.length];
-        final String[] entryValues = new String[modes.length];
-        for (int i = 0; i < modes.length; i++) {
-            entries[i] = modes[i].getDisplayName();
-            entryValues[i] = modes[i].name();
+        PreferenceUtils.configEnumListPreference(namedFilterDisplayModePref, NamedFilterDisplayMode.class, Settings.getNamedFilterDisplayMode());
+    }
+
+    private void configFriendLogTabOwnerModePreference() {
+        final ListPreference friendLogTabOwnerModePref = findPreference(getString(R.string.pref_friend_log_tab_owner_mode));
+        PreferenceUtils.configEnumListPreference(friendLogTabOwnerModePref, FriendLogTabOwnerMode.class, Settings.getFriendLogTabOwnerMode());
+    }
+
+    private void configTranslationLanguagePreference() {
+        final List<OfflineTranslateUtils.Language> languages = OfflineTranslateUtils.getSupportedLanguages();
+
+        final ListPreference translateTargetLngPref = findPreference(getString(R.string.pref_translation_language));
+        if (translateTargetLngPref != null) {
+            PreferenceUtils.setEntries(translateTargetLngPref, Arrays.asList(
+                            Pair.of(OfflineTranslateUtils.LANGUAGE_INVALID, LocalizationUtils.getString(R.string.translator_preference_disable)),
+                            Pair.of(OfflineTranslateUtils.LANGUAGE_AUTOMATIC, LocalizationUtils.getString(R.string.translator_preference_application_language))),
+                    languages, OfflineTranslateUtils.Language::getCode, OfflineTranslateUtils.Language::toString);
+            translateTargetLngPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                setTranslateLanguageSummary(translateTargetLngPref, newValue.toString());
+                return true;
+            });
+
+            setTranslateLanguageSummary(translateTargetLngPref, Settings.getTranslationTargetLanguageRaw().getCode());
+
+            final String rawCode = Settings.getTranslationTargetLanguageRaw().getCode();
+            if (translateTargetLngPref.getValue() == null) {
+                translateTargetLngPref.setValue(rawCode);
+            }
         }
-        namedFilterDisplayModePref.setEntries(entries);
-        namedFilterDisplayModePref.setEntryValues(entryValues);
-        namedFilterDisplayModePref.setValue(Settings.getNamedFilterDisplayMode().name());
-        namedFilterDisplayModePref.setSummary(Settings.getNamedFilterDisplayMode().getDisplayName());
-        namedFilterDisplayModePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(NamedFilterDisplayMode.valueOf(newValue.toString()).getDisplayName());
-            return true;
-        });
+
+        final MultiSelectListPreference noTranslateLngs = findPreference(getString(R.string.pref_translation_notranslate));
+        PreferenceUtils.setEntries(noTranslateLngs, languages, OfflineTranslateUtils.Language::getCode, OfflineTranslateUtils.Language::toString);
     }
 
     private void setTranslateLanguageSummary(final ListPreference languagePref, final String newValue) {

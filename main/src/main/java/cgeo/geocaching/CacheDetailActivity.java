@@ -2688,8 +2688,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
-        }  else if (pageId == Page.LOGSFRIENDS.id) {
-            final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
+        } else if (pageId == Page.LOGSFRIENDS.id) {
+
+            final var frag = getFragment(pageId);
+            final int logCount;
+            if (frag instanceof CacheLogsViewCreator creator) {
+                logCount = creator.getLogsCount();
+            } else {
+                logCount = cache == null ? 0 : cache.getFriendsLogs().size();
+            }
             return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
         return LocalizationUtils.getString(Page.find(pageId).titleStringId);
