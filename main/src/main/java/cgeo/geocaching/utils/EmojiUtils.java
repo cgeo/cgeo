@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.EmojiPickerDialogBinding;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.ViewUtils;
@@ -18,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -56,6 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import static java.util.Map.entry;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -73,13 +76,21 @@ public class EmojiUtils {
     public static final int NUMBER_START = 0x30;
     public static final int NUMBER_END = 0x39;
 
-    // extra (non-emoji) unicode characters offered in addition to the bundled emoji set; they are surfaced through the
-    // picker's search field (matched by their Unicode name). Non-renderable codepoints are skipped automatically.
-    private static final int[] EXTRA_SEARCHABLE_CODEPOINTS = {
-        /* numbers */          NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
-        /* circled n. */       0x24ea, 0x2460, 0x2461, 0x2462, 0x2463, 0x2464, 0x2465, 0x2466, 0x2467, 0x2468, 0x2469, 0x246a, 0x246b, 0x246c, 0x246d, 0x246e, 0x246f, 0x2470, 0x2471, 0x2472, 0x2473,
-        /* parenthesized n. */ 0x2474, 0x2475, 0x2476, 0x2477, 0x2478, 0x2479, 0x247a, 0x247b, 0x247c,
-    };
+    // extra (non-emoji) unicode characters offered in addition to the bundled emoji set, mapped to additional search terms.
+    // Non-renderable characters are skipped automatically.
+    private static final Map<String, String> EXTRA_SEARCHABLE_CODEPOINTS = Map.ofEntries(
+            entry("0", "0"), entry("1", "1"), entry("2", "2"), entry("3", "3"), entry("4", "4"),
+            entry("5", "5"), entry("6", "6"), entry("7", "7"), entry("8", "8"), entry("9", "9"),
+            /* circled numbers */
+            entry("\u24ea", "0"), entry("\u2460", "1"), entry("\u2461", "2"), entry("\u2462", "3"), entry("\u2463", "4"),
+            entry("\u2464", "5"), entry("\u2465", "6"), entry("\u2466", "7"), entry("\u2467", "8"), entry("\u2468", "9"),
+            entry("\u2469", "10"), entry("\u246a", "11"), entry("\u246b", "12"), entry("\u246c", "13"), entry("\u246d", "14"),
+            entry("\u246e", "15"), entry("\u246f", "16"), entry("\u2470", "17"), entry("\u2471", "18"), entry("\u2472", "19"),
+            entry("\u2473", "20"),
+            /* parenthesized numbers */
+            entry("\u2474", "1"), entry("\u2475", "2"), entry("\u2476", "3"), entry("\u2477", "4"), entry("\u2478", "5"),
+            entry("\u2479", "6"), entry("\u247a", "7"), entry("\u247b", "8"), entry("\u247c", "9")
+    );
 
     // Select emoji variation for unicode characters, see https://emojipedia.org/variation-selector-16/
     private static final int VariationSelectorEmoji = 0xfe0f;
@@ -110,10 +121,10 @@ public class EmojiUtils {
      *                     current value
      * @param showResetAllAction {@code true} forces display of "reset" and "close" buttons.
      *                    generic marker icon as preview and always offers the reset-to-default action
-     * @param cache        optional cache used to render the type marker as default/preview icon. If null then a generic marker is used
+     * @param resetIcon   optional icon to render the marker as default/preview icon. If null then a generic marker is used
      * @param onSelection callback receiving the selected emoji String, or the empty string when reset to default
      */
-    public static void selectEmojiPopup(final Context context, @Nullable final String currentValue, final boolean showResetAllAction, @Nullable final Geocache cache, final Action1<String> onSelection) {
+    public static void selectEmojiPopup(final Context context, @Nullable final String currentValue, final boolean showResetAllAction, @Nullable final Drawable resetIcon, final Action1<String> onSelection) {
 
         final Context themedContext = newContextThemeWrapper(context);
         final @NonNull EmojiPickerDialogBinding emojiPickerDialogBinding = EmojiPickerDialogBinding.inflate(LayoutInflater.from(themedContext));
@@ -199,13 +210,11 @@ public class EmojiUtils {
         // closing chevron matching the other bottom sheets
         pickerLayout.findViewById(R.id.emoji_picker_close).setOnClickListener(v -> dialog.dismiss());
 
-        final int wantedEmojiSizeInDp = 22;
-
         // right button: current value, click = close
         final MaterialButton dialogButtonRight = pickerLayout.findViewById(R.id.dialog_buttonRight);
-        if (StringUtils.isNotBlank(currentValue) || cache != null) {
+        if (StringUtils.isNotBlank(currentValue) || resetIcon != null) {
             dialogButtonRight.setVisibility(View.VISIBLE);
-            dialogButtonRight.setIcon(StringUtils.isNotBlank(currentValue) ? ImageParam.emoji(currentValue).getAsDrawable() : getTintedCacheIcon(context, cache));
+            dialogButtonRight.setIcon(StringUtils.isNotBlank(currentValue) ? ImageParam.emoji(currentValue).getAsDrawable() : resetIcon);
             dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
@@ -213,12 +222,12 @@ public class EmojiUtils {
         // left button: Reset to default
         final MaterialButton dialogButtonLeft = pickerLayout.findViewById(R.id.dialog_buttonLeft);
         if (showResetAllAction || StringUtils.isNotBlank(currentValue)) {
-            if (cache == null) {
+            if (resetIcon != null) {
+                dialogButtonLeft.setIcon(resetIcon);
+                dialogButtonLeft.setIconTint(null);
+            } else {
                 dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
                 MenuUtils.setButtonTint(dialogButtonLeft);
-            } else {
-                dialogButtonLeft.setIcon(getTintedCacheIcon(context, cache));
-                dialogButtonLeft.setIconTint(null);
             }
             dialogButtonLeft.setVisibility(View.VISIBLE);
             dialogButtonLeft.setOnClickListener(v -> {
@@ -231,8 +240,13 @@ public class EmojiUtils {
     }
 
     // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-    private static BitmapDrawable getTintedCacheIcon(final Context context, final Geocache cache) {
+    public static BitmapDrawable getTintedCacheIcon(final Context context, final Geocache cache) {
         return ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getTypeMarker(context.getResources(), cache)));
+    }
+
+    // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
+    public static BitmapDrawable getTintedWaypointIcon(final Context context, final Waypoint waypoint) {
+        return ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getWaypointTypeMarker(context.getResources(), waypoint.getWaypointType())));
     }
 
     @SuppressWarnings("DiscouragedApi")
@@ -352,18 +366,25 @@ public class EmojiUtils {
             categories.recycle();
         }
         // additionally offer the extra (non-emoji) unicode characters; non-renderable ones are skipped
-        for (final int cp : EXTRA_SEARCHABLE_CODEPOINTS) {
-            addSearchEntry(index, seen, glyphCheck, new String(Character.toChars(cp)));
+        for (final Map.Entry<String, String> extra : EXTRA_SEARCHABLE_CODEPOINTS.entrySet()) {
+            addSearchEntry(index, seen, glyphCheck, extra.getKey(), extra.getValue());
         }
         return index;
     }
 
     // adds an emoji/char to the search index, skipping blanks, duplicates and codepoints with no renderable glyph
     private static void addSearchEntry(final List<EmojiSearchEntry> index, final Set<String> seen, final Paint glyphCheck, final String emoji) {
+        addSearchEntry(index, seen, glyphCheck, emoji, null);
+    }
+
+    private static void addSearchEntry(final List<EmojiSearchEntry> index, final Set<String> seen, final Paint glyphCheck, final String emoji, @Nullable final String alias) {
         if (emoji.isEmpty() || !seen.add(emoji) || !glyphCheck.hasGlyph(emoji)) {
             return;
         }
         index.add(new EmojiSearchEntry(emoji, unicodeNameOf(emoji)));
+        if (alias != null) {
+            index.add(new EmojiSearchEntry(emoji, alias));
+        }
     }
 
     // @return the concatenated, lowercased Unicode names of all codepoints in the given emoji (e.g. "grinning face")
