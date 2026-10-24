@@ -34,6 +34,7 @@ import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.graphics.Canvas;
@@ -120,19 +121,19 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(getCurrentZoom());
     }
 
-    private void startMap() {
-        mMapView.getMapScaleBar().setVisible(true);
-        mMapView.getMapScaleBar().setDistanceUnitAdapter(mMapView.getMapScaleBar().getDistanceUnitAdapter());
-        mMapView.setBuiltInZoomControls(false);
-        mMapView.setZoomLevelMax((byte) currentTileProvider.getZoomMax());
+    private void startMap(@NonNull final MapView mv) {
+        mv.getMapScaleBar().setVisible(true);
+        mv.getMapScaleBar().setDistanceUnitAdapter(mv.getMapScaleBar().getDistanceUnitAdapter());
+        mv.setBuiltInZoomControls(false);
+        mv.setZoomLevelMax((byte) currentTileProvider.getZoomMax());
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
-        mMapView.getMapScaleBar().setMarginHorizontal(mapAttPx);
+        mv.getMapScaleBar().setMarginHorizontal(mapAttPx);
 
         if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
-            for (TileMBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
-                mMapView.getLayerManager().getLayers().add(backgroundMap);
+            for (TileMBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mv)) {
+                mv.getLayerManager().getLayers().add(backgroundMap);
             }
         }
 
@@ -182,7 +183,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         }
         if (mapEventsReceiver == null) {
             mapEventsReceiver = new MapEventsReceiver();
-            mMapView.getLayerManager().getLayers().add(mapEventsReceiver);
+            safeExecuteOnMapView(mv -> mv.getLayerManager().getLayers().add(mapEventsReceiver));
         }
     }
 
@@ -190,28 +191,36 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     public void onResume() {
         super.onResume();
         // mMapView.onResume();
-        mMapView.getModel().mapViewPosition.addObserver(this);
-        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
-            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mMapView);
-        }
+        safeExecuteOnMapView(mv -> {
+            mv.getModel().mapViewPosition.addObserver(this);
+            if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
+                ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).addTileLayer(this, mv);
+            }
+        });
     }
 
     @Override
     public void onPause() {
         // mMapView.onPause();
-        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider) {
-            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mMapView);
+        final MapView mv = mMapView;
+        if (currentTileProvider instanceof AbstractMapsforgeOnlineTileProvider && mv != null) {
+            ((AbstractMapsforgeOnlineTileProvider) currentTileProvider).removeTileLayer(mv);
         }
         super.onPause();
 
-        mMapView.getModel().mapViewPosition.removeObserver(this);
+        if (mv != null) {
+            mv.getModel().mapViewPosition.removeObserver(this);
+        }
     }
 
     @Override
     public void onDestroyView() {
 //        themeHelper.disposeTheme();
         mapEventsReceiver = null;
-        mMapView.destroyAll();
+        final MapView mv = mMapView;
+        if (mv != null) {
+            mv.destroyAll();
+        }
         super.onDestroyView();
     }
 
@@ -230,8 +239,9 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void prepareForTileSourceChange() {
-        if (currentTileProvider != null) {
-            ((AbstractMapsforgeTileProvider) currentTileProvider).prepareForTileSourceChange(mMapView);
+        final MapView mv = mMapView;
+        if (currentTileProvider != null && mv != null) {
+            ((AbstractMapsforgeTileProvider) currentTileProvider).prepareForTileSourceChange(mv);
         }
         super.prepareForTileSourceChange();
     }
@@ -240,8 +250,10 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
         final boolean needsUpdate = super.setTileSource(newSource, force);
         if (needsUpdate) {
-            ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMapView);
-            startMap();
+            safeExecuteOnMapView(mv -> {
+                ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mv);
+                startMap(mv);
+            });
         }
         return needsUpdate;
     }
@@ -261,65 +273,70 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setCenter(final Geopoint geopoint) {
-        try {
-            mMapView.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
-        } catch (IllegalArgumentException e) {
-            Log.e("MapsforgeFragment.setCenter: Invalid geopoint (lat=" + geopoint.getLatitude() + ", lon=" + geopoint.getLongitude() + ")\n" + Arrays.toString(e.getStackTrace()));
-            ViewUtils.showShortToast(getActivity(), R.string.err_center_coordinates_invalid);
-            mMapView.setCenter(new LatLong(41.89018, 12.49237)); // Use Rome, Colosseo as visual indicator for error case
-        }
+        safeExecuteOnMapView(mv -> {
+            try {
+                mv.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+            } catch (IllegalArgumentException e) {
+                Log.e("MapsforgeFragment.setCenter: Invalid geopoint (lat=" + geopoint.getLatitude() + ", lon=" + geopoint.getLongitude() + ")\n" + Arrays.toString(e.getStackTrace()));
+                ViewUtils.showShortToast(getActivity(), R.string.err_center_coordinates_invalid);
+                mv.setCenter(new LatLong(41.89018, 12.49237)); // Use Rome, Colosseo as visual indicator for error case
+            }
+        });
     }
 
     @Override
     public Geopoint getCenter() {
-        final LatLong pos = mMapView.getModel().mapViewPosition.getMapPosition().latLong;
-        return new Geopoint(pos.getLatitude(), pos.getLongitude());
+        final LatLong[] pos = new LatLong[1];
+        safeExecuteOnMapView(mv -> {
+            pos[0] = mv.getModel().mapViewPosition.getMapPosition().latLong;
+        });
+        return pos[0] == null ? null : new Geopoint(pos[0].getLatitude(), pos[0].getLongitude());
     }
 
     @Override
     public Viewport getViewport() {
-        if (mMapView == null) {
-            return null;
-        }
-        final Model model = mMapView.getModel();
-        if (model == null) {
-            return null;
-        }
-        final LatLong center = model.mapViewPosition.getCenter();
-        return new Viewport(new Geopoint(center.latitude, center.longitude), getLatitudeSpan(), getLongitudeSpan());
+        final Viewport[] viewport = new Viewport[1];
+        safeExecuteOnMapView(mv -> {
+            final Model model = mv.getModel();
+            if (model != null) {
+                final LatLong center = model.mapViewPosition.getCenter();
+                viewport[0] = new Viewport(new Geopoint(center.latitude, center.longitude), getLatitudeSpan(mv), getLongitudeSpan(mv));
+            }
+        });
+        return viewport[0];
     }
 
-    private double getLatitudeSpan() {
+    private double getLatitudeSpan(@NonNull final MapView mv) {
         double span = 0;
-        final long mapSize = MercatorProjection.getMapSize(mMapView.getModel().mapViewPosition.getZoomLevel(), mMapView.getModel().displayModel.getTileSize());
-        final Point center = MercatorProjection.getPixelAbsolute(mMapView.getModel().mapViewPosition.getCenter(), mapSize);
+        final long mapSize = MercatorProjection.getMapSize(mv.getModel().mapViewPosition.getZoomLevel(), mv.getModel().displayModel.getTileSize());
+        final Point center = MercatorProjection.getPixelAbsolute(mv.getModel().mapViewPosition.getCenter(), mapSize);
 
-        if (mMapView.getHeight() > 0) {
+        if (mv.getHeight() > 0) {
             try {
-                final LatLong low = mercatorFromPixels(center.x, center.y - mMapView.getHeight() / 2.0, mapSize);
-                final LatLong high = mercatorFromPixels(center.x, center.y + mMapView.getHeight() / 2.0, mapSize);
+                final LatLong low = mercatorFromPixels(center.x, center.y - mv.getHeight() / 2.0, mapSize);
+                final LatLong high = mercatorFromPixels(center.x, center.y + mv.getHeight() / 2.0, mapSize);
                 span = Math.abs(high.latitude - low.latitude);
             } catch (final IllegalArgumentException ex) {
                 //should never happen due to handling in "mercatorFromPixels", but leave it here just in case
-                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mMapView.getDimension(), ex);
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mv.getDimension(), ex);
             }
         }
         return span;
     }
 
-    private double getLongitudeSpan() {
+    private double getLongitudeSpan(@NonNull final MapView mv) {
         double span = 0;
-        final long mapSize = MercatorProjection.getMapSize(mMapView.getModel().mapViewPosition.getZoomLevel(), mMapView.getModel().displayModel.getTileSize());
-        final Point center = MercatorProjection.getPixelAbsolute(mMapView.getModel().mapViewPosition.getCenter(), mapSize);
+        final long mapSize = MercatorProjection.getMapSize(mv.getModel().mapViewPosition.getZoomLevel(), mv.getModel().displayModel.getTileSize());
+        final Point center = MercatorProjection.getPixelAbsolute(mv.getModel().mapViewPosition.getCenter(), mapSize);
 
-        if (mMapView.getWidth() > 0) {
+        if (mv.getWidth() > 0) {
             try {
-                final LatLong low = mercatorFromPixels(center.x - mMapView.getWidth() / 2.0, center.y, mapSize);
-                final LatLong high = mercatorFromPixels(center.x + mMapView.getWidth() / 2.0, center.y, mapSize);
+                final LatLong low = mercatorFromPixels(center.x - mv.getWidth() / 2.0, center.y, mapSize);
+                final LatLong high = mercatorFromPixels(center.x + mv.getWidth() / 2.0, center.y, mapSize);
                 span = Math.abs(high.longitude - low.longitude);
             } catch (final IllegalArgumentException ex) {
                 //should never happen due to handling in "mercatorFromPixels", but leave it here just in case
-                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mMapView.getDimension(), ex);
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mv.getDimension(), ex);
             }
         }
         return span;
@@ -348,8 +365,10 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setDrivingMode(final boolean enabled) {
-        mMapView.setMapViewCenterY(enabled ? 0.75f : 0.5f);
-        mMapView.getModel().frameBufferModel.setOverdrawFactor(Math.max(mMapView.getModel().frameBufferModel.getOverdrawFactor(), mMapView.getMapViewCenterY() * 2));
+        safeExecuteOnMapView(mv -> {
+            mv.setMapViewCenterY(enabled ? 0.75f : 0.5f);
+            mv.getModel().frameBufferModel.setOverdrawFactor(Math.max(mv.getModel().frameBufferModel.getOverdrawFactor(), mv.getMapViewCenterY() * 2));
+        });
     }
 
 
@@ -358,69 +377,76 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void zoomToBounds(final Viewport bounds) {
-        zoomToBounds(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()));
+        final BoundingBox bb = new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6());
+        safeExecuteOnMapView(mv -> zoomToBounds(mv, bb));
     }
 
-    public void zoomToBounds(final BoundingBox bounds) {
+    private void zoomToBounds(@NonNull final MapView mv, final BoundingBox bounds) {
         if (bounds.getLatitudeSpan() == 0 && bounds.getLongitudeSpan() == 0) {
             setCenter(new Geopoint(bounds.getCenterPoint().getLatitude(), bounds.getCenterPoint().getLongitude()));
         } else {
             // add some margin to not cut-off items at the edge
             // Google Maps does this implicitly, so we need to add it here map-specific
             final BoundingBox extendedBounds = bounds.extendMargin(1.1f);
-            if (mMapView.getWidth() == 0 || mMapView.getHeight() == 0) {
+            if (mv.getWidth() == 0 || mv.getHeight() == 0) {
                 //See Bug #14948: w/o map width/height the bounds can't be calculated
                 // -> postpone animation to later on UI thread (where map width/height will be set)
-                mMapView.post(() -> zoomToBoundsDirect(extendedBounds));
+                mv.post(() -> zoomToBoundsDirect(mv, extendedBounds));
             } else {
-                zoomToBoundsDirect(extendedBounds);
+                zoomToBoundsDirect(mv, extendedBounds);
             }
         }
     }
 
-    private void zoomToBoundsDirect(final BoundingBox bounds) {
+    private void zoomToBoundsDirect(@NonNull final MapView mv, final BoundingBox bounds) {
         setCenter(new Geopoint(bounds.getCenterPoint().getLatitude(), bounds.getCenterPoint().getLongitude()));
-        final int tileSize = mMapView.getModel().displayModel.getTileSize();
-        final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(mMapView.getWidth(), mMapView.getHeight()),
+        final int tileSize = mv.getModel().displayModel.getTileSize();
+        final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(mv.getWidth(), mv.getHeight()),
                 new org.mapsforge.core.model.BoundingBox(bounds.getMinLatitude(), bounds.getMinLongitude(), bounds.getMaxLatitude(), bounds.getMaxLongitude()), tileSize);
         setZoom(newZoom);
     }
 
     @Override
     public int getCurrentZoom() {
-        return mMapView.getModel().mapViewPosition.getZoomLevel();
+        final MapView mv = mMapView;
+        return mv == null ? 0 : mv.getModel().mapViewPosition.getZoomLevel();
     }
 
     @Override
     public void setZoom(final int zoomLevel) {
-        mMapView.setZoomLevel((byte) Math.max(Math.min(zoomLevel, getZoomMax()), getZoomMin()));
+        safeExecuteOnMapView(mv -> mv.setZoomLevel((byte) Math.max(Math.min(zoomLevel, getZoomMax()), getZoomMin())));
     }
 
     @Override
     public void zoomInOut(final boolean zoomIn) {
-        if (zoomIn) {
-            mMapView.getModel().mapViewPosition.zoomIn();
-        } else {
-            mMapView.getModel().mapViewPosition.zoomOut();
-        }
+        safeExecuteOnMapView(mv -> {
+            if (zoomIn) {
+                mv.getModel().mapViewPosition.zoomIn();
+            } else {
+                mv.getModel().mapViewPosition.zoomOut();
+            }
+        });
     }
 
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-        mMapView.getTouchGestureHandler().setRotationEnabled(mapRotation == Settings.MAPROTATION_MANUAL);
+        safeExecuteOnMapView(mv -> mv.getTouchGestureHandler().setRotationEnabled(mapRotation == Settings.MAPROTATION_MANUAL));
     }
 
     @Override
     public float getCurrentBearing() {
-        return AngleUtils.normalize(360 - mMapView.getMapRotation().degrees); // Mapsforge uses opposite way of calculating bearing compared to GM
+        final MapView mv = mMapView;
+        return AngleUtils.normalize(360 - (mv == null ? 0 : mv.getMapRotation().degrees)); // Mapsforge uses opposite way of calculating bearing compared to GM
     }
 
     @Override
     public void setBearing(final float bearing) {
         final float adjustedBearing = AngleUtils.normalize(360 - bearing); // Mapsforge uses opposite way of calculating bearing compared to GM
-        mMapView.rotate(new Rotation(adjustedBearing, mMapView.getWidth() * 0.5f, mMapView.getHeight() * 0.5f));
-        mMapView.getLayerManager().redrawLayers();
+        safeExecuteOnMapView(mv -> {
+            mv.rotate(new Rotation(adjustedBearing, mv.getWidth() * 0.5f, mv.getHeight() * 0.5f));
+            mv.getLayerManager().redrawLayers();
+        });
     }
 
 
@@ -449,6 +475,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         requireActivity().recreate();
     }
 
+    private void safeExecuteOnMapView(final Consumer<MapView> execute) {
+        final MapView mv = mMapView;
+        if (mv != null) {
+            execute.accept(mv);
+        }
+    }
+
 
     // ========================================================================
     // additional menu entries
@@ -461,17 +494,21 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
         @Override
         public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            final int[] location = new int[2];
-            mMapView.getLocationOnScreen(location);
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], true);
+            safeExecuteOnMapView(mv -> {
+                final int[] location = new int[2];
+                mv.getLocationOnScreen(location);
+                onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], true);
+            });
             return true;
         }
 
         @Override
         public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            final int[] location = new int[2];
-            mMapView.getLocationOnScreen(location);
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], false);
+            safeExecuteOnMapView(mv -> {
+                final int[] location = new int[2];
+                mv.getLocationOnScreen(location);
+                onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], false);
+            });
             return true;
         }
 
