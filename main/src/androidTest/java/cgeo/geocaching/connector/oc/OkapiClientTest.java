@@ -22,14 +22,13 @@ public class OkapiClientTest {
     public void testGetOCCache() {
         final String geoCode = "OU0331";
         Geocache cache = OkapiClient.getCache(geoCode);
-        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
         // cache should be stored to DB (to listID 0) when loaded above
         cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
-        assert cache != null;
-        assertThat(cache).isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from DataStore").isNotNull();
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
@@ -50,11 +49,10 @@ public class OkapiClientTest {
         final String geoCode = "OCDDD2";
         CgeoTestUtils.removeCacheCompletely(geoCode);
         Geocache cache = OkapiClient.getCache(geoCode);
-        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         // cache should be stored to DB (to listID 0) when loaded above
         cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
-        assert cache != null;
-        assertThat(cache).isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from DataStore").isNotNull();
         assertThat(cache.getWaypoints()).hasSize(3);
 
         // load again
@@ -68,7 +66,7 @@ public class OkapiClientTest {
 
         CgeoTestUtils.removeCacheCompletely(geoCode);
         final Geocache cache = OkapiClient.getCache(geoCode);
-        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
     }
 
@@ -77,7 +75,7 @@ public class OkapiClientTest {
         final String geoCode = "OC10CB8";
         final Geocache cache = OkapiClient.getCache(geoCode);
         final int defaultLogCount = 10;
-        assert cache != null; // eclipse null analysis
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         assertThat(cache.getLogs().size()).isGreaterThan(defaultLogCount);
     }
 
@@ -85,7 +83,7 @@ public class OkapiClientTest {
     public void testShortDescription() {
         final String geoCode = "OC10C06";
         final Geocache cache = OkapiClient.getCache(geoCode);
-        assert cache != null; // eclipse null analysis
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         assertThat(cache.getShortDescription()).isEqualTo("Nur in der fünften Jahreszeit kann er sprechen");
     }
 
@@ -130,7 +128,7 @@ public class OkapiClientTest {
     public void testLogImages() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
-        assert cache != null; // eclipse null analysis
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         LogEntry logWithImage = null;
         for (final LogEntry logEntry : cache.getLogs()) {
             if ("mountainbatchers".equals(logEntry.author)) {
@@ -146,7 +144,7 @@ public class OkapiClientTest {
     public void testUploadPersonalNote() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
-        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache).as("Cache " + geoCode + " from OKAPI").isNotNull();
         final String oldPersonalNote = cache.getPersonalNote();
 
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
@@ -178,7 +176,7 @@ public class OkapiClientTest {
 
             // check if updated personal note is not truncated
             final Geocache updatedCache = OkapiClient.getCache(geoCode);
-            assertThat(updatedCache).as("Updated Cache from OKAPI").isNotNull();
+            assertThat(updatedCache).as("Updated Cache " + updatedCache + " from OKAPI").isNotNull();
             final String updatedPersonalNote = updatedCache.getPersonalNote();
             assertThat(updatedPersonalNote).as("Updated Note").isEqualTo(longPersonalNote);
         } finally {
