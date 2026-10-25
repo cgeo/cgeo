@@ -104,7 +104,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             ownerLogs.removeAll(ownLogs);
 
             final Settings.OwnerLogDisplayMode ownerLogsMode = Settings.getOwnerLogDisplayMode();
-            final boolean hideOwnerLogs = ownerLogsMode == Settings.OwnerLogDisplayMode.DO_NOT_SHOW;
+            final boolean hideOwnerLogs = ownerLogsMode == Settings.OwnerLogDisplayMode.DO_NOT_LOAD;
             if (hideOwnerLogs) {
                 logs.removeAll(ownerLogs);
             }

@@ -235,10 +235,6 @@ public class Settings {
          */
         DO_NOT_LOAD(R.string.owner_log_display_mode_do_not_load),
         /**
-         * Do not load / show any owner logs.
-         */
-        DO_NOT_SHOW(R.string.owner_log_display_mode_do_not_show),
-        /**
          * Hide owner logs and add possibility to show them.
          */
         INACTIVE(R.string.owner_log_display_mode_inactive),

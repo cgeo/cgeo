@@ -1169,7 +1169,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_owner_log_display_mode">Show owner logs</string>
     <string name="owner_log_display_mode_do_not_load">Do not load</string>
-    <string name="owner_log_display_mode_do_not_show">Do not show</string>
     <string name="owner_log_display_mode_inactive">Inactive</string>
     <string name="owner_log_display_mode_active">Active</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
