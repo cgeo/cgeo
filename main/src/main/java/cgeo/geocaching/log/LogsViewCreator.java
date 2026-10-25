@@ -262,17 +262,24 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                         OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), translationStatus, logText,
                                 unsupportedLng -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
                                 downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
-                                translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, translated -> {
-                                    holder.binding.log.setText(translated);
-                                    holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))));
-                                    holder.binding.logTranslateButton.setOnClickListener(v1 -> {
-                                        translationStatus.setNotTranslated();
-                                        holder.binding.logTranslateHint.setVisibility(View.GONE);
-                                        fillViewHolder(holder, log);
-                                    });
-                                    holder.binding.logTranslateHint.setVisibility(View.VISIBLE);
-                                }, e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
-                        }
+                                translator -> {
+                                    if (null == translator) {
+                                        Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_initerror), Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                    OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, translated -> {
+                                                holder.binding.log.setText(translated);
+                                                holder.binding.logTranslateNote.setText(new SpannableStringBuilder(LocalizationUtils.getString(R.string.translator_translation_success, new OfflineTranslateUtils.Language(translator.getSourceLanguage()))));
+                                                holder.binding.logTranslateButton.setOnClickListener(v1 -> {
+                                                    translationStatus.setNotTranslated();
+                                                    holder.binding.logTranslateHint.setVisibility(View.GONE);
+                                                    fillViewHolder(holder, log);
+                                                });
+                                                holder.binding.logTranslateHint.setVisibility(View.VISIBLE);
+                                            },
+                                            e -> Toast.makeText(getContext(), LocalizationUtils.getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show());
+                                });
+                    }
                 });
             }
 

@@ -254,7 +254,7 @@ public class FormulaUtils {
 
     public static List<Pair<String, String>> scanForCoordinates(final Collection<String> texts, final Collection<Pair<String, String>> excludePairs) {
         final List<Pair<String, String>> result = new ArrayList<>();
-        final Set<String> patternsFound = new HashSet<>();
+        final List<String> patternsFound = new ArrayList<>();
         if (excludePairs != null) {
             for (Pair<String, String> p : excludePairs) {
                 patternsFound.add(pairToKey(p));
@@ -263,7 +263,6 @@ public class FormulaUtils {
         for (String text : texts) {
             scanCoordinatePattern(text, result, patternsFound);
         }
-        Collections.sort(result, (p1, p2) -> TextUtils.COLLATOR.compare(pairToKey(p1), pairToKey(p2)));
         return result;
     }
 
@@ -279,7 +278,7 @@ public class FormulaUtils {
         return processFoundDegree(preprocessScanText(degree)).replaceAll("\\h", "");
     }
 
-    private static void scanCoordinatePattern(final String stext, final List<Pair<String, String>> result, final Set<String> resultSet) {
+    private static void scanCoordinatePattern(final String stext, final List<Pair<String, String>> result, final List<String> resultSet) {
         if (stext == null) {
             return;
         }

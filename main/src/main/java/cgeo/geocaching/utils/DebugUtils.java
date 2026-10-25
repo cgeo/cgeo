@@ -31,18 +31,38 @@ public class DebugUtils {
 
     public static void createMemoryDump(@NonNull final Activity context) {
         ViewUtils.showToast(context, R.string.init_please_wait);
-        final File file = ContentStorage.get().createTempFile();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            try {
-                android.os.Debug.dumpHprofData(file.getPath());
-            } catch (IOException e) {
-                Log.e("createMemoryDump", e);
-            }
-            final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
+            final Uri dumpFileUri = writeMemoryDump();
 
             ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, LocalizationUtils.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
         }, 1000);
+    }
+
+    /**
+     * Writes a heap dump into the log files folder, where users can reach and share it without any
+     * storage permission. The dump goes to an internal temp file first and is then copied over.
+     *
+     * @return the dump's Uri, or null if it could not be written
+     */
+    @Nullable
+    public static Uri writeMemoryDump() {
+        final File file = ContentStorage.get().createTempFile();
+        if (file == null) {
+            return null;
+        }
+        try {
+            android.os.Debug.dumpHprofData(file.getPath());
+        } catch (final IOException e) {
+            Log.e("writeMemoryDump", e);
+            FileUtils.deleteIgnoringFailure(file);
+            return null;
+        }
+        final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
+        if (dumpFileUri == null) {
+            FileUtils.deleteIgnoringFailure(file);
+        }
+        return dumpFileUri;
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {

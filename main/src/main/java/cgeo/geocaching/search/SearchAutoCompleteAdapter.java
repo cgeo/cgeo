@@ -79,20 +79,27 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     }
 
     /**
-     * Highlight the selected text (case insensitive) in the given TextView
+     * Highlight the selected text (case-insensitive) in the given TextView
      */
     void setHighLightedText(final TextView tv, final String textToHighlight) {
-        final String text = tv.getText().toString().toLowerCase(Locale.getDefault());
-        int ofe = text.indexOf(textToHighlight, 0);
+        final String text = tv.getText().toString();
+        if (StringUtils.isBlank(textToHighlight) || textToHighlight.length() > text.length()) {
+            return;
+        }
         final Spannable wordToSpan = new SpannableString(tv.getText());
-        for (int ofs = 0; ofs < text.length() && ofe != -1; ofs = ofe + 1) {
-            ofe = text.indexOf(textToHighlight, ofs);
-            if (ofe == -1) {
-                break;
-            } else {
-                wordToSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorAccent)), ofe, ofe + textToHighlight.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
+        int foundRegionEnd = 0;
+        for (int i = 0; i <= text.length() - textToHighlight.length(); i++) {
+            if (i < foundRegionEnd) {
+                // don't highlight the same text multiple times
+                continue;
             }
+            if (text.regionMatches(true, i, textToHighlight, 0, textToHighlight.length())) {
+                foundRegionEnd = i + textToHighlight.length();
+                wordToSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorAccent, null)), i, foundRegionEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        if (foundRegionEnd > 0) {
+            tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
         }
     }
 
@@ -135,6 +142,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                     notifyDataSetChanged();
                 } else {
                     suggestions = new String[0];
+                    searchTerm = constraint == null ? null : constraint.toString().toLowerCase(Locale.getDefault());
                     notifyDataSetInvalidated();
                 }
             }

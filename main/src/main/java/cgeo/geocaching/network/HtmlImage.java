@@ -5,7 +5,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -19,7 +18,6 @@ import cgeo.geocaching.utils.html.HtmlUtils;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
@@ -169,9 +167,8 @@ public class HtmlImage implements Html.ImageGetter {
         this.viewRef = new WeakReference<>(view);
         this.userInitiatedRefresh = userInitiatedRefresh;
 
-        final Point displaySize = DisplayUtils.getDisplaySize();
-        this.maxWidth = displaySize.x - 25;
-        this.maxHeight = displaySize.y - 25;
+        this.maxWidth = ImageUtils.MAX_IMG_DIMEN;
+        this.maxHeight = ImageUtils.MAX_IMG_DIMEN;
         this.resources = CgeoApplication.getInstance().getResources();
     }
 

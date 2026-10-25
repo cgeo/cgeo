@@ -13,6 +13,7 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
 
     private final StringFilter stringFilter = new StringFilter();
 
+    @Nullable
     protected abstract String getValue(Geocache cache);
 
     protected String getSqlColumnName() {
