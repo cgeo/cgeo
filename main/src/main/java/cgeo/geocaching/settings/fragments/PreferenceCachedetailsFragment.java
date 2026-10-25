@@ -2,8 +2,8 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.Settings.FriendLogTabOwnerMode;
 import cgeo.geocaching.settings.Settings.NamedFilterDisplayMode;
+import cgeo.geocaching.settings.Settings.OwnerLogDisplayMode;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
@@ -27,7 +27,7 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
 
         configTranslationLanguagePreference();
         configNamedFilterDisplayModePreference();
-        configFriendLogTabOwnerModePreference();
+        configOwnerLogDisplayModePreference();
     }
 
     @Override
@@ -41,9 +41,9 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         PreferenceUtils.configEnumListPreference(namedFilterDisplayModePref, NamedFilterDisplayMode.class, Settings.getNamedFilterDisplayMode());
     }
 
-    private void configFriendLogTabOwnerModePreference() {
-        final ListPreference friendLogTabOwnerModePref = findPreference(getString(R.string.pref_friend_log_tab_owner_mode));
-        PreferenceUtils.configEnumListPreference(friendLogTabOwnerModePref, FriendLogTabOwnerMode.class, Settings.getFriendLogTabOwnerMode());
+    private void configOwnerLogDisplayModePreference() {
+        final ListPreference ownerLogDisplayModePref = findPreference(getString(R.string.pref_owner_log_display_mode));
+        PreferenceUtils.configEnumListPreference(ownerLogDisplayModePref, OwnerLogDisplayMode.class, Settings.getOwnerLogDisplayMode());
     }
 
     private void configTranslationLanguagePreference() {

@@ -26,7 +26,6 @@ import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import java.util.HashMap;
 import static java.util.UUID.randomUUID;
 
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {

@@ -229,23 +229,27 @@ public class Settings {
      * Controls how the logs of the cache-owner should be displayed
      * in the log-tab of friends-log.
      */
-    public enum FriendLogTabOwnerMode implements DisplayNameEnum {
+    public enum OwnerLogDisplayMode implements DisplayNameEnum {
         /**
          * Do not load / show any owner logs.
          */
-        NONE(R.string.friendlog_tab_owner_display_mode_none),
+        DO_NOT_LOAD(R.string.owner_log_display_mode_do_not_load),
+        /**
+         * Do not load / show any owner logs.
+         */
+        DO_NOT_SHOW(R.string.owner_log_display_mode_do_not_show),
         /**
          * Hide owner logs and add possibility to show them.
          */
-        HIDE(R.string.friendlog_tab_owner_display_mode_hide),
+        INACTIVE(R.string.owner_log_display_mode_inactive),
         /**
          * Show owner logs and add possibility to hide them.
          */
-        SHOW(R.string.friendlog_tab_owner_display_mode_show);
+        ACTIVE(R.string.owner_log_display_mode_active);
 
         private final @StringRes int displayNameResId;
 
-        FriendLogTabOwnerMode(final @StringRes int displayNameResId) {
+        OwnerLogDisplayMode(final @StringRes int displayNameResId) {
             this.displayNameResId = displayNameResId;
         }
 
@@ -1184,10 +1188,10 @@ public class Settings {
     }
 
     @NonNull
-    public static FriendLogTabOwnerMode getFriendLogTabOwnerMode() {
-        return EnumUtils.getEnum(FriendLogTabOwnerMode.class,
-                getString(R.string.pref_friend_log_tab_owner_mode, FriendLogTabOwnerMode.SHOW.name()),
-                FriendLogTabOwnerMode.SHOW);
+    public static OwnerLogDisplayMode getOwnerLogDisplayMode() {
+        return EnumUtils.getEnum(OwnerLogDisplayMode.class,
+                getString(R.string.pref_owner_log_display_mode, OwnerLogDisplayMode.ACTIVE.name()),
+                OwnerLogDisplayMode.ACTIVE);
     }
 
     public static boolean isTrackableAutoVisit() {

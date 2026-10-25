@@ -69,8 +69,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final LogsPageBinding binding = super.createView(inflater, container, savedInstanceState);
         if (!allLogs) {
-            final Settings.FriendLogTabOwnerMode ownerLogsMode = Settings.getFriendLogTabOwnerMode();
-            binding.chipOwner.setChecked(ownerLogsMode == Settings.FriendLogTabOwnerMode.SHOW);
+            final Settings.OwnerLogDisplayMode ownerLogsMode = Settings.getOwnerLogDisplayMode();
+            binding.chipOwner.setChecked(ownerLogsMode == Settings.OwnerLogDisplayMode.ACTIVE);
         }
         return binding;
     }
@@ -103,8 +103,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             friendsLogs.removeAll(ownerLogs);
             ownerLogs.removeAll(ownLogs);
 
-            final Settings.FriendLogTabOwnerMode ownerLogsMode = Settings.getFriendLogTabOwnerMode();
-            final boolean hideOwnerLogs = ownerLogsMode == Settings.FriendLogTabOwnerMode.NONE;
+            final Settings.OwnerLogDisplayMode ownerLogsMode = Settings.getOwnerLogDisplayMode();
+            final boolean hideOwnerLogs = ownerLogsMode == Settings.OwnerLogDisplayMode.DO_NOT_SHOW;
             if (hideOwnerLogs) {
                 logs.removeAll(ownerLogs);
             }
