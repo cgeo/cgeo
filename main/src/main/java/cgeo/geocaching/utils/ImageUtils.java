@@ -553,7 +553,7 @@ public final class ImageUtils {
         return imageUrl;
     }
 
-    public enum GCImageSize {
+    public enum GCImageSize implements DisplayNameEnum {
         UNCHANGED("", "", R.string.settings_gc_imagesize_entry_unchanged),
         ORIGINAL("", "", R.string.settings_gc_imagesize_entry_original),
         LARGE("_l", "large/", R.string.settings_gc_imagesize_entry_large),
@@ -563,7 +563,7 @@ public final class ImageUtils {
 
         private final String suffix;
         private final String pathname;
-        private final int label;
+        private final @StringRes int label;
 
         GCImageSize(final String suffix, final String pathname, final @StringRes int label) {
             this.suffix = suffix;
@@ -579,8 +579,13 @@ public final class ImageUtils {
             return suffix;
         }
 
-        public int getLabel() {
+        public @StringRes int getLabel() {
             return label;
+        }
+
+        @Override
+        public String getDisplayName() {
+            return LocalizationUtils.getString(label);
         }
     }
 
