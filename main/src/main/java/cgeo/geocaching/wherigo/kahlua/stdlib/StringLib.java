@@ -138,7 +138,7 @@ public final class StringLib implements JavaFunction {
 
         int len = f.length();
         int argc = 2;
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < len; i++) {
             char c = f.charAt(i);
             if (c == '%') {
@@ -488,13 +488,13 @@ public final class StringLib implements JavaFunction {
         return 1;
     }
 
-    private void append(StringBuffer buffer, String s, int start, int end) {
+    private void append(StringBuilder buffer, String s, int start, int end) {
         for (int i = start; i < end; i++) {
             buffer.append(s.charAt(i));
         }
     }
 
-    private void extend(StringBuffer buffer, int extraWidth, char padCharacter) {
+    private void extend(StringBuilder buffer, int extraWidth, char padCharacter) {
         int preLength = buffer.length();
         buffer.setLength(preLength + extraWidth);
         for (int i = extraWidth - 1; i >= 0; i--) {
@@ -502,7 +502,7 @@ public final class StringLib implements JavaFunction {
         }
     }
 
-    private void stringBufferUpperCase(StringBuffer buffer, int start) {
+    private void stringBufferUpperCase(StringBuilder buffer, int start) {
         int length = buffer.length();
         for (int i = start; i < length; i++) {
             char c = buffer.charAt(i);
@@ -520,7 +520,7 @@ public final class StringLib implements JavaFunction {
      * @param base the base to use when formatting (typically 8, 10 or 16)
      * @param mminDigits min digits
      */
-    private static void stringBufferAppend(StringBuffer sb, double pValue, int base, boolean printZero, int mminDigits) {
+    private static void stringBufferAppend(StringBuilder sb, double pValue, int base, boolean printZero, int mminDigits) {
         double value = pValue;
         int startPos = sb.length();
         int minDigits = mminDigits;
@@ -535,7 +535,7 @@ public final class StringLib implements JavaFunction {
             sb.append('0');
         } else {
             // Note that the digits are in reverse order now, so we need to correct it.
-            // We can't use StringBuffer.reverse because that reverses the entire string
+            // We can't use StringBuilder.reverse because that reverses the entire string
 
             int swapCount = (1 + endPos - startPos) / 2;
             for (int i = swapCount - 1; i >= 0; i--) {
@@ -552,7 +552,7 @@ public final class StringLib implements JavaFunction {
     /**
      * Only works with non-negative numbers
      */
-    private void appendPrecisionNumber(StringBuffer buffer, double pNumber, int precision, boolean requirePeriod) {
+    private void appendPrecisionNumber(StringBuilder buffer, double pNumber, int precision, boolean requirePeriod) {
         double number = MathLib.roundToPrecision(pNumber, precision);
         double iPart = Math.floor(number);
         double fPart = number - iPart;
@@ -574,7 +574,7 @@ public final class StringLib implements JavaFunction {
     /**
      * Only works with non-negative numbers
      */
-    private void appendSignificantNumber(StringBuffer buffer, double number, int pSignificantDecimals, boolean includeTrailingZeros) {
+    private void appendSignificantNumber(StringBuilder buffer, double number, int pSignificantDecimals, boolean includeTrailingZeros) {
         int significantDecimals = pSignificantDecimals;
         double iPart = Math.floor(number);
 
@@ -621,7 +621,7 @@ public final class StringLib implements JavaFunction {
         }
     }
 
-    private void appendScientificNumber(StringBuffer buffer, double xx, int precision, boolean repr, boolean useSignificantNumbers) {
+    private void appendScientificNumber(StringBuilder buffer, double xx, int precision, boolean repr, boolean useSignificantNumbers) {
         int exponent = 0;
         double x = xx;
 
@@ -692,7 +692,7 @@ public final class StringLib implements JavaFunction {
     private int reverse(LuaCallFrame callFrame, int nArguments) {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
         String s = getStringArg(callFrame, 1, names[REVERSE]);
-        s = new StringBuffer(s).reverse().toString();
+        s = new StringBuilder(s).reverse().toString();
         callFrame.push(s);
         return 1;
     }
@@ -743,13 +743,13 @@ public final class StringLib implements JavaFunction {
         int offset = ii - 1;
         for (int i = 0; i < nReturns; i++) {
             char c = s.charAt(offset + i);
-            callFrame.set(i, new Double((double) c));
+            callFrame.set(i, Double.valueOf((double) c));
         }
         return nReturns;
     }
 
     private int stringChar(LuaCallFrame callFrame, int nArguments) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nArguments; i++) {
             int num = getDoubleArg(callFrame, i + 1, names[CHAR]).intValue();
             sb.append((char) num);
@@ -825,7 +825,7 @@ public final class StringLib implements JavaFunction {
             Object[] caps = new String[level];
             for (int i = 0; i < level; i++) {
                 if (capture[i].len == CAP_POSITION) {
-                    caps[i] = new Double(src_init.length() - capture[i].init.length() + 1);
+                    caps[i] = Double.valueOf(src_init.length() - capture[i].init.length() + 1);
                 } else {
                     caps[i] = capture[i].init.getString().substring(0, capture[i].len);
                 }
@@ -934,7 +934,7 @@ public final class StringLib implements JavaFunction {
             if (l == CAP_UNFINISHED) {
                 throw new IllegalStateException("unfinished capture");
             } else if (l == CAP_POSITION) {
-                Double res = new Double(ms.src_init.length() - ms.capture[i].init.length() + 1);
+                Double res = Double.valueOf(ms.src_init.length() - ms.capture[i].init.length() + 1);
                 ms.callFrame.push(res);
                 return res;
             } else {
@@ -1011,7 +1011,7 @@ public final class StringLib implements JavaFunction {
                 ms.level = 0;
                 if ( ( res = match ( ms, s1, p ) ) != null ) {
                     if ( find ) {
-                        return callFrame.push(new Double(s.length () - s1.length () + 1), new Double(s.length () - res.length ())) +
+                        return callFrame.push(Double.valueOf(s.length () - s1.length () + 1), Double.valueOf(s.length () - res.length ())) +
                         pushCaptures( ms, null, null );
                     } else {
                         return pushCaptures( ms, s1, res );
@@ -1417,7 +1417,7 @@ public final class StringLib implements JavaFunction {
         ms.endIndex = src.length();
 
         int n = 0;
-        StringBuffer b = new StringBuffer();
+        StringBuilder b = new StringBuilder();
         StringPointer e = null;
         while (n < maxSubstitutions) {
             ms.level = 0;
@@ -1439,10 +1439,10 @@ public final class StringLib implements JavaFunction {
                 break;
             }
         }
-        return cf.push(b.append(src.getString()).toString(), new Double(n));
+        return cf.push(b.append(src.getString()).toString(), Double.valueOf(n));
     }
 
-    private static void addValue(MatchState ms, Object repl, StringBuffer b, StringPointer src, StringPointer e) {
+    private static void addValue(MatchState ms, Object repl, StringBuilder b, StringPointer src, StringPointer e) {
         String type = BaseLib.type(repl);
         if (type == BaseLib.TYPE_NUMBER || type == BaseLib.TYPE_STRING) {
             b.append(addString (ms, repl, src, e));
@@ -1468,7 +1468,7 @@ public final class StringLib implements JavaFunction {
     private static String addString(MatchState ms, Object repl, StringPointer s, StringPointer e) {
         String replTemp = BaseLib.tostring(repl, ms.callFrame.thread.state);
         StringPointer replStr = new StringPointer (replTemp);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < replTemp.length(); i++) {
             if (replStr.getChar ( i ) != L_ESC) {
                 buf.append(replStr.getChar(i));
