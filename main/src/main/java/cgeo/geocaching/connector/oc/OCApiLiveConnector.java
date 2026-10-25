@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -30,6 +31,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
 
 import java.util.EnumSet;
 import java.util.Locale;
@@ -46,6 +48,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     private final int tokenPublicPrefKeyId;
     private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED, UNKNOWN_FINDS);
+    /** whether the installation reports has_user_coords, checked on login */
+    private volatile boolean userCoordsAvailable = false;
 
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch, @StringRes final int prefKey) {
@@ -148,6 +152,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     public boolean login() {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
+            userCoordsAvailable = userInfo.getStatus() == UserInfoStatus.SUCCESSFUL && OkapiClient.hasUserCoords(this);
         } else {
             userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_SUPPORTED, UNKNOWN_FINDS);
         }
@@ -224,6 +229,31 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
         return OkapiClient.uploadPersonalNotes(this, cache);
+    }
+
+    @Override
+    public boolean supportsOwnCoordinates() {
+        return userCoordsAvailable && supportsPersonalization() && isActive();
+    }
+
+    @WorkerThread
+    @Override
+    public boolean uploadModifiedCoordinates(@NonNull final Geocache cache, @NonNull final Geopoint wpt) {
+        final boolean uploaded = OkapiClient.uploadUserCoords(this, cache, wpt);
+        if (uploaded) {
+            DataStore.saveChangedCache(cache);
+        }
+        return uploaded;
+    }
+
+    @WorkerThread
+    @Override
+    public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
+        final boolean deleted = OkapiClient.uploadUserCoords(this, cache, null);
+        if (deleted) {
+            DataStore.saveChangedCache(cache);
+        }
+        return deleted;
     }
 
     @Override
