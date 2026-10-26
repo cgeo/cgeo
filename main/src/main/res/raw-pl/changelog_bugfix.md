@@ -41,3 +41,15 @@
 - Fix: Handling of dropped trackables (#16203)
 - Fix: Handling when ignoring unsaved caches (#9445)
 
+##
+- Fix: "Scan for waypoint formulas" does not preserve order (#18749)
+- Fix: Crash in highlighting search results (#18831)
+- Fix: Crashes on map (#18805) (#18832) (#18834)
+- Fix: Owner filter not including Adventure Labs (#18840)
+- Fix: Crash for trackables (#18813)
+- Fix: Heading hash sing in log texts not handled correctly (#16147)
+- Fix: Images are scaled down too much on images tab (#18808)
+- Fix: Crash on renaming a route (#18810)
+- Fix: Crash in image handling (#18002)
+- Fix: Crash on logs page when translator is not yet available (#18800)
+- New: Optional memory dump on "out of memory" errors (#18822)
