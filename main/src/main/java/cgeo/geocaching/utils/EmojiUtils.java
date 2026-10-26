@@ -245,7 +245,11 @@ public class EmojiUtils {
     }
 
     // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
+    @Nullable
     public static BitmapDrawable getTintedWaypointIcon(final Context context, final Waypoint waypoint) {
+        if (waypoint == null) {
+            return null;
+        }
         return ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getWaypointTypeMarker(context.getResources(), waypoint.getWaypointType())));
     }
 
