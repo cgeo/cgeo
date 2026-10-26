@@ -133,6 +133,7 @@ abstract class GPXParser extends FileParser {
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
     private boolean wptEmptyCoordinates = false;
+    @Nullable private String wptAssignedEmoji = null;
     @Nullable private String cacheAssignedEmoji = null;
     private List<LogEntry> logs = new ArrayList<>();
 
@@ -346,6 +347,7 @@ abstract class GPXParser extends FileParser {
                         wpCombiner.updateNoteAndUserNote(cache.getDescription());
 
                         waypoint.setVisited(wptVisited);
+                        waypoint.setAssignedEmoji(wptAssignedEmoji);
                         final List<Waypoint> mergedWayPoints = new ArrayList<>(cacheForWaypoint.getWaypoints());
 
                         final List<Waypoint> newPoints = new ArrayList<>();
@@ -868,6 +870,9 @@ abstract class GPXParser extends FileParser {
             final Element cgeoEmptyCoords = cacheParent.getChild(cgeoNamespace, "originalCoordsEmpty");
             cgeoEmptyCoords.setEndTextElementListener(originalCoordsEmpty -> wptEmptyCoordinates = Boolean.parseBoolean(originalCoordsEmpty.trim()));
 
+            final Element cgeoWaypointEmoji = cacheParent.getChild(cgeoNamespace, "assignedEmojiText");
+            cgeoWaypointEmoji.setEndTextElementListener(assignedEmoji -> wptAssignedEmoji = assignedEmoji);
+
             final Element cgeo = cacheParent.getChild(cgeoNamespace, "cacheExtension");
             // new emoji entry (Unicode character as text, may be empty)
             final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmojiText");
@@ -968,6 +973,7 @@ abstract class GPXParser extends FileParser {
         wptVisited = false;
         wptUserDefined = false;
         wptEmptyCoordinates = false;
+        wptAssignedEmoji = null;
         cacheAssignedEmoji = null;
         logs = new ArrayList<>();
 
