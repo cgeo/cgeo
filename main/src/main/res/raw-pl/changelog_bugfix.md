@@ -5,7 +5,7 @@
 - Fix: Endless loop on selecting new format in "Calculate coordinate" (#18672)
 - Fix: Log text folding not working (#18653)
 - Fix: Crash in reading variables (#18667)
-- Naprawa awarii: awaria podczas logowania (#18679)
+- Naprawiono: Awaria podczas logowania (#18679)
 - Naprawiono: Awaria podczas próby przeczytania wkładu Wherigo (#18681)
 - Naprawiono: Awaria podczas próby uruchomienia wkładu Wherigo (#18675)
 - Naprawiono: Awaria podczas korzystania z map Google (#18676)
