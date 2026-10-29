@@ -661,6 +661,7 @@
     <string name="cache_filter_checkboxlist_add_items">Lägg till fler objekt</string>
     <string name="cache_filter_checkboxlist_add_all_items">Lägg till alla objekt</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lägg till objekt</string>
+    <string name="cache_filter_cache_icon">Anpassad cache-ikon</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
     <string name="cache_filter_distance_coordinates">Koordinater</string>
