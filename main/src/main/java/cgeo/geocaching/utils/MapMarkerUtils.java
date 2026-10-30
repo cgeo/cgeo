@@ -265,6 +265,7 @@ public final class MapMarkerUtils {
                 .append(waypoint.isVisited())
                 .append(id)
                 .append(waypoint.getMapMarkerId())
+                .append(waypoint.getAssignedEmoji())
                 .append(showPin)
                 .append(applyScaling);
         final Geocache cache = waypoint.getParentGeocache();
@@ -319,16 +320,19 @@ public final class MapMarkerUtils {
                 // do nothing
             }
         }
-        if (stagenum > 0) {
-            insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, stagenum, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
+        final Drawable waypointTypeIcon;
+        if (!StringUtils.isBlank(waypoint.getAssignedEmoji())) {
+            waypointTypeIcon = EmojiUtils.getEmojiDrawable(DisplayUtils.getPxFromDp(res, 19f, 1), waypoint.getAssignedEmoji());
+        } else if (stagenum > 0) {
+            waypointTypeIcon = getStageNumberMarker(res, stagenum, getWaypointScalingFactor(applyScaling));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
-            final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
+            waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
             if (cache != null && (cache.isDisabled() || cache.isArchived())) {
                 DrawableCompat.setTint(waypointTypeIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
-            insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(waypointTypeIcon, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
         }
+        insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(waypointTypeIcon, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
 
         if (cache != null && cache.isArchived()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, getWaypointScalingFactor(applyScaling)));

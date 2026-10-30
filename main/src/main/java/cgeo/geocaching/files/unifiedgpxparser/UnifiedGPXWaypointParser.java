@@ -140,6 +140,7 @@ final class UnifiedGPXWaypointParser {
         boolean wptVisited;
         boolean wptUserDefined;
         boolean wptEmptyCoordinates;
+        String wptAssignedEmoji;
         String assignedEmoji;
 
         // OpenCaching
@@ -215,6 +216,7 @@ final class UnifiedGPXWaypointParser {
                 case "visited":        wptVisited = parseBoolText(parser); break;
                 case "userdefined":    wptUserDefined |= parseBoolText(parser); break;
                 case "originalCoordsEmpty": wptEmptyCoordinates = parseBoolText(parser); break;
+                case "assignedEmojiText": wptAssignedEmoji = UnifiedGPXParser.readText(parser); break;
                 case "cacheExtension": parseCgeoCacheExtension(parser); break;
                 case "terracache":     parseTerracache(parser); break;
                 default:
@@ -269,6 +271,7 @@ final class UnifiedGPXWaypointParser {
                     case "visited":            wptVisited = parseBoolText(parser); break;
                     case "userdefined":        wptUserDefined |= parseBoolText(parser); break;
                     case "originalCoordsEmpty": wptEmptyCoordinates = parseBoolText(parser); break;
+                    case "assignedEmojiText": wptAssignedEmoji = UnifiedGPXParser.readText(parser); break;
                     case "cacheExtension":     parseCgeoCacheExtension(parser); break;
                     case "terracache":         parseTerracache(parser); break;
                     default: UnifiedGPXParser.skipSubtree(parser); break;
@@ -991,6 +994,7 @@ final class UnifiedGPXWaypointParser {
             // split combined note/user-note (separated by "\n--\n")
             new WaypointUserNoteCombiner(wp).updateNoteAndUserNote(cache.getDescription());
             wp.setVisited(wptVisited);
+            wp.setAssignedEmoji(wptAssignedEmoji);
 
             final boolean markUserModifiedCoords = wpType == WaypointType.ORIGINAL;
             return new ChildWaypoint(wp, parentCode, cacheName, wptUserDefined, markUserModifiedCoords);
