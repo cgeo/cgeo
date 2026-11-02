@@ -147,8 +147,9 @@ public class LogPostingService extends AbstractForegroundIntentService {
                 clearOfflineLogAfterSuccess(job.isEdit, () -> {
                     // The offline log is created on exiting the create activity, so clear it after a successful upload.
                     final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                    cache.clearOfflineLog(null);
-                    cache.notifyChange();
+                    if (cache != null) {
+                        cache.clearOfflineLog(null);
+                    }
                 });
             } else {
                 final LogEntry entryToEdit = job.isEdit ? job.oldEntry : null;

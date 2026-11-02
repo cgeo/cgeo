@@ -205,8 +205,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 entry.logType.getL10n(), Formatter.formatShortDateVerbally(entry.date)))
             .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
             .confirm(() -> {
-                DataStore.clearLogOffline(cache.getGeocode());
-                cache.notifyChange();
+                cache.clearOfflineLog(activity);
             });
     }
 

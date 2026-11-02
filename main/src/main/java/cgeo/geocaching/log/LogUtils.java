@@ -362,16 +362,17 @@ public final class LogUtils {
         final List<String> attributes = cache.getAttributes();
 
         // update cache state
+        if (newLogEntry.logType.isVisitLog()) {
+            cache.setVisitedDate(newLogEntry.date);
+        }
         switch (newLogEntry.logType) {
             case WEBCAM_PHOTO_TAKEN:
             case ATTENDED:
             case FOUND_IT:
                 cache.setFound(true);
-                cache.setVisitedDate(newLogEntry.date);
                 break;
             case DIDNT_FIND_IT:
                 cache.setDNF(true);
-                cache.setVisitedDate(newLogEntry.date);
                 break;
             case ARCHIVE:
                 cache.setArchived(true);

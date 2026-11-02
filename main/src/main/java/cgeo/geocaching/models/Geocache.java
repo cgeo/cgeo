@@ -64,7 +64,6 @@ import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
@@ -633,9 +632,10 @@ public class Geocache implements INamedGeoCoordinate {
 
         final boolean status = DataStore.saveLogOffline(geocode, logEntry);
 
-        final Resources res = fromActivity.getResources();
         if (status) {
             DataStore.saveVisitDate(geocode, logEntry.date);
+            setVisitedDate(logEntry.date);
+
             hasLogOffline = Boolean.TRUE;
             if (Settings.removeFromRouteOnLog()) {
                 DataStore.removeFirstMatchingIdFromIndividualRoute(fromActivity, geocode);

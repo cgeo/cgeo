@@ -156,6 +156,13 @@ public enum LogType {
     }
 
     /**
+     * Check if a log of this type sets the visited date of a cache (found logs and DNF).
+     */
+    public final boolean isVisitLog() {
+        return isFoundLog() || this == DIDNT_FIND_IT;
+    }
+
+    /**
      * gets Ids for all log types standing for a "found". Must be synchronized with {@link #isFoundLog()}
      */
     public static Integer[] getFoundLogIds() {

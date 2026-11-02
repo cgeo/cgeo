@@ -267,7 +267,7 @@ final class OkapiClient {
         final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
         final List<LogEntry> logs = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode);
         for (LogEntry log : logs) {
-            if (log.logType == LogType.FOUND_IT || log.logType == LogType.ATTENDED || log.logType == LogType.DIDNT_FIND_IT) {
+            if (log.logType.isVisitLog()) {
                 return log.date;
             }
         }
