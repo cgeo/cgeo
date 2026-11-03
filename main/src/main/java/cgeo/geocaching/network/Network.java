@@ -585,7 +585,11 @@ public final class Network {
      */
     @Nullable
     public static String getResponseData(final Response response, final boolean replaceWhitespace) {
-        return response.isSuccessful() ? getResponseDataNoError(response, replaceWhitespace) : null;
+        if (response.isSuccessful()) {
+            return getResponseDataNoError(response, replaceWhitespace);
+        }
+        response.close();
+        return null;
     }
 
     /**
@@ -618,6 +622,7 @@ public final class Network {
                 if (resp.isSuccessful()) {
                     final MediaType mediaType = MediaType.parse(resp.header("content-type", ""));
                     if (mediaType == null || !Strings.CS.equals(mediaType.type(), "text") || !Strings.CS.equals(mediaType.subtype(), "html")) {
+                        resp.close();
                         throw new IOException("unable to parse non HTML page with media type " + mediaType + " for " + uri);
                     }
                     final InputStream inputStream = resp.body().byteStream();
@@ -628,6 +633,7 @@ public final class Network {
                         resp.close();
                     }
                 }
+                resp.close();
                 throw new IOException("unsuccessful request " + uri);
             } catch (final Throwable t) {
                 return Single.error(t);
@@ -663,13 +669,20 @@ public final class Network {
                 response.close();
             }
         }
+        response.close();
         return Single.error(new IOException("request was not successful: " + response));
     };
 
     /**
-     * Filter only successful responses for use with flatMap.
+     * Filter only successful responses for use with flatMap. Unsuccessful responses are closed.
      */
-    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.error(new IOException("unsuccessful response: " + response));
+    public static final Function<Response, Single<Response>> withSuccess = response -> {
+        if (response.isSuccessful()) {
+            return Single.just(response);
+        }
+        response.close();
+        return Single.error(new IOException("unsuccessful response: " + response));
+    };
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the
