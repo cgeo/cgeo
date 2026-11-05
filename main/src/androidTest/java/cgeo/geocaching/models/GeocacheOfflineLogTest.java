@@ -88,8 +88,23 @@ public class GeocacheOfflineLogTest {
     }
 
     @Test
-    public void storeLogOfflineSetsVisitedDateForNonVisitLog() {
-        assertVisitedDateSetByOfflineLog(LogType.NOTE);
+    public void storeLogOfflineNoteSetsEmptyVisitedDate() {
+        final Geocache cache = createCache(0);
+
+        storeOfflineLog(cache, LogType.NOTE, LOG_DATE);
+
+        assertThat(cache.getVisitedDate()).isEqualTo(LOG_DATE);
+        assertThat(visitedDateInDb()).isEqualTo(LOG_DATE);
+    }
+
+    @Test
+    public void storeLogOfflineNoteKeepsExistingVisitedDate() {
+        final Geocache cache = createCache(OLD_VISIT_DATE);
+
+        storeOfflineLog(cache, LogType.NOTE, LOG_DATE);
+
+        assertThat(cache.getVisitedDate()).isEqualTo(OLD_VISIT_DATE);
+        assertThat(visitedDateInDb()).isEqualTo(OLD_VISIT_DATE);
     }
 
     @Test

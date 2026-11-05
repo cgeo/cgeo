@@ -633,8 +633,11 @@ public class Geocache implements INamedGeoCoordinate {
         final boolean status = DataStore.saveLogOffline(geocode, logEntry);
 
         if (status) {
-            DataStore.saveVisitDate(geocode, logEntry.date);
-            setVisitedDate(logEntry.date);
+            // a non-visit log (e.g. a note) must not overwrite an existing visited date
+            if (logEntry.logType.isVisitLog() || visitedDate == 0) {
+                DataStore.saveVisitDate(geocode, logEntry.date);
+                setVisitedDate(logEntry.date);
+            }
 
             hasLogOffline = Boolean.TRUE;
             if (Settings.removeFromRouteOnLog()) {
