@@ -157,9 +157,11 @@ public final class CacheDetailsCreator {
 
     public void addCacheState(final Geocache cache) {
         final List<String> states = new ArrayList<>(5);
-        String date = getVisitedDate(cache);
+        String date = formatDate(cache.getVisitedDate());
         if (cache.hasLogOffline()) {
-            states.add(LocalizationUtils.getString(R.string.cache_status_offline_log) + date);
+            // use the date of the saved log itself, a refresh may have set the visited date to an older online log (#13975)
+            final LogEntry offlineLog = cache.getOfflineLog();
+            states.add(LocalizationUtils.getString(R.string.cache_status_offline_log) + (offlineLog != null ? formatDate(offlineLog.date) : date));
             // reset the found date, to avoid showing it twice
             date = "";
         }
@@ -189,9 +191,8 @@ public final class CacheDetailsCreator {
         }
     }
 
-    private static String getVisitedDate(final Geocache cache) {
-        final long visited = cache.getVisitedDate();
-        return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
+    private static String formatDate(final long date) {
+        return date != 0 ? " (" + Formatter.formatShortDate(date) + ")" : "";
     }
 
     private static Float distanceNonBlocking(final ICoordinate target) {
