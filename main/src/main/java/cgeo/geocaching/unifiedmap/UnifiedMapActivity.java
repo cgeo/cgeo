@@ -972,8 +972,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         menu.findItem(R.id.menu_map_rotation_auto_precise).setVisible(true); // UnifiedMap supports high precision auto-rotate
 
         // map and theming options
-        menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
-        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
+        // disabled until the map has finished loading (menu gets refreshed by onMapReadyTasks)
+        final boolean mapReady = mapFragment.isMapReady();
+        menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes()).setEnabled(mapReady);
+        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions()).setEnabled(mapReady);
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
 
