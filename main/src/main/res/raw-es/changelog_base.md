@@ -4,6 +4,7 @@
 - Nuevo: Soporte a múltiples proveedores de teselas definidos por el usuario (#18586)
 - Nuevo: Mostrar mapa opcionalmente en la pantalla de bloqueo (#18383)
 - Nuevo: Advertencia si no todos los cachés de una lista pueden mostrarse en el mapa (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### Detalles del caché
 - Nuevo: Alterna la fecha almacenada en el dispositivo entre relativa y exacta (#18393)
@@ -24,3 +25,4 @@
 - Nuevo: Soporte para búsquedas de atributos adicionales en geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
