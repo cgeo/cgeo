@@ -7,9 +7,14 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
@@ -87,6 +92,64 @@ public class DateRangeGeocacheFilterTest {
 
         // Filter from today (offset 0) to far future
         assertSingle(c -> c.setHidden(tomorrow), dd -> dd.setRelativeMinMaxDays(0, Integer.MAX_VALUE), true);
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void localDayBoundariesMatchDatabaseInPositiveAndNegativeTimeZones() {
+        final TimeZone originalTimeZone = TimeZone.getDefault();
+        try {
+            assertLocalDayBoundariesMatchDatabase("Asia/Tokyo");
+            assertLocalDayBoundariesMatchDatabase("America/Los_Angeles");
+        } finally {
+            TimeZone.setDefault(originalTimeZone);
+        }
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void configuredDaySurvivesTimeZoneChangeInLogicAndDatabase() {
+        final TimeZone originalTimeZone = TimeZone.getDefault();
+        try {
+            assertConfiguredDaySurvivesTimeZoneChange("Asia/Tokyo", "America/Los_Angeles");
+            assertConfiguredDaySurvivesTimeZoneChange("America/Los_Angeles", "Asia/Tokyo");
+        } finally {
+            TimeZone.setDefault(originalTimeZone);
+        }
+    }
+
+    private void assertConfiguredDaySurvivesTimeZoneChange(final String sourceZoneId, final String targetZoneId) {
+        final ZoneId sourceZone = TimeZone.getTimeZone(sourceZoneId).toZoneId();
+        final ZoneId targetZone = TimeZone.getTimeZone(targetZoneId).toZoneId();
+        final LocalDate localDate = LocalDate.of(2025, 1, 1);
+        final Date selectedDate = Date.from(localDate.atTime(LocalTime.NOON).atZone(sourceZone).toInstant());
+        final Instant targetStart = localDate.atStartOfDay(targetZone).toInstant();
+        final Instant targetNextStart = localDate.plusDays(1).atStartOfDay(targetZone).toInstant();
+        final Action1<DateRangeGeocacheFilter> configureBeforeTimeZoneChange = filter -> {
+            TimeZone.setDefault(TimeZone.getTimeZone(sourceZoneId));
+            filter.setMinMaxDate(selectedDate, selectedDate);
+            TimeZone.setDefault(TimeZone.getTimeZone(targetZoneId));
+        };
+
+        assertSingle(c -> c.setHidden(Date.from(targetStart)), configureBeforeTimeZoneChange, true);
+        assertSingle(c -> c.setHidden(Date.from(targetNextStart.minusMillis(1))), configureBeforeTimeZoneChange, true);
+        assertSingle(c -> c.setHidden(Date.from(targetStart.minusMillis(1))), configureBeforeTimeZoneChange, false);
+        assertSingle(c -> c.setHidden(Date.from(targetNextStart)), configureBeforeTimeZoneChange, false);
+    }
+
+    private void assertLocalDayBoundariesMatchDatabase(final String zoneId) {
+        final TimeZone timeZone = TimeZone.getTimeZone(zoneId);
+        TimeZone.setDefault(timeZone);
+        final ZoneId zone = timeZone.toZoneId();
+        final LocalDate localDate = LocalDate.of(2025, 1, 1);
+        final Date selectedDate = Date.from(localDate.atTime(LocalTime.NOON).atZone(zone).toInstant());
+        final Instant startOfDay = localDate.atStartOfDay(zone).toInstant();
+        final Instant startOfNextDay = localDate.plusDays(1).atStartOfDay(zone).toInstant();
+
+        assertSingle(c -> c.setHidden(Date.from(startOfDay)), dd -> dd.setMinMaxDate(selectedDate, selectedDate), true);
+        assertSingle(c -> c.setHidden(Date.from(startOfNextDay.minusMillis(1))), dd -> dd.setMinMaxDate(selectedDate, selectedDate), true);
+        assertSingle(c -> c.setHidden(Date.from(startOfDay.minusMillis(1))), dd -> dd.setMinMaxDate(selectedDate, selectedDate), false);
+        assertSingle(c -> c.setHidden(Date.from(startOfNextDay)), dd -> dd.setMinMaxDate(selectedDate, selectedDate), false);
     }
 
     @Test

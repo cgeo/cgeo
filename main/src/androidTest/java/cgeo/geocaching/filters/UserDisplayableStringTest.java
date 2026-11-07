@@ -2,7 +2,6 @@ package cgeo.geocaching.filters;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
-import cgeo.geocaching.filters.core.DateFilter;
 import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -16,7 +15,9 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.filters.core.UserDisplayableStringUtils;
 import cgeo.geocaching.utils.functions.Action2;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Stack;
@@ -61,18 +62,19 @@ public class UserDisplayableStringTest {
 
         Locale.setDefault(Locale.US);
 
+        final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         final Date minValue;
         final Date maxValue;
         try {
-            minValue = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.parse("2022-04-06");
-            maxValue = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.parse("2022-06-06");
+            minValue = formatter.parse("2022-04-06");
+            maxValue = formatter.parse("2022-06-06");
         } catch (ParseException pe) {
             fail("Problem parsing the test dates");
             return;
         }
 
-        final String minValueOutput = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.format(minValue);
-        final String maxValueOutput = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.format(maxValue);
+        final String minValueOutput = formatter.format(minValue);
+        final String maxValueOutput = formatter.format(maxValue);
 
         testUserDisplayStringsForRange(f, f::setMinMaxDate, minValue, maxValue, minValueOutput, maxValueOutput);
     }
