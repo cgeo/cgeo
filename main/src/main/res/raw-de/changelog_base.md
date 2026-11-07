@@ -4,6 +4,7 @@
 - Neu: Unterstützt mehrere benutzerdefinierte Kartenanbieter (#18586)
 - Neu: Karte optional auf dem Sperrbildschirm anzeigen (#18383)
 - Neu: Warnung, wenn nicht alle Caches einer Liste auf der Karte angezeigt werden können (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### Cache-Details
 - Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut (#18393)
@@ -24,3 +25,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
