@@ -41,3 +41,15 @@
 - Fix: Handling of dropped trackables (#16203)
 - Fix: Handling when ignoring unsaved caches (#9445)
 
+##
+- Fix: "Skanna efter vägpunkt-formler" bevarar inte ordning (#18749)
+- Fix: Krasch vid markering av sökresultat (#18831)
+- Fix: Krasch på kartan (#18805) (#18832) (#18834)
+- Fix: Ägarfilter inkluderar inte Adventure Labs (#18840)
+- Fix: Krasch för spårbara objekt (#18813)
+- Fix: Rubrik hash-tecken i loggtexter som inte hanteras korrekt (#16147)
+- Fix: Bilderna skalas ner för mycket på bildfliken (#18808)
+- Fix: Krasch vid namnbyte av rutt (#18810)
+- Fix: Krasch i bildhantering (#18002)
+- Fix: Krasch på loggsidan när översättare ännu inte är tillgänglig (#18800)
+- Nytt: Valfri minnesdump vid fel "slut på minne" (#18822)
