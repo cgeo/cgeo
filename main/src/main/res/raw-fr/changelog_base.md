@@ -4,6 +4,7 @@
 - Nouveau : prise en charge de multiples fournisseurs de tuiles définis par l'utilisateur (#18586)
 - New: Optionally show map on lock screen (#18383)
 - New: Warning if not all caches of a list can be displayed on the map (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### Détails de la cache
 - Nouveau : Basculer la date stockée sur l'appareil entre la date relative et la date exacte (#18393)
@@ -24,3 +25,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
