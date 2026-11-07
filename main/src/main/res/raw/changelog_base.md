@@ -4,6 +4,7 @@
 - New: Support multiple user-defined tile providers (#18586)
 - New: Optionally show map on lock screen (#18383)
 - New: Warning if not all caches of a list can be displayed on the map (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### Cache details
 - New: Toggle stored-on-device date between relative and exact (#18393)
