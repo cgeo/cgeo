@@ -90,8 +90,8 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Scandinavia-SouthWest");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB / 2.1GB as of 5.11.23
-        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        final String sizeInfoString = d.getSizeInfo(); // 1.7 GiB / 2.1 GiB as of 5.11.23
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 4));
         assertThat(sizeInfoFloat).isBetween(1.6F, 2.5F);
     }
 
@@ -130,8 +130,8 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Freizeitkarte Hamburg");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 20.11 MB
-        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        final String sizeInfoString = d.getSizeInfo(); // 20.1 MiB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 4));
         assertThat(sizeInfoFloat).isBetween(17.8F, 25.0F);
     }
 
@@ -151,8 +151,8 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Outdoor design contrast v5");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 351.6 KB
-        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        final String sizeInfoString = d.getSizeInfo(); // 351.6 KiB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 4));
         assertThat(sizeInfoFloat).isBetween(350.0F, 360.0F);
     }
 
@@ -173,7 +173,7 @@ public class DownloaderTest {
         final Download d = findByName(list, "E5_N50.rd5");
         assertThat(d).isNotNull();
         final String sizeInfoString = d.getSizeInfo(); // 178328254 byte as of 2025-10-07
-        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 4));
         assertThat(sizeInfoFloat).isBetween(120.0F, 250.0F);
     }
 }

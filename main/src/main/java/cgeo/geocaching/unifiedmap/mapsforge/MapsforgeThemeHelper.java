@@ -74,10 +74,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final String ZIP_THEME_SEPARATOR = ":";
 
-    private static final int ZIP_FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
-    private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MB
+    private static final int ZIP_FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MiB
+    private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MiB
 
-    private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
+    private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; // 5 MiB
 
     private static final int AVAILABLE_THEMES_SCAN_MAXDEPTH = 2;
 
