@@ -686,13 +686,13 @@ public final class Network {
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the
-     * request does not complete successfully.success status.
+     * request does not complete successfully. The response is closed in either case, as its body is not needed.
      *
      * @param response the response to check
      */
     @NonNull
     public static Completable completeWithSuccess(final Single<Response> response) {
-        return Completable.fromSingle(response.flatMap(withSuccess));
+        return Completable.fromSingle(response.flatMap(withSuccess).doOnSuccess(Response::close));
     }
 
     public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(TextUtils::replaceWhitespace);
