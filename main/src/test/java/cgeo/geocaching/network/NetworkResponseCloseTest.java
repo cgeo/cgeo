@@ -75,6 +75,20 @@ public class NetworkResponseCloseTest {
     }
 
     @Test
+    public void completeWithSuccessClosesSuccessfulResponse() {
+        final TrackingBody body = new TrackingBody();
+        Network.completeWithSuccess(Single.just(response(200, body))).blockingAwait();
+        assertThat(body.closed).isTrue();
+    }
+
+    @Test
+    public void completeWithSuccessClosesUnsuccessfulResponse() {
+        final TrackingBody body = new TrackingBody();
+        assertThatThrownBy(() -> Network.completeWithSuccess(Single.just(response(404, body))).blockingAwait()).hasCauseInstanceOf(IOException.class);
+        assertThat(body.closed).isTrue();
+    }
+
+    @Test
     public void getResponseStreamClosesUnsuccessfulResponse() {
         final TrackingBody body = new TrackingBody();
         assertThat(Network.getResponseStream(Single.just(response(404, body)))).isNull();
