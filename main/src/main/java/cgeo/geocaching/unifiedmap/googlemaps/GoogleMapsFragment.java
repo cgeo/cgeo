@@ -320,6 +320,10 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void selectThemeOptions(final Activity activity) {
+        // map and tile provider are only set once the map is ready
+        if (mMap == null || !(currentTileProvider instanceof AbstractGoogleTileProvider)) {
+            return;
+        }
         final int mapType = ((AbstractGoogleTileProvider) currentTileProvider).getMapType();
         GoogleMapsThemeHelper.selectThemeOptions(activity, mapType, mMap, scaleDrawer);
     }

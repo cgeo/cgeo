@@ -4532,7 +4532,7 @@ public class DataStore {
     }
 
     /**
-     * Returns an SQL expression calculation the SQUARE (!) distance between two coordinates in meters.
+     * Returns an SQL expression calculation the SQUARE (!) distance between two coordinates in km.
      * Note that given (String) values for lat1/lon1 can be either numbers or e.g. SQL column names/expressions.
      * lat/lon2, however, must be numbers for our calculation tricks to work.... (hey, this is SQL we're talking about!)
      */
@@ -4549,7 +4549,7 @@ public class DataStore {
         final double lon2 = latlon2.getLongitude();
 
         //Unfortunately, SQLite in our version does not know functions like COS, SQRT or PI. So we have to perform some tricks...
-        final String dxExceptLon1Lon2Square = String.valueOf(Math.pow(Math.cos(lat2 * Math.PI / 180 * 0.01745) * 111.3, 2));
+        final String dxExceptLon1Lon2Square = String.valueOf(Math.pow(Math.cos(Math.toRadians(lat2)) * 111.3, 2));
         final String dyExceptLat1Lat2Square = String.valueOf(Math.pow(111.3, 2));
 
         final String dxSquare = "(" + dxExceptLon1Lon2Square + " * (" + lon1 + " - " + lon2 + ") * (" + lon1 + " - " + lon2 + "))";

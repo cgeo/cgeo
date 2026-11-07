@@ -162,6 +162,11 @@ public abstract class AbstractMapFragment extends Fragment {
         return false;
     }
 
+    /** tile source gets set by the map ready tasks, so this is false until the map has finished loading */
+    public boolean isMapReady() {
+        return currentTileProvider != null;
+    }
+
     // ========================================================================
     // layer handling
 
