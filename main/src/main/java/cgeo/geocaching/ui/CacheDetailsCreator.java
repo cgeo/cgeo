@@ -9,6 +9,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogUtils;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
@@ -157,9 +158,10 @@ public final class CacheDetailsCreator {
 
     public void addCacheState(final Geocache cache) {
         final List<String> states = new ArrayList<>(5);
-        String date = getVisitedDate(cache);
+        String date = formatStateDate(cache.getVisitedDate());
         if (cache.hasLogOffline()) {
-            states.add(LocalizationUtils.getString(R.string.cache_status_offline_log) + date);
+            final OfflineLogEntry offlineLog = cache.getOfflineLog();
+            states.add(LocalizationUtils.getString(R.string.cache_status_offline_log) + (offlineLog != null ? formatStateDate(offlineLog.date) : ""));
             // reset the found date, to avoid showing it twice
             date = "";
         }
@@ -189,9 +191,8 @@ public final class CacheDetailsCreator {
         }
     }
 
-    private static String getVisitedDate(final Geocache cache) {
-        final long visited = cache.getVisitedDate();
-        return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
+    private static String formatStateDate(final long date) {
+        return date != 0 ? " (" + Formatter.formatShortDate(date) + ")" : "";
     }
 
     private static Float distanceNonBlocking(final ICoordinate target) {

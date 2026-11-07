@@ -347,8 +347,8 @@ public final class Formatter {
     public static String formatCacheInfoHistory(final Geocache cache) {
         final List<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getShortGeocode()));
-        infos.add(formatDate(cache.getVisitedDate()));
-        infos.add(formatTime(cache.getVisitedDate()));
+        infos.add(formatDate(cache.getHistoryDate()));
+        infos.add(formatTime(cache.getHistoryDate()));
         return StringUtils.join(infos, SEPARATOR);
     }
 

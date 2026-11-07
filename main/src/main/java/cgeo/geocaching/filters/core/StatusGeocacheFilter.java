@@ -558,7 +558,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     private boolean hasFoundOfflineLog(final Geocache cache) {
         if (cache.hasLogOffline()) {
-            return cache.getOfflineLog().logType.isFoundLog();
+            final LogType offlineLogType = cache.getOfflineLogType();
+            return offlineLogType != null && offlineLogType.isFoundLog();
         }
         return false;
     }
