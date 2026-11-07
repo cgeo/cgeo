@@ -73,6 +73,8 @@ public class CoordinateInputDialog {
     private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
     private Geopoint gp;
+    /** text of the input fields as written for gp, to detect whether the user changed the coordinates */
+    private String guiTextForGp = null;
     private static Geopoint cacheCoordinates;
     private final CompositeDisposable geoDisposable = new CompositeDisposable();
     private CoordinateDialogDisplayModeEnum waypointOptions = CoordinateDialogDisplayModeEnum.Normal;
@@ -363,6 +365,12 @@ public class CoordinateInputDialog {
 
         final String result = readGui();
 
+        // input fields show the coordinates in the selected format only (e.g. DDD° MM.MMM), so use them only if changed by the user (#14714)
+        if (gp != null && result.equals(guiTextForGp)) {
+            callback.onDialogClosed(gp);
+            return true;
+        }
+
         try {
             final Geopoint entered = new Geopoint(result);
             if (entered.isValid()) {
@@ -414,6 +422,11 @@ public class CoordinateInputDialog {
 
     // Refresh the text fields according to the selected coordinate format
     private void updateGui() {
+        updateGuiFields();
+        guiTextForGp = readGui();
+    }
+
+    private void updateGuiFields() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
             eLatFrame.setVisibility(View.VISIBLE);
