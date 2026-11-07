@@ -1,5 +1,6 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
@@ -13,7 +14,8 @@ public class OfflineLogGeocacheFilter extends StringGeocacheFilter {
         if (!getStringFilter().isFilled()) {
             return "";
         }
-        return cache.hasLogOffline() && cache.getOfflineLog() != null ? cache.getOfflineLog().log : "";
+        final OfflineLogEntry offlineLog = cache.getOfflineLog();
+        return offlineLog != null ? offlineLog.log : "";
     }
 
     @Override

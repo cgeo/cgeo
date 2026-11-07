@@ -526,7 +526,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         final float rating = cache.getRating();
         holder.binding.favorite.setBackgroundResource(rating >= 3.5 ? R.drawable.favorite_background_green : rating >= 2.1 ? R.drawable.favorite_background_orange : rating > 0.0 ? R.drawable.favorite_background_red : R.drawable.favorite_background);
 
-        if (isHistory() && cache.getVisitedDate() > 0) {
+        if (isHistory() && cache.getHistoryDate() > 0) {
             holder.binding.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
             holder.binding.info.setText(Formatter.formatCacheInfoLong(cache, storedLists, currentListTitle));
