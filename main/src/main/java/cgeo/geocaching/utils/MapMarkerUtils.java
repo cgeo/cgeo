@@ -130,6 +130,7 @@ public final class MapMarkerUtils {
                 .append(cache.hasLogOffline())
                 .append(cache.getLists().isEmpty())
                 .append(cache.getOfflineLogType())
+                .append(getOfflineLogReportProblem(cache))
                 .append(showPin(cacheListType))
                 .append(showFloppyOverlay(cacheListType))
                 .append(assignedMarkers)
@@ -377,6 +378,7 @@ public final class MapMarkerUtils {
                 .append(cache.isArchived())
                 .append(cache.hasLogOffline())
                 .append(cache.getOfflineLogType())
+                .append(getOfflineLogReportProblem(cache))
                 .append(cache.hasUserModifiedCoords())
                 .append(cache.hasFinalDefined())
                 .toHashCode();
@@ -614,6 +616,13 @@ public final class MapMarkerUtils {
             }
         }
         return cache.getType().iconId;
+    }
+
+    /** report problem of offline log, as NOTE logs may be NM or NA logs with different markers */
+    @Nullable
+    private static ReportProblemType getOfflineLogReportProblem(final Geocache cache) {
+        final LogEntry offlineLog = cache.getOfflineLog();
+        return offlineLog != null ? offlineLog.reportProblem : null;
     }
 
     @Nullable
