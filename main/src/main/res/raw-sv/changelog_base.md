@@ -4,6 +4,7 @@
 - Nytt: Stöd flera användardefinierade rutleverantörer (#18586)
 - Nyhet: Visa karta på låsskärmen som tillval (#18383)
 - New: Warning if not all caches of a list can be displayed on the map (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### Cachedetaljer
 - Nytt: Växla lagrad-på-enhetens-datum mellan relativ och exakt (#18393)
@@ -24,3 +25,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
