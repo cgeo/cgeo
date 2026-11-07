@@ -185,7 +185,7 @@ public class OsLib implements JavaFunction {
 
     public static String formatTime(String format, Calendar cal) {
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int stringIndex = 0; stringIndex < format.length(); stringIndex ++) {
             if (format.charAt(stringIndex) != '%' || stringIndex + 1 == format.length()) { // no conversion specifier?
                 buffer.append(format.charAt(stringIndex));

@@ -66,7 +66,7 @@ public class Timer extends EventTable {
     private static final int INTERVAL = 1;
     private int type = COUNTDOWN;
 
-    private static final Double ZERO = new Double(0);
+    private static final Double ZERO = Double.valueOf(0);
 
     private long duration = -1;
     private long lastTick = 0;
@@ -79,8 +79,7 @@ public class Timer extends EventTable {
     }
 
     protected void setItem (String key, Object value) {
-        if ("Type".equals(key) && value instanceof String) {
-            String v = (String)value;
+        if ("Type".equals(key) && value instanceof String v) {
             int t = type;
             if ("Countdown".equals(v)) {
                 t = COUNTDOWN;

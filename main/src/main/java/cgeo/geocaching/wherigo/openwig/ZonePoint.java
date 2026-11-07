@@ -8,7 +8,8 @@ import org.apache.commons.collections4.IteratorUtils;
 
 import java.io.*;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Iterator;
 
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
@@ -81,19 +82,19 @@ public class ZonePoint implements LuaTable, Serializable {
         return distance(z.latitude, z.longitude, latitude, longitude);
     }
 
-    public static final Hashtable conversions = new Hashtable(6);
+    public static final HashMap<String, Double> conversions = new HashMap<>(6);
     static {
-        conversions.put("feet", new Double(0.3048));
-        conversions.put("ft", new Double(0.3048));
-        conversions.put("miles", new Double(1609.344));
-        conversions.put("meters", new Double(1));
-        conversions.put("kilometers", new Double(1000));
-        conversions.put("nauticalmiles", new Double(1852));
+        conversions.put("feet", Double.valueOf(0.3048));
+        conversions.put("ft", Double.valueOf(0.3048));
+        conversions.put("miles", Double.valueOf(1609.344));
+        conversions.put("meters", Double.valueOf(1));
+        conversions.put("kilometers", Double.valueOf(1000));
+        conversions.put("nauticalmiles", Double.valueOf(1852));
     }
 
     public static double convertDistanceTo (double value, String unit) {
         if (unit != null && conversions.containsKey(unit)) {
-            return value / ((Double)conversions.get(unit)).doubleValue();
+            return value / (conversions.get(unit)).doubleValue();
         } else {
             return value;
         }
@@ -101,7 +102,7 @@ public class ZonePoint implements LuaTable, Serializable {
 
     public static double convertDistanceFrom (double value, String unit) {
         if (unit != null && conversions.containsKey(unit)) {
-            return value * ((Double)conversions.get(unit)).doubleValue();
+            return value * (conversions.get(unit)).doubleValue();
         } else {
             return value;
         }
