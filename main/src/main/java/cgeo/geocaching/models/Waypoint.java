@@ -72,6 +72,7 @@ public class Waypoint implements INamedGeoCoordinate {
     private boolean own = false;
 
     private boolean visited = false;
+    @Nullable private String assignedEmoji;
     private boolean originalCoordsEmpty = false;
 
     private String calcStateConfig = null;
@@ -160,6 +161,9 @@ public class Waypoint implements INamedGeoCoordinate {
             id = old.id;
         }
         visited = old.visited;
+        if (assignedEmoji == null) {
+            assignedEmoji = old.assignedEmoji;
+        }
 
         if (projectionType == ProjectionType.NO_PROJECTION && old.projectionType != ProjectionType.NO_PROJECTION) {
             projectionType = old.projectionType;
@@ -544,6 +548,15 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public boolean isOriginalCoordsEmpty() {
         return originalCoordsEmpty;
+    }
+
+    @Nullable
+    public String getAssignedEmoji() {
+        return assignedEmoji;
+    }
+
+    public void setAssignedEmoji(@Nullable final String assignedEmoji) {
+        this.assignedEmoji = assignedEmoji;
     }
 
     public void setOriginalCoordsEmpty(final boolean originalCoordsEmpty) {

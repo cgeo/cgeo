@@ -138,12 +138,25 @@
                 android:layout_marginBottom="16dp"
                 tools:listitem="@android:layout/simple_spinner_item" />
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:hint="@string/waypoint_name" android:labelFor="@id/name" android:id="@+id/name_layout">
-                <AutoCompleteTextView
-                    android:id="@+id/name"
-                    style="@style/textinput_embedded_singleline" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/set_waypoint_icon"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_emoticons" />
+
+                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+                    android:hint="@string/waypoint_name" android:labelFor="@id/name" android:id="@+id/name_layout">
+                    <AutoCompleteTextView
+                        android:id="@+id/name"
+                        style="@style/textinput_embedded_singleline" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/note_layout"
