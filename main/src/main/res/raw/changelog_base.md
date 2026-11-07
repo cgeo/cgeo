@@ -24,3 +24,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
