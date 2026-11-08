@@ -492,7 +492,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType() == WaypointType.ORIGINAL;
             menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
-            menu.findItem(R.id.menu_waypoint_geofence).setVisible(selectedWaypoint.canChangeGeofence());
             menu.findItem(R.id.menu_waypoint_visited).setVisible(!selectedWaypoint.isVisited());
             menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint || selectedWaypoint.belongsToUserDefinedCache());
@@ -521,27 +520,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 ensureSaved();
                 EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
                 setNeedsRefresh();
-            }
-        } else if (itemId == R.id.menu_waypoint_geofence) {
-            if (selectedWaypoint != null) {
-                ensureSaved();
-                SimpleDialog.of(this)
-                        .setTitle(TextParam.id(R.string.waypoint_geofence))
-                        .setMessage(TextParam.id(R.string.waypoint_geofence_summary))
-                        .input(
-                                new SimpleDialog.InputOptions().setInitialValue(String.valueOf(selectedWaypoint.getGeofence())).setInputType(InputType.TYPE_CLASS_NUMBER),
-                                result -> {
-                                    float newValue = 0;
-                                    try {
-                                        newValue = Float.parseFloat(result);
-                                    } catch (NumberFormatException ignore) {
-                                        // ignore
-                                    }
-                                    selectedWaypoint.setGeofence(newValue);
-                                    saveAndNotify();
-                                }
-                );
-                refreshOnResume = true;
             }
         } else if (itemId == R.id.menu_waypoint_visited) {
             if (selectedWaypoint != null) {
