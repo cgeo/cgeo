@@ -760,7 +760,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // submenu advanced
             menu.findItem(R.id.menu_ignore).setVisible(connector instanceof IIgnoreCapability && ((IIgnoreCapability) connector).canIgnoreCache(cache));
             menu.findItem(R.id.menu_set_cache_icon).setVisible(true);
-            menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
+            menu.findItem(R.id.menu_advanced).setVisible(true);
             menu.findItem(R.id.menu_change_description_style).setVisible(!DescriptionViewCreator.useMarkdown(cache));
         }
 
