@@ -421,6 +421,17 @@ public class FormulaUtilsTest {
 
         assertScanCoordinates("N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n", "N 45° A.B(C+D)'|E 9° (A-B).(2*D)EF");
         assertScanCoordinates("N 45° A.B(C+D!) E 9°(A-B).(2*D)EF", "N 45° A.B(C+D!)|E 9°(A-B).(2*D)EF");
+
+        //from Issue #18884: typographic minute sign (U+2019) as produced by text editors
+        assertScanCoordinates("Final: N 47° 0A.BCD’ E 008° 3E.FGH\n\nFinalberechnung", "N 47° 0A.BCD'|E 008° 3E.FGH");
+    }
+
+    @Test
+    public void scanForCoordinatesTypographicLookalikes() {
+        //Issue #18884
+        assertScanCoordinates("N48º 12.ABC’ E10º 67.DEF’", "N48° 12.ABC'|E10° 67.DEF'");
+        assertScanCoordinates("N48˚ 12.ABC′ E10˚ 67.DEF′", "N48° 12.ABC'|E10° 67.DEF'");
+        assertScanCoordinates("N48° 12‘ 34” E10° 67´ 89″", "N48° 12' 34\"|E10° 67' 89\"");
     }
 
     @Test

@@ -61,6 +61,13 @@ public class FormulaUtils {
             "(?<lat>[nNsS](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\s*([a-zA-Z,()-]{2,}\\s+){0,3}(?<lon>[eEwWoO](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
 
+    // ’ ‘ ′ ´ (right/left single quote, prime, acute accent)
+    private static final Pattern SCAN_MINUTE_LOOKALIKES = Pattern.compile("[’‘′´]");
+    // ” “ ″ (right/left double quote, double prime)
+    private static final Pattern SCAN_SECOND_LOOKALIKES = Pattern.compile("[”“″]");
+    // º ˚ (masculine ordinal indicator, ring above)
+    private static final Pattern SCAN_DEGREE_LOOKALIKES = Pattern.compile("[º˚]");
+
     private static final Pattern DEGREE_TRAILINGSTUFF_REMOVER = Pattern.compile("(\\s+[a-zA-Z]{2,}|[.,(\\[+:*/-])$");
 
     private static final Map<Character, Integer> SPECIAL_LETTER_VALUE_MAP = new HashMap<>();
@@ -326,8 +333,14 @@ public class FormulaUtils {
     }
 
     private static String preprocessScanText(final String text) {
-        return text.replaceAll("\\h|\\s", " ").trim()
+        final String normalized = text.replaceAll("\\h|\\s", " ").trim()
                 .replace(',', '.');
+        //normalize typographic look-alikes of degree, minute and second signs (e.g. from text editors) to their plain ASCII/Latin-1 counterparts
+        return SCAN_DEGREE_LOOKALIKES.matcher(
+                SCAN_SECOND_LOOKALIKES.matcher(
+                        SCAN_MINUTE_LOOKALIKES.matcher(normalized).replaceAll("'")
+                ).replaceAll("\"")
+        ).replaceAll("°");
     }
 
     private static String processFoundDegree(final String degree) {
