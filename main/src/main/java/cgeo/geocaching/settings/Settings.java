@@ -1109,6 +1109,21 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    /**
+     * Whether friends', own and owner logs are shown in a separate logbook tab
+     * instead of being filterable within the regular logbook tab.
+     */
+    public static boolean isFriendLogsSeparateTab() {
+        return getBoolean(R.string.pref_friendlogs_separate_tab, false);
+    }
+
+    /**
+     * Whether owner logs are loaded through an additional request (to also get older owner logs).
+     */
+    public static boolean isLoadOwnerLogs() {
+        return getBoolean(R.string.pref_load_owner_logs, true);
+    }
+
     public static float getSaturationOffset(final boolean isLightTheme) {
         final int saturationOffset;
         if (isLightTheme) {

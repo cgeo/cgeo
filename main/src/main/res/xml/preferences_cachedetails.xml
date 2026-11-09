@@ -78,8 +78,20 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_friendlogswanted"
-            android:summary="@string/init_summary_friends_and_own_logs_wanted"
-            android:title="@string/init_friends_and_own_logs_wanted"
+            android:summary="@string/init_summary_friend_logs_wanted"
+            android:title="@string/init_friend_logs_wanted"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_load_owner_logs"
+            android:summary="@string/init_summary_load_owner_logs"
+            android:title="@string/init_load_owner_logs"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_friendlogs_separate_tab"
+            android:summary="@string/init_summary_friendlogs_separate_tab"
+            android:title="@string/init_friendlogs_separate_tab"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
