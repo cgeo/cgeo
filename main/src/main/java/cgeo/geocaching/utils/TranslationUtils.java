@@ -30,7 +30,7 @@ import org.apache.commons.lang3.Strings;
 /** Utilities used for (c:geo-external) translation */
 public final class TranslationUtils {
 
-    public enum Translator {
+    public enum Translator implements DisplayNameEnum {
         NONE(R.string.translate_external_none, null, null),
         EXTERNAL_APP(R.string.translate_external_app, APP_PACKAGE_ANYAPP, null),
         GOOGLE(R.string.translate_external_google, "com.google.android.apps.translate", WEB_GOOGLE_URL),
@@ -47,7 +47,8 @@ public final class TranslationUtils {
             this.urlPattern = urlPattern;
         }
 
-        public String toUserDisplayableString() {
+        @Override
+        public String getDisplayName() {
             final StringBuilder sb = new StringBuilder(LocalizationUtils.getString(nameId));
             if (this.appPackageName != null && !APP_PACKAGE_ANYAPP.equals(this.appPackageName)) {
                 sb
@@ -104,7 +105,7 @@ public final class TranslationUtils {
 
     @NonNull
     public static CharSequence getTranslationName() {
-        return getTranslator().toUserDisplayableString();
+        return getTranslator().getDisplayName();
     }
 
     @NonNull
