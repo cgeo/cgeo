@@ -1740,7 +1740,8 @@ public final class GCParser {
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
                 getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
-        final Observable<LogEntry> ownerLogs = getLogs(userToken, Logs.OWNER).cache();
+        final Observable<LogEntry> ownerLogs = Settings.isLoadOwnerLogs() ?
+                getLogs(userToken, Logs.OWNER).cache() : Observable.empty();
 
         final List<LogEntry> logsBlocked = logs.toList().blockingGet();
         final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
