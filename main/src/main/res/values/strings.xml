@@ -1165,8 +1165,12 @@
     <string name="init_signature_template_tblocation_geocache_name">Trackable - Geocache name</string>
     <string name="init_signature_template_tblocation_user">Trackable - User</string>
     <string name="init_summary_bettercacher">Load cache tier and categories from BetterCacher.org</string>
-    <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
-    <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
+    <string name="init_friend_logs_wanted">Load friends\' logs</string>
+    <string name="init_summary_friend_logs_wanted">Additionally load the logs of your friends</string>
+    <string name="init_load_owner_logs">Load owner logs</string>
+    <string name="init_summary_load_owner_logs">Additionally load the logs of the cache owner, including older ones</string>
+    <string name="init_friendlogs_separate_tab">Separate tab for friends\'/own logs</string>
+    <string name="init_summary_friendlogs_separate_tab">Display friends\', own and owner logs on an additional logbook page instead of filtering them within the logbook</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_address">Show Address</string>
