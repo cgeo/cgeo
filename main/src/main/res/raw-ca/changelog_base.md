@@ -4,7 +4,7 @@
 - Novetat: Suport per a múltiples proveïdors de tessel·les definits per l'usuari (#18586)
 - Novetat: opció de mostrar el mapa a la pantalla de bloqueig (#18383)
 - Novetat: Avís si no es poden mostrar al mapa tots els catxés d'una llista (#18506)
-- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
+- Canvi: Carregar al mapa només les pistes activades, GeoJSON, etc. (#18236)
 
 ### Detalls del catxé
 - Novetat: Alterna la data emmagatzemada al dispositiu entre relativa i exacta (#18393)
@@ -25,4 +25,4 @@
 - Novetat: Suport per a cerques d'atributs addicionals a geocaching.com (#18731)
 - Nou: Operació en bloc per a «desar punts de referencia & variables en una nota personal» (#18783)
 - Nou: Admet codis rastrejables des del porta-retalls a la cerca de codis rastrejables (#17101)
-- Change: Limit hidden date picker range to "2000-next year" (#18790)
+- Canvi: Limitar el rang del selector de dates ocult a «2000 – any vinent» (#18790)
