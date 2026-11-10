@@ -29,13 +29,13 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
     }
 
     /**
-     * Radar apps are only usable if some activity actually handles the radar intent action.
+     * Radar apps are only usable if an activity of the radar app actually handles the radar intent action.
      * Having the package installed is not sufficient (e.g. GPS Status and Toolbox 12.x
      * no longer handles {@code com.google.android.radar.SHOW_RADAR}, see #18889).
      */
     @Override
     public boolean isInstalled() {
-        return ProcessUtils.isIntentAvailable(intentAction);
+        return ProcessUtils.isActivityAvailable(createRadarIntent());
     }
 
     /**
@@ -43,8 +43,16 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
      */
     @NonNull
     protected Intent createIntent(@NonNull final Geopoint point, @Nullable final String name) {
-        final Intent intent = new Intent(intentAction);
+        final Intent intent = createRadarIntent();
         addCoordinates(intent, point);
+        return intent;
+    }
+
+    @NonNull
+    private Intent createRadarIntent() {
+        final Intent intent = new Intent(intentAction);
+        // restrict to the radar app, other apps may handle the same action as well
+        intent.setPackage(getPackageName());
         return intent;
     }
 
