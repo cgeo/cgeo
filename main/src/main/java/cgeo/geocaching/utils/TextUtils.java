@@ -318,6 +318,51 @@ public final class TextUtils {
         return false;
     }
 
+    /**
+     * Corrects the end of a web link Linkify has found at {@code start} to {@code end} in {@code text}.
+     * Slashes and closing brackets that close an opening bracket inside the link are taken in when they follow
+     * directly after the link, but not beyond {@code limit}.
+     * Then trailing punctuation and closing brackets without an opening bracket inside the link are cut off,
+     * so "(see https://example.com/page)" and "[name](https://example.com/page)" end before ")",
+     * while "https://en.wikipedia.org/wiki/Mercury_(planet)" keeps it. Everything else Linkify found stays as it is.
+     */
+    public static int getWebLinkEnd(@NonNull final CharSequence text, final int start, final int end, final int limit) {
+        int newEnd = end;
+        while (newEnd < limit) {
+            final char c = text.charAt(newEnd);
+            if (c == '/'
+                    || (c == ')' && !hasUnmatchedClosingBracket(text, start, newEnd + 1, '(', ')'))
+                    || (c == ']' && !hasUnmatchedClosingBracket(text, start, newEnd + 1, '[', ']'))) {
+                newEnd++;
+            } else {
+                break;
+            }
+        }
+        while (newEnd > start) {
+            final char c = text.charAt(newEnd - 1);
+            if (".,;:!?'".indexOf(c) >= 0
+                    || (c == ')' && hasUnmatchedClosingBracket(text, start, newEnd, '(', ')'))
+                    || (c == ']' && hasUnmatchedClosingBracket(text, start, newEnd, '[', ']'))) {
+                newEnd--;
+            } else {
+                break;
+            }
+        }
+        return newEnd;
+    }
+
+    private static boolean hasUnmatchedClosingBracket(final CharSequence text, final int start, final int end, final char open, final char close) {
+        int balance = 0;
+        for (int i = start; i < end; i++) {
+            if (text.charAt(i) == open) {
+                balance++;
+            } else if (text.charAt(i) == close) {
+                balance--;
+            }
+        }
+        return balance < 0;
+    }
+
     @NonNull
     public static String getTextBeforeIndexUntil(final String text, final int idx, final String startToken) {
         return getTextBeforeIndexUntil(text, idx, startToken, -1);

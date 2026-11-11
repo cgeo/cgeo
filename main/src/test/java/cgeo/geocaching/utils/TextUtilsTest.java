@@ -276,6 +276,53 @@ public class TextUtilsTest {
     }
 
     @Test
+    public void getWebLinkEndCorrectsBrackets() {
+        // as found by Linkify on Android 15 (Android 9: the same, except that it leaves out the ")" in the third case)
+        assertWebLink("[XKCD](https://xkcd.com/2868/)", "https://xkcd.com/2868", "https://xkcd.com/2868/");
+        assertWebLink("https://en.wikipedia.org/wiki/Mercury_(planet)", "https://en.wikipedia.org/wiki/Mercury_(planet", "https://en.wikipedia.org/wiki/Mercury_(planet)");
+        assertWebLink("(see https://example.com/page)", "https://example.com/page)", "https://example.com/page");
+        // as reported in #15071 (Android version unknown) and similar variants
+        assertWebLink("[XKCD](https://xkcd.com/2868/)", "https://xkcd.com/2868/)", "https://xkcd.com/2868/");
+        assertWebLink("(https://en.wikipedia.org/wiki/Mercury_(planet))", "https://en.wikipedia.org/wiki/Mercury_(planet))", "https://en.wikipedia.org/wiki/Mercury_(planet)");
+        assertWebLink("[https://example.com/a[1]]", "https://example.com/a[1]]", "https://example.com/a[1]");
+        assertWebLink("see https://example.com/page.)", "https://example.com/page.)", "https://example.com/page");
+    }
+
+    @Test
+    public void getWebLinkEndStopsAtClosingBracket() {
+        // as found by Linkify on Android 15 and 9
+        assertWebLink("[A](https://example.com/a)/ [B](https://example.com/b)", "https://example.com/a", "https://example.com/a");
+        assertWebLink("[A](https://example.com/a/)/ [B](https://example.com/b/)", "https://example.com/a", "https://example.com/a/");
+        assertWebLink("[A](https://example.com/a)]", "https://example.com/a", "https://example.com/a");
+    }
+
+    @Test
+    public void getWebLinkEndKeepsCorrectLinks() {
+        assertWebLink("https://example.com/page", "https://example.com/page", "https://example.com/page");
+        assertWebLink("see www.example.com/www.", "www.example.com/www", "www.example.com/www");
+        assertWebLink("https://de.wikipedia.org/wiki/Müller", "https://de.wikipedia.org/wiki/Müller", "https://de.wikipedia.org/wiki/Müller");
+        assertWebLink("https://münchen.de/rathaus", "https://münchen.de/rathaus", "https://münchen.de/rathaus");
+        assertWebLink("https://example.com/页面", "https://example.com/页面", "https://example.com/页面");
+        assertWebLink("**https://example.com/bold**", "https://example.com/bold", "https://example.com/bold");
+        assertWebLink("https://example.com/a,b", "https://example.com/a,b", "https://example.com/a,b");
+        assertWebLink("<https://example.com/angle>", "https://example.com/angle", "https://example.com/angle");
+        assertWebLink("https://example.com/?a=1&b=2, more", "https://example.com/?a=1&b=2", "https://example.com/?a=1&b=2");
+    }
+
+    @Test
+    public void getWebLinkEndRespectsLimit() {
+        final String text = "https://a.com/x/https://b.com";
+        assertThat(TextUtils.getWebLinkEnd(text, 0, "https://a.com/x".length(), text.indexOf("https://b"))).isEqualTo("https://a.com/x/".length());
+    }
+
+    /** linkifyLink: what Linkify has found, expectedLink: the corrected link */
+    private static void assertWebLink(final String text, final String linkifyLink, final String expectedLink) {
+        final int start = text.indexOf(linkifyLink);
+        final int newEnd = TextUtils.getWebLinkEnd(text, start, start + linkifyLink.length(), text.length());
+        assertThat(text.substring(start, newEnd)).isEqualTo(expectedLink);
+    }
+
+    @Test
     public void pattern() {
         final String text = "abc\"logTypes\":[{\"value\":2},{\"value\":3},{\"value\":4},{\"value\":45},{\"value\":7}]def";
         final Pattern p = Pattern.compile("\"logTypes\":\\[([^]]+)]");

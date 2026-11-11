@@ -33,8 +33,10 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.ArrowKeyMovementMethod;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Pair;
@@ -811,6 +813,52 @@ public class ViewUtils {
         } catch (RuntimeException re) {
             Log.d("Caught Error on Linkify.addLinks", re);
             return false;
+        }
+    }
+
+    /**
+     * Corrects the end of the web links Linkify has set in a text view (see {@link TextUtils#getWebLinkEnd}).
+     * Linkify's handling of brackets around and inside links differs between Android versions,
+     * e.g. for "[name](https://example.com/page)" or "https://en.wikipedia.org/wiki/Mercury_(planet)".
+     */
+    public static void fixWebLinkEnds(@NonNull final TextView textView) {
+        try {
+            fixWebLinkEnds(textView.getText());
+        } catch (RuntimeException re) {
+            Log.w("Caught Error on correcting link ends", re);
+        }
+    }
+
+    private static void fixWebLinkEnds(final CharSequence textViewText) {
+        if (!(textViewText instanceof Spannable)) {
+            return;
+        }
+        final Spannable text = (Spannable) textViewText;
+        final URLSpan[] spans = text.getSpans(0, text.length(), URLSpan.class);
+        for (final URLSpan span : spans) {
+            final String url = span.getURL();
+            final int start = text.getSpanStart(span);
+            final int end = text.getSpanEnd(span);
+            final String linkText = text.subSequence(start, end).toString();
+            // the URL may have a scheme Linkify added in front of the link text, e.g. "http://" for "www.example.com",
+            // and Linkify writes the scheme in lower case, e.g. "https://" for "HTTPS://example.com"
+            if (url == null || !(url.regionMatches(true, 0, "http://", 0, 7) || url.regionMatches(true, 0, "https://", 0, 8))
+                    || !url.regionMatches(true, url.length() - linkText.length(), linkText, 0, linkText.length())) {
+                continue;
+            }
+            int limit = text.length();
+            for (final URLSpan other : spans) {
+                final int otherStart = text.getSpanStart(other);
+                if (otherStart > start && otherStart < limit) {
+                    limit = otherStart;
+                }
+            }
+            final int newEnd = TextUtils.getWebLinkEnd(text, start, end, limit);
+            if (newEnd != end && newEnd > start) {
+                final String newUrl = newEnd < end ? url.substring(0, url.length() - (end - newEnd)) : url + text.subSequence(end, newEnd);
+                text.removeSpan(span);
+                text.setSpan(new URLSpan(newUrl), start, newEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
 
