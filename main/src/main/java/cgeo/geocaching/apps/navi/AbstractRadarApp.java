@@ -1,9 +1,13 @@
 package cgeo.geocaching.apps.navi;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 
@@ -30,21 +34,30 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
-        context.startActivity(createIntent(point));
+        startRadarActivity(context, createIntent(point));
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Intent intent = createIntent(cache.getCoords());
         addIntentExtras(intent, cache);
-        context.startActivity(intent);
+        startRadarActivity(context, intent);
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
         final Intent intent = createIntent(waypoint.getCoords());
         addIntentExtras(intent, waypoint);
-        context.startActivity(intent);
+        startRadarActivity(context, intent);
+    }
+
+    private void startRadarActivity(@NonNull final Context context, @NonNull final Intent intent) {
+        try {
+            context.startActivity(intent);
+        } catch (final ActivityNotFoundException e) {
+            Log.w("No activity found for radar intent " + intentAction, e);
+            ViewUtils.showToast(context, R.string.err_application_no);
+        }
     }
 
     protected abstract void addCoordinates(Intent intent, Geopoint point);
