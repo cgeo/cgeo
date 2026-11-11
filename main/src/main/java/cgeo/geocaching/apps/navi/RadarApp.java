@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  * Version 12 and later no longer handle {@link #INTENT}, but accept radar targets as
  * deep link {@code https://mobiwia.com/radar?q=<lat>,<lon>(<name>)} (see #18889).
  * Older versions are still started via the legacy radar intent.
+ * If GPS Status handles neither, the legacy radar intent is passed to any other radar app.
  */
 class RadarApp extends AbstractRadarApp {
 
@@ -34,7 +35,8 @@ class RadarApp extends AbstractRadarApp {
 
     @Override
     public boolean isInstalled() {
-        return isRadarLinkSupported() || super.isInstalled();
+        // the legacy radar intent of any radar app includes GPS Status <= 11
+        return isRadarLinkSupported() || ProcessUtils.isActivityAvailable(new Intent(INTENT));
     }
 
     @NonNull
@@ -43,7 +45,12 @@ class RadarApp extends AbstractRadarApp {
         if (isRadarLinkSupported()) {
             return createRadarLinkIntent(Uri.parse(RADAR_LINK_BASE + "?q=" + createRadarTargetQuery(point, name)));
         }
-        return super.createIntent(point, name);
+        final Intent intent = super.createIntent(point, name);
+        if (!ProcessUtils.isActivityAvailable(intent)) {
+            // GPS Status does not handle the legacy radar intent, let any other radar app handle it
+            intent.setPackage(null);
+        }
+        return intent;
     }
 
     @Override
