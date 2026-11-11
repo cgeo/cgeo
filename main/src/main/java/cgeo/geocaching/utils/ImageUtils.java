@@ -105,13 +105,33 @@ public final class ImageUtils {
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
         private final Folder folder;
+        private Collection<Image> preloadedImages;
 
+        /** Note: constructing may access storage (folder resolution), so avoid calling this on UI thread */
         public ImageFolderCategoryHandler(final String geocode) {
             folder = getSpoilerImageFolder(geocode);
         }
 
+        /**
+         * Reads the images of this category from storage and caches them for the next call to {@link #getAllImages()}.
+         * Intended to be called on a background thread, so that initializing the gallery on UI thread does not need storage access.
+         */
+        public ImageFolderCategoryHandler preloadImages() {
+            preloadedImages = readAllImages();
+            return this;
+        }
+
         @Override
         public Collection<Image> getAllImages() {
+            final Collection<Image> preloaded = preloadedImages;
+            if (preloaded != null) {
+                preloadedImages = null;
+                return preloaded;
+            }
+            return readAllImages();
+        }
+
+        private Collection<Image> readAllImages() {
             return CollectionStream.of(ContentStorage.get().list(folder))
                     .map(fi -> new Image.Builder().setUrl(fi.uri)
                             .setTitle(getTitleFromName(fi.name))
@@ -883,11 +903,19 @@ public final class ImageUtils {
     }
 
     public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images, final boolean showOwnCategory) {
+        initializeImageGallery(imageGallery, geocode, images, geocode != null && showOwnCategory ? new ImageFolderCategoryHandler(geocode) : null);
+    }
+
+    /**
+     * initializes an image gallery. If an ownCategoryHandler is given, then an editable "own" category is created using this handler.
+     * Pass a handler with preloaded images (see {@link ImageFolderCategoryHandler#preloadImages()}) to avoid storage access on UI thread.
+     */
+    public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images, @Nullable final ImageFolderCategoryHandler ownCategoryHandler) {
         imageGallery.clear();
         imageGallery.setup(geocode);
         imageGallery.registerCallerActivity();
-        if (geocode != null && showOwnCategory) {
-            imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
+        if (ownCategoryHandler != null) {
+            imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), ownCategoryHandler);
         }
         if (images != null) {
             //pre-create all contained categories to be in control of their sort order
