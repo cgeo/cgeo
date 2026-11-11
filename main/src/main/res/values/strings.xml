@@ -1219,6 +1219,8 @@
     <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note.</string>
     <string name="init_prevent_cache_note_merge">Overwrite Personal Cache Note</string>
     <string name="init_summary_prevent_cache_note_merge">If this setting is enabled c:geo will delete the locally stored note permanently and replace it by the personal note on the server. No merging will be done.</string>
+    <string name="init_personal_note_monospace">Monospace font for personal note</string>
+    <string name="init_summary_personal_note_monospace">Show and edit the personal note in a font with equal character widths, so that columns, tables and coordinates line up.</string>
     <string name="init_customtabs_as_browser">Use Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">External websites will be displayed without leaving c:geo (only possible if Chrome is installed)</string>
     <string name="init_rot13_hint">Encrypt hint</string>
