@@ -253,6 +253,12 @@ public final class GCParser {
         final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE, pageIn);
         if (matcher.find()) {
             personalNoteWithLineBreaks = matcher.group(1).trim();
+        } else {
+            // handle the new image-enabled personal note
+            final MatcherWrapper matchernew = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE_NEW, pageIn);
+            if (matchernew.find()) {
+                personalNoteWithLineBreaks = matchernew.group(1).trim();
+            }
         }
 
         //gc.com sends personal note with HTML-encoded entities. Replace those
