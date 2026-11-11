@@ -1026,6 +1026,10 @@
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
+        <intent>
+            <!-- other radar apps, used as fallback if GPS Status does not handle the radar -->
+            <action android:name="com.google.android.radar.SHOW_RADAR" />
+        </intent>
     </queries>
 
 </manifest>

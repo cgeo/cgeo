@@ -1,13 +1,19 @@
 package cgeo.geocaching.apps.navi;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 abstract class AbstractRadarApp extends AbstractPointNavigationApp {
@@ -22,29 +28,60 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
         this.intentAction = intent;
     }
 
-    private Intent createIntent(final Geopoint point) {
-        final Intent intent = new Intent(intentAction);
+    /**
+     * Radar apps are only usable if an activity of the radar app actually handles the radar intent action.
+     * Having the package installed is not sufficient (e.g. GPS Status and Toolbox 12.x
+     * no longer handles {@code com.google.android.radar.SHOW_RADAR}, see #18889).
+     */
+    @Override
+    public boolean isInstalled() {
+        return ProcessUtils.isActivityAvailable(createRadarIntent());
+    }
+
+    /**
+     * @param name optional display name of the target, may be ignored by the radar app
+     */
+    @NonNull
+    protected Intent createIntent(@NonNull final Geopoint point, @Nullable final String name) {
+        final Intent intent = createRadarIntent();
         addCoordinates(intent, point);
+        return intent;
+    }
+
+    @NonNull
+    private Intent createRadarIntent() {
+        final Intent intent = new Intent(intentAction);
+        // restrict to the radar app, other apps may handle the same action as well
+        intent.setPackage(getPackageName());
         return intent;
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
-        context.startActivity(createIntent(point));
+        startRadarActivity(context, createIntent(point, null));
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
-        final Intent intent = createIntent(cache.getCoords());
+        final Intent intent = createIntent(cache.getCoords(), cache.getName());
         addIntentExtras(intent, cache);
-        context.startActivity(intent);
+        startRadarActivity(context, intent);
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
-        final Intent intent = createIntent(waypoint.getCoords());
+        final Intent intent = createIntent(waypoint.getCoords(), waypoint.getName());
         addIntentExtras(intent, waypoint);
-        context.startActivity(intent);
+        startRadarActivity(context, intent);
+    }
+
+    private void startRadarActivity(@NonNull final Context context, @NonNull final Intent intent) {
+        try {
+            context.startActivity(intent);
+        } catch (final ActivityNotFoundException e) {
+            Log.w("No activity found for radar intent " + intentAction, e);
+            ViewUtils.showToast(context, R.string.err_application_no);
+        }
     }
 
     protected abstract void addCoordinates(Intent intent, Geopoint point);

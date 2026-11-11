@@ -154,6 +154,15 @@ public final class ProcessUtils {
         return CollectionUtils.isNotEmpty(list) || CollectionUtils.isNotEmpty(servicesList);
     }
 
+    /**
+     * Indicates whether at least one activity can handle the given intent,
+     * honoring any package restriction set on the intent.
+     */
+    public static boolean isActivityAvailable(@NonNull final Intent intent) {
+        final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
+        return CollectionUtils.isNotEmpty(packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY));
+    }
+
     public static void openMarket(final Activity activity, @NonNull final String packageName) {
         try {
             final String url = "market://details?id=" + packageName;

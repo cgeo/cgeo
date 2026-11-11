@@ -42,6 +42,11 @@ public abstract class AbstractApp implements App {
     }
 
     @Nullable
+    protected String getPackageName() {
+        return packageName;
+    }
+
+    @Nullable
     protected Intent getLaunchIntent() {
         return ProcessUtils.getLaunchIntent(packageName);
     }
