@@ -6,6 +6,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -24,6 +25,16 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
     protected AbstractRadarApp(@StringRes final int nameId, final String intent, final String packageName) {
         super(nameId, intent, packageName);
         this.intentAction = intent;
+    }
+
+    /**
+     * Radar apps are only usable if some activity actually handles the radar intent action.
+     * Having the package installed is not sufficient (e.g. GPS Status and Toolbox 12.x
+     * no longer handles {@code com.google.android.radar.SHOW_RADAR}, see #18889).
+     */
+    @Override
+    public boolean isInstalled() {
+        return ProcessUtils.isIntentAvailable(intentAction);
     }
 
     private Intent createIntent(final Geopoint point) {
