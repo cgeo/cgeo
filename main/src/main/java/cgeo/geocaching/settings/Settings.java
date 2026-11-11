@@ -1793,6 +1793,10 @@ public class Settings {
         return getBoolean(R.string.pref_personal_cache_note_merge_disable, false);
     }
 
+    public static boolean isPersonalNoteMonospace() {
+        return getBoolean(R.string.pref_personal_note_monospace, false);
+    }
+
     public static int getLastDetailsPage() {
         return getInt(R.string.pref_lastdetailspage, 1);
     }

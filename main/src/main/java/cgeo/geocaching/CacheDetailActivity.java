@@ -135,6 +135,7 @@ import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.text.util.Linkify;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -2987,6 +2988,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private static void setPersonalNote(final TextView personalNoteView, final View separator, final String personalNote) {
         personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
+        // monospace characters are wider, so the text is set one step smaller
+        final boolean monospace = Settings.isPersonalNoteMonospace();
+        personalNoteView.setTypeface(monospace ? Typeface.MONOSPACE : Typeface.DEFAULT);
+        personalNoteView.setTextSize(TypedValue.COMPLEX_UNIT_PX, personalNoteView.getResources().getDimension(monospace ? R.dimen.textSize_detailsSecondary : R.dimen.textSize_detailsPrimary));
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);
