@@ -46,7 +46,6 @@ import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.mbtiles.TileMBTilesLayer;
-import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -85,7 +84,8 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
         // create tile cache (taking driving mode into account when calculating tile cache size)
         setDrivingMode(true);
-        tileCache = AndroidUtil.createTileCache(requireContext(), "mapcache", mMapView.getModel().displayModel.getTileSize(), 2f, mMapView.getModel().frameBufferModel.getOverdrawFactor());
+        // use own tile cache implementation to avoid blocking UI thread when purging (e.g. on destroy)
+        tileCache = BackgroundPurgingFileSystemTileCache.createTileCache(requireContext(), "mapcache", mMapView.getModel().displayModel.getTileSize(), 2f, mMapView.getModel().frameBufferModel.getOverdrawFactor());
         setDrivingMode(false);
 
         themeHelper = new MapsforgeThemeHelper(requireActivity());
