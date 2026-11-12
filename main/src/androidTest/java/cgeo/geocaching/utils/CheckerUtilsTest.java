@@ -21,6 +21,14 @@ public class CheckerUtilsTest {
     }
 
     @Test
+    public void testAddMissingScheme() {
+        assertUrl("Check your solution: www.geochecker.com/index.php?code=1efeb6c15357a52c6625b5d06094c016&action=check&wp=474352384744&name=2254656c6574656b737422&language=Dutch", "https://www.geochecker.com/index.php?code=1efeb6c15357a52c6625b5d06094c016&action=check&wp=474352384744&name=2254656c6574656b737422&language=Dutch");
+        assertThat(CheckerUtils.ensureScheme("geocheck.org/geo_inputchkcoord.php?gid=1")).isEqualTo("https://geocheck.org/geo_inputchkcoord.php?gid=1");
+        assertThat(CheckerUtils.ensureScheme("http://geocheck.org/geo_inputchkcoord.php?gid=1")).isEqualTo("http://geocheck.org/geo_inputchkcoord.php?gid=1");
+        assertThat(CheckerUtils.ensureScheme("HTTPS://geocheck.org/geo_inputchkcoord.php?gid=1")).isEqualTo("HTTPS://geocheck.org/geo_inputchkcoord.php?gid=1");
+    }
+
+    @Test
     public void testAvoidNonLink() {
         assertUrl("some text... geochecker.com ... some more text", null);
     }
