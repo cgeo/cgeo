@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.text.StringEscapeUtils;
@@ -31,6 +32,9 @@ public final class CheckerUtils {
     };
 
     private static final GeoChecker GC_CHECKER = new GeoChecker("geocaching.com");
+
+    /** matches an URL starting with a scheme like "http://" or "https://" */
+    private static final Pattern URL_WITH_SCHEME = Pattern.compile("^[a-zA-Z][a-zA-Z0-9+.-]*://");
 
     private CheckerUtils() {
         // utility class
@@ -61,7 +65,7 @@ public final class CheckerUtils {
                             url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());
                         }
                     }
-                    return new Pair<>(StringEscapeUtils.unescapeHtml4(url), checker);
+                    return new Pair<>(ensureScheme(StringEscapeUtils.unescapeHtml4(url)), checker);
                 }
             }
         }
@@ -70,6 +74,15 @@ public final class CheckerUtils {
             return new Pair<>(cache.getUrl(), GC_CHECKER);
         }
         return null;
+    }
+
+    /**
+     * Links found in plain text of a cache description may lack a scheme (e.g. "www.geochecker.com/...").
+     * Browsers cannot handle such an URI, so add "https://" in this case.
+     */
+    @NonNull
+    static String ensureScheme(@NonNull final String url) {
+        return URL_WITH_SCHEME.matcher(url).find() ? url : "https://" + url;
     }
 
     public static class GeoChecker {
