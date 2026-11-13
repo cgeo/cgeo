@@ -69,7 +69,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.sorting.GeocacheSortContext;
-import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.sorting.HistoryComparator;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
@@ -1839,7 +1839,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         connectorAddFilter.setValues(Collections.singletonList(connector));
                         offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
                     }
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, -1, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, -1, offlineFilter, HistoryComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
                     break;
                 case NEAREST:
                     title = LocalizationUtils.getString(R.string.caches_nearby);
