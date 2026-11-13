@@ -2998,6 +2998,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             personalNoteView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);
             ViewUtils.safeAddLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
+            ViewUtils.fixWebLinkEnds(personalNoteView);
         } else {
             personalNoteView.setVisibility(View.GONE);
             separator.setVisibility(View.GONE);
