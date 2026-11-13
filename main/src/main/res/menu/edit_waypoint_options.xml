@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_set_cache_icon"
+        android:title="@string/cache_menu_set_cache_icon"
+        android:icon="@drawable/ic_menu_emoticons"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_waypoint_geofence"
+        android:title="@string/waypoint_geofence"
+        android:icon="@drawable/map_circle"
+        app:showAsAction="never"/>
+
+</menu>
