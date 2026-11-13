@@ -231,6 +231,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private TextView cacheDistanceView;
 
     private ImageGalleryView imageGallery;
+    /** gallery view for which images are currently being loaded in background (null if none) */
+    private ImageGalleryView imageGalleryLoading;
     private int imageGalleryPos = -1;
 
     private int imageGalleryResultRequestCode = -1;
@@ -434,7 +436,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
-        outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
+        outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? imageGalleryState : imageGallery.getState());
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
         outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
 
@@ -1022,6 +1024,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // reset imagesList so Images view page will be redrawn
         imageGallery = null;
+        imageGalleryLoading = null;
         setOrderedPages(getOrderedPages());
         reinitializeViewPager();
 
@@ -2553,26 +2556,43 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
-            if (activity.imageGallery == null) {
-                final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
-                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
-                // Make sure the cache is in the local DB before the user adds images to its image folder.
-                imageGallery.setBeforeImageAddAction(activity::ensureSaved);
-                activity.imageGallery = imageGallery;
-                activity.imageGallery.initializeToPosition(activity.imageGalleryPos);
-                reinitializeTitle();
-                activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
-                if (activity.imageGalleryState != null) {
-                    imageGallery.setState(activity.imageGalleryState);
-                }
-                if (activity.imageGalleryResultRequestCode >= 0) {
-                    activity.imageGallery.onActivityResult(activity.imageGalleryResultRequestCode, activity.imageGalleryResultResultCode, activity.imageGalleryData);
-                }
-                activity.imageGalleryState = null;
-                activity.imageGalleryResultRequestCode = -1;
-                activity.imageGalleryResultResultCode = 0;
-                activity.imageGalleryData = null;
+            final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
+            if (activity.imageGallery == null && activity.imageGalleryLoading != imageGallery) {
+                // collecting images requires storage access (e.g. local spoiler folder), which may block for several seconds
+                // => do it in background and initialize gallery afterwards on UI thread
+                activity.imageGalleryLoading = imageGallery;
+                final String geocode = cache.getGeocode();
+                AndroidRxUtils.andThenOnUi(Schedulers.io(),
+                        () -> new Pair<>(cache.getNonStaticImages(), geocode == null ? null : new ImageUtils.ImageFolderCategoryHandler(geocode).preloadImages()),
+                        images -> {
+                            if (activity.imageGalleryLoading != imageGallery || activity.isFinishing() || activity.isDestroyed()) {
+                                return; // outdated result (e.g. cache was reloaded in the meantime) or activity gone
+                            }
+                            activity.imageGalleryLoading = null;
+                            initializeImageGallery(activity, imageGallery, geocode, images.first, images.second);
+                        });
             }
+        }
+
+        private void initializeImageGallery(final CacheDetailActivity activity, final ImageGalleryView imageGallery, final String geocode,
+                                            final List<Image> images, @Nullable final ImageUtils.ImageFolderCategoryHandler ownCategoryHandler) {
+            ImageUtils.initializeImageGallery(imageGallery, geocode, images, ownCategoryHandler);
+            // Make sure the cache is in the local DB before the user adds images to its image folder.
+            imageGallery.setBeforeImageAddAction(activity::ensureSaved);
+            activity.imageGallery = imageGallery;
+            imageGallery.initializeToPosition(activity.imageGalleryPos);
+            reinitializeTitle();
+            imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
+            if (activity.imageGalleryState != null) {
+                imageGallery.setState(activity.imageGalleryState);
+            }
+            if (activity.imageGalleryResultRequestCode >= 0) {
+                imageGallery.onActivityResult(activity.imageGalleryResultRequestCode, activity.imageGalleryResultResultCode, activity.imageGalleryData);
+            }
+            activity.imageGalleryState = null;
+            activity.imageGalleryResultRequestCode = -1;
+            activity.imageGalleryResultResultCode = 0;
+            activity.imageGalleryData = null;
         }
     }
 
