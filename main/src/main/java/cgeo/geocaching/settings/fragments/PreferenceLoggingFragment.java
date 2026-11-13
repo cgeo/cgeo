@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.log.LogTemplateSortActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TemplateTextPreference;
 import cgeo.geocaching.utils.PreferenceUtils;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import java.util.List;
 import static java.util.UUID.randomUUID;
 
 public class PreferenceLoggingFragment extends BasePreferenceFragment {
@@ -48,10 +50,26 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
     private void recreateLogTemplatePreferences() {
         logTemplatesCategory.removeAll();
         logTemplatesCategory.setVisible(true);
-        for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
+        final List<Settings.PrefLogTemplate> templates = Settings.getLogTemplates();
+        for (Settings.PrefLogTemplate template : templates) {
             logTemplatesCategory.addPreference(createLogTemplatePreference(template));
         }
         logTemplatesCategory.addPreference(createLogTemplatePreferenceAddNew());
+        if (templates.size() > 1) {
+            logTemplatesCategory.addPreference(createLogTemplatePreferenceSort());
+        }
+    }
+
+    private Preference createLogTemplatePreferenceSort() {
+        final Preference preference = new Preference(requireContext());
+        preference.setTitle(R.string.init_log_template_sort);
+        preference.setLayoutResource(R.layout.preference_button);
+        preference.setIconSpaceReserved(false);
+        preference.setOnPreferenceClickListener(pref -> {
+            LogTemplateSortActivity.startActivity(requireContext());
+            return true;
+        });
+        return preference;
     }
 
     private Preference createLogTemplatePreferenceAddNew() {

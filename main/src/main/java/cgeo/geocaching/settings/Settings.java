@@ -2618,6 +2618,11 @@ public class Settings {
         } else {
             templates.set(templateIndex, template);
         }
+        putLogTemplates(templates);
+    }
+
+    /** stores the given log templates, replacing all existing ones (also used to persist a new order) */
+    public static void putLogTemplates(@NonNull final List<PrefLogTemplate> templates) {
         try {
             putString(R.string.pref_logTemplates, MAPPER.writeValueAsString(templates));
         } catch (JsonProcessingException e) {
