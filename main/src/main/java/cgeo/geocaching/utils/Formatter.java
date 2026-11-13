@@ -493,7 +493,7 @@ public final class Formatter {
         final int exp = (int) (Math.log(bytes) / Math.log(1024));
         final String pre = Character.toString("KMGTPE".charAt(exp - 1));
 
-        return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(1024, exp), pre);
+        return String.format(Locale.getDefault(), "%.1f %siB", bytes / Math.pow(1024, exp), pre);
     }
 
     public static String formatDuration(final long milliseconds) {

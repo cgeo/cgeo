@@ -53,7 +53,7 @@ public final class LocalStorage {
 
     private static final String WHERIGO_DIRNAME = "wherigo";
     private static final String BERGAMOT_DIR_NAME = "bergamot";
-    private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
+    private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MiB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
     private static final String CGEO_DIRNAME = "cgeo"; //legacy

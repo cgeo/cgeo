@@ -286,7 +286,7 @@ public class ImageListFragment extends Fragment {
             //A rough estimation for the size of the compressed image:
             // * tenth the size due to compress
             // * linear scale by pixel size
-            // * round to full KB
+            // * round to full KiB
             final long roughCompressedSize = width * height == 0 ? 0 :
                 ((fileSize * ((long) scaledHeight * scaledWidth) / 10 / ((long) width * height)) / 1024) * 1024;
 
