@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
@@ -90,15 +91,14 @@ public final class LoggingUI {
     }
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
-        final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
-        final LogType currentLogType = currentLog == null ? null : currentLog.logType;
-
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
         if (GCConnector.getInstance().canHandle(cache.getGeocode()) && !cache.isOwner()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
             logTypes.add(LogType.NEEDS_ARCHIVE);
         }
+        final LogType currentLogType = getQuickOfflineLogType(DataStore.loadLogOffline(cache.getGeocode()), logTypes);
+
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
         for (final LogType logType : logTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));
@@ -156,6 +156,24 @@ public final class LoggingUI {
         final AlertDialog alertDialog = builder.create();
         alertDialog.setOnDismissListener(listener);
         alertDialog.show();
+    }
+
+    /**
+     * Get the log type of the quick offline log menu matching the given offline log.
+     * NM/NA logs are stored as NOTE with a report problem, so map them back to their menu entry, if available.
+     */
+    @Nullable
+    private static LogType getQuickOfflineLogType(@Nullable final LogEntry offlineLog, @NonNull final List<LogType> logTypes) {
+        if (offlineLog == null) {
+            return null;
+        }
+        if (offlineLog.logType == LogType.NOTE && offlineLog.reportProblem != ReportProblemType.NO_PROBLEM) {
+            final LogType problemLogType = offlineLog.reportProblem == ReportProblemType.ARCHIVE ? LogType.NEEDS_ARCHIVE : LogType.NEEDS_MAINTENANCE;
+            if (logTypes.contains(problemLogType)) {
+                return problemLogType;
+            }
+        }
+        return offlineLog.logType;
     }
 
     private static void showOfflineTemplateMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
