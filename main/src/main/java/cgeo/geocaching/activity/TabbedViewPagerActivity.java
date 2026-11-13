@@ -214,6 +214,14 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         fragmentMap.put(pageId, fragment);
     }
 
+    /**
+     * Access a registered fragment by its page id. May return null if fragment not yet created.
+     */
+    @SuppressWarnings("rawtypes")
+    public TabbedViewPagerFragment getFragment(final long pageId) {
+        return fragmentMap.get(pageId);
+    }
+
     @SuppressWarnings("rawtypes")
     public void reinitializePage(final long pageId) {
         final TabbedViewPagerFragment fragment = fragmentMap.get(pageId);

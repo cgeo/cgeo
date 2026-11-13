@@ -43,6 +43,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.DisplayNameEnum;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -203,7 +204,7 @@ public class Settings {
      * Controls which {@link cgeo.geocaching.filters.NamedFilter}s matching the currently displayed cache
      * are shown in the cache details view.
      */
-    public enum NamedFilterDisplayMode {
+    public enum NamedFilterDisplayMode implements DisplayNameEnum {
         /** Do not show any matching named filters. */
         NONE(R.string.named_filter_display_mode_none),
         /** Only show matching named filters whose marker is currently active. */
@@ -217,6 +218,38 @@ public class Settings {
             this.displayNameResId = displayNameResId;
         }
 
+        @Override
+        public String getDisplayName() {
+            return LocalizationUtils.getString(displayNameResId);
+        }
+    }
+
+
+    /**
+     * Controls how the logs of the cache-owner should be displayed
+     * in the log-tab of friends-log.
+     */
+    public enum OwnerLogDisplayMode implements DisplayNameEnum {
+        /**
+         * Do not load / show any owner logs.
+         */
+        DO_NOT_LOAD(R.string.owner_log_display_mode_do_not_load),
+        /**
+         * Hide owner logs and add possibility to show them.
+         */
+        INACTIVE(R.string.owner_log_display_mode_inactive),
+        /**
+         * Show owner logs and add possibility to hide them.
+         */
+        ACTIVE(R.string.owner_log_display_mode_active);
+
+        private final @StringRes int displayNameResId;
+
+        OwnerLogDisplayMode(final @StringRes int displayNameResId) {
+            this.displayNameResId = displayNameResId;
+        }
+
+        @Override
         public String getDisplayName() {
             return LocalizationUtils.getString(displayNameResId);
         }
@@ -1148,6 +1181,13 @@ public class Settings {
         return EnumUtils.getEnum(NamedFilterDisplayMode.class,
                 getString(R.string.pref_named_filter_display_mode, NamedFilterDisplayMode.ACTIVE_ONLY.name()),
                 NamedFilterDisplayMode.ACTIVE_ONLY);
+    }
+
+    @NonNull
+    public static OwnerLogDisplayMode getOwnerLogDisplayMode() {
+        return EnumUtils.getEnum(OwnerLogDisplayMode.class,
+                getString(R.string.pref_owner_log_display_mode, OwnerLogDisplayMode.ACTIVE.name()),
+                OwnerLogDisplayMode.ACTIVE);
     }
 
     public static boolean isTrackableAutoVisit() {
