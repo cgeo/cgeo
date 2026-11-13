@@ -142,10 +142,17 @@ public class DateTimeEditor {
         return dateUnset[0] ? null : date.getTime();
     }
 
+    private boolean canShowDialog() {
+        return !fragmentManager.isDestroyed() && !fragmentManager.isStateSaved();
+    }
+
     private class DateListener implements View.OnClickListener {
 
         @Override
         public void onClick(final View arg0) {
+            if (!canShowDialog()) {
+                return;
+            }
             final MaterialDatePicker.Builder<Long> pickerBuilder = MaterialDatePicker.Builder
                     .datePicker()
                     .setSelection(date.getTimeInMillis() + TimeZone.getDefault().getRawOffset());
@@ -187,6 +194,9 @@ public class DateTimeEditor {
 
         @Override
         public void onClick(final View arg0) {
+            if (!canShowDialog()) {
+                return;
+            }
             final MaterialTimePicker timeDialog = new MaterialTimePicker.Builder()
                     .setTimeFormat(DateFormat.is24HourFormat(timeButton.getContext()) ? TimeFormat.CLOCK_24H : TimeFormat.CLOCK_12H)
                     .setHour(date.get(Calendar.HOUR_OF_DAY))

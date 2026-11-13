@@ -996,7 +996,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // map and theming options
         // disabled until the map has finished loading (menu gets refreshed by onMapReadyTasks)
-        final boolean mapReady = mapFragment.isMapReady();
+        final boolean mapReady = mapFragment != null && mapFragment.isMapReady();
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes()).setEnabled(mapReady);
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions()).setEnabled(mapReady);
 

@@ -46,6 +46,7 @@ import android.view.Window;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
@@ -104,15 +105,22 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     }
 
     /**
-     * Displays an instance of the calculator dialog
+     * Displays an instance of the calculator dialog, if the activity is able to show it
+     *
+     * @return true if the dialog was shown
      */
-    public static void show(final FragmentManager mgr, final DialogCallback callbackMethod, final CoordinateInputData initialState) {
+    public static boolean show(final FragmentActivity activity, final DialogCallback callbackMethod, final CoordinateInputData initialState) {
+        final FragmentManager mgr = ActivityMixin.getUsableFragmentManager(activity);
+        if (mgr == null) {
+            return false;
+        }
         callback = callbackMethod;
         final CoordinatesCalculateGlobalDialog ccd = new CoordinatesCalculateGlobalDialog();
         final Bundle args = new Bundle();
         args.putParcelable(ARG_INPUT_DATA, initialState);
         ccd.setArguments(args);
         ccd.show(mgr, "wpcalcglobaldialog");
+        return true;
     }
 
     public CoordinatesCalculateGlobalDialog() {

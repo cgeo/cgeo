@@ -253,6 +253,12 @@ public final class GCParser {
         final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE, pageIn);
         if (matcher.find()) {
             personalNoteWithLineBreaks = matcher.group(1).trim();
+        } else {
+            // handle the new image-enabled personal note
+            final MatcherWrapper matchernew = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE_NEW, pageIn);
+            if (matchernew.find()) {
+                personalNoteWithLineBreaks = matchernew.group(1).trim();
+            }
         }
 
         //gc.com sends personal note with HTML-encoded entities. Replace those
@@ -592,9 +598,9 @@ public final class GCParser {
                 continue;
             }
 
-            // waypoint name
+            // waypoint name (HTML entities like &quot; decoded, see #17100)
             // res is null during the unit tests
-            final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true);
+            final String name = StringEscapeUtils.unescapeHtml4(TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, LocalizationUtils.getString(R.string.waypoint), true));
 
             // waypoint type
             final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
