@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -35,8 +36,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
@@ -53,7 +56,10 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     private ArrayList<Download.DownloadTypeDescriptor> spinnerData = new ArrayList<>();
     private List<Download> lastCompanionList = Collections.emptyList();
     private Download.DownloadType lastCompanionType = null;
-    private ArrayList<CompanionFileUtils.DownloadedFileData> existingFiles = null;
+    @NonNull
+    private ArrayList<CompanionFileUtils.DownloadedFileData> existingFiles = new ArrayList<>();
+    /** incremented on each request to load installed offline maps, to ignore results of outdated requests */
+    private int installedOfflineMapsRequest = 0;
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
         @NonNull private final DownloadSelectorActivity activity;
@@ -222,7 +228,8 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             spinnerData = Download.DownloadType.get(fixedDownloadType);
             changeSource(0);
             binding.downloaderSelector.setVisibility(View.GONE);
-            existingFiles = CompanionFileUtils.availableOfflineMaps(Download.DownloadType.getFromId(fixedDownloadType));
+            final Download.DownloadType fixedType = Download.DownloadType.getFromId(fixedDownloadType);
+            loadExistingFiles(() -> CompanionFileUtils.availableOfflineMaps(fixedType));
         } else {
             spinnerData = Download.DownloadType.getOfflineMapTypes();
             final ArrayAdapter<Download.DownloadTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
@@ -252,8 +259,34 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                     ShareUtils.openUrl(this, current.projectUrl);
                 }
             });
-            existingFiles = CompanionFileUtils.availableOfflineMapRelatedFiles();
+            loadExistingFiles(CompanionFileUtils::availableOfflineMapRelatedFiles);
         }
+    }
+
+    /**
+     * Determining existing files needs storage access (listing folders, reading companion files), which can take several seconds.
+     * Thus load them in background and refresh list (badges) afterwards.
+     */
+    private void loadExistingFiles(@NonNull final Callable<ArrayList<CompanionFileUtils.DownloadedFileData>> loader) {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), loader, files -> {
+            if (isFinishing() || isDestroyed()) {
+                return;
+            }
+            existingFiles = files;
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    /** loads installed offline maps in background (needs storage access, see {@link #loadExistingFiles(Callable)}) and updates "check for updates" button afterwards */
+    private void loadInstalledOfflineMaps() {
+        final int request = ++installedOfflineMapsRequest;
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), CompanionFileUtils::availableOfflineMapRelatedFiles, files -> {
+            if (request != installedOfflineMapsRequest || isFinishing() || isDestroyed()) {
+                return;
+            }
+            installedOfflineMaps = files;
+            setUpdateButtonVisibility();
+        });
     }
 
     @Override
@@ -283,12 +316,12 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         adapter.notifyDataSetChanged();
 
         current = spinnerData.get(position).instance;
-        installedOfflineMaps = CompanionFileUtils.availableOfflineMapRelatedFiles();
 
         binding.downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
         binding.downloaderInfo.setText(current.mapSourceInfo);
 
         setUpdateButtonVisibility();
+        loadInstalledOfflineMaps();
         binding.checkForUpdates.setOnClickListener(v -> {
             binding.checkForUpdates.setVisibility(View.GONE);
             new DownloadSelectorMapUpdateCheckTask(this, installedOfflineMaps, LocalizationUtils.getString(R.string.downloadmap_available_updates), current, this::setMaps).execute();

@@ -11,6 +11,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,27 +78,57 @@ public class CompanionFileUtils {
         }
     }
 
+    /**
+     * reads companion file data for given filename in given folder.
+     * Note: resolving the filename requires listing the folder, so prefer {@link #readData(ContentStorage.FileInformation)} if file information is already available.
+     */
     @Nullable
     public static DownloadedFileData readData(final Folder folder, final String filename) {
         if (filename.endsWith(INFOFILE_SUFFIX)) {
             try (InputStream input = ContentStorage.get().openForRead(folder, filename)) {
-                if (input != null) {
-                    final DownloadedFileData offlineMapData = new DownloadedFileData();
-                    final Properties prop = new Properties();
-                    prop.load(input);
-                    offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
-                    offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
-                    offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
-                    offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
-                    offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
-                    offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
-                    return offlineMapData;
-                } else {
-                    Log.d("Cannot open property file " + filename + " for reading: ");
-                }
-            } catch (IOException | NumberFormatException | NullPointerException e) {
+                return readData(input, filename);
+            } catch (IOException e) {
                 Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
             }
+        }
+        return null;
+    }
+
+    /**
+     * reads companion file data for an already known file (avoids having to resolve the file by name in its folder again)
+     */
+    @Nullable
+    public static DownloadedFileData readData(@NonNull final ContentStorage.FileInformation fileInfo) {
+        if (!fileInfo.isDirectory && fileInfo.name.endsWith(INFOFILE_SUFFIX)) {
+            try (InputStream input = ContentStorage.get().openForRead(fileInfo.uri)) {
+                return readData(input, fileInfo.name);
+            } catch (IOException e) {
+                Log.d("Offline map property file error for " + fileInfo.name + ": " + e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    @VisibleForTesting
+    static DownloadedFileData readData(@Nullable final InputStream input, final String filename) {
+        if (input == null) {
+            Log.d("Cannot open property file " + filename + " for reading: ");
+            return null;
+        }
+        try {
+            final DownloadedFileData offlineMapData = new DownloadedFileData();
+            final Properties prop = new Properties();
+            prop.load(input);
+            offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
+            offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
+            offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
+            offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
+            offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
+            offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
+            return offlineMapData;
+        } catch (IOException | NumberFormatException | NullPointerException e) {
+            Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
         }
         return null;
     }
@@ -128,8 +159,8 @@ public class CompanionFileUtils {
 
         if (downloader.useCompanionFiles) {
             for (ContentStorage.FileInformation fi : files) {
-                final String filename = fi.name;
-                final DownloadedFileData offlineMapData = readData(downloader.targetFolder.getFolder(), filename);
+                // use already known file info here: reading by folder + name would list the whole folder again for each file
+                final DownloadedFileData offlineMapData = readData(fi);
                 if (offlineMapData != null && offlineMapData.remoteParsetype == filter.id && StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
                     result.add(offlineMapData);
                 }
