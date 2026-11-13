@@ -148,6 +148,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     protected void attachBaseContext(final Context newBase) {
         // Apply user-selected locale to activity context
         final Locale locale = Settings.getApplicationLocale();
+        // Android sets the default locale back to the system's when an activity starts,
+        // restore it for Java-side formatting (e.g. dates), see CgeoApplication.initApplicationLocale()
+        Locale.setDefault(locale);
         final Configuration configuration = new Configuration(newBase.getResources().getConfiguration());
         configuration.setLocale(locale);
         final Context localeContext = newBase.createConfigurationContext(configuration);
