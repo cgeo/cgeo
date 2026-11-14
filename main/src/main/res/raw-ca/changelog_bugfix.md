@@ -55,3 +55,8 @@
 - Nou: Bolcat de memòria opcional en errors de manca de memòria (#18822)
 - Correcció: El filtre/ordenació per distància dels catxés emmagatzemats sobreestimava les distàncies est-oest (#16194)
 - Correcció: Les respostes HTTP fallides romanen sense tancar (#15356)
+- Correcció: l'HTML en els noms dels punts de referència no es descodifica (#17100)
+- Correcció: La data del registre fora de línia es veu substituïda per la data del registre en línia a l'estat (#13975)
+- Correcció: La precisió de les coordenades que no han canviat al diàleg de coordenades pot deteriorar-se (#14714)
+- Correcció: Restablir la sincronització de les notes personals quan s'activa la funcionalitat experimental d'imatges (#18897)
+- Correcció: Bloqueig en iniciar «Radar» amb GPS Status & Toolbox versió 12 (#18889)
