@@ -7,6 +7,7 @@ import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -24,6 +25,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -38,6 +40,7 @@ import android.text.method.ArrowKeyMovementMethod;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,6 +64,7 @@ import android.widget.Toast;
 import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.AttrRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -970,4 +974,15 @@ public class ViewUtils {
     }
 
 
+
+    /**
+     * Sets the font of a view showing or editing the user's own notes (personal note, waypoint note, ...),
+     * depending on {@link Settings#isNotesMonospace()}.
+     * Monospace characters are wider, so the text is then set in a smaller size.
+     */
+    public static void setNoteFont(@NonNull final TextView view, @DimenRes final int textSize, @DimenRes final int monospaceTextSize) {
+        final boolean monospace = Settings.isNotesMonospace();
+        view.setTypeface(monospace ? Typeface.MONOSPACE : Typeface.DEFAULT);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_PX, view.getResources().getDimension(monospace ? monospaceTextSize : textSize));
+    }
 }

@@ -236,6 +236,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.variablesTidyup.setOnClickListener(v -> varListAdapter.tidyUp(calcCoord.getNeededVars()));
 
         binding.notesText.setText(notes);
+        ViewUtils.setNoteFont(binding.notesText, R.dimen.textSize_detailsPrimary, R.dimen.textSize_detailsSecondary);
 
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());

@@ -72,9 +72,9 @@
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_personal_note_monospace"
-            android:title="@string/init_personal_note_monospace"
-            android:summary="@string/init_summary_personal_note_monospace"
+            android:key="@string/pref_notes_monospace"
+            android:title="@string/init_notes_monospace"
+            android:summary="@string/init_summary_notes_monospace"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

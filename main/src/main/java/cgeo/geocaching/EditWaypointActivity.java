@@ -228,6 +228,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         super.onCreate(savedInstanceState);
         binding = EditwaypointActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
+        ViewUtils.setNoteFont(binding.userNote, R.dimen.textSize_textinputPrimary, R.dimen.textSize_detailsPrimary);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
