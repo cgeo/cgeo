@@ -2,12 +2,10 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -78,11 +76,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
 
         mEditText = view.findViewById(R.id.note);
-        if (Settings.isPersonalNoteMonospace()) {
-            // monospace characters are wider, so the text is set one step smaller
-            mEditText.setTypeface(Typeface.MONOSPACE);
-            mEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.textSize_detailsPrimary));
-        }
+        ViewUtils.setNoteFont(mEditText, R.dimen.textSize_textinputPrimary, R.dimen.textSize_detailsPrimary);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             // add a new line when editing existing text, to avoid accidental overwriting of the last line
