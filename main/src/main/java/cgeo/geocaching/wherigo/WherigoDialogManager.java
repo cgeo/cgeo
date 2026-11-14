@@ -16,8 +16,12 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -46,6 +50,7 @@ public class WherigoDialogManager {
     private State state = State.NO_DIALOG;
     private boolean currentlyDisplayingNotification;
     private IWherigoDialogProvider currentDialogProvider; //filled in states DIALOG_DISPLAYED, DIALOG_WAITING, DIALOG_PAUSED
+    private final Map<String, Object> currentDialogState = new HashMap<>(); // holds currently displayed dialog's state (optionally)
     private IWherigoDialogControl currentDialogControl; // filled in state DIALOG_DISPLAYED
     private final AtomicInteger currentDialogId = new AtomicInteger(0); // if DIALOG_DISPLAYED, then holds id of this dialog
 
@@ -63,16 +68,19 @@ public class WherigoDialogManager {
         private boolean pauseOnDismiss;
         private BiConsumer<Dialog, WherigoGame.NotifyType> gameListener;
         private Consumer<Dialog> dismissListener;
+        private Consumer<Map<String, Object>> saveStateListener;
         private boolean isDismissed = false;
         private boolean flaggedForNoUserResult = false;
         private final CompositeDisposable dismissDisposables = new CompositeDisposable();
 
-        public static WherigoDialogControl createAndShowDialog(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onDismissAction) {
-            return new WherigoDialogControl(activity, dialogProvider, onDismissAction);
+        public static WherigoDialogControl createAndShowDialog(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onDismissAction, final Map<String, Object> currentDialogState) {
+            return new WherigoDialogControl(activity, dialogProvider, onDismissAction, currentDialogState);
         }
 
-        private WherigoDialogControl(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onUserResultAction) {
-            dialog = dialogProvider.createAndShowDialog(activity, this);
+        private WherigoDialogControl(final Activity activity, @NonNull final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onUserResultAction, final Map<String, Object> currentDialogState) {
+            final String logInfo = dialogProvider.getClass().getName();
+            Log.iForce("WHERIGO: creating dialog: " + logInfo);
+            dialog = dialogProvider.createAndShowDialog(activity, this, currentDialogState);
             if (gameListener != null) {
                 gameListenerId = WherigoGame.get().addListener(nt -> WherigoViewUtils.ensureRunOnUi(() -> {
                     if (!isDismissed) {
@@ -82,7 +90,7 @@ public class WherigoDialogManager {
             }
 
             dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
-                Log.iForce("Wherigo: dismissing dialog");
+                Log.iForce("WHERIGO: dismissing dialog: " + logInfo);
                 WherigoGame.get().removeListener(gameListenerId);
                 isDismissed = true;
                 dismissDisposables.dispose();
@@ -96,6 +104,11 @@ public class WherigoDialogManager {
                 dialog = null;
             }));
             WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
+        }
+
+        @Override
+        public void setOnSaveStateListener(final Consumer<Map<String, Object>> listener) {
+            this.saveStateListener = listener;
         }
 
         @Override
@@ -137,6 +150,12 @@ public class WherigoDialogManager {
             this.dismissDisposables.add(disposable);
             return disposable;
         }
+
+        private void saveState(final Map<String, Object> state) {
+            if (saveStateListener != null) {
+                saveStateListener.accept(state);
+            }
+        }
     }
 
     private WherigoDialogManager() {
@@ -145,7 +164,7 @@ public class WherigoDialogManager {
 
     /** displays a dialog directly on top of an activity. This will NOT close an existing displayed dialog */
     public static void displayDirect(final Activity activity, final IWherigoDialogProvider dialogProvider) {
-        WherigoViewUtils.ensureRunOnUi(() -> WherigoDialogControl.createAndShowDialog(activity, dialogProvider, null));
+        WherigoViewUtils.ensureRunOnUi(() -> WherigoDialogControl.createAndShowDialog(activity, dialogProvider, null, Collections.emptyMap()));
     }
 
     public State getState() {
@@ -191,6 +210,7 @@ public class WherigoDialogManager {
         }
         if (state == State.DIALOG_DISPLAYED && currentActivity == null) {
             //close dialog, but prepare to re-open when activity comes back
+            ((WherigoDialogControl) currentDialogControl).saveState(currentDialogState);
             currentDialogControl.dismissWithoutUserResult();
             state = State.DIALOG_WAITING;
         }
@@ -218,6 +238,7 @@ public class WherigoDialogManager {
             if (currentDialogId.get() == dialogId) {
                 closeCurrentDialog();
                 if (isPause) {
+                    ((WherigoDialogControl) currentDialogControl).saveState(currentDialogState);
                     state = State.DIALOG_PAUSED;
                     final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
                     if (currentActivity != null) {
@@ -226,9 +247,10 @@ public class WherigoDialogManager {
                 } else {
                     this.currentDialogProvider = null;
                     state = State.NO_DIALOG;
+                    this.currentDialogState.clear();
                 }
             }
-        }));
+        }), currentDialogState);
         state = State.DIALOG_DISPLAYED;
     }
 
@@ -239,6 +261,7 @@ public class WherigoDialogManager {
         closeCurrentDialog();
         currentDialogProvider = null;
         state = State.NO_DIALOG;
+        currentDialogState.clear();
 
     }
 

@@ -2,6 +2,7 @@ package cgeo.geocaching.wherigo;
 
 import android.app.Dialog;
 
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -17,6 +18,8 @@ public interface IWherigoDialogControl {
     void setOnGameNotificationListener(BiConsumer<Dialog, WherigoGame.NotifyType> listener);
 
     void setOnDismissListener(Consumer<Dialog> listener);
+
+    void setOnSaveStateListener(Consumer<Map<String, Object>> listener);
 
     void dismiss();
 

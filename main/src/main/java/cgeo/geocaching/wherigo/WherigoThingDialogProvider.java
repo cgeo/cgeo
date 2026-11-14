@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
@@ -66,7 +67,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control, final Map<String, Object> state) {
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--", binding.getRoot());
 
