@@ -55,3 +55,8 @@
 - New: Optional memory dump on "out of memory" errors (#18822)
 - Fix: Distance filter/sort for stored caches overestimating east-west distances (#16194)
 - Fix: Failed http responses remain unclosed (#15356)
+- Fix: HTML in waypoint names do not get decoded (#17100)
+- Fix: Offline log date gets overridden by online log date in status (#13975)
+- Fix: Precision of unchanged coordinates in coordinate dialog can deteriorate (#14714)
+- Fix: Restore syncing of personal notes when experimental image feature is activated (#18897)
+- Fix: Crash when starting "Radar" with GPS Status & Toolbox version 12 (#18889)
