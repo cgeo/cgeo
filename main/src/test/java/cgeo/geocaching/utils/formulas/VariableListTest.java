@@ -120,6 +120,31 @@ public class VariableListTest {
     }
 
 
+    @Test
+    public void addWithoutFormulaKeepsStateWhenNoLongerNeeded() {
+        final VariableList cv = createTestInstance();
+        cv.addVariable("A", null);
+        final String unnamed = cv.addVariable(null, "A");
+        assertVariableList(cv, unnamed, "f:A", "A", "f:");
+
+        // A is no longer needed by any other variable, it must stay in the list with its state
+        cv.changeVariable(unnamed, "");
+        assertVariableList(cv, unnamed, "f:", "A", "f:");
+        assertThat(cv.getEntries()).extracting(e -> e.varname).containsExactly(unnamed, "A");
+
+        cv.changeVariable(unnamed, "A");
+        cv.removeVariable(unnamed);
+        assertVariableList(cv, "A", "f:");
+    }
+
+    @Test
+    public void setEntriesWithoutFormula() {
+        final VariableList cv = createTestInstance();
+        cv.setEntries(Arrays.asList(new VariableList.VariableEntry(1, "A", null), new VariableList.VariableEntry(2, "B", "A")));
+        cv.changeVariable("B", "");
+        assertVariableList(cv, "A", "f:", "B", "f:");
+    }
+
     /**
      * expectedParams syntax: pure string = expected var, prefix with f: to assert formula
      */
