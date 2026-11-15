@@ -215,8 +215,8 @@ public class RouteOptimizationHelper {
                                 }
                                 distanceMatrix[col][j] = (int) (1000.0f * distance);
                             }
-                            progress.set(progress.get() + 1);
-                            dialog.postProgress(progress.get() + 1);
+                            progress.set(progress.incrementAndGet());
+                            dialog.postProgress(progress.get());
                             if (Thread.currentThread().isInterrupted()) {
                                 return 1;
                             }
