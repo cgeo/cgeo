@@ -12,6 +12,7 @@
 - New: "Edit personal note" button in waypoint popup (#18559)
 - Fix: Broken colors under certain conditions (#17479)
 - New: New attributes for Opencaching (#18584)
+- Fix: Offline log marker not updated correctly (#15398)
 
 ### Wherigo -toistin
 -
