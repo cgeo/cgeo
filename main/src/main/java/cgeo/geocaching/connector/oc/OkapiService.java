@@ -15,6 +15,7 @@ enum OkapiService {
     SERVICE_USER_BY_USERNAME("/okapi/services/users/by_username", OAuthLevel.Level1),
     SERVICE_USER_BY_USERID("/okapi/services/users/by_internal_id", OAuthLevel.Level1),
     SERVICE_UPLOAD_PERSONAL_NOTE("/okapi/services/caches/save_personal_notes", OAuthLevel.Level3),
+    SERVICE_UPLOAD_FIELD_NOTES("/okapi/services/draftlogs/upload_fieldnotes", OAuthLevel.Level3),
     SERVICE_RESOLVE_URL("/okapi/services/caches/search/by_urls", OAuthLevel.Level1),
     SERVICE_API_INSTALLATION("/okapi/services/apisrv/installation", OAuthLevel.Level0),
     SERVICE_LOG_ENTRY("/okapi/services/logs/entry", OAuthLevel.Level1);

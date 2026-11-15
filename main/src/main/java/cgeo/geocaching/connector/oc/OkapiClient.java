@@ -754,6 +754,32 @@ final class OkapiClient {
     }
 
     /**
+     * Whether the OKAPI installation accepts field notes (services/draftlogs/upload_fieldnotes).
+     * Older installations don't report has_draft_logs at all.
+     */
+    @WorkerThread
+    public static boolean hasDraftLogs(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector).hasDraftLogs;
+    }
+
+    /**
+     * Uploads the field notes file, which the site stores as draft logs. The file is sent as it is
+     * (base64-encoded bytes); OKAPI detects its encoding.
+     */
+    @WorkerThread
+    public static boolean uploadFieldNotes(@NonNull final OCApiConnector connector, @NonNull final byte[] fieldNotesFile) {
+        final String encoded = Base64.encodeToString(fieldNotesFile, Base64.NO_WRAP);
+        final JSONResult result = postRequest(connector, OkapiService.SERVICE_UPLOAD_FIELD_NOTES, new Parameters("field_notes", encoded));
+
+        if (!result.isSuccess) {
+            Log.e("OkapiClient.uploadFieldNotes: " + result.data);
+            return false;
+        }
+        Log.i("OkapiClient.uploadFieldNotes: " + result.data.path("processed_records").asInt() + " of " + result.data.path("total_records").asInt() + " field notes stored as draft logs");
+        return result.data.path("success").asBoolean(false);
+    }
+
+    /**
      * returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right)
      */
     @NonNull
@@ -1512,6 +1538,8 @@ final class OkapiClient {
         Long imageMaxUploadSize;
         @JsonProperty("image_rcmd_max_pixels")
         Long imageRcmdMaxPixels;
+        @JsonProperty("has_draft_logs")
+        boolean hasDraftLogs;
 
         @Override
         @NonNull
@@ -1528,6 +1556,7 @@ final class OkapiClient {
                     ", mobileRegistrationUrl='" + mobileRegistrationUrl + '\'' +
                     ", imageMaxUploadSize=" + imageMaxUploadSize +
                     ", imageRcmdMaxPixels=" + imageRcmdMaxPixels +
+                    ", hasDraftLogs=" + hasDraftLogs +
                     '}';
         }
     }
