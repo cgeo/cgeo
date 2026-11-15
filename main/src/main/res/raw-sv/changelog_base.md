@@ -4,14 +4,15 @@
 - Nytt: Stöd flera användardefinierade rutleverantörer (#18586)
 - Nyhet: Visa karta på låsskärmen som tillval (#18383)
 - New: Warning if not all caches of a list can be displayed on the map (#18506)
-- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
+- Förändring: Ladda endast aktiverade spår, GeoJSON etc. på kartan (#18236)
 
 ### Cachedetaljer
 - Nytt: Växla lagrad-på-enhetens-datum mellan relativ och exakt (#18393)
 - Fix: Staplade status-dialogrutor när flera loggar tas bort (#18279)
 - Nytt: knappen "Redigera personlig anteckning" i vägpunkt-popup (#18559)
 - Fix: Broken colors under certain conditions (#17479)
-- New: New attributes for Opencaching (#18584)
+- Nytt: Nya attribut för Opencaching (#18584)
+- Fix: Offline log marker not updated correctly (#15398)
 
 ### Wherigo-spelare
 -
@@ -25,4 +26,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
-- Change: Limit hidden date picker range to "2000-next year" (#18790)
+- Förändring: Begränsa valt datumintervall till "2000-nästa år" (#18790)
