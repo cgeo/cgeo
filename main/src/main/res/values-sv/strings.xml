@@ -2358,6 +2358,9 @@
     <string name="attribute_historic_no">Ingen övergiven struktur eller ruin</string>
     <string name="attribute_blind_people_yes">Handikapp: Blind</string>
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
+    <string name="attribute_architecture_detail">Arkitektonisk detalj</string>
+    <string name="attribute_natural_monument">Naturligt monument</string>
+    <string name="attribute_street_art">Gatukonst</string>
     <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
     <string name="cat_status">Cache-status</string>
