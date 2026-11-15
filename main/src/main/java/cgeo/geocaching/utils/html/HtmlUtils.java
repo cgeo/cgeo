@@ -12,12 +12,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.BulletSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
@@ -36,7 +38,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -265,9 +269,85 @@ public final class HtmlUtils {
     public static Pair<Spannable, Boolean> renderHtml(final String html, final Function<String, Drawable> imageGetter) {
         final String preparedHtml = prepareParseBody(html);
         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-        final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(preparedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
+        final Spannable description = fromHtmlWithLists(preparedHtml, imageGetter::apply, unknownTagsHandler);
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());
 
+    }
+
+    /**
+     * Like {@code HtmlCompat.fromHtml(html, FROM_HTML_MODE_LEGACY, ...)}, but renders lists properly: numbered
+     * {@code ol}, one line per item, bullet/number with a hanging indent and nesting (#11992, #12527).
+     * {@code ul}/{@code li} stay with Android, so their styling (text-align, color, ...) is kept.
+     */
+    @NonNull
+    public static Spannable fromHtmlWithLists(@Nullable final String html, @Nullable final Html.ImageGetter imageGetter, @NonNull final UnknownTagsHandler tagHandler) {
+        return replaceBulletsWithListItems(HtmlCompat.fromHtml(markUnorderedLists(StringUtils.defaultString(html)),
+                HtmlCompat.FROM_HTML_MODE_LEGACY | HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST,
+                imageGetter, tagHandler));
+    }
+
+    /**
+     * marks start and end of every ul with private empty tags, so that the TagHandler (which never sees ul or li) learns
+     * where the list starts and ends; a wrapping element would not do, as TagSoup ignores end tags of unknown elements
+     */
+    @NonNull
+    static String markUnorderedLists(@NonNull final String html) {
+        if (!Strings.CI.contains(html, "<ul")) {
+            return html;
+        }
+        final Document document = Jsoup.parseBodyFragment(html);
+        document.outputSettings().prettyPrint(false);
+        for (final Element ul : document.select("ul")) {
+            ul.before("<" + UnknownTagsHandler.UL_START_TAG + "></" + UnknownTagsHandler.UL_START_TAG + ">");
+            ul.after("<" + UnknownTagsHandler.UL_END_TAG + "></" + UnknownTagsHandler.UL_END_TAG + ">");
+        }
+        return document.body().html();
+    }
+
+    // copies all spans into a new Spannable instead of removeSpan()/setSpan() in place, which is quadratic for long listings
+    private static Spannable replaceBulletsWithListItems(final Spanned text) {
+        final UnknownTagsHandler.ListRange[] lists = text.getSpans(0, text.length(), UnknownTagsHandler.ListRange.class);
+        final BulletSpan[] items = text.getSpans(0, text.length(), BulletSpan.class);
+        // document order, outer item before a nested one starting at the same position
+        Arrays.sort(items, Comparator.<BulletSpan>comparingInt(text::getSpanStart).thenComparing(Comparator.<BulletSpan>comparingInt(text::getSpanEnd).reversed()));
+        final Map<UnknownTagsHandler.ListRange, Integer> counters = new HashMap<>();
+        final String[] numbers = new String[items.length];
+        final UnknownTagsHandler.ListRange[] itemLists = new UnknownTagsHandler.ListRange[items.length];
+        for (int i = 0; i < items.length; i++) {
+            itemLists[i] = findInnermostList(text, lists, text.getSpanStart(items[i]), text.getSpanEnd(items[i]));
+            numbers[i] = itemLists[i] != null && itemLists[i].ordered ? counters.merge(itemLists[i], 1, Integer::sum) + "." : null;
+        }
+        final SpannableStringBuilder result = new SpannableStringBuilder(text.toString());
+        int next = 0;
+        for (final Object span : text.getSpans(0, text.length(), Object.class)) {
+            if (span instanceof BulletSpan) {
+                // Android draws leading margins in span order: items are emitted in document order (outer before nested),
+                // else a nested marker is drawn at the outer position; reusing the bullet slots keeps setSpan() cheap
+                final BulletSpan item = items[next];
+                // all items of one list share the indent of its widest number, so their texts stay aligned
+                final String widestNumber = numbers[next] == null ? null : counters.get(itemLists[next]) + ".";
+                result.setSpan(new ListItemSpan(numbers[next], widestNumber), text.getSpanStart(item), text.getSpanEnd(item), text.getSpanFlags(item));
+                next++;
+            } else if (!(span instanceof UnknownTagsHandler.ListRange)) {
+                result.setSpan(span, text.getSpanStart(span), text.getSpanEnd(span), text.getSpanFlags(span));
+            }
+        }
+        return result;
+    }
+
+    @Nullable
+    private static UnknownTagsHandler.ListRange findInnermostList(final Spanned text, final UnknownTagsHandler.ListRange[] lists, final int start, final int end) {
+        UnknownTagsHandler.ListRange innermost = null;
+        int innermostLength = Integer.MAX_VALUE;
+        for (final UnknownTagsHandler.ListRange list : lists) {
+            final int listStart = text.getSpanStart(list);
+            final int listEnd = text.getSpanEnd(list);
+            if (listStart <= start && end <= listEnd && listEnd - listStart < innermostLength) {
+                innermost = list;
+                innermostLength = listEnd - listStart;
+            }
+        }
+        return innermost;
     }
 
     /**

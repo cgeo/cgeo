@@ -35,7 +35,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -144,9 +143,8 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
             holder.binding.log.setText(
                     TextUtils.trimSpanned(
-                            HtmlCompat.fromHtml(
+                            HtmlUtils.fromHtmlWithLists(
                                     log.getDisplayText(),
-                                    HtmlCompat.FROM_HTML_MODE_LEGACY,
                                     new SmileyImage(getGeocode(), holder.binding.log),
                                     unknownTagsHandler)),
                     TextView.BufferType.SPANNABLE);
