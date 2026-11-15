@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Сохранено</string>
     <string name="any_button">Навигация</string>
     <string name="unknown_scan">Не найдено геокодов в процессе сканирования.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Здесь тайников нет</string>
     <string name="caches_more_caches">Загрузить больше тайников</string>
@@ -539,7 +540,6 @@
     <string name="caches_reset_cache_icons_title">Сбросить иконку тайника</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
     <string name="caches_set_listmarker">Установить маркер списка</string>
-    <string name="caches_recalculate_health_score">Пересчитать оценку состояния тайника</string>
     <string name="caches_askdeletion">Спросить про удаление, если пусто</string>
     <string name="select_icon">Выбрать иконку</string>
     <string name="onetime_missing_unicode_info">Ваша версия Android не поддерживает автоматическое определение иконок - некоторые символы могут отсутствовать</string>
@@ -794,7 +794,6 @@
     <string name="dialog_parent">Исходный элемент</string>
     <string name="dialog_parent_select">Выбрать исходный элемент</string>
     <string name="dialog_parent_new">Создать новый исходный элемент</string>
-    <string name="dialog_name">Название</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -1859,8 +1858,6 @@
     <string name="projection_type_bearing_hint_distance">Расстояние</string>
     <string name="projection_type_offset">Смещение</string>
     <string name="projection_type_offset_info">Смещение. широта %1$s микроминут (mm), долгота %2$s микроминут</string>
-    <string name="projection_type_offset_hint_latitude">Смещение широты в микроминутах</string>
-    <string name="projection_type_offset_hint_longitude">Смещение долготы в микроминутах</string>
     <!-- Variables -->
     <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_titletext_short">Значения и расчеты</string>
