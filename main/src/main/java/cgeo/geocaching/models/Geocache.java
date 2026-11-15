@@ -591,6 +591,9 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setHasLogOffline(final boolean hasLogOffline) {
         this.hasLogOffline = hasLogOffline;
+        if (!hasLogOffline) {
+            offlineLog = null;
+        }
     }
 
     public void logOffline(@NonNull final Activity fromActivity, @NonNull final LogType logType, @NonNull final ReportProblemType reportProblem) {
@@ -610,10 +613,11 @@ public class Geocache implements INamedGeoCoordinate {
      * If the cache already has an offline log with log text and the new offline log would overwrite that prompt for confirmation
      */
     public void logOffline(@NonNull final Activity fromActivity, @NonNull final OfflineLogEntry logEntry) {
-        if (hasLogOffline() && !getOfflineLog().log.isEmpty() && !getOfflineLog().log.equals(logEntry.log)) {
+        final OfflineLogEntry offlineLog = getOfflineLog();
+        if (offlineLog != null && !offlineLog.log.isEmpty() && !offlineLog.log.equals(logEntry.log)) {
             SimpleDialog.of(fromActivity)
                     .setTitle(R.string.caches_overwrite_offline_log)
-                    .setMessage(R.string.caches_overwrite_offline_log_question, getOfflineLog().logType.getL10n())
+                    .setMessage(R.string.caches_overwrite_offline_log_question, offlineLog.logType.getL10n())
                     .confirm(() -> storeLogOffline(fromActivity, logEntry));
         } else {
             storeLogOffline(fromActivity, logEntry);
@@ -637,10 +641,10 @@ public class Geocache implements INamedGeoCoordinate {
         if (status) {
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
+            offlineLog = logEntry;
             if (Settings.removeFromRouteOnLog()) {
                 DataStore.removeFirstMatchingIdFromIndividualRoute(fromActivity, geocode);
             }
-            offlineLog = logEntry;
             notifyChange(fromActivity);
             if (!fromActivity.isFinishing()) {
                 ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.info_log_saved));
@@ -1125,6 +1129,11 @@ public class Geocache implements INamedGeoCoordinate {
 
     public long getVisitedDate() {
         return visitedDate;
+    }
+
+    public long getHistoryDate() {
+        final OfflineLogEntry offlineLog = getOfflineLog();
+        return Math.max(visitedDate, offlineLog != null ? offlineLog.date : 0);
     }
 
     public void setVisitedDate(final long visitedDate) {

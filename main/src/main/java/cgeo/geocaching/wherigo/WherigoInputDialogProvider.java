@@ -25,9 +25,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /** Handles Wherigo/OpenWIG input dialogs */
 public class WherigoInputDialogProvider implements IWherigoDialogProvider {
+
+    private static final String STATE_TEXT = "state_text";
+    private static final String STATE_CHOICE = "state_choice";
 
     private final EventTable input;
 
@@ -59,7 +63,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control, final Map<String, Object> state) {
         control.setPauseOnDismiss(true);
 
         final WherigoGame game = WherigoGame.get();
@@ -87,6 +91,9 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         if ("Text".equals(type)) {
             binding.dialogInputLayout.setVisibility(VISIBLE);
+            if (state.containsKey(STATE_TEXT)) {
+                binding.dialogInputEdittext.setText(String.valueOf(state.get(STATE_TEXT)));
+            }
             WherigoViewUtils.setViewActions(Arrays.asList(Boolean.FALSE, Boolean.TRUE),
                     binding.dialogActionlist, 2, item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_CANCEL_BUTTON, item -> {
                 if (item) {
@@ -118,12 +125,14 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             }
 
             if (!choices.isEmpty()) {
+                final String choiceCancidate = String.valueOf(state.get(STATE_CHOICE));
+                final String selectedChoice = choices.contains(choiceCancidate) ? choiceCancidate : choices.get(0);
 
                 binding.dialogItemlistview.setVisibility(VISIBLE);
                 choiceModel
                     .setItems(choices)
                     .setDisplayMapper(s -> TextParam.text(game.toDisplayText(s)))
-                    .setSelectedItems(Collections.singleton(choices.get(0)))
+                    .setSelectedItems(Collections.singleton(selectedChoice))
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
                 binding.dialogItemlistview.setModel(choiceModel);
 
@@ -152,8 +161,11 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             });
         }
 
-        //retrigger choice paint on trasnlation events
-        control.setOnGameNotificationListener((d, nt) -> choiceModel.triggerRepaint());
+        //save input state
+        control.setOnSaveStateListener(saveState -> {
+            saveState.put(STATE_TEXT, String.valueOf(binding.dialogInputEdittext.getText()));
+            saveState.put(STATE_CHOICE, String.valueOf(CommonUtils.first(choiceModel.getSelectedItems())));
+        });
 
         dialog.show();
         return dialog;

@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -69,7 +70,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control, final Map<String, Object> state) {
         control.setPauseOnDismiss(true);
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player), binding.getRoot());

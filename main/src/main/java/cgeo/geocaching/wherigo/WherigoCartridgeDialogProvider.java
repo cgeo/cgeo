@@ -19,6 +19,7 @@ import android.view.View;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
@@ -49,7 +50,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control, final Map<String, Object> state) {
         final WherigoCartridgeDetailsBinding binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, cartridgeFile.name, binding.getRoot());
 

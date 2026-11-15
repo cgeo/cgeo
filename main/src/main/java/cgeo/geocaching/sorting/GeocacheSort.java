@@ -207,6 +207,10 @@ public class GeocacheSort implements Parcelable {
             case TARGET_DISTANCE:
                 base = this.targetCoords != null ? new TargetDistanceComparator(this.targetCoords) : getComparatorFor(SortType.DISTANCE, false);
                 break;
+            case LOGGED_DATE:
+                // history also considers date of offline log, other lists use visited date only
+                base = CacheListType.HISTORY.equals(listType) ? HistoryComparator.singleton : type.cacheComparatorSupplier.get();
+                break;
             default:
                 base = type.cacheComparatorSupplier.get();
                 break;
