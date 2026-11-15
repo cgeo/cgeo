@@ -4,12 +4,15 @@
 - New: Support multiple user-defined tile providers (#18586)
 - New: Optionally show map on lock screen (#18383)
 - New: Warning if not all caches of a list can be displayed on the map (#18506)
+- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
 
 ### 藏点详细信息
 - New: Toggle stored-on-device date between relative and exact (#18393)
 - Fix: Stacked progress dialogs when deleting multiple logs (#18279)
 - New: "Edit personal note" button in waypoint popup (#18559)
 - Fix: Broken colors under certain conditions (#17479)
+- New: New attributes for Opencaching (#18584)
+- Fix: Offline log marker not updated correctly (#15398)
 
 ### Wherigo 播放器
 -
@@ -23,3 +26,4 @@
 - New: Support additional attribute searches on geocaching.com (#18731)
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
+- Change: Limit hidden date picker range to "2000-next year" (#18790)
