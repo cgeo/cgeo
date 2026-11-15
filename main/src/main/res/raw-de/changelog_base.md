@@ -4,14 +4,15 @@
 - Neu: Unterstützt mehrere benutzerdefinierte Kartenanbieter (#18586)
 - Neu: Karte optional auf dem Sperrbildschirm anzeigen (#18383)
 - Neu: Warnung, wenn nicht alle Caches einer Liste auf der Karte angezeigt werden können (#18506)
-- Change: Load only enabled tracks, GeoJSON etc. on map (#18236)
+- Änderung: Nur aktivierte Tracks, GeoJSON usw. auf Karte laden (#18236)
 
 ### Cache-Details
 - Neu: Datum "gespeichert vor" umschaltbar zwischen relativ und absolut (#18393)
 - Korrektur: Überlappende Dialoge beim Löschen mehrerer Logs (#18279)
 - Neu: "Persönliche Notiz bearbeiten"-Button im Wegpunkt-Popup (#18559)
 - Korrektur: Farben unter bestimmten Bedingungen nicht lesbar (#17479)
-- New: New attributes for Opencaching (#18584)
+- Neu: Neue Attribute für Opencaching (#18584)
+- Korrektur: Offline-Log-Marker nicht korrekt aktualisiert (#15398)
 
 ### Wherigo Player
 -
@@ -22,7 +23,7 @@
 - Neu: Cacheliste: Final-Wegpunkte als korrigierte Wegpunkte setzen (#18335)
 - Änderung: Verwende Android Systembenachrichtigungen für Rückmeldungen zu Hintergrundaufgaben (#18596)
 - Korrektur: Filterleiste verwendet interne Attributnamen (#18730)
-- New: Support additional attribute searches on geocaching.com (#18731)
-- New: Batch operation for "store waypoints & variables in personal note" (#18783)
-- New: Support trackable code from clipboard in trackable search (#17101)
-- Change: Limit hidden date picker range to "2000-next year" (#18790)
+- Neu: Unterstütze zusätzliche Attributsuchen auf geocaching.com (#18731)
+- Neu: Batchoperation für "Speichere Wegpunkte & Variablen in persönlicher Notiz" (#18783)
+- Neu: Unterstütze Trackable Code aus der Zwischenablage in der Trackable Suche (#17101)
+- Änderung: Begrenze Datumsauswahl für "Versteckt-Datum" auf "2000-nächstes Jahr" (#18790)
