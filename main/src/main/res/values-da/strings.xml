@@ -343,6 +343,7 @@
     <string name="stored_caches_button">Gemte</string>
     <string name="any_button">Navigation</string>
     <string name="unknown_scan">Der blev ikke fundet nogen geokoder i skanningen.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Ingen cache</string>
     <string name="caches_more_caches">Flere cacher</string>
