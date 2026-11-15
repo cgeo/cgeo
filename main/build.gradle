@@ -528,7 +528,8 @@ dependencies {
 
     // androidx Emoji Picker (full standard emoji set, used by the icon/marker selection dialog)
     implementation 'androidx.emoji2:emoji2-emojipicker:1.6.0'
-    implementation 'com.google.guava:guava:33.6.0-android' //needed by emojipicker
+    // explicit import - used by emojipicker, but only with an old version
+    implementation 'com.google.guava:guava:33.8.0-android'
 
     // Settings Library
     implementation 'androidx.preference:preference:1.2.1'
