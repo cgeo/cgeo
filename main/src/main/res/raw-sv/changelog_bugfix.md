@@ -1,5 +1,5 @@
 ##
-- Fix: geocaching.com Ignorera Listans hantering fungerar inte (#16950)
+- Fix: Hanteringen av ignorera-listan från geocaching.com fungerade inte (#16950)
 - Fix: Flera minnesläckor (#18615)
 - Fix: Fel storlek på skalan på Google Maps (#18646)
 - Fix: Oändlig loop vid val av nytt format i "Beräkna koordinat" (#18672)
