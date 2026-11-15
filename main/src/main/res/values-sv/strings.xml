@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Sparade</string>
     <string name="any_button">Gå till</string>
     <string name="unknown_scan">Hittade inte någon geokod i scanningen.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Det finns ingen cache</string>
     <string name="caches_more_caches">Ladda fler cacher</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
-    <string name="caches_recalculate_health_score">Räkna om loggars hälsopoäng</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
     <string name="select_icon">Välj ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version stöder inte automatisk detektering av ikoner - vissa tecken kan saknas</string>
@@ -661,6 +661,7 @@
     <string name="cache_filter_checkboxlist_add_items">Lägg till fler objekt</string>
     <string name="cache_filter_checkboxlist_add_all_items">Lägg till alla objekt</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lägg till objekt</string>
+    <string name="cache_filter_cache_icon">Anpassad cache-ikon</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
     <string name="cache_filter_distance_coordinates">Koordinater</string>
@@ -1748,6 +1749,8 @@
     <string name="init_ActionbarAutohide">Dölj verktygsfältet vid tryck</string>
     <string name="init_summary_ActionbarAutohide">Tryck på tomt kartutrymme för att dölja/visa verktygsfältet</string>
     <string name="init_autozoom_consider_lastcenter">Återställ kartpositionen vid kartläggning av en lista</string>
+    <string name="init_mapOnLockScreen">Låsskärm</string>
+    <string name="init_summary_mapOnLockScreen">Visa karta på enhetens låsskärm. För att låsa upp enheten medan kartan visas, använd bakåtknappen/gesten.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">När en lista med cacher visas på karta, och kartan har tidigare lämnats inom listans gränser återställ förhandsgranskningsposition, annars zooma för att passa alla cacher.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">När en lista med cacher visas på karta, sätt zoom och gränser för att passa alla cacher.</string>
     <string name="goto_targets_list">Interna cacher</string>
@@ -1849,8 +1852,6 @@
     <string name="projection_type_bearing_hint_distance">Avstånd</string>
     <string name="projection_type_offset">Förskjutning</string>
     <string name="projection_type_offset_info">Förskjutning lat %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Latitud-förskjutning i mikro-minuter</string>
-    <string name="projection_type_offset_hint_longitude">Longitud-förskjutning i mikro-minuter</string>
     <!-- Variables -->
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_titletext_short">Värden och beräkningar</string>
@@ -2357,6 +2358,9 @@
     <string name="attribute_historic_no">Ingen övergiven struktur eller ruin</string>
     <string name="attribute_blind_people_yes">Handikapp: Blind</string>
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
+    <string name="attribute_architecture_detail">Arkitektonisk detalj</string>
+    <string name="attribute_natural_monument">Naturligt monument</string>
+    <string name="attribute_street_art">Gatukonst</string>
     <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
     <string name="cat_status">Cache-status</string>
@@ -2915,7 +2919,6 @@
     <string name="dbi_select_table">Välj tabell</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s vid #%2$d är skrivskyddad</string>
-    <string name="dbi_edit_title">Redigera \"%1$s\" vid #%2$d\"</string>
     <string name="dbi_delete_row_title">Ta bort rad</string>
     <string name="dbi_delete_row_question">Ta bort raden #%1$d (%2$s) för gott?</string>
     <string name="dbi_delete_success">Rad raderad: %1$s</string>
