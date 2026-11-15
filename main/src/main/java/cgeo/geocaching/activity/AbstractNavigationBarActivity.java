@@ -153,6 +153,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                 Settings.setLastDisplayedList(selectedListId);
                 startActivity(CacheListActivity.getActivityOfflineIntent(this, null));
             }
+            // like a tap on the bottom navigation, see onNavigationItemSelectedDefaultBehaviour()
+            clearBackStack();
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
@@ -161,6 +163,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private boolean onMapLongClicked() {
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
             DefaultMap.startActivityList(this, selectedListId, -1, null);
+            // like a tap on the bottom navigation, see onNavigationItemSelectedDefaultBehaviour()
+            clearBackStack();
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
