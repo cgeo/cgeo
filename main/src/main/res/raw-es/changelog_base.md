@@ -12,6 +12,7 @@
 - Nuevo: Botón para "Editar nota personal" en la ventana del waypoint (#18559)
 - Corregido: Colores rotos bajo ciertas condiciones (#17479)
 - New: New attributes for Opencaching (#18584)
+- Fix: Offline log marker not updated correctly (#15398)
 
 ### Ejecutador de Wherigos
 -
