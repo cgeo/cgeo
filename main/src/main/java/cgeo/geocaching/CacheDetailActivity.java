@@ -205,12 +205,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
     public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocaching.speechServiceRunning";
     public static final String STATE_TRANSLATION_LANGUAGE_SOURCE = "cgeo.geocaching.translation.languageSource";
+    public static final String STATE_FRIEND_LOGS_SEPARATE_TAB = "cgeo.geocaching.friendLogsSeparateTab";
 
 
     // Store Geocode here, as 'cache' is loaded Async.
     private String geocode;
     private Geocache cache;
     private boolean restartSpeechService = false;
+    /** whether friends'/own logs are shown on a separate page (fixed for the lifetime of this activity, matching the existing pages) */
+    private boolean friendLogsSeparateTab;
     @NonNull
     private final List<Trackable> genericTrackables = new ArrayList<>();
     private final Progress progress = new Progress();
@@ -258,6 +261,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        // before super.onCreate(), which may restore the logbook pages
+        friendLogsSeparateTab = savedInstanceState != null && savedInstanceState.containsKey(STATE_FRIEND_LOGS_SEPARATE_TAB)
+                ? savedInstanceState.getBoolean(STATE_FRIEND_LOGS_SEPARATE_TAB)
+                : Settings.isFriendLogsSeparateTab();
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
 
@@ -357,10 +364,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
-        final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
+        final long requestedPage = forceWaypointsPage ? Page.WAYPOINTS.id :
                 savedInstanceState != null ?
                         savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                         Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
+        // friends' logs are integrated into the logbook page unless a separate page is configured
+        final long pageToOpen = requestedPage == Page.LOGSFRIENDS.id && !friendLogsSeparateTab ? Page.LOGS.id : requestedPage;
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(STATE_DESCRIPTION_STYLE)) {
                 this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
@@ -437,6 +446,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
+        outState.putBoolean(STATE_FRIEND_LOGS_SEPARATE_TAB, friendLogsSeparateTab);
         outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
         outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
@@ -2691,8 +2701,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
-        }  else if (pageId == Page.LOGSFRIENDS.id) {
-            final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
+        } else if (pageId == Page.LOGS.id) {
+            final String title = LocalizationUtils.getString(Page.LOGS.titleStringId);
+            final String logCounts = cache == null || friendLogsSeparateTab ? "" : CacheLogsViewCreator.getSpecialLogsCountText(cache);
+            return logCounts.isEmpty() ? title : title + " (" + logCounts + ")";
+        } else if (pageId == Page.LOGSFRIENDS.id) {
+            final int logCount = cache == null ? 0 : CacheLogsViewCreator.getLogCountOfSeparateTab(cache);
             return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
         return LocalizationUtils.getString(Page.find(pageId).titleStringId);
@@ -2735,7 +2749,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache.supportsLogging() || !cache.getLogs().isEmpty()) {
                 pages.add(Page.LOGS.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getFriendsLogs()) && Settings.isFriendLogsWanted()) {
+            if (friendLogsSeparateTab && CacheLogsViewCreator.hasLogsForSeparateTab(cache)) {
                 pages.add(Page.LOGSFRIENDS.id);
             }
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
@@ -2759,9 +2773,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.DESCRIPTION.id) {
             return new DescriptionViewCreator();
         } else if (pageId == Page.LOGS.id) {
-            return CacheLogsViewCreator.newInstance(true);
+            return CacheLogsViewCreator.newInstance(friendLogsSeparateTab ? CacheLogsViewCreator.Mode.ALL_PLAIN : CacheLogsViewCreator.Mode.INTEGRATED);
         } else if (pageId == Page.LOGSFRIENDS.id) {
-            return CacheLogsViewCreator.newInstance(false);
+            return CacheLogsViewCreator.newInstance(CacheLogsViewCreator.Mode.SPECIAL_ONLY);
         } else if (pageId == Page.WAYPOINTS.id) {
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {
