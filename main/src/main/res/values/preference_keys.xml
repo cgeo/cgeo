@@ -302,6 +302,7 @@
 
     <!-- category logging templates -->
     <string translatable="false" name="preference_category_logging_logtemplates">preference_category_logging_logtemplates</string>
+    <string translatable="false" name="pref_fakekey_logging_logtemplates_manage">fakekey_logging_logtemplates_manage</string>
 
     <!-- catgory other logging options -->
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>

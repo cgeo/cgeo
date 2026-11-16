@@ -866,8 +866,8 @@
         </activity>
 
         <activity
-            android:name=".log.LogTemplateSortActivity"
-            android:label="@string/init_log_template_sort_title" >
+            android:name=".log.LogTemplatesActivity"
+            android:label="@string/init_log_templates" >
         </activity>
 
         <activity

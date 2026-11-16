@@ -24,7 +24,10 @@
         android:key="@string/preference_category_logging_logtemplates"
         android:title="@string/init_log_templates"
         app:iconSpaceReserved="false">
-        <!-- Filled dynamically -->
+        <Preference
+            android:key="@string/pref_fakekey_logging_logtemplates_manage"
+            android:title="@string/init_log_templates_manage"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
