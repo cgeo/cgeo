@@ -7,38 +7,12 @@
     android:orientation="vertical"
     android:padding="0dp">
 
-    <com.google.android.material.chip.ChipGroup
+    <cgeo.geocaching.ui.ChipChoiceGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4sp"
-        android:id="@+id/filter_chips">
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_own"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:checked="true"
-            style="@style/chip_choice"
-            android:text="@string/image_category_own" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:checked="true"
-            style="@style/chip_choice"
-            android:text="@string/cache_logs_friends" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_owner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:checked="true"
-            style="@style/chip_choice"
-            android:text="@string/cache_owner" />
-    </com.google.android.material.chip.ChipGroup>
+        android:visibility="gone"
+        android:id="@+id/filter_chips" />
 
     <cgeo.geocaching.ui.recyclerview.RecyclerViewWithHeader
         android:id="@+id/logs_items"
