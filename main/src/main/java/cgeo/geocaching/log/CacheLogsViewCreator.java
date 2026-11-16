@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -63,18 +64,20 @@ public class CacheLogsViewCreator extends LogsViewCreator {
      * The special categories are shown in this order as filter chips and in the page title.
      */
     private enum LogCategory {
-        OWN(R.string.cache_logs_own, R.string.cache_logs_count_own),
-        FRIEND(R.string.cache_logs_friends, R.string.cache_logs_count_friends),
-        OWNER(R.string.cache_logs_owner, R.string.cache_logs_count_owner),
-        OTHER(0, 0);
+        OWN(R.string.cache_logs_own, R.drawable.ic_menu_edit, R.string.cache_logs_count_own),
+        FRIEND(R.string.cache_logs_friends, R.drawable.ic_menu_face, R.string.cache_logs_count_friends),
+        OWNER(R.string.cache_logs_owner, R.drawable.ic_menu_star_outline, R.string.cache_logs_count_owner),
+        OTHER(0, 0, 0);
 
         private static final LogCategory[] SPECIAL = {OWN, FRIEND, OWNER};
 
         private final @StringRes int chipTextId;
+        private final @DrawableRes int chipIconId;
         private final @StringRes int countTextId;
 
-        LogCategory(final @StringRes int chipTextId, final @StringRes int countTextId) {
+        LogCategory(final @StringRes int chipTextId, final @DrawableRes int chipIconId, final @StringRes int countTextId) {
             this.chipTextId = chipTextId;
+            this.chipIconId = chipIconId;
             this.countTextId = countTextId;
         }
     }
@@ -137,6 +140,12 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 chipTexts.add(TextParam.id(category.chipTextId));
             }
             filterChips.addChips(chipTexts);
+            // the combinable chips of the separate page show a check icon instead
+            if (currentMode == Mode.INTEGRATED) {
+                for (final LogCategory category : LogCategory.SPECIAL) {
+                    filterChips.setButtonIconByIndex(category.chipIconId, category.ordinal());
+                }
+            }
             if (checkedFilterChips == null) {
                 filterChips.setSelectAllChecked(true);
             } else {
