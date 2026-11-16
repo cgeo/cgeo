@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -17,17 +18,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 /**
- * A group of text chips with multiselect allowed
+ * A group of text chips with multiselect allowed (or single choice, see {@link #setSingleChoice(boolean)})
  */
 public class ChipChoiceGroup extends ChipGroup {
 
     private boolean withSelectAllChip = true;
+    private boolean singleChoice = false;
 
     private final List<CompoundButton> valueButtons = new ArrayList<>();
     private CompoundButton selectAllNoneButton;
+    @Nullable
+    private Runnable onSelectionChangedListener;
 
 
     public ChipChoiceGroup(final Context context) {
@@ -48,17 +53,61 @@ public class ChipChoiceGroup extends ChipGroup {
     private void init() {
         //create the selectAllChip
         selectAllNoneButton = createChip(LayoutInflater.from(getContext()), TextParam.id(R.string.multiselect_selectall));
+        selectAllNoneButton.setId(View.generateViewId());
         selectAllNoneButton.setOnClickListener(v -> {
-            final boolean c = selectAllNoneButton.isChecked();
-            for (CompoundButton tb : valueButtons) {
-                tb.setChecked(c);
+            if (!singleChoice) {
+                final boolean c = selectAllNoneButton.isChecked();
+                for (CompoundButton tb : valueButtons) {
+                    tb.setChecked(c);
+                }
             }
+            notifySelectionChanged();
         });
+    }
+
+    /**
+     * switches to single choice: exactly one chip is checked, the selectAll chip stands for "no restriction"
+     * and is checked if no value chip is checked. Checked chips show no check icon (default: multiselect)
+     */
+    public void setSingleChoice(final boolean singleChoice) {
+        this.singleChoice = singleChoice;
+        setSingleSelection(singleChoice);
+        setSelectionRequired(singleChoice);
+        setCheckedIconVisible(selectAllNoneButton);
+        for (CompoundButton tb : valueButtons) {
+            setCheckedIconVisible(tb);
+        }
+        relayout();
+    }
+
+    public void setSelectAllText(final TextParam text) {
+        text.applyTo(selectAllNoneButton);
     }
 
     public void setWithSelectAllChip(final boolean withSelectAllChip) {
         this.withSelectAllChip = withSelectAllChip;
         relayout();
+    }
+
+    /**
+     * checks/unchecks the selectAll chip together with all value chips
+     * (single choice: checking the selectAll chip unchecks all value chips)
+     */
+    public void setSelectAllChecked(final boolean checked) {
+        selectAllNoneButton.setChecked(checked);
+        if (!singleChoice) {
+            for (CompoundButton tb : valueButtons) {
+                tb.setChecked(checked);
+            }
+        }
+    }
+
+    /**
+     * sets a listener which is called whenever the user changes the selection
+     * (not called for programmatic changes)
+     */
+    public void setOnSelectionChangedListener(@Nullable final Runnable onSelectionChangedListener) {
+        this.onSelectionChangedListener = onSelectionChangedListener;
     }
 
 
@@ -89,6 +138,32 @@ public class ChipChoiceGroup extends ChipGroup {
         checkAndSetAllNone();
     }
 
+    /**
+     * shows or hides value chips. Hidden chips are ignored when checking for all/none selected
+     * (single choice: if the checked chip gets hidden, the selectAll chip gets checked)
+     */
+    public void setButtonVisibleByIndex(final boolean visible, final int... indexes) {
+        for (int idx : indexes) {
+            if (idx >= 0 && idx < this.valueButtons.size()) {
+                this.valueButtons.get(idx).setVisibility(visible ? View.VISIBLE : View.GONE);
+            }
+        }
+        checkAndSetAllNone();
+    }
+
+    /**
+     * sets an icon in front of the text of a value chip, tinted like the text
+     */
+    public void setButtonIconByIndex(@DrawableRes final int iconId, final int index) {
+        if (index >= 0 && index < this.valueButtons.size() && this.valueButtons.get(index) instanceof Chip) {
+            final Chip chip = (Chip) this.valueButtons.get(index);
+            chip.setChipIconResource(iconId);
+            chip.setChipIconSize(ViewUtils.dpToPixelFloat(18));
+            chip.setChipIconTintResource(R.color.chip_textcolor_selector);
+            chip.setChipIconVisible(true);
+        }
+    }
+
     @NonNull
     public Set<Integer> getCheckedButtonIndexes() {
         final Set<Integer> checkedButtonIndexes = new HashSet<>();
@@ -108,8 +183,18 @@ public class ChipChoiceGroup extends ChipGroup {
 
         final CompoundButton chip = (CompoundButton) inflater.inflate(R.layout.chip_choice_view, this, false);
         text.applyTo(chip);
-        chip.setOnClickListener(v -> checkAndSetAllNone());
+        chip.setOnClickListener(v -> {
+            checkAndSetAllNone();
+            notifySelectionChanged();
+        });
+        setCheckedIconVisible(chip);
         return chip;
+    }
+
+    private void setCheckedIconVisible(final CompoundButton chip) {
+        if (chip instanceof Chip) {
+            ((Chip) chip).setCheckedIconVisible(!singleChoice);
+        }
     }
 
     public boolean allChecked() {
@@ -122,7 +207,7 @@ public class ChipChoiceGroup extends ChipGroup {
 
     private boolean allNoneChecked(final boolean checkAll) {
         for (CompoundButton valueButton : this.valueButtons) {
-            if (checkAll != valueButton.isChecked()) {
+            if (valueButton.getVisibility() == View.VISIBLE && checkAll != valueButton.isChecked()) {
                 return false;
             }
         }
@@ -130,7 +215,18 @@ public class ChipChoiceGroup extends ChipGroup {
     }
 
     private void checkAndSetAllNone() {
-        selectAllNoneButton.setChecked(allChecked());
+        if (!singleChoice) {
+            selectAllNoneButton.setChecked(allChecked());
+        } else if (noneChecked()) {
+            // the group unchecks a hidden value chip
+            selectAllNoneButton.setChecked(true);
+        }
+    }
+
+    private void notifySelectionChanged() {
+        if (onSelectionChangedListener != null) {
+            onSelectionChangedListener.run();
+        }
     }
 
     private void addChipToView(final CompoundButton chip) {
@@ -141,7 +237,7 @@ public class ChipChoiceGroup extends ChipGroup {
     private void relayout() {
 
         this.removeAllViews();
-        if (this.withSelectAllChip && this.valueButtons.size() > 1) {
+        if (this.withSelectAllChip && (this.singleChoice || this.valueButtons.size() > 1)) {
             addChipToView(this.selectAllNoneButton);
         }
         for (CompoundButton chip : this.valueButtons) {

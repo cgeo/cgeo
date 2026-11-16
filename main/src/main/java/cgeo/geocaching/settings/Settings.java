@@ -43,6 +43,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.PrefUserDefinedTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.DisplayNameEnum;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -203,7 +204,7 @@ public class Settings {
      * Controls which {@link cgeo.geocaching.filters.NamedFilter}s matching the currently displayed cache
      * are shown in the cache details view.
      */
-    public enum NamedFilterDisplayMode {
+    public enum NamedFilterDisplayMode implements DisplayNameEnum {
         /** Do not show any matching named filters. */
         NONE(R.string.named_filter_display_mode_none),
         /** Only show matching named filters whose marker is currently active. */
@@ -217,6 +218,7 @@ public class Settings {
             this.displayNameResId = displayNameResId;
         }
 
+        @Override
         public String getDisplayName() {
             return LocalizationUtils.getString(displayNameResId);
         }
@@ -1105,6 +1107,21 @@ public class Settings {
             return false;
         }
         return getBoolean(R.string.pref_friendlogswanted, true);
+    }
+
+    /**
+     * Whether friends', own and owner logs are shown in a separate logbook tab
+     * instead of being filterable within the regular logbook tab.
+     */
+    public static boolean isFriendLogsSeparateTab() {
+        return getBoolean(R.string.pref_friendlogs_separate_tab, false);
+    }
+
+    /**
+     * Whether owner logs are loaded through an additional request (to also get older owner logs).
+     */
+    public static boolean isLoadOwnerLogs() {
+        return getBoolean(R.string.pref_load_owner_logs, true);
     }
 
     public static float getSaturationOffset(final boolean isLightTheme) {
