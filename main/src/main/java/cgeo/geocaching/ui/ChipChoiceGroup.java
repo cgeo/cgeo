@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -148,6 +149,19 @@ public class ChipChoiceGroup extends ChipGroup {
             }
         }
         checkAndSetAllNone();
+    }
+
+    /**
+     * sets an icon in front of the text of a value chip, tinted like the text
+     */
+    public void setButtonIconByIndex(@DrawableRes final int iconId, final int index) {
+        if (index >= 0 && index < this.valueButtons.size() && this.valueButtons.get(index) instanceof Chip) {
+            final Chip chip = (Chip) this.valueButtons.get(index);
+            chip.setChipIconResource(iconId);
+            chip.setChipIconSize(ViewUtils.dpToPixelFloat(18));
+            chip.setChipIconTintResource(R.color.chip_textcolor_selector);
+            chip.setChipIconVisible(true);
+        }
     }
 
     @NonNull
