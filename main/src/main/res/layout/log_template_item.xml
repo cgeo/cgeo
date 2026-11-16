@@ -6,16 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:paddingStart="16dp"
     android:paddingEnd="4dp">
 
     <LinearLayout
+        android:id="@+id/template_content"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/template_title"
@@ -37,6 +39,13 @@
             android:ellipsize="end"
             tools:text="Found [NAME] after a nice walk" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/template_delete"
+        style="@style/button_icon"
+        android:layout_marginStart="6dp"
+        android:tooltipText="@string/delete"
+        app:icon="@drawable/ic_menu_delete" />
 
     <ImageView
         android:id="@+id/drag_handle"
