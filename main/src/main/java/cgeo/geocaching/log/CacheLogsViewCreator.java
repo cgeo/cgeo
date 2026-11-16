@@ -6,7 +6,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ChipChoiceGroup;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
@@ -18,50 +20,146 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.widget.TooltipCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.android.material.chip.Chip;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
-    private final boolean allLogs;
+
+    /**
+     * Which logs are shown on a logbook page.
+     */
+    public enum Mode {
+        /** all logs without filter chips (used if friends'/own logs are shown on a separate page) */
+        ALL_PLAIN,
+        /** only friends', own and owner logs, filterable by combinable chips (separate friends'/own logs page) */
+        SPECIAL_ONLY,
+        /** all logs, filterable by single choice chips for all logs or only friends', own or owner logs */
+        INTEGRATED
+    }
+
+    /**
+     * Category of a log. The ordinal of the special categories is the index of the according filter chip.
+     * The special categories are shown in this order as filter chips.
+     */
+    private enum LogCategory {
+        OWN(R.string.cache_logs_own),
+        FRIEND(R.string.cache_logs_friends),
+        OWNER(R.string.cache_logs_owner),
+        OTHER(0);
+
+        private static final LogCategory[] SPECIAL = {OWN, FRIEND, OWNER};
+
+        private final @StringRes int chipTextId;
+
+        LogCategory(final @StringRes int chipTextId) {
+            this.chipTextId = chipTextId;
+        }
+    }
+
+    private static final String ARG_MODE = "mode";
+    private static final String STATE_CHECKED_FILTER_CHIPS = "checkedFilterChips";
+
     private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
-    public CacheLogsViewCreator(final boolean allLogs) {
-        this.allLogs = allLogs;
-    }
+    /**
+     * checked filter chips, null for the initial state: all chips (combinable chips) or "All" (single choice chips).
+     * Kept on configuration changes, but not persisted.
+     */
+    @Nullable
+    private int[] checkedFilterChips = null;
 
-    public CacheLogsViewCreator() {
-        this.allLogs = false;
-    }
-
-    public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
-        final CacheLogsViewCreator fragment = new CacheLogsViewCreator(allLogs);
+    public static TabbedViewPagerFragment<LogsPageBinding> newInstance(@NonNull final Mode mode) {
+        final CacheLogsViewCreator fragment = new CacheLogsViewCreator();
         final Bundle bundle = new Bundle();
+        bundle.putString(ARG_MODE, mode.name());
         fragment.setArguments(bundle);
         return fragment;
     }
 
+    @NonNull
+    private Mode getMode() {
+        final Bundle arguments = getArguments();
+        return arguments == null ? Mode.ALL_PLAIN : EnumUtils.getEnum(Mode.class, arguments.getString(ARG_MODE), Mode.ALL_PLAIN);
+    }
+
+    @Override
+    public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final LogsPageBinding binding = super.createView(inflater, container, savedInstanceState);
+        if (savedInstanceState != null) {
+            restoreFilterState(savedInstanceState);
+        }
+        final Mode mode = getMode();
+        if (mode != Mode.ALL_PLAIN) {
+            final ChipChoiceGroup filterChips = binding.filterChips;
+            if (mode == Mode.INTEGRATED) {
+                filterChips.setSingleChoice(true);
+                filterChips.setSelectAllText(TextParam.id(R.string.cache_filter_status_select_all));
+            } else {
+                filterChips.setWithSelectAllChip(false);
+            }
+            final List<TextParam> chipTexts = new ArrayList<>();
+            for (final LogCategory category : LogCategory.SPECIAL) {
+                chipTexts.add(TextParam.id(category.chipTextId));
+            }
+            filterChips.addChips(chipTexts);
+            if (checkedFilterChips == null) {
+                filterChips.setSelectAllChecked(true);
+            } else {
+                filterChips.setSelectAllChecked(false);
+                filterChips.setCheckedButtonByIndex(true, checkedFilterChips);
+            }
+            filterChips.setOnSelectionChangedListener(this::onFilterChipsChanged);
+        }
+        return binding;
+    }
+
+    private void onFilterChipsChanged() {
+        storeCheckedFilterChips();
+        setContent();
+    }
+
+    private void storeCheckedFilterChips() {
+        checkedFilterChips = binding.filterChips.getCheckedButtonIndexes().stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private void restoreFilterState(@NonNull final Bundle savedInstanceState) {
+        checkedFilterChips = savedInstanceState.getIntArray(STATE_CHECKED_FILTER_CHIPS);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(STATE_CHECKED_FILTER_CHIPS, checkedFilterChips);
+    }
+
     @Override
     public long getPageId() {
-        return allLogs ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
+        return getMode() == Mode.SPECIAL_ONLY ? CacheDetailActivity.Page.LOGSFRIENDS.id : CacheDetailActivity.Page.LOGS.id;
     }
 
     private Geocache getCache() {
@@ -69,38 +167,70 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         return activity.getCache();
     }
 
+    /**
+     * Whether the separate friends'/own logs page has logs to show (including a saved offline log)
+     */
+    public static boolean hasLogsForSeparateTab(@NonNull final Geocache cache) {
+        if (cache.hasLogOffline()) {
+            return true;
+        }
+        for (final LogEntry log : cache.getFriendsLogs()) {
+            if (isShownInSeparateTab(log, cache)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isShownInSeparateTab(@NonNull final LogEntry log, @NonNull final Geocache cache) {
+        final LogCategory category = getCategory(log, cache);
+        return category != LogCategory.OTHER && isCategoryEnabled(category);
+    }
+
+    @NonNull
+    private static LogCategory getCategory(@NonNull final LogEntry log, @NonNull final Geocache cache) {
+        if (isOfflineLog(log) || LogUtils.isOwnLog(log, cache)) {
+            return LogCategory.OWN;
+        }
+        if (LogUtils.isOwnerLog(log, cache)) {
+            return LogCategory.OWNER;
+        }
+        return log.friend ? LogCategory.FRIEND : LogCategory.OTHER;
+    }
+
+    /**
+     * All logs of this page, ignoring the filter chips.
+     */
+    public static List<LogEntry> getUnfilteredLogs(@NonNull final Geocache cache, final Mode mode) {
+        if (mode != Mode.SPECIAL_ONLY) {
+            return addOwnOfflineLog(cache, cache.getLogs());
+        }
+        final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
+        logs.removeIf(log -> !isShownInSeparateTab(log, cache));
+        return logs;
+    }
+
+    /**
+     * @return true if the complete logbook of the cache is shown (no filter active)
+     */
+    private boolean isCompleteLogbook() {
+        final Mode mode = getMode();
+        return mode == Mode.ALL_PLAIN || (mode == Mode.INTEGRATED && binding.filterChips.getCheckedButtonIndexes().isEmpty());
+    }
+
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
-        if (allLogs) {
-            return addOwnOfflineLog(cache, cache.getLogs());
-        } else {
-            final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
-            final List<LogEntry> ownLogs = addOwnOfflineLog(cache, logs.stream().filter(log -> LogUtils.isOwnLog(log, cache)).collect(Collectors.toList()));
-            final List<LogEntry> ownerLogs = logs.stream().filter(log -> LogUtils.isOwnerLog(log, cache)).collect(Collectors.toList());
-            final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
-            friendsLogs.removeAll(ownLogs);
-            friendsLogs.removeAll(ownerLogs);
-            ownerLogs.removeAll(ownLogs);
-
-            binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
-
-            if (!binding.chipOwn.isChecked()) {
-                logs.removeAll(ownLogs);
-            }
-            if (!binding.chipFriends.isChecked()) {
-                logs.removeAll(friendsLogs);
-            }
-            if (!binding.chipOwner.isChecked()) {
-                logs.removeAll(ownerLogs);
-            }
+        final List<LogEntry> logs = getUnfilteredLogs(cache, getMode());
+        if (isCompleteLogbook()) {
             return logs;
         }
+        final Set<Integer> checkedCategories = binding.filterChips.getCheckedButtonIndexes();
+        logs.removeIf(log -> !checkedCategories.contains(getCategory(log, cache).ordinal()));
+        return logs;
     }
 
-    private List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
+    private static List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
         final List<LogEntry> logs = new ArrayList<>(logsIn);
         if (log != null) {
@@ -112,15 +242,52 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected void addHeaderView() {
         if (binding != null) {
+            updateFilter();
             addLogCountsHeader();
             addEmptyLogsHeader();
-
-            for (int i = 0; i < binding.filterChips.getChildCount(); i++) {
-                ((Chip) binding.filterChips.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    setContent();
-                });
-            }
         }
+    }
+
+    private void updateFilter() {
+        if (getMode() == Mode.ALL_PLAIN) {
+            return;
+        }
+        final Geocache cache = getCache();
+        final Set<LogCategory> presentCategories = EnumSet.noneOf(LogCategory.class);
+        for (final LogEntry log : getUnfilteredLogs(cache, getMode())) {
+            presentCategories.add(getCategory(log, cache));
+        }
+        updateFilterChips(presentCategories);
+    }
+
+    /**
+     * Friends' and owner logs may also be part of the regular logbook,
+     * but are counted in the page title and filterable only if they are loaded additionally
+     */
+    private static boolean isCategoryEnabled(@NonNull final LogCategory category) {
+        switch (category) {
+            case FRIEND:
+                return Settings.isFriendLogsWanted();
+            case OWNER:
+                return Settings.isLoadOwnerLogs();
+            default:
+                return true;
+        }
+    }
+
+    /**
+     * Shows only the filter chips of enabled categories which are present in the logs of this page
+     * (single choice: if the checked chip gets hidden, "All" gets checked)
+     */
+    private void updateFilterChips(@NonNull final Set<LogCategory> presentCategories) {
+        boolean anyChipVisible = false;
+        for (final LogCategory category : LogCategory.SPECIAL) {
+            final boolean visible = isCategoryEnabled(category) && presentCategories.contains(category);
+            binding.filterChips.setButtonVisibleByIndex(visible, category.ordinal());
+            anyChipVisible |= visible;
+        }
+        binding.filterChips.setVisibility(anyChipVisible ? View.VISIBLE : View.GONE);
+        storeCheckedFilterChips();
     }
 
     @SuppressLint("SetTextI18n")
@@ -130,7 +297,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
+        final Map<LogType, Integer> logCounts = isCompleteLogbook() ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
@@ -175,7 +342,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
-            countview2.setText(allLogs ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
+            countview2.setText(isCompleteLogbook() ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
             binding.logsItems.addHeaderView(countview2);
         }
     }
@@ -240,7 +407,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         });
     }
 
-    private boolean isOfflineLog(final LogEntry log) {
+    private static boolean isOfflineLog(final LogEntry log) {
         return log.author.equals(LocalizationUtils.getString(R.string.log_your_saved_log));
     }
 

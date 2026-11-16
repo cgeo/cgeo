@@ -357,10 +357,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
-        final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
+        final long requestedPage = forceWaypointsPage ? Page.WAYPOINTS.id :
                 savedInstanceState != null ?
                         savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                         Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
+        // friends' logs are integrated into the logbook page unless a separate page is configured
+        final long pageToOpen = requestedPage == Page.LOGSFRIENDS.id && !Settings.isFriendLogsSeparateTab() ? Page.LOGS.id : requestedPage;
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(STATE_DESCRIPTION_STYLE)) {
                 this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
@@ -2692,7 +2694,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {
-            final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
+            final int logCount = cache == null ? 0 : CacheLogsViewCreator.getUnfilteredLogs(cache, CacheLogsViewCreator.Mode.SPECIAL_ONLY).size();
             return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
         return LocalizationUtils.getString(Page.find(pageId).titleStringId);
@@ -2735,7 +2737,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache.supportsLogging() || !cache.getLogs().isEmpty()) {
                 pages.add(Page.LOGS.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getFriendsLogs()) && Settings.isFriendLogsWanted()) {
+            if (Settings.isFriendLogsSeparateTab() && CacheLogsViewCreator.hasLogsForSeparateTab(cache)) {
                 pages.add(Page.LOGSFRIENDS.id);
             }
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
@@ -2759,9 +2761,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.DESCRIPTION.id) {
             return new DescriptionViewCreator();
         } else if (pageId == Page.LOGS.id) {
-            return CacheLogsViewCreator.newInstance(true);
+            return CacheLogsViewCreator.newInstance(Settings.isFriendLogsSeparateTab() ? CacheLogsViewCreator.Mode.ALL_PLAIN : CacheLogsViewCreator.Mode.INTEGRATED);
         } else if (pageId == Page.LOGSFRIENDS.id) {
-            return CacheLogsViewCreator.newInstance(false);
+            return CacheLogsViewCreator.newInstance(CacheLogsViewCreator.Mode.SPECIAL_ONLY);
         } else if (pageId == Page.WAYPOINTS.id) {
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {
