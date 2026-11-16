@@ -12,7 +12,7 @@
 - Novetat: Botó «Edita la nota personal» a la finestra emergent del punt de referència (#18559)
 - Correcció: Colors incorrectes en determinades condicions (#17479)
 - Nou: Nous atributs per a Opencaching (#18584)
-- Fix: Offline log marker not updated correctly (#15398)
+- Correcció: El marcador de registre fora de línia no s'actualitzava correctament (#15398)
 
 ### Wherigo Player
 -
