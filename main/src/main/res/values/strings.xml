@@ -1788,6 +1788,9 @@
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_logs_count_friends" tools:ignore="PluralsCandidate">⚇%d</string>
+    <string name="cache_logs_count_own" tools:ignore="PluralsCandidate">✎%d</string>
+    <string name="cache_logs_count_owner" tools:ignore="PluralsCandidate">☆%d</string>
     <string name="cache_logs_friends">Friends</string>
     <string name="cache_logs_own">Own</string>
     <string name="cache_logs_owner">Owner</string>

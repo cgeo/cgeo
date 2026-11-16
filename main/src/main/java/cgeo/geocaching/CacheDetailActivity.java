@@ -2693,7 +2693,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
-        }  else if (pageId == Page.LOGSFRIENDS.id) {
+        } else if (pageId == Page.LOGS.id) {
+            final String title = LocalizationUtils.getString(Page.LOGS.titleStringId);
+            final String logCounts = cache == null || Settings.isFriendLogsSeparateTab() ? "" : CacheLogsViewCreator.getSpecialLogsCountText(cache);
+            return logCounts.isEmpty() ? title : title + " (" + logCounts + ")";
+        } else if (pageId == Page.LOGSFRIENDS.id) {
             final int logCount = cache == null ? 0 : CacheLogsViewCreator.getUnfilteredLogs(cache, CacheLogsViewCreator.Mode.SPECIAL_ONLY).size();
             return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }

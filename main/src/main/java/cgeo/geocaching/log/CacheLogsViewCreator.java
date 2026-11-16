@@ -1,7 +1,6 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
@@ -18,7 +17,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,6 +33,7 @@ import androidx.appcompat.widget.TooltipCompat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +42,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -62,27 +62,28 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     /**
      * Category of a log. The ordinal of the special categories is the index of the according filter chip.
-     * The special categories are shown in this order as filter chips.
+     * The special categories are shown in this order as filter chips and in the page title.
      */
     private enum LogCategory {
-        OWN(R.string.cache_logs_own),
-        FRIEND(R.string.cache_logs_friends),
-        OWNER(R.string.cache_logs_owner),
-        OTHER(0);
+        OWN(R.string.cache_logs_own, R.string.cache_logs_count_own),
+        FRIEND(R.string.cache_logs_friends, R.string.cache_logs_count_friends),
+        OWNER(R.string.cache_logs_owner, R.string.cache_logs_count_owner),
+        OTHER(0, 0);
 
         private static final LogCategory[] SPECIAL = {OWN, FRIEND, OWNER};
 
         private final @StringRes int chipTextId;
+        private final @StringRes int countTextId;
 
-        LogCategory(final @StringRes int chipTextId) {
+        LogCategory(final @StringRes int chipTextId, final @StringRes int countTextId) {
             this.chipTextId = chipTextId;
+            this.countTextId = countTextId;
         }
     }
 
     private static final String ARG_MODE = "mode";
     private static final String STATE_CHECKED_FILTER_CHIPS = "checkedFilterChips";
 
-    private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
@@ -185,6 +186,30 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private static boolean isShownInSeparateTab(@NonNull final LogEntry log, @NonNull final Geocache cache) {
         final LogCategory category = getCategory(log, cache);
         return category != LogCategory.OTHER && isCategoryEnabled(category);
+    }
+
+    /**
+     * Separate counts of own logs (including a saved offline log), friends' logs and owner logs shown in the logbook page title, e.g. "1✎/3⚇/2☆".
+     * Friends' and owner logs are only counted if they are loaded additionally.
+     * Counted categories are also shown without logs, e.g. "0✎/3⚇/0☆".
+     */
+    @NonNull
+    public static String getSpecialLogsCountText(@NonNull final Geocache cache) {
+        final Map<LogCategory, Integer> categoryCounts = new EnumMap<>(LogCategory.class);
+        if (cache.hasLogOffline()) {
+            categoryCounts.put(LogCategory.OWN, 1);
+        }
+        for (final LogEntry log : cache.getLogs()) {
+            categoryCounts.merge(getCategory(log, cache), 1, Integer::sum);
+        }
+        final List<String> counts = new ArrayList<>();
+        for (final LogCategory category : LogCategory.SPECIAL) {
+            if (isCategoryEnabled(category)) {
+                final Integer count = ObjectUtils.getIfNull(categoryCounts.get(category), 0);
+                counts.add(LocalizationUtils.getString(category.countTextId, count));
+            }
+        }
+        return StringUtils.join(counts, '/');
     }
 
     @NonNull
