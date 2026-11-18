@@ -94,12 +94,12 @@ public class GeopointParser {
         protected Double createCoordinate(@NonNull final String signGroup, @NonNull final String degreesGroup, @NonNull final String minutesGroup, @NonNull final String secondsGroup) {
             try {
                 final double seconds = Double.parseDouble(StringUtils.defaultIfEmpty(secondsGroup, "0"));
-                if (seconds >= 60.0) {
+                if (seconds > 60.0) {
                     return null;
                 }
 
                 final double minutes = Double.parseDouble(StringUtils.defaultIfEmpty(minutesGroup, "0"));
-                if (minutes >= 60.0) {
+                if (minutes > 60.0) {
                     return null;
                 }
 

@@ -30,6 +30,12 @@ public class GeoPointParserTest {
         assertGeopointEquals(goal, GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6f);
     }
 
+    @Test
+    public void testOverflowMinutes() {
+        assertThat(GeopointParser.parseLongitude("E 011 60.000")).isCloseTo(12.0, within(1e-8));
+        assertThat(GeopointParser.parseLongitude("E 011° 29' 60.000\"")).isCloseTo(11.5, within(1e-8));
+    }
+
     private static void assertGeopointEquals(final Geopoint expected, final Geopoint actual, final float tolerance) {
         assertThat(expected).isNotNull();
         assertThat(actual).isNotNull();
@@ -259,10 +265,14 @@ public class GeoPointParserTest {
         GeopointParser.parse("S 89° 59′ 59.99″ W 179° 59′ 59.99″");
         assertParsingFails("S 90° 00′ 00.01″ W 180° 00′ 00.00″");
         assertParsingFails("S 90° 00′ 00.00″ W 180° 00′ 00.01″");
-        assertParsingFails("S 89° 59′ 60.00″ W 179° 59′ 59.99″");
-        assertParsingFails("S 89° 59′ 59.99″ W 179° 59′ 60.00″");
-        assertParsingFails("S 89° 60′ 00.00″ W 179° 59′ 59.99″");
-        assertParsingFails("S 89° 59′ 59.99″ W 179° 60′ 00.00″");
+        GeopointParser.parse("S 89° 59′ 60.00″ W 179° 59′ 59.99″");
+        GeopointParser.parse("S 89° 59′ 59.99″ W 179° 59′ 60.00″");
+        assertParsingFails("S 89° 59′ 60.01″ W 179° 59′ 59.99″");
+        assertParsingFails("S 89° 59′ 59.99″ W 179° 59′ 60.01″");
+        GeopointParser.parse("S 89° 60′ 00.00″ W 179° 59′ 60.00″");
+        GeopointParser.parse("S 89° 59′ 60.00″ W 179° 60′ 00.00″");
+        assertParsingFails("S 89° 60′ 00.01″ W 179° 59′ 59.99″");
+        assertParsingFails("S 89° 59′ 59.99″ W 179° 60′ 00.01″");
     }
 
     @Test
@@ -271,8 +281,10 @@ public class GeoPointParserTest {
         GeopointParser.parse("S 89° 59′ W 179° 59′");
         assertParsingFails("S 90° 01′ W 180° 00′");
         assertParsingFails("S 90° 00′ W 180° 01′");
-        assertParsingFails("S 89° 60′ W 180° 00′");
-        assertParsingFails("S 90° 00′ W 179° 60′");
+        GeopointParser.parse("S 89° 60′ W 180° 00′");
+        GeopointParser.parse("S 90° 00′ W 179° 60′");
+        assertParsingFails("S 89° 61′ W 180° 00′");
+        assertParsingFails("S 90° 00′ W 179° 61′");
     }
 
     @Test
@@ -281,8 +293,10 @@ public class GeoPointParserTest {
         GeopointParser.parse("S 89° 59.999′ W 179° 59.999′");
         assertParsingFails("S 90° 00.001′ W 180° 00.000′");
         assertParsingFails("S 90° 00.000′ W 180° 00.001′");
-        assertParsingFails("S 89° 60.000′ W 180° 00.000′");
-        assertParsingFails("S 90° 00.000′ W 179° 60.000′");
+        GeopointParser.parse("S 89° 60.000′ W 180° 00.000′");
+        GeopointParser.parse("S 90° 00.000′ W 179° 60.000′");
+        assertParsingFails("S 89° 60.001′ W 180° 00.000′");
+        assertParsingFails("S 90° 00.000′ W 179° 60.001′");
     }
 
     @Test
