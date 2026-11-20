@@ -14,7 +14,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 public abstract class AbstractForegroundIntentService extends IntentService {
-    protected static String logTag = "ForegroundIntentService";
+    protected final String logTag;
 
     protected final int wakelockTimeout = 10 * 60 * 1000;
 
@@ -22,8 +22,9 @@ public abstract class AbstractForegroundIntentService extends IntentService {
     protected NotificationManagerCompat notificationManager;
     private PowerManager.WakeLock wakeLock;
 
-    public AbstractForegroundIntentService() {
+    protected AbstractForegroundIntentService(final String logTag) {
         super(logTag);
+        this.logTag = logTag;
         setIntentRedelivery(true);
     }
 
