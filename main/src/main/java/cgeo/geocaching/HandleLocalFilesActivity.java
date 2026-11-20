@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
+import cgeo.geocaching.service.AbstractForegroundIntentService;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -17,7 +18,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
@@ -78,7 +78,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         Log.iForce(LOGPRAEFIX + "continueWithForegroundService:" + clazz);
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
-        ContextCompat.startForegroundService(this, forwarder);
+        AbstractForegroundIntentService.start(this, forwarder);
         finish();
     }
 

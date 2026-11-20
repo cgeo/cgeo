@@ -23,15 +23,14 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LogPostingService extends AbstractForegroundIntentService {
 
-    static {
-        logTag = "LogPostingService";
+    public LogPostingService() {
+        super("LogPostingService");
     }
 
     private static final String EXTRA_GEOCODE = "extra_geocode";
@@ -83,7 +82,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
         PENDING_JOBS.put(geocode, new PostingJob(cache, logEntry, inventory));
         final Intent intent = new Intent(context, LogPostingService.class);
         intent.putExtra(EXTRA_GEOCODE, geocode);
-        ContextCompat.startForegroundService(context, intent);
+        start(context, intent);
     }
 
     public static void startEdit(final Context context, final Geocache cache,
@@ -92,7 +91,7 @@ public class LogPostingService extends AbstractForegroundIntentService {
         PENDING_JOBS.put(geocode, new PostingJob(cache, oldEntry, newEntry));
         final Intent intent = new Intent(context, LogPostingService.class);
         intent.putExtra(EXTRA_GEOCODE, geocode);
-        ContextCompat.startForegroundService(context, intent);
+        start(context, intent);
     }
 
     // -----------------------------------------------------------------------

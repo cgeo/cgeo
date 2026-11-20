@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 public class ReceiveDownloadService extends AbstractForegroundIntentService {
-    static {
-        logTag = "ReceiveDownloadService";
+    public ReceiveDownloadService() {
+        super("ReceiveDownloadService");
     }
 
     @Override
