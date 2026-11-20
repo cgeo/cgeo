@@ -25,7 +25,6 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -159,7 +158,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
-        ContextCompat.startForegroundService(context, intent);
+        start(context, intent);
         ViewUtils.showToast(context, R.string.download_started);
 
         if (onStartCallback != null) {

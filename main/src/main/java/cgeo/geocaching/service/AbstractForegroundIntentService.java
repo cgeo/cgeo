@@ -4,10 +4,13 @@ import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.Log;
 
 import android.app.IntentService;
+import android.content.Context;
+import android.content.Intent;
 import android.os.PowerManager;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 public abstract class AbstractForegroundIntentService extends IntentService {
     protected static String logTag = "ForegroundIntentService";
@@ -21,6 +24,27 @@ public abstract class AbstractForegroundIntentService extends IntentService {
     public AbstractForegroundIntentService() {
         super(logTag);
         setIntentRedelivery(true);
+    }
+
+    /**
+     * Starts a service derived from this class.
+     * <br />
+     * If the app is in foreground, the service is started as a regular service, which then promotes itself
+     * to a foreground service in onCreate(). This avoids the system's obligation to call startForeground()
+     * for each start request in time, which otherwise crashes the app (ForegroundServiceDidNotStartInTimeException),
+     * e.g. if the service stops itself while a start request is still pending (see #18931).
+     * <br />
+     * If the app is in background (where starting a regular service is not allowed),
+     * it falls back to starting a foreground service.
+     */
+    public static void start(final Context context, final Intent intent) {
+        try {
+            context.startService(intent);
+        } catch (IllegalStateException e) {
+            // BackgroundServiceStartNotAllowedException on API 31+, plain IllegalStateException on API 26-30
+            Log.w("cannot start service from background, falling back to foreground service start: " + e.getMessage());
+            ContextCompat.startForegroundService(context, intent);
+        }
     }
 
     protected abstract NotificationCompat.Builder createInitialNotification();
