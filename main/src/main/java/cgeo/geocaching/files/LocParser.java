@@ -28,6 +28,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public final class LocParser extends FileParser {
 
+    /**
+     * Progress is reported in parts of this value, advanced with each cache of the file,
+     * as the size of the stream is not always known.
+     */
+    static final int PROGRESS_MAX = 100;
+
     @NonNull
     private static final String NAME_OWNER_SEPARATOR = " by ";
 
@@ -115,10 +121,13 @@ public final class LocParser extends FileParser {
     @Override
     @NonNull
     public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException {
-        final int maxSize = stream.available();
         final Map<String, Geocache> coords = parseLoc(stream);
         final List<Geocache> caches = new ArrayList<>();
+        int done = 0;
         for (final Entry<String, Geocache> entry : coords.entrySet()) {
+            // before each cache, as storing may download it: shows the progress so far and lets the user cancel
+            showProgressMessage(progressHandler, PROGRESS_MAX * done / coords.size());
+            done++;
             final Geocache cache = entry.getValue();
             if (StringUtils.isBlank(cache.getGeocode()) || StringUtils.isBlank(cache.getName())) {
                 continue;
@@ -130,10 +139,9 @@ public final class LocParser extends FileParser {
             cache.getLists().add(listId);
             cache.setDetailed(true);
             cache.store();
-            if (progressHandler != null) {
-                progressHandler.sendMessage(progressHandler.obtainMessage(0, maxSize * caches.size() / coords.size(), 0));
-            }
         }
+        // also for files without caches, so a canceled import is reported as canceled
+        showProgressMessage(progressHandler, PROGRESS_MAX);
         Log.i("Caches found in .loc file: " + caches.size());
         return caches;
     }

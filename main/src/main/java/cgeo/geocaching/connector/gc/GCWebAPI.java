@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +67,16 @@ public class GCWebAPI {
 
     private GCWebAPI() {
         // Utility class, do not instantiate
+    }
+
+    /**
+     * Formats coordinates as "lat,lon" for search parameters. Values below 0.001 are written as plain decimals,
+     * as gc.com does not understand the scientific notation of Double.toString() (e.g. "-1.6E-5").
+     */
+    @VisibleForTesting
+    @NonNull
+    static String formatCoordinates(final double latitude, final double longitude) {
+        return BigDecimal.valueOf(latitude).toPlainString() + ',' + BigDecimal.valueOf(longitude).toPlainString();
     }
 
     /**
@@ -427,19 +438,19 @@ public class GCWebAPI {
                     }
                     return new MapSearchResultSet();
                 }
-                params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
-                        ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
+                params.put("box", formatCoordinates(this.box.getLatitudeMax(), this.box.getLongitudeMin()) +
+                        ',' + formatCoordinates(this.box.getLatitudeMin(), this.box.getLongitudeMax()));
 
                 //6.4.24: seems like gc.com adds a strange "rad=16000" parameter to every box search. Always 16000, regardless of zoom level.
                 // Don't know why yet...
                 params.put("rad", "16000");
 
                 //set origin to middle of viewport (will be overridden if origin is set explicitly later)
-                params.put("origin", String.valueOf(this.box.getCenter().getLatitude()) + ',' + this.box.getCenter().getLongitude());
+                params.put("origin", formatCoordinates(this.box.getCenter().getLatitude(), this.box.getCenter().getLongitude()));
             }
 
             if (origin != null) {
-                params.put("origin", String.valueOf(origin.getLatitude()) + ',' + origin.getLongitude());
+                params.put("origin", formatCoordinates(origin.getLatitude(), origin.getLongitude()));
             }
 
             if (!this.cacheTypes.isEmpty()) {
@@ -553,7 +564,7 @@ public class GCWebAPI {
                     //to sort by distance we need to set an origin of distance measurement
                     //6.4.24: gc.com seems to avoid dorigin param when box is set. So let's avoid it too...
                     final Geopoint dOrigin = origin != null ? origin : LocationDataProvider.getInstance().currentGeo().getCoords();
-                    params.put("dorigin", String.valueOf(dOrigin.getLatitude()) + ',' + dOrigin.getLongitude());
+                    params.put("dorigin", formatCoordinates(dOrigin.getLatitude(), dOrigin.getLongitude()));
                 }
                 params.put("asc", "" + sortAsc);
             }

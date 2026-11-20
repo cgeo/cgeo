@@ -6,8 +6,10 @@ import android.content.ContentResolver;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +20,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
 public class FileTypeDetector {
+
+    /**
+     * Only the start of a file is used to detect its type. Without a limit, reading the first "line" of a
+     * binary file without line breaks (e.g. a large image) reads the whole file into memory.
+     */
+    @VisibleForTesting
+    static final int MAX_HEADER_BYTES = 64 * 1024;
 
     private final ContentResolver contentResolver;
     private final Uri uri;
@@ -30,15 +39,13 @@ public class FileTypeDetector {
     @NonNull
     public FileType getFileType() {
         InputStream is = null;
-        BufferedReader reader = null;
         FileType type = FileType.UNKNOWN;
         try {
             is = contentResolver.openInputStream(uri);
             if (is == null) {
                 return FileType.UNKNOWN;
             }
-            reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            type = detectHeader(reader);
+            type = detectFileType(is);
         } catch (final IOException e) {
             if (!uri.toString().startsWith("http")) {
                 Log.e("FileTypeDetector", e);
@@ -46,10 +53,19 @@ public class FileTypeDetector {
         } catch (RuntimeException re) {
             Log.e("FileTypeDetector, unexpected error", re);
         } finally {
-            IOUtils.closeQuietly(reader);
             IOUtils.closeQuietly(is);
         }
         return type;
+    }
+
+    @VisibleForTesting
+    @NonNull
+    static FileType detectFileType(@NonNull final InputStream is) throws IOException {
+        final byte[] header = new byte[MAX_HEADER_BYTES];
+        final int length = IOUtils.read(is, header);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(header, 0, length), StandardCharsets.UTF_8))) {
+            return detectHeader(reader);
+        }
     }
 
     private static FileType detectHeader(final BufferedReader reader)

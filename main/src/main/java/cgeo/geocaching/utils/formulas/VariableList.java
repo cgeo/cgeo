@@ -139,7 +139,7 @@ public class VariableList {
                 pos--;
             }
         }
-        variableMap.put(varname, formula);
+        variableMap.put(varname, nonNullFormula(formula));
         variableList.add(pos, varname);
         variablesSet.put(varname, null);
         wasModified = true;
@@ -157,6 +157,16 @@ public class VariableList {
         variableMap.put(var, formula);
         wasModified = true;
         return true;
+    }
+
+    /**
+     * A variable of this list must not have a null formula in the VariableMap: there, null marks a variable
+     * which only exists because another one needs it, and such a variable is dropped from the map
+     * when no other variable needs it any more (while it would stay in this list without a state).
+     */
+    @NonNull
+    private static String nonNullFormula(@Nullable final String formula) {
+        return formula == null ? "" : formula;
     }
 
     public static boolean isVisible(final String varname) {
@@ -230,7 +240,7 @@ public class VariableList {
                 //must be a database error, ignore duplicate variable
                 continue;
             }
-            variableMap.put(entry.varname, entry.formula);
+            variableMap.put(entry.varname, nonNullFormula(entry.formula));
             this.variableList.add(entry.varname);
             this.variablesSet.put(entry.varname, entry.id);
         }
