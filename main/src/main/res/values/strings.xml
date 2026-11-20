@@ -2944,6 +2944,7 @@
     <string name="generating_distance_matrix">Generating distance matrix</string>
     <string name="running_route_optimizations">Running route optimizations</string>
     <string name="route_optimization_finished">Route optimization finished</string>
+    <string name="route_linear_alc_order_violated">Current order violates the stage order of at least one linear Adventure Lab Cache</string>
 
     <!-- changed permissions one time message -->
     <string name="changed_permissions_title">Changed permissions</string>
