@@ -2463,6 +2463,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
                 userNoteView.setVisibility(View.VISIBLE);
                 userNoteView.setText(wpt.getUserNote());
+                ViewUtils.setNoteFont(userNoteView, R.dimen.textSize_listsSecondary, R.dimen.textSize_detailsSecondary);
             } else {
                 userNoteView.setVisibility(View.GONE);
             }
@@ -3012,6 +3013,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private static void setPersonalNote(final TextView personalNoteView, final View separator, final String personalNote) {
         personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
+        ViewUtils.setNoteFont(personalNoteView, R.dimen.textSize_detailsPrimary, R.dimen.textSize_detailsSecondary);
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);

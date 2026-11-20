@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -75,6 +76,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
 
         mEditText = view.findViewById(R.id.note);
+        ViewUtils.setNoteFont(mEditText, R.dimen.textSize_textinputPrimary, R.dimen.textSize_detailsPrimary);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             // add a new line when editing existing text, to avoid accidental overwriting of the last line
