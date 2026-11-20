@@ -29,8 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class LogPostingService extends AbstractForegroundIntentService {
 
-    static {
-        logTag = "LogPostingService";
+    public LogPostingService() {
+        super("LogPostingService");
     }
 
     private static final String EXTRA_GEOCODE = "extra_geocode";
