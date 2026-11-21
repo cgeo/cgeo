@@ -28,6 +28,7 @@ public enum HtmlStyle {
     DEFAULT(R.string.html_style_default, false, true, (ctx, text, isLightSkin, imageGetter) -> HtmlUtils.renderHtml(text, imageGetter)),
     DEFAULT_NO_CONTRAST_FIX(R.string.html_style_default_no_contrast_fix, false, false, (ctx, text, isLightSkin, imageGetter) -> HtmlUtils.renderHtml(text, imageGetter)),
     MONOCHROME(R.string.html_style_monochrome, true, false, (ctx, text, isLightSkin, imageGetter) -> HtmlUtils.renderHtml(text, imageGetter)),
+    WEBVIEW(R.string.html_style_webview, false, false, (ctx, text, isLightSkin, imageGetter) -> new Pair<>(new SpannableStringBuilder(text), false)),
     HTML_SOURCE_FORMATTED(R.string.html_style_source_formatted, false, false, (ctx, text, isLightSkin, imageGetter) -> new Pair<>(HtmlUtils.getFormattedHtml(text, true, true, isLightSkin), false)),
     HTML_SOURCE(R.string.html_style_source, false, false, (ctx, text, isLightSkin, imageGetter) -> {
         final Spannable span = new SpannableStringBuilder(text);
