@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
@@ -18,13 +17,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,13 +34,10 @@ public class TemplateTextPreference extends Preference {
      * default value, if none is given in the preference XML.
      */
     private static final String DEFAULT_VALUE = StringUtils.EMPTY;
-    private EditText editText;
-    private EditText editTitle;
     private String initialValue;
 
     public TemplateTextPreference(final Context context) {
         super(context);
-        setWidgetLayoutResource(R.layout.button_icon_view);
     }
 
     public TemplateTextPreference(final Context context, final AttributeSet attrs) {
@@ -57,44 +54,36 @@ public class TemplateTextPreference extends Preference {
         final Preference pref = findPreferenceInHierarchy(getKey());
         if (pref != null) {
             pref.setOnPreferenceClickListener(preference -> {
-                launchEditTemplateDialog();
+                showEditDialog(getContext(), true, null, Settings.getSignature(), (title, text) -> {
+                    persistString(text);
+                    callChangeListener(text);
+                });
                 return false;
             });
-            if (!getKey().equals(LocalizationUtils.getPlainString(R.string.pref_signature))) {
-                final MaterialButton button = (MaterialButton) holder.findViewById(R.id.iconview);
-                button.setIconResource(R.drawable.ic_menu_delete);
-                button.setOnClickListener(v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
-                    Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
-                    callChangeListener(null);
-                }));
-            }
         }
     }
 
-    public void launchEditTemplateDialog() {
-        final boolean isSignature = getKey().equals(LocalizationUtils.getPlainString(R.string.pref_signature));
-
-        final View v = LayoutInflater.from(getContext()).inflate(R.layout.template_preference_dialog, null);
+    /**
+     * Shows a dialog to edit a signature (title is hidden then) or a log template (title and text).
+     * onSave is called with the new title and text once the user confirms a valid, non-empty input.
+     */
+    public static void showEditDialog(@NonNull final Context context, final boolean isSignature, @Nullable final String initialTitle, @Nullable final String initialText, @NonNull final BiConsumer<String, String> onSave) {
+        final View v = LayoutInflater.from(context).inflate(R.layout.template_preference_dialog, null);
         final TextInputLayout titleLayout = v.findViewById(R.id.titleLayout);
-        editTitle = v.findViewById(R.id.title);
-        editText = v.findViewById(R.id.edit);
+        final EditText editTitle = v.findViewById(R.id.title);
+        final EditText editText = v.findViewById(R.id.edit);
 
+        editText.setText(initialText);
         boolean focusOnText = true;
-        if (isSignature) {
-            editText.setText(Settings.getSignature());
-        } else {
+        if (!isSignature) {
             titleLayout.setVisibility(View.VISIBLE);
-            final Settings.PrefLogTemplate template = Settings.getLogTemplate(this.getKey());
-            if (template != null) { // can be null if template contains no value
-                editTitle.setText(template.getTitle());
-                editText.setText(template.getText());
-            }
+            editTitle.setText(initialTitle);
             focusOnText = StringUtils.isNotEmpty(editTitle.getText());
         }
         Dialogs.moveCursorToEnd(editText);
-        Keyboard.show(getContext(), focusOnText ? editText : editTitle);
+        Keyboard.show(context, focusOnText ? editText : editTitle);
 
-        final AlertDialog dialog = Dialogs.newBuilder(getContext())
+        final AlertDialog dialog = Dialogs.newBuilder(context)
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, null)
                 .setNeutralButton(R.string.init_signature_template_button, null)
@@ -113,17 +102,12 @@ public class TemplateTextPreference extends Preference {
                 // don't save empty templates
                 dialog.dismiss();
             } else {
-                if (isSignature) {
-                    persistString(newText);
-                } else {
-                    Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), newTitle, newText));
-                }
-                callChangeListener(newText);
+                onSave.accept(newTitle, newText);
                 dialog.dismiss();
             }
         });
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v2 -> {
-            final AlertDialog.Builder templateBuilder = Dialogs.newBuilder(TemplateTextPreference.this.getContext());
+            final AlertDialog.Builder templateBuilder = Dialogs.newBuilder(context);
             templateBuilder.setTitle(R.string.init_signature_template_button);
             final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature(null);
             final String[] items = new String[templates.size()];

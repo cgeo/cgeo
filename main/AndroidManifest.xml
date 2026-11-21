@@ -866,6 +866,11 @@
         </activity>
 
         <activity
+            android:name=".log.LogTemplatesActivity"
+            android:label="@string/init_log_templates" >
+        </activity>
+
+        <activity
             android:name=".connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
