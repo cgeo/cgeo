@@ -4,9 +4,14 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,22 +21,19 @@ import java.util.concurrent.TimeUnit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 
 public class DateFilter {
 
-    private static final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
-
-    private static final DateFormat DAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-    private static final DateFormat DAY_DATE_FORMAT_SQL = DAY_DATE_FORMAT;
-    private static final DateFormat DAY_MONTH_FORMAT = new SimpleDateFormat("MM-dd", Locale.US);
-
-    public static final DateFormat DAY_DATE_FORMAT_USER_DISPLAY = DAY_DATE_FORMAT;
+    private static final DateTimeFormatter DAY_DATE_FORMAT = DateTimeFormatter.ofPattern("uuuu-MM-dd", Locale.US);
+    private static final DateTimeFormatter DAY_MONTH_FORMAT = DateTimeFormatter.ofPattern("MM-dd", Locale.US);
+    private static final DateTimeFormatter JSON_DATE_FORMAT = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss", Locale.US);
 
     private final boolean truncateToDays;
     private Date minDate;
     private Date maxDate;
+    private LocalDate minLocalDate;
+    private LocalDate maxLocalDate;
     private boolean isRelative = false;
     private int minDateOffset = -1;
     private int maxDateOffset = -1;
@@ -45,89 +47,98 @@ public class DateFilter {
         this.truncateToDays = truncateToDays;
     }
 
-    private Date truncateToStartOfDay(final Date date) {
-        return date == null ? null : DateUtils.truncate(date, java.util.Calendar.DAY_OF_MONTH);
-    }
-
-    private Date truncateToEndOfDay(final Date date) {
-        if (date == null) {
-            return null;
-        }
-        final Date truncated = DateUtils.truncate(date, java.util.Calendar.DAY_OF_MONTH);
-        return DateUtils.addMilliseconds(DateUtils.addDays(truncated, 1), -1);
-    }
-
     public Boolean matches(final Date value) {
+        final EffectiveDateRange range = getEffectiveRange();
         if (value == null) {
-            return getMinDate() == null && getMaxDate() == null ? true : null;
+            return range.min == null && range.max == null ? true : null;
         }
 
         if (ignoreYear) {
-            return matchesDayOfYear(value);
+            return matchesDayOfYear(value, range);
         }
 
-        if (getMinDate() != null && getMinDate().getTime() / MILLIS_PER_DAY > value.getTime() / MILLIS_PER_DAY) {
+        if (range.min != null && value.before(range.min)) {
             return false;
         }
-        return getMaxDate() == null || getMaxDate().getTime() / MILLIS_PER_DAY >= value.getTime() / MILLIS_PER_DAY;
+        return range.max == null || !value.after(range.max);
     }
 
-    private Boolean matchesDayOfYear(final Date value) {
-        if (getMinDate() == null && getMaxDate() == null) {
+    private Boolean matchesDayOfYear(final Date value, final EffectiveDateRange range) {
+        if (range.minDay == null && range.maxDay == null) {
             return true;
         }
 
-        final String valueDayOfYear = DAY_MONTH_FORMAT.format(value);
-        final String minDayOfYear = getMinDate() != null ? DAY_MONTH_FORMAT.format(getMinDate()) : null;
-        final String maxDayOfYear = getMaxDate() != null ? DAY_MONTH_FORMAT.format(getMaxDate()) : null;
+        final String valueDayOfYear = DAY_MONTH_FORMAT.format(toLocalDate(value, range.zone));
+        final String minDayOfYear = formatLocalDate(range.minDay, DAY_MONTH_FORMAT);
+        final String maxDayOfYear = formatLocalDate(range.maxDay, DAY_MONTH_FORMAT);
 
         if (minDayOfYear != null && maxDayOfYear != null) {
             if (minDayOfYear.compareTo(maxDayOfYear) <= 0) {
                 // Normal range (e.g., 03-01 to 11-30)
                 return valueDayOfYear.compareTo(minDayOfYear) >= 0 &&
                        valueDayOfYear.compareTo(maxDayOfYear) <= 0;
-            } else {
-                // Wraps around year boundary (e.g., 11-01 to 02-28)
-                return valueDayOfYear.compareTo(minDayOfYear) >= 0 ||
-                       valueDayOfYear.compareTo(maxDayOfYear) <= 0;
             }
+            // Wraps around year boundary (e.g., 11-01 to 02-28)
+            return valueDayOfYear.compareTo(minDayOfYear) >= 0 ||
+                   valueDayOfYear.compareTo(maxDayOfYear) <= 0;
         } else if (minDayOfYear != null) {
             return valueDayOfYear.compareTo(minDayOfYear) >= 0;
-        } else {
-            return valueDayOfYear.compareTo(maxDayOfYear) <= 0;
         }
+        return valueDayOfYear.compareTo(maxDayOfYear) <= 0;
     }
 
     public Date getMinDate() {
-        if (isRelative) {
-            if (minDateOffset == Integer.MIN_VALUE) {
-                return null;
-            }
-            final Date today = truncateToDays ? truncateToStartOfDay(new Date()) : new Date();
-            return DateUtils.addDays(today, minDateOffset);
-        }
-        return minDate;
+        return getEffectiveRange().min;
     }
 
     public Date getMaxDate() {
+        return getEffectiveRange().max;
+    }
+
+    private EffectiveDateRange getEffectiveRange() {
+        final ZoneId zone = ZoneId.systemDefault();
         if (isRelative) {
-            if (maxDateOffset == Integer.MAX_VALUE) {
-                return null;
-            }
-            final Date today = truncateToDays ? truncateToStartOfDay(new Date()) : new Date();
-            final Date maxDay = DateUtils.addDays(today, maxDateOffset);
-            // If truncating to days, set to end of day (23:59:59.999) to include the entire day
-            return truncateToDays ? truncateToEndOfDay(maxDay) : maxDay;
+            return getEffectiveRelativeRange(zone);
         }
-        return maxDate;
+        if (truncateToDays) {
+            return createDayRange(minLocalDate, maxLocalDate, zone);
+        }
+        return createExactRange(minDate, maxDate, zone);
+    }
+
+    private EffectiveDateRange getEffectiveRelativeRange(final ZoneId zone) {
+        final ZonedDateTime now = ZonedDateTime.now(zone);
+        if (truncateToDays) {
+            final LocalDate today = now.toLocalDate();
+            final LocalDate effectiveMinDay = minDateOffset == Integer.MIN_VALUE ? null : today.plusDays(minDateOffset);
+            final LocalDate effectiveMaxDay = maxDateOffset == Integer.MAX_VALUE ? null : today.plusDays(maxDateOffset);
+            return createDayRange(effectiveMinDay, effectiveMaxDay, zone);
+        }
+
+        final Date effectiveMin = minDateOffset == Integer.MIN_VALUE ? null : toDate(now.plusDays(minDateOffset).toInstant());
+        final Date effectiveMax = maxDateOffset == Integer.MAX_VALUE ? null : toDate(now.plusDays(maxDateOffset).toInstant());
+        return createExactRange(effectiveMin, effectiveMax, zone);
+    }
+
+    private EffectiveDateRange createDayRange(final LocalDate minDay, final LocalDate maxDay, final ZoneId zone) {
+        final Date effectiveMin = minDay == null ? null : toDate(minDay.atStartOfDay(zone).toInstant());
+        final Date effectiveMax = maxDay == null ? null :
+                toDate(maxDay.plusDays(1).atStartOfDay(zone).toInstant().minusMillis(1));
+        return new EffectiveDateRange(effectiveMin, effectiveMax, minDay, maxDay, zone);
+    }
+
+    private EffectiveDateRange createExactRange(final Date exactMin, final Date exactMax, final ZoneId zone) {
+        return new EffectiveDateRange(exactMin, exactMax,
+                exactMin == null ? null : toLocalDate(exactMin, zone),
+                exactMax == null ? null : toLocalDate(exactMax, zone), zone);
     }
 
     public Date getConfiguredMinDate() {
-        return minDate;
+        return truncateToDays ? createDayRange(minLocalDate, null, ZoneId.systemDefault()).min : minDate;
     }
 
     public Date getConfiguredMaxDate() {
-        return maxDate;
+        return truncateToDays ? createDayRange(null, maxLocalDate, ZoneId.systemDefault()).max : maxDate;
     }
 
     public boolean isRelative() {
@@ -148,15 +159,29 @@ public class DateFilter {
     }
 
     public void setMinMaxDate(final Date min, final Date max) {
+        setConfiguredMinMaxDate(min, max, ZoneId.systemDefault());
+        this.isRelative = false;
+    }
+
+    private void setConfiguredMinMaxDate(final Date min, final Date max, final ZoneId zone) {
         if (truncateToDays) {
-            this.minDate = truncateToStartOfDay(min);
-            this.maxDate = truncateToEndOfDay(max);
+            this.minLocalDate = min == null ? null : toLocalDate(min, zone);
+            this.maxLocalDate = max == null ? null : toLocalDate(max, zone);
+            this.minDate = null;
+            this.maxDate = null;
         } else {
             this.minDate = min;
             this.maxDate = max;
+            this.minLocalDate = null;
+            this.maxLocalDate = null;
         }
+    }
 
-        this.isRelative = false;
+    private void setConfiguredLocalDates(final LocalDate min, final LocalDate max) {
+        this.minLocalDate = min;
+        this.maxLocalDate = max;
+        this.minDate = null;
+        this.maxDate = null;
     }
 
     public boolean isIgnoreYear() {
@@ -176,8 +201,14 @@ public class DateFilter {
 
     public void setConfig(final List<String> config) {
         if (config != null) {
-            minDate = config.isEmpty() ? null : parseDate(config.get(0));
-            maxDate = config.size() > 1 ? parseDate(config.get(1)) : null;
+            final String minText = config.isEmpty() ? null : config.get(0);
+            final String maxText = config.size() > 1 ? config.get(1) : null;
+            if (truncateToDays) {
+                setConfiguredLocalDates(parseLocalDate(minText), parseLocalDate(maxText));
+            } else {
+                final ZoneId zone = ZoneId.systemDefault();
+                setConfiguredMinMaxDate(parseDate(minText, zone), parseDate(maxText, zone), zone);
+            }
             isRelative = config.size() > 2 && Boolean.parseBoolean(config.get(2));
             minDateOffset = config.size() > 3 ? Integer.parseInt(config.get(3)) : -1;
             maxDateOffset = config.size() > 4 ? Integer.parseInt(config.get(4)) : -1;
@@ -187,8 +218,14 @@ public class DateFilter {
 
     public List<String> getConfig() {
         final List<String> config = new ArrayList<>();
-        config.add(minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate));
-        config.add(maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate));
+        if (truncateToDays) {
+            config.add(formatLocalDateOrDefault(minLocalDate, "-"));
+            config.add(formatLocalDateOrDefault(maxLocalDate, "-"));
+        } else {
+            final ZoneId zone = ZoneId.systemDefault();
+            config.add(minDate == null ? "-" : formatLocalDate(toLocalDate(minDate, zone), DAY_DATE_FORMAT));
+            config.add(maxDate == null ? "-" : formatLocalDate(toLocalDate(maxDate, zone), DAY_DATE_FORMAT));
+        }
         config.add(Boolean.toString(isRelative));
         config.add(String.valueOf(minDateOffset));
         config.add(String.valueOf(maxDateOffset));
@@ -196,22 +233,53 @@ public class DateFilter {
         return config;
     }
 
-    private Date parseDate(final String text) {
+    private LocalDate parseLocalDate(final String text) {
         if (StringUtils.isBlank(text) || "-".equals(text)) {
             return null;
         }
         try {
-            return DAY_DATE_FORMAT.parse(text);
-        } catch (ParseException pe) {
-            Log.w("Problem parsing '" + text + "' as date", pe);
+            return LocalDate.parse(text, DAY_DATE_FORMAT);
+        } catch (DateTimeException e) {
+            Log.w("Problem parsing '" + text + "' as date", e);
             return null;
         }
     }
 
+    private Date parseDate(final String text, final ZoneId zone) {
+        final LocalDate localDate = parseLocalDate(text);
+        return localDate == null ? null : toDate(localDate.atStartOfDay(zone).toInstant());
+    }
+
+    private LocalDateTime parseJsonLocalDateTime(final String text) {
+        if (StringUtils.isBlank(text)) {
+            return null;
+        }
+        try {
+            return LocalDateTime.parse(text, JSON_DATE_FORMAT);
+        } catch (DateTimeException e) {
+            Log.w("Problem parsing '" + text + "' as date and time", e);
+            return null;
+        }
+    }
+
+    private Date parseJsonDate(final String text, final ZoneId zone) {
+        final LocalDateTime localDateTime = parseJsonLocalDateTime(text);
+        return localDateTime == null ? null : toDate(localDateTime.atZone(zone).toInstant());
+    }
+
     public void setJsonConfig(final JsonNode node) {
         if (node != null) {
-            minDate = JsonUtils.getDate(node, "min", null);
-            maxDate = JsonUtils.getDate(node, "max", null);
+            final String minText = JsonUtils.getText(node, "min", null);
+            final String maxText = JsonUtils.getText(node, "max", null);
+            if (truncateToDays) {
+                final LocalDateTime parsedMin = parseJsonLocalDateTime(minText);
+                final LocalDateTime parsedMax = parseJsonLocalDateTime(maxText);
+                setConfiguredLocalDates(parsedMin == null ? null : parsedMin.toLocalDate(),
+                        parsedMax == null ? null : parsedMax.toLocalDate());
+            } else {
+                final ZoneId zone = ZoneId.systemDefault();
+                setConfiguredMinMaxDate(parseJsonDate(minText, zone), parseJsonDate(maxText, zone), zone);
+            }
             isRelative = JsonUtils.getBoolean(node, "relative", false);
             minDateOffset = JsonUtils.getInt(node, "minOffset", -1);
             maxDateOffset = JsonUtils.getInt(node, "maxOffset", -1);
@@ -222,8 +290,14 @@ public class DateFilter {
 
     public ObjectNode getJsonConfig() {
         final ObjectNode node = JsonUtils.createObjectNode();
-        JsonUtils.setDate(node, "min", minDate);
-        JsonUtils.setDate(node, "max", maxDate);
+        if (truncateToDays) {
+            JsonUtils.setText(node, "min", formatLocalDateTime(minLocalDate, false));
+            JsonUtils.setText(node, "max", formatLocalDateTime(maxLocalDate, true));
+        } else {
+            final ZoneId zone = ZoneId.systemDefault();
+            JsonUtils.setText(node, "min", formatLocalDateTime(minDate, zone));
+            JsonUtils.setText(node, "max", formatLocalDateTime(maxDate, zone));
+        }
         JsonUtils.setBoolean(node, "relative", isRelative);
         JsonUtils.setInt(node, "minOffset", minDateOffset);
         JsonUtils.setInt(node, "maxOffset", maxDateOffset);
@@ -233,21 +307,20 @@ public class DateFilter {
 
 
     public boolean isFilled() {
-        return getMinDate() != null || getMaxDate() != null;
+        final EffectiveDateRange range = getEffectiveRange();
+        return range.min != null || range.max != null;
     }
 
     public void addToSql(final SqlBuilder sqlBuilder, final String valueExpression) {
-
-        //convert long to date in SQLite: date(hidden/1000, 'unixepoch')
-
-        if (valueExpression != null && (getMinDate() != null || getMaxDate() != null)) {
+        final EffectiveDateRange range = getEffectiveRange();
+        if (valueExpression != null && (range.min != null || range.max != null)) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
 
             if (ignoreYear) {
-                // Extract month and day from the date value in SQLite
-                final String dayOfYearExpression = "strftime('%m-%d', date(" + valueExpression + "/1000, 'unixepoch'))";
-                final String minDayOfYear = getMinDate() != null ? DAY_MONTH_FORMAT.format(getMinDate()) : null;
-                final String maxDayOfYear = getMaxDate() != null ? DAY_MONTH_FORMAT.format(getMaxDate()) : null;
+                // SQLite's localtime modifier uses the same device-local calendar date as in-memory matching.
+                final String dayOfYearExpression = "strftime('%m-%d', " + valueExpression + "/1000, 'unixepoch', 'localtime')";
+                final String minDayOfYear = formatLocalDate(range.minDay, DAY_MONTH_FORMAT);
+                final String maxDayOfYear = formatLocalDate(range.maxDay, DAY_MONTH_FORMAT);
 
                 if (minDayOfYear != null && maxDayOfYear != null) {
                     if (minDayOfYear.compareTo(maxDayOfYear) <= 0) {
@@ -267,11 +340,12 @@ public class DateFilter {
                     sqlBuilder.addWhere(dayOfYearExpression + " <= '" + maxDayOfYear + "'");
                 }
             } else {
-                if (getMinDate() != null) {
-                    sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(getMinDate()) + "'");
+                // Compare the stored epoch value directly with the same inclusive boundaries used by matches().
+                if (range.min != null) {
+                    sqlBuilder.addWhere(valueExpression + " >= " + range.min.getTime());
                 }
-                if (getMaxDate() != null) {
-                    sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(getMaxDate()) + "'");
+                if (range.max != null) {
+                    sqlBuilder.addWhere(valueExpression + " <= " + range.max.getTime());
                 }
             }
             sqlBuilder.closeWhere();
@@ -281,15 +355,10 @@ public class DateFilter {
     }
 
     public String getUserDisplayableConfig() {
-        String minValueString = null;
-        String maxValueString = null;
-
-       if (getMinDate() != null) {
-            minValueString = ignoreYear ? DAY_MONTH_FORMAT.format(getMinDate()) : DAY_DATE_FORMAT_USER_DISPLAY.format(getMinDate());
-        }
-        if (getMaxDate() != null) {
-            maxValueString = ignoreYear ? DAY_MONTH_FORMAT.format(getMaxDate()) : DAY_DATE_FORMAT_USER_DISPLAY.format(getMaxDate());
-        }
+        final EffectiveDateRange range = getEffectiveRange();
+        final DateTimeFormatter formatter = ignoreYear ? DAY_MONTH_FORMAT : DAY_DATE_FORMAT;
+        final String minValueString = formatLocalDate(range.minDay, formatter);
+        final String maxValueString = formatLocalDate(range.maxDay, formatter);
 
         String value = UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
         if (isRelative) {
@@ -299,5 +368,48 @@ public class DateFilter {
             value += "(y)";
         }
         return value;
+    }
+
+    private static LocalDate toLocalDate(final Date date, final ZoneId zone) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(zone).toLocalDate();
+    }
+
+    private static Date toDate(final Instant instant) {
+        return Date.from(instant);
+    }
+
+    private static String formatLocalDate(final LocalDate date, final DateTimeFormatter formatter) {
+        return date == null ? null : formatter.format(date);
+    }
+
+    private static String formatLocalDateOrDefault(final LocalDate date, final String defaultValue) {
+        return date == null ? defaultValue : formatLocalDate(date, DAY_DATE_FORMAT);
+    }
+
+    private static String formatLocalDateTime(final LocalDate date, final boolean endOfDay) {
+        if (date == null) {
+            return null;
+        }
+        return JSON_DATE_FORMAT.format(endOfDay ? date.atTime(LocalTime.of(23, 59, 59)) : date.atStartOfDay());
+    }
+
+    private static String formatLocalDateTime(final Date date, final ZoneId zone) {
+        return date == null ? null : JSON_DATE_FORMAT.format(Instant.ofEpochMilli(date.getTime()).atZone(zone));
+    }
+
+    private static final class EffectiveDateRange {
+        private final Date min;
+        private final Date max;
+        private final LocalDate minDay;
+        private final LocalDate maxDay;
+        private final ZoneId zone;
+
+        private EffectiveDateRange(final Date min, final Date max, final LocalDate minDay, final LocalDate maxDay, final ZoneId zone) {
+            this.min = min;
+            this.max = max;
+            this.minDay = minDay;
+            this.maxDay = maxDay;
+            this.zone = zone;
+        }
     }
 }
