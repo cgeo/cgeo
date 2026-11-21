@@ -4,7 +4,8 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BackgroundRunner extends Thread {
 
@@ -36,7 +37,7 @@ public class BackgroundRunner extends Thread {
         return instance;
     }
 
-    private Vector queue = new Vector();
+    private ArrayList<Runnable> queue = new ArrayList<>();
     private boolean end = false;
     private Runnable queueProcessedListener = null;
 
@@ -54,8 +55,8 @@ public class BackgroundRunner extends Thread {
             events = false;
             while (!queue.isEmpty()) {
                 events = true;
-                Runnable c = (Runnable)queue.firstElement();
-                queue.removeElementAt(0);
+                Runnable c = queue.get(0);
+                queue.remove(0);
                 try {
                     c.run();
                 } catch (Throwable t) {
@@ -73,7 +74,7 @@ public class BackgroundRunner extends Thread {
     }
 
     synchronized public void perform (Runnable c) {
-        queue.addElement(c);
+        queue.add(c);
         notify();
     }
 
