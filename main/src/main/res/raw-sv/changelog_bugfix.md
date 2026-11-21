@@ -1,5 +1,5 @@
 ##
-- Fix: geocaching.com Ignorera Listans hantering fungerar inte (#16950)
+- Fix: Hanteringen av ignorera-listan från geocaching.com fungerade inte (#16950)
 - Fix: Flera minnesläckor (#18615)
 - Fix: Fel storlek på skalan på Google Maps (#18646)
 - Fix: Oändlig loop vid val av nytt format i "Beräkna koordinat" (#18672)
@@ -66,3 +66,11 @@
 - Fix some errors related to offline log dates (#7919) (#17030) (#17819) (18853)
 - Fix: Wherigo text inputs lost on forced reopening of dialog (#18855)
 - Fix: Hidden/event date follows system language rather than c:geo settings (#18561)
+- Fix: LOC importer not showing progress (#18229)
+- Fix: LOC importer cannot be cancelled (#18229)
+- Fix: Crash on editing variables (#18137)
+- Fix: Out of memory error in detecting file type (#16731)
+- Fix: No caches returned from geocaching.com with coordinates close to 0 (#12034)
+- Fix: "Resource not found" crash (#18916)
+- Fix: Progress notification in route optimization (#18920)
+- Fix: Long tap on bottom navigation adds to activity stack (#17179)

@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Enregistrées</string>
     <string name="any_button">Aller à</string>
     <string name="unknown_scan">Le scan ne contient aucun géocode.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Aucune cache</string>
     <string name="caches_more_caches">Rechercher d\'autres caches</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Réinitialiser l\'icône de la cache</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
     <string name="caches_set_listmarker">Définir le marqueur de liste</string>
-    <string name="caches_recalculate_health_score">Recalculer les scores de santé des caches</string>
     <string name="caches_askdeletion">Demande de suppression si vide</string>
     <string name="select_icon">Sélectionnez l\'icône</string>
     <string name="onetime_missing_unicode_info">Votre version d\'Android ne prend pas en charge la détection automatique des icônes - certains caractères peuvent manquer</string>
@@ -1847,8 +1847,6 @@
     <string name="projection_type_bearing_hint_distance">Distance</string>
     <string name="projection_type_offset">Décalage</string>
     <string name="projection_type_offset_info">Décalage %1$s mm, lon %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Décalage de Latitude en Micro-Minutes</string>
-    <string name="projection_type_offset_hint_longitude">Décalage de longitude en Micro-Minutes</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_titletext_short">Valeurs et calculs</string>
@@ -2912,7 +2910,6 @@
     <string name="dbi_select_table">Sélectionnez une table</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s dans #%2$d est en lecture seule</string>
-    <string name="dbi_edit_title">Modifier «%1$s» à #%2$d»</string>
     <string name="dbi_delete_row_title">Supprimer la ligne</string>
     <string name="dbi_delete_row_question">Supprimer la ligne%1$d (%2$s) pour de bon ?</string>
     <string name="dbi_delete_success">Ligne supprimée: %1$s</string>

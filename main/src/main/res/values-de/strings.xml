@@ -421,6 +421,7 @@
     <string name="stored_caches_button">Gespeichert</string>
     <string name="any_button">Gehe zu</string>
     <string name="unknown_scan">Konnte keinen Geocode im Scan finden.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Kein Cache</string>
     <string name="caches_more_caches">Mehr Caches laden</string>
@@ -533,7 +534,6 @@
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
-    <string name="caches_recalculate_health_score">Cache-Gesundheitswerte neu berechnen</string>
     <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
@@ -1748,6 +1748,8 @@
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="init_autozoom_consider_lastcenter">Kartenposition bei Anzeige einer Liste wiederherstellen</string>
+    <string name="init_mapOnLockScreen">Sperrbildschirm</string>
+    <string name="init_summary_mapOnLockScreen">Zeigt die Karte auf dem Sperrbildschirm deines Gerätes. Um das Gerät zu entsperren während die Karte anzeigt wird, nutze die Zurück-Schaltfläche/Geste.</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">Bei Anzeige einer Liste auf der Karte: Verändere Zoom nur, wenn nicht alle Caches in den zuletzt verwendeten Kartenausschnitt passen.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Wenn eine Liste von Caches auf der Karte angezeigt wird, setze Zoom und Ausschnitt so, dass alle Caches gezeigt werden.</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
@@ -1849,8 +1851,6 @@
     <string name="projection_type_bearing_hint_distance">Entfernung</string>
     <string name="projection_type_offset">Verschiebung</string>
     <string name="projection_type_offset_info">Verschiebung Breite %1$s mm, Länge %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Breitengrad Verschiebung in Mikro-Minuten</string>
-    <string name="projection_type_offset_hint_longitude">Längengrad Verschiebung in Mikro-Minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
     <string name="variables_titletext_short">Werte und Berechnungen</string>
@@ -2915,7 +2915,6 @@
     <string name="dbi_select_table">Tabelle auswählen</string>
     <string name="dbi_pageNumOfNum">%1$d / %2$d</string>
     <string name="dbi_read_only">%1$s in #%2$d ist schreibgeschützt</string>
-    <string name="dbi_edit_title">Bearbeite \"%1$s\" in #%2$d\"</string>
     <string name="dbi_delete_row_title">Zeile löschen</string>
     <string name="dbi_delete_row_question">Zeile #%1$d (%2$s) endgültig löschen?</string>
     <string name="dbi_delete_success">Zeile gelöscht: %1$s</string>

@@ -414,6 +414,7 @@
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Choď k</string>
     <string name="unknown_scan">Nepodarilo sa nájsť geokód v načítanom výsledku.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Žiadne skrýše</string>
     <string name="caches_more_caches">Načítať ďalšie skrýše</string>
@@ -531,7 +532,6 @@
     <string name="caches_reset_cache_icons_title">Obnoviť ikonu kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
-    <string name="caches_recalculate_health_score">Prepočítať stav zdravia kešiek</string>
     <string name="caches_askdeletion">Požiadať o odstránenie, ak je prázdne</string>
     <string name="select_icon">Vybrať ikonu</string>
     <string name="onetime_missing_unicode_info">Vaša verzia systému Android nepodporuje automatické zisťovanie podporovaných ikon – niektoré znaky môžu chýbať</string>
@@ -1796,8 +1796,6 @@
     <string name="projection_type_bearing_hint_distance">Vzdialenosť</string>
     <string name="projection_type_offset">Posun</string>
     <string name="projection_type_offset_info">Posun šírka %1$s mm, dĺžka %2$s mm</string>
-    <string name="projection_type_offset_hint_latitude">Posun zemepisnej šírky v mikrominútach</string>
-    <string name="projection_type_offset_hint_longitude">Posun zemepisnej dĺžky v mikrominútach</string>
     <!-- Variables -->
     <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
     <string name="variables_titletext_short">Hodnoty a výpočty</string>
