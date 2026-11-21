@@ -52,14 +52,20 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         final View v = getOrCreateView(context, convertView, parent);
-        final TextView textView = v.findViewById(R.id.text);
-        final ImageView iconView = v.findViewById(R.id.icon);
-        final View deleteView = v.findViewById(R.id.delete);
 
-        textView.setText(getItem(position));
-        setHighLightedText(textView, searchTerm);
-        iconView.setImageResource(isShowingResultsFromHistory ? historyIcon : suggestionIcon);
-        if (deleteFunction != null) {
+        final TextView textView = v.findViewById(R.id.text);
+        if (textView != null) {
+            textView.setText(getItem(position));
+            setHighLightedText(textView, searchTerm);
+        }
+
+        final ImageView iconView = v.findViewById(R.id.icon);
+        if (iconView != null) {
+            iconView.setImageResource(isShowingResultsFromHistory ? historyIcon : suggestionIcon);
+        }
+
+        final View deleteView = v.findViewById(R.id.delete);
+        if (deleteFunction != null && deleteView != null) {
             deleteView.setOnClickListener(view -> {
                 deleteFunction.call(getItem(position));
                 final List<String> temp = new ArrayList<>(Arrays.asList(suggestions));
