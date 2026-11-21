@@ -258,7 +258,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude", "geofence"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude", "geofence", "emojiString"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -271,7 +271,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 112;
+    private static final int dbVersion = 113;
     public static final int customListIdOffset = 10;
 
     /**
@@ -319,7 +319,8 @@ public class DataStore {
             109,  // add favorite column to cg_logs
             110,  // migrate markers/emojis datatype from int to string
             111, // correct a problem in name filter migration: reference by id instead of name
-            112  // add diacritic-normalized shadow columns to cg_caches/cg_trackables (nullable, re-runnable)
+            112, // add diacritic-normalized shadow columns to cg_caches/cg_trackables (nullable, re-runnable)
+            113  // add assigned emoji to waypoints
             ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -484,7 +485,8 @@ public class DataStore {
             + "projection_formula_1 TEXT, "
             + "preprojected_latitude DOUBLE, "
             + "preprojected_longitude DOUBLE, "
-            + "geofence DOUBLE"
+            + "geofence DOUBLE, "
+            + "emojiString TEXT"
             + "); ";
 
     private static final String dbCreateVariables = "CREATE TABLE IF NOT EXISTS " + dbTableVariables + " ("
@@ -2089,6 +2091,15 @@ public class DataStore {
                         }
                     }
 
+                    // add assigned emoji to waypoints
+                    if (oldVersion < 113) {
+                        try {
+                            createColumnIfNotExists(db, dbTableWaypoints, "emojiString TEXT");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 113);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -3036,6 +3047,7 @@ public class DataStore {
         values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2());
         putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
         values.put("geofence", waypoint.getGeofence());
+        values.put("emojiString", waypoint.getAssignedEmoji());
         return values;
     }
 
@@ -3802,6 +3814,7 @@ public class DataStore {
                 cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2"))
             );
             waypoint.setGeofence(cursor.getFloat(cursor.getColumnIndexOrThrow("geofence")));
+            waypoint.setAssignedEmoji(cursor.getString(cursor.getColumnIndexOrThrow("emojiString")));
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

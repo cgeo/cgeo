@@ -35,9 +35,11 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -52,6 +54,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,6 +113,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String lookup = "---";
     private boolean own = true;
     private boolean originalCoordsEmpty = false;
+    @Nullable private String assignedEmoji;
+    private int geofence;
 
     private Geopoint preprojectedCoords = null;
     private Geopoint currentCoords = null;
@@ -160,6 +165,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
                     activity.calcStateString = waypoint.getCalcStateConfig();
+                    activity.assignedEmoji = waypoint.getAssignedEmoji();
+                    activity.geofence = waypoint.getGeofence();
+                    activity.invalidateOptionsMenu();
 
                     //projection
                     activity.projectionType.set(waypoint.getProjectionType());
@@ -304,6 +312,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         } else if (itemId == R.id.menu_item_save) {
             saveWaypoint(getActivityData());
             finish();
+        } else if (itemId == R.id.menu_set_cache_icon) {
+            EmojiUtils.selectEmojiPopup(this, assignedEmoji, false, EmojiUtils.getTintedWaypointIcon(this, waypoint), icon -> assignedEmoji = icon);
+        } else if (itemId == R.id.menu_waypoint_geofence) {
+            SimpleDialog.of(this)
+                .setTitle(TextParam.id(R.string.waypoint_geofence))
+                .setMessage(TextParam.id(R.string.waypoint_geofence_summary))
+                .input(new SimpleDialog.InputOptions().setInitialValue(String.valueOf(geofence)).setInputType(InputType.TYPE_CLASS_NUMBER),
+                    result -> {
+                        try {
+                            geofence = Math.round(Float.parseFloat(result));
+                        } catch (NumberFormatException ignore) {
+                            geofence = 0;
+                        }
+                    });
         } else if (itemId == android.R.id.home) {
             finishConfirmDiscard();
         } else {
@@ -330,7 +352,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        getMenuInflater().inflate(R.menu.edit_waypoint_options, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        menu.findItem(R.id.menu_waypoint_geofence).setVisible(waypoint == null || waypoint.canChangeGeofence());
+        MenuUtils.enableIconsInOverflowMenu(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void initializeWaypointTypeSelector(final boolean excludeGenerated) {
@@ -670,8 +701,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.userNoteText = ViewUtils.getEditableText(binding.userNote.getText()).trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
-        currentState.geofence = waypoint == null ? 0 : waypoint.getGeofence();
+        currentState.geofence = geofence;
         currentState.calcStateJson = calcStateString;
+        currentState.assignedEmoji = assignedEmoji;
 
         return currentState;
     }
@@ -682,9 +714,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             || !Strings.CS.equals(currentState.name, waypoint.getName())
             || !Strings.CS.equals(currentState.noteText, waypoint.getNote())
             || !Strings.CS.equals(currentState.userNoteText, waypoint.getUserNote())
+            || currentState.geofence != waypoint.getGeofence()
             || currentState.visited != waypoint.isVisited()
             || currentState.type != waypoint.getWaypointType()
             || !Strings.CS.equals(currentState.calcStateJson, waypoint.getCalcStateConfig())
+            || !Strings.CS.equals(currentState.assignedEmoji, waypoint.getAssignedEmoji())
             || !Geopoint.equalsFormatted(currentState.preprojectedCoords, waypoint.getPreprojectedCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
             || currentState.projectionType != waypoint.getProjectionType()
             || currentState.projectionUnits != waypoint.getProjectionDistanceUnit()
@@ -755,6 +789,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setUserNote(currentState.userNoteText);
         waypoint.setVisited(currentState.visited);
         waypoint.setGeofence((float) currentState.geofence);
+        waypoint.setAssignedEmoji(currentState.assignedEmoji);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
@@ -812,6 +847,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public boolean visited;
         public int geofence;
         public String calcStateJson;
+        public String assignedEmoji;
         public ProjectionType projectionType;
         public DistanceUnit projectionUnits;
         public String projectionFormula1;
