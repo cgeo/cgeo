@@ -216,6 +216,15 @@ public final class ConnectorFactory {
         return false;
     }
 
+    public static boolean anyActiveConnectorSupportsOwnCoordinates() {
+        for (final IConnector conn : CONNECTORS) {
+            if (conn.isActive() && conn.supportsOwnCoordinates()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean canHandle(@Nullable final String geocode) {
         if (geocode == null) {
             return false;
