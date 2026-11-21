@@ -387,10 +387,13 @@ dependencies {
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.13.2'
 
-    // Leak Canary, memory leak detection
+    // LeakCanary, memory leak detection
     String leakCanaryVersion = '2.14'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
+
+    // LeakCanary within AS profiler
+    debugImplementation 'com.android.tools.studio.leakcanary:leakcanary:1.0.0'
 
     // Locus Maps integration
     implementation 'com.github.asamm.locus-api:locus-api-android:0.9.72'
