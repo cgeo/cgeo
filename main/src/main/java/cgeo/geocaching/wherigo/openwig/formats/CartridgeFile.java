@@ -18,7 +18,7 @@ public class CartridgeFile {
     private static final byte[] CART_ID = { 0x02, 0x0a, 0x43, 0x41, 0x52, 0x54, 0x00 };
             // 02 0a CART 00
 
-    private static final int CACHE_LIMIT = 128000; // in kB
+    private static final int CACHE_LIMIT = 128000; // in bytes (128 kB)
 
     private SeekableFile source;
 

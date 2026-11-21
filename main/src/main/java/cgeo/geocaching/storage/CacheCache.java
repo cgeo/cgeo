@@ -38,7 +38,7 @@ public class CacheCache {
     /**
      * Derive the maximum number of caches to keep in memory from the available heap.
      * <br>
-     * Take up a quarter of heap at max, assuming 8kB per geocache on average
+     * Take up a quarter of heap at max, assuming 8 KiB per geocache on average
      */
     private static int calculateMaxCachedCaches() {
         final int cacheSize = Settings.getCacheCacheSize();
