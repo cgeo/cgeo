@@ -13,6 +13,8 @@
 - Fix: Broken colors under certain conditions (#17479)
 - New: New attributes for Opencaching (#18584)
 - Fix: Offline log marker not updated correctly (#15398)
+- New: Option to show personal note / waypoint user notes in monospace font (#18895)
+- Fix: Coordinate parsing fails when rounding leads to 60 minutes value (#18928)
 
 ### Wherigo player
 - 
@@ -27,3 +29,4 @@
 - New: Batch operation for "store waypoints & variables in personal note" (#18783)
 - New: Support trackable code from clipboard in trackable search (#17101)
 - Change: Limit hidden date picker range to "2000-next year" (#18790)
+- New: Make log templates sortable via drag & drop (#15880)
