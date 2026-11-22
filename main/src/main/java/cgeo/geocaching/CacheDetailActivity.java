@@ -2204,6 +2204,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
         private Geocache cache;
         private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
+        private ClipboardManager.OnPrimaryClipChangedListener clipboardListener;
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {
@@ -2273,6 +2274,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             cache = activity.getCache();
             if (cache == null) {
+                return;
+            }
+            // view not (yet / anymore) available
+            if (binding == null) {
                 return;
             }
 
@@ -2379,8 +2384,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
 
-                final ClipboardManager cliboardManager = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-            cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(binding.addWaypointFromclipboard));
+            // setContent() may be called multiple times => replace a previously registered listener instead of adding another one
+            ClipboardUtils.removePrimaryClipChangedListener(clipboardListener);
+            clipboardListener = () -> {
+                if (binding != null) {
+                    setClipboardButtonVisibility(binding.addWaypointFromclipboard);
+                }
+            };
+            ClipboardUtils.addPrimaryClipChangedListener(clipboardListener);
+        }
+
+        @Override
+        public void onDestroyView() {
+            ClipboardUtils.removePrimaryClipChangedListener(clipboardListener);
+            clipboardListener = null;
+            // prevent setContent() from working on (and re-registering listeners for) a destroyed view
+            binding = null;
+            super.onDestroyView();
         }
 
         @Override

@@ -48,6 +48,31 @@ public final class ClipboardUtils {
     }
 
     /**
+     * register a listener for clipboard changes
+     * (uses application context to avoid leaking an activity via the ClipboardManager instance)
+     * Callers must unregister the listener using {@link #removePrimaryClipChangedListener} when no longer needed!
+     */
+    public static void addPrimaryClipChangedListener(@NonNull final ClipboardManager.OnPrimaryClipChangedListener listener) {
+        final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            clipboard.addPrimaryClipChangedListener(listener);
+        }
+    }
+
+    /**
+     * unregister a listener for clipboard changes previously registered via {@link #addPrimaryClipChangedListener}
+     */
+    public static void removePrimaryClipChangedListener(@Nullable final ClipboardManager.OnPrimaryClipChangedListener listener) {
+        if (listener == null) {
+            return;
+        }
+        final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            clipboard.removePrimaryClipChangedListener(listener);
+        }
+    }
+
+    /**
      * clear clipboard content
      * (up to API level 28: replace with empty string)
      */
