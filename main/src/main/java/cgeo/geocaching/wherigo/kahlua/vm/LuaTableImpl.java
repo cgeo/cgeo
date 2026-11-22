@@ -418,8 +418,8 @@ public final class LuaTableImpl implements LuaTable {
 
 
     public static int luaHashcode(Object a) {
-        if (a instanceof Double) {
-            Double ad = (Double) a;
+        if (a instanceof Double ad) {
+            
             long l = Double.doubleToLongBits(ad.doubleValue()) & 0x7fffffffffffffffL;
             return (int) (l ^ (l >>> 32));
         }
@@ -471,8 +471,7 @@ public final class LuaTableImpl implements LuaTable {
         boolean weakKeys = false, weakValues = false;
         if (metatable != null) {
             Object modeObj = metatable.rawget(BaseLib.MODE_KEY);
-            if (modeObj != null && modeObj instanceof String) {
-                String mode = (String) modeObj;
+            if (modeObj instanceof String mode) {
                 weakKeys = (mode.indexOf('k') >= 0);
                 weakValues = (mode.indexOf('v') >= 0);
             }
