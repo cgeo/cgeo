@@ -49,6 +49,16 @@ public class WherigoLayer {
         addAllWherigoElements();
     }
 
+    /**
+     * releases the given layer if it is the currently used one (to be called when the owning map is destroyed).
+     * Wherigo elements are not removed from the layer, as its map is about to be destroyed anyway.
+     */
+    public void releaseLayer(final GeoItemLayer<String> layer) {
+        if (layer != null && layer == this.currentLayer) {
+            this.currentLayer = null;
+        }
+    }
+
     public void refresh() {
         removeAllWherigoElements();
         addAllWherigoElements();

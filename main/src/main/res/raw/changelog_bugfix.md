@@ -74,3 +74,6 @@
 - Fix: "Resource not found" crash (#18916)
 - Fix: Progress notification in route optimization (#18920)
 - Fix: Long tap on bottom navigation adds to activity stack (#17179)
+
+##
+- Fix: Memory leaks (#18937)
