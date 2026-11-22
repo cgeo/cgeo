@@ -261,8 +261,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
 
-        WherigoLayer.get().setLayer(clickableItemsLayer);
-
         viewModel.init(routeTrackUtils);
 
         changeMapSource(Settings.getTileProvider());
@@ -1560,6 +1558,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return; // prevent further execution on the old activity instance
         }
 
+        // (re)attach wherigo zones to the map currently in foreground (there may be several maps in activity stack)
+        WherigoLayer.get().setLayer(clickableItemsLayer);
+
         reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
@@ -1586,6 +1587,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onDestroy() {
+        // static WherigoLayer singleton must not keep a reference to this activity's layer (and thus its MapView)
+        WherigoLayer.get().releaseLayer(clickableItemsLayer);
         if (navigationTargetLayer != null) {
             navigationTargetLayer.destroy();
         }
