@@ -3,6 +3,92 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2026.11.22 Bugfix Release
+
+- Fix: Crash when starting "Radar" with GPS Status & Toolbox version 12 (#18889)
+- Fix some "app not responding" errors (#18867) (#18871)
+- Fix: Crashes on map (#18805) (#18832) (#18834) (#18377)
+- Fix: "Resource not found" crash (#18916)
+- Fix some errors related to offline log dates (#7919) (#17030) (#17819) (18853)
+- New: Optional memory dump on "out of memory" errors (#18822)
+- Fix: "Scan for waypoint formulas" does not preserve order (#18749)
+- Fix: Crash in highlighting search results (#18831)
+- Fix: Owner filter not including Adventure Labs (#18840)
+- Fix: Crash for trackables (#18813)
+- Fix: Heading hash sign in log texts not handled correctly (#16147)
+- Fix: Images are scaled down too much on images tab (#18808)
+- Fix: Crash on renaming a route (#18810)
+- Fix: Crash in image handling (#18002)
+- Fix: Crash on logs page when translator is not yet available (#18800)
+- Fix: Distance filter/sort for stored caches overestimating east-west distances (#16194)
+- Fix: Failed http responses remain unclosed (#15356)
+- Fix: HTML in waypoint names do not get decoded (#17100)
+- Fix: Offline log date gets overridden by online log date in status (#13975)
+- Fix: Precision of unchanged coordinates in coordinate dialog can deteriorate (#14714)
+- Fix: Restore syncing of personal notes when experimental image feature is activated (#18897)
+- Fix: Hyperlink in personal note is not parsed correctly (#15071)
+- Fix: Crash on malformatted URL (#18901)
+- Fix: Wherigo text inputs lost on forced reopening of dialog (#18855)
+- Fix: Hidden/event date follows system language rather than c:geo settings (#18561)
+- Fix: LOC importer not showing progress (#18229)
+- Fix: LOC importer cannot be cancelled (#18229)
+- Fix: Crash on editing variables (#18137)
+- Fix: Out of memory error in detecting file type (#16731)
+- Fix: No caches returned from geocaching.com with coordinates close to 0 (#12034)
+- Fix: Progress notification in route optimization (#18920)
+- Fix: Long tap on bottom navigation adds to activity stack (#17179)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2026.10.18 Bugfix Release
+
+- Fix: Crash on opening a PM cache as basic member (#18737)
+- Fix: Bizarre scrolling issue in log list on Android 17 (#18657)
+- Fix: Wrong language download prompts on resuming activity (#18544)
+- Fix: Random items highlighted in selection dialog with no active items (#18724)
+- Fix: Toggling found-filter via map quick settings repeatedly adds endless "status" filters (#18701)
+- Fix: Updating filter looses marker setting and gets lost as sub filter within a filter (#18711)
+- Fix: Crash with "BadTokenException" after long running tasks (#18703)
+- Fix: "Prepend to route" breaks elevation chart (#18727)
+- Fix: Trackable not updated in status/spotted after logging (#17730)
+- Fix: Error while initiating backup is cut off (#18223)
+- Fix: Search broken in "Delete offline data" dialog (#18594)
+- Fix: Waypoint popup lost on returning to map (#18777)
+- Fix: c:geo keeps asking for missing translation models even after successful download (#18778)
+- Fix: Wrong emoji used when selecting "orange heart" (#18751)
+- Fix: Empty search results reported as "Communication error" (#18774)
+- Fix: Crash on trying to log cache that's no longer available (#18772)
+- Fix: Trackable inventory does not update on refresh (#18390) (#18742)
+- Fix: Filtering caches with square brackets not working consistently (#18766)
+- Fix: Draft log not preserved when editing other online log for same cache (#18764)
+- Fix: Coordinates wrong when having negative sign and no hemisphere info (#18763)
+- Fix: Geofence radius not preserved on editing waypoint (#18759)
+- Fix: Wrong parsing of UTM coordinates near equator (#18757)
+- Fix: Waypoint not stored on successful scan for waypoints in description (#18750)
+- Fix: Handling of dropped trackables (#16203)
+- Fix: Handling when ignoring unsaved caches (#9445)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2026.10.05 Bugfix Release
+
+- Fix: geocaching.com Ignore List handling not working (#16950)
+- Fix: Several memory leaks (#18615)
+- Fix: Wrong size of scale on Google Maps (#18646)
+- Fix: Endless loop on selecting new format in "Calculate coordinate" (#18672)
+- Fix: Log text folding not working (#18653)
+- Fix: Crash in reading variables (#18667)
+- Fix: Crash while logging (#18679)
+- Fix: Crash while trying to read Wherigo cartridge (#18681)
+- Fix: Crash while trying to start Wherigo service (#18675)
+- Fix: Crash while using Google Maps (#18676)
+- Fix: Crash in tracks quick settings (#18666)
+- Fix: Crash in offline translation (#18678)
+- Fix: Crash on map rotation (#18680)
+- Fix: Crash on VTM map (#18691)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2026.09.23 Feature Release
 
 ### Map
