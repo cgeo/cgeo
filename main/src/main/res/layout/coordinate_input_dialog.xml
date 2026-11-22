@@ -21,9 +21,10 @@
         android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/coordinateBox"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@drawable/border_active"
+		android:background="@drawable/border"
 		android:layout_margin="8dp"
 		android:orientation="vertical"
 		android:padding="8dp">
