@@ -1,0 +1,6 @@
+<p>2026.11.22 Bugfix Release</p>
+<p>Mehr als 30 Bugfixes</p>
+><p>
+   Eine detaillierte Übersicht der Änderungen findest Du in unserem
+   <a href="https://github.com/cgeo/cgeo/blob/release/main/src/main/res/raw-de/changelog_bugfix.md">detaillierten Release-Changelog</a>.
+ </p>
