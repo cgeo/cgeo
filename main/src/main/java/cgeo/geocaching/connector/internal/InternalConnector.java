@@ -324,7 +324,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable())));
         dialogButton.setIconTint(null);
         dialogButton.setTooltipText(context.getText(R.string.caches_set_cache_icon));
-        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), false, temporaryCache, assignedEmoji -> {
+        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), false, EmojiUtils.getTintedCacheIcon(context, temporaryCache), assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
             dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
         }));

@@ -290,6 +290,9 @@ public final class GpxSerializer {
             gpx.text("true");
             gpx.endTag(NS_CGEO, "originalCoordsEmpty");
         }
+        if (StringUtils.isNotBlank(waypoint.getAssignedEmoji())) {
+            XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmojiText", waypoint.getAssignedEmoji());
+        }
     }
 
     /**
