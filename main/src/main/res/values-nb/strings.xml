@@ -381,6 +381,7 @@
     <string name="stored_caches_button">Lagret</string>
     <string name="any_button">Gå til</string>
     <string name="unknown_scan">Fant ingen GC-koder i det skannede bildet.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">ingen cacher</string>
     <string name="caches_more_caches">flere cacher</string>

@@ -356,6 +356,7 @@
     <string name="stored_caches_button">已儲存:</string>
     <string name="any_button">前往</string>
     <string name="unknown_scan">無法找到任何地理藏寶</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">此处无文件</string>
     <string name="caches_more_caches">載入更多cache</string>

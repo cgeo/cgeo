@@ -291,6 +291,7 @@
     <string name="stored_caches_button">Mentett</string>
     <string name="any_button">Cél</string>
     <string name="unknown_scan">Nem található geokód a szkennelés eredményében.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Nem található láda</string>
     <string name="caches_more_caches">Nem elég? Keress több ládát!</string>

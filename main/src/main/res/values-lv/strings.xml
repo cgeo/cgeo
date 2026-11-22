@@ -257,6 +257,7 @@
     <string name="stored_caches_button">Saglabātie bezsaistē</string>
     <string name="any_button">Doties uz</string>
     <string name="unknown_scan">Skenēšanas rezultātā neviens ģeokods netika atrasts.</string>
+    <!-- Store waypoints -->
     <!-- caches -->
     <string name="caches_no_cache">Šeit nav slēpņu</string>
     <string name="caches_more_caches">Ielādēt vairāk slēpņus</string>
