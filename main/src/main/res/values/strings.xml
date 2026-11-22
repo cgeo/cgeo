@@ -264,7 +264,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Failed Login page parsing</string>
-    <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to login with c:geo.</string>
+    <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to log in with c:geo.</string>
     <string name="err_server_general">Unable to contact geocaching server. The website may be down or your internet connection not working.</string>
     <string name="err_server_gc">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
@@ -474,7 +474,7 @@
     <string name="caches_store_offline_map">Store caches offline</string>
     <string name="caches_store_selected">Store selected</string>
     <string name="caches_store_background_title">Download caches</string>
-    <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
+    <string name="caches_store_background_already_stored">Some caches are already stored. What should happen to them?</string>
     <string name="caches_store_background_option_nothing">Do nothing</string>
     <string name="caches_store_background_option_add_to_list">Add to list</string>
     <string name="caches_store_background_option_refresh_and_add">Refresh and add to list</string>
@@ -556,7 +556,7 @@
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e.g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone, and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_share_geocodes">Share list of geocodes</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
@@ -585,7 +585,7 @@
     </plurals>
     <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
     <string name="caches_warning_remove_from_list_user_data_others">Remove others</string>
-    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d caches are only on this list. Removing those caches from the list will delete them from your device.</string>
+    <string name="caches_warning_remove_caches_from_single_list" tools:ignore="PluralsCandidate">%1$d/%2$d caches are only on this list. Removing those caches from the list will delete them from your device.</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
@@ -593,7 +593,10 @@
     <string name="caches_set_cache_icon_selected">Set cache icon for selected caches</string>
     <string name="caches_set_final_wp_as_corrected_coords_all">Set finals as coordinates</string>
     <string name="caches_set_final_wp_as_corrected_coords_selected">Set final as coordinates (selected)</string>
-    <string name="caches_set_final_wp_as_corrected_coords_info">Apply the finals waypoint as corrected coordinates on %1$d caches.</string>
+    <plurals name="caches_set_final_wp_as_corrected_coords_info">
+        <item quantity="one">Apply the final\'s waypoint as corrected coordinates on %1$d cache.</item>
+        <item quantity="other">Apply the final\'s waypoint as corrected coordinates on %1$d caches.</item>
+    </plurals>
     <string name="caches_set_final_wp_as_corrected_coords_none_found">No caches with final waypoint found.</string>
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
@@ -738,7 +741,7 @@
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Search Text</string>
-    <string name="cache_filter_stringfilter_info">With option \'Pattern\', use wildcards * and ?. * represents zero, one or multiple characters, ? represents one single character. For example, pattern \'H?mburg*\' will match e.g. \'Homburg\' or \'Hamburg at Night\' but not \'A day in Hamburg\' or \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_info">With option \'Pattern\' use wildcards * and ?. * represents zero, one or multiple characters; ? represents one single character. For example, pattern \'H?mburg*\' will match e.g. \'Homburg\' or \'Hamburg at Night\' but not \'A day in Hamburg\' or \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Is Not Present</string>
     <string name="cache_filter_stringfilter_type_is_present">Is Present</string>
     <string name="cache_filter_stringfilter_type_contains">Contains</string>
@@ -968,7 +971,7 @@
     <string name="contribution_graphics">graphics</string>
 
     <string name="debug_user_error_report_title">Report a problem</string>
-    <string name="debug_user_error_errortext">An unexpected problem has occured which we would request you to report to us:</string>
+    <string name="debug_user_error_errortext">An unexpected problem has occurred which we would request you to report to us:</string>
     <string name="debug_user_error_explain_options">Help us fixing c:geo problems by reporting them via email with system information and c:geo logfile included.\nPlease do always also include a detailed error description with your mail!\n\nBefore sending a mail please also check our FAQ and/or social media presence for known problems.\nOther contact options can be found at \'About c:geo\'</string>
 
     <!-- download manager -->
@@ -983,7 +986,7 @@
     <string name="downloader_retry_download_details">Do you want to retry the download of the following file?</string>
     <string name="downloader_delete_all_pending">Delete all</string>
     <string name="downloader_delete_all_confirmation">Delete all pending downloads?</string>
-    <string name="downloader_delete_all_message">This will cancel all %d pending downloads and remove the downloaded parts. This action cannot be undone.</string>
+    <string name="downloader_delete_all_message" tools:ignore="PluralsCandidate">This will cancel all %d pending downloads and remove the downloaded parts. This action cannot be undone.</string>
     <string name="downloader_deleted_all">Deleted all pending downloads</string>
 
     <!-- Android system download manager status messages -->
@@ -1045,7 +1048,7 @@
     <string name="settings_userDefinedTileProvider_remove_confirm">Do you really want to remove this tile provider?</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_tileOverlays">User-defined overlays</string>
-    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example sea marks or hiking routes</string>
+    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example see marks or hiking routes</string>
     <string name="settings_tileOverlays_add">Add overlay</string>
     <string name="settings_tileOverlays_edit">Edit overlay</string>
     <string name="settings_tileOverlays_url_hint">Enter the full Uri including the {X}, {Y} and {Z} placeholders. Tiles must be transparent where they carry no data. Make sure you have checked and comply to the provider\'s usage conditions.</string>
@@ -1055,7 +1058,7 @@
     <!-- shared by the user-defined tile providers and the user-defined tile overlays -->
     <string name="settings_tileUrl_name">Name</string>
     <string name="settings_tileUrl_uri">Uri</string>
-    <string name="settings_tileUrl_invalid">Please enter a http(s) Uri containing {X}, {Y} and {Z}</string>
+    <string name="settings_tileUrl_invalid">Please enter an http(s) Uri containing {X}, {Y} and {Z}</string>
     <string name="settings_tileUrl_test">Test</string>
     <string name="settings_tileUrl_testing">Checking\u2026</string>
     <string name="settings_tileUrl_testok">A tile was received</string>
@@ -1118,7 +1121,7 @@
     <string name="err_vote_send_rating">Error while sending rating.</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging in…</string>
-    <string name="init_login_popup_ok">Login OK</string>
+    <string name="init_login_popup_ok">Login Ok</string>
     <string name="init_login_popup_failed">Login failed</string>
     <string name="init_login_popup_failed_reason">Login failed: %s</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
@@ -1183,7 +1186,7 @@
     <string name="init_translator_external_description">External translator app to use</string>
     <string name="system_default">System Default</string>
     <string name="init_showwaypoints">Show waypoints</string>
-    <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
+    <string name="init_showwaypoint_description">If less than the given amount of caches is displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
     <string name="init_zoomincludingwaypoints_description">If mapping a single cache: Should zoom be adjusted to include all its waypoints?</string>
     <string name="init_visitedWaypointsSemiTransparent">Visited waypoints semi-transparent</string>
@@ -1207,7 +1210,7 @@
     <string name="init_bigSmileysOnMap">Big icons</string>
     <string name="init_summary_bigSmileysOnMap">If enabled, symbols like the \'found smiley\' or the \'corrected coordinates\' marker will be shown enlarged on the map instead of the cache type icon.</string>
     <string name="init_dtMarkerOnCacheIcon">D/T rating on cache icons</string>
-    <string name="init_summary_dtMarkerOnCacheIcon">Show an marker for the Difficulty (left) and Terrain (right) ratings on cache markers in upper-right corner ("stored" marker is moved to middle).</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Show a marker for the Difficulty (left) and Terrain (right) ratings on cache markers in upper-right corner ("stored" marker is moved to middle).</string>
     <string name="init_showElevation">Show Elevation</string>
     <string name="init_summary_showElevation">Show elevation info for current position, taken from routing data or GNSS (if available)</string>
     <string name="init_elevation_notAvailable">"No elevation data available"</string>
@@ -1863,7 +1866,7 @@
     <string name="cache_log_menu_popup_title">Log of %s</string>
     <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
     <string name="ignore_confirm_title">Be careful</string>
-    <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website. Also all your local data related to this cache will be removed.</string>
+    <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website. Also, all your local data related to this cache will be removed.</string>
     <string name="ignore_confirm_toast">Cache %s will be ignored from now on.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
@@ -1974,7 +1977,7 @@
     <string name="internal_cache_default_description">This is a user-defined cache</string>
     <string name="internal_cache_default_owner">You</string>
     <string name="internal_goto_targets_title">\'Go to\' targets</string>
-    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also, you can move the cache to any other list of your choice.</string>
     <string name="goto_targets_deprecation_title">Deprecation notice</string>
     <string name="goto_targets_deprecation_notice">The \'Go to\' functionality is deprecated and will be removed in a future version. Please use user-defined caches instead for new targets.</string>
     <string name="init_longtap_map">Long tap on map</string>
@@ -2121,7 +2124,7 @@
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variable Name</string>
-    <string name="variables_varname_dialog_message">Enter variable name (may be left empty)</string>
+    <string name="variables_varname_dialog_message">Enter variable name (or le it empty)</string>
 
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
@@ -2237,7 +2240,7 @@
     <string name="map_routing_activate_title">Enable routing</string>
     <string name="map_routing_activate">Some routing modes are currently not available, as no routing engine is active.\n\nDo you want to activate c:geo\'s internal routing engine and downloading of routing data?</string>
     <string name="map_autorotation">Map auto rotation</string>
-    <string name="map_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
+    <string name="map_autorotation_disable">Disable map autorotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
     <string name="quick_settings_info">Some map settings (Map settings, hide, routing) have been moved to the new \"Quick settings\" popup.\nYou can open this popup using the icon in the map\'s bottom center.</string>
     <string name="zoom_in">Zoom in</string>
@@ -3136,14 +3139,14 @@
     <string name="wizard_permissions_title">Set app permissions</string>
     <string name="wizard_permissions_intro">c:geo needs certain permissions on your device to work correctly.\nI will explain more details in the next steps.</string>
     <string name="wizard_permissions_folder_title">Set folder: %s</string>
-    <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\nHint: You may need to unhide your device\'s internal storage first in the file selector being displayed next.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so-called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\nHint: You may need to unhide your device\'s internal storage first in the file selector being displayed next.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo needs a local folder to store theme files for offline maps.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks).</string>
     <string name="wizard_broutertilesfolder_request_explanation">In order to use the integrated routing tile data auto-download and -update feature you need to set a tile data folder.</string>
     <string name="wizard_select_or_create">Select or create such a folder in the next step.</string>
     <string name="wizard_platforms_title">Configure services</string>
-    <string name="wizard_platforms_intro">To find geocaches with c:geo you need an account for a geocaching service supported by c:geo.\nSelect the desired service below to either login with your existing account or create a new account.</string>
+    <string name="wizard_platforms_intro">To find geocaches with c:geo you need an account for a geocaching service supported by c:geo.\nSelect the desired service below to either log in with your existing account or create a new account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; others</string>
     <string name="wizard_advanced_restore_label">Restore</string>
