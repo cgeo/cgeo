@@ -1009,6 +1009,8 @@
     <string name="init_template_text">Text de la plantilla</string>
     <string name="init_log_template">Plantilla de registre</string>
     <string name="init_log_template_addnew">Afegeix una nova plantilla</string>
+    <string name="init_log_templates_manage">Gestiona les plantilles de registre</string>
+    <string name="init_log_templates_none">No s\'han definit plantilles de registre</string>
     <string name="init_log_template_remove_confirm">Realment voleu eliminar la plantilla?</string>
     <string name="init_log_templates">Plantilles de registre</string>
     <string name="init_log_template_prefix">Plantilla:\u0020</string>
@@ -1089,6 +1091,8 @@
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de les notes personals de catxés. Encara es pot activar per a catxés individuals desactivant la casella de selecció que hi ha a sota de la nota personal del catxé.</string>
     <string name="init_prevent_cache_note_merge">Sobreescriu la nota personal del catxé</string>
     <string name="init_summary_prevent_cache_note_merge">Si aquesta configuració està activada, c:geo suprimirà la nota emmagatzemada localment de manera permanent i la substituirà per la nota personal al servidor. No es farà cap fusió.</string>
+    <string name="init_notes_monospace">Tipus de lletra monoespai per a les notes</string>
+    <string name="init_summary_notes_monospace">Mostra i edita les teves pròpies notes (nota personal del catxé, notes de punts de referència, notes a la calculadora de coordenades) amb un tipus de lletra d\'amplada fixa, de manera que les columnes, les taules i les coordenades quedin alineades.</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_rot13_hint">Encripta la pista</string>
