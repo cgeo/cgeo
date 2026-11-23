@@ -13,6 +13,8 @@
 - Correcció: Colors incorrectes en determinades condicions (#17479)
 - Nou: Nous atributs per a Opencaching (#18584)
 - Correcció: El marcador de registre fora de línia no s'actualitzava correctament (#15398)
+- Nou: Opció per mostrar les notes personals / notes d'usuari dels punts de referència amb tipografia monoespai (#18895)
+- Correcció: L'anàlisi de coordenades falla quan l'arrodoniment dona lloc a un valor de 60 minuts (#18928)
 
 ### Wherigo Player
 -
@@ -27,3 +29,4 @@
 - Nou: Operació en bloc per a «desar punts de referencia & variables en una nota personal» (#18783)
 - Nou: Admet codis rastrejables des del porta-retalls a la cerca de codis rastrejables (#17101)
 - Canvi: Limitar el rang del selector de dates ocult a «2000 – any vinent» (#18790)
+- Nou: Fer que les plantilles de registre es puguin ordenar mitjançant arrossegar i deixar anar (#15880)
