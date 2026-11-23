@@ -69,8 +69,11 @@
 - Korrektur: LOC Import zeigt keinen Fortschritt an (#18229)
 - Korrektur: LOC Import kann nicht abgebrochen werden (#18229)
 - Korrektur: Absturz beim Bearbeiten von Variablen (#18137)
-- Fix: "Out of memory"-Fehler bei Erkennung des Dateityps (#16731)
+- Korrektur: "Out of memory"-Fehler bei Erkennung des Dateityps (#16731)
 - Korrektur: Keine Caches von geocaching.com gefunden bei Koordinaten nahe 0 (#12034)
 - Korrektur: "Ressource nicht gefunden" Absturz (#18916)
 - Korrektur: Fortschrittsbenachrichtigung bei Routenoptimierung (#18920)
 - Korrektur: Langes Tippen auf untere Navigation fügt Aktivität dem Stack hinzu (#17179)
+
+##
+- Fix: Memory leaks (#18937)
