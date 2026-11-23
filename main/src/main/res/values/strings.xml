@@ -585,7 +585,10 @@
     </plurals>
     <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
     <string name="caches_warning_remove_from_list_user_data_others">Remove others</string>
-    <string name="caches_warning_remove_caches_from_single_list" tools:ignore="PluralsCandidate">%1$d/%2$d caches are only on this list. Removing those caches from the list will delete them from your device.</string>
+    <plurals name="caches_warning_remove_caches_from_single_list">
+        <item quantity="one">%1$d/%2$d cache is only on this list. Removing this cache from the list will delete it from your device.</item>
+        <item quantity="other">%1$d/%2$d caches are only on this list. Removing these caches from the list will delete them from your device.</item>
+    </plurals>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
@@ -594,7 +597,7 @@
     <string name="caches_set_final_wp_as_corrected_coords_all">Set finals as coordinates</string>
     <string name="caches_set_final_wp_as_corrected_coords_selected">Set final as coordinates (selected)</string>
     <plurals name="caches_set_final_wp_as_corrected_coords_info">
-        <item quantity="one">Apply the final\'s waypoint as corrected coordinates on %1$d cache.</item>
+        <item quantity="one">Apply the final\'s waypoint as corrected coordinate on %1$d cache.</item>
         <item quantity="other">Apply the final\'s waypoint as corrected coordinates on %1$d caches.</item>
     </plurals>
     <string name="caches_set_final_wp_as_corrected_coords_none_found">No caches with final waypoint found.</string>
@@ -986,7 +989,10 @@
     <string name="downloader_retry_download_details">Do you want to retry the download of the following file?</string>
     <string name="downloader_delete_all_pending">Delete all</string>
     <string name="downloader_delete_all_confirmation">Delete all pending downloads?</string>
-    <string name="downloader_delete_all_message" tools:ignore="PluralsCandidate">This will cancel all %d pending downloads and remove the downloaded parts. This action cannot be undone.</string>
+    <plurals name="downloader_delete_all_message">
+        <item quantity="one">This will cancel %d pending download and remove the downloaded part. This action cannot be undone.</item>
+        <item quantity="other">This will cancel all %d pending downloads and remove the downloaded parts. This action cannot be undone.</item>
+    </plurals>
     <string name="downloader_deleted_all">Deleted all pending downloads</string>
 
     <!-- Android system download manager status messages -->

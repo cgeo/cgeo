@@ -46,7 +46,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
                                @Nullable final Runnable onFinishedCallback) {
         super(context, caches, R.string.command_delete_caches_progress);
         this.onFinishedCallback = onFinishedCallback;
-        
+
         final List<Geocache> toDelete = new ArrayList<>(caches);
         deleteFromDeviceAction = new DeleteFromDeviceAction(toDelete);
         removeFromListAction = null;
@@ -102,7 +102,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         if (cacheCount > 0) {
             final int allCacheCount = getCaches().size();
             final String title = LocalizationUtils.getString(R.string.command_remove_caches_from_list_progress);
-            final String warningMessage = LocalizationUtils.getString(R.string.caches_warning_remove_caches_from_single_list, cacheCount, allCacheCount);
+            final String warningMessage = LocalizationUtils.getPlural(R.plurals.caches_warning_remove_caches_from_single_list, cacheCount, allCacheCount);
 
             final boolean hasCachesToRemoveFromListOnly = allCacheCount > cacheCount;
             final String othersButtonText = hasCachesToRemoveFromListOnly ? LocalizationUtils.getString(R.string.caches_warning_remove_from_list_user_data_others) : null;
