@@ -591,9 +591,8 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void setHasLogOffline(final boolean hasLogOffline) {
         this.hasLogOffline = hasLogOffline;
-        if (!hasLogOffline) {
-            offlineLog = null;
-        }
+        // reload a changed offline log, forget a deleted one
+        this.offlineLog = null;
     }
 
     public void logOffline(@NonNull final Activity fromActivity, @NonNull final LogType logType, @NonNull final ReportProblemType reportProblem) {
@@ -663,7 +662,7 @@ public class Geocache implements INamedGeoCoordinate {
     public OfflineLogEntry getOfflineLog() {
         if (!BooleanUtils.isFalse(hasLogOffline) && offlineLog == null) {
             offlineLog = DataStore.loadLogOffline(geocode);
-            setHasLogOffline(offlineLog != null);
+            hasLogOffline = offlineLog != null;
         }
         return offlineLog;
     }
