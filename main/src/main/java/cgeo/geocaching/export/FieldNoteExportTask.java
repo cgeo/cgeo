@@ -2,8 +2,6 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
@@ -28,6 +26,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -44,18 +44,18 @@ public final class FieldNoteExportTask {
     /** Parameters of one export run */
     static class Input {
         @NonNull private final Geocache[] caches;
-        private final boolean upload;
+        @NonNull private final List<FieldNotesCapability> uploadTargets;
         private final boolean onlyNew;
         @NonNull private final String filename;
         @NonNull private final String name;
 
         /**
-         * @param upload  Upload the Field Note to geocaching.com
-         * @param onlyNew Upload/export only new logs since last export
+         * @param uploadTargets connectors to upload the field notes to (may be empty)
+         * @param onlyNew       Upload/export only new logs since last export
          */
-        Input(@NonNull final Geocache[] caches, final boolean upload, final boolean onlyNew, @NonNull final String filename, @NonNull final String name) {
+        Input(@NonNull final Geocache[] caches, @NonNull final List<FieldNotesCapability> uploadTargets, final boolean onlyNew, @NonNull final String filename, @NonNull final String name) {
             this.caches = caches;
-            this.upload = upload;
+            this.uploadTargets = uploadTargets;
             this.onlyNew = onlyNew;
             this.filename = filename;
             this.name = name;
@@ -64,7 +64,7 @@ public final class FieldNoteExportTask {
         @NonNull
         @Override
         public String toString() {
-            return filename + "(" + caches.length + " caches, upload=" + upload + ", onlyNew=" + onlyNew + ")";
+            return filename + "(" + caches.length + " caches, upload to " + uploadTargets.size() + " sites, onlyNew=" + onlyNew + ")";
         }
     }
 
@@ -79,16 +79,15 @@ public final class FieldNoteExportTask {
         }
     }
 
-    /** Result of one export run */
+    /** Result of one export run: the written file (null if writing failed) and the result of each upload */
     private static class ExportResult {
         @NonNull private final String name;
-        private final boolean upload;
-        @Nullable private final Uri uri;
+        @Nullable private Uri uri;
+        @NonNull private final List<String> uploadedTo = new ArrayList<>();
+        @NonNull private final List<String> uploadFailedTo = new ArrayList<>();
 
-        private ExportResult(@NonNull final String name, final boolean upload, @Nullable final Uri uri) {
+        private ExportResult(@NonNull final String name) {
             this.name = name;
-            this.upload = upload;
-            this.uri = uri;
         }
     }
 
@@ -101,12 +100,12 @@ public final class FieldNoteExportTask {
         WorkerTask.<Input, ExportProgress, ExportResult>of(
                 TASK_ID,
                 (input, progress, cancelFlag) -> {
-                    final Uri uri = export(input, progress);
-                    if (uri != null) {
+                    final ExportResult result = export(input, progress);
+                    if (result.uri != null) {
                         // done here rather than in the result handler, which doesn't run if the activity is gone by then
                         Settings.setFieldnoteExportDate(System.currentTimeMillis());
                     }
-                    return new ExportResult(input.name, input.upload, uri);
+                    return result;
                 },
                 AndroidRxUtils.computationScheduler)
             .addFeature(ProgressDialogFeature.<ExportProgress>of(activity)
@@ -134,51 +133,51 @@ public final class FieldNoteExportTask {
     }
 
     /**
-     * Writes the field note file and uploads it if requested, synchronously.
+     * Writes the field note file and uploads it to the selected sites, synchronously.
      *
-     * @return the Uri of the written file, or null if writing or uploading failed
+     * @return the result: the Uri of the written file (null if writing failed) and the result of each upload
      */
     @WorkerThread
-    @Nullable
-    private static Uri export(@NonNull final Input input, @Nullable final Consumer<ExportProgress> progress) {
+    @NonNull
+    private static ExportResult export(@NonNull final Input input, @Nullable final Consumer<ExportProgress> progress) {
+        final ExportResult result = new ExportResult(input.name);
         // export all field notes, without any filtering by connector
         final FieldNotes fieldNotes = createFieldNotes(input, progress);
         if (fieldNotes == null) {
-            return null;
+            return result;
         }
 
         // write to uri
-        final Uri uri = fieldNotes.writeToFolder(PersistableFolder.FIELD_NOTES.getFolder(), input.filename);
-        if (uri == null) {
-            return null;
+        result.uri = fieldNotes.writeToFolder(PersistableFolder.FIELD_NOTES.getFolder(), input.filename);
+        if (result.uri == null) {
+            return result;
         }
 
-        if (input.upload) {
+        if (!input.uploadTargets.isEmpty()) {
             if (progress != null) {
                 progress.accept(new ExportProgress(true, fieldNotes.size()));
             }
-            // upload same file to multiple connectors, if they support the upload
-            if (!uploadFieldNotes(uri, input.filename)) {
-                return null;
-            }
+            // upload the same (hybrid) file to all selected connectors; the export itself has succeeded
+            // at this point, the result of each upload is reported per site
+            uploadFieldNotes(result.uri, input, result);
         }
-        return uri;
+        return result;
     }
 
-    private static boolean uploadFieldNotes(@NonNull final Uri uri, @NonNull final String filename) {
-        boolean uploadResult = true;
-        final File tempFile = ContentStorage.get().writeUriToTempFile(uri, filename);
-        if (tempFile != null) {
-            for (final IConnector connector : ConnectorFactory.getConnectors()) {
-                if (connector instanceof FieldNotesCapability) {
-                    uploadResult &= ((FieldNotesCapability) connector).uploadFieldNotes(tempFile);
-                }
-            }
-            if (!tempFile.delete()) {
-                Log.i("Temp file could not be deleted: " + tempFile);
+    private static void uploadFieldNotes(@NonNull final Uri uri, @NonNull final Input input, @NonNull final ExportResult result) {
+        final File tempFile = ContentStorage.get().writeUriToTempFile(uri, input.filename);
+        for (final FieldNotesCapability connector : input.uploadTargets) {
+            // a site rejects e.g. a file without any record of its own platform; that must not
+            // turn the uploads to the other sites into a failure
+            if (tempFile != null && connector.uploadFieldNotes(tempFile)) {
+                result.uploadedTo.add(connector.getName());
+            } else {
+                result.uploadFailedTo.add(connector.getName());
             }
         }
-        return uploadResult;
+        if (tempFile != null && !tempFile.delete()) {
+            Log.i("Temp file could not be deleted: " + tempFile);
+        }
     }
 
     @Nullable
@@ -209,8 +208,11 @@ public final class FieldNoteExportTask {
             return;
         }
         ShareUtils.shareOrDismissDialog(activity, result.uri, "text/plain", R.string.export, result.name + " " + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(result.uri));
-        if (result.upload) {
-            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_success));
+        for (final String site : result.uploadedTo) {
+            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_to_success, site));
+        }
+        for (final String site : result.uploadFailedTo) {
+            ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_to_failed, site));
         }
     }
 
