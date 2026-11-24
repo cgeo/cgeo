@@ -1,5 +1,6 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -30,16 +31,23 @@ import org.apache.commons.lang3.StringUtils;
  * <pre>
  * GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"
  * </pre>
+ *
+ * The file holds the records of all platforms. The records of geocaching.com come first, the
+ * records of other platforms follow, each group in the order they were added: geocaching.com
+ * rejects the whole file if its first record is not a GC code, but ignores records of other
+ * platforms further down (see #14935). No record is left out.
  */
 class FieldNotes {
 
     private static final SynchronizedDateFormat FIELD_NOTE_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
 
     private int size = 0;
-    private final StringBuilder buffer = new StringBuilder();
+    private final StringBuilder gcRecords = new StringBuilder();
+    private final StringBuilder otherRecords = new StringBuilder();
 
     void add(final Geocache cache, final LogEntry log) {
         size++;
+        final StringBuilder buffer = GCConnector.getInstance().canHandle(cache.getGeocode()) ? gcRecords : otherRecords;
         buffer.append(cache.getGeocode())
                 .append(',')
                 .append(FIELD_NOTE_DATE_FORMAT.format(new Date(log.date)))
@@ -54,7 +62,7 @@ class FieldNotes {
     }
 
     public String getContent() {
-        return buffer.toString();
+        return gcRecords.toString() + otherRecords;
     }
 
     public Uri writeToFolder(final Folder folder, final String filename) {
