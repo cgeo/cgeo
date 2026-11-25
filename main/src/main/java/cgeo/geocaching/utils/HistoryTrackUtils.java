@@ -43,7 +43,7 @@ public class HistoryTrackUtils {
         } else if (id == R.id.menu_clear_trailhistory) {
             clearTrailHistory.run();
         } else if (id == R.id.menu_export_trailhistory) {
-            new TrailHistoryExport(activity, clearTrailHistory);
+            new TrailHistoryExport(activity);
         } else {
             return false;
         }

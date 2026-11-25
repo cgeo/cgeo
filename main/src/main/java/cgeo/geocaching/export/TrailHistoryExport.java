@@ -20,7 +20,7 @@ public class TrailHistoryExport {
 
     private String filename;
 
-    public TrailHistoryExport(final Activity activity, final Runnable clearTrailHistory) {
+    public TrailHistoryExport(final Activity activity) {
         // quick check for being able to write the GPX file
         if (!EnvironmentUtils.isExternalStorageAvailable()) {
             return;
@@ -42,7 +42,7 @@ public class TrailHistoryExport {
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
             Settings.setClearTrailAfterExportStatus(clearAfterExport.isChecked());
             dialog.dismiss();
-            new TrailHistoryExportTask(activity, clearTrailHistory, filename).execute(DataStore.loadTrailHistoryAsArray());
+            TrailHistoryExportTask.start(activity, new TrailHistoryExportTask.Input(DataStore.loadTrailHistoryAsArray(), filename, clearAfterExport.isChecked()));
         });
 
         builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());

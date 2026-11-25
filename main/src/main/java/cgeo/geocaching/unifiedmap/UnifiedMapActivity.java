@@ -11,6 +11,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.export.TrailHistoryExportTask;
 import cgeo.geocaching.filters.FilterUtils;
 import cgeo.geocaching.filters.NamedFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -205,6 +206,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
 
         viewModel = new ViewModelProvider(this).get(UnifiedMapViewModel.class);
+        TrailHistoryExportTask.attach(this, this::clearTrailHistory);
 
         // get data from intent
         final Bundle extras = getIntent().getExtras();
@@ -1017,6 +1019,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         return result;
     }
 
+    private void clearTrailHistory() {
+        PositionHistory positionHistory = viewModel.positionHistory.getValue();
+        if (positionHistory == null) {
+            positionHistory = new PositionHistory();
+        }
+        positionHistory.reset();
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
@@ -1059,13 +1069,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_check_hillshadingdata) {
             final Viewport vp = mapFragment.getViewportNonNull();
             MapUtils.checkHillshadingData(this, vp.getLatitudeMin(), vp.getLongitudeMin(), vp.getLatitudeMax(), vp.getLongitudeMax());
-        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(viewModel.positionHistory.getValue()), () -> {
-            PositionHistory positionHistory = viewModel.positionHistory.getValue();
-            if (positionHistory == null) {
-                positionHistory = new PositionHistory();
-            }
-            positionHistory.reset();
-        })
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(viewModel.positionHistory.getValue()), this::clearTrailHistory)
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_filter) {
