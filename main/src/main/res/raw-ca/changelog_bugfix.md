@@ -74,3 +74,6 @@
 - Correcció: fallada per «Recurs no trobat» (#18916)
 - Correcció: Notificació de progrés en l'optimització de rutes (#18920)
 - Correcció: Una pulsació llarga a la navegació inferior s'afegeix a la pila d'activitats (#17179)
+
+##
+- Correcció: Fugues de memòria (#18937)

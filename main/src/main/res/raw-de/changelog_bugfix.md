@@ -74,3 +74,6 @@
 - Korrektur: "Ressource nicht gefunden" Absturz (#18916)
 - Korrektur: Fortschrittsbenachrichtigung bei Routenoptimierung (#18920)
 - Korrektur: Langes Tippen auf untere Navigation fügt Aktivität dem Stack hinzu (#17179)
+
+##
+- Fix: Memory leaks (#18937)
