@@ -1054,7 +1054,7 @@
     <string name="settings_userDefinedTileProvider_remove_confirm">Do you really want to remove this tile provider?</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_tileOverlays">User-defined overlays</string>
-    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example see marks or hiking routes</string>
+    <string name="settings_tileOverlays_summary">Tile servers whose tiles are drawn on top of the map, for example sea marks or hiking routes</string>
     <string name="settings_tileOverlays_add">Add overlay</string>
     <string name="settings_tileOverlays_edit">Edit overlay</string>
     <string name="settings_tileOverlays_url_hint">Enter the full Uri including the {X}, {Y} and {Z} placeholders. Tiles must be transparent where they carry no data. Make sure you have checked and comply to the provider\'s usage conditions.</string>
@@ -2130,7 +2130,7 @@
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variable Name</string>
-    <string name="variables_varname_dialog_message">Enter variable name (or le it empty)</string>
+x    <string name="variables_varname_dialog_message">Enter variable name (or let it empty)</string>
 
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
