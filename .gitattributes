@@ -4,13 +4,12 @@
 # This will result in the files mentioned here not being processed during merge
 
 # Ignore translated strings
-/main/res/values-*/strings.xml merge=ours
+/main/src/main/res/values-*/strings.xml merge=ours
 /cgeo-contacts/res/values-*/strings.xml merge=ours
 
-# Ignore translated changelogs
-/main/res/raw-*/changelog_base.md merge=ours
-/main/res/raw-*/changelog_bugfix.md merge=ours
+# Ignore translated changelogs (base, betaupdate, bugfix, full)
+/main/src/main/res/raw-*/changelog_*.md merge=ours
 
-# Ignore translated playstore description 
+# Ignore translated playstore description
 /main/project/playstore/description/translated/*/*.txt merge=ours
 /cgeo-contacts/project/playstore/description/translated/*/*.txt merge=ours
