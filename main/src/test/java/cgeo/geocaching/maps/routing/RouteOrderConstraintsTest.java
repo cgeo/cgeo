@@ -82,11 +82,65 @@ public class RouteOrderConstraintsTest {
     }
 
     @Test
-    public void testDuplicateStagesKeepOrder() {
+    public void testDuplicateStageOnlyFirstOccurrenceConstrained() {
+        // S, A2, A1, A2 (second visit), E => only first A2 is constrained, second A2 can be placed freely
         final RouteOrderConstraints c = new RouteOrderConstraints(Arrays.asList(null, a(2), a(1), a(2), null));
+        assertThat(c.groupOf(1)).isGreaterThanOrEqualTo(0);
+        assertThat(c.groupOf(2)).isEqualTo(c.groupOf(1));
+        assertThat(c.groupOf(3)).isEqualTo(-1);
+        assertThat(c.groupSize(c.groupOf(1))).isEqualTo(2);
         final int[] route = identity(5);
         c.repair(route);
         assertThat(route).containsExactly(0, 2, 1, 3, 4);
+    }
+
+    @Test
+    public void testStartSatisfiesLowestStage() {
+        // example 1: only stages of one linear lab, stage 1 as start and end
+        final List<Stage> stages = Arrays.asList(a(1), a(3), a(2), a(4), a(1));
+        final RouteOrderConstraints c = new RouteOrderConstraints(stages);
+        assertThat(c.groupOf(0)).isEqualTo(-1);
+        assertThat(c.groupOf(4)).isEqualTo(-1);
+        assertThat(c.groupSize(c.groupOf(1))).isEqualTo(3);
+        assertThat(c.hasEffectiveSwap()).isFalse();
+        final int[] route = identity(5);
+        c.repair(route);
+        assertThat(route).containsExactly(0, 2, 1, 3, 4);
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(1), a(2), a(3), a(4), a(1)))).isFalse();
+    }
+
+    @Test
+    public void testStartSatisfiesLowestStageFreeCopyUnconstrained() {
+        // start A1 satisfies stage 1 => free copy of A1 is unconstrained
+        final RouteOrderConstraints c = new RouteOrderConstraints(Arrays.asList(a(1), a(2), a(1), a(3), null));
+        assertThat(c.groupOf(2)).isEqualTo(-1);
+        assertThat(c.groupOf(1)).isEqualTo(c.groupOf(3));
+        assertThat(c.groupSize(c.groupOf(1))).isEqualTo(2);
+    }
+
+    @Test
+    public void testEndSatisfiesHighestStage() {
+        // end A2 is highest stage => free A2 unconstrained, only A1 remains => no group
+        final RouteOrderConstraints c = new RouteOrderConstraints(Arrays.asList(null, a(2), a(1), a(2)));
+        assertThat(c.isEmpty()).isTrue();
+        // end A1 is not the highest stage => does not satisfy anything
+        final RouteOrderConstraints c2 = new RouteOrderConstraints(Arrays.asList(null, a(2), a(1), a(1)));
+        assertThat(c2.isEmpty()).isFalse();
+        assertThat(c2.groupOf(1)).isEqualTo(c2.groupOf(2));
+    }
+
+    @Test
+    public void testIsOrderViolatedWithRevisits() {
+        // example 1: stage 1 as start and end
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(1), a(2), a(3), a(1)))).isFalse();
+        // example 2: stage revisited as orientation point, first occurrence fulfills order
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(null, a(1), a(2), a(1), a(3), null))).isFalse();
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(1), a(2), a(3), a(2)))).isFalse();
+        // later occurrence fulfills order
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(2), a(1), a(2), a(3)))).isFalse();
+        // no combination of visits fulfills order
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(1), a(3), a(2), a(1)))).isTrue();
+        assertThat(RouteOrderConstraints.isOrderViolated(Arrays.asList(a(2), a(3), a(1), a(2)))).isTrue();
     }
 
     @Test

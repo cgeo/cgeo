@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,18 +46,51 @@ public class RouteOrderConstraints {
     private final int[][] sortedMembers;
 
     /**
+     * A stage may be visited more than once; it is sufficient that one visit per stage fulfills the order.
+     * Therefore only one occurrence per stage gets constrained, all further occurrences can be placed freely
+     * (occurrences of the same stage are the same waypoint and thus interchangeable).
+     * First and last route item are fixed and therefore never part of a constraint group,
+     * but they satisfy their stage if it is the lowest (first item) or highest (last item) stage of its lab adventure.
+     *
      * @param stages stage info per route item (same order as the route), null for unconstrained items.
-     *               First and last route item are fixed and therefore never part of a constraint group.
      */
     public RouteOrderConstraints(@NonNull final List<Stage> stages) {
         routeSize = stages.size();
         groupOf = new int[routeSize];
         Arrays.fill(groupOf, -1);
 
+        // lowest and highest stage number per lab adventure (all positions)
+        final Map<String, int[]> minMax = new HashMap<>();
+        for (Stage stage : stages) {
+            if (stage != null) {
+                final int[] mm = minMax.get(stage.geocode);
+                if (mm == null) {
+                    minMax.put(stage.geocode, new int[] { stage.number, stage.number });
+                } else {
+                    mm[0] = Math.min(mm[0], stage.number);
+                    mm[1] = Math.max(mm[1], stage.number);
+                }
+            }
+        }
+
+        // stages already satisfied by the fixed first / last route item
+        final Set<String> satisfied = new HashSet<>();
+        if (routeSize > 0) {
+            final Stage first = stages.get(0);
+            if (first != null && first.number == Objects.requireNonNull(minMax.get(first.geocode))[0]) {
+                satisfied.add(first.geocode + ":" + first.number);
+            }
+            final Stage last = stages.get(routeSize - 1);
+            if (last != null && last.number == Objects.requireNonNull(minMax.get(last.geocode))[1]) {
+                satisfied.add(last.geocode + ":" + last.number);
+            }
+        }
+
+        // constrain first free occurrence of each not yet satisfied stage
         final Map<String, List<Integer>> members = new LinkedHashMap<>();
         for (int i = 1; i < routeSize - 1; i++) {
             final Stage stage = stages.get(i);
-            if (stage != null) {
+            if (stage != null && satisfied.add(stage.geocode + ":" + stage.number)) {
                 Objects.requireNonNull(members.computeIfAbsent(stage.geocode, k -> new ArrayList<>())).add(i);
             }
         }
@@ -66,7 +100,6 @@ public class RouteOrderConstraints {
             if (m.size() < 2) {
                 continue;
             }
-            // stable sort => duplicate stage numbers keep their relative order
             m.sort((a, b) -> Integer.compare(stages.get(a).number, stages.get(b).number));
             final int g = groups.size();
             final int[] sorted = new int[m.size()];
@@ -136,18 +169,35 @@ public class RouteOrderConstraints {
     /**
      * Checks whether the given stages (in route order, null for unconstrained items) violate
      * the order of at least one linear lab adventure. All positions are checked, including first and last.
+     * A stage may be visited more than once: the order is fulfilled if one visit per stage can be chosen
+     * so that the chosen visits are in ascending stage order. This is checked greedily by choosing
+     * for each stage (ascending) its earliest visit after the visit chosen for the previous stage.
      */
     public static boolean isOrderViolated(@NonNull final List<Stage> stagesInRouteOrder) {
-        final Map<String, Integer> lastStage = new HashMap<>();
-        for (Stage stage : stagesInRouteOrder) {
-            if (stage == null) {
-                continue;
+        // geocode => stage number => positions (ascending)
+        final Map<String, TreeMap<Integer, List<Integer>>> visits = new HashMap<>();
+        for (int pos = 0; pos < stagesInRouteOrder.size(); pos++) {
+            final Stage stage = stagesInRouteOrder.get(pos);
+            if (stage != null) {
+                Objects.requireNonNull(Objects.requireNonNull(visits.computeIfAbsent(stage.geocode, k -> new TreeMap<>()))
+                        .computeIfAbsent(stage.number, k -> new ArrayList<>())).add(pos);
             }
-            final Integer last = lastStage.get(stage.geocode);
-            if (last != null && last > stage.number) {
-                return true;
+        }
+        for (TreeMap<Integer, List<Integer>> stageVisits : visits.values()) {
+            int lastPos = -1;
+            for (List<Integer> positions : stageVisits.values()) {
+                int chosen = -1;
+                for (int pos : positions) {
+                    if (pos > lastPos) {
+                        chosen = pos;
+                        break;
+                    }
+                }
+                if (chosen < 0) {
+                    return true;
+                }
+                lastPos = chosen;
             }
-            lastStage.put(stage.geocode, stage.number);
         }
         return false;
     }
