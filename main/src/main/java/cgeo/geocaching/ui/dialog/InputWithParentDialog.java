@@ -183,6 +183,19 @@ public class InputWithParentDialog {
                 ? noneLabel : options.initialParent;
         parentSelect.setText(initialParentDisplay, false);
 
+        // The drop-down's height is calculated when it opens. If the keyboard is closed while it is open,
+        // the dialog moves down but the drop-down keeps its height, so its last entries end up below the
+        // screen. Show it again whenever it moved, so that its size and position are calculated again.
+        final int[] lastParentSelectPosition = new int[2];
+        parentSelect.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            final int[] position = new int[2];
+            parentSelect.getLocationOnScreen(position);
+            if (parentSelect.isPopupShowing() && !Arrays.equals(position, lastParentSelectPosition)) {
+                parentSelect.showDropDown();
+            }
+            System.arraycopy(position, 0, lastParentSelectPosition, 0, position.length);
+        });
+
         final TextInputEditText newParentView = viewBinding.inputNewParentView;
         final View newParentRow = viewBinding.inputNewParentRow;
 
