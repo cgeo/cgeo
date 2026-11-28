@@ -3340,6 +3340,23 @@
     <string name="dbi_sqleditor_no_snippets">No statement stored yet</string>
     <string name="dbi_sqleditor_warning">SQL Editor is an experimental feature. Data loss may occur. Use at your own risk!</string>
 
+    <!-- logfile viewer -->
+    <string name="view_logfile">View logfile</string>
+    <string name="logview_select_file">Select logfile</string>
+    <string name="logview_loading">Loading %1$s…</string>
+    <string name="logview_error_reading">Error reading logfile %1$s</string>
+    <string name="logview_cell_title">%1$s in line %2$d</string>
+
+    <!-- logfile viewer, overriding column titles of "grid" (LogcatGrid) to support translation -->
+    <string name="grid_logcat_date">Date</string>
+    <string name="grid_logcat_time">Time</string>
+    <string name="grid_logcat_pid">PID</string>
+    <string name="grid_logcat_tid">TID</string>
+    <string name="grid_logcat_level">Level</string>
+    <string name="grid_logcat_tag">Tag</string>
+    <string name="grid_logcat_message">Message</string>
+    <string name="grid_logcat_extra">Extra %1$d</string>
+
     <!-- db inspection, overriding values of "grid" to support translation -->
     <string name="grid_search_title">Search</string>
     <string name="grid_search_reset">Reset</string>

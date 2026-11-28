@@ -5,6 +5,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.DBInspectionActivity;
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.LogViewerActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
@@ -45,6 +46,7 @@ public class QuickLaunchItem extends InfoItem {
         SETTINGS(4),
         VIEWSETTINGS(8),
         VIEWDATABASE(12),
+        VIEWLOG(14),
         BACKUPRESTORE(5),
         MESSAGECENTER(10),
         MANUAL(6),
@@ -70,6 +72,7 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.SETTINGS, R.string.menu_settings, R.drawable.settings_nut, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.VIEWSETTINGS, R.string.view_settings, R.drawable.settings_advanced, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.VIEWDATABASE, R.string.view_database, R.drawable.ic_database, VISIBILITY.ALL),
+        new QuickLaunchItem(VALUES.VIEWLOG, R.string.view_logfile, R.drawable.ic_menu_note, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.BACKUPRESTORE, R.string.menu_backup, R.drawable.settings_backup, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, VISIBILITY.GC),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, VISIBILITY.ALL),
@@ -138,6 +141,8 @@ public class QuickLaunchItem extends InfoItem {
                         activity.startActivity(intent);
                     } else if (which == VALUES.VIEWDATABASE.id) {
                         activity.startActivity(new Intent(activity, DBInspectionActivity.class));
+                    } else if (which == VALUES.VIEWLOG.id) {
+                        activity.startActivity(new Intent(activity, LogViewerActivity.class));
                     } else if (which == VALUES.INFO.id) {
                         activity.startActivity(new Intent(activity, AboutActivity.class));
                     } else {

@@ -74,6 +74,11 @@
             android:title="@string/about_system_write_logcat"
             app:iconSpaceReserved="false" />
         <Preference
+            android:key="@string/pref_fakekey_view_logfile"
+            android:layout="@layout/preference_button"
+            android:title="@string/view_logfile"
+            app:iconSpaceReserved="false" />
+        <Preference
             android:key="@string/pref_fakekey_memory_dump"
             android:layout="@layout/preference_button"
             android:title="@string/init_create_memory_dump"
