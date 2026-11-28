@@ -81,3 +81,4 @@
 - Fix: Coordinate box highlighted on opening (#16030)
 - Fix: Crash in Wherigo (#18984)
 - Fix: Crash in search (#18925)
+- Fix: Coordinate parsing fails when rounding leads to 60 minutes value (#18928)
