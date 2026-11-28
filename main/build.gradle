@@ -366,7 +366,7 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
 
     // DB inspection (new library)
-    implementation 'com.github.moving-bits:grid:7fccf69583'
+    implementation 'com.github.moving-bits:grid:abf7258e73'
 
     // Jackson XML processing
     String jacksonVersion = '2.21.8'
