@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.DBInspectionActivity;
+import cgeo.geocaching.LogViewerActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
@@ -42,6 +43,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
             ViewUtils.showShortToast(activity, R.string.init_reset_otm_done);
         }));
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
+        setPrefClick(this, R.string.pref_fakekey_view_logfile, () -> startActivity(new Intent(activity, LogViewerActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_view_database, () -> startActivity(new Intent(activity, DBInspectionActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_gui_testscreen, () -> SimpleDialogExamples.createTestDialog(activity));

@@ -69,7 +69,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             R.string.pref_defaultNavigationTool, R.string.pref_defaultNavigationTool2, R.string.pref_fakekey_navigationMenu,
             // system
             R.string.pref_persistablefolder_basedir,
-            R.string.pref_extended_settings_enabled, R.string.pref_debug, R.string.pref_fakekey_generate_logcat,
+            R.string.pref_extended_settings_enabled, R.string.pref_debug, R.string.pref_fakekey_generate_logcat, R.string.pref_fakekey_view_logfile,
             // backup / restore
             R.string.pref_backup_logins, R.string.pref_fakekey_preference_startbackup, R.string.pref_fakekey_startrestore, R.string.pref_fakekey_startrestore_dirselect
     };
