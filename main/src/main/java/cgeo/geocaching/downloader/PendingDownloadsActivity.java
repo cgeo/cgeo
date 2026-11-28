@@ -199,7 +199,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         final int count = pendingDownloads.size();
         SimpleDialog.of(this)
             .setTitle(R.string.downloader_delete_all_confirmation)
-            .setMessage(TextParam.text(LocalizationUtils.getString(R.string.downloader_delete_all_message, count)))
+            .setMessage(TextParam.text(LocalizationUtils.getPlural(R.plurals.downloader_delete_all_message, count)))
             .confirm(this::deleteAllDownloads);
     }
 

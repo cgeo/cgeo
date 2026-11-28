@@ -795,7 +795,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         SimpleDialog.of(this)
                 .setTitle(R.string.caches_set_final_wp_as_corrected_coords_all)
-                .setMessage(R.string.caches_set_final_wp_as_corrected_coords_info, matching.size())
+                .setMessage(TextParam.text(LocalizationUtils.getPlural(R.plurals.caches_set_final_wp_as_corrected_coords_info, matching.size())))
                 .confirm(() -> applyFinalWpAsCorrectedCoords(matching));
     }
 
