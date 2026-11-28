@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.RouteSortActivityBinding;
 import cgeo.geocaching.databinding.RouteSortItemBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -38,6 +39,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -46,6 +50,9 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     private RouteItemListAdapter routeItemAdapter;
     private ArrayList<RouteItem> originalRouteItems;
     private RecyclerView listView;
+    private RouteSortActivityBinding binding;
+    /** stage info of linear lab adventure waypoints, keyed by RouteItem identifier; null until loaded */
+    private Map<String, RouteOrderConstraints.Stage> stages = null;
 
     private static final String SAVED_STATE_ROUTEITEMS = "cgeo.geocaching.saved_state_routeitems";
 
@@ -125,11 +132,11 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
+        binding = RouteSortActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setTitle(LocalizationUtils.getString(R.string.map_sort_individual_route));
 
-        listView = new RecyclerView(this, null);
-        listView.setId(R.id.activity_content);
-        setContentView(listView);
+        listView = binding.routeList;
 
         originalRouteItems = DataStore.loadIndividualRoute();
 
@@ -139,12 +146,68 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         if (savedInstanceState != null) {
             routeItemAdapter.setItems(savedInstanceState.getParcelableArrayList(SAVED_STATE_ROUTEITEMS));
         }
+
+        // re-check stage order of linear lab adventures after each change of the list
+        routeItemAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                checkLinearAlcOrder();
+            }
+
+            @Override
+            public void onItemRangeMoved(final int fromPosition, final int toPosition, final int itemCount) {
+                checkLinearAlcOrder();
+            }
+
+            @Override
+            public void onItemRangeRemoved(final int positionStart, final int itemCount) {
+                checkLinearAlcOrder();
+            }
+
+            @Override
+            public void onItemRangeInserted(final int positionStart, final int itemCount) {
+                checkLinearAlcOrder();
+            }
+        });
+        loadLinearAlcStages(new ArrayList<>(routeItemAdapter.getItems()));
     }
 
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(SAVED_STATE_ROUTEITEMS, new ArrayList<>(routeItemAdapter.getItems()));
+    }
+
+    /** load stage info for all route items in background (needs database access), then check order */
+    private void loadLinearAlcStages(final List<RouteItem> items) {
+        final Map<String, RouteOrderConstraints.Stage> result = new HashMap<>();
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+            final List<RouteOrderConstraints.Stage> itemStages = RouteOrderConstraints.getStages(items);
+            for (int i = 0; i < items.size(); i++) {
+                if (itemStages.get(i) != null) {
+                    result.put(items.get(i).getIdentifier(), itemStages.get(i));
+                }
+            }
+        }, () -> {
+            stages = result;
+            checkLinearAlcOrder();
+        });
+    }
+
+    /** show hint if current order violates stage order of at least one linear lab adventure */
+    private void checkLinearAlcOrder() {
+        if (stages == null) {
+            return;
+        }
+        boolean violated = false;
+        if (!stages.isEmpty()) {
+            final List<RouteOrderConstraints.Stage> current = new ArrayList<>();
+            for (RouteItem item : routeItemAdapter.getItems()) {
+                current.add(stages.get(item.getIdentifier()));
+            }
+            violated = RouteOrderConstraints.isOrderViolated(current);
+        }
+        binding.orderViolationHint.setVisibility(violated ? View.VISIBLE : View.GONE);
     }
 
     private void invertOrder() {

@@ -31,11 +31,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +48,7 @@ public class RouteOptimizationHelper {
     private final List<RouteItem> initialRoute;
     private final int[][] distanceMatrix;
     private final int routeSize;
+    private RouteOrderConstraints constraints;
     private CachedDistances cachedDistances = resetCachedDistances();
 
     private class TSPDialog extends SimpleProgressDialog {
@@ -99,7 +100,11 @@ public class RouteOptimizationHelper {
         }
 
         void foundNewRoute(final int[] route) {
-            final int length = calculateRouteLength(route);
+            foundNewRoute(route, calculateRouteLength(route));
+        }
+
+        /** same as foundNewRoute(route), but with already known route length (avoids recalculation) */
+        void foundNewRoute(final int[] route, final int length) {
             if (initialLength.get() == Integer.MAX_VALUE) {
                 initialLength.set(length);
             }
@@ -144,12 +149,21 @@ public class RouteOptimizationHelper {
 
             dialog.setMessage(TextParam.id(R.string.generating_distance_matrix));
             dialog.setTypeDeterminate(routeSize * (routeSize - 1));
-            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> generateDistanceMatrix(dialog, executor), () -> {
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                constraints = RouteOrderConstraints.forRoute(initialRoute);
+                generateDistanceMatrix(dialog, executor);
+            }, () -> {
                 final int[] best = new int[routeSize];
                 initBest(dialog, best, true);
                 dialog.foundNewRoute(best);
                 dialog.setTypeIndeterminate();
-                runTSPWrapper(dialog, executor);
+                if (constraints.hasEffectiveSwap()) {
+                    runTSPWrapper(dialog, executor);
+                } else {
+                    // no reordering possible (apart from fixing order of linear lab adventures)
+                    dialog.setMessage(TextParam.id(R.string.route_optimization_finished));
+                    dialog.setProgressVisibility(View.GONE);
+                }
             });
         });
 
@@ -235,58 +249,130 @@ public class RouteOptimizationHelper {
 
     /** TSP calculation using hill climbing */
     private void hillClimbing(final TSPDialog dialog) {
-        final int[] best = new int[routeSize];
-        int bestFitness = initBest(dialog, best, false);
-        int[] savedState;
+        final int[] route = new int[routeSize];
+        int length = -initBest(dialog, route, false);
+        final SwapMove move = new SwapMove(route);
         for (int i = 0; i < 15000; i++) {
-            savedState = new int[routeSize];
-            System.arraycopy(best, 0, savedState, 0, routeSize);
-            swapRandomPoints(best);
-            final int currentFitness = - calculateRouteLength(best);
-            if (currentFitness > bestFitness) {
-                bestFitness = currentFitness;
-                dialog.foundNewRoute(best);
+            final int newLength = move.apply(length);
+            if (newLength < length) {
+                length = newLength;
+                dialog.foundNewRoute(route, length);
             } else {
-                System.arraycopy(savedState, 0, best, 0, routeSize);
+                move.undo();
             }
         }
     }
 
     /** TSP calculation using simulated annealing */
     private void simulatedAnnealing(final TSPDialog dialog) {
-        final int[] best = new int[routeSize];
-        int bestFitness = initBest(dialog, best, false);
-        int[] savedState;
+        final int[] route = new int[routeSize];
+        int length = -initBest(dialog, route, false);
+        final SwapMove move = new SwapMove(route);
         final double epsilon = 0.01;
         double temperature = 1538.0;
         while (temperature > epsilon) {
-            savedState = new int[routeSize];
-            System.arraycopy(best, 0, savedState, 0, routeSize);
-            swapRandomPoints(best);
-            final int currentFitness = - calculateRouteLength(best);
-            if (currentFitness > bestFitness || (new Random().nextDouble() < Math.exp((currentFitness - bestFitness) / temperature))) {
-                bestFitness = currentFitness;
-                dialog.foundNewRoute(best);
+            final int newLength = move.apply(length);
+            final int improvement = length - newLength;
+            if (improvement > 0 || ThreadLocalRandom.current().nextDouble() < Math.exp(improvement / temperature)) {
+                length = newLength;
+                dialog.foundNewRoute(route, length);
             } else {
-                System.arraycopy(savedState, 0, best, 0, routeSize);
+                move.undo();
             }
             temperature -= epsilon;
         }
     }
 
-    /** swaps entries at random positions except first and last */
-    @SuppressWarnings("checkstyle:FinalParameters")
-    private void swapRandomPoints(int[] route) {
-        while (true) {
-            final int posA = rand(1, routeSize - 2);
-            final int posB = rand(1, routeSize - 2);
-            if (posA != posB) {
-                final int temp = route[posA];
-                route[posA] = route[posB];
-                route[posB] = temp;
-                return;
+    /**
+     * Random swap of two entries (except first and last) on a given route, which can be undone.
+     * If no linear lab adventure is involved, the new route length is evaluated in constant time.
+     * Otherwise the stage order is restored afterwards and the route length gets recalculated.
+     * Requires constraints.hasEffectiveSwap() to be true. Not thread-safe, use one instance per thread.
+     */
+    private final class SwapMove {
+        private final int[] route;
+        private final int[] savedState = new int[routeSize];
+        private int posA;
+        private int posB;
+        private boolean repaired;
+
+        SwapMove(final int[] route) {
+            this.route = route;
+        }
+
+        /** applies a random swap to the route and returns the new route length */
+        int apply(final int currentLength) {
+            selectPositions();
+            repaired = constraints.groupOf(route[posA]) >= 0 || constraints.groupOf(route[posB]) >= 0;
+            if (!repaired) {
+                final int delta = swapDelta(distanceMatrix, route, posA, posB);
+                swap(route, posA, posB);
+                return currentLength + delta;
+            }
+            System.arraycopy(route, 0, savedState, 0, routeSize);
+            swap(route, posA, posB);
+            constraints.repair(route);
+            return calculateRouteLength(distanceMatrix, route);
+        }
+
+        /** reverts the last call to apply() */
+        void undo() {
+            if (repaired) {
+                System.arraycopy(savedState, 0, route, 0, routeSize);
+            } else {
+                swap(route, posA, posB);
             }
         }
+
+        /** selects two different positions, which do not belong to the same linear lab adventure */
+        private void selectPositions() {
+            posA = rand(1, routeSize - 2);
+            final int groupA = constraints.groupOf(route[posA]);
+            if (groupA < 0) {
+                // any other position
+                posB = rand(1, routeSize - 3);
+                if (posB >= posA) {
+                    posB++;
+                }
+                return;
+            }
+            // any position not belonging to the same group (count is > 0, as hasEffectiveSwap() is true)
+            int remaining = rand(0, routeSize - 2 - constraints.groupSize(groupA) - 1);
+            for (int pos = 1; pos < routeSize - 1; pos++) {
+                if (constraints.groupOf(route[pos]) != groupA && remaining-- == 0) {
+                    posB = pos;
+                    return;
+                }
+            }
+            throw new IllegalStateException("no valid swap position found");
+        }
+    }
+
+    @SuppressWarnings("checkstyle:FinalParameters")
+    private static void swap(int[] route, final int posA, final int posB) {
+        final int temp = route[posA];
+        route[posA] = route[posB];
+        route[posB] = temp;
+    }
+
+    /**
+     * returns the change in route length when swapping the entries at posA and posB (both excluding first and last position),
+     * works for asymmetric distance matrices as well
+     */
+    static int swapDelta(final int[][] d, final int[] route, final int posA, final int posB) {
+        final int i = Math.min(posA, posB);
+        final int j = Math.max(posA, posB);
+        final int prev = route[i - 1];
+        final int a = route[i];
+        final int b = route[j];
+        final int next = route[j + 1];
+        if (j == i + 1) {
+            return d[prev][b] + d[b][a] + d[a][next] - d[prev][a] - d[a][b] - d[b][next];
+        }
+        final int afterA = route[i + 1];
+        final int beforeB = route[j - 1];
+        return d[prev][b] + d[b][afterA] + d[beforeB][a] + d[a][next]
+                - d[prev][a] - d[a][afterA] - d[beforeB][b] - d[b][next];
     }
 
     /** initializes initial vector, returns its fitness */
@@ -296,6 +382,8 @@ public class RouteOptimizationHelper {
             for (int i = 0; i < routeSize; i++) {
                 best[i] = i;
             }
+            // initial route may violate stage order of linear lab adventures
+            constraints.repair(best);
         } else {
             final int[] temp = dialog.getRoute();
             System.arraycopy(temp, 0, best, 0, routeSize);
@@ -305,14 +393,19 @@ public class RouteOptimizationHelper {
 
     /** returns random number between (and including) bounds */
     public static int rand(final int lowerBound, final int upperBound) {
-        return new Random().nextInt(upperBound - lowerBound + 1) + lowerBound;
+        return ThreadLocalRandom.current().nextInt(lowerBound, upperBound + 1);
     }
 
     /** returns length in meters for the given route */
     public int calculateRouteLength(final int[] route) {
+        return calculateRouteLength(distanceMatrix, route);
+    }
+
+    /** returns length in meters for the given route, based on the given distance matrix */
+    static int calculateRouteLength(final int[][] d, final int[] route) {
         int length = 0;
         for (int i = 0; i < route.length - 1; i++) {
-            length += distanceMatrix[route[i]][route[i + 1]];
+            length += d[route[i]][route[i + 1]];
         }
         return length;
     }
