@@ -616,7 +616,12 @@ public final class GCParser {
             // waypoint latitude and longitude
             final String latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
             if (!Strings.CS.startsWith(latlon, "???")) {
-                waypoint.setCoords(new Geopoint(latlon));
+                try {
+                    waypoint.setCoords(new Geopoint(latlon));
+                } catch (Geopoint.ParseException e) {
+                    Log.e(e.getMessage() + ", cache: " + cache.getGeocode());
+                    waypoint.setOriginalCoordsEmpty(true);
+                }
             } else {
                 waypoint.setOriginalCoordsEmpty(true);
             }
