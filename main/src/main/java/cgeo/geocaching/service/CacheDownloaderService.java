@@ -40,8 +40,9 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.functions.Function;
 
 public class CacheDownloaderService extends AbstractGeocacheBatchService {
-    static {
-        logTag = "CacheDownloaderService";
+
+    public CacheDownloaderService() {
+        super("CacheDownloaderService");
     }
 
     private static final Map<String, DownloadTaskProperties> downloadQuery = new HashMap<>();

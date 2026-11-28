@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UploadCoordinatesBatchService extends AbstractGeocacheBatchService {
-    static {
-        logTag = "UploadCoordinatesBatchService";
+
+    public UploadCoordinatesBatchService() {
+        super("UploadCoordinatesBatchService");
     }
 
     /**

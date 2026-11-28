@@ -164,12 +164,9 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         @NonNull
         @SuppressWarnings("rawtypes")
         public Fragment createFragment(final int position) {
+            // FragmentStateAdapter requires a new instance here; fragment gets registered in fragmentMap on attach
             final long pageId = getItemId(position);
-            TabbedViewPagerFragment fragment = fragmentMap.get(pageId);
-            if (fragment != null) {
-                return fragment;
-            }
-            fragment = createNewFragment(pageId);
+            final TabbedViewPagerFragment fragment = createNewFragment(pageId);
             fragmentMap.put(pageId, fragment);
             return fragment;
         }
@@ -212,6 +209,12 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     @SuppressWarnings("rawtypes")
     public void registerFragment(final long pageId, final TabbedViewPagerFragment fragment) {
         fragmentMap.put(pageId, fragment);
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void unregisterFragment(final long pageId, final TabbedViewPagerFragment fragment) {
+        // only remove if still mapped to this instance (a newer fragment may already be registered)
+        fragmentMap.remove(pageId, fragment);
     }
 
     @SuppressWarnings("rawtypes")

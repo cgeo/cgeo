@@ -39,29 +39,29 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
-    private final boolean allLogs;
+    private static final String ARG_ALL_LOGS = "allLogs";
+
     private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
-    public CacheLogsViewCreator(final boolean allLogs) {
-        this.allLogs = allLogs;
-    }
-
-    public CacheLogsViewCreator() {
-        this.allLogs = false;
-    }
-
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
-        final CacheLogsViewCreator fragment = new CacheLogsViewCreator(allLogs);
+        final CacheLogsViewCreator fragment = new CacheLogsViewCreator();
         final Bundle bundle = new Bundle();
+        bundle.putBoolean(ARG_ALL_LOGS, allLogs);
         fragment.setArguments(bundle);
         return fragment;
     }
 
+    /** read from arguments (and not cached in a field) to survive fragment recreation by the system */
+    private boolean isAllLogs() {
+        final Bundle args = getArguments();
+        return args != null && args.getBoolean(ARG_ALL_LOGS, false);
+    }
+
     @Override
     public long getPageId() {
-        return allLogs ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
+        return isAllLogs() ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
     }
 
     private Geocache getCache() {
@@ -72,7 +72,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
-        if (allLogs) {
+        if (isAllLogs()) {
             return addOwnOfflineLog(cache, cache.getLogs());
         } else {
             final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
@@ -130,7 +130,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
+        final Map<LogType, Integer> logCounts = isAllLogs() ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
@@ -175,7 +175,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
-            countview2.setText(allLogs ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
+            countview2.setText(isAllLogs() ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
             binding.logsItems.addHeaderView(countview2);
         }
     }

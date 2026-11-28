@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UnwatchCachesBatchService extends AbstractGeocacheBatchService {
-    static {
-        logTag = "UnwatchCachesBatchService";
+
+    public UnwatchCachesBatchService() {
+        super("UnwatchCachesBatchService");
     }
 
     /** Enqueues all watchlist-capable caches for background unwatching. */

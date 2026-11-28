@@ -53,6 +53,10 @@ public abstract class AbstractGeocacheBatchService extends AbstractForegroundInt
         final AtomicInteger failed = new AtomicInteger(0);
     }
 
+    AbstractGeocacheBatchService(final String logText) {
+        super(logText);
+    }
+
     // ---- Static API for callers ----
 
     /**

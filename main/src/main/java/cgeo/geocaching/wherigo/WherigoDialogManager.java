@@ -236,9 +236,11 @@ public class WherigoDialogManager {
 
         currentDialogControl = WherigoDialogControl.createAndShowDialog(activity, currentDialogProvider, isPause -> executeAction(() -> {
             if (currentDialogId.get() == dialogId) {
-                closeCurrentDialog();
                 if (isPause) {
                     ((WherigoDialogControl) currentDialogControl).saveState(currentDialogState);
+                }
+                closeCurrentDialog();
+                if (isPause) {
                     state = State.DIALOG_PAUSED;
                     final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
                     if (currentActivity != null) {

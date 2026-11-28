@@ -76,4 +76,8 @@
 - Fix: Long tap on bottom navigation adds to activity stack (#17179)
 
 ##
-- Fix: Memory leaks (#18937)
+- Fix: Memory leaks (#18934) (#18937) (#18940)
+- Fix: Crashes while downloading caches (#18931)
+- Fix: Coordinate box highlighted on opening (#16030)
+- Fix: Crash in Wherigo (#18984)
+- Fix: Crash in search (#18925)

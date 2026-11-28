@@ -245,6 +245,8 @@ public class CoordinateInputDialog {
             editText.setOnFocusChangeListener(new PadZerosOnFocusLostListener());
             EditUtils.disableSuggestions(editText);
         }
+        plainLatitude.setOnFocusChangeListener((v, hasFocus) -> postUpdateCoordinateBoxHighlight());
+        plainLongitude.setOnFocusChangeListener((v, hasFocus) -> postUpdateCoordinateBoxHighlight());
 
         // Manage the options buttons
         final Button useCurrentLocation = binding.current;
@@ -627,6 +629,16 @@ public class CoordinateInputDialog {
         return true;
     }
 
+    /**
+     * Highlights the coordinate box only while one of its input fields has the focus
+     * (not the hemisphere buttons, which can get the focus with keyboard or D-pad navigation).
+     * Posted, so that moving the focus from one field to the next doesn't switch the highlight off in between.
+     */
+    private void postUpdateCoordinateBoxHighlight() {
+        final View box = binding.coordinateBox;
+        box.post(() -> box.setBackgroundResource(box.findFocus() instanceof EditText ? R.drawable.border_active : R.drawable.border));
+    }
+
     private class PadZerosOnFocusLostListener implements View.OnFocusChangeListener {
 
         @Override
@@ -637,6 +649,7 @@ public class CoordinateInputDialog {
                     editText.setText(padZeros(editText));
                 }
             }
+            postUpdateCoordinateBoxHighlight();
         }
     }
 

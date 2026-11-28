@@ -4,13 +4,17 @@ import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.Log;
 
 import android.app.IntentService;
+import android.content.Context;
+import android.content.Intent;
 import android.os.PowerManager;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 public abstract class AbstractForegroundIntentService extends IntentService {
-    protected static String logTag = "ForegroundIntentService";
+    protected final String logTag;
 
     protected final int wakelockTimeout = 10 * 60 * 1000;
 
@@ -18,9 +22,31 @@ public abstract class AbstractForegroundIntentService extends IntentService {
     protected NotificationManagerCompat notificationManager;
     private PowerManager.WakeLock wakeLock;
 
-    public AbstractForegroundIntentService() {
+    protected AbstractForegroundIntentService(final String logTag) {
         super(logTag);
+        this.logTag = logTag;
         setIntentRedelivery(true);
+    }
+
+    /**
+     * Starts a service derived from this class.
+     * <br />
+     * If the app is in foreground, the service is started as a regular service, which then promotes itself
+     * to a foreground service in onStartCommand(). This avoids the system's obligation to call startForeground()
+     * for each start request in time, which otherwise crashes the app (ForegroundServiceDidNotStartInTimeException),
+     * e.g. if the service stops itself while a start request is still pending (see #18931).
+     * <br />
+     * If the app is in background (where starting a regular service is not allowed),
+     * it falls back to starting a foreground service.
+     */
+    public static void start(final Context context, final Intent intent) {
+        try {
+            context.startService(intent);
+        } catch (IllegalStateException e) {
+            // BackgroundServiceStartNotAllowedException on API 31+, plain IllegalStateException on API 26-30
+            Log.w("cannot start service from background, falling back to foreground service start: " + e.getMessage());
+            ContextCompat.startForegroundService(context, intent);
+        }
     }
 
     protected abstract NotificationCompat.Builder createInitialNotification();
@@ -41,7 +67,12 @@ public abstract class AbstractForegroundIntentService extends IntentService {
         notification = createInitialNotification()
                 .setOnlyAlertOnce(true)
                 .setSilent(true);
+    }
 
+    @Override
+    public int onStartCommand(@Nullable final Intent intent, final int flags, final int startId) {
+        // call startForeground() for each start request (not only on creation of the service),
+        // as each call to startForegroundService() requires a subsequent call to startForeground()
         try {
             startForeground(getForegroundNotificationId(), notification.build());
         } catch (IllegalStateException | SecurityException e) {
@@ -50,6 +81,7 @@ public abstract class AbstractForegroundIntentService extends IntentService {
             // SecurityException is thrown on API 34+ when permissions are missing
             Log.e("cannot start foreground service " + e.getMessage());
         }
+        return super.onStartCommand(intent, flags, startId);
     }
 
 

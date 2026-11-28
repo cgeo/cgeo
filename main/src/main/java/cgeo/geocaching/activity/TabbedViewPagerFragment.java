@@ -37,6 +37,16 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
         ((TabbedViewPagerActivity) activity).registerFragment(getPageId(), this);
     }
 
+    @Override
+    public void onDetach() {
+        // remove fragment from TabbedViewPagerActivity's fragment cache to avoid leaking it
+        final Activity activity = getActivity();
+        if (activity instanceof TabbedViewPagerActivity) {
+            ((TabbedViewPagerActivity) activity).unregisterFragment(getPageId(), this);
+        }
+        super.onDetach();
+    }
+
     public abstract ViewBindingClass createView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     public abstract void setContent();

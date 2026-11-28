@@ -21,8 +21,9 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 public class PersonalNoteUploadService extends AbstractGeocacheBatchService {
-    static {
-        logTag = "PersonalNoteUploadService";
+
+    public PersonalNoteUploadService() {
+        super("PersonalNoteUploadService");
     }
 
     /** Enqueues caches that have a personal note and a capable connector for background upload. */
