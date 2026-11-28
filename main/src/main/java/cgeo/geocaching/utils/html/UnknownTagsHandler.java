@@ -7,13 +7,26 @@ import android.text.Editable;
 import android.text.Html.TagHandler;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+import android.util.Pair;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import org.xml.sax.XMLReader;
 
 public class UnknownTagsHandler implements TagHandler {
 
-    private enum ListType {
-        Ordered, Unordered
+    /** private markers before and after every ul, see {@link HtmlUtils#markUnorderedLists(String)}; only their opening matters */
+    public static final String UL_START_TAG = "cgeo-ul-start";
+    public static final String UL_END_TAG = "cgeo-ul-end";
+
+    /** Text range of one HTML list (ol or ul); turned into list item markers by {@link HtmlUtils#fromHtmlWithLists}. */
+    public static final class ListRange {
+        public final boolean ordered;
+
+        ListRange(final boolean ordered) {
+            this.ordered = ordered;
+        }
     }
 
     private static final int UNDEFINED_POSITION = -1;
@@ -21,8 +34,7 @@ public class UnknownTagsHandler implements TagHandler {
     private int countCells = 0;
     private int strikePos = UNDEFINED_POSITION;
     private boolean problematicDetected = false;
-    private int listIndex = 0;
-    private ListType listType = ListType.Unordered;
+    private final Deque<Pair<ListRange, Integer>> openLists = new ArrayDeque<>();
 
     @Override
     public void handleTag(final boolean opening, final String tag, final Editable output,
@@ -38,9 +50,11 @@ public class UnknownTagsHandler implements TagHandler {
         } else if ("pre".equalsIgnoreCase(tag)) {
             handleProblematic();
         } else if ("ol".equalsIgnoreCase(tag)) {
-            handleOl(opening);
-        } else if ("li".equalsIgnoreCase(tag)) {
-            handleLi(opening, output);
+            handleList(opening, true, output);
+        } else if (UL_START_TAG.equalsIgnoreCase(tag) && opening) {
+            handleList(true, false, output);
+        } else if (UL_END_TAG.equalsIgnoreCase(tag) && opening) {
+            handleList(false, false, output);
         } else if ("dt".equalsIgnoreCase(tag)) {
             handleDT(opening, output);
         } else if ("dd".equalsIgnoreCase(tag)) {
@@ -83,14 +97,35 @@ public class UnknownTagsHandler implements TagHandler {
         }
     }
 
-    // Ordered lists are handled in a simple manner. They are rendered as Arabic numbers starting at 1
-    // with no handling for alpha or Roman numbers or arbitrary numbering.
-    private void handleOl(final boolean opening) {
+    // li itself is rendered by Android (it never reaches a TagHandler), so only the list boundaries are recorded here
+    private void handleList(final boolean opening, final boolean ordered, final Editable output) {
         if (opening) {
-            listIndex = 1;
-            listType = ListType.Ordered;
-        } else {
-            listType = ListType.Unordered;
+            if (openLists.isEmpty()) {
+                ensureBlankLine(output);
+            }
+            openLists.push(new Pair<>(new ListRange(ordered), output.length()));
+        } else if (!openLists.isEmpty()) {
+            final Pair<ListRange, Integer> list = openLists.pop();
+            if (output.length() > list.second) {
+                output.setSpan(list.first, list.second, output.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (openLists.isEmpty()) {
+                ensureBlankLine(output);
+            }
+        }
+    }
+
+    // a top-level list is separated from the surrounding text like a paragraph (items themselves get one line break only)
+    private static void ensureBlankLine(final Editable output) {
+        if (output.length() == 0) {
+            return;
+        }
+        int newlines = 0;
+        for (int i = output.length() - 1; i >= 0 && output.charAt(i) == '\n' && newlines < 2; i--) {
+            newlines++;
+        }
+        for (; newlines < 2; newlines++) {
+            output.append('\n');
         }
     }
 
@@ -100,16 +135,6 @@ public class UnknownTagsHandler implements TagHandler {
 
     private void handleDD(final Editable output) {
         output.append("\n");
-    }
-
-    private void handleLi(final boolean opening, final Editable output) {
-        if (opening) {
-            if (listType == ListType.Ordered) {
-                output.append("\n  ").append(String.valueOf(listIndex++)).append(". ");
-            } else {
-                output.append("\n  • ");
-            }
-        }
     }
 
     private static void handleHr(final boolean opening, final Editable output) {

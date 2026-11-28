@@ -140,4 +140,17 @@ public class HtmlUtilsJunitTest {
                 .isEqualTo("just **a** note");
     }
 
+    @Test
+    public void markUnorderedListsMarksEveryUlAndKeepsItsAttributes() {
+        assertThat(HtmlUtils.markUnorderedLists("<ul style=\"text-align:center\"><li class=\"x\">a<ul><li>b</li></ul></li></ul>"))
+                .isEqualTo("<cgeo-ul-start></cgeo-ul-start><ul style=\"text-align:center\"><li class=\"x\">a<cgeo-ul-start></cgeo-ul-start><ul><li>b</li></ul><cgeo-ul-end></cgeo-ul-end></li></ul><cgeo-ul-end></cgeo-ul-end>");
+    }
+
+    @Test
+    public void markUnorderedListsLeavesOtherHtmlUntouched() {
+        final String html = "<ol><li>a</li></ol><p>no <b>ul</b> here</p>";
+        assertThat(HtmlUtils.markUnorderedLists(html)).isSameAs(html);
+        assertThat(HtmlUtils.markUnorderedLists("<UL><LI>a</LI></UL>")).isEqualTo("<cgeo-ul-start></cgeo-ul-start><ul><li>a</li></ul><cgeo-ul-end></cgeo-ul-end>");
+    }
+
 }
