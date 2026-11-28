@@ -2130,7 +2130,7 @@
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variable Name</string>
-x    <string name="variables_varname_dialog_message">Enter variable name (or let it empty)</string>
+    <string name="variables_varname_dialog_message">Enter variable name (or let it empty)</string>
 
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
